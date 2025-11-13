@@ -1,0 +1,19 @@
+{
+  "devDependencies": {
+    "markdown-it-container": "^4.0.0",
+    "mermaid": "^11.11.0",
+    "typescript": "^5.8.3",
+    "vitepress": "^1.6.3",
+    "vitepress-plugin-mermaid": "^2.0.17",
+    "vitepress-plugin-sandpack": "^1.1.4"
+  },
+  "scripts": {
+    "build:predocs": "typedoc",
+    "dev:docs": "vitepress dev --host",
+    "build:docs": "vitepress build",
+    "preview:docs": "vitepress preview"
+  },
+  "dependencies": {
+    "@iconify/vue": "^5.0.0"
+  }
+}

@@ -1,0 +1,173 @@
+<template>
+  <div class="donation-card">
+    <div class="icon-container" :style="{ backgroundColor: color }">
+      <Icon :icon="iconName" width="36" height="36" />
+    </div>
+    
+    <div class="content">
+      <h3>{{ title }}</h3>
+      <p>{{ description }}</p>
+      
+      <a 
+        class="link-button"
+        :href="link"
+        target="_blank"
+        rel="noopener noreferrer"
+        :style="{ backgroundColor: color }"
+      >
+        Support
+        <Icon icon="tabler:external-link" width="16" height="16" class="external-icon" />
+      </a>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+import { computed } from 'vue'
+import { Icon } from '@iconify/vue'
+
+export interface DonationCardProps {
+  iconType: 'kofi' | 'github' | 'ethereum' | 'tezos'
+  title: string
+  description: string
+  link: string
+  color: string
+}
+
+const props = defineProps<DonationCardProps>()
+
+const iconName = computed(() => {
+  switch (props.iconType) {
+    case 'kofi':
+      return 'simple-icons:kofi'
+    case 'github':
+      return 'tabler:brand-github'
+    case 'ethereum':
+      return 'cryptocurrency:eth'
+    case 'tezos':
+      return 'cryptocurrency:xtz'
+    default:
+      return 'simple-icons:kofi'
+  }
+})
+</script>
+
+<style scoped>
+.donation-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  height: 100%;
+}
+
+.donation-card:hover {
+  border-color: var(--vp-c-brand-1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  color: white;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.content h3 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--vp-c-text-1);
+}
+
+.content p {
+  margin: 0 0 1.5rem 0;
+  color: var(--vp-c-text-2);
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.link-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: all 0.25s ease;
+  margin-top: auto;
+  font-size: 0.9rem;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+}
+
+/* Keep text/icon color consistent regardless of global anchor hover styles */
+.link-button:link,
+.link-button:visited,
+.link-button:hover,
+.link-button:active,
+.link-button:focus {
+  color: #fff !important;
+}
+
+.link-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  filter: brightness(1.1);
+}
+
+.external-icon {
+  flex-shrink: 0;
+}
+
+/* Dark mode adjustments */
+.dark .donation-card {
+  background: var(--vp-c-bg-alt);
+  border-color: var(--vp-c-divider);
+}
+
+.dark .donation-card:hover {
+  border-color: var(--vp-c-brand-1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .donation-card {
+    padding: 1.25rem;
+  }
+  
+  .icon-container {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .content h3 {
+    font-size: 1.1rem;
+  }
+  
+  .link-button {
+    padding: 0.625rem 1rem;
+    font-size: 0.85rem;
+  }
+}
+</style>
