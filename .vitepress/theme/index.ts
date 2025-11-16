@@ -1,7 +1,6 @@
 /// <reference path="../shims.d.ts" />
 import DefaultTheme from 'vitepress/theme'
 import type { Theme } from 'vitepress'
-import { useData } from 'vitepress'
 import './custom.css'
 import { defineComponent, h } from 'vue'
 import type { App } from 'vue'
@@ -11,37 +10,27 @@ import { TextmodeSandbox } from './components/TextmodeSandbox'
 import FontShowcase from './components/FontShowcase.vue'
 import DonationGrid from './components/DonationGrid.vue'
 import TextmodeWhatIs from './components/TextmodeWhatIs.vue'
-import BlogPostList from './components/BlogPostList.vue'
-import BlogHome from './components/BlogHome.vue'
-import BlogPostLayout from './layouts/BlogPostLayout.vue'
-
-const BlogAwareLayout = defineComponent({
-  name: 'BlogAwareLayout',
-  setup() {
-    const { frontmatter } = useData()
-
-    return () => {
-      if (frontmatter.value?.blogPost === true) {
-        return h(BlogPostLayout)
-      }
-
-      return h(DefaultTheme.Layout, null, {
-        'home-hero-info-after': () => h('div', {
-          class: 'textmode-hero-wrapper',
-          innerHTML: `
-            <div class="textmode-hero-container">
-              <canvas class="textmode-hero-canvas"></canvas>
-            </div>
-          `
-        })
+import { withPlogTheme } from '../plog/src'
+const HeroLayout = defineComponent({
+  name: 'TextmodeHeroLayout',
+  setup(_, { slots }) {
+    return () => h(DefaultTheme.Layout, null, {
+      ...slots,
+      'home-hero-info-after': () => h('div', {
+        class: 'textmode-hero-wrapper',
+        innerHTML: `
+          <div class="textmode-hero-container">
+            <canvas class="textmode-hero-canvas"></canvas>
+          </div>
+        `
       })
-    }
+    })
   }
 })
 
-const theme: Theme = {
+const baseTheme: Theme = {
   extends: DefaultTheme,
-  Layout: BlogAwareLayout,
+  Layout: HeroLayout,
   enhanceApp({ app, router }: { app: App, router: any }) {
     // Register components
     app.component('Sandbox', Sandbox)
@@ -49,8 +38,6 @@ const theme: Theme = {
     app.component('FontShowcase', FontShowcase)
     app.component('DonationGrid', DonationGrid)
     app.component('TextmodeWhatIs', TextmodeWhatIs)
-    app.component('BlogPostList', BlogPostList)
-  app.component('BlogHome', BlogHome)
 
     if (typeof window !== 'undefined') {
       // Initialize hero sketch when the app loads on the home page
@@ -97,5 +84,7 @@ async function initTextmodeHero() {
     console.error('TextmodeHero: Failed to initialize sketch', error)
   }
 }
+
+const theme = withPlogTheme(baseTheme)
 
 export default theme
