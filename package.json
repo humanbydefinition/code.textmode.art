@@ -8,7 +8,8 @@
     "vitepress-plugin-sandpack": "^1.1.4"
   },
   "scripts": {
-    "build:predocs": "typedoc",
+    "build:predocs": "typedoc && node ./scripts/wrapExamples.js",
+    "wrap:examples": "node ./scripts/wrapExamples.js",
     "dev:docs": "vitepress dev --host",
     "build:docs": "vitepress build",
     "preview:docs": "vitepress preview"

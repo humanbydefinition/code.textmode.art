@@ -4,6 +4,8 @@
 
 Manages the grid of a [Textmodifier](Textmodifier.md) instance.
 
+Can be accessed via [Textmodifier.grid](Textmodifier.md#grid).
+
 ## Accessors
 
 ### cellHeight

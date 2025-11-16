@@ -1,8 +1,8 @@
-[textmode.js](../index.md) / TextmodeFont
+[textmode.js](../../../../index.md) / [loadables](../index.md) / TextmodeFont
 
 # Class: TextmodeFont
 
-Manages the font used for rendering characters.
+Manages the font used for rendering characters via [Textmodifier.loadFont](../../../../classes/Textmodifier.md#loadfont).
 
 This class coordinates font loading, character extraction, texture atlas creation,
 and provides character information.
@@ -91,26 +91,3 @@ Returns the number of rows in the texture atlas.
 ##### Returns
 
 `number`
-
-## Methods
-
-### getGlyphData()
-
-```ts
-getGlyphData(codePoint): null | GlyphData;
-```
-
-Lazily retrieves glyph data for the given Unicode code point.
-Glyph data is cached after the first access to avoid repeated Typr parsing.
-
-#### Parameters
-
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `codePoint` | `number` | Unicode code point |
-
-#### Returns
-
-`null` \| `GlyphData`
-
-Parsed glyph data or null if unavailable

@@ -68,6 +68,16 @@ The height of the canvas when creating a new canvas. Defaults to 600.
 
 ***
 
+### loadingScreen?
+
+```ts
+optional loadingScreen: LoadingScreenOptions;
+```
+
+Configure the built-in loading screen experience.
+
+***
+
 ### overlay?
 
 ```ts
@@ -78,12 +88,12 @@ Use `textmode.js` in overlay mode,
 which sets up the textmode `<canvas>` on top of an existing HTMLCanvasElement or HTMLVideoElement,
 automatically resizing and positioning it to match the target element.
 
-In this mode `textmode.js` fetches the content of the target element and applies it with adjustable textmode conversion
-as a first layer to the textmode canvas.
+In this mode `textmode.js` fetches the content of the target element and loads it into an adjustable [loadables.TextmodeImage](../textmode.js/namespaces/loadables/classes/TextmodeImage.md),
+that can be accessed via [Textmodifier.overlay](../classes/Textmodifier.md#overlay), and drawn via [Textmodifier.image](../classes/Textmodifier.md#image),
 
 Useful for applying textmode conversion to p5.js sketches, YouTube videos, and sooo much more.
 
-All functionality of `textmode.js` remains available, including drawing additional content on top of the converted source.
+All functionality of `textmode.js` remains available. Resizing the `textmode.js` canvas is not recommended though, since the overlay target defines the size.
 
 ***
 

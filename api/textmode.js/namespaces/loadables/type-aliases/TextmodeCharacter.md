@@ -1,4 +1,4 @@
-[textmode.js](../index.md) / TextmodeCharacter
+[textmode.js](../../../../index.md) / [loadables](../index.md) / TextmodeCharacter
 
 # Type Alias: TextmodeCharacter
 

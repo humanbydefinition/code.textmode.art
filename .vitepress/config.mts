@@ -118,6 +118,24 @@ export default withMermaid(defineConfig({
 
             return `${sandboxHtml}</ClientOnly>`;
           },
+        })
+        .use(container, 'example-spoiler', {
+          render(tokens: any[], idx: number) {
+            const info = tokens[idx].info.trim().slice('example-spoiler'.length).trim();
+            const summary = info || 'Show example';
+            const escapedSummary = summary
+              .replace(/&/g, '&amp;')
+              .replace(/</g, '&lt;')
+              .replace(/>/g, '&gt;')
+              .replace(/"/g, '&quot;')
+              .replace(/'/g, '&#39;');
+
+            if (tokens[idx].nesting === 1) {
+              return `<details class="example-spoiler"><summary>${escapedSummary}</summary>\n`;
+            }
+
+            return `</details>\n`;
+          },
         });
     },
   },

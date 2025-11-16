@@ -3,7 +3,7 @@
 # Class: Textmodifier
 
 Manages textmode rendering on a [`HTMLCanvasElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement) and provides methods for drawing,
-exporting, font management, event handling, and animation control.
+font management, event handling, and animation control.
 
 If the `Textmodifier` instance is created without a canvas parameter,
 it creates a new `HTMLCanvasElement` to draw on using the `textmode.js` drawing API.
@@ -11,7 +11,20 @@ If a canvas is provided, it will use that canvas instead.
 
 ## Extends
 
-- `TextmodifierCore`\<`this`\>.`RenderingCapabilities`.`FontCapabilities`.`AnimationCapabilities`.`MouseCapabilities`.`TouchCapabilities`.`KeyboardCapabilities`
+- `(Anonymous class)`\<`this`\>.`IRenderingMixin`.`IFontMixin`.`IAnimationMixin`.`IMouseMixin`.`ITouchMixin`.`IKeyboardMixin`
+
+## Implements
+
+- `ITextmodifier`
+
+## Properties
+
+| Property | Modifier | Type |
+| ------ | ------ | ------ |
+| <a id="_loadingdrawframebuffer"></a> `_loadingDrawFramebuffer` | `public` | [`TextmodeFramebuffer`](TextmodeFramebuffer.md) |
+| <a id="_loadingfont"></a> `_loadingFont` | `public` | [`TextmodeFont`](../textmode.js/namespaces/loadables/classes/TextmodeFont.md) |
+| <a id="_loadingframebuffer"></a> `_loadingFramebuffer` | `public` | [`TextmodeFramebuffer`](TextmodeFramebuffer.md) |
+| <a id="_loadinggrid"></a> `_loadingGrid` | `public` | [`TextmodeGrid`](TextmodeGrid.md) |
 
 ## Accessors
 
@@ -29,6 +42,12 @@ Get the textmodifier canvas containing the rendered output.
 
 `HTMLCanvasElement`
 
+#### Implementation of
+
+```ts
+ITextmodifier.canvas
+```
+
 ***
 
 ### drawFramebuffer
@@ -39,11 +58,17 @@ Get the textmodifier canvas containing the rendered output.
 get drawFramebuffer(): TextmodeFramebuffer;
 ```
 
-Get the WebGL framebuffer used for drawing operations.
+Get the WebGL framebuffer used for drawing operations in [Textmodifier.draw](#draw).
 
 ##### Returns
 
 [`TextmodeFramebuffer`](TextmodeFramebuffer.md)
+
+#### Implementation of
+
+```ts
+ITextmodifier.drawFramebuffer
+```
 
 ***
 
@@ -59,7 +84,13 @@ Get the current font object used for rendering.
 
 ##### Returns
 
-[`TextmodeFont`](TextmodeFont.md)
+[`TextmodeFont`](../textmode.js/namespaces/loadables/classes/TextmodeFont.md)
+
+#### Implementation of
+
+```ts
+ITextmodifier.font
+```
 
 ***
 
@@ -95,6 +126,12 @@ Set the current frame count.
 
 `void`
 
+#### Implementation of
+
+```ts
+ITextmodifier.frameCount
+```
+
 ***
 
 ### grid
@@ -111,6 +148,12 @@ Get the current grid object used for rendering.
 
 [`TextmodeGrid`](TextmodeGrid.md)
 
+#### Implementation of
+
+```ts
+ITextmodifier.grid
+```
+
 ***
 
 ### height
@@ -121,11 +164,17 @@ Get the current grid object used for rendering.
 get height(): number;
 ```
 
-Get the height of the canvas.
+Get the height of the canvas in pixels.
 
 ##### Returns
 
 `number`
+
+#### Implementation of
+
+```ts
+ITextmodifier.height
+```
 
 ***
 
@@ -142,6 +191,214 @@ Check if the instance has been disposed/destroyed.
 ##### Returns
 
 `boolean`
+
+#### Implementation of
+
+```ts
+ITextmodifier.isDisposed
+```
+
+***
+
+### lastKeyPressed
+
+#### Get Signature
+
+```ts
+get lastKeyPressed(): null | string;
+```
+
+Get the last key that was pressed.
+
+Returns the key string of the last pressed key, or null if no key has been pressed.
+
+::: example-spoiler Show example
+
+```javascript
+const t = textmode.create({ width: 800, height: 600 });
+
+t.draw(() => {
+  t.background(0);
+
+  const lastKey = t.lastKeyPressed;
+  if (lastKey) {
+    // Display the last pressed key
+    t.char(lastKey);
+    t.charColor(255, 255, 255);
+    t.point();
+  }
+});
+```
+
+:::
+
+##### Returns
+
+`null` \| `string`
+
+#### Implementation of
+
+```ts
+ITextmodifier.lastKeyPressed
+```
+
+***
+
+### lastKeyReleased
+
+#### Get Signature
+
+```ts
+get lastKeyReleased(): null | string;
+```
+
+Get the last key that was released.
+
+Returns the key string of the last released key, or null if no key has been released.
+
+::: example-spoiler Show example
+
+```javascript
+const t = textmode.create({ width: 800, height: 600 });
+
+t.draw(() => {
+  t.background(0);
+
+  const lastKey = t.lastKeyReleased;
+  if (lastKey) {
+    // Display the last released key
+    t.char(lastKey);
+    t.charColor(128, 128, 128);
+    t.point();
+  }
+});
+```
+
+:::
+
+##### Returns
+
+`null` \| `string`
+
+#### Implementation of
+
+```ts
+ITextmodifier.lastKeyReleased
+```
+
+***
+
+### loading
+
+#### Get Signature
+
+```ts
+get loading(): LoadingScreenManager;
+```
+
+Provides access to the loading screen manager to control boot-time loading UX.
+
+::: example-spoiler Show example
+
+```javascript
+const t = textmode.create({ width: 800, height: 600, loadingScreen: { message: 'loading...' } });
+
+t.setup(async () => {
+  // Initialize two loading phases
+  const phase1 = t.loading.addPhase('Loading assets');
+  const phase2 = t.loading.addPhase('Initializing game');
+
+  // Start the first phase and simulate asset loading
+  await phase1.track(async () => {
+    for (let i = 0; i <= 5; i++) {
+      phase1.report(i / 5);
+      // Small delay — increases visibility of the loading animation
+      await new Promise((r) => setTimeout(r, 200));
+    }
+  });
+
+  // Start the second phase and simulate initialization
+  await phase2.track(async () => {
+    for (let i = 0; i <= 5; i++) {
+      phase2.report(i / 5);
+      await new Promise((r) => setTimeout(r, 150));
+    }
+  });
+
+  // Optionally set a final message before the screen transitions away
+  t.loading.message('Ready - enjoy!');
+});
+```
+
+:::
+
+##### Returns
+
+[`LoadingScreenManager`](../textmode.js/namespaces/loading/classes/LoadingScreenManager.md)
+
+#### Implementation of
+
+```ts
+ITextmodifier.loading
+```
+
+***
+
+### modifierState
+
+#### Get Signature
+
+```ts
+get modifierState(): object;
+```
+
+Get current modifier key states.
+
+Returns an object with boolean properties for each modifier key.
+
+::: example-spoiler Show example
+
+```javascript
+const t = textmode.create({ width: 800, height: 600 });
+
+t.draw(() => {
+    t.background(0);
+    const mods = t.modifierState;
+
+    // Change behavior based on modifier keys
+    if (mods.shift) {
+        // Draw in caps or with different behavior
+        t.char('S');
+        t.charColor(255, 255, 0);
+        t.point();
+    }
+
+    if (mods.ctrl) {
+        // Control key is pressed
+        t.translate(2, 0);
+        t.char('C');
+        t.charColor(0, 255, 255);
+        t.point();
+    }
+});
+```
+
+:::
+
+##### Returns
+
+| Name | Type | Description |
+| ------ | ------ | ------ |
+| `alt` | `boolean` | Whether the Alt key is currently pressed |
+| `ctrl` | `boolean` | Whether the Ctrl key is currently pressed |
+| `meta` | `boolean` | Whether the Meta key *(Command on Mac, Windows key on Windows)* is currently pressed |
+| `shift` | `boolean` | Whether the Shift key is currently pressed |
+
+#### Implementation of
+
+```ts
+ITextmodifier.modifierState
+```
 
 ***
 
@@ -160,26 +417,37 @@ Returns the mouse position as grid cell coordinates *(column, row)*.
 If the mouse is outside the grid or the instance is not ready,
 it returns `{ x: -1, y: -1 }`.
 
-##### Example
+::: example-spoiler Show example
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
 t.draw(() => {
-  const mousePos = t.mouse;
-  
-  if (mousePos.x !== -1 && mousePos.y !== -1) {
-    // Mouse is over the grid
+    t.background(0);
+    
+    // Convert mouse position from top-left origin to center-based origin
+    const centerX = Math.round(t.mouse.x - (t.grid.cols - 1) / 2);
+    const centerY = Math.round(t.mouse.y - (t.grid.rows - 1) / 2);
+    
+    t.translate(centerX, centerY);
     t.char('*');
     t.charColor(255, 0, 0);
-    t.point(mousePos.x, mousePos.y);
-  }
+    t.cellColor(100);
+    t.point();
 });
 ```
+
+:::
 
 ##### Returns
 
 [`MousePosition`](../textmode.js/namespaces/input/namespaces/mouse/interfaces/MousePosition.md)
+
+#### Implementation of
+
+```ts
+ITextmodifier.mouse
+```
 
 ***
 
@@ -188,15 +456,97 @@ t.draw(() => {
 #### Get Signature
 
 ```ts
-get overlay(): undefined | TextmodeImage;
+get overlay(): 
+  | undefined
+  | TextmodeImage;
 ```
 
-If in overlay mode, returns the [TextmodeImage](TextmodeImage.md) instance capturing the target canvas/video content, 
+If in overlay mode, returns the [TextmodeImage](../textmode.js/namespaces/loadables/classes/TextmodeImage.md) instance capturing the target canvas/video content,
 allowing further configuration of the conversion parameters.
+
+::: example-spoiler Show example
+
+```javascript
+// Create the textmode instance using the p5 canvas as input overlay
+const t = textmode.create({ fontSize: 16, canvas: p.canvas, overlay: true });
+
+// Configure overlay conversion once fonts and grid are ready
+t.setup(() => {
+  t.overlay
+    .characters(' .:-=+*#%@')        // Character set for brightness mapping
+    .cellColorMode('fixed')          // Use fixed background cell color
+    .cellColor(0, 0, 0)              // Black background for each cell
+    .charColorMode('sampled')        // Sample the character color from the image
+    .background(0, 0, 0, 255);       // Black fallback for transparent pixels
+});
+
+// In the draw loop, pass the overlay into the text grid
+t.draw(() => {
+  t.clear();
+  t.image(t.overlay, t.grid.cols, t.grid.rows);
+});
+```
+
+:::
 
 ##### Returns
 
-`undefined` \| [`TextmodeImage`](TextmodeImage.md)
+  \| `undefined`
+  \| [`TextmodeImage`](../textmode.js/namespaces/loadables/classes/TextmodeImage.md)
+
+#### Implementation of
+
+```ts
+ITextmodifier.overlay
+```
+
+***
+
+### pressedKeys
+
+#### Get Signature
+
+```ts
+get pressedKeys(): string[];
+```
+
+Get all currently pressed keys.
+
+Returns an array of key strings that are currently being held down.
+
+::: example-spoiler Show example
+
+```javascript
+const t = textmode.create({ width: 800, height: 600 });
+
+t.draw(() => {
+    t.background(0);
+
+    const pressed = t.pressedKeys;
+
+    // Display all currently pressed keys
+    pressed.forEach((key, index) => {
+        t.push();
+        t.char(key[0] || '?'); // Show first character of key name
+        t.charColor(255, 200, 100);
+        t.translate(index, 0);
+        t.point();
+        t.pop();
+    });
+});
+```
+
+:::
+
+##### Returns
+
+`string`[]
+
+#### Implementation of
+
+```ts
+ITextmodifier.pressedKeys
+```
 
 ***
 
@@ -213,7 +563,7 @@ Get the currently active touches in grid coordinates.
 Returns a copy of each touch, including grid position, client coordinates, and pressure when
 available. Use this inside a draw loop to react to active multi-touch scenarios.
 
-##### Example
+::: example-spoiler Show example
 
 ```javascript
 t.draw(() => {
@@ -223,9 +573,17 @@ t.draw(() => {
 });
 ```
 
+:::
+
 ##### Returns
 
 [`TouchPosition`](../textmode.js/namespaces/input/namespaces/touch/interfaces/TouchPosition.md)[]
+
+#### Implementation of
+
+```ts
+ITextmodifier.touches
+```
 
 ***
 
@@ -237,11 +595,17 @@ t.draw(() => {
 get width(): number;
 ```
 
-Get the width of the canvas.
+Get the width of the canvas in pixels.
 
 ##### Returns
 
 `number`
+
+#### Implementation of
+
+```ts
+ITextmodifier.width
+```
 
 ## Methods
 
@@ -249,8 +613,6 @@ Get the width of the canvas.
 
 ```ts
 arc(
-   x, 
-   y, 
    width, 
    height, 
    startAngle, 
@@ -258,23 +620,22 @@ arc(
 ```
 
 Draw an arc with the current settings.
+Position is controlled via [translate](#translate), [push](#push), and [pop](#pop).
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `x` | `number` | X-coordinate of the arc center |
-| `y` | `number` | Y-coordinate of the arc center |
 | `width` | `number` | Width of the arc |
 | `height` | `number` | Height of the arc |
-| `startAngle` | `number` | Starting angle in radians |
-| `endAngle` | `number` | Ending angle in radians |
+| `startAngle` | `number` | Starting angle in degrees |
+| `endAngle` | `number` | Ending angle in degrees |
 
 #### Returns
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 const t = textmode.create({
@@ -284,8 +645,18 @@ const t = textmode.create({
 
 t.draw(() => {
   t.background(0);
-  t.arc(20, 15, 10, 10, 0, Math.PI);
+  t.rotateZ(t.frameCount);
+  t.char('A');
+  t.arc(10, 10, 0, 90);
 });
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.arc
 ```
 
 ***
@@ -294,7 +665,7 @@ t.draw(() => {
 
 ```ts
 background(
-   r, 
+   value, 
    g?, 
    b?, 
    a?): void;
@@ -306,27 +677,47 @@ Set the background color for the canvas.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `r` | `number` | Red component (0-255) |
-| `g?` | `number` | Green component (0-255) |
-| `b?` | `number` | Blue component (0-255) |
-| `a?` | `number` | Alpha component (0-255) |
+| `value` | `string` \| `number` \| [`TextmodeColor`](TextmodeColor.md) | A [TextmodeColor](TextmodeColor.md), hex string, grayscale value, or single RGB channel |
+| `g?` | `number` | Optional green component when providing RGB channels or alpha when used with grayscale |
+| `b?` | `number` | Optional blue component when providing RGB channels |
+| `a?` | `number` | Optional alpha component (0-255) |
 
 #### Returns
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 const t = textmode.create({
   width: 800,
   height: 600,
-})
+});
+
+const midnight = t.color('#0b1d3a');
 
 t.draw(() => {
-  // Set the background color to white
-  t.background(255);
+  // Set the background using a reusable color
+  t.background(midnight);
+
+  // Or inline RGB(A) notation
+  //t.background(32, 48, 64);
+
+  // Or hex string
+  //t.background('#203040');
+
+  t.char('M');
+  t.rotateZ(t.frameCount * 2);
+  t.rect(12, 12);
 });
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.background
 ```
 
 ***
@@ -365,7 +756,7 @@ The curve thickness is controlled by the current [lineWeight](#lineweight) setti
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 const t = textmode.create({
@@ -375,13 +766,31 @@ const t = textmode.create({
 
 t.draw(() => {
   t.background(0);
+  t.translate(-t.grid.cols / 2, -t.grid.rows / 2);
 
   // Draw a smooth S-curve
   t.char('*');
   t.charColor(255, 100, 255); // Magenta
   t.lineWeight(2);
-  t.bezierCurve(5, 20, 15, 5, 25, 35, 35, 20);
+
+  // Rotate the curve around its geometric center
+  // The bezier's control points: (5,20), (15,5), (25,35), (35,20)
+  // Center = average of points; translate to center then draw with local coordinates
+  const cx = (5 + 15 + 25 + 35) / 4;
+  const cy = (20 + 5 + 35 + 20) / 4;
+
+  t.translate(cx, cy);
+  t.rotateZ(t.frameCount * 2);
+  t.bezierCurve(5 - cx, 20 - cy, 15 - cx, 5 - cy, 25 - cx, 35 - cy, 35 - cx, 20 - cy);
 });
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.bezierCurve
 ```
 
 ***
@@ -390,28 +799,29 @@ t.draw(() => {
 
 ```ts
 cellColor(
-   r, 
-   g, 
-   b, 
-   a): void;
+   value, 
+   g?, 
+   b?, 
+   a?): void;
 ```
 
 Set the cell background color for subsequent rendering operations.
+Accepts channel values, hex strings, or a [TextmodeColor](TextmodeColor.md) instance.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `r` | `number` | Red component (0-255) |
-| `g` | `number` | Green component (0-255) |
-| `b` | `number` | Blue component (0-255) |
-| `a` | `number` | Alpha component (0-255, optional, defaults to 255) |
+| `value` | `string` \| `number` \| [`TextmodeColor`](TextmodeColor.md) | Color object, hex string, or grayscale value (0-255) |
+| `g?` | `number` | Optional green component when providing RGB values or alpha when using grayscale form |
+| `b?` | `number` | Optional blue component when providing RGB values |
+| `a?` | `number` | Optional alpha component (0-255) |
 
 #### Returns
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 const t = textmode.create({
@@ -419,11 +829,23 @@ const t = textmode.create({
   height: 600,
 })
 
+const dusk = t.color('#203040');
+
 t.draw(() => {
   t.background(0);
-  t.cellColor(0, 255, 0, 255); // Green cell background
-  t.rect(10, 10, 5, 5);
+  t.cellColor(dusk);
+  t.char('A');
+  t.rotateZ(t.frameCount * 2);
+  t.rect(10, 10);
 });
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.cellColor
 ```
 
 ***
@@ -435,18 +857,21 @@ char(character): void;
 ```
 
 Set the character to be used for subsequent rendering operations.
+Accepts a single character string or a
+[TextmodeColor](TextmodeColor.md) produced via [color](#color). When a color is provided,
+the encoded glyph information is applied if available.
 
 #### Parameters
 
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `character` | `string` | The character to set |
+| Parameter | Type |
+| ------ | ------ |
+| `character` | `string` \| [`TextmodeColor`](TextmodeColor.md) |
 
 #### Returns
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 const t = textmode.create({
@@ -454,11 +879,29 @@ const t = textmode.create({
   height: 600,
 })
 
+let semicolon;
+
+t.setup(() => {
+ semicolon = t.color(';');
+});
+
 t.draw(() => {
   t.background(0);
-  t.char('█');
-  t.rect(10, 10, 5, 5);
+  t.char('A');
+  t.rect(10, 10);
+
+  t.char(semicolon);
+  t.translate(15, 0);
+  t.rect(10, 10);
 });
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.char
 ```
 
 ***
@@ -467,28 +910,29 @@ t.draw(() => {
 
 ```ts
 charColor(
-   r, 
-   g, 
-   b, 
+   value, 
+   g?, 
+   b?, 
    a?): void;
 ```
 
 Set the character color for subsequent rendering operations.
+Accepts channel values, hex strings, or a [TextmodeColor](TextmodeColor.md) instance.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `r` | `number` | Red component (0-255) |
-| `g` | `number` | Green component (0-255) |
-| `b` | `number` | Blue component (0-255) |
-| `a?` | `number` | Alpha component (0-255, optional, defaults to 255) |
+| `value` | `string` \| `number` \| [`TextmodeColor`](TextmodeColor.md) | Color object, hex string, or grayscale value (0-255) |
+| `g?` | `number` | Optional green component when providing RGB values or alpha when using grayscale form |
+| `b?` | `number` | Optional blue component when providing RGB values |
+| `a?` | `number` | Optional alpha component (0-255) |
 
 #### Returns
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 const t = textmode.create({
@@ -496,11 +940,22 @@ const t = textmode.create({
   height: 600,
 })
 
+const hotPink = t.color(255, 105, 180);
+
 t.draw(() => {
   t.background(0);
-  t.charColor(255, 0, 0, 255); // Red character
-  t.rect(10, 10, 5, 5);
+  t.char('A');
+  t.charColor(hotPink);
+  t.rect(10, 10);
 });
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.charColor
 ```
 
 ***
@@ -523,7 +978,7 @@ Set the character rotation angle for subsequent character rendering.
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 const t = textmode.create({
@@ -533,9 +988,19 @@ const t = textmode.create({
 
 t.draw(() => {
   t.background(0);
+  t.char('A');
   t.charRotation(90); // Rotate character 90 degrees
-  t.rect(10, 10, 5, 5);
+  t.rotateZ(t.frameCount * 2);
+  t.rect(10, 10);
 });
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.charRotation
 ```
 
 ***
@@ -552,7 +1017,7 @@ Clear the canvas.
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 const t = textmode.create({
@@ -566,6 +1031,97 @@ t.draw(() => {
 });
 ```
 
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.clear
+```
+
+***
+
+### color()
+
+```ts
+color(
+   value, 
+   g?, 
+   b?, 
+   a?): TextmodeColor;
+```
+
+Create a reusable color object compatible with textmode drawing APIs.
+
+Accepts grayscale, RGB, RGBA, hex string values as arguments, and
+single characters that resolve to their encoded glyph color. Returned
+[TextmodeColor](TextmodeColor.md) instances can be passed to [background](#background),
+[char](#char), [charColor](#charcolor), [cellColor](#cellcolor), and more.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `value` | `string` \| `number` \| [`TextmodeColor`](TextmodeColor.md) | Grayscale value, hex string, single character, or an existing color |
+| `g?` | `number` | Optional green component, or `value` when using grayscale form |
+| `b?` | `number` | Optional blue component, or `value` when using grayscale form |
+| `a?` | `number` | Optional alpha component when using RGB form Example usage of the [color](#color) helper. |
+
+#### Returns
+
+[`TextmodeColor`](TextmodeColor.md)
+
+::: example-spoiler Show example
+
+```javascript
+const t = textmode.create({ width: 800, height: 600 });
+
+// Grayscale (0 = black, 255 = white)
+const gray = t.color(128);
+
+// RGB
+const hotPink = t.color(255, 105, 180);
+
+// RGBA (alpha 0-255)
+const semiTransparentRed = t.color(255, 0, 0, 128);
+
+// Hex string
+const dusk = t.color('#203040');
+
+// Single character: resolves to a TextmodeColor that may encode a glyph
+let glyphColor;
+
+t.setup(() => {
+    glyphColor = t.color('B'); // Color based on 'B' character glyph
+});
+
+t.draw(() => {
+    // Using colors with other drawing APIs
+    t.background(gray);
+    t.charColor(hotPink);
+    t.char('A');
+    t.rect(5, 5);
+
+    t.translate(5, 0);
+    t.cellColor(dusk);
+    t.char('*');
+    t.rect(5, 5);
+
+    t.translate(5, 0);
+    t.charColor("#FF00FF");
+    t.char(glyphColor);
+    t.rect(5, 5);
+});
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.color
+```
+
 ***
 
 ### createFilterShader()
@@ -575,8 +1131,8 @@ createFilterShader(fragmentSource): GLShader;
 ```
 
 Create a custom filter shader from fragment shader source code.
-The fragment shader will automatically receive the standard vertex shader inputs
-and must output to all 5 MRT attachments.
+The fragment shader automatically receives the standard vertex shader inputs
+and must output to the 3 MRT attachments (character/transform, primary color, secondary color).
 
 #### Parameters
 
@@ -590,7 +1146,7 @@ and must output to all 5 MRT attachments.
 
 A compiled shader ready for use with [shader](#shader)
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 const t = textmode.create({
@@ -598,46 +1154,62 @@ const t = textmode.create({
   height: 600,
 })
 
-const noiseShader = t.createFilterShader(`
-  #version 300 es
+const waveShader = t.createFilterShader(`#version 300 es
   precision highp float;
   
   in vec2 v_uv;
   in vec3 v_character;
   in vec4 v_primaryColor;
   in vec4 v_secondaryColor;
-  in vec2 v_rotation;
-  in vec3 v_transform;
   
-  uniform float u_frameCount;
+  uniform float u_time;
   
   layout(location = 0) out vec4 o_character;
   layout(location = 1) out vec4 o_primaryColor;
   layout(location = 2) out vec4 o_secondaryColor;
-  layout(location = 3) out vec4 o_rotation;
-  layout(location = 4) out vec4 o_transform;
   
-  float random(vec2 st) {
-    return fract(sin(dot(st.xy, vec2(12.9898,78.233))) * 43758.5453123);
+  float luma(vec3 c) {
+    return dot(c, vec3(0.2126, 0.7152, 0.0722));
   }
   
   void main() {
-    vec2 gridPos = floor(gl_FragCoord.xy);
-    float noise = random(gridPos + u_frameCount * 0.1);
-    
-    o_character = vec4(noise, 0.0, 0.0, 1.0);
-    o_primaryColor = vec4(vec3(noise), 1.0);
-    o_secondaryColor = vec4(0.0, 0.0, 0.0, 1.0);
-    o_rotation = vec4(0.0, 0.0, 0.0, 1.0);
-    o_transform = vec4(0.0, 0.0, 0.0, 1.0);
+    vec2 uv = v_uv * 2.0 - 1.0;
+    float time = u_time * 0.4;
+    float radial = length(uv);
+    float swirl = sin(radial * 9.0 - time) + cos(uv.x * 6.0 + time * 1.3);
+    float ripple = sin((uv.x + uv.y) * 10.0 + time * 2.0) * 0.5;
+
+    // Palette that shifts through warm→cool hues
+    vec3 color = vec3(
+      0.55 + 0.45 * sin(time + radial * 4.0),
+      0.55 + 0.45 * sin(time * 1.3 + uv.y * 5.0 + ripple),
+      0.55 + 0.45 * sin(time * 0.9 + uv.x * 5.0 - ripple)
+    );
+
+    float glyphIndex = fract(0.5 + 0.5 * swirl);
+    float rotation = fract(0.5 + swirl * 0.25);
+    int invertFlag = luma(color) > 0.6 ? 1 : 0;
+    float packedFlags = float(invertFlag) / 255.0;
+
+    o_character = vec4(glyphIndex, 0.0, packedFlags, 0.0);
+    o_primaryColor = vec4(color, 1.0);
+    o_secondaryColor = vec4(mix(vec3(0.1), color, 0.35), 1.0);
   }
 `);
 
 t.draw(() => {
-  t.shader(noiseShader);
-  t.setUniform('u_frameCount', t.frameCount);
-  t.rect(0, 0, t.grid.cols, t.grid.rows);
+  t.shader(waveShader);
+  t.setUniform('u_time', t.frameCount * 0.003);
+  t.rect(t.grid.cols, t.grid.rows);
 });
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.createFilterShader
 ```
 
 ***
@@ -650,9 +1222,8 @@ createFramebuffer(options): TextmodeFramebuffer;
 
 Create a new framebuffer for offscreen rendering.
 
-The framebuffer uses the same 5-attachment MRT structure as the main
-rendering pipeline, allowing all standard drawing operations to work
-seamlessly when rendering to the framebuffer.
+The framebuffer uses the same MRT structure as the main rendering pipeline.
+By default it allocates 4 attachments (character + color data).
 
 #### Parameters
 
@@ -666,7 +1237,7 @@ seamlessly when rendering to the framebuffer.
 
 A new Framebuffer instance.
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 const t = textmode.create({
@@ -685,13 +1256,23 @@ t.draw(() => {
   fb.begin();
   t.background(255, 0, 0);
   t.charColor(255);
-  t.rect(10, 10, 20, 10);
+  t.char('A');
+  t.rect(20, 10);
   fb.end();
   
   // Render framebuffer to main canvas
   t.background(0);
-  t.image(fb, 0, 0);
+  t.rotateZ(t.frameCount * 2);
+  t.image(fb);
 });
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.createFramebuffer
 ```
 
 ***
@@ -720,12 +1301,45 @@ See MDN for all options: https://developer.mozilla.org/en-US/docs/Web/CSS/cursor
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
-t.cursor('crosshair');
-// ... later, reset:
-t.cursor();
+const t = textmode.create({ width: 800, height: 600 });
+const target = { width: 30, height: 15 };
+
+t.draw(() => {
+  t.background(0);
+  t.charColor(255); // keep char visible
+  t.char('*');
+  t.rect(target.width, target.height);
+
+  // Rectangle is centered at (0, 0) which is grid center
+  // Calculate bounds relative to grid center
+  const centerX = t.grid.cols / 2;
+  const centerY = t.grid.rows / 2;
+
+  const halfRectWidth = target.width / 2;
+  const halfRectHeight = target.height / 2;
+
+  const rectLeft = centerX - halfRectWidth;
+  const rectRight = centerX + halfRectWidth;
+  const rectTop = centerY - halfRectHeight;
+  const rectBottom = centerY + halfRectHeight;
+
+  const hovering =
+    t.mouse.x >= rectLeft && t.mouse.x < rectRight &&
+    t.mouse.y >= rectTop && t.mouse.y < rectBottom;
+
+  t.cursor(hovering ? 'pointer' : 'default');
+});
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.cursor
 ```
 
 ***
@@ -744,7 +1358,7 @@ After calling this method, the instance should not be used and will be eligible 
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 // Create a textmodifier instance
@@ -756,6 +1370,14 @@ const textmodifier = textmode.create();
 textmodifier.destroy();
 
 // Instance is now safely disposed and ready for garbage collection
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.destroy
 ```
 
 ***
@@ -781,12 +1403,20 @@ helper lets you supply a dedicated handler when you want to treat double taps di
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 t.doubleTap((data) => {
   console.log('Double tap detected', data.touch);
 });
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.doubleTap
 ```
 
 ***
@@ -811,10 +1441,10 @@ This callback function is where all drawing commands should be placed for textmo
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
-// Create a standalone textmodifier instance
+// Create a textmodifier instance
 const t = textmode.create({
  width: 800,
  height: 600,
@@ -825,9 +1455,19 @@ t.draw(() => {
   // Set background color
   t.background(128);
   
-  // Draw a textmode rectangle with default settings
-  t.rect(0, 0, 16, 16);
+  // Draw a textmode rectangle
+  t.char('A');
+  t.rotateZ(t.frameCount * 2);
+  t.rect(16, 16);
 });
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.draw
 ```
 
 ***
@@ -835,21 +1475,16 @@ t.draw(() => {
 ### ellipse()
 
 ```ts
-ellipse(
-   x, 
-   y, 
-   width, 
-   height): void;
+ellipse(width, height): void;
 ```
 
 Draw an ellipse with the current settings.
+Position is controlled via [translate](#translate), [push](#push), and [pop](#pop).
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `x` | `number` | X-coordinate of the ellipse center |
-| `y` | `number` | Y-coordinate of the ellipse center |
 | `width` | `number` | Width of the ellipse |
 | `height` | `number` | Height of the ellipse |
 
@@ -857,7 +1492,7 @@ Draw an ellipse with the current settings.
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 const t = textmode.create({
@@ -867,8 +1502,18 @@ const t = textmode.create({
 
 t.draw(() => {
   t.background(0);
-  t.ellipse(20, 15, 10, 8);
+  t.char('O');
+  t.rotateZ(t.frameCount * 2);
+  t.ellipse(10, 8);
 });
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.ellipse
 ```
 
 ***
@@ -891,7 +1536,7 @@ Toggle horizontal flipping for subsequent character rendering.
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 const t = textmode.create({
@@ -902,8 +1547,16 @@ const t = textmode.create({
 t.draw(() => {
   t.background(0);
   t.flipX(true);
-  t.rect(10, 10, 5, 5);
+  t.rect(5, 5);
 });
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.flipX
 ```
 
 ***
@@ -926,7 +1579,7 @@ Toggle vertical flipping for subsequent character rendering.
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 const t = textmode.create({
@@ -937,8 +1590,16 @@ const t = textmode.create({
 t.draw(() => {
   t.background(0);
   t.flipY(true);
-  t.rect(10, 10, 5, 5);
+  t.rect(5, 5);
 });
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.flipY
 ```
 
 ***
@@ -961,14 +1622,30 @@ Set the font size used for rendering.
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 // Create a Textmodifier instance
-const textmodifier = textmode.create();
+const t = textmode.create();
 
-// Set the font size to 32
-textmodifier.fontSize(32);
+t.setup(() => {
+ // Set the font size to 32
+ t.fontSize(32);
+});
+
+t.draw(() => {
+ t.background(0);
+ t.char('A');
+ t.rect(5, 5);
+});
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.fontSize
 ```
 
 ***
@@ -991,7 +1668,7 @@ Set the maximum frame rate. If called without arguments, returns the current mea
 
 `number` \| `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 // Create a Textmodifier instance
@@ -999,80 +1676,21 @@ const textmodifier = textmode.create();
 
 // Set the maximum frame rate to 30 FPS
 textmodifier.frameRate(30);
-```
 
-***
-
-### glyphColor()
-
-```ts
-glyphColor(char): null | [number, number, number];
-```
-
-Get the RGB shader color of a specific character in the current font.
-
-Useful for custom shaders to control the character to render.
-
-#### Parameters
-
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `char` | `string` | The character to get the color for. |
-
-#### Returns
-
-`null` \| \[`number`, `number`, `number`\]
-
-An array representing the RGB color, or null if the character is not found.
-
-#### Example
-
-```javascript
-// Create a Textmodifier instance
-const textmodifier = textmode.create();
-
-// Get the color of the character 'A'
-textmodifier.setup(() => {
-  const color = textmodifier.glyphColor('A');
-  console.log(color); // e.g., [1, 0, 0] for red
+// Draw something at the set frame rate
+t.draw(() => {
+  t.background(0);
+  t.char('A');
+  t.rect(5, 5);
 });
 ```
 
-***
+:::
 
-### glyphColors()
+#### Implementation of
 
 ```ts
-glyphColors(str): (null | [number, number, number])[];
-```
-
-Get the RGB shader colors of all characters in a string for the current font.
-
-Useful for custom shaders to control the characters to render.
-
-#### Parameters
-
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `str` | `string` | The string to get the colors for. |
-
-#### Returns
-
-(`null` \| \[`number`, `number`, `number`\])[]
-
-An array of RGB color arrays, or null if a character is not found.
-
-#### Example
-
-```javascript
-// Create a Textmodifier instance
-const textmodifier = textmode.create();
-
-// Get the colors of the string 'Hello'
-textmodifier.setup(() => {
-  const colors = textmodifier.glyphColors('Hello');
-  console.log(colors); // e.g., [[0.1, 0, 0], ...]
-});
+ITextmodifier.frameRate
 ```
 
 ***
@@ -1082,8 +1700,6 @@ textmodifier.setup(() => {
 ```ts
 image(
    source, 
-   x, 
-   y, 
    width?, 
    height?): void;
 ```
@@ -1094,17 +1710,15 @@ Draw a TextmodeFramebuffer or TextmodeImage to the current render target.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `source` | \| [`TextmodeFramebuffer`](TextmodeFramebuffer.md) \| [`TextmodeImage`](TextmodeImage.md) | The TextmodeFramebuffer or TextmodeImage to render |
-| `x` | `number` | X position on the grid where to place the content *(top-left corner)* |
-| `y` | `number` | Y position on the grid where to place the content *(top-left corner)* |
-| `width?` | `number` | Width to scale the content |
-| `height?` | `number` | Height to scale the content |
+| `source` | \| [`TextmodeFramebuffer`](TextmodeFramebuffer.md) \| [`TextmodeImage`](../textmode.js/namespaces/loadables/classes/TextmodeImage.md) | The TextmodeFramebuffer or TextmodeImage to render |
+| `width?` | `number` | Width to potentially scale the content |
+| `height?` | `number` | Height to potentially scale the content |
 
 #### Returns
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 const t = textmode.create({
@@ -1117,19 +1731,29 @@ const fb = t.createFramebuffer({width: 30, height: 20});
 t.draw(() => {
   // Draw something to the framebuffer
   fb.begin();
+  t.clear();
   t.charColor(255, 0, 0);
-  t.rect(5, 5, 20, 10);
+  t.char('A');
+  t.rect(20, 10);
   fb.end();
   
   // Clear main canvas and render framebuffer content
   t.background(0);
   
   // Render at original size
-  t.image(fb, 10, 10);
+  t.image(fb);
   
   // Render scaled version
-  t.image(fb, 50, 10, 60, 40);
+  // t.image(fb, 60, 40);
 });
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.image
 ```
 
 ***
@@ -1152,7 +1776,7 @@ Toggle color inversion for subsequent character rendering.
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 const t = textmode.create({
@@ -1163,8 +1787,18 @@ const t = textmode.create({
 t.draw(() => {
   t.background(0);
   t.invert(true);
-  t.rect(10, 10, 5, 5);
+  t.char('A');
+  t.rotateZ(t.frameCount * 2);
+  t.rect(5, 5);
 });
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.invert
 ```
 
 ***
@@ -1189,7 +1823,7 @@ Check if a specific key is currently being pressed.
 
 true if the key is currently pressed, false otherwise
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -1217,8 +1851,17 @@ t.draw(() => {
   // Draw player character
   t.char('@');
   t.charColor(255, 255, 0);
-  t.point(playerX, playerY);
+  t.translate(playerX, playerY);
+  t.point();
 });
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.isKeyPressed
 ```
 
 ***
@@ -1237,7 +1880,7 @@ Check whether the textmodifier is currently running the automatic render loop.
 
 True if the render loop is currently active, false otherwise.
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 const textmodifier = textmode.create(canvas);
@@ -1249,7 +1892,15 @@ textmodifier.noLoop();
 console.log(textmodifier.isLooping()); // false (not looping)
 
 textmodifier.loop();
-console.log(textmodifier.isLooping()); // true (alooping)
+console.log(textmodifier.isLooping()); // true (looping)
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.isLooping
 ```
 
 ***
@@ -1272,20 +1923,43 @@ Set a callback function that will be called when a key is pressed down.
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
+let lastKey = '?';
+let pulse = 0;
+
+// Update some visual state when a key is pressed
 t.keyPressed((data) => {
-  console.log(`Key pressed: ${data.key}`);
-  if (data.key === 'Enter') {
-    console.log('Enter key was pressed!');
-  }
-  if (data.ctrlKey && data.key === 's') {
-    console.log('Ctrl+S was pressed!');
-  }
+  lastKey = data.key;
+  pulse = 6; // make the next frames brighter
 });
+
+t.draw(() => {
+  t.background(0);
+  
+  // Fade brightness back down each frame
+  const glow = Math.max(0, pulse--);
+  const brightness = 120 + glow * 20;
+  t.charColor(brightness, brightness, 0);
+  
+  // Show the last pressed key at the center of the grid
+  t.push();
+  t.translate(t.grid.cols / 2, t.grid.rows / 2);
+  t.char(lastKey.length ? lastKey[0] : '?');
+  t.point();
+  t.pop();
+});
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.keyPressed
 ```
 
 ***
@@ -1308,17 +1982,39 @@ Set a callback function that will be called when a key is released.
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
+let lastRelease = '?';
+let fade = 0;
+
+// Capture the most recent key release and trigger a pulse
 t.keyReleased((data) => {
-  console.log(`Key released: ${data.key}`);
-  if (data.key === ' ') {
-    console.log('Spacebar was released!');
-  }
+  lastRelease = data.key;
+  fade = 10;
 });
+
+t.draw(() => {
+  t.background(0);
+
+  // Dim the glow over time
+  const glow = Math.max(0, fade--);
+  const color = 80 + glow * 17;
+  t.charColor(color, color, 255);
+  
+  t.char(lastRelease.length ? lastRelease[0] : '?');
+  t.point();
+});
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.keyReleased
 ```
 
 ***
@@ -1348,7 +2044,7 @@ Draw a line from point (x1, y1) to point (x2, y2) with the settings.
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 const t = textmode.create({
@@ -1357,15 +2053,28 @@ const t = textmode.create({
 })
 
 t.draw(() => {
-  // Set the background color to black
   t.background(0);
 
-  // Draw a diagonal line
-  t.char('-');
-  t.charColor(0, 255, 255); // Cyan
-  t.lineWeight(1);
-  t.line(5, 5, 25, 15);
+  t.char('*');
+  t.charColor(255, 100, 255); // Magenta
+  t.lineWeight(2);
+
+  const halfWidth = 5;
+  const halfHeight = 7.5;
+
+  t.push();
+  t.rotateZ(t.frameCount * 2);
+  t.line(-halfWidth, halfHeight, halfWidth, -halfHeight);
+  t.pop();
 });
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.line
 ```
 
 ***
@@ -1388,19 +2097,47 @@ Update the line weight (thickness) for subsequent [line](#line) and [bezierCurve
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 const t = textmode.create({
- width: 800,
- height: 600,
+    width: 800,
+    height: 600,
 })
 
 t.draw(() => {
- t.background(0);
- t.lineWeight(1); // Thin line
- t.line(0, 0, t.grid.cols, t.grid.rows);
+    t.background('#050810');
+
+    // Animate the weight so every line breathes differently
+    const layers = 6;
+    const halfCols = t.grid.cols / 2;
+    const spacing = 4;
+
+    for (let i = 0; i < layers; i++) {
+        const phase = t.frameCount * 0.03 + i * 0.8;
+        const pulse = 0.75 + 3.25 * (0.5 + 0.5 * Math.sin(phase));
+        const wobble = Math.sin(phase * 1.6) * 4;
+        const centeredRow = (i - (layers - 1) / 2) * spacing;
+
+        t.lineWeight(Math.round(pulse));
+        t.charColor(160 + i * 12, 200 - i * 8, 255);
+        t.char('-');
+        t.line(
+            -halfCols + 2,
+            centeredRow + wobble,
+            halfCols - 2,
+            centeredRow - wobble,
+        );
+    }
 });
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.lineWeight
 ```
 
 ***
@@ -1423,17 +2160,27 @@ Update the font used for rendering.
 
 `Promise`\<`void`\>
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 // Create a Textmodifier instance
-const textmodifier = textmode.create();
+const t = textmode.create();
 
-// Load a custom font from a URL
-await textmodifier.loadFont('https://example.com/fonts/myfont.ttf');
+t.setup(async () => {
+ // Load a custom font from a URL
+ await t.loadFont('https://example.com/fonts/myfont.ttf');
 
-// Local font example
-// await textmodifier.loadFont('./fonts/myfont.ttf'); 
+ // Local font example
+ // await t.loadFont('./fonts/myfont.ttf'); 
+});
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.loadFont
 ```
 
 ***
@@ -1446,6 +2193,9 @@ loadImage(src): Promise<TextmodeImage>;
 
 Load an image and return a TextmodeImage that can be drawn with image().
 
+The loaded image can be rendered to the canvas using the [image](#image) method.
+This function returns a Promise that resolves when the image has loaded.
+
 #### Parameters
 
 | Parameter | Type | Description |
@@ -1454,7 +2204,100 @@ Load an image and return a TextmodeImage that can be drawn with image().
 
 #### Returns
 
-`Promise`\<[`TextmodeImage`](TextmodeImage.md)\>
+`Promise`\<[`TextmodeImage`](../textmode.js/namespaces/loadables/classes/TextmodeImage.md)\>
+
+A Promise that resolves to a TextmodeImage object
+
+::: example-spoiler Show example
+
+```javascript
+const t = textmode.create({
+    width: 800,
+    height: 600,
+});
+
+let img;
+
+t.setup(async () => {
+    img = await t.loadImage('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80');
+    img.characters(" .:-=+*#%@");
+});
+
+t.draw(() => {
+    t.background(0);
+
+    if (img) {
+        // Draw the loaded image
+        t.image(img);
+    }
+});
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.loadImage
+```
+
+***
+
+### loadVideo()
+
+```ts
+loadVideo(src, options?): Promise<TextmodeVideo>;
+```
+
+Load a video and return a TextmodeVideo that can be drawn with image().
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `src` | `string` \| `HTMLVideoElement` | URL or existing HTMLVideoElement |
+| `options?` | [`TextmodeVideoOptions`](../textmode.js/namespaces/loadables/interfaces/TextmodeVideoOptions.md) | Optional configuration for preloading behavior. Provide `frameRate` to preload frames, `onProgress` to observe preload progress, `onComplete` to know when preloading finished, and `onError` to catch preload failures. |
+
+#### Returns
+
+`Promise`\<[`TextmodeVideo`](../textmode.js/namespaces/loadables/classes/TextmodeVideo.md)\>
+
+::: example-spoiler Show example
+
+```javascript
+const t = textmode.create({
+    width: 800,
+    height: 600,
+});
+
+let video;
+
+t.setup(async () => {
+    video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
+    // Start playback and enable looping so the video keeps playing
+    video.play();
+    video.loop();
+
+    video.characters(" .:-=+*#%@");
+});
+
+t.draw(() => {
+    t.background(0);
+
+    if (video) {
+        // Draw the loaded video
+        t.image(video);
+    }
+});
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.loadVideo
+```
 
 ***
 
@@ -1479,12 +2322,20 @@ configured tolerance. The event includes the press duration in milliseconds.
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 t.longPress((data) => {
   console.log(`Long press for ${Math.round(data.duration)}ms`);
 });
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.longPress
 ```
 
 ***
@@ -1501,24 +2352,37 @@ Resume the rendering loop if it was stopped by [noLoop](#noloop).
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
-// Create a textmodifier instance
-const textmodifier = textmode.create();
+const t = textmode.create({ width: 800, height: 600 });
 
-// Stop the loop
-textmodifier.noLoop();
+// Toggle loop on SPACE
+t.keyPressed((data) => {
+  if (data.key === ' ') {
+    if (t.isLooping()) {
+      t.noLoop();
+    } else {
+      t.loop();
+    }
+  }
+});
 
-// Resume the loop
-textmodifier.loop();
+t.draw(() => {
+  t.background(0);
+  t.char('A');
+  t.charColor(255, 255, 255);
+  t.rotateZ(t.frameCount * 2);
+  t.rect(16, 16);
+});
+```
 
-// You can also use this pattern for conditional animation
-if (someCondition) {
-  textmodifier.loop();
-} else {
-  textmodifier.noLoop();
-}
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.loop
 ```
 
 ***
@@ -1541,15 +2405,84 @@ Set a callback function that will be called when the mouse is clicked.
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
+// Click to spawn ripples.
+
 const t = textmode.create({ width: 800, height: 600 });
 
+// Store ripples as { x, y } in center-based coordinates
+const ripples = [];
+
+// Create a ripple at the clicked grid cell
 t.mouseClicked((data) => {
-  console.log(`Clicked at grid position: ${data.position.x}, ${data.position.y}`);
-  console.log(`Button: ${data.button}`); // 0=left, 1=middle, 2=right
+  // Convert top-left grid coords to center-based coords (matching draw-time origin)
+  const centerX = Math.round(data.position.x - (t.grid.cols - 1) / 2);
+  const centerY = Math.round(data.position.y - (t.grid.rows - 1) / 2);
+
+  ripples.push({ x: centerX, y: centerY, age: 0, maxAge: 20 });
 });
+
+t.draw(() => {
+  t.background(0);
+
+  // Update and draw ripples (iterate backwards when removing)
+  for (let i = ripples.length - 1; i >= 0; i--) {
+    const r = ripples[i];
+    r.age++;
+    const life = r.age / r.maxAge;                    // 0..1
+    const radius = 1 + life * 7;                      // expands from ~1 to ~8
+    const intensity = Math.round(255 * (1 - life));   // fades out
+
+    // Keep cells dark so characters stand out
+    t.charColor(intensity, intensity, 255);
+    t.cellColor(0);
+
+    t.push();
+    // position already in center-based coordinates
+    t.translate(r.x, r.y);
+
+    // Draw a ring by sampling points around the circle
+    for (let a = 0; a < Math.PI * 2; a += Math.PI / 8) {
+      const ox = Math.round(Math.cos(a) * radius);
+      const oy = Math.round(Math.sin(a) * radius);
+      t.push();
+      t.translate(ox, oy);
+      t.char('*');
+      t.point();
+      t.pop();
+    }
+
+    t.pop();
+
+    // Remove finished ripples
+    if (r.age > r.maxAge) {
+      ripples.splice(i, 1);
+    }
+  }
+
+  // Show crosshair for the current mouse cell. Convert t.mouse (top-left origin)
+  // to the center-based coordinates used for drawing just like above.
+  if (t.mouse.x !== -1 && t.mouse.y !== -1) {
+    const cx = Math.round(t.mouse.x - (t.grid.cols - 1) / 2);
+    const cy = Math.round(t.mouse.y - (t.grid.rows - 1) / 2);
+    t.push();
+    t.charColor(180);
+    t.translate(cx, cy);
+    t.char('+');
+    t.point();
+    t.pop();
+  }
+});
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.mouseClicked
 ```
 
 ***
@@ -1572,17 +2505,77 @@ Set a callback function that will be called when the mouse moves.
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
+// Trail of particles following the mouse.
+
 const t = textmode.create({ width: 800, height: 600 });
 
+const trail = [];
+const maxTrail = 120;
+let lastMouse = null;
+
 t.mouseMoved((data) => {
-  if (data.position.x !== -1 && data.position.y !== -1) {
-    console.log(`Mouse moved to: ${data.position.x}, ${data.position.y}`);
-    console.log(`Previous position: ${data.previousPosition.x}, ${data.previousPosition.y}`);
+  if (data.position.x === -1 || data.position.y === -1) return;
+  
+  // Convert to center-based coords
+  const cx = Math.round(data.position.x - (t.grid.cols - 1) / 2);
+  const cy = Math.round(data.position.y - (t.grid.rows - 1) / 2);
+  
+  // Spawn multiple particles based on movement speed
+  const dx = lastMouse ? cx - lastMouse.x : 0;
+  const dy = lastMouse ? cy - lastMouse.y : 0;
+  const speed = Math.sqrt(dx * dx + dy * dy);
+  const count = Math.max(1, Math.ceil(speed * 1.5));
+  
+  for (let i = 0; i < count; i++) {
+    trail.push({ 
+      x: cx, 
+      y: cy, 
+      age: 0, 
+      maxAge: 15 + Math.random() * 10 
+    });
+  }
+  
+  lastMouse = { x: cx, y: cy };
+  if (trail.length > maxTrail) trail.splice(0, trail.length - maxTrail);
+});
+
+t.draw(() => {
+  t.background(0);
+  
+  // Draw and age particles
+  for (let i = trail.length - 1; i >= 0; i--) {
+    const p = trail[i];
+    p.age++;
+    
+    if (p.age >= p.maxAge) {
+      trail.splice(i, 1);
+      continue;
+    }
+    
+    const life = 1 - (p.age / p.maxAge);
+    const brightness = Math.round(255 * life);
+    const chars = ['.', '*', 'o', '@'];
+    const idx = Math.floor(life * chars.length);
+    
+    t.push();
+    t.charColor(brightness, brightness * 0.6, 255);
+    t.translate(p.x, p.y);
+    t.char(chars[Math.min(idx, chars.length - 1)]);
+    t.point();
+    t.pop();
   }
 });
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.mouseMoved
 ```
 
 ***
@@ -1605,14 +2598,77 @@ Set a callback function that will be called when the mouse is pressed down.
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
+// Hold mouse to spray particles that fall with gravity.
+
 const t = textmode.create({ width: 800, height: 600 });
 
+const particles = [];
+let pressing = false;
+
 t.mousePressed((data) => {
-  console.log(`Mouse pressed at: ${data.position.x}, ${data.position.y}`);
+  if (data.position.x === -1 || data.position.y === -1) return;
+  pressing = true;
 });
+
+t.mouseReleased(() => {
+  pressing = false;
+});
+
+t.draw(() => {
+  t.background(0);
+  
+  // Spawn particles while pressing
+  if (pressing && t.mouse.x !== -1) {
+    const cx = Math.round(t.mouse.x - (t.grid.cols - 1) / 2);
+    const cy = Math.round(t.mouse.y - (t.grid.rows - 1) / 2);
+    
+    for (let i = 0; i < 3; i++) {
+      particles.push({
+        x: cx,
+        y: cy,
+        vx: (Math.random() - 0.5) * 0.8,
+        vy: Math.random() * -0.5 - 0.2,
+        age: 0,
+        maxAge: 30 + Math.random() * 20
+      });
+    }
+  }
+  
+  // Update and draw particles
+  for (let i = particles.length - 1; i >= 0; i--) {
+    const p = particles[i];
+    p.age++;
+    p.vy += 0.08; // gravity
+    p.x += p.vx;
+    p.y += p.vy;
+    
+    if (p.age >= p.maxAge) {
+      particles.splice(i, 1);
+      continue;
+    }
+    
+    const life = 1 - (p.age / p.maxAge);
+    const brightness = Math.round(255 * life);
+    
+    t.push();
+    t.charColor(brightness, brightness * 0.7, 100);
+    t.translate(Math.round(p.x), Math.round(p.y));
+    t.char(life > 0.5 ? 'o' : '.');
+    t.point();
+    t.pop();
+  }
+});
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.mousePressed
 ```
 
 ***
@@ -1635,14 +2691,93 @@ Set a callback function that will be called when the mouse is released.
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
+// Drag to draw lines that fade over time.
+
 const t = textmode.create({ width: 800, height: 600 });
 
-t.mouseReleased((data) => {
-  console.log(`Mouse released at: ${data.position.x}, ${data.position.y}`);
+const lines = [];
+let dragStart = null;
+
+t.mousePressed((data) => {
+  if (data.position.x === -1 || data.position.y === -1) return;
+  const cx = Math.round(data.position.x - (t.grid.cols - 1) / 2);
+  const cy = Math.round(data.position.y - (t.grid.rows - 1) / 2);
+  dragStart = { x: cx, y: cy };
 });
+
+t.mouseReleased((data) => {
+  if (!dragStart || data.position.x === -1) return;
+  const cx = Math.round(data.position.x - (t.grid.cols - 1) / 2);
+  const cy = Math.round(data.position.y - (t.grid.rows - 1) / 2);
+  
+  // Calculate line center and local endpoints
+  const centerX = (dragStart.x + cx) / 2;
+  const centerY = (dragStart.y + cy) / 2;
+  const dx = cx - dragStart.x;
+  const dy = cy - dragStart.y;
+  
+  lines.push({
+    cx: centerX, cy: centerY,
+    dx: dx, dy: dy,
+    age: 0, maxAge: 30
+  });
+  dragStart = null;
+});
+
+t.draw(() => {
+  t.background(0);
+  
+  // Draw stored lines with fade
+  for (let i = lines.length - 1; i >= 0; i--) {
+    const ln = lines[i];
+    ln.age++;
+    
+    if (ln.age >= ln.maxAge) {
+      lines.splice(i, 1);
+      continue;
+    }
+    
+    const life = 1 - (ln.age / ln.maxAge);
+    const brightness = Math.round(150 * life);
+    
+    t.push();
+    t.charColor(brightness, brightness, 255);
+    t.char('-');
+    t.lineWeight(2);
+    t.translate(ln.cx, ln.cy);
+    t.line(-ln.dx / 2, -ln.dy / 2, ln.dx / 2, ln.dy / 2);
+    t.pop();
+  }
+  
+  // Draw current drag line
+  if (dragStart && t.mouse.x !== -1) {
+    const cx = Math.round(t.mouse.x - (t.grid.cols - 1) / 2);
+    const cy = Math.round(t.mouse.y - (t.grid.rows - 1) / 2);
+    const centerX = (dragStart.x + cx) / 2;
+    const centerY = (dragStart.y + cy) / 2;
+    const dx = cx - dragStart.x;
+    const dy = cy - dragStart.y;
+    
+    t.push();
+    t.charColor(255, 200, 0);
+    t.char('o');
+    t.lineWeight(2);
+    t.translate(centerX, centerY);
+    t.line(-dx / 2, -dy / 2, dx / 2, dy / 2);
+    t.pop();
+  }
+});
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.mouseReleased
 ```
 
 ***
@@ -1665,15 +2800,85 @@ Set a callback function that will be called when the mouse wheel is scrolled.
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
+// Scroll to create expanding rings.
+
 const t = textmode.create({ width: 800, height: 600 });
 
+const rings = [];
+
 t.mouseScrolled((data) => {
-  console.log(`Mouse scrolled at: ${data.position.x}, ${data.position.y}`);
-  console.log(`Scroll delta: ${data.delta?.x}, ${data.delta?.y}`);
+  if (data.position.x === -1 || data.position.y === -1) return;
+  
+  const cx = Math.round(data.position.x - (t.grid.cols - 1) / 2);
+  const cy = Math.round(data.position.y - (t.grid.rows - 1) / 2);
+  
+  // Use scroll delta to determine ring intensity and direction
+  const scrollSpeed = 2;
+  const intensity = Math.min(scrollSpeed * 30, 255);
+  const scrollDown = (data.delta?.y || 0) > 0;
+  
+  rings.push({
+    x: cx,
+    y: cy,
+    radius: 1,
+    maxRadius: 5 + scrollSpeed * 0.5,
+    color: intensity,
+    scrollDown: scrollDown,
+    age: 0,
+    maxAge: 20
+  });
 });
+
+t.draw(() => {
+  t.background(0);
+  
+  // Update and draw rings
+  for (let i = rings.length - 1; i >= 0; i--) {
+    const r = rings[i];
+    r.age++;
+    r.radius += (r.maxRadius - r.radius) * 0.15;
+    
+    if (r.age >= r.maxAge) {
+      rings.splice(i, 1);
+      continue;
+    }
+    
+    const life = 1 - (r.age / r.maxAge);
+    const brightness = Math.round(r.color * life);
+    
+    t.push();
+    // Blue for scroll down, orange for scroll up
+    if (r.scrollDown) {
+      t.charColor(brightness * 0.5, brightness * 0.8, 255);
+    } else {
+      t.charColor(255, brightness * 0.6, brightness * 0.3);
+    }
+    t.translate(r.x, r.y);
+    
+    // Draw ring
+    for (let a = 0; a < Math.PI * 2; a += Math.PI / 6) {
+      const ox = Math.round(Math.cos(a) * r.radius);
+      const oy = Math.round(Math.sin(a) * r.radius);
+      t.push();
+      t.translate(ox, oy);
+      t.char('o');
+      t.point();
+      t.pop();
+    }
+    t.pop();
+  }
+});
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.mouseScrolled
 ```
 
 ***
@@ -1694,22 +2899,107 @@ animation while maintaining the ability to continue it.
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
-// Create a textmodifier instance in auto mode
-const textmodifier = textmode.create();
+const t = textmode.create({ width: 800, height: 600 });
 
-// The render loop is running by default
-console.log(textmodifier.isLooping()); // true
+// Toggle loop on SPACE
+t.keyPressed((data) => {
+  if (data.key === ' ') {
+    if (t.isLooping()) {
+      t.noLoop();
+    } else {
+      t.loop();
+    }
+  }
+});
 
-// Stop the automatic rendering loop
-textmodifier.noLoop();
-console.log(textmodifier.isLooping()); // false
+t.draw(() => {
+  t.background(0);
+  t.char('A');
+  t.charColor(255, 255, 255);
+  t.rotateZ(t.frameCount * 2);
+  t.rect(16, 16);
+});
+```
 
-// Resume the rendering loop
-textmodifier.loop();
-console.log(textmodifier.isLooping()); // true
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.noLoop
+```
+
+***
+
+### ortho()
+
+```ts
+ortho(): void;
+```
+
+Enable orthographic projection for the current frame.
+
+By default, textmode.js uses perspective projection. Calling this function
+switches to orthographic projection for all geometries drawn in the current frame.
+Orthographic projection renders objects without perspective distortion - parallel 
+lines remain parallel regardless of depth, and objects don't appear smaller as 
+they move away from the camera.
+
+**Note**: The projection mode resets to perspective at the start of each frame,
+so `ortho()` must be called in every frame where you want orthographic projection.
+
+#### Returns
+
+`void`
+
+::: example-spoiler Show example
+
+```javascript
+const t = textmode.create({
+  width: 800,
+  height: 600,
+});
+
+let useOrtho = false;
+
+// Toggle between ortho and perspective with spacebar
+t.keyPressed((data) => {
+  if (data.key === ' ') {
+    useOrtho = !useOrtho;
+  }
+});
+
+t.draw(() => {
+  t.background(0);
+  
+  // Enable orthographic projection if toggled on
+  if (useOrtho) {
+    t.ortho();
+  }
+  
+  // Animate the rectangle back and forth on the z-axis
+  const zPos = Math.sin(t.frameCount * 0.01) * 50;
+  
+  t.push();
+  t.translate(0, 0, zPos);
+  t.rotateZ(t.frameCount * 2);
+  t.rotateX(t.frameCount * 1.5);
+  t.char('A');
+  t.charColor(255, 100, 200);
+  t.rect(16, 16);
+  t.pop();
+});
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.ortho
 ```
 
 ***
@@ -1735,12 +3025,20 @@ the initial distance and the change since the previous update, enabling zoom int
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 t.pinch((data) => {
   console.log(`Pinch scale: ${data.scale.toFixed(2)}`);
 });
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.pinch
 ```
 
 ***
@@ -1764,7 +3062,7 @@ Draw a single point at (x, y) with the current settings.
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 const t = textmode.create({
@@ -1776,8 +3074,16 @@ t.draw(() => {
   t.background(0);
 
   t.char('*');
-  t.point(10, 10);
+  t.point();
 });
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.point
 ```
 
 ***
@@ -1795,7 +3101,7 @@ Use with [push](#push) to isolate style changes within a block.
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 const t = textmode.create({
@@ -1808,10 +3114,19 @@ t.draw(() => {
 
   t.push(); // Save current state
   t.charColor(0, 255, 0); // Green characters
-  t.char('█');
-  t.rect(5, 5, 3, 3);
+  t.rotateZ(t.frameCount * 2);
+  t.char('A');
+  t.rect(16, 16);
   t.pop(); // Restore previous state
 });
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.pop
 ```
 
 ***
@@ -1829,7 +3144,7 @@ Use with [pop](#pop) to isolate style changes within a block.
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 const t = textmode.create({
@@ -1842,9 +3157,19 @@ t.draw(() => {
 
   t.push(); // Save current state
   t.charColor(255, 0, 0); // Red characters
-  t.rect(10, 10, 5, 5);
+  t.rotateZ(t.frameCount * 2);
+  t.char('A');
+  t.rect(16, 16);
   t.pop(); // Restore previous state
 });
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.push
 ```
 
 ***
@@ -1852,21 +3177,16 @@ t.draw(() => {
 ### rect()
 
 ```ts
-rect(
-   x, 
-   y, 
-   width?, 
-   height?): void;
+rect(width?, height?): void;
 ```
 
 Draw a rectangle with the current settings.
+Position is controlled via [translate](#translate), [push](#push), and [pop](#pop).
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `x` | `number` | X-coordinate of the rectangle *(top-left corner)* |
-| `y` | `number` | Y-coordinate of the rectangle *(top-left corner)* |
 | `width?` | `number` | Width of the rectangle |
 | `height?` | `number` | Height of the rectangle |
 
@@ -1874,7 +3194,7 @@ Draw a rectangle with the current settings.
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 const t = textmode.create({
@@ -1886,11 +3206,20 @@ t.draw(() => {
   // Set the background color to black
   t.background(0);
 
-  // Draw a filled rectangle with default character
-  t.char('█');
+  // Position and draw a filled rectangle
+  t.char('A');
   t.charColor(255, 255, 255); // White
-  t.rect(10, 10, 15, 8);
+  t.rotateZ(t.frameCount * 2);
+  t.rect(16, 16);
 });
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.rect
 ```
 
 ***
@@ -1916,23 +3245,58 @@ allowing you to trigger rendering on demand.
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
-// Create a textmodifier instance
-const textmodifier = textmode.create();
+// Press SPACE to manually trigger single frames while loop is paused.
 
-// Set up drawing
-textmodifier.draw(() => {
-  textmodifier.background(0);
+const t = textmode.create({ width: 800, height: 600 });
 
-  textmodifier.char("A");
-  textmodifier.charColor(255, 0, 0);
-  textmodifier.rect(10, 10, 50, 50);
+let rotation = 0;
+
+t.keyPressed((data) => {
+  if (data.key === ' ') {
+    rotation += 15; // Increment rotation
+    t.redraw(); // Manually trigger one frame
+  }
 });
 
-textmodifier.noLoop();
-textmodifier.redraw(3); // Render 3 times despite loop being stopped
+t.draw(() => {
+  if(t.frameCount === 1) {
+    t.noLoop();
+  }
+
+  t.background(0);
+  
+  t.push();
+  t.char('A');
+  t.charColor(100, 200, 255);
+  t.rotateZ(rotation);
+  t.rect(13, 13);
+  t.pop();
+  
+  // Show instruction text
+  t.push();
+  t.translate(-5, -10);
+  t.charColor(150);
+  const msg = 'PRESS SPACE';
+  [...msg].forEach((char, i) => {
+    t.push();
+    t.translate(i, 0);
+    t.char(char);
+    t.point();
+    t.pop();
+  });
+  t.pop();
+});
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.redraw
 ```
 
 ***
@@ -1955,6 +3319,39 @@ Resize the canvas and adjust all related components accordingly.
 #### Returns
 
 `void`
+
+::: example-spoiler Show example
+
+```javascript
+// Create a standalone textmodifier instance
+const t = textmode.create({
+  width: window.innerWidth,
+  height: window.innerHeight,
+});
+
+// Draw callback to update content
+t.draw(() => {
+ // Set background color
+ t.background(128);
+ t.char('A');
+ t.rotateZ(t.frameCount * 2);
+ t.rect(16, 16);
+});
+
+// Set up window resize callback
+t.windowResized(() => {
+  // Resize the canvas to match window size
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.resizeCanvas
+```
 
 ***
 
@@ -1983,7 +3380,7 @@ All geometries rotate around the center of the shape.
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 const t = textmode.create({
@@ -2002,6 +3399,14 @@ t.draw(() => {
   
   t.rect(10, 10, 5, 5);
 });
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.rotate
 ```
 
 ***
@@ -2027,12 +3432,20 @@ along with the gesture centre in grid coordinates. Ideal for dial-like interacti
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 t.rotateGesture((data) => {
   console.log(`Rotated ${data.deltaRotation.toFixed(1)}°`);
 });
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.rotateGesture
 ```
 
 ***
@@ -2057,7 +3470,7 @@ All geometries rotate around the center of the shape.
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 const t = textmode.create({
@@ -2070,6 +3483,14 @@ t.draw(() => {
   t.rotateX(45); // Rotate around X-axis
   t.rect(10, 10, 5, 5);
 });
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.rotateX
 ```
 
 ***
@@ -2094,7 +3515,7 @@ All geometries rotate around the center of the shape.
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 const t = textmode.create({
@@ -2107,6 +3528,14 @@ t.draw(() => {
   t.rotateY(45); // Rotate around Y-axis
   t.rect(10, 10, 5, 5);
 });
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.rotateY
 ```
 
 ***
@@ -2131,7 +3560,7 @@ All geometries rotate around the center of the shape.
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 const t = textmode.create({
@@ -2144,6 +3573,14 @@ t.draw(() => {
   t.rotateZ(45); // Rotate around Z-axis
   t.rect(10, 10, 5, 5);
 });
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.rotateZ
 ```
 
 ***
@@ -2167,7 +3604,7 @@ Set a uniform value for the current custom shader.
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 const t = textmode.create({
@@ -2185,6 +3622,14 @@ t.draw(() => {
   t.setUniform('u_time', t.frameCount * 0.02);
   t.rect(0, 0, t.grid.cols, t.grid.rows);
 });
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.setUniform
 ```
 
 ***
@@ -2207,7 +3652,7 @@ Set multiple uniform values for the current custom shader.
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 const t = textmode.create({
@@ -2231,6 +3676,14 @@ t.draw(() => {
 });
 ```
 
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.setUniforms
+```
+
 ***
 
 ### setup()
@@ -2239,46 +3692,22 @@ t.draw(() => {
 setup(callback): void;
 ```
 
-Set a setup callback function that will be executed once when initialization is complete.
-
-This callback is called after font loading and grid initialization, allowing access to
-properties like `textmodifier.grid.cols` for calculating layout or setup variables.
+Callbacks
 
 #### Parameters
 
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `callback` | () => `void` | The function to call when setup is complete |
+| Parameter | Type |
+| ------ | ------ |
+| `callback` | () => `void` \| `Promise`\<`void`\> |
 
 #### Returns
 
 `void`
 
-#### Example
+#### Implementation of
 
-```javascript
-const textmodifier = textmode.create({
-  width: 800,
-  height: 600,
-  fontSize: 16
-});
-
-// Setup callback - called once when ready
-textmodifier.setup(() => {
-  // Now you can access grid properties
-  const cols = textmodifier.grid.cols;
-  const rows = textmodifier.grid.rows;
-  
-  // Initialize any variables that depend on grid size
-  cellWidth = Math.floor(cols / 3);
-  cellHeight = Math.floor(rows / 2);
-});
-
-// Draw callback - called every frame
-textmodifier.draw(() => {
-  textmodifier.background(128);
-  textmodifier.rect(0, 0, cellWidth, cellHeight);
-});
+```ts
+ITextmodifier.setup
 ```
 
 ***
@@ -2301,7 +3730,7 @@ Set a custom shader for subsequent rendering operations.
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 const t = textmode.create({
@@ -2310,9 +3739,9 @@ const t = textmode.create({
 })
 
 // Create a custom filter shader
-const customShader = t.createFilterShader(`
+const customShader = t.createFilterShader('
   // ... fragment shader code ...
-`);
+');
 
 t.draw(() => {
   t.background(0);
@@ -2322,6 +3751,14 @@ t.draw(() => {
   t.setUniform('u_frameCount', t.frameCount);
   t.rect(0, 0, t.grid.cols, t.grid.rows);
 });
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.shader
 ```
 
 ***
@@ -2347,12 +3784,20 @@ velocity in CSS pixels per millisecond. Useful for panning, flicks, or quick sho
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 t.swipe((data) => {
   console.log(`Swipe ${data.direction} with distance ${data.distance}`);
 });
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.swipe
 ```
 
 ***
@@ -2378,12 +3823,20 @@ Use TouchTapEventData.taps to determine whether the gesture is a single or multi
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 t.tap((data) => {
   console.log(`Tapped at ${data.touch.x}, ${data.touch.y}`);
 });
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.tap
 ```
 
 ***
@@ -2409,12 +3862,20 @@ leaves the window. Treat this as an aborted touch and clean up any in-progress s
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 t.touchCancelled((data) => {
   console.warn(`Touch ${data.touch.id} cancelled by the browser`);
 });
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.touchCancelled
 ```
 
 ***
@@ -2440,12 +3901,20 @@ event. Use it to finalise state such as drawing strokes or completing gestures.
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 t.touchEnded((data) => {
   console.log(`Touch ${data.touch.id} finished at ${data.touch.x}, ${data.touch.y}`);
 });
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.touchEnded
 ```
 
 ***
@@ -2471,7 +3940,7 @@ The provided callback is invoked continuously while the browser reports move eve
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 t.touchMoved((data) => {
@@ -2480,6 +3949,14 @@ t.touchMoved((data) => {
     console.log(`Touch moved by ${touch.x - previousTouch.x}, ${touch.y - previousTouch.y}`);
   }
 });
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.touchMoved
 ```
 
 ***
@@ -2506,12 +3983,205 @@ more fingers on the canvas.
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 t.touchStarted((data) => {
   console.log(`Touch ${data.touch.id} began at ${data.touch.x}, ${data.touch.y}`);
 });
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.touchStarted
+```
+
+***
+
+### translate()
+
+```ts
+translate(
+   x?, 
+   y?, 
+   z?): void;
+```
+
+Sets the translation offsets for subsequent shape rendering operations.
+
+All geometries are displaced by the specified amounts. Similar to p5.js translate().
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `x?` | `number` | Translation along the X-axis in pixels (optional, defaults to 0) |
+| `y?` | `number` | Translation along the Y-axis in pixels (optional, defaults to 0) |
+| `z?` | `number` | Translation along the Z-axis in pixels (optional, defaults to 0) |
+
+#### Returns
+
+`void`
+
+::: example-spoiler Show example
+
+```javascript
+const t = textmode.create({
+  width: 800,
+  height: 600,
+})
+
+t.draw(() => {
+  t.background(0);
+  
+  // Translate in 2D
+  t.translate(10, 5);
+  
+  // Translate in 3D
+  t.translate(10, 5, 2);
+  
+  t.rect(0, 0, 5, 5); // Drawn at (10, 5) with Z offset
+});
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.translate
+```
+
+***
+
+### translateX()
+
+```ts
+translateX(pixels): void;
+```
+
+Sets the X-axis translation offset for subsequent shape rendering operations.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `pixels` | `number` | The translation offset in pixels along the X-axis |
+
+#### Returns
+
+`void`
+
+::: example-spoiler Show example
+
+```javascript
+const t = textmode.create({
+  width: 800,
+  height: 600,
+})
+
+t.draw(() => {
+  t.background(0);
+  t.translateX(10); // Translate 10 pixels to the right
+  t.rect(0, 0, 5, 5); // Drawn at (10, 0)
+});
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.translateX
+```
+
+***
+
+### translateY()
+
+```ts
+translateY(pixels): void;
+```
+
+Sets the Y-axis translation offset for subsequent shape rendering operations.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `pixels` | `number` | The translation offset in pixels along the Y-axis |
+
+#### Returns
+
+`void`
+
+::: example-spoiler Show example
+
+```javascript
+const t = textmode.create({
+  width: 800,
+  height: 600,
+})
+
+t.draw(() => {
+  t.background(0);
+  t.translateY(10); // Translate 10 pixels down
+  t.rect(0, 0, 5, 5); // Drawn at (0, 10)
+});
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.translateY
+```
+
+***
+
+### translateZ()
+
+```ts
+translateZ(pixels): void;
+```
+
+Sets the Z-axis translation offset for subsequent shape rendering operations.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `pixels` | `number` | The translation offset in pixels along the Z-axis |
+
+#### Returns
+
+`void`
+
+::: example-spoiler Show example
+
+```javascript
+const t = textmode.create({
+  width: 800,
+  height: 600,
+})
+
+t.draw(() => {
+  t.background(0);
+  t.translateZ(5); // Move 5 pixels forward in 3D space
+  t.rect(10, 10, 5, 5);
+});
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.translateZ
 ```
 
 ***
@@ -2545,7 +4215,7 @@ Draw a triangle with the current settings.
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 const t = textmode.create({
@@ -2557,6 +4227,14 @@ t.draw(() => {
   t.background(0);
   t.triangle(10, 10, 20, 10, 15, 20);
 });
+```
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.triangle
 ```
 
 ***
@@ -2579,7 +4257,7 @@ Set a callback function that will be called when the window is resized.
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 // Create a standalone textmodifier instance
@@ -2601,3 +4279,11 @@ t.windowResized(() => {
   // Resize the canvas to match window size
   t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
+
+:::
+
+#### Implementation of
+
+```ts
+ITextmodifier.windowResized
+```

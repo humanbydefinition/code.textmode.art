@@ -18,11 +18,13 @@ get static version(): string;
 
 Returns the version of `textmode.js` being used.
 
-##### Example
+::: example-spoiler Show example
 
 ```javascript
 console.log(textmode.version); // "1.0.0"
 ```
+
+:::
 
 ##### Returns
 
@@ -50,28 +52,20 @@ Create a new [Textmodifier](Textmodifier.md) instance with optional configuratio
 
 A new Textmodifier instance
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
-// Create with default canvas
-const textmodifier = textmode.create();
+const t = textmode.create({ width: 800, height: 600, fontSize: 16 });
 
-textmodifier.setup(() => {
-  // Called when the Textmodifier is ready
-  console.log(`Grid size: ${textmodifier.grid.cols}x${textmodifier.grid.rows}`);
+t.draw(() => {
+    t.background(0);
+    t.char("x");
+    t.rotateZ(t.frameCount);
+    t.rect(10, 10);
 });
-
-textmodifier.draw(() => {
-  textmodifier.background(128);
-  textmodifier.rect(10, 10, 20, 20);
-});
-
-// Create with options
-const textmodifier2 = textmode.create({ width: 1920, height: 1080 });
-
-// Create with canvas and options
-const textmodifier3 = textmode.create({ canvas: canvas, fontSize: 20 });
 ```
+
+:::
 
 ***
 
@@ -93,9 +87,11 @@ Set the global error handling level for the library. This applies to all [Textmo
 
 `void`
 
-#### Example
+::: example-spoiler Show example
 
 ```javascript
 // Set error level to WARNING
 textmode.setErrorLevel(TextmodeErrorLevel.WARNING);
 ```
+
+:::

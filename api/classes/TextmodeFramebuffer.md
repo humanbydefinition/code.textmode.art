@@ -4,16 +4,40 @@
 
 Framebuffer class for managing offscreen rendering targets initialized via [Textmodifier.createFramebuffer](Textmodifier.md#createframebuffer).
 
+`TextmodeFramebuffer` instances contain 3 attachments to support the rendering pipeline:
+- Attachment 0: Character and transform data *(RGBA)*
+- Attachment 1: Primary color data *(RGBA)*
+- Attachment 2: Secondary color data *(RGBA)*
+
+## Implements
+
+- `IFramebuffer`
+
 ## Properties
 
-| Property | Modifier | Type | Default value |
-| ------ | ------ | ------ | ------ |
-| <a id="_height"></a> `_height` | `protected` | `number` | `undefined` |
-| <a id="_options"></a> `_options` | `protected` | `FramebufferOptions` | `undefined` |
-| <a id="_pixels"></a> `_pixels` | `protected` | `null` \| `Uint8Array`\<`ArrayBufferLike`\> | `null` |
-| <a id="_width"></a> `_width` | `protected` | `number` | `undefined` |
+| Property | Modifier | Type |
+| ------ | ------ | ------ |
+| <a id="_height"></a> `_height` | `protected` | `number` |
+| <a id="_options"></a> `_options` | `protected` | `FramebufferOptions` |
+| <a id="_width"></a> `_width` | `protected` | `number` |
 
 ## Accessors
+
+### attachmentCount
+
+#### Get Signature
+
+```ts
+get attachmentCount(): number;
+```
+
+Get the number of color attachments in this framebuffer
+
+##### Returns
+
+`number`
+
+***
 
 ### height
 
@@ -23,11 +47,17 @@ Framebuffer class for managing offscreen rendering targets initialized via [Text
 get height(): number;
 ```
 
-Get the current framebuffer height.
+Get the height of the framebuffer
 
 ##### Returns
 
 `number`
+
+#### Implementation of
+
+```ts
+IFramebuffer.height
+```
 
 ***
 
@@ -39,20 +69,17 @@ Get the current framebuffer height.
 get textures(): WebGLTexture[];
 ```
 
-Get all textures associated with this framebuffer. 
-
-Useful for binding textures for reading in shaders.
-
-TextmodeFramebuffers have 5 attachments:
-- 0: Character colors that encode the character to display via red and green channels
-- 1: Character colors
-- 2: Cell background colors
-- 3: Rotation of each character encoded in red and green channels
-- 4: Inversion, horizontal, and vertical flip flags encoded in red, green, blue channels
+Get the WebGL textures associated with this framebuffer
 
 ##### Returns
 
 `WebGLTexture`[]
+
+#### Implementation of
+
+```ts
+IFramebuffer.textures
+```
 
 ***
 
@@ -64,11 +91,17 @@ TextmodeFramebuffers have 5 attachments:
 get width(): number;
 ```
 
-Get the current framebuffer width.
+Get the width of the framebuffer
 
 ##### Returns
 
 `number`
+
+#### Implementation of
+
+```ts
+IFramebuffer.width
+```
 
 ## Methods
 
@@ -84,6 +117,12 @@ Begin rendering to this framebuffer.
 
 `void`
 
+#### Implementation of
+
+```ts
+IFramebuffer.begin
+```
+
 ***
 
 ### end()
@@ -98,6 +137,45 @@ End rendering to this framebuffer and restore previous state.
 
 `void`
 
+#### Implementation of
+
+```ts
+IFramebuffer.end
+```
+
+***
+
+### readPixels()
+
+```ts
+readPixels(attachmentIndex): Uint8Array;
+```
+
+Read pixels from a specific color attachment into an RGBA Uint8Array.
+
+The returned pixel data:
+- Is in RGBA format (4 bytes per pixel)
+- Has top-left origin (first pixel is top-left corner)
+- Is cached until the next render pass to this framebuffer
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `attachmentIndex` | `number` | The index of the color attachment to read (0-based)<br/> 0. Character data and transform info<br/> 1. Character colors<br/> 2. Cell background colors<br/> |
+
+#### Returns
+
+`Uint8Array`
+
+A Uint8Array containing the pixel data in RGBA format
+
+#### Implementation of
+
+```ts
+IFramebuffer.readPixels
+```
+
 ***
 
 ### resize()
@@ -106,15 +184,22 @@ End rendering to this framebuffer and restore previous state.
 resize(width, height): void;
 ```
 
-Resize the framebuffer.
+Resize the framebuffer to new dimensions.
+This recreates the internal textures with the new size and invalidates any cached pixel data.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `width` | `number` | New width |
-| `height` | `number` | New height |
+| `width` | `number` | New width in pixels/cells |
+| `height` | `number` | New height in pixels/cells |
 
 #### Returns
 
 `void`
+
+#### Implementation of
+
+```ts
+IFramebuffer.resize
+```

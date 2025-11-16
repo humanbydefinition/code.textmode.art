@@ -10,6 +10,50 @@
   --textmode-font: 'JetBrains Mono', 'Courier New', monospace;
 }
 
+/* Collapsible spoiler styling for API examples */
+details.example-spoiler {
+  margin: 0.85rem 0 1.25rem;
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 0.6rem;
+  background-color: var(--vp-c-bg-soft);
+  padding: 0.35rem;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+details.example-spoiler[open] {
+  border-color: var(--vp-c-brand-1);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+}
+
+details.example-spoiler summary {
+  cursor: pointer;
+  font-weight: 600;
+  list-style: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.4rem;
+  margin-bottom: 0.4rem;
+}
+
+details.example-spoiler summary::before {
+  content: '▶';
+  display: inline-block;
+  transform: rotate(0deg);
+  transition: transform 0.2s ease;
+  font-size: 0.85rem;
+}
+
+details.example-spoiler[open] summary::before {
+  transform: rotate(90deg);
+}
+
+details.example-spoiler summary::-webkit-details-marker {
+  display: none;
+}
+
 /* Hero section adjustments */
 .actions {
   padding-top: 0.0rem !important;

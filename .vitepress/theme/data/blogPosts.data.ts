@@ -14,6 +14,80 @@ export interface BlogPostEntry {
 declare const data: BlogPostEntry[]
 export { data }
 
+const BLOG_POSTS_GLOB = 'blog/posts/**/*.md'
+type LoaderModule = Awaited<ReturnType<typeof importLoader>>
+
+function normalizeWatchPattern(pattern: string): string {
+  return pattern.replace(/\\+/g, '/')
+}
+
+const config = (globalThis as any).VITEPRESS_CONFIG
+const resolvedWatch = config?.srcDir
+  ? [normalizeWatchPattern(`${config.srcDir}/${BLOG_POSTS_GLOB}`)]
+  : [BLOG_POSTS_GLOB]
+
+let loaderPromise: Promise<LoaderModule> | null = null
+
+async function importLoader() {
+  const { createContentLoader } = await import('vitepress')
+  return createContentLoader(BLOG_POSTS_GLOB, {
+    excerpt: true,
+    includeSrc: true,
+    transform(posts): BlogPostEntry[] {
+      return posts
+        .map((post) => {
+          const frontmatter = post.frontmatter as Record<string, any>
+
+          const sourcePath = (post as any).src ?? ''
+          const date = frontmatter?.date ?? ''
+          const tags = Array.isArray(frontmatter?.tags) ? frontmatter.tags : []
+          const author = frontmatter?.author ?? 'textmode.js Team'
+          const permalink = post.url
+
+          const sourceContent = (post as any).src ?? ''
+          const words = typeof sourceContent === 'string' && sourceContent
+            ? sourceContent.trim().split(/\s+/).filter(Boolean).length
+            : 0
+          const readingTime = Math.max(1, Math.round(words / 220))
+
+          const rawDescription = frontmatter?.description ?? post.excerpt ?? ''
+          const description = typeof rawDescription === 'string'
+            ? rawDescription.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()
+            : ''
+
+          const slug = frontmatter?.slug ?? 
+            permalink.replace(/\/$/, '').split('/').pop() ?? 
+            ''
+
+          return {
+            title: frontmatter?.title ?? 'Untitled post',
+            description,
+            date,
+            tags,
+            author,
+            url: permalink,
+            slug,
+            readingTime,
+            cover: frontmatter?.cover ?? null,
+            source: sourcePath,
+          }
+        })
+        .sort((a, b) => {
+          const aTime = a.date ? Date.parse(a.date) : 0
+          const bTime = b.date ? Date.parse(b.date) : 0
+          return bTime - aTime
+        })
+    },
+  })
+}
+
+async function getLoader() {
+  if (!loaderPromise) {
+    loaderPromise = importLoader()
+  }
+  return loaderPromise
+}
+
 /**
  * VitePress Data Loader for blog posts
  * 
@@ -26,74 +100,9 @@ export { data }
  * - Frontmatter changes, content updates, and file additions/deletions are all detected
  */
 export default {
-  // Watch pattern for all blog post markdown files
-  // This enables HMR - any change to these files will trigger a reload
-  // Path is relative to VitePress root (vitepress/ directory)
-  watch: ['blog/posts/**/*.md'],
-  
-  async load(): Promise<BlogPostEntry[]> {
-    // Dynamically import createContentLoader to avoid ESM/CommonJS issues
-    const { createContentLoader } = await import('vitepress')
-    
-    // Create content loader with the same pattern
-    // Path is relative to VitePress root (vitepress/ directory)
-    const loader = createContentLoader('blog/posts/**/*.md', {
-      excerpt: true,
-      // Include raw content for reading time calculation
-      includeSrc: true,
-      transform(posts): BlogPostEntry[] {
-        return posts
-          .map((post) => {
-            const frontmatter = post.frontmatter as Record<string, any>
-            
-            // Extract metadata with proper fallbacks
-            const sourcePath = (post as any).src ?? ''
-            const date = frontmatter?.date ?? ''
-            const tags = Array.isArray(frontmatter?.tags) ? frontmatter.tags : []
-            const author = frontmatter?.author ?? 'textmode.js Team'
-            const permalink = post.url
-            
-            // Calculate reading time based on word count (average reading speed: 220 words/min)
-            // With includeSrc: true, the raw markdown content is available in post.src
-            const sourceContent = (post as any).src ?? ''
-            const words = typeof sourceContent === 'string' && sourceContent
-              ? sourceContent.trim().split(/\s+/).filter(Boolean).length
-              : 0
-            const readingTime = Math.max(1, Math.round(words / 220))
-            
-            // Clean description from HTML tags and normalize whitespace
-            const rawDescription = frontmatter?.description ?? post.excerpt ?? ''
-            const description = typeof rawDescription === 'string'
-              ? rawDescription.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim()
-              : ''
-
-            // Generate slug from frontmatter or URL
-            const slug = frontmatter?.slug ?? 
-              permalink.replace(/\/$/, '').split('/').pop() ?? 
-              ''
-
-            return {
-              title: frontmatter?.title ?? 'Untitled post',
-              description,
-              date,
-              tags,
-              author,
-              url: permalink,
-              slug,
-              readingTime,
-              cover: frontmatter?.cover ?? null,
-              source: sourcePath,
-            }
-          })
-          // Sort by date descending (newest first)
-          .sort((a, b) => {
-            const aTime = a.date ? Date.parse(a.date) : 0
-            const bTime = b.date ? Date.parse(b.date) : 0
-            return bTime - aTime
-          })
-      },
-    })
-    
+  watch: resolvedWatch,
+  async load(files?: string[]): Promise<BlogPostEntry[]> {
+    const loader = await getLoader()
     return await loader.load()
-  }
+  },
 }

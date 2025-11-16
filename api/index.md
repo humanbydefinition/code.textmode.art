@@ -5,6 +5,8 @@
 | Namespace | Description |
 | ------ | ------ |
 | [input](textmode.js/namespaces/input/index.md) | All types and interfaces related to input event handling. |
+| [loadables](textmode.js/namespaces/loadables/index.md) | All loadable assets related to textmode rendering. |
+| [loading](textmode.js/namespaces/loading/index.md) | All loading screen related modules and types. |
 
 ## Enumerations
 
@@ -17,11 +19,10 @@
 | Class | Description |
 | ------ | ------ |
 | [textmode](classes/textmode.md) | The main entry point for the `textmode.js` library. |
-| [TextmodeFont](classes/TextmodeFont.md) | Manages the font used for rendering characters. |
+| [TextmodeColor](classes/TextmodeColor.md) | Represents a color in the `textmode.js` rendering system. |
 | [TextmodeFramebuffer](classes/TextmodeFramebuffer.md) | Framebuffer class for managing offscreen rendering targets initialized via [Textmodifier.createFramebuffer](classes/Textmodifier.md#createframebuffer). |
 | [TextmodeGrid](classes/TextmodeGrid.md) | Manages the grid of a [Textmodifier](classes/Textmodifier.md) instance. |
-| [TextmodeImage](classes/TextmodeImage.md) | Represents an image uploaded for textmode rendering via [Textmodifier.loadImage](classes/Textmodifier.md#loadimage). |
-| [Textmodifier](classes/Textmodifier.md) | Manages textmode rendering on a [`HTMLCanvasElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement) and provides methods for drawing, exporting, font management, event handling, and animation control. |
+| [Textmodifier](classes/Textmodifier.md) | Manages textmode rendering on a [`HTMLCanvasElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement) and provides methods for drawing, font management, event handling, and animation control. |
 
 ## Interfaces
 
@@ -34,6 +35,5 @@
 
 | Type Alias | Description |
 | ------ | ------ |
-| [TextmodeCharacter](type-aliases/TextmodeCharacter.md) | Represents a single character in the [TextmodeFont.characters](classes/TextmodeFont.md#characters) array. |
 | [TextmodeFramebufferOptions](type-aliases/TextmodeFramebufferOptions.md) | Options for creating a framebuffer. |
 | [TextmodeOptions](type-aliases/TextmodeOptions.md) | Options for creating a [Textmodifier](classes/Textmodifier.md) instance. |

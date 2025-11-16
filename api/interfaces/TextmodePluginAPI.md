@@ -4,42 +4,18 @@
 
 An extended API provided to plugins when they are installed on a [Textmodifier](../classes/Textmodifier.md) instance.
 
-## Extends
-
-- `TextmodePluginContext`
-
 ## Properties
 
-| Property | Type | Description | Inherited from |
-| ------ | ------ | ------ | ------ |
-| <a id="asciiframebuffer"></a> `asciiFramebuffer` | [`TextmodeFramebuffer`](../classes/TextmodeFramebuffer.md) | The framebuffer containing the ASCII representation. | `TextmodePluginContext.asciiFramebuffer` |
-| <a id="canvas"></a> `canvas` | `TextmodeCanvas` | The canvas used by the Textmodifier instance. | `TextmodePluginContext.canvas` |
-| <a id="drawframebuffer"></a> `drawFramebuffer` | [`TextmodeFramebuffer`](../classes/TextmodeFramebuffer.md) | The framebuffer the user draws to. | `TextmodePluginContext.drawFramebuffer` |
-| <a id="font"></a> `font` | [`TextmodeFont`](../classes/TextmodeFont.md) | The font used by the Textmodifier instance. | `TextmodePluginContext.font` |
-| <a id="grid"></a> `grid` | [`TextmodeGrid`](../classes/TextmodeGrid.md) | The grid used by the Textmodifier instance. | `TextmodePluginContext.grid` |
-| <a id="renderer"></a> `renderer` | `GLRenderer` | The WebGL renderer used by the Textmodifier instance. | `TextmodePluginContext.renderer` |
+| Property | Type | Description |
+| ------ | ------ | ------ |
+| <a id="asciiframebuffer"></a> `asciiFramebuffer` | [`TextmodeFramebuffer`](../classes/TextmodeFramebuffer.md) | The framebuffer containing the ASCII representation.<br/> This framebuffer only has a single render target. |
+| <a id="canvas"></a> `canvas` | `TextmodeCanvas` | The canvas used by the Textmodifier instance. |
+| <a id="drawframebuffer"></a> `drawFramebuffer` | [`TextmodeFramebuffer`](../classes/TextmodeFramebuffer.md) | The framebuffer the user draws to. |
+| <a id="font"></a> `font` | [`TextmodeFont`](../textmode.js/namespaces/loadables/classes/TextmodeFont.md) | The font used by the Textmodifier instance. |
+| <a id="grid"></a> `grid` | [`TextmodeGrid`](../classes/TextmodeGrid.md) | The grid used by the Textmodifier instance. |
+| <a id="renderer"></a> `renderer` | `GLRenderer` | The WebGL renderer used by the Textmodifier instance. |
 
 ## Methods
-
-### flushDrawCommands()
-
-```ts
-flushDrawCommands(): void;
-```
-
-Immediately execute any pending draw commands.
-
-#### Returns
-
-`void`
-
-#### Inherited from
-
-```ts
-TextmodePluginContext.flushDrawCommands
-```
-
-***
 
 ### registerPostDrawHook()
 
@@ -47,7 +23,7 @@ TextmodePluginContext.flushDrawCommands
 registerPostDrawHook(callback): () => void;
 ```
 
-Register a callback to be invoked after each draw cycle. Happens outside of the draw framebuffer being bound.
+Register a callback to be invoked after each draw cycle. Happens outside of the draw framebuffer being bound after the final result is drawn to the screen.
 
 #### Parameters
 
@@ -73,7 +49,7 @@ Register a callback to be invoked after each draw cycle. Happens outside of the 
 registerPreDrawHook(callback): () => void;
 ```
 
-Register a callback to be invoked before each draw cycle. Happens outside of the draw framebuffer being bound.
+Register a callback to be invoked before each draw cycle. Happens just before the draw framebuffer is being bound.
 
 #### Parameters
 
