@@ -4,7 +4,7 @@
 
 ## Mouse events
 
-Mouse interaction in `textmode.js` is handled through a grid-based coordinate system. Mouse positions are automatically converted from pixel coordinates to grid cell coordinates.
+Mouse interaction in `textmode.js` is handled through a grid-based coordinate system. Mouse positions are automatically converted from pixel coordinates to grid cell coordinates with a top-left origin `(0, 0)`. When drawing, you'll typically convert these to center-based coordinates for use with `translate()`.
 
 ### Mouse position
 
@@ -14,13 +14,19 @@ The mouse position is available as grid coordinates (column, row) where the top-
 const t = textmode.create({ width: 800, height: 600 });
 
 t.draw(() => {
-    const mousePos = t.mouse;
+    t.background(0);
     
-    if (mousePos.x !== -1 && mousePos.y !== -1) {
-        // Mouse is over the grid
+    if (t.mouse.x !== -1 && t.mouse.y !== -1) {
+        // Convert mouse position from top-left origin to center-based origin
+        const centerX = Math.round(t.mouse.x - (t.grid.cols - 1) / 2);
+        const centerY = Math.round(t.mouse.y - (t.grid.rows - 1) / 2);
+        
+        t.push();
+        t.translate(centerX, centerY);
         t.char('*');
         t.charColor(255, 0, 0);
-        t.point(mousePos.x, mousePos.y);
+        t.point();
+        t.pop();
     }
 });
 ```
@@ -30,9 +36,49 @@ t.draw(() => {
 Handle mouse clicks with the [`mouseClicked()`](/api/classes/Textmodifier#mouseclicked) method:
 
 ```javascript
+const t = textmode.create({ width: 800, height: 600 });
+
+const ripples = [];
+
 t.mouseClicked((data) => {
-    console.log(`Clicked at grid position: ${data.position.x}, ${data.position.y}`);
-    console.log(`Button: ${data.button}`); // 0=left, 1=middle, 2=right
+    // Convert top-left grid coords to center-based coords
+    const centerX = Math.round(data.position.x - (t.grid.cols - 1) / 2);
+    const centerY = Math.round(data.position.y - (t.grid.rows - 1) / 2);
+    
+    ripples.push({ x: centerX, y: centerY, age: 0, maxAge: 20 });
+});
+
+t.draw(() => {
+    t.background(0);
+    
+    for (let i = ripples.length - 1; i >= 0; i--) {
+        const r = ripples[i];
+        r.age++;
+        const life = r.age / r.maxAge;
+        const radius = 1 + life * 7;
+        const intensity = Math.round(255 * (1 - life));
+        
+        t.charColor(intensity, intensity, 255);
+        
+        t.push();
+        t.translate(r.x, r.y);
+        
+        for (let a = 0; a < Math.PI * 2; a += Math.PI / 8) {
+            const ox = Math.round(Math.cos(a) * radius);
+            const oy = Math.round(Math.sin(a) * radius);
+            t.push();
+            t.translate(ox, oy);
+            t.char('*');
+            t.point();
+            t.pop();
+        }
+        
+        t.pop();
+        
+        if (r.age > r.maxAge) {
+            ripples.splice(i, 1);
+        }
+    }
 });
 ```
 
@@ -41,16 +87,61 @@ t.mouseClicked((data) => {
 Track mouse button states with [`mousePressed()`](/api/classes/Textmodifier#mousepressed) and [`mouseReleased()`](/api/classes/Textmodifier#mousereleased):
 
 ```javascript
-let isDragging = false;
+const t = textmode.create({ width: 800, height: 600 });
+
+const particles = [];
+let pressing = false;
 
 t.mousePressed((data) => {
-    isDragging = true;
-    console.log(`Mouse pressed at: ${data.position.x}, ${data.position.y}`);
+    if (data.position.x === -1 || data.position.y === -1) return;
+    pressing = true;
 });
 
-t.mouseReleased((data) => {
-    isDragging = false;
-    console.log(`Mouse released at: ${data.position.x}, ${data.position.y}`);
+t.mouseReleased(() => {
+    pressing = false;
+});
+
+t.draw(() => {
+    t.background(0);
+    
+    // Spawn particles while pressing
+    if (pressing && t.mouse.x !== -1) {
+        const cx = Math.round(t.mouse.x - (t.grid.cols - 1) / 2);
+        const cy = Math.round(t.mouse.y - (t.grid.rows - 1) / 2);
+        
+        for (let i = 0; i < 3; i++) {
+            particles.push({
+                x: cx, y: cy,
+                vx: (Math.random() - 0.5) * 0.8,
+                vy: Math.random() * -0.5 - 0.2,
+                age: 0, maxAge: 30 + Math.random() * 20
+            });
+        }
+    }
+    
+    // Update and draw particles
+    for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.age++;
+        p.vy += 0.08; // gravity
+        p.x += p.vx;
+        p.y += p.vy;
+        
+        if (p.age >= p.maxAge) {
+            particles.splice(i, 1);
+            continue;
+        }
+        
+        const life = 1 - (p.age / p.maxAge);
+        const brightness = Math.round(255 * life);
+        
+        t.push();
+        t.charColor(brightness, brightness * 0.7, 100);
+        t.translate(Math.round(p.x), Math.round(p.y));
+        t.char(life > 0.5 ? 'o' : '.');
+        t.point();
+        t.pop();
+    }
 });
 ```
 
@@ -59,10 +150,54 @@ t.mouseReleased((data) => {
 Respond to mouse movement with [`mouseMoved()`](/api/classes/Textmodifier#mousemoved):
 
 ```javascript
+const t = textmode.create({ width: 800, height: 600 });
+
+const trail = [];
+let lastMouse = null;
+
 t.mouseMoved((data) => {
-    if (data.position.x !== -1 && data.position.y !== -1) {
-        console.log(`Mouse moved to: ${data.position.x}, ${data.position.y}`);
-        console.log(`Previous position: ${data.previousPosition.x}, ${data.previousPosition.y}`);
+    if (data.position.x === -1 || data.position.y === -1) return;
+    
+    // Convert to center-based coords
+    const cx = Math.round(data.position.x - (t.grid.cols - 1) / 2);
+    const cy = Math.round(data.position.y - (t.grid.rows - 1) / 2);
+    
+    // Spawn multiple particles based on movement speed
+    const dx = lastMouse ? cx - lastMouse.x : 0;
+    const dy = lastMouse ? cy - lastMouse.y : 0;
+    const speed = Math.sqrt(dx * dx + dy * dy);
+    const count = Math.max(1, Math.ceil(speed * 1.5));
+    
+    for (let i = 0; i < count; i++) {
+        trail.push({ x: cx, y: cy, age: 0, maxAge: 15 + Math.random() * 10 });
+    }
+    
+    lastMouse = { x: cx, y: cy };
+});
+
+t.draw(() => {
+    t.background(0);
+    
+    for (let i = trail.length - 1; i >= 0; i--) {
+        const p = trail[i];
+        p.age++;
+        
+        if (p.age >= p.maxAge) {
+            trail.splice(i, 1);
+            continue;
+        }
+        
+        const life = 1 - (p.age / p.maxAge);
+        const brightness = Math.round(255 * life);
+        const chars = ['.', '*', 'o', '@'];
+        const idx = Math.floor(life * chars.length);
+        
+        t.push();
+        t.charColor(brightness, brightness * 0.6, 255);
+        t.translate(p.x, p.y);
+        t.char(chars[Math.min(idx, chars.length - 1)]);
+        t.point();
+        t.pop();
     }
 });
 ```
@@ -72,17 +207,60 @@ t.mouseMoved((data) => {
 Handle mouse wheel scrolling with [`mouseScrolled()`](/api/classes/Textmodifier#mousescrolled):
 
 ```javascript
-let zoomLevel = 1;
+const t = textmode.create({ width: 800, height: 600 });
+
+const rings = [];
 
 t.mouseScrolled((data) => {
-    console.log(`Mouse scrolled at: ${data.position.x}, ${data.position.y}`);
-    console.log(`Scroll delta: ${data.delta?.x}, ${data.delta?.y}`);
+    if (data.position.x === -1 || data.position.y === -1) return;
     
-    // Zoom in/out based on scroll direction
-    if (data.delta && data.delta.y > 0) {
-        zoomLevel += 0.1;
-    } else if (data.delta && data.delta.y < 0) {
-        zoomLevel = Math.max(0.1, zoomLevel - 0.1);
+    const cx = Math.round(data.position.x - (t.grid.cols - 1) / 2);
+    const cy = Math.round(data.position.y - (t.grid.rows - 1) / 2);
+    
+    const scrollDown = (data.delta?.y || 0) > 0;
+    
+    rings.push({
+        x: cx, y: cy,
+        radius: 1, maxRadius: 8,
+        scrollDown: scrollDown,
+        age: 0, maxAge: 20
+    });
+});
+
+t.draw(() => {
+    t.background(0);
+    
+    for (let i = rings.length - 1; i >= 0; i--) {
+        const r = rings[i];
+        r.age++;
+        r.radius += (r.maxRadius - r.radius) * 0.15;
+        
+        if (r.age >= r.maxAge) {
+            rings.splice(i, 1);
+            continue;
+        }
+        
+        const life = 1 - (r.age / r.maxAge);
+        const brightness = Math.round(255 * life);
+        
+        t.push();
+        if (r.scrollDown) {
+            t.charColor(brightness * 0.5, brightness * 0.8, 255);
+        } else {
+            t.charColor(255, brightness * 0.6, brightness * 0.3);
+        }
+        t.translate(r.x, r.y);
+        
+        for (let a = 0; a < Math.PI * 2; a += Math.PI / 6) {
+            const ox = Math.round(Math.cos(a) * r.radius);
+            const oy = Math.round(Math.sin(a) * r.radius);
+            t.push();
+            t.translate(ox, oy);
+            t.char('o');
+            t.point();
+            t.pop();
+        }
+        t.pop();
     }
 });
 ```
@@ -92,25 +270,32 @@ t.mouseScrolled((data) => {
 Change the canvas cursor with [`cursor()`](/api/classes/Textmodifier#cursor):
 
 ```javascript
-// Show crosshair when drawing
-t.mousePressed(() => {
-    t.cursor('crosshair');
-});
+const t = textmode.create({ width: 800, height: 600 });
 
-// Reset to default when released
-t.mouseReleased(() => {
-    t.cursor();
-});
+const target = { width: 30, height: 15 };
 
-// Use custom cursors while hovering over interactive regions
-const hotspot = { x: 10, y: 5, w: 8, h: 4 };
-
-t.mouseMoved((data) => {
-    const { x, y } = data.position;
-    const inside = x >= hotspot.x && x < hotspot.x + hotspot.w &&
-                    y >= hotspot.y && y < hotspot.y + hotspot.h;
-
-    t.cursor(inside ? 'pointer' : 'default');
+t.draw(() => {
+    t.background(0);
+    t.charColor(255);
+    t.char('*');
+    t.rect(target.width, target.height);
+    
+    // Rectangle is centered at (0, 0) which is grid center
+    const centerX = t.grid.cols / 2;
+    const centerY = t.grid.rows / 2;
+    
+    const halfRectWidth = target.width / 2;
+    const halfRectHeight = target.height / 2;
+    
+    const rectLeft = centerX - halfRectWidth;
+    const rectRight = centerX + halfRectWidth;
+    const rectTop = centerY - halfRectHeight;
+    const rectBottom = centerY + halfRectHeight;
+    
+    const hovering = t.mouse.x >= rectLeft && t.mouse.x < rectRight &&
+                     t.mouse.y >= rectTop && t.mouse.y < rectBottom;
+    
+    t.cursor(hovering ? 'pointer' : 'default');
 });
 ```
 
@@ -225,6 +410,8 @@ Keyboard interaction provides both real-time key state checking and event-driven
 Use [`isKeyPressed()`](/api/classes/Textmodifier#iskeypressed) to check if a key is currently being held down:
 
 ```javascript
+const t = textmode.create({ width: 800, height: 600 });
+
 let playerX = 0;
 let playerY = 0;
 
@@ -233,22 +420,23 @@ t.draw(() => {
     
     // Check for arrow keys to move a character
     if (t.isKeyPressed('ArrowUp')) {
-        playerY = Math.max(0, playerY - 1);
+        playerY -= 1;
     }
     if (t.isKeyPressed('ArrowDown')) {
-        playerY = Math.min(t.grid.rows - 1, playerY + 1);
+        playerY += 1;
     }
     if (t.isKeyPressed('ArrowLeft')) {
-        playerX = Math.max(0, playerX - 1);
+        playerX -= 1;
     }
     if (t.isKeyPressed('ArrowRight')) {
-        playerX = Math.min(t.grid.cols - 1, playerX + 1);
+        playerX += 1;
     }
     
     // Draw player character
     t.char('@');
     t.charColor(255, 255, 0);
-    t.point(playerX, playerY);
+    t.translate(playerX, playerY);
+    t.point();
 });
 ```
 
@@ -257,23 +445,30 @@ t.draw(() => {
 Handle individual key presses with [`keyPressed()`](/api/classes/Textmodifier#keypressed):
 
 ```javascript
+const t = textmode.create({ width: 800, height: 600 });
+
+let lastKey = '?';
+let pulse = 0;
+
+// Update some visual state when a key is pressed
 t.keyPressed((data) => {
-    console.log(`Key pressed: ${data.key}`);
+    lastKey = data.key;
+    pulse = 6; // make the next frames brighter
+});
+
+t.draw(() => {
+    t.background(0);
     
-    if (data.key === 'Enter') {
-        console.log('Enter key was pressed!');
-        // Trigger some action
-    }
+    // Fade brightness back down each frame
+    const glow = Math.max(0, pulse--);
+    const brightness = 120 + glow * 20;
+    t.charColor(brightness, brightness, 0);
     
-    if (data.ctrlKey && data.key === 's') {
-        console.log('Ctrl+S was pressed!');
-        // Save functionality
-    }
-    
-    if (data.key === ' ') {
-        console.log('Spacebar pressed!');
-        // Jump or shoot
-    }
+    // Show the last pressed key at the center of the grid
+    t.push();
+    t.char(lastKey.length ? lastKey[0] : '?');
+    t.point();
+    t.pop();
 });
 ```
 
@@ -282,13 +477,27 @@ t.keyPressed((data) => {
 Handle key releases with [`keyReleased()`](/api/classes/Textmodifier#keyreleased):
 
 ```javascript
+const t = textmode.create({ width: 800, height: 600 });
+
+let lastRelease = '?';
+let fade = 0;
+
+// Capture the most recent key release and trigger a pulse
 t.keyReleased((data) => {
-    console.log(`Key released: ${data.key}`);
+    lastRelease = data.key;
+    fade = 10;
+});
+
+t.draw(() => {
+    t.background(0);
     
-    if (data.key === ' ') {
-        console.log('Spacebar was released!');
-        // Stop jumping or shooting
-    }
+    // Dim the glow over time
+    const glow = Math.max(0, fade--);
+    const color = 80 + glow * 17;
+    t.charColor(color, color, 255);
+    
+    t.char(lastRelease.length ? lastRelease[0] : '?');
+    t.point();
 });
 ```
 
@@ -351,22 +560,32 @@ t.keyPressed((data) => {
 Access the most recently pressed or released keys:
 
 ```javascript
+const t = textmode.create({ width: 800, height: 600 });
+
 t.draw(() => {
+    t.background(0);
+    
     const lastPressed = t.lastKeyPressed;
     const lastReleased = t.lastKeyReleased;
     
     if (lastPressed) {
         // Display the last pressed key
+        t.push();
         t.char(lastPressed);
         t.charColor(255, 255, 255);
-        t.point(10, 10);
+        t.translate(-5, 0);
+        t.point();
+        t.pop();
     }
     
     if (lastReleased) {
         // Display the last released key
+        t.push();
         t.char(lastReleased);
         t.charColor(128, 128, 128);
-        t.point(20, 10);
+        t.translate(5, 0);
+        t.point();
+        t.pop();
     }
 });
 ```
