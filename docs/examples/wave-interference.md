@@ -23,7 +23,7 @@
     </style>
 
     <!-- Import textmode.js -->
-    <script src="https://unpkg.com/textmode.js@latest/dist/textmode.umd.js"></script>
+    <script src="https://unpkg.com/textmode.js@0.6.0-beta.2/dist/textmode.umd.js"></script>
   </head>
 
   <body>
@@ -53,20 +53,18 @@ tm.draw(() => {
     const time = tm.frameCount * 0.01;
     const step = 3;
     
-    for (let y = 0; y < tm.grid.rows; y += step) {
-        for (let x = 0; x < tm.grid.cols; x += step) {
-            tm.push();
-            
-            // Calculate distance from center
-            const centerX = tm.grid.cols / 2;
-            const centerY = tm.grid.rows / 2;
-            const distance = Math.sqrt((x - centerX) ** 2 + (y - centerY) ** 2);
+    for (let gridY = 0; gridY < tm.grid.rows + step; gridY += step) {
+        for (let gridX = 0; gridX < tm.grid.cols + step; gridX += step) {
+            // Calculate distance from center (in grid coordinates)
+            const dx = gridX - tm.grid.cols / 2;
+            const dy = gridY - tm.grid.rows / 2;
+            const distance = Math.sqrt(dx * dx + dy * dy);
             
             // Create ripple effect
             const wave = Math.sin(distance * 0.3 - time * 8) * 0.5 + 0.5;
             
             // Add secondary wave for interference
-            const wave2 = Math.sin(x * 0.2 + time * 4) * Math.sin(y * 0.15 + time * 3);
+            const wave2 = Math.sin(gridX * 0.2 + time * 4) * Math.sin(gridY * 0.15 + time * 3);
             const combined = (wave + wave2 * 0.3) / 1.3;
             
             // Map to characters based on wave intensity
@@ -86,9 +84,14 @@ tm.draw(() => {
                 tm.char(' ');
             }
             
-            tm.cellColor(0, 0, 0);
-            tm.rect(x, y, step, step);
+            // Convert grid coordinates to center-based coordinates
+            const x = gridX + 1 - tm.grid.cols / 2;
+            const y = gridY - tm.grid.rows / 2;
             
+            tm.push();
+            tm.translate(x, y, 0);
+            tm.cellColor(0, 0, 0);
+            tm.rect(step, step);
             tm.pop();
         }
     }

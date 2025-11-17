@@ -23,7 +23,7 @@
     </style>
 
     <!-- Import textmode.js -->
-    <script src="https://unpkg.com/textmode.js@latest/dist/textmode.umd.js"></script>
+    <script src="https://unpkg.com/textmode.js@0.6.0-beta.2/dist/textmode.umd.js"></script>
   </head>
 
   <body>
@@ -52,13 +52,11 @@ tm.draw(() => {
 
     const time = tm.frameCount * 0.02;
     
-    for (let y = 0; y < tm.grid.rows; y++) {
-        for (let x = 0; x < tm.grid.cols; x++) {
-            tm.push();
-            
+    for (let gridY = 0; gridY < tm.grid.rows; gridY++) {
+        for (let gridX = 0; gridX < tm.grid.cols; gridX++) {
             // Normalize coordinates
-            const nx = x / tm.grid.cols;
-            const ny = y / tm.grid.rows;
+            const nx = gridX / tm.grid.cols;
+            const ny = gridY / tm.grid.rows;
             
             // Create multiple plasma waves
             const plasma1 = Math.sin(nx * 8 + time);
@@ -115,8 +113,14 @@ tm.draw(() => {
             
             tm.charColor(r, g, b);
             tm.cellColor(0, 0, 0);
-            tm.rect(x, y, 1, 1);
             
+            // Convert grid coordinates to center-based coordinates
+            const x = (gridX + 1) - tm.grid.cols / 2;
+            const y = gridY - tm.grid.rows / 2;
+            
+            tm.push();
+            tm.translate(x, y, 0);
+            tm.rect(1, 1);
             tm.pop();
         }
     }

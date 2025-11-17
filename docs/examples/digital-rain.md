@@ -21,7 +21,7 @@
     </style>
 
     <!-- Import textmode.js -->
-    <script src="https://unpkg.com/textmode.js@latest/dist/textmode.umd.js"></script>
+    <script src="https://unpkg.com/textmode.js@0.6.0-beta.2/dist/textmode.umd.js"></script>
   </head>
 
   <body>
@@ -51,8 +51,8 @@ const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 tm.setup(() => {
     // Initialize rain drops
-    for (let x = 0; x < tm.grid.cols; x++) {
-        drops[x] = {
+    for (let gridX = 0; gridX < tm.grid.cols; gridX++) {
+        drops[gridX] = {
             y: Math.random() * -50,
             speed: Math.random() * 0.3 + 0.1,
             length: Math.floor(Math.random() * 15) + 5,
@@ -60,8 +60,8 @@ tm.setup(() => {
         };
         
         // Generate random characters for this drop
-        for (let i = 0; i < drops[x].length; i++) {
-            drops[x].chars[i] = chars[Math.floor(Math.random() * chars.length)];
+        for (let i = 0; i < drops[gridX].length; i++) {
+            drops[gridX].chars[i] = chars[Math.floor(Math.random() * chars.length)];
         }
     }
 });
@@ -71,16 +71,14 @@ tm.draw(() => {
     tm.background(0);
 
     // Update and draw each rain drop
-    for (let x = 0; x < drops.length; x++) {
-        const drop = drops[x];
+    for (let gridX = 0; gridX < drops.length; gridX++) {
+        const drop = drops[gridX];
         
         // Draw the trail
         for (let i = 0; i < drop.length; i++) {
-            const y = drop.y - i;
+            const gridY = drop.y - i;
             
-            if (y >= 0 && y < tm.grid.rows) {
-                tm.push();
-                
+            if (gridY >= 0 && gridY < tm.grid.rows) {
                 // Calculate fade based on position in trail
                 const fade = (drop.length - i) / drop.length;
                 
@@ -100,8 +98,14 @@ tm.draw(() => {
                 
                 tm.char(drop.chars[i]);
                 tm.cellColor(0, 0, 0);
-                tm.rect(x, Math.floor(y), 1, 1);
                 
+                // Convert grid coordinates to center-based coordinates
+                const x = (gridX + 1) - tm.grid.cols / 2;
+                const y = Math.floor(gridY) - tm.grid.rows / 2;
+                
+                tm.push();
+                tm.translate(x, y, 0);
+                tm.rect(1, 1);
                 tm.pop();
             }
         }
@@ -128,16 +132,16 @@ tm.windowResized(() => {
     
     // Reinitialize drops for new grid size
     drops.length = 0;
-    for (let x = 0; x < tm.grid.cols; x++) {
-        drops[x] = {
+    for (let gridX = 0; gridX < tm.grid.cols; gridX++) {
+        drops[gridX] = {
             y: Math.random() * -50,
             speed: Math.random() * 0.3 + 0.1,
             length: Math.floor(Math.random() * 15) + 5,
             chars: []
         };
         
-        for (let i = 0; i < drops[x].length; i++) {
-            drops[x].chars[i] = chars[Math.floor(Math.random() * chars.length)];
+        for (let i = 0; i < drops[gridX].length; i++) {
+            drops[gridX].chars[i] = chars[Math.floor(Math.random() * chars.length)];
         }
     }
 });

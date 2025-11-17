@@ -63,7 +63,7 @@
     </style>
 
     <!-- Import textmode.js -->
-    <script src="https://unpkg.com/textmode.js@latest/dist/textmode.umd.js"></script>
+    <script src="https://unpkg.com/textmode.js@0.6.0-beta.2/dist/textmode.umd.js"></script>
   </head>
 
   <body>
@@ -146,35 +146,7 @@ async function initWebcam() {
             tm.background(0, 0, 0, 255);
             
             // Draw the converted webcam feed
-            tm.image(tm.overlay, 0, 0, tm.grid.cols, tm.grid.rows);
-            
-            // Add crosshair for center
-            const centerX = Math.floor(tm.grid.cols / 2);
-            const centerY = Math.floor(tm.grid.rows / 2);
-            
-            tm.char('+');
-            tm.charColor(0, 255, 0);
-            tm.cellColor(0, 0, 0);
-            tm.point(centerX, centerY);
-            
-            // Draw crosshair lines
-            tm.char('-');
-            tm.charColor(0, 255, 0);
-            tm.cellColor(0, 0, 0);
-            for (let i = -2; i <= 2; i++) {
-                if (i !== 0) {
-                    tm.point(centerX + i, centerY);
-                }
-            }
-            
-            tm.char('|');
-            tm.charColor(0, 255, 0);
-            tm.cellColor(0, 0, 0);
-            for (let i = -2; i <= 2; i++) {
-                if (i !== 0) {
-                    tm.point(centerX, centerY + i);
-                }
-            }
+            tm.image(tm.overlay, tm.grid.cols, tm.grid.rows);
         });
         
     } catch (err) {

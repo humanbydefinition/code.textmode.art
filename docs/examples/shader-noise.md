@@ -23,7 +23,7 @@
     </style>
 
     <!-- Import textmode.js -->
-    <script src="https://unpkg.com/textmode.js@latest/dist/textmode.umd.js"></script>
+    <script src="https://unpkg.com/textmode.js@0.6.0-beta.3/dist/textmode.umd.js"></script>
   </head>
 
   <body>
@@ -52,8 +52,6 @@ uniform vec2 u_gridSize;
 layout(location = 0) out vec4 o_character;
 layout(location = 1) out vec4 o_primaryColor;
 layout(location = 2) out vec4 o_secondaryColor;
-layout(location = 3) out vec4 o_rotation;
-layout(location = 4) out vec4 o_transform;
 
 // Perlin noise implementation
 vec3 random3(vec3 c) {
@@ -139,22 +137,28 @@ void main() {
         charValue = 0.9;
     }
     
-    // Output to MRT attachments
-    o_character = vec4(charValue, 0.0, 0.0, 1.0);
-    
     // Create color gradient based on noise
     vec3 color1 = vec3(0.2, 0.6, 1.0); // Blue
     vec3 color2 = vec3(1.0, 0.8, 0.2); // Orange
     vec3 finalColor = mix(color1, color2, noise);
     
-    o_primaryColor = vec4(finalColor, 1.0);
-    o_secondaryColor = vec4(0.0, 0.0, 0.1, 1.0); // Dark blue background
-
     // Apply inversion when noise intensity is high (> 0.5)
     float invertFlag = step(0.5, noise);
     
-    o_rotation = vec4(0.0);
-    o_transform = vec4(invertFlag, 0.0, 0.0, 1.0);
+    // Pack transform flags (invert, flipX, flipY) into 3 bits
+    int invertBit = int(invertFlag);
+    int flipXBit = 0; // No horizontal flip
+    int flipYBit = 0; // No vertical flip
+    float packedFlags = float(invertBit | (flipXBit << 1) | (flipYBit << 2)) / 255.0;
+    
+    // Rotation value (0-1 range, 0 = no rotation)
+    float rotation = 0.0;
+    
+    // Output to MRT attachments (3 render targets)
+    // Character attachment: R/G = glyph index, B = packed flags, A = rotation
+    o_character = vec4(charValue, 0.0, packedFlags, rotation);
+    o_primaryColor = vec4(finalColor, 1.0);
+    o_secondaryColor = vec4(0.0, 0.0, 0.1, 1.0); // Dark blue background
 }`;
 
 const tm = textmode.create({
@@ -166,9 +170,9 @@ const tm = textmode.create({
 
 let noiseShader;
 
-tm.setup(() => {
+tm.setup(async () => {
     // Create the noise shader
-    noiseShader = tm.createFilterShader(perlinNoiseShader);
+    noiseShader = await tm.createFilterShader(perlinNoiseShader);
 });
 
 tm.draw(() => {
@@ -184,11 +188,7 @@ tm.draw(() => {
         u_gridSize: [tm.grid.cols, tm.grid.rows]
     });
     
-    // Fill the entire grid with the shader effect
-    tm.rect(0, 0, tm.grid.cols, tm.grid.rows);
-    
-    // Reset to default shader for any additional drawing
-    tm.shader(null);
+    tm.rect(tm.grid.cols, tm.grid.rows);
 });
 
 tm.windowResized(() => {

@@ -23,7 +23,7 @@
 
     <!-- Import textmode.js -->
     <script src="https://cdn.jsdelivr.net/npm/p5@1.11.9/lib/p5.js"></script>
-    <script src="https://unpkg.com/textmode.js@latest/dist/textmode.umd.js"></script>
+    <script src="https://unpkg.com/textmode.js@0.6.0-beta.2/dist/textmode.umd.js"></script>
   </head>
 
   <body>
@@ -59,8 +59,8 @@ function setup() {
   });
 
   tm.draw(() => {
-      tm.clear();
-      tm.image(tm.overlay, 0, 0, tm.grid.cols, tm.grid.rows);
+      tm.background(0);
+      tm.image(tm.overlay, tm.grid.cols, tm.grid.rows);
   });
 }
 

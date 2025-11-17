@@ -68,7 +68,7 @@ export function createHeroWaveSimpleSketch(canvas: HTMLCanvasElement, width: num
         const y = gridY - tm.grid.rows / 2
         
         tm.push()
-        tm.translate(x, y, 0)
+        tm.translate(x + 1, y, 0)
         tm.char(char)
         tm.charColor(r, g, b, 255)
         tm.cellColor(0, 0, 0, 0)

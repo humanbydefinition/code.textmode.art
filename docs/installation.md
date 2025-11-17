@@ -30,26 +30,6 @@ To get started with `textmode.js`, you'll need:
 
 ## Importing `textmode.js`
 
-`textmode.js` is available in multiple bundle variants to suit different project needs:
-
-| Bundle type | File size | Font included? | Best for |
-|-------------|-----------|---------------|----------|
-| **Standard UMD** (`textmode.umd.js`) | ~87kB | ✅ [UrsaFont](https://ursafrank.itch.io/ursafont) embedded | Quick setup, prototyping |
-| **Standard ESM** (`textmode.esm.js`) | ~111kB | ✅ [UrsaFont](https://ursafrank.itch.io/ursafont) embedded | Quick setup, prototyping |
-| **Minified UMD** (`textmode.umd.min.js`) | ~79kB | ❌ Requires external font | Custom fonts |
-| **Minified ESM** (`textmode.esm.min.js`) | ~103kB | ❌ Requires external font | Custom fonts |
-
-**Choose standard bundles for:**
-- Quick setup with no additional configuration
-- Production applications that use the embedded font
-
-**Choose minified bundles for:**
-- Production applications that don't use the embedded font
-
-:::info
-Apart from the font inclusion, both bundle types are functionally identical and equally minified.
-:::
-
 ### UMD
 
 To use `textmode.js` in a UMD environment, download the latest `umd` build from the [**GitHub releases page**](https://github.com/humanbydefinition/textmode.js/releases/) or import it directly from a CDN like [**jsDelivr**](https://www.jsdelivr.com/package/npm/textmode.js). The library is distributed as a single JavaScript file, which you can include in your project by adding the following script tag to your HTML file:
@@ -61,11 +41,8 @@ To use `textmode.js` in a UMD environment, download the latest `umd` build from 
 <head>
     <title>textmode.js sketch</title>
 
-    <!-- Standard bundle (with embedded UrsaFont) -->
+    <!-- Import textmode.js from CDN -->
     <script src="https://cdn.jsdelivr.net/npm/textmode.js@latest/dist/textmode.umd.js"></script>
-    
-    <!-- OR Minified bundle (requires external font) -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/textmode.js@latest/dist/textmode.umd.min.js"></script> -->
 </head>
 <body>
     <script src="sketch.js"></script>
@@ -91,7 +68,7 @@ t.draw(() => {
 
     t.char('A');
     t.charColor(255, 0, 0); // Cover the top-left quarter of the grid with a rectangle of red 'A's
-    t.rect(0, 0, t.grid.cols / 2, t.grid.rows / 2);
+    t.rect(t.grid.cols / 2, t.grid.rows / 2);
 
     // ...add your drawing code here!
 });
@@ -127,11 +104,9 @@ Then, you can import it in your JavaScript or TypeScript files:
 
 ```javascript
 // sketch.js
-// Standard bundle (with embedded UrsaFont)
-import { textmode } from 'textmode.js';
 
-// OR Minified bundle (requires external font)
-// import { textmode } from 'textmode.js/min';
+// Import textmode.js
+import { textmode } from 'textmode.js';
 
 const t = textmode.create({
     width: window.innerWidth,
@@ -149,7 +124,7 @@ t.draw(() => {
 
     t.char('A');
     t.charColor(255, 0, 0); // Cover the top-left quarter of the grid with a rectangle of red 'A's
-    t.rect(0, 0, t.grid.cols / 2, t.grid.rows / 2);
+    t.rect(t.grid.cols / 2, t.grid.rows / 2);
 
     // ...add your drawing code here!
 });

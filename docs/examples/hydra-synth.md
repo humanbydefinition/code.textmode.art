@@ -24,7 +24,7 @@
 
     <!-- Import dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/hydra-synth/dist/hydra-synth.js"></script>
-    <script src="https://unpkg.com/textmode.js@latest/dist/textmode.umd.js"></script>
+    <script src="https://unpkg.com/textmode.js@0.6.0-beta.2/dist/textmode.umd.js"></script>
   </head>
 
   <body>
@@ -71,8 +71,8 @@ tm.setup(() => {
 });
 
 tm.draw(() => {
-    tm.clear();
-    tm.image(tm.overlay, 0, 0, tm.grid.cols, tm.grid.rows);
+    tm.background(0);
+    tm.image(tm.overlay, tm.grid.cols, tm.grid.rows);
 });
 
 // Handle window resize

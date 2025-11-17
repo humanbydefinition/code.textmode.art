@@ -23,7 +23,7 @@
     </style>
 
     <!-- Import textmode.js -->
-    <script src="https://unpkg.com/textmode.js@latest/dist/textmode.umd.js"></script>
+    <script src="https://unpkg.com/textmode.js@0.6.0-beta.3/dist/textmode.umd.js"></script>
   </head>
 
   <body>
@@ -68,35 +68,42 @@ const drawLabel = (text, x, y) => {
     tm.charColor(255, 255, 255);
     tm.cellColor(0, 0, 0);
     [...text].forEach((char, i) => {
+        tm.push();
         tm.char(char);
-        tm.rect(x + i, y, 1, 1);
+        tm.translate(x + i, y, 0);
+        tm.rect(1, 1);
+        tm.pop();
     });
     tm.pop();
 };
 
 tm.setup(() => {
-  cellWidth = Math.floor(tm.grid.cols / cols);
-  cellHeight = Math.floor(tm.grid.rows / rows);
+    cellWidth = Math.floor(tm.grid.cols / cols);
+    cellHeight = Math.floor(tm.grid.rows / rows);
 });
 
 tm.draw(() => {
     tm.background(20, 20, 30, 255); // Dark blue background
 
+    tm.push();
+    tm.translate(-tm.grid.cols / 2, -tm.grid.rows / 2, 0);
+
     // Title
-    drawLabel('TEXTMODE.JS PRIMITIVES', Math.floor(tm.grid.cols / 2) - 10, 1);
+    drawLabel('TEXTMODE.JS PRIMITIVES', Math.floor(tm.grid.cols / 2) - 10, 2);
 
     // 1. RECTANGLE (top-left)
     const rectX = 0;
     const rectY = 0;
     const rectCenterX = rectX * cellWidth + cellWidth / 2;
-    const rectCenterY = rectY * cellHeight + cellHeight / 2 + 1;
+    const rectCenterY = rectY * cellHeight + cellHeight / 2 + 3;
 
     tm.push();
     tm.char('•');
     tm.charColor(...colors[0]);
     tm.cellColor(0, 0, 0);
+    tm.translate(rectCenterX, rectCenterY, 0);
     tm.rotateZ(tm.frameCount * 2);
-    tm.rect(rectCenterX - 5, rectCenterY - 2, 10, 4);
+    tm.rect(10, 4);
     tm.pop();
 
     drawLabel('RECT', rectCenterX - 2, rectCenterY + 3);
@@ -105,14 +112,15 @@ tm.draw(() => {
     const ellipseX = 1;
     const ellipseY = 0;
     const ellipseCenterX = ellipseX * cellWidth + cellWidth / 2;
-    const ellipseCenterY = ellipseY * cellHeight + cellHeight / 2 + 1;
+    const ellipseCenterY = ellipseY * cellHeight + cellHeight / 2 + 3;
 
     tm.push();
     tm.char('⌐');
     tm.charColor(...colors[1]);
     tm.cellColor(0, 0, 0);
+    tm.translate(ellipseCenterX, ellipseCenterY, 0);
     tm.rotateZ(tm.frameCount * 2);
-    tm.ellipse(ellipseCenterX, ellipseCenterY, 10, 6);
+    tm.ellipse(10, 6);
     tm.pop();
 
     drawLabel('ELLIPSE', ellipseCenterX - 3, ellipseCenterY + 3);
@@ -121,15 +129,16 @@ tm.draw(() => {
     const lineX = 2;
     const lineY = 0;
     const lineCenterX = lineX * cellWidth + cellWidth / 2;
-    const lineCenterY = lineY * cellHeight + cellHeight / 2 + 1;
+    const lineCenterY = lineY * cellHeight + cellHeight / 2 + 3;
 
     tm.push();
     tm.char('─');
     tm.charColor(...colors[2]);
     tm.cellColor(0, 0, 0);
     tm.lineWeight(2);
+    tm.translate(lineCenterX, lineCenterY, 0);
     tm.rotateZ(tm.frameCount * 2);
-    tm.line(lineCenterX - 6, lineCenterY - 2, lineCenterX + 6, lineCenterY + 2);
+    tm.line(-6, -2, 6, 2);
     tm.pop();
 
     drawLabel('LINE', lineCenterX - 2, lineCenterY + 3);
@@ -138,17 +147,18 @@ tm.draw(() => {
     const triX = 0;
     const triY = 1;
     const triCenterX = triX * cellWidth + cellWidth / 2;
-    const triCenterY = triY * cellHeight + cellHeight / 2 + 1;
+    const triCenterY = triY * cellHeight + cellHeight / 2 + 3;
 
     tm.push();
     tm.char('▲');
     tm.charColor(...colors[3]);
     tm.cellColor(0, 0, 0);
+    tm.translate(triCenterX, triCenterY, 0);
     tm.rotateZ(tm.frameCount * 2);
     tm.triangle(
-        triCenterX, triCenterY - 3,        // Top point
-        triCenterX - 5, triCenterY + 2,    // Bottom left
-        triCenterX + 5, triCenterY + 2     // Bottom right
+        0, -3,      // Top point
+        -5, 2,      // Bottom left
+        5, 2        // Bottom right
     );
     tm.pop();
 
@@ -158,22 +168,23 @@ tm.draw(() => {
     const bezierX = 1;
     const bezierY = 1;
     const bezierCenterX = bezierX * cellWidth + cellWidth / 2;
-    const bezierCenterY = bezierY * cellHeight + cellHeight / 2 + 1;
+    const bezierCenterY = bezierY * cellHeight + cellHeight / 2 + 3;
 
     tm.push();
     tm.char('~');
     tm.charColor(...colors[4]);
     tm.cellColor(0, 0, 0);
     tm.lineWeight(2);
+    tm.translate(bezierCenterX, bezierCenterY, 0);
     tm.rotateZ(tm.frameCount * 2);
     
-    // Animated S-curve
+    // Animated S-curve defined around local origin
     const curveOffset = Math.sin(tm.frameCount * 0.04) * 2;
     tm.bezierCurve(
-        bezierCenterX - 6, bezierCenterY + 2,                    // Start point
-        bezierCenterX - 3, bezierCenterY - 3 + curveOffset,      // Control point 1
-        bezierCenterX + 3, bezierCenterY + 3 - curveOffset,      // Control point 2
-        bezierCenterX + 6, bezierCenterY - 2                     // End point
+        -6, 2,                  // Start point
+        -3, -3 + curveOffset,   // Control point 1
+        3, 3 - curveOffset,     // Control point 2
+        6, -2                   // End point
     );
     tm.pop();
 
@@ -183,19 +194,20 @@ tm.draw(() => {
     const arcX = 2;
     const arcY = 1;
     const arcCenterX = arcX * cellWidth + cellWidth / 2;
-    const arcCenterY = arcY * cellHeight + cellHeight / 2 + 1;
+    const arcCenterY = arcY * cellHeight + cellHeight / 2 + 3;
 
     tm.push();
     tm.char('σ');
     tm.charColor(...colors[5]);
     tm.cellColor(0, 0, 0);
-    
-    tm.push();
+    tm.translate(arcCenterX, arcCenterY, 0);
     tm.rotateZ(tm.frameCount * 1.5);
-    tm.arc(arcCenterX, arcCenterY, 10, 10, 0, 180);
+    tm.arc(10, 10, 0, 180);
     tm.pop();
 
     drawLabel('ARC', arcCenterX - 1, arcCenterY + 4);
+
+    tm.pop(); // End of main translation
 });
 
 tm.windowResized(() => {

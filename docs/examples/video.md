@@ -69,7 +69,7 @@
     </style>
 
     <!-- Import textmode.js -->
-    <script src="https://cdn.jsdelivr.net/npm/textmode.js@latest/dist/textmode.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/textmode.js@0.6.0-beta.2/dist/textmode.umd.js"></script>
   </head>
 
   <body>
@@ -84,7 +84,6 @@
       <div class="controls">
         <button id="playBtn">Play</button>
         <button id="pauseBtn">Pause</button>
-        <button id="toggleTextmode">Hide ASCII</button>
       </div>
     </div>
 
@@ -139,8 +138,8 @@ class VideoTextmodeDemo {
         });
 
         this.textmodifier.draw(() => {
-            this.textmodifier.clear();
-            this.textmodifier.image(this.textmodifier.overlay, 0, 0, this.textmodifier.grid.cols, this.textmodifier.grid.rows);
+            this.textmodifier.background(0);
+            this.textmodifier.image(this.textmodifier.overlay, this.textmodifier.grid.cols, this.textmodifier.grid.rows);
         });
     }
 
@@ -152,21 +151,6 @@ class VideoTextmodeDemo {
         document.getElementById('pauseBtn').addEventListener('click', () => {
             this.video?.pause();
         });
-
-        document.getElementById('toggleTextmode').addEventListener('click', () => {
-            this.toggleTextmodeVisibility();
-        });
-    }
-
-    toggleTextmodeVisibility() {
-        this.isTextmodeVisible = !this.isTextmodeVisible;
-        const btn = document.getElementById('toggleTextmode');
-        
-        if (this.isTextmodeVisible) {
-            btn.textContent = 'Hide ASCII';
-        } else {
-            btn.textContent = 'Show ASCII';
-        }
     }
 }
 

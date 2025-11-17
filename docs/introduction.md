@@ -13,7 +13,6 @@ The library is designed to be easy to use and accessible to developers of all sk
 
 - Real‑time* ASCII/textmode rendering with a simple drawing API
 - `WebGL2` pipeline with [Multiple Render Targets (MRT)](https://en.wikipedia.org/wiki/Multiple_Render_Targets) for rich per‑cell data
-- Instanced rendering and batching for low draw call counts
 - Font system with runtime font loading and dynamic sizing *(supports TTF/OTF/WOFF)*
 - Author custom filter shaders in [`GLSL ES 3.00`](https://registry.khronos.org/OpenGL/specs/es/3.0/GLSL_ES_Specification_3.00.pdf) for advanced effects
 - Flexible exporting: TXT, SVG, raster images *(PNG/JPG/WebP)*, animated GIFs, and video *(WebM)*
@@ -29,7 +28,7 @@ The library is designed to be easy to use and accessible to developers of all sk
 
 The renderer operates in two passes:
 
-1) Draw pass *(offscreen)*: your drawing commands emit instances that are flushed into a special framebuffer with five color attachments *(MRT)*. Each attachment encodes a different piece of per‑cell information.
+1) Draw pass *(offscreen)*: your drawing commands emit instances that are flushed into a special framebuffer with three color attachments *(MRT)*. Each attachment encodes a different piece of per‑cell information.
 2) Conversion pass *(onscreen)*: a conversion shader reads those attachments plus the font atlas to draw the final glyphs aligned to the grid.
 
 ### Render pipeline at a glance
@@ -42,32 +41,27 @@ flowchart TD
 	C --> D["⚡ Instanced shader"]
 	D --> E["🎯 MRT framebuffer"]
 	
-	subgraph MRT["📊 5 attachments"]
+	subgraph MRT["📊 3 attachments"]
 		direction TB
 		E0["o_character"] 
 		E1["o_primaryColor"] 
-		E2["o_secondaryColor"] 
-		E3["o_rotation"] 
-		E4["o_transform"]
+		E2["o_secondaryColor"]
 	end
 	
 	E --> MRT
 	MRT --> F["🔄 Conversion shader"]
 	F --> G["🖼️ Canvas"]
-	MRT -.-> H["💾 Export"]
 	
 	class A,B,C,D,F processNode
 	class E,MRT dataNode
 	class G,H outputNode
 ```
 
-### The five attachments *(MRT)*
+### The three attachments *(MRT)*
 
-0. `o_character` - glyph index to select a character
+0. `o_character` - glyph index *(RG channels)*, rotation data *(A channel)*, and transform flags *(B channel)*
 1. `o_primaryColor` - character color information
 2. `o_secondaryColor` - cell color information
-3. `o_rotation` - per‑cell rotation data
-4. `o_transform` - per‑cell transform flags *(invert, flipX, flipY)*
 
 These textures have the same resolution as the grid *(cols x rows)*. That makes readback and export straightforward and efficient.
 

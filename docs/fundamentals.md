@@ -19,7 +19,7 @@ t.setup(() => {
 });
 ```
 
-The `create()` method returns a promise that resolves to a [`Textmodifier`](/api/classes/Textmodifier) instance, which is the main interface for drawing and manipulating the textmode canvas.
+The `create()` method a [`Textmodifier`](/api/classes/Textmodifier) instance, which is the main interface for drawing and manipulating the textmode canvas.
 
 :::info
 For more details on the available initialization options, refer to [`TextmodeOptions`](/api/type-aliases/TextmodeOptions).
@@ -37,7 +37,7 @@ Once you have created a canvas, you can start drawing on it by defining a [`draw
 
 ### Coordinate system
 
-The coordinate system in `textmode.js` is grid-based, where each character occupies a cell in a 2D grid. The top-left corner of the grid is `(0, 0)`, and the bottom-right corner is `(cols - 1, rows - 1)`. The grid dimensions are dynamically calculated based on the canvas size, the set font, and its size. You can access the grid dimensions via the [`grid`](/api/classes/Textmodifier#grid) property of the `Textmodifier` instance.
+The coordinate system in `textmode.js` is grid-based, where each character occupies a cell in a 2D grid. The center of the grid is `(0, 0, 0)`. The grid dimensions are dynamically calculated based on the canvas size, the set font, and its size. You can access the grid dimensions via the [`grid`](/api/classes/Textmodifier#grid) property of the `Textmodifier` instance.
 
 ```javascript
 console.log(t.grid.cols); // Number of columns
@@ -50,10 +50,10 @@ As seen in the example above, `textmode.js` provides several drawing primitives 
 
 #### Rectangle
 
-The [`rect(x, y, width, height)`](/api/classes/Textmodifier#rect) method draws a filled rectangle of characters on the grid using the previously specified properties. The rectangle is defined by its top-left corner `(x, y)` and its dimensions `(width, height)`.
+The [`rect(width, height)`](/api/classes/Textmodifier#rect) method draws a filled rectangle of characters on the grid using the previously specified properties.
 
 ```javascript
-t.rect(0, 0, 10, 5);
+t.rect(10, 5);
 ```
 
 #### Line
@@ -61,7 +61,7 @@ The [`line(x1, y1, x2, y2)`](/api/classes/Textmodifier#line) method draws a line
 
 ```javascript
 t.lineWeight(2); // Set line weight to 2 cells
-t.line(0, 0, t.grid.cols - 1, t.grid.rows - 1);
+t.line(-10, 0, 10, 0);
 ```
 
 #### Triangle
@@ -72,10 +72,10 @@ t.triangle(0, 0, 10, 0, 5, 5);
 ```
 
 #### Ellipse
-The [`ellipse(x, y, width, height)`](/api/classes/Textmodifier#ellipse) method draws a filled ellipse on the grid using the previously specified properties. The ellipse is defined by its bounding box with the center `(x, y)` and dimensions `(width, height)`.
+The [`ellipse(width, height)`](/api/classes/Textmodifier#ellipse) method draws a filled ellipse on the grid using the previously specified properties.
 
 ```javascript
-t.ellipse(15, 15, 10, 5);
+t.ellipse(10, 5);
 ```
 
 #### Bezier curve
@@ -87,10 +87,10 @@ t.bezierCurve(0, 0, 10, 5, 5, 10, 10, 0);
 ```
 
 #### Arc
-The [`arc(x, y, width, height, startAngle, endAngle)`](/api/classes/Textmodifier#arc) method draws an arc on the grid using the previously specified properties. The arc is defined by its bounding box with the center `(x, y)`, dimensions `(width, height)`, and the start and end angles in degrees.
+The [`arc(width, height, startAngle, endAngle)`](/api/classes/Textmodifier#arc) method draws an arc on the grid using the previously specified properties.
 
 ```javascript
-t.arc(15, 15, 10, 5, 0, 180);
+t.arc(10, 5, 0, 180);
 ```
 
 ### Cell properties
@@ -111,7 +111,7 @@ When drawing shapes, you can customize the appearance of the affected cells usin
 - [`charRotation(angle)`](/api/classes/Textmodifier#charrotation)
     - Sets the rotation angle *(in degrees)* of the characters for subsequent drawing operations.
 
-### Shape properties
+### Geometry properties
 - [`rotate(angleX, angleY, angleZ)`](/api/classes/Textmodifier#rotate)
     - Rotates subsequent shapes around the specified axes by the given angles (in degrees). The rotation is applied around the center of the shape.
 - [`lineWeight(weight)`](/api/classes/Textmodifier#lineweight)
@@ -123,6 +123,14 @@ When drawing shapes, you can customize the appearance of the affected cells usin
     - Rotates subsequent shapes around the Y-axis by the given angle (in degrees).
 - [`rotateZ(angle)`](/api/classes/Textmodifier#rotatez)
     - Rotates subsequent shapes around the Z-axis by the given angle (in degrees).
+- [`translate(x, y, z?)`](/api/classes/Textmodifier#translate)
+    - Translates subsequent shapes by the specified amounts along the X, Y, and optional Z axes.
+- [`translateX(x)`](/api/classes/Textmodifier#translatex)
+    - Translates subsequent shapes by the specified amount along the X-axis.
+- [`translateY(y)`](/api/classes/Textmodifier#translatey)
+    - Translates subsequent shapes by the specified amount along the Y-axis.
+- [`translateZ(z)`](/api/classes/Textmodifier#translatez)
+    - Translates subsequent shapes by the specified amount along the Z-axis.
 
 ### Canvas control
 
@@ -154,16 +162,18 @@ Methods for custom shaders and advanced rendering techniques:
     - Sets multiple uniform values for the current shader.
 - [`createFilterShader(fragmentSource)`](/api/classes/Textmodifier#createfiltershader)
     - Creates a custom filter shader from fragment shader source code.
+- [`ortho()`](/api/classes/Textmodifier#ortho)
+    - Render subsequent frames in orthographic projection mode.
 
 ## Using custom filter shaders
 
 Besides drawing with the built-in primitives, you can also create custom filter shaders to apply advanced effects onto rectangles. Due to the unique rendering pipeline of `textmode.js`, custom shaders operate on a per-cell basis rather than per-pixel. This means that each invocation of the shader corresponds to a single cell in the textmode grid. 
 
-`textmode.js` is currently dependent on `WebGL2`, so custom fragment shaders need to be written in `GLSL ES 3.00`, and follow the naming conventions for input varyings and output locations. The library currently uses five output attachments to store per-cell data, which can be written to in your shader.
+`textmode.js` is currently dependent on `WebGL2`, so custom fragment shaders need to be written in `GLSL ES 3.00`, and follow the naming conventions for input varyings and output locations. The library currently uses three output attachments to store per-cell data, which can be written to in your shader.
 
 ### Multiple render targets (MRT) overview
 
-Your custom shader must output to all five MRT attachments. Each attachment serves a specific purpose in the textmode rendering pipeline:
+Your custom shader must output to all three MRT attachments. Each attachment serves a specific purpose in the textmode rendering pipeline:
 
 ```glsl
 #version 300 es
@@ -173,19 +183,15 @@ in vec2 v_uv;
 
 uniform float u_time;
 
-layout(location = 0) out vec4 o_character;      // Character selection
+layout(location = 0) out vec4 o_character;      // Character (RG), rotation (A), transform (B)
 layout(location = 1) out vec4 o_primaryColor;   // Character color
-layout(location = 2) out vec4 o_secondaryColor; // Background color  
-layout(location = 3) out vec4 o_rotation;       // Character rotation
-layout(location = 4) out vec4 o_transform;      // Transform flags
+layout(location = 2) out vec4 o_secondaryColor; // Background color
 
 void main() {
 	// write per‑cell data here
 	o_character = vec4(fract(u_time), 0.0, 0.0, 1.0);
 	o_primaryColor = vec4(1.0);
 	o_secondaryColor = vec4(0.0, 0.0, 0.0, 1.0);
-	o_rotation = vec4(0.0);
-	o_transform = vec4(0.0);
 }
 ```
 
@@ -202,24 +208,26 @@ t.draw(() => {
 
 ### Character selection (`o_character`)
 
-**Purpose**: Determines which character from the font atlas is displayed in each cell.
+**Purpose**: Determines which character from the font atlas is displayed in each cell, along with rotation and transform data.
 
-**Format**: The character index is encoded in the **red and green channels** using a two-byte encoding system:
+**Format**: This attachment packs multiple pieces of data into its channels:
 - **Red channel**: Lower 8 bits of the character index (0-255)
 - **Green channel**: Upper 8 bits of the character index (0-255)
-- **Blue/Alpha channels**: Unused (can be 0)
+- **Blue channel**: Transform flags (invert, flipX, flipY)
+- **Alpha channel**: Character rotation angle (0-1 maps to 0-360°)
 
 ```glsl
-// Example: Select character at index 65
+// Example: Select character at index 65 with no rotation or transforms
 int charIndex = 65;
 float r = float(charIndex % 256) / 255.0;        // Lower byte
 float g = float(charIndex / 256) / 255.0;        // Upper byte
-o_character = vec4(r, g, 0.0, 1.0);
+o_character = vec4(r, g, 0.0, 1.0);              // Blue=transforms, Alpha=rotation
 
-// For procedural character selection based on noise:
+// For procedural character selection with rotation:
 float noise = someNoiseFunction(v_uv);
 int procedural_index = int(noise * 255.0);       // Map to character range
-o_character = vec4(float(procedural_index) / 255.0, 0.0, 0.0, 1.0);
+float rotation = fract(u_time * 0.1);            // Animated rotation (0-1)
+o_character = vec4(float(procedural_index) / 255.0, 0.0, 0.0, rotation);
 ```
 
 :::info
@@ -264,63 +272,62 @@ float pulse = sin(u_time * 2.0) * 0.5 + 0.5;
 o_secondaryColor = vec4(0.0, 0.0, pulse * 0.2, 1.0);
 ```
 
-### Character rotation (`o_rotation`)
+### Character rotation and transforms
 
-**Purpose**: Rotates individual characters within their cells.
+**Purpose**: Character rotation and transform flags are now packed into the `o_character` attachment.
 
-**Format**: Rotation angle encoded across **red and green channels**:
-- **Red channel**: Primary rotation value (0-255 maps to 0-360°)
-- **Green channel**: Fine adjustment for sub-degree precision
-- **Blue/Alpha channels**: Unused (can be 0)
+**Rotation** *(Alpha channel)*: Rotation angle normalized to 0-1 (maps to 0-360°)
 
 ```glsl
 // Rotate character by 45 degrees
 float angle = 45.0;                              // Degrees
 float normalized = angle / 360.0;                // Normalize to 0-1
-o_rotation = vec4(normalized, 0.0, 0.0, 1.0);
+o_character.a = normalized;
 
 // Continuous rotation over time
-float rotationAngle = fract(u_time * 0.1) * 360.0;
-o_rotation = vec4(rotationAngle / 360.0, 0.0, 0.0, 1.0);
+float rotationAngle = fract(u_time * 0.1);       // Already normalized
+o_character.a = rotationAngle;
 
 // Per-cell rotation based on position
-float positionAngle = atan(v_uv.y - 0.5, v_uv.x - 0.5) * 180.0 / 3.14159;
-o_rotation = vec4(fract(positionAngle / 360.0), 0.0, 0.0, 1.0);
+float positionAngle = atan(v_uv.y - 0.5, v_uv.x - 0.5);
+o_character.a = fract(positionAngle / (2.0 * 3.14159));
 ```
 
-### Transform flags (`o_transform`)
+**Transform flags** *(Blue channel)*: Boolean flags for color inversion and flipping are packed into the blue channel.
 
-**Purpose**: Controls character transformations like flipping and color inversion.
-
-**Format**: Boolean flags encoded in RGB channels *(values > 0.5 = true)*:
-- **Red channel**: Color inversion flag *(swap character/cell colors)*
-- **Green channel**: Horizontal flip flag  
-- **Blue channel**: Vertical flip flag
-- **Alpha channel**: Unused *(can be 1.0)*
+The blue channel encodes three boolean flags as bit values:
+- **Bit 0** (value 1): Color inversion flag *(swap character/cell colors)*
+- **Bit 1** (value 2): Horizontal flip flag  
+- **Bit 2** (value 4): Vertical flip flag
 
 ```glsl
-// No transformations
-o_transform = vec4(0.0, 0.0, 0.0, 1.0);
+// Pack transform flags using bitwise operations
+int invertFlag = 0;  // or 1
+int flipXFlag = 0;   // or 1
+int flipYFlag = 0;   // or 1
+float packedFlags = float(invertFlag | (flipXFlag << 1) | (flipYFlag << 2)) / 255.0;
+o_character.b = packedFlags;
 
-// Invert colors only
-o_transform = vec4(1.0, 0.0, 0.0, 1.0);
+// Example: Invert colors only
+int invertFlag = 1;
+int flipXFlag = 0;
+int flipYFlag = 0;
+o_character.b = float(invertFlag | (flipXFlag << 1) | (flipYFlag << 2)) / 255.0;
 
-// Flip horizontally and vertically
-o_transform = vec4(0.0, 1.0, 1.0, 1.0);
+// Example: Flip horizontally and vertically
+int invertFlag = 0;
+int flipXFlag = 1;
+int flipYFlag = 1;
+o_character.b = float(invertFlag | (flipXFlag << 1) | (flipYFlag << 2)) / 255.0;
 
 // Conditional transformations based on position
-float invertFlag = step(0.5, v_uv.x);           // Invert right half
-float flipHFlag = step(0.5, v_uv.y);            // Flip bottom half horizontally
-o_transform = vec4(invertFlag, flipHFlag, 0.0, 1.0);
+int invertFlag = int(v_uv.x > 0.5 ? 1 : 0);      // Invert right half
+int flipXFlag = int(v_uv.y > 0.5 ? 1 : 0);       // Flip bottom half horizontally
+int flipYFlag = 0;
+o_character.b = float(invertFlag | (flipXFlag << 1) | (flipYFlag << 2)) / 255.0;
 ```
 
 <!--@include: ./examples/shader-noise.md-->
-
-:::info
-`textmode.js` is still in its early stages of development. The MRT layout and shader API may evolve in future releases.
-:::
-
----
 
 ## Summary
 
