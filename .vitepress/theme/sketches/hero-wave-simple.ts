@@ -41,15 +41,17 @@ export function createHeroWaveSimpleSketch(canvas: HTMLCanvasElement, width: num
     time += 0.02
 
     // Create animated wave pattern
-    for (let y = 0; y < tm.grid.rows; y++) {
-      for (let x = 0; x < tm.grid.cols; x++) {
-        const dx = x - tm.grid.cols / 2
-        const dy = y - tm.grid.rows / 2
+    // With center origin, convert from top-left grid coordinates
+    for (let gridY = 0; gridY < tm.grid.rows; gridY++) {
+      for (let gridX = 0; gridX < tm.grid.cols; gridX++) {
+        // Calculate position relative to center for wave calculations
+        const dx = gridX - tm.grid.cols / 2
+        const dy = gridY - tm.grid.rows / 2
         const dist = Math.sqrt(dx * dx + dy * dy)
         
         const wave = Math.sin(dist * 0.3 - time * 2) * 0.5 + 0.5
-        const wave2 = Math.sin(x * 0.2 + time) * 0.5 + 0.5
-        const wave3 = Math.sin(y * 0.2 - time * 0.7) * 0.5 + 0.5
+        const wave2 = Math.sin(gridX * 0.2 + time) * 0.5 + 0.5
+        const wave3 = Math.sin(gridY * 0.2 - time * 0.7) * 0.5 + 0.5
         
         const combined = (wave + wave2 + wave3) / 3
         
@@ -61,10 +63,17 @@ export function createHeroWaveSimpleSketch(canvas: HTMLCanvasElement, width: num
         const charIndex = Math.floor(combined * (chars.length - 1))
         const char = chars[charIndex]
         
+        // Convert grid coordinates to center-based coordinates
+        const x = gridX - tm.grid.cols / 2
+        const y = gridY - tm.grid.rows / 2
+        
+        tm.push()
+        tm.translate(x, y, 0)
         tm.char(char)
         tm.charColor(r, g, b, 255)
         tm.cellColor(0, 0, 0, 0)
-        tm.rect(x, y, 1, 1)
+        tm.rect(1, 1)
+        tm.pop()
       }
     }
   })

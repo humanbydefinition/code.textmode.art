@@ -14,11 +14,11 @@ features:
   - icon: 
       src: /realtime.svg
     title: Real-time performance
-    details: Blazing fast ASCII conversion powered by an optimized WebGL rendering pipeline specifically designed for textmode art.
+    details: Blazing fast ASCII conversion powered by an optimized WebGL2 rendering pipeline specifically designed for textmode art.
   - icon: 
       src: /agnostic.svg
     title: Framework-agnostic
-    details: Apply textmode conversion to any existing &lt;canvas&gt; and &lt;video&gt; context. Compatible with p5.js, Three.js, and more.
+    details: Apply textmode conversion to any existing &lt;canvas&gt; and &lt;video&gt; context. Compatible with p5.js, Three.js, and much more.
   - icon: 
       src: /dependencies.svg
     title: Zero dependencies
@@ -60,19 +60,31 @@ A library designed for building generative art installations, retro games, inter
 ### From zero to textmode in minutes
 
 ```javascript
-import { textmode } from 'textmode.js' 
-
 const tm = textmode.create();
 
 tm.draw(() => {
-  tm.clear();
-  tm.char('█');
-  tm.charColor(0, 200, 255);
-  tm.ellipse(tm.mouseX, tm.mouseY, 8, 8);
-})
+  tm.background(0, 0, 0, 0);
+  
+  const halfCols = tm.grid.cols / 2;
+  const halfRows = tm.grid.rows / 2;
+  
+  for (let y = -halfRows; y < halfRows; y++) {
+    for (let x = -halfCols; x < halfCols; x++) {
+      const dist = Math.sqrt(x * x + y * y);
+      const wave = Math.sin(dist * 0.2 - tm.frameCount * 0.1);
+      
+      tm.push();
+      tm.translate(x, y, 0);
+      tm.char(wave > 0.5 ? '▓' : wave > 0 ? '▒' : '░');
+      tm.charColor(0, 150 + wave * 100, 255);
+      tm.point();
+      tm.pop();
+    }
+  }
+});
 ```
 
-**That's it.** The sketch on the right *(bottom on mobile)*? Built with the same simple API in under 50 lines. Your turn.
+Simple, powerful, and ready for your wildest ideas.
 
 </TextmodeWhatIs>
 
@@ -113,6 +125,6 @@ Dive into the interactive examples below - view source, tweak parameters, and br
 
 ## What will you create?
 
-The examples on this page started as empty files. Your next masterpiece starts the same way.
+Every sketch starts with an empty file. Your next masterpiece starts the same way.
 
 <a class="textmode-cta-button alt" href="/docs/introduction">Begin your journey</a>

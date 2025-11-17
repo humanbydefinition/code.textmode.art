@@ -92,15 +92,17 @@ export function createHeroWaveSketch(canvas: HTMLCanvasElement, width: number, h
     time += 0.02
 
     // Create animated wave pattern
-    for (let y = 0; y < tm.grid.rows; y++) {
-      for (let x = 0; x < tm.grid.cols; x++) {
-        const dx = x - tm.grid.cols / 2
-        const dy = y - tm.grid.rows / 2
+    // With center origin, convert from top-left grid coordinates
+    for (let gridY = 0; gridY < tm.grid.rows; gridY++) {
+      for (let gridX = 0; gridX < tm.grid.cols; gridX++) {
+        // Calculate position relative to center for wave calculations
+        const dx = gridX - tm.grid.cols / 2
+        const dy = gridY - tm.grid.rows / 2
         const dist = Math.sqrt(dx * dx + dy * dy)
         
         const wave = Math.sin(dist * 0.3 - time * 2) * 0.5 + 0.5
-        const wave2 = Math.sin(x * 0.2 + time) * 0.5 + 0.5
-        const wave3 = Math.sin(y * 0.2 - time * 0.7) * 0.5 + 0.5
+        const wave2 = Math.sin(gridX * 0.2 + time) * 0.5 + 0.5
+        const wave3 = Math.sin(gridY * 0.2 - time * 0.7) * 0.5 + 0.5
         
         const combined = (wave + wave2 + wave3) / 3
         
@@ -112,21 +114,29 @@ export function createHeroWaveSketch(canvas: HTMLCanvasElement, width: number, h
         const charIndex = Math.floor(combined * (chars.length - 1))
         const char = chars[charIndex]
         
+        // Convert grid coordinates to center-based coordinates
+        const x = gridX - tm.grid.cols / 2
+        const y = gridY - tm.grid.rows / 2
+        
+        tm.push()
+        tm.translate(x, y, 0)
         tm.char(char)
         tm.charColor(r, g, b, 255)
         tm.cellColor(0, 0, 0, 0)
-        tm.rect(x, y, 1, 1)
+        tm.rect(1, 1)
+        tm.pop()
       }
     }
 
     // Animated logo aligned near the top-left
+    // Calculate position in grid space first, then convert to center-based
     const marginCols = Math.max(2, Math.floor(tm.grid.cols * 0.05))
-    const marginRows = 0;
-    const logoBaseX = Math.min(2, tm.grid.cols - LOGO_TEXT.length - 2)
-    const logoBaseY = Math.min(marginRows, tm.grid.rows - subheaderLines.length - 6)
+    const marginRows = 0
+    const logoGridX = Math.min(2, tm.grid.cols - LOGO_TEXT.length - 2) + 1
+    const logoGridY = Math.min(marginRows, tm.grid.rows - subheaderLines.length - 6)
 
     // Calculate dimensions
-    const subheaderStartY = logoBaseY + 4
+    const subheaderStartGridY = logoGridY + 4
     const maxLineLength = Math.max(...subheaderLines.map(line => line.length))
     const logoTextWidth = LOGO_TEXT.length + 2  // Width of just the logo text area
     const totalWidth = Math.max(logoTextWidth, maxLineLength + 2) // Total width for subtitle area
@@ -155,28 +165,50 @@ export function createHeroWaveSketch(canvas: HTMLCanvasElement, width: number, h
     const borderAlpha = Math.floor(200 + borderPulse * 55)
 
     // Top border of logo (only spans the width of "textmode.js")
-    for (let x = 0; x < logoTextWidth; x++) {
+    for (let i = 0; i < logoTextWidth; i++) {
       let char = borderChars.horizontal
-      if (x === 0) char = borderChars.topLeft
-      if (x === logoTextWidth - 1) char = borderChars.topRight
+      if (i === 0) char = borderChars.topLeft
+      if (i === logoTextWidth - 1) char = borderChars.topRight
       
+      const x = (logoGridX - 1 + i) - tm.grid.cols / 2
+      const y = (logoGridY + 1) - tm.grid.rows / 2
+      
+      tm.push()
+      tm.translate(x, y, 0)
       tm.char(char)
       tm.charColor(borderR, borderG, borderB, borderAlpha)
       tm.cellColor(0, 0, 0, 0)
-      tm.rect(logoBaseX - 1 + x, logoBaseY + 1, 1, 1)
+      tm.rect(1, 1)
+      tm.pop()
     }
 
     // Left border of logo
-    tm.char(borderChars.vertical)
-    tm.charColor(borderR, borderG, borderB, borderAlpha)
-    tm.cellColor(0, 0, 0, 0)
-    tm.rect(logoBaseX - 1, logoBaseY + 2, 1, 1)
+    {
+      const x = (logoGridX - 1) - tm.grid.cols / 2
+      const y = (logoGridY + 2) - tm.grid.rows / 2
+      
+      tm.push()
+      tm.translate(x, y, 0)
+      tm.char(borderChars.vertical)
+      tm.charColor(borderR, borderG, borderB, borderAlpha)
+      tm.cellColor(0, 0, 0, 0)
+      tm.rect(1, 1)
+      tm.pop()
+    }
     
     // Right border of logo (only for the logo text width)
-    tm.char(borderChars.vertical)
-    tm.charColor(borderR, borderG, borderB, borderAlpha)
-    tm.cellColor(0, 0, 0, 0)
-    tm.rect(logoBaseX + logoTextWidth - 2, logoBaseY + 2, 1, 1)
+    {
+      const x = (logoGridX + logoTextWidth - 2) - tm.grid.cols / 2
+      const y = (logoGridY + 2) - tm.grid.rows / 2
+      
+      tm.push()
+      tm.translate(x, y, 0)
+      tm.char(borderChars.vertical)
+      tm.charColor(borderR, borderG, borderB, borderAlpha)
+      tm.cellColor(0, 0, 0, 0)
+      tm.rect(1, 1)
+      tm.pop()
+    }
 
     // Draw logo text
     for (let i = 0; i < LOGO_TEXT.length; i++) {
@@ -187,23 +219,35 @@ export function createHeroWaveSketch(canvas: HTMLCanvasElement, width: number, h
       const g = Math.floor(LOGO_COLOR_BASE[1] + (LOGO_COLOR_HIGHLIGHT[1] - LOGO_COLOR_BASE[1]) * pulse)
       const b = Math.floor(LOGO_COLOR_BASE[2] + (LOGO_COLOR_HIGHLIGHT[2] - LOGO_COLOR_BASE[2]) * pulse)
 
+      const x = (logoGridX + i) - tm.grid.cols / 2
+      const y = (logoGridY + 2) - tm.grid.rows / 2
+      
+      tm.push()
+      tm.translate(x, y, 0)
       tm.char(char)
       tm.charColor(r, g, b, 255)
       tm.cellColor(0, 0, 0, 0)
-      tm.rect(logoBaseX + i, logoBaseY + 2, 1, 1)
+      tm.rect(1, 1)
+      tm.pop()
     }
 
     // Middle separator line (connects logo to subheader, expands to full width)
-    for (let x = 0; x < totalWidth; x++) {
+    for (let i = 0; i < totalWidth; i++) {
       let char = borderChars.horizontal
-      if (x === 0) char = borderChars.middleLeft
-      else if (x === logoTextWidth - 1) char = borderChars.bottomJoin  // Junction where logo border meets
-      else if (x === totalWidth - 1) char = borderChars.topRight
+      if (i === 0) char = borderChars.middleLeft
+      else if (i === logoTextWidth - 1) char = borderChars.bottomJoin  // Junction where logo border meets
+      else if (i === totalWidth - 1) char = borderChars.topRight
       
+      const x = (logoGridX - 1 + i) - tm.grid.cols / 2
+      const y = (logoGridY + 3) - tm.grid.rows / 2
+      
+      tm.push()
+      tm.translate(x, y, 0)
       tm.char(char)
       tm.charColor(borderR, borderG, borderB, borderAlpha)
       tm.cellColor(0, 0, 0, 0)
-      tm.rect(logoBaseX - 1 + x, logoBaseY + 3, 1, 1)
+      tm.rect(1, 1)
+      tm.pop()
     }
 
     // Calculate subheader rectangle dimensions
@@ -212,35 +256,63 @@ export function createHeroWaveSketch(canvas: HTMLCanvasElement, width: number, h
 
 
     // Bottom border of subheader
-    for (let x = 0; x < subheaderWidth; x++) {
+    for (let i = 0; i < subheaderWidth; i++) {
       let char = borderChars.horizontal
-      if (x === 0) char = borderChars.bottomLeft
-      if (x === subheaderWidth - 1) char = borderChars.bottomRight
+      if (i === 0) char = borderChars.bottomLeft
+      if (i === subheaderWidth - 1) char = borderChars.bottomRight
       
+      const x = (logoGridX - 1 + i) - tm.grid.cols / 2
+      const y = (subheaderStartGridY + subheaderLines.length) - tm.grid.rows / 2
+      
+      tm.push()
+      tm.translate(x, y, 0)
       tm.char(char)
       tm.charColor(borderR, borderG, borderB, borderAlpha)
       tm.cellColor(0, 0, 0, 0)
-      tm.rect(logoBaseX - 1 + x, subheaderStartY + subheaderLines.length, 1, 1)
+      tm.rect(1, 1)
+      tm.pop()
     }
 
     // Left and right borders
-    for (let y = 0; y < subheaderLines.length; y++) {
+    for (let j = 0; j < subheaderLines.length; j++) {
       // Left border
-      tm.char(borderChars.vertical)
-      tm.charColor(borderR, borderG, borderB, borderAlpha)
-      tm.cellColor(0, 0, 0, 0)
-      tm.rect(logoBaseX - 1, subheaderStartY + y, 1, 1)
+      {
+        const x = (logoGridX - 1) - tm.grid.cols / 2
+        const y = (subheaderStartGridY + j) - tm.grid.rows / 2
+        
+        tm.push()
+        tm.translate(x, y, 0)
+        tm.char(borderChars.vertical)
+        tm.charColor(borderR, borderG, borderB, borderAlpha)
+        tm.cellColor(0, 0, 0, 0)
+        tm.rect(1, 1)
+        tm.pop()
+      }
       
       // Right border
-      tm.char(borderChars.vertical)
-      tm.charColor(borderR, borderG, borderB, borderAlpha)
-      tm.cellColor(0, 0, 0, 0)
-      tm.rect(logoBaseX + maxLineLength, subheaderStartY + y, 1, 1)
+      {
+        const x = (logoGridX + maxLineLength) - tm.grid.cols / 2
+        const y = (subheaderStartGridY + j) - tm.grid.rows / 2
+        
+        tm.push()
+        tm.translate(x, y, 0)
+        tm.char(borderChars.vertical)
+        tm.charColor(borderR, borderG, borderB, borderAlpha)
+        tm.cellColor(0, 0, 0, 0)
+        tm.rect(1, 1)
+        tm.pop()
+      }
     }
 
     // Fill empty spaces in each line with space characters
     subheaderLines.forEach((line, lineIndex) => {
       for (let i = 0; i < maxLineLength; i++) {
+        const x = (logoGridX + i) - tm.grid.cols / 2
+        const y = (subheaderStartGridY + lineIndex) - tm.grid.rows / 2
+        
+        tm.push()
+        tm.translate(x, y, 0)
+        
         if (i < line.length) {
           // Draw text character
           const char = line[i]
@@ -254,14 +326,15 @@ export function createHeroWaveSketch(canvas: HTMLCanvasElement, width: number, h
           tm.char(char)
           tm.charColor(r, g, b, alpha)
           tm.cellColor(0, 0, 0, 0)
-          tm.rect(logoBaseX + i, subheaderStartY + lineIndex, 1, 1)
         } else {
           // Fill with space character
           tm.char(' ')
           tm.charColor(0, 0, 0, 0)
           tm.cellColor(0, 0, 0, 0)
-          tm.rect(logoBaseX + i, subheaderStartY + lineIndex, 1, 1)
         }
+        
+        tm.rect(1, 1)
+        tm.pop()
       }
     })
   })

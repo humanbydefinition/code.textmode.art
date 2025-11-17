@@ -177,7 +177,7 @@ details.example-spoiler summary::-webkit-details-marker {
   position: relative;
   width: 100%;
   height: 400px;
-  margin: 2rem 0;
+  margin: 1.5rem 0;
   border-radius: 8px;
   overflow: hidden;
   background: linear-gradient(135deg, var(--vp-c-bg-soft) 0%, var(--vp-c-bg) 100%);
