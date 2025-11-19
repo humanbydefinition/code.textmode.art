@@ -10,6 +10,15 @@ import { textmode } from './textmode.esm.js'
 
 export interface SketchInstance {
   tm: any
+  resize?: (width: number, height: number) => void
+}
+
+export interface HeroWaveOptions {
+  /**
+   * "hero" mode renders the branded textmode.js label and subtitle frame.
+   * "background" mode renders only the animated waves (used in secondary sections).
+   */
+  mode?: 'hero' | 'background'
 }
 
 const wrapText = (text: string, maxChars: number): string[] => {
@@ -53,10 +62,18 @@ const BORDER_COLOR_HIGHLIGHT = [0, 160, 220] // Brighter cyan-blue
 const SUBHEAD_COLOR_BASE = [80, 100, 130] // Medium gray-blue
 const SUBHEAD_COLOR_HIGHLIGHT = [0, 180, 200] // Teal highlight
 
-export function createHeroWaveSketch(canvas: HTMLCanvasElement, width: number, height: number): SketchInstance {
+export function createHeroWaveSketch(
+  canvas: HTMLCanvasElement,
+  width: number,
+  height: number,
+  options: HeroWaveOptions = {}
+): SketchInstance {
   if (!textmode) {
     throw new Error('textmode.js library not loaded')
   }
+
+  const displayMode = options.mode ?? 'hero'
+  const showBranding = displayMode === 'hero'
   
   const tm = textmode.create({
     canvas: canvas,
@@ -79,12 +96,13 @@ export function createHeroWaveSketch(canvas: HTMLCanvasElement, width: number, h
     return wrapText(SUBHEADER_TEXT, effectiveMaxChars)
   }
   
-  let subheaderLines: string[]
+  let subheaderLines: string[] = []
   
   tm.setup(() => {
     tm.background(0, 0, 0, 0)
-
-    subheaderLines = calculateSubheaderLines()
+    if (showBranding) {
+      subheaderLines = calculateSubheaderLines()
+    }
   })
 
   tm.draw(() => {
@@ -128,7 +146,12 @@ export function createHeroWaveSketch(canvas: HTMLCanvasElement, width: number, h
       }
     }
 
-    // Animated logo aligned near the top-left
+    if (showBranding) {
+      if (subheaderLines.length === 0) {
+        subheaderLines = calculateSubheaderLines()
+      }
+
+      // Animated logo aligned near the top-left
     // Calculate position in grid space first, then convert to center-based
     const marginCols = Math.max(2, Math.floor(tm.grid.cols * 0.05))
     const marginRows = 0
@@ -143,7 +166,7 @@ export function createHeroWaveSketch(canvas: HTMLCanvasElement, width: number, h
     const logoHeight = 3 // Logo + top/bottom border
 
     // Border characters for both logo and subheader
-    const borderChars = {
+      const borderChars = {
       topLeft: '┌',
       topRight: '┐',
       bottomLeft: '└',
@@ -157,15 +180,15 @@ export function createHeroWaveSketch(canvas: HTMLCanvasElement, width: number, h
     }
 
     // Animated border colors
-    const borderPhase = time * 1.5
-    const borderPulse = Math.sin(borderPhase) * 0.5 + 0.5
-    const borderR = Math.floor(BORDER_COLOR_BASE[0] + (BORDER_COLOR_HIGHLIGHT[0] - BORDER_COLOR_BASE[0]) * borderPulse)
-    const borderG = Math.floor(BORDER_COLOR_BASE[1] + (BORDER_COLOR_HIGHLIGHT[1] - BORDER_COLOR_BASE[1]) * borderPulse)
-    const borderB = Math.floor(BORDER_COLOR_BASE[2] + (BORDER_COLOR_HIGHLIGHT[2] - BORDER_COLOR_BASE[2]) * borderPulse)
-    const borderAlpha = Math.floor(200 + borderPulse * 55)
+      const borderPhase = time * 1.5
+      const borderPulse = Math.sin(borderPhase) * 0.5 + 0.5
+      const borderR = Math.floor(BORDER_COLOR_BASE[0] + (BORDER_COLOR_HIGHLIGHT[0] - BORDER_COLOR_BASE[0]) * borderPulse)
+      const borderG = Math.floor(BORDER_COLOR_BASE[1] + (BORDER_COLOR_HIGHLIGHT[1] - BORDER_COLOR_BASE[1]) * borderPulse)
+      const borderB = Math.floor(BORDER_COLOR_BASE[2] + (BORDER_COLOR_HIGHLIGHT[2] - BORDER_COLOR_BASE[2]) * borderPulse)
+      const borderAlpha = Math.floor(200 + borderPulse * 55)
 
     // Top border of logo (only spans the width of "textmode.js")
-    for (let i = 0; i < logoTextWidth; i++) {
+      for (let i = 0; i < logoTextWidth; i++) {
       let char = borderChars.horizontal
       if (i === 0) char = borderChars.topLeft
       if (i === logoTextWidth - 1) char = borderChars.topRight
@@ -183,7 +206,7 @@ export function createHeroWaveSketch(canvas: HTMLCanvasElement, width: number, h
     }
 
     // Left border of logo
-    {
+      {
       const x = (logoGridX - 1) - tm.grid.cols / 2
       const y = (logoGridY + 2) - tm.grid.rows / 2
       
@@ -197,7 +220,7 @@ export function createHeroWaveSketch(canvas: HTMLCanvasElement, width: number, h
     }
     
     // Right border of logo (only for the logo text width)
-    {
+      {
       const x = (logoGridX + logoTextWidth - 2) - tm.grid.cols / 2
       const y = (logoGridY + 2) - tm.grid.rows / 2
       
@@ -211,7 +234,7 @@ export function createHeroWaveSketch(canvas: HTMLCanvasElement, width: number, h
     }
 
     // Draw logo text
-    for (let i = 0; i < LOGO_TEXT.length; i++) {
+      for (let i = 0; i < LOGO_TEXT.length; i++) {
       const char = LOGO_TEXT[i]
       const phase = time * 2.2 + i * 0.35
       const pulse = Math.sin(phase) * 0.5 + 0.5
@@ -232,7 +255,7 @@ export function createHeroWaveSketch(canvas: HTMLCanvasElement, width: number, h
     }
 
     // Middle separator line (connects logo to subheader, expands to full width)
-    for (let i = 0; i < totalWidth; i++) {
+      for (let i = 0; i < totalWidth; i++) {
       let char = borderChars.horizontal
       if (i === 0) char = borderChars.middleLeft
       else if (i === logoTextWidth - 1) char = borderChars.bottomJoin  // Junction where logo border meets
@@ -251,12 +274,12 @@ export function createHeroWaveSketch(canvas: HTMLCanvasElement, width: number, h
     }
 
     // Calculate subheader rectangle dimensions
-    const subheaderWidth = totalWidth  // Match total width
-    const subheaderHeight = subheaderLines.length + 1  // +1 for bottom border
+      const subheaderWidth = totalWidth  // Match total width
+      const subheaderHeight = subheaderLines.length + 1  // +1 for bottom border
 
 
-    // Bottom border of subheader
-    for (let i = 0; i < subheaderWidth; i++) {
+      // Bottom border of subheader
+      for (let i = 0; i < subheaderWidth; i++) {
       let char = borderChars.horizontal
       if (i === 0) char = borderChars.bottomLeft
       if (i === subheaderWidth - 1) char = borderChars.bottomRight
@@ -274,7 +297,7 @@ export function createHeroWaveSketch(canvas: HTMLCanvasElement, width: number, h
     }
 
     // Left and right borders
-    for (let j = 0; j < subheaderLines.length; j++) {
+      for (let j = 0; j < subheaderLines.length; j++) {
       // Left border
       {
         const x = (logoGridX - 1) - tm.grid.cols / 2
@@ -305,7 +328,7 @@ export function createHeroWaveSketch(canvas: HTMLCanvasElement, width: number, h
     }
 
     // Fill empty spaces in each line with space characters
-    subheaderLines.forEach((line, lineIndex) => {
+      subheaderLines.forEach((line, lineIndex) => {
       for (let i = 0; i < maxLineLength; i++) {
         const x = (logoGridX + i) - tm.grid.cols / 2
         const y = (subheaderStartGridY + lineIndex) - tm.grid.rows / 2
@@ -336,8 +359,18 @@ export function createHeroWaveSketch(canvas: HTMLCanvasElement, width: number, h
         tm.rect(1, 1)
         tm.pop()
       }
-    })
+      })
+    }
   })
+
+  const resizeSketch = (newWidth: number, newHeight: number) => {
+    canvas.width = newWidth
+    canvas.height = newHeight
+    tm.resizeCanvas(newWidth, newHeight)
+    if (showBranding) {
+      subheaderLines = calculateSubheaderLines()
+    }
+  }
 
   // windowResized callback will be triggered by the actual window resize event
   tm.windowResized(() => {
@@ -345,14 +378,12 @@ export function createHeroWaveSketch(canvas: HTMLCanvasElement, width: number, h
     if (canvas && canvas.parentElement) {
       const newWidth = canvas.parentElement.clientWidth
       const newHeight = canvas.parentElement.clientHeight
-      canvas.width = newWidth
-      canvas.height = newHeight
-      tm.resizeCanvas(newWidth, newHeight)
-      // Recalculate text wrapping for new grid dimensions
-      subheaderLines = calculateSubheaderLines()
+      resizeSketch(newWidth, newHeight)
     }
-  })  // Return instance with textmode object
+  })
+
   return {
-    tm: tm
+    tm: tm,
+    resize: resizeSketch
   }
 }

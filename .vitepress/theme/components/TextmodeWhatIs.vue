@@ -82,17 +82,17 @@ onMounted(async () => {
             : (content ? content.clientHeight : container.clientHeight || 400)
 
         // Dynamically import the sketch module (only runs on client)
-        const { createHeroWaveSimpleSketch } = await import('../sketches/hero-wave-simple')
+        const { createHeroWaveSketch } = await import('../sketches/hero-wave')
 
-        if (!createHeroWaveSimpleSketch) {
-            console.error('TextmodeWhatIs: createHeroWaveSimpleSketch function not found in module')
+        if (!createHeroWaveSketch) {
+            console.error('TextmodeWhatIs: createHeroWaveSketch function not found in module')
             return
         }
 
         canvas.width = width
         canvas.height = height
 
-        sketchInstance = createHeroWaveSimpleSketch(canvas, width, height)
+        sketchInstance = createHeroWaveSketch(canvas, width, height, { mode: 'background' })
 
         // Set up ResizeObserver to watch content height changes
         if (content) {
@@ -163,8 +163,6 @@ onBeforeUnmount(() => {
 }
 
 .textmode-sketch-canvas {
-    width: 100%;
-    height: 100%;
     display: block;
 }
 

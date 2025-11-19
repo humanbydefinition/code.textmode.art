@@ -24,6 +24,19 @@ const canvasRef = ref<HTMLCanvasElement>()
 let sketchInstance: any = null
 const isClient = ref(false)
 
+const handleResize = () => {
+  const canvas = canvasRef.value
+  const container = containerRef.value
+
+  if (!canvas || !container || !sketchInstance?.resize) {
+    return
+  }
+
+  const width = container.clientWidth || canvas.width || 800
+  const height = container.clientHeight || canvas.height || 400
+  sketchInstance.resize(width, height)
+}
+
 onMounted(async () => {
   isClient.value = true
   await nextTick()
@@ -52,13 +65,16 @@ onMounted(async () => {
     canvas.width = width
     canvas.height = height
     
-    sketchInstance = createHeroWaveSketch(canvas, width, height)
+    sketchInstance = createHeroWaveSketch(canvas, width, height, { mode: 'hero' })
+
+    window.addEventListener('resize', handleResize)
   } catch (error) {
     console.error('TextmodeHero: Failed to initialize sketch', error)
   }
 })
 
 onBeforeUnmount(() => {
+  window.removeEventListener('resize', handleResize)
   if (sketchInstance?.tm?.remove) {
     sketchInstance.tm.remove()
   }
