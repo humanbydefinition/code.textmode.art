@@ -223,7 +223,7 @@ textmodifier.saveGIF({
 | `frameRate` | `number` | `60` | Frames captured per second |
 | `scale` | `number` | `1.0` | Scale factor for the rendered frames |
 | `repeat` | `number` | `0` | Loop count (`0` = loop forever) |
-| `onProgress` | (`progress: GIFExportProgress`) => `void` | — | Progress callback fired during recording |
+| `onProgress` | (`progress: GIFExportProgress`) => `void` | - | Progress callback fired during recording |
 
 ::: tip Some use cases
 - Sharing animated ASCII art on social media

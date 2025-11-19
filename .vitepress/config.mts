@@ -52,6 +52,7 @@ const themeConfig = {
         { text: "Fundamentals", link: "/docs/fundamentals" },
         { text: "Event handling", link: "/docs/events" },
         { text: "Fonts", link: "/docs/fonts" },
+        { text: "Images and videos", link: "/docs/loadables" },
         { text: "Advanced features", link: "/docs/advanced" },
         { text: "Framework integration", link: "/docs/framework-integration" },
         { text: "Exporting", link: "/docs/exporting" },

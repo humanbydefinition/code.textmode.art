@@ -36,7 +36,7 @@ t.draw(() => {
 
     t.char('+');
     t.charColor(255, 255, 0);
-    t.point(10, 10); // Add a marker on top of the converted content
+    t.point(); // Add a marker on top of the converted content
 });
 ```
 
