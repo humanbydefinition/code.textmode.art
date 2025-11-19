@@ -10,7 +10,7 @@ import { TextmodeSandbox } from './components/TextmodeSandbox'
 import FontShowcase from './components/FontShowcase.vue'
 import DonationGrid from './components/DonationGrid.vue'
 import TextmodeWhatIs from './components/TextmodeWhatIs.vue'
-import { withPlogTheme } from '../plog/src'
+import { withBlogTheme } from '../blog/src'
 const HeroLayout = defineComponent({
   name: 'TextmodeHeroLayout',
   setup(_, { slots }) {
@@ -85,6 +85,6 @@ async function initTextmodeHero() {
   }
 }
 
-const theme = withPlogTheme(baseTheme)
+const theme = withBlogTheme(baseTheme)
 
 export default theme

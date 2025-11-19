@@ -9,7 +9,7 @@ import BlogHome from './components/BlogHome.vue'
 
 import './styles/blog.css'
 
-export interface PlogOptions {
+export interface BlogOptions {
   /**
    * Frontmatter flag that marks a page as a blog post.
    * @default 'blogPost'
@@ -20,12 +20,12 @@ export interface PlogOptions {
 export type { BlogPostEntry } from './data/blogPosts.data'
 export { BlogPostList, BlogPostLayout, BlogHome }
 
-export function withPlogTheme(baseTheme: Theme = DefaultTheme, options: PlogOptions = {}): Theme {
+export function withBlogTheme(baseTheme: Theme = DefaultTheme, options: BlogOptions = {}): Theme {
   const blogFlagKey = options.blogFrontmatterKey ?? 'blogPost'
   const BaseLayout = baseTheme.Layout ?? DefaultTheme.Layout
 
   const BlogAwareLayout = defineComponent({
-    name: 'PlogBlogAwareLayout',
+    name: 'BlogAwareLayout',
     setup(_, { slots }) {
       const { frontmatter } = useData()
 
