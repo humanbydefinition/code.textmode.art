@@ -59,7 +59,7 @@ flowchart TD
 
 ### The three attachments *(MRT)*
 
-0. `o_character` - glyph index *(RG channels)*, rotation data *(A channel)*, and transform flags *(B channel)*
+0. `o_character` - glyph index *(RG channels)*, transform flags *(B channel)*, and rotation data *(A channel)*
 1. `o_primaryColor` - character color information
 2. `o_secondaryColor` - cell color information
 

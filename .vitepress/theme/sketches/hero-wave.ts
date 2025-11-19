@@ -107,7 +107,7 @@ export function createHeroWaveSketch(
 
   tm.draw(() => {
     tm.background(0, 0, 0, 0)
-    time += 0.02
+    time += 0.04;
 
     // Create animated wave pattern
     // With center origin, convert from top-left grid coordinates

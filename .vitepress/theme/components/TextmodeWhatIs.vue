@@ -110,23 +110,11 @@ onMounted(async () => {
 })
 
 onBeforeUnmount(() => {
-    // Clear any pending resize timeout
-    if (resizeTimeout !== null) {
-        window.clearTimeout(resizeTimeout)
-        resizeTimeout = null
-    }
-
-    if (resizeObserver) {
-        resizeObserver.disconnect()
-        resizeObserver = null
-    }
-
-    window.removeEventListener('resize', updateCanvasSize)
-
-    if (sketchInstance?.tm?.remove) {
-        sketchInstance.tm.remove()
-    }
-    sketchInstance = null
+  window.removeEventListener('resize', updateCanvasSize)
+  if (sketchInstance?.tm?.remove) {
+    sketchInstance.tm.remove()
+  }
+  sketchInstance = null
 })
 </script>
 
