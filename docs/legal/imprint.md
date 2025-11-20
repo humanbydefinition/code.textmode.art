@@ -1,5 +1,8 @@
 # Imprint
 
+> Diese Seite ist auch auf [Deutsch](./impressum) verfügbar.  
+> This page is also available in [German](./impressum).
+
 ## Scope
 
 This imprint and privacy policies apply to the following web presences:
