@@ -20,22 +20,6 @@ Use [Textmodifier.color](Textmodifier.md#color) to create colors.
 
 ## Accessors
 
-### character
-
-#### Get Signature
-
-```ts
-get character(): undefined | [number, number, number];
-```
-
-Returns the character encoding *(0-1 range)* if this color was created from a glyph.
-
-##### Returns
-
-`undefined` \| \[`number`, `number`, `number`\]
-
-***
-
 ### normalized
 
 #### Get Signature
@@ -81,3 +65,23 @@ Returns a plain RGBA array with integer components.
 ##### Returns
 
 \[`number`, `number`, `number`, `number`\]
+
+## Methods
+
+### withAlpha()
+
+```ts
+withAlpha(alpha): TextmodeColor;
+```
+
+Create a copy of this color with a different alpha value.
+
+#### Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `alpha` | `number` |
+
+#### Returns
+
+`TextmodeColor`

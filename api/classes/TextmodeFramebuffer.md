@@ -13,14 +13,6 @@ Framebuffer class for managing offscreen rendering targets initialized via [Text
 
 - `IFramebuffer`
 
-## Properties
-
-| Property | Modifier | Type |
-| ------ | ------ | ------ |
-| <a id="_height"></a> `_height` | `protected` | `number` |
-| <a id="_options"></a> `_options` | `protected` | `FramebufferOptions` |
-| <a id="_width"></a> `_width` | `protected` | `number` |
-
 ## Accessors
 
 ### attachmentCount

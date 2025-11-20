@@ -6,6 +6,12 @@ A plugin interface for extending the functionality of a [Textmodifier](../classe
 
 Users can create plugins by implementing this interface.
 
+## Note
+
+Plugins are currently experimental and the API may change in future releases. 
+For now, it has been integrated to outsource export features to `textmode.export.js`.
+Documentation and examples will be provided as the plugin system matures.
+
 ## Properties
 
 | Property | Type | Description |

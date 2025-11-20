@@ -7,7 +7,26 @@ Manages the font used for rendering characters via [Textmodifier.loadFont](../..
 This class coordinates font loading, character extraction, texture atlas creation,
 and provides character information.
 
+The font used by your [Textmodifier](../../../../classes/Textmodifier.md) instance is accessible via
+the [Textmodifier.font](../../../../classes/Textmodifier.md#font) property.
+
 ## Accessors
+
+### characterMap
+
+#### Get Signature
+
+```ts
+get characterMap(): Map<string, TextmodeCharacter>;
+```
+
+Returns the character map for O(1) lookups.
+
+##### Returns
+
+`Map`\<`string`, [`TextmodeCharacter`](../type-aliases/TextmodeCharacter.md)\>
+
+***
 
 ### characters
 
@@ -22,6 +41,22 @@ Returns the array of [TextmodeCharacter](../type-aliases/TextmodeCharacter.md) o
 ##### Returns
 
 [`TextmodeCharacter`](../type-aliases/TextmodeCharacter.md)[]
+
+***
+
+### fontFramebuffer
+
+#### Get Signature
+
+```ts
+get fontFramebuffer(): TextmodeFramebuffer;
+```
+
+Returns the WebGL framebuffer containing the font texture atlas.
+
+##### Returns
+
+[`TextmodeFramebuffer`](../../../../classes/TextmodeFramebuffer.md)
 
 ***
 

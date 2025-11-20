@@ -9,6 +9,7 @@ export interface BlogPostEntry {
   readingTime: number
   cover: string | null
   source: string
+  published: boolean
 }
 
 declare const data: BlogPostEntry[]
@@ -59,6 +60,8 @@ async function importLoader() {
             permalink.replace(/\/$/, '').split('/').pop() ?? 
             ''
 
+          const published = frontmatter?.published ?? true
+
           return {
             title: frontmatter?.title ?? 'Untitled post',
             description,
@@ -70,8 +73,10 @@ async function importLoader() {
             readingTime,
             cover: frontmatter?.cover ?? null,
             source: sourcePath,
+            published,
           }
         })
+        .filter((post) => post.published)
         .sort((a, b) => {
           const aTime = a.date ? Date.parse(a.date) : 0
           const bTime = b.date ? Date.parse(b.date) : 0

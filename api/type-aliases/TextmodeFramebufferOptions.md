@@ -6,24 +6,24 @@
 type TextmodeFramebufferOptions = object;
 ```
 
-Options for creating a framebuffer.
+Options for creating a framebuffer. If not specified, width and height default to the current textmode grid size.
 
 ## Properties
 
-### height
+### height?
 
 ```ts
-height: number;
+optional height: number;
 ```
 
 Height of the framebuffer in grid cells
 
 ***
 
-### width
+### width?
 
 ```ts
-width: number;
+optional width: number;
 ```
 
 Width of the framebuffer in grid cells

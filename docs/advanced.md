@@ -157,7 +157,7 @@ t.draw(() => {
 
 ### Setting multiple uniforms
 
-Use [`setUniforms()`](/api/classes/Textmodifier#setuniforms) to pass multiple values at once:
+Use [`setUniforms()`](/api/classes/Textmodifier#setuniforms) to pass multiple values in one call:
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });

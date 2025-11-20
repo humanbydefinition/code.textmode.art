@@ -30,6 +30,16 @@ The shader color associated with the character.
 
 ***
 
+### glyphData
+
+```ts
+glyphData: GlyphData;
+```
+
+Glyph outline data including advance width and path information.
+
+***
+
 ### unicode
 
 ```ts

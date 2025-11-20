@@ -10,7 +10,7 @@ An extended API provided to plugins when they are installed on a [Textmodifier](
 | ------ | ------ | ------ |
 | <a id="asciiframebuffer"></a> `asciiFramebuffer` | [`TextmodeFramebuffer`](../classes/TextmodeFramebuffer.md) | The framebuffer containing the ASCII representation.<br/> This framebuffer only has a single render target. |
 | <a id="canvas"></a> `canvas` | `TextmodeCanvas` | The canvas used by the Textmodifier instance. |
-| <a id="drawframebuffer"></a> `drawFramebuffer` | [`TextmodeFramebuffer`](../classes/TextmodeFramebuffer.md) | The framebuffer the user draws to. |
+| <a id="drawframebuffer"></a> `drawFramebuffer` | [`TextmodeFramebuffer`](../classes/TextmodeFramebuffer.md) | The framebuffer the user draws to with 3 render targets. |
 | <a id="font"></a> `font` | [`TextmodeFont`](../textmode.js/namespaces/loadables/classes/TextmodeFont.md) | The font used by the Textmodifier instance. |
 | <a id="grid"></a> `grid` | [`TextmodeGrid`](../classes/TextmodeGrid.md) | The grid used by the Textmodifier instance. |
 | <a id="renderer"></a> `renderer` | `GLRenderer` | The WebGL renderer used by the Textmodifier instance. |

@@ -9,52 +9,40 @@ It can be drawn to the canvas via [Textmodifier.image](../../../../classes/Textm
 A video uploaded currently runs through an adjustable brightness-converter that converts
 the video frames into a textmode representation using characters. 
 Those adjustable options are available via chainable methods on this class.
+```javascript
+const t = textmode.create({
+    width: 800,
+    height: 600,
+});
+
+let video;
+
+t.setup(async () => {
+    video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
+    // Start playback and enable looping so the video keeps playing
+    video.play();
+    video.loop();
+
+    video.characters(" .:-=+*#%@");
+    // ... other adjustments like video.flipX(boolean), video.cellColorMode('sampled' | 'fixed'), etc.
+    // (can also be chained or updated during runtime)
+});
+
+t.draw(() => {
+    t.background(0);
+
+    if (video) {
+        // Draw the loaded video
+        t.image(video);
+    }
+});
+```
 
 ## Extends
 
 - `TextmodeSource`
 
-## Properties
-
-| Property | Modifier | Type | Default value | Inherited from |
-| ------ | ------ | ------ | ------ | ------ |
-| <a id="_backgroundcolor"></a> `_backgroundColor` | `protected` | \[`number`, `number`, `number`, `number`\] | `undefined` | `TextmodeSource._backgroundColor` |
-| <a id="_cellcolor"></a> `_cellColor` | `protected` | \[`number`, `number`, `number`, `number`\] | `undefined` | `TextmodeSource._cellColor` |
-| <a id="_cellcolormode"></a> `_cellColorMode` | `protected` | `"sampled"` \| `"fixed"` | `'fixed'` | `TextmodeSource._cellColorMode` |
-| <a id="_charcolor"></a> `_charColor` | `protected` | \[`number`, `number`, `number`, `number`\] | `undefined` | `TextmodeSource._charColor` |
-| <a id="_charcolormode"></a> `_charColorMode` | `protected` | `"sampled"` \| `"fixed"` | `'sampled'` | `TextmodeSource._charColorMode` |
-| <a id="_charrotation"></a> `_charRotation` | `protected` | `number` | `0` | `TextmodeSource._charRotation` |
-| <a id="_flipx"></a> `_flipX` | `protected` | `number` | `0` | `TextmodeSource._flipX` |
-| <a id="_flipy"></a> `_flipY` | `protected` | `number` | `0` | `TextmodeSource._flipY` |
-| <a id="_gl"></a> `_gl` | `protected` | `WebGL2RenderingContext` | `undefined` | `TextmodeSource._gl` |
-| <a id="_glyphcolorresolver"></a> `_glyphColorResolver` | `protected` | (`s`) => `GlyphColor`[] | `undefined` | `TextmodeSource._glyphColorResolver` |
-| <a id="_glyphcolors"></a> `_glyphColors` | `protected` | `GlyphColor`[] | `undefined` | `TextmodeSource._glyphColors` |
-| <a id="_height"></a> `_height` | `protected` | `number` | `undefined` | `TextmodeSource._height` |
-| <a id="_invert"></a> `_invert` | `protected` | `number` | `0` | `TextmodeSource._invert` |
-| <a id="_material"></a> `_material` | `protected` | `null` \| `Material` | `null` | `TextmodeSource._material` |
-| <a id="_originalheight"></a> `_originalHeight` | `protected` | `number` | `undefined` | `TextmodeSource._originalHeight` |
-| <a id="_originalwidth"></a> `_originalWidth` | `protected` | `number` | `undefined` | `TextmodeSource._originalWidth` |
-| <a id="_renderer"></a> `_renderer` | `protected` | `GLRenderer` | `undefined` | `TextmodeSource._renderer` |
-| <a id="_texture"></a> `_texture` | `protected` | `WebGLTexture` | `undefined` | `TextmodeSource._texture` |
-| <a id="_width"></a> `_width` | `protected` | `number` | `undefined` | `TextmodeSource._width` |
-
 ## Accessors
-
-### currentFrameIndex
-
-#### Get Signature
-
-```ts
-get currentFrameIndex(): number;
-```
-
-Current frame index for preloaded videos. Returns 0 for non-preloaded videos.
-
-##### Returns
-
-`number`
-
-***
 
 ### currentTime
 
@@ -126,22 +114,6 @@ Whether the video is currently playing.
 
 ***
 
-### isPreloaded
-
-#### Get Signature
-
-```ts
-get isPreloaded(): boolean;
-```
-
-Whether this video has been preloaded with frames.
-
-##### Returns
-
-`boolean`
-
-***
-
 ### originalHeight
 
 #### Get Signature
@@ -183,22 +155,6 @@ Original pixel width of the video.
 ```ts
 TextmodeSource.originalWidth
 ```
-
-***
-
-### preloadFrameRate
-
-#### Get Signature
-
-```ts
-get preloadFrameRate(): null | number;
-```
-
-The frame rate used for preloading. Returns null for non-preloaded videos.
-
-##### Returns
-
-`null` \| `number`
 
 ***
 
@@ -278,44 +234,6 @@ TextmodeSource.width
 
 ## Methods
 
-### \_createUniforms()
-
-```ts
-protected _createUniforms(): Record<string, any>;
-```
-
-#### Returns
-
-`Record`\<`string`, `any`\>
-
-#### Inherited from
-
-```ts
-TextmodeSource._createUniforms
-```
-
-***
-
-### $beforeMaterialUpdate()
-
-```ts
-protected $beforeMaterialUpdate(): void;
-```
-
-Hook for subclasses to run logic before material updates (e.g., upload latest frame).
-
-#### Returns
-
-`void`
-
-#### Overrides
-
-```ts
-TextmodeSource.$beforeMaterialUpdate
-```
-
-***
-
 ### background()
 
 ```ts
@@ -332,10 +250,10 @@ Defines the background color used for transparent pixels.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `colorOrGray` | `number` \| [`TextmodeColor`](../../../../classes/TextmodeColor.md) | A grayscale value or TextmodeColor for the background |
-| `g?` | `number` | Additional green component if using RGB |
-| `b?` | `number` | Additional blue component if using RGB |
-| `a?` | `number` | Additional alpha component if using RGBA |
+| `colorOrGray` | \| `string` \| `number` \| [`TextmodeColor`](../../../../classes/TextmodeColor.md) | A grayscale value (0-255), hex string ('#RGB', '#RRGGBB', '#RRGGBBAA'), or TextmodeColor instance |
+| `g?` | `number` | Green component (0-255) if using RGB format |
+| `b?` | `number` | Blue component (0-255) if using RGB format |
+| `a?` | `number` | Alpha component (0-255) if using RGBA format |
 
 #### Returns
 
@@ -367,10 +285,10 @@ Defines the cell color when [cellColorMode](#cellcolormode) is `'fixed'`.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `colorOrGray` | \| `string` \| `number` \| [`TextmodeColor`](../../../../classes/TextmodeColor.md) | A grayscale value or TextmodeColor for the cell |
-| `g?` | `number` | Additional green component if using RGB |
-| `b?` | `number` | Additional blue component if using RGB |
-| `a?` | `number` | Additional alpha component if using RGBA |
+| `colorOrGray` | \| `string` \| `number` \| [`TextmodeColor`](../../../../classes/TextmodeColor.md) | A grayscale value (0-255), hex string ('#RGB', '#RRGGBB', '#RRGGBBAA'), or TextmodeColor instance |
+| `g?` | `number` | Green component (0-255) if using RGB format |
+| `b?` | `number` | Blue component (0-255) if using RGB format |
+| `a?` | `number` | Alpha component (0-255) if using RGBA format |
 
 #### Returns
 
@@ -421,7 +339,7 @@ characters(chars): this;
 ```
 
 Define the characters to use for brightness mapping as a string.
-Maximum length is 64; excess characters are ignored.
+Maximum length is 255; excess characters are ignored.
 
 #### Parameters
 
@@ -459,10 +377,10 @@ Defines the character color when [charColorMode](#charcolormode) is `'fixed'`.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `colorOrGray` | \| `string` \| `number` \| [`TextmodeColor`](../../../../classes/TextmodeColor.md) | A grayscale value or TextmodeColor for the character |
-| `g?` | `number` | Additional green component if using RGB |
-| `b?` | `number` | Additional blue component if using RGB |
-| `a?` | `number` | Additional alpha component if using RGBA |
+| `colorOrGray` | \| `string` \| `number` \| [`TextmodeColor`](../../../../classes/TextmodeColor.md) | A grayscale value (0-255), hex string ('#RGB', '#RRGGBB', '#RRGGBBAA'), or TextmodeColor instance |
+| `g?` | `number` | Green component (0-255) if using RGB format |
+| `b?` | `number` | Blue component (0-255) if using RGB format |
+| `a?` | `number` | Alpha component (0-255) if using RGBA format |
 
 #### Returns
 
@@ -530,6 +448,64 @@ This instance for chaining.
 
 ```ts
 TextmodeSource.charRotation
+```
+
+***
+
+### colorFilter()
+
+```ts
+colorFilter(palette?): this;
+```
+
+Applies an optional color filter palette before MRT conversion.
+When a palette is provided, all sampled pixels are quantized to the closest palette color
+prior to character/color analysis.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `palette?` | \| `null` \| `string`[] \| \[`number`, `number`, `number`\][] \| \[`number`, `number`, `number`, `number`\][] \| [`TextmodeColor`](../../../../classes/TextmodeColor.md)[] | A list of colors defined as [TextmodeColor](../../../../classes/TextmodeColor.md) instances, hex strings, or RGBA tuples (0-255). Providing an empty array or `null` disables the filter. |
+
+#### Returns
+
+`this`
+
+#### Inherited from
+
+```ts
+TextmodeSource.colorFilter
+```
+
+***
+
+### conversionMode()
+
+```ts
+conversionMode(mode): this;
+```
+
+Select the conversion mode for this source.
+
+`textmode.js` includes only a single built-in conversion strategy `'brightness'`.
+
+Additional conversion strategies may be provided via add-on libraries.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `mode` | `TextmodeConversionMode` | Conversion mode to use. |
+
+#### Returns
+
+`this`
+
+#### Inherited from
+
+```ts
+TextmodeSource.conversionMode
 ```
 
 ***

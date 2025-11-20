@@ -1,4 +1,4 @@
-# textmode.js
+# textmode.js v0.6.0-beta.5
 
 ## Namespaces
 
@@ -35,5 +35,5 @@
 
 | Type Alias | Description |
 | ------ | ------ |
-| [TextmodeFramebufferOptions](type-aliases/TextmodeFramebufferOptions.md) | Options for creating a framebuffer. |
+| [TextmodeFramebufferOptions](type-aliases/TextmodeFramebufferOptions.md) | Options for creating a framebuffer. If not specified, width and height default to the current textmode grid size. |
 | [TextmodeOptions](type-aliases/TextmodeOptions.md) | Options for creating a [Textmodifier](classes/Textmodifier.md) instance. |

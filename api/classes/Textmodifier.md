@@ -17,15 +17,6 @@ If a canvas is provided, it will use that canvas instead.
 
 - `ITextmodifier`
 
-## Properties
-
-| Property | Modifier | Type |
-| ------ | ------ | ------ |
-| <a id="_loadingdrawframebuffer"></a> `_loadingDrawFramebuffer` | `public` | [`TextmodeFramebuffer`](TextmodeFramebuffer.md) |
-| <a id="_loadingfont"></a> `_loadingFont` | `public` | [`TextmodeFont`](../textmode.js/namespaces/loadables/classes/TextmodeFont.md) |
-| <a id="_loadingframebuffer"></a> `_loadingFramebuffer` | `public` | [`TextmodeFramebuffer`](TextmodeFramebuffer.md) |
-| <a id="_loadinggrid"></a> `_loadingGrid` | `public` | [`TextmodeGrid`](TextmodeGrid.md) |
-
 ## Accessors
 
 ### canvas
@@ -1053,8 +1044,7 @@ color(
 
 Create a reusable color object compatible with textmode drawing APIs.
 
-Accepts grayscale, RGB, RGBA, hex string values as arguments, and
-single characters that resolve to their encoded glyph color. Returned
+Accepts grayscale, RGB, RGBA, and hex string values as arguments. Returned
 [TextmodeColor](TextmodeColor.md) instances can be passed to [background](#background),
 [char](#char), [charColor](#charcolor), [cellColor](#cellcolor), and more.
 
@@ -1088,13 +1078,6 @@ const semiTransparentRed = t.color(255, 0, 0, 128);
 // Hex string
 const dusk = t.color('#203040');
 
-// Single character: resolves to a TextmodeColor that may encode a glyph
-let glyphColor;
-
-t.setup(() => {
-    glyphColor = t.color('B'); // Color based on 'B' character glyph
-});
-
 t.draw(() => {
     // Using colors with other drawing APIs
     t.background(gray);
@@ -1109,7 +1092,7 @@ t.draw(() => {
 
     t.translate(5, 0);
     t.charColor("#FF00FF");
-    t.char(glyphColor);
+    t.char("B");
     t.rect(5, 5);
 });
 ```
@@ -1127,10 +1110,10 @@ ITextmodifier.color
 ### createFilterShader()
 
 ```ts
-createFilterShader(fragmentSource): GLShader;
+createFilterShader(fragmentSource): Promise<GLShader>;
 ```
 
-Create a custom filter shader from fragment shader source code.
+Create a custom filter shader from fragment shader source code or a file path.
 The fragment shader automatically receives the standard vertex shader inputs
 and must output to the 3 MRT attachments (character/transform, primary color, secondary color).
 
@@ -1138,13 +1121,13 @@ and must output to the 3 MRT attachments (character/transform, primary color, se
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `fragmentSource` | `string` | The fragment shader source code |
+| `fragmentSource` | `string` | The fragment shader source code or a file path (e.g., './shader.frag') |
 
 #### Returns
 
-`GLShader`
+`Promise`\<`GLShader`\>
 
-A compiled shader ready for use with [shader](#shader)
+A Promise that resolves to a compiled shader ready for use with [shader](#shader)
 
 ::: example-spoiler Show example
 
@@ -1154,53 +1137,39 @@ const t = textmode.create({
   height: 600,
 })
 
-const waveShader = t.createFilterShader(`#version 300 es
-  precision highp float;
-  
-  in vec2 v_uv;
-  in vec3 v_character;
-  in vec4 v_primaryColor;
-  in vec4 v_secondaryColor;
-  
-  uniform float u_time;
-  
-  layout(location = 0) out vec4 o_character;
-  layout(location = 1) out vec4 o_primaryColor;
-  layout(location = 2) out vec4 o_secondaryColor;
-  
-  float luma(vec3 c) {
-    return dot(c, vec3(0.2126, 0.7152, 0.0722));
-  }
-  
-  void main() {
-    vec2 uv = v_uv * 2.0 - 1.0;
-    float time = u_time * 0.4;
-    float radial = length(uv);
-    float swirl = sin(radial * 9.0 - time) + cos(uv.x * 6.0 + time * 1.3);
-    float ripple = sin((uv.x + uv.y) * 10.0 + time * 2.0) * 0.5;
+let waveShader;
 
-    // Palette that shifts through warm→cool hues
-    vec3 color = vec3(
-      0.55 + 0.45 * sin(time + radial * 4.0),
-      0.55 + 0.45 * sin(time * 1.3 + uv.y * 5.0 + ripple),
-      0.55 + 0.45 * sin(time * 0.9 + uv.x * 5.0 - ripple)
-    );
-
-    float glyphIndex = fract(0.5 + 0.5 * swirl);
-    float rotation = fract(0.5 + swirl * 0.25);
-    int invertFlag = luma(color) > 0.6 ? 1 : 0;
-    float packedFlags = float(invertFlag) / 255.0;
-
-    o_character = vec4(glyphIndex, 0.0, packedFlags, 0.0);
-    o_primaryColor = vec4(color, 1.0);
-    o_secondaryColor = vec4(mix(vec3(0.1), color, 0.35), 1.0);
-  }
-`);
+t.setup(async () => {
+  // Load shader from file
+  waveShader = await t.createFilterShader('./shader.frag');
+  
+  // Or create from inline source
+  // waveShader = await t.createFilterShader(`#version 300 es
+  //   precision highp float;
+  //   
+  //   in vec2 v_uv;
+  //   in vec3 v_character;
+  //   in vec4 v_primaryColor;
+  //   in vec4 v_secondaryColor;
+  //   
+  //   uniform float u_time;
+  //   
+  //   layout(location = 0) out vec4 o_character;
+  //   layout(location = 1) out vec4 o_primaryColor;
+  //   layout(location = 2) out vec4 o_secondaryColor;
+  //   
+  //   void main() {
+  //     // Shader code here
+  //   }
+  // `);
+});
 
 t.draw(() => {
-  t.shader(waveShader);
-  t.setUniform('u_time', t.frameCount * 0.003);
-  t.rect(t.grid.cols, t.grid.rows);
+  if (waveShader) {
+    t.shader(waveShader);
+    t.setUniform('u_time', t.frameCount * 0.003);
+    t.rect(t.grid.cols, t.grid.rows);
+  }
 });
 ```
 
@@ -1704,13 +1673,13 @@ image(
    height?): void;
 ```
 
-Draw a TextmodeFramebuffer or TextmodeImage to the current render target.
+Draw a TextmodeFramebuffer or TextmodeSource (TextmodeImage/TextmodeVideo) to the current render target.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `source` | \| [`TextmodeFramebuffer`](TextmodeFramebuffer.md) \| [`TextmodeImage`](../textmode.js/namespaces/loadables/classes/TextmodeImage.md) | The TextmodeFramebuffer or TextmodeImage to render |
+| `source` | [`TextmodeFramebuffer`](TextmodeFramebuffer.md) \| `TextmodeSource` | The TextmodeFramebuffer or TextmodeSource to render |
 | `width?` | `number` | Width to potentially scale the content |
 | `height?` | `number` | Height to potentially scale the content |
 
@@ -3046,17 +3015,10 @@ ITextmodifier.pinch
 ### point()
 
 ```ts
-point(x, y): void;
+point(): void;
 ```
 
-Draw a single point at (x, y) with the current settings.
-
-#### Parameters
-
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `x` | `number` | X-coordinate of the point |
-| `y` | `number` | Y-coordinate of the point |
+Draw a 1x1 rectangle with the current settings.
 
 #### Returns
 
@@ -3065,15 +3027,39 @@ Draw a single point at (x, y) with the current settings.
 ::: example-spoiler Show example
 
 ```javascript
-const t = textmode.create({
-  width: 800,
-  height: 600,
-})
+const t = textmode.create({ width: 800, height: 600 });
 
 t.draw(() => {
   t.background(0);
 
-  t.char('*');
+  const angle = t.frameCount * 0.06;
+  const radius = Math.min(t.grid.cols, t.grid.rows) * 0.35;
+
+  // Draw a short trail of points behind the leading point
+  for (let i = 0; i < 10; i++) {
+    const a = angle - i * 0.18;
+    const r = radius * (1 - i * 0.08);
+    const x = Math.round(Math.cos(a) * r);
+    const y = Math.round(Math.sin(a) * r);
+
+    // Color and brightness fade across the trail
+    const brightness = Math.max(40, 255 - i * 20);
+    const blue = Math.max(60, 255 - i * 25);
+    const green = 120 + i * 8;
+
+    t.push();
+    t.translate(x, y);
+    t.char('*');
+    t.charColor(brightness, green, blue);
+    t.point();
+
+    t.pop();
+  }
+
+  // Leading point drawn with highest brightness
+  t.char('@');
+  t.charColor(255, 255, 160);
+  t.translate(Math.round(Math.cos(angle) * radius), Math.round(Math.sin(angle) * radius));
   t.point();
 });
 ```
@@ -3104,20 +3090,21 @@ Use with [push](#push) to isolate style changes within a block.
 ::: example-spoiler Show example
 
 ```javascript
-const t = textmode.create({
-  width: 800,
-  height: 600,
-})
+const t = textmode.create({ width: 800, height: 600 });
 
 t.draw(() => {
   t.background(0);
 
-  t.push(); // Save current state
-  t.charColor(0, 255, 0); // Green characters
-  t.rotateZ(t.frameCount * 2);
-  t.char('A');
-  t.rect(16, 16);
-  t.pop(); // Restore previous state
+  // Draw three rotating shapes with isolated transformations and colors
+  for (let i = 0; i < 3; i++) {
+    t.push(); // Save state
+    t.translate(i * 12 - 12, 0);
+    t.rotateZ(t.frameCount * (1 + i * 0.5));
+    t.charColor(100 + i * 70, 255 - i * 50, 150);
+    t.char(['*', '@', '#'][i]);
+    t.rect(8, 8);
+    t.pop(); // Restore state - next iteration starts fresh
+  }
 });
 ```
 
@@ -3147,20 +3134,21 @@ Use with [pop](#pop) to isolate style changes within a block.
 ::: example-spoiler Show example
 
 ```javascript
-const t = textmode.create({
-  width: 800,
-  height: 600,
-})
+const t = textmode.create({ width: 800, height: 600 });
 
 t.draw(() => {
   t.background(0);
 
-  t.push(); // Save current state
-  t.charColor(255, 0, 0); // Red characters
-  t.rotateZ(t.frameCount * 2);
-  t.char('A');
-  t.rect(16, 16);
-  t.pop(); // Restore previous state
+  // Draw three rotating shapes with isolated transformations and colors
+  for (let i = 0; i < 3; i++) {
+    t.push(); // Save state
+    t.translate(i * 12 - 12, 0);
+    t.rotateZ(t.frameCount * (1 + i * 0.5));
+    t.charColor(100 + i * 70, 255 - i * 50, 150);
+    t.char(['*', '@', '#'][i]);
+    t.rect(8, 8);
+    t.pop(); // Restore state - next iteration starts fresh
+  }
 });
 ```
 
@@ -3383,21 +3371,25 @@ All geometries rotate around the center of the shape.
 ::: example-spoiler Show example
 
 ```javascript
-const t = textmode.create({
-  width: 800,
-  height: 600,
-})
+const t = textmode.create({ width: 800, height: 600 });
 
 t.draw(() => {
   t.background(0);
   
-  // Rotate only around Z-axis (backward compatible)
-  t.rotate(0, 0, 45);
-  
-  // Rotate around all three axes
-  t.rotate(30, 45, 60);
-  
-  t.rect(10, 10, 5, 5);
+  // Draw three rectangles rotating in 3D space with different axes
+  for (let i = 0; i < 3; i++) {
+    t.push();
+    t.translate(i * 15 - 15, 0, 0);
+    
+    const angle = t.frameCount * (1.5 + i * 0.5);
+    // Each shape rotates around different combinations of axes
+    t.rotate(angle * 0.7, angle * 0.5, angle);
+    
+    t.char(['T', 'X', 'T'][i]);
+    t.charColor(100 + i * 60, 200 - i * 40, 255);
+    t.rect(10, 10);
+    t.pop();
+  }
 });
 ```
 
@@ -3473,15 +3465,14 @@ All geometries rotate around the center of the shape.
 ::: example-spoiler Show example
 
 ```javascript
-const t = textmode.create({
-  width: 800,
-  height: 600,
-})
+const t = textmode.create({ width: 800, height: 600 });
 
 t.draw(() => {
   t.background(0);
-  t.rotateX(45); // Rotate around X-axis
-  t.rect(10, 10, 5, 5);
+  t.char('A');
+  t.charColor(255, 150, 100);
+  t.rotateX(t.frameCount * 2); // Flip forward/backward
+  t.rect(12, 12);
 });
 ```
 
@@ -3518,15 +3509,14 @@ All geometries rotate around the center of the shape.
 ::: example-spoiler Show example
 
 ```javascript
-const t = textmode.create({
-  width: 800,
-  height: 600,
-})
+const t = textmode.create({ width: 800, height: 600 });
 
 t.draw(() => {
   t.background(0);
-  t.rotateY(45); // Rotate around Y-axis
-  t.rect(10, 10, 5, 5);
+  t.char('B');
+  t.charColor(100, 255, 200);
+  t.rotateY(t.frameCount * 2); // Spin left/right
+  t.rect(12, 12);
 });
 ```
 
@@ -3563,15 +3553,14 @@ All geometries rotate around the center of the shape.
 ::: example-spoiler Show example
 
 ```javascript
-const t = textmode.create({
-  width: 800,
-  height: 600,
-})
+const t = textmode.create({ width: 800, height: 600 });
 
 t.draw(() => {
   t.background(0);
-  t.rotateZ(45); // Rotate around Z-axis
-  t.rect(10, 10, 5, 5);
+  t.char('C');
+  t.charColor(255, 220, 100);
+  t.rotateZ(t.frameCount * 2); // Spin clockwise
+  t.rect(12, 12);
 });
 ```
 
@@ -3607,20 +3596,29 @@ Set a uniform value for the current custom shader.
 ::: example-spoiler Show example
 
 ```javascript
-const t = textmode.create({
-  width: 800,
-  height: 600,
-})
+const t = textmode.create({ width: 800, height: 600 });
 
-const shader = t.createFilterShader(`
+const pulseShader = t.createFilterShader(`#version 300 es
+  precision highp float;
+  in vec2 v_uv;
   uniform float u_time;
-  // ... rest of shader ...
+  layout(location = 0) out vec4 o_character;
+  layout(location = 1) out vec4 o_primaryColor;
+  layout(location = 2) out vec4 o_secondaryColor;
+  
+  void main() {
+    float pulse = 0.5 + 0.5 * sin(u_time + length(v_uv - 0.5) * 8.0);
+    vec3 color = vec3(pulse * 0.3, pulse * 0.8, pulse);
+    o_character = vec4(pulse, 0.0, 0.0, 0.0);
+    o_primaryColor = vec4(color, 1.0);
+    o_secondaryColor = vec4(color * 0.3, 1.0);
+  }
 `);
 
 t.draw(() => {
-  t.shader(shader);
-  t.setUniform('u_time', t.frameCount * 0.02);
-  t.rect(0, 0, t.grid.cols, t.grid.rows);
+  t.shader(pulseShader);
+  t.setUniform('u_time', t.frameCount * 0.005);
+  t.rect(t.grid.cols, t.grid.rows);
 });
 ```
 
@@ -3655,24 +3653,34 @@ Set multiple uniform values for the current custom shader.
 ::: example-spoiler Show example
 
 ```javascript
-const t = textmode.create({
-  width: 800,
-  height: 600,
-})
+const t = textmode.create({ width: 800, height: 600 });
 
-const shader = t.createFilterShader(`
+const rippleShader = t.createFilterShader(`#version 300 es
+  precision highp float;
+  in vec2 v_uv;
   uniform float u_time;
-  uniform vec2 u_resolution;
-  // ... rest of shader ...
+  uniform vec2 u_center;
+  layout(location = 0) out vec4 o_character;
+  layout(location = 1) out vec4 o_primaryColor;
+  layout(location = 2) out vec4 o_secondaryColor;
+  
+  void main() {
+    float dist = length(v_uv - u_center);
+    float wave = sin(dist * 20.0 - u_time * 2.0) * 0.5 + 0.5;
+    vec3 color = mix(vec3(0.2, 0.4, 0.8), vec3(0.9, 0.6, 0.3), wave);
+    o_character = vec4(wave, 0.0, 0.0, 0.0);
+    o_primaryColor = vec4(color, 1.0);
+    o_secondaryColor = vec4(color * 0.4, 1.0);
+  }
 `);
 
 t.draw(() => {
-  t.shader(shader);
+  t.shader(rippleShader);
   t.setUniforms({
-    u_time: t.frameCount * 0.02,
-    u_resolution: [t.grid.cols, t.grid.rows]
+    u_time: t.frameCount * 0.0005,
+    u_center: [0.5, 0.5]
   });
-  t.rect(0, 0, t.grid.cols, t.grid.rows);
+  t.rect(t.grid.cols, t.grid.rows);
 });
 ```
 
@@ -3692,17 +3700,51 @@ ITextmodifier.setUniforms
 setup(callback): void;
 ```
 
-Callbacks
+Set a setup callback function that will be executed once when initialization is complete.
+
+This callback is called after font loading and grid initialization, allowing access to
+properties like `textmodifier.grid.cols` for calculating layout or setup variables.
 
 #### Parameters
 
-| Parameter | Type |
-| ------ | ------ |
-| `callback` | () => `void` \| `Promise`\<`void`\> |
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `callback` | () => `void` \| `Promise`\<`void`\> | The function to call when setup is complete |
 
 #### Returns
 
 `void`
+
+::: example-spoiler Show example
+
+```javascript
+const textmodifier = textmode.create({
+  width: 800,
+  height: 600,
+  fontSize: 16
+});
+
+// Setup callback - called once when ready
+textmodifier.setup(() => {
+  // Now you can access grid properties
+  const cols = textmodifier.grid.cols;
+  const rows = textmodifier.grid.rows;
+  
+  // Initialize any variables that depend on grid size
+  rectWidth = Math.floor(cols / 3);
+  rectHeight = Math.floor(rows / 2);
+});
+
+// Draw callback - called every frame
+textmodifier.draw(() => {
+  textmodifier.background(128);
+  textmodifier.char('A');
+  textmodifier.rotateZ(textmodifier.frameCount * 2);
+  textmodifier.rect(rectWidth, rectHeight);
+});
+```
+
+:::
 
 #### Implementation of
 
@@ -3733,23 +3775,30 @@ Set a custom shader for subsequent rendering operations.
 ::: example-spoiler Show example
 
 ```javascript
-const t = textmode.create({
-  width: 800,
-  height: 600,
-})
+const t = textmode.create({ width: 800, height: 600 });
 
-// Create a custom filter shader
-const customShader = t.createFilterShader('
-  // ... fragment shader code ...
-');
+const glitchShader = t.createFilterShader(`#version 300 es
+  precision highp float;
+  in vec2 v_uv;
+  uniform float u_intensity;
+  layout(location = 0) out vec4 o_character;
+  layout(location = 1) out vec4 o_primaryColor;
+  layout(location = 2) out vec4 o_secondaryColor;
+  
+  void main() {
+    vec2 offset = vec2(sin(v_uv.y * 50.0) * u_intensity, 0.0);
+    float pattern = fract(v_uv.x * 20.0 + offset.x);
+    vec3 color = vec3(pattern, 1.0 - pattern, 0.5);
+    o_character = vec4(pattern, 0.0, 0.0, 0.0);
+    o_primaryColor = vec4(color, 1.0);
+    o_secondaryColor = vec4(color * 0.5, 1.0);
+  }
+`);
 
 t.draw(() => {
-  t.background(0);
-  
-  // Use custom shader
-  t.shader(customShader);
-  t.setUniform('u_frameCount', t.frameCount);
-  t.rect(0, 0, t.grid.cols, t.grid.rows);
+  t.shader(glitchShader);
+  t.setUniform('u_intensity', Math.sin(t.frameCount * 0.1) * 0.02);
+  t.rect(t.grid.cols, t.grid.rows);
 });
 ```
 
@@ -4029,21 +4078,20 @@ All geometries are displaced by the specified amounts. Similar to p5.js translat
 ::: example-spoiler Show example
 
 ```javascript
-const t = textmode.create({
-  width: 800,
-  height: 600,
-})
+const t = textmode.create({ width: 800, height: 600 });
 
 t.draw(() => {
   t.background(0);
   
-  // Translate in 2D
-  t.translate(10, 5);
-  
-  // Translate in 3D
-  t.translate(10, 5, 2);
-  
-  t.rect(0, 0, 5, 5); // Drawn at (10, 5) with Z offset
+  // Draw a grid of shapes with different translations
+  for (let i = 0; i < 3; i++) {
+    t.push();
+    t.translate(i * 12 - 12, Math.sin(t.frameCount * 0.05 + i) * 3);
+    t.char('A');
+    t.charColor(100 + i * 70, 150, 255 - i * 50);
+    t.rect(8, 8);
+    t.pop();
+  }
 });
 ```
 
@@ -4078,15 +4126,14 @@ Sets the X-axis translation offset for subsequent shape rendering operations.
 ::: example-spoiler Show example
 
 ```javascript
-const t = textmode.create({
-  width: 800,
-  height: 600,
-})
+const t = textmode.create({ width: 800, height: 600 });
 
 t.draw(() => {
   t.background(0);
-  t.translateX(10); // Translate 10 pixels to the right
-  t.rect(0, 0, 5, 5); // Drawn at (10, 0)
+  t.char('→');
+  t.charColor(255, 180, 100);
+  t.translateX(Math.sin(t.frameCount * 0.05) * 15); // Slide left/right
+  t.rect(10, 10);
 });
 ```
 
@@ -4121,15 +4168,14 @@ Sets the Y-axis translation offset for subsequent shape rendering operations.
 ::: example-spoiler Show example
 
 ```javascript
-const t = textmode.create({
-  width: 800,
-  height: 600,
-})
+const t = textmode.create({ width: 800, height: 600 });
 
 t.draw(() => {
   t.background(0);
-  t.translateY(10); // Translate 10 pixels down
-  t.rect(0, 0, 5, 5); // Drawn at (0, 10)
+  t.char('↓');
+  t.charColor(100, 255, 180);
+  t.translateY(Math.sin(t.frameCount * 0.05) * 10); // Bounce up/down
+  t.rect(10, 10);
 });
 ```
 
@@ -4164,15 +4210,14 @@ Sets the Z-axis translation offset for subsequent shape rendering operations.
 ::: example-spoiler Show example
 
 ```javascript
-const t = textmode.create({
-  width: 800,
-  height: 600,
-})
+const t = textmode.create({ width: 800, height: 600 });
 
 t.draw(() => {
   t.background(0);
-  t.translateZ(5); // Move 5 pixels forward in 3D space
-  t.rect(10, 10, 5, 5);
+  t.char('O');
+  t.charColor(180, 120, 255);
+  t.translateZ(Math.sin(t.frameCount * 0.05) * 20); // Pulse in/out
+  t.rect(12, 12);
 });
 ```
 
@@ -4218,14 +4263,20 @@ Draw a triangle with the current settings.
 ::: example-spoiler Show example
 
 ```javascript
-const t = textmode.create({
-  width: 800,
-  height: 600,
-})
+const t = textmode.create({ width: 800, height: 600 });
 
 t.draw(() => {
   t.background(0);
-  t.triangle(10, 10, 20, 10, 15, 20);
+  t.char('*');
+  t.charColor(255, 100, 150);
+  
+  const angle = t.frameCount * 0.02;
+  const size = 15;
+  t.triangle(
+    Math.cos(angle) * size, Math.sin(angle) * size,
+    Math.cos(angle + 2.09) * size, Math.sin(angle + 2.09) * size,
+    Math.cos(angle + 4.19) * size, Math.sin(angle + 4.19) * size
+  );
 });
 ```
 
@@ -4262,16 +4313,17 @@ Set a callback function that will be called when the window is resized.
 ```javascript
 // Create a standalone textmodifier instance
 const t = textmode.create({
- width: window.innerWidth,
- height: window.innerHeight,
+  width: window.innerWidth,
+  height: window.innerHeight,
 });
 
 // Draw callback to update content
 t.draw(() => {
-  // Set background color
-  t.background(128);
-
-  t.rect(0, 0, t.grid.cols, t.grid.rows);
+ // Set background color
+ t.background(128);
+ t.char('A');
+ t.rotateZ(t.frameCount * 2);
+ t.rect(16, 16);
 });
 
 // Set up window resize callback
@@ -4279,6 +4331,7 @@ t.windowResized(() => {
   // Resize the canvas to match window size
   t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
+```
 
 :::
 
