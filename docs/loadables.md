@@ -29,13 +29,11 @@ Once loaded, images can be drawn to the canvas using the [`image()`](/api/classe
 
 ```javascript
 t.draw(() => {
-    if (myImage) {
-        // Draw image at full grid size
-        t.image(myImage);
-        
-        // Or draw with specific dimensions
-        // t.image(myImage, 40, 20);
-    }
+    // Draw image at full grid size
+    t.image(myImage);
+    
+    // Or draw with specific dimensions
+    // t.image(myImage, 40, 20);
 });
 ```
 
@@ -145,13 +143,11 @@ Videos are drawn the same way as images using the [`image()`](/api/classes/Textm
 
 ```javascript
 t.draw(() => {
-    if (myVideo) {
-        // Draw video at full grid size
-        t.image(myVideo);
-        
-        // Or draw with specific dimensions
-        // t.image(myVideo, 60, 40);
-    }
+    // Draw video at full grid size
+    t.image(myVideo);
+    
+    // Or draw with specific dimensions
+    // t.image(myVideo, 60, 40);
 });
 ```
 
@@ -185,7 +181,7 @@ t.setup(async () => {
 
 ### Preloading video frames
 
-For smoother playback and better performance, you can preload video frames:
+For canvas video capturing purposes, you may want to preload the video to allow for synchronous playback without frame drops while recording. Use the `loadVideo()` options to set a target frame rate and optionally provide progress callbacks:
 
 ```javascript
 t.setup(async () => {
@@ -196,14 +192,18 @@ t.setup(async () => {
         },
         onComplete: () => {
             console.log('Preloading complete!');
-            myVideo.play();
-            myVideo.loop();
         },
         onError: (error) => {
             console.error('Preload error:', error);
         }
     });
 });
+
+t.draw(() => {
+    t.background(0);
+    t.image(myVideo.frame(t.frameCount));
+});
+
 ```
 
 ## Combining images and videos with transformations
@@ -212,30 +212,19 @@ Both images and videos can be transformed using the standard textmode.js transfo
 
 ```javascript
 t.draw(() => {
-    if (myImage) {
-        // Rotate the image
-        t.push();
-        t.rotateZ(t.frameCount * 2);
-        t.image(myImage, 40, 30);
-        t.pop();
-    }
-    
-    if (myVideo) {
-        // Scale and position the video
-        t.push();
-        t.translate(20, 10);
-        t.image(myVideo, 30, 20);
-        t.pop();
-    }
+    // Rotate the image
+    t.push();
+    t.rotateZ(t.frameCount * 2);
+    t.image(myImage, 40, 30);
+    t.pop();
+
+    // Scale and position the video
+    t.push();
+    t.translate(20, 10);
+    t.image(myVideo, 30, 20);
+    t.pop();
 });
 ```
-
-## Performance considerations
-
-- **Image loading**: Images are loaded asynchronously. Always use them within the `setup()` callback or check if they're loaded before drawing.
-- **Video performance**: Real-time video conversion is computationally intensive. Consider using smaller grid dimensions or lower frame rates for better performance.
-- **Character sets**: Shorter character sets (fewer characters) generally process faster than longer ones.
-- **Preloading**: For videos that need to play smoothly, use the preloading options to cache frames in advance.
 
 ## Summary
 
