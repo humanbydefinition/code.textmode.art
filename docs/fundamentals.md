@@ -231,7 +231,7 @@ o_character = vec4(float(procedural_index) / 255.0, 0.0, 0.0, rotation);
 ```
 
 :::info
-`textmode.js` provides a built-in functionality to access shader color data for all available characters in the current font. Make sure to check out the [TextmodeFont.characters](/api/classes/TextmodeFont#characters) property for more details, which can be accessed via `t.font.characters` from the `Textmodifier` instance.
+`textmode.js` provides a built-in functionality to access shader color data for all available characters in the current font. Make sure to check out the [TextmodeFont.characters](/api/textmode.js/namespaces/loadables/classes/TextmodeFont#characters) property for more details, which can be accessed via `t.font.characters` from the `Textmodifier` instance.
 :::
 
 ### Primary color (`o_primaryColor`)

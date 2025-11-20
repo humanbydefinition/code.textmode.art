@@ -40,11 +40,11 @@ t.draw(() => {
 });
 ```
 
-The above code initializes `textmode.js` in overlay mode on an existing canvas element. The `t.overlay` property provides access to the automatically converted content as a [`TextmodeImage`](/api/classes/TextmodeImage), which can be drawn using standard textmode.js functions.
+The above code initializes `textmode.js` in overlay mode on an existing canvas element. The `t.overlay` property provides access to the automatically converted content as a [`TextmodeImage`](/api/textmode.js/namespaces/loadables/classes/TextmodeImage), which can be drawn using standard textmode.js functions.
 
 ## Conversion customization
 
-When using overlay mode, the source content is automatically converted to a [`TextmodeImage`](/api/classes/TextmodeImage) that can be accessed and customized via the [`overlay`](/api/classes/Textmodifier#overlay) property.
+When using overlay mode, the source content is automatically converted to a [`TextmodeImage`](/api/textmode.js/namespaces/loadables/classes/TextmodeImage) that can be accessed and customized via the [`overlay`](/api/classes/Textmodifier#overlay) property.
 
 ### Basic customization
 
