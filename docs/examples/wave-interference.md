@@ -23,7 +23,7 @@
     </style>
 
     <!-- Import textmode.js -->
-    <script src="https://unpkg.com/textmode.js@0.6.0-beta.2/dist/textmode.umd.js"></script>
+    <script src="https://unpkg.com/textmode.js@latest/dist/textmode.umd.js"></script>
   </head>
 
   <body>

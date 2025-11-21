@@ -38,7 +38,7 @@
  */
 
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.178.0/build/three.module.js';
-import { textmode } from 'https://cdn.jsdelivr.net/npm/textmode.js@0.6.0-beta.2/dist/textmode.esm.js';
+import { textmode } from 'https://cdn.jsdelivr.net/npm/textmode.js@latest/dist/textmode.esm.js';
 
 let tm;
 let scene, camera, renderer, cube;

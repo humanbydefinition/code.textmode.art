@@ -69,7 +69,7 @@
     </style>
 
     <!-- Import textmode.js -->
-    <script src="https://cdn.jsdelivr.net/npm/textmode.js@0.6.0-beta.2/dist/textmode.umd.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/textmode.js@latest/dist/textmode.umd.js"></script>
   </head>
 
   <body>

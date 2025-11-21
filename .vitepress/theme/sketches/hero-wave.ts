@@ -6,7 +6,7 @@
  */
 
 // @ts-nocheck - Using bundled textmode.js for docs site
-import { textmode } from './textmode.esm.js'
+import { textmode } from 'https://cdn.jsdelivr.net/npm/textmode.js@0.6.1/+esm'
 
 export interface SketchInstance {
   tm: any
