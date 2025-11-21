@@ -135,6 +135,19 @@ onBeforeUnmount(() => {
 
 .textmode-what-is-content {
     padding-right: 1rem;
+    min-width: 0;
+}
+
+.textmode-what-is-content :deep(pre) {
+    max-width: 100%;
+    overflow-x: auto;
+    box-sizing: border-box;
+    margin-bottom: 1.5rem;
+}
+
+.textmode-what-is-content :deep(pre code) {
+    display: block;
+    width: 100%;
 }
 
 .textmode-what-is-sketch {
