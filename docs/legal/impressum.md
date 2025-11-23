@@ -1,3 +1,12 @@
+---
+title: Impressum
+description: Rechtliches Impressum für textmode.js, einschließlich Angaben zur verantwortlichen Person und Haftungsausschluss.
+lastUpdated: false
+comment: false
+prev: false
+next: false
+---
+
 # Impressum
 
 > Diese Seite ist auch auf [Englisch](./imprint) verfügbar.  

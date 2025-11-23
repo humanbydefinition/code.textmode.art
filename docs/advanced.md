@@ -462,13 +462,3 @@ t.draw(() => {
 ## Summary
 
 These advanced features unlock the full potential of `textmode.js` for creating sophisticated graphics and optimized applications. By combining framebuffers, custom shaders, 3D transformations, and multi-pass rendering techniques, you can create complex visual effects while maintaining excellent performance.
-
-:::info Next steps
--> For working with images and videos, refer to the [Images and videos](/docs/loadables) section.
-
--> For basic drawing concepts, refer to the [Fundamentals](/docs/fundamentals) section.
-
--> For working with custom fonts, refer to the [Fonts](/docs/fonts) section.
-
--> For exporting your creations, refer to the [Exporting](/docs/exporting) section.
-:::

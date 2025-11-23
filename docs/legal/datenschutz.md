@@ -1,3 +1,12 @@
+---
+title: Datenschutzerklärung
+description: Datenschutzerklärung für textmode.js, einschließlich Informationen zur Datenverarbeitung, Analyse und Zahlungsdienste.
+lastUpdated: false
+comment: false
+prev: false
+next: false
+---
+
 # Datenschutzerklärung
 
 > Diese Seite ist auch auf [Englisch](./data-protection-policy) verfügbar.  

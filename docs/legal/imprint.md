@@ -1,3 +1,12 @@
+---
+title: Imprint
+description: Legal imprint for textmode.js, including responsible party information and liability disclaimer.
+lastUpdated: false
+comment: false
+prev: false
+next: false
+---
+
 # Imprint
 
 > Diese Seite ist auch auf [Deutsch](./impressum) verfügbar.  

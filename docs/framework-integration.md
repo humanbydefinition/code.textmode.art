@@ -80,11 +80,3 @@ t.setup(() => {
 ## Summary
 
 Framework integration with overlay mode opens up endless possibilities for applying textmode aesthetics to existing content. Whether you're converting p5.js sketches, Three.js scenes, or video content, `textmode.js` seamlessly integrates while preserving all its drawing capabilities for additional content.
-
-:::info Next steps
--> For basic drawing concepts, refer to the [Fundamentals](/docs/fundamentals) section.
-
--> For event handling in integrated environments, refer to the [Event handling](/docs/events) section.
-
--> For advanced features like framebuffers, refer to the [Advanced features](/docs/advanced) section.
-:::

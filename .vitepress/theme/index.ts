@@ -3,7 +3,7 @@ import DefaultTheme from 'vitepress/theme'
 import type { EnhanceAppContext, Theme } from 'vitepress'
 import { useData, useRoute } from 'vitepress'
 import './custom.css'
-import { defineComponent, h, nextTick, onMounted, watch } from 'vue'
+import { defineComponent, h, nextTick, onMounted, watch, render } from 'vue'
 import type { App } from 'vue'
 import 'vitepress-plugin-sandpack/dist/style.css'
 import { Sandbox } from 'vitepress-plugin-sandpack'
@@ -12,6 +12,7 @@ import { TextmodeSandbox } from './components/TextmodeSandbox'
 import FontShowcase from './components/FontShowcase.vue'
 import DonationGrid from './components/DonationGrid.vue'
 import TextmodeWhatIs from './components/TextmodeWhatIs.vue'
+import CommentSectionLead from './components/CommentSectionLead.vue'
 import { withBlogTheme } from '../blog/src'
 
 const giscusConfig = {
@@ -135,6 +136,7 @@ function useCommentSectionDecorator(
 }
 
 const MAX_COMMENT_DECORATION_ATTEMPTS = 8
+const COMMENT_LEAD_ROOT_ATTRIBUTE = 'data-comment-lead-root'
 
 function decorateCommentSection(frontmatter?: Record<string, unknown>, attempt = 0) {
   if (typeof window === 'undefined') return
@@ -155,6 +157,7 @@ function decorateCommentSection(frontmatter?: Record<string, unknown>, attempt =
   }
 
   const existingSection = docContent.querySelector<HTMLElement>('.comment-section')
+  cleanupCommentLead(existingSection)
   existingSection?.remove()
   const existingThread = docContent.querySelector<HTMLElement>('.comment-section__thread')
   existingThread?.remove()
@@ -165,9 +168,7 @@ function decorateCommentSection(frontmatter?: Record<string, unknown>, attempt =
   const section = document.createElement('section')
   section.className = 'comment-section'
   section.setAttribute('aria-label', 'Community comments powered by giscus')
-
-  const lead = buildCommentLead()
-  section.append(lead)
+  mountCommentLead(section)
 
   const thread = document.createElement('div')
   thread.className = 'comment-section__thread'
@@ -182,7 +183,9 @@ function teardownCommentSection() {
   const docContent = document.querySelector<HTMLElement>('.content-container')
   if (!docContent) return
 
-  docContent.querySelector<HTMLElement>('.comment-section')?.remove()
+  const existingSection = docContent.querySelector<HTMLElement>('.comment-section')
+  cleanupCommentLead(existingSection)
+  existingSection?.remove()
 
   const existingThread = docContent.querySelector<HTMLElement>('.comment-section__thread')
   if (!existingThread) return
@@ -197,59 +200,17 @@ function teardownCommentSection() {
   existingThread.remove()
 }
 
-function buildCommentLead(): HTMLDivElement {
-  const lead = document.createElement('div')
-  lead.className = 'comment-section__lead'
+function mountCommentLead(section: HTMLElement) {
+  const leadRoot = document.createElement('div')
+  leadRoot.setAttribute(COMMENT_LEAD_ROOT_ATTRIBUTE, 'true')
+  section.appendChild(leadRoot)
+  render(h(CommentSectionLead), leadRoot)
+}
 
-  const eyebrow = document.createElement('p')
-  eyebrow.className = 'comment-section__eyebrow'
-  eyebrow.textContent = 'Join the discussion ↓ '
-
-  const title = document.createElement('h2')
-  title.className = 'comment-section__title'
-  title.textContent = 'Join the discussion ↓'
-
-  const description = document.createElement('p')
-  description.className = 'comment-section__description'
-  description.textContent = 'Swap ideas, ask questions, and leave feedback for the textmode.js team and community.'
-
-  const rulesList = document.createElement('ul')
-  rulesList.className = 'comment-section__rules'
-  const rules = [
-    { text: 'Stay constructive and keep threads on-topic.', link: null },
-    { text: 'Use code blocks for snippets or logs so others can help faster.', link: null },
-    { text: 'Report urgent bugs on ', linkText: 'GitHub Issues', link: 'https://github.com/humanbydefinition/textmode.js/issues', suffix: ' so we can track progress.' },
-  ]
-  for (const rule of rules) {
-    const li = document.createElement('li')
-    if (rule.link) {
-      const textBefore = document.createTextNode(rule.text)
-      const link = document.createElement('a')
-      link.href = rule.link
-      link.textContent = rule.linkText || ''
-      link.target = '_blank'
-      link.rel = 'noopener noreferrer'
-      link.className = 'comment-section__link'
-      const textAfter = document.createTextNode(rule.suffix || '')
-      li.append(textBefore, link, textAfter)
-    } else {
-      li.textContent = rule.text
-    }
-    rulesList.appendChild(li)
-  }
-
-  const note = document.createElement('p')
-  note.className = 'comment-section__note'
-  const noteText1 = document.createTextNode('Comments sync with ')
-  const discussionsLink = document.createElement('a')
-  discussionsLink.href = 'https://github.com/humanbydefinition/textmode.js/discussions'
-  discussionsLink.textContent = 'GitHub Discussions'
-  discussionsLink.target = '_blank'
-  discussionsLink.rel = 'noopener noreferrer'
-  discussionsLink.className = 'comment-section__link'
-  const noteText2 = document.createTextNode(' via giscus. Sign in with GitHub to leave replies or reactions.')
-  note.append(noteText1, discussionsLink, noteText2)
-
-  lead.append(eyebrow, description, rulesList, note)
-  return lead
+function cleanupCommentLead(container?: HTMLElement | null) {
+  if (!container) return
+  const leadRoot = container.querySelector<HTMLElement>(`[${COMMENT_LEAD_ROOT_ATTRIBUTE}]`)
+  if (!leadRoot) return
+  render(null, leadRoot)
+  leadRoot.remove()
 }

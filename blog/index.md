@@ -5,6 +5,8 @@ aside: false
 description: Stories, guides, and release notes from the textmode.js team.
 prev: false
 next: false
+lastUpdated: false
+comment: false
 ---
 
 # textmode.js blog

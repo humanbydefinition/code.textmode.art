@@ -62,7 +62,6 @@ const themeConfig = {
         { text: "Exporting", link: "/docs/exporting" },
         { text: "Examples", link: "/docs/examples" },
         { text: "Contributing", link: "/docs/contributing" },
-        { text: "Changelog", link: "/docs/changelog" }
       ]
     },
     {

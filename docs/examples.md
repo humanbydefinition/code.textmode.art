@@ -1,3 +1,9 @@
+---
+title: Examples
+description: Explore interactive examples showcasing textmode.js capabilities - from generative patterns to classic effects.
+aside: false
+---
+
 # Examples
 
 Experience `textmode.js` in action with our interactive demos.
@@ -15,11 +21,3 @@ Explore interactive examples showcasing textmode.js capabilities - from generati
 ## Getting started
 
 Ready to add textmode effects to your project? Check out our [Installation](/docs/installation) and [Fundamentals](/docs/fundamentals) to get started.
-
-:::info Next steps
--> Not installed yet? Visit the [Installation](/docs/installation) guide.
-
--> Learn the core API in [Fundamentals](/docs/fundamentals).
-
--> Need full signatures? Open the [API Reference](/api/).
-:::

@@ -337,13 +337,3 @@ o_character.b = float(invertFlag | (flipXFlag << 1) | (flipYFlag << 2)) / 255.0;
 ## Summary
 
 These are the fundamental concepts and features of `textmode.js`. With this knowledge, you can start creating your own textmode graphics and animations using the library. For more advanced topics and features, refer to the other sections of this documentation.
-
-:::info Next steps
--> To learn about using custom fonts, refer to the [Fonts](/docs/fonts) section.
-
--> To learn about exporting your creations, refer to the [Exporting](/docs/exporting) section.
-
--> For input and interactivity, read [Event handling](/docs/events).
-
--> See the API in action in [Examples](/docs/examples).
-:::

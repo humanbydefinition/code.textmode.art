@@ -279,11 +279,3 @@ textmodifier.saveWEBM({
 :::
 
 Ready to share your creations with the world? Start exporting your ASCII masterpieces! 🎨
-
----
-
-:::info Next steps
--> Learn how typography choices affect output in [Fonts](/docs/fonts).
-
--> Need full option signatures? Open the [API Reference](/api/).
-:::

@@ -46,9 +46,7 @@
             <footer class="blog-card__footer">
               <div class="blog-card__author">
                 <img 
-                  v-if="isGitHubUsername(post.author)"
                   :src="`https://github.com/${post.author}.png`" 
-                  :alt="`${post.author}'s avatar`"
                   class="blog-card__avatar"
                   loading="lazy"
                 />
@@ -142,11 +140,5 @@ function formatDate(date: string) {
   const parsed = Date.parse(date)
   if (Number.isNaN(parsed)) return date
   return dateFormatter.format(new Date(parsed))
-}
-
-function isGitHubUsername(author: string): boolean {
-  // Check if it's a valid GitHub username (alphanumeric, hyphens, no spaces)
-  // and not team names like "textmode.js Team"
-  return /^[a-zA-Z0-9](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$/.test(author) && !author.includes(' ')
 }
 </script>

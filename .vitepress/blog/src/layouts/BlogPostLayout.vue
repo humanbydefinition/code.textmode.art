@@ -58,16 +58,6 @@
             <span class="pagination-title">{{ nextPost.title }}</span>
           </a>
         </div>
-
-        <section class="blog-post__cta">
-          <h2>Keep exploring textmode.js</h2>
-          <p>Dive into the documentation, try an example, or show us what you are building.</p>
-          <div class="blog-post__cta-buttons">
-            <a href="/docs/introduction" class="cta-button primary">Read the docs</a>
-            <a href="/docs/examples" class="cta-button secondary">Explore examples</a>
-            <a href="https://discord.gg/sjrw8QXNks" class="cta-button secondary" target="_blank" rel="noopener">Join the Discord</a>
-          </div>
-        </section>
       </footer>
     </template>
   </Layout>

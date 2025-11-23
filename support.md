@@ -2,6 +2,9 @@
 title: Support
 description: Support the development of textmode.js and related projects. Learn about different ways to contribute financially and emotionally to the open-source ASCII art library.
 comment: false
+prev: false
+next: false
+lastUpdated: false
 ---
 
 # Support `textmode.js`

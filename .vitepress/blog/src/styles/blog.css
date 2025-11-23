@@ -408,8 +408,7 @@
 }
 
 .blog-post__footer {
-  margin-top: 3rem;
-  padding-top: 1.5rem;
+  margin-top: 1.5rem;
   border-top: 1px solid var(--vp-c-divider);
   display: flex;
   flex-direction: column;
@@ -604,8 +603,7 @@
   }
 
   .blog-post__footer {
-    margin-top: 3rem;
-    padding-top: 2rem;
+    margin-top: 1.5rem;
   }
 
   .blog-post__cta {

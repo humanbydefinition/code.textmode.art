@@ -229,11 +229,3 @@ t.draw(() => {
 ## Summary
 
 Images and videos provide powerful ways to integrate visual media into your textmode.js creations. By adjusting the conversion parameters and combining them with transformations, you can create unique ASCII art effects from any visual source.
-
-:::info Next steps
--> For advanced rendering techniques including framebuffers and shaders, refer to the [Advanced features](/docs/advanced) section.
-
--> For working with custom fonts, refer to the [Fonts](/docs/fonts) section.
-
--> For exporting your creations, refer to the [Exporting](/docs/exporting) section.
-:::

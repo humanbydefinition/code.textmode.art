@@ -138,15 +138,3 @@ t.windowResized(() => {
     t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-
----
-
-:::info Next steps
--> Continue with the [Fundamentals](/docs/fundamentals) to learn the basics.
-
--> Browse [Examples](/docs/examples) to see it in action.
-
--> Experiment online in the [Web Editor](https://editor.textmode.art).
-
--> Need types and full signatures? Open the [API Reference](/api/).
-:::

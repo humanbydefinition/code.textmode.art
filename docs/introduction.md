@@ -5,104 +5,59 @@ description: Introduction to textmode.js, a creative-coding library for real-tim
 
 # textmode.js
 
-textmode.js is a free, lightweight, and framework-agnostic creative-coding library for real‑time ASCII and textmode graphics in the browser. It combines a grid‑based API with a modern [`WebGL2`](https://developer.mozilla.org/en-US/docs/Web/API/WebGL2RenderingContext) pipeline, multiple render targets, and aggressive instanced rendering to deliver smooth, high‑performance rendering.
+`textmode.js` is a free, lightweight, and framework-agnostic creative‑coding library for real‑time ASCII and textmode graphics in the browser. It gives you a grid‑based drawing API on top of a modern [`WebGL2`](https://developer.mozilla.org/en-US/docs/Web/API/WebGL2RenderingContext) pipeline, so you can focus on ideas instead of low‑level rendering details.
 
-The library is designed to be easy to use and accessible to developers of all skill levels. Whether you're a seasoned developer or just starting out, `textmode.js` provides a simple and intuitive API that makes it easy to create stunning textmode art and animations.
+The library is designed to be approachable for all skill levels. Whether you're just getting into creative coding or building production systems, `textmode.js` aims to feel familiar if you know tools like Processing or p5.js, while still exposing advanced features when you need them.
 
 
-## Features
+## What can you build with it?
 
-- Real‑time* ASCII/textmode rendering with a simple drawing API
-- `WebGL2` pipeline with [Multiple Render Targets (MRT)](https://en.wikipedia.org/wiki/Multiple_Render_Targets) for rich per‑cell data
+`textmode.js` is built for creative, text‑driven visuals. Common use cases include:
+
+- Generative sketches, demos, and art installations
+- Retro/terminal‑inspired games and UI mockups
+- Audio‑reactive visualizers and VJ setups
+- Live coding performances and streaming overlays
+- Experimental web experiences that lean into text and glyphs
+
+If you can imagine it as a grid of characters and colors, you can probably build it with `textmode.js`.
+
+
+## How it feels to use
+
+At its core, `textmode.js` gives you:
+
+- A **grid of cells** instead of pixels, exposed via `t.grid.cols` and `t.grid.rows`
+- A single **animation loop** (`t.draw(() => { ... })`) where you render each frame
+- A set of **drawing primitives** (`rect`, `line`, `ellipse`, `triangle`, etc.) that fill cells
+- **Cell properties** like `char`, `charColor`, and `cellColor` to control glyphs and colors
+- Familiar **state helpers** like `push`/`pop`, `translate`, and `rotate` for composing scenes
+
+You write straightforward JavaScript or TypeScript, and `textmode.js` handles batching, instancing, and GPU details behind the scenes.
+
+
+## Key capabilities
+
+Here’s a high‑level overview of what the library offers. Later pages dive into each area in detail.
+
+- Real‑time ASCII/textmode rendering with a simple drawing API
 - Font system with runtime font loading and dynamic sizing *(supports TTF/OTF/WOFF)*
-- Author custom filter shaders in [`GLSL ES 3.00`](https://registry.khronos.org/OpenGL/specs/es/3.0/GLSL_ES_Specification_3.00.pdf) for advanced effects
+- Custom filter shaders in [`GLSL ES 3.00`](https://registry.khronos.org/OpenGL/specs/es/3.0/GLSL_ES_Specification_3.00.pdf) for advanced effects
 - Flexible exporting: TXT, SVG, raster images *(PNG/JPG/WebP)*, animated GIFs, and video *(WebM)*
-- Animation loop control: `frameRate`, `loop`/`noLoop`, `redraw`, `frameCount`, etc.
-- Framework-agnostic: Use `textmode.js` with any canvas-based framework or library
+- Animation loop control: `frameRate`, `loop`/`noLoop`, `redraw`, `frameCount`, and more
+- Load images and videos as sources for textmode conversion
+- Offscreen framebuffer support for advanced and multi‑pass workflows
+- Dynamic layering system with blend modes and opacity for multi‑layered textmode scenes
+- Framework‑agnostic design for use with any canvas‑based framework or library
 - Zero dependencies, written in TypeScript, with comprehensive type definitions
 
 :::info
-*Performance depends on the complexity of your scene and device capabilities. Consider authoring filter shaders for complex effects at low cost.
+Actual performance depends on your scene complexity and the target device. For complex work, consider authoring filter shaders to keep heavy effects on the GPU.
 :::
 
-## How it works *(high‑level)*
-
-The renderer operates in two passes:
-
-1) Draw pass *(offscreen)*: your drawing commands emit instances that are flushed into a special framebuffer with three color attachments *(MRT)*. Each attachment encodes a different piece of per‑cell information.
-2) Conversion pass *(onscreen)*: a conversion shader reads those attachments plus the font atlas to draw the final glyphs aligned to the grid.
-
-### Render pipeline at a glance
-
-```mermaid
-%%{init: {"flowchart": {"nodeSpacing": 10, "rankSpacing": 30}}}%%
-flowchart TD
-	A["🎨 draw() commands"] --> B["📋 Draw queue"]
-	B --> C["📦 Instance batching"]
-	C --> D["⚡ Instanced shader"]
-	D --> E["🎯 MRT framebuffer"]
-	
-	subgraph MRT["📊 3 attachments"]
-		direction TB
-		E0["o_character"] 
-		E1["o_primaryColor"] 
-		E2["o_secondaryColor"]
-	end
-	
-	E --> MRT
-	MRT --> F["🔄 Conversion shader"]
-	F --> G["🖼️ Canvas"]
-	
-	class A,B,C,D,F processNode
-	class E,MRT dataNode
-	class G,H outputNode
-```
-
-### The three attachments *(MRT)*
-
-0. `o_character` - glyph index *(RG channels)*, transform flags *(B channel)*, and rotation data *(A channel)*
-1. `o_primaryColor` - character color information
-2. `o_secondaryColor` - cell color information
-
-These textures have the same resolution as the grid *(cols x rows)*. That makes readback and export straightforward and efficient.
-
-### Why instanced rendering matters
-
-textmode.js packs many draw calls’ worth of work into a few batched, instanced draws. This reduces driver overhead dramatically, enabling high FPS even with complex scenes and thousands of shapes drawn per frame.
-
-<div align="center">
-
-```mermaid
-%%{init: {"flowchart": {"nodeSpacing": 15, "rankSpacing": 25}}}%%
-flowchart TD
-    A["🎯 Thousands of shapes"] -->|enqueue| B["📋 Draw queue"]
-    B -->|pack attributes| C["📦 Instance buffer"]
-    C -->|one or few| D["⚡ Instanced draw call(s)"]
-    D --> E["📊 MRT textures"]
-    
-    class A inputNode
-    class B,C,D processNode
-    class E outputNode
-```
-
-</div>
 
 ## Acknowledgments
 
 `textmode.js` ships with a custom-made TypeScript rewrite and stripped-down version of [`Typr.js`](https://github.com/photopea/Typr.js) by [**Photopea**](https://github.com/photopea) for font parsing and glyph extraction, containing only the necessary components for our use case. `Typr.js` is licensed under the [**MIT License**](https://github.com/photopea/Typr.js/blob/main/LICENSE).
 
 The non-minified version of `textmode.js` ships with [`UrsaFont`](https://ursafrank.itch.io/ursafont) as the default font, created by [**UrsaFrank**](https://ursafrank.itch.io/). This font is available under the [**CC0 (Creative Commons Zero) license**](https://creativecommons.org/publicdomain/zero/1.0/).
-
----
-
-:::info Next steps
--> Ready to install? Head to the [Installation](/docs/installation) guide.
-
--> New to the API? Start with the [Fundamentals](/docs/fundamentals).
-
--> Want to see it in action? Explore the [Examples](/docs/examples).
-
--> Looking for typography details? Check out [Fonts](/docs/fonts).
-
--> Need full type and method details? Visit the [API Reference](/api/).
-:::

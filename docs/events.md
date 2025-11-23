@@ -606,15 +606,3 @@ All keyboard event callbacks receive a `KeyboardEventData` object containing:
 ## Summary
 
 The event handling system in `textmode.js` provides a robust foundation for creating interactive applications. By combining touch, mouse, and keyboard events with the grid-based coordinate system, you can create engaging textmode experiences ranging from simple drawing tools to complex games.
-
-:::info Next steps
--> For basic drawing concepts, refer to the [Fundamentals](/docs/fundamentals) section.
-
--> For advanced features like images and framebuffers, refer to the [Advanced features](/docs/advanced) section.
-
--> For working with custom fonts, refer to the [Fonts](/docs/fonts) section.
-
--> To apply events in other canvases and media, see [Framework integration](/docs/framework-integration).
-
--> Want hands-on demos? Explore the [Examples](/docs/examples).
-:::
