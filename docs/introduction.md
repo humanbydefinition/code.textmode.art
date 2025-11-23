@@ -1,5 +1,6 @@
 ---
 title: Introduction
+description: Introduction to textmode.js, a creative-coding library for real-time ASCII and textmode graphics in the browser.
 ---
 
 # textmode.js

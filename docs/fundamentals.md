@@ -1,3 +1,8 @@
+---
+title: Fundamentals
+description: Learn the fundamental concepts and features of textmode.js, a creative-coding library for real-time ASCII and textmode graphics in the browser.
+---
+
 # Fundamentals
 
 This section covers the fundamental concepts and features of the `textmode.js` library, providing a solid foundation for understanding how to create and manipulate text mode graphics using the library.

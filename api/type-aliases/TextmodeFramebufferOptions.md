@@ -10,6 +10,16 @@ Options for creating a framebuffer. If not specified, width and height default t
 
 ## Properties
 
+### attachments?
+
+```ts
+optional attachments: number;
+```
+
+Number of color attachments (1-8)
+
+***
+
 ### height?
 
 ```ts

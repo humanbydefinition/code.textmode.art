@@ -14,6 +14,7 @@
     "preview:docs": "vitepress preview"
   },
   "dependencies": {
-    "@iconify/vue": "^5.0.0"
+    "@iconify/vue": "^5.0.0",
+    "vitepress-plugin-comment-with-giscus": "^1.1.15"
   }
 }

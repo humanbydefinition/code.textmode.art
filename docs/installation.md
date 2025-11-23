@@ -1,3 +1,8 @@
+---
+title: Installation
+description: Guide to installing textmode.js, a creative-coding library for real-time ASCII and textmode graphics in the browser.
+---
+
 # Installation
 
 Getting started with `textmode.js` is straightforward! This guide will walk you through the installation process for different environments and provide you with everything you need to begin creating ASCII art in the browser.

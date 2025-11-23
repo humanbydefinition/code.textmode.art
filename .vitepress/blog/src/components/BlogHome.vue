@@ -3,5 +3,6 @@
     <section class="blog-home__content">
       <BlogPostList />
     </section>
+    <hr />
   </div>
 </template>

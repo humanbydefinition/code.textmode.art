@@ -26,6 +26,10 @@ const headers = process.env.NODE_ENV === "production" ?
 const themeConfig = {
   logo: '/doc_logo.svg',
 
+  lastUpdated: {
+    text: 'Last updated'
+  },
+
   nav: [
     { text: 'Home', link: '/' },
     { text: 'Documentation', link: '/docs/introduction' },

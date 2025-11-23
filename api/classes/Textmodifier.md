@@ -19,6 +19,22 @@ If a canvas is provided, it will use that canvas instead.
 
 ## Accessors
 
+### baseLayer
+
+#### Get Signature
+
+```ts
+get baseLayer(): TextmodeLayer;
+```
+
+Access the internal base layer.
+
+##### Returns
+
+[`TextmodeLayer`](../namespaces/layering/classes/TextmodeLayer.md)
+
+***
+
 ### canvas
 
 #### Get Signature
@@ -75,7 +91,7 @@ Get the current font object used for rendering.
 
 ##### Returns
 
-[`TextmodeFont`](../textmode.js/namespaces/loadables/classes/TextmodeFont.md)
+[`TextmodeFont`](../namespaces/loadables/classes/TextmodeFont.md)
 
 #### Implementation of
 
@@ -203,7 +219,7 @@ Get the last key that was pressed.
 
 Returns the key string of the last pressed key, or null if no key has been pressed.
 
-::: example-spoiler Show example
+##### Example
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -220,8 +236,6 @@ t.draw(() => {
   }
 });
 ```
-
-:::
 
 ##### Returns
 
@@ -247,7 +261,7 @@ Get the last key that was released.
 
 Returns the key string of the last released key, or null if no key has been released.
 
-::: example-spoiler Show example
+##### Example
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -265,8 +279,6 @@ t.draw(() => {
 });
 ```
 
-:::
-
 ##### Returns
 
 `null` \| `string`
@@ -276,6 +288,20 @@ t.draw(() => {
 ```ts
 ITextmodifier.lastKeyReleased
 ```
+
+***
+
+### layers
+
+#### Get Signature
+
+```ts
+get layers(): TextmodeLayerManager;
+```
+
+##### Returns
+
+[`TextmodeLayerManager`](../namespaces/layering/classes/TextmodeLayerManager.md)
 
 ***
 
@@ -289,7 +315,7 @@ get loading(): LoadingScreenManager;
 
 Provides access to the loading screen manager to control boot-time loading UX.
 
-::: example-spoiler Show example
+##### Example
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600, loadingScreen: { message: 'loading...' } });
@@ -321,11 +347,9 @@ t.setup(async () => {
 });
 ```
 
-:::
-
 ##### Returns
 
-[`LoadingScreenManager`](../textmode.js/namespaces/loading/classes/LoadingScreenManager.md)
+[`LoadingScreenManager`](../namespaces/loading/classes/LoadingScreenManager.md)
 
 #### Implementation of
 
@@ -347,7 +371,7 @@ Get current modifier key states.
 
 Returns an object with boolean properties for each modifier key.
 
-::: example-spoiler Show example
+##### Example
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -373,8 +397,6 @@ t.draw(() => {
     }
 });
 ```
-
-:::
 
 ##### Returns
 
@@ -408,7 +430,7 @@ Returns the mouse position as grid cell coordinates *(column, row)*.
 If the mouse is outside the grid or the instance is not ready,
 it returns `{ x: -1, y: -1 }`.
 
-::: example-spoiler Show example
+##### Example
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -428,11 +450,9 @@ t.draw(() => {
 });
 ```
 
-:::
-
 ##### Returns
 
-[`MousePosition`](../textmode.js/namespaces/input/namespaces/mouse/interfaces/MousePosition.md)
+[`MousePosition`](../namespaces/input/namespaces/mouse/interfaces/MousePosition.md)
 
 #### Implementation of
 
@@ -452,10 +472,10 @@ get overlay():
   | TextmodeImage;
 ```
 
-If in overlay mode, returns the [TextmodeImage](../textmode.js/namespaces/loadables/classes/TextmodeImage.md) instance capturing the target canvas/video content,
+If in overlay mode, returns the [TextmodeImage](../namespaces/loadables/classes/TextmodeImage.md) instance capturing the target canvas/video content,
 allowing further configuration of the conversion parameters.
 
-::: example-spoiler Show example
+##### Example
 
 ```javascript
 // Create the textmode instance using the p5 canvas as input overlay
@@ -478,12 +498,10 @@ t.draw(() => {
 });
 ```
 
-:::
-
 ##### Returns
 
   \| `undefined`
-  \| [`TextmodeImage`](../textmode.js/namespaces/loadables/classes/TextmodeImage.md)
+  \| [`TextmodeImage`](../namespaces/loadables/classes/TextmodeImage.md)
 
 #### Implementation of
 
@@ -505,7 +523,7 @@ Get all currently pressed keys.
 
 Returns an array of key strings that are currently being held down.
 
-::: example-spoiler Show example
+##### Example
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -526,8 +544,6 @@ t.draw(() => {
     });
 });
 ```
-
-:::
 
 ##### Returns
 
@@ -554,7 +570,7 @@ Get the currently active touches in grid coordinates.
 Returns a copy of each touch, including grid position, client coordinates, and pressure when
 available. Use this inside a draw loop to react to active multi-touch scenarios.
 
-::: example-spoiler Show example
+##### Example
 
 ```javascript
 t.draw(() => {
@@ -564,11 +580,9 @@ t.draw(() => {
 });
 ```
 
-:::
-
 ##### Returns
 
-[`TouchPosition`](../textmode.js/namespaces/input/namespaces/touch/interfaces/TouchPosition.md)[]
+[`TouchPosition`](../namespaces/input/namespaces/touch/interfaces/TouchPosition.md)[]
 
 #### Implementation of
 
@@ -626,7 +640,7 @@ Position is controlled via [translate](#translate), [push](#push), and [pop](#po
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({
@@ -641,8 +655,6 @@ t.draw(() => {
   t.arc(10, 10, 0, 90);
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -677,7 +689,7 @@ Set the background color for the canvas.
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({
@@ -702,8 +714,6 @@ t.draw(() => {
   t.rect(12, 12);
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -747,7 +757,7 @@ The curve thickness is controlled by the current [lineWeight](#lineweight) setti
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({
@@ -775,8 +785,6 @@ t.draw(() => {
   t.bezierCurve(5 - cx, 20 - cy, 15 - cx, 5 - cy, 25 - cx, 35 - cy, 35 - cx, 20 - cy);
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -812,7 +820,7 @@ Accepts channel values, hex strings, or a [TextmodeColor](TextmodeColor.md) inst
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({
@@ -830,8 +838,6 @@ t.draw(() => {
   t.rect(10, 10);
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -862,7 +868,7 @@ the encoded glyph information is applied if available.
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({
@@ -886,8 +892,6 @@ t.draw(() => {
   t.rect(10, 10);
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -923,7 +927,7 @@ Accepts channel values, hex strings, or a [TextmodeColor](TextmodeColor.md) inst
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({
@@ -940,8 +944,6 @@ t.draw(() => {
   t.rect(10, 10);
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -969,7 +971,7 @@ Set the character rotation angle for subsequent character rendering.
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({
@@ -985,8 +987,6 @@ t.draw(() => {
   t.rect(10, 10);
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -1008,7 +1008,7 @@ Clear the canvas.
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({
@@ -1021,8 +1021,6 @@ t.draw(() => {
  t.clear();
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -1061,7 +1059,7 @@ Accepts grayscale, RGB, RGBA, and hex string values as arguments. Returned
 
 [`TextmodeColor`](TextmodeColor.md)
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -1097,8 +1095,6 @@ t.draw(() => {
 });
 ```
 
-:::
-
 #### Implementation of
 
 ```ts
@@ -1129,7 +1125,7 @@ and must output to the 3 MRT attachments (character/transform, primary color, se
 
 A Promise that resolves to a compiled shader ready for use with [shader](#shader)
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({
@@ -1173,8 +1169,6 @@ t.draw(() => {
 });
 ```
 
-:::
-
 #### Implementation of
 
 ```ts
@@ -1206,7 +1200,7 @@ By default it allocates 4 attachments (character + color data).
 
 A new Framebuffer instance.
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({
@@ -1235,8 +1229,6 @@ t.draw(() => {
   t.image(fb);
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -1270,7 +1262,7 @@ See MDN for all options: https://developer.mozilla.org/en-US/docs/Web/CSS/cursor
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -1303,8 +1295,6 @@ t.draw(() => {
 });
 ```
 
-:::
-
 #### Implementation of
 
 ```ts
@@ -1327,7 +1317,7 @@ After calling this method, the instance should not be used and will be eligible 
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 // Create a textmodifier instance
@@ -1340,8 +1330,6 @@ textmodifier.destroy();
 
 // Instance is now safely disposed and ready for garbage collection
 ```
-
-:::
 
 #### Implementation of
 
@@ -1366,21 +1354,19 @@ helper lets you supply a dedicated handler when you want to treat double taps di
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`TouchTapHandler`](../textmode.js/namespaces/input/namespaces/touch/type-aliases/TouchTapHandler.md) | The function to call when a double tap is detected. |
+| `callback` | [`TouchTapHandler`](../namespaces/input/namespaces/touch/type-aliases/TouchTapHandler.md) | The function to call when a double tap is detected. |
 
 #### Returns
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 t.doubleTap((data) => {
   console.log('Double tap detected', data.touch);
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -1410,7 +1396,7 @@ This callback function is where all drawing commands should be placed for textmo
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 // Create a textmodifier instance
@@ -1430,8 +1416,6 @@ t.draw(() => {
   t.rect(16, 16);
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -1461,7 +1445,7 @@ Position is controlled via [translate](#translate), [push](#push), and [pop](#po
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({
@@ -1476,8 +1460,6 @@ t.draw(() => {
   t.ellipse(10, 8);
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -1505,7 +1487,7 @@ Toggle horizontal flipping for subsequent character rendering.
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({
@@ -1519,8 +1501,6 @@ t.draw(() => {
   t.rect(5, 5);
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -1548,7 +1528,7 @@ Toggle vertical flipping for subsequent character rendering.
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({
@@ -1562,8 +1542,6 @@ t.draw(() => {
   t.rect(5, 5);
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -1591,7 +1569,7 @@ Set the font size used for rendering.
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 // Create a Textmodifier instance
@@ -1608,8 +1586,6 @@ t.draw(() => {
  t.rect(5, 5);
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -1637,7 +1613,7 @@ Set the maximum frame rate. If called without arguments, returns the current mea
 
 `number` \| `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 // Create a Textmodifier instance
@@ -1653,8 +1629,6 @@ t.draw(() => {
   t.rect(5, 5);
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -1687,7 +1661,7 @@ Draw a TextmodeFramebuffer or TextmodeSource (TextmodeImage/TextmodeVideo) to th
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({
@@ -1717,8 +1691,6 @@ t.draw(() => {
 });
 ```
 
-:::
-
 #### Implementation of
 
 ```ts
@@ -1745,7 +1717,7 @@ Toggle color inversion for subsequent character rendering.
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({
@@ -1761,8 +1733,6 @@ t.draw(() => {
   t.rect(5, 5);
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -1792,7 +1762,7 @@ Check if a specific key is currently being pressed.
 
 true if the key is currently pressed, false otherwise
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -1825,8 +1795,6 @@ t.draw(() => {
 });
 ```
 
-:::
-
 #### Implementation of
 
 ```ts
@@ -1849,7 +1817,7 @@ Check whether the textmodifier is currently running the automatic render loop.
 
 True if the render loop is currently active, false otherwise.
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const textmodifier = textmode.create(canvas);
@@ -1863,8 +1831,6 @@ console.log(textmodifier.isLooping()); // false (not looping)
 textmodifier.loop();
 console.log(textmodifier.isLooping()); // true (looping)
 ```
-
-:::
 
 #### Implementation of
 
@@ -1886,13 +1852,13 @@ Set a callback function that will be called when a key is pressed down.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`KeyboardEventHandler`](../textmode.js/namespaces/input/namespaces/keyboard/type-aliases/KeyboardEventHandler.md) | The function to call when a key is pressed |
+| `callback` | [`KeyboardEventHandler`](../namespaces/input/namespaces/keyboard/type-aliases/KeyboardEventHandler.md) | The function to call when a key is pressed |
 
 #### Returns
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -1923,8 +1889,6 @@ t.draw(() => {
 });
 ```
 
-:::
-
 #### Implementation of
 
 ```ts
@@ -1945,13 +1909,13 @@ Set a callback function that will be called when a key is released.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`KeyboardEventHandler`](../textmode.js/namespaces/input/namespaces/keyboard/type-aliases/KeyboardEventHandler.md) | The function to call when a key is released |
+| `callback` | [`KeyboardEventHandler`](../namespaces/input/namespaces/keyboard/type-aliases/KeyboardEventHandler.md) | The function to call when a key is released |
 
 #### Returns
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -1977,8 +1941,6 @@ t.draw(() => {
   t.point();
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -2013,7 +1975,7 @@ Draw a line from point (x1, y1) to point (x2, y2) with the settings.
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({
@@ -2037,8 +1999,6 @@ t.draw(() => {
   t.pop();
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -2066,7 +2026,7 @@ Update the line weight (thickness) for subsequent [line](#line) and [bezierCurve
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({
@@ -2101,8 +2061,6 @@ t.draw(() => {
 });
 ```
 
-:::
-
 #### Implementation of
 
 ```ts
@@ -2129,7 +2087,7 @@ Update the font used for rendering.
 
 `Promise`\<`void`\>
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 // Create a Textmodifier instance
@@ -2143,8 +2101,6 @@ t.setup(async () => {
  // await t.loadFont('./fonts/myfont.ttf'); 
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -2173,11 +2129,11 @@ This function returns a Promise that resolves when the image has loaded.
 
 #### Returns
 
-`Promise`\<[`TextmodeImage`](../textmode.js/namespaces/loadables/classes/TextmodeImage.md)\>
+`Promise`\<[`TextmodeImage`](../namespaces/loadables/classes/TextmodeImage.md)\>
 
 A Promise that resolves to a TextmodeImage object
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({
@@ -2202,8 +2158,6 @@ t.draw(() => {
 });
 ```
 
-:::
-
 #### Implementation of
 
 ```ts
@@ -2225,13 +2179,13 @@ Load a video and return a TextmodeVideo that can be drawn with image().
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
 | `src` | `string` \| `HTMLVideoElement` | URL or existing HTMLVideoElement |
-| `options?` | [`TextmodeVideoOptions`](../textmode.js/namespaces/loadables/interfaces/TextmodeVideoOptions.md) | Optional configuration for preloading behavior. Provide `frameRate` to preload frames, `onProgress` to observe preload progress, `onComplete` to know when preloading finished, and `onError` to catch preload failures. |
+| `options?` | [`TextmodeVideoOptions`](../namespaces/loadables/interfaces/TextmodeVideoOptions.md) | Optional configuration for preloading behavior. Provide `frameRate` to preload frames, `onProgress` to observe preload progress, `onComplete` to know when preloading finished, and `onError` to catch preload failures. |
 
 #### Returns
 
-`Promise`\<[`TextmodeVideo`](../textmode.js/namespaces/loadables/classes/TextmodeVideo.md)\>
+`Promise`\<[`TextmodeVideo`](../namespaces/loadables/classes/TextmodeVideo.md)\>
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({
@@ -2260,8 +2214,6 @@ t.draw(() => {
 });
 ```
 
-:::
-
 #### Implementation of
 
 ```ts
@@ -2285,21 +2237,19 @@ configured tolerance. The event includes the press duration in milliseconds.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`TouchLongPressHandler`](../textmode.js/namespaces/input/namespaces/touch/type-aliases/TouchLongPressHandler.md) | The function to call when a long press gesture is detected. |
+| `callback` | [`TouchLongPressHandler`](../namespaces/input/namespaces/touch/type-aliases/TouchLongPressHandler.md) | The function to call when a long press gesture is detected. |
 
 #### Returns
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 t.longPress((data) => {
   console.log(`Long press for ${Math.round(data.duration)}ms`);
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -2321,7 +2271,7 @@ Resume the rendering loop if it was stopped by [noLoop](#noloop).
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -2346,8 +2296,6 @@ t.draw(() => {
 });
 ```
 
-:::
-
 #### Implementation of
 
 ```ts
@@ -2368,13 +2316,13 @@ Set a callback function that will be called when the mouse is clicked.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`MouseEventHandler`](../textmode.js/namespaces/input/namespaces/mouse/type-aliases/MouseEventHandler.md) | The function to call when the mouse is clicked |
+| `callback` | [`MouseEventHandler`](../namespaces/input/namespaces/mouse/type-aliases/MouseEventHandler.md) | The function to call when the mouse is clicked |
 
 #### Returns
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 // Click to spawn ripples.
@@ -2446,8 +2394,6 @@ t.draw(() => {
 });
 ```
 
-:::
-
 #### Implementation of
 
 ```ts
@@ -2468,13 +2414,13 @@ Set a callback function that will be called when the mouse moves.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`MouseEventHandler`](../textmode.js/namespaces/input/namespaces/mouse/type-aliases/MouseEventHandler.md) | The function to call when the mouse moves |
+| `callback` | [`MouseEventHandler`](../namespaces/input/namespaces/mouse/type-aliases/MouseEventHandler.md) | The function to call when the mouse moves |
 
 #### Returns
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 // Trail of particles following the mouse.
@@ -2539,8 +2485,6 @@ t.draw(() => {
 });
 ```
 
-:::
-
 #### Implementation of
 
 ```ts
@@ -2561,13 +2505,13 @@ Set a callback function that will be called when the mouse is pressed down.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`MouseEventHandler`](../textmode.js/namespaces/input/namespaces/mouse/type-aliases/MouseEventHandler.md) | The function to call when the mouse is pressed |
+| `callback` | [`MouseEventHandler`](../namespaces/input/namespaces/mouse/type-aliases/MouseEventHandler.md) | The function to call when the mouse is pressed |
 
 #### Returns
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 // Hold mouse to spray particles that fall with gravity.
@@ -2632,8 +2576,6 @@ t.draw(() => {
 });
 ```
 
-:::
-
 #### Implementation of
 
 ```ts
@@ -2654,13 +2596,13 @@ Set a callback function that will be called when the mouse is released.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`MouseEventHandler`](../textmode.js/namespaces/input/namespaces/mouse/type-aliases/MouseEventHandler.md) | The function to call when the mouse is released |
+| `callback` | [`MouseEventHandler`](../namespaces/input/namespaces/mouse/type-aliases/MouseEventHandler.md) | The function to call when the mouse is released |
 
 #### Returns
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 // Drag to draw lines that fade over time.
@@ -2741,8 +2683,6 @@ t.draw(() => {
 });
 ```
 
-:::
-
 #### Implementation of
 
 ```ts
@@ -2763,13 +2703,13 @@ Set a callback function that will be called when the mouse wheel is scrolled.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`MouseEventHandler`](../textmode.js/namespaces/input/namespaces/mouse/type-aliases/MouseEventHandler.md) | The function to call when the mouse wheel is scrolled |
+| `callback` | [`MouseEventHandler`](../namespaces/input/namespaces/mouse/type-aliases/MouseEventHandler.md) | The function to call when the mouse wheel is scrolled |
 
 #### Returns
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 // Scroll to create expanding rings.
@@ -2842,8 +2782,6 @@ t.draw(() => {
 });
 ```
 
-:::
-
 #### Implementation of
 
 ```ts
@@ -2868,7 +2806,7 @@ animation while maintaining the ability to continue it.
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -2892,8 +2830,6 @@ t.draw(() => {
   t.rect(16, 16);
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -2924,7 +2860,7 @@ so `ortho()` must be called in every frame where you want orthographic projectio
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({
@@ -2963,8 +2899,6 @@ t.draw(() => {
 });
 ```
 
-:::
-
 #### Implementation of
 
 ```ts
@@ -2988,21 +2922,19 @@ the initial distance and the change since the previous update, enabling zoom int
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`TouchPinchHandler`](../textmode.js/namespaces/input/namespaces/touch/type-aliases/TouchPinchHandler.md) | The function to call when a pinch gesture is detected. |
+| `callback` | [`TouchPinchHandler`](../namespaces/input/namespaces/touch/type-aliases/TouchPinchHandler.md) | The function to call when a pinch gesture is detected. |
 
 #### Returns
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 t.pinch((data) => {
   console.log(`Pinch scale: ${data.scale.toFixed(2)}`);
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -3024,7 +2956,7 @@ Draw a 1x1 rectangle with the current settings.
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -3064,8 +2996,6 @@ t.draw(() => {
 });
 ```
 
-:::
-
 #### Implementation of
 
 ```ts
@@ -3087,7 +3017,7 @@ Use with [push](#push) to isolate style changes within a block.
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -3107,8 +3037,6 @@ t.draw(() => {
   }
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -3131,7 +3059,7 @@ Use with [pop](#pop) to isolate style changes within a block.
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -3151,8 +3079,6 @@ t.draw(() => {
   }
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -3182,7 +3108,7 @@ Position is controlled via [translate](#translate), [push](#push), and [pop](#po
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({
@@ -3201,8 +3127,6 @@ t.draw(() => {
   t.rect(16, 16);
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -3233,7 +3157,7 @@ allowing you to trigger rendering on demand.
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 // Press SPACE to manually trigger single frames while loop is paused.
@@ -3279,8 +3203,6 @@ t.draw(() => {
 });
 ```
 
-:::
-
 #### Implementation of
 
 ```ts
@@ -3308,7 +3230,7 @@ Resize the canvas and adjust all related components accordingly.
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 // Create a standalone textmodifier instance
@@ -3332,8 +3254,6 @@ t.windowResized(() => {
   t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -3368,7 +3288,7 @@ All geometries rotate around the center of the shape.
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -3393,8 +3313,6 @@ t.draw(() => {
 });
 ```
 
-:::
-
 #### Implementation of
 
 ```ts
@@ -3418,21 +3336,19 @@ along with the gesture centre in grid coordinates. Ideal for dial-like interacti
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`TouchRotateHandler`](../textmode.js/namespaces/input/namespaces/touch/type-aliases/TouchRotateHandler.md) | The function to call when a rotation gesture is detected. |
+| `callback` | [`TouchRotateHandler`](../namespaces/input/namespaces/touch/type-aliases/TouchRotateHandler.md) | The function to call when a rotation gesture is detected. |
 
 #### Returns
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 t.rotateGesture((data) => {
   console.log(`Rotated ${data.deltaRotation.toFixed(1)}°`);
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -3462,7 +3378,7 @@ All geometries rotate around the center of the shape.
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -3475,8 +3391,6 @@ t.draw(() => {
   t.rect(12, 12);
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -3506,7 +3420,7 @@ All geometries rotate around the center of the shape.
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -3519,8 +3433,6 @@ t.draw(() => {
   t.rect(12, 12);
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -3550,7 +3462,7 @@ All geometries rotate around the center of the shape.
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -3563,8 +3475,6 @@ t.draw(() => {
   t.rect(12, 12);
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -3593,7 +3503,7 @@ Set a uniform value for the current custom shader.
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -3622,8 +3532,6 @@ t.draw(() => {
 });
 ```
 
-:::
-
 #### Implementation of
 
 ```ts
@@ -3650,7 +3558,7 @@ Set multiple uniform values for the current custom shader.
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -3684,8 +3592,6 @@ t.draw(() => {
 });
 ```
 
-:::
-
 #### Implementation of
 
 ```ts
@@ -3715,7 +3621,7 @@ properties like `textmodifier.grid.cols` for calculating layout or setup variabl
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const textmodifier = textmode.create({
@@ -3744,8 +3650,6 @@ textmodifier.draw(() => {
 });
 ```
 
-:::
-
 #### Implementation of
 
 ```ts
@@ -3772,7 +3676,7 @@ Set a custom shader for subsequent rendering operations.
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -3802,8 +3706,6 @@ t.draw(() => {
 });
 ```
 
-:::
-
 #### Implementation of
 
 ```ts
@@ -3827,21 +3729,19 @@ velocity in CSS pixels per millisecond. Useful for panning, flicks, or quick sho
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`TouchSwipeHandler`](../textmode.js/namespaces/input/namespaces/touch/type-aliases/TouchSwipeHandler.md) | The function to call when a swipe gesture is detected. |
+| `callback` | [`TouchSwipeHandler`](../namespaces/input/namespaces/touch/type-aliases/TouchSwipeHandler.md) | The function to call when a swipe gesture is detected. |
 
 #### Returns
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 t.swipe((data) => {
   console.log(`Swipe ${data.direction} with distance ${data.distance}`);
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -3866,21 +3766,19 @@ Use TouchTapEventData.taps to determine whether the gesture is a single or multi
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`TouchTapHandler`](../textmode.js/namespaces/input/namespaces/touch/type-aliases/TouchTapHandler.md) | The function to call when a tap gesture is detected. |
+| `callback` | [`TouchTapHandler`](../namespaces/input/namespaces/touch/type-aliases/TouchTapHandler.md) | The function to call when a tap gesture is detected. |
 
 #### Returns
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 t.tap((data) => {
   console.log(`Tapped at ${data.touch.x}, ${data.touch.y}`);
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -3905,21 +3803,19 @@ leaves the window. Treat this as an aborted touch and clean up any in-progress s
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`TouchEventHandler`](../textmode.js/namespaces/input/namespaces/touch/type-aliases/TouchEventHandler.md) | The function to call when a touch is cancelled. |
+| `callback` | [`TouchEventHandler`](../namespaces/input/namespaces/touch/type-aliases/TouchEventHandler.md) | The function to call when a touch is cancelled. |
 
 #### Returns
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 t.touchCancelled((data) => {
   console.warn(`Touch ${data.touch.id} cancelled by the browser`);
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -3944,21 +3840,19 @@ event. Use it to finalise state such as drawing strokes or completing gestures.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`TouchEventHandler`](../textmode.js/namespaces/input/namespaces/touch/type-aliases/TouchEventHandler.md) | The function to call when a touch ends. |
+| `callback` | [`TouchEventHandler`](../namespaces/input/namespaces/touch/type-aliases/TouchEventHandler.md) | The function to call when a touch ends. |
 
 #### Returns
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 t.touchEnded((data) => {
   console.log(`Touch ${data.touch.id} finished at ${data.touch.x}, ${data.touch.y}`);
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -3983,13 +3877,13 @@ The provided callback is invoked continuously while the browser reports move eve
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`TouchEventHandler`](../textmode.js/namespaces/input/namespaces/touch/type-aliases/TouchEventHandler.md) | The function to call when a touch moves. |
+| `callback` | [`TouchEventHandler`](../namespaces/input/namespaces/touch/type-aliases/TouchEventHandler.md) | The function to call when a touch moves. |
 
 #### Returns
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 t.touchMoved((data) => {
@@ -3999,8 +3893,6 @@ t.touchMoved((data) => {
   }
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -4026,21 +3918,19 @@ more fingers on the canvas.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`TouchEventHandler`](../textmode.js/namespaces/input/namespaces/touch/type-aliases/TouchEventHandler.md) | The function to call when a touch starts. |
+| `callback` | [`TouchEventHandler`](../namespaces/input/namespaces/touch/type-aliases/TouchEventHandler.md) | The function to call when a touch starts. |
 
 #### Returns
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 t.touchStarted((data) => {
   console.log(`Touch ${data.touch.id} began at ${data.touch.x}, ${data.touch.y}`);
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -4075,7 +3965,7 @@ All geometries are displaced by the specified amounts. Similar to p5.js translat
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -4094,8 +3984,6 @@ t.draw(() => {
   }
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -4123,7 +4011,7 @@ Sets the X-axis translation offset for subsequent shape rendering operations.
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -4136,8 +4024,6 @@ t.draw(() => {
   t.rect(10, 10);
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -4165,7 +4051,7 @@ Sets the Y-axis translation offset for subsequent shape rendering operations.
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -4178,8 +4064,6 @@ t.draw(() => {
   t.rect(10, 10);
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -4207,7 +4091,7 @@ Sets the Z-axis translation offset for subsequent shape rendering operations.
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -4220,8 +4104,6 @@ t.draw(() => {
   t.rect(12, 12);
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -4260,7 +4142,7 @@ Draw a triangle with the current settings.
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -4279,8 +4161,6 @@ t.draw(() => {
   );
 });
 ```
-
-:::
 
 #### Implementation of
 
@@ -4308,7 +4188,7 @@ Set a callback function that will be called when the window is resized.
 
 `void`
 
-::: example-spoiler Show example
+#### Example
 
 ```javascript
 // Create a standalone textmodifier instance
@@ -4332,8 +4212,6 @@ t.windowResized(() => {
   t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-
-:::
 
 #### Implementation of
 
