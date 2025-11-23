@@ -500,7 +500,7 @@ html {
   margin-top: 1.5rem;
   border: 1px solid var(--vp-c-divider);
   border-radius: 1rem;
-  background: var(--vp-c-bg);
+  background: var(--vp-c-bg-soft);
   padding: clamp(0.75rem, 2vw, 1.5rem);
 }
 

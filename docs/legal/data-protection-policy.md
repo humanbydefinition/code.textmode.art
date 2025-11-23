@@ -41,13 +41,31 @@ The following anonymous data may be collected:
 
 As Umami does not use cookies and does not collect personal data, consent for this type of analytics is not required under GDPR.
 
-## No User Data Collection
+## No User Data Collection (Except as Described Below)
 
-This website is strictly an informational documentation site. We do not:
-- Require user registration or authentication
-- Collect any personal information from visitors
-- Process or store any user-specific data
+This website is primarily an informational documentation site. Apart from the anonymized analytics described above and the optional features described below, we do not:
+- Require user registration or authentication for general use of the site
+- Collect any personal information from visitors on our own servers
+- Process or store any user-specific data beyond what is technically necessary for hosting
 - Use cookies for tracking or personalization purposes
+
+## Comments (giscus / GitHub)
+
+We provide an optional comment section on some pages of this website using **giscus**, a third-party comments widget that integrates with **GitHub**. This feature is entirely voluntary and not required to use the documentation.
+
+When you choose to view or interact with the comment section, the following applies:
+
+- The comments widget is loaded from `giscus.app` and GitHub domains.
+- To post, edit, or react to comments, you must be logged in with your GitHub account. Authentication is handled exclusively by GitHub.
+- Personal data processed in this context may include your GitHub username, avatar, profile URL, the content of your comments and reactions, and technical data such as IP address and browser information collected by GitHub and giscus.
+- Comments and related metadata are stored in our GitHub repository (e.g. as Discussions or Issues), not on our own server infrastructure.
+
+The legal basis for this processing is Art. 6(1)(a) GDPR (your consent) and, where applicable, Art. 6(1)(f) GDPR (our legitimate interest in providing a community discussion feature for our open-source project). Using the website without using the comment function is possible at any time; in that case, no comment-related personal data is processed.
+
+For more information about data processing by GitHub and giscus, please see:
+
+- [GitHub Privacy Statement](https://docs.github.com/en/site-policy/privacy-policies/github-privacy-statement)
+- [giscus](https://giscus.app/)
 
 ## Payment Services and Financial Support
 
@@ -78,7 +96,9 @@ We do not store any payment information, credit card details, or financial data 
 
 ## Your Rights
 
-Under the GDPR, you have various rights regarding the processing of your personal data. However, since we do not collect or process any personal data beyond the anonymous analytics described above, most of these rights do not apply in practice to your use of this documentation site.
+Under the GDPR, you have various rights regarding the processing of your personal data. In the context of this documentation site, these rights are relevant in particular where third-party services such as Umami (analytics), payment providers or the optional comments feature (giscus / GitHub) process personal data.
+
+For analytics and comment data, you can manage many settings directly in your browser or your GitHub account. For payment-related data, please refer to the respective provider's privacy policy. You may also contact us if you have questions regarding how these services are integrated into this site; we will forward your request to the appropriate provider where necessary.
 
 For any questions about our data practices, please contact us via email at [hello@textmode.art](mailto:hello@textmode.art).
 

@@ -41,13 +41,31 @@ Folgende anonyme Daten können erfasst werden:
 
 Da Umami keine Cookies verwendet und keine personenbezogenen Daten sammelt, ist eine Einwilligung für diese Art von Analysen gemäß DSGVO nicht erforderlich.
 
-## Keine Erhebung von Benutzerdaten
+## Keine Erhebung von Benutzerdaten (außer wie nachfolgend beschrieben)
 
-Diese Website ist ausschließlich eine informative Dokumentationsseite. Wir:
-- Erfordern keine Benutzerregistrierung oder Authentifizierung
-- Sammeln keine personenbezogenen Informationen von Besuchern
-- Verarbeiten oder speichern keine benutzerspezifischen Daten
-- Verwenden keine Cookies für Tracking- oder Personalisierungszwecke
+Diese Website ist in erster Linie eine informative Dokumentationsseite. Abgesehen von den oben beschriebenen anonymen Analysen und den nachfolgend beschriebenen optionalen Funktionen:
+- Erfordern wir für die allgemeine Nutzung der Seite keine Benutzerregistrierung oder Authentifizierung
+- Sammeln wir auf unseren eigenen Servern keine personenbezogenen Informationen von Besuchern
+- Verarbeiten oder speichern wir keine benutzerspezifischen Daten über das für den Betrieb der Website technisch Notwendige hinaus
+- Verwenden wir keine Cookies für Tracking- oder Personalisierungszwecke
+
+## Kommentare (giscus / GitHub)
+
+Auf einigen Seiten dieser Website stellen wir einen optionalen Kommentarbereich mit **giscus** bereit, einem Kommentar-Widget eines Drittanbieters, das mit **GitHub** integriert ist. Diese Funktion ist vollständig freiwillig und nicht erforderlich, um die Dokumentation zu nutzen.
+
+Wenn Sie sich dafür entscheiden, den Kommentarbereich anzuzeigen oder zu nutzen, gilt Folgendes:
+
+- Das Kommentar-Widget wird von Domains wie `giscus.app` und GitHub geladen.
+- Um Kommentare zu schreiben, zu bearbeiten oder darauf zu reagieren, müssen Sie mit Ihrem GitHub-Konto angemeldet sein. Die Authentifizierung erfolgt ausschließlich über GitHub.
+- In diesem Zusammenhang können personenbezogene Daten verarbeitet werden, z. B. Ihr GitHub-Benutzername, Avatar, Profil-URL, der Inhalt Ihrer Kommentare und Reaktionen sowie technische Daten wie IP-Adresse und Browser-Informationen, die von GitHub und giscus erfasst werden.
+- Kommentare und zugehörige Metadaten werden in unserem GitHub-Repository (z. B. als Discussions oder Issues) gespeichert, nicht auf unserer eigenen Serverinfrastruktur.
+
+Rechtsgrundlage für diese Verarbeitung ist Art. 6 Abs. 1 lit. a DSGVO (Ihre Einwilligung) und, soweit einschlägig, Art. 6 Abs. 1 lit. f DSGVO (unser berechtigtes Interesse, eine Community-Diskussionsmöglichkeit für unser Open-Source-Projekt bereitzustellen). Die Nutzung der Website ohne Verwendung der Kommentarfunktion ist jederzeit möglich; in diesem Fall werden keine kommentarbezogenen personenbezogenen Daten verarbeitet.
+
+Weitere Informationen zur Datenverarbeitung durch GitHub und giscus finden Sie unter:
+
+- [GitHub Datenschutzerklärung](https://docs.github.com/de/site-policy/privacy-policies/github-privacy-statement)
+- [giscus](https://giscus.app/)
 
 ## Zahlungsdienste und finanzielle Unterstützung
 
@@ -78,7 +96,9 @@ Wir speichern keine Zahlungsinformationen, Kreditkartendaten oder Finanzdaten au
 
 ## Ihre Rechte
 
-Gemäß der DSGVO haben Sie verschiedene Rechte in Bezug auf die Verarbeitung Ihrer personenbezogenen Daten. Da wir jedoch keine personenbezogenen Daten über die oben beschriebenen anonymen Analysen hinaus sammeln oder verarbeiten, gelten die meisten dieser Rechte in der Praxis nicht für Ihre Nutzung dieser Dokumentationsseite.
+Gemäß der DSGVO haben Sie verschiedene Rechte in Bezug auf die Verarbeitung Ihrer personenbezogenen Daten. Im Zusammenhang mit dieser Dokumentationsseite sind diese Rechte insbesondere dort relevant, wo Drittanbieter-Dienste wie Umami (Analysen), Zahlungsanbieter oder die optionale Kommentarfunktion (giscus / GitHub) personenbezogene Daten verarbeiten.
+
+Für Analyse- und Kommentar-Daten können Sie viele Einstellungen direkt in Ihrem Browser bzw. in Ihrem GitHub-Konto verwalten. Für zahlungsbezogene Daten verweisen wir auf die jeweilige Datenschutzerklärung des Anbieters. Sie können sich auch an uns wenden, wenn Sie Fragen zur Einbindung dieser Dienste auf dieser Website haben; wir leiten Ihre Anfrage bei Bedarf an den entsprechenden Anbieter weiter.
 
 Bei Fragen zu unseren Datenschutzpraktiken kontaktieren Sie uns bitte per E-Mail unter [hello@textmode.art](mailto:hello@textmode.art).
 
