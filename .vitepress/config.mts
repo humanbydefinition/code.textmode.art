@@ -33,8 +33,8 @@ const themeConfig = {
     { text: 'Documentation', link: '/docs/introduction' },
     { text: 'API', link: '/api/' },
     { text: 'Blog', link: '/blog/' },
-    { text: 'Web Editor', link: 'https://editor.textmode.art' },
     { text: 'Support ♥', link: '/support' },
+    { text: 'Web Editor', link: 'https://editor.textmode.art' },
   ],
 
   search: {

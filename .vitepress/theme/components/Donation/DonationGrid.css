@@ -1,0 +1,38 @@
+.donation-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+  max-width: 100%;
+  align-items: stretch;
+}
+
+.grid-item {
+  width: 100%;
+}
+
+:deep(.donation-card) {
+  height: 100%;
+}
+
+.donation-grid__empty {
+  text-align: center;
+  padding: 1.5rem;
+  color: var(--vp-c-text-2);
+  font-style: italic;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .donation-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .donation-grid {
+    margin: 1rem 0;
+  }
+}
