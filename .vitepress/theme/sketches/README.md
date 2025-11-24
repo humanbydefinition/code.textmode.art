@@ -10,7 +10,7 @@ Each sketch is a TypeScript module that exports:
 
 ## Adding a New Sketch
 
-1. Create a new `.ts` file in this directory
+1. Create a new `.ts` file (or folder with an `index.ts`) in this directory
 2. Import textmode.js from the CDN:
    ```typescript
    import { textmode } from 'https://cdn.jsdelivr.net/npm/textmode.js@0.4.0/+esm'
@@ -46,7 +46,7 @@ Each sketch is a TypeScript module that exports:
 
 4. Import and use in a Vue component:
    ```typescript
-   const { createMySketch } = await import('../sketches/my-sketch.ts')
+  const { createMySketch } = await import('../sketches/my-sketch')
    const instance = createMySketch(canvas, width, height)
    ```
 
@@ -60,4 +60,4 @@ Each sketch is a TypeScript module that exports:
 
 ## Example Sketches
 
-- `hero-wave.ts` - Animated wave pattern with glowing text (used on landing page)
+- `hero-wave/` - Animated wave pattern with glowing text (used on landing page)

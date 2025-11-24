@@ -10,7 +10,7 @@ import { Sandbox } from 'vitepress-plugin-sandpack'
 import giscusTalk from 'vitepress-plugin-comment-with-giscus'
 import { TextmodeSandbox } from './components/TextmodeSandbox'
 import FontShowcase from './components/FontShowcase/index.vue'
-import DonationGrid from './components/DonationGrid.vue'
+import DonationGrid from './components/Donation/index.vue'
 import TextmodeWhatIs from './components/TextmodeWhatIs.vue'
 import CommentSectionLead from './components/CommentSectionLead.vue'
 import { withBlogTheme } from '../blog/src'
@@ -104,7 +104,7 @@ async function initTextmodeHero() {
     const height = container.clientHeight || 400
 
     // Dynamically import the sketch module (only runs on client)
-    const { createHeroWaveSketch } = await import('./sketches/hero-wave')
+    const { createHeroWaveSketch } = await import('./sketches/hero-wave/')
     
     if (!createHeroWaveSketch) {
       console.error('TextmodeHero: createHeroWaveSketch function not found in module')

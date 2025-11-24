@@ -82,7 +82,7 @@ onMounted(async () => {
             : (content ? content.clientHeight : container.clientHeight || 400)
 
         // Dynamically import the sketch module (only runs on client)
-        const { createHeroWaveSketch } = await import('../sketches/hero-wave')
+        const { createHeroWaveSketch } = await import('../sketches/hero-wave/')
 
         if (!createHeroWaveSketch) {
             console.error('TextmodeWhatIs: createHeroWaveSketch function not found in module')

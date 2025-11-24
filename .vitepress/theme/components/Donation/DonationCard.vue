@@ -1,55 +1,44 @@
 <template>
-  <div class="donation-card">
-    <div class="icon-container" :style="{ backgroundColor: color }">
+  <article class="donation-card">
+    <div class="icon-container" :style="{ backgroundColor: color }" aria-hidden="true">
       <Icon :icon="iconName" width="36" height="36" />
     </div>
-    
+
     <div class="content">
-      <h3>{{ title }}</h3>
-      <p>{{ description }}</p>
-      
-      <a 
+      <h3 class="title">{{ title }}</h3>
+      <p class="description">{{ description }}</p>
+
+      <a
         class="link-button"
         :href="link"
         target="_blank"
         rel="noopener noreferrer"
         :style="{ backgroundColor: color }"
+        :aria-label="`Support via ${title}`"
       >
         Support
         <Icon icon="tabler:external-link" width="16" height="16" class="external-icon" />
       </a>
     </div>
-  </div>
+  </article>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, toRefs } from 'vue'
 import { Icon } from '@iconify/vue'
+import type { DonationCardProps, DonationIconType } from './types'
 
-export interface DonationCardProps {
-  iconType: 'kofi' | 'github' | 'ethereum' | 'tezos'
-  title: string
-  description: string
-  link: string
-  color: string
+const ICON_MAP: Record<DonationIconType, string> = {
+  kofi: 'simple-icons:kofi',
+  github: 'tabler:brand-github',
+  ethereum: 'cryptocurrency:eth',
+  tezos: 'cryptocurrency:xtz'
 }
 
 const props = defineProps<DonationCardProps>()
+const { title, description, link, color } = toRefs(props)
 
-const iconName = computed(() => {
-  switch (props.iconType) {
-    case 'kofi':
-      return 'simple-icons:kofi'
-    case 'github':
-      return 'tabler:brand-github'
-    case 'ethereum':
-      return 'cryptocurrency:eth'
-    case 'tezos':
-      return 'cryptocurrency:xtz'
-    default:
-      return 'simple-icons:kofi'
-  }
-})
+const iconName = computed(() => ICON_MAP[props.iconType])
 </script>
 
 <style scoped>
@@ -88,14 +77,14 @@ const iconName = computed(() => {
   flex-grow: 1;
 }
 
-.content h3 {
+.title {
   margin: 0 0 0.5rem 0;
   font-size: 1.25rem;
   font-weight: 600;
   color: var(--vp-c-text-1);
 }
 
-.content p {
+.description {
   margin: 0 0 1.5rem 0;
   color: var(--vp-c-text-2);
   line-height: 1.5;
@@ -120,7 +109,6 @@ const iconName = computed(() => {
   text-align: center;
 }
 
-/* Keep text/icon color consistent regardless of global anchor hover styles */
 .link-button:link,
 .link-button:visited,
 .link-button:hover,
@@ -139,7 +127,6 @@ const iconName = computed(() => {
   flex-shrink: 0;
 }
 
-/* Dark mode adjustments */
 .dark .donation-card {
   background: var(--vp-c-bg-alt);
   border-color: var(--vp-c-divider);
@@ -150,21 +137,20 @@ const iconName = computed(() => {
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
-/* Mobile responsiveness */
 @media (max-width: 768px) {
   .donation-card {
     padding: 1.25rem;
   }
-  
+
   .icon-container {
     width: 50px;
     height: 50px;
   }
-  
-  .content h3 {
+
+  .title {
     font-size: 1.1rem;
   }
-  
+
   .link-button {
     padding: 0.625rem 1rem;
     font-size: 0.85rem;
