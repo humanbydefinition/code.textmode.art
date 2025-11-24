@@ -19,9 +19,7 @@ const baseHeaders: HeadConfig[] = [
   ['link', { href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap', rel: 'stylesheet' }],
 ]
 
-const headers = process.env.NODE_ENV === "production" ?
-  [...baseHeaders, umamiScript] :
-  baseHeaders
+const headers = [...baseHeaders, umamiScript];
 
 const themeConfig = {
   logo: '/svg/doc_logo.svg',
@@ -33,7 +31,7 @@ const themeConfig = {
   nav: [
     { text: 'Home', link: '/' },
     { text: 'Documentation', link: '/docs/introduction' },
-    { text: 'API', link: '/api' },
+    { text: 'API', link: '/api/' },
     { text: 'Blog', link: '/blog/' },
     { text: 'Web Editor', link: 'https://editor.textmode.art' },
     { text: 'Support ♥', link: '/support' },
@@ -90,20 +88,10 @@ export default withMermaid(defineConfig({
   description: "textmode.js is a lightweight creative coding library for creating real-time ASCII art on the web.",
   head: headers,
 
-  vite: {
-    ssr: {
-      noExternal: ['textmode.js']
-    }
-  },
-
-  mermaid: {
-    // mermaidConfig !theme here works for light mode since dark theme is forced in dark mode
-  },
-
   markdown: {
     config(md) {
       md
-        .use(container, 'sandbox', {
+        .use(container, 'sandbox', { // Sandbox container without 'made by' label
           render(tokens: any[], idx: number) {
             const sandboxHtml = renderSandbox(tokens, idx, 'sandbox');
             if (tokens[idx].nesting === 1) {
@@ -113,7 +101,7 @@ export default withMermaid(defineConfig({
             return `${sandboxHtml}</ClientOnly>`;
           },
         })
-        .use(container, 'textmode-sandbox', {
+        .use(container, 'textmode-sandbox', { // Sandbox container with 'by {author}' label
           render(tokens: any[], idx: number) {
             const sandboxHtml = renderSandbox(tokens, idx, 'textmode-sandbox');
             if (tokens[idx].nesting === 1) {
@@ -121,24 +109,6 @@ export default withMermaid(defineConfig({
             }
 
             return `${sandboxHtml}</ClientOnly>`;
-          },
-        })
-        .use(container, 'example-spoiler', {
-          render(tokens: any[], idx: number) {
-            const info = tokens[idx].info.trim().slice('example-spoiler'.length).trim();
-            const summary = info || 'Show example';
-            const escapedSummary = summary
-              .replace(/&/g, '&amp;')
-              .replace(/</g, '&lt;')
-              .replace(/>/g, '&gt;')
-              .replace(/"/g, '&quot;')
-              .replace(/'/g, '&#39;');
-
-            if (tokens[idx].nesting === 1) {
-              return `<details class="example-spoiler"><summary>${escapedSummary}</summary>\n`;
-            }
-
-            return `</details>\n`;
           },
         });
     },

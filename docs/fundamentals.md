@@ -38,7 +38,7 @@ Once you have created a canvas, you can start drawing on it by defining a [`draw
 
 `textmode.js` provides a variety of drawing primitives, such as `rect()`, `line()`, and `triangle()`, which you can use to create shapes on the grid. To define how a shape should look, you can set various cell properties like `char()`, `charColor()`, and `cellColor()`, which define the character, character color, and cell background color, respectively for subsequent drawing operations.
 
-<!--@include: ./examples/primitives.md-->
+<!--@include: ./examples/docs/primitives.md-->
 
 ### Coordinate system
 
@@ -332,7 +332,7 @@ int flipYFlag = 0;
 o_character.b = float(invertFlag | (flipXFlag << 1) | (flipYFlag << 2)) / 255.0;
 ```
 
-<!--@include: ./examples/shader-noise.md-->
+<!--@include: ./examples/docs/shader-noise.md-->
 
 ## Summary
 

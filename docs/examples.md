@@ -12,11 +12,11 @@ Experience `textmode.js` in action with our interactive demos.
 
 Explore interactive examples showcasing textmode.js capabilities - from generative patterns to classic effects. Hover over any demo and click **Open Sandbox** to open it in CodeSandbox, where you can view the source, adjust parameters, and make it your own.
 
-<!--@include: ./examples/wave-interference.md-->
+<!--@include: ./examples/showcase/wave-interference.md-->
 ---
-<!--@include: ./examples/digital-rain.md-->
+<!--@include: ./examples/showcase/digital-rain.md-->
 ---
-<!--@include: ./examples/plasma-field.md-->
+<!--@include: ./examples/showcase/plasma-field.md-->
 
 ## Getting started
 

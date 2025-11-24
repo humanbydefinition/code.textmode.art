@@ -67,11 +67,11 @@ t.setup(() => {
 
 ## Examples
 
-<!--@include: ./examples/p5js.md-->
-<!--@include: ./examples/hydra-synth.md-->
-<!--@include: ./examples/threejs.md-->
-<!--@include: ./examples/webcam.md-->
-<!--@include: ./examples/video.md-->
+<!--@include: ./examples/integration/p5js.md-->
+<!--@include: ./examples/integration/hydra-synth.md-->
+<!--@include: ./examples/integration/threejs.md-->
+<!--@include: ./examples/integration/webcam.md-->
+<!--@include: ./examples/integration/video.md-->
 
 ## Summary
 

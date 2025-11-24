@@ -96,11 +96,11 @@ Dive into the interactive examples below - view source, tweak parameters, and br
 
 
 
-<!--@include: ./docs/examples/wave-interference.md-->
+<!--@include: ./docs/examples/showcase/wave-interference.md-->
 ---
-<!--@include: ./docs/examples/digital-rain.md-->
+<!--@include: ./docs/examples/showcase/digital-rain.md-->
 ---
-<!--@include: ./docs/examples/plasma-field.md-->
+<!--@include: ./docs/examples/showcase/plasma-field.md-->
 
 ## Community and support
 
