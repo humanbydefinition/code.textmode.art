@@ -1,6 +1,6 @@
 import { defineComponent, h } from 'vue';
 import { Sandbox, sandboxProps } from 'vitepress-plugin-sandpack';
-import sketchMetadata from '../data/sketch-metadata.json';
+import sketchMetadata from '../data/sketches.json';
 
 /**
  * Custom Sandbox component that extends the base Sandbox

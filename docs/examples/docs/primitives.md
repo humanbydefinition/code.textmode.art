@@ -1,6 +1,6 @@
 
 
-::: sandbox {template=static rtl :previewHeight="600" hideEditor}
+::: textmode-sandbox {template=static rtl :previewHeight="600" hideEditor}
 
 ```html index.html [readonly]
 <!DOCTYPE html>

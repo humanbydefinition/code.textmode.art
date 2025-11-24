@@ -1,6 +1,6 @@
 ::: details video {closed}
 
-::: sandbox {template=static}
+::: textmode-sandbox {template=static}
 
 ```html index.html [readonly]
 <!DOCTYPE html>

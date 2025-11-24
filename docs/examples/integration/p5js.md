@@ -1,6 +1,6 @@
 ::: details p5.js {open}
 
-::: sandbox {template=static}
+::: textmode-sandbox {template=static}
 
 ```html index.html [readonly]
 <!DOCTYPE html>

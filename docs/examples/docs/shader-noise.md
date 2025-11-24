@@ -1,4 +1,4 @@
-::: sandbox {template=static rtl hideEditor}
+::: textmode-sandbox {template=static rtl hideEditor}
 
 ```html index.html [readonly]
 <!DOCTYPE html>

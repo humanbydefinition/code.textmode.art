@@ -91,17 +91,7 @@ export default withMermaid(defineConfig({
   markdown: {
     config(md) {
       md
-        .use(container, 'sandbox', { // Sandbox container without 'made by' label
-          render(tokens: any[], idx: number) {
-            const sandboxHtml = renderSandbox(tokens, idx, 'sandbox');
-            if (tokens[idx].nesting === 1) {
-              return `<ClientOnly>${sandboxHtml}`;
-            }
-
-            return `${sandboxHtml}</ClientOnly>`;
-          },
-        })
-        .use(container, 'textmode-sandbox', { // Sandbox container with 'by {author}' label
+        .use(container, 'textmode-sandbox', { 
           render(tokens: any[], idx: number) {
             const sandboxHtml = renderSandbox(tokens, idx, 'textmode-sandbox');
             if (tokens[idx].nesting === 1) {
