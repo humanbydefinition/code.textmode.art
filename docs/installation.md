@@ -107,7 +107,7 @@ Then, you can import it in your JavaScript or TypeScript files:
 </html>
 ```
 
-```javascript
+```js
 // sketch.js
 
 // Import textmode.js

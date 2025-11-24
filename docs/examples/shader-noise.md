@@ -1,6 +1,4 @@
-::: details perlin noise shader example {open}
-
-::: sandbox {template=static rtl}
+::: sandbox {template=static rtl hideEditor}
 
 ```html index.html [readonly]
 <!DOCTYPE html>

@@ -13,7 +13,7 @@ const umamiScript: HeadConfig = ["script", {
 }]
 
 const baseHeaders: HeadConfig[] = [
-  ['link', { rel: 'icon', href: '/doc_logo.svg', type: 'image/svg+xml' }],
+  ['link', { rel: 'icon', href: '/svg/doc_logo.svg', type: 'image/svg+xml' }],
   ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
   ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
   ['link', { href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap', rel: 'stylesheet' }],
@@ -24,7 +24,7 @@ const headers = process.env.NODE_ENV === "production" ?
   baseHeaders
 
 const themeConfig = {
-  logo: '/doc_logo.svg',
+  logo: '/svg/doc_logo.svg',
 
   lastUpdated: {
     text: 'Last updated'

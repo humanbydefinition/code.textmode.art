@@ -24,7 +24,7 @@ Text export generates pure ASCII/text content that can be displayed in any text 
 
 ### Basic usage
 
-```javascript
+```js
 // Get ASCII content as a string
 const textContent = textmodifier.toString();
 console.log(textContent);
@@ -37,7 +37,7 @@ textmodifier.saveStrings({
 
 ### Advanced options
 
-```javascript
+```js
 // Generate with custom options
 const textContent = textmodifier.toString({
     preserveTrailingSpaces: true,
@@ -73,7 +73,7 @@ SVG export creates scalable vector graphics that maintain crisp quality at any s
 
 ### Basic usage
 
-```javascript
+```js
 // Generate SVG content as a string
 const svgContent = textmodifier.toSVG();
 
@@ -88,7 +88,7 @@ textmodifier.saveSVG({
 
 ### Advanced configuration
 
-```javascript
+```js
 // Generate with custom styling
 const svgContent = textmodifier.toSVG({
     includeBackgroundRectangles: true,
@@ -125,7 +125,7 @@ Image export creates raster images in popular formats, perfect for sharing on so
 
 ### Basic usage
 
-```javascript
+```js
 // Save as PNG (default)
 textmodifier.saveCanvas();
 
@@ -142,7 +142,7 @@ textmodifier.saveCanvas({
 
 ### High-quality export
 
-```javascript
+```js
 // Export high-resolution image
 textmodifier.saveCanvas({
     filename: 'hires_ascii',
@@ -192,7 +192,7 @@ GIF export captures a sequence of frames from your sketch and encodes them into 
 
 ### Basic usage
 
-```javascript
+```js
 // Record a short looping GIF
 textmodifier.saveGIF({
     filename: 'animated_ascii',
@@ -203,7 +203,7 @@ textmodifier.saveGIF({
 
 ### Progress and customization
 
-```javascript
+```js
 textmodifier.saveGIF({
     filename: 'hires_loop',
     scale: 2.0,          // Upscale output
@@ -237,7 +237,7 @@ Video export records a WebM video with higher fidelity and optional alpha suppor
 
 ### Basic usage
 
-```javascript
+```js
 // Capture a quick demo video
 textmodifier.saveWEBM({
     filename: 'demo_capture',
@@ -248,7 +248,7 @@ textmodifier.saveWEBM({
 
 ### Advanced configuration
 
-```javascript
+```js
 textmodifier.saveWEBM({
     filename: 'presentation',
     quality: 0.85,           // Balance quality vs. size

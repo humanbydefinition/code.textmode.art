@@ -23,12 +23,12 @@ To use a specific font with `textmode.js`, you'll need to:
 3. **Specify the font path** when calling the [`loadFont`](/api/classes/Textmodifier#loadfont) method in your [`Textmodifier`](/api/classes/Textmodifier) instance:
 
 #### Load a new font at any point after initialization:
-```javascript
+```js
 textmodifier.loadFont("./path/to/your/font.woff"); // or .ttf / .otf
 ```
 
 #### Initialize with a custom font:
-```javascript
+```js
 const textmodifier = textmode.create({
   fontSource: "./path/to/your/font.ttf", // or .otf / .woff
 });
@@ -37,18 +37,18 @@ const textmodifier = textmode.create({
 ::: tip
 You can also load fonts from a CDN or web font service by providing the URL directly.
 
-```javascript
+```js
 textmodifier.loadFont("https://example.com/path/to/font.ttf");
 ```
 :::
 
 ## Featured fonts
 
-<FontShowcase />
-
-## License information
-
+:::info
 Please respect the individual licenses of each font. Some fonts are released under permissive licenses like CC0, while others may have specific usage requirements. Always check the license before using a font in your projects.
+:::
+
+<FontShowcase />
 
 ## Contributing
 

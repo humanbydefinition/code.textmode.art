@@ -12,27 +12,27 @@ hero:
 
 features:
   - icon: 
-      src: /realtime.svg
+      src: /svg/realtime.svg
     title: Real-time performance
     details: Blazing fast ASCII conversion powered by an optimized WebGL2 rendering pipeline specifically designed for textmode art.
   - icon: 
-      src: /agnostic.svg
+      src: /svg/agnostic.svg
     title: Framework-agnostic
     details: Apply textmode conversion to any existing &lt;canvas&gt; and &lt;video&gt; context. Compatible with p5.js, Three.js, and much more.
   - icon: 
-      src: /dependencies.svg
+      src: /svg/dependencies.svg
     title: Zero dependencies
     details: Lightweight and self-contained. No external libraries required - just import and start creating.
   - icon: 
-      src: /crossplatform.svg
+      src: /svg/crossplatform.svg
     title: Cross-platform
     details: Runs everywhere the web runs - desktop, mobile, tablets. Full TypeScript support with comprehensive type definitions.
   - icon: 
-      src: /easytouse.svg
+      src: /svg/easytouse.svg
     title: Easy integration
     details: Simple and intuitive API designed for quick setup and seamless integration into your projects.
   - icon: 
-      src: /export.svg
+      src: /svg/export.svg
     title: Export anything
     details: Export your creations as TXT, SVG, GIF, video, and image. Perfect for sharing on social media, printing, or integrating into other projects.
 

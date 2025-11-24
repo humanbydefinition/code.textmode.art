@@ -10,14 +10,22 @@ This section covers how to work with images and videos in `textmode.js`. Both ar
 
 Use the [`loadImage()`](/api/classes/Textmodifier#loadimage) method to load image files. This method returns a Promise that resolves to a [`TextmodeImage`](/api/textmode.js/namespaces/loadables/classes/TextmodeImage) instance:
 
-```javascript
+```js
+import { textmode } from 'textmode.js'
+
 const t = textmode.create({ width: 800, height: 600 });
 
 let myImage;
 
 t.setup(async () => {
-    myImage = await t.loadImage('path/to/image.png');
-    // Image is now ready to use
+    myImage = await t.loadImage('https://upload.wikimedia.org/wikipedia/commons/0/07/El_Gouna_Turtle_House_R01.jpg');
+    myImage.characters(' .:-=+*#%@');
+    myImage.invert(true);
+});
+
+t.draw(() => {
+    t.background(220);
+    t.image(myImage);
 });
 ```
 
@@ -27,13 +35,13 @@ Supported formats include PNG, JPEG, WebP, and other formats supported by the br
 
 Once loaded, images can be drawn to the canvas using the [`image()`](/api/classes/Textmodifier#image) method:
 
-```javascript
+```js
 t.draw(() => {
     // Draw image at full grid size
     t.image(myImage);
     
     // Or draw with specific dimensions
-    // t.image(myImage, 40, 20);
+    // t.image(image, 40, 20);
 });
 ```
 
@@ -41,7 +49,7 @@ t.draw(() => {
 
 The [`TextmodeImage`](/api/textmode.js/namespaces/loadables/classes/TextmodeImage) instance returned by `loadImage()` provides several methods to customize how the image is converted to textmode graphics:
 
-```javascript
+```js
 t.setup(async () => {
     myImage = await t.loadImage('path/to/image.png');
     
@@ -92,7 +100,7 @@ Videos work similarly to images but with additional playback controls. Video fra
 
 Use the [`loadVideo()`](/api/classes/Textmodifier#loadvideo) method to load video files. This returns a Promise that resolves to a [`TextmodeVideo`](/api/textmode.js/namespaces/loadables/classes/TextmodeVideo) instance:
 
-```javascript
+```js
 const t = textmode.create({ width: 800, height: 600 });
 
 let myVideo;
@@ -112,7 +120,7 @@ t.setup(async () => {
 
 The [`TextmodeVideo`](/api/textmode.js/namespaces/loadables/classes/TextmodeVideo) class provides standard video playback methods:
 
-```javascript
+```js
 // Play the video
 myVideo.play();
 
@@ -141,7 +149,7 @@ const duration = myVideo.duration();
 
 Videos are drawn the same way as images using the [`image()`](/api/classes/Textmodifier#image) method:
 
-```javascript
+```js
 t.draw(() => {
     // Draw video at full grid size
     t.image(myVideo);
@@ -155,7 +163,7 @@ t.draw(() => {
 
 Just like images, videos support the same conversion customization methods:
 
-```javascript
+```js
 t.setup(async () => {
     myVideo = await t.loadVideo('path/to/video.mp4');
     
@@ -183,7 +191,7 @@ t.setup(async () => {
 
 For canvas video capturing purposes, you may want to preload the video to allow for synchronous playback without frame drops while recording. Use the `loadVideo()` options to set a target frame rate and optionally provide progress callbacks:
 
-```javascript
+```js
 t.setup(async () => {
     myVideo = await t.loadVideo('path/to/video.mp4', {
         frameRate: 30, // Preload at 30 fps
@@ -210,12 +218,12 @@ t.draw(() => {
 
 Both images and videos can be transformed using the standard textmode.js transformation methods:
 
-```javascript
+```js
 t.draw(() => {
     // Rotate the image
     t.push();
     t.rotateZ(t.frameCount * 2);
-    t.image(myImage, 40, 30);
+    t.image(image, 40, 30);
     t.pop();
 
     // Scale and position the video

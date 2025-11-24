@@ -10,7 +10,7 @@ Framebuffers allow you to render graphics offscreen and then use them as texture
 
 Create a framebuffer using the [`createFramebuffer()`](/api/classes/Textmodifier#createframebuffer) method with specified grid dimensions:
 
-```javascript
+```js
 const t = textmode.create({ width: 800, height: 600 });
 
 let fb;
@@ -30,7 +30,7 @@ The framebuffer uses the same Multiple Render Target (MRT) structure as the main
 
 Use [`begin()`](/api/classes/TextmodeFramebuffer#begin) and [`end()`](/api/classes/TextmodeFramebuffer#end) to redirect rendering operations to the framebuffer:
 
-```javascript
+```js
 t.draw(() => {
     // Render to offscreen buffer
     fb.begin();
@@ -55,7 +55,7 @@ t.draw(() => {
 
 Framebuffers can be drawn with any transformation applied:
 
-```javascript
+```js
 t.draw(() => {
     // Draw something to framebuffer
     fb.begin();
@@ -88,7 +88,7 @@ t.draw(() => {
 
 You can specify dimensions when drawing a framebuffer to scale its content:
 
-```javascript
+```js
 t.draw(() => {
     // Render at original size
     t.image(fb);
@@ -108,7 +108,7 @@ t.draw(() => {
 
 Use [`createFilterShader()`](/api/classes/Textmodifier#createfiltershader) to create custom shaders from GLSL source code:
 
-```javascript
+```js
 const t = textmode.create({ width: 800, height: 600 });
 
 let waveShader;
@@ -137,7 +137,7 @@ t.setup(async () => {
 
 You can also load shaders from external files:
 
-```javascript
+```js
 t.setup(async () => {
     waveShader = await t.createFilterShader('./shader.frag');
 });
@@ -147,7 +147,7 @@ t.setup(async () => {
 
 Use the [`shader()`](/api/classes/Textmodifier#shader) method to set the current shader, and [`setUniform()`](/api/classes/Textmodifier#setuniform) or [`setUniforms()`](/api/classes/Textmodifier#setuniforms) to pass values:
 
-```javascript
+```js
 t.draw(() => {
     t.shader(waveShader);
     t.setUniform('u_time', t.frameCount * 0.003);
@@ -213,14 +213,14 @@ Custom filter shaders must output to three MRT attachments:
 
 Combine framebuffers with shaders for complex multi-pass effects:
 
-```javascript
+```js
 const t = textmode.create({ width: 800, height: 600 });
 
 let fb1, fb2, blurShader;
 
 t.setup(async () => {
-    fb1 = t.createFramebuffer({ width: 80, height: 60 });
-    fb2 = t.createFramebuffer({ width: 80, height: 60 });
+    fb1 = t.createFramebuffer({ width: t.grid.cols, height: t.grid.rows });
+    fb2 = t.createFramebuffer({ width: t.grid.cols, height: t.grid.rows });
     
     blurShader = await t.createFilterShader('./blur.frag');
 });
@@ -232,7 +232,7 @@ t.draw(() => {
     t.char('A');
     t.charColor(255, 100, 200);
     t.rotateZ(t.frameCount * 2);
-    t.rect(20, 20);
+    t.rect(t.grid.cols, t.grid.rows);
     fb1.end();
     
     // Second pass: apply blur shader to fb2
@@ -259,8 +259,8 @@ let prevFramebuffer, nextFramebuffer, feedbackShader;
 
 t.setup(async () => {
     // Create two framebuffers for ping-ponging
-    prevFramebuffer = t.createFramebuffer();
-    nextFramebuffer = t.createFramebuffer();
+    prevFramebuffer = t.createFramebuffer({ width: t.grid.cols, height: t.grid.rows });
+    nextFramebuffer = t.createFramebuffer({ width: t.grid.cols, height: t.grid.rows });
 
     // Clear both framebuffers once so we start from a blank slate
     [prevFramebuffer, nextFramebuffer].forEach((fb) => {
@@ -380,6 +380,8 @@ t.draw(() => {
 Use [`translate()`](/api/classes/Textmodifier#translate), [`translateX()`](/api/classes/Textmodifier#translatex), [`translateY()`](/api/classes/Textmodifier#translatey), or [`translateZ()`](/api/classes/Textmodifier#translatez):
 
 ```javascript
+const t = textmode.create({ width: 800, height: 600 });
+
 t.draw(() => {
     t.background(0);
     
@@ -441,6 +443,8 @@ t.draw(() => {
 Use [`push()`](/api/classes/Textmodifier#push) and [`pop()`](/api/classes/Textmodifier#pop) to isolate transformation and style changes:
 
 ```javascript
+const t = textmode.create({ width: 800, height: 600 });
+
 t.draw(() => {
     t.background(0);
     

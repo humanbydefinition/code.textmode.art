@@ -13,7 +13,7 @@ To create a canvas for drawing, you can use the [`textmode.create()`](/api/class
 
 Here's an example of how to create a canvas:
 
-```javascript
+```js
 import { textmode } from 'textmode.js'; // ESM (not needed/allowed in UMD)
 
 const t = textmode.create({ width: 800, height: 600, fontSize: 16 });
@@ -44,7 +44,7 @@ Once you have created a canvas, you can start drawing on it by defining a [`draw
 
 The coordinate system in `textmode.js` is grid-based, where each character occupies a cell in a 2D grid. The center of the grid is `(0, 0, 0)`. The grid dimensions are dynamically calculated based on the canvas size, the set font, and its size. You can access the grid dimensions via the [`grid`](/api/classes/Textmodifier#grid) property of the `Textmodifier` instance.
 
-```javascript
+```js
 console.log(t.grid.cols); // Number of columns
 console.log(t.grid.rows); // Number of rows
 ```
@@ -57,14 +57,14 @@ As seen in the example above, `textmode.js` provides several drawing primitives 
 
 The [`rect(width, height)`](/api/classes/Textmodifier#rect) method draws a filled rectangle of characters on the grid using the previously specified properties.
 
-```javascript
+```js
 t.rect(10, 5);
 ```
 
 #### Line
 The [`line(x1, y1, x2, y2)`](/api/classes/Textmodifier#line) method draws a line between two points `(x1, y1)` and `(x2, y2)` using the previously specified properties.
 
-```javascript
+```js
 t.lineWeight(2); // Set line weight to 2 cells
 t.line(-10, 0, 10, 0);
 ```
@@ -72,21 +72,21 @@ t.line(-10, 0, 10, 0);
 #### Triangle
 The [`triangle(x1, y1, x2, y2, x3, y3)`](/api/classes/Textmodifier#triangle) method draws a filled triangle on the grid using the previously specified properties.
 
-```javascript
+```js
 t.triangle(0, 0, 10, 0, 5, 5);
 ```
 
 #### Ellipse
 The [`ellipse(width, height)`](/api/classes/Textmodifier#ellipse) method draws a filled ellipse on the grid using the previously specified properties.
 
-```javascript
+```js
 t.ellipse(10, 5);
 ```
 
 #### Bezier curve
 The [`bezierCurve(x1, y1, cx1, cy1, cx2, cy2, x2, y2)`](/api/classes/Textmodifier#bezierCurve) method draws a cubic Bezier curve on the grid using the previously specified properties. The curve is defined by its start point `(x1, y1)`, end point `(x2, y2)`, and two control points `(cx1, cy1)` and `(cx2, cy2)`.
 
-```javascript
+```js
 t.lineWeight(1); // Set line weight to 1 cell
 t.bezierCurve(0, 0, 10, 5, 5, 10, 10, 0);
 ```
@@ -94,7 +94,7 @@ t.bezierCurve(0, 0, 10, 5, 5, 10, 10, 0);
 #### Arc
 The [`arc(width, height, startAngle, endAngle)`](/api/classes/Textmodifier#arc) method draws an arc on the grid using the previously specified properties.
 
-```javascript
+```js
 t.arc(10, 5, 0, 180);
 ```
 
@@ -226,7 +226,7 @@ t.draw(() => {
 int charIndex = 65;
 float r = float(charIndex % 256) / 255.0;        // Lower byte
 float g = float(charIndex / 256) / 255.0;        // Upper byte
-o_character = vec4(r, g, 0.0, 1.0);              // Blue=transforms, Alpha=rotation
+o_character = vec4(r, g, 0.0, 0.0);              // Blue=transforms, Alpha=rotation
 
 // For procedural character selection with rotation:
 float noise = someNoiseFunction(v_uv);

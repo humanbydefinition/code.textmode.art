@@ -1,7 +1,6 @@
 <template>
   <div class="comment-section__lead">
     <p class="comment-section__eyebrow">Join the discussion ↓</p>
-    <h2 class="comment-section__title">Join the discussion ↓</h2>
     <p class="comment-section__description">
       Swap ideas, ask questions, and leave feedback for the textmode.js team and community.
     </p>

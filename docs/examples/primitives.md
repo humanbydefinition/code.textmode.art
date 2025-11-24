@@ -1,6 +1,6 @@
-::: details primitives {open}
 
-::: sandbox {template=static rtl :previewHeight="600"}
+
+::: sandbox {template=static rtl :previewHeight="600" hideEditor}
 
 ```html index.html [readonly]
 <!DOCTYPE html>
@@ -216,4 +216,5 @@ tm.windowResized(() => {
     cellHeight = Math.floor(tm.grid.rows / rows);
 });
 ```
+
 :::

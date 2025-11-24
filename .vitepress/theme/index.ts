@@ -222,7 +222,7 @@ function cleanupCommentLead(container?: HTMLElement | null) {
 }
 
 const CODE_SANDBOX_ENDPOINT = 'https://codesandbox.io/api/v1/sandboxes/define'
-const CODE_SANDBOX_LANGUAGES = new Set(['js', 'ts', 'javascript', 'typescript'])
+const CODE_SANDBOX_LANGUAGES = new Set(['javascript', 'typescript'])
 const CODE_BLOCK_MAX_ENHANCE_ATTEMPTS = 4
 const SANDBOX_INDEX_HTML = `<!DOCTYPE html>
 <html lang="en">

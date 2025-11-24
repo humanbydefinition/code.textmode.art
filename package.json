@@ -8,7 +8,6 @@
     "vitepress-plugin-sandpack": "^1.1.4"
   },
   "scripts": {
-    "wrap:examples": "node ./scripts/wrapExamples.js",
     "dev:docs": "vitepress dev --host",
     "build:docs": "vitepress build",
     "preview:docs": "vitepress preview"

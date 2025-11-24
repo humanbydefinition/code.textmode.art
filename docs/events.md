@@ -316,6 +316,10 @@ All mouse event callbacks receive a `MouseEventData` object containing:
 
 Touch interaction in `textmode.js` mirrors the mouse APIs while supporting multi-touch and high-level gesture recognition. All touch positions are converted into grid coordinates, so you can work with the same column/row values used elsewhere in the drawing API.
 
+:::warning
+The touch-related code examples are currently outdated and will be updated soon.
+:::
+
 ### Touch tracking
 
 Use [`t.touches`](/api/classes/Textmodifier#touches) to access the currently active touches each frame:
@@ -330,7 +334,7 @@ t.draw(() => {
         if (touch.x !== -1 && touch.y !== -1) {
             t.char('●');
             t.charColor(255, 128, 128);
-            t.point(touch.x, touch.y);
+            t.point();
         }
     }
 });
@@ -340,7 +344,7 @@ t.draw(() => {
 
 Register callbacks with [`touchStarted()`](/api/classes/Textmodifier#touchstarted), [`touchMoved()`](/api/classes/Textmodifier#touchmoved), [`touchEnded()`](/api/classes/Textmodifier#touchended), and [`touchCancelled()`](/api/classes/Textmodifier#touchcancelled) to react to raw touch events:
 
-```javascript
+```js
 const activeTouches = new Map();
 
 t.touchStarted((data) => {
@@ -381,7 +385,7 @@ High-level gestures provide convenient abstractions for common behaviours:
 - [`pinch()`](/api/classes/Textmodifier#pinch) delivers scale and delta scale for two-finger zoom
 - [`rotateGesture()`](/api/classes/Textmodifier#rotategesture) tracks two-finger rotations
 
-```javascript
+```js
 t.tap((data) => {
     console.log(`Tapped at ${data.touch.x}, ${data.touch.y}`);
 });
@@ -505,7 +509,7 @@ t.draw(() => {
 
 The keyboard system handles special keys with normalized names:
 
-```javascript
+```js
 // Arrow keys
 if (t.isKeyPressed('ArrowUp')) { /* ... */ }
 if (t.isKeyPressed('ArrowDown')) { /* ... */ }
@@ -535,7 +539,7 @@ if (t.isKeyPressed('Meta')) { /* ... */ }
 
 Check for modifier key combinations:
 
-```javascript
+```js
 t.keyPressed((data) => {
     if (data.ctrlKey && data.key === 'c') {
         console.log('Copy command');

@@ -1,6 +1,6 @@
 ---
 title: Support
-description: Support the development of textmode.js and related projects. Learn about different ways to contribute financially and emotionally to the open-source ASCII art library.
+description: Support the development of textmode.js and related projects. Learn about different ways to contribute financially and emotionally to the ASCII art library.
 comment: false
 prev: false
 next: false
@@ -12,7 +12,7 @@ lastUpdated: false
 If you enjoy using `textmode.js` and would like to support my textmode endeavors and its continued development, your contribution is greatly appreciated.
 
 :::info
-`textmode.js` remains free, accessible, and open-source forever for everyone to use and enjoy, regardless of any contributions. Your support is greatly appreciated but never required to use the library or access its features.
+`textmode.js` remains free and accessible forever for everyone to use and enjoy, regardless of any contributions. Your support is greatly appreciated but never required to use the library or access its features.
 :::
 
 ## Support emotionally \<3

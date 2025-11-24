@@ -15,7 +15,7 @@ Overlay mode enables `textmode.js` to act as a filter layer on top of existing v
 
 ### Basic overlay setup
 
-```javascript
+```js
 // Target an existing canvas element
 const existingCanvas = document.getElementById('myCanvas');
 
@@ -26,13 +26,9 @@ const t = textmode.create({
     fontSize: 16
 });
 
-t.setup(() => {
-    console.log('Overlay is ready!');
-});
-
 t.draw(() => {
     t.clear();
-    t.image(t.overlay, 0, 0, t.grid.cols, t.grid.rows);
+    t.image(t.overlay, t.grid.cols, t.grid.rows);
 
     t.char('+');
     t.charColor(255, 255, 0);
@@ -48,7 +44,7 @@ When using overlay mode, the source content is automatically converted to a [`Te
 
 ### Basic customization
 
-```javascript
+```js
 const t = textmode.create({
     canvas: sourceElement,
     overlay: true,

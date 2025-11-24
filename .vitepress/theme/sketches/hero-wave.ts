@@ -81,7 +81,7 @@ export function createHeroWaveSketch(
     height: height,
     fontSize: 16,
     frameRate: 60,
-    fontSource: '/Bescii-Mono.woff'
+    fontSource: '/fonts/Bescii-Mono.woff'
   })
 
   let time = 0
