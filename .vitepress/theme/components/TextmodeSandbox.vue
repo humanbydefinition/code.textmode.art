@@ -29,7 +29,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { Sandbox, sandboxProps } from 'vitepress-plugin-sandpack'
-import sketchMetadata from '../data/sketches.json'
+import sketchMetadata from '../../data/sketches.json'
 
 type SketchMetadataMap = typeof sketchMetadata
 

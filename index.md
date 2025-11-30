@@ -38,12 +38,7 @@ features:
 
 ---
 
-<div class="textmode-cta-buttons">
-  <a class="textmode-cta-button brand" href="/docs/introduction">Get started</a>
-  <a class="textmode-cta-button alt" href="/docs/installation">Installation</a>
-  <a class="textmode-cta-button alt" href="/docs/examples">View examples</a>
-  <a class="textmode-cta-button alt" href="/api/">API reference</a>
-</div>
+<HomeCta />
 
 ## What is `textmode.js`?
 
@@ -123,4 +118,4 @@ Dive into the interactive examples below - view source, tweak parameters, and br
 
 Every sketch starts with an empty file. Your next masterpiece starts the same way.
 
-<a class="textmode-cta-button alt" href="/docs/introduction">Begin your journey</a>
+<HomeCta :actions="[{ text: 'Begin your journey', link: '/docs/introduction' }]" />

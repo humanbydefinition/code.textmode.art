@@ -41,6 +41,12 @@ export default withMermaid(defineConfig({
   description: "textmode.js is a lightweight creative coding library for creating real-time ASCII art on the web.",
   head,
 
+  vite: {
+    ssr: {
+      noExternal: ['vitepress-plugin-codesandbox']
+    }
+  },
+
   markdown: {
     config(md) {
       md
