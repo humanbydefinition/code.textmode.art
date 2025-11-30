@@ -6,6 +6,7 @@ author: humanbydefinition
 layout: doc
 blogPost: true
 slug: introducing-textmode-js
+published: true
 tags:
   - announcement
   - release

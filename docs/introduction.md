@@ -42,6 +42,7 @@ Here’s a high‑level overview of what the library offers. Later pages dive in
 
 - Real‑time ASCII/textmode rendering with a simple drawing API
 - Font system with runtime font loading and dynamic sizing *(supports TTF/OTF/WOFF)*
+- Layer system for multi-layered textmode scenes with blend modes, opacity, positioning, filtering, and more
 - Custom filter shaders in [`GLSL ES 3.00`](https://registry.khronos.org/OpenGL/specs/es/3.0/GLSL_ES_Specification_3.00.pdf) for advanced effects
 - Flexible exporting: TXT, SVG, raster images *(PNG/JPG/WebP)*, animated GIFs, and video *(WebM)*
 - Animation loop control: `frameRate`, `loop`/`noLoop`, `redraw`, `frameCount`, and more

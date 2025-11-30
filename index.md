@@ -94,8 +94,6 @@ Simple, powerful, and ready for your wildest ideas.
 
 Dive into the interactive examples below - view source, tweak parameters, and break things *(it's encouraged!)*. Then show the world what you made. The community is watching. (｡◕‿‿◕｡)
 
-
-
 <!--@include: ./docs/examples/showcase/wave-interference.md-->
 ---
 <!--@include: ./docs/examples/showcase/digital-rain.md-->
@@ -105,7 +103,6 @@ Dive into the interactive examples below - view source, tweak parameters, and br
 ## Community and support
 
 **You're not coding alone.** Join a vibrant community of creative developers pushing the boundaries of textmode art. Whether you're debugging your first sketch or sharing your latest masterpiece, we're here to help.
-
 
 ### Resources
 
@@ -121,7 +118,6 @@ Dive into the interactive examples below - view source, tweak parameters, and br
 ### Get involved
 
 **Your work matters.** Sketches shared with `#textmodejs` inspire the next wave of creators. Bug reports strengthen the foundation. Answered questions build collective knowledge. Jump in wherever your passion leads.
-
 
 ## What will you create?
 

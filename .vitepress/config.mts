@@ -1,25 +1,9 @@
 /// <reference path="./shims.d.ts" />
 import { defineConfig } from 'vitepress'
-import type { HeadConfig } from 'vitepress'
 import container from 'markdown-it-container'
 import { renderSandbox } from 'vitepress-plugin-sandpack'
 import { withMermaid } from 'vitepress-plugin-mermaid'
-import typedocSidebar from "../api/typedoc-sidebar.json";
-
-const umamiScript: HeadConfig = ["script", {
-  defer: "true",
-  src: "https://analytics.textmode.art/script.js",
-  "data-website-id": "f5bf4e2e-1d33-4785-b51c-9c55da523767"
-}]
-
-const baseHeaders: HeadConfig[] = [
-  ['link', { rel: 'icon', href: '/svg/doc_logo.svg', type: 'image/svg+xml' }],
-  ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
-  ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
-  ['link', { href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap', rel: 'stylesheet' }],
-]
-
-const headers = [...baseHeaders, umamiScript];
+import { head, nav, sidebar } from './configs/index.mts'
 
 const themeConfig = {
   logo: '/svg/doc_logo.svg',
@@ -28,14 +12,7 @@ const themeConfig = {
     text: 'Last updated'
   },
 
-  nav: [
-    { text: 'Home', link: '/' },
-    { text: 'Documentation', link: '/docs/introduction' },
-    { text: 'API', link: '/api/' },
-    { text: 'Blog', link: '/blog/' },
-    { text: 'Support ♥', link: '/support' },
-    { text: 'Web Editor', link: 'https://editor.textmode.art' },
-  ],
+  nav,
 
   search: {
     provider: 'local' as const,
@@ -45,31 +22,7 @@ const themeConfig = {
     level: [2, 3] as [number, number],
   },
 
-  sidebar: [
-    {
-      text: "Docs",
-      items: [
-        { text: "Introduction", link: "/docs/introduction" },
-        { text: "Installation", link: "/docs/installation" },
-        { text: "Fundamentals", link: "/docs/fundamentals" },
-        { text: "Event handling", link: "/docs/events" },
-        { text: "Fonts", link: "/docs/fonts" },
-        { text: "Images and videos", link: "/docs/loadables" },
-        { text: "Advanced features", link: "/docs/advanced" },
-        { text: "Framework integration", link: "/docs/framework-integration" },
-        { text: "Exporting", link: "/docs/exporting" },
-        { text: "Examples", link: "/docs/examples" },
-        { text: "Contributing", link: "/docs/contributing" },
-      ]
-    },
-    {
-      text: "API",
-      items: [
-        { text: "Index", link: "/api/" },
-        ...typedocSidebar
-      ],
-    },
-  ],
+  sidebar,
 
   footer: {
     copyright: 'Copyright © 2025 <a href="https://textmode.art" target="_blank">textmode.art</a>. Built with <a href="https://vitepress.dev" target="_blank">VitePress</a>. Created by <a href="https://github.com/humanbydefinition" target="_blank">humanbydefinition</a>.',
@@ -86,7 +39,7 @@ const themeConfig = {
 export default withMermaid(defineConfig({
   title: "textmode.js",
   description: "textmode.js is a lightweight creative coding library for creating real-time ASCII art on the web.",
-  head: headers,
+  head,
 
   markdown: {
     config(md) {
