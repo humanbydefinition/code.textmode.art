@@ -14,12 +14,13 @@ import 'vitepress-plugin-codesandbox/style.css'
 // Components
 import TextmodeSandbox from './components/TextmodeSandbox.vue'
 import FontShowcase from './components/FontShowcase/FontShowcase.vue'
-import DonationGrid from './components/Donation/DonationGrid.vue'
+import SupportGrid from './components/Support/SupportGrid.vue'
 import TextmodeWhatIs from './components/TextmodeWhatIs.vue'
 import HomeCta from './components/HomeCta/HomeCta.vue'
 
 // Blog
-import { withBlogTheme } from '../blog/src'
+import { withBlogTheme } from 'vitepress-plugin-blog'
+import 'vitepress-plugin-blog/style.css'
 
 // Composables
 import { useComments, setupHeroSketchRouter } from './composables'
@@ -63,7 +64,7 @@ const baseTheme: Theme = {
     app.component('Sandbox', Sandbox)
     app.component('TextmodeSandbox', TextmodeSandbox)
     app.component('FontShowcase', FontShowcase)
-    app.component('DonationGrid', DonationGrid)
+    app.component('SupportGrid', SupportGrid)
     app.component('TextmodeWhatIs', TextmodeWhatIs)
     app.component('HomeCta', HomeCta)
 

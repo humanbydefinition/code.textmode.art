@@ -15,4 +15,4 @@ Stay up to date with release notes, deep dives, and creative coding tips from th
 
 <hr />
 
-<BlogHome />
+<BlogIndex />

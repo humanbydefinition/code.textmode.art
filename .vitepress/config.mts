@@ -4,6 +4,7 @@ import container from 'markdown-it-container'
 import { renderSandbox } from 'vitepress-plugin-sandpack'
 import { withMermaid } from 'vitepress-plugin-mermaid'
 import { head, nav, sidebar } from './configs/index.mts'
+import { blogPlugin } from 'vitepress-plugin-blog/plugin'
 
 const themeConfig = {
   logo: '/svg/doc_logo.svg',
@@ -42,6 +43,9 @@ export default withMermaid(defineConfig({
   head,
 
   vite: {
+    plugins: [
+      blogPlugin(),
+    ],
     ssr: {
       noExternal: ['vitepress-plugin-codesandbox']
     }

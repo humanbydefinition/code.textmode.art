@@ -31,7 +31,7 @@ This is a personal project, not a registered charity or non-profit organization.
 
 Thank you for considering to support this project and being part of this creative journey! Your support means the world to me and helps to keep this project alive and thriving.
 
-<DonationGrid />
+<SupportGrid />
 
 ## Other ways to support
 

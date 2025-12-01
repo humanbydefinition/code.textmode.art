@@ -1,12 +1,12 @@
 <template>
-  <UiCard rounded="lg" padded padding="lg" hoverable class="donation-card">
-    <div class="donation-card__icon" :style="{ backgroundColor: color }" aria-hidden="true">
+  <UiCard rounded="lg" padded padding="lg" hoverable class="support-card">
+    <div class="support-card__icon" :style="{ backgroundColor: color }" aria-hidden="true">
       <UiIcon :name="iconName" :size="36" color="#fff" />
     </div>
 
-    <div class="donation-card__content">
-      <h3 class="donation-card__title">{{ title }}</h3>
-      <p class="donation-card__description">{{ description }}</p>
+    <div class="support-card__content">
+      <h3 class="support-card__title">{{ title }}</h3>
+      <p class="support-card__description">{{ description }}</p>
 
       <UiButton
         variant="custom"
@@ -15,7 +15,7 @@
         external
         block
         :aria-label="ariaLabel"
-        class="donation-card__cta"
+        class="support-card__cta"
       >
         Support
         <UiIcon name="tabler:external-link" size="sm" />
@@ -27,18 +27,18 @@
 <script setup lang="ts">
 import { computed, toRefs } from 'vue'
 import { UiCard, UiButton, UiIcon } from '../ui'
-import type { DonationCardProps, DonationIconType } from './types'
+import type { SupportCardProps, SupportIconType } from './types'
 
-const ICON_MAP: Record<DonationIconType, string> = {
+const ICON_MAP: Record<SupportIconType, string> = {
   kofi: 'simple-icons:kofi',
   github: 'tabler:brand-github',
   ethereum: 'cryptocurrency:eth',
   tezos: 'cryptocurrency:xtz'
 }
 
-defineOptions({ name: 'DonationCard' })
+defineOptions({ name: 'SupportCard' })
 
-const props = defineProps<DonationCardProps>()
+const props = defineProps<SupportCardProps>()
 const { title, description, link, color } = toRefs(props)
 
 const iconName = computed(() => ICON_MAP[props.iconType])
@@ -46,7 +46,7 @@ const ariaLabel = computed(() => `Support via ${title.value}`)
 </script>
 
 <style scoped>
-.donation-card__icon {
+.support-card__icon {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -57,37 +57,37 @@ const ariaLabel = computed(() => `Support via ${title.value}`)
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
 }
 
-.donation-card__content {
+.support-card__content {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
 }
 
-.donation-card__title {
+.support-card__title {
   margin: 0 0 0.5rem 0;
   font-size: 1.25rem;
   font-weight: 600;
   color: var(--vp-c-text-1);
 }
 
-.donation-card__description {
+.support-card__description {
   margin: 0 0 1.5rem 0;
   color: var(--vp-c-text-2);
   line-height: 1.5;
   flex-grow: 1;
 }
 
-.donation-card__cta {
+.support-card__cta {
   margin-top: auto;
 }
 
 @media (max-width: 768px) {
-  .donation-card__icon {
+  .support-card__icon {
     width: 50px;
     height: 50px;
   }
 
-  .donation-card__title {
+  .support-card__title {
     font-size: 1.1rem;
   }
 }

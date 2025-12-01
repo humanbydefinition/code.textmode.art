@@ -1,30 +1,30 @@
 <template>
-  <section class="donation-grid">
+  <section class="support-grid">
     <template v-if="hasOptions">
       <div v-for="(option, index) in gridOptions" :key="option.title ?? option.link ?? index" class="grid-item">
-        <DonationCard v-bind="option" />
+        <SupportCard v-bind="option" />
       </div>
     </template>
-    <p v-else class="donation-grid__empty">
-      No donation options are available at the moment.
+    <p v-else class="support-grid__empty">
+      No support options are available at the moment.
     </p>
   </section>
 </template>
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import DonationCard from './DonationCard.vue'
-import donationOptions from '../../../data/support.json'
-import type { DonationCardProps } from './types'
+import SupportCard from './SupportCard.vue'
+import supportOptions from '../../../data/support.json'
+import type { SupportCardProps } from './types'
 
-defineOptions({ name: 'DonationGrid' })
+defineOptions({ name: 'SupportGrid' })
 
-const gridOptions = computed(() => donationOptions as DonationCardProps[])
+const gridOptions = computed(() => supportOptions as SupportCardProps[])
 const hasOptions = computed(() => gridOptions.value.length > 0)
 </script>
 
 <style scoped>
-.donation-grid {
+.support-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1.5rem;
@@ -37,11 +37,11 @@ const hasOptions = computed(() => gridOptions.value.length > 0)
   width: 100%;
 }
 
-:deep(.donation-card) {
+:deep(.support-card) {
   height: 100%;
 }
 
-.donation-grid__empty {
+.support-grid__empty {
   text-align: center;
   padding: 1.5rem;
   color: var(--vp-c-text-2);
@@ -50,7 +50,7 @@ const hasOptions = computed(() => gridOptions.value.length > 0)
 }
 
 @media (max-width: 768px) {
-  .donation-grid {
+  .support-grid {
     grid-template-columns: 1fr;
     gap: 1rem;
     margin: 1.5rem 0;

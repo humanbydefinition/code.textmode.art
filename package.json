@@ -1,5 +1,6 @@
 {
   "devDependencies": {
+    "@types/node": "^24.10.1",
     "markdown-it-container": "^4.0.0",
     "mermaid": "^11.11.0",
     "typescript": "^5.8.3",
@@ -8,13 +9,14 @@
     "vitepress-plugin-sandpack": "^1.1.4"
   },
   "scripts": {
-    "dev:docs": "vitepress dev --host",
-    "build:docs": "vitepress build",
-    "preview:docs": "vitepress preview"
+    "dev": "vitepress dev --host --port 4175",
+    "build": "vitepress build",
+    "preview": "vitepress preview"
   },
   "dependencies": {
     "@iconify/vue": "^5.0.0",
     "lz-string": "^1.5.0",
+    "vitepress-plugin-blog": "^0.1.3",
     "vitepress-plugin-codeblocks-fold": "^1.2.35",
     "vitepress-plugin-codesandbox": "^0.1.1",
     "vitepress-plugin-comment-with-giscus": "^1.1.15"

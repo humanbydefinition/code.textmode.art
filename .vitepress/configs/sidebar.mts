@@ -1,7 +1,13 @@
 import type { DefaultTheme } from 'vitepress'
 import typedocSidebar from '../../api/typedoc-sidebar.json'
+import { fileURLToPath } from 'url'
+import { dirname, resolve } from 'path'
+import { generateBlogSidebarFromFiles } from 'vitepress-plugin-blog/sidebar'
 
-export const sidebar: DefaultTheme.Sidebar = [
+const __dirname = dirname(fileURLToPath(import.meta.url))
+const docsDir = resolve(__dirname, '../..')
+
+const docsSidebar: DefaultTheme.SidebarItem[] = [
   {
     text: 'Docs',
     items: [
@@ -26,3 +32,11 @@ export const sidebar: DefaultTheme.Sidebar = [
     ],
   },
 ]
+
+export const sidebar: DefaultTheme.Sidebar = {
+  '/docs/': docsSidebar,
+  '/api/': docsSidebar,
+  '/blog/': generateBlogSidebarFromFiles(docsDir, {
+    recentPostsCount: 5,
+  }),
+}
