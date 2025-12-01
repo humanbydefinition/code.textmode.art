@@ -46,9 +46,6 @@ export default withMermaid(defineConfig({
     plugins: [
       blogPlugin(),
     ],
-    ssr: {
-      noExternal: ['vitepress-plugin-codesandbox']
-    }
   },
 
   markdown: {
