@@ -1,9 +1,10 @@
-# textmode.js v0.6.1
+# textmode.js
 
 ## Namespaces
 
 | Namespace | Description |
 | ------ | ------ |
+| [filters](namespaces/filters/index.md) | All filter related modules and types. |
 | [input](namespaces/input/index.md) | All types and interfaces related to input event handling. |
 | [layering](namespaces/layering/index.md) | All modules and types related to multi-layered textmode rendering. |
 | [loadables](namespaces/loadables/index.md) | All loadable assets related to textmode rendering. |

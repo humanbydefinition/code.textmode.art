@@ -2,7 +2,7 @@
 
 # Interface: TextmodeLayerOptions
 
-Options for configuring a TextmodeLayer.
+Options for configuring a new TextmodeLayer via [TextmodeLayerManager.add](../classes/TextmodeLayerManager.md#add).
 
 ## Properties
 

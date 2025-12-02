@@ -9,7 +9,7 @@ Types and interfaces for mouse event handling
 | Interface | Description |
 | ------ | ------ |
 | [MouseEventData](interfaces/MouseEventData.md) | Mouse event data passed to event handlers |
-| [MousePosition](interfaces/MousePosition.md) | Mouse coordinates in grid space |
+| [MousePosition](interfaces/MousePosition.md) | Mouse coordinates in grid space. |
 
 ## Type Aliases
 

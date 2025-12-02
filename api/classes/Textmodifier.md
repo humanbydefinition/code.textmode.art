@@ -17,23 +17,13 @@ If a canvas is provided, it will use that canvas instead.
 
 - `ITextmodifier`
 
+## Properties
+
+| Property | Modifier | Type | Description |
+| ------ | ------ | ------ | ------ |
+| <a id="_filtermanager"></a> `_filterManager` | `public` | [`TextmodeFilterManager`](../namespaces/filters/classes/TextmodeFilterManager.md) | **`Internal`** |
+
 ## Accessors
-
-### baseLayer
-
-#### Get Signature
-
-```ts
-get baseLayer(): TextmodeLayer;
-```
-
-Access the internal base layer.
-
-##### Returns
-
-[`TextmodeLayer`](../namespaces/layering/classes/TextmodeLayer.md)
-
-***
 
 ### canvas
 
@@ -76,6 +66,47 @@ Get the WebGL framebuffer used for drawing operations in [Textmodifier.draw](#dr
 ```ts
 ITextmodifier.drawFramebuffer
 ```
+
+***
+
+### filters
+
+#### Get Signature
+
+```ts
+get filters(): TextmodeFilterManager;
+```
+
+Access the filter manager for this Textmodifier instance.
+
+Use this to register custom filters that can be applied both globally
+(via [filter](#filter)) and on individual layers (via TextmodeLayer.filter).
+Filters only need to be registered once and are available everywhere.
+
+##### Example
+
+```typescript
+// Register a custom filter once
+await t.filters.register('vignette', vignetteShader, {
+    u_intensity: ['intensity', 0.5]
+});
+
+t.draw(() => {
+    t.background(0);
+    t.char('A');
+    t.rect(10, 10);
+    
+    // Apply filter globally to final output
+    t.filter('vignette', { intensity: 0.8 });
+    
+    // Or apply to a specific layer
+    t.layers.base.filter('vignette', 0.5);
+});
+```
+
+##### Returns
+
+[`TextmodeFilterManager`](../namespaces/filters/classes/TextmodeFilterManager.md)
 
 ***
 
@@ -575,7 +606,7 @@ available. Use this inside a draw loop to react to active multi-touch scenarios.
 ```javascript
 t.draw(() => {
   for (const touch of t.touches) {
-    t.point(touch.x, touch.y);
+    t.point();
   }
 });
 ```
@@ -876,18 +907,12 @@ const t = textmode.create({
   height: 600,
 })
 
-let semicolon;
-
-t.setup(() => {
- semicolon = t.color(';');
-});
-
 t.draw(() => {
   t.background(0);
   t.char('A');
   t.rect(10, 10);
 
-  t.char(semicolon);
+  t.char(";");
   t.translate(15, 0);
   t.rect(10, 10);
 });
@@ -1238,6 +1263,75 @@ ITextmodifier.createFramebuffer
 
 ***
 
+### createShader()
+
+```ts
+createShader(vertexSource, fragmentSource): Promise<GLShader>;
+```
+
+Create a custom shader from vertex and fragment shader source code or file paths.
+Both the vertex and fragment shaders can be provided as inline GLSL source code
+or as file paths (e.g., './vertex.vert', './fragment.frag').
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `vertexSource` | `string` | The vertex shader source code or a file path (e.g., './shader.vert') |
+| `fragmentSource` | `string` | The fragment shader source code or a file path (e.g., './shader.frag') |
+
+#### Returns
+
+`Promise`\<`GLShader`\>
+
+A Promise that resolves to a compiled shader ready for use with [shader](#shader)
+
+#### Example
+
+```javascript
+const t = textmode.create({
+  width: 800,
+  height: 600,
+});
+
+let customShader;
+
+t.setup(async () => {
+  // Load shaders from files
+  customShader = await t.createShader('./vertex.vert', './fragment.frag');
+  
+  // Or create from inline source
+  // customShader = await t.createShader(
+  //   `#version 300 es
+  //   in vec2 a_position;
+  //   void main() {
+  //     gl_Position = vec4(a_position, 0.0, 1.0);
+  //   }`,
+  //   `#version 300 es
+  //   precision highp float;
+  //   out vec4 fragColor;
+  //   void main() {
+  //     fragColor = vec4(1.0, 0.0, 0.0, 1.0);
+  //   }`
+  // );
+});
+
+t.draw(() => {
+  if (customShader) {
+    t.shader(customShader);
+    t.rect(t.grid.cols, t.grid.rows);
+  }
+});
+```
+
+#### Implementation of
+
+```ts
+ITextmodifier.createShader
+```
+
+***
+
 ### cursor()
 
 ```ts
@@ -1382,9 +1476,12 @@ ITextmodifier.doubleTap
 draw(callback): void;
 ```
 
-Set a draw callback function that will be executed before each render.
+Set a draw callback function for the base layer.
 
-This callback function is where all drawing commands should be placed for textmode rendering.
+This callback function is where all drawing commands should be placed for textmode rendering on the main layer.
+
+If multiple layers are added via [Textmodifier.layers](#layers), each layer can have its own draw callback set via [TextmodeLayer.draw](../namespaces/layering/classes/TextmodeLayer.md#draw).
+This allows for complex multi-layered compositions with independent rendering logic per layer.
 
 #### Parameters
 
@@ -1469,6 +1566,100 @@ ITextmodifier.ellipse
 
 ***
 
+### filter()
+
+#### Call Signature
+
+```ts
+filter<T>(name, params?): void;
+```
+
+Apply a filter to the final composited output.
+
+Filters are applied after all layers are composited but before
+the result is presented to the canvas. Multiple filters can be
+queued per frame and will be applied in order.
+
+##### Type Parameters
+
+| Type Parameter |
+| ------ |
+| `T` *extends* [`BuiltInFilterName`](../namespaces/filters/type-aliases/BuiltInFilterName.md) |
+
+##### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `name` | `T` | The name of the filter to apply (built-in or custom) |
+| `params?` | [`BuiltInFilterParams`](../namespaces/filters/interfaces/BuiltInFilterParams.md)\[`T`\] | Optional parameters for the filter |
+
+##### Returns
+
+`void`
+
+##### Example
+
+```typescript
+t.draw(() => {
+    t.background(0);
+    t.charColor(255);
+    t.char('A');
+    t.rect(10, 10);
+    
+    // Apply built-in filters
+    t.filter('grayscale', 0.5);
+    t.filter('invert');
+    
+    // Chain multiple filters
+    t.filter('sepia', { amount: 0.3 });
+    t.filter('threshold', 0.5);
+});
+```
+
+#### Call Signature
+
+```ts
+filter(name, params?): void;
+```
+
+Apply a filter to the final composited output.
+
+Filters are applied after all layers are composited but before
+the result is presented to the canvas. Multiple filters can be
+queued per frame and will be applied in order.
+
+##### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `name` | `string` | The name of the filter to apply (built-in or custom) |
+| `params?` | `unknown` | Optional parameters for the filter |
+
+##### Returns
+
+`void`
+
+##### Example
+
+```typescript
+t.draw(() => {
+    t.background(0);
+    t.charColor(255);
+    t.char('A');
+    t.rect(10, 10);
+    
+    // Apply built-in filters
+    t.filter('grayscale', 0.5);
+    t.filter('invert');
+    
+    // Chain multiple filters
+    t.filter('sepia', { amount: 0.3 });
+    t.filter('threshold', 0.5);
+});
+```
+
+***
+
 ### flipX()
 
 ```ts
@@ -1498,6 +1689,7 @@ const t = textmode.create({
 t.draw(() => {
   t.background(0);
   t.flipX(true);
+  t.char('A');
   t.rect(5, 5);
 });
 ```
@@ -1539,6 +1731,7 @@ const t = textmode.create({
 t.draw(() => {
   t.background(0);
   t.flipY(true);
+  t.char('A');
   t.rect(5, 5);
 });
 ```
@@ -1882,7 +2075,6 @@ t.draw(() => {
   
   // Show the last pressed key at the center of the grid
   t.push();
-  t.translate(t.grid.cols / 2, t.grid.rows / 2);
   t.char(lastKey.length ? lastKey[0] : '?');
   t.point();
   t.pop();
@@ -3508,7 +3700,10 @@ Set a uniform value for the current custom shader.
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
-const pulseShader = t.createFilterShader(`#version 300 es
+let pulseShader;
+
+t.setup(async () => {
+    pulseShader = await t.createFilterShader(`#version 300 es
   precision highp float;
   in vec2 v_uv;
   uniform float u_time;
@@ -3524,11 +3719,12 @@ const pulseShader = t.createFilterShader(`#version 300 es
     o_secondaryColor = vec4(color * 0.3, 1.0);
   }
 `);
+});
 
 t.draw(() => {
-  t.shader(pulseShader);
-  t.setUniform('u_time', t.frameCount * 0.005);
-  t.rect(t.grid.cols, t.grid.rows);
+    t.shader(pulseShader);
+    t.setUniform('u_time', t.frameCount * 0.005);
+    t.rect(t.grid.cols, t.grid.rows);
 });
 ```
 
@@ -3563,7 +3759,10 @@ Set multiple uniform values for the current custom shader.
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
-const rippleShader = t.createFilterShader(`#version 300 es
+let rippleShader;
+
+t.setup(async() => {
+    rippleShader = await t.createFilterShader(`#version 300 es
   precision highp float;
   in vec2 v_uv;
   uniform float u_time;
@@ -3581,14 +3780,15 @@ const rippleShader = t.createFilterShader(`#version 300 es
     o_secondaryColor = vec4(color * 0.4, 1.0);
   }
 `);
+});
 
 t.draw(() => {
-  t.shader(rippleShader);
-  t.setUniforms({
-    u_time: t.frameCount * 0.0005,
-    u_center: [0.5, 0.5]
-  });
-  t.rect(t.grid.cols, t.grid.rows);
+    t.shader(rippleShader);
+    t.setUniforms({
+        u_time: t.frameCount * 0.0005,
+        u_center: [0.5, 0.5]
+    });
+    t.rect(t.grid.cols, t.grid.rows);
 });
 ```
 
@@ -3681,7 +3881,10 @@ Set a custom shader for subsequent rendering operations.
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
-const glitchShader = t.createFilterShader(`#version 300 es
+let glitchShader;
+
+t.setup(async() => {
+    glitchShader = await t.createFilterShader(`#version 300 es
   precision highp float;
   in vec2 v_uv;
   uniform float u_intensity;
@@ -3700,9 +3903,9 @@ const glitchShader = t.createFilterShader(`#version 300 es
 `);
 
 t.draw(() => {
-  t.shader(glitchShader);
-  t.setUniform('u_intensity', Math.sin(t.frameCount * 0.1) * 0.02);
-  t.rect(t.grid.cols, t.grid.rows);
+    t.shader(glitchShader);
+    t.setUniform('u_intensity', Math.sin(t.frameCount * 0.1) * 0.02);
+    t.rect(t.grid.cols, t.grid.rows);
 });
 ```
 

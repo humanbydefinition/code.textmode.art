@@ -27,10 +27,10 @@ import { useComments, setupHeroSketchRouter } from './composables'
 import type { GiscusConfig } from './composables'
 
 const giscusConfig: GiscusConfig = {
-  repo: 'humanbydefinition/textmode.js-docs',
-  repoId: 'R_kgDOQbiCUQ',
-  category: 'Website comments',
-  categoryId: 'DIC_kwDOQbiCUc4CyH1P',
+  repo: 'humanbydefinition/textmode.js',
+  repoId: 'R_kgDOPMadwQ',
+  category: 'code.textmode.art',
+  categoryId: 'DIC_kwDOPMadwc4CzUUr',
   mapping: 'URL',
   inputPosition: 'top',
   lang: 'en',

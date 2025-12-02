@@ -40,16 +40,15 @@ You write straightforward JavaScript or TypeScript, and `textmode.js` handles ba
 
 Here’s a high‑level overview of what the library offers. Later pages dive into each area in detail.
 
-- Real‑time ASCII/textmode rendering with a simple drawing API
+- Real‑time* ASCII/textmode rendering with a simple drawing API
 - Font system with runtime font loading and dynamic sizing *(supports TTF/OTF/WOFF)*
-- Layer system for multi-layered textmode scenes with blend modes, opacity, positioning, filtering, and more
-- Custom filter shaders in [`GLSL ES 3.00`](https://registry.khronos.org/OpenGL/specs/es/3.0/GLSL_ES_Specification_3.00.pdf) for advanced effects
-- Flexible exporting: TXT, SVG, raster images *(PNG/JPG/WebP)*, animated GIFs, and video *(WebM)*
-- Animation loop control: `frameRate`, `loop`/`noLoop`, `redraw`, `frameCount`, and more
-- Load images and videos as sources for textmode conversion
-- Offscreen framebuffer support for advanced and multi‑pass workflows
 - Dynamic layering system with blend modes and opacity for multi‑layered textmode scenes
-- Framework‑agnostic design for use with any canvas‑based framework or library
+- Filter system with built-in filters and support for custom filter shaders
+- Load images and videos as sources and render them as textmode with adjustable converters
+- Author custom filter shaders in [`GLSL ES 3.00`](https://registry.khronos.org/OpenGL/specs/es/3.0/GLSL_ES_Specification_3.00.pdf) for advanced effects
+- Flexible exporting: TXT, SVG, raster images *(PNG/JPG/WebP)*, animated GIFs, and video *(WebM)*
+- Animation loop control: `frameRate`, `loop`/`noLoop`, `redraw`, `frameCount`, etc.
+- Framework-agnostic: Use `textmode.js` with any canvas-based framework or library
 - Zero dependencies, written in TypeScript, with comprehensive type definitions
 
 :::info

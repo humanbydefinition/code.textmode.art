@@ -18,7 +18,7 @@ Get the current overall loading progress (0-1).
 
 ##### Example
 
-```ts
+```javascript
 const t = textmode.create({
   width: 800,
   height: 600,
@@ -67,7 +67,7 @@ A handle to the created loading phase.
 
 #### Example
 
-```ts
+```javascript
 const t = textmode.create({
   width: 800,
   height: 600,
@@ -111,7 +111,7 @@ Report an error that occurred during loading.
 
 #### Example
 
-```ts
+```javascript
 const t = textmode.create({
   width: 800,
   height: 600,
@@ -156,7 +156,7 @@ The current loading screen message.
 
 #### Example
 
-```ts
+```javascript
 const t = textmode.create({
   width: 800,
   height: 600,

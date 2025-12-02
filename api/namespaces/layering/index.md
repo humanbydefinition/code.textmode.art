@@ -15,10 +15,10 @@ All modules and types related to multi-layered textmode rendering.
 
 | Interface | Description |
 | ------ | ------ |
-| [TextmodeLayerOptions](interfaces/TextmodeLayerOptions.md) | Options for configuring a TextmodeLayer. |
+| [TextmodeLayerOptions](interfaces/TextmodeLayerOptions.md) | Options for configuring a new TextmodeLayer via [TextmodeLayerManager.add](classes/TextmodeLayerManager.md#add). |
 
 ## Type Aliases
 
 | Type Alias | Description |
 | ------ | ------ |
-| [TextmodeLayerBlendMode](type-aliases/TextmodeLayerBlendMode.md) | Blend modes available for [TextmodeLayer](classes/TextmodeLayer.md) compositing. |
+| [TextmodeLayerBlendMode](type-aliases/TextmodeLayerBlendMode.md) | Blend modes available for [TextmodeLayer](classes/TextmodeLayer.md) compositing in 2D mode. |

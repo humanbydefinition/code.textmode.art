@@ -13,6 +13,11 @@ const themeConfig = {
     text: 'Last updated'
   },
 
+  editLink: {
+    pattern: 'https://github.com/humanbydefinition/code.textmode.art/edit/main/:path',
+    text: 'Edit this page on GitHub'
+  },
+
   nav,
 
   search: {

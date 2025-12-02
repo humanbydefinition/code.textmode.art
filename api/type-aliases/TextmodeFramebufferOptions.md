@@ -16,7 +16,12 @@ Options for creating a framebuffer. If not specified, width and height default t
 optional attachments: number;
 ```
 
-Number of color attachments (1-8)
+Number of color attachments *(1-8)* 
+
+Defaults to 3 for textmode framebuffers *(character/transform data, primary color, secondary color)*. 
+You probably do not want to go below 3 for textmode rendering, otherwise rendering will not function correctly.
+
+Going above 3 is only recommended for advanced use cases involving custom shaders that utilize additional attachments.
 
 ***
 
