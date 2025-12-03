@@ -3,14 +3,7 @@ import { defineConfig } from 'vitepress'
 import container from 'markdown-it-container'
 import { renderSandbox } from 'vitepress-plugin-sandpack'
 import { withMermaid } from 'vitepress-plugin-mermaid'
-import { head, nav, sidebar } from './configs/index.mts'
-import { defineBlogConfig } from 'vitepress-plugin-blog/config'
-
-const blog = defineBlogConfig({
-  sidebar: {
-    recentPostsCount: 5,
-  }
-})
+import { head, nav, sidebar, blog } from './configs/index.mts'
 
 const themeConfig = {
   logo: '/svg/doc_logo.svg',
@@ -34,10 +27,7 @@ const themeConfig = {
     level: [2, 3] as [number, number],
   },
 
-  sidebar: {
-    ...sidebar,
-    '/blog/': blog.sidebar,
-  },
+  sidebar,
 
   footer: {
     copyright: 'Copyright © 2025 <a href="https://textmode.art" target="_blank">textmode.art</a>. Built with <a href="https://vitepress.dev" target="_blank">VitePress</a>. Created by <a href="https://github.com/humanbydefinition" target="_blank">humanbydefinition</a>.',
