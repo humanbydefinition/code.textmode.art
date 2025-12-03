@@ -1,0 +1,260 @@
+/* Import a good monospace font for ASCII aesthetics */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+/* Custom CSS variables for textmode.js theme */
+:root {
+  --textmode-green: #00ff88;
+  --textmode-green-dark: #00cc6a;
+  --textmode-bg-overlay: rgba(10, 10, 10, 0.95);
+  --textmode-glow: 0 0 20px rgba(0, 255, 136, 0.3);
+  --textmode-font: 'JetBrains Mono', 'Courier New', monospace;
+}
+
+/* Hero section adjustments */
+.actions {
+  padding-top: 0.0rem !important;
+}
+
+/* Creative coding hero action buttons */
+.VPHome .VPHero .actions {
+  display: none !important;
+}
+
+/* Enhanced hero section styles - only apply to home page */
+.VPHome .VPHero {
+  position: relative;
+  overflow: hidden;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin: 0;
+}
+
+
+.VPHome {
+  margin-bottom: 64px !important;
+}
+
+.textmode-hero-container {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  margin: 1.5rem 0;
+  border-radius: 8px;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--vp-c-bg-soft) 0%, var(--vp-c-bg) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+
+  .VPHome .VPButton {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.9rem;
+  }
+
+  /* TextmodeHero mobile styles */
+  .textmode-hero-container {
+    height: 300px;
+    margin: 1rem 0;
+  }
+}
+
+/* Footer styling for better spacing */
+.VPFooter {
+  border-top: 1px solid var(--vp-c-divider);
+  padding-top: 2rem !important;
+  padding-bottom: 2rem !important;
+}
+
+/* Ensure global footer stays visible on documentation views with sidebars */
+.VPFooter.has-sidebar {
+  display: block !important;
+}
+
+@media (min-width: 960px) {
+  .VPFooter.has-sidebar {
+    padding-left: calc(var(--vp-sidebar-width, 320px) + 24px);
+    padding-right: 24px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .VPFooter.has-sidebar {
+    padding-left: calc(((100vw - var(--vp-layout-max-width)) / 2) + var(--vp-sidebar-width, 320px) + 24px);
+    padding-right: calc(((100vw - var(--vp-layout-max-width)) / 2) + 24px);
+  }
+}
+
+.VPFooter .message {
+  margin-bottom: 1rem !important;
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+.VPFooter .message a {
+  color: var(--vp-c-brand-1);
+  text-decoration: none;
+  transition: color 0.25s;
+}
+
+.VPFooter .message a:hover {
+  color: var(--vp-c-brand-2);
+}
+
+@media (max-width: 480px) {
+  /* TextmodeHero mobile styles */
+  .textmode-hero-container {
+    height: 250px;
+  }
+}
+
+/* Textmode Sandbox Overlay Styling */
+.textmode-sandbox-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.textmode-sketch-overlay {
+  position: absolute;
+  top: 1px;
+  left: 1px;
+  z-index: 10;
+  pointer-events: none;
+  padding: 1rem 1.25rem;
+  background: rgba(6, 12, 20, 0.75);
+  border-radius: 8px;
+  max-width: 400px;
+}
+
+.textmode-sketch-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #6db3ff;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.25rem;
+  text-shadow: 0 0 10px rgba(109, 179, 255, 0.4);
+}
+
+.textmode-sketch-author {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.03em;
+}
+
+.textmode-sketch-author-link,
+.textmode-sketch-author-link:visited {
+  font-size: 0.85rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.7) !important;
+  letter-spacing: 0.03em;
+  text-decoration: none;
+  pointer-events: auto;
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.textmode-sketch-author-link:hover,
+.textmode-sketch-author-link:focus {
+  color: rgba(255, 255, 255, 1.0) !important;
+  text-shadow: 0 0 8px rgba(109, 179, 255, 0.3);
+}
+
+/* Responsive adjustments for overlay */
+@media (max-width: 768px) {
+
+  .textmode-sketch-title {
+    font-size: 0.9rem;
+  }
+
+  .textmode-sketch-author,
+  .textmode-sketch-author-link {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .textmode-sketch-title {
+    font-size: 0.8rem;
+  }
+
+  .textmode-sketch-author,
+  .textmode-sketch-author-link {
+    font-size: 0.7rem;
+  }
+}
+
+/* Home feature card layout adjustments */
+.VPHome .VPFeature .box {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    "icon title"
+    "details details"
+    "link link";
+  column-gap: 16px;
+  align-items: center;
+}
+
+.VPHome .VPFeature .box>img.VPImage,
+.VPHome .VPFeature .box>.icon {
+  grid-area: icon;
+  margin-bottom: 0;
+  justify-self: start;
+  align-self: center;
+}
+
+.VPHome .VPFeature .details {
+  grid-area: details;
+}
+
+.VPHome .VPFeature .link-text {
+  grid-area: link;
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  border: 1px solid transparent;
+  transition: all 0.2s ease;
+}
+
+.cta-button.primary {
+  background: var(--vp-c-brand-1);
+  border-color: var(--vp-c-brand-1);
+  color: #000;
+}
+
+.cta-button.primary:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.cta-button.secondary {
+  background: var(--vp-c-bg);
+  border-color: var(--vp-c-divider);
+  color: var(--vp-c-text-1);
+}
+
+.cta-button.secondary:hover {
+  border-color: var(--vp-c-brand-1);
+  color: var(--vp-c-brand-1);
+}
+
+@media (max-width: 960px) {
+  .cta-button {
+    width: 100%;
+  }
+}
+
