@@ -91,6 +91,29 @@ ILayerManager.add
 
 ***
 
+### clear()
+
+```ts
+clear(): void;
+```
+
+Remove all user-created layers from the manager.
+The base layer is not affected by this operation.
+This is useful for integration into live-coding environments where code is re-evaluated
+and layers need to be recreated from scratch.
+
+#### Returns
+
+`void`
+
+#### Implementation of
+
+```ts
+ILayerManager.clear
+```
+
+***
+
 ### move()
 
 ```ts

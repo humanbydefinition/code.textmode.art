@@ -12,4 +12,5 @@ Options for configuring a new TextmodeLayer via [TextmodeLayerManager.add](../cl
 | <a id="offsetx"></a> `offsetX?` | `number` | The horizontal offset of the layer in pixels. Default is `0`. |
 | <a id="offsety"></a> `offsetY?` | `number` | The vertical offset of the layer in pixels. Default is `0`. |
 | <a id="opacity"></a> `opacity?` | `number` | The opacity of the layer, between 0 (fully transparent) and 1 (fully opaque). Default is `1`. |
+| <a id="rotation"></a> `rotation?` | `number` | The `z` rotation of the layer in degrees around its center. Default is `0`. |
 | <a id="visible"></a> `visible?` | `boolean` | Whether the layer is visible. Default is `true`. |

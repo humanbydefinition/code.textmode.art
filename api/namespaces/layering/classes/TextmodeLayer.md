@@ -551,6 +551,66 @@ ITextmodeLayer.opacity
 
 ***
 
+### rotateZ()
+
+```ts
+rotateZ(z?): number | void;
+```
+
+Set or get the layer's rotation in degrees around its center.
+
+The rotation is applied during compositing around the center of the layer's
+rectangular bounds. The rotation origin remains at the center even when
+an offset is applied.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `z?` | `number` | The rotation angle in degrees. Positive values rotate clockwise. |
+
+#### Returns
+
+`number` \| `void`
+
+The current rotation in degrees if no parameter is provided.
+
+#### Example
+
+```typescript
+import { textmode } from 'textmode.js';
+
+const t = textmode.create();
+
+const rotatingLayer = t.layers.add({ blendMode: 'difference', opacity: 1.0 });
+
+rotatingLayer.draw(() => {
+  t.clear();
+  t.charColor(255, 200, 100);
+  t.char('#');
+  t.rect(10, 5);
+});
+
+t.draw(() => {
+  t.background(20, 20, 40);
+
+  // Rotate the layer over time
+  rotatingLayer.rotateZ(t.frameCount * 2);
+
+  t.charColor(100, 200, 255);
+  t.char('-');
+  t.rect(t.grid.cols, t.grid.rows);
+});
+```
+
+#### Implementation of
+
+```ts
+ITextmodeLayer.rotateZ
+```
+
+***
+
 ### show()
 
 ```ts
