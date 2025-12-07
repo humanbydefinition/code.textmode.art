@@ -17,7 +17,18 @@
         </div>
         <div class="font-card__detail">
           <dt>License:</dt>
-          <dd>{{ font.license }}</dd>
+          <dd>
+            <a 
+              v-if="isUrl(font.license)" 
+              :href="font.license" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="font-card__license-link"
+            >
+              {{ font.license }}
+            </a>
+            <span v-else>{{ font.license }}</span>
+          </dd>
         </div>
       </dl>
 
@@ -38,6 +49,10 @@ import { UiCard, UiButton } from '../ui'
 import type { Font } from './types'
 
 defineProps<{ font: Font }>()
+
+const isUrl = (str: string): boolean => {
+  return str.startsWith('http://') || str.startsWith('https://')
+}
 </script>
 
 <style scoped>
@@ -109,6 +124,17 @@ defineProps<{ font: Font }>()
   margin: 0;
   color: var(--vp-c-text-1);
   text-align: right;
+}
+
+.font-card__license-link {
+  color: var(--vp-c-brand-1);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.font-card__license-link:hover {
+  color: var(--vp-c-brand-2);
+  text-decoration: underline;
 }
 
 .font-card__cta {
