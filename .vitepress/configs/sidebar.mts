@@ -23,6 +23,7 @@ const docsSidebar: DefaultTheme.SidebarItem[] = [
       { text: 'Exporting', link: '/docs/exporting' },
       { text: 'Examples', link: '/docs/examples' },
       { text: 'Contributing', link: '/docs/contributing' },
+      { text: 'Contributors', link: '/docs/contributors' },
     ]
   },
   {
