@@ -1,6 +1,7 @@
 ---
 title: Contributors
-description: Meet the team behind textmode.js
+description: Meet the contributors who help build and maintain textmode.js and its documentation.
+layout: doc
 ---
 
 <script setup>
