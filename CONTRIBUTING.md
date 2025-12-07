@@ -1,4 +1,4 @@
-# Contributing to `code.textmode.art`
+# Contributing
 
 Thank you for your interest in contributing! This documentation site thrives on community input, and there are many ways to help - no matter your skill level.
 
