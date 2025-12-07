@@ -238,6 +238,7 @@ onUnmounted(() => {
   justify-content: center;
   padding: 1rem;
   outline: none;
+  backdrop-filter: blur(4px);
 }
 
 .lightbox-content {
