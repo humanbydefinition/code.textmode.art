@@ -17,6 +17,7 @@ import FontShowcase from './components/FontShowcase/FontShowcase.vue'
 import SupportGrid from './components/Support/SupportGrid.vue'
 import TextmodeWhatIs from './components/TextmodeWhatIs.vue'
 import HomeCta from './components/HomeCta/HomeCta.vue'
+import NotificationToast from './components/NotificationToast/NotificationToast.vue'
 
 // Blog
 import { withBlogTheme } from 'vitepress-plugin-blog'
@@ -49,7 +50,8 @@ const HeroLayout = defineComponent({
             <canvas class="textmode-hero-canvas"></canvas>
           </div>
         `
-      })
+      }),
+      'layout-bottom': () => h(NotificationToast)
     })
   }
 })
