@@ -41,9 +41,23 @@ The following anonymous data may be collected:
 
 As Umami does not use cookies and does not collect personal data, consent for this type of analytics is not required under GDPR.
 
+## Local Storage
+
+This website uses browser local storage to save non-personal preferences and enhance your user experience. Specifically:
+
+- **Notification preferences**: When you dismiss certain notifications or information banners, your preference is saved locally in your browser to prevent showing the same message repeatedly.
+
+This data:
+- Is stored only in your browser's local storage
+- Does not contain any personally identifiable information
+- Is never transmitted to our servers or any third party
+- Can be deleted at any time by clearing your browser's local storage
+
+No consent is required for this type of local storage as it serves only to improve usability and does not track or identify users (Art. 6(1)(f) GDPR - legitimate interest).
+
 ## No User Data Collection (Except as Described Below)
 
-This website is primarily an informational documentation site. Apart from the anonymized analytics described above and the optional features described below, we do not:
+This website is primarily an informational documentation site. Apart from the anonymized analytics described above, local storage for preferences, and the optional features described below, we do not:
 - Require user registration or authentication for general use of the site
 - Collect any personal information from visitors on our own servers
 - Process or store any user-specific data beyond what is technically necessary for hosting
