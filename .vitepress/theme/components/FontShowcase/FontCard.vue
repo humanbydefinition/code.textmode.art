@@ -1,8 +1,13 @@
 <template>
   <UiCard hoverable rounded="md" :padded="false" class="font-card">
     <template #media>
-      <div class="font-card__preview">
-        <img :src="font.image" :alt="`${font.name} preview`" class="font-card__image" />
+      <div 
+        class="font-card__preview" 
+        @click="openGallery"
+        @touchstart="handleTouchStart"
+        @touchend="handleTouchEnd"
+      >
+        <img :src="coverImage" :alt="`${font.name} preview`" class="font-card__image" />
       </div>
     </template>
 
@@ -45,10 +50,50 @@
 </template>
 
 <script setup lang="ts">
+import { computed } from 'vue'
 import { UiCard, UiButton } from '../ui'
 import type { Font } from './types'
 
-defineProps<{ font: Font }>()
+const props = defineProps<{ font: Font }>()
+const emit = defineEmits<{
+  openGallery: [images: string[], fontName: string]
+}>()
+
+const galleryImages = computed(() => props.font.images ?? [])
+const coverImage = computed(() => galleryImages.value[0] || '')
+
+// Touch handling to distinguish between tap and scroll
+let touchStartX = 0
+let touchStartY = 0
+let touchStartTime = 0
+
+const handleTouchStart = (event: TouchEvent) => {
+  touchStartX = event.touches[0].clientX
+  touchStartY = event.touches[0].clientY
+  touchStartTime = Date.now()
+}
+
+const handleTouchEnd = (event: TouchEvent) => {
+  const touchEndX = event.changedTouches[0].clientX
+  const touchEndY = event.changedTouches[0].clientY
+  const touchEndTime = Date.now()
+  
+  const deltaX = Math.abs(touchEndX - touchStartX)
+  const deltaY = Math.abs(touchEndY - touchStartY)
+  const deltaTime = touchEndTime - touchStartTime
+  
+  // Only open gallery if it's a tap (minimal movement, short duration)
+  const isTap = deltaX < 10 && deltaY < 10 && deltaTime < 300
+  
+  if (isTap) {
+    event.preventDefault()
+    openGallery()
+  }
+}
+
+const openGallery = () => {
+  emit('openGallery', galleryImages.value, props.font.name)
+}
 
 const isUrl = (str: string): boolean => {
   return str.startsWith('http://') || str.startsWith('https://')
@@ -64,10 +109,25 @@ const isUrl = (str: string): boolean => {
   justify-content: center;
   min-height: 200px;
   border-bottom: 1px solid var(--vp-c-border);
+  position: relative;
+  transition: all 0.2s ease;
+  cursor: zoom-in;
+}
+
+.font-card__preview:hover {
+  background: #e9ecef;
+}
+
+.font-card__preview:hover .font-card__image {
+  transform: scale(1.02);
 }
 
 .dark .font-card__preview {
   background: var(--vp-c-bg-alt);
+}
+
+.dark .font-card__preview:hover {
+  background: var(--vp-c-bg-mute);
 }
 
 .font-card__image {
@@ -76,6 +136,7 @@ const isUrl = (str: string): boolean => {
   object-fit: contain;
   border-radius: 4px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
 }
 
 .dark .font-card__image {

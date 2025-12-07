@@ -1,7 +1,9 @@
 [
   {
     "name": "UrsaFont",
-    "image": "/font_previews/UrsaFont.png",
+    "images": [
+      "/font_previews/ursafont/01.png"
+    ],
     "description": "8x8 monospaced ANSI-inspired font for text art and games, with regular and inverted variants.",
     "downloadUrl": "https://ursafrank.itch.io/ursafont",
     "glyphCount": "255+",
@@ -9,7 +11,14 @@
   },
   {
     "name": "C64 Pro Mono",
-    "image": "/font_previews/c64_truetype.png",
+    "images": [
+      "/font_previews/c64_pro_mono/01.png",
+      "/font_previews/c64_pro_mono/02.png",
+      "/font_previews/c64_pro_mono/03.png",
+      "/font_previews/c64_pro_mono/04.png",
+      "/font_previews/c64_pro_mono/05.png",
+      "/font_previews/c64_pro_mono/06.png"
+    ],
     "description": "Monospaced font with all 304 Commodore 64 glyphs, ideal for PETSCII art and classic C64 aesthetics.",
     "downloadUrl": "https://style64.org/c64-truetype",
     "glyphCount": "1000+",
@@ -17,7 +26,9 @@
   },
   {
     "name": "FROGBLOCK-V2.1",
-    "image": "/font_previews/FROGBLOCK.png",
+    "images": [
+      "/font_previews/frogblock/01.png"
+    ],
     "description": "8x8 monospaced font by Polyducks for text art and games, with special characters for artistic use.",
     "downloadUrl": "https://polyducks.itch.io/frogblock",
     "glyphCount": "255",
@@ -25,7 +36,10 @@
   },
   {
     "name": "CHUNKY",
-    "image": "/font_previews/CHUNKY.png",
+    "images": [
+      "/font_previews/chunky/01.png",
+      "/font_previews/chunky/02.png"
+    ],
     "description": "A bold 8x8 pixel font, offering a wide range of shapes and symbols for expressive textmode art.",
     "downloadUrl": "https://batfeula.itch.io/chunky",
     "glyphCount": "367",
@@ -33,7 +47,10 @@
   },
   {
     "name": "Kitchen Sink",
-    "image": "/font_previews/Kitchen_Sink.png",
+    "images": [
+      "/font_previews/kitchen_sink/01.png",
+      "/font_previews/kitchen_sink/02.png"
+    ],
     "description": "Compact 6x8 monospaced font with 256 characters and special symbols for text art, games, and creative designs.",
     "downloadUrl": "https://polyducks.itch.io/kitchen-sink-textmode-font",
     "glyphCount": "256",
@@ -41,7 +58,23 @@
   },
   {
     "name": "PetMe64",
-    "image": "/font_previews/petme64.png",
+    "images": [
+      "/font_previews/petme64/01.png",
+      "/font_previews/petme64/02.png",
+      "/font_previews/petme64/03.png",
+      "/font_previews/petme64/04.png",
+      "/font_previews/petme64/05.png",
+      "/font_previews/petme64/06.png",
+      "/font_previews/petme64/07.png",
+      "/font_previews/petme64/08.png",
+      "/font_previews/petme64/09.png",
+      "/font_previews/petme64/10.png",
+      "/font_previews/petme64/11.png",
+      "/font_previews/petme64/12.png",
+      "/font_previews/petme64/13.png",
+      "/font_previews/petme64/14.png",
+      "/font_previews/petme64/15.png"
+    ],
     "description": "Faithfully replicates the 40-column Commodore 64 character set, with added Unicode, box-drawing, and legacy computing symbols for retro projects.",
     "downloadUrl": "https://www.kreativekorp.com/software/fonts/c64/",
     "glyphCount": "~3809",
@@ -49,7 +82,10 @@
   },
   {
     "name": "ATASCII",
-    "image": "/font_previews/atascii.png",
+    "images": [
+      "/font_previews/atascii/01.png",
+      "/font_previews/atascii/02.png"
+    ],
     "description": "8x8 monospaced font based on Atari 8-bit and ST character sets, with extended Latin, Greek, Hebrew, and symbol support.",
     "downloadUrl": "https://codeberg.org/Dmian/font-atascii",
     "glyphCount": "~385",
@@ -57,7 +93,16 @@
   },
   {
     "name": "BESCII",
-    "image": "/font_previews/bescii.png",
+    "images": [
+      "/font_previews/bescii/01.png",
+      "/font_previews/bescii/02.png",
+      "/font_previews/bescii/03.png",
+      "/font_previews/bescii/04.png",
+      "/font_previews/bescii/05.png",
+      "/font_previews/bescii/06.png",
+      "/font_previews/bescii/07.png",
+      "/font_previews/bescii/08.png"
+    ],
     "description": "8×8 monospaced PETSCII-inspired font for BASIC Engine, supporting Western European, Greek, Cyrillic, kana, PETSCII, CPC 464, legacy computing, and pixel-art glyphs.",
     "downloadUrl": "https://codeberg.org/Dmian/font-bescii",
     "glyphCount": "~1903",
@@ -65,7 +110,10 @@
   },
   {
     "name": "CPC464",
-    "image": "/font_previews/cpc464.png",
+    "images": [
+      "/font_previews/cpc464/01.png",
+      "/font_previews/cpc464/02.png"
+    ],
     "description": "8×8 monospaced font based on Amstrad CPC 464, with extended Western European, Greek, and CPC symbols. Wide strokes for low-res screens.",
     "downloadUrl": "https://codeberg.org/Dmian/font-cpc464",
     "glyphCount": "~390",
@@ -73,7 +121,9 @@
   },
   {
     "name": "Pixel Dingbats-7",
-    "image": "/font_previews/pixel_dingbats_7.png",
+    "images": [
+      "/font_previews/pixel_dingbats/01.png"
+    ],
     "description": "Compact 8x8 pixel dingbat font with 221 symbols, including chess pieces, card suits, icons, and patterns for retro UI and pixel art.",
     "downloadUrl": "https://www.dafont.com/pixel-dingbats-7.font",
     "glyphCount": "~218",
