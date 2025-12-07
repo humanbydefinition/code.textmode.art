@@ -1,17 +1,17 @@
 <template>
   <Transition name="toast-fade">
-    <div v-if="visible" class="opensource-toast" role="alert" aria-live="polite">
-      <div class="opensource-toast__content">
-        <div class="opensource-toast__header">
-          <span class="opensource-toast__icon">📖</span>
-          <h3 class="opensource-toast__title">Docs now open-source</h3>
+    <div v-if="visible" class="notification-toast" role="alert" aria-live="polite">
+      <div class="notification-toast__content">
+        <div class="notification-toast__header">
+          <span class="notification-toast__icon">📖</span>
+          <h3 class="notification-toast__title">Docs now open-source</h3>
         </div>
-        <p class="opensource-toast__body">
-          These docs just went public. We'd love your contributions and feedback.
+        <p class="notification-toast__body">
+          These docs just went public. We'd love your contributions and feedback!
         </p>
-        <div class="opensource-toast__actions">
+        <div class="notification-toast__actions">
           <a
-            class="opensource-toast__button opensource-toast__button--primary"
+            class="notification-toast__button notification-toast__button--primary"
             href="https://github.com/humanbydefinition/code.textmode.art"
             target="_blank"
             rel="noopener noreferrer"
@@ -20,7 +20,7 @@
             Contribute on GitHub
           </a>
           <button
-            class="opensource-toast__button opensource-toast__button--secondary"
+            class="notification-toast__button notification-toast__button--secondary"
             type="button"
             @click="dismiss"
           >
@@ -29,7 +29,7 @@
         </div>
       </div>
       <button
-        class="opensource-toast__close"
+        class="notification-toast__close"
         type="button"
         aria-label="Dismiss notification"
         @click="dismiss"
@@ -44,7 +44,7 @@
 import { ref, onMounted } from 'vue'
 
 const DISMISS_KEY = 'textmodejs_docs_toast_dismissed_at'
-const DISMISS_DAYS = 30
+const DISMISS_DAYS = 7
 const DISMISS_MS = DISMISS_DAYS * 24 * 60 * 60 * 1000
 const SHOW_DELAY = 1500 // 1.5 seconds delay before showing
 
@@ -100,11 +100,11 @@ function handlePrimaryAction() {
 </script>
 
 <style scoped>
-.opensource-toast {
+.notification-toast {
   position: fixed;
   bottom: 1.5rem;
   right: 1.5rem;
-  max-width: 380px;
+  max-width: 340px;
   background: var(--vp-c-bg-soft);
   border: 1px solid var(--vp-c-border);
   border-radius: 12px;
@@ -114,30 +114,30 @@ function handlePrimaryAction() {
   font-family: var(--textmode-font, 'JetBrains Mono', 'Courier New', monospace);
 }
 
-.dark .opensource-toast {
+.dark .notification-toast {
   background: var(--vp-c-bg-alt);
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
 }
 
-.opensource-toast__content {
+.notification-toast__content {
   display: flex;
   flex-direction: column;
   gap: 0.875rem;
 }
 
-.opensource-toast__header {
+.notification-toast__header {
   display: flex;
   align-items: center;
   gap: 0.625rem;
 }
 
-.opensource-toast__icon {
+.notification-toast__icon {
   font-size: 1.25rem;
   line-height: 1;
   flex-shrink: 0;
 }
 
-.opensource-toast__title {
+.notification-toast__title {
   margin: 0;
   font-size: 0.9375rem;
   font-weight: 600;
@@ -145,20 +145,20 @@ function handlePrimaryAction() {
   line-height: 1.4;
 }
 
-.opensource-toast__body {
+.notification-toast__body {
   margin: 0;
   font-size: 0.8125rem;
   color: var(--vp-c-text-2);
   line-height: 1.6;
 }
 
-.opensource-toast__actions {
+.notification-toast__actions {
   display: flex;
   gap: 0.5rem;
   margin-top: 0.25rem;
 }
 
-.opensource-toast__button {
+.notification-toast__button {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -175,29 +175,29 @@ function handlePrimaryAction() {
   white-space: nowrap;
 }
 
-.opensource-toast__button--primary {
+.notification-toast__button--primary {
   background: var(--vp-c-brand-1);
   border-color: var(--vp-c-brand-1);
   color: var(--vp-c-white);
 }
 
-.opensource-toast__button--primary:hover {
+.notification-toast__button--primary:hover {
   background: var(--vp-c-brand-2);
   border-color: var(--vp-c-brand-2);
 }
 
-.opensource-toast__button--secondary {
+.notification-toast__button--secondary {
   background: var(--vp-c-bg);
   border-color: var(--vp-c-divider);
   color: var(--vp-c-text-2);
 }
 
-.opensource-toast__button--secondary:hover {
+.notification-toast__button--secondary:hover {
   border-color: var(--vp-c-text-3);
   color: var(--vp-c-text-1);
 }
 
-.opensource-toast__close {
+.notification-toast__close {
   position: absolute;
   top: 0.75rem;
   right: 0.75rem;
@@ -216,12 +216,12 @@ function handlePrimaryAction() {
   transition: all 0.15s ease;
 }
 
-.opensource-toast__close:hover {
+.notification-toast__close:hover {
   background: var(--vp-c-bg);
   color: var(--vp-c-text-1);
 }
 
-.opensource-toast__close:active {
+.notification-toast__close:active {
   transform: scale(0.95);
 }
 
@@ -243,7 +243,7 @@ function handlePrimaryAction() {
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-  .opensource-toast {
+  .notification-toast {
     bottom: 1rem;
     right: 1rem;
     left: 1rem;
@@ -251,11 +251,11 @@ function handlePrimaryAction() {
     padding: 1rem;
   }
 
-  .opensource-toast__actions {
+  .notification-toast__actions {
     flex-direction: column;
   }
 
-  .opensource-toast__button {
+  .notification-toast__button {
     width: 100%;
   }
 }
@@ -272,8 +272,8 @@ function handlePrimaryAction() {
     transform: none;
   }
 
-  .opensource-toast__button:hover,
-  .opensource-toast__button--primary:hover {
+  .notification-toast__button:hover,
+  .notification-toast__button--primary:hover {
     transform: none;
   }
 }
