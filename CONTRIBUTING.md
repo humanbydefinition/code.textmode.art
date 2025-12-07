@@ -34,9 +34,8 @@ Example sketches appear throughout the documentation and showcase what's possibl
 
 Sketch metadata is stored in [`.vitepress/data/sketches.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/sketches.json).
 
-:::info
-A gallery will be added in the future to showcase community-submitted sketches. On the `code.textmode.art` landing page, it will pick 3 random sketches from the collection each time the page loads, instead of the current static examples.
-:::
+> [!NOTE]
+> A gallery will be added in the future to showcase community-submitted sketches. On the `code.textmode.art` landing page, it will pick 3 random sketches from the collection each time the page loads, instead of the current static examples.
 
 ### 📝 Improve documentation
 
