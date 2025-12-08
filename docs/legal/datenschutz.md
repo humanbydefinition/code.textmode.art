@@ -42,9 +42,23 @@ Folgende anonyme Daten können erfasst werden:
 
 Da Umami keine Cookies verwendet und keine personenbezogenen Daten sammelt, ist eine Einwilligung für diese Art von Analysen gemäß DSGVO nicht erforderlich.
 
+## Local Storage (Lokaler Speicher)
+
+Diese Website verwendet den lokalen Speicher Ihres Browsers, um nicht-personenbezogene Präferenzen zu speichern und Ihre Benutzererfahrung zu verbessern. Konkret:
+
+- **Benachrichtigungspräferenzen**: Wenn Sie bestimmte Benachrichtigungen oder Informationsbanner schließen, wird Ihre Präferenz lokal in Ihrem Browser gespeichert, um zu verhindern, dass dieselbe Nachricht wiederholt angezeigt wird.
+
+Diese Daten:
+- Werden nur im lokalen Speicher Ihres Browsers gespeichert
+- Enthalten keine personenbezogenen Daten
+- Werden niemals an unsere Server oder Dritte übertragen
+- Können jederzeit durch Löschen des lokalen Speichers Ihres Browsers entfernt werden
+
+Für diese Art der lokalen Speicherung ist keine Einwilligung erforderlich, da sie nur der Verbesserung der Benutzerfreundlichkeit dient und keine Benutzer verfolgt oder identifiziert (Art. 6 Abs. 1 lit. f DSGVO - berechtigtes Interesse).
+
 ## Keine Erhebung von Benutzerdaten (außer wie nachfolgend beschrieben)
 
-Diese Website ist in erster Linie eine informative Dokumentationsseite. Abgesehen von den oben beschriebenen anonymen Analysen und den nachfolgend beschriebenen optionalen Funktionen:
+Diese Website ist in erster Linie eine informative Dokumentationsseite. Abgesehen von den oben beschriebenen anonymen Analysen, dem lokalen Speicher für Präferenzen und den nachfolgend beschriebenen optionalen Funktionen:
 - Erfordern wir für die allgemeine Nutzung der Seite keine Benutzerregistrierung oder Authentifizierung
 - Sammeln wir auf unseren eigenen Servern keine personenbezogenen Informationen von Besuchern
 - Verarbeiten oder speichern wir keine benutzerspezifischen Daten über das für den Betrieb der Website technisch Notwendige hinaus
