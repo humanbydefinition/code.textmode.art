@@ -8,6 +8,7 @@
   --textmode-bg-overlay: rgba(10, 10, 10, 0.95);
   --textmode-glow: 0 0 20px rgba(0, 255, 136, 0.3);
   --textmode-font: 'JetBrains Mono', 'Courier New', monospace;
+  --textmode-doc-aside-width: 256px;
 }
 
 /* Hero section adjustments */
@@ -65,7 +66,7 @@
 
 /* Footer styling for better spacing */
 .VPFooter {
-  border-top: 1px solid var(--vp-c-divider);
+  border-top: 1px solid var(--vp-c-divider) !important;
   padding-top: 2rem !important;
   padding-bottom: 2rem !important;
 }
@@ -73,19 +74,17 @@
 /* Ensure global footer stays visible on documentation views with sidebars */
 .VPFooter.has-sidebar {
   display: block !important;
+  max-width: var(--vp-layout-max-width);
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
 }
 
-@media (min-width: 960px) {
+@media (min-width: 1280px) {
   .VPFooter.has-sidebar {
-    padding-left: calc(var(--vp-sidebar-width, 320px) + 24px);
-    padding-right: 24px;
-  }
-}
-
-@media (min-width: 1440px) {
-  .VPFooter.has-sidebar {
-    padding-left: calc(((100vw - var(--vp-layout-max-width)) / 2) + var(--vp-sidebar-width, 320px) + 24px);
-    padding-right: calc(((100vw - var(--vp-layout-max-width)) / 2) + 24px);
+    max-width: none;
+    margin-left: calc(var(--vp-sidebar-width, 320px) + 32px);
+    margin-right: calc(var(--textmode-doc-aside-width) + 32px);
   }
 }
 
@@ -255,6 +254,69 @@
 @media (max-width: 960px) {
   .cta-button {
     width: 100%;
+  }
+}
+
+/* Aside layout - make outline scrollable with sticky bottom section */
+@media (min-width: 1280px) {
+  /* Remove scroll from the aside container, we'll handle it in the outline */
+  .VPDoc .aside .aside-container {
+    overflow-y: visible;
+    overflow-x: visible;
+  }
+
+  /* Make aside-content fill the available height with proper flex layout */
+  .VPDoc .aside .aside-content {
+    display: flex;
+    flex-direction: column;
+    max-height: calc(100vh - var(--vp-nav-height) - var(--vp-layout-top-height, 0px) - var(--vp-doc-top-height, 0px) - 48px - 32px);
+  }
+
+  /* VPDocAside is already flex column, ensure it fills space */
+  .VPDoc .aside .aside-content .VPDocAside {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    max-height: 100%;
+  }
+
+  /* Make the outline wrapper scrollable */
+  .VPDoc .aside .VPDocAsideOutline {
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: var(--vp-c-divider) transparent;
+  }
+
+  /* Hide the spacer since we're using flex to push bottom content */
+  .VPDoc .aside .VPDocAside > .spacer {
+    display: none;
+  }
+
+  /* Webkit scrollbar styles for outline */
+  .VPDoc .aside .VPDocAsideOutline::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  .VPDoc .aside .VPDocAsideOutline::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .VPDoc .aside .VPDocAsideOutline::-webkit-scrollbar-thumb {
+    background: var(--vp-c-divider);
+    border-radius: 2px;
+  }
+
+  .VPDoc .aside .VPDocAsideOutline::-webkit-scrollbar-thumb:hover {
+    background: var(--vp-c-text-3);
+  }
+
+  /* Hide the default aside curtain gradient since outline has its own scroll */
+  .VPDoc .aside .aside-curtain {
+    display: none;
   }
 }
 
