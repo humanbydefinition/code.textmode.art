@@ -17,6 +17,7 @@ import FontShowcase from './components/FontShowcase/FontShowcase.vue'
 import SupportGrid from './components/Support/SupportGrid.vue'
 import TextmodeWhatIs from './components/TextmodeWhatIs.vue'
 import HomeCta from './components/HomeCta/HomeCta.vue'
+import AsideLinks from './components/AsideLinks/AsideLinks.vue'
 import NotificationToast from './components/NotificationToast/NotificationToast.vue'
 
 // Blog
@@ -51,6 +52,7 @@ const HeroLayout = defineComponent({
           </div>
         `
       }),
+      'aside-bottom': () => h(AsideLinks),
       'layout-bottom': () => h(NotificationToast)
     })
   }

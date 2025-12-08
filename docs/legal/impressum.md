@@ -3,6 +3,7 @@ title: Impressum
 description: Rechtliches Impressum für textmode.js, einschließlich Angaben zur verantwortlichen Person und Haftungsausschluss.
 lastUpdated: false
 comment: false
+quickActions: false
 prev: false
 next: false
 ---
