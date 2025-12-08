@@ -3,6 +3,7 @@ title: Imprint
 description: Legal imprint for textmode.js, including responsible party information and liability disclaimer.
 lastUpdated: false
 comment: false
+quickActions: false
 prev: false
 next: false
 ---

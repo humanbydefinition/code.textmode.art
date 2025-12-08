@@ -1,5 +1,5 @@
 <template>
-  <div class="aside-links">
+  <div v-if="showQuickActions" class="aside-links">
     <div class="aside-links__section">
       <h3 class="aside-links__title">Quick Actions</h3>
       <a
@@ -11,25 +11,21 @@
       >
         <span class="aside-links__logo" aria-hidden="true">
           <svg
-            viewBox="0 0 2406 2406"
+            viewBox="0 0 24 24"
             xmlns="http://www.w3.org/2000/svg"
             role="presentation"
+            fill="currentColor"
           >
-            <g fill="currentColor">
-              <path d="M1107.3 299.1c-198 0-373.9 127.3-435.2 315.3L650 743.5v427.9c0 21.4 11 40.4 29.4 51.4l344.5 198.515V833.3h.1v-27.9L1372.7 604c33.715-19.52 70.44-32.857 108.47-39.828L1447.6 450.3C1361 353.5 1237.1 298.5 1107.3 299.1zm0 117.5-.6.6c79.699 0 156.3 27.5 217.6 78.4-2.5 1.2-7.4 4.3-11 6.1L952.8 709.3c-18.4 10.4-29.4 30-29.4 51.4V1248l-155.1-89.4V755.8c-.1-187.099 151.601-338.9 339-339.2z" />
-              <path d="M1107.3 299.1c-198 0-373.9 127.3-435.2 315.3L650 743.5v427.9c0 21.4 11 40.4 29.4 51.4l344.5 198.515V833.3h.1v-27.9L1372.7 604c33.715-19.52 70.44-32.857 108.47-39.828L1447.6 450.3C1361 353.5 1237.1 298.5 1107.3 299.1zm0 117.5-.6.6c79.699 0 156.3 27.5 217.6 78.4-2.5 1.2-7.4 4.3-11 6.1L952.8 709.3c-18.4 10.4-29.4 30-29.4 51.4V1248l-155.1-89.4V755.8c-.1-187.099 151.601-338.9 339-339.2z" transform="rotate(60 1203 1203)" />
-              <path d="M1107.3 299.1c-198 0-373.9 127.3-435.2 315.3L650 743.5v427.9c0 21.4 11 40.4 29.4 51.4l344.5 198.515V833.3h.1v-27.9L1372.7 604c33.715-19.52 70.44-32.857 108.47-39.828L1447.6 450.3C1361 353.5 1237.1 298.5 1107.3 299.1zm0 117.5-.6.6c79.699 0 156.3 27.5 217.6 78.4-2.5 1.2-7.4 4.3-11 6.1L952.8 709.3c-18.4 10.4-29.4 30-29.4 51.4V1248l-155.1-89.4V755.8c-.1-187.099 151.601-338.9 339-339.2z" transform="rotate(120 1203 1203)" />
-              <path d="M1107.3 299.1c-198 0-373.9 127.3-435.2 315.3L650 743.5v427.9c0 21.4 11 40.4 29.4 51.4l344.5 198.515V833.3h.1v-27.9L1372.7 604c33.715-19.52 70.44-32.857 108.47-39.828L1447.6 450.3C1361 353.5 1237.1 298.5 1107.3 299.1zm0 117.5-.6.6c79.699 0 156.3 27.5 217.6 78.4-2.5 1.2-7.4 4.3-11 6.1L952.8 709.3c-18.4 10.4-29.4 30-29.4 51.4V1248l-155.1-89.4V755.8c-.1-187.099 151.601-338.9 339-339.2z" transform="rotate(180 1203 1203)" />
-              <path d="M1107.3 299.1c-198 0-373.9 127.3-435.2 315.3L650 743.5v427.9c0 21.4 11 40.4 29.4 51.4l344.5 198.515V833.3h.1v-27.9L1372.7 604c33.715-19.52 70.44-32.857 108.47-39.828L1447.6 450.3C1361 353.5 1237.1 298.5 1107.3 299.1zm0 117.5-.6.6c79.699 0 156.3 27.5 217.6 78.4-2.5 1.2-7.4 4.3-11 6.1L952.8 709.3c-18.4 10.4-29.4 30-29.4 51.4V1248l-155.1-89.4V755.8c-.1-187.099 151.601-338.9 339-339.2z" transform="rotate(240 1203 1203)" />
-              <path d="M1107.3 299.1c-198 0-373.9 127.3-435.2 315.3L650 743.5v427.9c0 21.4 11 40.4 29.4 51.4l344.5 198.515V833.3h.1v-27.9L1372.7 604c33.715-19.52 70.44-32.857 108.47-39.828L1447.6 450.3C1361 353.5 1237.1 298.5 1107.3 299.1zm0 117.5-.6.6c79.699 0 156.3 27.5 217.6 78.4-2.5 1.2-7.4 4.3-11 6.1L952.8 709.3c-18.4 10.4-29.4 30-29.4 51.4V1248l-155.1-89.4V755.8c-.1-187.099 151.601-338.9 339-339.2z" transform="rotate(300 1203 1203)" />
-            </g>
+            <path d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073zM13.26 22.43a4.476 4.476 0 0 1-2.876-1.04l.141-.081 4.779-2.758a.795.795 0 0 0 .392-.681v-6.737l2.02 1.168a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.494zM3.6 18.304a4.47 4.47 0 0 1-.535-3.014l.142.085 4.783 2.759a.771.771 0 0 0 .78 0l5.843-3.369v2.332a.08.08 0 0 1-.033.062L9.74 19.95a4.5 4.5 0 0 1-6.14-1.646zM2.34 7.896a4.485 4.485 0 0 1 2.366-1.973V11.6a.766.766 0 0 0 .388.676l5.815 3.355-2.02 1.168a.076.076 0 0 1-.071 0l-4.83-2.786A4.504 4.504 0 0 1 2.34 7.872zm16.597 3.855l-5.833-3.387L15.119 7.2a.076.076 0 0 1 .071 0l4.83 2.791a4.494 4.494 0 0 1-.676 8.105v-5.678a.79.79 0 0 0-.407-.667zm2.01-3.023l-.141-.085-4.774-2.782a.776.776 0 0 0-.785 0L9.409 9.23V6.897a.066.066 0 0 1 .028-.061l4.83-2.787a4.5 4.5 0 0 1 6.68 4.66zm-12.64 4.135l-2.02-1.164a.08.08 0 0 1-.038-.057V6.075a4.5 4.5 0 0 1 7.375-3.453l-.142.08L8.704 5.46a.795.795 0 0 0-.393.681zm1.097-2.365l2.602-1.5 2.607 1.5v2.999l-2.597 1.5-2.607-1.5z" />
           </svg>
         </span>
-        <span class="aside-links__text">
-          <span class="aside-links__label">Open in ChatGPT</span>
-          <span class="aside-links__helper">Instant AI summary of this page</span>
+        <span class="aside-links__text">Open in ChatGPT</span>
+        <span class="aside-links__external-icon" aria-hidden="true">
+          <svg viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="16" height="16" rx="3" fill="currentColor" opacity="0.1" />
+            <path d="M6 5h5v5M11 5l-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
         </span>
-        <span class="aside-links__external-icon" aria-hidden="true">↗</span>
       </a>
     </div>
   </div>
@@ -41,8 +37,13 @@ import { useData, useRoute } from 'vitepress'
 
 defineOptions({ name: 'AsideLinks' })
 
-const { page, site } = useData()
+const { page, site, frontmatter } = useData()
 const route = useRoute()
+
+const showQuickActions = computed(() => {
+  // Hide Quick Actions if frontmatter explicitly sets quickActions to false
+  return frontmatter.value.quickActions !== false
+})
 
 const currentUrl = computed(() => {
   if (typeof window !== 'undefined') {
@@ -54,12 +55,10 @@ const currentUrl = computed(() => {
   return `https://code.textmode.art${baseUrl}${path}`.replace(/\/+/g, '/').replace(':/', '://')
 })
 
-const pageKind = computed<'guide' | 'api' | 'example' | 'blog' | 'legal' | 'other'>(() => {
+const pageKind = computed<'guide' | 'api' | 'blog' | 'other'>(() => {
   const path = route.path
   if (path.startsWith('/api/')) return 'api'
-  if (path.startsWith('/docs/examples')) return 'example'
   if (path.startsWith('/blog/')) return 'blog'
-  if (path.startsWith('/docs/legal/')) return 'legal'
   if (path.startsWith('/docs/')) return 'guide'
   return 'other'
 })
@@ -72,10 +71,10 @@ const basePrompt = computed(() => {
     'You are assisting a developer working with **textmode.js**.',
     '',
     'First, fetch and read this documentation page:',
-    '',
     '```',
     url,
     '```',
+    '',
     ''
   ].join('\n')
 
@@ -84,43 +83,27 @@ const basePrompt = computed(() => {
       [
         'Treat it as a conceptual / guide page and respond in **three sections**:',
         '',
-        '1. **Summary** – 3–5 sentences capturing the main ideas.',
-        '2. **Key concepts & APIs** – bullet list, each item with a 1–2 sentence explanation.',
-        '3. **Sketch ideas** – 3 concrete textmode.js sketch ideas or experiments based directly on this page.',
+        '1. **Summary** - 3-5 sentences capturing the main ideas.',
+        '2. **Key concepts & APIs** - bullet list, each item with a 1-2 sentence explanation.',
+        '3. **Sketch ideas** - 3 concrete textmode.js sketch ideas or experiments based directly on this page.',
         ''
       ].join('\n'),
     api:
       [
         'Treat it as **API reference** and respond in **three sections**:',
         '',
-        '1. **Purpose** – short paragraph on what this API surface is for.',
-        '2. **Most important pieces** – group the key methods/options/types and explain when to use each.',
-        '3. **Pitfalls & edge cases** – bullet list of common mistakes or gotchas.',
-        ''
-      ].join('\n'),
-    example:
-      [
-        'Treat it as an **example / tutorial** and respond in **three sections**:',
-        '',
-        '1. **What this example shows** – short summary.',
-        '2. **How to adapt it** – explain how to change things like font, resolution, input source, or parameters.',
-        '3. **Variations to try** – 2–3 specific variations a developer could build from this starting point.',
+        '1. **Purpose** - short paragraph on what this API surface is for.',
+        '2. **Most important pieces** - group the key methods/options/types and explain when to use each.',
+        '3. **Pitfalls & edge cases** - bullet list of common mistakes or gotchas.',
         ''
       ].join('\n'),
     blog:
       [
         'Treat it as a **blog / article** and respond in **three sections**:',
         '',
-        '1. **Core ideas** – short summary.',
-        '2. **Practical techniques** – textmode.js techniques, patterns, or recommendations mentioned in the article.',
-        '3. **How to apply this** – suggestions for how a developer could use these ideas in their own sketches.',
-        ''
-      ].join('\n'),
-    legal:
-      [
-        'Summarize the key **legal points and obligations** in clear, neutral language.',
-        '',
-        'Highlight anything that developers integrating textmode.js into their own projects should be aware of (especially around data, licensing, or attribution).',
+        '1. **Core ideas** - short summary.',
+        '2. **Practical techniques** - textmode.js techniques, patterns, or recommendations mentioned in the article.',
+        '3. **How to apply this** - suggestions for how a developer could use these ideas in their own sketches.',
         ''
       ].join('\n'),
     other:
@@ -131,10 +114,10 @@ const basePrompt = computed(() => {
   }
 
   const finishingLine = [
+    '',
     '---',
     '',
-    'After you respond, stop and wait for my follow-up questions instead of generating additional code or content on your own.',
-    ''
+    'After you respond, stop and wait for my follow-up questions instead of generating additional code or content on your own.'
   ].join('\n')
 
   return commonIntro + guidanceByKind[kind] + finishingLine
@@ -147,7 +130,7 @@ const chatGptUrl = computed(() => {
 
 <style scoped>
 .aside-links {
-  padding: 1rem 0 0 0;
+  padding: 0.75rem 0 0 0;
   margin-top: auto;
   border-top: 1px solid var(--vp-c-divider);
   background: var(--vp-c-bg);
@@ -157,7 +140,7 @@ const chatGptUrl = computed(() => {
 .aside-links__section {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.25rem;
 }
 
 .aside-links__title {
@@ -166,80 +149,68 @@ const chatGptUrl = computed(() => {
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: var(--vp-c-text-2);
-  margin: 0 0 0.5rem 0;
+  margin: 0 0 0.25rem 0;
 }
+
 .aside-links__link {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.75rem 0.875rem;
-  border-radius: 10px;
-  border: 1px solid var(--vp-c-divider);
-  background: transparent;
-  color: var(--vp-c-text-1);
+  gap: 0.5rem;
+  padding: 0.125rem 0;
+  padding-left: 0.75rem;
+  padding-bottom: 0.75rem;
+  color: var(--vp-c-text-2);
   text-decoration: none;
-  transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  transition: color 0.2s ease;
 }
 
 .aside-links__link:hover {
-  border-color: var(--vp-c-brand-1);
-  background: var(--vp-c-brand-soft);
   color: var(--vp-c-brand-1);
 }
 
 .aside-links__logo {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  background: var(--vp-c-bg-soft);
-  border: 1px solid var(--vp-c-divider);
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   color: var(--vp-c-text-2);
   flex-shrink: 0;
 }
 
 .aside-links__logo svg {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
 }
 
 .aside-links__text {
-  display: flex;
-  flex-direction: column;
-  gap: 0.1rem;
-  line-height: 1.2;
   flex: 1;
-}
-
-.aside-links__label {
-  font-size: 0.9rem;
   font-weight: 600;
 }
 
-.aside-links__helper {
-  font-size: 0.75rem;
-  color: var(--vp-c-text-2);
-}
-
 .aside-links__external-icon {
-  font-size: 0.8rem;
-  opacity: 0.6;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  color: currentColor;
+  opacity: 0.75;
   transition: opacity 0.2s ease, transform 0.2s ease;
 }
 
-.aside-links__link:hover .aside-links__logo {
-  color: var(--vp-c-brand-1);
-  background: var(--vp-c-brand-soft);
-  border-color: var(--vp-c-brand-1);
-}
-
-.aside-links__link:hover .aside-links__helper {
-  color: var(--vp-c-brand-1);
+.aside-links__external-icon svg {
+  width: 14px;
+  height: 14px;
 }
 
 .aside-links__link:hover .aside-links__external-icon {
   opacity: 1;
-  transform: translateX(2px);
+}
+
+.aside-links__link:hover .aside-links__logo {
+  color: var(--vp-c-text-2);
 }
 </style>

@@ -3,6 +3,7 @@ title: Data Protection Policy
 description: Data protection policy for textmode.js, including information on data processing, analytics, and payment services.
 lastUpdated: false
 comment: false
+quickActions: false
 prev: false
 next: false
 ---

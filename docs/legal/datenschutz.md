@@ -3,6 +3,7 @@ title: Datenschutzerklärung
 description: Datenschutzerklärung für textmode.js, einschließlich Informationen zur Datenverarbeitung, Analyse und Zahlungsdienste.
 lastUpdated: false
 comment: false
+quickActions: false
 prev: false
 next: false
 ---
