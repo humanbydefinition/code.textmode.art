@@ -98,13 +98,17 @@ const showQuickActions = computed(() => {
 })
 
 const currentUrl = computed(() => {
-  if (typeof window !== 'undefined') {
-    return window.location.href
-  }
-  // Fallback for SSR - construct URL from site data and page path
-  const baseUrl = site.value.base || '/'
+  const base = site.value.base || '/'
   const path = page.value.relativePath.replace(/\.md$/, '.html')
-  return `https://code.textmode.art${baseUrl}${path}`.replace(/\/+/g, '/').replace(':/', '://')
+
+  // Build from reactive page data so it updates on SPA navigation
+  if (typeof window !== 'undefined') {
+    const origin = window.location.origin
+    return `${origin}${base}${path}`.replace(/\/+/g, '/').replace(':/', '://')
+  }
+
+  // SSR fallback
+  return `https://code.textmode.art${base}${path}`.replace(/\/+/g, '/').replace(':/', '://')
 })
 
 const pageKind = computed<'guide' | 'api' | 'blog' | 'other'>(() => {
