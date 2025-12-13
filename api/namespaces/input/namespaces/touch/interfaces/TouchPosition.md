@@ -2,7 +2,17 @@
 
 # Interface: TouchPosition
 
-Touch position expressed both in grid and client coordinates
+Touch position expressed both in grid and client coordinates.
+
+The grid coordinate system uses center-based coordinates matching the rendering space:
+- `(0, 0)` is the center cell of the grid
+- Negative X values are to the left of center
+- Positive X values are to the right of center
+- Negative Y values are above center
+- Positive Y values are below center
+
+When the touch is outside the grid bounds, `x` and `y` are set to
+`Number.NEGATIVE_INFINITY` to indicate an invalid/outside position.
 
 ## Properties
 
@@ -15,5 +25,5 @@ Touch position expressed both in grid and client coordinates
 | <a id="radiusx"></a> `radiusX?` | `number` | Contact ellipse radius on the X axis in CSS pixels |
 | <a id="radiusy"></a> `radiusY?` | `number` | Contact ellipse radius on the Y axis in CSS pixels |
 | <a id="rotationangle"></a> `rotationAngle?` | `number` | Contact ellipse angle in radians when provided |
-| <a id="x"></a> `x` | `number` | Grid X coordinate (column), -1 if touch is outside grid |
-| <a id="y"></a> `y` | `number` | Grid Y coordinate (row), -1 if touch is outside grid |
+| <a id="x"></a> `x` | `number` | Grid X coordinate (column) in center-based coords. `Number.NEGATIVE_INFINITY` if outside grid. |
+| <a id="y"></a> `y` | `number` | Grid Y coordinate (row) in center-based coords. `Number.NEGATIVE_INFINITY` if outside grid. |

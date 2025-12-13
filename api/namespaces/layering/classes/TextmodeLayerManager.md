@@ -2,8 +2,8 @@
 
 # Class: TextmodeLayerManager
 
-Manages all user-defined layers within a Textmodifier instance.
-
+Manages all user-defined layers within a Textmodifier in *
+Th *
 This manager is responsible for:
 - Managing the collection of user layers (add, remove, move, swap)
 - Coordinating layer rendering and compositing

@@ -7,8 +7,8 @@ Represents a video element for textmode rendering via [Textmodifier.loadVideo](.
 It can be drawn to the canvas via [Textmodifier.image](../../../classes/Textmodifier.md#image).
 
 A video uploaded currently runs through an adjustable brightness-converter that converts
-the video frames into a textmode representation using characters. 
-Those adjustable options are available via chainable methods on this class.
+the video frames into a textmode representation using characters.
+Those adjustable options are available via chainable methods on this interface.
 ```javascript
 const t = textmode.create({
     width: 800,
@@ -31,16 +31,18 @@ t.setup(async () => {
 t.draw(() => {
     t.background(0);
 
-    if (video) {
-        // Draw the loaded video
-        t.image(video);
-    }
+     // Draw the loaded video
+     t.image(video);
 });
 ```
 
 ## Extends
 
 - `TextmodeSource`
+
+## Implements
+
+- `ITextmodeVideo`
 
 ## Accessors
 
@@ -58,6 +60,12 @@ Current playback time in seconds.
 
 `number`
 
+#### Implementation of
+
+```ts
+ITextmodeVideo.currentTime
+```
+
 ***
 
 ### duration
@@ -74,6 +82,12 @@ Total duration of the video in seconds.
 
 `number`
 
+#### Implementation of
+
+```ts
+ITextmodeVideo.duration
+```
+
 ***
 
 ### height
@@ -84,13 +98,19 @@ Total duration of the video in seconds.
 get height(): number;
 ```
 
-Ideal height to draw the video at (in grid cells), calculated to fit the grid while preserving aspect ratio.
+Ideal height in grid cells.
 
 ##### Returns
 
 `number`
 
-#### Overrides
+#### Implementation of
+
+```ts
+ITextmodeVideo.height
+```
+
+#### Inherited from
 
 ```ts
 TextmodeSource.height
@@ -112,6 +132,12 @@ Whether the video is currently playing.
 
 `boolean`
 
+#### Implementation of
+
+```ts
+ITextmodeVideo.isPlaying
+```
+
 ***
 
 ### originalHeight
@@ -122,13 +148,19 @@ Whether the video is currently playing.
 get originalHeight(): number;
 ```
 
-Original pixel height of the video.
+Original pixel height.
 
 ##### Returns
 
 `number`
 
-#### Overrides
+#### Implementation of
+
+```ts
+ITextmodeVideo.originalHeight
+```
+
+#### Inherited from
 
 ```ts
 TextmodeSource.originalHeight
@@ -144,13 +176,19 @@ TextmodeSource.originalHeight
 get originalWidth(): number;
 ```
 
-Original pixel width of the video.
+Original pixel width.
 
 ##### Returns
 
 `number`
 
-#### Overrides
+#### Implementation of
+
+```ts
+ITextmodeVideo.originalWidth
+```
+
+#### Inherited from
 
 ```ts
 TextmodeSource.originalWidth
@@ -166,33 +204,23 @@ TextmodeSource.originalWidth
 get texture(): WebGLTexture;
 ```
 
-WebGL texture handle containing the current video frame.
+Return the WebGL texture currently backing this source.
 
 ##### Returns
 
 `WebGLTexture`
 
-#### Overrides
+#### Implementation of
+
+```ts
+ITextmodeVideo.texture
+```
+
+#### Inherited from
 
 ```ts
 TextmodeSource.texture
 ```
-
-***
-
-### totalFrames
-
-#### Get Signature
-
-```ts
-get totalFrames(): number;
-```
-
-Total number of preloaded frames. Returns 0 for non-preloaded videos.
-
-##### Returns
-
-`number`
 
 ***
 
@@ -210,6 +238,12 @@ The underlying HTML video element.
 
 `HTMLVideoElement`
 
+#### Implementation of
+
+```ts
+ITextmodeVideo.videoElement
+```
+
 ***
 
 ### width
@@ -220,13 +254,19 @@ The underlying HTML video element.
 get width(): number;
 ```
 
-Ideal width to draw the video at (in grid cells), calculated to fit the grid while preserving aspect ratio.
+Ideal width in grid cells.
 
 ##### Returns
 
 `number`
 
-#### Overrides
+#### Implementation of
+
+```ts
+ITextmodeVideo.width
+```
+
+#### Inherited from
 
 ```ts
 TextmodeSource.width
@@ -260,6 +300,12 @@ Defines the background color used for transparent pixels.
 `this`
 
 This instance for chaining.
+
+#### Implementation of
+
+```ts
+ITextmodeVideo.background
+```
 
 #### Inherited from
 
@@ -296,6 +342,12 @@ Defines the cell color when [cellColorMode](#cellcolormode) is `'fixed'`.
 
 This instance for chaining.
 
+#### Implementation of
+
+```ts
+ITextmodeVideo.cellColor
+```
+
 #### Inherited from
 
 ```ts
@@ -323,6 +375,12 @@ Set cell color mode: `'sampled'` *(from source)* or `'fixed'`.
 `this`
 
 This instance for chaining.
+
+#### Implementation of
+
+```ts
+ITextmodeVideo.cellColorMode
+```
 
 #### Inherited from
 
@@ -352,6 +410,12 @@ Maximum length is 255; excess characters are ignored.
 `this`
 
 This instance for chaining.
+
+#### Implementation of
+
+```ts
+ITextmodeVideo.characters
+```
 
 #### Inherited from
 
@@ -388,6 +452,12 @@ Defines the character color when [charColorMode](#charcolormode) is `'fixed'`.
 
 This instance for chaining.
 
+#### Implementation of
+
+```ts
+ITextmodeVideo.charColor
+```
+
 #### Inherited from
 
 ```ts
@@ -415,6 +485,12 @@ Set character color mode: `'sampled'` *(from source)* or `'fixed'`.
 `this`
 
 This instance for chaining.
+
+#### Implementation of
+
+```ts
+ITextmodeVideo.charColorMode
+```
 
 #### Inherited from
 
@@ -444,38 +520,16 @@ Set the character rotation in degrees (0-360).
 
 This instance for chaining.
 
+#### Implementation of
+
+```ts
+ITextmodeVideo.charRotation
+```
+
 #### Inherited from
 
 ```ts
 TextmodeSource.charRotation
-```
-
-***
-
-### colorFilter()
-
-```ts
-colorFilter(palette?): this;
-```
-
-Applies an optional color filter palette before MRT conversion.
-When a palette is provided, all sampled pixels are quantized to the closest palette color
-prior to character/color analysis.
-
-#### Parameters
-
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `palette?` | \| `null` \| `string`[] \| \[`number`, `number`, `number`\][] \| \[`number`, `number`, `number`, `number`\][] \| [`TextmodeColor`](../../../classes/TextmodeColor.md)[] | A list of colors defined as [TextmodeColor](../../../classes/TextmodeColor.md) instances, hex strings, or RGBA tuples (0-255). Providing an empty array or `null` disables the filter. |
-
-#### Returns
-
-`this`
-
-#### Inherited from
-
-```ts
-TextmodeSource.colorFilter
 ```
 
 ***
@@ -496,11 +550,17 @@ Additional conversion strategies may be provided via add-on libraries.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `mode` | `TextmodeConversionMode` | Conversion mode to use. |
+| `mode` | [`TextmodeConversionMode`](../../conversion/type-aliases/TextmodeConversionMode.md) | Conversion mode to use. |
 
 #### Returns
 
 `this`
+
+#### Implementation of
+
+```ts
+ITextmodeVideo.conversionMode
+```
 
 #### Inherited from
 
@@ -530,6 +590,12 @@ Set horizontal flip indicator flag.
 
 This instance for chaining.
 
+#### Implementation of
+
+```ts
+ITextmodeVideo.flipX
+```
+
 #### Inherited from
 
 ```ts
@@ -558,52 +624,16 @@ Set vertical flip indicator flag.
 
 This instance for chaining.
 
+#### Implementation of
+
+```ts
+ITextmodeVideo.flipY
+```
+
 #### Inherited from
 
 ```ts
 TextmodeSource.flipY
-```
-
-***
-
-### frame()
-
-```ts
-frame(index?): this;
-```
-
-For preloaded videos, set or get the current frame index.
-When called without arguments, returns this video instance for use with t.image().
-When called with an index, sets the frame and returns this instance.
-
-The frame index automatically wraps using modulo, so you can pass t.frameCount directly
-and it will loop through the video frames seamlessly.
-
-For non-preloaded videos, this method does nothing and returns the instance.
-
-#### Parameters
-
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `index?` | `number` | Optional frame index to set (0-based, automatically wraps) |
-
-#### Returns
-
-`this`
-
-This instance for chaining.
-
-#### Example
-
-```javascript
-// Draw specific frame
-t.image(video.frame(0), x, y);
-
-// Draw frame based on frameCount (automatically wraps)
-t.image(video.frame(t.frameCount), x, y);
-
-video.frame(t.frameCount);
-t.image(video, x, y);
 ```
 
 ***
@@ -627,6 +657,12 @@ Set the invert flag, swapping character and cell colors when enabled.
 `this`
 
 This instance for chaining.
+
+#### Implementation of
+
+```ts
+ITextmodeVideo.invert
+```
 
 #### Inherited from
 
@@ -654,6 +690,12 @@ Set whether the video should loop.
 
 `this`
 
+#### Implementation of
+
+```ts
+ITextmodeVideo.loop
+```
+
 ***
 
 ### pause()
@@ -667,6 +709,12 @@ Pause the video.
 #### Returns
 
 `void`
+
+#### Implementation of
+
+```ts
+ITextmodeVideo.pause
+```
 
 ***
 
@@ -683,6 +731,12 @@ Play the video.
 `Promise`\<`void`\>
 
 Promise that resolves when playback starts
+
+#### Implementation of
+
+```ts
+ITextmodeVideo.play
+```
 
 ***
 
@@ -704,6 +758,12 @@ Set the playback speed.
 
 `this`
 
+#### Implementation of
+
+```ts
+ITextmodeVideo.speed
+```
+
 ***
 
 ### stop()
@@ -717,6 +777,12 @@ Stop the video and reset to beginning.
 #### Returns
 
 `void`
+
+#### Implementation of
+
+```ts
+ITextmodeVideo.stop
+```
 
 ***
 
@@ -738,6 +804,12 @@ Set the current time position in the video.
 
 `this`
 
+#### Implementation of
+
+```ts
+ITextmodeVideo.time
+```
+
 ***
 
 ### volume()
@@ -757,3 +829,9 @@ Set the volume.
 #### Returns
 
 `this`
+
+#### Implementation of
+
+```ts
+ITextmodeVideo.volume
+```

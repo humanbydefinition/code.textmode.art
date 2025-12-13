@@ -7,7 +7,7 @@ Represents an image uploaded for textmode rendering via [Textmodifier.loadImage]
 It can be drawn to the canvas via [Textmodifier.image](../../../classes/Textmodifier.md#image).
 
 An image uploaded currently runs through an adjustable brightness-converter that converts
-the original image into a textmode representation using characters. 
+the original image into a textmode representation using characters.
 Those adjustable options are available via chainable methods on this class.
 
 ## Example
@@ -30,10 +30,8 @@ t.setup(async () => {
 t.draw(() => {
     t.background(0);
 
-    if (img) {
-        // Draw the loaded image
-        t.image(img);
-    }
+    // Draw the loaded image
+    t.image(img);
 });
 ```
 
@@ -371,34 +369,6 @@ TextmodeSource.charRotation
 
 ***
 
-### colorFilter()
-
-```ts
-colorFilter(palette?): this;
-```
-
-Applies an optional color filter palette before MRT conversion.
-When a palette is provided, all sampled pixels are quantized to the closest palette color
-prior to character/color analysis.
-
-#### Parameters
-
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `palette?` | \| `null` \| `string`[] \| \[`number`, `number`, `number`\][] \| \[`number`, `number`, `number`, `number`\][] \| [`TextmodeColor`](../../../classes/TextmodeColor.md)[] | A list of colors defined as [TextmodeColor](../../../classes/TextmodeColor.md) instances, hex strings, or RGBA tuples (0-255). Providing an empty array or `null` disables the filter. |
-
-#### Returns
-
-`this`
-
-#### Inherited from
-
-```ts
-TextmodeSource.colorFilter
-```
-
-***
-
 ### conversionMode()
 
 ```ts
@@ -415,7 +385,7 @@ Additional conversion strategies may be provided via add-on libraries.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `mode` | `TextmodeConversionMode` | Conversion mode to use. |
+| `mode` | [`TextmodeConversionMode`](../../conversion/type-aliases/TextmodeConversionMode.md) | Conversion mode to use. |
 
 #### Returns
 

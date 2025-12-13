@@ -9,10 +9,11 @@ Types and interfaces for mouse event handling
 | Interface | Description |
 | ------ | ------ |
 | [MouseEventData](interfaces/MouseEventData.md) | Mouse event data passed to event handlers |
-| [MousePosition](interfaces/MousePosition.md) | Mouse coordinates in grid space. |
+| [MousePosition](interfaces/MousePosition.md) | Mouse coordinates in grid space using center-based coordinates. |
 
 ## Type Aliases
 
 | Type Alias | Description |
 | ------ | ------ |
+| [GridProvider](type-aliases/GridProvider.md) | Grid provider function type - returns the grid to use for coordinate calculations |
 | [MouseEventHandler](type-aliases/MouseEventHandler.md) | Mouse event handler function type |

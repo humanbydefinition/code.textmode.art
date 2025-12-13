@@ -3,7 +3,7 @@
 # Class: Textmodifier
 
 Manages textmode rendering on a [`HTMLCanvasElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement) and provides methods for drawing,
-font management, event handling, and animation control.
+font management, event handling, layer management, animation control, and more. The heart of the `textmode.js` library.
 
 If the `Textmodifier` instance is created without a canvas parameter,
 it creates a new `HTMLCanvasElement` to draw on using the `textmode.js` drawing API.
@@ -11,17 +11,11 @@ If a canvas is provided, it will use that canvas instead.
 
 ## Extends
 
-- `(Anonymous class)`\<`this`\>.`IRenderingMixin`.`IFontMixin`.`IAnimationMixin`.`IMouseMixin`.`ITouchMixin`.`IKeyboardMixin`
+- `(Anonymous class)`\<`this`\>.`IRenderingMixin`.`IAnimationMixin`.`IMouseMixin`.`ITouchMixin`.`IKeyboardMixin`
 
 ## Implements
 
 - `ITextmodifier`
-
-## Properties
-
-| Property | Modifier | Type | Description |
-| ------ | ------ | ------ | ------ |
-| <a id="_filtermanager"></a> `_filterManager` | `public` | [`TextmodeFilterManager`](../namespaces/filters/classes/TextmodeFilterManager.md) | **`Internal`** |
 
 ## Accessors
 
@@ -47,24 +41,27 @@ ITextmodifier.canvas
 
 ***
 
-### drawFramebuffer
+### conversions
 
 #### Get Signature
 
 ```ts
-get drawFramebuffer(): TextmodeFramebuffer;
+get conversions(): TextmodeConversionManager;
 ```
 
-Get the WebGL framebuffer used for drawing operations in [Textmodifier.draw](#draw).
+Access the conversion manager for this Textmodifier instance.
+
+Use this to register custom conversion strategies that can be used
+when converting images/videos/canvases into textmode representations.
 
 ##### Returns
 
-[`TextmodeFramebuffer`](TextmodeFramebuffer.md)
+[`TextmodeConversionManager`](../namespaces/conversion/classes/TextmodeConversionManager.md)
 
 #### Implementation of
 
 ```ts
-ITextmodifier.drawFramebuffer
+ITextmodifier.conversions
 ```
 
 ***
@@ -80,8 +77,7 @@ get filters(): TextmodeFilterManager;
 Access the filter manager for this Textmodifier instance.
 
 Use this to register custom filters that can be applied both globally
-(via [filter](#filter)) and on individual layers (via TextmodeLayer.filter).
-Filters only need to be registered once and are available everywhere.
+(via [filter](#filter)) and on individual layers (via [TextmodeLayer.filter](../namespaces/layering/classes/TextmodeLayer.md#filter)).
 
 ##### Example
 
@@ -95,10 +91,10 @@ t.draw(() => {
     t.background(0);
     t.char('A');
     t.rect(10, 10);
-    
+
     // Apply filter globally to final output
     t.filter('vignette', { intensity: 0.8 });
-    
+
     // Or apply to a specific layer
     t.layers.base.filter('vignette', 0.5);
 });
@@ -107,6 +103,12 @@ t.draw(() => {
 ##### Returns
 
 [`TextmodeFilterManager`](../namespaces/filters/classes/TextmodeFilterManager.md)
+
+#### Implementation of
+
+```ts
+ITextmodifier.filters
+```
 
 ***
 
@@ -118,7 +120,7 @@ t.draw(() => {
 get font(): TextmodeFont;
 ```
 
-Get the current font object used for rendering.
+Get the current font object used for rendering the base layer.
 
 ##### Returns
 
@@ -177,14 +179,17 @@ ITextmodifier.frameCount
 #### Get Signature
 
 ```ts
-get grid(): TextmodeGrid;
+get grid(): undefined | TextmodeGrid;
 ```
 
-Get the current grid object used for rendering.
+Get the grid whose layer is currently being drawn to.
+If called outside of a layers draw callback, returns the base layer's grid.
+
+If no grid is set (e.g., before user setup()), returns `undefined`.
 
 ##### Returns
 
-[`TextmodeGrid`](TextmodeGrid.md)
+`undefined` \| [`TextmodeGrid`](TextmodeGrid.md)
 
 #### Implementation of
 
@@ -330,9 +335,20 @@ ITextmodifier.lastKeyReleased
 get layers(): TextmodeLayerManager;
 ```
 
+Access the layer manager for this Textmodifier instance.
+
+Use this to create and manage multiple layers within the textmode rendering context.
+Each layer has its own grid, font, draw callback, and filters.
+
 ##### Returns
 
 [`TextmodeLayerManager`](../namespaces/layering/classes/TextmodeLayerManager.md)
+
+#### Implementation of
+
+```ts
+ITextmodifier.layers
+```
 
 ***
 
@@ -360,7 +376,7 @@ t.setup(async () => {
   await phase1.track(async () => {
     for (let i = 0; i <= 5; i++) {
       phase1.report(i / 5);
-      // Small delay — increases visibility of the loading animation
+      // Small delay - increases visibility of the loading animation
       await new Promise((r) => setTimeout(r, 200));
     }
   });
@@ -454,12 +470,13 @@ ITextmodifier.modifierState
 get mouse(): MousePosition;
 ```
 
-Get the current mouse position in grid coordinates.
+Get the current mouse position in center-based grid coordinates.
 
-Returns the mouse position as grid cell coordinates *(column, row)*.
+Returns the mouse position as grid cell coordinates where `(0, 0)` is the center cell.
+This matches the drawing coordinate system, so coordinates can be used directly with `translate()`.
 
 If the mouse is outside the grid or the instance is not ready,
-it returns `{ x: -1, y: -1 }`.
+it returns `{ x: Number.NEGATIVE_INFINITY, y: Number.NEGATIVE_INFINITY }`.
 
 ##### Example
 
@@ -468,16 +485,15 @@ const t = textmode.create({ width: 800, height: 600 });
 
 t.draw(() => {
     t.background(0);
-    
-    // Convert mouse position from top-left origin to center-based origin
-    const centerX = Math.round(t.mouse.x - (t.grid.cols - 1) / 2);
-    const centerY = Math.round(t.mouse.y - (t.grid.rows - 1) / 2);
-    
-    t.translate(centerX, centerY);
-    t.char('*');
-    t.charColor(255, 0, 0);
-    t.cellColor(100);
-    t.point();
+
+    // Mouse coordinates are center-based, matching the drawing system
+    if (t.mouse.x !== Number.NEGATIVE_INFINITY) {
+        t.translate(t.mouse.x, t.mouse.y);
+        t.char('*');
+        t.charColor(255, 0, 0);
+        t.cellColor(100);
+        t.point();
+    }
 });
 ```
 
@@ -705,7 +721,9 @@ background(
    a?): void;
 ```
 
-Set the background color for the canvas.
+Set the background color of the layer currently drawing to.
+
+Used to clear the layer to a specific color at the start of its drawing cycle.
 
 #### Parameters
 
@@ -885,15 +903,13 @@ char(character): void;
 ```
 
 Set the character to be used for subsequent rendering operations.
-Accepts a single character string or a
-[TextmodeColor](TextmodeColor.md) produced via [color](#color). When a color is provided,
-the encoded glyph information is applied if available.
+Accepts a single character string.
 
 #### Parameters
 
-| Parameter | Type |
-| ------ | ------ |
-| `character` | `string` \| [`TextmodeColor`](TextmodeColor.md) |
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `character` | `string` | The character to set for rendering |
 
 #### Returns
 
@@ -1027,7 +1043,9 @@ ITextmodifier.charRotation
 clear(): void;
 ```
 
-Clear the canvas.
+Clear the layer currently drawing to.
+
+Used to clear the layer at the start of its drawing cycle.
 
 #### Returns
 
@@ -1163,22 +1181,22 @@ let waveShader;
 t.setup(async () => {
   // Load shader from file
   waveShader = await t.createFilterShader('./shader.frag');
-  
+
   // Or create from inline source
   // waveShader = await t.createFilterShader(`#version 300 es
   //   precision highp float;
-  //   
+  //
   //   in vec2 v_uv;
   //   in vec3 v_character;
   //   in vec4 v_primaryColor;
   //   in vec4 v_secondaryColor;
-  //   
+  //
   //   uniform float u_time;
-  //   
+  //
   //   layout(location = 0) out vec4 o_character;
   //   layout(location = 1) out vec4 o_primaryColor;
   //   layout(location = 2) out vec4 o_secondaryColor;
-  //   
+  //
   //   void main() {
   //     // Shader code here
   //   }
@@ -1247,7 +1265,7 @@ t.draw(() => {
   t.char('A');
   t.rect(20, 10);
   fb.end();
-  
+
   // Render framebuffer to main canvas
   t.background(0);
   t.rotateZ(t.frameCount * 2);
@@ -1259,75 +1277,6 @@ t.draw(() => {
 
 ```ts
 ITextmodifier.createFramebuffer
-```
-
-***
-
-### createShader()
-
-```ts
-createShader(vertexSource, fragmentSource): Promise<GLShader>;
-```
-
-Create a custom shader from vertex and fragment shader source code or file paths.
-Both the vertex and fragment shaders can be provided as inline GLSL source code
-or as file paths (e.g., './vertex.vert', './fragment.frag').
-
-#### Parameters
-
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `vertexSource` | `string` | The vertex shader source code or a file path (e.g., './shader.vert') |
-| `fragmentSource` | `string` | The fragment shader source code or a file path (e.g., './shader.frag') |
-
-#### Returns
-
-`Promise`\<`GLShader`\>
-
-A Promise that resolves to a compiled shader ready for use with [shader](#shader)
-
-#### Example
-
-```javascript
-const t = textmode.create({
-  width: 800,
-  height: 600,
-});
-
-let customShader;
-
-t.setup(async () => {
-  // Load shaders from files
-  customShader = await t.createShader('./vertex.vert', './fragment.frag');
-  
-  // Or create from inline source
-  // customShader = await t.createShader(
-  //   `#version 300 es
-  //   in vec2 a_position;
-  //   void main() {
-  //     gl_Position = vec4(a_position, 0.0, 1.0);
-  //   }`,
-  //   `#version 300 es
-  //   precision highp float;
-  //   out vec4 fragColor;
-  //   void main() {
-  //     fragColor = vec4(1.0, 0.0, 0.0, 1.0);
-  //   }`
-  // );
-});
-
-t.draw(() => {
-  if (customShader) {
-    t.shader(customShader);
-    t.rect(t.grid.cols, t.grid.rows);
-  }
-});
-```
-
-#### Implementation of
-
-```ts
-ITextmodifier.createShader
 ```
 
 ***
@@ -1369,21 +1318,14 @@ t.draw(() => {
   t.rect(target.width, target.height);
 
   // Rectangle is centered at (0, 0) which is grid center
-  // Calculate bounds relative to grid center
-  const centerX = t.grid.cols / 2;
-  const centerY = t.grid.rows / 2;
-
+  // Mouse coordinates are also center-based, so we can compare directly
   const halfRectWidth = target.width / 2;
   const halfRectHeight = target.height / 2;
 
-  const rectLeft = centerX - halfRectWidth;
-  const rectRight = centerX + halfRectWidth;
-  const rectTop = centerY - halfRectHeight;
-  const rectBottom = centerY + halfRectHeight;
-
   const hovering =
-    t.mouse.x >= rectLeft && t.mouse.x < rectRight &&
-    t.mouse.y >= rectTop && t.mouse.y < rectBottom;
+    t.mouse.x !== Number.NEGATIVE_INFINITY &&
+    t.mouse.x >= -halfRectWidth && t.mouse.x < halfRectWidth &&
+    t.mouse.y >= -halfRectHeight && t.mouse.y < halfRectHeight;
 
   t.cursor(hovering ? 'pointer' : 'default');
 });
@@ -1480,8 +1422,14 @@ Set a draw callback function for the base layer.
 
 This callback function is where all drawing commands should be placed for textmode rendering on the main layer.
 
-If multiple layers are added via [Textmodifier.layers](#layers), each layer can have its own draw callback set via [TextmodeLayer.draw](../namespaces/layering/classes/TextmodeLayer.md#draw).
+If multiple layers are added via [Textmodifier.layers](#layers), each layer has its own draw callback set via [TextmodeLayer.draw](../namespaces/layering/classes/TextmodeLayer.md#draw).
 This allows for complex multi-layered compositions with independent rendering logic per layer.
+
+Calling this method is equivalent to setting the draw callback on the base layer,
+while the direct layer callback has precedence if both are set.
+```javascript
+textmodifier.layers.base.draw(callback);
+```
 
 #### Parameters
 
@@ -1506,7 +1454,7 @@ const t = textmode.create({
 t.draw(() => {
   // Set background color
   t.background(128);
-  
+
   // Draw a textmode rectangle
   t.char('A');
   t.rotateZ(t.frameCount * 2);
@@ -1605,15 +1553,21 @@ t.draw(() => {
     t.charColor(255);
     t.char('A');
     t.rect(10, 10);
-    
+
     // Apply built-in filters
     t.filter('grayscale', 0.5);
     t.filter('invert');
-    
+
     // Chain multiple filters
     t.filter('sepia', { amount: 0.3 });
     t.filter('threshold', 0.5);
 });
+```
+
+##### Implementation of
+
+```ts
+ITextmodifier.filter
 ```
 
 #### Call Signature
@@ -1622,40 +1576,21 @@ t.draw(() => {
 filter(name, params?): void;
 ```
 
-Apply a filter to the final composited output.
-
-Filters are applied after all layers are composited but before
-the result is presented to the canvas. Multiple filters can be
-queued per frame and will be applied in order.
-
 ##### Parameters
 
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `name` | `string` | The name of the filter to apply (built-in or custom) |
-| `params?` | `unknown` | Optional parameters for the filter |
+| Parameter | Type |
+| ------ | ------ |
+| `name` | `string` |
+| `params?` | `unknown` |
 
 ##### Returns
 
 `void`
 
-##### Example
+##### Implementation of
 
-```typescript
-t.draw(() => {
-    t.background(0);
-    t.charColor(255);
-    t.char('A');
-    t.rect(10, 10);
-    
-    // Apply built-in filters
-    t.filter('grayscale', 0.5);
-    t.filter('invert');
-    
-    // Chain multiple filters
-    t.filter('sepia', { amount: 0.3 });
-    t.filter('threshold', 0.5);
-});
+```ts
+ITextmodifier.filter
 ```
 
 ***
@@ -1840,13 +1775,13 @@ image(
    height?): void;
 ```
 
-Draw a TextmodeFramebuffer or TextmodeSource (TextmodeImage/TextmodeVideo) to the current render target.
+Draw a TextmodeFramebuffer, TextmodeImage, or TextmodeVideo to the current render target.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `source` | [`TextmodeFramebuffer`](TextmodeFramebuffer.md) \| `TextmodeSource` | The TextmodeFramebuffer or TextmodeSource to render |
+| `source` | \| [`TextmodeFramebuffer`](TextmodeFramebuffer.md) \| [`TextmodeImage`](../namespaces/loadables/classes/TextmodeImage.md) \| [`TextmodeVideo`](../namespaces/loadables/classes/TextmodeVideo.md) | The TextmodeFramebuffer or TextmodeSource to render |
 | `width?` | `number` | Width to potentially scale the content |
 | `height?` | `number` | Height to potentially scale the content |
 
@@ -1872,13 +1807,13 @@ t.draw(() => {
   t.char('A');
   t.rect(20, 10);
   fb.end();
-  
+
   // Clear main canvas and render framebuffer content
   t.background(0);
-  
+
   // Render at original size
   t.image(fb);
-  
+
   // Render scaled version
   // t.image(fb, 60, 40);
 });
@@ -1888,6 +1823,66 @@ t.draw(() => {
 
 ```ts
 ITextmodifier.image
+```
+
+***
+
+### inputGrid()
+
+```ts
+inputGrid(target?): void | TextmodeGrid | "topmost";
+```
+
+Get or set the grid used for mouse and touch input coordinate mapping.
+
+By default, input coordinates are mapped to the topmost visible layer's grid,
+which changes dynamically as layers are shown/hidden. Use this method to lock
+input mapping to a specific grid or layer, or to return to responsive mode.
+
+When called without arguments, returns the current input grid mode:<br/>
+- `'topmost'` if using responsive mode (default)<br/>
+- The specific `TextmodeGrid` if locked
+
+#### Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `target?` | [`TextmodeGrid`](TextmodeGrid.md) \| `"topmost"` |
+
+#### Returns
+
+`void` \| [`TextmodeGrid`](TextmodeGrid.md) \| `"topmost"`
+
+#### Example
+
+```javascript
+const t = textmode.create();
+
+// Add a UI layer on top
+const uiLayer = t.layers.add({ fontSize: 16 });
+
+t.setup(() => {
+  // Lock input to the base layer's grid for game controls
+  // even though the UI layer is rendered on top
+  t.inputGrid(t.layers.base.grid);
+});
+
+t.draw(() => {
+  // Mouse positions now always use base layer's grid
+  t.text(`Mouse: ${t.mouseX}, ${t.mouseY}`, 0, 0);
+});
+
+// Switch back to responsive mode
+// t.inputGrid('topmost');
+
+// Or check current mode
+// const current = t.inputGrid(); // 'topmost' or the locked grid
+```
+
+#### Implementation of
+
+```ts
+ITextmodifier.inputGrid
 ```
 
 ***
@@ -1965,7 +1960,7 @@ let playerY = 0;
 
 t.draw(() => {
   t.background(0);
-  
+
   // Check for arrow keys to move a character
   if (t.isKeyPressed('ArrowUp')) {
     playerY -= 1;
@@ -1979,7 +1974,7 @@ t.draw(() => {
   if (t.isKeyPressed('ArrowRight')) {
     playerX += 1;
   }
-  
+
   // Draw player character
   t.char('@');
   t.charColor(255, 255, 0);
@@ -2067,12 +2062,12 @@ t.keyPressed((data) => {
 
 t.draw(() => {
   t.background(0);
-  
+
   // Fade brightness back down each frame
   const glow = Math.max(0, pulse--);
   const brightness = 120 + glow * 20;
   t.charColor(brightness, brightness, 0);
-  
+
   // Show the last pressed key at the center of the grid
   t.push();
   t.char(lastKey.length ? lastKey[0] : '?');
@@ -2128,7 +2123,7 @@ t.draw(() => {
   const glow = Math.max(0, fade--);
   const color = 80 + glow * 17;
   t.charColor(color, color, 255);
-  
+
   t.char(lastRelease.length ? lastRelease[0] : '?');
   t.point();
 });
@@ -2264,10 +2259,12 @@ ITextmodifier.lineWeight
 ### loadFont()
 
 ```ts
-loadFont(fontSource): Promise<void>;
+loadFont(fontSource): Promise<TextmodeFont>;
 ```
 
-Update the font used for rendering.
+Load a font for the base layer and return it.
+
+The returned font can be reused on other layers via [TextmodeLayer.loadFont](../namespaces/layering/classes/TextmodeLayer.md#loadfont).
 
 #### Parameters
 
@@ -2277,20 +2274,26 @@ Update the font used for rendering.
 
 #### Returns
 
-`Promise`\<`void`\>
+`Promise`\<[`TextmodeFont`](../namespaces/loadables/classes/TextmodeFont.md)\>
+
+The loaded TextmodeFont instance (base layer font).
 
 #### Example
 
 ```javascript
-// Create a Textmodifier instance
 const t = textmode.create();
 
 t.setup(async () => {
- // Load a custom font from a URL
- await t.loadFont('https://example.com/fonts/myfont.ttf');
+  // Load font for the base layer
+  const font = await t.loadFont('./fonts/myfont.ttf');
+  // const font = await t.layers.base.loadFont('./fonts/myfont.ttf'); // Equivalent
 
- // Local font example
- // await t.loadFont('./fonts/myfont.ttf'); 
+  // Use the same font on another layer
+  const layer = t.layers.add();
+  await layer.loadFont(font);
+
+  // Or load a different font for a layer
+  await layer.loadFont('./fonts/otherfont.ttf');
 });
 ```
 
@@ -2343,10 +2346,8 @@ t.setup(async () => {
 t.draw(() => {
     t.background(0);
 
-    if (img) {
-        // Draw the loaded image
-        t.image(img);
-    }
+    // Draw the loaded image
+    t.image(img);
 });
 ```
 
@@ -2361,7 +2362,7 @@ ITextmodifier.loadImage
 ### loadVideo()
 
 ```ts
-loadVideo(src, options?): Promise<TextmodeVideo>;
+loadVideo(src): Promise<TextmodeVideo>;
 ```
 
 Load a video and return a TextmodeVideo that can be drawn with image().
@@ -2371,7 +2372,6 @@ Load a video and return a TextmodeVideo that can be drawn with image().
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
 | `src` | `string` \| `HTMLVideoElement` | URL or existing HTMLVideoElement |
-| `options?` | [`TextmodeVideoOptions`](../namespaces/loadables/interfaces/TextmodeVideoOptions.md) | Optional configuration for preloading behavior. Provide `frameRate` to preload frames, `onProgress` to observe preload progress, `onComplete` to know when preloading finished, and `onError` to catch preload failures. |
 
 #### Returns
 
@@ -2399,10 +2399,8 @@ t.setup(async () => {
 t.draw(() => {
     t.background(0);
 
-    if (video) {
-        // Draw the loaded video
-        t.image(video);
-    }
+    // Draw the loaded video
+    t.image(video);
 });
 ```
 
@@ -2526,11 +2524,11 @@ const ripples = [];
 
 // Create a ripple at the clicked grid cell
 t.mouseClicked((data) => {
-  // Convert top-left grid coords to center-based coords (matching draw-time origin)
-  const centerX = Math.round(data.position.x - (t.grid.cols - 1) / 2);
-  const centerY = Math.round(data.position.y - (t.grid.rows - 1) / 2);
+  // Skip if mouse is outside the grid
+  if (data.position.x === Number.NEGATIVE_INFINITY) return;
 
-  ripples.push({ x: centerX, y: centerY, age: 0, maxAge: 20 });
+  // Coordinates are already center-based, matching the drawing coordinate system
+  ripples.push({ x: data.position.x, y: data.position.y, age: 0, maxAge: 20 });
 });
 
 t.draw(() => {
@@ -2571,14 +2569,12 @@ t.draw(() => {
     }
   }
 
-  // Show crosshair for the current mouse cell. Convert t.mouse (top-left origin)
-  // to the center-based coordinates used for drawing just like above.
-  if (t.mouse.x !== -1 && t.mouse.y !== -1) {
-    const cx = Math.round(t.mouse.x - (t.grid.cols - 1) / 2);
-    const cy = Math.round(t.mouse.y - (t.grid.rows - 1) / 2);
+  // Show crosshair for the current mouse cell
+  // Mouse coordinates are center-based, matching the drawing coordinate system
+  if (t.mouse.x !== Number.NEGATIVE_INFINITY) {
     t.push();
     t.charColor(180);
-    t.translate(cx, cy);
+    t.translate(t.mouse.x, t.mouse.y);
     t.char('+');
     t.point();
     t.pop();
@@ -2624,49 +2620,49 @@ const maxTrail = 120;
 let lastMouse = null;
 
 t.mouseMoved((data) => {
-  if (data.position.x === -1 || data.position.y === -1) return;
-  
-  // Convert to center-based coords
-  const cx = Math.round(data.position.x - (t.grid.cols - 1) / 2);
-  const cy = Math.round(data.position.y - (t.grid.rows - 1) / 2);
-  
+  if (data.position.x === Number.NEGATIVE_INFINITY) return;
+
+  // Coordinates are already center-based, matching the drawing system
+  const cx = data.position.x;
+  const cy = data.position.y;
+
   // Spawn multiple particles based on movement speed
   const dx = lastMouse ? cx - lastMouse.x : 0;
   const dy = lastMouse ? cy - lastMouse.y : 0;
   const speed = Math.sqrt(dx * dx + dy * dy);
   const count = Math.max(1, Math.ceil(speed * 1.5));
-  
+
   for (let i = 0; i < count; i++) {
-    trail.push({ 
-      x: cx, 
-      y: cy, 
-      age: 0, 
-      maxAge: 15 + Math.random() * 10 
+    trail.push({
+      x: cx,
+      y: cy,
+      age: 0,
+      maxAge: 15 + Math.random() * 10
     });
   }
-  
+
   lastMouse = { x: cx, y: cy };
   if (trail.length > maxTrail) trail.splice(0, trail.length - maxTrail);
 });
 
 t.draw(() => {
   t.background(0);
-  
+
   // Draw and age particles
   for (let i = trail.length - 1; i >= 0; i--) {
     const p = trail[i];
     p.age++;
-    
+
     if (p.age >= p.maxAge) {
       trail.splice(i, 1);
       continue;
     }
-    
+
     const life = 1 - (p.age / p.maxAge);
     const brightness = Math.round(255 * life);
     const chars = ['.', '*', 'o', '@'];
     const idx = Math.floor(life * chars.length);
-    
+
     t.push();
     t.charColor(brightness, brightness * 0.6, 255);
     t.translate(p.x, p.y);
@@ -2714,7 +2710,7 @@ const particles = [];
 let pressing = false;
 
 t.mousePressed((data) => {
-  if (data.position.x === -1 || data.position.y === -1) return;
+  if (data.position.x === Number.NEGATIVE_INFINITY) return;
   pressing = true;
 });
 
@@ -2724,12 +2720,12 @@ t.mouseReleased(() => {
 
 t.draw(() => {
   t.background(0);
-  
-  // Spawn particles while pressing
-  if (pressing && t.mouse.x !== -1) {
-    const cx = Math.round(t.mouse.x - (t.grid.cols - 1) / 2);
-    const cy = Math.round(t.mouse.y - (t.grid.rows - 1) / 2);
-    
+
+  // Spawn particles while pressing (mouse coords are center-based)
+  if (pressing && t.mouse.x !== Number.NEGATIVE_INFINITY) {
+    const cx = t.mouse.x;
+    const cy = t.mouse.y;
+
     for (let i = 0; i < 3; i++) {
       particles.push({
         x: cx,
@@ -2741,7 +2737,7 @@ t.draw(() => {
       });
     }
   }
-  
+
   // Update and draw particles
   for (let i = particles.length - 1; i >= 0; i--) {
     const p = particles[i];
@@ -2749,15 +2745,15 @@ t.draw(() => {
     p.vy += 0.08; // gravity
     p.x += p.vx;
     p.y += p.vy;
-    
+
     if (p.age >= p.maxAge) {
       particles.splice(i, 1);
       continue;
     }
-    
+
     const life = 1 - (p.age / p.maxAge);
     const brightness = Math.round(255 * life);
-    
+
     t.push();
     t.charColor(brightness, brightness * 0.7, 100);
     t.translate(Math.round(p.x), Math.round(p.y));
@@ -2805,23 +2801,22 @@ const lines = [];
 let dragStart = null;
 
 t.mousePressed((data) => {
-  if (data.position.x === -1 || data.position.y === -1) return;
-  const cx = Math.round(data.position.x - (t.grid.cols - 1) / 2);
-  const cy = Math.round(data.position.y - (t.grid.rows - 1) / 2);
-  dragStart = { x: cx, y: cy };
+  if (data.position.x === Number.NEGATIVE_INFINITY) return;
+  // Coordinates are already center-based
+  dragStart = { x: data.position.x, y: data.position.y };
 });
 
 t.mouseReleased((data) => {
-  if (!dragStart || data.position.x === -1) return;
-  const cx = Math.round(data.position.x - (t.grid.cols - 1) / 2);
-  const cy = Math.round(data.position.y - (t.grid.rows - 1) / 2);
-  
+  if (!dragStart || data.position.x === Number.NEGATIVE_INFINITY) return;
+  const cx = data.position.x;
+  const cy = data.position.y;
+
   // Calculate line center and local endpoints
   const centerX = (dragStart.x + cx) / 2;
   const centerY = (dragStart.y + cy) / 2;
   const dx = cx - dragStart.x;
   const dy = cy - dragStart.y;
-  
+
   lines.push({
     cx: centerX, cy: centerY,
     dx: dx, dy: dy,
@@ -2832,20 +2827,20 @@ t.mouseReleased((data) => {
 
 t.draw(() => {
   t.background(0);
-  
+
   // Draw stored lines with fade
   for (let i = lines.length - 1; i >= 0; i--) {
     const ln = lines[i];
     ln.age++;
-    
+
     if (ln.age >= ln.maxAge) {
       lines.splice(i, 1);
       continue;
     }
-    
+
     const life = 1 - (ln.age / ln.maxAge);
     const brightness = Math.round(150 * life);
-    
+
     t.push();
     t.charColor(brightness, brightness, 255);
     t.char('-');
@@ -2854,16 +2849,16 @@ t.draw(() => {
     t.line(-ln.dx / 2, -ln.dy / 2, ln.dx / 2, ln.dy / 2);
     t.pop();
   }
-  
-  // Draw current drag line
-  if (dragStart && t.mouse.x !== -1) {
-    const cx = Math.round(t.mouse.x - (t.grid.cols - 1) / 2);
-    const cy = Math.round(t.mouse.y - (t.grid.rows - 1) / 2);
+
+  // Draw current drag line (mouse coords are center-based)
+  if (dragStart && t.mouse.x !== Number.NEGATIVE_INFINITY) {
+    const cx = t.mouse.x;
+    const cy = t.mouse.y;
     const centerX = (dragStart.x + cx) / 2;
     const centerY = (dragStart.y + cy) / 2;
     const dx = cx - dragStart.x;
     const dy = cy - dragStart.y;
-    
+
     t.push();
     t.charColor(255, 200, 0);
     t.char('o');
@@ -2911,16 +2906,17 @@ const t = textmode.create({ width: 800, height: 600 });
 const rings = [];
 
 t.mouseScrolled((data) => {
-  if (data.position.x === -1 || data.position.y === -1) return;
-  
-  const cx = Math.round(data.position.x - (t.grid.cols - 1) / 2);
-  const cy = Math.round(data.position.y - (t.grid.rows - 1) / 2);
-  
+  if (data.position.x === Number.NEGATIVE_INFINITY) return;
+
+  // Coordinates are already center-based
+  const cx = data.position.x;
+  const cy = data.position.y;
+
   // Use scroll delta to determine ring intensity and direction
   const scrollSpeed = 2;
   const intensity = Math.min(scrollSpeed * 30, 255);
   const scrollDown = (data.delta?.y || 0) > 0;
-  
+
   rings.push({
     x: cx,
     y: cy,
@@ -2935,21 +2931,21 @@ t.mouseScrolled((data) => {
 
 t.draw(() => {
   t.background(0);
-  
+
   // Update and draw rings
   for (let i = rings.length - 1; i >= 0; i--) {
     const r = rings[i];
     r.age++;
     r.radius += (r.maxRadius - r.radius) * 0.15;
-    
+
     if (r.age >= r.maxAge) {
       rings.splice(i, 1);
       continue;
     }
-    
+
     const life = 1 - (r.age / r.maxAge);
     const brightness = Math.round(r.color * life);
-    
+
     t.push();
     // Blue for scroll down, orange for scroll up
     if (r.scrollDown) {
@@ -2958,7 +2954,7 @@ t.draw(() => {
       t.charColor(255, brightness * 0.6, brightness * 0.3);
     }
     t.translate(r.x, r.y);
-    
+
     // Draw ring
     for (let a = 0; a < Math.PI * 2; a += Math.PI / 6) {
       const ox = Math.round(Math.cos(a) * r.radius);
@@ -3027,74 +3023,6 @@ t.draw(() => {
 
 ```ts
 ITextmodifier.noLoop
-```
-
-***
-
-### ortho()
-
-```ts
-ortho(): void;
-```
-
-Enable orthographic projection for the current frame.
-
-By default, textmode.js uses perspective projection. Calling this function
-switches to orthographic projection for all geometries drawn in the current frame.
-Orthographic projection renders objects without perspective distortion - parallel 
-lines remain parallel regardless of depth, and objects don't appear smaller as 
-they move away from the camera.
-
-**Note**: The projection mode resets to perspective at the start of each frame,
-so `ortho()` must be called in every frame where you want orthographic projection.
-
-#### Returns
-
-`void`
-
-#### Example
-
-```javascript
-const t = textmode.create({
-  width: 800,
-  height: 600,
-});
-
-let useOrtho = false;
-
-// Toggle between ortho and perspective with spacebar
-t.keyPressed((data) => {
-  if (data.key === ' ') {
-    useOrtho = !useOrtho;
-  }
-});
-
-t.draw(() => {
-  t.background(0);
-  
-  // Enable orthographic projection if toggled on
-  if (useOrtho) {
-    t.ortho();
-  }
-  
-  // Animate the rectangle back and forth on the z-axis
-  const zPos = Math.sin(t.frameCount * 0.01) * 50;
-  
-  t.push();
-  t.translate(0, 0, zPos);
-  t.rotateZ(t.frameCount * 2);
-  t.rotateX(t.frameCount * 1.5);
-  t.char('A');
-  t.charColor(255, 100, 200);
-  t.rect(16, 16);
-  t.pop();
-});
-```
-
-#### Implementation of
-
-```ts
-ITextmodifier.ortho
 ```
 
 ***
@@ -3336,7 +3264,7 @@ redraw(n?): void;
 
 Execute the render function a specified number of times.
 
-This method is useful when the render loop has been stopped with [noLoop](#noloop), 
+This method is useful when the render loop has been stopped with [noLoop](#noloop),
 allowing you to trigger rendering on demand.
 
 #### Parameters
@@ -3371,14 +3299,14 @@ t.draw(() => {
   }
 
   t.background(0);
-  
+
   t.push();
   t.char('A');
   t.charColor(100, 200, 255);
   t.rotateZ(rotation);
   t.rect(13, 13);
   t.pop();
-  
+
   // Show instruction text
   t.push();
   t.translate(-5, -10);
@@ -3487,16 +3415,16 @@ const t = textmode.create({ width: 800, height: 600 });
 
 t.draw(() => {
   t.background(0);
-  
+
   // Draw three rectangles rotating in 3D space with different axes
   for (let i = 0; i < 3; i++) {
     t.push();
     t.translate(i * 15 - 15, 0, 0);
-    
+
     const angle = t.frameCount * (1.5 + i * 0.5);
     // Each shape rotates around different combinations of axes
     t.rotate(angle * 0.7, angle * 0.5, angle);
-    
+
     t.char(['T', 'X', 'T'][i]);
     t.charColor(100 + i * 60, 200 - i * 40, 255);
     t.rect(10, 10);
@@ -3710,7 +3638,7 @@ t.setup(async () => {
   layout(location = 0) out vec4 o_character;
   layout(location = 1) out vec4 o_primaryColor;
   layout(location = 2) out vec4 o_secondaryColor;
-  
+
   void main() {
     float pulse = 0.5 + 0.5 * sin(u_time + length(v_uv - 0.5) * 8.0);
     vec3 color = vec3(pulse * 0.3, pulse * 0.8, pulse);
@@ -3770,7 +3698,7 @@ t.setup(async() => {
   layout(location = 0) out vec4 o_character;
   layout(location = 1) out vec4 o_primaryColor;
   layout(location = 2) out vec4 o_secondaryColor;
-  
+
   void main() {
     float dist = length(v_uv - u_center);
     float wave = sin(dist * 20.0 - u_time * 2.0) * 0.5 + 0.5;
@@ -3803,7 +3731,7 @@ ITextmodifier.setUniforms
 ### setup()
 
 ```ts
-setup(callback): void;
+setup(callback): Promise<void>;
 ```
 
 Set a setup callback function that will be executed once when initialization is complete.
@@ -3819,7 +3747,7 @@ properties like `textmodifier.grid.cols` for calculating layout or setup variabl
 
 #### Returns
 
-`void`
+`Promise`\<`void`\>
 
 #### Example
 
@@ -3835,7 +3763,7 @@ textmodifier.setup(() => {
   // Now you can access grid properties
   const cols = textmodifier.grid.cols;
   const rows = textmodifier.grid.rows;
-  
+
   // Initialize any variables that depend on grid size
   rectWidth = Math.floor(cols / 3);
   rectHeight = Math.floor(rows / 2);
@@ -3891,7 +3819,7 @@ t.setup(async() => {
   layout(location = 0) out vec4 o_character;
   layout(location = 1) out vec4 o_primaryColor;
   layout(location = 2) out vec4 o_secondaryColor;
-  
+
   void main() {
     vec2 offset = vec2(sin(v_uv.y * 50.0) * u_intensity, 0.0);
     float pattern = fract(v_uv.x * 20.0 + offset.x);
@@ -4175,7 +4103,7 @@ const t = textmode.create({ width: 800, height: 600 });
 
 t.draw(() => {
   t.background(0);
-  
+
   // Draw a grid of shapes with different translations
   for (let i = 0; i < 3; i++) {
     t.push();
@@ -4354,7 +4282,7 @@ t.draw(() => {
   t.background(0);
   t.char('*');
   t.charColor(255, 100, 150);
-  
+
   const angle = t.frameCount * 0.02;
   const size = 15;
   t.triangle(

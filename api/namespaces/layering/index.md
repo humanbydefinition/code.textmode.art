@@ -9,7 +9,7 @@ All modules and types related to multi-layered textmode rendering.
 | Class | Description |
 | ------ | ------ |
 | [TextmodeLayer](classes/TextmodeLayer.md) | A single layer within a multi-layered textmode rendering context. |
-| [TextmodeLayerManager](classes/TextmodeLayerManager.md) | Manages all user-defined layers within a Textmodifier instance. |
+| [TextmodeLayerManager](classes/TextmodeLayerManager.md) | Manages all user-defined layers within a Textmodifier in * Th * This manager is responsible for: - Managing the collection of user layers (add, remove, move, swap) - Coordinating layer rendering and compositing |
 
 ## Interfaces
 

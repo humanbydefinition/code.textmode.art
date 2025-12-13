@@ -2,16 +2,21 @@
 
 # Interface: MousePosition
 
-Mouse coordinates in grid space.
+Mouse coordinates in grid space using center-based coordinates.
 
-Unlike the main drawing logic, where `(0,0,0)` is the center cell,
-the mouse coordinates use the top-left cell as `(0,0)`. This means
-you'll need to adjust accordingly when using these coordinates
-for drawing or other grid operations.
+The coordinate system matches the main drawing/rendering space:
+- `(0, 0)` is the center cell of the grid
+- Negative X values are to the left of center
+- Positive X values are to the right of center
+- Negative Y values are above center
+- Positive Y values are below center
+
+When the mouse is outside the grid bounds, both `x` and `y` are set to
+`Number.NEGATIVE_INFINITY` to indicate an invalid/outside position.
 
 ## Properties
 
 | Property | Type | Description |
 | ------ | ------ | ------ |
-| <a id="x"></a> `x` | `number` | Grid X coordinate (column), -1 if mouse is outside grid |
-| <a id="y"></a> `y` | `number` | Grid Y coordinate (row), -1 if mouse is outside grid |
+| <a id="x"></a> `x` | `number` | Grid X coordinate (column) in center-based coords. `Number.NEGATIVE_INFINITY` if outside grid. |
+| <a id="y"></a> `y` | `number` | Grid Y coordinate (row) in center-based coords. `Number.NEGATIVE_INFINITY` if outside grid. |

@@ -1,15 +1,23 @@
-[textmode.js](../../../index.md) / [loading](../index.md) / LoadingPhaseHandle
+[textmode.js](../../../index.md) / [loading](../index.md) / LoadingPhase
 
-# Interface: LoadingPhaseHandle
+# Class: LoadingPhase
 
-Handle for managing a loading phase.
+Represents a loading phase tracked by a LoadingPhaseTracker.
+
+Allows reporting progress, completion, and failure of the phase.
+
+Also provides a method to track asynchronous tasks within the phase.
+
+## Implements
+
+- `ILoadingPhase`
 
 ## Properties
 
-| Property | Type | Description |
-| ------ | ------ | ------ |
-| <a id="id"></a> `id` | `string` | The unique identifier of the loading phase. |
-| <a id="label"></a> `label` | `string` | The label or name of the loading phase. |
+| Property | Modifier | Type | Description |
+| ------ | ------ | ------ | ------ |
+| <a id="id"></a> `id` | `readonly` | `string` | The unique identifier for this loading phase |
+| <a id="label"></a> `label` | `readonly` | `string` | The human-readable label for this loading phase |
 
 ## Methods
 
@@ -37,21 +45,27 @@ t.setup(() => {
 });
 ```
 
+#### Implementation of
+
+```ts
+ILoadingPhase.complete
+```
+
 ***
 
 ### fail()
 
 ```ts
-fail(error?): void;
+fail(_error?): void;
 ```
 
 Mark the loading phase as failed.
 
 #### Parameters
 
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `error?` | `Error` | An optional error object describing the failure. |
+| Parameter | Type |
+| ------ | ------ |
+| `_error?` | `Error` |
 
 #### Returns
 
@@ -71,6 +85,12 @@ t.setup(async () => {
     phase.fail(err instanceof Error ? err : String(err));
   }
 });
+```
+
+#### Implementation of
+
+```ts
+ILoadingPhase.fail
 ```
 
 ***
@@ -106,6 +126,12 @@ t.setup(async () => {
   phase.report(0.75);
   phase.complete();
 });
+```
+
+#### Implementation of
+
+```ts
+ILoadingPhase.report
 ```
 
 ***
@@ -151,4 +177,10 @@ t.setup(async () => {
     }
   });
 });
+```
+
+#### Implementation of
+
+```ts
+ILoadingPhase.track
 ```

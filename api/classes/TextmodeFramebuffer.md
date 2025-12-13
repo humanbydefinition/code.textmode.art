@@ -103,7 +103,16 @@ IFramebuffer.width
 begin(): void;
 ```
 
-Begin rendering to this framebuffer.
+Begin drawing to this framebuffer.
+
+This method:
+- Flushes any pending draw calls to maintain proper render order
+- Saves the current framebuffer and viewport state
+- Binds this framebuffer as the render target
+- Clears all color attachments to transparent black
+- Sets the viewport to match the framebuffer dimensions
+
+All subsequent drawing operations will target this framebuffer until [end](#end) is called.
 
 #### Returns
 
@@ -124,6 +133,13 @@ end(): void;
 ```
 
 End rendering to this framebuffer and restore previous state.
+
+This method:
+- Flushes any pending draw calls into this framebuffer
+- Restores the previously bound framebuffer
+- Restores the previous viewport settings
+
+After calling this method, rendering operations will target the previously active framebuffer.
 
 #### Returns
 

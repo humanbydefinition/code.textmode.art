@@ -12,12 +12,6 @@ All loadable assets related to textmode rendering.
 | [TextmodeImage](classes/TextmodeImage.md) | Represents an image uploaded for textmode rendering via [Textmodifier.loadImage](../../classes/Textmodifier.md#loadimage). |
 | [TextmodeVideo](classes/TextmodeVideo.md) | Represents a video element for textmode rendering via [Textmodifier.loadVideo](../../classes/Textmodifier.md#loadvideo). |
 
-## Interfaces
-
-| Interface | Description |
-| ------ | ------ |
-| [TextmodeVideoOptions](interfaces/TextmodeVideoOptions.md) | Options for preloading video frames in [TextmodeVideo](classes/TextmodeVideo.md). |
-
 ## Type Aliases
 
 | Type Alias | Description |

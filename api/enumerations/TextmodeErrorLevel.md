@@ -9,7 +9,7 @@ Each level provides different behavior for error reporting and execution flow co
 
 ## Note
 
-This feature is currently not fully implemented across all modules, 
+This feature is currently not fully implemented across all modules,
 and most `textmode.js` functions will still throw errors if used incorrectly.
 
 ## Example

@@ -44,12 +44,12 @@ t.setup(async () => {
 ### addPhase()
 
 ```ts
-addPhase(label, weight): LoadingPhaseHandle;
+addPhase(label, weight): LoadingPhase;
 ```
 
 Begin a new loading phase.
 
-With the returned [LoadingPhaseHandle](../interfaces/LoadingPhaseHandle.md) you can report progress,
+With the returned [LoadingPhase](LoadingPhase.md) you can report progress,
 track asynchronous work, and manage the phase lifecycle.
 
 #### Parameters
@@ -61,7 +61,7 @@ track asynchronous work, and manage the phase lifecycle.
 
 #### Returns
 
-[`LoadingPhaseHandle`](../interfaces/LoadingPhaseHandle.md)
+[`LoadingPhase`](LoadingPhase.md)
 
 A handle to the created loading phase.
 

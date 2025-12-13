@@ -4,6 +4,7 @@
 
 | Namespace | Description |
 | ------ | ------ |
+| [conversion](namespaces/conversion/index.md) | All media conversion related modules and types. |
 | [filters](namespaces/filters/index.md) | All filter related modules and types. |
 | [input](namespaces/input/index.md) | All types and interfaces related to input event handling. |
 | [layering](namespaces/layering/index.md) | All modules and types related to multi-layered textmode rendering. |
@@ -23,8 +24,8 @@
 | [textmode](classes/textmode.md) | The main entry point for the `textmode.js` library. |
 | [TextmodeColor](classes/TextmodeColor.md) | Represents a color in the `textmode.js` rendering system. |
 | [TextmodeFramebuffer](classes/TextmodeFramebuffer.md) | Framebuffer class for managing offscreen rendering targets initialized via [Textmodifier.createFramebuffer](classes/Textmodifier.md#createframebuffer). |
-| [TextmodeGrid](classes/TextmodeGrid.md) | Manages the grid of a [Textmodifier](classes/Textmodifier.md) instance. |
-| [Textmodifier](classes/Textmodifier.md) | Manages textmode rendering on a [`HTMLCanvasElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement) and provides methods for drawing, font management, event handling, and animation control. |
+| [TextmodeGrid](classes/TextmodeGrid.md) | Manages the grid of each `TextmodeLayer` instance. |
+| [Textmodifier](classes/Textmodifier.md) | Manages textmode rendering on a [`HTMLCanvasElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement) and provides methods for drawing, font management, event handling, layer management, animation control, and more. The heart of the `textmode.js` library. |
 
 ## Interfaces
 

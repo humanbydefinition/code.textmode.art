@@ -17,6 +17,25 @@ like you would with the base layer's [Textmodifier.draw](../../../classes/Textmo
 
 ## Accessors
 
+### asciiFramebuffer
+
+#### Get Signature
+
+```ts
+get asciiFramebuffer(): 
+  | undefined
+  | TextmodeFramebuffer;
+```
+
+Get the framebuffer containing the rendered textmode output for this layer.
+
+##### Returns
+
+  \| `undefined`
+  \| [`TextmodeFramebuffer`](../../../classes/TextmodeFramebuffer.md)
+
+***
+
 ### drawFramebuffer
 
 #### Get Signature
@@ -27,8 +46,7 @@ get drawFramebuffer():
   | TextmodeFramebuffer;
 ```
 
-Returns the draw framebuffer for this layer.
-If the layer is not yet initialized, returns undefined.
+Get the framebuffer used for drawing operations on this layer.
 
 ##### Returns
 
@@ -40,6 +58,44 @@ If the layer is not yet initialized, returns undefined.
 ```ts
 ITextmodeLayer.drawFramebuffer
 ```
+
+***
+
+### font
+
+#### Get Signature
+
+```ts
+get font(): TextmodeFont;
+```
+
+The font used by this layer.
+
+##### Returns
+
+[`TextmodeFont`](../../loadables/classes/TextmodeFont.md)
+
+#### Implementation of
+
+```ts
+ITextmodeLayer.font
+```
+
+***
+
+### grid
+
+#### Get Signature
+
+```ts
+get grid(): undefined | TextmodeGrid;
+```
+
+Get the grid associated with this layer.
+
+##### Returns
+
+`undefined` \| [`TextmodeGrid`](../../../classes/TextmodeGrid.md)
 
 ***
 
@@ -74,8 +130,7 @@ ITextmodeLayer.height
 get texture(): undefined | WebGLTexture;
 ```
 
-Returns the WebGL texture of the final ASCII framebuffer.
-If the layer is not yet initialized, returns undefined.
+Get the texture containing the rendered textmode output for this layer.
 
 ##### Returns
 
@@ -135,7 +190,7 @@ Set or get the layer's blend mode for compositing with layers below.
 
 The current blend mode if no parameter is provided.
 
-**Available Blend Modes:**
+**Available blend modes:**
 - `'normal'` - Standard alpha compositing
 - `'additive'` - Adds colors together (great for glow/energy effects)
 - `'multiply'` - Darkens by multiplying colors
@@ -168,20 +223,20 @@ t.draw(() => {
     layers.forEach((layer, i) => {
         layer.draw(() => {
             t.charColor(...colors[i], 255);
-            
+
             // Draw spiral of characters
             for (let j = 0; j < 30; j++) {
                 const angle = j * 0.2 + time * (i % 2 ? 1 : -1);
                 const radius = 3 + j * 0.4 + Math.sin(time + j) * 2;
                 const x = Math.cos(angle) * radius;
                 const y = Math.sin(angle) * radius * 0.6;
-                
+
                 t.char('#*+=-.'[j % 6]);
                 t.translate(Math.round(x), Math.round(y));
                 t.rect(1, 1);
             }
         });
-        
+
         // Offset each layer
         layer.offset(Math.sin(time * 0.6 + i) * 6, Math.cos(time * 0.3 + i) * 4);
     });
@@ -205,7 +260,7 @@ draw(callback): void;
 Define this layer's draw callback. The callback is executed each frame
 and should contain all drawing commands for this layer.
 
-Inside the callback, use `t` (your textmode instance) to access drawing
+Inside the callback, use `t` (your `Textmodifier` instance) to access drawing
 methods like `char()`, `charColor()`, `translate()`, and `rect()`.
 
 #### Parameters
@@ -310,7 +365,7 @@ Apply a post-processing filter to this layer's rendered output.
 Filters are applied after ASCII conversion in the order they are called.
 Call this method within your layer's draw callback to apply effects.
 
-**Built-in Filters:**
+**Built-in filters:**
 - `'invert'` - Inverts all colors
 - `'grayscale'` - Converts to grayscale (param: amount 0-1, default 1)
 - `'sepia'` - Applies sepia tone (param: amount 0-1, default 1)
@@ -396,6 +451,32 @@ ITextmodeLayer.filter
 
 ***
 
+### fontSize()
+
+```ts
+fontSize(size?): number | void;
+```
+
+Get or set the font size for this layer's font.
+
+#### Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `size?` | `number` |
+
+#### Returns
+
+`number` \| `void`
+
+#### Implementation of
+
+```ts
+ITextmodeLayer.fontSize
+```
+
+***
+
 ### hide()
 
 ```ts
@@ -412,6 +493,46 @@ Hide this layer from rendering.
 
 ```ts
 ITextmodeLayer.hide
+```
+
+***
+
+### loadFont()
+
+```ts
+loadFont(fontSource): Promise<TextmodeFont>;
+```
+
+Load a font into this layer from a URL/path or reuse an existing [TextmodeFont](../../loadables/classes/TextmodeFont.md) instance.
+Creates a new font instance for this layer and loads the font data when a string source is provided.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `fontSource` | `string` \| [`TextmodeFont`](../../loadables/classes/TextmodeFont.md) | The URL or path to the font file. |
+
+#### Returns
+
+`Promise`\<[`TextmodeFont`](../../loadables/classes/TextmodeFont.md)\>
+
+The loaded TextmodeFont instance.
+
+#### Example
+
+```javascript
+const layer = t.layers.add();
+
+t.setup(async () => {
+  // Load a custom font for this layer
+  await layer.loadFont('./fonts/custom.ttf');
+});
+```
+
+#### Implementation of
+
+```ts
+ITextmodeLayer.loadFont
 ```
 
 ***

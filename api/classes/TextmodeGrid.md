@@ -2,9 +2,7 @@
 
 # Class: TextmodeGrid
 
-Manages the grid of a [Textmodifier](Textmodifier.md) instance.
-
-Can be accessed via [Textmodifier.grid](Textmodifier.md#grid).
+Manages the grid of each `TextmodeLayer` instance.
 
 ## Accessors
 
@@ -53,6 +51,24 @@ Returns the number of columns in the grid.
 ##### Returns
 
 `number`
+
+#### Set Signature
+
+```ts
+set cols(newCols): void;
+```
+
+Sets the number of columns and locks grid sizing until `responsive()` is called.
+
+##### Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `newCols` | `number` |
+
+##### Returns
+
+`void`
 
 ***
 
@@ -118,6 +134,24 @@ Returns the number of rows in the grid.
 
 `number`
 
+#### Set Signature
+
+```ts
+set rows(newRows): void;
+```
+
+Sets the number of rows and locks grid sizing until `responsive()` is called.
+
+##### Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `newRows` | `number` |
+
+##### Returns
+
+`void`
+
 ***
 
 ### width
@@ -133,3 +167,17 @@ Returns the total width of the grid.
 ##### Returns
 
 `number`
+
+## Methods
+
+### responsive()
+
+```ts
+responsive(): void;
+```
+
+Restores responsive sizing so subsequent `t.resizeCanvas` calls recompute cols/rows.
+
+#### Returns
+
+`void`
