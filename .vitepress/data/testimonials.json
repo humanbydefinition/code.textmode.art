@@ -1,0 +1,32 @@
+{
+  "placeholder-1": {
+    "quote": "Your testimonial could be here! Share your textmode.js creations on socials with #textmodejs.",
+    "author": "You?",
+    "role": "Creative Developer",
+    "githubUsername": null,
+    "avatarUrl": null,
+    "link": null,
+    "source": null,
+    "featured": true
+  },
+  "placeholder-2": {
+    "quote": "Built something amazing? Write a blog post or tweet about it - we'd love to feature your work!",
+    "author": "Your Name",
+    "role": "Generative Artist",
+    "githubUsername": null,
+    "avatarUrl": null,
+    "link": null,
+    "source": null,
+    "featured": true
+  },
+  "placeholder-3": {
+    "quote": "Tag your posts with #textmodejs and help others discover this library. Your creation could inspire the next wave of textmode art!",
+    "author": "Community Member",
+    "role": "Creative Coder",
+    "githubUsername": null,
+    "avatarUrl": null,
+    "link": null,
+    "source": null,
+    "featured": true
+  }
+}

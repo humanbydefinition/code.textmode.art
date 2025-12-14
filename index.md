@@ -89,6 +89,10 @@ Simple, powerful, and ready for your wildest ideas.
 
 <hr />
 
+<Testimonials />
+
+<hr />
+
 <CommunitySupport />
 
 ## What will you create?
