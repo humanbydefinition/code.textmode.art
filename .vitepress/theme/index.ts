@@ -23,6 +23,7 @@ import DocFooter from './components/DocFooter/DocFooter.vue'
 import FeaturedSketches from './components/FeaturedSketches/FeaturedSketches.vue'
 import CommunitySupport from './components/CommunitySupport/CommunitySupport.vue'
 import Testimonials from './components/Testimonials/Testimonials.vue'
+import ContributorsGrid from './components/Contributors/ContributorsGrid.vue'
 
 // Blog
 import { withBlogTheme } from 'vitepress-plugin-blog'
@@ -79,6 +80,7 @@ const baseTheme: Theme = {
     app.component('FeaturedSketches', FeaturedSketches)
     app.component('CommunitySupport', CommunitySupport)
     app.component('Testimonials', Testimonials)
+    app.component('ContributorsGrid', ContributorsGrid)
 
     // Set up hero sketch router
     setupHeroSketchRouter(router)

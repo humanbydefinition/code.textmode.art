@@ -5,8 +5,7 @@ layout: doc
 ---
 
 <script setup>
-import { VPTeamMembers } from 'vitepress/theme'
-import members from '../.vitepress/data/contributors.json'
+import contributors from '../.vitepress/data/contributors.json'
 </script>
 
 # Contributors
@@ -14,18 +13,18 @@ import members from '../.vitepress/data/contributors.json'
 `textmode.js` is built with passion and maintained by creative minds who believe in making textmode graphics accessible to everyone.
 
 :::info About this page
-This page follows the [**All Contributors**](https://allcontributors.org/) specification to recognize every type of contribution. For a complete list of contribution types and their meanings, scroll down to the "About the emoji Key" section below.
+This page follows the [**All Contributors**](https://allcontributors.org/) specification to recognize every type of contribution. Hover over any emoji to see what type of contribution it represents!
 :::
 
 :::tip Help us grow!
-We welcome contributions of all sizes! Whether it's fixing a typo, adding a feature, improving documentation, or creating examples - every contribution earns you a place here. Check out our [Contributing Guide](/docs/contributing) to get started.
+We welcome contributions of all sizes! Whether it's fixing a typo, adding a feature, improving documentation, or creating examples - every contribution earns you a place here. Check out our [Contributing Guide](/docs/contributing/) to get started.
 :::
 
 
 
 ## Current and past contributors
 
-<VPTeamMembers size="small" :members="members" />
+<ContributorsGrid :contributors="contributors" />
 
 ## About the emoji key
 
