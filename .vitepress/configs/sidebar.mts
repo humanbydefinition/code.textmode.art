@@ -24,7 +24,7 @@ const docsSidebar: DefaultTheme.SidebarItem[] = [
       { text: 'Examples', link: '/docs/examples' },
       {
         text: 'Contributing',
-        collapsed: false,
+        collapsed: true,
         items: [
           { text: 'Overview', link: '/docs/contributing/' },
           { text: 'Getting started', link: '/docs/contributing/getting-started' },
