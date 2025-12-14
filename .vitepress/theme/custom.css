@@ -64,27 +64,44 @@
   }
 }
 
-/* Footer styling for better spacing */
+/*
+ * Global Footer styling
+ * 
+ * On doc pages with sidebars, VitePress hides the global footer by default.
+ * We use a custom DocFooter component rendered inside the content column instead.
+ * The global footer is still visible on pages without sidebars (home, etc.)
+ */
 .VPFooter {
   border-top: 1px solid var(--vp-c-divider) !important;
   padding-top: 2rem !important;
   padding-bottom: 2rem !important;
 }
 
-.VPFooter .message {
-  margin-bottom: 1rem !important;
-  font-size: 0.9rem;
-  opacity: 0.8;
+.VPFooter .message,
+.VPFooter .copyright {
+  line-height: 24px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--vp-c-text-2);
 }
 
-.VPFooter .message a {
-  color: var(--vp-c-brand-1);
+.VPFooter .message {
+  margin-bottom: 8px !important;
+}
+
+/* Style all links in the footer consistently */
+.VPFooter .message a,
+.VPFooter .copyright a {
+  color: var(--vp-c-brand-1) !important;
   text-decoration: none;
   transition: color 0.25s;
 }
 
-.VPFooter .message a:hover {
-  color: var(--vp-c-brand-2);
+.VPFooter .message a:hover,
+.VPFooter .copyright a:hover {
+  color: var(--vp-c-brand-2) !important;
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 @media (max-width: 480px) {
