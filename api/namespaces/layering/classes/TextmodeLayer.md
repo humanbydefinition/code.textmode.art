@@ -6,7 +6,7 @@ A single layer within a multi-layered textmode rendering context.
 
 Layers are composited together using various blend modes
 to create complex visual effects. Each layer can be independently
-manipulated in terms of visibility, opacity, blend mode, and position.
+manipulated in terms of visibility, [opacity](#opacity), [blendMode](#blendmode), [offset](#offset), rotation, [TextmodeGrid](../../../classes/TextmodeGrid.md), and [TextmodeFont](../../loadables/classes/TextmodeFont.md).
 
 You can draw on each layer by providing a draw callback function,
 like you would with the base layer's [Textmodifier.draw](../../../classes/Textmodifier.md#draw) method.
@@ -208,7 +208,7 @@ The current blend mode if no parameter is provided.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create();
 
 // Create 5 layers with different blend modes
@@ -275,7 +275,7 @@ methods like `char()`, `charColor()`, `translate()`, and `rect()`.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create();
 
 // Create layers with different blend modes
@@ -390,7 +390,7 @@ Call this method within your layer's draw callback to apply effects.
 
 ##### Example
 
-```typescript
+```javascript
 const t = textmode.create();
 
 // Create a layer with filters applied
@@ -520,7 +520,7 @@ The loaded TextmodeFont instance.
 
 #### Example
 
-```javascript
+```js
 const layer = t.layers.add();
 
 t.setup(async () => {
@@ -569,7 +569,7 @@ The current offset if no parameters are provided.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create();
 
 const LAYER_COUNT = 32;
@@ -698,9 +698,7 @@ The current rotation in degrees if no parameter is provided.
 
 #### Example
 
-```typescript
-import { textmode } from 'textmode.js';
-
+```javascript
 const t = textmode.create();
 
 const rotatingLayer = t.layers.add({ blendMode: 'difference', opacity: 1.0 });

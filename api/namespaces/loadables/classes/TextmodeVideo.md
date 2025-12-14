@@ -550,7 +550,7 @@ Additional conversion strategies may be provided via add-on libraries.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `mode` | [`TextmodeConversionMode`](../../conversion/type-aliases/TextmodeConversionMode.md) | Conversion mode to use. |
+| `mode` | `string` | Conversion mode to use. |
 
 #### Returns
 

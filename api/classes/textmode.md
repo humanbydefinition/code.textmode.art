@@ -20,7 +20,7 @@ Returns the version of `textmode.js` being used.
 
 ##### Example
 
-```javascript
+```js
 console.log(textmode.version); // "1.0.0"
 ```
 
@@ -63,6 +63,10 @@ t.draw(() => {
 });
 ```
 
+#### Example Author
+
+[@humanbydefinition](https://github.com/humanbydefinition) *(📷 [Instagram](https://instagram.com/humanbydefinition) | 🐘 [Mastodon](https://mastodon.social/@humanbydefinition) | 🦋 [BlueSky](https://bsky.app/profile/humanbydefinition.bsky.social))*
+
 ***
 
 ### setErrorLevel()
@@ -85,7 +89,7 @@ Set the global error handling level for the library. This applies to all [Textmo
 
 #### Example
 
-```javascript
+```js
 // Set error level to WARNING
 textmode.setErrorLevel(TextmodeErrorLevel.WARNING);
 ```

@@ -39,7 +39,7 @@ Mark the loading phase as complete.
 const t = textmode.create({ width: 800, height: 600, loadingScreen: { message: 'prepping...' } });
 
 t.setup(() => {
-  const phase = t.loading.beginPhase('init', 1);
+  const phase = t.loading.addPhase('init', 1);
   // Finish phase when work is done
   phase.complete();
 });
@@ -56,16 +56,19 @@ ILoadingPhase.complete
 ### fail()
 
 ```ts
-fail(_error?): void;
+fail(error?): void;
 ```
 
 Mark the loading phase as failed.
 
+This will put the loading manager into an error state, displaying the
+error on the loading screen.
+
 #### Parameters
 
-| Parameter | Type |
-| ------ | ------ |
-| `_error?` | `Error` |
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `error?` | `string` \| `Error` | An optional error object or message describing the failure. |
 
 #### Returns
 
@@ -77,7 +80,7 @@ Mark the loading phase as failed.
 const t = textmode.create({ width: 800, height: 600 });
 
 t.setup(async () => {
-  const phase = t.loading.beginPhase('fetch', 1);
+  const phase = t.loading.addPhase('fetch', 1);
   try {
     // simulate failure
     throw new Error('network error');
@@ -120,7 +123,7 @@ const t = textmode.create({ width: 800, height: 600, loadingScreen: { message: '
 
 // Create a phase and report progress as work proceeds
 t.setup(async () => {
-  const phase = t.loading.beginPhase('assets', 1);
+  const phase = t.loading.addPhase('assets', 1);
   phase.report(0.25);
   // ...load assets...
   phase.report(0.75);
@@ -168,7 +171,7 @@ A promise that resolves with the task's result.
 const t = textmode.create({ width: 800, height: 600, loadingScreen: { message: 'loading...' } });
 
 t.setup(async () => {
-  const phase = t.loading.beginPhase('video', 2);
+  const phase = t.loading.addPhase('video', 2);
   await phase.track(async () => {
     // do async work and report updates
     for (let i = 0; i <= 10; i++) {

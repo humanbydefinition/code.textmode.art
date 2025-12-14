@@ -2,13 +2,13 @@
 
 # Class: TextmodeFont
 
-Manages the font used for rendering characters via [Textmodifier.loadFont](../../../classes/Textmodifier.md#loadfont).
+Manages the font used for rendering characters via [TextmodeLayer.loadFont](../../layering/classes/TextmodeLayer.md#loadfont).
 
 This class coordinates font loading, character extraction, texture atlas creation,
 and provides character information.
 
-The font used by your [Textmodifier](../../../classes/Textmodifier.md) instance is accessible via
-the [Textmodifier.font](../../../classes/Textmodifier.md#font) property.
+Each [TextmodeLayer](../../layering/classes/TextmodeLayer.md) has its own instance of this class to allow for
+layer-specific font configurations.
 
 ## Accessors
 

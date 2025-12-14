@@ -81,7 +81,7 @@ Use this to register custom filters that can be applied both globally
 
 ##### Example
 
-```typescript
+```ts
 // Register a custom filter once
 await t.filters.register('vignette', vignetteShader, {
     u_intensity: ['intensity', 0.5]
@@ -524,7 +524,7 @@ allowing further configuration of the conversion parameters.
 
 ##### Example
 
-```javascript
+```js
 // Create the textmode instance using the p5 canvas as input overlay
 const t = textmode.create({ fontSize: 16, canvas: p.canvas, overlay: true });
 
@@ -619,7 +619,7 @@ available. Use this inside a draw loop to react to active multi-touch scenarios.
 
 ##### Example
 
-```javascript
+```js
 t.draw(() => {
   for (const touch of t.touches) {
     t.point();
@@ -1355,7 +1355,7 @@ After calling this method, the instance should not be used and will be eligible 
 
 #### Example
 
-```javascript
+```js
 // Create a textmodifier instance
 const textmodifier = textmode.create();
 
@@ -1398,7 +1398,7 @@ helper lets you supply a dedicated handler when you want to treat double taps di
 
 #### Example
 
-```javascript
+```js
 t.doubleTap((data) => {
   console.log('Double tap detected', data.touch);
 });
@@ -1427,7 +1427,7 @@ This allows for complex multi-layered compositions with independent rendering lo
 
 Calling this method is equivalent to setting the draw callback on the base layer,
 while the direct layer callback has precedence if both are set.
-```javascript
+```js
 textmodifier.layers.base.draw(callback);
 ```
 
@@ -1547,7 +1547,7 @@ queued per frame and will be applied in order.
 
 ##### Example
 
-```typescript
+```ts
 t.draw(() => {
     t.background(0);
     t.charColor(255);
@@ -2007,7 +2007,7 @@ True if the render loop is currently active, false otherwise.
 
 #### Example
 
-```javascript
+```js
 const textmodifier = textmode.create(canvas);
 
 // Check loop status in different states
@@ -2435,7 +2435,7 @@ configured tolerance. The event includes the press duration in milliseconds.
 
 #### Example
 
-```javascript
+```js
 t.longPress((data) => {
   console.log(`Long press for ${Math.round(data.duration)}ms`);
 });
@@ -3050,7 +3050,7 @@ the initial distance and the change since the previous update, enabling zoom int
 
 #### Example
 
-```javascript
+```js
 t.pinch((data) => {
   console.log(`Pinch scale: ${data.scale.toFixed(2)}`);
 });
@@ -3464,7 +3464,7 @@ along with the gesture centre in grid coordinates. Ideal for dial-like interacti
 
 #### Example
 
-```javascript
+```js
 t.rotateGesture((data) => {
   console.log(`Rotated ${data.deltaRotation.toFixed(1)}°`);
 });
@@ -3868,7 +3868,7 @@ velocity in CSS pixels per millisecond. Useful for panning, flicks, or quick sho
 
 #### Example
 
-```javascript
+```js
 t.swipe((data) => {
   console.log(`Swipe ${data.direction} with distance ${data.distance}`);
 });
@@ -3905,7 +3905,7 @@ Use TouchTapEventData.taps to determine whether the gesture is a single or multi
 
 #### Example
 
-```javascript
+```js
 t.tap((data) => {
   console.log(`Tapped at ${data.touch.x}, ${data.touch.y}`);
 });
@@ -3942,7 +3942,7 @@ leaves the window. Treat this as an aborted touch and clean up any in-progress s
 
 #### Example
 
-```javascript
+```js
 t.touchCancelled((data) => {
   console.warn(`Touch ${data.touch.id} cancelled by the browser`);
 });
@@ -3979,7 +3979,7 @@ event. Use it to finalise state such as drawing strokes or completing gestures.
 
 #### Example
 
-```javascript
+```js
 t.touchEnded((data) => {
   console.log(`Touch ${data.touch.id} finished at ${data.touch.x}, ${data.touch.y}`);
 });
@@ -4016,7 +4016,7 @@ The provided callback is invoked continuously while the browser reports move eve
 
 #### Example
 
-```javascript
+```js
 t.touchMoved((data) => {
   const { touch, previousTouch } = data;
   if (previousTouch) {
@@ -4057,7 +4057,7 @@ more fingers on the canvas.
 
 #### Example
 
-```javascript
+```js
 t.touchStarted((data) => {
   console.log(`Touch ${data.touch.id} began at ${data.touch.x}, ${data.touch.y}`);
 });

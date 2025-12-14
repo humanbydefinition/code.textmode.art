@@ -12,7 +12,7 @@ Used for image-to-ASCII conversion modes.
 
 ## Example
 
-```typescript
+```ts
 // Register a custom conversion strategy
 t.conversions.register({
     id: 'custom',
@@ -38,7 +38,7 @@ Check if a conversion strategy with the given ID is registered.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `id` | [`TextmodeConversionMode`](../type-aliases/TextmodeConversionMode.md) | The conversion strategy ID to check |
+| `id` | `string` | The conversion strategy ID to check |
 
 #### Returns
 
@@ -68,7 +68,7 @@ Register a custom conversion strategy.
 
 #### Example
 
-```typescript
+```ts
 t.conversions.register({
     id: 'custom',
     createShader: (ctx) => shader,
@@ -90,7 +90,7 @@ Unregister a conversion strategy by its ID.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `id` | [`TextmodeConversionMode`](../type-aliases/TextmodeConversionMode.md) | The conversion strategy ID to unregister |
+| `id` | `string` | The conversion strategy ID to unregister |
 
 #### Returns
 

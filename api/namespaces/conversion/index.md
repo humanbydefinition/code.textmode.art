@@ -4,7 +4,7 @@
 
 All media conversion related modules and types.
 
-Responsible for converting images and videos into textmode-renderable formats,
+Responsible for converting images and videos into textmode-renderable formats
 using various conversion strategies, like brightness- or edge-detection-based conversion.
 
 `textmode.js` only comes with a built-in `'brightness'`-based conversion strategy,

@@ -8,7 +8,7 @@ All loadable assets related to textmode rendering.
 
 | Class | Description |
 | ------ | ------ |
-| [TextmodeFont](classes/TextmodeFont.md) | Manages the font used for rendering characters via [Textmodifier.loadFont](../../classes/Textmodifier.md#loadfont). |
+| [TextmodeFont](classes/TextmodeFont.md) | Manages the font used for rendering characters via [TextmodeLayer.loadFont](../layering/classes/TextmodeLayer.md#loadfont). |
 | [TextmodeImage](classes/TextmodeImage.md) | Represents an image uploaded for textmode rendering via [Textmodifier.loadImage](../../classes/Textmodifier.md#loadimage). |
 | [TextmodeVideo](classes/TextmodeVideo.md) | Represents a video element for textmode rendering via [Textmodifier.loadVideo](../../classes/Textmodifier.md#loadvideo). |
 

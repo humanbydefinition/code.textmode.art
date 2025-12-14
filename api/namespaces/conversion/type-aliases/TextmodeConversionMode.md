@@ -3,7 +3,7 @@
 # Type Alias: TextmodeConversionMode
 
 ```ts
-type TextmodeConversionMode = BuiltInConversionMode | string & object;
+type TextmodeConversionMode = BuiltInConversionMode | string;
 ```
 
 Type representing the available textmode conversion modes

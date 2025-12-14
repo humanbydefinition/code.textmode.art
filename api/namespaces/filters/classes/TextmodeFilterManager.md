@@ -4,16 +4,11 @@
 
 Manages filter registration, shader compilation, and filter chain application.
 
-This class provides:
-- A registry for custom and built-in filter strategies
-- Lazy shader compilation and caching
-- Ping-pong rendering for efficient multi-filter chains
-
 Used both for layer-level filters and global post-processing filters.
 
 ## Example
 
-```typescript
+```ts
 // Register a custom filter
 await t.filters.register('brightness', brightnessShader, {
     u_amount: ['amount', 1.0]
@@ -75,7 +70,7 @@ Register a custom filter with the given ID, shader, and uniform definitions.
 
 #### Example
 
-```typescript
+```ts
 // Register with inline shader source
 await t.filters.register('blur', blurFragSource, {
     u_radius: ['radius', 5.0],
