@@ -87,24 +87,9 @@ Simple, powerful, and ready for your wildest ideas.
 
 <FeaturedSketches :count="3" />
 
-## Community and support
+<hr />
 
-**You're not coding alone.** Join a vibrant community of creative developers pushing the boundaries of textmode art. Whether you're debugging your first sketch or sharing your latest masterpiece, we're here to help.
-
-### Resources
-
-**Documentation** - [Complete guides and tutorials](/docs/introduction)  
-**API Reference** - [Full API documentation with examples](/api/)  
-**Examples** - [Interactive demos you can remix](/docs/examples)
-
-### Connect
-
-**Discord** - [Real-time chat and support](https://discord.gg/sjrw8QXNks)  
-**GitHub** - [Bug reports and feature requests](https://github.com/humanbydefinition/textmode.js/issues)
-
-### Get involved
-
-**Your work matters.** Sketches shared with `#textmodejs` inspire the next wave of creators. Bug reports strengthen the foundation. Answered questions build collective knowledge. Jump in wherever your passion leads.
+<CommunitySupport />
 
 ## What will you create?
 
