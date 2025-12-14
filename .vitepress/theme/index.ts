@@ -19,6 +19,7 @@ import TextmodeWhatIs from './components/TextmodeWhatIs.vue'
 import HomeCta from './components/HomeCta/HomeCta.vue'
 import AsideLinks from './components/AsideLinks/AsideLinks.vue'
 import NotificationToast from './components/NotificationToast/NotificationToast.vue'
+import DocFooter from './components/DocFooter/DocFooter.vue'
 
 // Blog
 import { withBlogTheme } from 'vitepress-plugin-blog'
@@ -53,6 +54,7 @@ const HeroLayout = defineComponent({
         `
       }),
       'aside-bottom': () => h(AsideLinks),
+      'doc-after': () => h(DocFooter),
       'layout-bottom': () => h(NotificationToast)
     })
   }

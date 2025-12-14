@@ -71,23 +71,6 @@
   padding-bottom: 2rem !important;
 }
 
-/* Ensure global footer stays visible on documentation views with sidebars */
-.VPFooter.has-sidebar {
-  display: block !important;
-  max-width: var(--vp-layout-max-width);
-  margin: 0 auto;
-  padding-left: 24px;
-  padding-right: 24px;
-}
-
-@media (min-width: 1280px) {
-  .VPFooter.has-sidebar {
-    max-width: none;
-    margin-left: calc(var(--vp-sidebar-width, 320px) + 32px);
-    margin-right: calc(var(--textmode-doc-aside-width) + 32px);
-  }
-}
-
 .VPFooter .message {
   margin-bottom: 1rem !important;
   font-size: 0.9rem;
