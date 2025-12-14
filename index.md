@@ -95,8 +95,4 @@ Simple, powerful, and ready for your wildest ideas.
 
 <CommunitySupport />
 
-## What will you create?
-
-Every sketch starts with an empty file. Your next masterpiece starts the same way.
-
-<HomeCta :actions="[{ text: 'Begin your journey', link: '/docs/introduction' }]" />
+<WhatWillYouCreate />
