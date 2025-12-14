@@ -2,51 +2,61 @@
   "wave-interference": {
     "title": "Animated wave pattern",
     "author": "humanbydefinition",
-    "authorUrl": "https://github.com/humanbydefinition"
+    "authorUrl": "https://github.com/humanbydefinition",
+    "featured": true
   },
   "digital-rain": {
     "title": "Digital rain",
     "author": "humanbydefinition",
-    "authorUrl": "https://github.com/humanbydefinition"
+    "authorUrl": "https://github.com/humanbydefinition",
+    "featured": true
   },
   "plasma-field": {
     "title": "Plasma field",
     "author": "humanbydefinition",
-    "authorUrl": "https://github.com/humanbydefinition"
+    "authorUrl": "https://github.com/humanbydefinition",
+    "featured": true
   },
   "webcam": {
     "title": "Webcam Integration",
     "author": "humanbydefinition",
-    "authorUrl": "https://github.com/humanbydefinition"
+    "authorUrl": "https://github.com/humanbydefinition",
+    "featured": false
   },
   "video": {
     "title": "Video Processing",
     "author": "humanbydefinition",
-    "authorUrl": "https://github.com/humanbydefinition"
+    "authorUrl": "https://github.com/humanbydefinition",
+    "featured": false
   },
   "threejs": {
     "title": "Three.js Integration",
     "author": "humanbydefinition",
-    "authorUrl": "https://github.com/humanbydefinition"
+    "authorUrl": "https://github.com/humanbydefinition",
+    "featured": false
   },
   "shader-noise": {
     "title": "Shader Noise",
     "author": "humanbydefinition",
-    "authorUrl": "https://github.com/humanbydefinition"
+    "authorUrl": "https://github.com/humanbydefinition",
+    "featured": false
   },
   "primitives": {
     "title": "Primitives Showcase",
     "author": "humanbydefinition",
-    "authorUrl": "https://github.com/humanbydefinition"
+    "authorUrl": "https://github.com/humanbydefinition",
+    "featured": false
   },
   "p5js": {
     "title": "p5.js Integration",
     "author": "humanbydefinition",
-    "authorUrl": "https://github.com/humanbydefinition"
+    "authorUrl": "https://github.com/humanbydefinition",
+    "featured": false
   },
   "hydra-synth": {
     "title": "Hydra Synth Integration",
     "author": "humanbydefinition",
-    "authorUrl": "https://github.com/humanbydefinition"
+    "authorUrl": "https://github.com/humanbydefinition",
+    "featured": false
   }
 }

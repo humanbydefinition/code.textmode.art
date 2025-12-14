@@ -20,6 +20,7 @@ import HomeCta from './components/HomeCta/HomeCta.vue'
 import AsideLinks from './components/AsideLinks/AsideLinks.vue'
 import NotificationToast from './components/NotificationToast/NotificationToast.vue'
 import DocFooter from './components/DocFooter/DocFooter.vue'
+import FeaturedSketches from './components/FeaturedSketches/FeaturedSketches.vue'
 
 // Blog
 import { withBlogTheme } from 'vitepress-plugin-blog'
@@ -73,6 +74,7 @@ const baseTheme: Theme = {
     app.component('SupportGrid', SupportGrid)
     app.component('TextmodeWhatIs', TextmodeWhatIs)
     app.component('HomeCta', HomeCta)
+    app.component('FeaturedSketches', FeaturedSketches)
 
     // Set up hero sketch router
     setupHeroSketchRouter(router)

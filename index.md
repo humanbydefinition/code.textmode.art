@@ -83,17 +83,9 @@ Simple, powerful, and ready for your wildest ideas.
 
 </TextmodeWhatIs>
 
-## Built with `#textmodejs`
+<hr />
 
-**Make something amazing. Share it with `#textmodejs`.** Every pattern, every animation, every experiment adds to the growing tapestry of textmode art. Your sketch could be the one that sparks someone else's creativity.
-
-Dive into the interactive examples below - view source, tweak parameters, and break things *(it's encouraged!)*. Then show the world what you made. The community is watching. (｡◕‿‿◕｡)
-
-<!--@include: ./docs/examples/showcase/wave-interference.md-->
----
-<!--@include: ./docs/examples/showcase/digital-rain.md-->
----
-<!--@include: ./docs/examples/showcase/plasma-field.md-->
+<FeaturedSketches :count="3" />
 
 ## Community and support
 
