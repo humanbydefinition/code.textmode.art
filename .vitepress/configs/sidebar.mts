@@ -22,7 +22,17 @@ const docsSidebar: DefaultTheme.SidebarItem[] = [
       { text: 'Framework integration', link: '/docs/framework-integration' },
       { text: 'Exporting', link: '/docs/exporting' },
       { text: 'Examples', link: '/docs/examples' },
-      { text: 'Contributing', link: '/docs/contributing' },
+      {
+        text: 'Contributing',
+        collapsed: false,
+        items: [
+          { text: 'Overview', link: '/docs/contributing/' },
+          { text: 'Getting started', link: '/docs/contributing/getting-started' },
+          { text: 'Suggest a font', link: '/docs/contributing/suggest-a-font' },
+          { text: 'Submit a sketch', link: '/docs/contributing/submit-a-sketch' },
+          { text: 'Improve docs', link: '/docs/contributing/improve-docs' },
+        ]
+      },
       { text: 'Contributors', link: '/docs/contributors' },
     ]
   },
