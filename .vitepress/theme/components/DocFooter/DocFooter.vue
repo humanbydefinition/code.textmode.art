@@ -62,7 +62,6 @@ watch(() => route.path, () => {
 
 <style scoped>
 .doc-footer {
-  margin-top: 64px;
   padding-top: 24px;
   border-top: 1px solid var(--vp-c-divider);
 }

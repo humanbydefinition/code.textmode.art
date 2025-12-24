@@ -76,6 +76,7 @@
 
 .comment-section__thread {
   margin-top: 1.5rem;
+  margin-bottom: 14px;
   border: 1px solid var(--vp-c-divider);
   border-radius: 1rem;
   background: var(--vp-c-bg-soft);
