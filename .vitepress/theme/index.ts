@@ -25,6 +25,7 @@ import CommunitySupport from './components/CommunitySupport/CommunitySupport.vue
 import Testimonials from './components/Testimonials/Testimonials.vue'
 import ContributorsGrid from './components/Contributors/ContributorsGrid.vue'
 import WhatWillYouCreate from './components/WhatWillYouCreate/WhatWillYouCreate.vue'
+import { GalleryGrid } from './components/Gallery'
 
 // Blog
 import { withBlogTheme } from 'vitepress-plugin-blog'
@@ -83,6 +84,7 @@ const baseTheme: Theme = {
     app.component('Testimonials', Testimonials)
     app.component('ContributorsGrid', ContributorsGrid)
     app.component('WhatWillYouCreate', WhatWillYouCreate)
+    app.component('GalleryGrid', GalleryGrid)
 
     // Set up hero sketch router
     setupHeroSketchRouter(router)

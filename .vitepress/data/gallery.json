@@ -1,0 +1,38 @@
+{
+  "automata.textmode.art": {
+    "title": "automata.textmode.art",
+    "description": "Create and explore cellular automata in ASCII. Design custom rulesets, watch characters evolve into mesmerizing patterns, and generate unique textmode art in your browser.",
+    "type": "website",
+    "thumbnailUrl": "/gallery/automata-textmode-art.png",
+    "url": "https://github.com/humanbydefinition/textmode.js",
+    "author": "humanbydefinition",
+    "authorUrl": "https://github.com/humanbydefinition",
+    "tags": ["cellular-automata", "interactive", "generative"],
+    "featured": true,
+    "date": null
+  },
+  "textmode-flok": {
+    "title": "flok.cc: Live coding with textmode.js",
+    "description": "Real-time collaborative live coding platform integrating textmode.js with Hydra visuals and Strudel audio. Code audio-reactive ASCII art with friends in your browser.",
+    "type": "integration",
+    "thumbnailUrl": "/svg/placeholder-gallery.svg",
+    "url": "https://flok.cc/",
+    "author": "humanbydefinition",
+    "authorUrl": "https://github.com/humanbydefinition",
+    "tags": ["live-coding", "audio-reactive", "visuals"],
+    "featured": true,
+    "date": null
+  },
+  "placeholder-3": {
+    "title": "Your project here!",
+    "description": "Submit your own textmode.js creation to be featured in the gallery.",
+    "type": "experiment",
+    "thumbnailUrl": "/svg/placeholder-gallery.svg",
+    "url": "https://github.com/humanbydefinition/textmode.js/discussions",
+    "author": "Traveller",
+    "authorUrl": null,
+    "tags": ["submit", "your", "project"],
+    "featured": true,
+    "date": null
+  }
+}

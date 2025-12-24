@@ -2,6 +2,7 @@ import type { DefaultTheme } from 'vitepress'
 
 export const nav: DefaultTheme.NavItem[] = [
   { text: 'Home', link: '/' },
+  { text: 'Gallery', link: '/gallery' },
   { text: 'Documentation', link: '/docs/introduction' },
   { text: 'API', link: '/api/' },
   { text: 'Blog', link: '/blog/' },

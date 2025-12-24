@@ -1,0 +1,11 @@
+<svg width="400" height="225" viewBox="0 0 400 225" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="225" fill="#1a1a1a"/>
+  <defs>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#2a2a2a" stroke-width="0.5"/>
+    </pattern>
+  </defs>
+  <rect width="400" height="225" fill="url(#grid)"/>
+  <text x="200" y="100" text-anchor="middle" fill="#00ff88" font-family="monospace" font-size="36" opacity="0.8">▓▒░</text>
+  <text x="200" y="140" text-anchor="middle" fill="#666" font-family="monospace" font-size="14">Your project here</text>
+</svg>
