@@ -412,3 +412,60 @@
   }
 }
 
+/*
+ * Hide global VPFooter on doc layout pages
+ * DocFooter component handles footer display in doc pages
+ * VPFooter should only show on home/landing pages
+ */
+.VPDoc ~ .VPFooter,
+.VPDoc + .VPFooter {
+  display: none !important;
+}
+
+/* When viewing doc pages, ensure VPFooter in the layout is hidden */
+.Layout:has(.VPDoc) > .VPFooter {
+  display: none !important;
+}
+
+/*
+ * Full-width content when aside is disabled
+ * VitePress doesn't automatically expand content when aside: false in frontmatter
+ */
+@media (min-width: 960px) {
+  /* When doc page has no aside, expand content to use full width */
+  .VPDoc:not(.has-aside) .content-container {
+    max-width: 100% !important;
+  }
+
+  .VPDoc:not(.has-aside) .content {
+    max-width: 100% !important;
+    padding-right: 0;
+  }
+
+  /* Remove the aside placeholder space */
+  .VPDoc:not(.has-aside) .container {
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 1280px) {
+  /* On larger screens, give more room when no aside */
+  .VPDoc:not(.has-aside) .content-container {
+    max-width: 992px !important;
+  }
+
+  .VPDoc:not(.has-aside) .content {
+    max-width: 992px !important;
+  }
+}
+
+@media (min-width: 1440px) {
+  /* On extra large screens */
+  .VPDoc:not(.has-aside) .content-container {
+    max-width: 1104px !important;
+  }
+
+  .VPDoc:not(.has-aside) .content {
+    max-width: 1104px !important;
+  }
+}
