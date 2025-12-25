@@ -4,7 +4,7 @@
     "description": "Create and explore cellular automata in ASCII. Design custom rulesets, watch characters evolve into mesmerizing patterns, and generate unique textmode art in your browser.",
     "type": "website",
     "thumbnailUrl": "/gallery/automata-textmode-art.png",
-    "url": "https://github.com/humanbydefinition/textmode.js",
+    "url": "https://automata.textmode.art/",
     "author": "humanbydefinition",
     "authorUrl": "https://github.com/humanbydefinition",
     "tags": ["cellular-automata", "interactive", "generative"],
