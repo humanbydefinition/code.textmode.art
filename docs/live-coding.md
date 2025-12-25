@@ -3,9 +3,22 @@ title: Live coding
 description: Use textmode.js for live coding performances with flok.cc - a collaborative browser-based environment supporting Hydra visuals and Strudel audio.
 ---
 
+<script setup>
+import { GalleryCard } from '../.vitepress/theme/components/Gallery'
+import galleryData from '../.vitepress/data/gallery.json'
+
+const flokItem = {
+  id: 'textmode-flok',
+  ...galleryData['textmode-flok']
+}
+</script>
+
 # Live coding
 
 `textmode.js` is fully integrated into [**flok.cc**](https://flok.cc/), a collaborative live coding environment that runs entirely in your browser. This opens up exciting possibilities for real-time textmode performances, combining ASCII graphics with audio-reactive visuals.
+
+<GalleryCard :item="flokItem" />
+
 
 ## What is flok.cc?
 
