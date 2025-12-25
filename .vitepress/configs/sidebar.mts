@@ -21,6 +21,7 @@ const docsSidebar: DefaultTheme.SidebarItem[] = [
       { text: 'Advanced features', link: '/docs/advanced' },
       { text: 'Framework integration', link: '/docs/framework-integration' },
       { text: 'Exporting', link: '/docs/exporting' },
+      { text: 'Live coding', link: '/docs/live-coding' },
       { text: 'Examples', link: '/docs/examples' },
       {
         text: 'Contributing',
