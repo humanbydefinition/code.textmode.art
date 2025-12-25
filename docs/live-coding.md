@@ -1,6 +1,6 @@
 ---
 title: Live coding
-description: Use textmode.js for live coding performances with flok.cc - a collaborative browser-based environment supporting Hydra visuals and Strudel audio.
+description: Use textmode.js for live coding performances with flok.cc - a collaborative browser-based environment supporting Hydra visuals, Strudel audio, and more.
 ---
 
 <script setup>
