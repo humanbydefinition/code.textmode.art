@@ -15,7 +15,7 @@
     "title": "flok.cc: Live coding with textmode.js",
     "description": "Real-time collaborative live coding platform integrating textmode.js with Hydra visuals and Strudel audio. Code audio-reactive ASCII art with friends in your browser.",
     "type": "integration",
-    "thumbnailUrl": "/svg/placeholder-gallery.svg",
+    "thumbnailUrl": "/gallery/flok-textmode.png",
     "url": "https://flok.cc/",
     "author": "humanbydefinition",
     "authorUrl": "https://github.com/humanbydefinition",
