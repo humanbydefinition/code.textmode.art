@@ -102,7 +102,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { UiIcon } from '../ui'
 import GalleryCard from './GalleryCard.vue'
 import galleryData from '../../../data/gallery.json'
@@ -129,8 +129,15 @@ interface RawGalleryItem {
   date?: string | null
 }
 
-const galleryItems = computed<GalleryItem[]>(() => {
-  if (props.items) return props.items
+// Initialize gallery items without randomization
+const galleryItems = ref<GalleryItem[]>([])
+
+// Initialize items on mount to avoid SSR hydration mismatch
+onMounted(() => {
+  if (props.items) {
+    galleryItems.value = props.items
+    return
+  }
   
   const items = Object.entries(galleryData as Record<string, RawGalleryItem>).map(([id, data]) => ({
     id,
@@ -144,7 +151,7 @@ const galleryItems = computed<GalleryItem[]>(() => {
     [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
   }
   
-  return shuffled
+  galleryItems.value = shuffled
 })
 
 // Filters
