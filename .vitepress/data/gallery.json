@@ -34,17 +34,5 @@
     "tags": ["music-video", "ascii-art", "pixel-art"],
     "featured": true,
     "date": null
-  },
-  "placeholder-3": {
-    "title": "Your project here!",
-    "description": "Submit your own textmode.js creation to be featured in the gallery.",
-    "type": "experiment",
-    "thumbnailUrl": "/svg/placeholder-gallery.svg",
-    "url": "https://github.com/humanbydefinition/textmode.js/discussions",
-    "author": "Traveller",
-    "authorUrl": null,
-    "tags": ["submit", "your", "project"],
-    "featured": true,
-    "date": null
   }
 }
