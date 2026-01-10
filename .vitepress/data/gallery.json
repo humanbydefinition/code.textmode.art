@@ -23,6 +23,18 @@
     "featured": true,
     "date": null
   },
+  "sunnexo-internet-exploder": {
+    "title": "Sunnexo - Internet Exploder",
+    "description": "Electronic music video blending ASCII art rendering via textmode.js with pixel art animation, using custom video-to-textmode conversion for retro-futuristic visuals.",
+    "type": "music-video",
+    "thumbnailUrl": "/gallery/sunnexo-internet-exploder.png",
+    "url": "https://sunnexo.moe/internet-exploder",
+    "author": "Sunnexo",
+    "authorUrl": "https://sunnexo.moe/",
+    "tags": ["music-video", "ascii-art", "pixel-art"],
+    "featured": true,
+    "date": null
+  },
   "placeholder-3": {
     "title": "Your project here!",
     "description": "Submit your own textmode.js creation to be featured in the gallery.",
