@@ -34,5 +34,17 @@
     "tags": ["music-video", "ascii-art", "pixel-art"],
     "featured": true,
     "date": null
+  },
+  "synth-textmode-art": {
+    "title": "synth.textmode.art",
+    "description": "Live coding environment for ASCII synthesis and algorithmic audio patterns.",
+    "type": "website",
+    "thumbnailUrl": "/gallery/synth-textmode-art.png",
+    "url": "https://synth.textmode.art/",
+    "author": "humanbydefinition",
+    "authorUrl": "https://github.com/humanbydefinition",
+    "tags": ["live-coding", "audio-reactive", "visuals"],
+    "featured": true,
+    "date": null
   }
 }
