@@ -243,6 +243,28 @@ ITextmodifier.isDisposed
 
 ***
 
+### isRenderingFrame
+
+#### Get Signature
+
+```ts
+get isRenderingFrame(): boolean;
+```
+
+Check if rendering is currently in progress for this frame.
+
+##### Returns
+
+`boolean`
+
+#### Implementation of
+
+```ts
+ITextmodifier.isRenderingFrame
+```
+
+***
+
 ### lastKeyPressed
 
 #### Get Signature
@@ -402,6 +424,96 @@ t.setup(async () => {
 
 ```ts
 ITextmodifier.loading
+```
+
+***
+
+### millis
+
+#### Get Signature
+
+```ts
+get millis(): number;
+```
+
+Get the number of milliseconds since the sketch started running.
+
+`millis` keeps track of how long a sketch has been running in milliseconds
+(thousandths of a second). This information is often helpful for timing events
+and animations.
+
+Time tracking begins before the code in [setup](#setup) runs. If loading screen is
+enabled, `millis` begins tracking as soon as the loading screen starts.
+
+This property is connected to [secs](#secs) - setting one will affect the other.
+
+##### Examples
+
+```js
+const t = textmode.create({ width: 800, height: 600 });
+
+t.draw(() => {
+  t.background(0);
+
+  // Get the number of seconds the sketch has run
+  const seconds = t.millis / 1000;
+
+  console.log(`Running time: ${seconds.toFixed(1)} sec(s)`);
+});
+```
+
+```javascript
+const t = textmode.create({ width: 800, height: 600 });
+
+t.draw(() => {
+  t.background(0);
+
+  // Use millis for smooth animation
+  const time = t.millis / 1000;
+  const x = Math.sin(time) * 20 + 40;
+
+  t.char('O', Math.floor(x), 10);
+});
+```
+
+```javascript
+const t = textmode.create({ width: 800, height: 600 });
+
+// Seek to a specific time in the animation
+t.millis = 5000; // Jump to 5 seconds
+```
+
+##### Returns
+
+`number`
+
+Number of milliseconds since starting the sketch.
+
+#### Set Signature
+
+```ts
+set millis(value): void;
+```
+
+Set the elapsed milliseconds by adjusting the internal start time.
+
+This allows seeking/scrubbing in animations. Setting `millis` will also
+affect the value returned by [secs](#secs) since they are connected.
+
+##### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `value` | `number` | The new elapsed time in milliseconds |
+
+##### Returns
+
+`void`
+
+#### Implementation of
+
+```ts
+ITextmodifier.millis
 ```
 
 ***
@@ -600,6 +712,82 @@ t.draw(() => {
 
 ```ts
 ITextmodifier.pressedKeys
+```
+
+***
+
+### secs
+
+#### Get Signature
+
+```ts
+get secs(): number;
+```
+
+Get the number of seconds since the sketch started running.
+
+`secs` is a convenience property that returns the elapsed time in seconds
+instead of milliseconds. Equivalent to `millis / 1000`.
+
+Time tracking begins before the code in [setup](#setup) runs. If loading screen is
+enabled, `secs` begins tracking as soon as the loading screen starts.
+
+This property is connected to [millis](#millis) - setting one will affect the other.
+
+##### Examples
+
+```js
+const t = textmode.create({ width: 800, height: 600 });
+
+t.draw(() => {
+  t.background(0);
+
+  // Use secs for smooth time-based animations
+  const angle = t.secs * Math.PI;
+  const x = Math.sin(angle) * 10;
+
+  console.log(`X: ${x.toFixed(2)}`);
+});
+```
+
+```js
+const t = textmode.create({ width: 800, height: 600 });
+
+// Seek to a specific time in the animation
+t.secs = 10; // Jump to 10 seconds (equivalent to t.millis = 10000)
+```
+
+##### Returns
+
+`number`
+
+Number of seconds since starting the sketch.
+
+#### Set Signature
+
+```ts
+set secs(value): void;
+```
+
+Set the elapsed seconds by adjusting the internal start time.
+
+This allows seeking/scrubbing in animations. Setting `secs` will also
+affect the value returned by [millis](#millis) since they are connected.
+
+##### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `value` | `number` | The new elapsed time in seconds |
+
+##### Returns
+
+`void`
+
+#### Implementation of
+
+```ts
+ITextmodifier.secs
 ```
 
 ***
@@ -1149,7 +1337,7 @@ ITextmodifier.color
 ### createFilterShader()
 
 ```ts
-createFilterShader(fragmentSource): Promise<GLShader>;
+createFilterShader(fragmentSource): Promise<TextmodeShader>;
 ```
 
 Create a custom filter shader from fragment shader source code or a file path.
@@ -1164,7 +1352,7 @@ and must output to the 3 MRT attachments (character/transform, primary color, se
 
 #### Returns
 
-`Promise`\<`GLShader`\>
+`Promise`\<[`TextmodeShader`](TextmodeShader.md)\>
 
 A Promise that resolves to a compiled shader ready for use with [shader](#shader)
 
@@ -1281,6 +1469,36 @@ ITextmodifier.createFramebuffer
 
 ***
 
+### createShader()
+
+```ts
+createShader(vertexSource, fragmentSource): Promise<TextmodeShader>;
+```
+
+Create a shader from vertex and fragment source code or file paths.
+Accepts inline shader source or file paths (e.g. './shader.frag', './shader.vert', '.frag', '.vert').
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `vertexSource` | `string` | The vertex shader source code or a file path |
+| `fragmentSource` | `string` | The fragment shader source code or a file path |
+
+#### Returns
+
+`Promise`\<[`TextmodeShader`](TextmodeShader.md)\>
+
+A Promise that resolves to a compiled shader
+
+#### Implementation of
+
+```ts
+ITextmodifier.createShader
+```
+
+***
+
 ### cursor()
 
 ```ts
@@ -1335,6 +1553,49 @@ t.draw(() => {
 
 ```ts
 ITextmodifier.cursor
+```
+
+***
+
+### deltaTime()
+
+```ts
+deltaTime(): number;
+```
+
+Returns the time in milliseconds between the current frame and the previous frame.
+
+`deltaTime()` is useful for creating frame-rate-independent animations. By multiplying
+velocities and movements by `deltaTime()`, animations will run at consistent speeds
+regardless of the actual frame rate.
+
+#### Returns
+
+`number`
+
+Time elapsed between current and previous frame in milliseconds.
+
+#### Example
+
+```js
+const t = textmode.create({ width: 800, height: 600 });
+let x = 0;
+const speed = 0.1; // units per millisecond
+
+t.draw(() => {
+  t.background(0);
+
+  // Move at consistent speed regardless of frame rate
+  x += speed * t.deltaTime();
+
+  console.log(`X: ${x.toFixed(2)}`);
+});
+```
+
+#### Implementation of
+
+```ts
+ITextmodifier.deltaTime
 ```
 
 ***
@@ -1729,7 +1990,7 @@ ITextmodifier.fontSize
 frameRate(fps?): number | void;
 ```
 
-Set the maximum frame rate. If called without arguments, returns the current measured frame rate.
+Set the target frame rate. If called without arguments, returns the current measured frame rate.
 
 #### Parameters
 
@@ -1855,7 +2116,7 @@ When called without arguments, returns the current input grid mode:<br/>
 
 #### Example
 
-```javascript
+```js
 const t = textmode.create();
 
 // Add a UI layer on top
@@ -1869,7 +2130,7 @@ t.setup(() => {
 
 t.draw(() => {
   // Mouse positions now always use base layer's grid
-  t.text(`Mouse: ${t.mouseX}, ${t.mouseY}`, 0, 0);
+  console.log(`Mouse: ${t.mouseX}, ${t.mouseY}`);
 });
 
 // Switch back to responsive mode
@@ -3798,7 +4059,7 @@ Set a custom shader for subsequent rendering operations.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `shader` | `GLShader` | The custom shader to use |
+| `shader` | [`TextmodeShader`](TextmodeShader.md) | The custom shader to use |
 
 #### Returns
 
@@ -3915,6 +4176,47 @@ t.tap((data) => {
 
 ```ts
 ITextmodifier.tap
+```
+
+***
+
+### targetFrameRate()
+
+```ts
+targetFrameRate(fps?): number | void;
+```
+
+Set or get the target frame rate limit.
+
+Works similarly to [frameRate](#framerate), but gets the target frame rate instead of the current measured frame rate.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `fps?` | `number` | Optional new target frame rate. If not provided, returns current target frame rate. |
+
+#### Returns
+
+`number` \| `void`
+
+Current target frame rate when getting, void when setting
+
+#### Example
+
+```js
+const t = textmode.create({ width: 800, height: 600 });
+
+// Set target frame rate to 24 FPS
+t.targetFrameRate(24);
+
+console.log(`Target Frame Rate: ${t.targetFrameRate()} FPS`);
+```
+
+#### Implementation of
+
+```ts
+ITextmodifier.targetFrameRate
 ```
 
 ***

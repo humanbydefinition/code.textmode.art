@@ -126,6 +126,29 @@ IFramebuffer.begin
 
 ***
 
+### dispose()
+
+```ts
+dispose(): void;
+```
+
+Dispose of WebGL resources used by this framebuffer.
+
+This method is idempotent and safe to call multiple times.
+After disposal, the framebuffer should not be used for rendering.
+
+#### Returns
+
+`void`
+
+#### Implementation of
+
+```ts
+IFramebuffer.dispose
+```
+
+***
+
 ### end()
 
 ```ts

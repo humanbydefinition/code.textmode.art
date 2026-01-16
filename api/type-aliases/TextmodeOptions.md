@@ -6,7 +6,7 @@
 type TextmodeOptions = object;
 ```
 
-Options for creating a [Textmodifier](../classes/Textmodifier.md) instance.
+Options when creating a [Textmodifier](../classes/Textmodifier.md) instance.
 
 ## Properties
 
@@ -89,7 +89,9 @@ that can be accessed via [Textmodifier.overlay](../classes/Textmodifier.md#overl
 
 Useful for applying textmode conversion to p5.js sketches, YouTube videos, and sooo much more.
 
-All functionality of `textmode.js` remains available. Resizing the `textmode.js` canvas is not recommended though, since the overlay target defines the size.
+All functionality of `textmode.js` remains available. 
+Resizing the `textmode.js` canvas is not recommended though, 
+since the overlay target automatically updates the size.
 
 ***
 

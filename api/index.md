@@ -10,6 +10,7 @@
 | [layering](namespaces/layering/index.md) | All modules and types related to multi-layered textmode rendering. |
 | [loadables](namespaces/loadables/index.md) | All loadable assets related to textmode rendering. |
 | [loading](namespaces/loading/index.md) | All loading screen related modules and types. |
+| [plugins](namespaces/plugins/index.md) | Plugin system types for extending textmode.js functionality. |
 
 ## Enumerations
 
@@ -25,18 +26,12 @@
 | [TextmodeColor](classes/TextmodeColor.md) | Represents a color in the `textmode.js` rendering system. |
 | [TextmodeFramebuffer](classes/TextmodeFramebuffer.md) | Framebuffer class for managing offscreen rendering targets initialized via [Textmodifier.createFramebuffer](classes/Textmodifier.md#createframebuffer). |
 | [TextmodeGrid](classes/TextmodeGrid.md) | Manages the grid of each `TextmodeLayer` instance. |
+| [TextmodeShader](classes/TextmodeShader.md) | Shader class for managing WebGL shader programs initialized via [Textmodifier.createFilterShader](classes/Textmodifier.md#createfiltershader) or [Textmodifier.createShader](classes/Textmodifier.md#createshader). |
 | [Textmodifier](classes/Textmodifier.md) | Manages textmode rendering on a [`HTMLCanvasElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement) and provides methods for drawing, font management, event handling, layer management, animation control, and more. The heart of the `textmode.js` library. |
-
-## Interfaces
-
-| Interface | Description |
-| ------ | ------ |
-| [TextmodePlugin](interfaces/TextmodePlugin.md) | A plugin interface for extending the functionality of a [Textmodifier](classes/Textmodifier.md) instance. |
-| [TextmodePluginAPI](interfaces/TextmodePluginAPI.md) | An extended API provided to plugins when they are installed on a [Textmodifier](classes/Textmodifier.md) instance. |
 
 ## Type Aliases
 
 | Type Alias | Description |
 | ------ | ------ |
 | [TextmodeFramebufferOptions](type-aliases/TextmodeFramebufferOptions.md) | Options for creating a framebuffer. If not specified, width and height default to the current textmode grid size. |
-| [TextmodeOptions](type-aliases/TextmodeOptions.md) | Options for creating a [Textmodifier](classes/Textmodifier.md) instance. |
+| [TextmodeOptions](type-aliases/TextmodeOptions.md) | Options when creating a [Textmodifier](classes/Textmodifier.md) instance. |

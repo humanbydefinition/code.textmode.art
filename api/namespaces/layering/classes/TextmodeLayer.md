@@ -11,6 +11,10 @@ manipulated in terms of visibility, [opacity](#opacity), [blendMode](#blendmode)
 You can draw on each layer by providing a draw callback function,
 like you would with the base layer's [Textmodifier.draw](../../../classes/Textmodifier.md#draw) method.
 
+Plugins can extend TextmodeLayer with additional methods using the plugin API's
+`extendLayer` function. For example, the `textmode-synth` plugin adds a `.synth()`
+method for hydra-like procedural generation.
+
 ## Implements
 
 - `ITextmodeLayer`
@@ -34,6 +38,12 @@ Get the framebuffer containing the rendered textmode output for this layer.
   \| `undefined`
   \| [`TextmodeFramebuffer`](../../../classes/TextmodeFramebuffer.md)
 
+#### Implementation of
+
+```ts
+ITextmodeLayer.asciiFramebuffer
+```
+
 ***
 
 ### drawFramebuffer
@@ -46,7 +56,8 @@ get drawFramebuffer():
   | TextmodeFramebuffer;
 ```
 
-Get the framebuffer used for drawing operations on this layer.
+Returns the draw framebuffer for this layer.
+If the layer is not yet initialized, returns undefined.
 
 ##### Returns
 
@@ -97,6 +108,12 @@ Get the grid associated with this layer.
 
 `undefined` \| [`TextmodeGrid`](../../../classes/TextmodeGrid.md)
 
+#### Implementation of
+
+```ts
+ITextmodeLayer.grid
+```
+
 ***
 
 ### height
@@ -130,7 +147,8 @@ ITextmodeLayer.height
 get texture(): undefined | WebGLTexture;
 ```
 
-Get the texture containing the rendered textmode output for this layer.
+Returns the WebGL texture of the final ASCII framebuffer.
+If the layer is not yet initialized, returns undefined.
 
 ##### Returns
 
@@ -247,6 +265,32 @@ t.draw(() => {
 
 ```ts
 ITextmodeLayer.blendMode
+```
+
+***
+
+### deletePluginState()
+
+```ts
+deletePluginState(pluginName): boolean;
+```
+
+Delete plugin-specific state from this layer.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `pluginName` | `string` | Unique identifier for the plugin. |
+
+#### Returns
+
+`boolean`
+
+#### Implementation of
+
+```ts
+ITextmodeLayer.deletePluginState
 ```
 
 ***
@@ -454,10 +498,10 @@ ITextmodeLayer.filter
 ### fontSize()
 
 ```ts
-fontSize(size?): number | void;
+fontSize(size?): void;
 ```
 
-Get or set the font size for this layer's font.
+Get or set the font size for this layer.
 
 #### Parameters
 
@@ -467,12 +511,74 @@ Get or set the font size for this layer's font.
 
 #### Returns
 
-`number` \| `void`
+`void`
 
 #### Implementation of
 
 ```ts
 ITextmodeLayer.fontSize
+```
+
+***
+
+### getPluginState()
+
+```ts
+getPluginState<T>(pluginName): undefined | T;
+```
+
+Retrieve plugin-specific state stored on this layer.
+
+#### Type Parameters
+
+| Type Parameter |
+| ------ |
+| `T` |
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `pluginName` | `string` | Unique identifier for the plugin. |
+
+#### Returns
+
+`undefined` \| `T`
+
+The stored state object, or undefined if not set.
+
+#### Implementation of
+
+```ts
+ITextmodeLayer.getPluginState
+```
+
+***
+
+### hasPluginState()
+
+```ts
+hasPluginState(pluginName): boolean;
+```
+
+Check if plugin-specific state exists on this layer.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `pluginName` | `string` | Unique identifier for the plugin. |
+
+#### Returns
+
+`boolean`
+
+True if state exists, false otherwise.
+
+#### Implementation of
+
+```ts
+ITextmodeLayer.hasPluginState
 ```
 
 ***
@@ -726,6 +832,40 @@ t.draw(() => {
 
 ```ts
 ITextmodeLayer.rotateZ
+```
+
+***
+
+### setPluginState()
+
+```ts
+setPluginState<T>(pluginName, state): void;
+```
+
+Store plugin-specific state on this layer.
+Plugins can use this to attach their own data to layer instances.
+
+#### Type Parameters
+
+| Type Parameter |
+| ------ |
+| `T` |
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `pluginName` | `string` | Unique identifier for the plugin. |
+| `state` | `T` | The state object to store. |
+
+#### Returns
+
+`void`
+
+#### Implementation of
+
+```ts
+ITextmodeLayer.setPluginState
 ```
 
 ***

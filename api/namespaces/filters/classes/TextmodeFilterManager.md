@@ -61,7 +61,7 @@ Register a custom filter with the given ID, shader, and uniform definitions.
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
 | `id` | `string` | Unique filter identifier |
-| `shader` | `string` \| `GLShader` | Pre-compiled GLShader, fragment shader source string, or path to a .frag/.glsl file |
+| `shader` | `string` \| [`TextmodeShader`](../../../classes/TextmodeShader.md) | Pre-compiled GLShader, fragment shader source string, or path to a .frag/.glsl file |
 | `uniformDefs` | `Record`\<`string`, \[`string`, `unknown`\]\> | Maps uniform names to [paramName, defaultValue] tuples |
 
 #### Returns

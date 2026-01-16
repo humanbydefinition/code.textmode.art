@@ -4,9 +4,10 @@
 
 Manages all user-defined layers within a Textmodifier in addition to the base layer.
 
-This manager is responsible for:
+Responsibilities:
 - Managing the collection of user layers (add, remove, move, swap)
 - Coordinating layer rendering and compositing
+- Owning the global post-processing pipeline (global filters + present to screen)
 
 The instance of this class can be accessed via [Textmodifier.layers](../../../classes/Textmodifier.md#layers).
 
@@ -61,6 +62,42 @@ This layer represents the main drawing content before any user layers are compos
 ILayerManager.base
 ```
 
+***
+
+### filters
+
+#### Get Signature
+
+```ts
+get filters(): TextmodeFilterManager;
+```
+
+##### Returns
+
+[`TextmodeFilterManager`](../../filters/classes/TextmodeFilterManager.md)
+
+***
+
+### resultFramebuffer
+
+#### Get Signature
+
+```ts
+get resultFramebuffer(): TextmodeFramebuffer;
+```
+
+The framebuffer containing the final composited result after all layers and filters have been applied.
+
+##### Returns
+
+[`TextmodeFramebuffer`](../../../classes/TextmodeFramebuffer.md)
+
+#### Implementation of
+
+```ts
+ILayerManager.resultFramebuffer
+```
+
 ## Methods
 
 ### add()
@@ -97,10 +134,7 @@ ILayerManager.add
 clear(): void;
 ```
 
-Remove all user-created layers from the manager.
-The base layer is not affected by this operation.
-This is useful for integration into live-coding environments where code is re-evaluated
-and layers need to be recreated from scratch.
+Remove and dispose all user layers (keeps base layer intact).
 
 #### Returns
 

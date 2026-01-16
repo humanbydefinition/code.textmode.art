@@ -178,6 +178,8 @@ responsive(): void;
 
 Restores responsive sizing so subsequent `t.resizeCanvas` calls recompute cols/rows.
 
+A grid becomes non-responsive when either `cols` or `rows` is manually set.
+
 #### Returns
 
 `void`

@@ -1,16 +1,16 @@
-[textmode.js](../index.md) / TextmodePlugin
+[textmode.js](../../../index.md) / [plugins](../index.md) / TextmodePlugin
 
 # Interface: TextmodePlugin
 
-A plugin interface for extending the functionality of a [Textmodifier](../classes/Textmodifier.md) instance.
+A plugin interface for extending the functionality of a [Textmodifier](../../../classes/Textmodifier.md) instance.
 
 Users can create plugins by implementing this interface.
 
 ## Note
 
 Plugins are currently experimental and the API may change in future releases.
-For now, it has been integrated to outsource export features to `textmode.export.js`.
-Documentation and examples will be provided as the plugin system matures.
+The documentation is still lacking, but there are some add-on libraries already available,
+all of which are fully open source and can be used as references for creating your own plugins.
 
 ## Properties
 
@@ -27,13 +27,13 @@ Documentation and examples will be provided as the plugin system matures.
 install(textmodifier, api): void | Promise<void>;
 ```
 
-Called when the plugin is installed on a [Textmodifier](../classes/Textmodifier.md) instance.
+Called when the plugin is installed on a [Textmodifier](../../../classes/Textmodifier.md) instance.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `textmodifier` | [`Textmodifier`](../classes/Textmodifier.md) | The Textmodifier instance the plugin is being installed on. |
+| `textmodifier` | [`Textmodifier`](../../../classes/Textmodifier.md) | The Textmodifier instance the plugin is being installed on. |
 | `api` | [`TextmodePluginAPI`](TextmodePluginAPI.md) | An API object providing access to the Textmodifier's context and hook registration methods. |
 
 #### Returns
@@ -48,13 +48,13 @@ Called when the plugin is installed on a [Textmodifier](../classes/Textmodifier.
 optional uninstall(textmodifier, api): void | Promise<void>;
 ```
 
-Called when the plugin is uninstalled from a [Textmodifier](../classes/Textmodifier.md) instance.
+Called when the plugin is uninstalled from a [Textmodifier](../../../classes/Textmodifier.md) instance.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `textmodifier` | [`Textmodifier`](../classes/Textmodifier.md) | The Textmodifier instance the plugin is being uninstalled from. |
+| `textmodifier` | [`Textmodifier`](../../../classes/Textmodifier.md) | The Textmodifier instance the plugin is being uninstalled from. |
 | `api` | [`TextmodePluginAPI`](TextmodePluginAPI.md) | An API object providing access to the Textmodifier's context and hook registration methods. |
 
 #### Returns
