@@ -12,8 +12,8 @@
     "date": null
   },
   "textmode-flok": {
-    "title": "flok.cc: Live coding with textmode.js",
-    "description": "Real-time collaborative live coding platform integrating textmode.js with Hydra visuals and Strudel audio. Code audio-reactive ASCII art with friends in your browser.",
+    "title": "flok.cc: textmode.js integration",
+    "description": "Real-time collaborative live coding platform integrating various creative coding libraries.",
     "type": "integration",
     "thumbnailUrl": "/gallery/flok-textmode.png",
     "url": "https://flok.cc/",
@@ -23,15 +23,39 @@
     "featured": true,
     "date": null
   },
-  "placeholder-3": {
-    "title": "Your project here!",
-    "description": "Submit your own textmode.js creation to be featured in the gallery.",
-    "type": "experiment",
-    "thumbnailUrl": "/svg/placeholder-gallery.svg",
-    "url": "https://github.com/humanbydefinition/textmode.js/discussions",
-    "author": "Traveller",
-    "authorUrl": null,
-    "tags": ["submit", "your", "project"],
+  "sunnexo-internet-exploder": {
+    "title": "Sunnexo - Internet Exploder",
+    "description": "Electronic music video blending ASCII art rendering via textmode.js with pixel art animation, using custom video-to-textmode conversion for retro-futuristic visuals.",
+    "type": "music-video",
+    "thumbnailUrl": "/gallery/sunnexo-internet-exploder.png",
+    "url": "https://sunnexo.moe/internet-exploder",
+    "author": "Sunnexo",
+    "authorUrl": "https://sunnexo.moe/",
+    "tags": ["music-video", "ascii-art", "pixel-art"],
+    "featured": true,
+    "date": null
+  },
+  "synth-textmode-art": {
+    "title": "synth.textmode.art",
+    "description": "Live coding environment for ASCII synthesis and algorithmic audio patterns.",
+    "type": "website",
+    "thumbnailUrl": "/gallery/synth-textmode-art.png",
+    "url": "https://synth.textmode.art/",
+    "author": "humanbydefinition",
+    "authorUrl": "https://github.com/humanbydefinition",
+    "tags": ["live-coding", "audio-reactive", "visuals"],
+    "featured": true,
+    "date": null
+  },
+  "patchies-app": {
+    "title": "Patchies.app: textmode.js integration",
+    "description": "Patchies is a creative coding patcher for audio-visual things that runs on the web.",
+    "type": "integration",
+    "thumbnailUrl": "/gallery/patchies-app.png",
+    "url": "https://patchies.app/",
+    "author": "heypoom",
+    "authorUrl": "https://github.com/heypoom",
+    "tags": ["live-coding", "creative-coding", "audio-visual"],
     "featured": true,
     "date": null
   }

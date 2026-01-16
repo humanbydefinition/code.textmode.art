@@ -35,6 +35,28 @@
         :key="item.id"
         :item="item"
       />
+      
+      <!-- Custom CTA Card -->
+      <div key="cta-card" class="gallery-grid__cta-card">
+        <div class="gallery-grid__cta-card-icon">
+          <UiIcon name="ph:plus-circle-duotone" size="xl" />
+        </div>
+        <h3 class="gallery-grid__cta-card-title">Your project here!</h3>
+        <p class="gallery-grid__cta-card-desc">
+          Built something with <code>textmode.js</code>? Share it with the community!
+        </p>
+        <div class="gallery-grid__cta-card-actions">
+          <a
+            href="https://github.com/humanbydefinition/code.textmode.art/edit/main/.vitepress/data/gallery.json"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="gallery-grid__cta-card-btn"
+          >
+            <UiIcon name="ph:github-logo-duotone" size="sm" />
+            Submit Project
+          </a>
+        </div>
+      </div>
     </TransitionGroup>
 
     <!-- Empty State -->
@@ -80,7 +102,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { UiIcon } from '../ui'
 import GalleryCard from './GalleryCard.vue'
 import galleryData from '../../../data/gallery.json'
@@ -107,13 +129,29 @@ interface RawGalleryItem {
   date?: string | null
 }
 
-const galleryItems = computed<GalleryItem[]>(() => {
-  if (props.items) return props.items
+// Initialize gallery items without randomization
+const galleryItems = ref<GalleryItem[]>([])
+
+// Initialize items on mount to avoid SSR hydration mismatch
+onMounted(() => {
+  if (props.items) {
+    galleryItems.value = props.items
+    return
+  }
   
-  return Object.entries(galleryData as Record<string, RawGalleryItem>).map(([id, data]) => ({
+  const items = Object.entries(galleryData as Record<string, RawGalleryItem>).map(([id, data]) => ({
     id,
     ...data
   }))
+  
+  // Randomize order using Fisher-Yates shuffle
+  const shuffled = [...items]
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]]
+  }
+  
+  galleryItems.value = shuffled
 })
 
 // Filters
@@ -371,6 +409,85 @@ function getFilterCount(filter: GalleryItemType | 'all'): number {
   border-color: var(--vp-c-brand-1);
   color: var(--vp-c-brand-1);
   transform: translateY(-1px);
+}
+
+/* CTA Card */
+.gallery-grid__cta-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding: 2rem 1.5rem;
+  background: linear-gradient(135deg, var(--vp-c-brand-soft) 0%, var(--vp-c-bg-soft) 100%);
+  border: 2px dashed var(--vp-c-brand-1);
+  border-radius: 12px;
+  text-align: center;
+  transition: all 0.3s ease;
+  min-height: 320px;
+}
+
+.gallery-grid__cta-card:hover {
+  border-color: var(--vp-c-brand-2);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px -4px rgba(var(--vp-c-brand-1-rgb), 0.2);
+}
+
+.gallery-grid__cta-card-icon {
+  color: var(--vp-c-brand-1);
+  opacity: 0.8;
+}
+
+.gallery-grid__cta-card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--vp-c-text-1);
+  margin: 0;
+}
+
+.gallery-grid__cta-card-desc {
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  color: var(--vp-c-text-2);
+  margin: 0;
+  max-width: 280px;
+}
+
+.gallery-grid__cta-card-desc code {
+  font-family: var(--textmode-font);
+  font-size: 0.875rem;
+  background: var(--vp-c-brand-soft);
+  color: var(--vp-c-brand-1);
+  padding: 0.125rem 0.375rem;
+  border-radius: 4px;
+}
+
+.gallery-grid__cta-card-actions {
+  margin-top: 0.5rem;
+}
+
+.gallery-grid__cta-card-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  font-family: var(--textmode-font);
+  font-size: 0.875rem;
+  font-weight: 500;
+  text-decoration: none;
+  background: var(--vp-c-brand-1);
+  color: white;
+  border: 1px solid var(--vp-c-brand-1);
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.gallery-grid__cta-card-btn:hover {
+  background: var(--vp-c-brand-2);
+  border-color: var(--vp-c-brand-2);
+  color: white;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px -2px rgba(var(--vp-c-brand-1-rgb), 0.4);
 }
 
 /* Responsive */

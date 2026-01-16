@@ -29,7 +29,7 @@
         <div class="testimonials__header">
             <h2 class="testimonials__title">What developers say</h2>
             <p class="testimonials__subtitle">
-                Join the conversation and share your experience with textmode.js
+                Join the conversation and share your experience with textmode.js.
             </p>
         </div>
 
