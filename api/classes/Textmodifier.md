@@ -122,6 +122,46 @@ get font(): TextmodeFont;
 
 Get the current font object used for rendering the base layer.
 
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+t.draw(() => {
+  t.background(0);
+
+  const font = t.font;
+  const count = font.characters.length;
+  const info = `FONT CHARS: ${count}`;
+
+  // Visualize the character set count as a bar
+  const barWidth = Math.min(Math.ceil(count / 10), t.grid.cols - 4);
+
+  t.char('░');
+  t.charColor(100, 100, 100);
+  t.rect(barWidth + 2, 5);
+
+  t.char('█');
+  t.charColor(0, 150, 255);
+  t.rect(barWidth, 3);
+
+  // Label
+  for (let i = 0; i < info.length; i++) {
+    t.push();
+    t.translate(i - info.length / 2, 0);
+    t.char(info[i]);
+    t.cellColor(0);
+    t.charColor(255);
+    t.point();
+    t.pop();
+  }
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 ##### Returns
 
 [`TextmodeFont`](../namespaces/loadables/classes/TextmodeFont.md)
@@ -144,9 +184,39 @@ get frameCount(): number;
 
 Get the current frame count.
 
+The frame count starts at 0, but is incremented at the beginning of each draw cycle.
+This means that inside the first call to `draw()`, `frameCount` is 1.
+
+This value is useful for timing-based animations, patterns, and state changes.
+
+##### Example
+
+```javascript
+const t = textmode.create({ width: 800, height: 600 });
+
+t.draw(() => {
+  t.background(0);
+
+  // Use frameCount to rotate a shape over time
+  t.translate(0, 0);
+  t.rotateZ(t.frameCount * 2);
+  t.char('X');
+  t.rect(10, 10);
+
+  // Create a blinking effect
+  if (t.frameCount % 60 < 30) {
+    t.translate(15, 0);
+    t.char('O');
+    t.rect(5, 5);
+  }
+});
+```
+
 ##### Returns
 
 `number`
+
+The number of frames rendered since the sketch started.
 
 #### Set Signature
 
@@ -156,11 +226,27 @@ set frameCount(value): void;
 
 Set the current frame count.
 
+Modifying the frame count can be used to reset animations or jump to a specific
+point in time-based patterns.
+
+##### Example
+
+```javascript
+const t = textmode.create();
+
+t.keyPressed((data) => {
+  // Reset animation when SPACE is pressed
+  if (data.key === ' ') {
+    t.frameCount = 0;
+  }
+});
+```
+
 ##### Parameters
 
-| Parameter | Type |
-| ------ | ------ |
-| `value` | `number` |
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `value` | `number` | The new frame count value. |
 
 ##### Returns
 
@@ -187,6 +273,43 @@ If called outside of a layers draw callback, returns the base layer's grid.
 
 If no grid is set (e.g., before user setup()), returns `undefined`.
 
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+t.draw(() => {
+  t.background(0);
+  const { cols, rows } = t.grid;
+  const time = t.frameCount * 0.05;
+
+  // Iterate through the grid to create a field of waving characters
+  // We use centered coordinates (from -cols/2 to cols/2)
+  for (let y = -Math.floor(rows / 2); y < Math.floor(rows / 2); y++) {
+    for (let x = -Math.floor(cols / 2); x < Math.floor(cols / 2); x++) {
+      // Calculate distance from center for a ripple effect
+      const dist = Math.sqrt(x * x + y * y);
+      const ripple = Math.sin(dist * 0.4 - time);
+
+      // Map ripple value to character and color
+      const charIdx = Math.floor((ripple + 1) * 2); // 0 to 4
+      const glyph = ['.', ':', '-', '=', '#'][charIdx] || '#';
+
+      t.push();
+      t.translate(x + 0.5, y + 0.5);
+      t.char(glyph);
+      t.charColor(100 + ripple * 155, 150 + ripple * 50, 255);
+      t.point();
+      t.pop();
+    }
+  }
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 ##### Returns
 
 `undefined` \| [`TextmodeGrid`](TextmodeGrid.md)
@@ -208,6 +331,56 @@ get height(): number;
 ```
 
 Get the height of the canvas in pixels.
+
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+t.draw(() => {
+  t.background(0);
+
+  const h = t.height;
+  const info = `HEIGHT: ${h}px`;
+
+  // Draw vertical arrows pointing to edges
+  const arrowLen = Math.floor(t.grid.rows / 2) - 3;
+
+  // Top arrow
+  for(let i=0; i<arrowLen; i++) {
+     t.push();
+     t.translate(0, -arrowLen + i);
+     t.char(i === 0 ? '╩' : '|');
+     t.charColor(100, 255, 100);
+     t.point();
+     t.pop();
+  }
+
+  // Bottom arrow
+  for(let i=0; i<arrowLen; i++) {
+     t.push();
+     t.translate(0, arrowLen - i);
+     t.char(i === 0 ? '╚' : '|');
+     t.charColor(100, 255, 100);
+     t.point();
+     t.pop();
+  }
+
+  // Label
+  for (let i = 0; i < info.length; i++) {
+    t.push();
+    t.translate(i - info.length / 2, 0);
+    t.char(info[i]);
+    t.charColor(255);
+    t.point();
+    t.pop();
+  }
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 
 ##### Returns
 
@@ -362,6 +535,46 @@ Access the layer manager for this Textmodifier instance.
 Use this to create and manage multiple layers within the textmode rendering context.
 Each layer has its own grid, font, draw callback, and filters.
 
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+// Create a second layer on top of the base layer
+const topLayer = t.layers.add();
+
+t.draw(() => {
+  // 1. Draw background on base layer
+  t.background(0);
+
+  // Rotating pattern in background
+  t.push();
+  t.rotateZ(t.frameCount);
+  t.char('▼');
+  t.charColor(50, 100, 150);
+  t.rect(40, 40);
+  t.pop();
+});
+
+topLayer.draw(() => {
+  // 2. Draw HUD/Text on top layer
+  t.clear()
+
+  const time = t.frameCount * 0.05;
+  const x = Math.sin(time) * 10;
+
+  t.char('æ');
+  t.charColor(255, 200, 0);
+  t.cellColor(0, 0, 0, 0); // Transparent cell background
+  t.translate(x, 0);
+  t.point();
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 ##### Returns
 
 [`TextmodeLayerManager`](../namespaces/layering/classes/TextmodeLayerManager.md)
@@ -449,16 +662,25 @@ This property is connected to [secs](#secs) - setting one will affect the other.
 
 ##### Examples
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
 t.draw(() => {
   t.background(0);
 
-  // Get the number of seconds the sketch has run
-  const seconds = t.millis / 1000;
+  // Calculate a heartbeat pulse every 1000ms
+  const pulse = (t.millis % 1000) / 1000;
 
-  console.log(`Running time: ${seconds.toFixed(1)} sec(s)`);
+  // Ease out effect: rapid expansion then fade
+  // This uses time to drive animation state
+  const scale = 1 + Math.sin(pulse * Math.PI) * 0.5;
+  const alpha = 255 * (1 - pulse);
+
+  t.char('•');
+  t.charColor(255, 50, 50, alpha);
+
+  // Draw pulsing heart at center
+  t.rect(10 * scale, 10 * scale);
 });
 ```
 
@@ -477,10 +699,62 @@ t.draw(() => {
 ```
 
 ```javascript
+// Press SPACE to reset the animation timer.
+
 const t = textmode.create({ width: 800, height: 600 });
 
-// Seek to a specific time in the animation
-t.millis = 5000; // Jump to 5 seconds
+t.keyPressed((data) => {
+  if (data.key === ' ') {
+    // Reset the timer to 0
+    t.millis = 0;
+  }
+});
+
+t.draw(() => {
+  t.background(0);
+
+  // Create a visual timer bar that fills up every 3 seconds
+  const duration = 3000;
+  const elapsed = t.millis;
+  const progress = (elapsed % duration) / duration;
+
+  // Draw bar background
+  const barWidth = 40;
+  const barHeight = 4;
+  const w = barWidth * progress;
+
+  // Draw empty background (centered)
+  t.charColor(64);
+  t.rect(barWidth, barHeight);
+
+  // Draw filling bar
+  // Calculate center for the filled portion to align it to the left
+  t.push();
+  t.translate(-barWidth / 2 + w / 2, 0);
+  t.char('=');
+  t.charColor(100, 200, 255);
+  t.rect(w, barHeight);
+  t.pop();
+
+  // Draw numeric timer above
+  t.push();
+  t.translate(0, -5);
+  t.charColor(255);
+  // Show seconds with 1 decimal place
+  const timeString = (elapsed / 1000).toFixed(1) + 's';
+
+  // Simple manual text drawing
+  for(let i=0; i<timeString.length; i++) {
+    t.push();
+    t.translate(i, 0);
+    t.char(timeString[i]);
+    t.point();
+    t.pop();
+  }
+  t.pop();
+
+  t.pop();
+});
 ```
 
 ##### Returns
@@ -499,6 +773,60 @@ Set the elapsed milliseconds by adjusting the internal start time.
 
 This allows seeking/scrubbing in animations. Setting `millis` will also
 affect the value returned by [secs](#secs) since they are connected.
+
+##### Example
+
+```javascript
+// Hold SPACE and move mouse to scrub time.
+
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+t.draw(() => {
+  t.background(0);
+
+  // Manual Time Scrubbing
+  if (t.isKeyPressed(' ')) {
+    // Map mouse position to time (0 to 10 seconds)
+    // Mouse X is center-based (-cols/2 to +cols/2)
+    const progress = (t.mouse.x + t.grid.cols / 2) / t.grid.cols;
+    t.millis = Math.max(0, progress * 10000);
+    t.cursor('ew-resize');
+  } else {
+    t.cursor('default');
+  }
+
+  const time = t.millis;
+
+  // Draw a spiral that unwinds with time
+  const count = 256;
+  const maxRadius = Math.min(t.grid.cols, t.grid.rows) * 0.4;
+
+  for (let i = 0; i < count; i++) {
+    const pct = i / count;
+    // Angle rotates with time
+    const angle = i * 0.5 + time * 0.002;
+    const r = pct * maxRadius;
+
+    const x = Math.cos(angle) * r;
+    const y = Math.sin(angle) * r;
+
+    t.push();
+    t.translate(x, y);
+
+    // Color pulse based on time and index
+    const hue = (time * 0.1 + i * 5) % 255;
+    t.charColor(hue, 255 - hue, 200);
+
+    t.char(i % 3 === 0 ? 'O' : '.');
+    t.point();
+    t.pop();
+  }
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 
 ##### Parameters
 
@@ -736,25 +1064,52 @@ This property is connected to [millis](#millis) - setting one will affect the ot
 
 ##### Examples
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
 t.draw(() => {
   t.background(0);
 
-  // Use secs for smooth time-based animations
-  const angle = t.secs * Math.PI;
-  const x = Math.sin(angle) * 10;
+  // Use secs to drive a smooth sine wave animation
+  const time = t.secs;
+  const x = Math.sin(time * 2) * 20;
+  const y = Math.cos(time * 3) * 10;
 
-  console.log(`X: ${x.toFixed(2)}`);
+  t.translate(x, y);
+  t.char('O');
+  t.charColor(255, 100, 100);
+  t.rect(3, 3);
 });
 ```
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
-// Seek to a specific time in the animation
-t.secs = 10; // Jump to 10 seconds (equivalent to t.millis = 10000)
+// Press SPACE to jump forward in time
+t.keyPressed((e) => {
+  if (e.key === ' ') {
+    t.secs += 2; // Jump 2 seconds ahead
+  }
+});
+
+t.draw(() => {
+  t.background(0);
+
+  // Animation driven by t.secs
+  const time = t.secs;
+
+  // Calculate position based on time (wrapping loop)
+  const loopDuration = 5; // seconds
+  const progress = (time % loopDuration) / loopDuration;
+
+  // Move from left to right (-cols/2 to +cols/2)
+  const x = (progress - 0.5) * t.grid.cols;
+
+  t.translate(x, 0);
+  t.char('>');
+  t.charColor(50, 255, 100);
+  t.rect(4, 4);
+});
 ```
 
 ##### Returns
@@ -773,6 +1128,70 @@ Set the elapsed seconds by adjusting the internal start time.
 
 This allows seeking/scrubbing in animations. Setting `secs` will also
 affect the value returned by [millis](#millis) since they are connected.
+
+##### Example
+
+```javascript
+// Hold SPACE and drag to manipulate time.
+
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+t.draw(() => {
+  t.background(0);
+
+  // Interaction: Scrub time
+  if (t.isKeyPressed(' ')) {
+    // Map mouse position to a 5-second window
+    const progress = (t.mouse.x + t.grid.cols / 2) / t.grid.cols;
+    t.secs = Math.max(0, progress * 5);
+    t.cursor('grabbing');
+  } else {
+    t.cursor('default');
+  }
+
+  const time = t.secs;
+  const length = Math.min(t.grid.rows, t.grid.cols) * 0.35;
+  // Pendulum physics (approximate)
+  const angle = Math.sin(time * 3) * Math.PI * 0.3;
+
+  const bobX = Math.sin(angle) * length;
+  const bobY = Math.cos(angle) * length;
+
+  // Draw String
+  t.charColor(80);
+  t.char('.');
+  t.line(0, 0, bobX, bobY);
+
+  // Draw "Echoes" of the past
+  for (let i = 1; i <= 4; i++) {
+    const lag = i * 0.08;
+    const echoAngle = Math.sin((time - lag) * 3) * Math.PI * 0.3;
+    const ex = Math.sin(echoAngle) * length;
+    const ey = Math.cos(echoAngle) * length;
+
+    t.push();
+    t.translate(ex, ey);
+    t.charColor(50, 100, 255, 100 - i * 20);
+    t.char('o');
+    t.ellipse(6 - i, 6 - i);
+    t.pop();
+  }
+
+  // Draw Main Bob
+  t.push();
+  t.translate(bobX, bobY);
+  // Hot color when moving fast (center), cool when slow (edges)
+  const speed = Math.abs(Math.cos(time * 3));
+  t.charColor(255, 100 + speed * 155, 50);
+  t.char('O');
+  t.ellipse(8, 8);
+  t.pop();
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 
 ##### Parameters
 
@@ -807,9 +1226,38 @@ available. Use this inside a draw loop to react to active multi-touch scenarios.
 
 ##### Example
 
-```js
+```javascript
+const t = textmode.create({ width: 800, height: 600 });
+
 t.draw(() => {
+  t.background(0);
+
+  // Visualize all active touches
   for (const touch of t.touches) {
+    t.push();
+    // touch.x and touch.y are already center-relative
+    t.translate(touch.x, touch.y);
+
+    const pulse = 1 + Math.sin(t.frameCount * 0.2) * 0.5;
+    const radius = (touch.pressure || 0.5) * 20 * pulse;
+
+    // Draw glowing ring
+    t.char('○');
+    t.charColor(255, 100, 150);
+    t.ellipse(radius, radius);
+
+    // Draw center point with ID digit
+    t.char((touch.id % 9 + 1).toString());
+    t.charColor(255);
+    t.point();
+
+    t.pop();
+  }
+
+  // Hint text if no touches
+  if (t.touches.length === 0) {
+    t.char('?');
+    t.charColor(80);
     t.point();
   }
 });
@@ -836,6 +1284,56 @@ get width(): number;
 ```
 
 Get the width of the canvas in pixels.
+
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+t.draw(() => {
+  t.background(0);
+
+  const w = t.width;
+  const info = `WIDTH: ${w}px`;
+
+  // Draw arrows pointing to edges
+  const arrowLen = Math.floor(t.grid.cols / 2) - 4;
+
+  // Left arrow
+  for(let i=0; i<arrowLen; i++) {
+     t.push();
+     t.translate(-arrowLen + i, 0);
+     t.char(i === 0 ? '<' : '-');
+     t.charColor(255, 100, 100);
+     t.point();
+     t.pop();
+  }
+
+  // Right arrow
+  for(let i=0; i<arrowLen; i++) {
+     t.push();
+     t.translate(arrowLen - i, 0);
+     t.char(i === 0 ? '>' : '-');
+     t.charColor(255, 100, 100);
+     t.point();
+     t.pop();
+  }
+
+  // Label
+  for (let i = 0; i < info.length; i++) {
+    t.push();
+    t.translate(i - info.length / 2, 0);
+    t.char(info[i]);
+    t.charColor(255);
+    t.point();
+    t.pop();
+  }
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 
 ##### Returns
 
@@ -866,8 +1364,8 @@ Position is controlled via [translate](#translate), [push](#push), and [pop](#po
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `width` | `number` | Width of the arc |
-| `height` | `number` | Height of the arc |
+| `width` | `number` | Width of the arc in grid cells |
+| `height` | `number` | Height of the arc in grid cells |
 | `startAngle` | `number` | Starting angle in degrees |
 | `endAngle` | `number` | Ending angle in degrees |
 
@@ -878,16 +1376,46 @@ Position is controlled via [translate](#translate), [push](#push), and [pop](#po
 #### Example
 
 ```javascript
-const t = textmode.create({
-  width: 800,
-  height: 600,
-})
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
 
 t.draw(() => {
-  t.background(0);
-  t.rotateZ(t.frameCount);
-  t.char('A');
-  t.arc(10, 10, 0, 90);
+  t.background(10, 15, 25); // Deep space blue
+
+  const time = t.frameCount * 0.02;
+  const arcCount = 32;
+  const baseSize = Math.min(t.grid.cols, t.grid.rows);
+
+  for (let i = 0; i < arcCount; i++) {
+    const phase = i / arcCount;
+    const size = baseSize * (0.3 + 0.7 * Math.sin(time + phase * Math.PI));
+    const startAngle = (time * 50 + i * 45) % 360;
+    const sweep = 45 + 90 * (0.5 + 0.5 * Math.cos(time * 0.7 + i));
+
+    t.push();
+    t.rotateZ(i * (360 / arcCount) + time * 20);
+
+    // Color shifting
+    const r = 100 + 155 * Math.sin(time + phase);
+    const g = 150 + 105 * Math.cos(time * 0.5 + phase);
+    const b = 200 + 55 * Math.sin(time * 0.8);
+
+    t.charColor(r, g, b);
+    t.char(['+', '•', '·', '░'][i % 4]);
+    t.lineWeight(2 + i % 3);
+
+    t.arc(size, size, startAngle, startAngle + sweep);
+    t.pop();
+  }
+
+  // Center core
+  t.char('@');
+  t.charColor(255, 255, 200);
+  t.rotateZ(-time * 100);
+  t.rect(2, 2);
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -901,58 +1429,195 @@ ITextmodifier.arc
 
 ### background()
 
+#### Call Signature
+
 ```ts
-background(
-   value, 
-   g?, 
-   b?, 
-   a?): void;
+background(): TextmodeColor;
 ```
 
-Set the background color of the layer currently drawing to.
+Get the current background color.
 
-Used to clear the layer to a specific color at the start of its drawing cycle.
+##### Returns
 
-#### Parameters
+[`TextmodeColor`](TextmodeColor.md)
+
+The current background color as a [TextmodeColor](TextmodeColor.md).
+
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+t.draw(() => {
+  // Set dynamic background
+  t.background(
+    127 + 127 * Math.sin(t.frameCount * 0.01),
+    50,
+    127 + 127 * Math.cos(t.frameCount * 0.01)
+  );
+
+  // Retrieve it to create a contrasting shape color
+  const bg = t.background();
+  t.charColor(255 - bg.r, 255 - bg.g, 255 - bg.b);
+
+  t.char('☼');
+  t.rect(10, 10);
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
+##### Implementation of
+
+```ts
+ITextmodifier.background
+```
+
+#### Call Signature
+
+```ts
+background(gray, alpha?): void;
+```
+
+Set the background color using a grayscale value.
+
+##### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `value` | `string` \| `number` \| [`TextmodeColor`](TextmodeColor.md) | A [TextmodeColor](TextmodeColor.md), hex string, grayscale value, or single RGB channel |
-| `g?` | `number` | Optional green component when providing RGB channels or alpha when used with grayscale |
-| `b?` | `number` | Optional blue component when providing RGB channels |
-| `a?` | `number` | Optional alpha component (0-255) |
+| `gray` | `number` | Grayscale value (0-255) |
+| `alpha?` | `number` | Optional alpha value (0-255) |
 
-#### Returns
+##### Returns
 
 `void`
 
-#### Example
+##### Example
 
 ```javascript
-const t = textmode.create({
-  width: 800,
-  height: 600,
-});
-
-const midnight = t.color('#0b1d3a');
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
-  // Set the background using a reusable color
-  t.background(midnight);
+  // Pulsing grayscale background
+  const gray = 127 + 127 * Math.sin(t.frameCount * 0.05);
+  t.background(gray);
 
-  // Or inline RGB(A) notation
-  //t.background(32, 48, 64);
+  t.charColor(255 - gray); // Inverse color for text
+  t.cellColor(0, 0, 0, 0); // Transparent cell background
+  t.char('+');
+  t.rect(20, 20);
+});
 
-  // Or hex string
-  //t.background('#203040');
-
-  t.char('M');
-  t.rotateZ(t.frameCount * 2);
-  t.rect(12, 12);
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
-#### Implementation of
+##### Implementation of
+
+```ts
+ITextmodifier.background
+```
+
+#### Call Signature
+
+```ts
+background(
+   r, 
+   g, 
+   b, 
+   a?): void;
+```
+
+Set the background color using RGB(A) values.
+
+##### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `r` | `number` | Red component (0-255) |
+| `g` | `number` | Green component (0-255) |
+| `b` | `number` | Blue component (0-255) |
+| `a?` | `number` | Optional alpha component (0-255) |
+
+##### Returns
+
+`void`
+
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+t.draw(() => {
+  // Colorful background based on time
+  t.background(
+    100 + 100 * Math.sin(t.frameCount * 0.03),
+    100 + 100 * Math.sin(t.frameCount * 0.04),
+    100 + 100 * Math.sin(t.frameCount * 0.05)
+  );
+
+  t.char('B');
+  t.charColor(255);
+  t.rect(10, 10);
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
+##### Implementation of
+
+```ts
+ITextmodifier.background
+```
+
+#### Call Signature
+
+```ts
+background(value): void;
+```
+
+Set the background color using a CSS string or TextmodeColor object.
+
+##### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `value` | `string` \| [`TextmodeColor`](TextmodeColor.md) | Hex string, `rgb()`/`rgba()` string, or an existing color object |
+
+##### Returns
+
+`void`
+
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+t.draw(() => {
+  // Switch between hex string and color object
+  if (Math.floor(t.frameCount / 60) % 2 === 0) {
+    t.background('#220044');
+  } else {
+    const col = t.color(0, 100, 50);
+    t.background(col);
+  }
+
+  t.char('#');
+  t.charColor(255);
+  t.rect(15, 15);
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
+##### Implementation of
 
 ```ts
 ITextmodifier.background
@@ -981,14 +1646,14 @@ The curve thickness is controlled by the current [lineWeight](#lineweight) setti
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `x1` | `number` | Start point X coordinate |
-| `y1` | `number` | Start point Y coordinate |
-| `cp1x` | `number` | First control point X coordinate |
-| `cp1y` | `number` | First control point Y coordinate |
-| `cp2x` | `number` | Second control point X coordinate |
-| `cp2y` | `number` | Second control point Y coordinate |
-| `x2` | `number` | End point X coordinate |
-| `y2` | `number` | End point Y coordinate |
+| `x1` | `number` | Start point X coordinate in grid cells |
+| `y1` | `number` | Start point Y coordinate in grid cells |
+| `cp1x` | `number` | First control point X coordinate in grid cells |
+| `cp1y` | `number` | First control point Y coordinate in grid cells |
+| `cp2x` | `number` | Second control point X coordinate in grid cells |
+| `cp2y` | `number` | Second control point Y coordinate in grid cells |
+| `x2` | `number` | End point X coordinate in grid cells |
+| `y2` | `number` | End point Y coordinate in grid cells |
 
 #### Returns
 
@@ -997,29 +1662,42 @@ The curve thickness is controlled by the current [lineWeight](#lineweight) setti
 #### Example
 
 ```javascript
-const t = textmode.create({
-  width: 800,
-  height: 600,
-})
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
-  t.background(0);
-  t.translate(-t.grid.cols / 2, -t.grid.rows / 2);
+  t.background(5, 5, 10);
 
-  // Draw a smooth S-curve
-  t.char('*');
-  t.charColor(255, 100, 255); // Magenta
-  t.lineWeight(2);
+  const time = t.frameCount * 0.015;
+  const petals = 8;
+  const size = Math.min(t.grid.cols, t.grid.rows) * 0.35;
 
-  // Rotate the curve around its geometric center
-  // The bezier's control points: (5,20), (15,5), (25,35), (35,20)
-  // Center = average of points; translate to center then draw with local coordinates
-  const cx = (5 + 15 + 25 + 35) / 4;
-  const cy = (20 + 5 + 35 + 20) / 4;
+  t.lineWeight(1);
 
-  t.translate(cx, cy);
-  t.rotateZ(t.frameCount * 2);
-  t.bezierCurve(5 - cx, 20 - cy, 15 - cx, 5 - cy, 25 - cx, 35 - cy, 35 - cx, 20 - cy);
+  for (let i = 0; i < petals; i++) {
+    t.push();
+    const angle = (i / petals) * 360 + t.frameCount * 0.2;
+    t.rotateZ(angle);
+
+    // Dynamic control points based on time
+    const cp1 = size * (0.5 + 0.3 * Math.sin(time + i));
+    const cp2 = size * (0.5 + 0.3 * Math.cos(time + i * 0.5));
+
+    // Ethereal colors
+    t.charColor(100 + 100 * Math.sin(time + i), 100, 255);
+    t.char(['~', '≈', '∫'][i % 3]);
+
+    t.bezierCurve(
+      0, 0,            // Anchor 1
+      cp1, -cp2,       // Control 1
+      cp1, cp2,        // Control 2
+      size, 0          // Anchor 2
+    );
+    t.pop();
+  }
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -1033,50 +1711,188 @@ ITextmodifier.bezierCurve
 
 ### cellColor()
 
+#### Call Signature
+
 ```ts
-cellColor(
-   value, 
-   g?, 
-   b?, 
-   a?): void;
+cellColor(): TextmodeColor;
 ```
 
-Set the cell background color for subsequent rendering operations.
-Accepts channel values, hex strings, or a [TextmodeColor](TextmodeColor.md) instance.
+Get the current cell background color.
 
-#### Parameters
+##### Returns
 
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `value` | `string` \| `number` \| [`TextmodeColor`](TextmodeColor.md) | Color object, hex string, or grayscale value (0-255) |
-| `g?` | `number` | Optional green component when providing RGB values or alpha when using grayscale form |
-| `b?` | `number` | Optional blue component when providing RGB values |
-| `a?` | `number` | Optional alpha component (0-255) |
+[`TextmodeColor`](TextmodeColor.md)
 
-#### Returns
+The current cell color as a [TextmodeColor](TextmodeColor.md).
 
-`void`
-
-#### Example
+##### Example
 
 ```javascript
-const t = textmode.create({
-  width: 800,
-  height: 600,
-})
-
-const dusk = t.color('#203040');
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
   t.background(0);
-  t.cellColor(dusk);
-  t.char('A');
-  t.rotateZ(t.frameCount * 2);
+
+  // Set cell color based on position
+  const x = Math.sin(t.frameCount * 0.05) * 10;
+  if (x > 0) t.cellColor(50, 0, 0);
+  else t.cellColor(0, 0, 50);
+
+  // Query the current cell color to set the character color
+  const cell = t.cellColor();
+  t.charColor(255 - cell.r, 255 - cell.g, 255 - cell.b);
+
+  t.char('.');
+  t.translate(x, 0);
   t.rect(10, 10);
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
-#### Implementation of
+##### Implementation of
+
+```ts
+ITextmodifier.cellColor
+```
+
+#### Call Signature
+
+```ts
+cellColor(gray, alpha?): void;
+```
+
+Set the cell background color using a grayscale value.
+
+##### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `gray` | `number` | Grayscale value (0-255) |
+| `alpha?` | `number` | Optional alpha value (0-255) |
+
+##### Returns
+
+`void`
+
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+t.draw(() => {
+  t.background(0);
+  t.charColor(255);
+  t.char(' ');
+
+  // Vary cell brightness
+  const brightness = 127 + 127 * Math.sin(t.frameCount * 0.1);
+  t.cellColor(brightness);
+  t.rect(10, 10);
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
+##### Implementation of
+
+```ts
+ITextmodifier.cellColor
+```
+
+#### Call Signature
+
+```ts
+cellColor(
+   r, 
+   g, 
+   b, 
+   a?): void;
+```
+
+Set the cell background color using RGB(A) values.
+
+##### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `r` | `number` | Red component (0-255) |
+| `g` | `number` | Green component (0-255) |
+| `b` | `number` | Blue component (0-255) |
+| `a?` | `number` | Optional alpha component (0-255) |
+
+##### Returns
+
+`void`
+
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+t.draw(() => {
+  t.background(0);
+  t.charColor(0, 0, 0);
+  t.char('/');
+
+  // Cyan cell background
+  t.cellColor(0, 255, 255);
+  t.rect(10, 10);
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
+##### Implementation of
+
+```ts
+ITextmodifier.cellColor
+```
+
+#### Call Signature
+
+```ts
+cellColor(value): void;
+```
+
+Set the cell background color using a CSS string or TextmodeColor object.
+
+##### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `value` | `string` \| [`TextmodeColor`](TextmodeColor.md) | Hex string, `rgb()`/`rgba()` string, or an existing color object |
+
+##### Returns
+
+`void`
+
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+t.draw(() => {
+  t.background(0);
+  t.char('@');
+
+  // Use hex for cell background
+  t.cellColor('#ff4400');
+  t.rect(10, 10);
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
+##### Implementation of
 
 ```ts
 ITextmodifier.cellColor
@@ -1086,43 +1902,96 @@ ITextmodifier.cellColor
 
 ### char()
 
+#### Call Signature
+
 ```ts
 char(character): void;
 ```
 
 Set the character to be used for subsequent rendering operations.
-Accepts a single character string.
+Accepts a single character string or a character index in the current font.
 
-#### Parameters
+##### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `character` | `string` | The character to set for rendering |
+| `character` | `string` \| `number` | The character string or font character index to set for rendering |
 
-#### Returns
+##### Returns
 
 `void`
 
-#### Example
+##### Example
 
 ```javascript
-const t = textmode.create({
-  width: 800,
-  height: 600,
-})
+// Swapping characters over time
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
   t.background(0);
-  t.char('A');
-  t.rect(10, 10);
 
-  t.char(";");
-  t.translate(15, 0);
-  t.rect(10, 10);
+  // Cycle through character indices
+  const charIndex = Math.floor(t.frameCount / 10) % t.font.characters.length;
+  t.char(charIndex);
+
+  t.charColor(0, 255, 150);
+  t.rotateZ(t.frameCount * 2);
+  t.rect(15, 15);
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
-#### Implementation of
+##### Implementation of
+
+```ts
+ITextmodifier.char
+```
+
+#### Call Signature
+
+```ts
+char(): string;
+```
+
+Get the current character string used for rendering.
+
+##### Returns
+
+`string`
+
+The current character string.
+
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+t.draw(() => {
+  t.background(0);
+
+  const chars = ['A', 'B', 'C'];
+  const index = Math.floor(t.frameCount / 30) % chars.length;
+  t.char(chars[index]);
+
+  // Query the current character to decide the color
+  const current = t.char();
+
+  if (current === 'A') t.charColor(255, 100, 100);
+  else if (current === 'B') t.charColor(100, 255, 100);
+  else t.charColor(100, 100, 255);
+
+  t.rect(10, 10);
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
+##### Implementation of
 
 ```ts
 ITextmodifier.char
@@ -1132,49 +2001,196 @@ ITextmodifier.char
 
 ### charColor()
 
+#### Call Signature
+
 ```ts
-charColor(
-   value, 
-   g?, 
-   b?, 
-   a?): void;
+charColor(): TextmodeColor;
 ```
 
-Set the character color for subsequent rendering operations.
-Accepts channel values, hex strings, or a [TextmodeColor](TextmodeColor.md) instance.
+Get the current character color.
 
-#### Parameters
+##### Returns
 
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `value` | `string` \| `number` \| [`TextmodeColor`](TextmodeColor.md) | Color object, hex string, or grayscale value (0-255) |
-| `g?` | `number` | Optional green component when providing RGB values or alpha when using grayscale form |
-| `b?` | `number` | Optional blue component when providing RGB values |
-| `a?` | `number` | Optional alpha component (0-255) |
+[`TextmodeColor`](TextmodeColor.md)
 
-#### Returns
+The current character color as a [TextmodeColor](TextmodeColor.md).
 
-`void`
-
-#### Example
+##### Example
 
 ```javascript
-const t = textmode.create({
-  width: 800,
-  height: 600,
-})
-
-const hotPink = t.color(255, 105, 180);
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
   t.background(0);
+
+  // Set a dynamic base color
+  t.charColor(
+    127 + 127 * Math.sin(t.frameCount * 0.05),
+    127 + 127 * Math.cos(t.frameCount * 0.05),
+    200
+  );
+
+  // Draw base shape
   t.char('A');
-  t.charColor(hotPink);
   t.rect(10, 10);
+
+  // Query the color we just set
+  const col = t.charColor();
+
+  // Create a complementary color (inverse) for the second shape
+  t.push();
+  t.translate(15, 0);
+  t.charColor(255 - col.r, 255 - col.g, 255 - col.b);
+  t.char('B');
+  t.rect(10, 10);
+  t.pop();
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
-#### Implementation of
+##### Implementation of
+
+```ts
+ITextmodifier.charColor
+```
+
+#### Call Signature
+
+```ts
+charColor(gray, alpha?): void;
+```
+
+Set the character color using a grayscale value.
+
+##### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `gray` | `number` | Grayscale value (0-255) |
+| `alpha?` | `number` | Optional alpha value (0-255) |
+
+##### Returns
+
+`void`
+
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+t.draw(() => {
+  t.background(0);
+  // Fade character color in and out
+  const alpha = 127 + 127 * Math.sin(t.frameCount * 0.1);
+  t.charColor(255, alpha);
+  t.char('A');
+  t.rect(10, 10);
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
+##### Implementation of
+
+```ts
+ITextmodifier.charColor
+```
+
+#### Call Signature
+
+```ts
+charColor(
+   r, 
+   g, 
+   b, 
+   a?): void;
+```
+
+Set the character color using RGB(A) values.
+
+##### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `r` | `number` | Red component (0-255) |
+| `g` | `number` | Green component (0-255) |
+| `b` | `number` | Blue component (0-255) |
+| `a?` | `number` | Optional alpha component (0-255) |
+
+##### Returns
+
+`void`
+
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+t.draw(() => {
+  t.background(0);
+  // Cycle through colors
+  t.charColor(
+    Math.sin(t.frameCount * 0.05) * 127 + 128,
+    Math.sin(t.frameCount * 0.05 + 2) * 127 + 128,
+    Math.sin(t.frameCount * 0.05 + 4) * 127 + 128
+  );
+  t.char('=');
+  t.rect(10, 10);
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
+##### Implementation of
+
+```ts
+ITextmodifier.charColor
+```
+
+#### Call Signature
+
+```ts
+charColor(value): void;
+```
+
+Set the character color using a CSS string or TextmodeColor object.
+
+##### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `value` | `string` \| [`TextmodeColor`](TextmodeColor.md) | Hex string, `rgb()`/`rgba()` string, or an existing color object |
+
+##### Returns
+
+`void`
+
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+t.draw(() => {
+  t.background(0);
+  // Use hex color
+  t.charColor('#FFD700'); // Gold
+  t.char('$');
+  t.rect(10, 10);
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
+##### Implementation of
 
 ```ts
 ITextmodifier.charColor
@@ -1185,35 +2201,53 @@ ITextmodifier.charColor
 ### charRotation()
 
 ```ts
-charRotation(degrees): void;
+charRotation(degrees?): number | void;
 ```
 
-Set the character rotation angle for subsequent character rendering.
+Set the character rotation angle for subsequent character rendering, or get current angle.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `degrees` | `number` | The rotation angle in degrees |
+| `degrees?` | `number` | The rotation angle in degrees (optional) |
 
 #### Returns
 
-`void`
+`number` \| `void`
+
+The current rotation angle in degrees if called without arguments
 
 #### Example
 
 ```javascript
-const t = textmode.create({
-  width: 800,
-  height: 600,
-})
+// Rotating characters independently of geometry
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
   t.background(0);
-  t.char('A');
-  t.charRotation(90); // Rotate character 90 degrees
-  t.rotateZ(t.frameCount * 2);
-  t.rect(10, 10);
+
+  const count = 64;
+  for (let i = 0; i < count; i++) {
+    const angle = (i / count) * Math.PI * 2;
+    const x = Math.cos(angle) * 20;
+    const y = Math.sin(angle) * 20;
+
+    t.push();
+    t.translate(x, y);
+
+    // Rotate the character itself
+    t.charRotation(t.frameCount * 5 + i * 30);
+
+    t.charColor(255, 200, 100);
+    t.char('+');
+    t.point();
+    t.pop();
+  }
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -1263,70 +2297,163 @@ ITextmodifier.clear
 
 ### color()
 
+#### Call Signature
+
 ```ts
-color(
-   value, 
-   g?, 
-   b?, 
-   a?): TextmodeColor;
+color(gray, alpha?): TextmodeColor;
 ```
 
-Create a reusable color object compatible with textmode drawing APIs.
+Create a reusable color object from a grayscale value.
 
-Accepts grayscale, RGB, RGBA, and hex string values as arguments. Returned
-[TextmodeColor](TextmodeColor.md) instances can be passed to [background](#background),
-[char](#char), [charColor](#charcolor), [cellColor](#cellcolor), and more.
-
-#### Parameters
+##### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `value` | `string` \| `number` \| [`TextmodeColor`](TextmodeColor.md) | Grayscale value, hex string, single character, or an existing color |
-| `g?` | `number` | Optional green component, or `value` when using grayscale form |
-| `b?` | `number` | Optional blue component, or `value` when using grayscale form |
-| `a?` | `number` | Optional alpha component when using RGB form Example usage of the [color](#color) helper. |
+| `gray` | `number` | Grayscale value (0-255) |
+| `alpha?` | `number` | Optional alpha value (0-255) |
 
-#### Returns
+##### Returns
 
 [`TextmodeColor`](TextmodeColor.md)
 
-#### Example
+A TextmodeColor instance
+
+##### Example
+
+```javascript
+// Dynamic color creation
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+t.draw(() => {
+  t.background(0);
+
+  const count = 10;
+  for (let i = 0; i < count; i++) {
+    // Create a reusable color for each slice
+    const brightness = (i / (count - 1)) * 255;
+    const col = t.color(brightness);
+
+    t.push();
+    t.translate((i - (count - 1) / 2) * 5, 0);
+    t.charColor(col);
+    t.char('█');
+    t.rect(4, 30);
+    t.pop();
+  }
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
+##### Implementation of
+
+```ts
+ITextmodifier.color
+```
+
+#### Call Signature
+
+```ts
+color(
+   r, 
+   g, 
+   b, 
+   a?): TextmodeColor;
+```
+
+Create a reusable color object from RGB(A) values.
+
+##### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `r` | `number` | Red component (0-255) |
+| `g` | `number` | Green component (0-255) |
+| `b` | `number` | Blue component (0-255) |
+| `a?` | `number` | Optional alpha component (0-255) |
+
+##### Returns
+
+[`TextmodeColor`](TextmodeColor.md)
+
+A TextmodeColor instance
+
+##### Example
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
-// Grayscale (0 = black, 255 = white)
-const gray = t.color(128);
-
-// RGB
-const hotPink = t.color(255, 105, 180);
-
-// RGBA (alpha 0-255)
-const semiTransparentRed = t.color(255, 0, 0, 128);
-
-// Hex string
-const dusk = t.color('#203040');
+// Create reusable colors
+const red = t.color(255, 50, 50);
+const blue = t.color(50, 100, 255);
+// Semi-transparent yellow
+const yellow = t.color(255, 255, 0, 150);
 
 t.draw(() => {
-    // Using colors with other drawing APIs
-    t.background(gray);
-    t.charColor(hotPink);
-    t.char('A');
-    t.rect(5, 5);
+  t.background(20);
 
-    t.translate(5, 0);
-    t.cellColor(dusk);
-    t.char('*');
-    t.rect(5, 5);
+  // Draw overlapping circles to show mixing
+  const x = Math.sin(t.frameCount * 0.05) * 10;
 
-    t.translate(5, 0);
-    t.charColor("#FF00FF");
-    t.char("B");
-    t.rect(5, 5);
+  t.char('O');
+
+  t.push();
+  t.translate(-8 + x, 0);
+  t.charColor(red);
+  t.ellipse(16, 16);
+  t.pop();
+
+  t.push();
+  t.translate(8 - x, 0);
+  t.charColor(blue);
+  t.ellipse(16, 16);
+  t.pop();
+
+  // Center shape
+  t.charColor(yellow);
+  t.ellipse(12, 12);
 });
 ```
 
-#### Implementation of
+##### Implementation of
+
+```ts
+ITextmodifier.color
+```
+
+#### Call Signature
+
+```ts
+color(value): TextmodeColor;
+```
+
+Create a reusable color object from a CSS string or existing TextmodeColor.
+
+Accepts hex strings (e.g. `'#FF0000'`) and `rgb()`/`rgba()` strings.
+**Note:** Named CSS colors (e.g., `'red'`, `'blue'`) are **not** supported.
+
+##### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `value` | `string` \| [`TextmodeColor`](TextmodeColor.md) | Hex string, `rgb()`/`rgba()` string, or an existing color object |
+
+##### Returns
+
+[`TextmodeColor`](TextmodeColor.md)
+
+A TextmodeColor instance
+
+##### Example
+
+```javascript
+const dusk = t.color('#203040');
+const copy = t.color(dusk);
+```
+
+##### Implementation of
 
 ```ts
 ITextmodifier.color
@@ -1417,7 +2544,7 @@ createFramebuffer(options): TextmodeFramebuffer;
 Create a new framebuffer for offscreen rendering.
 
 The framebuffer uses the same MRT structure as the main rendering pipeline.
-By default it allocates 4 attachments (character + color data).
+By default it allocates 3 attachments (character + color data).
 
 #### Parameters
 
@@ -1491,10 +2618,139 @@ Accepts inline shader source or file paths (e.g. './shader.frag', './shader.vert
 
 A Promise that resolves to a compiled shader
 
+#### Example
+
+```javascript
+const t = textmode.create({ width: 800, height: 600 });
+
+let customShader;
+
+t.setup(async () => {
+  // Define a vertex shader that passes through position and UVs
+  const vert = `#version 300 es
+    in vec4 a_position;
+    in vec2 a_uv;
+    out vec2 v_uv;
+    void main() {
+      gl_Position = a_position;
+      v_uv = a_uv;
+    }
+  `;
+
+  // Define a fragment shader that outputs a solid color
+  // Note: Must match the MRT output layout of the textmode pipeline
+  const frag = `#version 300 es
+    precision highp float;
+    in vec2 v_uv;
+    layout(location = 0) out vec4 o_character;
+    layout(location = 1) out vec4 o_primaryColor;
+    layout(location = 2) out vec4 o_secondaryColor;
+
+    void main() {
+       // Output character data (RG=char index/value)
+       o_character = vec4(0.1, 0.0, 0.0, 0.0);
+       // Output primary color (Red)
+       o_primaryColor = vec4(1.0, 0.0, 0.0, 1.0);
+       // Output secondary color (Transparent)
+       o_secondaryColor = vec4(0.0);
+    }
+  `;
+
+  customShader = await t.createShader(vert, frag);
+});
+
+t.draw(() => {
+  if (customShader) {
+    t.shader(customShader);
+    t.rect(10, 10);
+  }
+});
+```
+
 #### Implementation of
 
 ```ts
 ITextmodifier.createShader
+```
+
+***
+
+### createTexture()
+
+```ts
+createTexture(source): TextmodeTexture;
+```
+
+Create a texture from an external canvas or video element for integration with other WebGL libraries.
+
+This method enables seamless integration with libraries like three.js, p5.js, Babylon.js,
+hydra-synth, or any library that renders to a canvas element.
+
+The texture automatically updates each frame to capture the latest content from the source.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `source` | `HTMLCanvasElement` \| `HTMLVideoElement` | Canvas or video element from an external library |
+
+#### Returns
+
+[`TextmodeTexture`](../namespaces/loadables/classes/TextmodeTexture.md)
+
+A TextmodeTexture that can be drawn with image()
+
+#### Examples
+
+```js
+// === Three.js Integration ===
+const threeRenderer = new THREE.WebGLRenderer();
+// ... setup three.js scene ...
+
+const t = textmode.create({ width: 800, height: 600 });
+
+let tex;
+
+t.setup(() => {
+    // Create texture from three.js canvas - auto-updates every frame
+    tex = t.createTexture(threeRenderer.domElement);
+    tex.characters(" .:-=+*#%@")
+       .charColorMode("sampled")
+       .cellColorMode("fixed")
+       .cellColor(0);
+});
+
+t.draw(() => {
+    // Render three.js scene first
+    threeRenderer.render(scene, camera);
+
+    // Then render as textmode
+    t.background(0);
+    t.image(tex);
+});
+```
+
+```js
+// === hydra-synth Integration ===
+const hydraInstance = new HydraSynth({ width: 800, height: 600 });
+hydraInstance.synth.osc(10, 0.1).out();
+
+let tex;
+
+t.setup(() => {
+    tex = t.createTexture(hydraInstance.canvas);
+    tex.characters(" .:-=+*#%@");
+});
+
+t.draw(() => {
+    t.image(tex);
+});
+```
+
+#### Implementation of
+
+```ts
+ITextmodifier.createTexture
 ```
 
 ***
@@ -1577,18 +2833,26 @@ Time elapsed between current and previous frame in milliseconds.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
+
 let x = 0;
-const speed = 0.1; // units per millisecond
+const speed = 0.05; // 0.05 grid units per millisecond
 
 t.draw(() => {
   t.background(0);
 
-  // Move at consistent speed regardless of frame rate
+  // Update position based on elapsed time for consistent speed
   x += speed * t.deltaTime();
 
-  console.log(`X: ${x.toFixed(2)}`);
+  // Wrap around screen
+  if (x > t.grid.cols) x = -10;
+
+  // Draw moving object
+  t.translate(x, t.grid.rows / 2);
+  t.char('>');
+  t.charColor(255, 100, 50);
+  t.rect(4, 2);
 });
 ```
 
@@ -1644,7 +2908,7 @@ doubleTap(callback): void;
 
 Register a callback for double tap gestures.
 
-Double taps reuse the same TouchTapEventData as taps with `taps` set to `2`. This
+Double taps reuse the same [TouchTapEventData](../namespaces/input/namespaces/touch/interfaces/TouchTapEventData.md) as taps with `taps` set to `2`. This
 helper lets you supply a dedicated handler when you want to treat double taps differently.
 
 #### Parameters
@@ -1659,9 +2923,40 @@ helper lets you supply a dedicated handler when you want to treat double taps di
 
 #### Example
 
-```js
+```javascript
+const t = textmode.create({ width: 800, height: 600 });
+
+let pulse = 0;
+let activeColor = t.color(100, 200, 255);
+
 t.doubleTap((data) => {
-  console.log('Double tap detected', data.touch);
+  // Trigger visual feedback at the tap location
+  pulse = 20;
+  // Randomize color
+  activeColor = t.color(Math.random() * 255, 200, Math.random() * 255);
+});
+
+t.draw(() => {
+  t.background(0);
+
+  // Animate pulse
+  if (pulse > 0) pulse--;
+
+  // Draw central interactive box
+  t.char('▓');
+  t.charColor(activeColor);
+
+  const size = 15 + pulse;
+  t.rect(size, size);
+
+  // Draw visual echo if pulsing
+  if (pulse > 0) {
+    t.push();
+    t.char('░');
+    t.charColor(255, 255, 255, pulse * 12);
+    t.rect(size + 5, size + 5);
+    t.pop();
+  }
 });
 ```
 
@@ -1705,21 +3000,36 @@ textmodifier.layers.base.draw(callback);
 #### Example
 
 ```javascript
-// Create a textmodifier instance
-const t = textmode.create({
- width: 800,
- height: 600,
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+t.draw(() => {
+  t.background(0);
+
+  // Create a dynamic, shifting pattern
+  const time = t.frameCount * 0.05;
+
+  for (let i = 0; i < 20; i++) {
+    const angle = time + i * 0.3;
+    const radius = 10 + i;
+
+    const x = Math.cos(angle) * radius;
+    const y = Math.sin(angle) * radius;
+
+    t.push();
+    t.translate(x, y);
+    t.rotateZ(angle);
+
+    // Color gradient from center out
+    t.charColor(255 - i * 10, 100 + i * 5, 200);
+    t.char(['+', 'x', 'o'][i % 3]);
+
+    t.rect(2, 2);
+    t.pop();
+  }
 });
 
-// Set up draw callback
-t.draw(() => {
-  // Set background color
-  t.background(128);
-
-  // Draw a textmode rectangle
-  t.char('A');
-  t.rotateZ(t.frameCount * 2);
-  t.rect(16, 16);
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -1734,7 +3044,7 @@ ITextmodifier.draw
 ### ellipse()
 
 ```ts
-ellipse(width, height): void;
+ellipse(width?, height?): void;
 ```
 
 Draw an ellipse with the current settings.
@@ -1744,8 +3054,8 @@ Position is controlled via [translate](#translate), [push](#push), and [pop](#po
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `width` | `number` | Width of the ellipse |
-| `height` | `number` | Height of the ellipse |
+| `width?` | `number` | Width of the ellipse in grid cells (defaults to 1) |
+| `height?` | `number` | Height of the ellipse in grid cells (defaults to 1) |
 
 #### Returns
 
@@ -1754,16 +3064,50 @@ Position is controlled via [translate](#translate), [push](#push), and [pop](#po
 #### Example
 
 ```javascript
-const t = textmode.create({
-  width: 800,
-  height: 600,
-})
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
 
 t.draw(() => {
-  t.background(0);
-  t.char('O');
-  t.rotateZ(t.frameCount * 2);
-  t.ellipse(10, 8);
+  t.background(5, 5, 15);
+
+  const time = t.frameCount * 0.02;
+  const orbitCount = 12;
+  const baseSize = Math.min(t.grid.cols, t.grid.rows);
+
+  // Draw a series of harmonically rotating orbital rings
+  for (let i = 0; i < orbitCount; i++) {
+    const phase = i / orbitCount;
+
+    t.push();
+    // Complex 3D rotation based on index and time
+    t.rotateX(time * 23 + i * 15);
+    t.rotateY(time * 31 + i * 25);
+    t.rotateZ(time * 17 + i * 35);
+
+    // Color shifts through a cool-to-warm spectrum
+    const hue = (phase * 360 + time * 50) % 360;
+    t.charColor(150 + 105 * Math.sin(time + phase * 6), 100, 255);
+
+    // Select character based on "depth" or index for texture variety
+    t.char(['░', '▒', '▓', '█', '•', '·'][i % 6]);
+    t.lineWeight(1 + (i % 3));
+
+    const s = baseSize * (0.4 + 0.6 * Math.sin(time * 0.5 + phase * Math.PI));
+    t.ellipse(s, s * 0.7);
+    t.pop();
+  }
+
+  // Pulsing central star
+  t.push();
+  t.char('☼');
+  t.charColor(255, 255, 200);
+  t.rotateZ(-time * 100);
+  const pulse = 2 + Math.sin(time * 8) * 0.5;
+  t.ellipse(pulse, pulse);
+  t.pop();
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -1771,6 +3115,110 @@ t.draw(() => {
 
 ```ts
 ITextmodifier.ellipse
+```
+
+***
+
+### fill()
+
+#### Call Signature
+
+```ts
+fill(): TextmodeColor;
+```
+
+Alias for [cellColor](#cellcolor). Get the current fill (cell background) color.
+
+##### Returns
+
+[`TextmodeColor`](TextmodeColor.md)
+
+The current cell color as a [TextmodeColor](TextmodeColor.md).
+
+##### Implementation of
+
+```ts
+ITextmodifier.fill
+```
+
+#### Call Signature
+
+```ts
+fill(gray, alpha?): void;
+```
+
+Alias for [cellColor](#cellcolor). Set the fill (cell background) color using a grayscale value.
+
+##### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `gray` | `number` | Grayscale value (0-255) |
+| `alpha?` | `number` | Optional alpha value (0-255) |
+
+##### Returns
+
+`void`
+
+##### Implementation of
+
+```ts
+ITextmodifier.fill
+```
+
+#### Call Signature
+
+```ts
+fill(
+   r, 
+   g, 
+   b, 
+   a?): void;
+```
+
+Alias for [cellColor](#cellcolor). Set the fill (cell background) color using RGB(A) values.
+
+##### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `r` | `number` | Red component (0-255) |
+| `g` | `number` | Green component (0-255) |
+| `b` | `number` | Blue component (0-255) |
+| `a?` | `number` | Optional alpha component (0-255) |
+
+##### Returns
+
+`void`
+
+##### Implementation of
+
+```ts
+ITextmodifier.fill
+```
+
+#### Call Signature
+
+```ts
+fill(value): void;
+```
+
+Alias for [cellColor](#cellcolor). Set the fill (cell background) color using a CSS string or TextmodeColor object.
+
+##### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `value` | `string` \| [`TextmodeColor`](TextmodeColor.md) | Hex string, `rgb()`/`rgba()` string, or an existing color object |
+
+##### Returns
+
+`void`
+
+##### Implementation of
+
+```ts
+ITextmodifier.fill
 ```
 
 ***
@@ -1808,20 +3256,49 @@ queued per frame and will be applied in order.
 
 ##### Example
 
-```ts
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
 t.draw(() => {
-    t.background(0);
-    t.charColor(255);
-    t.char('A');
-    t.rect(10, 10);
+  t.background(0);
 
-    // Apply built-in filters
-    t.filter('grayscale', 0.5);
+  // Draw overlapping shapes with gradient colors
+  const time = t.frameCount * 0.02;
+  const count = 12;
+
+  for (let i = 0; i < count; i++) {
+    const angle = (i / count) * Math.PI * 2 + time;
+    const r = 15 + 5 * Math.sin(time * 3 + i);
+
+    t.push();
+    t.translate(Math.cos(angle) * r, Math.sin(angle) * r);
+    t.rotateZ(angle * 50);
+
+    // Soft colors
+    t.charColor(
+      127 + 127 * Math.sin(i),
+      127 + 127 * Math.cos(i),
+      200
+    );
+    t.char(['@', '%', '#', '*'][i % 4]);
+    t.rect(12, 12);
+    t.pop();
+  }
+
+  // Apply filters to alter the composition
+
+  // Dynamic threshold: creates a "cutout" look that evolves
+  const thresh = 0.4 + 0.2 * Math.sin(time * 2);
+  t.filter('threshold', thresh);
+
+  // Invert colors every second for a strobe effect
+  if (Math.floor(time) % 2 === 0) {
     t.filter('invert');
+  }
+});
 
-    // Chain multiple filters
-    t.filter('sepia', { amount: 0.3 });
-    t.filter('threshold', 0.5);
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -1834,15 +3311,21 @@ ITextmodifier.filter
 #### Call Signature
 
 ```ts
-filter(name, params?): void;
+filter<TParams>(name, params?): void;
 ```
+
+##### Type Parameters
+
+| Type Parameter | Default type |
+| ------ | ------ |
+| `TParams` | `unknown` |
 
 ##### Parameters
 
 | Parameter | Type |
 | ------ | ------ |
 | `name` | `string` |
-| `params?` | `unknown` |
+| `params?` | `TParams` |
 
 ##### Returns
 
@@ -1859,34 +3342,59 @@ ITextmodifier.filter
 ### flipX()
 
 ```ts
-flipX(toggle): void;
+flipX(toggle?): boolean | void;
 ```
 
-Toggle horizontal flipping for subsequent character rendering.
+Toggle horizontal flipping for subsequent character rendering, or get current state.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `toggle` | `boolean` | Whether to flip horizontally |
+| `toggle?` | `boolean` | Whether to flip horizontally (optional) |
 
 #### Returns
 
-`void`
+`boolean` \| `void`
+
+The current flip state if called without arguments
 
 #### Example
 
 ```javascript
-const t = textmode.create({
-  width: 800,
-  height: 600,
-})
+// Using flipX for symmetry
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
   t.background(0);
-  t.flipX(true);
-  t.char('A');
-  t.rect(5, 5);
+
+  const count = 10;
+  for (let i = 0; i < count; i++) {
+    const phase = i / count;
+    const y = (phase - 0.5) * t.grid.rows * 0.8;
+    const x = Math.sin(t.frameCount * 0.05 + i) * 10;
+
+    // Draw original
+    t.push();
+    t.translate(x, y);
+    t.char('R');
+    t.charColor(255);
+    t.point();
+    t.pop();
+
+    // Draw mirrored
+    t.push();
+    t.translate(-x, y);
+    t.flipX(true);
+    t.char('R');
+    t.charColor(255, 100, 100);
+    t.point();
+    t.pop();
+  }
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -1901,34 +3409,59 @@ ITextmodifier.flipX
 ### flipY()
 
 ```ts
-flipY(toggle): void;
+flipY(toggle?): boolean | void;
 ```
 
-Toggle vertical flipping for subsequent character rendering.
+Toggle vertical flipping for subsequent character rendering, or get current state.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `toggle` | `boolean` | Whether to flip vertically |
+| `toggle?` | `boolean` | Whether to flip vertically (optional) |
 
 #### Returns
 
-`void`
+`boolean` \| `void`
+
+The current flip state if called without arguments
 
 #### Example
 
 ```javascript
-const t = textmode.create({
-  width: 800,
-  height: 600,
-})
+// Using flipY for vertical reflection
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
-  t.background(0);
-  t.flipY(true);
-  t.char('A');
-  t.rect(5, 5);
+  t.background(0, 10, 20);
+
+  const count = 32;
+  for (let i = 0; i < count; i++) {
+    const x = (i / (count - 1) - 0.5) * t.grid.cols * 0.7;
+    const y = -10 + Math.sin(t.frameCount * 0.05 + i) * 2;
+
+    // Draw original (Sky)
+    t.push();
+    t.translate(x, y);
+    t.char('^');
+    t.charColor(200, 200, 255);
+    t.point();
+    t.pop();
+
+    // Draw reflected (Water)
+    t.push();
+    t.translate(x, -y);
+    t.flipY(true);
+    t.char('^');
+    // Dimmer and bluer for reflection
+    t.charColor(50, 100, 200, 150);
+    t.point();
+    t.pop();
+  }
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -1943,20 +3476,22 @@ ITextmodifier.flipY
 ### fontSize()
 
 ```ts
-fontSize(size): void;
+fontSize(size?): number | void;
 ```
 
-Set the font size used for rendering.
+Get or set the font size used for rendering.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `size` | `number` | The font size to set. |
+| `size?` | `number` | The font size to set. |
 
 #### Returns
 
-`void`
+`number` \| `void`
+
+The current font size if called without arguments.
 
 #### Example
 
@@ -1967,6 +3502,9 @@ const t = textmode.create();
 t.setup(() => {
  // Set the font size to 32
  t.fontSize(32);
+
+ // Get the current font size
+ console.log(t.fontSize()); // 32
 });
 
 t.draw(() => {
@@ -1996,7 +3534,7 @@ Set the target frame rate. If called without arguments, returns the current meas
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `fps?` | `number` | The maximum frames per second for rendering. |
+| `fps?` | `number` | The maximum frames per second for rendering (optional). |
 
 #### Returns
 
@@ -2005,17 +3543,61 @@ Set the target frame rate. If called without arguments, returns the current meas
 #### Example
 
 ```javascript
-// Create a Textmodifier instance
-const textmodifier = textmode.create();
+// Click to toggle between slow-mo (10fps) and turbo (60fps).
 
-// Set the maximum frame rate to 30 FPS
-textmodifier.frameRate(30);
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
-// Draw something at the set frame rate
+t.mouseClicked(() => {
+  // Toggle speed
+  const current = t.frameRate();
+  t.frameRate(current < 30 ? 60 : 10);
+});
+
+// Drops state
+const drops = Array(50).fill(0).map(() => ({
+  x: 0, y: 0, speed: 0, len: 0
+}));
+
+// Reset a drop
+const resetDrop = (d) => {
+  d.x = (Math.random() - 0.5) * t.grid.cols;
+  d.y = -t.grid.rows/2 - Math.random() * 20;
+  d.speed = 0.5 + Math.random();
+  d.len = 5 + Math.floor(Math.random() * 10);
+};
+
+t.setup(() => {
+  drops.forEach(resetDrop);
+});
+
 t.draw(() => {
   t.background(0);
-  t.char('A');
-  t.rect(5, 5);
+
+  const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+  for(const d of drops) {
+    d.y += d.speed;
+    if (d.y > t.grid.rows/2) resetDrop(d);
+
+    for(let i=0; i<d.len; i++) {
+      t.push();
+      t.translate(d.x, d.y - i);
+
+      // Head is white, tail is green fading out
+      if (i == 0) t.charColor(200, 255, 200);
+      else t.charColor(0, 255, 70, 255 - (i/d.len)*255);
+
+      // Random character change
+      const charIdx = Math.floor(Math.random() * chars.length);
+      t.char(chars[charIdx]);
+      t.point();
+      t.pop();
+    }
+  }
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -2036,15 +3618,15 @@ image(
    height?): void;
 ```
 
-Draw a TextmodeFramebuffer, TextmodeImage, or TextmodeVideo to the current render target.
+Draw a TextmodeFramebuffer, TextmodeImage, TextmodeVideo, or TextmodeTexture to the current render target.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `source` | \| [`TextmodeFramebuffer`](TextmodeFramebuffer.md) \| [`TextmodeImage`](../namespaces/loadables/classes/TextmodeImage.md) \| [`TextmodeVideo`](../namespaces/loadables/classes/TextmodeVideo.md) | The TextmodeFramebuffer or TextmodeSource to render |
-| `width?` | `number` | Width to potentially scale the content |
-| `height?` | `number` | Height to potentially scale the content |
+| `source` | \| [`TextmodeFramebuffer`](TextmodeFramebuffer.md) \| [`TextmodeImage`](../namespaces/loadables/classes/TextmodeImage.md) \| [`TextmodeTexture`](../namespaces/loadables/classes/TextmodeTexture.md) \| [`TextmodeVideo`](../namespaces/loadables/classes/TextmodeVideo.md) | The TextmodeFramebuffer, TextmodeImage, TextmodeVideo, or TextmodeTexture to render |
+| `width?` | `number` | Width in grid cells to potentially scale the content (defaults to ideal fit, respecting aspect ratio) |
+| `height?` | `number` | Height in grid cells to potentially scale the content (defaults to ideal fit, respecting aspect ratio) |
 
 #### Returns
 
@@ -2130,7 +3712,7 @@ t.setup(() => {
 
 t.draw(() => {
   // Mouse positions now always use base layer's grid
-  console.log(`Mouse: ${t.mouseX}, ${t.mouseY}`);
+  console.log(`Mouse: ${t.mouse.x}, ${t.mouse.y}`);
 });
 
 // Switch back to responsive mode
@@ -2151,35 +3733,51 @@ ITextmodifier.inputGrid
 ### invert()
 
 ```ts
-invert(toggle): void;
+invert(toggle?): boolean | void;
 ```
 
-Toggle color inversion for subsequent character rendering.
+Toggle color inversion for subsequent character rendering, or get current state.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `toggle` | `boolean` | Whether to invert colors |
+| `toggle?` | `boolean` | Whether to invert colors (optional) |
 
 #### Returns
 
-`void`
+`boolean` \| `void`
+
+The current inversion state if called without arguments
 
 #### Example
 
 ```javascript
-const t = textmode.create({
-  width: 800,
-  height: 600,
-})
+// Swapping foreground and background
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
   t.background(0);
-  t.invert(true);
-  t.char('A');
-  t.rotateZ(t.frameCount * 2);
-  t.rect(5, 5);
+
+  const count = 15;
+  for (let i = 0; i < count; i++) {
+    t.push();
+    t.translate((i - (count - 1) / 2) * 6, 0);
+
+    // Toggle inversion based on position and time
+    const shouldInvert = (i + Math.floor(t.frameCount / 30)) % 2 === 0;
+    t.invert(shouldInvert);
+
+    t.charColor(255, 100, 100);
+    t.cellColor(0, 50, 100);
+    t.char('█');
+    t.rect(5, 20);
+    t.pop();
+  }
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -2268,17 +3866,41 @@ True if the render loop is currently active, false otherwise.
 
 #### Example
 
-```js
-const textmodifier = textmode.create(canvas);
+```javascript
+const t = textmode.create({ width: 800, height: 600 });
 
-// Check loop status in different states
-console.log(textmodifier.isLooping()); // true (looping)
+// Toggle loop on mouse click
+t.mousePressed(() => {
+  if (t.isLooping()) {
+    t.noLoop();
+    // Manually trigger one more frame to show "PAUSED"
+    t.redraw();
+  } else {
+    t.loop();
+  }
+});
 
-textmodifier.noLoop();
-console.log(textmodifier.isLooping()); // false (not looping)
+t.draw(() => {
+  t.background(0);
 
-textmodifier.loop();
-console.log(textmodifier.isLooping()); // true (looping)
+  const isRunning = t.isLooping();
+
+  // Shapes are centered by default (origin is 0,0)
+
+  if (isRunning) {
+    // Rotate while running
+    t.rotateZ(t.frameCount * 5);
+    t.charColor(0, 255, 100);
+    t.char('►');
+  } else {
+    // Static when paused (using last frameCount)
+    t.rotateZ(t.frameCount * 5);
+    t.charColor(255, 100, 100);
+    t.char('║');
+  }
+
+  t.rect(10, 10);
+});
 ```
 
 #### Implementation of
@@ -2414,10 +4036,10 @@ Draw a line from point (x1, y1) to point (x2, y2) with the settings.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `x1` | `number` | X-coordinate of the line start point |
-| `y1` | `number` | Y-coordinate of the line start point |
-| `x2` | `number` | X-coordinate of the line end point |
-| `y2` | `number` | Y-coordinate of the line end point |
+| `x1` | `number` | X-coordinate of the line start point in grid cells |
+| `y1` | `number` | Y-coordinate of the line start point in grid cells |
+| `x2` | `number` | X-coordinate of the line end point in grid cells |
+| `y2` | `number` | Y-coordinate of the line end point in grid cells |
 
 #### Returns
 
@@ -2426,25 +4048,42 @@ Draw a line from point (x1, y1) to point (x2, y2) with the settings.
 #### Example
 
 ```javascript
-const t = textmode.create({
-  width: 800,
-  height: 600,
-})
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
-  t.background(0);
+  t.background(10, 10, 20);
 
-  t.char('*');
-  t.charColor(255, 100, 255); // Magenta
+  const time = t.frameCount * 0.01;
+  const lineCount = 24;
+  const radius = Math.min(t.grid.cols, t.grid.rows) * 0.4;
+
   t.lineWeight(2);
 
-  const halfWidth = 5;
-  const halfHeight = 7.5;
+  // Spinning web of lines
+  for (let i = 0; i < lineCount; i++) {
+    const phase1 = (i / lineCount) * Math.PI * 2;
+    const phase2 = phase1 + Math.PI + Math.sin(time) * Math.PI;
 
-  t.push();
-  t.rotateZ(t.frameCount * 2);
-  t.line(-halfWidth, halfHeight, halfWidth, -halfHeight);
-  t.pop();
+    // Points on two different rotating circles
+    const x1 = Math.cos(phase1 + time) * radius;
+    const y1 = Math.sin(phase1 * 2 + time * 1.5) * radius * 0.5;
+
+    const x2 = Math.cos(phase2 - time * 0.7) * radius * 0.8;
+    const y2 = Math.sin(phase2 * 1.5 - time) * radius;
+
+    // Emergent color based on line index
+    const r = 127 + 127 * Math.sin(phase1 + time);
+    const g = 127 + 127 * Math.cos(phase1 * 0.5 + time);
+    t.charColor(r, g, 255);
+
+	   t.char(['+', '-', '|', '/'][i % 4]);
+
+    t.line(x1, y1, x2, y2);
+  }
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -2459,53 +4098,54 @@ ITextmodifier.line
 ### lineWeight()
 
 ```ts
-lineWeight(weight): void;
+lineWeight(weight?): number | void;
 ```
 
-Update the line weight (thickness) for subsequent [line](#line) and [bezierCurve](#beziercurve) calls.
+Set or get the line weight (thickness).
+
+If called with a value, sets the line weight for subsequent drawing operations.
+If called without arguments, returns the current line weight.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `weight` | `number` | The line weight (thickness) to set. |
+| `weight?` | `number` | The line weight (thickness) to set. |
 
 #### Returns
 
-`void`
+`number` \| `void`
+
+The current line weight if called without arguments.
 
 #### Example
 
 ```javascript
-const t = textmode.create({
-    width: 800,
-    height: 600,
-})
+// Dynamic line thickness
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
-    t.background('#050810');
+  t.background('#050810');
 
-    // Animate the weight so every line breathes differently
-    const layers = 6;
-    const halfCols = t.grid.cols / 2;
-    const spacing = 4;
+  const layers = 6;
+  const spacing = 4;
 
-    for (let i = 0; i < layers; i++) {
-        const phase = t.frameCount * 0.03 + i * 0.8;
-        const pulse = 0.75 + 3.25 * (0.5 + 0.5 * Math.sin(phase));
-        const wobble = Math.sin(phase * 1.6) * 4;
-        const centeredRow = (i - (layers - 1) / 2) * spacing;
+  for (let i = 0; i < layers; i++) {
+    const phase = t.frameCount * 0.03 + i * 0.8;
+    const pulse = 1 + 4 * (0.5 + 0.5 * Math.sin(phase));
+    const wobble = Math.sin(phase * 1.6) * 5;
 
-        t.lineWeight(Math.round(pulse));
-        t.charColor(160 + i * 12, 200 - i * 8, 255);
-        t.char('-');
-        t.line(
-            -halfCols + 2,
-            centeredRow + wobble,
-            halfCols - 2,
-            centeredRow - wobble,
-        );
-    }
+    t.lineWeight(Math.round(pulse));
+    t.charColor(160 + i * 12, 200, 255);
+    t.char(['-', '+', '×'][i % 3]);
+
+    const y = (i - (layers - 1) / 2) * spacing;
+    t.line(-20, y + wobble, 20, y - wobble);
+  }
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -2520,41 +4160,70 @@ ITextmodifier.lineWeight
 ### loadFont()
 
 ```ts
-loadFont(fontSource): Promise<TextmodeFont>;
+loadFont(fontSource, setActive): Promise<TextmodeFont>;
 ```
 
-Load a font for the base layer and return it.
+Load a font, optionally setting it as the base layer's active font.
+
+Accepts either a URL string to load a new font, or an existing [TextmodeFont](../namespaces/loadables/classes/TextmodeFont.md)
+instance to reuse it.
+
+If `setActive` is true (default), the font is set as the base layer's font.
+If `setActive` is false, the font is loaded/initialized and returned without modifying the layer.
 
 The returned font can be reused on other layers via [TextmodeLayer.loadFont](../namespaces/layering/classes/TextmodeLayer.md#loadfont).
 
 #### Parameters
 
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `fontSource` | `string` | The URL of the font to load. |
+| Parameter | Type | Default value | Description |
+| ------ | ------ | ------ | ------ |
+| `fontSource` | \| `string` \| [`TextmodeFont`](../namespaces/loadables/classes/TextmodeFont.md) | `undefined` | The URL of the font to load, or an existing TextmodeFont instance. |
+| `setActive` | `boolean` | `true` | Whether to set the font as the base layer's active font. Defaults to `true`. |
 
 #### Returns
 
 `Promise`\<[`TextmodeFont`](../namespaces/loadables/classes/TextmodeFont.md)\>
 
-The loaded TextmodeFont instance (base layer font).
+The loaded TextmodeFont instance.
 
 #### Example
 
 ```javascript
-const t = textmode.create();
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.setup(async () => {
-  // Load font for the base layer
-  const font = await t.loadFont('./fonts/myfont.ttf');
-  // const font = await t.layers.base.loadFont('./fonts/myfont.ttf'); // Equivalent
+  // Load a custom font and set it as active immediately
+  // Note: This automatically recalculates grid dimensions!
+  // await t.loadFont('https://example.com/fonts/my-font.ttf');
 
-  // Use the same font on another layer
-  const layer = t.layers.add();
-  await layer.loadFont(font);
+  // You can also preload fonts without activating them:
+  // const pixelFont = await t.loadFont('./fonts/pixel.ttf', false);
 
-  // Or load a different font for a layer
-  await layer.loadFont('./fonts/otherfont.ttf');
+  // And then apply them to specific layers later:
+  // t.layers.base.loadFont(pixelFont);
+});
+
+t.draw(() => {
+  t.background(0);
+  t.charColor(255);
+
+  const text = "TYPE";
+  // Center text
+  const centerX = -text.length / 2;
+
+  for (let i = 0; i < text.length; i++) {
+    t.push();
+    t.translate(centerX + i + 0.5, 0);
+    t.char(text[i]);
+    // Pulsing effect
+    t.charColor(150 + 100 * Math.sin(t.frameCount * 0.1 + i), 200, 255);
+    t.rect(1, 1);
+    t.pop();
+  }
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -2581,7 +4250,7 @@ This function returns a Promise that resolves when the image has loaded.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `src` | `string` \| `HTMLImageElement` | URL or existing HTMLImageElement |
+| `src` | `string` | URL of the image file |
 
 #### Returns
 
@@ -2592,23 +4261,32 @@ A Promise that resolves to a TextmodeImage object
 #### Example
 
 ```javascript
-const t = textmode.create({
-    width: 800,
-    height: 600,
-});
+// Loading and rendering external assets
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let img;
 
 t.setup(async () => {
-    img = await t.loadImage('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80');
-    img.characters(" .:-=+*#%@");
+  // Remote image URL
+  const url = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80';
+  img = await t.loadImage(url);
+
+  // Configure character mapping for the image
+  img.characters(" .:-=+*#%@");
 });
 
 t.draw(() => {
-    t.background(0);
+  t.background(0);
+  if (img) {
+    // Pulse image scale and rotation
+    const scale = 1 + Math.sin(t.frameCount * 0.05) * 0.1;
+    t.rotateZ(Math.sin(t.frameCount * 0.02) * 5);
+    t.image(img, t.grid.cols * scale, t.grid.rows * scale);
+  }
+});
 
-    // Draw the loaded image
-    t.image(img);
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -2632,7 +4310,7 @@ Load a video and return a TextmodeVideo that can be drawn with image().
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `src` | `string` \| `HTMLVideoElement` | URL or existing HTMLVideoElement |
+| `src` | `string` | URL of the video file |
 
 #### Returns
 
@@ -2641,27 +4319,34 @@ Load a video and return a TextmodeVideo that can be drawn with image().
 #### Example
 
 ```javascript
-const t = textmode.create({
-    width: 800,
-    height: 600,
-});
+// Video to ASCII conversion
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let video;
 
 t.setup(async () => {
-    video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
-    // Start playback and enable looping so the video keeps playing
-    video.play();
-    video.loop();
+  const url = 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4';
+  video = await t.loadVideo(url);
 
-    video.characters(" .:-=+*#%@");
+  // Configure video playback
+  video.play();
+  video.loop();
+
+  // Set ASCII density characters
+  video.characters(" .:-=+*#%@");
 });
 
 t.draw(() => {
-    t.background(0);
+  t.background(0);
+  if (video) {
+    // Rotate and draw the video
+    t.rotateY(t.frameCount);
+    t.image(video, 40, 30);
+  }
+});
 
-    // Draw the loaded video
-    t.image(video);
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -2696,9 +4381,48 @@ configured tolerance. The event includes the press duration in milliseconds.
 
 #### Example
 
-```js
+```javascript
+const t = textmode.create({ width: 800, height: 600 });
+
+const bursts = [];
+
 t.longPress((data) => {
-  console.log(`Long press for ${Math.round(data.duration)}ms`);
+  // Spawn an expanding energy burst at the long press location
+  bursts.push({
+    x: data.touch.x,
+    y: data.touch.y,
+    life: 0
+  });
+});
+
+t.draw(() => {
+  t.background(0);
+
+  // Animate bursts
+  for (let i = bursts.length - 1; i >= 0; i--) {
+    const b = bursts[i];
+    b.life += 1;
+
+    t.push();
+    t.translate(b.x, b.y);
+    t.rotateZ(b.life * 5);
+
+    const size = b.life * 1.5;
+    const alpha = Math.max(0, 255 - b.life * 4);
+
+    t.char('☼');
+    t.charColor(255, 200, 100, alpha);
+    t.rect(size, size);
+    t.pop();
+
+    if (b.life > 60) bursts.splice(i, 1);
+  }
+
+  if (bursts.length === 0) {
+    t.charColor(100);
+    t.char('?');
+    t.rect(1, 1);
+  }
 });
 ```
 
@@ -2776,70 +4500,63 @@ Set a callback function that will be called when the mouse is clicked.
 #### Example
 
 ```javascript
-// Click to spawn ripples.
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
-const t = textmode.create({ width: 800, height: 600 });
+const echoes = [];
 
-// Store ripples as { x, y } in center-based coordinates
-const ripples = [];
-
-// Create a ripple at the clicked grid cell
 t.mouseClicked((data) => {
-  // Skip if mouse is outside the grid
   if (data.position.x === Number.NEGATIVE_INFINITY) return;
-
-  // Coordinates are already center-based, matching the drawing coordinate system
-  ripples.push({ x: data.position.x, y: data.position.y, age: 0, maxAge: 20 });
+  // Add a new sonar echo at the clicked position (center-based coords)
+  echoes.push({ x: data.position.x, y: data.position.y, age: 0 });
 });
 
 t.draw(() => {
   t.background(0);
 
-  // Update and draw ripples (iterate backwards when removing)
-  for (let i = ripples.length - 1; i >= 0; i--) {
-    const r = ripples[i];
-    r.age++;
-    const life = r.age / r.maxAge;                    // 0..1
-    const radius = 1 + life * 7;                      // expands from ~1 to ~8
-    const intensity = Math.round(255 * (1 - life));   // fades out
+  // Render all active echoes
+  for (let i = 0; i < echoes.length; i++) {
+    const e = echoes[i];
+    e.age += 1;
+    const maxAge = 60;
 
-    // Keep cells dark so characters stand out
-    t.charColor(intensity, intensity, 255);
-    t.cellColor(0);
+    if (e.age > maxAge) {
+      echoes.splice(i, 1);
+      continue;
+    }
 
     t.push();
-    // position already in center-based coordinates
-    t.translate(r.x, r.y);
+    t.translate(e.x, e.y);
 
-    // Draw a ring by sampling points around the circle
-    for (let a = 0; a < Math.PI * 2; a += Math.PI / 8) {
-      const ox = Math.round(Math.cos(a) * radius);
-      const oy = Math.round(Math.sin(a) * radius);
-      t.push();
-      t.translate(ox, oy);
-      t.char('*');
-      t.point();
-      t.pop();
+    const progress = e.age / maxAge;
+    const radius = progress * 30;
+    const alpha = 255 * (1 - progress);
+
+    t.charColor(100, 200, 255, alpha);
+    t.char('○');
+    t.ellipse(radius, radius);
+
+    // Inner after-shock
+    if (progress > 0.2) {
+      t.charColor(50, 100, 255, alpha * 0.5);
+      t.char('·');
+      t.ellipse(radius * 0.6, radius * 0.6);
     }
-
     t.pop();
-
-    // Remove finished ripples
-    if (r.age > r.maxAge) {
-      ripples.splice(i, 1);
-    }
   }
 
-  // Show crosshair for the current mouse cell
-  // Mouse coordinates are center-based, matching the drawing coordinate system
+  // Crosshair at mouse
   if (t.mouse.x !== Number.NEGATIVE_INFINITY) {
     t.push();
-    t.charColor(180);
     t.translate(t.mouse.x, t.mouse.y);
     t.char('+');
+    t.charColor(255);
     t.point();
     t.pop();
   }
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -2872,65 +4589,58 @@ Set a callback function that will be called when the mouse moves.
 #### Example
 
 ```javascript
-// Trail of particles following the mouse.
-
-const t = textmode.create({ width: 800, height: 600 });
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 const trail = [];
-const maxTrail = 120;
-let lastMouse = null;
+let prev = null;
 
 t.mouseMoved((data) => {
   if (data.position.x === Number.NEGATIVE_INFINITY) return;
 
-  // Coordinates are already center-based, matching the drawing system
-  const cx = data.position.x;
-  const cy = data.position.y;
+  const x = data.position.x;
+  const y = data.position.y;
 
-  // Spawn multiple particles based on movement speed
-  const dx = lastMouse ? cx - lastMouse.x : 0;
-  const dy = lastMouse ? cy - lastMouse.y : 0;
-  const speed = Math.sqrt(dx * dx + dy * dy);
-  const count = Math.max(1, Math.ceil(speed * 1.5));
+  // Calculate velocity
+  const dx = prev ? x - prev.x : 0;
+  const dy = prev ? y - prev.y : 0;
+  prev = { x, y };
 
-  for (let i = 0; i < count; i++) {
-    trail.push({
-      x: cx,
-      y: cy,
-      age: 0,
-      maxAge: 15 + Math.random() * 10
-    });
-  }
-
-  lastMouse = { x: cx, y: cy };
-  if (trail.length > maxTrail) trail.splice(0, trail.length - maxTrail);
+  // Spawn particle with inertia
+  trail.push({
+    x: x, y: y,
+    vx: dx * 0.2 + (Math.random() - 0.5),
+    vy: dy * 0.2 + (Math.random() - 0.5),
+    life: 1.0,
+    char: ['+', '*', '.', '·'][Math.floor(Math.random() * 4)]
+  });
 });
 
 t.draw(() => {
   t.background(0);
 
-  // Draw and age particles
   for (let i = trail.length - 1; i >= 0; i--) {
     const p = trail[i];
-    p.age++;
+    p.x += p.vx;
+    p.y += p.vy;
+    p.life -= 0.02;
 
-    if (p.age >= p.maxAge) {
+    if (p.life <= 0) {
       trail.splice(i, 1);
       continue;
     }
 
-    const life = 1 - (p.age / p.maxAge);
-    const brightness = Math.round(255 * life);
-    const chars = ['.', '*', 'o', '@'];
-    const idx = Math.floor(life * chars.length);
-
     t.push();
-    t.charColor(brightness, brightness * 0.6, 255);
     t.translate(p.x, p.y);
-    t.char(chars[Math.min(idx, chars.length - 1)]);
+    // Color shifts from hot to cool based on life
+    t.charColor(255 * p.life, 100 + 155 * (1-p.life), 255);
+    t.char(p.char);
     t.point();
     t.pop();
   }
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -2963,65 +4673,56 @@ Set a callback function that will be called when the mouse is pressed down.
 #### Example
 
 ```javascript
-// Hold mouse to spray particles that fall with gravity.
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
-const t = textmode.create({ width: 800, height: 600 });
-
+let isPressing = false;
 const particles = [];
-let pressing = false;
 
-t.mousePressed((data) => {
-  if (data.position.x === Number.NEGATIVE_INFINITY) return;
-  pressing = true;
-});
-
-t.mouseReleased(() => {
-  pressing = false;
-});
+t.mousePressed(() => isPressing = true);
+t.mouseReleased(() => isPressing = false);
 
 t.draw(() => {
   t.background(0);
 
-  // Spawn particles while pressing (mouse coords are center-based)
-  if (pressing && t.mouse.x !== Number.NEGATIVE_INFINITY) {
-    const cx = t.mouse.x;
-    const cy = t.mouse.y;
-
-    for (let i = 0; i < 3; i++) {
+  // Emit particles while mouse is held
+  if (isPressing && t.mouse.x !== Number.NEGATIVE_INFINITY) {
+    for(let k=0; k<5; k++) { // Spawn rate
+      const angle = Math.random() * Math.PI * 2;
+      const speed = Math.random() * 0.5 + 0.2;
       particles.push({
-        x: cx,
-        y: cy,
-        vx: (Math.random() - 0.5) * 0.8,
-        vy: Math.random() * -0.5 - 0.2,
-        age: 0,
-        maxAge: 30 + Math.random() * 20
+        x: t.mouse.x,
+        y: t.mouse.y,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        life: 1.0
       });
     }
   }
 
-  // Update and draw particles
+  // Update and draw
   for (let i = particles.length - 1; i >= 0; i--) {
     const p = particles[i];
-    p.age++;
-    p.vy += 0.08; // gravity
     p.x += p.vx;
     p.y += p.vy;
+    p.life -= 0.02;
 
-    if (p.age >= p.maxAge) {
+    if (p.life <= 0) {
       particles.splice(i, 1);
       continue;
     }
 
-    const life = 1 - (p.age / p.maxAge);
-    const brightness = Math.round(255 * life);
-
     t.push();
-    t.charColor(brightness, brightness * 0.7, 100);
-    t.translate(Math.round(p.x), Math.round(p.y));
-    t.char(life > 0.5 ? 'o' : '.');
+    t.translate(p.x, p.y);
+    const chars = ['.', 'o', '*', '@'];
+    t.char(chars[Math.floor(p.life * 3.99)]);
+    t.charColor(255, p.life * 255, 100); // Yellow to Red fade
     t.point();
     t.pop();
   }
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -3288,6 +4989,64 @@ ITextmodifier.noLoop
 
 ***
 
+### ortho()
+
+```ts
+ortho(): void;
+```
+
+Enables orthographic projection for subsequent shape rendering operations.
+
+By default, textmode uses a perspective projection. Calling this method switches to an
+orthographic projection, where objects maintain their size regardless of depth (Z position).
+
+The projection mode is reset to perspective at the beginning of each frame.
+
+#### Returns
+
+`void`
+
+#### Example
+
+```javascript
+// Orthographic projection vs Depth
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+t.draw(() => {
+  t.background(0);
+
+  // Enable orthographic mode - Z depth no longer affects scale
+  t.ortho();
+
+  const count = 12;
+  for (let i = 0; i < count; i++) {
+    const angle = (i / count) * Math.PI * 2 + t.frameCount * 0.02;
+    const x = Math.cos(angle) * 20;
+    const y = Math.sin(angle) * 20;
+    const z = Math.sin(t.frameCount * 0.05 + i) * 50;
+
+    t.push();
+    t.translate(x, y, z);
+    t.charColor(200, 255, 100);
+    t.char('█');
+    t.rect(5, 5); // Rect stays same size despite oscillating Z
+    t.pop();
+  }
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
+#### Implementation of
+
+```ts
+ITextmodifier.ortho
+```
+
+***
+
 ### pinch()
 
 ```ts
@@ -3311,9 +5070,26 @@ the initial distance and the change since the previous update, enabling zoom int
 
 #### Example
 
-```js
+```javascript
+const t = textmode.create({ width: 800, height: 600 });
+
+let currentScale = 1.0;
+
+// Handle pinch gestures to zoom
 t.pinch((data) => {
-  console.log(`Pinch scale: ${data.scale.toFixed(2)}`);
+  // Limit scale between 0.5x and 5x
+  currentScale = Math.max(0.5, Math.min(5.0, data.scale));
+});
+
+t.draw(() => {
+  t.background(0);
+
+  // Draw a shape scaled by the pinch gesture
+  const size = 20 * currentScale;
+
+  t.char('▒');
+  t.charColor(255, 100 + currentScale * 20, 150);
+  t.rect(size, size);
 });
 ```
 
@@ -3340,40 +5116,33 @@ Draw a 1x1 rectangle with the current settings.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
-  t.background(0);
+  t.background(10, 10, 20);
 
-  const angle = t.frameCount * 0.06;
+  const time = t.frameCount * 0.05;
   const radius = Math.min(t.grid.cols, t.grid.rows) * 0.35;
 
-  // Draw a short trail of points behind the leading point
-  for (let i = 0; i < 10; i++) {
-    const a = angle - i * 0.18;
-    const r = radius * (1 - i * 0.08);
-    const x = Math.round(Math.cos(a) * r);
-    const y = Math.round(Math.sin(a) * r);
+  // Draw a rhythmic particle trail using point()
+  for (let i = 0; i < 30; i++) {
+    const angle = time - i * 0.1;
+    const r = radius * (0.8 + 0.4 * Math.sin(time * 0.3 + i * 0.2));
+    const x = Math.cos(angle) * r;
+    const y = Math.sin(angle) * r;
 
-    // Color and brightness fade across the trail
-    const brightness = Math.max(40, 255 - i * 20);
-    const blue = Math.max(60, 255 - i * 25);
-    const green = 120 + i * 8;
-
+    const life = 1 - i / 30;
     t.push();
     t.translate(x, y);
-    t.char('*');
-    t.charColor(brightness, green, blue);
+    t.char(['*', '·', '•', '°'][i % 4]);
+    t.charColor(255 * life, 150 * life, 255);
     t.point();
-
     t.pop();
   }
+});
 
-  // Leading point drawn with highest brightness
-  t.char('@');
-  t.charColor(255, 255, 160);
-  t.translate(Math.round(Math.cos(angle) * radius), Math.round(Math.sin(angle) * radius));
-  t.point();
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -3482,8 +5251,8 @@ Position is controlled via [translate](#translate), [push](#push), and [pop](#po
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `width?` | `number` | Width of the rectangle |
-| `height?` | `number` | Height of the rectangle |
+| `width?` | `number` | Width of the rectangle in grid cells (defaults to 1) |
+| `height?` | `number` | Height of the rectangle in grid cells (defaults to 1) |
 
 #### Returns
 
@@ -3492,20 +5261,36 @@ Position is controlled via [translate](#translate), [push](#push), and [pop](#po
 #### Example
 
 ```javascript
-const t = textmode.create({
-  width: 800,
-  height: 600,
-})
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
-  // Set the background color to black
   t.background(0);
 
-  // Position and draw a filled rectangle
-  t.char('A');
-  t.charColor(255, 255, 255); // White
-  t.rotateZ(t.frameCount * 2);
-  t.rect(16, 16);
+  const time = t.frameCount * 0.5;
+  const squareCount = 64;
+  const maxSize = Math.max(t.grid.cols, t.grid.rows) * 1.5;
+
+  // Draw squares from back to front for a depth effect
+  for (let i = squareCount; i > 0; i--) {
+    const progress = i / squareCount;
+    const size = maxSize * Math.pow(progress, 1.5);
+    const rotation = time + i * 15;
+
+    t.push();
+    t.rotateZ(rotation);
+
+    // Dynamic coloring based on "depth"
+    const brightness = Math.round(255 * (1 - progress));
+    t.charColor(brightness, Math.round(brightness * 0.5), 255);
+    t.char(['░', '▒', '▓', '█'][i % 4]);
+
+    t.rect(size, size);
+    t.pop();
+  }
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -3588,6 +5373,98 @@ t.draw(() => {
 
 ```ts
 ITextmodifier.redraw
+```
+
+***
+
+### resetShader()
+
+```ts
+resetShader(): void;
+```
+
+Reset the current shader to the default solid color shader.
+
+This clears both the active shader and any accumulated uniforms set via [setUniform](#setuniform).
+Equivalent to calling `shader(null)`.
+
+#### Returns
+
+`void`
+
+#### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+let portalShader;
+
+t.setup(async() => {
+  portalShader = await t.createFilterShader(`#version 300 es
+    precision highp float;
+    in vec2 v_uv;
+    uniform float u_time;
+    layout(location = 0) out vec4 o_char;
+    layout(location = 1) out vec4 o_prim;
+    layout(location = 2) out vec4 o_sec;
+
+    void main() {
+      vec2 p = v_uv * 2.0 - 1.0;
+      float r = length(p);
+      float a = atan(p.y, p.x);
+
+      // Characters: slow/spatial pattern (avoid rapid flickering)
+      float charPattern = floor(r * 8.0) / 8.0 + sin(a * 6.0 + u_time * 0.3) * 0.1;
+      o_char = vec4(charPattern, 0.0, 0.0, 1.0);
+
+      // Colors: can animate rapidly for smooth visual effect
+      float wave = sin(r * 20.0 - u_time * 5.0 + sin(a * 10.0));
+      o_prim = vec4(0.5 + 0.5 * cos(u_time + r * 2.0), 0.2 + wave * 0.3, 0.8, 1.0);
+      o_sec = vec4(0.0);
+    }
+  `);
+});
+
+t.draw(() => {
+  t.background(0);
+
+  if (portalShader) {
+    t.shader(portalShader);
+    t.setUniform('u_time', t.frameCount * 0.02);
+
+    // Draw the portal background
+    t.rect(t.grid.cols, t.grid.rows);
+  }
+
+  // Reset to default shader for foreground objects
+  t.resetShader();
+
+  // Draw floating objects in front of the portal
+  const count = 8;
+  for (let i = 0; i < count; i++) {
+    const angle = t.frameCount * 0.05 + (i / count) * Math.PI * 2;
+    const x = Math.cos(angle) * 15;
+    const y = Math.sin(angle) * 15;
+
+    t.push();
+    t.translate(x, y);
+    t.rotateZ(angle * 2);
+    t.char('♦');
+    t.charColor(255, 200, 100);
+    t.rect(5, 5);
+    t.pop();
+  }
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
+#### Implementation of
+
+```ts
+ITextmodifier.resetShader
 ```
 
 ***
@@ -3725,9 +5602,34 @@ along with the gesture centre in grid coordinates. Ideal for dial-like interacti
 
 #### Example
 
-```js
+```javascript
+const t = textmode.create({ width: 800, height: 600 });
+
+let rotation = 0;
+
 t.rotateGesture((data) => {
-  console.log(`Rotated ${data.deltaRotation.toFixed(1)}°`);
+  // Accumulate the delta rotation (in degrees)
+  rotation += data.deltaRotation;
+});
+
+t.draw(() => {
+  t.background(0);
+
+  // Rotate the coordinate system by the accumulated angle
+  t.rotateZ(rotation);
+
+  // Draw a "dial" or "gear" shape
+  t.char('☼');
+  t.charColor(100, 255, 200);
+  t.rect(20, 20);
+
+  // Add a marker to make rotation obvious
+  t.push();
+  t.translate(15, 0); // Offset from center
+  t.char('•');
+  t.charColor(255, 100, 100);
+  t.rect(5, 5);
+  t.pop();
 });
 ```
 
@@ -3742,10 +5644,10 @@ ITextmodifier.rotateGesture
 ### rotateX()
 
 ```ts
-rotateX(degrees): void;
+rotateX(degrees?): number | void;
 ```
 
-Sets the X-axis rotation angle for subsequent shape rendering operations.
+Sets the X-axis rotation angle for subsequent shape rendering operations, or gets the current angle.
 
 All geometries rotate around the center of the shape.
 
@@ -3753,23 +5655,52 @@ All geometries rotate around the center of the shape.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `degrees` | `number` | The rotation angle in degrees around the X-axis |
+| `degrees?` | `number` | The rotation angle in degrees around the X-axis. If not provided, returns the current accumulated rotation. |
 
 #### Returns
 
-`void`
+`number` \| `void`
+
+The current X-axis rotation in degrees if called without arguments.
 
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
+// A field of oscillating slabs
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
   t.background(0);
-  t.char('A');
-  t.charColor(255, 150, 100);
-  t.rotateX(t.frameCount * 2); // Flip forward/backward
-  t.rect(12, 12);
+
+  const cols = 5;
+  const rows = 5;
+  const spacing = 12;
+
+  for (let x = 0; x < cols; x++) {
+    for (let y = 0; y < rows; y++) {
+      t.push();
+      // Position in grid
+      t.translate((x - (cols - 1) / 2) * spacing, (y - (rows - 1) / 2) * spacing);
+
+      // Rotation with phase shift based on position
+      const angle = t.frameCount * 4 + (x + y) * 20;
+      t.rotateX(angle);
+
+      // Aesthetic coloring based on rotation phase
+      const intensity = Math.sin(angle * Math.PI / 180);
+      const brightness = 127 + 127 * intensity;
+
+      t.charColor(brightness, 150, 255 - brightness);
+      t.char(Math.abs(intensity) > 0.5 ? '█' : '▒');
+
+      t.rect(10, 8);
+      t.pop();
+    }
+  }
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -3784,10 +5715,10 @@ ITextmodifier.rotateX
 ### rotateY()
 
 ```ts
-rotateY(degrees): void;
+rotateY(degrees?): number | void;
 ```
 
-Sets the Y-axis rotation angle for subsequent shape rendering operations.
+Sets the Y-axis rotation angle for subsequent shape rendering operations, or gets the current angle.
 
 All geometries rotate around the center of the shape.
 
@@ -3795,23 +5726,52 @@ All geometries rotate around the center of the shape.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `degrees` | `number` | The rotation angle in degrees around the Y-axis |
+| `degrees?` | `number` | The rotation angle in degrees around the Y-axis. If not provided, returns the current accumulated rotation. |
 
 #### Returns
 
-`void`
+`number` \| `void`
+
+The current Y-axis rotation in degrees if called without arguments.
 
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
+// A vertical stack of spinning glyphs
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
   t.background(0);
-  t.char('B');
-  t.charColor(100, 255, 200);
-  t.rotateY(t.frameCount * 2); // Spin left/right
-  t.rect(12, 12);
+
+  const count = 15;
+  const spacing = 4;
+
+  for (let i = 0; i < count; i++) {
+    const phase = i / count;
+    const angle = t.frameCount * 3 + i * 20;
+
+    t.push();
+    // Stack vertically
+    t.translate(0, (i - (count - 1) / 2) * spacing);
+
+    // Rotate around Y axis (vertical spin)
+    t.rotateY(angle);
+
+    // Dynamic character selection based on "side" of rotation
+    const side = Math.cos(angle * Math.PI / 180);
+    t.char(side > 0 ? '▓' : '░');
+
+    // Cyberpunk color palette
+    t.charColor(100, 255, 200);
+    if (Math.abs(side) < 0.2) t.charColor(255, 255, 255); // Flash on edge
+
+    t.rect(20, 3);
+    t.pop();
+  }
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -3826,10 +5786,10 @@ ITextmodifier.rotateY
 ### rotateZ()
 
 ```ts
-rotateZ(degrees): void;
+rotateZ(degrees?): number | void;
 ```
 
-Sets the Z-axis rotation angle for subsequent shape rendering operations.
+Sets the Z-axis rotation angle for subsequent shape rendering operations, or gets the current angle.
 
 All geometries rotate around the center of the shape.
 
@@ -3837,23 +5797,48 @@ All geometries rotate around the center of the shape.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `degrees` | `number` | The rotation angle in degrees around the Z-axis |
+| `degrees?` | `number` | The rotation angle in degrees around the Z-axis. If not provided, returns the current accumulated rotation. |
 
 #### Returns
 
-`void`
+`number` \| `void`
+
+The current Z-axis rotation in degrees if called without arguments.
 
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
+// Layered rotation and symmetry
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
-  t.background(0);
-  t.char('C');
-  t.charColor(255, 220, 100);
-  t.rotateZ(t.frameCount * 2); // Spin clockwise
-  t.rect(12, 12);
+  t.background(10, 5, 20);
+
+  const layers = 8;
+  const time = t.frameCount;
+
+  for (let i = 0; i < layers; i++) {
+    const progress = i / layers;
+    const angle = time * (1 + progress) + i * 45;
+
+    t.push();
+    // Rotate around Z axis (flat spin)
+    t.rotateZ(angle);
+
+    // Dynamic size and character
+    const size = 30 - i * 3;
+    t.char(['.', '=', '+', '!', '?'][i % 5]);
+
+    // Neon color gradient
+    t.charColor(255, 100 + i * 20, 200 - i * 10);
+
+    t.rect(size, size);
+    t.pop();
+  }
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -3887,33 +5872,39 @@ Set a uniform value for the current custom shader.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
+// Passing CPU values to Shaders
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let pulseShader;
-
 t.setup(async () => {
-    pulseShader = await t.createFilterShader(`#version 300 es
-  precision highp float;
-  in vec2 v_uv;
-  uniform float u_time;
-  layout(location = 0) out vec4 o_character;
-  layout(location = 1) out vec4 o_primaryColor;
-  layout(location = 2) out vec4 o_secondaryColor;
-
-  void main() {
-    float pulse = 0.5 + 0.5 * sin(u_time + length(v_uv - 0.5) * 8.0);
-    vec3 color = vec3(pulse * 0.3, pulse * 0.8, pulse);
-    o_character = vec4(pulse, 0.0, 0.0, 0.0);
-    o_primaryColor = vec4(color, 1.0);
-    o_secondaryColor = vec4(color * 0.3, 1.0);
-  }
-`);
+  pulseShader = await t.createFilterShader(`#version 300 es
+    precision highp float;
+    in vec2 v_uv;
+    uniform float u_time;
+    layout(location = 0) out vec4 o_char;
+    layout(location = 1) out vec4 o_col;
+    layout(location = 2) out vec4 o_bg;
+    void main() {
+      float p = 0.5 + 0.5 * sin(u_time + v_uv.x);
+      o_char = vec4(p, 0.0, 0.0, 1.0);
+      o_col = vec4(v_uv, 1.0, 1.0);
+      o_bg = vec4(0.0, 0.0, 0.0, 1.0);
+    }
+  `);
 });
 
 t.draw(() => {
+  t.background(0);
+  if (pulseShader) {
     t.shader(pulseShader);
-    t.setUniform('u_time', t.frameCount * 0.005);
+    // Sync CPU state to GPU uniform
+    t.setUniform('u_time', t.frameCount * 0.001);
     t.rect(t.grid.cols, t.grid.rows);
+  }
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -3946,38 +5937,42 @@ Set multiple uniform values for the current custom shader.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
+// Bulk uniform updates
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
-let rippleShader;
-
-t.setup(async() => {
-    rippleShader = await t.createFilterShader(`#version 300 es
-  precision highp float;
-  in vec2 v_uv;
-  uniform float u_time;
-  uniform vec2 u_center;
-  layout(location = 0) out vec4 o_character;
-  layout(location = 1) out vec4 o_primaryColor;
-  layout(location = 2) out vec4 o_secondaryColor;
-
-  void main() {
-    float dist = length(v_uv - u_center);
-    float wave = sin(dist * 20.0 - u_time * 2.0) * 0.5 + 0.5;
-    vec3 color = mix(vec3(0.2, 0.4, 0.8), vec3(0.9, 0.6, 0.3), wave);
-    o_character = vec4(wave, 0.0, 0.0, 0.0);
-    o_primaryColor = vec4(color, 1.0);
-    o_secondaryColor = vec4(color * 0.4, 1.0);
-  }
-`);
+let ripple;
+t.setup(async () => {
+  ripple = await t.createFilterShader(`#version 300 es
+    precision highp float;
+    in vec2 v_uv;
+    uniform float u_time; uniform vec2 u_mouse;
+    layout(location = 0) out vec4 o_c;
+    layout(location = 1) out vec4 o_p;
+    layout(location = 2) out vec4 o_s;
+    void main() {
+      float d = length(v_uv - u_mouse);
+      float w = 0.5 + 0.5 * sin(d * 20.0 - u_time);
+      o_c = vec4(w, 0.0, 0.0, 1.0);
+      o_p = vec4(0.2, 0.5, 1.0, 1.0);
+      o_s = vec4(0.0);
+    }
+  `);
 });
 
 t.draw(() => {
-    t.shader(rippleShader);
+  t.background(0);
+  if (ripple) {
+    t.shader(ripple);
     t.setUniforms({
-        u_time: t.frameCount * 0.0005,
-        u_center: [0.5, 0.5]
+      u_time: t.frameCount * 0.05,
+      u_mouse: [t.mouse.x, t.mouse.y]
     });
     t.rect(t.grid.cols, t.grid.rows);
+  }
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -4000,6 +5995,8 @@ Set a setup callback function that will be executed once when initialization is 
 This callback is called after font loading and grid initialization, allowing access to
 properties like `textmodifier.grid.cols` for calculating layout or setup variables.
 
+The callback can be asynchronous (return a Promise).
+
 #### Parameters
 
 | Parameter | Type | Description |
@@ -4013,29 +6010,37 @@ properties like `textmodifier.grid.cols` for calculating layout or setup variabl
 #### Example
 
 ```javascript
-const textmodifier = textmode.create({
-  width: 800,
-  height: 600,
-  fontSize: 16
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+let fb;
+
+t.setup(async () => {
+  // Pre-allocate resources
+  fb = t.createFramebuffer({ width: 20, height: 20 });
+
+  // Render static content to framebuffer once
+  fb.begin();
+  t.background(50, 0, 0);
+  t.charColor(255, 200, 0);
+  t.char('=');
+  t.rect(20, 20);
+  fb.end();
 });
 
-// Setup callback - called once when ready
-textmodifier.setup(() => {
-  // Now you can access grid properties
-  const cols = textmodifier.grid.cols;
-  const rows = textmodifier.grid.rows;
+t.draw(() => {
+  t.background(0);
 
-  // Initialize any variables that depend on grid size
-  rectWidth = Math.floor(cols / 3);
-  rectHeight = Math.floor(rows / 2);
+  // Draw the pre-rendered content multiple times
+  for(let i = 0; i < 5; i++) {
+    t.push();
+    t.translate(Math.sin(t.frameCount * 0.02 + i) * 20, i * 2);
+    t.image(fb);
+    t.pop();
+  }
 });
 
-// Draw callback - called every frame
-textmodifier.draw(() => {
-  textmodifier.background(128);
-  textmodifier.char('A');
-  textmodifier.rotateZ(textmodifier.frameCount * 2);
-  textmodifier.rect(rectWidth, rectHeight);
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -4055,11 +6060,14 @@ shader(shader): void;
 
 Set a custom shader for subsequent rendering operations.
 
+The shader persists until explicitly reset via [resetShader](#resetshader) or by calling `shader(null)`.
+This behavior matches p5.js, allowing multiple draw calls with the same shader.
+
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `shader` | [`TextmodeShader`](TextmodeShader.md) | The custom shader to use |
+| `shader` | `null` \| [`TextmodeShader`](TextmodeShader.md) | The custom shader to use, or `null` to reset to the default shader. |
 
 #### Returns
 
@@ -4090,11 +6098,19 @@ t.setup(async() => {
     o_secondaryColor = vec4(color * 0.5, 1.0);
   }
 `);
+});
 
 t.draw(() => {
     t.shader(glitchShader);
     t.setUniform('u_intensity', Math.sin(t.frameCount * 0.1) * 0.02);
-    t.rect(t.grid.cols, t.grid.rows);
+
+    // Draw multiple shapes with the same shader
+    t.translate(10, 10);
+    t.rect(20, 20);
+    t.translate(25, 0);
+    t.rect(20, 20);
+
+    t.resetShader(); // Reset to default when done
 });
 ```
 
@@ -4102,6 +6118,110 @@ t.draw(() => {
 
 ```ts
 ITextmodifier.shader
+```
+
+***
+
+### stroke()
+
+#### Call Signature
+
+```ts
+stroke(): TextmodeColor;
+```
+
+Alias for [charColor](#charcolor). Get the current stroke (character) color.
+
+##### Returns
+
+[`TextmodeColor`](TextmodeColor.md)
+
+The current character color as a [TextmodeColor](TextmodeColor.md).
+
+##### Implementation of
+
+```ts
+ITextmodifier.stroke
+```
+
+#### Call Signature
+
+```ts
+stroke(gray, alpha?): void;
+```
+
+Alias for [charColor](#charcolor). Set the stroke (character) color using a grayscale value.
+
+##### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `gray` | `number` | Grayscale value (0-255) |
+| `alpha?` | `number` | Optional alpha value (0-255) |
+
+##### Returns
+
+`void`
+
+##### Implementation of
+
+```ts
+ITextmodifier.stroke
+```
+
+#### Call Signature
+
+```ts
+stroke(
+   r, 
+   g, 
+   b, 
+   a?): void;
+```
+
+Alias for [charColor](#charcolor). Set the stroke (character) color using RGB(A) values.
+
+##### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `r` | `number` | Red component (0-255) |
+| `g` | `number` | Green component (0-255) |
+| `b` | `number` | Blue component (0-255) |
+| `a?` | `number` | Optional alpha component (0-255) |
+
+##### Returns
+
+`void`
+
+##### Implementation of
+
+```ts
+ITextmodifier.stroke
+```
+
+#### Call Signature
+
+```ts
+stroke(value): void;
+```
+
+Alias for [charColor](#charcolor). Set the stroke (character) color using a CSS string or TextmodeColor object.
+
+##### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `value` | `string` \| [`TextmodeColor`](TextmodeColor.md) | Hex string, `rgb()`/`rgba()` string, or an existing color object |
+
+##### Returns
+
+`void`
+
+##### Implementation of
+
+```ts
+ITextmodifier.stroke
 ```
 
 ***
@@ -4129,9 +6249,32 @@ velocity in CSS pixels per millisecond. Useful for panning, flicks, or quick sho
 
 #### Example
 
-```js
+```javascript
+const t = textmode.create({ width: 800, height: 600 });
+
+let arrow = '•';
+let r = 128, g = 128, b = 128;
+
 t.swipe((data) => {
-  console.log(`Swipe ${data.direction} with distance ${data.distance}`);
+  // Update visual state based on swipe direction
+  switch (data.direction) {
+    case 'up':    arrow = '▲'; r = 255; g = 100; b = 100; break;
+    case 'down':  arrow = '▼'; r = 100; g = 255; b = 100; break;
+    case 'left':  arrow = '◀'; r = 100; g = 100; b = 255; break;
+    case 'right': arrow = '▶'; r = 255; g = 255; b = 100; break;
+  }
+});
+
+t.draw(() => {
+  t.background(0);
+
+  // Pulse effect
+  const size = 8 + Math.sin(t.frameCount * 0.1) * 2;
+
+  // Draw the direction indicator
+  t.char(arrow);
+  t.charColor(r, g, b);
+  t.rect(size, size);
 });
 ```
 
@@ -4152,7 +6295,7 @@ tap(callback): void;
 Register a callback for tap gestures.
 
 A tap is fired when the user quickly touches and releases the canvas without travelling far.
-Use TouchTapEventData.taps to determine whether the gesture is a single or multi tap.
+Use [TouchTapEventData.taps](../namespaces/input/namespaces/touch/interfaces/TouchTapEventData.md#taps) to determine whether the gesture is a single or multi tap.
 
 #### Parameters
 
@@ -4166,9 +6309,46 @@ Use TouchTapEventData.taps to determine whether the gesture is a single or multi
 
 #### Example
 
-```js
+```javascript
+const t = textmode.create({ width: 800, height: 600 });
+
+const markers = [];
+
+// Add a temporary marker where the user taps
 t.tap((data) => {
-  console.log(`Tapped at ${data.touch.x}, ${data.touch.y}`);
+  markers.push({
+    x: data.touch.x,
+    y: data.touch.y,
+    life: 60
+  });
+});
+
+t.draw(() => {
+  t.background(0);
+
+  // Draw markers at their tapped positions
+  for (let i = markers.length - 1; i >= 0; i--) {
+    const m = markers[i];
+
+    t.push();
+    // Coordinates are already relative to center!
+    t.translate(m.x, m.y);
+
+    const alpha = (m.life / 60) * 255;
+    t.char('X');
+    t.charColor(255, 100, 100, alpha);
+    t.rect(3, 3);
+    t.pop();
+
+    m.life--;
+    if (m.life <= 0) markers.splice(i, 1);
+  }
+
+  if (markers.length === 0) {
+     t.charColor(100);
+     t.char('?');
+     t.rect(1, 1);
+  }
 });
 ```
 
@@ -4204,13 +6384,42 @@ Current target frame rate when getting, void when setting
 
 #### Example
 
-```js
-const t = textmode.create({ width: 800, height: 600 });
+```javascript
+// Target FPS oscillates, warping time perception.
 
-// Set target frame rate to 24 FPS
-t.targetFrameRate(24);
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
-console.log(`Target Frame Rate: ${t.targetFrameRate()} FPS`);
+t.draw(() => {
+  t.background(0);
+
+  // Oscillate target FPS between 5 and 60
+  const fps = 32.5 + Math.sin(Date.now() * 0.001) * 27.5;
+  t.targetFrameRate(fps);
+
+  // Pulsating Orb
+  const pulse = Math.sin(t.frameCount * 0.1) * 10 + 15;
+
+  t.charColor(255, 100, 200);
+  t.char('O');
+  t.ellipse(pulse, pulse);
+
+  t.charColor(255);
+  t.char('·');
+  t.ellipse(pulse * 0.7, pulse * 0.7);
+
+  // Visual indicator of current target
+  const barWidth = fps;
+  t.push();
+  t.translate(0, t.grid.rows/2 - 2);
+  t.charColor(0, 255, 100);
+  t.char('|');
+  t.rect(barWidth, 1);
+  t.pop();
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
 ```
 
 #### Implementation of
@@ -4244,9 +6453,35 @@ leaves the window. Treat this as an aborted touch and clean up any in-progress s
 
 #### Example
 
-```js
+```javascript
+const t = textmode.create({ width: 800, height: 600 });
+
+let msg = 'OK';
+let colorIntensity = 100;
+
+t.touchStarted(() => { msg = 'TOUCH'; colorIntensity = 200; });
+t.touchEnded(() => { msg = 'OK'; colorIntensity = 100; });
+
+// Cancellation happens when browser interrupts (e.g. alt-tab)
 t.touchCancelled((data) => {
-  console.warn(`Touch ${data.touch.id} cancelled by the browser`);
+  msg = 'CANCEL';
+  colorIntensity = 0; // Red
+});
+
+t.draw(() => {
+  t.background(0);
+
+  // Draw status indicator
+  t.char(msg.charAt(0));
+  t.charColor(255, colorIntensity, colorIntensity);
+  t.rotateZ(t.frameCount * 0.1);
+  t.rect(15, 15);
+
+  // Reset if cancelled after a while
+  if (msg === 'CANCEL' && t.frameCount % 60 === 0) {
+      msg = 'OK';
+      colorIntensity = 100;
+  }
 });
 ```
 
@@ -4281,9 +6516,43 @@ event. Use it to finalise state such as drawing strokes or completing gestures.
 
 #### Example
 
-```js
+```javascript
+const t = textmode.create({ width: 800, height: 600 });
+
+const ghosts = [];
+
 t.touchEnded((data) => {
-  console.log(`Touch ${data.touch.id} finished at ${data.touch.x}, ${data.touch.y}`);
+  // Record where touch ended to show a fading "ghost"
+  ghosts.push({
+    x: data.touch.x,
+    y: data.touch.y,
+    alpha: 255
+  });
+});
+
+t.draw(() => {
+  t.background(0);
+
+  // Draw and update ghosts
+  for (let i = ghosts.length - 1; i >= 0; i--) {
+    const g = ghosts[i];
+
+    t.push();
+    t.translate(g.x, g.y);
+    t.char('○');
+    t.charColor(255, 100, 100, g.alpha);
+    t.ellipse(10, 10);
+    t.pop();
+
+    g.alpha -= 10;
+    if (g.alpha <= 0) ghosts.splice(i, 1);
+  }
+
+  if (ghosts.length === 0) {
+    t.charColor(100);
+    t.char('?');
+    t.rect(1, 1);
+  }
 });
 ```
 
@@ -4318,12 +6587,38 @@ The provided callback is invoked continuously while the browser reports move eve
 
 #### Example
 
-```js
+```javascript
+const t = textmode.create({ width: 800, height: 600 });
+
+// Position of our draggable object
+let posX = 0;
+let posY = 0;
+
 t.touchMoved((data) => {
   const { touch, previousTouch } = data;
+
+  // If we have history, calculate the delta and move the object
   if (previousTouch) {
-    console.log(`Touch moved by ${touch.x - previousTouch.x}, ${touch.y - previousTouch.y}`);
+    posX += touch.x - previousTouch.x;
+    posY += touch.y - previousTouch.y;
   }
+});
+
+t.draw(() => {
+  t.background(0);
+
+  // Draw the object at its current position
+  t.push();
+  t.translate(posX, posY);
+
+  // Visual flair: color changes based on position
+  const r = Math.abs(Math.sin(posX * 0.05)) * 255;
+  const b = Math.abs(Math.cos(posY * 0.05)) * 255;
+  t.charColor(r, 200, b);
+
+  t.char('◈');
+  t.rect(8, 8);
+  t.pop();
 });
 ```
 
@@ -4343,7 +6638,7 @@ touchStarted(callback): void;
 
 Set a callback function that will be called when a touch point begins.
 
-The callback receives TouchEventData containing the touch that triggered the event,
+The callback receives [TouchEventData](../namespaces/input/namespaces/touch/interfaces/TouchEventData.md) containing the touch that triggered the event,
 all active touches, and the original DOM event. Use this to react when the user places one or
 more fingers on the canvas.
 
@@ -4359,9 +6654,45 @@ more fingers on the canvas.
 
 #### Example
 
-```js
+```javascript
+const t = textmode.create({ width: 800, height: 600 });
+
+const ripples = [];
+
 t.touchStarted((data) => {
-  console.log(`Touch ${data.touch.id} began at ${data.touch.x}, ${data.touch.y}`);
+  // Spawn a ripple at touch location with random color
+  ripples.push({
+    x: data.touch.x,
+    y: data.touch.y,
+    r: Math.random() * 255,
+    g: Math.random() * 255,
+    b: Math.random() * 255,
+    startFrame: t.frameCount
+  });
+});
+
+t.draw(() => {
+  t.background(0);
+
+  // Update and draw ripples
+  for (let i = ripples.length - 1; i >= 0; i--) {
+    const ripple = ripples[i];
+    const age = t.frameCount - ripple.startFrame;
+    const size = age * 0.5;
+    const alpha = Math.max(0, 255 - age * 4);
+
+    if (alpha <= 0) {
+      ripples.splice(i, 1);
+      continue;
+    }
+
+    t.push();
+    t.translate(ripple.x, ripple.y);
+    t.char('O');
+    t.charColor(ripple.r, ripple.g, ripple.b, alpha);
+    t.ellipse(size, size);
+    t.pop();
+  }
 });
 ```
 
@@ -4390,9 +6721,9 @@ All geometries are displaced by the specified amounts. Similar to p5.js translat
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `x?` | `number` | Translation along the X-axis in pixels (optional, defaults to 0) |
-| `y?` | `number` | Translation along the Y-axis in pixels (optional, defaults to 0) |
-| `z?` | `number` | Translation along the Z-axis in pixels (optional, defaults to 0) |
+| `x?` | `number` | Translation along the X-axis in grid cells (optional, defaults to 0) |
+| `y?` | `number` | Translation along the Y-axis in grid cells (optional, defaults to 0) |
+| `z?` | `number` | Translation along the Z-axis in grid cells (optional, defaults to 0) |
 
 #### Returns
 
@@ -4401,20 +6732,33 @@ All geometries are displaced by the specified amounts. Similar to p5.js translat
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
+// Rhythmic translation field
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
   t.background(0);
 
-  // Draw a grid of shapes with different translations
-  for (let i = 0; i < 3; i++) {
+  const count = 32;
+  const time = t.frameCount * 0.05;
+
+  for (let i = 0; i < count; i++) {
+    const phase = i / count;
+    const x = (phase - 0.5) * t.grid.cols * 0.8;
+    const y = Math.sin(time + phase * 10) * 15;
+
     t.push();
-    t.translate(i * 12 - 12, Math.sin(t.frameCount * 0.05 + i) * 3);
-    t.char('A');
-    t.charColor(100 + i * 70, 150, 255 - i * 50);
-    t.rect(8, 8);
+    // Displace glyph in space
+    t.translate(x, y, Math.cos(time + phase * 5) * 10);
+
+    t.charColor(100, 155 + y * 5, 255);
+    t.char('≈');
+    t.point();
     t.pop();
   }
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -4428,37 +6772,103 @@ ITextmodifier.translate
 
 ### translateX()
 
+#### Call Signature
+
+```ts
+translateX(): number;
+```
+
+Gets the current accumulated X-axis translation offset.
+
+##### Returns
+
+`number`
+
+The current X-axis translation in grid cells.
+
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+t.draw(() => {
+  t.background(0);
+
+  t.push();
+  // Move based on sine wave
+  t.translateX(Math.sin(t.frameCount * 0.05) * 20);
+
+  // Use the actual position to determine rotation speed
+  const x = t.translateX();
+  t.rotateZ(t.frameCount + x);
+
+  t.charColor(150 + x * 5, 200, 255);
+  t.char('X');
+  t.rect(10, 10);
+  t.pop();
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
+##### Implementation of
+
+```ts
+ITextmodifier.translateX
+```
+
+#### Call Signature
+
 ```ts
 translateX(pixels): void;
 ```
 
 Sets the X-axis translation offset for subsequent shape rendering operations.
 
-#### Parameters
+##### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `pixels` | `number` | The translation offset in pixels along the X-axis |
+| `pixels` | `number` | The translation offset in grid cells along the X-axis. |
 
-#### Returns
+##### Returns
 
 `void`
 
-#### Example
+##### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
+// Horizontal oscillation field
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
-  t.background(0);
-  t.char('→');
-  t.charColor(255, 180, 100);
-  t.translateX(Math.sin(t.frameCount * 0.05) * 15); // Slide left/right
-  t.rect(10, 10);
+  t.background(0, 10, 0);
+
+  const count = 64;
+  for (let i = 0; i < count; i++) {
+    t.push();
+    // Vertical position
+    t.translateY((i - (count - 1) / 2));
+
+    // Oscillating horizontal position
+    const x = Math.sin(t.frameCount * 0.04 + i * 0.5) * 25;
+    t.translateX(x);
+
+    t.charColor(0, 255, 100);
+    t.char('█');
+    t.rect(4, 2);
+    t.pop();
+  }
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
-#### Implementation of
+##### Implementation of
 
 ```ts
 ITextmodifier.translateX
@@ -4468,37 +6878,105 @@ ITextmodifier.translateX
 
 ### translateY()
 
+#### Call Signature
+
+```ts
+translateY(): number;
+```
+
+Gets the current accumulated Y-axis translation offset.
+
+##### Returns
+
+`number`
+
+The current Y-axis translation in grid cells.
+
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+t.draw(() => {
+  t.background(0);
+
+  const yPos = Math.sin(t.frameCount * 0.03) * 15;
+
+  t.push();
+  t.translateY(yPos);
+
+  // Visualize the Y coordinate
+  const currentY = t.translateY();
+  if (currentY > 0) t.char('▲');
+  else t.char('▼');
+
+  t.charColor(255, 255 - Math.abs(currentY) * 10, 100);
+  t.rect(8, 8);
+  t.pop();
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
+##### Implementation of
+
+```ts
+ITextmodifier.translateY
+```
+
+#### Call Signature
+
 ```ts
 translateY(pixels): void;
 ```
 
 Sets the Y-axis translation offset for subsequent shape rendering operations.
 
-#### Parameters
+##### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `pixels` | `number` | The translation offset in pixels along the Y-axis |
+| `pixels` | `number` | The translation offset in grid cells along the Y-axis. |
 
-#### Returns
+##### Returns
 
 `void`
 
-#### Example
+##### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
+// Cascading vertical motion
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
-  t.background(0);
-  t.char('↓');
-  t.charColor(100, 255, 180);
-  t.translateY(Math.sin(t.frameCount * 0.05) * 10); // Bounce up/down
-  t.rect(10, 10);
+  t.background(0, 0, 10);
+
+  const drops = 128;
+  for (let i = 0; i < drops; i++) {
+    t.push();
+    // Horizontal position
+    t.translateX((i - (drops - 1) / 2) * 8);
+
+    // Vertical fall with wrapping
+    const speed = 1 + (i % 3) * 0.5;
+    const y = (t.frameCount * speed + i * 20) % (t.grid.rows + 10) - (t.grid.rows + 10) / 2;
+    t.translateY(y);
+
+    t.charColor(100, 200, 255);
+    t.char('|');
+    t.point();
+    t.pop();
+  }
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
-#### Implementation of
+##### Implementation of
 
 ```ts
 ITextmodifier.translateY
@@ -4508,23 +6986,72 @@ ITextmodifier.translateY
 
 ### translateZ()
 
+#### Call Signature
+
+```ts
+translateZ(): number;
+```
+
+Gets the current accumulated Z-axis translation offset.
+
+##### Returns
+
+`number`
+
+The current Z-axis translation in grid cells.
+
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+t.draw(() => {
+  t.background(0);
+
+  t.push();
+  t.translateZ(Math.sin(t.frameCount * 0.05) * 50);
+
+  const depth = t.translateZ();
+
+  // Fade out as it goes further back (manual fog effect)
+  const alpha = 50 + (depth + 50) * 2;
+  t.charColor(255, 255, 255, alpha);
+
+  t.char('Z');
+  t.rect(10, 10);
+  t.pop();
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
+##### Implementation of
+
+```ts
+ITextmodifier.translateZ
+```
+
+#### Call Signature
+
 ```ts
 translateZ(pixels): void;
 ```
 
 Sets the Z-axis translation offset for subsequent shape rendering operations.
 
-#### Parameters
+##### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `pixels` | `number` | The translation offset in pixels along the Z-axis |
+| `pixels` | `number` | The translation offset in grid cells along the Z-axis. |
 
-#### Returns
+##### Returns
 
 `void`
 
-#### Example
+##### Example
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -4538,7 +7065,7 @@ t.draw(() => {
 });
 ```
 
-#### Implementation of
+##### Implementation of
 
 ```ts
 ITextmodifier.translateZ
@@ -4564,12 +7091,12 @@ Draw a triangle with the current settings.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `x1` | `number` | X-coordinate of the first vertex |
-| `y1` | `number` | Y-coordinate of the first vertex |
-| `x2` | `number` | X-coordinate of the second vertex |
-| `y2` | `number` | Y-coordinate of the second vertex |
-| `x3` | `number` | X-coordinate of the third vertex |
-| `y3` | `number` | Y-coordinate of the third vertex |
+| `x1` | `number` | X-coordinate of the first vertex in grid cells |
+| `y1` | `number` | Y-coordinate of the first vertex in grid cells |
+| `x2` | `number` | X-coordinate of the second vertex in grid cells |
+| `y2` | `number` | Y-coordinate of the second vertex in grid cells |
+| `x3` | `number` | X-coordinate of the third vertex in grid cells |
+| `y3` | `number` | Y-coordinate of the third vertex in grid cells |
 
 #### Returns
 
@@ -4578,20 +7105,44 @@ Draw a triangle with the current settings.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
-  t.background(0);
-  t.char('*');
-  t.charColor(255, 100, 150);
+  t.background(5, 5, 10);
 
-  const angle = t.frameCount * 0.02;
-  const size = 15;
-  t.triangle(
-    Math.cos(angle) * size, Math.sin(angle) * size,
-    Math.cos(angle + 2.09) * size, Math.sin(angle + 2.09) * size,
-    Math.cos(angle + 4.19) * size, Math.sin(angle + 4.19) * size
-  );
+  const time = t.frameCount * 0.02;
+  const count = 12;
+  const radius = Math.min(t.grid.cols, t.grid.rows) * 0.35;
+
+  for (let i = 0; i < count; i++) {
+    const angle = (i / count) * Math.PI * 2;
+    const pulse = 0.5 + 0.5 * Math.sin(time + i * 0.5);
+
+    // Coordinate rotation for a kaleidoscopic effect
+    const x = Math.cos(angle + time * 0.5) * radius * pulse;
+    const y = Math.sin(angle + time * 0.5) * radius * pulse;
+
+    t.push();
+    t.translate(x, y);
+    t.rotateZ(i * 30 + time * 100);
+
+    // Aesthetic color gradient
+    t.charColor(150 + pulse * 105, 100, 255 - pulse * 100);
+    t.char(['/', '\\', '|', '-'][i % 4]);
+    t.lineWeight(1 + Math.floor(pulse * 3));
+
+    const s = 4 + pulse * 8;
+    t.triangle(
+      0, -s,           // Top vertex
+      -s, s * 0.7,     // Bottom left
+      s, s * 0.7       // Bottom right
+    );
+    t.pop();
+  }
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 

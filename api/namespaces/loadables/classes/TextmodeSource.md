@@ -1,97 +1,23 @@
-[textmode.js](../../../index.md) / [loadables](../index.md) / TextmodeVideo
+[textmode.js](../../../index.md) / [loadables](../index.md) / TextmodeSource
 
-# Class: TextmodeVideo
+# Class: `abstract` TextmodeSource
 
-Represents a video element for textmode rendering via [Textmodifier.loadVideo](../../../classes/Textmodifier.md#loadvideo).
-
-It can be drawn to the canvas via [Textmodifier.image](../../../classes/Textmodifier.md#image).
-
-A video uploaded currently runs through an adjustable brightness-converter that converts
-the video frames into a textmode representation using characters.
-Those adjustable options are available via chainable methods on this interface.
-
-## Example
-
-```javascript
-const t = textmode.create({
-    width: 800,
-    height: 600,
-});
-
-let video;
-
-t.setup(async () => {
-    video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
-    // Start playback and enable looping so the video keeps playing
-    video.play();
-    video.loop();
-
-    video.characters(" .:-=+*#%@");
-    // ... other adjustments like video.flipX(boolean), video.cellColorMode('sampled' | 'fixed'), etc.
-    // (can also be chained or updated during runtime)
-});
-
-t.draw(() => {
-    t.background(0);
-
-     // Draw the loaded video
-     t.image(video);
-});
-```
+Abstract base class representing a textmode source asset (image, video, texture).
 
 ## Extends
 
+- `Disposable`
+
+## Extended by
+
+- [`TextmodeImage`](TextmodeImage.md)
 - [`TextmodeTexture`](TextmodeTexture.md)
 
 ## Implements
 
-- `ITextmodeVideo`
+- `ITextmodeSource`
 
 ## Accessors
-
-### currentTime
-
-#### Get Signature
-
-```ts
-get currentTime(): number;
-```
-
-Current playback time in seconds.
-
-##### Returns
-
-`number`
-
-#### Implementation of
-
-```ts
-ITextmodeVideo.currentTime
-```
-
-***
-
-### duration
-
-#### Get Signature
-
-```ts
-get duration(): number;
-```
-
-Total duration of the video in seconds.
-
-##### Returns
-
-`number`
-
-#### Implementation of
-
-```ts
-ITextmodeVideo.duration
-```
-
-***
 
 ### height
 
@@ -110,33 +36,7 @@ Ideal height in grid cells.
 #### Implementation of
 
 ```ts
-ITextmodeVideo.height
-```
-
-#### Inherited from
-
-[`TextmodeTexture`](TextmodeTexture.md).[`height`](TextmodeTexture.md#height)
-
-***
-
-### isPlaying
-
-#### Get Signature
-
-```ts
-get isPlaying(): boolean;
-```
-
-Whether the video is currently playing.
-
-##### Returns
-
-`boolean`
-
-#### Implementation of
-
-```ts
-ITextmodeVideo.isPlaying
+ITextmodeSource.height
 ```
 
 ***
@@ -158,12 +58,8 @@ Original pixel height.
 #### Implementation of
 
 ```ts
-ITextmodeVideo.originalHeight
+ITextmodeSource.originalHeight
 ```
-
-#### Inherited from
-
-[`TextmodeTexture`](TextmodeTexture.md).[`originalHeight`](TextmodeTexture.md#originalheight)
 
 ***
 
@@ -184,32 +80,8 @@ Original pixel width.
 #### Implementation of
 
 ```ts
-ITextmodeVideo.originalWidth
+ITextmodeSource.originalWidth
 ```
-
-#### Inherited from
-
-[`TextmodeTexture`](TextmodeTexture.md).[`originalWidth`](TextmodeTexture.md#originalwidth)
-
-***
-
-### source
-
-#### Get Signature
-
-```ts
-get source(): HTMLCanvasElement | HTMLVideoElement;
-```
-
-The source element this texture captures from.
-
-##### Returns
-
-`HTMLCanvasElement` \| `HTMLVideoElement`
-
-#### Inherited from
-
-[`TextmodeTexture`](TextmodeTexture.md).[`source`](TextmodeTexture.md#source)
 
 ***
 
@@ -230,33 +102,7 @@ Return the WebGL texture currently backing this source.
 #### Implementation of
 
 ```ts
-ITextmodeVideo.texture
-```
-
-#### Inherited from
-
-[`TextmodeTexture`](TextmodeTexture.md).[`texture`](TextmodeTexture.md#texture)
-
-***
-
-### videoElement
-
-#### Get Signature
-
-```ts
-get videoElement(): HTMLVideoElement;
-```
-
-The underlying HTML video element.
-
-##### Returns
-
-`HTMLVideoElement`
-
-#### Implementation of
-
-```ts
-ITextmodeVideo.videoElement
+ITextmodeSource.texture
 ```
 
 ***
@@ -278,12 +124,8 @@ Ideal width in grid cells.
 #### Implementation of
 
 ```ts
-ITextmodeVideo.width
+ITextmodeSource.width
 ```
-
-#### Inherited from
-
-[`TextmodeTexture`](TextmodeTexture.md).[`width`](TextmodeTexture.md#width)
 
 ## Methods
 
@@ -347,12 +189,8 @@ t.windowResized(() => {
 #### Implementation of
 
 ```ts
-ITextmodeVideo.background
+ITextmodeSource.background
 ```
-
-#### Inherited from
-
-[`TextmodeTexture`](TextmodeTexture.md).[`background`](TextmodeTexture.md#background)
 
 ***
 
@@ -416,12 +254,8 @@ t.windowResized(() => {
 #### Implementation of
 
 ```ts
-ITextmodeVideo.cellColor
+ITextmodeSource.cellColor
 ```
-
-#### Inherited from
-
-[`TextmodeTexture`](TextmodeTexture.md).[`cellColor`](TextmodeTexture.md#cellcolor)
 
 ***
 
@@ -478,12 +312,8 @@ t.windowResized(() => {
 #### Implementation of
 
 ```ts
-ITextmodeVideo.cellColorMode
+ITextmodeSource.cellColorMode
 ```
-
-#### Inherited from
-
-[`TextmodeTexture`](TextmodeTexture.md).[`cellColorMode`](TextmodeTexture.md#cellcolormode)
 
 ***
 
@@ -554,12 +384,8 @@ t.windowResized(() => {
 #### Implementation of
 
 ```ts
-ITextmodeVideo.characters
+ITextmodeSource.characters
 ```
-
-#### Inherited from
-
-[`TextmodeTexture`](TextmodeTexture.md).[`characters`](TextmodeTexture.md#characters)
 
 ***
 
@@ -624,12 +450,8 @@ t.windowResized(() => {
 #### Implementation of
 
 ```ts
-ITextmodeVideo.charColor
+ITextmodeSource.charColor
 ```
-
-#### Inherited from
-
-[`TextmodeTexture`](TextmodeTexture.md).[`charColor`](TextmodeTexture.md#charcolor)
 
 ***
 
@@ -686,12 +508,8 @@ t.windowResized(() => {
 #### Implementation of
 
 ```ts
-ITextmodeVideo.charColorMode
+ITextmodeSource.charColorMode
 ```
-
-#### Inherited from
-
-[`TextmodeTexture`](TextmodeTexture.md).[`charColorMode`](TextmodeTexture.md#charcolormode)
 
 ***
 
@@ -770,12 +588,8 @@ t.windowResized(() => {
 #### Implementation of
 
 ```ts
-ITextmodeVideo.charRotation
+ITextmodeSource.charRotation
 ```
-
-#### Inherited from
-
-[`TextmodeTexture`](TextmodeTexture.md).[`charRotation`](TextmodeTexture.md#charrotation)
 
 ***
 
@@ -832,12 +646,8 @@ t.windowResized(() => {
 #### Implementation of
 
 ```ts
-ITextmodeVideo.conversionMode
+ITextmodeSource.conversionMode
 ```
-
-#### Inherited from
-
-[`TextmodeTexture`](TextmodeTexture.md).[`conversionMode`](TextmodeTexture.md#conversionmode)
 
 ***
 
@@ -857,12 +667,14 @@ Subclasses should call super.dispose() at the end of their dispose method.
 #### Implementation of
 
 ```ts
-ITextmodeVideo.dispose
+ITextmodeSource.dispose
 ```
 
 #### Overrides
 
-[`TextmodeTexture`](TextmodeTexture.md).[`dispose`](TextmodeTexture.md#dispose)
+```ts
+Disposable.dispose
+```
 
 ***
 
@@ -939,12 +751,8 @@ t.windowResized(() => {
 #### Implementation of
 
 ```ts
-ITextmodeVideo.flipX
+ITextmodeSource.flipX
 ```
-
-#### Inherited from
-
-[`TextmodeTexture`](TextmodeTexture.md).[`flipX`](TextmodeTexture.md#flipx)
 
 ***
 
@@ -1011,12 +819,8 @@ t.windowResized(() => {
 #### Implementation of
 
 ```ts
-ITextmodeVideo.flipY
+ITextmodeSource.flipY
 ```
-
-#### Inherited from
-
-[`TextmodeTexture`](TextmodeTexture.md).[`flipY`](TextmodeTexture.md#flipy)
 
 ***
 
@@ -1098,451 +902,5 @@ t.windowResized(() => {
 #### Implementation of
 
 ```ts
-ITextmodeVideo.invert
-```
-
-#### Inherited from
-
-[`TextmodeTexture`](TextmodeTexture.md).[`invert`](TextmodeTexture.md#invert)
-
-***
-
-### loop()
-
-```ts
-loop(shouldLoop): this;
-```
-
-Set whether the video should loop.
-
-#### Parameters
-
-| Parameter | Type | Default value | Description |
-| ------ | ------ | ------ | ------ |
-| `shouldLoop` | `boolean` | `true` | Whether to loop (defaults to true) |
-
-#### Returns
-
-`this`
-
-#### Example
-
-```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
-
-let video;
-
-t.setup(async () => {
-  video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
-  // Disable automatic looping
-  video.loop(false);
-  video.play();
-  video.characters(' .:-=+*#%@');
-});
-
-t.draw(() => {
-  t.background(0);
-  if (!video) return;
-  t.image(video);
-
-  // Manual loop logic: Restart if finished
-  if (!video.isPlaying && video.currentTime >= video.duration) {
-     video.play();
-  }
-});
-
-t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
-
-#### Implementation of
-
-```ts
-ITextmodeVideo.loop
-```
-
-***
-
-### pause()
-
-```ts
-pause(): void;
-```
-
-Pause the video.
-
-#### Returns
-
-`void`
-
-#### Example
-
-```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
-
-let video;
-
-t.setup(async () => {
-  video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
-  video.play();
-  video.loop();
-  video.characters(' .:-=+*#%@');
-});
-
-t.draw(() => {
-  t.background(0);
-  if (video) t.image(video);
-});
-
-t.mouseClicked(() => {
-  if (!video) return;
-  // Toggle playback
-  if (video.isPlaying) {
-    video.pause();
-  } else {
-    video.play();
-  }
-});
-
-t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
-
-#### Implementation of
-
-```ts
-ITextmodeVideo.pause
-```
-
-***
-
-### play()
-
-```ts
-play(): Promise<void>;
-```
-
-Play the video.
-
-#### Returns
-
-`Promise`\<`void`\>
-
-Promise that resolves when playback starts
-
-#### Example
-
-```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
-
-let video;
-
-t.setup(async () => {
-  // Load a video from a CC0 source
-  video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
-  video.play();
-  video.loop();
-  video.characters(' .:-=+*#%@');
-});
-
-t.draw(() => {
-  t.background(0);
-  if (video) {
-    t.image(video);
-
-    // Draw Play/Pause indicator
-    t.push();
-    t.translate(0, 0); // Center
-    t.charColor(255);
-
-    if (video.isPlaying) {
-       // Draw Pause bars if playing (visible on hover)
-       if (t.mouse.x > -10 && t.mouse.x < 10 && t.mouse.y > -10 && t.mouse.y < 10) {
-          t.char('ñ');
-          t.rect(5, 5);
-       }
-    } else {
-       // Draw Play triangle if paused
-       t.char('≤');
-       t.rect(5, 5);
-    }
-    t.pop();
-  }
-});
-
-t.mouseClicked(() => {
-  if (video) {
-    if (video.isPlaying) video.pause();
-    else video.play();
-  }
-});
-
-t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
-
-#### Implementation of
-
-```ts
-ITextmodeVideo.play
-```
-
-***
-
-### speed()
-
-```ts
-speed(rate): this;
-```
-
-Set the playback speed.
-
-#### Parameters
-
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `rate` | `number` | Playback rate (1.0 = normal speed) |
-
-#### Returns
-
-`this`
-
-#### Example
-
-```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
-
-let video;
-
-t.setup(async () => {
-  video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
-  video.play();
-  video.loop();
-  video.characters(' .:-=+*#%@');
-});
-
-t.draw(() => {
-  t.background(0);
-  if (!video) return;
-
-  t.image(video);
-
-  // Map mouse X to playback speed (0.1x to 4x)
-  // Mouse X is center-based (-cols/2 to cols/2)
-  const halfWidth = t.grid.cols / 2;
-  const normalizedX = (t.mouse.x + halfWidth) / t.grid.cols; // 0 to 1 (approx)
-  // Clamp to 0-1
-  const clampedX = Math.max(0, Math.min(1, normalizedX));
-  const rate = 0.1 + clampedX * 3.9;
-
-  video.speed(rate);
-
-  // Show speed
-  t.push();
-  t.translate(0, 0);
-  t.charColor(255);
-  const label = `Speed: ${rate.toFixed(1)}x`;
-  for(let i=0; i<label.length; i++) {
-    t.push();
-    t.translate(i - label.length/2, 0);
-    t.char(label[i]);
-    t.point();
-    t.pop();
-  }
-  t.pop();
-});
-
-t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
-
-#### Implementation of
-
-```ts
-ITextmodeVideo.speed
-```
-
-***
-
-### stop()
-
-```ts
-stop(): void;
-```
-
-Stop the video and reset to beginning.
-
-#### Returns
-
-`void`
-
-#### Example
-
-```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
-
-let video;
-
-t.setup(async () => {
-  video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
-  video.play();
-  video.loop();
-  video.characters(' .:-=+*#%@');
-});
-
-t.draw(() => {
-  t.background(0);
-  if (video) t.image(video);
-});
-
-t.keyPressed(() => {
-  if (!video) return;
-  // Press 's' to stop and reset
-  if (t.isKeyPressed('s')) {
-    video.stop();
-    // Restart after 1 second
-    setTimeout(() => video.play(), 1000);
-  }
-});
-
-t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
-
-#### Implementation of
-
-```ts
-ITextmodeVideo.stop
-```
-
-***
-
-### time()
-
-```ts
-time(seconds): this;
-```
-
-Set the current time position in the video.
-
-#### Parameters
-
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `seconds` | `number` | Time in seconds |
-
-#### Returns
-
-`this`
-
-#### Example
-
-```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
-
-let video;
-
-t.setup(async () => {
-  video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
-  video.play();
-  video.loop();
-  video.characters(' .:-=+*#%@');
-});
-
-t.draw(() => {
-  t.background(0);
-  if (!video) return;
-  t.image(video);
-});
-
-t.mouseClicked(() => {
-  if (!video) return;
-  // Jump to a random time on click
-  const randomTime = Math.random() * video.duration;
-  video.time(randomTime);
-});
-
-t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
-
-#### Implementation of
-
-```ts
-ITextmodeVideo.time
-```
-
-***
-
-### volume()
-
-```ts
-volume(level): this;
-```
-
-Set the volume.
-
-#### Parameters
-
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `level` | `number` | Volume level (0.0-1.0) |
-
-#### Returns
-
-`this`
-
-#### Example
-
-```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
-
-let video;
-
-t.setup(async () => {
-  video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
-  video.play();
-  video.loop();
-  video.characters(' .:-=+*#%@');
-});
-
-t.draw(() => {
-  t.background(0);
-  if (!video) return;
-  t.image(video);
-
-  // Control volume with mouse Y
-  // Top = 1.0, Bottom = 0.0
-  const halfHeight = t.grid.rows / 2;
-  const normalizedY = (t.mouse.y + halfHeight) / t.grid.rows;
-  const vol = 1.0 - Math.max(0, Math.min(1, normalizedY));
-
-  video.volume(vol);
-
-  // Display Volume
-  t.push();
-  t.translate(0, 0);
-  t.charColor(255);
-  const label = `Vol: ${Math.round(vol * 100)}%`;
-  for(let i=0; i<label.length; i++) {
-    t.push(); t.translate(i - label.length/2, 0); t.char(label[i]); t.point(); t.pop();
-  }
-  t.pop();
-});
-
-t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
-
-#### Implementation of
-
-```ts
-ITextmodeVideo.volume
+ITextmodeSource.invert
 ```

@@ -9,6 +9,10 @@ Framebuffer class for managing offscreen rendering targets initialized via [Text
 - Attachment 1: Primary color data *(RGBA)*
 - Attachment 2: Secondary color data *(RGBA)*
 
+## Extends
+
+- `Disposable`
+
 ## Implements
 
 - `IFramebuffer`
@@ -31,6 +35,22 @@ Get the number of color attachments in this framebuffer
 
 ***
 
+### framebuffer
+
+#### Get Signature
+
+```ts
+get framebuffer(): null | WebGLFramebuffer;
+```
+
+Get the WebGLFramebuffer object
+
+##### Returns
+
+`null` \| `WebGLFramebuffer`
+
+***
+
 ### height
 
 #### Get Signature
@@ -39,7 +59,7 @@ Get the number of color attachments in this framebuffer
 get height(): number;
 ```
 
-Get the height of the framebuffer
+Get the current framebuffer height in grid cells.
 
 ##### Returns
 
@@ -61,7 +81,14 @@ IFramebuffer.height
 get textures(): WebGLTexture[];
 ```
 
-Get the WebGL textures associated with this framebuffer
+Get all textures associated with this framebuffer.
+
+Useful for binding textures for reading in shaders.
+
+Textmode framebuffers allocate 3 attachments by default:
+- 0: Character data (RG), flags (B), and rotation (A)
+- 1: Character colors (RGBA)
+- 2: Cell background colors (RGBA)
 
 ##### Returns
 
@@ -83,7 +110,7 @@ IFramebuffer.textures
 get width(): number;
 ```
 
-Get the width of the framebuffer
+Get the current framebuffer width in grid cells.
 
 ##### Returns
 
@@ -132,10 +159,8 @@ IFramebuffer.begin
 dispose(): void;
 ```
 
-Dispose of WebGL resources used by this framebuffer.
-
-This method is idempotent and safe to call multiple times.
-After disposal, the framebuffer should not be used for rendering.
+Dispose of the resource and run all registered callbacks.
+Subclasses should call super.dispose() at the end of their dispose method.
 
 #### Returns
 
@@ -145,6 +170,12 @@ After disposal, the framebuffer should not be used for rendering.
 
 ```ts
 IFramebuffer.dispose
+```
+
+#### Overrides
+
+```ts
+Disposable.dispose
 ```
 
 ***
@@ -222,8 +253,8 @@ This recreates the internal textures with the new size and invalidates any cache
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `width` | `number` | New width in pixels/cells |
-| `height` | `number` | New height in pixels/cells |
+| `width` | `number` | New width in grid cells |
+| `height` | `number` | New height in grid cells |
 
 #### Returns
 

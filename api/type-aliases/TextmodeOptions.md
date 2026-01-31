@@ -13,7 +13,7 @@ Options when creating a [Textmodifier](../classes/Textmodifier.md) instance.
 ### canvas?
 
 ```ts
-optional canvas: HTMLCanvasElement;
+optional canvas: HTMLCanvasElement | HTMLVideoElement;
 ```
 
 An existing [HTMLCanvasElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement) to use instead of creating a new one.
@@ -54,6 +54,18 @@ Maximum frames per second for auto rendering. Defaults to 60.
 
 ***
 
+### gl?
+
+```ts
+optional gl: WebGL2RenderingContext;
+```
+
+Use an external WebGL2 context instead of creating a new one.
+Useful for integrating with three.js, Babylon.js, hydra-synth, or other WebGL libraries
+that share the same canvas.
+
+***
+
 ### height?
 
 ```ts
@@ -89,8 +101,8 @@ that can be accessed via [Textmodifier.overlay](../classes/Textmodifier.md#overl
 
 Useful for applying textmode conversion to p5.js sketches, YouTube videos, and sooo much more.
 
-All functionality of `textmode.js` remains available. 
-Resizing the `textmode.js` canvas is not recommended though, 
+All functionality of `textmode.js` remains available.
+Resizing the `textmode.js` canvas is not recommended though,
 since the overlay target automatically updates the size.
 
 ***

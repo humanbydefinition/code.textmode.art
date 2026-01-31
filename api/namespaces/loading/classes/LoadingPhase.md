@@ -14,10 +14,35 @@ Also provides a method to track asynchronous tasks within the phase.
 
 ## Properties
 
-| Property | Modifier | Type | Description |
-| ------ | ------ | ------ | ------ |
-| <a id="id"></a> `id` | `readonly` | `string` | The unique identifier for this loading phase |
-| <a id="label"></a> `label` | `readonly` | `string` | The human-readable label for this loading phase |
+### id
+
+```ts
+readonly id: string;
+```
+
+The unique identifier for this loading phase
+
+#### Implementation of
+
+```ts
+ILoadingPhase.id
+```
+
+***
+
+### label
+
+```ts
+readonly label: string;
+```
+
+The human-readable label for this loading phase
+
+#### Implementation of
+
+```ts
+ILoadingPhase.label
+```
 
 ## Methods
 

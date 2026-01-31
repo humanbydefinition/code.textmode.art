@@ -16,6 +16,13 @@ but custom strategies can be registered via [TextmodeConversionManager.register]
 | ------ | ------ |
 | [TextmodeConversionManager](classes/TextmodeConversionManager.md) | Manages conversion strategy registration and retrieval. |
 
+## Interfaces
+
+| Interface | Description |
+| ------ | ------ |
+| [TextmodeConversionContext](interfaces/TextmodeConversionContext.md) | Interface for the context provided to conversion strategies during shader and uniform creation. |
+| [TextmodeConversionStrategy](interfaces/TextmodeConversionStrategy.md) | Interface for defining a custom textmode conversion strategy. |
+
 ## Type Aliases
 
 | Type Alias | Description |

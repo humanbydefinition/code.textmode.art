@@ -24,6 +24,7 @@
 | ------ | ------ |
 | [textmode](classes/textmode.md) | The main entry point for the `textmode.js` library. |
 | [TextmodeColor](classes/TextmodeColor.md) | Represents a color in the `textmode.js` rendering system. |
+| [TextmodeError](classes/TextmodeError.md) | Custom error class for textmode.js exceptions. |
 | [TextmodeFramebuffer](classes/TextmodeFramebuffer.md) | Framebuffer class for managing offscreen rendering targets initialized via [Textmodifier.createFramebuffer](classes/Textmodifier.md#createframebuffer). |
 | [TextmodeGrid](classes/TextmodeGrid.md) | Manages the grid of each `TextmodeLayer` instance. |
 | [TextmodeShader](classes/TextmodeShader.md) | Shader class for managing WebGL shader programs initialized via [Textmodifier.createFilterShader](classes/Textmodifier.md#createfiltershader) or [Textmodifier.createShader](classes/Textmodifier.md#createshader). |

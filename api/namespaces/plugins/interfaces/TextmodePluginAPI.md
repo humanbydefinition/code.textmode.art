@@ -47,7 +47,7 @@ The method will be available on all existing and future layer instances.
 
 #### Example
 
-```typescript
+```ts
 api.extendLayer('synth', function(source: SynthSource) {
   // `this` is the TextmodeLayer instance
   this.setPluginState('synth', { source, compiled: compile(source) });
@@ -149,7 +149,7 @@ A function to unregister the hook.
 registerPostDrawHook(callback): () => void;
 ```
 
-Register a callback to be invoked after each draw cycle. 
+Register a callback to be invoked after each draw cycle.
 Happens outside of the draw framebuffer being bound after the final result is drawn to the screen.
 
 #### Parameters
@@ -209,7 +209,7 @@ A function to unregister the hook.
 registerPreDrawHook(callback): () => void;
 ```
 
-Register a callback to be invoked before each draw cycle. 
+Register a callback to be invoked before each draw cycle.
 Happens just before any framebuffer
 
 #### Parameters

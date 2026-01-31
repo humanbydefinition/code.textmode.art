@@ -6,6 +6,27 @@ The main entry point for the `textmode.js` library.
 
 Provides static methods for creating [Textmodifier](Textmodifier.md) instances and managing global settings.
 
+## Example
+
+```javascript
+// Basic usage pattern
+const t = textmode.create({
+  width: window.innerWidth,
+  height: window.innerHeight
+});
+
+t.draw(() => {
+  t.background(0);
+  t.charColor(255);
+  t.char('T');
+  t.rect(5, 5);
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 ## Accessors
 
 ### version
@@ -20,13 +41,39 @@ Returns the version of `textmode.js` being used.
 
 ##### Example
 
-```js
-console.log(textmode.version); // "1.0.0"
+```javascript
+// Display the library version in a retro terminal style
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+const v = `VERSION: ${textmode.version}`;
+
+t.draw(() => {
+  t.background(0, 20, 0); // CRT Dark Green
+
+  t.push();
+  t.translate(-v.length / 2, 0);
+  t.charColor(0, 255, 0);
+
+  for (let i = 0; i < v.length; i++) {
+    t.push();
+    t.translate(i, 0);
+    t.char(v[i]);
+    t.point();
+    t.pop();
+  }
+  t.pop();
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
 ```
 
 ##### Returns
 
 `string`
+
+The version string of the library.
 
 ## Methods
 
@@ -53,22 +100,36 @@ A new Textmodifier instance
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600, fontSize: 16 });
+// Initialize with custom font size and responsive canvas
+const t = textmode.create({
+  width: window.innerWidth,
+  height: window.innerHeight,
+  fontSize: 16
+});
 
 t.draw(() => {
-    t.background(0);
-    t.char("x");
-    t.rotateZ(t.frameCount);
-    t.rect(10, 10);
+  t.background(10, 15, 20);
+
+  // Draw a field of rhythmic characters
+  for (let x = -20; x <= 20; x += 5) {
+    for (let y = -15; y <= 15; y += 5) {
+      const dist = Math.sqrt(x*x + y*y);
+      const offset = Math.sin(t.frameCount * 0.1 - dist * 0.5) * 2;
+
+      t.push();
+      t.translate(x, y + offset);
+      t.charColor(255 - dist * 10, 150, 200);
+      t.char(dist < 10 ? '█' : '░');
+      t.point();
+      t.pop();
+    }
+  }
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;">
-  <img src="https://github.com/humanbydefinition.png" alt="humanbydefinition avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.25rem;">
-    <strong>by <a href="https://github.com/humanbydefinition" target="_blank" rel="noopener noreferrer">@humanbydefinition</a></strong>
-    <span style="font-size:0.95em;">🐙 <a href="https://github.com/humanbydefinition" target="_blank" rel="noopener noreferrer">GitHub</a>&nbsp;•&nbsp; 📷 <a href="https://instagram.com/humanbydefinition" target="_blank" rel="noopener noreferrer">Instagram</a>&nbsp;•&nbsp; 🐘 <a href="https://mastodon.social/@humanbydefinition" target="_blank" rel="noopener noreferrer">Mastodon</a>&nbsp;•&nbsp; 🦋 <a href="https://bsky.app/profile/humanbydefinition.bsky.social" target="_blank" rel="noopener noreferrer">BlueSky</a></span>
-  </div>
-</div>
 
 ***
 
@@ -92,7 +153,23 @@ Set the global error handling level for the library. This applies to all [Textmo
 
 #### Example
 
-```js
-// Set error level to WARNING
+```javascript
+// Configuring error behavior
+import { TextmodeErrorLevel } from 'textmode.js';
+
+// Suppress non-critical warnings in production
 textmode.setErrorLevel(TextmodeErrorLevel.WARNING);
+
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+t.draw(() => {
+  t.background(0);
+  t.char('!');
+  t.charColor(255, 255, 0);
+  t.rect(10, 10);
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
 ```

@@ -20,15 +20,16 @@ const MyPlugin: TextmodePlugin = {
   version: '1.0.0',
   install(textmodifier, api) {
     // Extend layers with a new method
-    api.extendLayer('myMethod', function(value) {
+    api.extendLayer('setMyState', function(value: number) {
+      // `this` is bound to the TextmodeLayer instance
       this.setPluginState('my-plugin', { value });
     });
-    
+
     // Hook into layer rendering
-    api.registerLayerPreRenderHook((layer, ctx) => {
-      const state = layer.getPluginState('my-plugin');
-      if (state) {
-        // Render plugin content to layer.drawFramebuffer
+    api.registerLayerPreRenderHook((layer) => {
+      const state = layer.getPluginState<{ value: number }>('my-plugin');
+      if (state && state.value > 0.5) {
+        // Render custom content based on plugin state
       }
     });
   }
@@ -46,6 +47,7 @@ const MyPlugin: TextmodePlugin = {
 
 | Type Alias | Description |
 | ------ | ------ |
+| [LayerExtensionImplementation](type-aliases/LayerExtensionImplementation.md) | Type for layer extension method implementations. The `this` context is bound to the `TextmodeLayer` instance. |
 | [LayerLifecycleHook](type-aliases/LayerLifecycleHook.md) | Callback type for layer lifecycle events. |
 | [LayerRenderHook](type-aliases/LayerRenderHook.md) | Callback type for layer render hooks. |
 | [SetupLifecycleHook](type-aliases/SetupLifecycleHook.md) | Callback type for setup lifecycle hooks. Can be synchronous or return a Promise for async operations. |

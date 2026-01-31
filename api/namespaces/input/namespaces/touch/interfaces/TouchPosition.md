@@ -14,16 +14,20 @@ The grid coordinate system uses center-based coordinates matching the rendering 
 When the touch is outside the grid bounds, `x` and `y` are set to
 `Number.NEGATIVE_INFINITY` to indicate an invalid/outside position.
 
+## Extends
+
+- `GridPosition`
+
 ## Properties
 
-| Property | Type | Description |
-| ------ | ------ | ------ |
-| <a id="clientx"></a> `clientX` | `number` | Client X coordinate in CSS pixels |
-| <a id="clienty"></a> `clientY` | `number` | Client Y coordinate in CSS pixels |
-| <a id="id"></a> `id` | `number` | Identifier provided by the browser for a touch point |
-| <a id="pressure"></a> `pressure?` | `number` | Touch pressure (0-1) when supported |
-| <a id="radiusx"></a> `radiusX?` | `number` | Contact ellipse radius on the X axis in CSS pixels |
-| <a id="radiusy"></a> `radiusY?` | `number` | Contact ellipse radius on the Y axis in CSS pixels |
-| <a id="rotationangle"></a> `rotationAngle?` | `number` | Contact ellipse angle in radians when provided |
-| <a id="x"></a> `x` | `number` | Grid X coordinate (column) in center-based coords. `Number.NEGATIVE_INFINITY` if outside grid. |
-| <a id="y"></a> `y` | `number` | Grid Y coordinate (row) in center-based coords. `Number.NEGATIVE_INFINITY` if outside grid. |
+| Property | Type | Description | Inherited from |
+| ------ | ------ | ------ | ------ |
+| <a id="clientx"></a> `clientX` | `number` | Client X coordinate in CSS pixels | - |
+| <a id="clienty"></a> `clientY` | `number` | Client Y coordinate in CSS pixels | - |
+| <a id="id"></a> `id` | `number` | Identifier provided by the browser for a touch point | - |
+| <a id="pressure"></a> `pressure?` | `number` | Touch pressure (0-1) when supported | - |
+| <a id="radiusx"></a> `radiusX?` | `number` | Contact ellipse radius on the X axis in CSS pixels | - |
+| <a id="radiusy"></a> `radiusY?` | `number` | Contact ellipse radius on the Y axis in CSS pixels | - |
+| <a id="rotationangle"></a> `rotationAngle?` | `number` | Contact ellipse angle in radians when provided | - |
+| <a id="x"></a> `x` | `number` | The X coordinate (column), often relative to the grid's center. | `GridPosition.x` |
+| <a id="y"></a> `y` | `number` | The Y coordinate (row), often relative to the grid's center. | `GridPosition.y` |

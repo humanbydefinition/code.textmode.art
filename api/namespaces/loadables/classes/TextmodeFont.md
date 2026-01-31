@@ -10,6 +10,29 @@ and provides character information.
 Each [TextmodeLayer](../../layering/classes/TextmodeLayer.md) has its own instance of this class to allow for
 layer-specific font configurations.
 
+## Example
+
+```javascript
+const t = textmode.create({ width: 800, height: 600 });
+
+t.setup(async () => {
+  // Load a custom font
+  const font = await t.loadFont('./fonts/retro.ttf', false);
+
+  // Get info about the loaded font
+  console.log(`Loaded ${font.characters.length} characters`);
+  console.log(`Max glyph size: ${font.maxGlyphDimensions.width}x${font.maxGlyphDimensions.height}`);
+
+  // Use it on a specific layer
+  const layer = t.layers.add();
+  await layer.loadFont(font);
+});
+```
+
+## Extends
+
+- `Disposable`
+
 ## Accessors
 
 ### characterMap
@@ -37,6 +60,57 @@ get characters(): TextmodeCharacter[];
 ```
 
 Returns the array of [TextmodeCharacter](../type-aliases/TextmodeCharacter.md) objects in the font.
+
+##### Example
+
+```javascript
+// Interactive Character Map
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+t.draw(() => {
+  t.background(10, 10, 20);
+
+  const chars = t.font.characters;
+  const cols = 32;
+  const rows = Math.ceil(chars.length / cols);
+
+  // Center the grid in the viewport
+  const startX = -(cols) / 2;
+  const startY = -(rows) / 2;
+
+  // Calculate mouse position in "map space"
+  const mx = Math.floor(t.mouse.x - startX);
+  const my = Math.floor(t.mouse.y - startY);
+
+  for (let i = 0; i < chars.length; i++) {
+    const x = i % cols;
+    const y = Math.floor(i / cols);
+    const isHovered = mx === x && my === y;
+
+    t.push();
+    t.translate(startX + x, startY + y);
+
+    // Highlight hovered character
+    if (isHovered) {
+      t.cellColor(50, 100, 200);
+      t.charColor(255);
+      t.translateZ(5); // Pop out
+    } else {
+      // Gradient based on index
+      const hue = (i / chars.length) * 255;
+      t.charColor(hue, 150, 255 - hue);
+    }
+
+    t.char(chars[i].character);
+    t.point();
+    t.pop();
+  }
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 
 ##### Returns
 
@@ -68,7 +142,7 @@ Returns the WebGL framebuffer containing the font texture atlas.
 get fontSize(): number;
 ```
 
-Returns the font size used for rendering.
+Returns the font size used for the texture atlas.
 
 ##### Returns
 
@@ -84,7 +158,7 @@ Returns the font size used for rendering.
 get maxGlyphDimensions(): object;
 ```
 
-Returns the maximum dimensions of a glyph in the font.
+Returns the maximum dimensions of a glyph in the font in pixels.
 
 ##### Returns
 
@@ -126,3 +200,23 @@ Returns the number of rows in the texture atlas.
 ##### Returns
 
 `number`
+
+## Methods
+
+### dispose()
+
+```ts
+dispose(): void;
+```
+
+Dispose of all resources used by this font manager.
+
+#### Returns
+
+`void`
+
+#### Overrides
+
+```ts
+Disposable.dispose
+```

@@ -4,13 +4,7 @@
 
 A plugin interface for extending the functionality of a [Textmodifier](../../../classes/Textmodifier.md) instance.
 
-Users can create plugins by implementing this interface.
-
-## Note
-
-Plugins are currently experimental and the API may change in future releases.
-The documentation is still lacking, but there are some add-on libraries already available,
-all of which are fully open source and can be used as references for creating your own plugins.
+Create plugins by implementing this interface.
 
 ## Properties
 

@@ -2,7 +2,7 @@
 
 # filters
 
-All filter related modules and types. 
+All filter related modules and types.
 
 Provides various image processing filters that can be applied in sequence on a layer's textmode-converted output,
 such as blur, sharpen, edge detection, and color adjustments. Filters can also be applied globally to all layers as post-processing effects.

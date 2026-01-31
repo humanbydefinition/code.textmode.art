@@ -15,5 +15,4 @@ Types and interfaces for mouse event handling
 
 | Type Alias | Description |
 | ------ | ------ |
-| [GridProvider](type-aliases/GridProvider.md) | Grid provider function type - returns the grid to use for coordinate calculations |
 | [MouseEventHandler](type-aliases/MouseEventHandler.md) | Mouse event handler function type |

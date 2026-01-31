@@ -14,9 +14,13 @@ The coordinate system matches the main drawing/rendering space:
 When the mouse is outside the grid bounds, both `x` and `y` are set to
 `Number.NEGATIVE_INFINITY` to indicate an invalid/outside position.
 
+## Extends
+
+- `GridPosition`
+
 ## Properties
 
-| Property | Type | Description |
-| ------ | ------ | ------ |
-| <a id="x"></a> `x` | `number` | Grid X coordinate (column) in center-based coords. `Number.NEGATIVE_INFINITY` if outside grid. |
-| <a id="y"></a> `y` | `number` | Grid Y coordinate (row) in center-based coords. `Number.NEGATIVE_INFINITY` if outside grid. |
+| Property | Type | Description | Inherited from |
+| ------ | ------ | ------ | ------ |
+| <a id="x"></a> `x` | `number` | The X coordinate (column), often relative to the grid's center. | `GridPosition.x` |
+| <a id="y"></a> `y` | `number` | The Y coordinate (row), often relative to the grid's center. | `GridPosition.y` |

@@ -10,6 +10,8 @@ This class provides:
 
 Used for image-to-ASCII conversion modes.
 
+Access via [Textmodifier.conversions](../../../classes/Textmodifier.md#conversions).
+
 ## Example
 
 ```ts
@@ -60,7 +62,7 @@ Register a custom conversion strategy.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `strategy` | `TextmodeConversionStrategy` | The conversion strategy to register |
+| `strategy` | [`TextmodeConversionStrategy`](../interfaces/TextmodeConversionStrategy.md) | The conversion strategy to register |
 
 #### Returns
 

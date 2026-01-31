@@ -2,16 +2,15 @@
 
 # Class: TextmodeLayerManager
 
-Manages all user-defined layers within a Textmodifier in addition to the base layer.
+Manages the stack of layers within a [Textmodifier](../../../classes/Textmodifier.md) instance.
 
-Responsibilities:
-- Managing the collection of user layers (add, remove, move, swap)
-- Coordinating layer rendering and compositing
-- Owning the global post-processing pipeline (global filters + present to screen)
+This interface provides methods to create, manage, and organize multiple textmode layers.
+Layers allow for complex compositing, independent rendering passes, and post-processing effects.
 
-The instance of this class can be accessed via [Textmodifier.layers](../../../classes/Textmodifier.md#layers).
+The `base` layer is always present at the bottom of the stack. User-created layers are added
+on top of the base layer.
 
-The [base](#base) layer is not part of the public layer stack, but is instead managed internally.
+Access this manager via `textmodifier.layers`.
 
 ## Implements
 
@@ -28,6 +27,21 @@ get all(): readonly TextmodeLayer[];
 ```
 
 Get all user layers as a readonly array.
+
+##### Example
+
+```js
+const t = textmode.create();
+t.layers.add();
+t.layers.add();
+
+console.log(t.layers.all.length); // 2
+
+// Iterate over all user layers
+t.layers.all.forEach(layer => {
+  layer.opacity(0.5);
+});
+```
 
 ##### Returns
 
@@ -51,6 +65,8 @@ get base(): TextmodeLayer;
 
 The base layer that is always rendered at the bottom of the layer stack.
 This layer represents the main drawing content before any user layers are composited.
+
+The base layer cannot be removed or moved.
 
 ##### Returns
 
@@ -106,19 +122,55 @@ ILayerManager.resultFramebuffer
 add(options): TextmodeLayer;
 ```
 
-Add a new layer to the manager.
+Create and add a new layer to the top of the layer stack.
+
+New layers are initialized with their own grid and font settings.
+Layers can be offset, rotated, and blended with layers below them.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `options` | [`TextmodeLayerOptions`](../interfaces/TextmodeLayerOptions.md) | Layer configuration options. |
+| `options` | [`TextmodeLayerOptions`](../interfaces/TextmodeLayerOptions.md) | Optional configuration for the new layer (visibility, opacity, blendMode, etc.) |
 
 #### Returns
 
 [`TextmodeLayer`](TextmodeLayer.md)
 
-The newly added layer.
+The newly created TextmodeLayer instance.
+
+#### Example
+
+```javascript
+const t = textmode.create();
+
+// Add a new layer on top of the base layer
+const uiLayer = t.layers.add({
+    blendMode: 'normal',
+    opacity: 1.0,
+    fontSize: 16
+});
+
+// Draw to the new layer
+uiLayer.draw(() => {
+    t.clear(); // Clear THIS layer's background (transparent)
+
+    t.charColor(255, 0, 0); // Red text
+    t.cellColor(0, 0, 0, 0); // Transparent cell background
+    t.char('!');
+    t.rect(5, 5);
+});
+
+// Base layer content
+t.draw(() => {
+    t.background(0, 0, 50); // Dark blue background
+
+    t.charColor(0, 0, 255); // Blue text
+    t.cellColor(0, 0, 0, 0); // Transparent cell background
+    t.char('?');
+    t.rect(5, 5);
+});
+```
 
 #### Implementation of
 
@@ -134,11 +186,29 @@ ILayerManager.add
 clear(): void;
 ```
 
-Remove and dispose all user layers (keeps base layer intact).
+Remove all user-created layers from the manager.
+The base layer is not affected by this operation.
+This is useful for integration into live-coding environments where code is re-evaluated
+and layers need to be recreated from scratch.
 
 #### Returns
 
 `void`
+
+#### Example
+
+```js
+const t = textmode.create();
+
+t.setup(() => {
+  // Ensure clean slate when re-running setup
+  t.layers.clear();
+
+  // Re-create layers
+  t.layers.add({ blendMode: 'additive' });
+  t.layers.add({ blendMode: 'multiply' });
+});
+```
 
 #### Implementation of
 
@@ -167,6 +237,19 @@ Move a layer to a new index in the layer stack.
 
 `void`
 
+#### Example
+
+```js
+const t = textmode.create();
+
+const bgLayer = t.layers.add(); // Index 0
+const fgLayer = t.layers.add(); // Index 1
+
+// Swap z-order by moving fgLayer to bottom (index 0)
+// This pushes bgLayer to index 1
+t.layers.move(fgLayer, 0);
+```
+
 #### Implementation of
 
 ```ts
@@ -192,6 +275,21 @@ Remove a layer from the manager.
 #### Returns
 
 `void`
+
+#### Example
+
+```js
+const t = textmode.create();
+
+const tempLayer = t.layers.add();
+
+// Remove the layer after 100 frames
+t.draw(() => {
+  if (t.frameCount > 100) {
+    t.layers.remove(tempLayer);
+  }
+});
+```
 
 #### Implementation of
 
@@ -219,6 +317,18 @@ Swap the order of two layers if they exist in the same collection.
 #### Returns
 
 `void`
+
+#### Example
+
+```js
+const t = textmode.create();
+
+const layer1 = t.layers.add();
+const layer2 = t.layers.add();
+
+// Swap the layers' positions in the stack
+t.layers.swap(layer1, layer2);
+```
 
 #### Implementation of
 

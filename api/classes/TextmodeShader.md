@@ -6,8 +6,11 @@ Shader class for managing WebGL shader programs initialized via [Textmodifier.cr
 
 Use shaders and set uniforms via [Textmodifier.shader](Textmodifier.md#shader), [Textmodifier.setUniform](Textmodifier.md#setuniform), and [Textmodifier.setUniforms](Textmodifier.md#setuniforms).
 
-With a shader active, the next [Textmodifier.rect](Textmodifier.md#rect) call will use the shader for rendering, 
-and automatically unuse it afterwards.
+After using a custom shader, you can revert to the default textmode shader with [Textmodifier.resetShader](Textmodifier.md#resetshader).
+
+## Extends
+
+- `Disposable`
 
 ## Accessors
 
@@ -38,3 +41,9 @@ Dispose of WebGL resources used by this shader.
 #### Returns
 
 `void`
+
+#### Overrides
+
+```ts
+Disposable.dispose
+```
