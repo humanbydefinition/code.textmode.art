@@ -4,6 +4,7 @@ description: A lightweight, framework-agnostic creative coding library for real-
 layout: home
 
 hero:
+  text: textmode.js
   actions:
     - theme: brand
       text: Get started

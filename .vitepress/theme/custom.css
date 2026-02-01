@@ -21,6 +21,13 @@
   display: none !important;
 }
 
+/* Hide default hero heading since we have a custom UI */
+.VPHome .VPHero .heading,
+.VPHome .VPHero h1.text,
+.VPHome .VPHero .main .name {
+  display: none !important;
+}
+
 /* Enhanced hero section styles - only apply to home page */
 .VPHome .VPHero {
   position: relative;
