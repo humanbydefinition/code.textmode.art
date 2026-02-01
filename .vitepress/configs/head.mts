@@ -16,7 +16,7 @@ const umamiScript: HeadConfig = ['script', {
 export const head: HeadConfig[] = [...baseHeaders, umamiScript]
 
 export const transformHead = ({ pageData }: TransformContext): HeadConfig[] => {
-  const canonicalUrl = `https://code.textmode.art/${pageData.relativePath.replace(/index\.md$/, '').replace(/\.md$/, '.html')}`
+  const canonicalUrl = `https://code.textmode.art/${pageData.relativePath.replace(/index\.md$/, '').replace(/\.md$/, '')}`
     .replace(/\/$/, ''); 
 
   // Breadcrumb Schema Generation
