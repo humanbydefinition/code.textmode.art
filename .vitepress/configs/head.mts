@@ -24,5 +24,19 @@ export const transformHead = ({ pageData }: TransformContext): HeadConfig[] => {
     ['meta', { property: 'og:title', content: pageData.title || 'textmode.js' }],
     ['meta', { property: 'og:description', content: pageData.description || 'textmode.js is a lightweight creative coding library for creating real-time ASCII art on the web.' }],
     ['meta', { property: 'og:url', content: canonicalUrl }],
+    ['script', { type: 'application/ld+json' }, JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "textmode.js",
+      "operatingSystem": "Any",
+      "applicationCategory": "DeveloperApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "description": "A lightweight creative coding library for creating real-time ASCII art on the web.",
+      "url": "https://code.textmode.art"
+    })]
   ]
 }
