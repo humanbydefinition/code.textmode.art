@@ -30,13 +30,14 @@
       tag="div"
       class="gallery-grid__grid"
     >
-      <GalleryCard
-        v-for="(item, index) in filteredItems"
-        v-if="isReady"
-        :key="item.id"
-        :item="item"
-        :style="{ '--delay': index * 50 + 'ms' }"
-      />
+      <template v-if="isReady">
+        <GalleryCard
+          v-for="(item, index) in filteredItems"
+          :key="item.id"
+          :item="item"
+          :style="{ '--delay': index * 50 + 'ms' }"
+        />
+      </template>
       
       <!-- Custom CTA Card -->
       <div 
