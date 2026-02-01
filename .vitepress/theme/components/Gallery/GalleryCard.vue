@@ -16,7 +16,7 @@
       <img
         v-if="item.thumbnailUrl"
         :src="item.thumbnailUrl"
-        :alt="`${item.title} thumbnail`"
+        :alt="item.description || `${item.title} thumbnail`"
         class="gallery-card__image"
         loading="lazy"
       />
