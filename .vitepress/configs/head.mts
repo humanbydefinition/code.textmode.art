@@ -57,11 +57,28 @@ export const transformHead = ({ pageData }: TransformContext): HeadConfig[] => {
     })
   })
 
+  const defaultDescription = 'textmode.js is a lightweight creative coding library for creating real-time ASCII art on the web.'
+  const ogTitle = pageData.title || 'textmode.js'
+  const ogDescription = pageData.description || defaultDescription
+  const ogImage = 'https://code.textmode.art/png/textmodejs_banner.png'
+
   return [
     ['link', { rel: 'canonical', href: canonicalUrl }],
-    ['meta', { property: 'og:title', content: pageData.title || 'textmode.js' }],
-    ['meta', { property: 'og:description', content: pageData.description || 'textmode.js is a lightweight creative coding library for creating real-time ASCII art on the web.' }],
+    // Open Graph
+    ['meta', { property: 'og:type', content: 'website' }],
+    ['meta', { property: 'og:site_name', content: 'textmode.js' }],
+    ['meta', { property: 'og:locale', content: 'en_US' }],
+    ['meta', { property: 'og:title', content: ogTitle }],
+    ['meta', { property: 'og:description', content: ogDescription }],
     ['meta', { property: 'og:url', content: canonicalUrl }],
+    ['meta', { property: 'og:image', content: ogImage }],
+    ['meta', { property: 'og:image:alt', content: 'textmode.js - Real-time ASCII art library' }],
+    // Twitter Card
+    ['meta', { name: 'twitter:card', content: 'summary_large_image' }],
+    ['meta', { name: 'twitter:title', content: ogTitle }],
+    ['meta', { name: 'twitter:description', content: ogDescription }],
+    ['meta', { name: 'twitter:image', content: ogImage }],
+    ['meta', { name: 'twitter:image:alt', content: 'textmode.js - Real-time ASCII art library' }],
     ['script', { type: 'application/ld+json' }, JSON.stringify({
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
