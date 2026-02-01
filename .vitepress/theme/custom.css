@@ -21,6 +21,12 @@
   display: none !important;
 }
 
+/* Force Dark Mode: Hide theme toggle */
+.VPNavBarAppearance,
+.VPSwitchAppearance {
+  display: none !important;
+}
+
 /* Hide default hero heading since we have a custom UI */
 .VPHome .VPHero .heading,
 .VPHome .VPHero h1.text,
@@ -112,6 +118,7 @@
 }
 
 @media (max-width: 480px) {
+
   /* TextmodeHero mobile styles */
   .textmode-hero-container {
     height: 250px;
@@ -358,6 +365,7 @@
 
 /* Aside layout - make outline scrollable with sticky bottom section */
 @media (min-width: 1280px) {
+
   /* Remove scroll from the aside container, we'll handle it in the outline */
   .VPDoc .aside .aside-container {
     overflow-y: visible;
@@ -391,7 +399,7 @@
   }
 
   /* Hide the spacer since we're using flex to push bottom content */
-  .VPDoc .aside .VPDocAside > .spacer {
+  .VPDoc .aside .VPDocAside>.spacer {
     display: none;
   }
 
@@ -424,13 +432,13 @@
  * DocFooter component handles footer display in doc pages
  * VPFooter should only show on home/landing pages
  */
-.VPDoc ~ .VPFooter,
-.VPDoc + .VPFooter {
+.VPDoc~.VPFooter,
+.VPDoc+.VPFooter {
   display: none !important;
 }
 
 /* When viewing doc pages, ensure VPFooter in the layout is hidden */
-.Layout:has(.VPDoc) > .VPFooter {
+.Layout:has(.VPDoc)>.VPFooter {
   display: none !important;
 }
 
@@ -439,6 +447,7 @@
  * VitePress doesn't automatically expand content when aside: false in frontmatter
  */
 @media (min-width: 960px) {
+
   /* When doc page has no aside, expand content to use full width */
   .VPDoc:not(.has-aside) .content-container {
     max-width: 100% !important;
@@ -456,6 +465,7 @@
 }
 
 @media (min-width: 1280px) {
+
   /* On larger screens, give more room when no aside */
   .VPDoc:not(.has-aside) .content-container {
     max-width: 992px !important;
@@ -467,6 +477,7 @@
 }
 
 @media (min-width: 1440px) {
+
   /* On extra large screens */
   .VPDoc:not(.has-aside) .content-container {
     max-width: 1104px !important;
