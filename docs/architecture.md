@@ -1,3 +1,12 @@
+---
+title: Architecture
+description: A high-level overview of the textmode.js rendering architecture, including the draw queue, instanced rendering, and MRT render pipeline.
+---
+
+# Architecture
+
+This document provides a high-level overview of the `textmode.js` rendering architecture, explaining how drawing commands are processed and rendered to the screen.
+
 ## How it works *(high‑level)*
 
 The renderer operates in two passes:

@@ -1,3 +1,8 @@
+---
+title: Images and Videos
+description: Learn how to load and display images and videos as ASCII art in textmode.js, including customization of brightness conversion and playback controls.
+---
+
 # Images and videos
 
 This section covers how to work with images and videos in `textmode.js`. Both are automatically converted to character-based representations using an adjustable brightness conversion process, allowing you to create dynamic ASCII art from visual media.

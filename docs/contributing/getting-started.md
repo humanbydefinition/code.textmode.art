@@ -1,5 +1,6 @@
 ---
 title: Getting started
+description: A step-by-step guide to setting up your local environment for contributing to the textmode.js documentation and codebase.
 ---
 
 # Getting started

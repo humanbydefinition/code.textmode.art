@@ -1,5 +1,6 @@
 ---
 title: Improve Documentation
+description: A guide on how to improve the textmode.js documentation, from fixing typos to writing new guides and adding code examples.
 ---
 
 # Improve documentation

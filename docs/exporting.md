@@ -1,3 +1,8 @@
+---
+title: Exporting
+description: Learn how to export your textmode.js creations to TXT, SVG, PNG/JPG images, animated GIFs, and WebM video using the textmode.export.js plugin.
+---
+
 # Exporting
 
 Once you've created your ASCII art with `textmode.js`, you'll likely want to save or share it. Since `textmode.js` [v0.4.0](https://github.com/humanbydefinition/textmode.js/releases/tag/0.4.0), the library no longer includes built-in export functions directly, but instead offers them through an official add-on library [`textmode.export.js`](https://github.com/humanbydefinition/textmode.export.js).

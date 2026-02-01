@@ -1,5 +1,6 @@
 ---
 title: Contributing
+description: Overview of contribution opportunities for textmode.js, including font suggestions, example sketches, and documentation improvements.
 ---
 
 # Contributing

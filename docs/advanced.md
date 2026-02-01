@@ -1,3 +1,8 @@
+---
+title: Advanced Features
+description: Explore advanced features of textmode.js including offscreen framebuffers, custom GLSL shaders, 3D transformations, and multi-pass rendering.
+---
+
 # Advanced features
 
 This section covers advanced features of `textmode.js` that enable sophisticated graphics and rendering techniques, including offscreen rendering with framebuffers, custom shaders, and 3D transformations.
