@@ -1,3 +1,14 @@
+---
+layout: doc
+editLink: true
+title: TextmodeErrorLevel
+description: Error handling levels to control how errors are reported and handled.
+category: Enumerations
+api: true
+kind: Enum
+lastModified: 2026-02-01
+---
+
 [textmode.js](../index.md) / TextmodeErrorLevel
 
 # Enumeration: TextmodeErrorLevel

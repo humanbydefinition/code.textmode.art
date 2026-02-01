@@ -1,3 +1,16 @@
+---
+layout: doc
+editLink: true
+title: TextmodeConversionContext
+description: Interface for the context provided to conversion strategies during shader and uniform creation.
+category: Interfaces
+api: true
+namespace: conversion
+kind: Interface
+lastModified: 2026-02-01
+isInterface: true
+---
+
 [textmode.js](../../../index.md) / [conversion](../index.md) / TextmodeConversionContext
 
 # Interface: TextmodeConversionContext

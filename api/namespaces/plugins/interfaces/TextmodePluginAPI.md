@@ -1,3 +1,16 @@
+---
+layout: doc
+editLink: true
+title: TextmodePluginAPI
+description: An extended API provided to plugins when they are installed on a Textmodifier instance.
+category: Interfaces
+api: true
+namespace: plugins
+kind: Interface
+lastModified: 2026-02-01
+isInterface: true
+---
+
 [textmode.js](../../../index.md) / [plugins](../index.md) / TextmodePluginAPI
 
 # Interface: TextmodePluginAPI

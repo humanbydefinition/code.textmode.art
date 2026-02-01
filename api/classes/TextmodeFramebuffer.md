@@ -1,3 +1,15 @@
+---
+layout: doc
+editLink: true
+title: TextmodeFramebuffer
+description: Framebuffer class for managing offscreen rendering targets initialized via Textmodifier.createFramebuffer.
+category: Classes
+api: true
+kind: Class
+lastModified: 2026-02-01
+hasConstructor: false
+---
+
 [textmode.js](../index.md) / TextmodeFramebuffer
 
 # Class: TextmodeFramebuffer

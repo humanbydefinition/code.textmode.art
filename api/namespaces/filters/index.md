@@ -1,3 +1,14 @@
+---
+layout: doc
+editLink: true
+title: filters
+description: All filter related modules and types.
+category: Namespaces
+api: true
+kind: Namespace
+lastModified: 2026-02-01
+---
+
 [textmode.js](../../index.md) / filters
 
 # filters

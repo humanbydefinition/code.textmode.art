@@ -1,3 +1,16 @@
+---
+layout: doc
+editLink: true
+title: MousePosition
+description: Mouse coordinates in grid space using center-based coordinates.
+category: Interfaces
+api: true
+namespace: input.mouse
+kind: Interface
+lastModified: 2026-02-01
+isInterface: true
+---
+
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [mouse](../index.md) / MousePosition
 
 # Interface: MousePosition

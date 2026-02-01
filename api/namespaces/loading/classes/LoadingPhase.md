@@ -1,3 +1,16 @@
+---
+layout: doc
+editLink: true
+title: LoadingPhase
+description: Represents a loading phase tracked by a LoadingPhaseTracker.
+category: Classes
+api: true
+namespace: loading
+kind: Class
+lastModified: 2026-02-01
+hasConstructor: false
+---
+
 [textmode.js](../../../index.md) / [loading](../index.md) / LoadingPhase
 
 # Class: LoadingPhase

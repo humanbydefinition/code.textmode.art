@@ -1,3 +1,15 @@
+---
+layout: doc
+editLink: true
+title: Textmodifier
+description: Manages textmode rendering on a [`HTMLCanvasElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement) and provides methods for drawing, f...
+category: Classes
+api: true
+kind: Class
+lastModified: 2026-02-01
+hasConstructor: false
+---
+
 [textmode.js](../index.md) / Textmodifier
 
 # Class: Textmodifier

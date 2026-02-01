@@ -1,3 +1,16 @@
+---
+layout: doc
+editLink: true
+title: TextmodeLayer
+description: A single layer within a multi-layered textmode rendering context.
+category: Classes
+api: true
+namespace: layering
+kind: Class
+lastModified: 2026-02-01
+hasConstructor: false
+---
+
 [textmode.js](../../../index.md) / [layering](../index.md) / TextmodeLayer
 
 # Class: TextmodeLayer

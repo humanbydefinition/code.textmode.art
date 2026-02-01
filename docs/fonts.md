@@ -57,4 +57,4 @@ Please respect the individual licenses of each font. Some fonts are released und
 
 ## Contributing
 
-Have a great monospaced font that works well with `textmode.js`? We'd love to feature it! Check out our [Contributing Guide](/docs/contributing#suggest-a-font) for details on how to suggest fonts for inclusion in this showcase.
+Have a great monospaced font that works well with `textmode.js`? We'd love to feature it! Check out our [Contributing Guide](/docs/contributing/index.md#suggest-a-font) for details on how to suggest fonts for inclusion in this showcase.

@@ -1,3 +1,16 @@
+---
+layout: doc
+editLink: true
+title: TextmodeImage
+description: Represents an image uploaded for textmode rendering via Textmodifier.loadImage.
+category: Classes
+api: true
+namespace: loadables
+kind: Class
+lastModified: 2026-02-01
+hasConstructor: false
+---
+
 [textmode.js](../../../index.md) / [loadables](../index.md) / TextmodeImage
 
 # Class: TextmodeImage

@@ -1,3 +1,16 @@
+---
+layout: doc
+editLink: true
+title: TextmodeSource
+description: Abstract base class representing a textmode source asset (image, video, texture).
+category: Classes
+api: true
+namespace: loadables
+kind: Class
+lastModified: 2026-02-01
+hasConstructor: false
+---
+
 [textmode.js](../../../index.md) / [loadables](../index.md) / TextmodeSource
 
 # Class: `abstract` TextmodeSource

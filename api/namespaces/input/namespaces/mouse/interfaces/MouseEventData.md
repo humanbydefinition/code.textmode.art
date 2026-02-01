@@ -1,3 +1,16 @@
+---
+layout: doc
+editLink: true
+title: MouseEventData
+description: Mouse event data passed to event handlers
+category: Interfaces
+api: true
+namespace: input.mouse
+kind: Interface
+lastModified: 2026-02-01
+isInterface: true
+---
+
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [mouse](../index.md) / MouseEventData
 
 # Interface: MouseEventData

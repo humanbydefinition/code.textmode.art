@@ -1,3 +1,16 @@
+---
+layout: doc
+editLink: true
+title: LoadingScreenOptions
+description: Options for configuring the loading screen.
+category: Interfaces
+api: true
+namespace: loading
+kind: Interface
+lastModified: 2026-02-01
+isInterface: true
+---
+
 [textmode.js](../../../index.md) / [loading](../index.md) / LoadingScreenOptions
 
 # Interface: LoadingScreenOptions

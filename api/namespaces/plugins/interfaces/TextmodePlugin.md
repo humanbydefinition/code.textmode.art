@@ -1,3 +1,16 @@
+---
+layout: doc
+editLink: true
+title: TextmodePlugin
+description: A plugin interface for extending the functionality of a Textmodifier instance.
+category: Interfaces
+api: true
+namespace: plugins
+kind: Interface
+lastModified: 2026-02-01
+isInterface: true
+---
+
 [textmode.js](../../../index.md) / [plugins](../index.md) / TextmodePlugin
 
 # Interface: TextmodePlugin

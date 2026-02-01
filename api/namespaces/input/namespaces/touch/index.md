@@ -1,3 +1,15 @@
+---
+layout: doc
+editLink: true
+title: touch
+description: Types and interfaces for touch event handling
+category: Namespaces
+api: true
+namespace: input
+kind: Namespace
+lastModified: 2026-02-01
+---
+
 [textmode.js](../../../../index.md) / [input](../../index.md) / touch
 
 # touch

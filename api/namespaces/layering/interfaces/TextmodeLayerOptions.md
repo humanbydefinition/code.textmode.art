@@ -1,3 +1,16 @@
+---
+layout: doc
+editLink: true
+title: TextmodeLayerOptions
+description: Options for configuring a new TextmodeLayer via TextmodeLayerManager.add.
+category: Interfaces
+api: true
+namespace: layering
+kind: Interface
+lastModified: 2026-02-01
+isInterface: true
+---
+
 [textmode.js](../../../index.md) / [layering](../index.md) / TextmodeLayerOptions
 
 # Interface: TextmodeLayerOptions

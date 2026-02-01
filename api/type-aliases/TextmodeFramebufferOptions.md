@@ -1,3 +1,14 @@
+---
+layout: doc
+editLink: true
+title: TextmodeFramebufferOptions
+description: Options for creating a framebuffer. If not specified, width and height default to the current textmode grid size.
+category: Type Aliases
+api: true
+kind: TypeAlias
+lastModified: 2026-02-01
+---
+
 [textmode.js](../index.md) / TextmodeFramebufferOptions
 
 # Type Alias: TextmodeFramebufferOptions

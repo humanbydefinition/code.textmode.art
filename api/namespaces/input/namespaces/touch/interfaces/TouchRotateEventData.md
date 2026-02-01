@@ -1,3 +1,16 @@
+---
+layout: doc
+editLink: true
+title: TouchRotateEventData
+description: Rotate gesture event data describing the angle change between the initial and current segment
+category: Interfaces
+api: true
+namespace: input.touch
+kind: Interface
+lastModified: 2026-02-01
+isInterface: true
+---
+
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [touch](../index.md) / TouchRotateEventData
 
 # Interface: TouchRotateEventData

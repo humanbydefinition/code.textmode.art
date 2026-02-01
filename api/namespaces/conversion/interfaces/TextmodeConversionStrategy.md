@@ -1,3 +1,16 @@
+---
+layout: doc
+editLink: true
+title: TextmodeConversionStrategy
+description: Interface for defining a custom textmode conversion strategy.
+category: Interfaces
+api: true
+namespace: conversion
+kind: Interface
+lastModified: 2026-02-01
+isInterface: true
+---
+
 [textmode.js](../../../index.md) / [conversion](../index.md) / TextmodeConversionStrategy
 
 # Interface: TextmodeConversionStrategy

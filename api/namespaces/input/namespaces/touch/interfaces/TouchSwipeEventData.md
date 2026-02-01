@@ -1,3 +1,16 @@
+---
+layout: doc
+editLink: true
+title: TouchSwipeEventData
+description: Swipe event data reported when the finger travels a minimum distance within a time window
+category: Interfaces
+api: true
+namespace: input.touch
+kind: Interface
+lastModified: 2026-02-01
+isInterface: true
+---
+
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [touch](../index.md) / TouchSwipeEventData
 
 # Interface: TouchSwipeEventData

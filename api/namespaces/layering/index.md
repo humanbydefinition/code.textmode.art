@@ -1,3 +1,14 @@
+---
+layout: doc
+editLink: true
+title: layering
+description: All modules and types related to multi-layered textmode rendering.
+category: Namespaces
+api: true
+kind: Namespace
+lastModified: 2026-02-01
+---
+
 [textmode.js](../../index.md) / layering
 
 # layering

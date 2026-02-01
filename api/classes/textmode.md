@@ -1,3 +1,15 @@
+---
+layout: doc
+editLink: true
+title: textmode
+description: The main entry point for the `textmode.js` library.
+category: Classes
+api: true
+kind: Class
+lastModified: 2026-02-01
+hasConstructor: false
+---
+
 [textmode.js](../index.md) / textmode
 
 # Class: textmode

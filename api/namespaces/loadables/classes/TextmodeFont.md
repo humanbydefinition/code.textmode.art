@@ -1,3 +1,16 @@
+---
+layout: doc
+editLink: true
+title: TextmodeFont
+description: Manages the font used for rendering characters via TextmodeLayer.loadFont.
+category: Classes
+api: true
+namespace: loadables
+kind: Class
+lastModified: 2026-02-01
+hasConstructor: false
+---
+
 [textmode.js](../../../index.md) / [loadables](../index.md) / TextmodeFont
 
 # Class: TextmodeFont

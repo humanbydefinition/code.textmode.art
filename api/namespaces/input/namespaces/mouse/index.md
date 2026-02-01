@@ -1,3 +1,15 @@
+---
+layout: doc
+editLink: true
+title: mouse
+description: Types and interfaces for mouse event handling
+category: Namespaces
+api: true
+namespace: input
+kind: Namespace
+lastModified: 2026-02-01
+---
+
 [textmode.js](../../../../index.md) / [input](../../index.md) / mouse
 
 # mouse

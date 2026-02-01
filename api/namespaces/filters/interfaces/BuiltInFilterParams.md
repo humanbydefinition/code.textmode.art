@@ -1,3 +1,16 @@
+---
+layout: doc
+editLink: true
+title: BuiltInFilterParams
+description: Filter parameter types for built-in filters.
+category: Interfaces
+api: true
+namespace: filters
+kind: Interface
+lastModified: 2026-02-01
+isInterface: true
+---
+
 [textmode.js](../../../index.md) / [filters](../index.md) / BuiltInFilterParams
 
 # Interface: BuiltInFilterParams

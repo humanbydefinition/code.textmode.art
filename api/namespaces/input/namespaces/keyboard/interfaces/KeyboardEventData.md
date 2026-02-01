@@ -1,3 +1,16 @@
+---
+layout: doc
+editLink: true
+title: KeyboardEventData
+description: Key event data passed to event handlers
+category: Interfaces
+api: true
+namespace: input.keyboard
+kind: Interface
+lastModified: 2026-02-01
+isInterface: true
+---
+
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [keyboard](../index.md) / KeyboardEventData
 
 # Interface: KeyboardEventData

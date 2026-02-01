@@ -1,3 +1,15 @@
+---
+layout: doc
+editLink: true
+title: TextmodeShader
+description: Shader class for managing WebGL shader programs initialized via Textmodifier.createFilterShader or Textmodifier.createShader.
+category: Classes
+api: true
+kind: Class
+lastModified: 2026-02-01
+hasConstructor: false
+---
+
 [textmode.js](../index.md) / TextmodeShader
 
 # Class: TextmodeShader
