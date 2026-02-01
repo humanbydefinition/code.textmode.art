@@ -42,6 +42,8 @@ const themeConfig = {
 
 // https://vitepress.dev/reference/site-config
 export default withMermaid(defineConfig({
+  lang: 'en-US',
+  lastUpdated: true,
   title: "textmode.js",
   description: "textmode.js is a lightweight creative coding library for creating real-time ASCII art on the web.",
   head,
