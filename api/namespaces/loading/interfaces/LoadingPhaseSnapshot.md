@@ -1,3 +1,16 @@
+---
+layout: doc
+editLink: true
+title: LoadingPhaseSnapshot
+description: Snapshot of a loading phase's state.
+category: Interfaces
+api: true
+namespace: loading
+kind: Interface
+lastModified: 2026-02-01
+isInterface: true
+---
+
 [textmode.js](../../../index.md) / [loading](../index.md) / LoadingPhaseSnapshot
 
 # Interface: LoadingPhaseSnapshot

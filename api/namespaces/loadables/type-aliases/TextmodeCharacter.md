@@ -1,3 +1,15 @@
+---
+layout: doc
+editLink: true
+title: TextmodeCharacter
+description: Represents a single character in the TextmodeFont.characters array.
+category: Type Aliases
+api: true
+namespace: loadables
+kind: TypeAlias
+lastModified: 2026-02-01
+---
+
 [textmode.js](../../../index.md) / [loadables](../index.md) / TextmodeCharacter
 
 # Type Alias: TextmodeCharacter

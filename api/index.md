@@ -1,3 +1,14 @@
+---
+layout: doc
+editLink: true
+title: textmode.js
+description: Complete API reference for textmode.js - a lightweight creative coding library for real-time ASCII art on the web.
+category: API Reference
+api: true
+kind: Project
+lastModified: 2026-02-01
+---
+
 # textmode.js
 
 ## Namespaces

@@ -1,3 +1,16 @@
+---
+layout: doc
+editLink: true
+title: LoadingScreenManager
+description: Manages the loading screen display and state. Can be accessed via Textmodifier.loading.
+category: Classes
+api: true
+namespace: loading
+kind: Class
+lastModified: 2026-02-01
+hasConstructor: false
+---
+
 [textmode.js](../../../index.md) / [loading](../index.md) / LoadingScreenManager
 
 # Class: LoadingScreenManager

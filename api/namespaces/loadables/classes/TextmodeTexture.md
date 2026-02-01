@@ -1,3 +1,16 @@
+---
+layout: doc
+editLink: true
+title: TextmodeTexture
+description: Represents an external texture source for textmode rendering via Textmodifier.createTexture.
+category: Classes
+api: true
+namespace: loadables
+kind: Class
+lastModified: 2026-02-01
+hasConstructor: false
+---
+
 [textmode.js](../../../index.md) / [loadables](../index.md) / TextmodeTexture
 
 # Class: TextmodeTexture

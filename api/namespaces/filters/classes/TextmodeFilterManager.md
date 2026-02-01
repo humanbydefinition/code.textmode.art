@@ -1,3 +1,16 @@
+---
+layout: doc
+editLink: true
+title: TextmodeFilterManager
+description: Manages filter registration, shader compilation, and filter chain application.
+category: Classes
+api: true
+namespace: filters
+kind: Class
+lastModified: 2026-02-01
+hasConstructor: false
+---
+
 [textmode.js](../../../index.md) / [filters](../index.md) / TextmodeFilterManager
 
 # Class: TextmodeFilterManager

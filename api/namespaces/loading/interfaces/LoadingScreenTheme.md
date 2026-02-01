@@ -1,3 +1,16 @@
+---
+layout: doc
+editLink: true
+title: LoadingScreenTheme
+description: Theme settings for the loading screen.
+category: Interfaces
+api: true
+namespace: loading
+kind: Interface
+lastModified: 2026-02-01
+isInterface: true
+---
+
 [textmode.js](../../../index.md) / [loading](../index.md) / LoadingScreenTheme
 
 # Interface: LoadingScreenTheme

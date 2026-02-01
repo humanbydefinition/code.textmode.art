@@ -1,3 +1,16 @@
+---
+layout: doc
+editLink: true
+title: TouchPinchEventData
+description: Pinch gesture event data describing the scaling factor between the initial and current distance
+category: Interfaces
+api: true
+namespace: input.touch
+kind: Interface
+lastModified: 2026-02-01
+isInterface: true
+---
+
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [touch](../index.md) / TouchPinchEventData
 
 # Interface: TouchPinchEventData

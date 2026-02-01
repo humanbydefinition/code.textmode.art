@@ -1,3 +1,15 @@
+---
+layout: doc
+editLink: true
+title: TextmodeLayerBlendMode
+description: Blend modes available for TextmodeLayer compositing in 2D mode.
+category: Type Aliases
+api: true
+namespace: layering
+kind: TypeAlias
+lastModified: 2026-02-01
+---
+
 [textmode.js](../../../index.md) / [layering](../index.md) / TextmodeLayerBlendMode
 
 # Type Alias: TextmodeLayerBlendMode

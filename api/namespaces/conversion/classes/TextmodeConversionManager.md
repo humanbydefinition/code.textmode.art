@@ -1,3 +1,16 @@
+---
+layout: doc
+editLink: true
+title: TextmodeConversionManager
+description: Manages conversion strategy registration and retrieval.
+category: Classes
+api: true
+namespace: conversion
+kind: Class
+lastModified: 2026-02-01
+hasConstructor: false
+---
+
 [textmode.js](../../../index.md) / [conversion](../index.md) / TextmodeConversionManager
 
 # Class: TextmodeConversionManager

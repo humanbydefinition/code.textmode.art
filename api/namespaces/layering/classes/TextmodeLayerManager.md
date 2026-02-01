@@ -1,3 +1,16 @@
+---
+layout: doc
+editLink: true
+title: TextmodeLayerManager
+description: Manages the stack of layers within a Textmodifier instance.
+category: Classes
+api: true
+namespace: layering
+kind: Class
+lastModified: 2026-02-01
+hasConstructor: false
+---
+
 [textmode.js](../../../index.md) / [layering](../index.md) / TextmodeLayerManager
 
 # Class: TextmodeLayerManager

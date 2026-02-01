@@ -1,3 +1,16 @@
+---
+layout: doc
+editLink: true
+title: TouchEventData
+description: Touch event data.
+category: Interfaces
+api: true
+namespace: input.touch
+kind: Interface
+lastModified: 2026-02-01
+isInterface: true
+---
+
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [touch](../index.md) / TouchEventData
 
 # Interface: TouchEventData

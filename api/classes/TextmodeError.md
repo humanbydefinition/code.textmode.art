@@ -1,3 +1,15 @@
+---
+layout: doc
+editLink: true
+title: TextmodeError
+description: Custom error class for textmode.js exceptions.
+category: Classes
+api: true
+kind: Class
+lastModified: 2026-02-01
+hasConstructor: true
+---
+
 [textmode.js](../index.md) / TextmodeError
 
 # Class: TextmodeError

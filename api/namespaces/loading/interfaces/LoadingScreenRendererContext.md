@@ -1,3 +1,16 @@
+---
+layout: doc
+editLink: true
+title: LoadingScreenRendererContext
+description: Context object passed to a loading screen renderer function.
+category: Interfaces
+api: true
+namespace: loading
+kind: Interface
+lastModified: 2026-02-01
+isInterface: true
+---
+
 [textmode.js](../../../index.md) / [loading](../index.md) / LoadingScreenRendererContext
 
 # Interface: LoadingScreenRendererContext
