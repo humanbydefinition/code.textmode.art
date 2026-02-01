@@ -3,7 +3,7 @@ import { defineConfig } from 'vitepress'
 import container from 'markdown-it-container'
 import { renderSandbox } from 'vitepress-plugin-sandpack'
 import { withMermaid } from 'vitepress-plugin-mermaid'
-import { head, nav, sidebar, blog } from './configs/index.mts'
+import { head, nav, sidebar, blog, transformHead } from './configs/index.mts'
 
 const themeConfig = {
   logo: '/svg/doc_logo.svg',
@@ -45,6 +45,10 @@ export default withMermaid(defineConfig({
   title: "textmode.js",
   description: "textmode.js is a lightweight creative coding library for creating real-time ASCII art on the web.",
   head,
+  sitemap: {
+    hostname: 'https://code.textmode.art'
+  },
+  transformHead,
 
   vite: {
     plugins: [blog.plugin],

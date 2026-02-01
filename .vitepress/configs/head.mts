@@ -1,4 +1,4 @@
-import type { HeadConfig } from 'vitepress'
+import type { HeadConfig, TransformContext } from 'vitepress'
 
 const baseHeaders: HeadConfig[] = [
   ['link', { rel: 'icon', href: '/svg/doc_logo.svg', type: 'image/svg+xml' }],
@@ -14,3 +14,15 @@ const umamiScript: HeadConfig = ['script', {
 }]
 
 export const head: HeadConfig[] = [...baseHeaders, umamiScript]
+
+export const transformHead = ({ pageData }: TransformContext): HeadConfig[] => {
+  const canonicalUrl = `https://code.textmode.art/${pageData.relativePath.replace(/index\.md$/, '').replace(/\.md$/, '.html')}`
+    .replace(/\/$/, ''); 
+
+  return [
+    ['link', { rel: 'canonical', href: canonicalUrl }],
+    ['meta', { property: 'og:title', content: pageData.title || 'textmode.js' }],
+    ['meta', { property: 'og:description', content: pageData.description || 'textmode.js is a lightweight creative coding library for creating real-time ASCII art on the web.' }],
+    ['meta', { property: 'og:url', content: canonicalUrl }],
+  ]
+}
