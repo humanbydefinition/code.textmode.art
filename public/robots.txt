@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://code.textmode.art/sitemap.xml

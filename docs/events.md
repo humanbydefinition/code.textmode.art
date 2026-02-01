@@ -1,3 +1,8 @@
+---
+title: Event Handling
+description: comprehensive guide to handling mouse, touch, and keyboard events in textmode.js for interactive ASCII art and games.
+---
+
 # Event handling
 
 `textmode.js` provides comprehensive event handling capabilities for touch, mouse, and keyboard interactions, enabling you to create interactive textmode applications and games. The event system is designed to be familiar to developers coming from p5.js or similar creative coding frameworks.

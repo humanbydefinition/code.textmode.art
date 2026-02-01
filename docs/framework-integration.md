@@ -1,3 +1,8 @@
+---
+title: Framework Integration
+description: Integrate textmode.js with existing frameworks like p5.js, Three.js, and Hydra. Learn how to use overlay mode to convert any canvas or video to ASCII art.
+---
+
 # Framework integration
 
 `textmode.js` is designed to be framework-agnostic and can seamlessly integrate with existing web-based graphics frameworks and media elements. The overlay mode allows you to transform any canvas or video content into textmode graphics in real-time while preserving all textmode.js functionality for additional drawing operations.

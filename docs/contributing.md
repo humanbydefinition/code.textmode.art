@@ -1,5 +1,6 @@
 ---
 title: Contributing
+description: Learn how to contribute to textmode.js. Ways to help include suggesting fonts, submitting sketches, improving docs, and reporting issues.
 ---
 
 # Contributing

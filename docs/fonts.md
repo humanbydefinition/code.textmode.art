@@ -1,3 +1,8 @@
+---
+title: Fonts
+description: A curated showcase of monospaced bitmap fonts perfect for textmode.js. Learn how to load custom fonts for your ASCII art projects.
+---
+
 # Fonts
 
 `textmode.js` works best with monospaced bitmap fonts that are perfect for creating ASCII art, textmode graphics, and retro computing aesthetics. This page showcases a curated collection of fonts that work exceptionally well with the library.
