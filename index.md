@@ -1,5 +1,5 @@
 ---
-title: textmode.js - Real-time ASCII art library for the web
+title: Home
 description: A lightweight, framework-agnostic creative coding library for real-time ASCII and textmode graphics. Build generative art, retro games, live coding visuals, and more with WebGL2-powered performance.
 layout: home
 
