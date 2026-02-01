@@ -1,11 +1,15 @@
-# code.textmode.art
+# code.textmode.art (✿◠‿◠)
 
-[![VitePress](https://img.shields.io/badge/VitePress-646CFF?logo=vitepress&logoColor=white)](https://vitepress.dev/) [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-222?logo=github&logoColor=white)](https://pages.github.com/) [![Discord](https://img.shields.io/discord/1357070706181017691?color=5865F2&label=Discord&logo=discord&logoColor=white)](https://discord.gg/sjrw8QXNks) [![ko-fi](https://shields.io/badge/ko--fi-donate-ff5f5f?logo=ko-fi)](https://ko-fi.com/V7V8JG2FY)
+<div align="center">
 
+<img alt="textmodejs_banner" src="https://github.com/user-attachments/assets/f03c2d74-7dc3-45cf-a0a5-043f9438231e" />
+
+| [![VitePress](https://img.shields.io/badge/VitePress-646CFF?logo=vitepress&logoColor=white)](https://vitepress.dev/) [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-222?logo=github&logoColor=white)](https://pages.github.com/) | [![Discord](https://img.shields.io/discord/1357070706181017691?color=5865F2&label=Discord&logo=discord&logoColor=white)](https://discord.gg/sjrw8QXNks) [![ko-fi](https://shields.io/badge/ko--fi-donate-ff5f5f?logo=ko-fi)](https://ko-fi.com/V7V8JG2FY) |
+|:-------------|:-------------|
+
+</div>
 
 Official documentation, guides, and examples for [textmode.js](https://github.com/humanbydefinition/textmode.js) - a creative coding library for real-time ASCII art on the web.
-
-[What's inside](#whats-inside) • [Local development](#local-development) • [Contributing](#contributing) • [Tech stack](#tech-stack) • [License](#license) • [Links](#links)
 
 🌐 **Live site**: [code.textmode.art](https://code.textmode.art)
 
@@ -17,6 +21,8 @@ Official documentation, guides, and examples for [textmode.js](https://github.co
 - 🔌 **Integrations** - Guides for p5.js, Three.js, Hydra Synth, and more
 
 ## Local development
+
+To run this documentation site locally:
 
 ```bash
 # Install dependencies
