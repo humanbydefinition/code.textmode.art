@@ -30,14 +30,22 @@
       tag="div"
       class="gallery-grid__grid"
     >
-      <GalleryCard
-        v-for="item in filteredItems"
-        :key="item.id"
-        :item="item"
-      />
+      <template v-if="isReady">
+        <GalleryCard
+          v-for="(item, index) in filteredItems"
+          :key="item.id"
+          :item="item"
+          :style="{ '--delay': index * 50 + 'ms' }"
+        />
+      </template>
       
       <!-- Custom CTA Card -->
-      <div key="cta-card" class="gallery-grid__cta-card">
+      <div 
+        v-if="isReady" 
+        key="cta-card" 
+        class="gallery-grid__cta-card"
+        :style="{ '--delay': filteredItems.length * 50 + 'ms' }"
+      >
         <div class="gallery-grid__cta-card-icon">
           <UiIcon name="ph:plus-circle-duotone" size="xl" />
         </div>
@@ -131,11 +139,13 @@ interface RawGalleryItem {
 
 // Initialize gallery items without randomization
 const galleryItems = ref<GalleryItem[]>([])
+const isReady = ref(false)
 
 // Initialize items on mount to avoid SSR hydration mismatch
 onMounted(() => {
   if (props.items) {
     galleryItems.value = props.items
+    requestAnimationFrame(() => isReady.value = true)
     return
   }
   
@@ -152,6 +162,7 @@ onMounted(() => {
   }
   
   galleryItems.value = shuffled
+  requestAnimationFrame(() => isReady.value = true)
 })
 
 // Filters
@@ -281,6 +292,7 @@ function getFilterCount(filter: GalleryItemType | 'all'): number {
 .gallery-fade-enter-active,
 .gallery-fade-leave-active {
   transition: all 0.3s ease;
+  transition-delay: var(--delay, 0ms);
 }
 
 .gallery-fade-enter-from,

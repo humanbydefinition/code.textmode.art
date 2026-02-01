@@ -113,7 +113,7 @@ export const transformHead = ({ pageData }: TransformContext): HeadConfig[] => {
         "price": "0",
         "priceCurrency": "USD"
       },
-      "description": "A lightweight creative coding library for creating real-time ASCII art on the web.",
+      "description": "textmode.js is a lightweight creative coding library for creating real-time ASCII art on the web.",
       "url": "https://code.textmode.art"
     })]);
   }

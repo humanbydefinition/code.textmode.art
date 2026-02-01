@@ -43,6 +43,7 @@ const themeConfig = {
 // https://vitepress.dev/reference/site-config
 export default withMermaid(defineConfig({
   lang: 'en-US',
+  appearance: 'dark',
   lastUpdated: true,
   title: "textmode.js",
   description: "textmode.js is a lightweight creative coding library for creating real-time ASCII art on the web.",
@@ -60,7 +61,7 @@ export default withMermaid(defineConfig({
   markdown: {
     config(md) {
       md
-        .use(container, 'textmode-sandbox', { 
+        .use(container, 'textmode-sandbox', {
           render(tokens: any[], idx: number) {
             const sandboxHtml = renderSandbox(tokens, idx, 'textmode-sandbox');
             if (tokens[idx].nesting === 1) {
