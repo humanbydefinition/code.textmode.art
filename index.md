@@ -42,6 +42,11 @@ features:
 
 ---
 
+<h1 class="sr-only">textmode.js - Real-time ASCII art for the web</h1>
+<p class="sr-only">
+  Lightweight creative coding library for real-time textmode graphics in the browser.
+</p>
+
 <HomeCta />
 
 ## What is `textmode.js`?
