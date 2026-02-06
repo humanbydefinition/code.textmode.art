@@ -33,7 +33,7 @@ jobs:
         uses: actions/configure-pages@v4
 
       - name: Install dependencies
-        run: npm ci --omit=optional
+        run: npm install --frozen-lockfile
 
       - name: Build VitePress site
         run: npm run build
