@@ -109,9 +109,14 @@ const baseTheme: Theme = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>textmode.js | sketch</title>
     <style>
-      * { box-sizing: border-box; }
-      body { margin: 0; background: #050608; color: #fff; font-family: 'JetBrains Mono', monospace; }
-      canvas { display: block; }
+      html, body {
+        margin: 0;
+        padding: 0;
+      }
+
+      canvas {
+        display: block;
+      }
     </style>
   </head>
   <body>
