@@ -5,7 +5,7 @@ export const nav: DefaultTheme.NavItem[] = [
   { text: 'Gallery', link: '/gallery' },
   { text: 'Documentation', link: '/docs/introduction' },
   { text: 'API', link: '/api/' },
-  { text: 'Blog', link: '/blog/' },
+  /** { text: 'Blog', link: '/blog/' }, **/
   { text: 'Support ♥', link: '/docs/support' },
   { text: 'Web Editor', link: 'https://editor.textmode.art' },
 ]

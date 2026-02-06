@@ -93,7 +93,7 @@ export const transformHead = ({ pageData }: TransformContext): HeadConfig[] => {
   ]
 
   // Add Keywords (from frontmatter or default)
-  const defaultKeywords = 'textmode, ascii art, creative coding, webgl, javascript, library, generative art, visualization';
+  const defaultKeywords = 'textmode, ascii art, creative coding, webgl, javascript library, generative art, real-time, canvas, visualization, retro, 8-bit, terminal, petscii, live coding';
   const keywords = pageData.frontmatter.keywords || defaultKeywords;
 
   if (keywords) {

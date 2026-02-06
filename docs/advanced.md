@@ -13,7 +13,7 @@ Framebuffers allow you to render graphics offscreen and then use them as texture
 
 ### Creating framebuffers
 
-Create a framebuffer using the [`createFramebuffer()`](/api/classes/Textmodifier#createframebuffer) method with specified grid dimensions:
+Create a framebuffer using the [`createFramebuffer()`](/api/textmode.js/classes/Textmodifier#createframebuffer) method with specified grid dimensions:
 
 ```js
 const t = textmode.create({ width: 800, height: 600 });
@@ -33,7 +33,7 @@ The framebuffer uses the same Multiple Render Target (MRT) structure as the main
 
 ### Rendering to framebuffers
 
-Use [`begin()`](/api/classes/TextmodeFramebuffer#begin) and [`end()`](/api/classes/TextmodeFramebuffer#end) to redirect rendering operations to the framebuffer:
+Use [`begin()`](/api/textmode.js/classes/TextmodeFramebuffer#begin) and [`end()`](/api/textmode.js/classes/TextmodeFramebuffer#end) to redirect rendering operations to the framebuffer:
 
 ```js
 t.draw(() => {
@@ -111,7 +111,7 @@ t.draw(() => {
 
 ### Creating filter shaders
 
-Use [`createFilterShader()`](/api/classes/Textmodifier#createfiltershader) to create custom shaders from GLSL source code:
+Use [`createFilterShader()`](/api/textmode.js/classes/Textmodifier#createfiltershader) to create custom shaders from GLSL source code:
 
 ```js
 const t = textmode.create({ width: 800, height: 600 });
@@ -150,7 +150,7 @@ t.setup(async () => {
 
 ### Applying shaders
 
-Use the [`shader()`](/api/classes/Textmodifier#shader) method to set the current shader, and [`setUniform()`](/api/classes/Textmodifier#setuniform) or [`setUniforms()`](/api/classes/Textmodifier#setuniforms) to pass values:
+Use the [`shader()`](/api/textmode.js/classes/Textmodifier#shader) method to set the current shader, and [`setUniform()`](/api/textmode.js/classes/Textmodifier#setuniform) or [`setUniforms()`](/api/textmode.js/classes/Textmodifier#setuniforms) to pass values:
 
 ```js
 t.draw(() => {
@@ -162,7 +162,7 @@ t.draw(() => {
 
 ### Setting multiple uniforms
 
-Use [`setUniforms()`](/api/classes/Textmodifier#setuniforms) to pass multiple values in one call:
+Use [`setUniforms()`](/api/textmode.js/classes/Textmodifier#setuniforms) to pass multiple values in one call:
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -355,7 +355,7 @@ t.draw(() => {
 
 ### Rotation in 3D space
 
-Use [`rotate()`](/api/classes/Textmodifier#rotate), [`rotateX()`](/api/classes/Textmodifier#rotatex), [`rotateY()`](/api/classes/Textmodifier#rotatey), or [`rotateZ()`](/api/classes/Textmodifier#rotatez):
+Use [`rotate()`](/api/textmode.js/classes/Textmodifier#rotate), [`rotateX()`](/api/textmode.js/classes/Textmodifier#rotatex), [`rotateY()`](/api/textmode.js/classes/Textmodifier#rotatey), or [`rotateZ()`](/api/textmode.js/classes/Textmodifier#rotatez):
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -382,7 +382,7 @@ t.draw(() => {
 
 ### Translation in 3D space
 
-Use [`translate()`](/api/classes/Textmodifier#translate), [`translateX()`](/api/classes/Textmodifier#translatex), [`translateY()`](/api/classes/Textmodifier#translatey), or [`translateZ()`](/api/classes/Textmodifier#translatez):
+Use [`translate()`](/api/textmode.js/classes/Textmodifier#translate), [`translateX()`](/api/textmode.js/classes/Textmodifier#translatex), [`translateY()`](/api/textmode.js/classes/Textmodifier#translatey), or [`translateZ()`](/api/textmode.js/classes/Textmodifier#translatez):
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -405,7 +405,7 @@ t.draw(() => {
 
 ### Orthographic projection
 
-By default, `textmode.js` uses perspective projection. Switch to orthographic projection with [`ortho()`](/api/classes/Textmodifier#ortho):
+By default, `textmode.js` uses perspective projection. Switch to orthographic projection with [`ortho()`](/api/textmode.js/classes/Textmodifier#ortho):
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -445,7 +445,7 @@ t.draw(() => {
 
 ### State management with push/pop
 
-Use [`push()`](/api/classes/Textmodifier#push) and [`pop()`](/api/classes/Textmodifier#pop) to isolate transformation and style changes:
+Use [`push()`](/api/textmode.js/classes/Textmodifier#push) and [`pop()`](/api/textmode.js/classes/Textmodifier#pop) to isolate transformation and style changes:
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });

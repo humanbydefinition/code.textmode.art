@@ -38,7 +38,7 @@ Key features of flok include:
 3. Add a **textmode** panel from the target dropdown
 4. Start coding!
 
-When you select **textmode** as your target, you get access to a global `t` variable - a [`Textmodifier`](/api/classes/Textmodifier) instance that provides the full `textmode.js` API.
+When you select **textmode** as your target, you get access to a global `t` variable - a [`Textmodifier`](/api/textmode.js/classes/Textmodifier) instance that provides the full `textmode.js` API.
 
 ## Basic example
 
@@ -142,7 +142,7 @@ t.draw(() => {
 });
 ```
 
-The `t.overlay` property gives you access to the Hydra canvas as a [`TextmodeImage`](/api/namespaces/loadables/classes/TextmodeImage), which you can configure and draw just like any other loaded image.
+The `t.overlay` property gives you access to the Hydra canvas as a [`TextmodeImage`](/api/textmode.js/namespaces/loadables/classes/TextmodeImage), which you can configure and draw just like any other loaded image.
 
 ## Strudel audio reactivity
 

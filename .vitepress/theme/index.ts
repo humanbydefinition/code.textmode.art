@@ -25,6 +25,7 @@ import CommunitySupport from './components/CommunitySupport/CommunitySupport.vue
 import Testimonials from './components/Testimonials/Testimonials.vue'
 import ContributorsGrid from './components/Contributors/ContributorsGrid.vue'
 import WhatWillYouCreate from './components/WhatWillYouCreate/WhatWillYouCreate.vue'
+import ApiLanding from './components/ApiLanding/ApiLanding.vue'
 import { GalleryGrid } from './components/Gallery'
 
 // Blog
@@ -85,6 +86,7 @@ const baseTheme: Theme = {
     app.component('ContributorsGrid', ContributorsGrid)
     app.component('WhatWillYouCreate', WhatWillYouCreate)
     app.component('GalleryGrid', GalleryGrid)
+    app.component('ApiLanding', ApiLanding)
 
     // Set up hero sketch router
     setupHeroSketchRouter(router)
@@ -97,7 +99,7 @@ const baseTheme: Theme = {
     codeblocksFold({ route, frontmatter })
     useCodeSandbox({
       languages: ['javascript', 'typescript'],
-      scripts: ['https://unpkg.com/textmode.js@latest/dist/textmode.umd.js'],
+      scripts: ['https://unpkg.com/textmode.js@latest/dist/textmode.umd.js', 'https://unpkg.com/textmode.synth.js@latest/dist/textmode.synth.umd.js', 'https://unpkg.com/textmode.filters.js@latest/dist/textmode.filters.umd.js'],
       filename: 'sketch.js',
       buttonText: 'Open in CodeSandbox',
       indexHtml: `<!DOCTYPE html>
@@ -107,9 +109,14 @@ const baseTheme: Theme = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>textmode.js | sketch</title>
     <style>
-      * { box-sizing: border-box; }
-      body { margin: 0; background: #050608; color: #fff; font-family: 'JetBrains Mono', monospace; }
-      canvas { display: block; }
+      html, body {
+        margin: 0;
+        padding: 0;
+      }
+
+      canvas {
+        display: block;
+      }
     </style>
   </head>
   <body>

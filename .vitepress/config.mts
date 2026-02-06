@@ -45,6 +45,7 @@ export default withMermaid(defineConfig({
   lang: 'en-US',
   appearance: 'dark',
   lastUpdated: true,
+  srcExclude: ['docs/examples/**'],
   title: "textmode.js",
   description: "textmode.js is a lightweight creative coding library for creating real-time ASCII art on the web.",
   head,

@@ -43,6 +43,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 
+const ENABLED = false
 const DISMISS_KEY = 'textmodejs_docs_toast_dismissed_at'
 const DISMISS_DAYS = 7
 const DISMISS_MS = DISMISS_DAYS * 24 * 60 * 60 * 1000
@@ -51,6 +52,9 @@ const SHOW_DELAY = 1500 // 1.5 seconds delay before showing
 const visible = ref(false)
 
 onMounted(() => {
+  if (!ENABLED) {
+    return
+  }
   // Small delay before checking to avoid collision with page load
   setTimeout(() => {
     try {

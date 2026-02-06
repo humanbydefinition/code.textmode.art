@@ -1,5 +1,7 @@
 import type { DefaultTheme } from 'vitepress'
-import typedocSidebar from '../../api/typedoc-sidebar.json'
+import typedocSidebarTextmode from '../../api/textmode.js/typedoc-sidebar.json'
+import typedocSidebarSynth from '../../api/textmode.synth.js/typedoc-sidebar.json'
+import typedocSidebarFilters from '../../api/textmode.filters.js/typedoc-sidebar.json'
 import { defineBlogConfig } from 'vitepress-plugin-blog/config'
 
 export const blog = defineBlogConfig({
@@ -37,17 +39,40 @@ const docsSidebar: DefaultTheme.SidebarItem[] = [
       { text: 'Contributors', link: '/docs/contributors' },
     ]
   },
+]
+
+const apiSidebar: DefaultTheme.SidebarItem[] = [
   {
     text: 'API',
     items: [
-      { text: 'Index', link: '/api/' },
-      ...typedocSidebar
+      { text: 'Overview', link: '/api/' },
     ],
   },
+  {
+    text: 'textmode.js',
+    items: [
+      { text: 'Index', link: '/api/textmode.js/' },
+      ...typedocSidebarTextmode
+    ],
+  },
+  {
+    text: 'textmode.synth.js',
+    items: [
+      { text: 'Index', link: '/api/textmode.synth.js/' },
+      ...typedocSidebarSynth
+    ],
+  },
+  {
+    text: 'textmode.filters.js',
+    items: [
+      { text: 'Index', link: '/api/textmode.filters.js/' },
+      ...typedocSidebarFilters
+    ],
+  }
 ]
 
 export const sidebar: DefaultTheme.Sidebar = {
   '/docs/': docsSidebar,
-  '/api/': docsSidebar,
+  '/api/': apiSidebar,
   '/blog/': blog.sidebar,
 }

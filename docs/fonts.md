@@ -25,7 +25,7 @@ To use a specific font with `textmode.js`, you'll need to:
 
 1. **Download a font** from the provided links below or from your preferred font repository
 2. **Include the font** in your project
-3. **Specify the font path** when calling the [`loadFont`](/api/classes/Textmodifier#loadfont) method in your [`Textmodifier`](/api/classes/Textmodifier) instance:
+3. **Specify the font path** when calling the [`loadFont`](/api/textmode.js/classes/Textmodifier#loadfont) method in your [`Textmodifier`](/api/textmode.js/classes/Textmodifier) instance:
 
 #### Load a new font at any point after initialization:
 ```js
