@@ -4,6 +4,7 @@ description: GPU-accelerated image filters plugin for textmode.js.
 category: API Reference
 api: true
 kind: Project
+ecosystem: textmode.js
 lastModified: 2026-02-06
 ---
 
@@ -18,7 +19,7 @@ via WebGL2 fragment shaders for maximum performance.
 
 ### Color adjustment
 - [brightness](interfaces/BrightnessOptions.md) - Adjust image brightness
-- [contrast](interfaces/ContrastOptions.md) - Adjust image contrast  
+- [contrast](interfaces/ContrastOptions.md) - Adjust image contrast
 - [saturation](interfaces/SaturationOptions.md) - Adjust color intensity
 - [hueRotate](interfaces/HueRotateOptions.md) - Rotate colors around the color wheel
 - [posterize](interfaces/PosterizeOptions.md) - Reduce color levels
@@ -28,7 +29,7 @@ via WebGL2 fragment shaders for maximum performance.
 - [pixelate](interfaces/PixelateOptions.md) - Pixelation/mosaic effect
 - [gridDistortion](interfaces/GridDistortionOptions.md) - Custom grid warping
 
-### Stylization  
+### Stylization
 - [glitch](interfaces/GlitchOptions.md) - Digital glitch effect
 - [crtMattias](interfaces/CrtMattiasOptions.md) - CRT monitor emulation
 - [scanlines](interfaces/ScanlinesOptions.md) - Customizable scanlines

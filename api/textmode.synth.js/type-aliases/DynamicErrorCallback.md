@@ -4,6 +4,7 @@ description: Callback signature for dynamic parameter evaluation errors. Live co
 category: Type Aliases
 api: true
 kind: TypeAlias
+ecosystem: textmode.js
 lastModified: 2026-02-06
 ---
 

@@ -4,6 +4,7 @@ description: A derivative work of hydra-synth by Olivia Jack, adapted for the te
 category: API Reference
 api: true
 kind: Project
+ecosystem: textmode.js
 lastModified: 2026-02-06
 ---
 

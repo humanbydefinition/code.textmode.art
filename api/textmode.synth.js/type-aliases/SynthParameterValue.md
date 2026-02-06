@@ -4,6 +4,7 @@ description: Dynamic parameter value types supported by the synth system.
 category: Type Aliases
 api: true
 kind: TypeAlias
+ecosystem: textmode.js
 lastModified: 2026-02-06
 ---
 

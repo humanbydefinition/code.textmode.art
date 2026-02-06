@@ -4,6 +4,7 @@ description: Configuration options for the 'pixelate' filter.
 category: Interfaces
 api: true
 kind: Interface
+ecosystem: textmode.js
 lastModified: 2026-02-06
 isInterface: true
 ---

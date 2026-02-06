@@ -1,9 +1,10 @@
 ---
 title: char
-description: char function API reference for textmode.js.
+description: char function API reference for textmode.synth.js.
 category: Functions
 api: true
 kind: Function
+ecosystem: textmode.js
 lastModified: 2026-02-06
 ---
 

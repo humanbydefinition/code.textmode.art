@@ -4,6 +4,7 @@ description: Extended array interface with modulation methods.
 category: Interfaces
 api: true
 kind: Interface
+ecosystem: textmode.js
 lastModified: 2026-02-06
 isInterface: true
 ---
