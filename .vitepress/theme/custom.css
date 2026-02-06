@@ -11,6 +11,39 @@
   --textmode-doc-aside-width: 256px;
 }
 
+/* 
+ * Custom scrollbar for entire page
+ * Applies the same minimal scrollbar design across all scrollable areas
+ */
+html,
+body {
+  /* Firefox scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: var(--vp-c-divider) transparent;
+}
+
+/* Webkit scrollbar styles for page */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 4px;
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background: var(--vp-c-divider);
+  border-radius: 2px;
+}
+
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover {
+  background: var(--vp-c-text-3);
+}
+
 /* Screen-reader only utility */
 .sr-only {
   position: absolute !important;
@@ -499,4 +532,47 @@
   .VPDoc:not(.has-aside) .content {
     max-width: 1104px !important;
   }
+}
+
+/* 
+ * Custom scrollbar for sidebar navigation (#app > div > aside)
+ * Matches the style used on the aside outline
+ */
+#app > div > aside,
+#app > div > aside .VPSidebar,
+#app > div > aside .container,
+#app > div > aside nav {
+  /* Firefox scrollbar */
+  scrollbar-width: thin;
+  scrollbar-color: var(--vp-c-divider) transparent;
+}
+
+/* Webkit scrollbar styles for sidebar navigation */
+#app > div > aside::-webkit-scrollbar,
+#app > div > aside .VPSidebar::-webkit-scrollbar,
+#app > div > aside .container::-webkit-scrollbar,
+#app > div > aside nav::-webkit-scrollbar {
+  width: 4px;
+}
+
+#app > div > aside::-webkit-scrollbar-track,
+#app > div > aside .VPSidebar::-webkit-scrollbar-track,
+#app > div > aside .container::-webkit-scrollbar-track,
+#app > div > aside nav::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#app > div > aside::-webkit-scrollbar-thumb,
+#app > div > aside .VPSidebar::-webkit-scrollbar-thumb,
+#app > div > aside .container::-webkit-scrollbar-thumb,
+#app > div > aside nav::-webkit-scrollbar-thumb {
+  background: var(--vp-c-divider);
+  border-radius: 2px;
+}
+
+#app > div > aside::-webkit-scrollbar-thumb:hover,
+#app > div > aside .VPSidebar::-webkit-scrollbar-thumb:hover,
+#app > div > aside .container::-webkit-scrollbar-thumb:hover,
+#app > div > aside nav::-webkit-scrollbar-thumb:hover {
+  background: var(--vp-c-text-3);
 }
