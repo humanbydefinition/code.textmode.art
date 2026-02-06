@@ -52,10 +52,10 @@ const libraries: ApiLibrary[] = [
     name: 'textmode.js',
     kicker: 'das nest',
     badge: 'core',
-    description: 'Rendering primitives, layers, loadables, input handling, and shaders for ASCII canvases.',
+    description: 'Rendering primitives, layers, loadables, input handling, shaders, and much more.',
     highlights: [
       'Grid-driven drawing API',
-      'Fonts, images, and video loadables',
+      'Font, image, video, and canvas loadables',
       'Plugin hooks + lifecycle events'
     ],
     cta: '/api/textmode.js/',
@@ -67,10 +67,10 @@ const libraries: ApiLibrary[] = [
     name: 'textmode.synth.js',
     kicker: 'visual synthesis',
     badge: 'synth',
-    description: 'Hydra-inspired synthesis chains for procedural characters, colors, and modulation.',
+    description: 'Hydra-inspired synthesis chains for procedural pattern generation and shader graph building.',
     highlights: [
       'Chainable sources and modulators',
-      'Pattern generators: noise, osc, voronoi',
+      'Pattern generators: noise, osc, voronoi, and much more',
       'Installs as a textmode.js plugin'
     ],
     cta: '/api/textmode.synth.js/',
