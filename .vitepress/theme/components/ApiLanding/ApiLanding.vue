@@ -75,7 +75,7 @@ const libraries: ApiLibrary[] = [
     name: 'textmode.filters.js',
     kicker: 'post-processing',
     badge: 'filters',
-    description: 'A collection of post-processing filters for textmode.js layers and canvas.',
+    description: 'A collection of post-processing filters for textmode.js layers and canvases.',
     highlights: [],
     cta: '/api/textmode.filters.js/',
     secondary: '/api/textmode.filters.js/#example',
