@@ -9,7 +9,7 @@ This section covers the fundamental concepts and features of the `textmode.js` l
 
 ## Creating a canvas to draw on
 
-To create a canvas for drawing, you can use the [`textmode.create()`](/api/classes/textmode#create) method. This method initializes a new textmode canvas with the specified dimensions and font size.
+To create a canvas for drawing, you can use the [`textmode.create()`](/api/textmode.js/classes/textmode#create) method. This method initializes a new textmode canvas with the specified dimensions and font size.
 
 Here's an example of how to create a canvas:
 
@@ -24,17 +24,17 @@ t.setup(() => {
 });
 ```
 
-The `create()` method a [`Textmodifier`](/api/classes/Textmodifier) instance, which is the main interface for drawing and manipulating the textmode canvas.
+The `create()` method a [`Textmodifier`](/api/textmode.js/classes/Textmodifier) instance, which is the main interface for drawing and manipulating the textmode canvas.
 
 :::info
-For more details on the available initialization options, refer to [`TextmodeOptions`](/api/type-aliases/TextmodeOptions).
+For more details on the available initialization options, refer to [`TextmodeOptions`](/api/textmode.js/type-aliases/TextmodeOptions).
 
-The [`setup`](/api/classes/Textmodifier#setup) callback is optional and can be used to perform any setup tasks that require access to the fully initialized `Textmodifier` instance. If you don't need to perform any setup tasks, you don't need to provide this callback.
+The [`setup`](/api/textmode.js/classes/Textmodifier#setup) callback is optional and can be used to perform any setup tasks that require access to the fully initialized `Textmodifier` instance. If you don't need to perform any setup tasks, you don't need to provide this callback.
 :::
 
 ## Drawing on the canvas
 
-Once you have created a canvas, you can start drawing on it by defining a [`draw`](/api/classes/Textmodifier#draw) callback function. This function is called on each frame, allowing you to create animations and dynamic graphics.
+Once you have created a canvas, you can start drawing on it by defining a [`draw`](/api/textmode.js/classes/Textmodifier#draw) callback function. This function is called on each frame, allowing you to create animations and dynamic graphics.
 
 `textmode.js` provides a variety of drawing primitives, such as `rect()`, `line()`, and `triangle()`, which you can use to create shapes on the grid. To define how a shape should look, you can set various cell properties like `char()`, `charColor()`, and `cellColor()`, which define the character, character color, and cell background color, respectively for subsequent drawing operations.
 
@@ -42,7 +42,7 @@ Once you have created a canvas, you can start drawing on it by defining a [`draw
 
 ### Coordinate system
 
-The coordinate system in `textmode.js` is grid-based, where each character occupies a cell in a 2D grid. The center of the grid is `(0, 0, 0)`. The grid dimensions are dynamically calculated based on the canvas size, the set font, and its size. You can access the grid dimensions via the [`grid`](/api/classes/Textmodifier#grid) property of the `Textmodifier` instance.
+The coordinate system in `textmode.js` is grid-based, where each character occupies a cell in a 2D grid. The center of the grid is `(0, 0, 0)`. The grid dimensions are dynamically calculated based on the canvas size, the set font, and its size. You can access the grid dimensions via the [`grid`](/api/textmode.js/classes/Textmodifier#grid) property of the `Textmodifier` instance.
 
 ```js
 console.log(t.grid.cols); // Number of columns
@@ -55,14 +55,14 @@ As seen in the example above, `textmode.js` provides several drawing primitives 
 
 #### Rectangle
 
-The [`rect(width, height)`](/api/classes/Textmodifier#rect) method draws a filled rectangle of characters on the grid using the previously specified properties.
+The [`rect(width, height)`](/api/textmode.js/classes/Textmodifier#rect) method draws a filled rectangle of characters on the grid using the previously specified properties.
 
 ```js
 t.rect(10, 5);
 ```
 
 #### Line
-The [`line(x1, y1, x2, y2)`](/api/classes/Textmodifier#line) method draws a line between two points `(x1, y1)` and `(x2, y2)` using the previously specified properties.
+The [`line(x1, y1, x2, y2)`](/api/textmode.js/classes/Textmodifier#line) method draws a line between two points `(x1, y1)` and `(x2, y2)` using the previously specified properties.
 
 ```js
 t.lineWeight(2); // Set line weight to 2 cells
@@ -70,21 +70,21 @@ t.line(-10, 0, 10, 0);
 ```
 
 #### Triangle
-The [`triangle(x1, y1, x2, y2, x3, y3)`](/api/classes/Textmodifier#triangle) method draws a filled triangle on the grid using the previously specified properties.
+The [`triangle(x1, y1, x2, y2, x3, y3)`](/api/textmode.js/classes/Textmodifier#triangle) method draws a filled triangle on the grid using the previously specified properties.
 
 ```js
 t.triangle(0, 0, 10, 0, 5, 5);
 ```
 
 #### Ellipse
-The [`ellipse(width, height)`](/api/classes/Textmodifier#ellipse) method draws a filled ellipse on the grid using the previously specified properties.
+The [`ellipse(width, height)`](/api/textmode.js/classes/Textmodifier#ellipse) method draws a filled ellipse on the grid using the previously specified properties.
 
 ```js
 t.ellipse(10, 5);
 ```
 
 #### Bezier curve
-The [`bezierCurve(x1, y1, cx1, cy1, cx2, cy2, x2, y2)`](/api/classes/Textmodifier#bezierCurve) method draws a cubic Bezier curve on the grid using the previously specified properties. The curve is defined by its start point `(x1, y1)`, end point `(x2, y2)`, and two control points `(cx1, cy1)` and `(cx2, cy2)`.
+The [`bezierCurve(x1, y1, cx1, cy1, cx2, cy2, x2, y2)`](/api/textmode.js/classes/Textmodifier#bezierCurve) method draws a cubic Bezier curve on the grid using the previously specified properties. The curve is defined by its start point `(x1, y1)`, end point `(x2, y2)`, and two control points `(cx1, cy1)` and `(cx2, cy2)`.
 
 ```js
 t.lineWeight(1); // Set line weight to 1 cell
@@ -92,7 +92,7 @@ t.bezierCurve(0, 0, 10, 5, 5, 10, 10, 0);
 ```
 
 #### Arc
-The [`arc(width, height, startAngle, endAngle)`](/api/classes/Textmodifier#arc) method draws an arc on the grid using the previously specified properties.
+The [`arc(width, height, startAngle, endAngle)`](/api/textmode.js/classes/Textmodifier#arc) method draws an arc on the grid using the previously specified properties.
 
 ```js
 t.arc(10, 5, 0, 180);
@@ -101,73 +101,73 @@ t.arc(10, 5, 0, 180);
 ### Cell properties
 
 When drawing shapes, you can customize the appearance of the affected cells using the following methods:
-- [`char(character)`](/api/classes/Textmodifier#char)
+- [`char(character)`](/api/textmode.js/classes/Textmodifier#char)
     - Sets the character to be used for subsequent drawing operations.
-- [`charColor(r, g, b, a?)`](/api/classes/Textmodifier#charcolor)
+- [`charColor(r, g, b, a?)`](/api/textmode.js/classes/Textmodifier#charcolor)
     - Sets the character color for subsequent drawing operations.
-- [`cellColor(r, g, b, a?)`](/api/classes/Textmodifier#cellcolor)
+- [`cellColor(r, g, b, a?)`](/api/textmode.js/classes/Textmodifier#cellcolor)
     - Sets the background color for subsequent drawing operations.
-- [`flipX(boolean | number)`](/api/classes/Textmodifier#flipx)
+- [`flipX(boolean | number)`](/api/textmode.js/classes/Textmodifier#flipx)
     - Toggles horizontal flipping for subsequent drawing operations.
-- [`flipY(boolean | number)`](/api/classes/Textmodifier#flipy)
+- [`flipY(boolean | number)`](/api/textmode.js/classes/Textmodifier#flipy)
     - Toggles vertical flipping for subsequent drawing operations.
-- [`invert(boolean | number)`](/api/classes/Textmodifier#invert)
+- [`invert(boolean | number)`](/api/textmode.js/classes/Textmodifier#invert)
     - Swaps the character and cell colors for subsequent drawing operations.
-- [`charRotation(angle)`](/api/classes/Textmodifier#charrotation)
+- [`charRotation(angle)`](/api/textmode.js/classes/Textmodifier#charrotation)
     - Sets the rotation angle *(in degrees)* of the characters for subsequent drawing operations.
 
 ### Geometry properties
-- [`rotate(angleX, angleY, angleZ)`](/api/classes/Textmodifier#rotate)
+- [`rotate(angleX, angleY, angleZ)`](/api/textmode.js/classes/Textmodifier#rotate)
     - Rotates subsequent shapes around the specified axes by the given angles (in degrees). The rotation is applied around the center of the shape.
-- [`lineWeight(weight)`](/api/classes/Textmodifier#lineweight)
+- [`lineWeight(weight)`](/api/textmode.js/classes/Textmodifier#lineweight)
     - Sets the line weight in number of cells for subsequent line drawing operations.
         - Affects only the `line()` and `bezierCurve()` methods.
-- [`rotateX(angle)`](/api/classes/Textmodifier#rotatex)
+- [`rotateX(angle)`](/api/textmode.js/classes/Textmodifier#rotatex)
     - Rotates subsequent shapes around the X-axis by the given angle (in degrees).
-- [`rotateY(angle)`](/api/classes/Textmodifier#rotatey)
+- [`rotateY(angle)`](/api/textmode.js/classes/Textmodifier#rotatey)
     - Rotates subsequent shapes around the Y-axis by the given angle (in degrees).
-- [`rotateZ(angle)`](/api/classes/Textmodifier#rotatez)
+- [`rotateZ(angle)`](/api/textmode.js/classes/Textmodifier#rotatez)
     - Rotates subsequent shapes around the Z-axis by the given angle (in degrees).
-- [`translate(x, y, z?)`](/api/classes/Textmodifier#translate)
+- [`translate(x, y, z?)`](/api/textmode.js/classes/Textmodifier#translate)
     - Translates subsequent shapes by the specified amounts along the X, Y, and optional Z axes.
-- [`translateX(x)`](/api/classes/Textmodifier#translatex)
+- [`translateX(x)`](/api/textmode.js/classes/Textmodifier#translatex)
     - Translates subsequent shapes by the specified amount along the X-axis.
-- [`translateY(y)`](/api/classes/Textmodifier#translatey)
+- [`translateY(y)`](/api/textmode.js/classes/Textmodifier#translatey)
     - Translates subsequent shapes by the specified amount along the Y-axis.
-- [`translateZ(z)`](/api/classes/Textmodifier#translatez)
+- [`translateZ(z)`](/api/textmode.js/classes/Textmodifier#translatez)
     - Translates subsequent shapes by the specified amount along the Z-axis.
 
 ### Canvas control
 
 Methods for managing the overall canvas state:
 
-- [`background(r, g, b, a)`](/api/classes/Textmodifier#background)
+- [`background(r, g, b, a)`](/api/textmode.js/classes/Textmodifier#background)
     - Sets the background color for the entire canvas.
-- [`clear()`](/api/classes/Textmodifier#clear)
+- [`clear()`](/api/textmode.js/classes/Textmodifier#clear)
     - Clears the entire canvas, setting all cells to transparent.
 
 ### State management
 
 Methods for saving and restoring drawing settings:
 
-- [`push()`](/api/classes/Textmodifier#push)
+- [`push()`](/api/textmode.js/classes/Textmodifier#push)
     - Saves the current drawing state (cell properties, transformations, etc.) onto a stack.
-- [`pop()`](/api/classes/Textmodifier#pop)
+- [`pop()`](/api/textmode.js/classes/Textmodifier#pop)
     - Restores the most recently saved drawing state from the stack.
 
 ### Advanced rendering
 
 Methods for custom shaders and advanced rendering techniques:
 
-- [`shader(shader)`](/api/classes/Textmodifier#shader)
+- [`shader(shader)`](/api/textmode.js/classes/Textmodifier#shader)
     - Sets a custom shader for subsequent drawing operations.
-- [`setUniform(name, value)`](/api/classes/Textmodifier#setuniform)
+- [`setUniform(name, value)`](/api/textmode.js/classes/Textmodifier#setuniform)
     - Sets a uniform value for the current shader.
-- [`setUniforms(uniforms)`](/api/classes/Textmodifier#setuniforms)
+- [`setUniforms(uniforms)`](/api/textmode.js/classes/Textmodifier#setuniforms)
     - Sets multiple uniform values for the current shader.
-- [`createFilterShader(fragmentSource)`](/api/classes/Textmodifier#createfiltershader)
+- [`createFilterShader(fragmentSource)`](/api/textmode.js/classes/Textmodifier#createfiltershader)
     - Creates a custom filter shader from fragment shader source code.
-- [`ortho()`](/api/classes/Textmodifier#ortho)
+- [`ortho()`](/api/textmode.js/classes/Textmodifier#ortho)
     - Render subsequent frames in orthographic projection mode.
 
 ## Using custom filter shaders

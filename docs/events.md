@@ -38,7 +38,7 @@ t.draw(() => {
 
 ### Mouse click events
 
-Handle mouse clicks with the [`mouseClicked()`](/api/classes/Textmodifier#mouseclicked) method:
+Handle mouse clicks with the [`mouseClicked()`](/api/textmode.js/classes/Textmodifier#mouseclicked) method:
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -89,7 +89,7 @@ t.draw(() => {
 
 ### Mouse press and release
 
-Track mouse button states with [`mousePressed()`](/api/classes/Textmodifier#mousepressed) and [`mouseReleased()`](/api/classes/Textmodifier#mousereleased):
+Track mouse button states with [`mousePressed()`](/api/textmode.js/classes/Textmodifier#mousepressed) and [`mouseReleased()`](/api/textmode.js/classes/Textmodifier#mousereleased):
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -152,7 +152,7 @@ t.draw(() => {
 
 ### Mouse movement
 
-Respond to mouse movement with [`mouseMoved()`](/api/classes/Textmodifier#mousemoved):
+Respond to mouse movement with [`mouseMoved()`](/api/textmode.js/classes/Textmodifier#mousemoved):
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -209,7 +209,7 @@ t.draw(() => {
 
 ### Mouse scroll events
 
-Handle mouse wheel scrolling with [`mouseScrolled()`](/api/classes/Textmodifier#mousescrolled):
+Handle mouse wheel scrolling with [`mouseScrolled()`](/api/textmode.js/classes/Textmodifier#mousescrolled):
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -272,7 +272,7 @@ t.draw(() => {
 
 ### Mouse cursor control
 
-Change the canvas cursor with [`cursor()`](/api/classes/Textmodifier#cursor):
+Change the canvas cursor with [`cursor()`](/api/textmode.js/classes/Textmodifier#cursor):
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -327,7 +327,7 @@ The touch-related code examples are currently outdated and will be updated soon.
 
 ### Touch tracking
 
-Use [`t.touches`](/api/classes/Textmodifier#touches) to access the currently active touches each frame:
+Use [`t.touches`](/api/textmode.js/classes/Textmodifier#touches) to access the currently active touches each frame:
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -347,7 +347,7 @@ t.draw(() => {
 
 ### Touch start, move, end, and cancel
 
-Register callbacks with [`touchStarted()`](/api/classes/Textmodifier#touchstarted), [`touchMoved()`](/api/classes/Textmodifier#touchmoved), [`touchEnded()`](/api/classes/Textmodifier#touchended), and [`touchCancelled()`](/api/classes/Textmodifier#touchcancelled) to react to raw touch events:
+Register callbacks with [`touchStarted()`](/api/textmode.js/classes/Textmodifier#touchstarted), [`touchMoved()`](/api/textmode.js/classes/Textmodifier#touchmoved), [`touchEnded()`](/api/textmode.js/classes/Textmodifier#touchended), and [`touchCancelled()`](/api/textmode.js/classes/Textmodifier#touchcancelled) to react to raw touch events:
 
 ```js
 const activeTouches = new Map();
@@ -383,12 +383,12 @@ The `TouchEventData` object exposes:
 
 High-level gestures provide convenient abstractions for common behaviours:
 
-- [`tap()`](/api/classes/Textmodifier#tap) detects single taps
-- [`doubleTap()`](/api/classes/Textmodifier#doubletap) detects double taps
-- [`longPress()`](/api/classes/Textmodifier#longpress) fires when a finger stays in place
-- [`swipe()`](/api/classes/Textmodifier#swipe) reports direction, distance, and velocity
-- [`pinch()`](/api/classes/Textmodifier#pinch) delivers scale and delta scale for two-finger zoom
-- [`rotateGesture()`](/api/classes/Textmodifier#rotategesture) tracks two-finger rotations
+- [`tap()`](/api/textmode.js/classes/Textmodifier#tap) detects single taps
+- [`doubleTap()`](/api/textmode.js/classes/Textmodifier#doubletap) detects double taps
+- [`longPress()`](/api/textmode.js/classes/Textmodifier#longpress) fires when a finger stays in place
+- [`swipe()`](/api/textmode.js/classes/Textmodifier#swipe) reports direction, distance, and velocity
+- [`pinch()`](/api/textmode.js/classes/Textmodifier#pinch) delivers scale and delta scale for two-finger zoom
+- [`rotateGesture()`](/api/textmode.js/classes/Textmodifier#rotategesture) tracks two-finger rotations
 
 ```js
 t.tap((data) => {
@@ -416,7 +416,7 @@ Keyboard interaction provides both real-time key state checking and event-driven
 
 ### Key state checking
 
-Use [`isKeyPressed()`](/api/classes/Textmodifier#iskeypressed) to check if a key is currently being held down:
+Use [`isKeyPressed()`](/api/textmode.js/classes/Textmodifier#iskeypressed) to check if a key is currently being held down:
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -451,7 +451,7 @@ t.draw(() => {
 
 ### Key press events
 
-Handle individual key presses with [`keyPressed()`](/api/classes/Textmodifier#keypressed):
+Handle individual key presses with [`keyPressed()`](/api/textmode.js/classes/Textmodifier#keypressed):
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
@@ -483,7 +483,7 @@ t.draw(() => {
 
 ### Key release events
 
-Handle key releases with [`keyReleased()`](/api/classes/Textmodifier#keyreleased):
+Handle key releases with [`keyReleased()`](/api/textmode.js/classes/Textmodifier#keyreleased):
 
 ```javascript
 const t = textmode.create({ width: 800, height: 600 });
