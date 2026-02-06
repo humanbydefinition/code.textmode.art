@@ -2,7 +2,7 @@
 layout: doc
 editLink: true
 title: API Reference
-description: API reference for textmode.js and textmode.synth.js.
+description: API reference for the textmode.js ecosystem.
 category: API Reference
 api: true
 lastModified: 2026-02-06
