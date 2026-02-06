@@ -86,7 +86,7 @@ const quickLinks: ApiQuickLink[] = [
     description: 'Main drawing and lifecycle interface for textmode.js.',
     metaLabel: 'CLASS',
     metaSource: 'TEXTMODE.JS',
-    href: '/api/textmode.js/classes/Textmodifier.md'
+    href: '/api/textmode.js/classes/Textmodifier'
   },
   {
     title: 'Input namespace',
@@ -100,14 +100,14 @@ const quickLinks: ApiQuickLink[] = [
     description: 'Chainable synth source for building shader graphs.',
     metaLabel: 'CLASS',
     metaSource: 'TEXTMODE.SYNTH.JS',
-    href: '/api/textmode.synth.js/classes/SynthSource.md'
+    href: '/api/textmode.synth.js/classes/SynthSource'
   },
   {
     title: 'osc()',
     description: 'Oscillator pattern generator for synth chains.',
     metaLabel: 'FUNCTION',
     metaSource: 'TEXTMODE.SYNTH.JS',
-    href: '/api/textmode.synth.js/functions/osc.md'
+    href: '/api/textmode.synth.js/functions/osc'
   }
 ]
 </script>
