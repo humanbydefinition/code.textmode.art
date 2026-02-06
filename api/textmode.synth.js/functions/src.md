@@ -53,7 +53,7 @@ A new SynthSource that samples the specified source or self
 
 ## Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,

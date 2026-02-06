@@ -21,7 +21,7 @@ manually tracking time or state.
 
 ## Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -75,7 +75,7 @@ The array for chaining
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -120,7 +120,7 @@ The array for chaining
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -170,7 +170,7 @@ The array for chaining
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -218,7 +218,7 @@ The array for chaining
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -269,7 +269,7 @@ A new ModulatedArray with remapped values
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,

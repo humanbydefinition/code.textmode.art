@@ -21,7 +21,7 @@ transform to the chain, which is later compiled into a GLSL shader.
 
 ## Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -73,7 +73,7 @@ Generate oscillating patterns using sine waves.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -120,7 +120,7 @@ Generate Perlin noise patterns.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -172,7 +172,7 @@ Generate plasma-like sine field patterns.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -228,7 +228,7 @@ Generate moire interference patterns.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -278,7 +278,7 @@ Generate voronoi patterns.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -323,7 +323,7 @@ Generate a rotating radial gradient.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -373,7 +373,7 @@ Generate geometric shapes (polygons).
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -420,7 +420,7 @@ Generate a solid grayscale color.
 
 ##### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -470,7 +470,7 @@ Generate a solid color.
 
 ##### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -531,7 +531,7 @@ Equivalent to hydra's `src(o0)`.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -578,7 +578,7 @@ Rotate coordinates.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -633,7 +633,7 @@ Scale coordinates.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -685,7 +685,7 @@ Scroll coordinates in both X and Y directions.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -731,7 +731,7 @@ Scroll coordinates in X direction.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -777,7 +777,7 @@ Scroll coordinates in Y direction.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -824,7 +824,7 @@ Pixelate the output.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -877,7 +877,7 @@ Repeat coordinates in both X and Y directions.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -923,7 +923,7 @@ Repeat coordinates in X direction.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -969,7 +969,7 @@ Repeat coordinates in Y direction.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -1014,7 +1014,7 @@ Apply kaleidoscope effect.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -1061,7 +1061,7 @@ Convert coordinates to polar space.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -1114,7 +1114,7 @@ Twirl distortion with radial falloff.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -1164,7 +1164,7 @@ Swirl distortion around a center.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -1210,7 +1210,7 @@ Mirror coordinates across X and/or Y axes.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -1262,7 +1262,7 @@ Shear coordinates along X and Y axes.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -1312,7 +1312,7 @@ Barrel distortion (bulge outward).
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -1362,7 +1362,7 @@ Pinch distortion (pull inward).
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -1412,7 +1412,7 @@ Fisheye lens distortion.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -1457,7 +1457,7 @@ Adjust brightness.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -1502,7 +1502,7 @@ Adjust contrast.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -1547,7 +1547,7 @@ Invert colors.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -1592,7 +1592,7 @@ Adjust color saturation.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -1637,7 +1637,7 @@ Shift hue.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -1682,7 +1682,7 @@ Apply colorama effect (hue rotation based on luminance).
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -1728,7 +1728,7 @@ Posterize colors to limited palette.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -1774,7 +1774,7 @@ Apply threshold based on luminance.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -1820,7 +1820,7 @@ Apply hard threshold.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -1867,7 +1867,7 @@ Multiply all channels by a scalar value (grayscale).
 
 ##### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -1920,7 +1920,7 @@ This is the recommended way to add color to grayscale sources like `osc()`,
 
 ##### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -1966,7 +1966,7 @@ Extract the red channel as a grayscale value.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -2013,7 +2013,7 @@ Extract the green channel as a grayscale value.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -2060,7 +2060,7 @@ Extract the blue channel as a grayscale value.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -2113,7 +2113,7 @@ Shift color channels by adding offset values.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -2158,7 +2158,7 @@ Apply gamma correction for nonlinear brightness control.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -2212,7 +2212,7 @@ Adjust input/output levels and gamma for precise tonal control.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -2258,7 +2258,7 @@ Clamp color values to a specified range for stability.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -2307,7 +2307,7 @@ reproducible patterns. Different seeds produce different patterns.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -2354,7 +2354,7 @@ Add another source.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -2400,7 +2400,7 @@ Subtract another source.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -2446,7 +2446,7 @@ Multiply with another source.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -2493,7 +2493,7 @@ Blend with another source.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -2538,7 +2538,7 @@ Difference with another source.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -2583,7 +2583,7 @@ Layer another source on top.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -2628,7 +2628,7 @@ Mask using another source.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -2674,7 +2674,7 @@ Screen blend with another source.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -2720,7 +2720,7 @@ Overlay blend with another source.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -2766,7 +2766,7 @@ Soft light blend with another source.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -2812,7 +2812,7 @@ Hard light blend with another source.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -2858,7 +2858,7 @@ Color dodge blend with another source.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -2904,7 +2904,7 @@ Color burn blend with another source.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -2950,7 +2950,7 @@ Lighten blend with another source.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -2996,7 +2996,7 @@ Darken blend with another source.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -3042,7 +3042,7 @@ Modulate coordinates using another source.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -3092,7 +3092,7 @@ Modulate scale using another source.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -3142,7 +3142,7 @@ Modulate rotation using another source.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -3192,7 +3192,7 @@ Modulate pixelation using another source.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -3238,7 +3238,7 @@ Modulate kaleidoscope using another source.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -3288,7 +3288,7 @@ Modulate X scroll using another source.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -3338,7 +3338,7 @@ Modulate Y scroll using another source.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -3392,7 +3392,7 @@ Modulate repeat pattern with another source.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -3442,7 +3442,7 @@ Modulate X repeat with another source.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -3492,7 +3492,7 @@ Modulate Y repeat with another source.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -3538,7 +3538,7 @@ Modulate coordinates based on hue differences.
 
 #### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
