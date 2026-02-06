@@ -45,7 +45,8 @@ import type { ApiHeroAction, ApiLibrary, ApiQuickLink } from './types'
 const heroActions: ApiHeroAction[] = [
   { label: 'textmode.js API', href: '/api/textmode.js/', variant: 'secondary' },
   { label: 'textmode.synth.js API', href: '/api/textmode.synth.js/', variant: 'secondary' },
-  { label: 'textmode.filters.js API', href: '/api/textmode.filters.js/', variant: 'secondary' }
+  { label: 'textmode.filters.js API', href: '/api/textmode.filters.js/', variant: 'secondary' },
+  { label: 'textmode.export.js API', href: '/api/textmode.export.js/', variant: 'secondary' },
 ]
 
 const libraries: ApiLibrary[] = [
@@ -81,6 +82,17 @@ const libraries: ApiLibrary[] = [
     secondary: '/api/textmode.filters.js/#example',
     githubUser: 'humanbydefinition',
     githubRepo: 'textmode.filters.js'
+  },
+  {
+    name: 'textmode.export.js',
+    kicker: 'export utilities',
+    badge: 'export',
+    description: 'Utilities for exporting textmode.js creations to common formats like PNG, GIF, and SVG.',
+    highlights: [],
+    cta: '/api/textmode.export.js/',
+    secondary: '/api/textmode.export.js/#example',
+    githubUser: 'humanbydefinition',
+    githubRepo: 'textmode.export.js'
   }
 ]
 

@@ -2,6 +2,7 @@ import type { DefaultTheme } from 'vitepress'
 import typedocSidebarTextmode from '../../api/textmode.js/typedoc-sidebar.json'
 import typedocSidebarSynth from '../../api/textmode.synth.js/typedoc-sidebar.json'
 import typedocSidebarFilters from '../../api/textmode.filters.js/typedoc-sidebar.json'
+import typedocSidebarExport from '../../api/textmode.export.js/typedoc-sidebar.json'
 import { defineBlogConfig } from 'vitepress-plugin-blog/config'
 
 export const blog = defineBlogConfig({
@@ -68,7 +69,14 @@ const apiSidebar: DefaultTheme.SidebarItem[] = [
       { text: 'Index', link: '/api/textmode.filters.js/' },
       ...typedocSidebarFilters
     ],
-  }
+  },
+  {
+    text: 'textmode.export.js',
+    items: [
+      { text: 'Index', link: '/api/textmode.export.js/' },
+      ...typedocSidebarExport
+    ],
+  },
 ]
 
 export const sidebar: DefaultTheme.Sidebar = {
