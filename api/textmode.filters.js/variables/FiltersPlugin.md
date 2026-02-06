@@ -4,6 +4,7 @@ description: GPU-accelerated image filters plugin for textmode.js.
 category: Variables
 api: true
 kind: Variable
+ecosystem: textmode.js
 lastModified: 2026-02-06
 ---
 
