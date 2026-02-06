@@ -1,3 +1,12 @@
+---
+title: EasingFunction
+description: Easing functions from
+category: Type Aliases
+api: true
+kind: TypeAlias
+lastModified: 2026-02-06
+---
+
 [textmode.synth.js](../index.md) / EasingFunction
 
 # Type Alias: EasingFunction
