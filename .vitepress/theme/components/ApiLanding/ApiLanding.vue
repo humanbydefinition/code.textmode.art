@@ -44,7 +44,8 @@ import type { ApiHeroAction, ApiLibrary, ApiQuickLink } from './types'
 
 const heroActions: ApiHeroAction[] = [
   { label: 'textmode.js API', href: '/api/textmode.js/', variant: 'secondary' },
-  { label: 'textmode.synth.js API', href: '/api/textmode.synth.js/', variant: 'secondary' }
+  { label: 'textmode.synth.js API', href: '/api/textmode.synth.js/', variant: 'secondary' },
+  { label: 'textmode.filters.js API', href: '/api/textmode.filters.js/', variant: 'secondary' }
 ]
 
 const libraries: ApiLibrary[] = [
