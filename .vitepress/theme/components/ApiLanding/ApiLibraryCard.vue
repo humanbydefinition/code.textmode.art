@@ -15,7 +15,7 @@
       <li v-for="item in library.highlights" :key="item">{{ item }}</li>
     </ul>
     <div class="api-card__actions">
-      <UiButton :href="library.cta" variant="primary">
+      <UiButton :href="library.cta" variant="secondary">
         Open API
       </UiButton>
       <UiButton :href="library.secondary" variant="ghost">
@@ -41,6 +41,9 @@ defineProps<{
 .api-card {
   border: 1px solid var(--vp-c-divider);
   background: var(--vp-c-bg-soft);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .api-card__header {
@@ -68,7 +71,7 @@ defineProps<{
 .api-card__title-row {
   display: flex;
   align-items: baseline;
-  gap: 0.45rem;
+  gap: 1rem;
 }
 
 .api-card__description {
@@ -94,6 +97,7 @@ defineProps<{
   display: flex;
   gap: 0.75rem;
   flex-wrap: wrap;
+  margin-top: auto;
 }
 
 @media (max-width: 640px) {
