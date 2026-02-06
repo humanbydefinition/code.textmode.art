@@ -22,7 +22,7 @@ Install this plugin to enable `.synth()` on TextmodeLayer instances.
 
 ## Example
 
-```ts
+```typescript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
