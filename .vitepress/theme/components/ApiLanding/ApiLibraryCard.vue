@@ -3,7 +3,10 @@
     <div class="api-card__header">
       <div>
         <p class="api-card__kicker">{{ library.kicker }}</p>
-        <h3 class="api-card__title">{{ library.name }}</h3>
+        <div class="api-card__title-row">
+          <h3 class="api-card__title">{{ library.name }}</h3>
+          <StarCta :user="library.githubUser" :repo="library.githubRepo" />
+        </div>
       </div>
       <UiBadge variant="subtle" pill>{{ library.badge }}</UiBadge>
     </div>
@@ -11,9 +14,6 @@
     <ul class="api-card__list">
       <li v-for="item in library.highlights" :key="item">{{ item }}</li>
     </ul>
-    <div class="api-card__meta">
-      <StarCta :user="library.githubUser" :repo="library.githubRepo" />
-    </div>
     <div class="api-card__actions">
       <UiButton :href="library.cta" variant="primary">
         Open API
@@ -46,7 +46,7 @@ defineProps<{
 .api-card__header {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: flex-start;
   gap: 1rem;
 }
 
@@ -61,7 +61,14 @@ defineProps<{
 .api-card__title {
   margin: 0;
   font-size: 1.4rem;
+  line-height: 1.05;
   color: var(--vp-c-text-1);
+}
+
+.api-card__title-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
 }
 
 .api-card__description {
@@ -77,16 +84,10 @@ defineProps<{
   gap: 0.35rem;
 }
 
-.api-card__meta {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1rem;
-}
-
-.api-card__meta :deep(.star-cta) {
+.api-card__title-row :deep(.star-cta) {
   margin-left: 0;
   padding-left: 0;
-  transform: none;
+  transform: translateY(2px);
 }
 
 .api-card__actions {
