@@ -32,7 +32,7 @@ Generate a solid grayscale color.
 
 ### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -76,7 +76,7 @@ Generate a solid color.
 
 ### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,

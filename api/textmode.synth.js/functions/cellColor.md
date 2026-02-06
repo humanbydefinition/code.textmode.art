@@ -40,7 +40,7 @@ A new SynthSource configured with cell color
 
 ### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -86,7 +86,7 @@ A new SynthSource configured with cell color
 
 ### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -123,7 +123,7 @@ Create a synth source with cell background color defined using a grayscale value
 
 ### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,

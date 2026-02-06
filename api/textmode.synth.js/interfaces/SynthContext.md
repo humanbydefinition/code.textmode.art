@@ -17,7 +17,7 @@ Context passed to dynamic parameter functions during rendering.
 
 ## Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,

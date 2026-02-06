@@ -40,7 +40,7 @@ A new SynthSource configured with character color
 
 ### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -86,7 +86,7 @@ A new SynthSource configured with character color
 
 ### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -123,7 +123,7 @@ Create a synth source with character foreground color defined using a grayscale 
 
 ### Example
 
-```typescript
+```javascript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
