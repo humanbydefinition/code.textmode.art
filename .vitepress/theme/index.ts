@@ -99,7 +99,7 @@ const baseTheme: Theme = {
     codeblocksFold({ route, frontmatter })
     useCodeSandbox({
       languages: ['javascript', 'typescript'],
-      scripts: ['https://unpkg.com/textmode.js@latest/dist/textmode.umd.js'],
+      scripts: ['https://unpkg.com/textmode.js@latest/dist/textmode.umd.js', 'https://unpkg.com/textmode.synth.js@latest/dist/textmode.synth.umd.js', 'https://unpkg.com/textmode.filters.js@latest/dist/textmode.filters.umd.js'],
       filename: 'sketch.js',
       buttonText: 'Open in CodeSandbox',
       indexHtml: `<!DOCTYPE html>
