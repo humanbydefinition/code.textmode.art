@@ -4,6 +4,7 @@ description: The textmode.synth.js plugin to install.
 category: Variables
 api: true
 kind: Variable
+ecosystem: textmode.js
 lastModified: 2026-02-06
 ---
 

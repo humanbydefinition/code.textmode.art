@@ -4,6 +4,7 @@ description: A chainable synthesis source that accumulates transforms to be comp
 category: Classes
 api: true
 kind: Class
+ecosystem: textmode.js
 lastModified: 2026-02-06
 hasConstructor: false
 ---
