@@ -30,7 +30,7 @@ Generate a rotating radial gradient.
 
 ## Example
 
-```ts
+```typescript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,

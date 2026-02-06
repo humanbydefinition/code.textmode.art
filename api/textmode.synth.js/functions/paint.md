@@ -39,7 +39,7 @@ A new SynthSource configured with both color sources
 
 ### Example
 
-```ts
+```typescript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -85,7 +85,7 @@ A new SynthSource configured with both color sources
 
 ### Example
 
-```ts
+```typescript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,
@@ -122,7 +122,7 @@ Create a synth source with both character and cell colors defined using a graysc
 
 ### Example
 
-```ts
+```typescript
 const t = textmode.create({
   width: window.innerWidth,
   height: window.innerHeight,

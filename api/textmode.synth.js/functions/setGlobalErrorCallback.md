@@ -33,7 +33,7 @@ notifications whenever a dynamic parameter fails to evaluate.
 
 ## Example
 
-```ts
+```typescript
 setGlobalErrorCallback((error, uniformName) => {
   console.error(`[Synth] Parameter "${uniformName}" error:`, error);
 });
