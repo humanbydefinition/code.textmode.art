@@ -2,11 +2,11 @@
 layout: doc
 editLink: true
 title: TextmodeColor
-description: Represents a color in the `textmode.js` rendering system.
+description: Represents a color in the textmode.js rendering system.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-02-01
+lastModified: 2026-02-06
 hasConstructor: false
 ---
 

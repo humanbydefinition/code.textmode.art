@@ -6,7 +6,7 @@ description: Custom error class for textmode.js exceptions.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-02-01
+lastModified: 2026-02-06
 hasConstructor: true
 ---
 

@@ -6,7 +6,7 @@ description: Complete API reference for textmode.js - a lightweight creative cod
 category: API Reference
 api: true
 kind: Project
-lastModified: 2026-02-01
+lastModified: 2026-02-06
 ---
 
 # textmode.js

@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: loadables
 kind: Class
-lastModified: 2026-02-01
+lastModified: 2026-02-06
 hasConstructor: false
 ---
 
@@ -153,6 +153,46 @@ Ideal width in grid cells.
 [`TextmodeSource`](TextmodeSource.md).[`width`](TextmodeSource.md#width)
 
 ## Methods
+
+### $clearFrameOverrides()
+
+```ts
+$clearFrameOverrides(): void;
+```
+
+**`Internal`**
+
+Clear any draw-scoped overrides set during the current frame.
+
+#### Returns
+
+`void`
+
+#### Inherited from
+
+[`TextmodeSource`](TextmodeSource.md).[`$clearFrameOverrides`](TextmodeSource.md#clearframeoverrides)
+
+***
+
+### $hasFrameOverrides()
+
+```ts
+$hasFrameOverrides(): boolean;
+```
+
+**`Internal`**
+
+Check if any draw-scoped overrides are active.
+
+#### Returns
+
+`boolean`
+
+#### Inherited from
+
+[`TextmodeSource`](TextmodeSource.md).[`$hasFrameOverrides`](TextmodeSource.md#hasframeoverrides)
+
+***
 
 ### background()
 

@@ -6,7 +6,7 @@ description: Options for creating a framebuffer. If not specified, width and hei
 category: Type Aliases
 api: true
 kind: TypeAlias
-lastModified: 2026-02-01
+lastModified: 2026-02-06
 ---
 
 [textmode.js](../index.md) / TextmodeFramebufferOptions

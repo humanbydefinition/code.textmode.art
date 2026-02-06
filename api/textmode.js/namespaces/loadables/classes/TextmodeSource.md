@@ -7,13 +7,13 @@ category: Classes
 api: true
 namespace: loadables
 kind: Class
-lastModified: 2026-02-01
+lastModified: 2026-02-06
 hasConstructor: false
 ---
 
 [textmode.js](../../../index.md) / [loadables](../index.md) / TextmodeSource
 
-# Class: `abstract` TextmodeSource
+# Abstract Class: TextmodeSource
 
 Abstract base class representing a textmode source asset (image, video, texture).
 
@@ -141,6 +141,38 @@ ITextmodeSource.width
 ```
 
 ## Methods
+
+### $clearFrameOverrides()
+
+```ts
+$clearFrameOverrides(): void;
+```
+
+**`Internal`**
+
+Clear any draw-scoped overrides set during the current frame.
+
+#### Returns
+
+`void`
+
+***
+
+### $hasFrameOverrides()
+
+```ts
+$hasFrameOverrides(): boolean;
+```
+
+**`Internal`**
+
+Check if any draw-scoped overrides are active.
+
+#### Returns
+
+`boolean`
+
+***
 
 ### background()
 

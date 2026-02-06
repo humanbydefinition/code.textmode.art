@@ -2,11 +2,11 @@
 layout: doc
 editLink: true
 title: TextmodeGrid
-description: Manages the grid of each `TextmodeLayer` instance.
+description: Manages the grid of each TextmodeLayer instance.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-02-01
+lastModified: 2026-02-06
 hasConstructor: false
 ---
 

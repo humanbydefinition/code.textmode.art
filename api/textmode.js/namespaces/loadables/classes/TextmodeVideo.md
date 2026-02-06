@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: loadables
 kind: Class
-lastModified: 2026-02-01
+lastModified: 2026-02-06
 hasConstructor: false
 ---
 
@@ -299,6 +299,46 @@ ITextmodeVideo.width
 [`TextmodeTexture`](TextmodeTexture.md).[`width`](TextmodeTexture.md#width)
 
 ## Methods
+
+### $clearFrameOverrides()
+
+```ts
+$clearFrameOverrides(): void;
+```
+
+**`Internal`**
+
+Clear any draw-scoped overrides set during the current frame.
+
+#### Returns
+
+`void`
+
+#### Inherited from
+
+[`TextmodeTexture`](TextmodeTexture.md).[`$clearFrameOverrides`](TextmodeTexture.md#clearframeoverrides)
+
+***
+
+### $hasFrameOverrides()
+
+```ts
+$hasFrameOverrides(): boolean;
+```
+
+**`Internal`**
+
+Check if any draw-scoped overrides are active.
+
+#### Returns
+
+`boolean`
+
+#### Inherited from
+
+[`TextmodeTexture`](TextmodeTexture.md).[`$hasFrameOverrides`](TextmodeTexture.md#hasframeoverrides)
+
+***
 
 ### background()
 
@@ -1490,6 +1530,22 @@ t.windowResized(() => {
 ```ts
 ITextmodeVideo.time
 ```
+
+***
+
+### update()
+
+```ts
+update(): void;
+```
+
+#### Returns
+
+`void`
+
+#### Inherited from
+
+[`TextmodeTexture`](TextmodeTexture.md).[`update`](TextmodeTexture.md#update)
 
 ***
 

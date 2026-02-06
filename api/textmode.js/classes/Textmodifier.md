@@ -2,11 +2,11 @@
 layout: doc
 editLink: true
 title: Textmodifier
-description: Manages textmode rendering on a [`HTMLCanvasElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement) and provides methods for drawing, f...
+description: Manages textmode rendering on a HTMLCanvasElement and provides methods for drawing, font management, event handling, layer management, animation control, and...
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-02-01
+lastModified: 2026-02-06
 hasConstructor: false
 ---
 
@@ -2288,14 +2288,26 @@ Used to clear the layer at the start of its drawing cycle.
 #### Example
 
 ```javascript
-const t = textmode.create({
- width: 800,
- height: 600,
-})
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
- // Clear the canvas
- t.clear();
+  // Clear the canvas fully at the start of each frame
+  // This prevents "trails" from previous frames
+  t.clear();
+
+  t.background(0);
+
+  const x = Math.sin(t.frameCount * 0.05) * 20;
+  t.push();
+  t.translate(x, 0);
+  t.charColor(255);
+  t.char('X');
+  t.rect(5, 5);
+  t.pop();
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
