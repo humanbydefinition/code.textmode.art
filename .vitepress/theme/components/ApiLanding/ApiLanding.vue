@@ -53,11 +53,7 @@ const libraries: ApiLibrary[] = [
     kicker: 'das nest',
     badge: 'core',
     description: 'Rendering primitives, layers, loadables, input handling, shaders, and much more.',
-    highlights: [
-      'Grid-driven drawing API',
-      'Font, image, video, and canvas loadables',
-      'Plugin hooks + lifecycle events'
-    ],
+    highlights: [],
     cta: '/api/textmode.js/',
     secondary: '/docs/introduction',
     githubUser: 'humanbydefinition',
@@ -68,15 +64,22 @@ const libraries: ApiLibrary[] = [
     kicker: 'visual synthesis',
     badge: 'synth',
     description: 'Hydra-inspired synthesis chains for procedural pattern generation and shader graph building.',
-    highlights: [
-      'Chainable sources and modulators',
-      'Pattern generators: noise, osc, voronoi, and much more',
-      'Installs as a textmode.js plugin'
-    ],
+    highlights: [],
     cta: '/api/textmode.synth.js/',
     secondary: '/api/textmode.synth.js/#example',
     githubUser: 'humanbydefinition',
     githubRepo: 'textmode.synth.js'
+  },
+  {
+    name: 'textmode.filters.js',
+    kicker: 'post-processing',
+    badge: 'filters',
+    description: 'A collection of post-processing filters for textmode.js layers and canvas.',
+    highlights: [],
+    cta: '/api/textmode.filters.js/',
+    secondary: '/api/textmode.filters.js/#example',
+    githubUser: 'humanbydefinition',
+    githubRepo: 'textmode.filters.js'
   }
 ]
 
@@ -123,7 +126,7 @@ const quickLinks: ApiQuickLink[] = [
 
 .api-library-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 400px), 1fr));
   gap: 1.5rem;
   margin-top: 1.5rem;
 }
