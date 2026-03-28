@@ -50,7 +50,7 @@
     "featured": false
   },
   "entity-wave-prop": {
-    "title": "Entity Based Wave Displacement",
+    "title": "Entity Based Wave Propagation",
     "author": "trintlermint",
     "featured": true
   }

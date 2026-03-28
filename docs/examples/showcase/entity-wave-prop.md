@@ -5,7 +5,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>textmode | Entity Wave Propogation Example</title>
+    <title>textmode | Entity Wave Propagation Example</title>
 
     <style>
       body {
@@ -32,7 +32,7 @@
 
 ```js sketch.js [active]
 /**
- * @name [textmode.js] Entity Based Wave Displacement
+ * @name [textmode.js] Entity Based Wave Propagation
  * @description A Lissajous-curve entity floating around water, causing wave displacement.
  * @author trintlermint
  * @link https://github.com/humanbydefinition/textmode.js
@@ -49,11 +49,12 @@ let cols, rows, cur, prev;
 // DAMP: wave damping factor. closer to 1 implies that longer-lasting ripples, lower means that ripples die quickly
 const DAMP = 0.955;
 const CHARS = " .'`~:;-=+*#%&@";
+const TAIL_RIPPLE_OFFSET = 30;
 const WHALE = [
   '       .                   ',
   '      ":"                  ',
   '    ___:____     |"\\/"|      ',
-  "  ,'        `.    \\  /      ",
+  '  ,\'        `.    \\  /      ',
   '  |  O        \\___/  |      ',
   '~^~^~^~^~^~^~^~^~^~^~^~^~',
 ];
@@ -131,13 +132,13 @@ tm.draw(() => {
     drop(headX, headY, 4);
   }
   // create a secondary ripple behind the whale.
-  // the index (30) controls how far back the wabe forms; force (1.5) controls its strength
+  // the index (TAIL_RIPPLE_OFFSET) controls how far back the wave forms; force (1.5) controls its strength
   if (whaleTrail.length > 10 && tm.frameCount % 4 === 0) {
-    const tail = whaleTrail[Math.min(whaleTrail.length - 1, 30)];
+    const tail = whaleTrail[Math.min(whaleTrail.length - 1, TAIL_RIPPLE_OFFSET)];
     drop(tail.x, tail.y, 1.5);
   }
 
-  // simulate wave propogation (dissapation of waves)
+  // simulate wave propagation (dissipation of waves)
   const next = prev;
   for (let y = 1; y < rows - 1; y++) {
     const yo = y * cols;
@@ -170,7 +171,7 @@ tm.draw(() => {
       // visibility threshold, raise to hide faint ripples, lower for v.v.
       if (a < 0.06) continue;
 
-      // char mapping: the 2.0 multiplier controls how quickly chars escalate i.e. @ to # fatster.
+      // char mapping: the 2.0 multiplier controls how quickly chars escalate i.e. @ to # faster.
       const ci = Math.min(Math.floor(a * 2.0), CHARS.length - 1);
       // brightness: the 50 multiplier controls overall water brightness
       const bright = Math.min(a * 50, 255);
@@ -183,22 +184,23 @@ tm.draw(() => {
       // cell bg tint: faint blue glow behind the characters
       //
       tm.cellColor(0, Math.min(a * 4, 18), Math.min(a * 10, 40));
+      tm.push();
       tm.translate(x - hc, y - hr);
       tm.rect(1, 1);
-      tm.translate(-(x - hc), -(y - hr));
+      tm.pop();
     }
   }
 
   // WHALE
   const artCols = whaleData.cols;
   // spacing: distance between trail samples per art column.
-  // higher gives creatur more stretched/spread body, lower = compact
+  // higher gives creature more stretched/spread body, lower = compact
   const spacing = 1.8;
   for (let col = 0; col < artCols.length; col++) {
     const trailPos = Math.floor(col * spacing);
     if (trailPos >= whaleTrail.length) break;
     const pos = whaleTrail[trailPos];
-    // tail whale the 0.7 controls how much the tail dims. 0-1: no fade -> tail dark
+    // The 0.7 controls how much the whale's tail dims. 0-1: no fade -> tail dark
     const fade = 1.0 - (col / artCols.length) * 0.7;
 
     for (const { ch, vert } of artCols[col]) {
@@ -214,9 +216,10 @@ tm.draw(() => {
       tm.char(ch);
       tm.charColor(r, g, b);
       tm.cellColor(0, Math.floor(fade * 3), Math.floor(fade * 10));
+      tm.push();
       tm.translate(gx - hc, gy - hr);
       tm.rect(1, 1);
-      tm.translate(-(gx - hc), -(gy - hr));
+      tm.pop();
     }
   }
 });
