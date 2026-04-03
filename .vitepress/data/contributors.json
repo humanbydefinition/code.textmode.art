@@ -1,21 +1,18 @@
-[
-  {
-    "avatar": "https://www.github.com/humanbydefinition.png",
-    "name": "humanbydefinition",
-    "desc": "💻 📖 🎨 💡 🚧 🚇 🔧 🔌 🤔 👀 🎛️",
+{
+  "humanbydefinition": {
     "links": [
-      { "icon": "github", "link": "https://github.com/humanbydefinition" },
-      { "icon": "instagram", "link": "https://www.instagram.com/humanbydefinition/" },
-      { "icon": "mastodon", "link": "https://mastodon.social/@humanbydefinition" },
-      { "icon": "twitter", "link": "https://twitter.com/textmode_art" }
-    ]
-  },
-  {
-    "avatar": "https://www.github.com/trintlermint.png",
-    "name": "trintlermint",
-    "desc": "🖼️💡",
-    "links": [
-      { "icon": "github", "link": "https://github.com/trintlermint" }
+      {
+        "icon": "instagram",
+        "link": "https://www.instagram.com/humanbydefinition/"
+      },
+      {
+        "icon": "mastodon",
+        "link": "https://mastodon.social/@humanbydefinition"
+      },
+      {
+        "icon": "twitter",
+        "link": "https://twitter.com/textmode_art"
+      }
     ]
   }
-]
+}

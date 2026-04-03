@@ -70,7 +70,7 @@ Understanding the project layout helps you find what you need:
 ├── data/
 │   ├── fonts.json      # Font showcase data
 │   ├── sketches.json   # Example sketch metadata
-│   └── contributors.json # Contributors list
+│   └── contributors.json # Optional contributor profile metadata
 └── theme/              # Custom theme components
 
 docs/                   # Documentation pages (you'll mostly edit here)
@@ -88,7 +88,8 @@ public/                 # Static assets (fonts, images, SVGs)
 - **[`.vitepress/config.mts`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/config.mts)** - VitePress configuration
 - **[`.vitepress/data/fonts.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/fonts.json)** - Font showcase data
 - **[`.vitepress/data/sketches.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/sketches.json)** - Example sketch metadata
-- **[`.vitepress/data/contributors.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contributors.json)** - Contributors list
+- **[`.all-contributorsrc`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.all-contributorsrc)** - Canonical contributor registry
+- **[`.vitepress/data/contributors.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contributors.json)** - Optional social/profile metadata for the website
 
 ## Making changes
 
@@ -160,17 +161,14 @@ When submitting a pull request:
 
 ## Getting credit
 
-To be credited as a contributor, add or update your entry in [`.vitepress/data/contributors.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contributors.json):
+To be credited as a contributor, maintainers update [`.all-contributorsrc`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.all-contributorsrc) with:
 
-```json
-{
-  "name": "Your Name",
-  "github": "your-username",
-  "twitter": "your-handle",
-  "website": "https://your-site.com",
-  "contributions": ["docs", "fonts", "examples"]
-}
+```bash
+npm run contributors:add -- your-github-username doc
+npm run contributors:generate
 ```
+
+If you want additional social links to appear on the site, add them to [`.vitepress/data/contributors.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contributors.json).
 
 You'll appear on the [Contributors page](/docs/contributors) when your PR is merged!
 

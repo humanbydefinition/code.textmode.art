@@ -81,19 +81,9 @@
 import { computed } from 'vue'
 import { Sandbox, sandboxProps } from 'vitepress-plugin-sandpack'
 import sketchMetadata from '../../data/sketches.json'
-import contributors from '../../data/contributors.json'
+import { findContributorByName } from '../composables/contributors'
 
 type SketchMetadataMap = typeof sketchMetadata
-
-interface ContributorLink {
-  icon: string
-  link: string
-}
-
-interface Contributor {
-  name: string
-  links?: ContributorLink[]
-}
 
 defineOptions({ name: 'TextmodeSandbox' })
 
@@ -118,9 +108,7 @@ const contributor = computed(() => {
   if (!metadata.value?.author) {
     return null
   }
-  return (contributors as Contributor[]).find(
-    (c) => c.name === metadata.value.author
-  ) ?? null
+  return findContributorByName(metadata.value.author)
 })
 
 // Extract GitHub URL from contributor links

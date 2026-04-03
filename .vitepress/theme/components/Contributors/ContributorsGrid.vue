@@ -1,17 +1,6 @@
 <script setup lang="ts">
 import ContributorCard from './ContributorCard.vue'
-
-interface ContributorLink {
-  icon: string
-  link: string
-}
-
-interface Contributor {
-  avatar: string
-  name: string
-  desc: string
-  links?: ContributorLink[]
-}
+import type { Contributor } from '../../composables/contributors'
 
 defineProps<{
   contributors: Contributor[]

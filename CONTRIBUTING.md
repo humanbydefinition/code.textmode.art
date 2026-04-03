@@ -101,7 +101,8 @@ public/                 # Static assets (fonts, images, SVGs)
 - [`.vitepress/config.mts`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/config.mts) - VitePress configuration
 - [`.vitepress/data/fonts.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/fonts.json) - Font showcase data
 - [`.vitepress/data/sketches.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/sketches.json) - Example sketch metadata
-- [`.vitepress/data/contributors.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contributors.json) - Contributors list
+- [`.all-contributorsrc`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.all-contributorsrc) - Canonical contributor registry for the README and website
+- [`.vitepress/data/contributors.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contributors.json) - Optional social/profile metadata used by the website
 - [`.vitepress/theme/`](https://github.com/humanbydefinition/code.textmode.art/tree/main/.vitepress/theme) - Custom theme components
 
 ## Pull request guidelines
@@ -113,9 +114,10 @@ public/                 # Static assets (fonts, images, SVGs)
 
 ## Credits
 
-All contributors are recognized on the [Contributors page](/docs/contributors). When your contribution is merged, you'll be added with links to your social profiles (unless you prefer otherwise).
+All contributors are recognized on the [Contributors page](/docs/contributors) and in the README using the [All Contributors](https://allcontributors.org/) specification.
 
-To be credited, simply include an updated or new entry in [`.vitepress/data/contributors.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contributors.json) when submitting your pull request.
+Maintainers update contributor recognition with `npm run contributors:add -- <github-username> <contribution[,contribution]>` and `npm run contributors:generate`.
+If you want extra social links on the website, add them to [`.vitepress/data/contributors.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contributors.json).
 
 ## Questions?
 

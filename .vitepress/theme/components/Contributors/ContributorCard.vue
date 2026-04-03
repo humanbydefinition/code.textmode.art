@@ -1,67 +1,9 @@
 <script setup lang="ts">
-import { computed } from 'vue'
-
-interface ContributorLink {
-  icon: string
-  link: string
-}
-
-interface Contributor {
-  avatar: string
-  name: string
-  desc: string
-  links?: ContributorLink[]
-}
+import type { Contributor } from '../../composables/contributors'
 
 const props = defineProps<{
   contributor: Contributor
 }>()
-
-// All Contributors emoji key mapping
-const emojiMap: Record<string, { name: string; description: string }> = {
-  '💻': { name: 'Code', description: 'Core library code, features, and bug fixes' },
-  '📖': { name: 'Documentation', description: 'Documentation pages, API docs, and guides' },
-  '🐛': { name: 'Bug Reports', description: 'Identifying and reporting bugs' },
-  '💡': { name: 'Examples', description: 'Code examples and demos' },
-  '🎨': { name: 'Design', description: 'Visual design, branding, and UI/UX' },
-  '🤔': { name: 'Ideas & Planning', description: 'Feature ideas and project planning' },
-  '👀': { name: 'Reviews', description: 'Reviewing pull requests and code' },
-  '⚠️': { name: 'Tests', description: 'Writing and maintaining tests' },
-  '🔧': { name: 'Tools', description: 'Development tools and utilities' },
-  '🌍': { name: 'Translation', description: 'Translating documentation' },
-  '📢': { name: 'Talks', description: 'Presentations and promoting the project' },
-  '💬': { name: 'Answering Questions', description: 'Helping users in issues and discussions' },
-  '🚇': { name: 'Infrastructure', description: 'Build tools, CI/CD, and hosting' },
-  '🚧': { name: 'Maintenance', description: 'Project maintenance and organization' },
-  '🎮': { name: 'Games & Interactive', description: 'Creating games or interactive experiences' },
-  '🎞️': { name: 'Video Tutorials', description: 'Creating video content and tutorials' },
-  '🖼️': { name: 'Artwork', description: 'ASCII art, textmode graphics, and creative work' },
-  '🔤': { name: 'Fonts', description: 'Contributing or creating fonts for use with the library' },
-  '🎛️': { name: 'Shaders', description: 'Writing custom GLSL shaders and filters' },
-  '🔌': { name: 'Plugin/Utilities', description: 'Creating plugins or utility libraries' },
-}
-
-// Parse emojis from the description string
-const contributions = computed(() => {
-  const desc = props.contributor.desc || ''
-  const emojis: { emoji: string; name: string; description: string }[] = []
-  
-  // Match emojis (including compound emojis with variation selectors)
-  const emojiRegex = /(\p{Emoji_Presentation}|\p{Emoji}\uFE0F)/gu
-  const matches = desc.match(emojiRegex) || []
-  
-  for (const emoji of matches) {
-    const info = emojiMap[emoji]
-    if (info) {
-      emojis.push({ emoji, ...info })
-    } else {
-      // Fallback for unmapped emojis
-      emojis.push({ emoji, name: 'Contribution', description: 'Community contribution' })
-    }
-  }
-  
-  return emojis
-})
 
 // Social icon SVG paths
 const iconPaths: Record<string, string> = {
@@ -104,9 +46,9 @@ function getIconPath(icon: string): string {
       </a>
       
       <div class="contributions">
-        <span 
-          v-for="(contribution, index) in contributions" 
-          :key="index"
+        <span
+          v-for="contribution in props.contributor.contributions"
+          :key="contribution.type"
           class="contribution-emoji"
           :title="`${contribution.name}: ${contribution.description}`"
         >

@@ -42,7 +42,7 @@ Ready to contribute? Check out our [Getting Started guide](/docs/contributing/ge
 
 ## Credits
 
-All contributors are recognized on the [Contributors page](/docs/contributors). When your contribution is merged, you'll be added with links to your social profiles (unless you prefer otherwise).
+All contributors are recognized on the [Contributors page](/docs/contributors) and in the README using the [All Contributors](https://allcontributors.org/) specification.
 
 ## Questions?
 
