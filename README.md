@@ -1,5 +1,9 @@
 # code.textmode.art (✿◠‿◠)
 
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/github/all-contributors/humanbydefinition/code.textmode.art?color=ee8449&style=flat-square)](#contributors)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
+
 <div align="center">
 
 <img alt="textmodejs_banner" src="https://github.com/user-attachments/assets/f03c2d74-7dc3-45cf-a0a5-043f9438231e" />
@@ -11,14 +15,14 @@
 
 Official documentation, guides, and examples for [textmode.js](https://github.com/humanbydefinition/textmode.js) - a creative coding library for real-time ASCII art on the web.
 
-🌐 **Live site**: [code.textmode.art](https://code.textmode.art)
+**Live site**: [code.textmode.art](https://code.textmode.art)
 
 ## What's inside
 
-- 📚 **Documentation** - Installation guides, API reference, and tutorials
-- 🎨 **Examples** - Interactive demos and code samples
-- 🔤 **Font showcase** - Curated collection of compatible pixel fonts
-- 🔌 **Integrations** - Guides for p5.js, Three.js, Hydra Synth, and more
+- **Documentation** - Installation guides, API reference, and tutorials
+- **Examples** - Interactive demos and code samples
+- **Font showcase** - Curated collection of compatible pixel fonts
+- **Integrations** - Guides for p5.js, Three.js, Hydra Synth, and more
 
 ## Local development
 
@@ -42,12 +46,38 @@ npm run preview
 
 We welcome contributions! There are many ways to help:
 
-- **🔤 Suggest fonts** - Know a great pixel font? Add it to the showcase
-- **🎨 Share sketches** - Create example sketches for the documentation
-- **📝 Improve docs** - Better explanations, code examples, or tutorials
-- **🐛 Report issues** - Found a bug or typo? Let us know
+- **Suggest fonts** - Know a great pixel font? Add it to the showcase
+- **Share sketches** - Create example sketches for the documentation
+- **Improve docs** - Better explanations, code examples, or tutorials
+- **Report issues** - Found a bug or typo? Let us know
 
-All contributors are credited on the site. See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+All contributors are credited in this README and on the site. See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+
+## Contributors
+
+Thanks go to these wonderful people ([emoji key](https://allcontributors.org/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tbody>
+    <tr>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/humanbydefinition"><img src="https://avatars.githubusercontent.com/u/59119064?v=4?s=100" width="100px;" alt="humanbydefinition"/><br /><sub><b>humanbydefinition</b></sub></a><br /><a href="https://github.com/humanbydefinition/code.textmode.art/commits?author=humanbydefinition" title="Code">💻</a> <a href="https://github.com/humanbydefinition/code.textmode.art/commits?author=humanbydefinition" title="Documentation">📖</a> <a href="#design-humanbydefinition" title="Design">🎨</a> <a href="#example-humanbydefinition" title="Examples">💡</a> <a href="#ideas-humanbydefinition" title="Ideas, Planning, & Feedback">🤔</a> <a href="#maintenance-humanbydefinition" title="Maintenance">🚧</a> <a href="#infra-humanbydefinition" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#tool-humanbydefinition" title="Tools">🔧</a> <a href="#plugin-humanbydefinition" title="Plugin/utility libraries">🔌</a> <a href="https://github.com/humanbydefinition/code.textmode.art/pulls?q=is%3Apr+reviewed-by%3Ahumanbydefinition" title="Reviewed Pull Requests">👀</a></td>
+      <td align="center" valign="top" width="14.28%"><a href="https://github.com/trintlermint"><img src="https://www.github.com/trintlermint.png?s=100" width="100px;" alt="trintlermint"/><br /><sub><b>trintlermint</b></sub></a><br /><a href="#design-trintlermint" title="Design">🎨</a> <a href="#example-trintlermint" title="Examples">💡</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- markdownlint-restore -->
+<!-- prettier-ignore-end -->
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://allcontributors.org) specification.
+Contributions of any kind are welcome.
+Maintainers can update this section with `npm run contributors:add -- <github-username> <contribution[,contribution]>`
+and `npm run contributors:generate`.
 
 ## Tech stack
 
@@ -65,7 +95,7 @@ Documentation content is licensed under [CC BY 4.0](https://creativecommons.org/
 
 ## Links
 
-- 📦 [textmode.js on npm](https://www.npmjs.com/package/textmode.js)
-- 💻 [textmode.js repository](https://github.com/humanbydefinition/textmode.js)
-- ✏️ [textmode.js web editor](https://editor.textmode.art)
-- 💬 [Discord community](https://discord.gg/sjrw8QXNks)
+- [textmode.js on npm](https://www.npmjs.com/package/textmode.js)
+- [textmode.js repository](https://github.com/humanbydefinition/textmode.js)
+- [textmode.js web editor](https://editor.textmode.art)
+- [Discord community](https://discord.gg/sjrw8QXNks)
