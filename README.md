@@ -15,7 +15,7 @@
 
 Official documentation, guides, and examples for [textmode.js](https://github.com/humanbydefinition/textmode.js) - a creative coding library for real-time ASCII art on the web.
 
-🌐 **Live site**: [code.textmode.art](https://code.textmode.art)
+**Live site**: [code.textmode.art](https://code.textmode.art)
 
 ## What's inside
 
