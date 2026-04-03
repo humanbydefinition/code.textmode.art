@@ -11,7 +11,9 @@
   "scripts": {
     "dev": "vitepress dev --host --port 4175",
     "build": "vitepress build",
-    "preview": "vitepress preview"
+    "preview": "vitepress preview",
+    "contributors:add": "npx all-contributors-cli add",
+    "contributors:generate": "npx all-contributors-cli generate"
   },
   "dependencies": {
     "@iconify/vue": "^5.0.0",
