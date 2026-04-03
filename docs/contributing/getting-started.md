@@ -45,7 +45,7 @@ This will install VitePress and all required dependencies.
 npm run dev
 ```
 
-The documentation site will be available at `http://localhost:4175`. The dev server supports hot reload - your changes will appear instantly!
+The documentation site will be available at `http://localhost:4175`. The dev server supports hot reload - your code changes will appear instantly!
 
 ### 5. Create a branch
 
