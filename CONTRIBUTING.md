@@ -114,7 +114,7 @@ public/                 # Static assets (fonts, images, SVGs)
 
 ## Credits
 
-All contributors are recognized on the [Contributors page](/docs/contributors) and in the README using the [All Contributors](https://allcontributors.org/) specification.
+All contributors are recognized on the [Contributors page](/docs/contributors) and in the [README](https://github.com/humanbydefinition/code.textmode.art#contributors) using the [All Contributors](https://allcontributors.org/) specification.
 
 Maintainers update contributor recognition with `npm run contributors:add -- <github-username> <contribution[,contribution]>` and `npm run contributors:generate`.
 If you want extra social links on the website, add them to [`.vitepress/data/contributors.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contributors.json).
