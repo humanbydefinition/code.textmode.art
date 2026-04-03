@@ -24,6 +24,8 @@ interface ContributorMetadataEntry {
 
 type ContributorMetadata = Record<string, ContributorMetadataEntry>
 
+const linkOrder = ['website', 'github', 'instagram', 'twitter', 'mastodon', 'bluesky', 'discord'] as const
+
 interface Contribution {
   type: string
   emoji: string
@@ -106,7 +108,15 @@ function getLinks(entry: AllContributorsEntry, metadata: ContributorMetadataEntr
     }
   }
 
-  return links
+  return links.sort((left, right) => {
+    const leftIndex = linkOrder.indexOf(left.icon as (typeof linkOrder)[number])
+    const rightIndex = linkOrder.indexOf(right.icon as (typeof linkOrder)[number])
+
+    const normalizedLeftIndex = leftIndex === -1 ? linkOrder.length : leftIndex
+    const normalizedRightIndex = rightIndex === -1 ? linkOrder.length : rightIndex
+
+    return normalizedLeftIndex - normalizedRightIndex
+  })
 }
 
 export const contributors: Contributor[] = allContributors.contributors.map((entry) => ({
