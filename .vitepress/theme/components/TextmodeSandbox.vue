@@ -24,6 +24,18 @@
         </div>
         <div v-if="socialLinks" class="social-links">
           <a
+            v-if="socialLinks.website"
+            :href="socialLinks.website"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="social-link"
+            aria-label="Website"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="social-icon">
+              <path d="M12 2C6.477 2 2 6.478 2 12s4.477 10 10 10 10-4.478 10-10S17.523 2 12 2zm6.93 9h-3.06a15.93 15.93 0 00-1.38-5.01A8.025 8.025 0 0118.93 11zM12 4.07c.78 0 2.39 2.07 2.93 6.93H9.07C9.61 6.14 11.22 4.07 12 4.07zM4.07 13h3.06c.12 1.81.6 3.54 1.38 5.01A8.025 8.025 0 014.07 13zm3.06-2H4.07a8.025 8.025 0 014.44-5.01A15.93 15.93 0 007.13 11zm4.87 8.93c-.78 0-2.39-2.07-2.93-6.93h5.86c-.54 4.86-2.15 6.93-2.93 6.93zM15.31 18.01c.78-1.47 1.26-3.2 1.38-5.01h3.24a8.025 8.025 0 01-4.62 5.01z" fill="currentColor" />
+            </svg>
+          </a>
+          <a
             v-if="socialLinks.instagram"
             :href="socialLinks.instagram"
             target="_blank"
@@ -124,7 +136,7 @@ const socialLinks = computed(() => {
   
   const links: Record<string, string> = {}
   contributor.value.links.forEach(link => {
-    if (['instagram', 'twitter', 'mastodon', 'bluesky'].includes(link.icon)) {
+    if (['website', 'instagram', 'twitter', 'mastodon', 'bluesky'].includes(link.icon)) {
       links[link.icon] = link.link
     }
   })
