@@ -14,7 +14,6 @@ interface SketchMeta {
 interface ExampleSketchContribution {
   id: string
   title: string
-  featured: boolean
 }
 
 export interface DiscordRoleReward {
@@ -32,7 +31,6 @@ export interface ExampleLeaderboardEntry {
   profile: string | null
   links: ContributorLink[]
   sketchCount: number
-  featuredCount: number
   progressPercent: number
   sketchesUntilRole: number
   hasUnlockedRole: boolean
@@ -41,7 +39,6 @@ export interface ExampleLeaderboardEntry {
 
 export interface ExampleLeaderboardStats {
   totalSketches: number
-  totalFeaturedSketches: number
   totalContributors: number
   roleEligibleContributors: number
 }
@@ -81,7 +78,6 @@ function createLeaderboardEntry(
 ): Omit<ExampleLeaderboardEntry, 'rank'> {
   const contributor = getIdentity(author)
   const sketchCount = sketches.length
-  const featuredCount = sketches.filter(sketch => sketch.featured).length
   const authorKey = contributor?.login ?? author.toLowerCase()
   const sketchesUntilRole = Math.max(0, discordRoleReward.unlockCount - sketchCount)
 
@@ -93,7 +89,6 @@ function createLeaderboardEntry(
     profile: getProfile(contributor),
     links: contributor?.links ?? [],
     sketchCount,
-    featuredCount,
     progressPercent: Math.min(100, Math.round((sketchCount / discordRoleReward.unlockCount) * 100)),
     sketchesUntilRole,
     hasUnlockedRole: sketchesUntilRole === 0,
@@ -115,7 +110,6 @@ const groupedSketches = sketchEntries.reduce<Record<string, ExampleSketchContrib
   groups[author].push({
     id,
     title: meta.title,
-    featured: meta.featured === true,
   })
 
   return groups
@@ -128,10 +122,6 @@ const sortedEntries = Object.entries(groupedSketches)
       return right.sketchCount - left.sketchCount
     }
 
-    if (right.featuredCount !== left.featuredCount) {
-      return right.featuredCount - left.featuredCount
-    }
-
     return left.name.localeCompare(right.name)
   })
 
@@ -139,13 +129,11 @@ export const exampleLeaderboard: ExampleLeaderboardEntry[] = []
 
 let previousRank = 0
 let previousSketchCount = -1
-let previousFeaturedCount = -1
 
 for (const [index, entry] of sortedEntries.entries()) {
   const hasSameScore =
     index > 0
     && previousSketchCount === entry.sketchCount
-    && previousFeaturedCount === entry.featuredCount
 
   const rank = hasSameScore ? previousRank : index + 1
 
@@ -156,12 +144,10 @@ for (const [index, entry] of sortedEntries.entries()) {
 
   previousRank = rank
   previousSketchCount = entry.sketchCount
-  previousFeaturedCount = entry.featuredCount
 }
 
 export const exampleLeaderboardStats: ExampleLeaderboardStats = {
   totalSketches: sketchEntries.length,
-  totalFeaturedSketches: sketchEntries.filter(([, meta]) => meta.featured === true).length,
   totalContributors: exampleLeaderboard.length,
   roleEligibleContributors: exampleLeaderboard.filter(entry => entry.hasUnlockedRole).length,
 }

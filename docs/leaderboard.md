@@ -16,7 +16,7 @@ As the API TypeDoc pages grow a larger pool of contributed example sketches, thi
 ## How it works
 
 - Each accepted example sketch counts as one leaderboard contribution.
-- Rankings are sorted by accepted example count, then by featured examples as a tiebreaker.
+- Rankings are sorted by accepted example count, then alphabetically by contributor name.
 - The Discord role unlock is based on merged example sketches that have made it into the deployed docs.
 - If you qualify for the role, join the [Discord server](https://discord.gg/sjrw8QXNks) and tell the maintainers which GitHub account to match.
 

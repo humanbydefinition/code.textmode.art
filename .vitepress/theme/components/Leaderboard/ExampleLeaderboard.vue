@@ -5,7 +5,7 @@
         <p class="example-leaderboard__eyebrow">Accepted examples</p>
         <p class="example-leaderboard__value">{{ exampleLeaderboardStats.totalSketches }}</p>
         <p class="example-leaderboard__meta">
-          {{ exampleLeaderboardStats.totalFeaturedSketches }} featured across the docs
+          Across all contributed documentation examples
         </p>
       </UiCard>
 
@@ -33,7 +33,7 @@
           <code>{{ discordRoleReward.name }}</code> role in Discord.
         </p>
         <p class="example-leaderboard__meta">
-          Ties are sorted by featured examples, then alphabetically by contributor name.
+          Ties are sorted alphabetically by contributor name.
         </p>
       </div>
 
@@ -90,10 +90,6 @@
             <dt>Accepted</dt>
             <dd>{{ entry.sketchCount }}</dd>
           </div>
-          <div>
-            <dt>Featured</dt>
-            <dd>{{ entry.featuredCount }}</dd>
-          </div>
         </dl>
 
         <p class="example-leaderboard__titles">
@@ -109,7 +105,6 @@
             <th>Rank</th>
             <th>Contributor</th>
             <th>Accepted</th>
-            <th>Featured</th>
             <th>Role status</th>
           </tr>
         </thead>
@@ -140,7 +135,6 @@
               </div>
             </td>
             <td>{{ entry.sketchCount }}</td>
-            <td>{{ entry.featuredCount }}</td>
             <td>
               <UiBadge :variant="entry.hasUnlockedRole ? 'success' : 'warning'" pill>
                 {{ entry.hasUnlockedRole ? 'Eligible now' : `${entry.sketchesUntilRole} remaining` }}
@@ -267,15 +261,13 @@ function formatTitles(titles: string[]): string {
 }
 
 .example-leaderboard__table-wrap :deep(th:nth-child(3)),
-.example-leaderboard__table-wrap :deep(td:nth-child(3)),
-.example-leaderboard__table-wrap :deep(th:nth-child(4)),
-.example-leaderboard__table-wrap :deep(td:nth-child(4)) {
+.example-leaderboard__table-wrap :deep(td:nth-child(3)) {
   width: 96px;
   white-space: nowrap;
 }
 
-.example-leaderboard__table-wrap :deep(th:nth-child(5)),
-.example-leaderboard__table-wrap :deep(td:nth-child(5)) {
+.example-leaderboard__table-wrap :deep(th:nth-child(4)),
+.example-leaderboard__table-wrap :deep(td:nth-child(4)) {
   width: 180px;
   white-space: nowrap;
 }
@@ -337,7 +329,7 @@ function formatTitles(titles: string[]): string {
 
 .example-leaderboard__mobile-stats {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: 1fr;
   gap: 0.75rem;
   margin: 0 0 0.85rem;
 }
