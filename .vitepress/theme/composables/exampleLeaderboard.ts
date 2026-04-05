@@ -1,4 +1,5 @@
 import sketchMetadata from '../../data/sketches.json'
+import { data as apiSketches } from '../../data/apiSketches.data'
 import {
   findContributorByName,
   type Contributor,
@@ -45,11 +46,14 @@ export interface ExampleLeaderboardStats {
 
 type SketchMetadataMap = Record<string, SketchMeta>
 
-const sketchEntries = Object.entries(sketchMetadata as SketchMetadataMap)
-const excludedLeaderboardLogins = new Set(['humanbydefinition'])
+const sketchEntries: [string, SketchMeta][] = [
+  ...Object.entries(sketchMetadata as SketchMetadataMap),
+  ...Object.entries(apiSketches as SketchMetadataMap),
+]
+const excludedLeaderboardLogins = new Set([''])
 
 export const discordRoleReward: DiscordRoleReward = {
-  name: 'Textmodulator',
+  name: 'Textmodeller',
   unlockCount: 3,
   inviteUrl: 'https://discord.gg/sjrw8QXNks',
 }
