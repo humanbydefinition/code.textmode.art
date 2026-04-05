@@ -35,6 +35,7 @@ export interface ExampleLeaderboardEntry {
   progressPercent: number
   sketchesUntilRole: number
   hasUnlockedRole: boolean
+  isBot: boolean
   sketches: ExampleSketchContribution[]
 }
 
@@ -50,7 +51,8 @@ const sketchEntries: [string, SketchMeta][] = [
   ...Object.entries(sketchMetadata as SketchMetadataMap),
   ...Object.entries(apiSketches as SketchMetadataMap),
 ]
-const excludedLeaderboardLogins = new Set([''])
+const excludedLeaderboardLogins = new Set(['humanbydefinition'])
+const botLogins = new Set(['codex'])
 
 export const discordRoleReward: DiscordRoleReward = {
   name: 'Textmodeller',
@@ -68,12 +70,12 @@ function isExcludedFromLeaderboard(author: string): boolean {
   return excludedLeaderboardLogins.has(login.toLowerCase())
 }
 
-function getAvatar(contributor: Contributor | null): string | null {
-  return contributor?.avatar ?? null
+function getAvatar(contributor: Contributor | null, author: string): string | null {
+  return contributor?.avatar ?? `https://github.com/${author}.png?s=160`
 }
 
-function getProfile(contributor: Contributor | null): string | null {
-  return contributor?.profile ?? null
+function getProfile(contributor: Contributor | null, author: string): string | null {
+  return contributor?.profile ?? `https://github.com/${author}`
 }
 
 function createLeaderboardEntry(
@@ -88,14 +90,15 @@ function createLeaderboardEntry(
   return {
     authorKey,
     name: contributor?.name ?? author,
-    login: contributor?.login ?? null,
-    avatar: getAvatar(contributor),
-    profile: getProfile(contributor),
+    login: contributor?.login ?? author.toLowerCase(),
+    avatar: getAvatar(contributor, author),
+    profile: getProfile(contributor, author),
     links: contributor?.links ?? [],
     sketchCount,
     progressPercent: Math.min(100, Math.round((sketchCount / discordRoleReward.unlockCount) * 100)),
     sketchesUntilRole,
     hasUnlockedRole: sketchesUntilRole === 0,
+    isBot: botLogins.has(authorKey.toLowerCase()),
     sketches: sketches.slice().sort((left, right) => left.title.localeCompare(right.title)),
   }
 }
@@ -152,6 +155,6 @@ for (const [index, entry] of sortedEntries.entries()) {
 
 export const exampleLeaderboardStats: ExampleLeaderboardStats = {
   totalSketches: sketchEntries.length,
-  totalContributors: exampleLeaderboard.length,
+  totalContributors: exampleLeaderboard.filter(entry => !entry.isBot).length,
   roleEligibleContributors: exampleLeaderboard.filter(entry => entry.hasUnlockedRole).length,
 }

@@ -52,8 +52,6 @@ export default {
 
         const block = lines.slice(i, Math.min(i + 12, lines.length)).join('\n')
 
-        if (block.includes('{ai-generated}')) continue
-
         const authorMatch = block.match(/<strong><a[^>]*>@([^<]+)<\/a><\/strong>/)
         if (!authorMatch) continue
 

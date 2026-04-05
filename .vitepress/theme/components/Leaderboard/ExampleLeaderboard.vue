@@ -3,15 +3,15 @@
     <div class="example-leaderboard__stats">
       <UiCard rounded="md" padded>
         <p class="example-leaderboard__eyebrow">Examples</p>
-        <p class="example-leaderboard__value">{{ exampleLeaderboardStats.totalSketches }}</p>
+        <p class="example-leaderboard__value">~{{ exampleLeaderboardStats.totalSketches }}</p>
         <p class="example-leaderboard__meta">
-          Across all contributed documentation examples
+          Across all API documentation pages
         </p>
       </UiCard>
 
       <UiCard rounded="md" padded>
         <p class="example-leaderboard__eyebrow">Contributors</p>
-        <p class="example-leaderboard__value">{{ exampleLeaderboardStats.totalContributors }}</p>
+        <p class="example-leaderboard__value">{{ exampleLeaderboardStats.totalContributors }} <span class="example-leaderboard__ai-hint">(+ 🤖)</span></p>
         <p class="example-leaderboard__meta">Ranked by merged example sketch count</p>
       </UiCard>
 
@@ -70,10 +70,11 @@
                 rel="noopener noreferrer"
                 class="example-leaderboard__profile-link"
               >
-                {{ entry.name }}
+                {{ entry.name }} <span v-if="entry.isBot">🤖</span>
               </a>
-              <span v-else>{{ entry.name }}</span>
+              <span v-else>{{ entry.name }} <span v-if="entry.isBot">🤖</span></span>
               <span v-if="entry.login" class="example-leaderboard__login">@{{ entry.login }}</span>
+              <span v-if="entry.isBot" class="example-leaderboard__bot-taunt">Replace its sketches to knock it off the board</span>
             </div>
           </div>
 
@@ -114,7 +115,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="entry in exampleLeaderboard" :key="entry.authorKey">
+          <tr v-for="entry in exampleLeaderboard" :key="entry.authorKey" :class="{ 'example-leaderboard__row--bot': entry.isBot }">
             <td class="example-leaderboard__rank-cell">#{{ entry.rank }}</td>
             <td>
               <div class="example-leaderboard__person">
@@ -132,10 +133,11 @@
                     rel="noopener noreferrer"
                     class="example-leaderboard__profile-link"
                   >
-                    {{ entry.name }}
+                    {{ entry.name }} <span v-if="entry.isBot">🤖</span>
                   </a>
-                  <span v-else>{{ entry.name }}</span>
+                  <span v-else>{{ entry.name }} <span v-if="entry.isBot">🤖</span></span>
                   <span v-if="entry.login" class="example-leaderboard__login">@{{ entry.login }}</span>
+                  <span v-if="entry.isBot" class="example-leaderboard__bot-taunt">Replace its sketches to knock it off the board</span>
                 </div>
               </div>
             </td>
@@ -218,6 +220,12 @@ function formatTitles(titles: string[]): string {
   font-weight: 700;
   line-height: 1;
   color: var(--vp-c-text-1);
+}
+
+.example-leaderboard__ai-hint {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--vp-c-text-3);
 }
 
 .example-leaderboard__meta {
@@ -415,6 +423,12 @@ function formatTitles(titles: string[]): string {
 
 .example-leaderboard__login {
   font-size: 0.85rem;
+}
+
+.example-leaderboard__bot-taunt {
+  font-size: 0.8rem;
+  font-style: italic;
+  color: var(--vp-c-text-3);
 }
 
 .example-leaderboard__titles {
