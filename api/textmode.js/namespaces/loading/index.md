@@ -6,7 +6,7 @@ description: All loading screen related modules and types.
 category: Namespaces
 api: true
 kind: Namespace
-lastModified: 2026-02-06
+lastModified: 2026-04-05
 ---
 
 [textmode.js](../../index.md) / loading
@@ -19,14 +19,11 @@ All loading screen related modules and types.
 
 | Class | Description |
 | ------ | ------ |
-| [LoadingPhase](classes/LoadingPhase.md) | Represents a loading phase tracked by a LoadingPhaseTracker. |
-| [LoadingScreenManager](classes/LoadingScreenManager.md) | Manages the loading screen display and state. Can be accessed via [Textmodifier.loading](../../classes/Textmodifier.md#loading). |
+| [LoadingLayerController](classes/LoadingLayerController.md) | Controls the internal loading layer lifecycle and rendering behavior. |
 
 ## Interfaces
 
 | Interface | Description |
 | ------ | ------ |
-| [LoadingPhaseSnapshot](interfaces/LoadingPhaseSnapshot.md) | Snapshot of a loading phase's state. |
 | [LoadingScreenOptions](interfaces/LoadingScreenOptions.md) | Options for configuring the loading screen. |
-| [LoadingScreenRendererContext](interfaces/LoadingScreenRendererContext.md) | Context object passed to a loading screen renderer function. |
-| [LoadingScreenTheme](interfaces/LoadingScreenTheme.md) | Theme settings for the loading screen. |
+| [LoadingScreenRendererContext](interfaces/LoadingScreenRendererContext.md) | Context object passed to loading renderer callbacks. |

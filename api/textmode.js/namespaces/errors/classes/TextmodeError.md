@@ -5,12 +5,13 @@ title: TextmodeError
 description: Custom error class for textmode.js exceptions.
 category: Classes
 api: true
+namespace: errors
 kind: Class
-lastModified: 2026-02-06
+lastModified: 2026-04-05
 hasConstructor: true
 ---
 
-[textmode.js](../index.md) / TextmodeError
+[textmode.js](../../../index.md) / [errors](../index.md) / TextmodeError
 
 # Class: TextmodeError
 
@@ -28,7 +29,10 @@ debug issues.
 ### Constructor
 
 ```ts
-new TextmodeError(message, context?): TextmodeError;
+new TextmodeError(
+   message, 
+   context?, 
+   options?): TextmodeError;
 ```
 
 Creates a new TextmodeError instance.
@@ -39,6 +43,7 @@ Creates a new TextmodeError instance.
 | ------ | ------ | ------ |
 | `message` | `string` | The main error message |
 | `context?` | `Record`\<`string`, `unknown`\> | Optional context data to include in the error message |
+| `options?` | `TextmodeErrorFormatOptions` | Optional message formatting options |
 
 #### Returns
 

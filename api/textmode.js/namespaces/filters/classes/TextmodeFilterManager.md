@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: filters
 kind: Class
-lastModified: 2026-02-06
+lastModified: 2026-04-05
 hasConstructor: false
 ---
 

@@ -6,7 +6,7 @@ description: Error handling levels to control how errors are reported and handle
 category: Enumerations
 api: true
 kind: Enum
-lastModified: 2026-02-06
+lastModified: 2026-04-05
 ---
 
 [textmode.js](../index.md) / TextmodeErrorLevel
@@ -24,7 +24,7 @@ Each level provides different behavior for error reporting and execution flow co
 
 ## Example
 
-```js
+```javascript
 // Set to `WARNING` level to log errors without stopping execution
 textmode.setErrorLevel(TextmodeErrorLevel.WARNING);
 ```

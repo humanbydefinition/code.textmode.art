@@ -6,7 +6,7 @@ description: All loadable assets related to textmode rendering.
 category: Namespaces
 api: true
 kind: Namespace
-lastModified: 2026-02-06
+lastModified: 2026-04-05
 ---
 
 [textmode.js](../../index.md) / loadables

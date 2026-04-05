@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 namespace: input.touch
 kind: TypeAlias
-lastModified: 2026-02-06
+lastModified: 2026-04-05
 ---
 
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [touch](../index.md) / TouchPinchHandler
