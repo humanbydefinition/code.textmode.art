@@ -69,7 +69,7 @@ Understanding the project layout helps you find what you need:
 ├── config.mts          # VitePress configuration
 ├── data/
 │   ├── fonts.json      # Font showcase data
-│   ├── sketches.json   # Example sketch metadata
+│   ├── sketches.json   # Example sketch metadata and leaderboard input
 │   └── contributors.json # Optional contributor profile metadata
 └── theme/              # Custom theme components
 
@@ -87,7 +87,7 @@ public/                 # Static assets (fonts, images, SVGs)
 
 - **[`.vitepress/config.mts`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/config.mts)** - VitePress configuration
 - **[`.vitepress/data/fonts.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/fonts.json)** - Font showcase data
-- **[`.vitepress/data/sketches.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/sketches.json)** - Example sketch metadata
+- **[`.vitepress/data/sketches.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/sketches.json)** - Example sketch metadata used by the docs and leaderboard
 - **[`.all-contributorsrc`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.all-contributorsrc)** - Canonical contributor registry
 - **[`.vitepress/data/contributors.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contributors.json)** - Optional social/profile metadata for the website
 
@@ -171,6 +171,7 @@ npm run contributors:generate
 If you want additional social links to appear on the site, add them to [`.vitepress/data/contributors.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contributors.json).
 
 You'll appear on the [Contributors page](/docs/contributors) when your PR is merged!
+If your contribution is an accepted example sketch, it will also count toward the [Example Sketch Leaderboard](/docs/leaderboard) on the next redeploy.
 
 ## Tips for success
 
@@ -193,6 +194,7 @@ You'll appear on the [Contributors page](/docs/contributors) when your PR is mer
 1. Add entry to `.vitepress/data/sketches.json`
 2. Test the sketch works correctly
 3. Submit pull request
+4. Check the [Example Sketch Leaderboard](/docs/leaderboard) after the next deployment
 
 ### Fixing a typo
 

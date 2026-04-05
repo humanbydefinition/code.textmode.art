@@ -20,7 +20,9 @@ This page follows the [**All Contributors**](https://allcontributors.org/) speci
 We welcome contributions of all sizes! Whether it's fixing a typo, adding a feature, improving documentation, or creating examples - every contribution earns you a place here. Check out our [Contributing Guide](/docs/contributing/) to get started.
 :::
 
-
+:::tip Looking for example-sketch rankings?
+Accepted documentation examples also appear on the dedicated [Example Sketch Leaderboard](/docs/leaderboard), including the Discord role unlock progress.
+:::
 
 ## Current and past contributors
 

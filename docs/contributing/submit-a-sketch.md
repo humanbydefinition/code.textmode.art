@@ -26,6 +26,10 @@ You can submit a sketch in two ways:
 2. Add your sketch metadata to [`.vitepress/data/sketches.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/sketches.json)
 3. Submit a pull request with your changes
 
+:::tip Recognition and rewards
+Accepted sketches can appear on the [Example Sketch Leaderboard](/docs/leaderboard). Once you reach the current unlock threshold of **3 accepted example sketches**, you also become eligible for the `Textmodulator` role in Discord.
+:::
+
 ### Option 2: Open an issue
 
 Open an issue on GitHub with:
@@ -63,6 +67,8 @@ A gallery will be added in the future to showcase community-submitted sketches. 
 Once your submission is reviewed and approved:
 
 - Your sketch may appear in the documentation examples
+- Your accepted examples count toward the [Example Sketch Leaderboard](/docs/leaderboard)
+- Reaching 3 accepted examples makes you eligible for the `Textmodulator` Discord role
 - You could be featured in the upcoming sketch gallery
 - You'll be credited in the [Contributors page](/docs/contributors)
 - You'll inspire others in the community!
