@@ -5,7 +5,7 @@
         <p class="example-leaderboard__eyebrow">Examples</p>
         <p class="example-leaderboard__value">~{{ exampleLeaderboardStats.totalSketches }}</p>
         <p class="example-leaderboard__meta">
-          Across all API documentation pages
+          Across showcase and API documentation pages
         </p>
       </UiCard>
 
