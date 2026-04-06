@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: loadables
 kind: Class
-lastModified: 2026-04-05
+lastModified: 2026-04-06
 hasConstructor: false
 ---
 
@@ -25,7 +25,7 @@ layer-specific font configurations.
 
 ## Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
 const accentLayer = t.layers.add({ fontSize: 8, offset: [0, 6] });
 
@@ -105,7 +105,7 @@ Returns the character map for O(1) lookups.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
 
 function label(text, y, color = [220, 220, 220]) {
@@ -166,7 +166,7 @@ Returns the array of [TextmodeCharacter](../type-aliases/TextmodeCharacter.md) o
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
 
 t.draw(() => {
@@ -220,7 +220,7 @@ Returns the WebGL framebuffer containing the font texture atlas.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
 
 function label(text, y, color = [220, 220, 220]) {
@@ -276,7 +276,7 @@ Returns the font size used for the texture atlas.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
 const miniLayer = t.layers.add({ fontSize: 16, offset: [0, 6] });
 
@@ -342,7 +342,7 @@ Returns the maximum dimensions of a glyph in the font in pixels.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
 
 function label(text, y, color = [220, 220, 220]) {
@@ -404,7 +404,7 @@ Returns the number of columns in the texture atlas.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
 
 function label(text, y, color = [220, 220, 220]) {
@@ -468,7 +468,7 @@ Returns the number of rows in the texture atlas.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
 
 function label(text, y, color = [220, 220, 220]) {
@@ -530,7 +530,7 @@ Dispose of all resources used by this font manager.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
 
 let tempFont;

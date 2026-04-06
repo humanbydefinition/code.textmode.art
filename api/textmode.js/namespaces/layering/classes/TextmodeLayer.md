@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: layering
 kind: Class
-lastModified: 2026-04-05
+lastModified: 2026-04-06
 hasConstructor: false
 ---
 
@@ -52,7 +52,7 @@ Get the framebuffer containing the rendered textmode output for this layer.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
 const stamp = t.layers.add({ blendMode: 'screen' });
 
@@ -100,7 +100,7 @@ If the layer is not yet initialized, returns undefined.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
 const stamp = t.layers.add();
 
@@ -145,7 +145,7 @@ The font used by this layer.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 const layer = t.layers.add({ fontSize: 32, blendMode: 'additive' });
 
@@ -226,7 +226,7 @@ Get the grid associated with this layer.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 32 });
 const rainLayer = t.layers.add({ fontSize: 16, blendMode: 'screen' });
 
@@ -312,7 +312,7 @@ If the layer is not yet initialized, returns 0.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 const waveLayer = t.layers.add({ blendMode: 'lighten' });
 
@@ -423,7 +423,7 @@ If the layer is not yet initialized, returns 0.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
 const detail = t.layers.add({ fontSize: 8 });
 
@@ -531,7 +531,7 @@ The current blend mode if no parameter is provided.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 // Create 5 layers with different blend modes
@@ -623,7 +623,7 @@ Set explicit camera parameters for this layer.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
 const scene = t.layers.add();
 
@@ -668,7 +668,7 @@ The created camera.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
 const scene = t.layers.add();
 let camera;
@@ -724,7 +724,7 @@ Delete plugin-specific state from this layer.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 const layer = t.layers.add();
 
@@ -807,7 +807,7 @@ methods like `char()`, `charColor()`, `translate()`, and `rect()`.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create();
 
 // Create layers with different blend modes
@@ -924,7 +924,7 @@ Call this method within your layer's draw callback to apply effects.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create();
 
 // Create a layer with filters applied
@@ -1011,7 +1011,7 @@ The current font size if called without arguments.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600, fontSize: 16 });
 
 // Add a high-resolution layer (small font) for details
@@ -1077,7 +1077,7 @@ The stored state object, or undefined if not set.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 const layer = t.layers.add();
 
@@ -1147,7 +1147,7 @@ True if state exists, false otherwise.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
 const layer = t.layers.add();
 
@@ -1199,7 +1199,7 @@ Hide this layer from rendering.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
 const banner = t.layers.add({ blendMode: 'screen' });
 let hidden = false;
@@ -1269,7 +1269,7 @@ The loaded TextmodeFont instance.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
 const accent = t.layers.add({ blendMode: 'screen' });
 
@@ -1343,7 +1343,7 @@ Update this layer camera's target and optional up vector.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
 const scene = t.layers.add();
 
@@ -1413,7 +1413,7 @@ The current offset if no parameters are provided.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create();
 
 const LAYER_COUNT = 32;
@@ -1512,7 +1512,7 @@ The current opacity if no parameter is provided.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
 const haze = t.layers.add({ blendMode: 'additive' });
 
@@ -1577,7 +1577,7 @@ Enable orthographic projection for this layer.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
 const scene = t.layers.add();
 
@@ -1635,7 +1635,7 @@ Enable perspective projection for this layer.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
 const scene = t.layers.add();
 
@@ -1683,7 +1683,7 @@ Reset this layer to default auto camera behavior.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
 const scene = t.layers.add();
 let custom = true;
@@ -1746,7 +1746,7 @@ The current rotation in degrees if no parameter is provided.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create();
 
 const rotatingLayer = t.layers.add({ blendMode: 'difference', opacity: 1.0 });
@@ -1800,7 +1800,7 @@ Set the active camera for this layer.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
 const scene = t.layers.add();
 let useLeft = true;
@@ -1873,7 +1873,7 @@ Plugins can use this to attach their own data to layer instances.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 const layers = [];
@@ -1949,7 +1949,7 @@ Show this layer for rendering.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
 const reveal = t.layers.add({ visible: false, blendMode: 'screen' });
 

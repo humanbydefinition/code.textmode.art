@@ -6,7 +6,7 @@ description: Options for creating a framebuffer via Textmodifier.createFramebuff
 category: Type Aliases
 api: true
 kind: TypeAlias
-lastModified: 2026-04-05
+lastModified: 2026-04-06
 ---
 
 [textmode.js](../index.md) / TextmodeFramebufferOptions

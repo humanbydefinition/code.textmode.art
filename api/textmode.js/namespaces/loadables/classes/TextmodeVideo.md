@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: loadables
 kind: Class
-lastModified: 2026-04-05
+lastModified: 2026-04-06
 hasConstructor: false
 ---
 
@@ -25,7 +25,7 @@ Those adjustable options are available via chainable methods on this class.
 
 ## Example
 
-```js
+```javascript
 const VIDEO_URL = 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4';
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
@@ -310,7 +310,7 @@ This instance for chaining.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let plainSource;
@@ -432,7 +432,7 @@ This instance for chaining.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let source;
@@ -530,7 +530,7 @@ This instance for chaining.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let sampledSource;
@@ -651,7 +651,7 @@ This instance for chaining.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let sparseSource;
@@ -769,7 +769,7 @@ This instance for chaining.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let source;
@@ -868,7 +868,7 @@ This instance for chaining.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let sampledSource;
@@ -985,7 +985,7 @@ This instance for chaining.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let source;
@@ -1096,7 +1096,7 @@ This instance for chaining.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let source;
@@ -1213,7 +1213,7 @@ This instance for chaining.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let source;
@@ -1328,7 +1328,7 @@ This instance for chaining.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let source;
@@ -1443,7 +1443,7 @@ This instance for chaining.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let normalSource;
@@ -1553,7 +1553,7 @@ Set whether the video should loop.
 
 #### Example
 
-```js
+```javascript
 const VIDEO_URL = 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4';
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
@@ -1624,7 +1624,7 @@ Pause the video.
 
 #### Example
 
-```js
+```javascript
 const VIDEO_URL = 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4';
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
@@ -1703,7 +1703,7 @@ Promise that resolves when playback starts
 
 #### Example
 
-```js
+```javascript
 const VIDEO_URL = 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4';
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
@@ -1783,7 +1783,7 @@ Set the playback speed.
 
 #### Example
 
-```js
+```javascript
 const VIDEO_URL = 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4';
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
@@ -1855,7 +1855,7 @@ Stop the video and reset to beginning.
 
 #### Example
 
-```js
+```javascript
 const VIDEO_URL = 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4';
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
@@ -1939,7 +1939,7 @@ Set the current time position in the video.
 
 #### Example
 
-```js
+```javascript
 const VIDEO_URL = 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4';
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
@@ -2018,7 +2018,7 @@ Set the volume.
 
 #### Example
 
-```js
+```javascript
 const VIDEO_URL = 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4';
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 

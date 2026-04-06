@@ -6,7 +6,7 @@ description: The main entry point for the textmode.js library.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-04-05
+lastModified: 2026-04-06
 hasConstructor: false
 ---
 
@@ -20,7 +20,7 @@ Provides static methods for creating [Textmodifier](Textmodifier.md) instances a
 
 ## Example
 
-```js
+```javascript
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
@@ -99,7 +99,7 @@ The version string of the library.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 const versionLabel = `VERSION: ${textmode.version}`;
@@ -158,7 +158,7 @@ A new Textmodifier instance
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
@@ -245,7 +245,7 @@ Set the global error handling level for the library. This applies to all [Textmo
 
 #### Example
 
-```js
+```javascript
 const level = TextmodeErrorLevel.WARNING;
 
 textmode.setErrorLevel(level);

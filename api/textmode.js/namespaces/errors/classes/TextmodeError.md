@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: errors
 kind: Class
-lastModified: 2026-04-05
+lastModified: 2026-04-06
 hasConstructor: true
 ---
 

@@ -6,7 +6,7 @@ description: Manages the grid of each TextmodeLayer instance.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-04-05
+lastModified: 2026-04-06
 hasConstructor: false
 ---
 
@@ -24,7 +24,7 @@ You can manually set `cols` and `rows` to lock the grid to a specific size.
 
 ## Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.setup(() => {
@@ -70,7 +70,7 @@ Returns the height of each cell in the grid in screen pixels.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
@@ -133,7 +133,7 @@ Returns the width of each cell in the grid in screen pixels.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
@@ -186,7 +186,7 @@ Returns the number of columns in the grid.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
@@ -237,7 +237,7 @@ Sets the number of columns and locks grid sizing until `responsive()` is called.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.setup(() => {
@@ -303,7 +303,7 @@ This is equal to `rows * cellHeight`.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
@@ -365,7 +365,7 @@ Returns the horizontal offset (margin) in pixels from the canvas edge to the gri
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
@@ -414,7 +414,7 @@ Returns the vertical offset (margin) in pixels from the canvas edge to the grid.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
@@ -463,7 +463,7 @@ Returns the number of rows in the grid.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
@@ -515,7 +515,7 @@ Sets the number of rows and locks grid sizing until `responsive()` is called.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.setup(() => {
@@ -582,7 +582,7 @@ This is equal to `cols * cellWidth`.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
@@ -636,7 +636,7 @@ You typically do not need to call this method directly.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let locked = false;
@@ -692,7 +692,7 @@ A grid becomes non-responsive when either `cols` or `rows` is manually set.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let isLocked = false;

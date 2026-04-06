@@ -6,7 +6,7 @@ description: Manages textmode rendering on a HTMLCanvasElement and provides meth
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-04-05
+lastModified: 2026-04-06
 hasConstructor: false
 ---
 
@@ -35,7 +35,7 @@ Returns the key string of the last pressed key, or null if no key has been press
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
 t.draw(() => {
@@ -72,7 +72,7 @@ Returns the key string of the last released key, or null if no key has been rele
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
 t.draw(() => {
@@ -116,7 +116,7 @@ Returns an object with boolean properties for each modifier key.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 640, height: 640, fontSize: 16 });
 
 function drawLabel(text, x, y, color = 180) {
@@ -205,7 +205,7 @@ it returns `{ x: Number.NEGATIVE_INFINITY, y: Number.NEGATIVE_INFINITY }`.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
 t.draw(() => {
@@ -245,7 +245,7 @@ Returns an array of key strings that are currently being held down.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
 t.draw(() => {
@@ -287,7 +287,7 @@ available. Use this inside a draw loop to react to active multi-touch scenarios.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
 t.draw(() => {
@@ -344,7 +344,7 @@ Get the canvas containing the rendered output.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
 
 t.canvas.title = 'Textmodifier.canvas example';
@@ -407,7 +407,7 @@ when converting images/videos/canvases into textmode representations.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
 
 let img;
@@ -487,7 +487,7 @@ Provides access to the error layer controller to display fatal errors in a user-
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
 
 let triggerError = false;
@@ -577,7 +577,7 @@ t.draw(() => {
 });
 ```
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
 
 function label(text, y, color = [220, 220, 220]) {
@@ -645,7 +645,7 @@ Get the current font object used for rendering the base layer.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
@@ -713,7 +713,7 @@ The number of frames rendered since the sketch started.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
 function drawLabel(text, y) {
@@ -786,7 +786,7 @@ point in time-based patterns.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
 function drawLabel(text, y) {
@@ -859,7 +859,7 @@ If no grid is set (e.g., before user setup()), returns `undefined`.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
@@ -916,7 +916,7 @@ Get the height of the canvas in pixels.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
@@ -985,7 +985,7 @@ Check if the instance has been disposed/destroyed.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
 
 const button = document.createElement('button');
@@ -1058,7 +1058,7 @@ Check if rendering is currently in progress for this frame.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
 
 let outsideFrame = false;
@@ -1121,7 +1121,7 @@ Each layer has its own grid, font, draw callback, and filters.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 const topLayer = t.layers.add();
@@ -1183,7 +1183,7 @@ Provides access to the loading layer controller to control boot-time loading UX.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({
 	width: 800,
 	height: 600,
@@ -1270,7 +1270,7 @@ Number of milliseconds since starting the sketch.
 
 ##### Examples
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
 function drawLabel(text, y) {
@@ -1312,7 +1312,7 @@ t.draw(() => {
   </div>
 </div>
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
 function drawLabel(text, y) {
@@ -1356,7 +1356,7 @@ t.draw(() => {
   </div>
 </div>
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
 function drawLabel(text, y) {
@@ -1438,7 +1438,7 @@ affect the value returned by [secs](#secs) since they are connected.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 function drawLabel(text, y) {
@@ -1524,7 +1524,7 @@ allowing further configuration of the conversion parameters.
 
 ##### Example
 
-```js
+```javascript
 const sourceCanvas = document.createElement('canvas');
 sourceCanvas.width = 360;
 sourceCanvas.height = 240;
@@ -1598,7 +1598,7 @@ Number of seconds since starting the sketch.
 
 ##### Examples
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
 function drawLabel(text, y) {
@@ -1643,7 +1643,7 @@ t.draw(() => {
   </div>
 </div>
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
 function drawLabel(text, y) {
@@ -1718,7 +1718,7 @@ affect the value returned by [millis](#millis) since they are connected.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 function drawLabel(text, y) {
@@ -1811,7 +1811,7 @@ Get the width of the canvas in pixels.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
@@ -1891,7 +1891,7 @@ Lighting uses RGB only, so any provided alpha value is ignored.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
@@ -2161,7 +2161,7 @@ Position is controlled via [translate](#translate), [push](#push), and [pop](#po
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
 
 t.draw(() => {
@@ -2233,7 +2233,7 @@ The current background color as a [TextmodeColor](TextmodeColor.md).
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
@@ -2286,7 +2286,7 @@ Set the background color using a grayscale value.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
@@ -2340,7 +2340,7 @@ Set the background color using RGB(A) values.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
@@ -2389,7 +2389,7 @@ Set the background color using a CSS string or TextmodeColor object.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
@@ -2457,7 +2457,7 @@ The curve thickness is controlled by the current [lineWeight](#lineweight) setti
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
@@ -2532,7 +2532,7 @@ Draw a box mesh primitive.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
 
 function label(text, y) {
@@ -2623,7 +2623,7 @@ Sets an explicit camera transform (eye, target, up) for subsequent draw calls.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 const scene = [
@@ -2707,7 +2707,7 @@ The current cell color as a [TextmodeColor](TextmodeColor.md).
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
@@ -2761,7 +2761,7 @@ Set the cell background color using a grayscale value.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
@@ -2815,7 +2815,7 @@ Set the cell background color using RGB(A) values.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
@@ -2861,7 +2861,7 @@ Set the cell background color using a CSS string or TextmodeColor object.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
@@ -2906,7 +2906,7 @@ The current character string.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
@@ -2960,7 +2960,7 @@ Accepts a single character string or a character index in the current font.
 
 ##### Example
 
-```js
+```javascript
 // Swapping characters over time
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
@@ -3009,7 +3009,7 @@ The current character color as a [TextmodeColor](TextmodeColor.md).
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
@@ -3072,7 +3072,7 @@ Set the character color using a grayscale value.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
@@ -3124,7 +3124,7 @@ Set the character color using RGB(A) values.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
@@ -3172,7 +3172,7 @@ Set the character color using a CSS string or TextmodeColor object.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
@@ -3220,7 +3220,7 @@ The current rotation angle in degrees if called without arguments
 
 #### Example
 
-```js
+```javascript
 // Rotating characters independently of geometry
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
@@ -3277,7 +3277,7 @@ Used to clear the layer at the start of its drawing cycle.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
@@ -3336,7 +3336,7 @@ A TextmodeColor instance
 
 ##### Example
 
-```js
+```javascript
 // Dynamic color creation
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
@@ -3400,7 +3400,7 @@ A TextmodeColor instance
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
 // Create reusable colors
@@ -3468,7 +3468,7 @@ A TextmodeColor instance
 
 ##### Example
 
-```js
+```javascript
 const dusk = t.color('#203040');
 const copy = t.color(dusk);
 ```
@@ -3504,7 +3504,7 @@ Draw a cone mesh primitive.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
 
 function label(text, y) {
@@ -3575,7 +3575,7 @@ reapplied via [setCamera](#setcamera).
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let camera;
@@ -3675,7 +3675,7 @@ A Promise that resolves to a compiled shader ready for use with [shader](#shader
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({
   width: 800,
   height: 600,
@@ -3752,7 +3752,7 @@ A new Framebuffer instance.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({
   width: 800,
   height: 600,
@@ -3814,7 +3814,7 @@ A Promise that resolves to a compiled shader
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
 let customShader;
@@ -3924,7 +3924,7 @@ See MDN for all options: https://developer.mozilla.org/en-US/docs/Web/CSS/cursor
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 const target = { width: 30, height: 15 };
 
@@ -3979,7 +3979,7 @@ Draw a cylinder mesh primitive.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
 
 function label(text, y) {
@@ -4052,7 +4052,7 @@ Time elapsed between current and previous frame in milliseconds.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
 let x = -40;
@@ -4119,7 +4119,7 @@ After calling this method, the instance should not be used and will be eligible 
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
 
 let destroyed = false;
@@ -4197,7 +4197,7 @@ helper lets you supply a dedicated handler when you want to treat double taps di
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
 let pulse = 0;
@@ -4252,7 +4252,7 @@ This allows for complex multi-layered compositions with independent rendering lo
 
 Calling this method is equivalent to setting the draw callback on the base layer,
 while the direct layer callback has precedence if both are set.
-```javascript
+```js
 textmodifier.layers.base.draw(callback);
 ```
 
@@ -4268,7 +4268,7 @@ textmodifier.layers.base.draw(callback);
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
@@ -4329,7 +4329,7 @@ Position is controlled via [translate](#translate), [push](#push), and [pop](#po
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
 
 t.draw(() => {
@@ -4411,7 +4411,7 @@ Draw an ellipsoid mesh primitive.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
 
 function label(text, y) {
@@ -4578,7 +4578,7 @@ queued per frame and will be applied in order.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
@@ -4652,7 +4652,7 @@ queued per frame and will be applied in order.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
@@ -4719,7 +4719,7 @@ The current flip state if called without arguments
 
 #### Example
 
-```js
+```javascript
 // Using flipX for symmetry
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
@@ -4788,7 +4788,7 @@ The current flip state if called without arguments
 
 #### Example
 
-```js
+```javascript
 // Using flipY for vertical reflection
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
@@ -4857,7 +4857,7 @@ The current font size if called without arguments.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 function drawLabel(label, y, color) {
@@ -4936,7 +4936,7 @@ Set the target frame rate. If called without arguments, returns the current meas
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let target = 60;
@@ -5022,7 +5022,7 @@ Draw a TextmodeFramebuffer, TextmodeImage, TextmodeVideo, or TextmodeTexture to 
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({
   width: 800,
   height: 600,
@@ -5088,7 +5088,7 @@ When called without arguments, returns the current input grid mode:<br/>
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
 
 let uiLayer;
@@ -5174,7 +5174,7 @@ The current inversion state if called without arguments
 
 #### Example
 
-```js
+```javascript
 // Swapping foreground and background
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
@@ -5235,7 +5235,7 @@ true if the key is currently pressed, false otherwise
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
 let playerX = 0;
@@ -5290,7 +5290,7 @@ True if the render loop is currently active, false otherwise.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
 function drawLabel(text, y) {
@@ -5363,7 +5363,7 @@ Set a callback function that will be called when a key is pressed down.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
 let lastKey = '?';
@@ -5418,7 +5418,7 @@ Set a callback function that will be called when a key is released.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
 let lastRelease = '?';
@@ -5478,7 +5478,7 @@ Negative inputs are clamped to `0`. If all inputs resolve to `0`, the falloff re
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
@@ -5606,7 +5606,7 @@ Draw a line from point (x1, y1) to point (x2, y2) with the settings.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
@@ -5681,7 +5681,7 @@ The current line weight if called without arguments.
 
 #### Example
 
-```js
+```javascript
 // Dynamic line thickness
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
@@ -5752,7 +5752,7 @@ The loaded TextmodeFont instance.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 const accentLayer = t.layers.add({ fontSize: 24, blendMode: 'additive' });
 
@@ -5829,7 +5829,7 @@ A Promise that resolves to a TextmodeImage object
 
 #### Example
 
-```js
+```javascript
 // Loading and rendering external assets
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
@@ -5889,7 +5889,7 @@ Load a video and return a TextmodeVideo that can be drawn with image().
 
 #### Example
 
-```js
+```javascript
 // Video to ASCII conversion
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
@@ -5954,7 +5954,7 @@ configured tolerance. The event includes the press duration in milliseconds.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
 const bursts = [];
@@ -6034,7 +6034,7 @@ Updates the current look-at target (and optional up vector) for the active camer
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 const scene = [
@@ -6129,7 +6129,7 @@ Resume the rendering loop if it was stopped by [noLoop](#noloop).
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600, fontSize: 16 });
 
 let paused = false;
@@ -6210,7 +6210,7 @@ Set a callback function that will be called when the mouse is clicked.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 const echoes = [];
@@ -6298,7 +6298,7 @@ Set a callback function that will be called when the mouse moves.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 const trail = [];
@@ -6381,7 +6381,7 @@ Set a callback function that will be called when the mouse is pressed down.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let isPressing = false;
@@ -6469,7 +6469,7 @@ Set a callback function that will be called when the mouse is released.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
 const lines = [];
@@ -6565,7 +6565,7 @@ Set a callback function that will be called when the mouse wheel is scrolled.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
 const rings = [];
@@ -6657,7 +6657,7 @@ Useful when you want later draw calls in the same frame to render unlit.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
@@ -6778,7 +6778,7 @@ animation while maintaining the ability to continue it.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
 let paused = false;
@@ -6854,7 +6854,7 @@ The projection mode is reset to perspective at the beginning of each frame.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 function drawLabel(text, y) {
@@ -6938,7 +6938,7 @@ The default perspective is tuned to match textmode.js legacy depth behavior.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 const scene = [
@@ -7030,7 +7030,7 @@ the initial distance and the change since the previous update, enabling zoom int
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
 let currentScale = 1;
@@ -7072,7 +7072,7 @@ Draw a 1x1 rectangle with the current settings.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
@@ -7149,7 +7149,7 @@ Up to five point lights are supported per frame. Additional calls are ignored.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
@@ -7322,7 +7322,7 @@ Use with [push](#push) to isolate style changes within a block.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
 t.draw(() => {
@@ -7366,7 +7366,7 @@ Use with [pop](#pop) to isolate style changes within a block.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
 t.draw(() => {
@@ -7417,7 +7417,7 @@ Position is controlled via [translate](#translate), [push](#push), and [pop](#po
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
@@ -7484,7 +7484,7 @@ allowing you to trigger rendering on demand.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600, fontSize: 16 });
 
 let manualMode = false;
@@ -7581,7 +7581,7 @@ This clears any active explicit camera and returns view calculation to renderer-
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let customCamera;
@@ -7697,7 +7697,7 @@ Equivalent to calling `shader(null)`.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let portalShader;
@@ -7795,7 +7795,7 @@ Resize the canvas and adjust all related components accordingly.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 600, height: 400 });
 
 let direction = 1;
@@ -7857,7 +7857,7 @@ All geometries rotate around the center of the shape.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
 t.draw(() => {
@@ -7967,7 +7967,7 @@ along with the gesture centre in grid coordinates. Ideal for dial-like interacti
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
 let rotation = 0;
@@ -8026,7 +8026,7 @@ The current X-axis rotation in degrees if called without arguments.
 
 #### Example
 
-```js
+```javascript
 // A field of oscillating slabs
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
@@ -8099,7 +8099,7 @@ The current Y-axis rotation in degrees if called without arguments.
 
 #### Example
 
-```js
+```javascript
 // A vertical stack of spinning glyphs
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
@@ -8172,7 +8172,7 @@ The current Z-axis rotation in degrees if called without arguments.
 
 #### Example
 
-```js
+```javascript
 // Layered rotation and symmetry
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
@@ -8262,7 +8262,7 @@ Sets the active camera from a previously created camera object.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let cameraA;
@@ -8363,7 +8363,7 @@ Set a uniform value for the current custom shader.
 
 #### Example
 
-```js
+```javascript
 // Passing CPU values to Shaders
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
@@ -8430,7 +8430,7 @@ Set multiple uniform values for the current custom shader.
 
 #### Example
 
-```js
+```javascript
 // Bulk uniform updates
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
@@ -8505,7 +8505,7 @@ The callback can be asynchronous (return a Promise).
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let stamp;
@@ -8583,7 +8583,7 @@ This behavior matches p5.js, allowing multiple draw calls with the same shader.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
 let glitchShader;
@@ -8652,7 +8652,7 @@ Draw a sphere mesh primitive.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
 
 function label(text, y) {
@@ -8818,7 +8818,7 @@ velocity in CSS pixels per millisecond. Useful for panning, flicks, or quick sho
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
 let arrow = '•';
@@ -8899,7 +8899,7 @@ Use TouchTapEventData.taps to determine whether the gesture is a single or multi
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
 const markers = [];
@@ -8967,7 +8967,7 @@ Current target frame rate when getting, void when setting
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 function drawLabel(text, y) {
@@ -9048,7 +9048,7 @@ Draw a torus mesh primitive.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
 
 function label(text, y) {
@@ -9125,7 +9125,7 @@ leaves the window. Treat this as an aborted touch and clean up any in-progress s
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
 let message = 'OK';
@@ -9193,7 +9193,7 @@ event. Use it to finalise state such as drawing strokes or completing gestures.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
 const ghosts = [];
@@ -9260,7 +9260,7 @@ The provided callback is invoked continuously while the browser reports move eve
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
 let posX = 0;
@@ -9323,7 +9323,7 @@ more fingers on the canvas.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
 const ripples = [];
@@ -9400,7 +9400,7 @@ All geometries are displaced by the specified amounts. Similar to p5.js translat
 
 #### Example
 
-```js
+```javascript
 // Rhythmic translation field
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
@@ -9459,7 +9459,7 @@ The current X-axis translation in grid cells.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
@@ -9512,7 +9512,7 @@ Sets the X-axis translation offset for subsequent shape rendering operations.
 
 ##### Example
 
-```js
+```javascript
 // Horizontal oscillation field
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
@@ -9569,7 +9569,7 @@ The current Y-axis translation in grid cells.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
@@ -9623,7 +9623,7 @@ Sets the Y-axis translation offset for subsequent shape rendering operations.
 
 ##### Example
 
-```js
+```javascript
 // Cascading vertical motion
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
@@ -9681,7 +9681,7 @@ The current Z-axis translation in grid cells.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
@@ -9734,7 +9734,7 @@ Sets the Z-axis translation offset for subsequent shape rendering operations.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: 800, height: 600 });
 
 t.draw(() => {
@@ -9787,7 +9787,7 @@ Draw a triangle with the current settings.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
@@ -9859,7 +9859,7 @@ Set a callback function that will be called when the window is resized.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 function drawLabel(label, y, color) {

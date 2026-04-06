@@ -6,7 +6,7 @@ description: Framebuffer class for managing offscreen rendering targets initiali
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-04-05
+lastModified: 2026-04-06
 hasConstructor: false
 ---
 
@@ -153,7 +153,7 @@ and pushes renderer state so drawing commands are isolated from the previous tar
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({
 	width: 720,
 	height: 420,
@@ -237,7 +237,7 @@ Call this when a custom framebuffer is no longer needed to release GPU resources
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({
 	width: 720,
 	height: 420,
@@ -336,7 +336,7 @@ and viewport state from the renderer stack.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({
 	width: 720,
 	height: 420,
@@ -457,7 +457,7 @@ is resized to match the new dimensions.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({
 	width: 720,
 	height: 420,

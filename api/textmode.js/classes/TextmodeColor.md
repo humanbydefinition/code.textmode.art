@@ -6,7 +6,7 @@ description: Represents a color in the textmode.js rendering system.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-04-05
+lastModified: 2026-04-06
 hasConstructor: false
 ---
 
@@ -23,7 +23,7 @@ Use [Textmodifier.color](Textmodifier.md#color) to create colors.
 
 ## Example
 
-```js
+```javascript
 // Demonstrating color creation and manipulation
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
@@ -87,7 +87,7 @@ Alpha component (0-255).
 
 #### Example
 
-```js
+```javascript
 // Alpha transparency
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
@@ -141,7 +141,7 @@ Blue component (0-255).
 
 #### Example
 
-```js
+```javascript
 // Blue channel waves
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
@@ -192,7 +192,7 @@ Green component (0-255).
 
 #### Example
 
-```js
+```javascript
 // Green channel visualization
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
@@ -262,7 +262,7 @@ Red component (0-255).
 
 #### Example
 
-```js
+```javascript
 // Visualizing the red component
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
@@ -325,7 +325,7 @@ A [r, g, b, a] tuple where each component is between 0.0 and 1.0.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 const color = t.color(255, 128, 0, 255);
@@ -425,7 +425,7 @@ A [r, g, b] tuple with values between 0 and 255.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 const color = t.color(50, 100, 200);
@@ -516,7 +516,7 @@ A [r, g, b, a] tuple with values between 0 and 255.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 const color = t.color(255, 128, 0, 100);
@@ -627,7 +627,7 @@ A new TextmodeColor instance with the updated alpha.
 
 #### Example
 
-```js
+```javascript
 // Modifying alpha of a base color
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 

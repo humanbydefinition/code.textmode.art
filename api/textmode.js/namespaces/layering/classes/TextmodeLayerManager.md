@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: layering
 kind: Class
-lastModified: 2026-04-05
+lastModified: 2026-04-06
 hasConstructor: false
 ---
 
@@ -43,7 +43,7 @@ readonly [`TextmodeLayer`](TextmodeLayer.md)[]
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
 
 ['screen', 'additive', 'overlay', 'difference'].forEach((blendMode, index) => {
@@ -126,7 +126,7 @@ The base layer cannot be removed or moved.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
 
 const base = t.layers.base;
@@ -244,7 +244,7 @@ and any user-created layer via [TextmodeLayer.filter](TextmodeLayer.md#filter).
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
 
 const prismLayer = t.layers.add({ blendMode: 'screen', opacity: 0.85 });
@@ -401,7 +401,7 @@ The newly created TextmodeLayer instance.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
 
 const cloudLayer = t.layers.add({ blendMode: 'screen', opacity: 0.45 });
@@ -510,7 +510,7 @@ and layers need to be recreated from scratch.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
 
 let mode = 0;
@@ -612,7 +612,7 @@ Move a layer to a new index in the layer stack.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
 
 const specs = [
@@ -708,7 +708,7 @@ Remove a layer from the manager.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
 
 const echoes = [];
@@ -825,7 +825,7 @@ Swap the order of two layers if they exist in the same collection.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
 
 const warmLayer = t.layers.add({ blendMode: 'normal', opacity: 1 });

@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: layering
 kind: Interface
-lastModified: 2026-04-05
+lastModified: 2026-04-06
 isInterface: true
 ---
 

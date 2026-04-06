@@ -6,7 +6,7 @@ description: Mutable camera object used for p5-style camera workflows.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-04-05
+lastModified: 2026-04-06
 hasConstructor: true
 ---
 
@@ -73,7 +73,7 @@ Get the current x position of the camera eye.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let camera;
@@ -142,7 +142,7 @@ Get the current y position of the camera eye.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let camera;
@@ -215,7 +215,7 @@ Get the current z position of the camera eye.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let camera;
@@ -284,7 +284,7 @@ Get the current x position of the camera target.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let camera;
@@ -364,7 +364,7 @@ Get the current y position of the camera target.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let camera;
@@ -436,7 +436,7 @@ Get the current z position of the camera target.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let camera;
@@ -516,7 +516,7 @@ Get the current x component of the camera up vector.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let camera;
@@ -582,7 +582,7 @@ Get the current y component of the camera up vector.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let camera;
@@ -648,7 +648,7 @@ Get the current z component of the camera up vector.
 
 ##### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let camera;
@@ -715,7 +715,7 @@ Create a copy of this camera.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let originalCamera;
@@ -801,7 +801,7 @@ Set camera look-at target.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let camera;
@@ -892,7 +892,7 @@ Move eye and target together in world space.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let camera;
@@ -982,7 +982,7 @@ Set camera eye position.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let camera;
@@ -1066,7 +1066,7 @@ Set camera up vector.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let camera;

@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: loadables
 kind: Class
-lastModified: 2026-04-05
+lastModified: 2026-04-06
 hasConstructor: false
 ---
 
@@ -25,7 +25,7 @@ Those adjustable options are available via chainable methods on this class.
 
 ## Example
 
-```js
+```javascript
 const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80';
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
 
@@ -229,7 +229,7 @@ This instance for chaining.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let plainSource;
@@ -351,7 +351,7 @@ This instance for chaining.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let source;
@@ -449,7 +449,7 @@ This instance for chaining.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let sampledSource;
@@ -570,7 +570,7 @@ This instance for chaining.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let sparseSource;
@@ -688,7 +688,7 @@ This instance for chaining.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let source;
@@ -787,7 +787,7 @@ This instance for chaining.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let sampledSource;
@@ -904,7 +904,7 @@ This instance for chaining.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let source;
@@ -1015,7 +1015,7 @@ This instance for chaining.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let source;
@@ -1132,7 +1132,7 @@ This instance for chaining.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let source;
@@ -1247,7 +1247,7 @@ This instance for chaining.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let source;
@@ -1362,7 +1362,7 @@ This instance for chaining.
 
 #### Example
 
-```js
+```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let normalSource;
