@@ -6,7 +6,7 @@ description: All modules and types related to multi-layered textmode rendering.
 category: Namespaces
 api: true
 kind: Namespace
-lastModified: 2026-02-06
+lastModified: 2026-04-06
 ---
 
 [textmode.js](../../index.md) / layering
@@ -32,4 +32,10 @@ All modules and types related to multi-layered textmode rendering.
 
 | Type Alias | Description |
 | ------ | ------ |
-| [TextmodeLayerBlendMode](type-aliases/TextmodeLayerBlendMode.md) | Blend modes available for [TextmodeLayer](classes/TextmodeLayer.md) compositing in 2D mode. |
+| [TextmodeLayerBlendMode](type-aliases/TextmodeLayerBlendMode.md) | - |
+
+## Variables
+
+| Variable | Description |
+| ------ | ------ |
+| [TEXTMODE\_LAYER\_BLEND\_MODES](variables/TEXTMODE_LAYER_BLEND_MODES.md) | Blend modes available for [TextmodeLayer](classes/TextmodeLayer.md) compositing in 2D mode. |

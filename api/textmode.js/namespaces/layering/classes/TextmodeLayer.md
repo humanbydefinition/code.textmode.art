@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: layering
 kind: Class
-lastModified: 2026-02-06
+lastModified: 2026-04-06
 hasConstructor: false
 ---
 
@@ -19,7 +19,7 @@ A single layer within a multi-layered textmode rendering context.
 
 Layers are composited together using various blend modes
 to create complex visual effects. Each layer can be independently
-manipulated in terms of visibility, [opacity](#opacity), [blendMode](#blendmode), [offset](#offset), rotation, [TextmodeGrid](../../../classes/TextmodeGrid.md), and [TextmodeFont](../../loadables/classes/TextmodeFont.md).
+manipulated in terms of visibility, opacity, blend mode, and position.
 
 You can draw on each layer by providing a draw callback function,
 like you would with the base layer's [Textmodifier.draw](../../../classes/Textmodifier.md#draw) method.
@@ -28,9 +28,8 @@ Plugins can extend TextmodeLayer with additional methods using the plugin API's
 `extendLayer` function. For example, the `textmode-synth` plugin adds a `.synth()`
 method for hydra-like procedural generation.
 
-## Implements
-
-- `ITextmodeLayer`
+The base layer, which is always present at the bottom of the layer stack,
+can be accessed via Textmodifier.layers.base.
 
 ## Accessors
 
@@ -51,11 +50,33 @@ Get the framebuffer containing the rendered textmode output for this layer.
   \| `undefined`
   \| [`TextmodeFramebuffer`](../../../classes/TextmodeFramebuffer.md)
 
-#### Implementation of
+##### Example
 
-```ts
-ITextmodeLayer.asciiFramebuffer
+```javascript
+const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
+const stamp = t.layers.add({ blendMode: 'screen' });
+
+stamp.draw(() => {
+	t.clear();
+	t.rotateZ(t.frameCount * 2);
+	t.char('*');
+	t.charColor(120, 220, 255);
+	t.rect(14, 8);
+});
+
+t.draw(() => {
+	t.background(8, 10, 18);
+	if (stamp.asciiFramebuffer) t.image(stamp.asciiFramebuffer, 20, 12);
+});
 ```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="https://code.textmode.art/docs/leaderboard" target="_blank" rel="noopener noreferrer">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeLayer/asciiFramebuffer/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 ***
 
@@ -77,11 +98,34 @@ If the layer is not yet initialized, returns undefined.
   \| `undefined`
   \| [`TextmodeFramebuffer`](../../../classes/TextmodeFramebuffer.md)
 
-#### Implementation of
+##### Example
 
-```ts
-ITextmodeLayer.drawFramebuffer
+```javascript
+const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
+const stamp = t.layers.add();
+
+stamp.draw(() => {
+	t.clear();
+	t.rotateZ(t.frameCount * 2);
+	t.char('#');
+	t.charColor(255, 180, 120);
+	t.rect(14, 8);
+});
+
+t.draw(() => {
+	const raw = stamp.drawFramebuffer;
+	t.background(8, 10, 18);
+	if (raw) t.image(raw, 20, 12);
+});
 ```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="https://code.textmode.art/docs/leaderboard" target="_blank" rel="noopener noreferrer">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeLayer/drawFramebuffer/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 ***
 
@@ -94,6 +138,10 @@ get font(): TextmodeFont;
 ```
 
 The font used by this layer.
+
+##### Returns
+
+[`TextmodeFont`](../../loadables/classes/TextmodeFont.md)
 
 ##### Example
 
@@ -151,16 +199,14 @@ t.windowResized(() => {
   t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-
-##### Returns
-
-[`TextmodeFont`](../../loadables/classes/TextmodeFont.md)
-
-#### Implementation of
-
-```ts
-ITextmodeLayer.font
-```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="https://code.textmode.art/docs/leaderboard" target="_blank" rel="noopener noreferrer">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeLayer/font/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 ***
 
@@ -173,6 +219,10 @@ get grid(): undefined | TextmodeGrid;
 ```
 
 Get the grid associated with this layer.
+
+##### Returns
+
+`undefined` \| [`TextmodeGrid`](../../../classes/TextmodeGrid.md)
 
 ##### Example
 
@@ -234,16 +284,14 @@ t.windowResized(() => {
   t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-
-##### Returns
-
-`undefined` \| [`TextmodeGrid`](../../../classes/TextmodeGrid.md)
-
-#### Implementation of
-
-```ts
-ITextmodeLayer.grid
-```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="https://code.textmode.art/docs/leaderboard" target="_blank" rel="noopener noreferrer">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeLayer/grid/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 ***
 
@@ -257,6 +305,10 @@ get height(): number;
 
 Returns the height of the final ASCII framebuffer in pixels.
 If the layer is not yet initialized, returns 0.
+
+##### Returns
+
+`number`
 
 ##### Example
 
@@ -326,16 +378,14 @@ t.windowResized(() => {
   t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-
-##### Returns
-
-`number`
-
-#### Implementation of
-
-```ts
-ITextmodeLayer.height
-```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="https://code.textmode.art/docs/leaderboard" target="_blank" rel="noopener noreferrer">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeLayer/height/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 ***
 
@@ -354,12 +404,6 @@ If the layer is not yet initialized, returns undefined.
 
 `undefined` \| `WebGLTexture`
 
-#### Implementation of
-
-```ts
-ITextmodeLayer.texture
-```
-
 ***
 
 ### width
@@ -377,11 +421,46 @@ If the layer is not yet initialized, returns 0.
 
 `number`
 
-#### Implementation of
+##### Example
 
-```ts
-ITextmodeLayer.width
+```javascript
+const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
+const detail = t.layers.add({ fontSize: 8 });
+
+function label(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(8, 10, 18);
+	label(`detail.width: ${detail.width}px`, -2, [255, 220, 120]);
+});
+
+detail.draw(() => {
+	t.clear();
+	t.char('.');
+	t.charColor(120, 220, 255);
+	t.rect(60, 18);
+});
 ```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="https://code.textmode.art/docs/leaderboard" target="_blank" rel="noopener noreferrer">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeLayer/width/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 ## Methods
 
@@ -390,7 +469,20 @@ ITextmodeLayer.width
 ```ts
 blendMode(mode?): 
   | void
-  | TextmodeLayerBlendMode;
+  | "normal"
+  | "additive"
+  | "multiply"
+  | "screen"
+  | "subtract"
+  | "darken"
+  | "lighten"
+  | "overlay"
+  | "softLight"
+  | "hardLight"
+  | "colorDodge"
+  | "colorBurn"
+  | "difference"
+  | "exclusion";
 ```
 
 Set or get the layer's blend mode for compositing with layers below.
@@ -399,12 +491,25 @@ Set or get the layer's blend mode for compositing with layers below.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `mode?` | [`TextmodeLayerBlendMode`](../type-aliases/TextmodeLayerBlendMode.md) | The blend mode to set. |
+| `mode?` | \| `"normal"` \| `"additive"` \| `"multiply"` \| `"screen"` \| `"subtract"` \| `"darken"` \| `"lighten"` \| `"overlay"` \| `"softLight"` \| `"hardLight"` \| `"colorDodge"` \| `"colorBurn"` \| `"difference"` \| `"exclusion"` | The blend mode to set. |
 
 #### Returns
 
   \| `void`
-  \| [`TextmodeLayerBlendMode`](../type-aliases/TextmodeLayerBlendMode.md)
+  \| `"normal"`
+  \| `"additive"`
+  \| `"multiply"`
+  \| `"screen"`
+  \| `"subtract"`
+  \| `"darken"`
+  \| `"lighten"`
+  \| `"overlay"`
+  \| `"softLight"`
+  \| `"hardLight"`
+  \| `"colorDodge"`
+  \| `"colorBurn"`
+  \| `"difference"`
+  \| `"exclusion"`
 
 The current blend mode if no parameter is provided.
 
@@ -427,45 +532,175 @@ The current blend mode if no parameter is provided.
 #### Example
 
 ```javascript
-const t = textmode.create();
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 // Create 5 layers with different blend modes
 const blendModes = ['additive', 'screen', 'overlay', 'difference', 'multiply'];
-const colors = [[255, 80, 150], [80, 180, 255], [255, 200, 80], [150, 255, 120], [200, 120, 255]];
-const layers = blendModes.map(mode => t.layers.add({ blendMode: mode, opacity: 0.85 }));
+const colors = [
+	[255, 80, 150],
+	[80, 180, 255],
+	[255, 200, 80],
+	[150, 255, 120],
+	[200, 120, 255],
+];
+const layers = blendModes.map((mode) => t.layers.add({ blendMode: mode, opacity: 0.85 }));
 
 t.draw(() => {
-    const time = t.frameCount * 0.2;
-    t.background(12, 8, 20, 255);
+	const time = t.frameCount * 0.2;
+	t.background(12, 8, 20, 255);
 
-    layers.forEach((layer, i) => {
-        layer.draw(() => {
-            t.charColor(...colors[i], 255);
+	layers.forEach((layer, i) => {
+		layer.draw(() => {
+			t.charColor(...colors[i], 255);
 
-            // Draw spiral of characters
-            for (let j = 0; j < 30; j++) {
-                const angle = j * 0.2 + time * (i % 2 ? 1 : -1);
-                const radius = 3 + j * 0.4 + Math.sin(time + j) * 2;
-                const x = Math.cos(angle) * radius;
-                const y = Math.sin(angle) * radius * 0.6;
+			// Draw spiral of characters
+			for (let j = 0; j < 30; j++) {
+				const angle = j * 0.2 + time * (i % 2 ? 1 : -1);
+				const radius = 3 + j * 0.4 + Math.sin(time + j) * 2;
+				const x = Math.cos(angle) * radius;
+				const y = Math.sin(angle) * radius * 0.6;
 
-                t.char('#*+=-.'[j % 6]);
-                t.translate(Math.round(x), Math.round(y));
-                t.rect(1, 1);
-            }
-        });
+				t.char('#*+=-.'[j % 6]);
+				t.translate(Math.round(x), Math.round(y));
+				t.rect(1, 1);
+			}
+		});
 
-        // Offset each layer
-        layer.offset(Math.sin(time * 0.6 + i) * 6, Math.cos(time * 0.3 + i) * 4);
-    });
+		// Offset each layer
+		layer.offset(Math.sin(time * 0.6 + i) * 6, Math.cos(time * 0.3 + i) * 4);
+	});
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="https://code.textmode.art/docs/leaderboard" target="_blank" rel="noopener noreferrer">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeLayer/blendMode/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
-#### Implementation of
+***
+
+### camera()
 
 ```ts
-ITextmodeLayer.blendMode
+camera(
+   eyeX, 
+   eyeY, 
+   eyeZ, 
+   targetX, 
+   targetY, 
+   targetZ, 
+   upX, 
+   upY, 
+   upZ): void;
 ```
+
+Set explicit camera parameters for this layer.
+
+#### Parameters
+
+| Parameter | Type | Default value |
+| ------ | ------ | ------ |
+| `eyeX` | `number` | `undefined` |
+| `eyeY` | `number` | `undefined` |
+| `eyeZ` | `number` | `undefined` |
+| `targetX` | `number` | `0` |
+| `targetY` | `number` | `0` |
+| `targetZ` | `number` | `0` |
+| `upX` | `number` | `0` |
+| `upY` | `number` | `1` |
+| `upZ` | `number` | `0` |
+
+#### Returns
+
+`void`
+
+#### Example
+
+```javascript
+const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
+const scene = t.layers.add();
+
+t.draw(() => {
+	t.background(8, 10, 18);
+	scene.camera(Math.sin(t.frameCount * 0.03) * 18, 10, 42, 0, 0, 0);
+});
+
+scene.draw(() => {
+	t.clear();
+	t.rotateY(t.frameCount * 2);
+	t.rotateX(25);
+	t.char('#');
+	t.charColor(120, 220, 255);
+	t.box(16, 16, 16);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="https://code.textmode.art/docs/leaderboard" target="_blank" rel="noopener noreferrer">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeLayer/camera/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
+
+***
+
+### createCamera()
+
+```ts
+createCamera(): TextmodeCamera;
+```
+
+Create a camera initialized from this layer's camera state and set it active for this layer.
+
+#### Returns
+
+[`TextmodeCamera`](../../../classes/TextmodeCamera.md)
+
+The created camera.
+
+#### Example
+
+```javascript
+const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
+const scene = t.layers.add();
+let camera;
+
+t.setup(() => {
+	camera = scene.createCamera();
+	scene.setCamera(camera);
+});
+
+t.draw(() => {
+	t.background(8, 10, 18);
+	camera.setPosition(Math.sin(t.frameCount * 0.03) * 18, 8, 46);
+	camera.lookAt(0, 0, 0);
+});
+
+scene.draw(() => {
+	t.clear();
+	t.rotateY(t.frameCount * 2);
+	t.rotateX(20);
+	t.char('#');
+	t.charColor(120, 220, 255);
+	t.box(16, 16, 16);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="https://code.textmode.art/docs/leaderboard" target="_blank" rel="noopener noreferrer">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeLayer/createCamera/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 ***
 
@@ -537,12 +772,14 @@ t.windowResized(() => {
   t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-
-#### Implementation of
-
-```ts
-ITextmodeLayer.deletePluginState
-```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="https://code.textmode.art/docs/leaderboard" target="_blank" rel="noopener noreferrer">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeLayer/deletePluginState/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 ***
 
@@ -638,12 +875,14 @@ particleLayer.draw(() => {
   }
 });
 ```
-
-#### Implementation of
-
-```ts
-ITextmodeLayer.draw
-```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="https://code.textmode.art/docs/leaderboard" target="_blank" rel="noopener noreferrer">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeLayer/draw/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 ***
 
@@ -712,12 +951,14 @@ effectLayer.draw(() => {
   effectLayer.filter('grayscale', Math.sin(t.frameCount * 0.05) * 0.5 + 0.5);
 });
 ```
-
-##### Implementation of
-
-```ts
-ITextmodeLayer.filter
-```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="https://code.textmode.art/docs/leaderboard" target="_blank" rel="noopener noreferrer">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeLayer/filter/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 #### Call Signature
 
@@ -743,12 +984,6 @@ Apply a custom filter registered via `t.layers.filters.register()`.
 ##### Returns
 
 `void`
-
-##### Implementation of
-
-```ts
-ITextmodeLayer.filter
-```
 
 ***
 
@@ -803,12 +1038,14 @@ detailLayer.draw(() => {
   }
 });
 ```
-
-#### Implementation of
-
-```ts
-ITextmodeLayer.fontSize
-```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="https://code.textmode.art/docs/leaderboard" target="_blank" rel="noopener noreferrer">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeLayer/fontSize/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 ***
 
@@ -877,12 +1114,14 @@ t.windowResized(() => {
   t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-
-#### Implementation of
-
-```ts
-ITextmodeLayer.getPluginState
-```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="https://code.textmode.art/docs/leaderboard" target="_blank" rel="noopener noreferrer">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeLayer/getPluginState/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 ***
 
@@ -906,11 +1145,43 @@ Check if plugin-specific state exists on this layer.
 
 True if state exists, false otherwise.
 
-#### Implementation of
+#### Example
 
-```ts
-ITextmodeLayer.hasPluginState
+```javascript
+const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
+const layer = t.layers.add();
+
+function label(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+	t.pop();
+}
+
+t.draw(() => {
+	if (t.frameCount % 120 === 0) {
+		if (layer.hasPluginState('demo')) layer.deletePluginState('demo');
+		else layer.setPluginState('demo', { enabled: true });
+	}
+	t.background(8, 10, 18);
+	label(`hasPluginState(): ${layer.hasPluginState('demo')}`, -2, [255, 220, 120]);
+});
 ```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="https://code.textmode.art/docs/leaderboard" target="_blank" rel="noopener noreferrer">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeLayer/hasPluginState/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 ***
 
@@ -928,21 +1199,50 @@ Hide this layer from rendering.
 
 #### Example
 
-```js
-const t = textmode.create();
-const layer = t.layers.add();
+```javascript
+const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
+const banner = t.layers.add({ blendMode: 'screen' });
+let hidden = false;
 
-// Hide the layer when mouse is pressed
+function label(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+	t.pop();
+}
+
 t.mousePressed(() => {
-  layer.hide();
+	banner.hide();
+	hidden = true;
+});
+
+t.draw(() => {
+	t.background(6, 10, 18);
+	label(hidden ? 'hide() removed the top layer' : 'click to hide the banner layer', -6, [255, 220, 120]);
+});
+
+banner.draw(() => {
+	t.clear();
+	t.char('H');
+	t.charColor(255, 120, 160);
+	t.rect(20, 6);
 });
 ```
-
-#### Implementation of
-
-```ts
-ITextmodeLayer.hide
-```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="https://code.textmode.art/docs/leaderboard" target="_blank" rel="noopener noreferrer">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeLayer/hide/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 ***
 
@@ -952,14 +1252,14 @@ ITextmodeLayer.hide
 loadFont(fontSource): Promise<TextmodeFont>;
 ```
 
-Load a font into this layer from a URL/path or reuse an existing [TextmodeFont](../../loadables/classes/TextmodeFont.md) instance.
-Creates a new font instance for this layer and loads the font data when a string source is provided.
+Load a font into this layer from a URL/path or from an existing [TextmodeFont](../../loadables/classes/TextmodeFont.md).
+When a `TextmodeFont` is provided, the layer creates a layer-local fork with independent GPU resources.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `fontSource` | `string` \| [`TextmodeFont`](../../loadables/classes/TextmodeFont.md) | The URL or path to the font file. |
+| `fontSource` | `string` \| [`TextmodeFont`](../../loadables/classes/TextmodeFont.md) | The URL/path to the font file, or an existing TextmodeFont to fork from. |
 
 #### Returns
 
@@ -969,20 +1269,115 @@ The loaded TextmodeFont instance.
 
 #### Example
 
-```js
-const layer = t.layers.add();
+```javascript
+const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
+const accent = t.layers.add({ blendMode: 'screen' });
+
+function label(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+	t.pop();
+}
 
 t.setup(async () => {
-  // Load a custom font for this layer
-  await layer.loadFont('./fonts/custom.ttf');
+	await accent.loadFont('../../primitives/FROGBLOCK-V2.1.ttf');
+});
+
+t.draw(() => {
+	t.background(8, 10, 18);
+	label('base layer keeps the default font', -4, [255, 220, 120]);
+});
+
+accent.draw(() => {
+	t.clear();
+	label('layer.loadFont() swapped only this layer', 4, [120, 220, 255]);
 });
 ```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="https://code.textmode.art/docs/leaderboard" target="_blank" rel="noopener noreferrer">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeLayer/loadFont/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
-#### Implementation of
+***
+
+### lookAt()
 
 ```ts
-ITextmodeLayer.loadFont
+lookAt(
+   targetX, 
+   targetY, 
+   targetZ, 
+   upX?, 
+   upY?, 
+   upZ?): void;
 ```
+
+Update this layer camera's target and optional up vector.
+
+#### Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `targetX` | `number` |
+| `targetY` | `number` |
+| `targetZ` | `number` |
+| `upX?` | `number` |
+| `upY?` | `number` |
+| `upZ?` | `number` |
+
+#### Returns
+
+`void`
+
+#### Example
+
+```javascript
+const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
+const scene = t.layers.add();
+
+t.draw(() => {
+	const x = Math.sin(t.frameCount * 0.04) * 8;
+	const y = Math.cos(t.frameCount * 0.03) * 5;
+	t.background(8, 10, 18);
+	scene.camera(0, 0, 46);
+	scene.lookAt(x, y, 0);
+});
+
+scene.draw(() => {
+	t.clear();
+	t.push();
+	t.translate(Math.sin(t.frameCount * 0.04) * 8, Math.cos(t.frameCount * 0.03) * 5, 0);
+	t.char('*');
+	t.charColor(255, 220, 120);
+	t.box(4, 4, 4);
+	t.pop();
+
+	t.rotateY(t.frameCount * 2);
+	t.char('#');
+	t.charColor(120, 220, 255);
+	t.box(12, 12, 12);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="https://code.textmode.art/docs/leaderboard" target="_blank" rel="noopener noreferrer">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeLayer/lookAt/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 ***
 
@@ -1084,12 +1479,14 @@ t.draw(() => {
   });
 });
 ```
-
-#### Implementation of
-
-```ts
-ITextmodeLayer.offset
-```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="https://code.textmode.art/docs/leaderboard" target="_blank" rel="noopener noreferrer">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeLayer/offset/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 ***
 
@@ -1115,22 +1512,211 @@ The current opacity if no parameter is provided.
 
 #### Example
 
-```js
-const t = textmode.create();
-const fadeLayer = t.layers.add();
+```javascript
+const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
+const haze = t.layers.add({ blendMode: 'additive' });
+
+function label(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+	t.pop();
+}
 
 t.draw(() => {
-  // Fade layer in and out over time
-  const opacity = 0.5 + 0.5 * Math.sin(t.frameCount * 0.05);
-  fadeLayer.opacity(opacity);
+	const amount = 0.15 + ((Math.sin(t.frameCount * 0.04) + 1) * 0.5) * 0.85;
+	haze.opacity(amount);
+	t.background(8, 10, 18);
+	label(`opacity(): ${amount.toFixed(2)}`, -6, [255, 220, 120]);
+});
+
+haze.draw(() => {
+	t.clear();
+	t.rotateZ(t.frameCount * 3);
+	t.char('#');
+	t.charColor(80, 180, 255);
+	t.rect(18, 18);
 });
 ```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="https://code.textmode.art/docs/leaderboard" target="_blank" rel="noopener noreferrer">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeLayer/opacity/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
-#### Implementation of
+***
+
+### ortho()
 
 ```ts
-ITextmodeLayer.opacity
+ortho(near?, far?): void;
 ```
+
+Enable orthographic projection for this layer.
+
+#### Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `near?` | `number` |
+| `far?` | `number` |
+
+#### Returns
+
+`void`
+
+#### Example
+
+```javascript
+const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
+const scene = t.layers.add();
+
+t.draw(() => {
+	t.background(8, 10, 18);
+	scene.ortho();
+	scene.camera(0, 0, 44);
+});
+
+scene.draw(() => {
+	for (let i = 0; i < 3; i++) {
+		t.push();
+		t.translate((i - 1) * 10, 0, i * -12);
+		t.rotateY(t.frameCount * 2 + i * 20);
+		t.char('+');
+		t.charColor(120 + i * 40, 220, 255);
+		t.box(8, 8, 8);
+		t.pop();
+	}
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="https://code.textmode.art/docs/leaderboard" target="_blank" rel="noopener noreferrer">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeLayer/ortho/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
+
+***
+
+### perspective()
+
+```ts
+perspective(
+   fov?, 
+   near?, 
+   far?): void;
+```
+
+Enable perspective projection for this layer.
+
+#### Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `fov?` | `number` |
+| `near?` | `number` |
+| `far?` | `number` |
+
+#### Returns
+
+`void`
+
+#### Example
+
+```javascript
+const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
+const scene = t.layers.add();
+
+t.draw(() => {
+	const fov = 30 + ((Math.sin(t.frameCount * 0.03) + 1) * 0.5) * 70;
+	t.background(8, 10, 18);
+	scene.perspective(fov, 0.1, 256);
+	scene.camera(0, 0, 44);
+});
+
+scene.draw(() => {
+	for (let i = 0; i < 3; i++) {
+		t.push();
+		t.translate((i - 1) * 10, 0, i * -12);
+		t.rotateY(t.frameCount * 2 + i * 20);
+		t.char('#');
+		t.charColor(120 + i * 40, 220, 255);
+		t.box(8, 8, 8);
+		t.pop();
+	}
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="https://code.textmode.art/docs/leaderboard" target="_blank" rel="noopener noreferrer">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeLayer/perspective/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
+
+***
+
+### resetCamera()
+
+```ts
+resetCamera(): void;
+```
+
+Reset this layer to default auto camera behavior.
+
+#### Returns
+
+`void`
+
+#### Example
+
+```javascript
+const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
+const scene = t.layers.add();
+let custom = true;
+
+t.mousePressed(() => {
+	custom = !custom;
+});
+
+t.draw(() => {
+	t.background(8, 10, 18);
+	if (custom) {
+		scene.camera(Math.sin(t.frameCount * 0.03) * 18, 8, 42);
+	} else {
+		scene.resetCamera();
+	}
+});
+
+scene.draw(() => {
+	t.clear();
+	t.rotateY(t.frameCount * 2);
+	t.char('*');
+	t.charColor(custom ? 255 : 120, 220, 255);
+	t.box(16, 16, 16);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="https://code.textmode.art/docs/leaderboard" target="_blank" rel="noopener noreferrer">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeLayer/resetCamera/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 ***
 
@@ -1183,12 +1769,79 @@ t.draw(() => {
   t.rect(t.grid.cols, t.grid.rows);
 });
 ```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="https://code.textmode.art/docs/leaderboard" target="_blank" rel="noopener noreferrer">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeLayer/rotateZ/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
-#### Implementation of
+***
+
+### setCamera()
 
 ```ts
-ITextmodeLayer.rotateZ
+setCamera(camera): void;
 ```
+
+Set the active camera for this layer.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `camera` | [`TextmodeCamera`](../../../classes/TextmodeCamera.md) | Camera instance to apply. |
+
+#### Returns
+
+`void`
+
+#### Example
+
+```javascript
+const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
+const scene = t.layers.add();
+let useLeft = true;
+let left;
+let right;
+
+t.setup(() => {
+	left = scene.createCamera();
+	right = scene.createCamera();
+	left.setPosition(-18, 10, 38);
+	right.setPosition(18, 10, 38);
+	left.lookAt(0, 0, 0);
+	right.lookAt(0, 0, 0);
+	scene.setCamera(left);
+});
+
+t.mousePressed(() => {
+	useLeft = !useLeft;
+	scene.setCamera(useLeft ? left : right);
+});
+
+t.draw(() => {
+	t.background(8, 10, 18);
+});
+
+scene.draw(() => {
+	t.clear();
+	t.rotateY(t.frameCount * 2);
+	t.char('@');
+	t.charColor(useLeft ? 255 : 120, 220, useLeft ? 120 : 255);
+	t.box(16, 16, 16);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="https://code.textmode.art/docs/leaderboard" target="_blank" rel="noopener noreferrer">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeLayer/setCamera/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 ***
 
@@ -1271,12 +1924,14 @@ t.windowResized(() => {
   t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-
-#### Implementation of
-
-```ts
-ITextmodeLayer.setPluginState
-```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="https://code.textmode.art/docs/leaderboard" target="_blank" rel="noopener noreferrer">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeLayer/setPluginState/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 ***
 
@@ -1294,20 +1949,43 @@ Show this layer for rendering.
 
 #### Example
 
-```js
-const t = textmode.create();
-const hiddenLayer = t.layers.add({ visible: false });
+```javascript
+const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
+const reveal = t.layers.add({ visible: false, blendMode: 'screen' });
 
-// Show the layer after 2 seconds
+function label(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+	t.pop();
+}
+
 t.draw(() => {
-  if (t.secs > 2) {
-    hiddenLayer.show();
-  }
+	t.background(8, 12, 24);
+	if (t.frameCount === 120) reveal.show();
+	label(t.frameCount < 120 ? 'layer hidden for 120 frames' : 'show() revealed the layer', -6, [255, 220, 120]);
+});
+
+reveal.draw(() => {
+	t.clear();
+	t.rotateZ(t.frameCount * 2);
+	t.char('*');
+	t.charColor(120, 220, 255);
+	t.rect(18, 10);
 });
 ```
-
-#### Implementation of
-
-```ts
-ITextmodeLayer.show
-```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="https://code.textmode.art/docs/leaderboard" target="_blank" rel="noopener noreferrer">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeLayer/show/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>

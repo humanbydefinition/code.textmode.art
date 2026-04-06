@@ -2,11 +2,11 @@
 layout: doc
 editLink: true
 title: TextmodeOptions
-description: Options when creating a Textmodifier instance.
+description: Options when creating a Textmodifier instance via textmode.create.
 category: Type Aliases
 api: true
 kind: TypeAlias
-lastModified: 2026-02-06
+lastModified: 2026-04-06
 ---
 
 [textmode.js](../index.md) / TextmodeOptions
@@ -17,7 +17,7 @@ lastModified: 2026-02-06
 type TextmodeOptions = object;
 ```
 
-Options when creating a [Textmodifier](../classes/Textmodifier.md) instance.
+Options when creating a [Textmodifier](../classes/Textmodifier.md) instance via [textmode.create](../classes/textmode.md#create).
 
 ## Properties
 
@@ -27,7 +27,7 @@ Options when creating a [Textmodifier](../classes/Textmodifier.md) instance.
 optional canvas: HTMLCanvasElement | HTMLVideoElement;
 ```
 
-An existing [HTMLCanvasElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement) to use instead of creating a new one.
+An existing [HTMLCanvasElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement) to use instead of letting `textmode.js` create its own canvas.
 
 **Note:**
 If using `overlay` mode, this should be the target canvas or video element to overlay on.
@@ -51,7 +51,7 @@ The font size to use for text rendering. Defaults to 16.
 optional fontSource: string;
 ```
 
-URL or path to a custom font file *(.otf/.ttf)*.
+URL or path to a custom font file *(.otf/.ttf/.woff)*.
 
 ***
 
@@ -108,7 +108,7 @@ which sets up the textmode `<canvas>` on top of an existing HTMLCanvasElement or
 automatically resizing and positioning it to match the target element.
 
 In this mode `textmode.js` fetches the content of the target element and loads it into an adjustable [loadables.TextmodeImage](../namespaces/loadables/classes/TextmodeImage.md),
-that can be accessed via [Textmodifier.overlay](../classes/Textmodifier.md#overlay), and drawn via [Textmodifier.image](../classes/Textmodifier.md#image),
+that can be accessed via [Textmodifier.overlay](../classes/Textmodifier.md#overlay), and drawn via [Textmodifier.image](../classes/Textmodifier.md#image).
 
 Useful for applying textmode conversion to p5.js sketches, YouTube videos, and sooo much more.
 

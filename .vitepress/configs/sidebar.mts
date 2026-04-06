@@ -37,6 +37,7 @@ const docsSidebar: DefaultTheme.SidebarItem[] = [
           { text: 'Improve docs', link: '/docs/contributing/improve-docs' },
         ]
       },
+      { text: 'Leaderboard', link: '/docs/leaderboard' },
       { text: 'Contributors', link: '/docs/contributors' },
     ]
   },

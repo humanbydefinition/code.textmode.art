@@ -4,82 +4,104 @@ title: Submit a Sketch
 
 # Submit an example sketch
 
-Example sketches appear throughout the documentation and showcase what's possible with textmode.js. Your creative work helps inspire and teach others!
+There are now two different sketch contribution paths in the `textmode.js` / `textmode.art` ecosystem:
 
-## What makes a good example sketch?
+- **Gallery / showcase sketches** live in the [`code.textmode.art`](https://github.com/humanbydefinition/code.textmode.art) repository and power the public documentation showcase.
+- **API example sketches** currently belong to the [`textmode.js`](https://github.com/humanbydefinition/textmode.js) repository, because that is where the source code for the supported API reference examples currently lives.
 
-The best example sketches are:
+This page explains the difference so you can submit your sketch to the right repository.
 
-- **Focused** - Demonstrates one concept or technique clearly
-- **Concise** - Short enough to understand quickly (typically < 100 lines)
-- **Well-commented** - Includes comments explaining key concepts
-- **Self-contained** - Works independently without external dependencies
-- **Visually interesting** - Creates engaging ASCII art output
+## Choose the right track
 
-## How to submit
+### Gallery / showcase sketches
 
-You can submit a sketch in two ways:
+Use this route if your sketch is meant to be a standalone community example for the website.
 
-### Option 1: Pull request (recommended)
+These sketches are already used in two places:
 
-1. Fork the [code.textmode.art repository](https://github.com/humanbydefinition/code.textmode.art)
-2. Add your sketch metadata to [`.vitepress/data/sketches.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/sketches.json)
-3. Submit a pull request with your changes
+- The landing page displays **3 random featured sketches** at a time.
+- Visitors can click **Shuffle** to rotate that selection.
+- Reloading the landing page picks another random set.
+- The full showcase collection is also displayed on [Examples](/docs/examples).
 
-### Option 2: Open an issue
+Submit gallery / showcase sketches to the [`code.textmode.art`](https://github.com/humanbydefinition/code.textmode.art) repository.
 
-Open an issue on GitHub with:
+### API example sketches
 
-- **Sketch code** - Your complete, working code
-- **Title** - A clear, descriptive name
-- **Description** - Brief explanation (1-2 sentences) of what it demonstrates
-- **Category** - Where it might fit (e.g., "fundamentals", "animation", "effects")
-- **Documentation page** - Which page it could enhance (optional)
+Use this route if your sketch is meant to teach a specific API surface in the generated TypeDoc reference.
 
-## Sketch data structure
+The API docs on `code.textmode.art` cover more than just `textmode.js`. They also include plugin libraries such as `textmode.synth.js`, `textmode.filters.js`, and `textmode.export.js`.
 
-When adding to `sketches.json`, use this structure:
+At the moment, however, contributed API example sketches are only supported for the core `textmode.js` API flow. Those examples are not authored in `code.textmode.art` right now. Their source code currently lives in the [`textmode.js`](https://github.com/humanbydefinition/textmode.js) repository directly, so API example sketch contributions need to be proposed there.
 
-```json
-{
-  "id": "unique-sketch-id",
-  "title": "Sketch Title",
-  "description": "Brief description of what the sketch demonstrates",
-  "author": "Your Name",
-  "category": "animation",
-  "code": "// Your sketch code here",
-  "featured": false
-}
-```
+Plugin API example contributions are planned for the future, but they are not part of the contribution workflow yet.
 
-## Sketch gallery
-
-:::info Coming soon
-A gallery will be added in the future to showcase community-submitted sketches. On the `code.textmode.art` landing page, it will pick 3 random sketches from the collection each time the page loads.
+:::tip Recognition and rewards
+Accepted showcase and API example sketches both count toward the [Leaderboard](/docs/leaderboard). Once you reach the current unlock threshold of **3 accepted sketches**, you become eligible for the `Textmodeller` role in Discord.
 :::
 
-## After submission
+## What makes a good sketch?
 
-Once your submission is reviewed and approved:
+The best sketches are:
 
-- Your sketch may appear in the documentation examples
-- You could be featured in the upcoming sketch gallery
-- You'll be credited in the [Contributors page](/docs/contributors)
-- You'll inspire others in the community!
+- **Focused** - Demonstrate one idea clearly
+- **Concise** - Short enough to understand quickly
+- **Well-commented** - Explain the key moves without over-explaining
+- **Self-contained** - Avoid unnecessary dependencies
+- **Visually interesting** - Show why the technique is worth learning
 
-## Tips for great sketches
+## Submitting a gallery / showcase sketch
 
-- **Start simple** - Build up complexity gradually
-- **Use meaningful variable names** - Help others understand your code
-- **Experiment with animation** - Motion brings ASCII art to life
-- **Try different fonts** - Each font has a unique aesthetic
-- **Add interactivity** - Mouse and keyboard input make sketches engaging
+If your sketch is for the public docs showcase:
+
+1. Fork the [code.textmode.art repository](https://github.com/humanbydefinition/code.textmode.art)
+2. Add or update the relevant showcase sketch files and metadata
+3. Submit a pull request with a short explanation of what the sketch demonstrates
+
+The current showcase metadata lives in [`.vitepress/data/sketches.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/sketches.json).
+
+Contributor recognition on the site is also tied to:
+
+- [`.all-contributorsrc`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.all-contributorsrc)
+- [`.vitepress/data/contributors.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contributors.json)
+
+## Submitting an API example sketch
+
+If your sketch is for the currently supported API reference examples:
+
+1. Fork the [textmode.js repository](https://github.com/humanbydefinition/textmode.js)
+2. Add or update the example source for the relevant `textmode.js` API entry
+3. Submit a pull request explaining which API entry the example improves
+
+If you want your contribution metadata and optional profile links reflected on the `code.textmode.art` site as well, you may also need a companion PR in [`code.textmode.art`](https://github.com/humanbydefinition/code.textmode.art) touching:
+
+- [`.all-contributorsrc`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.all-contributorsrc)
+- [`.vitepress/data/contributors.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contributors.json)
+
+If you are not sure whether your example belongs to the currently supported `textmode.js` API flow or to a not-yet-supported plugin API flow, open an issue first or ask in Discord before starting the implementation.
+
+## What happens after submission?
+
+### For gallery / showcase sketches
+
+- Your sketch can appear on the landing page as part of the rotating featured set
+- It can also appear on the [Examples](/docs/examples) page
+- Accepted sketches also count toward the [Leaderboard](/docs/leaderboard)
+- Reaching 3 accepted sketches makes you eligible for the `Textmodeller` Discord role
+- You help expand the public showcase of what people are building with `textmode.js`
+
+### For API example sketches
+
+- Your sketch can improve a specific `textmode.js` API reference entry
+- Accepted examples can count toward the [Leaderboard](/docs/leaderboard)
+- Reaching 3 accepted sketches makes you eligible for the `Textmodeller` Discord role
+- You help turn the supported API docs into a better learning resource
 
 ## Questions?
 
-If you're unsure about anything, feel free to:
+If you're unsure which route your sketch belongs to:
 
-- Open an [issue](https://github.com/humanbydefinition/code.textmode.art/issues) for questions
-- Join the [Discord community](https://discord.gg/sjrw8QXNks) for help
+- Open an [issue](https://github.com/humanbydefinition/code.textmode.art/issues)
+- Join the [Discord community](https://discord.gg/sjrw8QXNks)
 
-Thank you for sharing your creativity with the textmode.js community! 🎨
+Thank you for contributing to the `textmode.js` documentation ecosystem!

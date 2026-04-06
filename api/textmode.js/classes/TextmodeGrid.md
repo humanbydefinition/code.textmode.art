@@ -6,7 +6,7 @@ description: Manages the grid of each TextmodeLayer instance.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-02-06
+lastModified: 2026-04-06
 hasConstructor: false
 ---
 
@@ -28,21 +28,29 @@ You can manually set `cols` and `rows` to lock the grid to a specific size.
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.setup(() => {
-  // Lock the grid to a fixed resolution of 40x25 characters
-  // regardless of the window size.
-  t.grid.cols = 40;
-  t.grid.rows = 25;
+	t.grid.cols = 40;
+	t.grid.rows = 25;
 });
 
 t.draw(() => {
-  t.background(0);
-  t.charColor(0, 255, 0);
-  t.char('#');
+	t.background(0);
+	t.charColor(0, 255, 0);
+	t.char('#');
+	t.rect(t.grid.cols, t.grid.rows);
+});
 
-  // Draw a border around the fixed grid
-  t.rect(t.grid.cols, t.grid.rows);
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="https://code.textmode.art/docs/leaderboard" target="_blank" rel="noopener noreferrer">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeGrid/creation/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 ## Accessors
 
@@ -56,53 +64,56 @@ get cellHeight(): number;
 
 Returns the height of each cell in the grid in screen pixels.
 
+##### Returns
+
+`number`
+
 ##### Example
 
 ```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
-  t.background(0);
+	t.background(0);
 
-  const h = t.grid.cellHeight;
-  const rows = t.grid.rows;
+	const rows = t.grid.rows;
+	const label = `CELL H: ${t.grid.cellHeight}px`;
 
-  // Draw vertical stripes to visualize rows
-  for (let y = -rows / 2; y < rows / 2; y++) {
-    // Gradient based on Y position
-    const brightness = 100 + (Math.sin(y * 0.2 + t.frameCount * 0.1) * 0.5 + 0.5) * 155;
-    t.cellColor(0, brightness * 0.5, brightness);
+	for (let y = -rows / 2; y < rows / 2; y++) {
+		const brightness = 100 + (Math.sin(y * 0.2 + t.frameCount * 0.1) * 0.5 + 0.5) * 155;
 
-    t.push();
-    t.translate(0, y);
-    // Draw a horizontal line across the center column
-    t.char('=');
-    t.charColor(255);
-    t.point();
-    t.pop();
-  }
+		t.cellColor(0, brightness * 0.5, brightness);
+		t.push();
+		t.translate(0, y);
+		t.char('=');
+		t.charColor(255);
+		t.point();
+		t.pop();
+	}
 
-  // Display the cell height in pixels
-  const label = `CELL H: ${h}px`;
-  for (let i = 0; i < label.length; i++) {
-    t.push();
-    t.translate(i - label.length / 2, 0);
-    t.char(label[i]);
-    t.cellColor(0); // clear background for text
-    t.charColor(255, 255, 0);
-    t.point();
-    t.pop();
-  }
+	for (let i = 0; i < label.length; i++) {
+		t.push();
+		t.translate(i - label.length / 2, 0);
+		t.char(label[i]);
+		t.cellColor(0);
+		t.charColor(255, 255, 0);
+		t.point();
+		t.pop();
+	}
 });
 
 t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-
-##### Returns
-
-`number`
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="https://code.textmode.art/docs/leaderboard" target="_blank" rel="noopener noreferrer">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeGrid/cellHeight/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 ***
 
@@ -116,41 +127,46 @@ get cellWidth(): number;
 
 Returns the width of each cell in the grid in screen pixels.
 
+##### Returns
+
+`number`
+
 ##### Example
 
 ```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
-  t.background(0);
+	t.background(0);
 
-  const w = t.grid.cellWidth;
-  const h = t.grid.cellHeight;
+	const label = `${t.grid.cellWidth}x${t.grid.cellHeight}`;
 
-  t.char('▓');
-  t.charColor(255, 100, 100);
-  t.rect(11, 11);
+	t.char('▓');
+	t.charColor(255, 100, 100);
+	t.rect(11, 11);
 
-  // Display pixel dimensions
-  const label = `${w}x${h}`;
-  for (let i = 0; i < label.length; i++) {
-    t.push();
-    t.translate(i - label.length / 2, 0);
-    t.char(label[i]);
-    t.charColor(255);
-    t.point();
-    t.pop();
-  }
+	for (let i = 0; i < label.length; i++) {
+		t.push();
+		t.translate(i - label.length / 2, 0);
+		t.char(label[i]);
+		t.charColor(255);
+		t.point();
+		t.pop();
+	}
 });
 
 t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-
-##### Returns
-
-`number`
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="https://code.textmode.art/docs/leaderboard" target="_blank" rel="noopener noreferrer">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeGrid/cellWidth/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 ***
 
@@ -164,36 +180,42 @@ get cols(): number;
 
 Returns the number of columns in the grid.
 
+##### Returns
+
+`number`
+
 ##### Example
 
 ```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
-  t.background(0);
+	t.background(0);
 
-  // Draw a frame around the grid
-  const w = t.grid.cols;
-  const h = t.grid.rows;
+	const cols = t.grid.cols;
+	const rows = t.grid.rows;
 
-  t.char('#');
-  t.charColor(255, 100, 100);
-  t.rect(w, h);
+	t.char('#');
+	t.charColor(255, 100, 100);
+	t.rect(cols, rows);
 
-  // Clear center
-  t.char(' ');
-  t.cellColor(0);
-  t.rect(w - 2, h - 2);
+	t.char(' ');
+	t.cellColor(0);
+	t.rect(cols - 2, rows - 2);
 });
 
 t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-
-##### Returns
-
-`number`
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="https://code.textmode.art/docs/leaderboard" target="_blank" rel="noopener noreferrer">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeGrid/cols/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 #### Set Signature
 
@@ -202,45 +224,6 @@ set cols(newCols): void;
 ```
 
 Sets the number of columns and locks grid sizing until `responsive()` is called.
-
-##### Example
-
-```javascript
-// Locking the grid columns
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
-
-t.setup(() => {
-  // Lock the grid to exactly 40 columns.
-  // Resizing the window will now only increase the margins.
-  t.grid.cols = 40;
-});
-
-t.draw(() => {
-  t.background(0, 20, 0);
-
-  // Draw a pattern that fills the 40-column width
-  for (let x = -20; x < 20; x++) {
-    const h = 5 + Math.sin(t.frameCount * 0.1 + x * 0.5) * 5;
-    t.push();
-    t.translate(x + 0.5, 0);
-    t.charColor(0, 255, 100);
-    t.char('+');
-    t.rect(1, h);
-    t.pop();
-  }
-
-  // Display the fixed column count
-  const label = `LOCKED: ${t.grid.cols} COLS`;
-  t.charColor(255);
-  for(let i=0; i<label.length; i++) {
-    t.push(); t.translate(i - label.length/2, 10); t.char(label[i]); t.point(); t.pop();
-  }
-});
-
-t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
 
 ##### Parameters
 
@@ -251,6 +234,54 @@ t.windowResized(() => {
 ##### Returns
 
 `void`
+
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+t.setup(() => {
+	t.grid.cols = 40;
+});
+
+t.draw(() => {
+	t.background(0, 20, 0);
+
+	for (let x = -20; x < 20; x++) {
+		const height = 5 + Math.sin(t.frameCount * 0.1 + x * 0.5) * 5;
+
+		t.push();
+		t.translate(x + 0.5, 0);
+		t.charColor(0, 255, 100);
+		t.char('+');
+		t.rect(1, height);
+		t.pop();
+	}
+
+	const label = `LOCKED: ${t.grid.cols} COLS`;
+	t.charColor(255);
+
+	for (let i = 0; i < label.length; i++) {
+		t.push();
+		t.translate(i - label.length / 2, 10);
+		t.char(label[i]);
+		t.point();
+		t.pop();
+	}
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="https://code.textmode.art/docs/leaderboard" target="_blank" rel="noopener noreferrer">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeGrid/setCols/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 ***
 
@@ -266,52 +297,55 @@ Returns the total height of the grid in screen pixels.
 
 This is equal to `rows * cellHeight`.
 
+##### Returns
+
+`number`
+
 ##### Example
 
 ```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
-  t.background(0);
+	t.background(0);
 
-  // Display the total grid height in pixels
-  const h = t.grid.height;
-  const label = `${h}px`;
+	const label = `${t.grid.height}px`;
 
-  // Draw a vertical gradient ruler
-  for (let i = 0; i < t.grid.rows; i++) {
-    const y = i - t.grid.rows / 2;
-    // Gradient from center (blue) to edges (pink)
-    const brightness = Math.abs(y / (t.grid.rows / 2)) * 255;
+	for (let i = 0; i < t.grid.rows; i++) {
+		const y = i - t.grid.rows / 2;
+		const brightness = Math.abs(y / (t.grid.rows / 2)) * 255;
 
-    t.push();
-    t.translate(0, y);
-    t.char('|');
-    t.charColor(255, 100, 255 - brightness);
-    t.point();
-    t.pop();
-  }
+		t.push();
+		t.translate(0, y);
+		t.char('|');
+		t.charColor(255, 100, 255 - brightness);
+		t.point();
+		t.pop();
+	}
 
-  // Overlay the pixel height text
-  for (let i = 0; i < label.length; i++) {
-    t.push();
-    t.translate(i - label.length / 2, 0);
-    t.char(label[i]);
-    t.cellColor(0);
-    t.charColor(255);
-    t.point();
-    t.pop();
-  }
+	for (let i = 0; i < label.length; i++) {
+		t.push();
+		t.translate(i - label.length / 2, 0);
+		t.char(label[i]);
+		t.cellColor(0);
+		t.charColor(255);
+		t.point();
+		t.pop();
+	}
 });
 
 t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-
-##### Returns
-
-`number`
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="https://code.textmode.art/docs/leaderboard" target="_blank" rel="noopener noreferrer">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeGrid/height/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 ***
 
@@ -325,35 +359,42 @@ get offsetX(): number;
 
 Returns the horizontal offset (margin) in pixels from the canvas edge to the grid.
 
+##### Returns
+
+`number`
+
 ##### Example
 
 ```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
-  t.background(0);
+	t.background(0);
 
-  const margin = t.grid.offsetX;
-  const text = `X MARGIN: ${margin}px`;
+	const text = `X MARGIN: ${t.grid.offsetX}px`;
 
-  for (let i = 0; i < text.length; i++) {
-    t.push();
-    t.translate(i - text.length / 2, -2);
-    t.char(text[i]);
-    t.charColor(200, 200, 255);
-    t.point();
-    t.pop();
-  }
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i - text.length / 2, -2);
+		t.char(text[i]);
+		t.charColor(200, 200, 255);
+		t.point();
+		t.pop();
+	}
 });
 
 t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-
-##### Returns
-
-`number`
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="https://code.textmode.art/docs/leaderboard" target="_blank" rel="noopener noreferrer">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeGrid/offsetX/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 ***
 
@@ -367,35 +408,42 @@ get offsetY(): number;
 
 Returns the vertical offset (margin) in pixels from the canvas edge to the grid.
 
+##### Returns
+
+`number`
+
 ##### Example
 
 ```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
-  t.background(0);
+	t.background(0);
 
-  const margin = t.grid.offsetY;
-  const text = `Y MARGIN: ${margin}px`;
+	const text = `Y MARGIN: ${t.grid.offsetY}px`;
 
-  for (let i = 0; i < text.length; i++) {
-    t.push();
-    t.translate(i - text.length / 2, 2);
-    t.char(text[i]);
-    t.charColor(255, 200, 200);
-    t.point();
-    t.pop();
-  }
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i - text.length / 2, 2);
+		t.char(text[i]);
+		t.charColor(255, 200, 200);
+		t.point();
+		t.pop();
+	}
 });
 
 t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-
-##### Returns
-
-`number`
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="https://code.textmode.art/docs/leaderboard" target="_blank" rel="noopener noreferrer">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeGrid/offsetY/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 ***
 
@@ -409,39 +457,43 @@ get rows(): number;
 
 Returns the number of rows in the grid.
 
+##### Returns
+
+`number`
+
 ##### Example
 
 ```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
-  t.background(0);
+	t.background(0);
 
-  const rows = t.grid.rows;
+	const rows = t.grid.rows;
 
-  // Draw horizontal stripes
-  for (let y = 0; y < rows; y++) {
-    const brightness = (y / rows) * 255;
-    t.cellColor(brightness, 0, 255 - brightness);
+	for (let y = 0; y < rows; y++) {
+		const brightness = (y / rows) * 255;
 
-    // Draw a full row
-    t.push();
-    // Note: Default coordinates are centered.
-    // We need to calculate Y relative to center.
-    t.translateY(y - rows / 2 + 0.5);
-    t.rect(t.grid.cols, 1);
-    t.pop();
-  }
+		t.cellColor(brightness, 0, 255 - brightness);
+		t.push();
+		t.translateY(y - rows / 2 + 0.5);
+		t.rect(t.grid.cols, 1);
+		t.pop();
+	}
 });
 
 t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-
-##### Returns
-
-`number`
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="https://code.textmode.art/docs/leaderboard" target="_blank" rel="noopener noreferrer">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeGrid/rows/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 #### Set Signature
 
@@ -450,43 +502,6 @@ set rows(newRows): void;
 ```
 
 Sets the number of rows and locks grid sizing until `responsive()` is called.
-
-##### Example
-
-```javascript
-// Locking the grid rows
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
-
-t.setup(() => {
-  // Lock the grid to exactly 15 rows.
-  t.grid.rows = 15;
-});
-
-t.draw(() => {
-  t.background(20, 0, 40);
-
-  // Visualize the 15 locked rows
-  for (let y = -7; y <= 7; y++) {
-    const brightness = 127 + 127 * Math.sin(t.frameCount * 0.1 + y);
-    t.push();
-    t.translate(0, y);
-    t.charColor(brightness, 100, 255);
-    t.char('=');
-    t.rect(t.grid.cols, 1);
-    t.pop();
-  }
-
-  const label = `LOCKED: ${t.grid.rows} ROWS`;
-  t.charColor(255, 255, 0);
-  for(let i=0; i<label.length; i++) {
-    t.push(); t.translate(i - label.length/2, 0); t.char(label[i]); t.cellColor(0); t.point(); t.pop();
-  }
-});
-
-t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
 
 ##### Parameters
 
@@ -497,6 +512,55 @@ t.windowResized(() => {
 ##### Returns
 
 `void`
+
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+t.setup(() => {
+	t.grid.rows = 15;
+});
+
+t.draw(() => {
+	t.background(20, 0, 40);
+
+	for (let y = -7; y <= 7; y++) {
+		const brightness = 127 + 127 * Math.sin(t.frameCount * 0.1 + y);
+
+		t.push();
+		t.translate(0, y);
+		t.charColor(brightness, 100, 255);
+		t.char('=');
+		t.rect(t.grid.cols, 1);
+		t.pop();
+	}
+
+	const label = `LOCKED: ${t.grid.rows} ROWS`;
+	t.charColor(255, 255, 0);
+
+	for (let i = 0; i < label.length; i++) {
+		t.push();
+		t.translate(i - label.length / 2, 0);
+		t.char(label[i]);
+		t.cellColor(0);
+		t.point();
+		t.pop();
+	}
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="https://code.textmode.art/docs/leaderboard" target="_blank" rel="noopener noreferrer">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeGrid/setRows/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 ***
 
@@ -512,37 +576,43 @@ Returns the total width of the grid in screen pixels.
 
 This is equal to `cols * cellWidth`.
 
+##### Returns
+
+`number`
+
 ##### Example
 
 ```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
-  t.background(0);
+	t.background(0);
 
-  // Visualize the grid width vs window width
-  const percent = (t.grid.width / window.innerWidth) * 100;
+	const percent = (t.grid.width / window.innerWidth) * 100;
+	const text = `Grid covers ${percent.toFixed(1)}% of width`;
 
-  const text = `Grid covers ${percent.toFixed(1)}% of width`;
-
-  for (let i = 0; i < text.length; i++) {
-    t.push();
-    t.translate(i - text.length / 2, 0);
-    t.char(text[i]);
-    t.charColor(0, 255, 255);
-    t.point();
-    t.pop();
-  }
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i - text.length / 2, 0);
+		t.char(text[i]);
+		t.charColor(0, 255, 255);
+		t.point();
+		t.pop();
+	}
 });
 
 t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-
-##### Returns
-
-`number`
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="https://code.textmode.art/docs/leaderboard" target="_blank" rel="noopener noreferrer">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeGrid/width/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 ## Methods
 
@@ -572,31 +642,37 @@ const t = textmode.create({ width: window.innerWidth, height: window.innerHeight
 let locked = false;
 
 t.draw(() => {
-  t.background(0);
-
-  t.charColor(255);
-  t.char(locked ? 'L' : 'R');
-  t.rect(t.grid.cols, t.grid.rows);
+	t.background(0);
+	t.charColor(255);
+	t.char(locked ? 'L' : 'R');
+	t.rect(t.grid.cols, t.grid.rows);
 });
 
-// Toggle between fixed size and responsive
 t.mousePressed(() => {
-  locked = !locked;
-  if (locked) {
-    // Lock to small grid
-    t.grid.cols = 20;
-    t.grid.rows = 10;
-  } else {
-    // Restore responsive sizing
-    t.grid.responsive();
-    t.grid.reset();
-  }
+	locked = !locked;
+
+	if (locked) {
+		t.grid.cols = 20;
+		t.grid.rows = 10;
+		return;
+	}
+
+	t.grid.responsive();
+	t.grid.reset();
 });
 
 t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="https://code.textmode.art/docs/leaderboard" target="_blank" rel="noopener noreferrer">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeGrid/reset/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 ***
 
@@ -617,40 +693,50 @@ A grid becomes non-responsive when either `cols` or `rows` is manually set.
 #### Example
 
 ```javascript
-// Restoring responsive sizing
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let isLocked = false;
 
 t.draw(() => {
-  t.background(0);
+	t.background(0);
+	t.charColor(isLocked ? t.color(255, 100, 100) : t.color(100, 255, 100));
+	t.char(isLocked ? 'L' : 'R');
+	t.rect(t.grid.cols - 2, t.grid.rows - 2);
 
-  t.charColor(isLocked ? t.color(255, 100, 100) : t.color(100, 255, 100));
-  t.char(isLocked ? 'L' : 'R');
+	const message = isLocked ? 'LOCKED (Fixed 26x10)' : 'RESPONSIVE (Auto-size)';
 
-  // Draw a frame fitting the current grid
-  t.rect(t.grid.cols - 2, t.grid.rows - 2);
-
-  const msg = isLocked ? "LOCKED (Fixed 20x10)" : "RESPONSIVE (Auto-size)";
-  for(let i=0; i<msg.length; i++) {
-    t.push(); t.translate(i - msg.length/2, 0); t.char(msg[i]); t.cellColor(0); t.point(); t.pop();
-  }
+	for (let i = 0; i < message.length; i++) {
+		t.push();
+		t.translate(i - message.length / 2, 0);
+		t.char(message[i]);
+		t.cellColor(0);
+		t.point();
+		t.pop();
+	}
 });
 
 t.mousePressed(() => {
-  isLocked = !isLocked;
+	isLocked = !isLocked;
 
-  if (isLocked) {
-    t.grid.cols = 20;
-    t.grid.rows = 10;
-  } else {
-    // Restore automatic sizing based on window/canvas dimensions
-    t.grid.responsive();
-    t.grid.reset();
-  }
+	if (isLocked) {
+		t.grid.cols = 26;
+		t.grid.rows = 10;
+		return;
+	}
+
+	t.grid.responsive();
+	t.grid.reset();
 });
 
 t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="https://code.textmode.art/docs/leaderboard" target="_blank" rel="noopener noreferrer">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeGrid/responsive/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>

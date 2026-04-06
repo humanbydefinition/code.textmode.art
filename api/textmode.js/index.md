@@ -2,20 +2,23 @@
 layout: doc
 editLink: true
 title: textmode.js
-description: textmode.js is a lightweight creative coding library for creating real-time ASCII art on the web.
+description: ~ travelling without arriving
 category: API Reference
 api: true
 kind: Project
-lastModified: 2026-02-06
+lastModified: 2026-04-06
 ---
 
 # textmode.js
+
+~ travelling without arriving
 
 ## Namespaces
 
 | Namespace | Description |
 | ------ | ------ |
 | [conversion](namespaces/conversion/index.md) | All media conversion related modules and types. |
+| [errors](namespaces/errors/index.md) | All error handling related modules and types. |
 | [filters](namespaces/filters/index.md) | All filter related modules and types. |
 | [input](namespaces/input/index.md) | All types and interfaces related to input event handling. |
 | [layering](namespaces/layering/index.md) | All modules and types related to multi-layered textmode rendering. |
@@ -34,8 +37,8 @@ lastModified: 2026-02-06
 | Class | Description |
 | ------ | ------ |
 | [textmode](classes/textmode.md) | The main entry point for the `textmode.js` library. |
+| [TextmodeCamera](classes/TextmodeCamera.md) | Mutable camera object used for p5-style camera workflows. |
 | [TextmodeColor](classes/TextmodeColor.md) | Represents a color in the `textmode.js` rendering system. |
-| [TextmodeError](classes/TextmodeError.md) | Custom error class for textmode.js exceptions. |
 | [TextmodeFramebuffer](classes/TextmodeFramebuffer.md) | Framebuffer class for managing offscreen rendering targets initialized via [Textmodifier.createFramebuffer](classes/Textmodifier.md#createframebuffer). |
 | [TextmodeGrid](classes/TextmodeGrid.md) | Manages the grid of each `TextmodeLayer` instance. |
 | [TextmodeShader](classes/TextmodeShader.md) | Shader class for managing WebGL shader programs initialized via [Textmodifier.createFilterShader](classes/Textmodifier.md#createfiltershader) or [Textmodifier.createShader](classes/Textmodifier.md#createshader). |
@@ -45,5 +48,5 @@ lastModified: 2026-02-06
 
 | Type Alias | Description |
 | ------ | ------ |
-| [TextmodeFramebufferOptions](type-aliases/TextmodeFramebufferOptions.md) | Options for creating a framebuffer. If not specified, width and height default to the current textmode grid size. |
-| [TextmodeOptions](type-aliases/TextmodeOptions.md) | Options when creating a [Textmodifier](classes/Textmodifier.md) instance. |
+| [TextmodeFramebufferOptions](type-aliases/TextmodeFramebufferOptions.md) | Options for creating a framebuffer via [Textmodifier.createFramebuffer](classes/Textmodifier.md#createframebuffer). If not specified, width and height default to the current textmode grid size. |
+| [TextmodeOptions](type-aliases/TextmodeOptions.md) | Options when creating a [Textmodifier](classes/Textmodifier.md) instance via [textmode.create](classes/textmode.md#create). |
