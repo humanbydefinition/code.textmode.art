@@ -37,7 +37,7 @@ At the moment, however, contributed API example sketches are only supported for 
 Plugin API example contributions are planned for the future, but they are not part of the contribution workflow yet.
 
 :::tip Recognition and rewards
-Accepted API example sketches can count toward the [Leaderboard](/docs/leaderboard). Once you reach the current unlock threshold of **3 accepted API example sketches**, you become eligible for the `Textmodulator` role in Discord.
+Accepted showcase and API example sketches both count toward the [Leaderboard](/docs/leaderboard). Once you reach the current unlock threshold of **3 accepted sketches**, you become eligible for the `Textmodeller` role in Discord.
 :::
 
 ## What makes a good sketch?
@@ -60,6 +60,11 @@ If your sketch is for the public docs showcase:
 
 The current showcase metadata lives in [`.vitepress/data/sketches.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/sketches.json).
 
+Contributor recognition on the site is also tied to:
+
+- [`.all-contributorsrc`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.all-contributorsrc)
+- [`.vitepress/data/contributors.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contributors.json)
+
 ## Submitting an API example sketch
 
 If your sketch is for the currently supported API reference examples:
@@ -67,6 +72,11 @@ If your sketch is for the currently supported API reference examples:
 1. Fork the [textmode.js repository](https://github.com/humanbydefinition/textmode.js)
 2. Add or update the example source for the relevant `textmode.js` API entry
 3. Submit a pull request explaining which API entry the example improves
+
+If you want your contribution metadata and optional profile links reflected on the `code.textmode.art` site as well, you may also need a companion PR in [`code.textmode.art`](https://github.com/humanbydefinition/code.textmode.art) touching:
+
+- [`.all-contributorsrc`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.all-contributorsrc)
+- [`.vitepress/data/contributors.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contributors.json)
 
 If you are not sure whether your example belongs to the currently supported `textmode.js` API flow or to a not-yet-supported plugin API flow, open an issue first or ask in Discord before starting the implementation.
 
@@ -76,13 +86,15 @@ If you are not sure whether your example belongs to the currently supported `tex
 
 - Your sketch can appear on the landing page as part of the rotating featured set
 - It can also appear on the [Examples](/docs/examples) page
+- Accepted sketches also count toward the [Leaderboard](/docs/leaderboard)
+- Reaching 3 accepted sketches makes you eligible for the `Textmodeller` Discord role
 - You help expand the public showcase of what people are building with `textmode.js`
 
 ### For API example sketches
 
 - Your sketch can improve a specific `textmode.js` API reference entry
 - Accepted examples can count toward the [Leaderboard](/docs/leaderboard)
-- Reaching 3 accepted API example sketches makes you eligible for the `Textmodulator` Discord role
+- Reaching 3 accepted sketches makes you eligible for the `Textmodeller` Discord role
 - You help turn the supported API docs into a better learning resource
 
 ## Questions?
@@ -92,4 +104,4 @@ If you're unsure which route your sketch belongs to:
 - Open an [issue](https://github.com/humanbydefinition/code.textmode.art/issues)
 - Join the [Discord community](https://discord.gg/sjrw8QXNks)
 
-Thank you for contributing to the `textmode.js` documentation ecosystem.
+Thank you for contributing to the `textmode.js` documentation ecosystem!
