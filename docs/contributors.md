@@ -21,7 +21,7 @@ We welcome contributions of all sizes! Whether it's fixing a typo, adding a feat
 :::
 
 :::tip Looking for example-sketch rankings?
-Accepted documentation examples also appear on the dedicated [Example Sketch Leaderboard](/docs/leaderboard), including the Discord role unlock progress.
+Accepted documentation examples also appear on the dedicated [Leaderboard](/docs/leaderboard), including the Discord role unlock progress.
 :::
 
 ## Current and past contributors

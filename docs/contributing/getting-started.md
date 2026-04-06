@@ -171,7 +171,7 @@ npm run contributors:generate
 If you want additional social links to appear on the site, add them to [`.vitepress/data/contributors.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contributors.json).
 
 You'll appear on the [Contributors page](/docs/contributors) when your PR is merged!
-If your contribution is an accepted example sketch, it will also count toward the [Example Sketch Leaderboard](/docs/leaderboard) on the next redeploy.
+If your contribution is an accepted example sketch, it will also count toward the [Leaderboard](/docs/leaderboard) on the next redeploy.
 
 ## Tips for success
 
@@ -194,7 +194,7 @@ If your contribution is an accepted example sketch, it will also count toward th
 1. Add entry to `.vitepress/data/sketches.json`
 2. Test the sketch works correctly
 3. Submit pull request
-4. Check the [Example Sketch Leaderboard](/docs/leaderboard) after the next deployment
+4. Check the [Leaderboard](/docs/leaderboard) after the next deployment
 
 ### Fixing a typo
 

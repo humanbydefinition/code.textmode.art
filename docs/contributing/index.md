@@ -48,7 +48,7 @@ Ready to contribute? Check out our [Getting Started guide](/docs/contributing/ge
 
 All contributors are recognized on the [Contributors page](/docs/contributors) and in the [README](https://github.com/humanbydefinition/code.textmode.art#contributors) using the [All Contributors](https://allcontributors.org/) specification.
 
-Accepted example sketch contributions also appear on the [Example Sketch Leaderboard](/docs/leaderboard), which recalculates automatically whenever the documentation is redeployed.
+Accepted example sketch contributions also appear on the [Leaderboard](/docs/leaderboard), which recalculates automatically whenever the documentation is redeployed.
 
 Maintainers update contributor recognition with `npm run contributors:add -- <github-username> <contribution[,contribution]>` and `npm run contributors:generate`.
 If you want extra social links on the website, add them to [`.vitepress/data/contributors.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contributors.json).
