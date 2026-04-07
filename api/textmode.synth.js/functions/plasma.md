@@ -1,11 +1,13 @@
 ---
+layout: doc
+editLink: true
 title: plasma
 description: plasma function API reference for textmode.synth.js.
 category: Functions
 api: true
 kind: Function
 ecosystem: textmode.js
-lastModified: 2026-02-06
+lastModified: 2026-04-07
 ---
 
 [textmode.synth.js](../index.md) / plasma
@@ -37,19 +39,16 @@ Generate plasma-like sine field patterns.
 
 ## Example
 
-```javascript
+```js
 const t = textmode.create({
-  width: window.innerWidth,
-  height: window.innerHeight,
-  plugins: [SynthPlugin]
+	width: window.innerWidth,
+	height: window.innerHeight,
+	plugins: [SynthPlugin],
 });
 
-t.layers.base.synth(
-  plasma(8, 0.6, 0.2, 1.4)
-    .kaleid(4)
-);
+t.layers.base.synth(plasma(8, 0.6, 0.2, 1.4).kaleid(4));
 
 t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```

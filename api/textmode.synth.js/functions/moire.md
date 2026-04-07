@@ -1,11 +1,13 @@
 ---
+layout: doc
+editLink: true
 title: moire
 description: moire function API reference for textmode.synth.js.
 category: Functions
 api: true
 kind: Function
 ecosystem: textmode.js
-lastModified: 2026-02-06
+lastModified: 2026-04-07
 ---
 
 [textmode.synth.js](../index.md) / moire
@@ -41,19 +43,16 @@ Generate moire interference patterns.
 
 ## Example
 
-```javascript
+```js
 const t = textmode.create({
-  width: window.innerWidth,
-  height: window.innerHeight,
-  plugins: [SynthPlugin]
+	width: window.innerWidth,
+	height: window.innerHeight,
+	plugins: [SynthPlugin],
 });
 
-t.layers.base.synth(
-  moire(14, 15, 0.2, 1.2, 0.2, 0.1)
-    .color(0.7, 0.5, 1.1)
-);
+t.layers.base.synth(moire(14, 15, 0.2, 1.2, 0.2, 0.1).color(0.7, 0.5, 1.1));
 
 t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```

@@ -1,11 +1,13 @@
 ---
+layout: doc
+editLink: true
 title: solid
 description: solid function API reference for textmode.synth.js.
 category: Functions
 api: true
 kind: Function
 ecosystem: textmode.js
-lastModified: 2026-02-06
+lastModified: 2026-04-07
 ---
 
 [textmode.synth.js](../index.md) / solid
@@ -32,20 +34,17 @@ Generate a solid grayscale color.
 
 ### Example
 
-```javascript
+```js
 const t = textmode.create({
-  width: window.innerWidth,
-  height: window.innerHeight,
-  plugins: [SynthPlugin]
+	width: window.innerWidth,
+	height: window.innerHeight,
+	plugins: [SynthPlugin],
 });
 
-t.layers.base.synth(
-  solid(0.4)
-    .char(osc(6, 0.1, 1.2))
-);
+t.layers.base.synth(solid(0.4).char(osc(6, 0.1, 1.2)));
 
 t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -76,19 +75,16 @@ Generate a solid color.
 
 ### Example
 
-```javascript
+```js
 const t = textmode.create({
-  width: window.innerWidth,
-  height: window.innerHeight,
-  plugins: [SynthPlugin]
+	width: window.innerWidth,
+	height: window.innerHeight,
+	plugins: [SynthPlugin],
 });
 
-t.layers.base.synth(
-  solid(0.1, 0.2, 0.5, 1)
-    .char(noise(8))
-);
+t.layers.base.synth(solid(0.1, 0.2, 0.5, 1).char(noise(8)));
 
 t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```

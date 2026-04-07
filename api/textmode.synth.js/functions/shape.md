@@ -1,11 +1,13 @@
 ---
+layout: doc
+editLink: true
 title: shape
 description: shape function API reference for textmode.synth.js.
 category: Functions
 api: true
 kind: Function
 ecosystem: textmode.js
-lastModified: 2026-02-06
+lastModified: 2026-04-07
 ---
 
 [textmode.synth.js](../index.md) / shape
@@ -35,19 +37,16 @@ Generate geometric shapes (polygons).
 
 ## Example
 
-```javascript
+```js
 const t = textmode.create({
-  width: window.innerWidth,
-  height: window.innerHeight,
-  plugins: [SynthPlugin]
+	width: window.innerWidth,
+	height: window.innerHeight,
+	plugins: [SynthPlugin],
 });
 
-t.layers.base.synth(
-  shape(6, 0.35, 0.02)
-    .rotate(() => t.secs)
-);
+t.layers.base.synth(shape(6, 0.35, 0.02).rotate(() => t.secs));
 
 t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```

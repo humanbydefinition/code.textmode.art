@@ -1,11 +1,13 @@
 ---
+layout: doc
+editLink: true
 title: cellColor
 description: cellColor function API reference for textmode.synth.js.
 category: Functions
 api: true
 kind: Function
 ecosystem: textmode.js
-lastModified: 2026-02-06
+lastModified: 2026-04-07
 ---
 
 [textmode.synth.js](../index.md) / cellColor
@@ -40,20 +42,17 @@ A new SynthSource configured with cell color
 
 ### Example
 
-```javascript
+```js
 const t = textmode.create({
-  width: window.innerWidth,
-  height: window.innerHeight,
-  plugins: [SynthPlugin]
+	width: window.innerWidth,
+	height: window.innerHeight,
+	plugins: [SynthPlugin],
 });
 
-t.layers.base.synth(
-  cellColor(osc(6, 0.1, 1.2).invert())
-    .char(noise(6))
-);
+t.layers.base.synth(cellColor(osc(6, 0.1, 1.2).invert()).char(noise(6)));
 
 t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -86,20 +85,17 @@ A new SynthSource configured with cell color
 
 ### Example
 
-```javascript
+```js
 const t = textmode.create({
-  width: window.innerWidth,
-  height: window.innerHeight,
-  plugins: [SynthPlugin]
+	width: window.innerWidth,
+	height: window.innerHeight,
+	plugins: [SynthPlugin],
 });
 
-t.layers.base.synth(
-  cellColor(0.05, 0.08, 0.1, 0.8)
-    .char(noise(10))
-);
+t.layers.base.synth(cellColor(0.05, 0.08, 0.1, 0.8).char(noise(10)));
 
 t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -123,19 +119,16 @@ Create a synth source with cell background color defined using a grayscale value
 
 ### Example
 
-```javascript
+```js
 const t = textmode.create({
-  width: window.innerWidth,
-  height: window.innerHeight,
-  plugins: [SynthPlugin]
+	width: window.innerWidth,
+	height: window.innerHeight,
+	plugins: [SynthPlugin],
 });
 
-t.layers.base.synth(
-  cellColor(0.2)
-    .char(osc(6, 0.1, 1.2))
-);
+t.layers.base.synth(cellColor(0.2).char(osc(6, 0.1, 1.2)));
 
 t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```

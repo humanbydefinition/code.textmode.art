@@ -1,11 +1,13 @@
 ---
+layout: doc
+editLink: true
 title: src
 description: src function API reference for textmode.synth.js.
 category: Functions
 api: true
 kind: Function
 ecosystem: textmode.js
-lastModified: 2026-02-06
+lastModified: 2026-04-07
 ---
 
 [textmode.synth.js](../index.md) / src
@@ -53,20 +55,16 @@ A new SynthSource that samples the specified source or self
 
 ## Example
 
-```javascript
+```js
 const t = textmode.create({
-  width: window.innerWidth,
-  height: window.innerHeight,
-  plugins: [SynthPlugin]
+	width: window.innerWidth,
+	height: window.innerHeight,
+	plugins: [SynthPlugin],
 });
 
-t.layers.base.synth(
-  src()
-    .scale(1.01)
-    .blend(osc(6, 0.1, 1.2), 0.1)
-);
+t.layers.base.synth(src().scale(1.01).blend(osc(6, 0.1, 1.2), 0.1));
 
 t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```

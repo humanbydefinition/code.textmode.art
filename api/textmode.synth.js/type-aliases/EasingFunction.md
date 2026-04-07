@@ -1,11 +1,13 @@
 ---
+layout: doc
+editLink: true
 title: EasingFunction
 description: Easing functions from
 category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-02-06
+lastModified: 2026-04-07
 ---
 
 [textmode.synth.js](../index.md) / EasingFunction
@@ -24,19 +26,16 @@ Available easing functions: `'linear'`, `'easeInQuad'`, `'easeOutQuad'`, `'easeI
 
 ## Example
 
-```javascript
+```js
 const t = textmode.create({
-  width: window.innerWidth,
-  height: window.innerHeight,
-  plugins: [SynthPlugin]
+	width: window.innerWidth,
+	height: window.innerHeight,
+	plugins: [SynthPlugin],
 });
 
-t.layers.base.synth(
-  shape(4)
-    .rotate([-1.5, 1.5].ease('easeInOutCubic'))
-);
+t.layers.base.synth(shape(4).rotate([-1.5, 1.5].ease('easeInOutCubic')));
 
 t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```

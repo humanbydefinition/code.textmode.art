@@ -1,11 +1,13 @@
 ---
+layout: doc
+editLink: true
 title: textmode.synth.js
 description: A derivative work of hydra-synth by Olivia Jack, adapted for the textmode.js ecosystem, providing a visual synthesis system for procedural generation of char...
 category: API Reference
 api: true
 kind: Project
 ecosystem: textmode.js
-lastModified: 2026-02-06
+lastModified: 2026-04-07
 ---
 
 # textmode.synth.js

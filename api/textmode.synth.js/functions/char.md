@@ -1,11 +1,13 @@
 ---
+layout: doc
+editLink: true
 title: char
 description: char function API reference for textmode.synth.js.
 category: Functions
 api: true
 kind: Function
 ecosystem: textmode.js
-lastModified: 2026-02-06
+lastModified: 2026-04-07
 ---
 
 [textmode.synth.js](../index.md) / char
@@ -35,20 +37,18 @@ A new SynthSource configured for character generation
 
 ## Example
 
-```javascript
+```js
 const t = textmode.create({
-  width: window.innerWidth,
-  height: window.innerHeight,
-  plugins: [SynthPlugin]
+	width: window.innerWidth,
+	height: window.innerHeight,
+	plugins: [SynthPlugin],
 });
 
 t.layers.base.synth(
-  char(osc(6, 0.1, 1.2))
-    .charMap('@#%*+=-:. ')
-    .charColor(osc(12, 0.05, 0.2))
+	char(osc(6, 0.1, 1.2)).charMap('@#%*+=-:. ').charColor(osc(12, 0.05, 0.2))
 );
 
 t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```

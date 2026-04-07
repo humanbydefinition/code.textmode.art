@@ -1,11 +1,13 @@
 ---
+layout: doc
+editLink: true
 title: ModulatedArray
 description: Extended array interface with modulation methods.
 category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-02-06
+lastModified: 2026-04-07
 isInterface: true
 ---
 
@@ -21,20 +23,17 @@ manually tracking time or state.
 
 ## Example
 
-```javascript
+```js
 const t = textmode.create({
-  width: window.innerWidth,
-  height: window.innerHeight,
-  plugins: [SynthPlugin]
+	width: window.innerWidth,
+	height: window.innerHeight,
+	plugins: [SynthPlugin],
 });
 
-t.layers.base.synth(
-  osc([4, 8, 12].fast(1.5), 0.1, 1.2)
-    .kaleid(5)
-);
+t.layers.base.synth(osc([4, 8, 12].fast(1.5), 0.1, 1.2).kaleid(5));
 
 t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -75,20 +74,17 @@ The array for chaining
 
 #### Example
 
-```javascript
+```js
 const t = textmode.create({
-  width: window.innerWidth,
-  height: window.innerHeight,
-  plugins: [SynthPlugin]
+	width: window.innerWidth,
+	height: window.innerHeight,
+	plugins: [SynthPlugin],
 });
 
-t.layers.base.synth(
-  osc([4, 8, 12].fast(2), 0.1, 1.2)
-    .kaleid(5)
-);
+t.layers.base.synth(osc([4, 8, 12].fast(2), 0.1, 1.2).kaleid(5));
 
 t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -120,20 +116,17 @@ The array for chaining
 
 #### Example
 
-```javascript
+```js
 const t = textmode.create({
-  width: window.innerWidth,
-  height: window.innerHeight,
-  plugins: [SynthPlugin]
+	width: window.innerWidth,
+	height: window.innerHeight,
+	plugins: [SynthPlugin],
 });
 
-t.layers.base.synth(
-  shape(5, 0.4)
-    .scale([0.6, 1.2].smooth(0.8))
-);
+t.layers.base.synth(shape(5, 0.4).scale([0.6, 1.2].smooth(0.8)));
 
 t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -170,20 +163,17 @@ The array for chaining
 
 #### Example
 
-```javascript
+```js
 const t = textmode.create({
-  width: window.innerWidth,
-  height: window.innerHeight,
-  plugins: [SynthPlugin]
+	width: window.innerWidth,
+	height: window.innerHeight,
+	plugins: [SynthPlugin],
 });
 
-t.layers.base.synth(
-  shape(4)
-    .rotate([-1.5, 1.5].ease('sin'))
-);
+t.layers.base.synth(shape(4).rotate([-1.5, 1.5].ease('sin')));
 
 t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -218,22 +208,19 @@ The array for chaining
 
 #### Example
 
-```javascript
+```js
 const t = textmode.create({
-  width: window.innerWidth,
-  height: window.innerHeight,
-  plugins: [SynthPlugin]
+	width: window.innerWidth,
+	height: window.innerHeight,
+	plugins: [SynthPlugin],
 });
 
 const base = [6, 12, 18].fast(1.5);
 
-t.layers.base.synth(
-  osc(base, 0.1, 1.2)
-    .layer(osc(base.offset(0.5), 0.1, 1.2), 0.5)
-);
+t.layers.base.synth(osc(base, 0.1, 1.2).layer(osc(base.offset(0.5), 0.1, 1.2), 0.5));
 
 t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -269,19 +256,16 @@ A new ModulatedArray with remapped values
 
 #### Example
 
-```javascript
+```js
 const t = textmode.create({
-  width: window.innerWidth,
-  height: window.innerHeight,
-  plugins: [SynthPlugin]
+	width: window.innerWidth,
+	height: window.innerHeight,
+	plugins: [SynthPlugin],
 });
 
-t.layers.base.synth(
-  shape(6)
-    .scale([2, 6].fit(0.5, 1.5))
-);
+t.layers.base.synth(shape(6).scale([2, 6].fit(0.5, 1.5)));
 
 t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
