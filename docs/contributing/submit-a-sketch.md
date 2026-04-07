@@ -7,7 +7,7 @@ title: Submit a Sketch
 There are now two different sketch contribution paths in the `textmode.js` / `textmode.art` ecosystem:
 
 - **Gallery / showcase sketches** live in the [`code.textmode.art`](https://github.com/humanbydefinition/code.textmode.art) repository and power the public documentation showcase.
-- **API example sketches** currently belong to the [`textmode.js`](https://github.com/humanbydefinition/textmode.js) repository, because that is where the source code for the supported API reference examples currently lives.
+- **API example sketches** belong to the repository that owns the source example used by the generated API docs.
 
 This page explains the difference so you can submit your sketch to the right repository.
 
@@ -32,9 +32,14 @@ Use this route if your sketch is meant to teach a specific API surface in the ge
 
 The API docs on `code.textmode.art` cover more than just `textmode.js`. They also include plugin libraries such as `textmode.synth.js`, `textmode.filters.js`, and `textmode.export.js`.
 
-At the moment, however, contributed API example sketches are only supported for the core `textmode.js` API flow. Those examples are not authored in `code.textmode.art` right now. Their source code currently lives in the [`textmode.js`](https://github.com/humanbydefinition/textmode.js) repository directly, so API example sketch contributions need to be proposed there.
+API example sketches are not authored in `code.textmode.art`. They live in the original package repositories instead.
 
-Plugin API example contributions are planned for the future, but they are not part of the contribution workflow yet.
+Right now, that means:
+
+- Core API examples for `textmode.js` belong in [`humanbydefinition/textmode.js`](https://github.com/humanbydefinition/textmode.js)
+- Synth API examples for `textmode.synth.js` belong in [`humanbydefinition/textmode.synth.js`](https://github.com/humanbydefinition/textmode.synth.js)
+
+As a rule of thumb: if an API page includes a **View sketch on GitHub** link, submit your change to the repository linked there.
 
 :::tip Recognition and rewards
 Accepted showcase and API example sketches both count toward the [Leaderboard](/docs/leaderboard). Once you reach the current unlock threshold of **3 accepted sketches**, you become eligible for the `Textmodeller` role in Discord.
@@ -67,18 +72,20 @@ Contributor recognition on the site is also tied to:
 
 ## Submitting an API example sketch
 
-If your sketch is for the currently supported API reference examples:
+If your sketch is for a generated API reference example:
 
-1. Fork the [textmode.js repository](https://github.com/humanbydefinition/textmode.js)
-2. Add or update the example source for the relevant `textmode.js` API entry
-3. Submit a pull request explaining which API entry the example improves
+1. Open the relevant API page on `code.textmode.art`
+2. Follow the **View sketch on GitHub** link for that example
+3. Fork the repository that owns that example source
+4. Add or update the sketch for the relevant API entry
+5. Submit a pull request explaining which API entry the example improves
 
 If you want your contribution metadata and optional profile links reflected on the `code.textmode.art` site as well, you may also need a companion PR in [`code.textmode.art`](https://github.com/humanbydefinition/code.textmode.art) touching:
 
 - [`.all-contributorsrc`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.all-contributorsrc)
 - [`.vitepress/data/contributors.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contributors.json)
 
-If you are not sure whether your example belongs to the currently supported `textmode.js` API flow or to a not-yet-supported plugin API flow, open an issue first or ask in Discord before starting the implementation.
+If you are not sure which repository owns a given API example, open an issue first or ask in Discord before starting the implementation.
 
 ## What happens after submission?
 
@@ -92,7 +99,7 @@ If you are not sure whether your example belongs to the currently supported `tex
 
 ### For API example sketches
 
-- Your sketch can improve a specific `textmode.js` API reference entry
+- Your sketch can improve a specific generated API reference entry for `textmode.js`, `textmode.synth.js`, or another package that adopts the same workflow
 - Accepted examples can count toward the [Leaderboard](/docs/leaderboard)
 - Reaching 3 accepted sketches makes you eligible for the `Textmodeller` Discord role
 - You help turn the supported API docs into a better learning resource
