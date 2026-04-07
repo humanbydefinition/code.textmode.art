@@ -1,11 +1,13 @@
 ---
+layout: doc
+editLink: true
 title: SynthContext
 description: Context passed to dynamic parameter functions during rendering.
 category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-02-06
+lastModified: 2026-04-07
 isInterface: true
 ---
 

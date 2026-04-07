@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 namespace: filters
 kind: TypeAlias
-lastModified: 2026-04-06
+lastModified: 2026-04-07
 ---
 
 [textmode.js](../../../index.md) / [filters](../index.md) / FilterName

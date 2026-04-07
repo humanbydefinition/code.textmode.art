@@ -1,11 +1,13 @@
 ---
+layout: doc
+editLink: true
 title: setGlobalErrorCallback
 description: setGlobalErrorCallback function API reference for textmode.synth.js.
 category: Functions
 api: true
 kind: Function
 ecosystem: textmode.js
-lastModified: 2026-02-06
+lastModified: 2026-04-07
 ---
 
 [textmode.synth.js](../index.md) / setGlobalErrorCallback
