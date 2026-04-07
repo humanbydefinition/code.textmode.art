@@ -6,7 +6,7 @@ description: All filter related modules and types.
 category: Namespaces
 api: true
 kind: Namespace
-lastModified: 2026-04-06
+lastModified: 2026-04-07
 ---
 
 [textmode.js](../../index.md) / filters

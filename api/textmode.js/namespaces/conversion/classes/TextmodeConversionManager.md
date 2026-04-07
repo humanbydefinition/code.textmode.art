@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: conversion
 kind: Class
-lastModified: 2026-04-06
+lastModified: 2026-04-07
 hasConstructor: false
 ---
 
