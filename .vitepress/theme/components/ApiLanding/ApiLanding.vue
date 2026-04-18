@@ -47,6 +47,7 @@ const heroActions: ApiHeroAction[] = [
   { label: 'textmode.synth.js API', href: '/api/textmode.synth.js/', variant: 'secondary' },
   { label: 'textmode.filters.js API', href: '/api/textmode.filters.js/', variant: 'secondary' },
   { label: 'textmode.export.js API', href: '/api/textmode.export.js/', variant: 'secondary' },
+  { label: 'textmode.figlet.js API', href: '/api/textmode.figlet.js/', variant: 'secondary' },
 ]
 
 const libraries: ApiLibrary[] = [
@@ -93,6 +94,17 @@ const libraries: ApiLibrary[] = [
     secondary: '/api/textmode.export.js/#example',
     githubUser: 'humanbydefinition',
     githubRepo: 'textmode.export.js'
+  },
+  {
+    name: 'textmode.figlet.js',
+    kicker: 'ascii typography',
+    badge: 'figlet',
+    description: 'FIGlet font loading, layout, bounds measurement, and plugin-powered text rendering for textmode.js sketches.',
+    highlights: [],
+    cta: '/api/textmode.figlet.js/',
+    secondary: '/api/textmode.figlet.js/variables/FigletPlugin',
+    githubUser: 'humanbydefinition',
+    githubRepo: 'textmode.figlet.js'
   }
 ]
 
