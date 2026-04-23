@@ -1,11 +1,13 @@
 ---
+layout: doc
+editLink: true
 title: textmode.export.js
 description: Export plugin for textmode.js - save artworks as images, videos, SVG, and text.
 category: API Reference
 api: true
 kind: Project
 ecosystem: textmode.js
-lastModified: 2026-02-06
+lastModified: 2026-04-23
 ---
 
 # textmode.export.js
@@ -13,7 +15,7 @@ lastModified: 2026-02-06
 Export plugin for textmode.js - save artworks as images, videos, SVG, and text.
 
 This plugin adds comprehensive export capabilities to textmode.js instances,
-allowing you to save your generative artworks in multiple formats with a 
+allowing you to save your generative artworks in multiple formats with a
 convenient overlay UI for quick access to all export options.
 
 ## Available export formats

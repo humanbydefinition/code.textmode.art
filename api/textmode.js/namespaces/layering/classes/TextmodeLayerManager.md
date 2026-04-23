@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: layering
 kind: Class
-lastModified: 2026-04-07
+lastModified: 2026-04-23
 hasConstructor: false
 ---
 
@@ -349,11 +349,70 @@ t.windowResized(() => {
 get resultFramebuffer(): TextmodeFramebuffer;
 ```
 
-The framebuffer containing the final composited result after all layers and filters have been applied.
+The framebuffer containing the most recent composited result, or the framebuffer that will receive
+the current frame's composited result if accessed mid-frame before presentation completes.
 
 ##### Returns
 
 [`TextmodeFramebuffer`](../../../classes/TextmodeFramebuffer.md)
+
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const glowLayer = t.layers.add({ fontSize: 16, blendMode: 'screen' });
+
+function label(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(6, 9, 18);
+	t.push();
+	t.rotateZ(t.frameCount * 1.1);
+	t.charColor(255, 230, 150);
+	t.rect(14, 14);
+	t.pop();
+
+	const result = t.layers.resultFramebuffer;
+
+	label(`result framebuffer ${result.width} x ${result.height}`, -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
+	label(`attachments ${result.attachmentCount}`, Math.floor(t.grid.rows * 0.32), [120, 205, 255]);
+});
+
+glowLayer.draw(() => {
+	t.clear();
+	t.push();
+	t.rotateZ(-t.frameCount * 1.7);
+	t.charColor(110, 205, 255);
+	t.rect(20, 6);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeLayerManager/resultFramebuffer/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 ## Methods
 

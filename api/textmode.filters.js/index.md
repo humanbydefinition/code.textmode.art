@@ -1,11 +1,13 @@
 ---
+layout: doc
+editLink: true
 title: textmode.filters.js
 description: GPU-accelerated image filters plugin for textmode.js.
 category: API Reference
 api: true
 kind: Project
 ecosystem: textmode.js
-lastModified: 2026-02-06
+lastModified: 2026-04-23
 ---
 
 # textmode.filters.js
@@ -37,15 +39,7 @@ via WebGL2 fragment shaders for maximum performance.
 - [bloom](interfaces/BloomOptions.md) - Glow around bright areas
 - [filmGrain](interfaces/FilmGrainOptions.md) - Animated film grain overlay
 
-## Functions
-
-| Function | Description |
-| ------ | ------ |
-| [~~createFiltersPlugin~~](functions/createFiltersPlugin.md) | Creates the `textmode.filters.js` plugin for textmode.js. |
-
-## Interfaces
-
-### Color adjustment filters
+## Color adjustment filters
 
 | Interface | Description |
 | ------ | ------ |
@@ -55,7 +49,7 @@ via WebGL2 fragment shaders for maximum performance.
 | [HueRotateOptions](interfaces/HueRotateOptions.md) | Configuration options for the `'hueRotate'` filter. |
 | [PosterizeOptions](interfaces/PosterizeOptions.md) | Configuration options for the `'posterize'` filter. |
 
-### Distortion filters
+## Distortion filters
 
 | Interface | Description |
 | ------ | ------ |
@@ -63,7 +57,14 @@ via WebGL2 fragment shaders for maximum performance.
 | [PixelateOptions](interfaces/PixelateOptions.md) | Configuration options for the `'pixelate'` filter. |
 | [GridDistortionOptions](interfaces/GridDistortionOptions.md) | Configuration options for the `'gridDistortion'` filter. |
 
-### Stylization filters
+## Other
+
+| Name | Description |
+| ------ | ------ |
+| [FiltersPlugin](variables/FiltersPlugin.md) | GPU-accelerated image filters plugin for textmode.js. |
+| [~~createFiltersPlugin~~](functions/createFiltersPlugin.md) | Creates the `textmode.filters.js` plugin for textmode.js. |
+
+## Stylization filters
 
 | Interface | Description |
 | ------ | ------ |
@@ -73,9 +74,3 @@ via WebGL2 fragment shaders for maximum performance.
 | [VignetteOptions](interfaces/VignetteOptions.md) | Configuration options for the `'vignette'` filter. |
 | [BloomOptions](interfaces/BloomOptions.md) | Configuration options for the `'bloom'` filter. |
 | [FilmGrainOptions](interfaces/FilmGrainOptions.md) | Configuration options for the `'filmGrain'` filter. |
-
-## Variables
-
-| Variable | Description |
-| ------ | ------ |
-| [FiltersPlugin](variables/FiltersPlugin.md) | GPU-accelerated image filters plugin for textmode.js. |

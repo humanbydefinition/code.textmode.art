@@ -6,7 +6,7 @@ description: Plugin system types for extending textmode.js functionality.
 category: Namespaces
 api: true
 kind: Namespace
-lastModified: 2026-04-07
+lastModified: 2026-04-23
 ---
 
 [textmode.js](../../index.md) / plugins
@@ -24,20 +24,20 @@ Plugins can:
 ## Example
 
 ```ts
-import type { TextmodePlugin, TextmodePluginAPI } from 'textmode.js/plugins';
+import type { TextmodePlugin, TextmodePluginContext } from 'textmode.js/plugins';
 
 const MyPlugin: TextmodePlugin = {
   name: 'my-plugin',
   version: '1.0.0',
-  install(textmodifier, api) {
+  install(textmodifier, context: TextmodePluginContext) {
     // Extend layers with a new method
-    api.extendLayer('setMyState', function(value: number) {
+    context.extendLayer('setMyState', function(value: number) {
       // `this` is bound to the TextmodeLayer instance
       this.setPluginState('my-plugin', { value });
     });
 
     // Hook into layer rendering
-    api.registerLayerPreRenderHook((layer) => {
+    context.registerLayerPreRenderHook((layer) => {
       const state = layer.getPluginState<{ value: number }>('my-plugin');
       if (state && state.value > 0.5) {
         // Render custom content based on plugin state
@@ -51,8 +51,9 @@ const MyPlugin: TextmodePlugin = {
 
 | Interface | Description |
 | ------ | ------ |
+| [TextmodeCanvasHandle](interfaces/TextmodeCanvasHandle.md) | Stable read-only canvas handle exposed to plugins. |
 | [TextmodePlugin](interfaces/TextmodePlugin.md) | A plugin interface for extending the functionality of a [Textmodifier](../../classes/Textmodifier.md) instance. |
-| [TextmodePluginAPI](interfaces/TextmodePluginAPI.md) | An extended API provided to plugins when they are installed on a [Textmodifier](../../classes/Textmodifier.md) instance. |
+| [TextmodePluginContext](interfaces/TextmodePluginContext.md) | Host-provided context passed to plugins when they are installed on a [Textmodifier](../../classes/Textmodifier.md) instance. |
 
 ## Type Aliases
 

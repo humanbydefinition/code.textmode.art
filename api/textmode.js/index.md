@@ -6,7 +6,7 @@ description: ~ travelling without arriving
 category: API Reference
 api: true
 kind: Project
-lastModified: 2026-04-07
+lastModified: 2026-04-23
 ---
 
 # textmode.js
@@ -20,17 +20,12 @@ lastModified: 2026-04-07
 | [conversion](namespaces/conversion/index.md) | All media conversion related modules and types. |
 | [errors](namespaces/errors/index.md) | All error handling related modules and types. |
 | [filters](namespaces/filters/index.md) | All filter related modules and types. |
+| [fonts](namespaces/fonts/index.md) | All font rendering related modules and types. |
 | [input](namespaces/input/index.md) | All types and interfaces related to input event handling. |
 | [layering](namespaces/layering/index.md) | All modules and types related to multi-layered textmode rendering. |
-| [loadables](namespaces/loadables/index.md) | All loadable assets related to textmode rendering. |
 | [loading](namespaces/loading/index.md) | All loading screen related modules and types. |
+| [media](namespaces/media/index.md) | All media asset related modules and types. |
 | [plugins](namespaces/plugins/index.md) | Plugin system types for extending textmode.js functionality. |
-
-## Enumerations
-
-| Enumeration | Description |
-| ------ | ------ |
-| [TextmodeErrorLevel](enumerations/TextmodeErrorLevel.md) | Error handling levels to control how errors are reported and handled. |
 
 ## Classes
 

@@ -1,11 +1,13 @@
 ---
+layout: doc
+editLink: true
 title: ExportOverlayController
 description: Controller for managing the export overlay UI visibility at runtime.
 category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-02-06
+lastModified: 2026-04-23
 isInterface: true
 ---
 
@@ -29,6 +31,12 @@ Shows the export overlay UI.
 
 `void`
 
+#### Example
+
+```ts
+t.exportOverlay.show();
+```
+
 ***
 
 ### hide()
@@ -42,6 +50,12 @@ Hides the export overlay UI.
 #### Returns
 
 `void`
+
+#### Example
+
+```ts
+t.exportOverlay.hide();
+```
 
 ***
 
@@ -57,6 +71,12 @@ Toggles the export overlay UI visibility.
 
 `void`
 
+#### Example
+
+```ts
+t.exportOverlay.toggle();
+```
+
 ***
 
 ### isVisible()
@@ -70,3 +90,9 @@ Checks if the export overlay is currently visible.
 #### Returns
 
 `boolean`
+
+#### Example
+
+```ts
+const visible = t.exportOverlay.isVisible();
+```

@@ -1,11 +1,13 @@
 ---
+layout: doc
+editLink: true
 title: SVGExportOptions
 description: Options for exporting the textmode content to SVG format.
 category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-02-06
+lastModified: 2026-04-23
 ---
 
 [textmode.export.js](../index.md) / SVGExportOptions
@@ -26,7 +28,7 @@ Options for exporting the textmode content to SVG format.
 optional filename: string;
 ```
 
-The filename to save the SVG file as. 
+The filename to save the SVG file as.
 
 If not provided, a default filename is used.
 

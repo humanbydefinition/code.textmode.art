@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: layering
 kind: Class
-lastModified: 2026-04-07
+lastModified: 2026-04-23
 hasConstructor: false
 ---
 
@@ -53,7 +53,7 @@ Get the framebuffer containing the rendered textmode output for this layer.
 ##### Example
 
 ```javascript
-const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
 const stamp = t.layers.add({ blendMode: 'screen' });
 
 stamp.draw(() => {
@@ -67,6 +67,10 @@ stamp.draw(() => {
 t.draw(() => {
 	t.background(8, 10, 18);
 	if (stamp.asciiFramebuffer) t.image(stamp.asciiFramebuffer, 20, 12);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
@@ -101,7 +105,7 @@ If the layer is not yet initialized, returns undefined.
 ##### Example
 
 ```javascript
-const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
 const stamp = t.layers.add();
 
 stamp.draw(() => {
@@ -116,6 +120,10 @@ t.draw(() => {
 	const raw = stamp.drawFramebuffer;
 	t.background(8, 10, 18);
 	if (raw) t.image(raw, 20, 12);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
@@ -134,14 +142,17 @@ t.draw(() => {
 #### Get Signature
 
 ```ts
-get font(): TextmodeFont;
+get font(): 
+  | TextmodeFont
+  | TextmodeTileset;
 ```
 
 The font used by this layer.
 
 ##### Returns
 
-[`TextmodeFont`](../../loadables/classes/TextmodeFont.md)
+  \| [`TextmodeFont`](../../fonts/classes/TextmodeFont.md)
+  \| [`TextmodeTileset`](../../fonts/classes/TextmodeTileset.md)
 
 ##### Example
 
@@ -404,6 +415,58 @@ If the layer is not yet initialized, returns undefined.
 
 `undefined` \| `WebGLTexture`
 
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const layer = t.layers.add({ fontSize: 16, blendMode: 'screen' });
+
+function label(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(5, 7, 18);
+
+	const textureMatches = layer.texture === layer.asciiFramebuffer.textures[0];
+	label('TextmodeLayer.texture', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
+	label(textureMatches ? 'texture matches ascii framebuffer' : 'texture pending', Math.floor(t.grid.rows * 0.30), [120, 205, 255]);
+});
+
+layer.draw(() => {
+	t.clear();
+	t.push();
+	t.rotateZ(t.frameCount * 1.5);
+	t.charColor(120, 205, 255);
+	t.rect(18, 8);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeLayer/texture/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
+
 ***
 
 ### width
@@ -424,7 +487,7 @@ If the layer is not yet initialized, returns 0.
 ##### Example
 
 ```javascript
-const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
 const detail = t.layers.add({ fontSize: 8 });
 
 function label(text, y, color = [220, 220, 220]) {
@@ -444,6 +507,10 @@ function label(text, y, color = [220, 220, 220]) {
 t.draw(() => {
 	t.background(8, 10, 18);
 	label(`detail.width: ${detail.width}px`, -2, [255, 220, 120]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 
 detail.draw(() => {
@@ -470,19 +537,19 @@ detail.draw(() => {
 blendMode(mode?): 
   | void
   | "normal"
-  | "additive"
-  | "multiply"
-  | "screen"
-  | "subtract"
   | "darken"
+  | "difference"
+  | "exclusion"
   | "lighten"
+  | "multiply"
   | "overlay"
+  | "screen"
+  | "additive"
+  | "subtract"
   | "softLight"
   | "hardLight"
   | "colorDodge"
-  | "colorBurn"
-  | "difference"
-  | "exclusion";
+  | "colorBurn";
 ```
 
 Set or get the layer's blend mode for compositing with layers below.
@@ -491,25 +558,25 @@ Set or get the layer's blend mode for compositing with layers below.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `mode?` | \| `"normal"` \| `"additive"` \| `"multiply"` \| `"screen"` \| `"subtract"` \| `"darken"` \| `"lighten"` \| `"overlay"` \| `"softLight"` \| `"hardLight"` \| `"colorDodge"` \| `"colorBurn"` \| `"difference"` \| `"exclusion"` | The blend mode to set. |
+| `mode?` | \| `"normal"` \| `"darken"` \| `"difference"` \| `"exclusion"` \| `"lighten"` \| `"multiply"` \| `"overlay"` \| `"screen"` \| `"additive"` \| `"subtract"` \| `"softLight"` \| `"hardLight"` \| `"colorDodge"` \| `"colorBurn"` | The blend mode to set. |
 
 #### Returns
 
   \| `void`
   \| `"normal"`
-  \| `"additive"`
-  \| `"multiply"`
-  \| `"screen"`
-  \| `"subtract"`
   \| `"darken"`
+  \| `"difference"`
+  \| `"exclusion"`
   \| `"lighten"`
+  \| `"multiply"`
   \| `"overlay"`
+  \| `"screen"`
+  \| `"additive"`
+  \| `"subtract"`
   \| `"softLight"`
   \| `"hardLight"`
   \| `"colorDodge"`
   \| `"colorBurn"`
-  \| `"difference"`
-  \| `"exclusion"`
 
 The current blend mode if no parameter is provided.
 
@@ -624,7 +691,7 @@ Set explicit camera parameters for this layer.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
 const scene = t.layers.add();
 
 t.draw(() => {
@@ -639,6 +706,10 @@ scene.draw(() => {
 	t.char('#');
 	t.charColor(120, 220, 255);
 	t.box(16, 16, 16);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
@@ -669,7 +740,7 @@ The created camera.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
 const scene = t.layers.add();
 let camera;
 
@@ -682,6 +753,10 @@ t.draw(() => {
 	t.background(8, 10, 18);
 	camera.setPosition(Math.sin(t.frameCount * 0.03) * 18, 8, 46);
 	camera.lookAt(0, 0, 0);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 
 scene.draw(() => {
@@ -1012,7 +1087,7 @@ The current font size if called without arguments.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600, fontSize: 16 });
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
 
 // Add a high-resolution layer (small font) for details
 const detailLayer = t.layers.add({ fontSize: 8 });
@@ -1022,6 +1097,10 @@ t.draw(() => {
   t.charColor(100);
   t.char('X');
   t.rect(10, 10);
+});
+
+t.windowResized(() => {
+	 t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 
 detailLayer.draw(() => {
@@ -1148,7 +1227,7 @@ True if state exists, false otherwise.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
 const layer = t.layers.add();
 
 function label(text, y, color = [220, 220, 220]) {
@@ -1172,6 +1251,10 @@ t.draw(() => {
 	}
 	t.background(8, 10, 18);
 	label(`hasPluginState(): ${layer.hasPluginState('demo')}`, -2, [255, 220, 120]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
@@ -1200,7 +1283,7 @@ Hide this layer from rendering.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
 const banner = t.layers.add({ blendMode: 'screen' });
 let hidden = false;
 
@@ -1228,6 +1311,10 @@ t.draw(() => {
 	label(hidden ? 'hide() removed the top layer' : 'click to hide the banner layer', -6, [255, 220, 120]);
 });
 
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+
 banner.draw(() => {
 	t.clear();
 	t.char('H');
@@ -1252,25 +1339,24 @@ banner.draw(() => {
 loadFont(fontSource): Promise<TextmodeFont>;
 ```
 
-Load a font into this layer from a URL/path or from an existing [TextmodeFont](../../loadables/classes/TextmodeFont.md).
-When a `TextmodeFont` is provided, the layer creates a layer-local fork with independent GPU resources.
+Load a font into this layer from a URL/path or from an existing [TextmodeFont](../../fonts/classes/TextmodeFont.md).
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `fontSource` | `string` \| [`TextmodeFont`](../../loadables/classes/TextmodeFont.md) | The URL/path to the font file, or an existing TextmodeFont to fork from. |
+| `fontSource` | `string` \| [`TextmodeFont`](../../fonts/classes/TextmodeFont.md) | The URL/path to the font file, or an existing TextmodeFont to fork from. |
 
 #### Returns
 
-`Promise`\<[`TextmodeFont`](../../loadables/classes/TextmodeFont.md)\>
+`Promise`\<[`TextmodeFont`](../../fonts/classes/TextmodeFont.md)\>
 
 The loaded TextmodeFont instance.
 
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
 const accent = t.layers.add({ blendMode: 'screen' });
 
 function label(text, y, color = [220, 220, 220]) {
@@ -1296,6 +1382,10 @@ t.draw(() => {
 	label('base layer keeps the default font', -4, [255, 220, 120]);
 });
 
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+
 accent.draw(() => {
 	t.clear();
 	label('layer.loadFont() swapped only this layer', 4, [120, 220, 255]);
@@ -1307,6 +1397,114 @@ accent.draw(() => {
     <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
     <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
     <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeLayer/loadFont/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
+
+***
+
+### loadTileset()
+
+```ts
+loadTileset(tilesetSource): Promise<TextmodeTileset>;
+```
+
+Load a tileset into this layer from load options or from an existing [TextmodeTileset](../../fonts/classes/TextmodeTileset.md).
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `tilesetSource` | \| [`TextmodeTilesetOptions`](../../fonts/interfaces/TextmodeTilesetOptions.md) \| [`TextmodeTileset`](../../fonts/classes/TextmodeTileset.md) | Tileset load options or an existing TextmodeTileset to fork from. |
+
+#### Returns
+
+`Promise`\<[`TextmodeTileset`](../../fonts/classes/TextmodeTileset.md)\>
+
+The loaded TextmodeTileset instance.
+
+#### Example
+
+```javascript
+const TILE_COLUMNS = 16;
+const TILE_ROWS = 16;
+const TILE_COUNT = TILE_COLUMNS * TILE_ROWS;
+
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const tilesLayer = t.layers.add({ fontSize: 16 });
+
+let tileset = null;
+let useTileColors = false;
+
+function activeTileIndex() {
+	return Math.floor((t.frameCount * 0.4) % TILE_COUNT);
+}
+
+function label(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+t.setup(async () => {
+	tileset = await t.loadTileset(
+		{
+			source: 'https://littlebitspace.com/resources/fonts/T64.png',
+			columns: TILE_COLUMNS,
+			rows: TILE_ROWS,
+			count: TILE_COUNT,
+		},
+		false
+	);
+
+	await tilesLayer.loadTileset(tileset);
+	tilesLayer.useTileColors(useTileColors);
+});
+
+t.draw(() => {
+	t.background(5, 7, 18);
+	label('layer-local tileset', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
+	label('T64  16 x 16  8 x 8 cells', Math.floor(t.grid.rows * 0.22));
+	label(useTileColors ? 'layer uses authored colors' : 'layer recolors through char/cell', Math.floor(t.grid.rows * 0.30));
+	label('click to toggle layer.useTileColors()', Math.floor(t.grid.rows * 0.38), [120, 205, 255]);
+});
+
+tilesLayer.draw(() => {
+	if (!tileset) {
+		return;
+	}
+
+	t.clear();
+	tilesLayer.useTileColors(useTileColors);
+	t.char(activeTileIndex());
+	t.charColor(255, 90, 110);
+	t.cellColor(18, 70, 160);
+	t.point();
+});
+
+t.mouseClicked(() => {
+	useTileColors = !useTileColors;
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeLayer/loadTileset/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
   </div>
 </div>
 
@@ -1344,7 +1542,7 @@ Update this layer camera's target and optional up vector.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
 const scene = t.layers.add();
 
 t.draw(() => {
@@ -1353,6 +1551,10 @@ t.draw(() => {
 	t.background(8, 10, 18);
 	scene.camera(0, 0, 46);
 	scene.lookAt(x, y, 0);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 
 scene.draw(() => {
@@ -1513,7 +1715,7 @@ The current opacity if no parameter is provided.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
 const haze = t.layers.add({ blendMode: 'additive' });
 
 function label(text, y, color = [220, 220, 220]) {
@@ -1535,6 +1737,10 @@ t.draw(() => {
 	haze.opacity(amount);
 	t.background(8, 10, 18);
 	label(`opacity(): ${amount.toFixed(2)}`, -6, [255, 220, 120]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 
 haze.draw(() => {
@@ -1578,13 +1784,17 @@ Enable orthographic projection for this layer.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
 const scene = t.layers.add();
 
 t.draw(() => {
 	t.background(8, 10, 18);
 	scene.ortho();
 	scene.camera(0, 0, 44);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 
 scene.draw(() => {
@@ -1636,7 +1846,7 @@ Enable perspective projection for this layer.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
 const scene = t.layers.add();
 
 t.draw(() => {
@@ -1644,6 +1854,10 @@ t.draw(() => {
 	t.background(8, 10, 18);
 	scene.perspective(fov, 0.1, 256);
 	scene.camera(0, 0, 44);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 
 scene.draw(() => {
@@ -1684,7 +1898,7 @@ Reset this layer to default auto camera behavior.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
 const scene = t.layers.add();
 let custom = true;
 
@@ -1699,6 +1913,10 @@ t.draw(() => {
 	} else {
 		scene.resetCamera();
 	}
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 
 scene.draw(() => {
@@ -1801,7 +2019,7 @@ Set the active camera for this layer.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
 const scene = t.layers.add();
 let useLeft = true;
 let left;
@@ -1824,6 +2042,10 @@ t.mousePressed(() => {
 
 t.draw(() => {
 	t.background(8, 10, 18);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 
 scene.draw(() => {
@@ -1950,7 +2172,7 @@ Show this layer for rendering.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 640, height: 480, fontSize: 16 });
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
 const reveal = t.layers.add({ visible: false, blendMode: 'screen' });
 
 function label(text, y, color = [220, 220, 220]) {
@@ -1973,6 +2195,10 @@ t.draw(() => {
 	label(t.frameCount < 120 ? 'layer hidden for 120 frames' : 'show() revealed the layer', -6, [255, 220, 120]);
 });
 
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+
 reveal.draw(() => {
 	t.clear();
 	t.rotateZ(t.frameCount * 2);
@@ -1987,5 +2213,117 @@ reveal.draw(() => {
     <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
     <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
     <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeLayer/show/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
+
+***
+
+### useTileColors()
+
+```ts
+useTileColors(enabled?): boolean | void;
+```
+
+Get or set whether this layer should use authored tileset colors directly during the final ASCII pass.
+
+When disabled (default), tileset texels are remapped to the current character (`primary`)
+and cell (`secondary`) colors. Vector/font atlases always use character/cell recoloring
+regardless of this setting.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `enabled?` | `boolean` | Whether this layer should use authored tileset colors directly. |
+
+#### Returns
+
+`boolean` \| `void`
+
+The current layer tileset-color mode if called without arguments.
+
+#### Example
+
+```javascript
+const TILE_COLUMNS = 16;
+const TILE_ROWS = 16;
+const TILE_COUNT = TILE_COLUMNS * TILE_ROWS;
+
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const tilesLayer = t.layers.add({ fontSize: 16 });
+
+let tileset = null;
+let useTileColors = false;
+
+function activeTileIndex() {
+	return Math.floor((t.frameCount * 0.4) % TILE_COUNT);
+}
+
+function label(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+t.setup(async () => {
+	tileset = await t.loadTileset(
+		{
+			source: 'https://littlebitspace.com/resources/fonts/T64.png',
+			columns: TILE_COLUMNS,
+			rows: TILE_ROWS,
+			count: TILE_COUNT,
+		},
+		false
+	);
+
+	await tilesLayer.loadTileset(tileset);
+	tilesLayer.useTileColors(useTileColors);
+});
+
+t.draw(() => {
+	t.background(5, 7, 18);
+	label('layer-local tileset', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
+	label('T64  16 x 16  8 x 8 cells', Math.floor(t.grid.rows * 0.22));
+	label(useTileColors ? 'layer uses authored colors' : 'layer recolors through char/cell', Math.floor(t.grid.rows * 0.30));
+	label('click to toggle layer.useTileColors()', Math.floor(t.grid.rows * 0.38), [120, 205, 255]);
+});
+
+tilesLayer.draw(() => {
+	if (!tileset) {
+		return;
+	}
+
+	t.clear();
+	tilesLayer.useTileColors(useTileColors);
+	t.char(activeTileIndex());
+	t.charColor(255, 90, 110);
+	t.cellColor(18, 70, 160);
+	t.point();
+});
+
+t.mouseClicked(() => {
+	useTileColors = !useTileColors;
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeLayer/loadTileset/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
   </div>
 </div>

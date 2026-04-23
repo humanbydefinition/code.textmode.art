@@ -58,5 +58,18 @@
     "tags": ["live-coding", "creative-coding", "audio-visual"],
     "featured": true,
     "date": null
+  },
+  "draw-textmode-art": {
+    "title": "draw.textmode.art",
+    "description": "A real-time collaborative textmode editor. Draw together on a shared canvas with Unicode glyphs, weekly community themes, and live chat.",
+    "type": "website",
+    "thumbnailUrl": "/gallery/draw-textmode-art.png",
+    "url": "https://draw.textmode.art/",
+    "author": "humanbydefinition",
+    "authorUrl": "https://github.com/humanbydefinition",
+    "tags": ["drawing", "collaborative", "interactive"],
+    "featured": true,
+    "date": null
   }
+
 }

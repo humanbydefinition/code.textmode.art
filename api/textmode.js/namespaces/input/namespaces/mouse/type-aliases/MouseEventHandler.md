@@ -2,12 +2,12 @@
 layout: doc
 editLink: true
 title: MouseEventHandler
-description: Mouse event handler function type
+description: Mouse event handler function type.
 category: Type Aliases
 api: true
 namespace: input.mouse
 kind: TypeAlias
-lastModified: 2026-04-07
+lastModified: 2026-04-23
 ---
 
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [mouse](../index.md) / MouseEventHandler
@@ -18,7 +18,7 @@ lastModified: 2026-04-07
 type MouseEventHandler = (data) => void;
 ```
 
-Mouse event handler function type
+Mouse event handler function type.
 
 ## Parameters
 

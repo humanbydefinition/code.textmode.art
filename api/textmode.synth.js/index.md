@@ -7,7 +7,7 @@ category: API Reference
 api: true
 kind: Project
 ecosystem: textmode.js
-lastModified: 2026-04-07
+lastModified: 2026-04-23
 ---
 
 # textmode.synth.js
