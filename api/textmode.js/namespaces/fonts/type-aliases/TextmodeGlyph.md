@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 namespace: fonts
 kind: TypeAlias
-lastModified: 2026-04-19
+lastModified: 2026-04-23
 ---
 
 [textmode.js](../../../index.md) / [fonts](../index.md) / TextmodeGlyph
@@ -21,16 +21,6 @@ type TextmodeGlyph = object;
 Represents a single glyph entry in a textmode glyph atlas.
 
 ## Properties
-
-### atlasIndex
-
-```ts
-atlasIndex: number;
-```
-
-Stable atlas slot used by the ASCII shader. Slot 0 is reserved for missing glyphs.
-
-***
 
 ### character
 
@@ -48,27 +38,20 @@ The character itself.
 color: [number, number, number];
 ```
 
-The shader color associated with the character.
+RGB-encoded glyph identity used by the render pipeline and exposed through character color lookups.
 
 ***
 
 ### glyphData?
 
 ```ts
-optional glyphData: GlyphData;
+optional glyphData: GlyphData | null;
 ```
 
 Glyph outline data including advance width and path information.
 
-***
-
-### sourceIndex
-
-```ts
-sourceIndex: number;
-```
-
-Source-order index before atlas normalization.
+Only available for [TextmodeFont](../classes/TextmodeFont.md) glyphs, not [TextmodeTileset](../classes/TextmodeTileset.md) glyphs,
+since tilesets use pre-rendered bitmap data instead of vector outlines.
 
 ***
 
@@ -78,14 +61,4 @@ Source-order index before atlas normalization.
 unicode: number;
 ```
 
-The first Unicode code point of the character, kept for backward compatibility.
-
-***
-
-### unicodeSequence
-
-```ts
-unicodeSequence: number[];
-```
-
-Full Unicode code-point sequence for this glyph token.
+The Unicode code point of the character.

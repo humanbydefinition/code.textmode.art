@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: media
 kind: Class
-lastModified: 2026-04-19
+lastModified: 2026-04-23
 hasConstructor: false
 ---
 
@@ -48,6 +48,76 @@ Ideal height in grid cells.
 
 `number`
 
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+
+const sourceCanvas = document.createElement('canvas');
+sourceCanvas.width = 192;
+sourceCanvas.height = 96;
+
+const sourceContext = sourceCanvas.getContext('2d');
+let source = null;
+
+function renderSource() {
+	if (!sourceContext) {
+		return;
+	}
+
+	sourceContext.fillStyle = '#020617';
+	sourceContext.fillRect(0, 0, sourceCanvas.width, sourceCanvas.height);
+	sourceContext.fillStyle = '#34d399';
+	sourceContext.fillRect(18, 18, sourceCanvas.width - 36, sourceCanvas.height - 36);
+}
+
+function label(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+t.setup(() => {
+	renderSource();
+	source = t.createTexture(sourceCanvas);
+	source.characters(' .:-=+*#%@');
+});
+
+t.draw(() => {
+	t.background(5, 7, 18);
+
+	if (source) {
+		t.image(source, t.grid.cols - 8, t.grid.rows - 10);
+		label(`width ${source.width}  height ${source.height}`, Math.floor(t.grid.rows * 0.24));
+		label(`original ${source.originalWidth} x ${source.originalHeight}`, Math.floor(t.grid.rows * 0.34), [120, 205, 255]);
+	}
+
+	label('TextmodeSource dimensions', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeSource/width/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
+
 #### Inherited from
 
 [`TextmodeSource`](TextmodeSource.md).[`height`](TextmodeSource.md#height)
@@ -67,6 +137,76 @@ Original pixel height.
 ##### Returns
 
 `number`
+
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+
+const sourceCanvas = document.createElement('canvas');
+sourceCanvas.width = 192;
+sourceCanvas.height = 96;
+
+const sourceContext = sourceCanvas.getContext('2d');
+let source = null;
+
+function renderSource() {
+	if (!sourceContext) {
+		return;
+	}
+
+	sourceContext.fillStyle = '#020617';
+	sourceContext.fillRect(0, 0, sourceCanvas.width, sourceCanvas.height);
+	sourceContext.fillStyle = '#34d399';
+	sourceContext.fillRect(18, 18, sourceCanvas.width - 36, sourceCanvas.height - 36);
+}
+
+function label(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+t.setup(() => {
+	renderSource();
+	source = t.createTexture(sourceCanvas);
+	source.characters(' .:-=+*#%@');
+});
+
+t.draw(() => {
+	t.background(5, 7, 18);
+
+	if (source) {
+		t.image(source, t.grid.cols - 8, t.grid.rows - 10);
+		label(`width ${source.width}  height ${source.height}`, Math.floor(t.grid.rows * 0.24));
+		label(`original ${source.originalWidth} x ${source.originalHeight}`, Math.floor(t.grid.rows * 0.34), [120, 205, 255]);
+	}
+
+	label('TextmodeSource dimensions', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeSource/width/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 #### Inherited from
 
@@ -88,6 +228,76 @@ Original pixel width.
 
 `number`
 
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+
+const sourceCanvas = document.createElement('canvas');
+sourceCanvas.width = 192;
+sourceCanvas.height = 96;
+
+const sourceContext = sourceCanvas.getContext('2d');
+let source = null;
+
+function renderSource() {
+	if (!sourceContext) {
+		return;
+	}
+
+	sourceContext.fillStyle = '#020617';
+	sourceContext.fillRect(0, 0, sourceCanvas.width, sourceCanvas.height);
+	sourceContext.fillStyle = '#34d399';
+	sourceContext.fillRect(18, 18, sourceCanvas.width - 36, sourceCanvas.height - 36);
+}
+
+function label(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+t.setup(() => {
+	renderSource();
+	source = t.createTexture(sourceCanvas);
+	source.characters(' .:-=+*#%@');
+});
+
+t.draw(() => {
+	t.background(5, 7, 18);
+
+	if (source) {
+		t.image(source, t.grid.cols - 8, t.grid.rows - 10);
+		label(`width ${source.width}  height ${source.height}`, Math.floor(t.grid.rows * 0.24));
+		label(`original ${source.originalWidth} x ${source.originalHeight}`, Math.floor(t.grid.rows * 0.34), [120, 205, 255]);
+	}
+
+	label('TextmodeSource dimensions', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeSource/width/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
+
 #### Inherited from
 
 [`TextmodeSource`](TextmodeSource.md).[`originalWidth`](TextmodeSource.md#originalwidth)
@@ -108,6 +318,81 @@ The source element this texture captures from.
 
 `HTMLCanvasElement` \| `HTMLVideoElement`
 
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+
+const sourceCanvas = document.createElement('canvas');
+sourceCanvas.width = 180;
+sourceCanvas.height = 120;
+
+const sourceContext = sourceCanvas.getContext('2d');
+const texture = t.createTexture(sourceCanvas);
+texture.characters(' .:-=+*#%@');
+
+function drawSourceCanvas() {
+	if (!sourceContext) {
+		return;
+	}
+
+	const time = t.frameCount * 0.05;
+	sourceContext.fillStyle = '#050816';
+	sourceContext.fillRect(0, 0, sourceCanvas.width, sourceCanvas.height);
+
+	const gradient = sourceContext.createLinearGradient(0, 0, sourceCanvas.width, sourceCanvas.height);
+	gradient.addColorStop(0, '#1d4ed8');
+	gradient.addColorStop(1, '#fb7185');
+	sourceContext.fillStyle = gradient;
+	sourceContext.fillRect(18, 18, sourceCanvas.width - 36, sourceCanvas.height - 36);
+
+	sourceContext.save();
+	sourceContext.translate(sourceCanvas.width / 2, sourceCanvas.height / 2);
+	sourceContext.rotate(time * 0.8);
+	sourceContext.fillStyle = '#fef08a';
+	sourceContext.fillRect(-18, -44, 36, 88);
+	sourceContext.restore();
+}
+
+function drawLabel(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+t.draw(() => {
+	drawSourceCanvas();
+
+	t.background(5, 7, 18);
+	t.image(texture, t.grid.cols - 8, t.grid.rows - 10);
+
+	drawLabel('createTexture(canvas)', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
+	drawLabel(`source matches ${texture.source === sourceCanvas ? 'yes' : 'no'}`, Math.floor(t.grid.rows * 0.30), [120, 205, 255]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/Textmodifier/createTexture/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
+
 ***
 
 ### texture
@@ -123,6 +408,78 @@ Return the WebGL texture currently backing this source.
 ##### Returns
 
 `WebGLTexture`
+
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+
+const sourceCanvas = document.createElement('canvas');
+sourceCanvas.width = 180;
+sourceCanvas.height = 120;
+
+const sourceContext = sourceCanvas.getContext('2d');
+let source = null;
+
+function renderSource() {
+	if (!sourceContext) {
+		return;
+	}
+
+	const gradient = sourceContext.createLinearGradient(0, 0, sourceCanvas.width, sourceCanvas.height);
+	gradient.addColorStop(0, '#020617');
+	gradient.addColorStop(1, '#1d4ed8');
+	sourceContext.fillStyle = gradient;
+	sourceContext.fillRect(0, 0, sourceCanvas.width, sourceCanvas.height);
+	sourceContext.fillStyle = '#f97316';
+	sourceContext.fillRect(24, 24, 132, 72);
+}
+
+function label(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+t.setup(() => {
+	renderSource();
+	source = t.createTexture(sourceCanvas);
+	source.characters(' .:-=+*#%@');
+});
+
+t.draw(() => {
+	t.background(5, 7, 18);
+
+	if (source) {
+		t.image(source, t.grid.cols - 8, t.grid.rows - 10);
+	}
+
+	label('TextmodeSource.texture', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
+	label(source && source.texture ? 'webgl texture available' : 'texture pending', Math.floor(t.grid.rows * 0.30), [120, 205, 255]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeSource/texture/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 #### Inherited from
 
@@ -143,6 +500,76 @@ Ideal width in grid cells.
 ##### Returns
 
 `number`
+
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+
+const sourceCanvas = document.createElement('canvas');
+sourceCanvas.width = 192;
+sourceCanvas.height = 96;
+
+const sourceContext = sourceCanvas.getContext('2d');
+let source = null;
+
+function renderSource() {
+	if (!sourceContext) {
+		return;
+	}
+
+	sourceContext.fillStyle = '#020617';
+	sourceContext.fillRect(0, 0, sourceCanvas.width, sourceCanvas.height);
+	sourceContext.fillStyle = '#34d399';
+	sourceContext.fillRect(18, 18, sourceCanvas.width - 36, sourceCanvas.height - 36);
+}
+
+function label(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+t.setup(() => {
+	renderSource();
+	source = t.createTexture(sourceCanvas);
+	source.characters(' .:-=+*#%@');
+});
+
+t.draw(() => {
+	t.background(5, 7, 18);
+
+	if (source) {
+		t.image(source, t.grid.cols - 8, t.grid.rows - 10);
+		label(`width ${source.width}  height ${source.height}`, Math.floor(t.grid.rows * 0.24));
+		label(`original ${source.originalWidth} x ${source.originalHeight}`, Math.floor(t.grid.rows * 0.34), [120, 205, 255]);
+	}
+
+	label('TextmodeSource dimensions', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeSource/width/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 #### Inherited from
 
@@ -405,7 +832,7 @@ Set cell color mode: `'sampled'` *(from source)* or `'fixed'`.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `mode` | `"sampled"` \| `"fixed"` | The cell color mode |
+| `mode` | `"fixed"` \| `"sampled"` | The cell color mode |
 
 #### Returns
 
@@ -743,7 +1170,7 @@ Set character color mode: `'sampled'` *(from source)* or `'fixed'`.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `mode` | `"sampled"` \| `"fixed"` | The character color mode |
+| `mode` | `"fixed"` \| `"sampled"` | The character color mode |
 
 #### Returns
 
@@ -1069,6 +1496,87 @@ and [Textmodifier.createTexture](../../../classes/Textmodifier.md#createtexture)
 #### Returns
 
 `void`
+
+#### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+
+const sourceCanvas = document.createElement('canvas');
+sourceCanvas.width = 160;
+sourceCanvas.height = 120;
+
+const sourceContext = sourceCanvas.getContext('2d');
+let source = null;
+let disposed = false;
+
+function renderSource() {
+	if (!sourceContext) {
+		return;
+	}
+
+	sourceContext.fillStyle = '#050816';
+	sourceContext.fillRect(0, 0, sourceCanvas.width, sourceCanvas.height);
+	sourceContext.fillStyle = '#60a5fa';
+	sourceContext.fillRect(24, 20, 112, 80);
+	sourceContext.fillStyle = '#fef08a';
+	sourceContext.fillRect(56, 34, 48, 52);
+}
+
+function label(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+t.setup(() => {
+	renderSource();
+	source = t.createTexture(sourceCanvas);
+	source.characters(' .:-=+*#%@');
+});
+
+t.draw(() => {
+	t.background(5, 7, 18);
+
+	if (source && !disposed) {
+		t.image(source, t.grid.cols - 8, t.grid.rows - 10);
+	}
+
+	label('click to dispose source', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
+	label(disposed ? 'source disposed' : 'source active', Math.floor(t.grid.rows * 0.30), [120, 205, 255]);
+});
+
+t.mouseClicked(() => {
+	if (!source || disposed) {
+		return;
+	}
+
+	source.dispose();
+	disposed = true;
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeSource/dispose/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 #### Inherited from
 

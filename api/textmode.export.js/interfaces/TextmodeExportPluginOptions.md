@@ -1,25 +1,28 @@
 ---
+layout: doc
+editLink: true
+deprecated: |-
+  This interface is only used by the deprecated 
+   function.
+  Use 
+   directly instead, and control overlay visibility at runtime via
+
+  .
 title: TextmodeExportPluginOptions
 description: Options for configuring the export plugin.
 category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-02-06
+lastModified: 2026-04-23
 isInterface: true
 ---
 
 [textmode.export.js](../index.md) / TextmodeExportPluginOptions
 
-# ~~Interface: TextmodeExportPluginOptions~~
+# Interface: TextmodeExportPluginOptions
 
 Options for configuring the export plugin.
-
-## Deprecated
-
-This interface is only used by the deprecated `createTextmodeExportPlugin` function.
-Use [ExportPlugin](../variables/ExportPlugin.md) directly instead, and control overlay visibility at runtime via
-[ExportOverlayController](ExportOverlayController.md).
 
 ## Properties
 

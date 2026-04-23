@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: plugins
 kind: Interface
-lastModified: 2026-04-19
+lastModified: 2026-04-23
 isInterface: true
 ---
 
@@ -16,8 +16,6 @@ isInterface: true
 # Interface: TextmodeCanvasHandle
 
 Stable read-only canvas handle exposed to plugins.
-
-This intentionally avoids exposing the internal `TextmodeCanvas` implementation class.
 
 ## Properties
 

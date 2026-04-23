@@ -6,7 +6,7 @@ description: All loading screen related modules and types.
 category: Namespaces
 api: true
 kind: Namespace
-lastModified: 2026-04-19
+lastModified: 2026-04-23
 ---
 
 [textmode.js](../../index.md) / loading
@@ -27,3 +27,9 @@ All loading screen related modules and types.
 | ------ | ------ |
 | [LoadingScreenOptions](interfaces/LoadingScreenOptions.md) | Options for configuring the loading screen. |
 | [LoadingScreenRendererContext](interfaces/LoadingScreenRendererContext.md) | Context object passed to loading renderer callbacks. |
+
+## Type Aliases
+
+| Type Alias | Description |
+| ------ | ------ |
+| [LoadingScreenState](type-aliases/LoadingScreenState.md) | Internal state of the loading screen. |

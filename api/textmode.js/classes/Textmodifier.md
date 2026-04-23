@@ -6,7 +6,7 @@ description: Manages textmode rendering on a HTMLCanvasElement and provides meth
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-04-19
+lastModified: 2026-04-23
 hasConstructor: false
 ---
 
@@ -34,6 +34,129 @@ Get the currently connected gamepads as a compact readonly list.
 The returned array is sorted by browser `Gamepad.index`, but unlike the browser API
 it does not contain sparse `null` holes for disconnected slots. Use
 [Textmodifier.gamepad](#gamepad) when you need to resolve a specific browser slot index.
+
+#### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+
+function drawText(text, x, y, r = 220, g = r, b = r) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+function formatAxis(value) {
+	return (value >= 0 ? '+' : '') + value.toFixed(2);
+}
+
+t.draw(() => {
+	t.background(0);
+
+	const pads = t.gamepads;
+
+	drawText('gamepad polling api', -28, -18, 255, 255, 255);
+	drawText(`connected: ${pads.length}`, -28, -16, pads.length > 0 ? 120 : 90, pads.length > 0 ? 220 : 90, pads.length > 0 ? 120 : 90);
+
+	if (pads.length === 0) {
+		drawText('connect a controller and press any button', -28, -6, 180, 180, 180);
+		drawText('some browsers wait for input before exposing a pad', -28, -4, 110, 110, 110);
+		return;
+	}
+
+	pads.slice(0, 2).forEach((pad, listIndex) => {
+		const y = -12 + listIndex * 14;
+		const slot = t.gamepad(pad.index);
+
+		// Header
+		drawText(`slot ${pad.index}`, -28, y, 255, 200, 80);
+		drawText(pad.mapping === 'standard' ? 'standard' : 'raw', -21, y, 120, 180, 255);
+		drawText(slot ? 'ok' : 'missing', -13, y, slot ? 100 : 255, slot ? 160 : 80, slot ? 100 : 80);
+		drawText(pad.id.slice(0, 50), -28, y + 1, 120, 120, 120);
+
+		// Raw axes
+		const axisStr = pad.axes
+			.slice(0, 6)
+			.map((v, i) => `a${i}:${formatAxis(v)}`)
+			.join(' ');
+		drawText(axisStr || 'no axes', -28, y + 3, 180, 200, 220);
+
+		// Raw buttons
+		const btnStr = pad.buttons
+			.slice(0, 17)
+			.map((b) => (b.value >= 0.5 ? '#' : b.value > 0.01 ? ':' : '.'))
+			.join('');
+		drawText(`btn ${btnStr}`, -28, y + 5, 180, 200, 220);
+
+		// Analog button values for triggers
+		if (pad.buttons.length >= 8) {
+			const l2 = pad.buttons[6].value.toFixed(2);
+			const r2 = pad.buttons[7].value.toFixed(2);
+			drawText(`l2:${l2} r2:${r2}`, -28, y + 7, 160, 160, 180);
+		}
+
+		// Standard mapping helpers
+		if (pad.standard) {
+			const face = pad.standard.faceButtons;
+			const dpad = pad.standard.dpad;
+			const ls = pad.standard.leftStick;
+			const rs = pad.standard.rightStick;
+
+			// Face buttons
+			drawText(`  N:${face.north.pressed ? '#' : '.'}`, 6, y + 2, 160, 220, 160);
+			drawText(`W:${face.west.pressed ? '#' : '.'} E:${face.east.pressed ? '#' : '.'}`, 6, y + 3, 160, 220, 160);
+			drawText(`  S:${face.south.pressed ? '#' : '.'}`, 6, y + 4, 160, 220, 160);
+
+			// D-pad
+			drawText(`  U:${dpad.up.pressed ? '#' : '.'}`, 18, y + 2, 220, 180, 120);
+			drawText(`L:${dpad.left.pressed ? '#' : '.'} R:${dpad.right.pressed ? '#' : '.'}`, 18, y + 3, 220, 180, 120);
+			drawText(`  D:${dpad.down.pressed ? '#' : '.'}`, 18, y + 4, 220, 180, 120);
+
+			// Left stick
+			drawText('L-stick', 6, y + 6, 100, 140, 180);
+			const lx = Math.round(10 + ls.x * 4);
+			const ly = Math.round(y + 8 + ls.y * 2);
+			t.push();
+			t.translate(lx, ly);
+			t.char(ls.magnitude > 0 ? '@' : '+');
+			t.charColor(255, 220, 100);
+			t.point();
+			t.pop();
+
+			// Right stick
+			drawText('R-stick', 18, y + 6, 100, 140, 180);
+			const rx = Math.round(22 + rs.x * 4);
+			const ry = Math.round(y + 8 + rs.y * 2);
+			t.push();
+			t.translate(rx, ry);
+			t.char(rs.magnitude > 0 ? '@' : '+');
+			t.charColor(100, 220, 255);
+			t.point();
+			t.pop();
+		}
+	});
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/humanbydefinition.png" alt="humanbydefinition avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/humanbydefinition" target="_blank" rel="noopener noreferrer">@humanbydefinition</a></strong></span>
+  </div>
+</div>
 
 ***
 
@@ -210,7 +333,7 @@ t.draw(() => {
 ### mouse
 
 ```ts
-readonly mouse: MousePosition;
+readonly mouse: GridPosition;
 ```
 
 Get the current mouse position in center-based grid coordinates.
@@ -452,7 +575,7 @@ t.windowResized(() => {
 ### pmouse
 
 ```ts
-readonly pmouse: MousePosition;
+readonly pmouse: GridPosition;
 ```
 
 Get the mouse position from the previous rendered frame.
@@ -782,7 +905,7 @@ Provides access to the error layer controller to display fatal errors in a user-
 
 ##### Returns
 
-`ErrorLayerController`
+[`ErrorLayerController`](../namespaces/errors/classes/ErrorLayerController.md)
 
 ##### Example
 
@@ -2402,6 +2525,99 @@ Current implementation supports affine TRS-style matrices (no perspective/shear)
 
 `void`
 
+##### Example
+
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+function trsMatrixY(angle, tx, ty, tz, sx, sy, sz) {
+	const c = Math.cos(angle);
+	const s = Math.sin(angle);
+
+	return new Float32Array([
+		c * sx,
+		0,
+		-s * sx,
+		0,
+		0,
+		sy,
+		0,
+		0,
+		s * sz,
+		0,
+		c * sz,
+		0,
+		tx,
+		ty,
+		tz,
+		1,
+	]);
+}
+
+function drawLabel(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+t.setup(() => {
+	t.perspective(60, 0.1, 4096);
+	const camera = t.createCamera();
+	camera.setPosition(0, 6, 54).lookAt(0, 0, 0);
+	t.setCamera(camera);
+});
+
+t.draw(() => {
+	const time = t.frameCount * 0.02;
+	t.background(5, 7, 18);
+
+	const left = trsMatrixY(time * 1.4, -12, 0, 0, 1.1, 1.1, 1.1);
+	t.push();
+	t.applyMatrix(left);
+	t.char('M');
+	t.charColor(255, 140, 120);
+	t.box(8, 8, 8);
+	t.pop();
+
+	const right = trsMatrixY(time * 2.0, 12, 0, 0, 1.0, 1.0, 1.0);
+	t.push();
+	t.applyMatrix(right);
+	t.scale(1.0 + Math.sin(time * 2.2) * 0.2);
+	t.char('S');
+	t.charColor(120, 205, 255);
+	t.torus(3.2, 1.3);
+	t.pop();
+
+	drawLabel('applyMatrix() + scale()', -Math.floor(t.grid.rows * 0.36), [255, 225, 140]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/Textmodifier/applyMatrix/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
+
 #### Call Signature
 
 ```ts
@@ -3268,9 +3484,9 @@ Accepts a single character string or a character index in the current font.
 
 ##### Parameters
 
-| Parameter | Type |
-| ------ | ------ |
-| `value` | `string` \| `number` |
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `value` | `string` \| `number` | The character string or font character index to set for rendering |
 
 ##### Returns
 
@@ -4222,6 +4438,81 @@ The texture automatically updates each frame to capture the latest content from 
 
 A TextmodeTexture that can be drawn with image()
 
+#### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+
+const sourceCanvas = document.createElement('canvas');
+sourceCanvas.width = 180;
+sourceCanvas.height = 120;
+
+const sourceContext = sourceCanvas.getContext('2d');
+const texture = t.createTexture(sourceCanvas);
+texture.characters(' .:-=+*#%@');
+
+function drawSourceCanvas() {
+	if (!sourceContext) {
+		return;
+	}
+
+	const time = t.frameCount * 0.05;
+	sourceContext.fillStyle = '#050816';
+	sourceContext.fillRect(0, 0, sourceCanvas.width, sourceCanvas.height);
+
+	const gradient = sourceContext.createLinearGradient(0, 0, sourceCanvas.width, sourceCanvas.height);
+	gradient.addColorStop(0, '#1d4ed8');
+	gradient.addColorStop(1, '#fb7185');
+	sourceContext.fillStyle = gradient;
+	sourceContext.fillRect(18, 18, sourceCanvas.width - 36, sourceCanvas.height - 36);
+
+	sourceContext.save();
+	sourceContext.translate(sourceCanvas.width / 2, sourceCanvas.height / 2);
+	sourceContext.rotate(time * 0.8);
+	sourceContext.fillStyle = '#fef08a';
+	sourceContext.fillRect(-18, -44, 36, 88);
+	sourceContext.restore();
+}
+
+function drawLabel(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+t.draw(() => {
+	drawSourceCanvas();
+
+	t.background(5, 7, 18);
+	t.image(texture, t.grid.cols - 8, t.grid.rows - 10);
+
+	drawLabel('createTexture(canvas)', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
+	drawLabel(`source matches ${texture.source === sourceCanvas ? 'yes' : 'no'}`, Math.floor(t.grid.rows * 0.30), [120, 205, 255]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/Textmodifier/createTexture/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
+
 ***
 
 ### cursor()
@@ -4958,6 +5249,59 @@ Alias for [cellColor](#cellcolor). Get the current fill (cell background) color.
 
 The current cell color as a [TextmodeColor](TextmodeColor.md).
 
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+
+function drawLabel(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+t.draw(() => {
+	const pulse = (Math.sin(t.frameCount * 0.04) + 1) * 0.5;
+	t.background(5, 7, 18);
+
+	t.stroke(255, 140 + pulse * 80, 90);
+	t.fill(20, 50 + pulse * 90, 140 + pulse * 80);
+
+	t.push();
+	t.rotateZ(t.frameCount * 1.1);
+	t.rect(t.grid.cols - 12, t.grid.rows - 12);
+	t.pop();
+
+	const stroke = t.stroke();
+	const fill = t.fill();
+
+	drawLabel(`stroke ${stroke.r},${stroke.g},${stroke.b}`, -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
+	drawLabel(`fill ${fill.r},${fill.g},${fill.b}`, Math.floor(t.grid.rows * 0.30), [120, 205, 255]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/Textmodifier/stroke/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
+
 #### Call Signature
 
 ```ts
@@ -4976,6 +5320,59 @@ Alias for [cellColor](#cellcolor). Set the fill (cell background) color using a 
 ##### Returns
 
 `void`
+
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+
+function drawLabel(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+t.draw(() => {
+	const pulse = (Math.sin(t.frameCount * 0.04) + 1) * 0.5;
+	t.background(5, 7, 18);
+
+	t.stroke(255, 140 + pulse * 80, 90);
+	t.fill(20, 50 + pulse * 90, 140 + pulse * 80);
+
+	t.push();
+	t.rotateZ(t.frameCount * 1.1);
+	t.rect(t.grid.cols - 12, t.grid.rows - 12);
+	t.pop();
+
+	const stroke = t.stroke();
+	const fill = t.fill();
+
+	drawLabel(`stroke ${stroke.r},${stroke.g},${stroke.b}`, -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
+	drawLabel(`fill ${fill.r},${fill.g},${fill.b}`, Math.floor(t.grid.rows * 0.30), [120, 205, 255]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/Textmodifier/stroke/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 #### Call Signature
 
@@ -5002,6 +5399,59 @@ Alias for [cellColor](#cellcolor). Set the fill (cell background) color using RG
 
 `void`
 
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+
+function drawLabel(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+t.draw(() => {
+	const pulse = (Math.sin(t.frameCount * 0.04) + 1) * 0.5;
+	t.background(5, 7, 18);
+
+	t.stroke(255, 140 + pulse * 80, 90);
+	t.fill(20, 50 + pulse * 90, 140 + pulse * 80);
+
+	t.push();
+	t.rotateZ(t.frameCount * 1.1);
+	t.rect(t.grid.cols - 12, t.grid.rows - 12);
+	t.pop();
+
+	const stroke = t.stroke();
+	const fill = t.fill();
+
+	drawLabel(`stroke ${stroke.r},${stroke.g},${stroke.b}`, -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
+	drawLabel(`fill ${fill.r},${fill.g},${fill.b}`, Math.floor(t.grid.rows * 0.30), [120, 205, 255]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/Textmodifier/stroke/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
+
 #### Call Signature
 
 ```ts
@@ -5019,6 +5469,59 @@ Alias for [cellColor](#cellcolor). Set the fill (cell background) color using a 
 ##### Returns
 
 `void`
+
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+
+function drawLabel(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+t.draw(() => {
+	const pulse = (Math.sin(t.frameCount * 0.04) + 1) * 0.5;
+	t.background(5, 7, 18);
+
+	t.stroke(255, 140 + pulse * 80, 90);
+	t.fill(20, 50 + pulse * 90, 140 + pulse * 80);
+
+	t.push();
+	t.rotateZ(t.frameCount * 1.1);
+	t.rect(t.grid.cols - 12, t.grid.rows - 12);
+	t.pop();
+
+	const stroke = t.stroke();
+	const fill = t.fill();
+
+	drawLabel(`stroke ${stroke.r},${stroke.g},${stroke.b}`, -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
+	drawLabel(`fill ${fill.r},${fill.g},${fill.b}`, Math.floor(t.grid.rows * 0.30), [120, 205, 255]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/Textmodifier/stroke/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 ***
 
@@ -5352,7 +5855,7 @@ function drawLabel(label, y, color) {
 
 t.setup(() => {
   // Set the base layer font size.
-  t.fontSize(28);
+  t.fontSize(32);
 });
 
 t.draw(() => {
@@ -5496,6 +5999,596 @@ Returns `undefined` when that slot is currently absent or disconnected.
 
   \| `undefined`
   \| [`TextmodeGamepadSnapshot`](../namespaces/input/namespaces/gamepad/interfaces/TextmodeGamepadSnapshot.md)
+
+#### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+
+function drawText(text, x, y, r = 220, g = r, b = r) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+function formatAxis(value) {
+	return (value >= 0 ? '+' : '') + value.toFixed(2);
+}
+
+t.draw(() => {
+	t.background(0);
+
+	drawText('gamepad(index)', -28, -18, 255, 255, 255);
+	drawText('resolve specific browser slots even when indexes are sparse', -28, -16, 140, 140, 140);
+	drawText(`compact list length: ${t.gamepads.length}`, -28, -14, 120, 180, 255);
+
+	for (let slotIndex = 0; slotIndex < 4; slotIndex++) {
+		const pad = t.gamepad(slotIndex);
+		const y = -10 + slotIndex * 7;
+
+		drawText(`slot ${slotIndex}`, -28, y, 255, 200, 90);
+
+		if (!pad) {
+			drawText('empty', -20, y, 90, 90, 90);
+			drawText('connect a controller or press a button to wake the browser api', -28, y + 2, 100, 100, 100);
+			continue;
+		}
+
+		drawText(pad.id.slice(0, 48), -20, y, 180, 180, 180);
+		drawText(`mapping: ${pad.mapping || 'raw'}`, -28, y + 2, 120, 180, 255);
+
+		const axes = pad.axes
+			.slice(0, 4)
+			.map((value, axisIndex) => `a${axisIndex}:${formatAxis(value)}`)
+			.join(' ');
+		drawText(axes || 'no axes', -11, y + 2, 160, 200, 220);
+
+		const pressedCount = pad.buttons.filter((button) => button.value >= 0.5).length;
+		const triggerValue = pad.buttons[6] ? pad.buttons[6].value.toFixed(2) : '--';
+		drawText(`pressed:${pressedCount} l2:${triggerValue}`, -28, y + 4, 160, 220, 160);
+	}
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/Textmodifier/gamepad/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
+
+***
+
+### gamepadAxisChanged()
+
+```ts
+gamepadAxisChanged(callback): void;
+```
+
+Set a callback function that will be called when a gamepad axis changes meaningfully.
+
+Axis callbacks are derived from per-frame polling, not native DOM events. For continuous
+stick or trigger state, polling [Textmodifier.gamepads](#gamepads) inside `draw()` is often the
+simpler choice; use this callback when you specifically want change notifications.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `callback` | [`GamepadAxisEventHandler`](../namespaces/input/namespaces/gamepad/type-aliases/GamepadAxisEventHandler.md) | The function to call when an axis changes. |
+
+#### Returns
+
+`void`
+
+#### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+
+const vectors = [];
+
+function drawText(text, x, y, r = 220, g = r, b = r, a = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b, a);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+function arrowForDelta(delta) {
+	if (delta > 0.08) return '>';
+	if (delta < -0.08) return '<';
+	return '|';
+}
+
+t.gamepadAxisChanged((data) => {
+	const label = data.standardAxisName || `axis[${data.axisIndex}]`;
+	vectors.unshift({
+		label,
+		value: data.value,
+		delta: data.delta,
+		x: -18 + (data.axisIndex % 4) * 12,
+		y: -4 + (vectors.length % 6) * 3,
+		life: 1,
+	});
+
+	if (vectors.length > 24) vectors.length = 24;
+});
+
+t.draw(() => {
+	t.background(0);
+
+	drawText('gamepadAxisChanged()', -28, -18, 255, 255, 255);
+	drawText('move a stick or analog trigger to emit change notifications', -28, -16, 140, 140, 140);
+
+	if (vectors.length === 0) {
+		drawText('waiting for analog movement...', -28, -4, 100, 100, 100);
+	}
+
+	for (let i = vectors.length - 1; i >= 0; i--) {
+		const vector = vectors[i];
+		vector.life -= 0.018;
+		vector.x += vector.delta * 4;
+
+		if (vector.life <= 0) {
+			vectors.splice(i, 1);
+			continue;
+		}
+
+		const a = Math.round(255 * vector.life);
+		const arrow = arrowForDelta(vector.delta);
+		drawText(arrow, Math.round(vector.x - 2), vector.y, 120, 200, 255, a);
+		drawText(
+			`${vector.label} ${(vector.value >= 0 ? '+' : '') + vector.value.toFixed(2)}`,
+			Math.round(vector.x),
+			vector.y,
+			180,
+			220,
+			255,
+			a
+		);
+	}
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/Textmodifier/gamepadAxisChanged/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
+
+***
+
+### gamepadButtonPressed()
+
+```ts
+gamepadButtonPressed(callback): void;
+```
+
+Set a callback function that will be called when a gamepad button crosses the press threshold.
+
+This is a legacy-style single-callback shortcut for the `'gamepadButtonPressed'` event.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `callback` | [`GamepadButtonEventHandler`](../namespaces/input/namespaces/gamepad/type-aliases/GamepadButtonEventHandler.md) | The function to call when a button is pressed. |
+
+#### Returns
+
+`void`
+
+#### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+
+const hits = [];
+
+function drawText(text, x, y, r = 220, g = r, b = r, a = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b, a);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+t.gamepadButtonPressed((data) => {
+	const label = data.standardButtonName || `btn[${data.buttonIndex}]`;
+	hits.unshift({
+		text: `slot ${data.gamepad.index}  ${label}  ${data.button.value.toFixed(2)}`,
+		x: -24 + (hits.length % 3) * 18,
+		y: -3 + (hits.length % 5) * 3,
+		life: 1,
+	});
+
+	if (hits.length > 18) hits.length = 18;
+});
+
+t.draw(() => {
+	t.background(0);
+
+	drawText('gamepadButtonPressed()', -28, -18, 255, 255, 255);
+	drawText('press any gamepad button to spawn a hit marker', -28, -16, 140, 140, 140);
+	drawText(`connected: ${t.gamepads.length}`, -28, -14, 120, 180, 255);
+
+	if (hits.length === 0) {
+		drawText('waiting for a button press...', -28, -4, 100, 100, 100);
+	}
+
+	for (let i = hits.length - 1; i >= 0; i--) {
+		const hit = hits[i];
+		hit.life -= 0.02;
+		hit.y -= 0.04;
+
+		if (hit.life <= 0) {
+			hits.splice(i, 1);
+			continue;
+		}
+
+		const a = Math.round(255 * hit.life);
+		drawText('+', hit.x - 2, Math.round(hit.y), 255, 220, 90, a);
+		drawText(hit.text, hit.x, Math.round(hit.y), 255, 200, 110, a);
+	}
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/Textmodifier/gamepadButtonPressed/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
+
+***
+
+### gamepadButtonReleased()
+
+```ts
+gamepadButtonReleased(callback): void;
+```
+
+Set a callback function that will be called when a gamepad button crosses the release threshold.
+
+This is a legacy-style single-callback shortcut for the `'gamepadButtonReleased'` event.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `callback` | [`GamepadButtonEventHandler`](../namespaces/input/namespaces/gamepad/type-aliases/GamepadButtonEventHandler.md) | The function to call when a button is released. |
+
+#### Returns
+
+`void`
+
+#### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+
+const releases = [];
+
+function drawText(text, x, y, r = 220, g = r, b = r, a = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b, a);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+t.gamepadButtonReleased((data) => {
+	const label = data.standardButtonName || `btn[${data.buttonIndex}]`;
+	releases.unshift({
+		text: `slot ${data.gamepad.index}  ${label}`,
+		age: 0,
+	});
+
+	if (releases.length > 10) releases.length = 10;
+});
+
+t.draw(() => {
+	t.background(0);
+
+	drawText('gamepadButtonReleased()', -28, -18, 255, 255, 255);
+	drawText('release a held button to log its edge transition', -28, -16, 140, 140, 140);
+	drawText('release log', -28, -12, 180, 180, 180);
+	drawText('----------------------------------------', -28, -11, 60, 60, 60);
+
+	if (releases.length === 0) {
+		drawText('hold a button, then let go', -28, -6, 100, 100, 100);
+	}
+
+	for (let i = 0; i < releases.length; i++) {
+		const entry = releases[i];
+		entry.age++;
+		const fade = Math.max(0.2, 1 - entry.age / 240);
+		const a = Math.round(255 * fade);
+		const cool = 100 + Math.round(120 * fade);
+
+		drawText('v', -28, -8 + i * 2, 120, 160, 255, a);
+		drawText(entry.text, -26, -8 + i * 2, 140, 180, cool, a);
+	}
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/Textmodifier/gamepadButtonReleased/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
+
+***
+
+### gamepadConnected()
+
+```ts
+gamepadConnected(callback): void;
+```
+
+Set a callback function that will be called when a gamepad becomes available.
+
+This is a legacy-style single-callback shortcut for the `'gamepadConnected'` event.
+Calling it replaces the previous callback registered through this same method while
+leaving any listeners added via [Textmodifier.on](#on) untouched.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `callback` | [`GamepadConnectionEventHandler`](../namespaces/input/namespaces/gamepad/type-aliases/GamepadConnectionEventHandler.md) | The function to call when a controller connects. |
+
+#### Returns
+
+`void`
+
+#### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+
+const bursts = [];
+const ledger = [];
+
+function drawText(text, x, y, r = 220, g = r, b = r, a = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b, a);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+t.gamepadConnected((data) => {
+	const burstY = -6 + (bursts.length % 5) * 3;
+	bursts.push({
+		slot: data.gamepad.index,
+		id: data.gamepad.id.slice(0, 32),
+		x: -16 + (bursts.length % 4) * 12,
+		y: burstY,
+		radius: 0,
+		life: 1,
+	});
+
+	ledger.unshift(`slot ${data.gamepad.index}  ${data.gamepad.id.slice(0, 36)}`);
+	if (ledger.length > 6) ledger.length = 6;
+});
+
+t.draw(() => {
+	t.background(0);
+
+	drawText('gamepadConnected()', -28, -18, 255, 255, 255);
+	drawText('plug in or wake a controller to trigger the callback', -28, -16, 140, 140, 140);
+	drawText(`connected now: ${t.gamepads.length}`, -28, -14, 100, 200, 120);
+
+	for (let i = bursts.length - 1; i >= 0; i--) {
+		const burst = bursts[i];
+		burst.radius += 0.4;
+		burst.life -= 0.015;
+
+		if (burst.life <= 0) {
+			bursts.splice(i, 1);
+			continue;
+		}
+
+		const a = Math.round(255 * burst.life);
+		drawText(`slot ${burst.slot}`, burst.x - 2, burst.y - 2, 255, 200, 80, a);
+
+		for (let ring = 0; ring < 8; ring++) {
+			const angle = (Math.PI * 2 * ring) / 8;
+			const x = Math.round(burst.x + Math.cos(angle) * burst.radius);
+			const y = Math.round(burst.y + Math.sin(angle) * burst.radius * 0.6);
+			drawText('*', x, y, 100, 220, 140, a);
+		}
+	}
+
+	drawText('recent arrivals', -28, -8, 180, 180, 180);
+	drawText('----------------------------------------------', -28, -7, 60, 60, 60);
+
+	if (ledger.length === 0) {
+		drawText('waiting for the first connection event...', -28, -5, 100, 100, 100);
+	}
+
+	for (let i = 0; i < ledger.length; i++) {
+		drawText(ledger[i], -28, -5 + i * 2, 160, 220, 180);
+	}
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/Textmodifier/gamepadConnected/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
+
+***
+
+### gamepadDisconnected()
+
+```ts
+gamepadDisconnected(callback): void;
+```
+
+Set a callback function that will be called when a previously connected gamepad disappears.
+
+This is a legacy-style single-callback shortcut for the `'gamepadDisconnected'` event.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `callback` | [`GamepadConnectionEventHandler`](../namespaces/input/namespaces/gamepad/type-aliases/GamepadConnectionEventHandler.md) | The function to call when a controller disconnects. |
+
+#### Returns
+
+`void`
+
+#### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+
+const departures = [];
+
+function drawText(text, x, y, r = 220, g = r, b = r, a = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b, a);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+t.gamepadDisconnected((data) => {
+	departures.unshift({
+		text: `slot ${data.gamepad.index}  ${data.gamepad.id.slice(0, 36)}`,
+		age: 0,
+	});
+
+	if (departures.length > 8) departures.length = 8;
+});
+
+t.draw(() => {
+	t.background(0);
+
+	drawText('gamepadDisconnected()', -28, -18, 255, 255, 255);
+	drawText('disconnect or power down a controller to record its exit', -28, -16, 140, 140, 140);
+	drawText(`connected now: ${t.gamepads.length}`, -28, -14, 120, 180, 255);
+
+	drawText('last disconnect events', -28, -10, 200, 200, 200);
+	drawText('----------------------------------------------', -28, -9, 60, 60, 60);
+
+	if (departures.length === 0) {
+		drawText('no disconnect observed yet', -28, -6, 110, 110, 110);
+		drawText('the callback fires when a previously tracked pad disappears', -28, -4, 90, 90, 90);
+	}
+
+	for (let i = departures.length - 1; i >= 0; i--) {
+		const entry = departures[i];
+		entry.age++;
+	}
+
+	for (let i = 0; i < departures.length; i++) {
+		const entry = departures[i];
+		const fade = Math.max(0.2, 1 - entry.age / 300);
+		const a = Math.round(255 * fade);
+		const marker = fade > 0.6 ? 'x' : '.';
+
+		drawText(marker, -28, -6 + i * 2, 255, 110, 110, a);
+		drawText(entry.text, -26, -6 + i * 2, 255, 160, 160, a);
+	}
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/Textmodifier/gamepadDisconnected/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 ***
 
@@ -6074,7 +7167,7 @@ Negative inputs are clamped to `0`. If all inputs resolve to `0`, the falloff re
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
-	fontSize: 10,
+	fontSize: 8,
 	frameRate: 60,
 });
 
@@ -6346,7 +7439,7 @@ The loaded TextmodeFont instance.
 
 ```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
-const accentLayer = t.layers.add({ fontSize: 24, blendMode: 'additive' });
+const accentLayer = t.layers.add({ fontSize: 16, blendMode: 'additive' });
 
 function drawLabel(label, y, color) {
   const startX = -label.length / 2;
@@ -6490,6 +7583,148 @@ which creates a layer-local fork rather than sharing a mutable instance by refer
 `Promise`\<[`TextmodeTileset`](../namespaces/fonts/classes/TextmodeTileset.md)\>
 
 The loaded TextmodeTileset instance.
+
+#### Example
+
+```javascript
+const TILE_COLUMNS = 16;
+const TILE_ROWS = 16;
+const TILE_COUNT = TILE_COLUMNS * TILE_ROWS;
+
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const tilesLayer = t.layers.add({ fontSize: 8 });
+const previewLayer = t.layers.add({ fontSize: 32, blendMode: 'additive' });
+
+let tileset = null;
+
+function getActiveTile() {
+  const index = Math.floor((t.frameCount * 0.35) % TILE_COUNT);
+  return {
+    index,
+    col: index % TILE_COLUMNS,
+    row: Math.floor(index / TILE_COLUMNS),
+  };
+}
+
+function drawLabel(label, x, y, color) {
+  t.charColor(...color);
+
+  for (let i = 0; i < label.length; i++) {
+    t.push();
+    t.translate(x - label.length / 2 + i + 0.5, y);
+    t.char(label[i]);
+    t.point();
+    t.pop();
+  }
+}
+
+t.setup(async () => {
+  tileset = await t.loadTileset(
+    {
+      source: 'https://littlebitspace.com/resources/fonts/T64.png',
+      columns: TILE_COLUMNS,
+      rows: TILE_ROWS,
+      count: TILE_COUNT,
+    },
+    false
+  );
+
+  await tilesLayer.loadTileset(tileset);
+  await previewLayer.loadTileset(tileset);
+
+  tilesLayer.useTileColors(false);
+  previewLayer.useTileColors(false);
+});
+
+t.draw(() => {
+  t.background(5, 8, 18);
+
+  drawLabel('LOAD TILESET', 0, -Math.floor(t.grid.rows * 0.42), [255, 236, 160]);
+  drawLabel('T64   16 X 16   8 X 8 CELLS', 0, -Math.floor(t.grid.rows * 0.35), [120, 210, 255]);
+
+  if (!tileset) {
+    drawLabel('LOADING TILESET...', 0, 0, [180, 190, 220]);
+    return;
+  }
+
+  const activeTile = getActiveTile();
+  drawLabel(`INDEX ${String(activeTile.index).padStart(3, '0')}`, 0, Math.floor(t.grid.rows * 0.36), [255, 220, 120]);
+  drawLabel(`COL ${activeTile.col}   ROW ${activeTile.row}`, 0, Math.floor(t.grid.rows * 0.42), [160, 190, 255]);
+});
+
+tilesLayer.draw(() => {
+  if (!tileset) {
+    return;
+  }
+
+  t.clear();
+
+  const activeTile = getActiveTile();
+  const startX = -18;
+  const startY = -7.5;
+
+  for (let index = 0; index < TILE_COUNT; index++) {
+    const col = index % TILE_COLUMNS;
+    const row = Math.floor(index / TILE_COLUMNS);
+    const distance = Math.abs(index - activeTile.index);
+    const glow = Math.max(0, 1 - distance / 32);
+
+    t.push();
+    t.translate(startX + col, startY + row);
+    t.char(index);
+    t.charColor(70 + glow * 185, 110 + glow * 120, 160 + glow * 90);
+    t.point();
+    t.pop();
+  }
+});
+
+previewLayer.draw(() => {
+  if (!tileset) {
+    return;
+  }
+
+  t.clear();
+
+  const activeTile = getActiveTile();
+  const previewX = 13;
+  const previewY = 0;
+
+  t.push();
+  t.translate(previewX, previewY);
+  t.rotateZ(t.frameCount * 1.5);
+  t.char(activeTile.index);
+  t.charColor(255, 245, 180);
+  t.point();
+  t.pop();
+
+  for (let orbit = 0; orbit < 6; orbit++) {
+    const angle = t.frameCount * 2 + orbit * 60;
+    const radius = 4.5;
+    const orbitIndex = (activeTile.index + orbit + 1) % TILE_COUNT;
+    const x = previewX + Math.cos((angle * Math.PI) / 180) * radius;
+    const y = previewY + Math.sin((angle * Math.PI) / 180) * radius;
+
+    t.push();
+    t.translate(x, y);
+    t.char(orbitIndex);
+    t.charColor(90, 210, 255);
+    t.point();
+    t.pop();
+  }
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/Textmodifier/loadTileset/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 ***
 
@@ -8593,6 +9828,63 @@ This clears translation, rotation, and scale state for subsequent draw calls.
 
 `void`
 
+#### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+
+function drawLabel(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(5, 7, 18);
+
+	t.push();
+	t.translate(-8, 0);
+	t.rotateZ(t.frameCount * 1.6);
+	t.charColor(255, 140, 120);
+	t.rect(10, 10);
+	t.pop();
+
+	t.push();
+	t.translate(8, 0);
+	t.rotateZ(t.frameCount * 1.6);
+	t.resetMatrix();
+	t.translate(8, 0);
+	t.charColor(120, 205, 255);
+	t.rect(10, 10);
+	t.pop();
+
+	drawLabel('left keeps rotation', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
+	drawLabel('right calls resetMatrix()', Math.floor(t.grid.rows * 0.30), [120, 205, 255]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/Textmodifier/resetMatrix/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
+
 ***
 
 ### resetShader()
@@ -9155,6 +10447,99 @@ Scale subsequent geometry in model space.
 
 `void`
 
+#### Example
+
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+function trsMatrixY(angle, tx, ty, tz, sx, sy, sz) {
+	const c = Math.cos(angle);
+	const s = Math.sin(angle);
+
+	return new Float32Array([
+		c * sx,
+		0,
+		-s * sx,
+		0,
+		0,
+		sy,
+		0,
+		0,
+		s * sz,
+		0,
+		c * sz,
+		0,
+		tx,
+		ty,
+		tz,
+		1,
+	]);
+}
+
+function drawLabel(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+t.setup(() => {
+	t.perspective(60, 0.1, 4096);
+	const camera = t.createCamera();
+	camera.setPosition(0, 6, 54).lookAt(0, 0, 0);
+	t.setCamera(camera);
+});
+
+t.draw(() => {
+	const time = t.frameCount * 0.02;
+	t.background(5, 7, 18);
+
+	const left = trsMatrixY(time * 1.4, -12, 0, 0, 1.1, 1.1, 1.1);
+	t.push();
+	t.applyMatrix(left);
+	t.char('M');
+	t.charColor(255, 140, 120);
+	t.box(8, 8, 8);
+	t.pop();
+
+	const right = trsMatrixY(time * 2.0, 12, 0, 0, 1.0, 1.0, 1.0);
+	t.push();
+	t.applyMatrix(right);
+	t.scale(1.0 + Math.sin(time * 2.2) * 0.2);
+	t.char('S');
+	t.charColor(120, 205, 255);
+	t.torus(3.2, 1.3);
+	t.pop();
+
+	drawLabel('applyMatrix() + scale()', -Math.floor(t.grid.rows * 0.36), [255, 225, 140]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/Textmodifier/applyMatrix/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
+
 ***
 
 ### setCamera()
@@ -9646,6 +11031,59 @@ Alias for [charColor](#charcolor). Get the current stroke (character) color.
 
 The current character color as a [TextmodeColor](TextmodeColor.md).
 
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+
+function drawLabel(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+t.draw(() => {
+	const pulse = (Math.sin(t.frameCount * 0.04) + 1) * 0.5;
+	t.background(5, 7, 18);
+
+	t.stroke(255, 140 + pulse * 80, 90);
+	t.fill(20, 50 + pulse * 90, 140 + pulse * 80);
+
+	t.push();
+	t.rotateZ(t.frameCount * 1.1);
+	t.rect(t.grid.cols - 12, t.grid.rows - 12);
+	t.pop();
+
+	const stroke = t.stroke();
+	const fill = t.fill();
+
+	drawLabel(`stroke ${stroke.r},${stroke.g},${stroke.b}`, -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
+	drawLabel(`fill ${fill.r},${fill.g},${fill.b}`, Math.floor(t.grid.rows * 0.30), [120, 205, 255]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/Textmodifier/stroke/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
+
 #### Call Signature
 
 ```ts
@@ -9664,6 +11102,59 @@ Alias for [charColor](#charcolor). Set the stroke (character) color using a gray
 ##### Returns
 
 `void`
+
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+
+function drawLabel(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+t.draw(() => {
+	const pulse = (Math.sin(t.frameCount * 0.04) + 1) * 0.5;
+	t.background(5, 7, 18);
+
+	t.stroke(255, 140 + pulse * 80, 90);
+	t.fill(20, 50 + pulse * 90, 140 + pulse * 80);
+
+	t.push();
+	t.rotateZ(t.frameCount * 1.1);
+	t.rect(t.grid.cols - 12, t.grid.rows - 12);
+	t.pop();
+
+	const stroke = t.stroke();
+	const fill = t.fill();
+
+	drawLabel(`stroke ${stroke.r},${stroke.g},${stroke.b}`, -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
+	drawLabel(`fill ${fill.r},${fill.g},${fill.b}`, Math.floor(t.grid.rows * 0.30), [120, 205, 255]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/Textmodifier/stroke/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 #### Call Signature
 
@@ -9690,6 +11181,59 @@ Alias for [charColor](#charcolor). Set the stroke (character) color using RGB(A)
 
 `void`
 
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+
+function drawLabel(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+t.draw(() => {
+	const pulse = (Math.sin(t.frameCount * 0.04) + 1) * 0.5;
+	t.background(5, 7, 18);
+
+	t.stroke(255, 140 + pulse * 80, 90);
+	t.fill(20, 50 + pulse * 90, 140 + pulse * 80);
+
+	t.push();
+	t.rotateZ(t.frameCount * 1.1);
+	t.rect(t.grid.cols - 12, t.grid.rows - 12);
+	t.pop();
+
+	const stroke = t.stroke();
+	const fill = t.fill();
+
+	drawLabel(`stroke ${stroke.r},${stroke.g},${stroke.b}`, -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
+	drawLabel(`fill ${fill.r},${fill.g},${fill.b}`, Math.floor(t.grid.rows * 0.30), [120, 205, 255]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/Textmodifier/stroke/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
+
 #### Call Signature
 
 ```ts
@@ -9707,6 +11251,59 @@ Alias for [charColor](#charcolor). Set the stroke (character) color using a CSS 
 ##### Returns
 
 `void`
+
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+
+function drawLabel(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+t.draw(() => {
+	const pulse = (Math.sin(t.frameCount * 0.04) + 1) * 0.5;
+	t.background(5, 7, 18);
+
+	t.stroke(255, 140 + pulse * 80, 90);
+	t.fill(20, 50 + pulse * 90, 140 + pulse * 80);
+
+	t.push();
+	t.rotateZ(t.frameCount * 1.1);
+	t.rect(t.grid.cols - 12, t.grid.rows - 12);
+	t.pop();
+
+	const stroke = t.stroke();
+	const fill = t.fill();
+
+	drawLabel(`stroke ${stroke.r},${stroke.g},${stroke.b}`, -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
+	drawLabel(`fill ${fill.r},${fill.g},${fill.b}`, Math.floor(t.grid.rows * 0.30), [120, 205, 255]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/Textmodifier/stroke/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 ***
 
@@ -10779,6 +12376,85 @@ character (`primary`) and cell (`secondary`) colors.
 `boolean` \| `void`
 
 The current base-layer tileset-color mode if called without arguments.
+
+#### Example
+
+```javascript
+const TILE_COLUMNS = 16;
+const TILE_ROWS = 16;
+const TILE_COUNT = TILE_COLUMNS * TILE_ROWS;
+
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+let tileset = null;
+let usesTileColors = false;
+
+function activeTileIndex() {
+	return Math.floor((t.frameCount * 0.35) % TILE_COUNT);
+}
+
+function drawLabel(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+t.setup(async () => {
+	tileset = await t.loadTileset({
+		source: 'https://littlebitspace.com/resources/fonts/T64.png',
+		columns: TILE_COLUMNS,
+		rows: TILE_ROWS,
+		count: TILE_COUNT,
+	});
+});
+
+t.draw(() => {
+	t.background(4, 7, 18);
+
+	if (!tileset) {
+		drawLabel('loading tileset...', 0, [255, 225, 140]);
+		return;
+	}
+
+	const tileIndex = activeTileIndex();
+	t.useTileColors(usesTileColors);
+	t.char(tileIndex);
+	t.charColor(255, 90, 90);
+	t.cellColor(20, 60, 160);
+	t.point();
+
+	drawLabel('base layer tileset colors', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
+	drawLabel('T64  16 x 16  8 x 8 cells', Math.floor(t.grid.rows * 0.20));
+	drawLabel(usesTileColors ? 'authored colors enabled' : 'char + cell recolor active', Math.floor(t.grid.rows * 0.28));
+	drawLabel('click to toggle useTileColors()', Math.floor(t.grid.rows * 0.36), [120, 205, 255]);
+});
+
+t.mouseClicked(() => {
+	usesTileColors = !usesTileColors;
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/Textmodifier/useTileColors/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 ***
 

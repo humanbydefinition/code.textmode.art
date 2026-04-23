@@ -1,11 +1,13 @@
 ---
+layout: doc
+editLink: true
 title: ExportPlugin
 description: Export plugin for textmode.js.
 category: Variables
 api: true
 kind: Variable
 ecosystem: textmode.js
-lastModified: 2026-02-06
+lastModified: 2026-04-23
 ---
 
 [textmode.export.js](../index.md) / ExportPlugin

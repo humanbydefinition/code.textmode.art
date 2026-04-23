@@ -1,11 +1,13 @@
 ---
+layout: doc
+editLink: true
 title: GIFExportProgress
 description: Progress information emitted during the GIF export process.
 category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-02-06
+lastModified: 2026-04-23
 ---
 
 [textmode.export.js](../index.md) / GIFExportProgress

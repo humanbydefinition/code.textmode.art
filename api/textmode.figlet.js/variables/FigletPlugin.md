@@ -7,7 +7,7 @@ category: Variables
 api: true
 kind: Variable
 ecosystem: textmode.js
-lastModified: 2026-04-19
+lastModified: 2026-04-23
 ---
 
 [textmode.figlet.js](../index.md) / FigletPlugin

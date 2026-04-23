@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-04-07
+lastModified: 2026-04-23
 isInterface: true
 ---
 

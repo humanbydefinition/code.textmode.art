@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-04-19
+lastModified: 2026-04-23
 ---
 
 [textmode.figlet.js](../index.md) / FigTextBaseline

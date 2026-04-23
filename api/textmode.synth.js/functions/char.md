@@ -7,7 +7,7 @@ category: Functions
 api: true
 kind: Function
 ecosystem: textmode.js
-lastModified: 2026-04-07
+lastModified: 2026-04-23
 ---
 
 [textmode.synth.js](../index.md) / char

@@ -5,11 +5,12 @@ title: TextmodeErrorLevel
 description: Error handling levels to control how errors are reported and handled.
 category: Enumerations
 api: true
+namespace: errors
 kind: Enum
-lastModified: 2026-04-19
+lastModified: 2026-04-23
 ---
 
-[textmode.js](../index.md) / TextmodeErrorLevel
+[textmode.js](../../../index.md) / [errors](../index.md) / TextmodeErrorLevel
 
 # Enumeration: TextmodeErrorLevel
 

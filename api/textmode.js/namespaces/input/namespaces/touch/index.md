@@ -7,7 +7,7 @@ category: Namespaces
 api: true
 namespace: input
 kind: Namespace
-lastModified: 2026-04-19
+lastModified: 2026-04-23
 ---
 
 [textmode.js](../../../../index.md) / [input](../../index.md) / touch
@@ -39,3 +39,10 @@ Types and interfaces for touch event handling
 | [TouchRotateHandler](type-aliases/TouchRotateHandler.md) | Touch rotate event handler function type. |
 | [TouchSwipeHandler](type-aliases/TouchSwipeHandler.md) | Touch swipe event handler function type. |
 | [TouchTapHandler](type-aliases/TouchTapHandler.md) | Touch tap event handler function type. |
+
+## Variables
+
+| Variable | Description |
+| ------ | ------ |
+| [GESTURE\_EVENT\_NAMES](variables/GESTURE_EVENT_NAMES.md) | Touch gesture event names supported by the shared input event API. |
+| [TOUCH\_EVENT\_NAMES](variables/TOUCH_EVENT_NAMES.md) | Touch lifecycle event names supported by the shared input event API. |

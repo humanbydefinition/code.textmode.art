@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: input.mouse
 kind: Interface
-lastModified: 2026-04-19
+lastModified: 2026-04-23
 isInterface: true
 ---
 
@@ -26,5 +26,5 @@ Mouse event data passed to event handlers.
 | `delta.x` | `number` | Scroll delta in X direction. |
 | `delta.y` | `number` | Scroll delta in Y direction. |
 | <a id="originalevent"></a> `originalEvent` | `MouseEvent` \| `WheelEvent` | Original DOM event. |
-| <a id="position"></a> `position` | [`MousePosition`](MousePosition.md) | Current mouse position in grid coordinates. |
-| <a id="previousposition"></a> `previousPosition` | [`MousePosition`](MousePosition.md) | Previous mouse position in grid coordinates. |
+| <a id="position"></a> `position` | `GridPosition` | Current mouse position in grid coordinates. |
+| <a id="previousposition"></a> `previousPosition` | `GridPosition` | Previous mouse position in grid coordinates. |

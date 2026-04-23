@@ -7,7 +7,7 @@ category: Namespaces
 api: true
 namespace: input
 kind: Namespace
-lastModified: 2026-04-19
+lastModified: 2026-04-23
 ---
 
 [textmode.js](../../../../index.md) / [input](../../index.md) / gamepad
@@ -38,3 +38,9 @@ Types and interfaces for gamepad event handling
 | [GamepadConnectionEventHandler](type-aliases/GamepadConnectionEventHandler.md) | Gamepad connection event handler. |
 | [TextmodeStandardAxisName](type-aliases/TextmodeStandardAxisName.md) | Semantic axis names exposed for standard-mapped controllers. |
 | [TextmodeStandardButtonName](type-aliases/TextmodeStandardButtonName.md) | Semantic button names exposed for standard-mapped controllers. |
+
+## Variables
+
+| Variable | Description |
+| ------ | ------ |
+| [GAMEPAD\_EVENT\_NAMES](variables/GAMEPAD_EVENT_NAMES.md) | Gamepad event names supported by the shared input event API. |

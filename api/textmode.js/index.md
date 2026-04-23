@@ -6,7 +6,7 @@ description: ~ travelling without arriving
 category: API Reference
 api: true
 kind: Project
-lastModified: 2026-04-19
+lastModified: 2026-04-23
 ---
 
 # textmode.js
@@ -26,12 +26,6 @@ lastModified: 2026-04-19
 | [loading](namespaces/loading/index.md) | All loading screen related modules and types. |
 | [media](namespaces/media/index.md) | All media asset related modules and types. |
 | [plugins](namespaces/plugins/index.md) | Plugin system types for extending textmode.js functionality. |
-
-## Enumerations
-
-| Enumeration | Description |
-| ------ | ------ |
-| [TextmodeErrorLevel](enumerations/TextmodeErrorLevel.md) | Error handling levels to control how errors are reported and handled. |
 
 ## Classes
 

@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: layering
 kind: Class
-lastModified: 2026-04-19
+lastModified: 2026-04-23
 hasConstructor: false
 ---
 
@@ -415,6 +415,58 @@ If the layer is not yet initialized, returns undefined.
 
 `undefined` \| `WebGLTexture`
 
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const layer = t.layers.add({ fontSize: 16, blendMode: 'screen' });
+
+function label(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(5, 7, 18);
+
+	const textureMatches = layer.texture === layer.asciiFramebuffer.textures[0];
+	label('TextmodeLayer.texture', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
+	label(textureMatches ? 'texture matches ascii framebuffer' : 'texture pending', Math.floor(t.grid.rows * 0.30), [120, 205, 255]);
+});
+
+layer.draw(() => {
+	t.clear();
+	t.push();
+	t.rotateZ(t.frameCount * 1.5);
+	t.charColor(120, 205, 255);
+	t.rect(18, 8);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeLayer/texture/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
+
 ***
 
 ### width
@@ -485,19 +537,19 @@ detail.draw(() => {
 blendMode(mode?): 
   | void
   | "normal"
-  | "additive"
-  | "multiply"
-  | "screen"
-  | "subtract"
   | "darken"
+  | "difference"
+  | "exclusion"
   | "lighten"
+  | "multiply"
   | "overlay"
+  | "screen"
+  | "additive"
+  | "subtract"
   | "softLight"
   | "hardLight"
   | "colorDodge"
-  | "colorBurn"
-  | "difference"
-  | "exclusion";
+  | "colorBurn";
 ```
 
 Set or get the layer's blend mode for compositing with layers below.
@@ -506,25 +558,25 @@ Set or get the layer's blend mode for compositing with layers below.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `mode?` | \| `"normal"` \| `"additive"` \| `"multiply"` \| `"screen"` \| `"subtract"` \| `"darken"` \| `"lighten"` \| `"overlay"` \| `"softLight"` \| `"hardLight"` \| `"colorDodge"` \| `"colorBurn"` \| `"difference"` \| `"exclusion"` | The blend mode to set. |
+| `mode?` | \| `"normal"` \| `"darken"` \| `"difference"` \| `"exclusion"` \| `"lighten"` \| `"multiply"` \| `"overlay"` \| `"screen"` \| `"additive"` \| `"subtract"` \| `"softLight"` \| `"hardLight"` \| `"colorDodge"` \| `"colorBurn"` | The blend mode to set. |
 
 #### Returns
 
   \| `void`
   \| `"normal"`
-  \| `"additive"`
-  \| `"multiply"`
-  \| `"screen"`
-  \| `"subtract"`
   \| `"darken"`
+  \| `"difference"`
+  \| `"exclusion"`
   \| `"lighten"`
+  \| `"multiply"`
   \| `"overlay"`
+  \| `"screen"`
+  \| `"additive"`
+  \| `"subtract"`
   \| `"softLight"`
   \| `"hardLight"`
   \| `"colorDodge"`
   \| `"colorBurn"`
-  \| `"difference"`
-  \| `"exclusion"`
 
 The current blend mode if no parameter is provided.
 
@@ -1288,7 +1340,6 @@ loadFont(fontSource): Promise<TextmodeFont>;
 ```
 
 Load a font into this layer from a URL/path or from an existing [TextmodeFont](../../fonts/classes/TextmodeFont.md).
-When a `TextmodeFont` is provided, the layer creates a layer-local fork with independent GPU resources.
 
 #### Parameters
 
@@ -1358,7 +1409,6 @@ loadTileset(tilesetSource): Promise<TextmodeTileset>;
 ```
 
 Load a tileset into this layer from load options or from an existing [TextmodeTileset](../../fonts/classes/TextmodeTileset.md).
-When a `TextmodeTileset` is provided, the layer creates a layer-local fork with independent GPU resources.
 
 #### Parameters
 
@@ -1371,6 +1421,92 @@ When a `TextmodeTileset` is provided, the layer creates a layer-local fork with 
 `Promise`\<[`TextmodeTileset`](../../fonts/classes/TextmodeTileset.md)\>
 
 The loaded TextmodeTileset instance.
+
+#### Example
+
+```javascript
+const TILE_COLUMNS = 16;
+const TILE_ROWS = 16;
+const TILE_COUNT = TILE_COLUMNS * TILE_ROWS;
+
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const tilesLayer = t.layers.add({ fontSize: 16 });
+
+let tileset = null;
+let useTileColors = false;
+
+function activeTileIndex() {
+	return Math.floor((t.frameCount * 0.4) % TILE_COUNT);
+}
+
+function label(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+t.setup(async () => {
+	tileset = await t.loadTileset(
+		{
+			source: 'https://littlebitspace.com/resources/fonts/T64.png',
+			columns: TILE_COLUMNS,
+			rows: TILE_ROWS,
+			count: TILE_COUNT,
+		},
+		false
+	);
+
+	await tilesLayer.loadTileset(tileset);
+	tilesLayer.useTileColors(useTileColors);
+});
+
+t.draw(() => {
+	t.background(5, 7, 18);
+	label('layer-local tileset', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
+	label('T64  16 x 16  8 x 8 cells', Math.floor(t.grid.rows * 0.22));
+	label(useTileColors ? 'layer uses authored colors' : 'layer recolors through char/cell', Math.floor(t.grid.rows * 0.30));
+	label('click to toggle layer.useTileColors()', Math.floor(t.grid.rows * 0.38), [120, 205, 255]);
+});
+
+tilesLayer.draw(() => {
+	if (!tileset) {
+		return;
+	}
+
+	t.clear();
+	tilesLayer.useTileColors(useTileColors);
+	t.char(activeTileIndex());
+	t.charColor(255, 90, 110);
+	t.cellColor(18, 70, 160);
+	t.point();
+});
+
+t.mouseClicked(() => {
+	useTileColors = !useTileColors;
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeLayer/loadTileset/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 ***
 
@@ -2105,3 +2241,89 @@ regardless of this setting.
 `boolean` \| `void`
 
 The current layer tileset-color mode if called without arguments.
+
+#### Example
+
+```javascript
+const TILE_COLUMNS = 16;
+const TILE_ROWS = 16;
+const TILE_COUNT = TILE_COLUMNS * TILE_ROWS;
+
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const tilesLayer = t.layers.add({ fontSize: 16 });
+
+let tileset = null;
+let useTileColors = false;
+
+function activeTileIndex() {
+	return Math.floor((t.frameCount * 0.4) % TILE_COUNT);
+}
+
+function label(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+t.setup(async () => {
+	tileset = await t.loadTileset(
+		{
+			source: 'https://littlebitspace.com/resources/fonts/T64.png',
+			columns: TILE_COLUMNS,
+			rows: TILE_ROWS,
+			count: TILE_COUNT,
+		},
+		false
+	);
+
+	await tilesLayer.loadTileset(tileset);
+	tilesLayer.useTileColors(useTileColors);
+});
+
+t.draw(() => {
+	t.background(5, 7, 18);
+	label('layer-local tileset', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
+	label('T64  16 x 16  8 x 8 cells', Math.floor(t.grid.rows * 0.22));
+	label(useTileColors ? 'layer uses authored colors' : 'layer recolors through char/cell', Math.floor(t.grid.rows * 0.30));
+	label('click to toggle layer.useTileColors()', Math.floor(t.grid.rows * 0.38), [120, 205, 255]);
+});
+
+tilesLayer.draw(() => {
+	if (!tileset) {
+		return;
+	}
+
+	t.clear();
+	tilesLayer.useTileColors(useTileColors);
+	t.char(activeTileIndex());
+	t.charColor(255, 90, 110);
+	t.cellColor(18, 70, 160);
+	t.point();
+});
+
+t.mouseClicked(() => {
+	useTileColors = !useTileColors;
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeLayer/loadTileset/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>

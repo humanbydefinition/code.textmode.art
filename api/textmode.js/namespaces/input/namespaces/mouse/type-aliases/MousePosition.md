@@ -3,17 +3,20 @@ layout: doc
 editLink: true
 title: MousePosition
 description: Mouse coordinates in grid space using center-based coordinates.
-category: Interfaces
+category: Type Aliases
 api: true
 namespace: input.mouse
-kind: Interface
-lastModified: 2026-04-19
-isInterface: true
+kind: TypeAlias
+lastModified: 2026-04-23
 ---
 
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [mouse](../index.md) / MousePosition
 
-# Interface: MousePosition
+# Type Alias: MousePosition
+
+```ts
+type MousePosition = GridPosition;
+```
 
 Mouse coordinates in grid space using center-based coordinates.
 
@@ -26,14 +29,3 @@ The coordinate system matches the main drawing/rendering space:
 
 When the mouse is outside the grid bounds, both `x` and `y` are set to
 `Number.NEGATIVE_INFINITY` to indicate an invalid/outside position.
-
-## Extends
-
-- `GridPosition`
-
-## Properties
-
-| Property | Type | Description | Inherited from |
-| ------ | ------ | ------ | ------ |
-| <a id="x"></a> `x` | `number` | The X coordinate (column), often relative to the grid's center. | `GridPosition.x` |
-| <a id="y"></a> `y` | `number` | The Y coordinate (row), often relative to the grid's center. | `GridPosition.y` |

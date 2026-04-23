@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: loading
 kind: Class
-lastModified: 2026-04-19
+lastModified: 2026-04-23
 hasConstructor: false
 ---
 
@@ -29,6 +29,9 @@ Controls the internal loading layer lifecycle and rendering behavior.
 _isInitialized: boolean = false;
 ```
 
+Indicates whether the internal layer has been initialized and is ready for rendering.
+Prevents rendering and resource access before the layer is fully set up.
+
 #### Inherited from
 
 ```ts
@@ -43,18 +46,13 @@ InternalLayerController._isInitialized
 _layer: TextmodeLayer;
 ```
 
+The internal layer instance managed by this controller.
+Guaranteed to be initialized and available after the controller's `_initialize` method resolves.
+
 #### Inherited from
 
 ```ts
 InternalLayerController._layer
-```
-
-***
-
-### \_state
-
-```ts
-_state: LoadingScreenState = 'active';
 ```
 
 ## Methods
@@ -64,6 +62,8 @@ _state: LoadingScreenState = 'active';
 ```ts
 _dispose(): void;
 ```
+
+Disposes of the internal layer and its resources.
 
 #### Returns
 
@@ -83,11 +83,14 @@ InternalLayerController._dispose
 draw(callback?): void;
 ```
 
+Overridable method to set a custom draw callback for rendering the internal layer.
+If not set, the layer will use the default template.
+
 #### Parameters
 
-| Parameter | Type |
-| ------ | ------ |
-| `callback?` | (`context`) => `void` |
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `callback?` | (`context`) => `void` |  |
 
 #### Returns
 

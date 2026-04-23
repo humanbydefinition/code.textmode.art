@@ -1,11 +1,13 @@
 ---
+layout: doc
+editLink: true
 title: TextmodeExportAPI
 description: Runtime export helpers that createExportPlugin attaches to the Textmodifier instance.
 category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-02-06
+lastModified: 2026-04-23
 isInterface: true
 ---
 
@@ -41,6 +43,12 @@ Saves the current canvas content to an image file *(`'png'` by default)*.
 
 `Promise`\<`void`\>
 
+#### Example
+
+```ts
+await t.saveCanvas({ format: 'png', filename: 'frame-001' });
+```
+
 ***
 
 ### copyCanvas()
@@ -60,6 +68,12 @@ Copies the current canvas to the user's clipboard as an image.
 #### Returns
 
 `Promise`\<`void`\>
+
+#### Example
+
+```ts
+await t.copyCanvas({ format: 'png' });
+```
 
 ***
 
@@ -81,6 +95,12 @@ Downloads the current frame as an SVG file.
 
 `void`
 
+#### Example
+
+```ts
+t.saveSVG({ filename: 'poster', includeBackgroundRectangles: true });
+```
+
 ***
 
 ### saveStrings()
@@ -100,6 +120,12 @@ Downloads the current text content as a plain-text file.
 #### Returns
 
 `void`
+
+#### Example
+
+```ts
+t.saveStrings({ filename: 'frame', preserveTrailingSpaces: true });
+```
 
 ***
 
@@ -123,6 +149,12 @@ Generates the SVG markup for the current frame.
 
 The SVG content representing the artwork.
 
+#### Example
+
+```ts
+const svg = t.toSVG({ drawMode: 'stroke', strokeWidth: 1.5 });
+```
+
 ***
 
 ### toString()
@@ -145,6 +177,12 @@ Produces the current text content as a string.
 
 The textual representation of the artwork.
 
+#### Example
+
+```ts
+const text = t.toString({ preserveTrailingSpaces: false });
+```
+
 ***
 
 ### saveGIF()
@@ -165,6 +203,12 @@ Records an animated GIF and saves it to disk.
 
 `Promise`\<`void`\>
 
+#### Example
+
+```ts
+await t.saveGIF({ frameCount: 120, frameRate: 30, filename: 'loop' });
+```
+
 ***
 
 ### saveWEBM()
@@ -184,3 +228,9 @@ Captures a WEBM video and saves it to disk.
 #### Returns
 
 `Promise`\<`void`\>
+
+#### Example
+
+```ts
+await t.saveWEBM({ frameCount: 240, frameRate: 60, filename: 'capture' });
+```

@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: fonts
 kind: Class
-lastModified: 2026-04-19
+lastModified: 2026-04-23
 hasConstructor: false
 ---
 
@@ -79,13 +79,9 @@ t.windowResized(() => {
 
 - `Disposable`
 
-## Properties
+## Implements
 
-### \_isInitialized
-
-```ts
-_isInitialized: boolean = false;
-```
+- `TextmodeGlyphAtlas`
 
 ## Accessors
 
@@ -94,14 +90,62 @@ _isInitialized: boolean = false;
 #### Get Signature
 
 ```ts
-get cellDimensions(): GlyphDimensions;
+get cellDimensions(): object;
 ```
 
 Returns the effective glyph cell dimensions used by the layer grid.
 
 ##### Returns
 
-[`GlyphDimensions`](../interfaces/GlyphDimensions.md)
+`object`
+
+| Name | Type |
+| ------ | ------ |
+| `height` | `number` |
+| `width` | `number` |
+
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
+
+function label(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+t.draw(() => {
+	const dimensions = t.font.cellDimensions;
+	t.background(7, 10, 20);
+
+	label('TextmodeFont cell metrics', -5, [255, 220, 120]);
+	label(`cell ${dimensions.width} x ${dimensions.height}px`, -1);
+	label(`width ${t.font.cellWidth}  height ${t.font.cellHeight}`, 3, [120, 205, 255]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeFont/cellDimensions/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 #### Implementation of
 
@@ -125,6 +169,49 @@ Returns the effective glyph cell height used by the layer grid.
 
 `number`
 
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
+
+function label(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+t.draw(() => {
+	const dimensions = t.font.cellDimensions;
+	t.background(7, 10, 20);
+
+	label('TextmodeFont cell metrics', -5, [255, 220, 120]);
+	label(`cell ${dimensions.width} x ${dimensions.height}px`, -1);
+	label(`width ${t.font.cellWidth}  height ${t.font.cellHeight}`, 3, [120, 205, 255]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeFont/cellDimensions/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
+
 #### Implementation of
 
 ```ts
@@ -146,6 +233,49 @@ Returns the effective glyph cell width used by the layer grid.
 ##### Returns
 
 `number`
+
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
+
+function label(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+t.draw(() => {
+	const dimensions = t.font.cellDimensions;
+	t.background(7, 10, 20);
+
+	label('TextmodeFont cell metrics', -5, [255, 220, 120]);
+	label(`cell ${dimensions.width} x ${dimensions.height}px`, -1);
+	label(`width ${t.font.cellWidth}  height ${t.font.cellHeight}`, 3, [120, 205, 255]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeFont/cellDimensions/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 #### Implementation of
 
@@ -227,14 +357,14 @@ TextmodeGlyphAtlas.characterMap
 #### Get Signature
 
 ```ts
-get characters(): TextmodeGlyph[];
+get characters(): readonly TextmodeGlyph[];
 ```
 
-Returns the array of [TextmodeCharacter](../type-aliases/TextmodeCharacter.md) objects in the font.
+Returns the array of [TextmodeGlyph](../type-aliases/TextmodeGlyph.md) objects in the font.
 
 ##### Returns
 
-[`TextmodeGlyph`](../type-aliases/TextmodeGlyph.md)[]
+readonly [`TextmodeGlyph`](../type-aliases/TextmodeGlyph.md)[]
 
 ##### Example
 
@@ -296,11 +426,120 @@ Returns the number of columns in the normalized glyph atlas.
 
 `number`
 
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
+
+function label(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+	t.pop();
+}
+
+t.draw(() => {
+	const cols = t.font.textureColumns;
+	t.background(8, 10, 22);
+	label('textureColumns', -6, [255, 210, 90]);
+	label(`atlas columns: ${cols}`, -2);
+
+	for (let i = 0; i < cols; i++) {
+		t.push();
+		t.translate(-cols / 2 + i, 3);
+		t.char('|');
+		t.charColor(120 + (i % 12) * 10, 180, 255);
+		t.line(0, -2, 0, 2);
+		t.pop();
+	}
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeFont/textureColumns/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
+
 #### Implementation of
 
 ```ts
 TextmodeGlyphAtlas.columns
 ```
+
+***
+
+### font
+
+#### Get Signature
+
+```ts
+get font(): TyprFont;
+```
+
+Returns the Typr.js font object.
+
+##### Returns
+
+`TyprFont`
+
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
+
+function label(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+t.draw(() => {
+	const font = t.font.font;
+	const unitsPerEm = font?.head?.unitsPerEm ?? 0;
+	const ascender = font?.hhea?.ascender ?? 0;
+
+	t.background(7, 10, 20);
+	label('TextmodeFont.font', -5, [255, 220, 120]);
+	label(`unitsPerEm ${unitsPerEm}`, -1);
+	label(`ascender ${ascender}`, 3, [120, 205, 255]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeFont/font/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 ***
 
@@ -435,6 +674,46 @@ Returns the normalized glyph atlas framebuffer used by the ASCII shader.
 
 [`TextmodeFramebuffer`](../../../classes/TextmodeFramebuffer.md)
 
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
+
+function label(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+	t.pop();
+}
+
+t.draw(() => {
+	const atlas = t.font.fontFramebuffer;
+	t.background(8, 10, 22);
+	label('fontFramebuffer', -5, [255, 210, 90]);
+	label(`atlas size: ${atlas.width} x ${atlas.height}px`, -1);
+	label(`grid: ${t.font.textureColumns} cols x ${t.font.textureRows} rows`, 3, [150, 160, 190]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeFont/fontFramebuffer/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
+
 #### Implementation of
 
 ```ts
@@ -523,6 +802,54 @@ Returns the number of rows in the normalized glyph atlas.
 ##### Returns
 
 `number`
+
+##### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
+
+function label(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+	t.pop();
+}
+
+t.draw(() => {
+	const rows = t.font.textureRows;
+	t.background(8, 10, 22);
+	label('textureRows', -6, [255, 210, 90]);
+	label(`atlas rows: ${rows}`, -2);
+
+	for (let i = 0; i < rows; i++) {
+		t.push();
+		t.translate(0, i - rows / 2 + 4);
+		t.char('-');
+		t.charColor(120, 170 + (i % 10) * 8, 255);
+		t.line(-6, 0, 6, 0);
+		t.pop();
+	}
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeFont/textureRows/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
 
 #### Implementation of
 
@@ -727,52 +1054,4 @@ t.windowResized(() => {
 
 ```ts
 Disposable.dispose
-```
-
-***
-
-### getCharacterColor()
-
-```ts
-getCharacterColor(character): [number, number, number];
-```
-
-#### Parameters
-
-| Parameter | Type |
-| ------ | ------ |
-| `character` | `string` |
-
-#### Returns
-
-\[`number`, `number`, `number`\]
-
-#### Implementation of
-
-```ts
-TextmodeGlyphAtlas.getCharacterColor
-```
-
-***
-
-### getCharacterColors()
-
-```ts
-getCharacterColors(characters): [number, number, number][];
-```
-
-#### Parameters
-
-| Parameter | Type |
-| ------ | ------ |
-| `characters` | `string` |
-
-#### Returns
-
-\[`number`, `number`, `number`\][]
-
-#### Implementation of
-
-```ts
-TextmodeGlyphAtlas.getCharacterColors
 ```
