@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: plugins
 kind: Interface
-lastModified: 2026-04-07
+lastModified: 2026-04-19
 isInterface: true
 ---
 
@@ -31,7 +31,7 @@ Create plugins by implementing this interface.
 ### install()
 
 ```ts
-install(textmodifier, api): void | Promise<void>;
+install(textmodifier, context): void | Promise<void>;
 ```
 
 Called when the plugin is installed on a [Textmodifier](../../../classes/Textmodifier.md) instance.
@@ -41,7 +41,7 @@ Called when the plugin is installed on a [Textmodifier](../../../classes/Textmod
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
 | `textmodifier` | [`Textmodifier`](../../../classes/Textmodifier.md) | The Textmodifier instance the plugin is being installed on. |
-| `api` | [`TextmodePluginAPI`](TextmodePluginAPI.md) | An API object providing access to the Textmodifier's context and hook registration methods. |
+| `context` | [`TextmodePluginContext`](TextmodePluginContext.md) | A host-provided context exposing the Textmodifier runtime and plugin hook registration methods. |
 
 #### Returns
 
@@ -52,7 +52,7 @@ Called when the plugin is installed on a [Textmodifier](../../../classes/Textmod
 ### uninstall()?
 
 ```ts
-optional uninstall(textmodifier, api): void | Promise<void>;
+optional uninstall(textmodifier, context): void | Promise<void>;
 ```
 
 Called when the plugin is uninstalled from a [Textmodifier](../../../classes/Textmodifier.md) instance.
@@ -62,7 +62,7 @@ Called when the plugin is uninstalled from a [Textmodifier](../../../classes/Tex
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
 | `textmodifier` | [`Textmodifier`](../../../classes/Textmodifier.md) | The Textmodifier instance the plugin is being uninstalled from. |
-| `api` | [`TextmodePluginAPI`](TextmodePluginAPI.md) | An API object providing access to the Textmodifier's context and hook registration methods. |
+| `context` | [`TextmodePluginContext`](TextmodePluginContext.md) | A host-provided context exposing the Textmodifier runtime and plugin hook registration methods. |
 
 #### Returns
 

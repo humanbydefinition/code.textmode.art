@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: conversion
 kind: Interface
-lastModified: 2026-04-07
+lastModified: 2026-04-19
 isInterface: true
 ---
 
@@ -24,7 +24,8 @@ necessary for implementing custom conversion logic.
 
 | Property | Type | Description |
 | ------ | ------ | ------ |
-| <a id="font"></a> `font` | [`TextmodeFont`](../../loadables/classes/TextmodeFont.md) | The font currently being used for rendering. Useful for accessing font texture data or metrics. |
+| <a id="font"></a> `font` | `TextmodeGlyphAtlas` | Legacy alias for the active glyph atlas. Kept for backward compatibility with existing conversion strategies. |
 | <a id="gl"></a> `gl` | `WebGL2RenderingContext` | The native WebGL2 rendering context. Use this for creating textures, buffers, or other low-level WebGL resources. |
+| <a id="glyphatlas"></a> `glyphAtlas` | `TextmodeGlyphAtlas` | Backend-neutral glyph atlas currently being used for rendering. Prefer this in new code. |
 | <a id="renderer"></a> `renderer` | `GLRenderer` | The WebGL renderer instance. |
-| <a id="source"></a> `source` | [`TextmodeSource`](../../loadables/classes/TextmodeSource.md) | The source asset (image, video, etc.) being converted. Provides access to the source texture and dimensions. |
+| <a id="source"></a> `source` | [`TextmodeSource`](../../media/classes/TextmodeSource.md) | The source asset (image, video, etc.) being converted. Provides access to the source texture and dimensions. |

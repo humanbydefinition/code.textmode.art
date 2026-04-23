@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: input.touch
 kind: Interface
-lastModified: 2026-04-07
+lastModified: 2026-04-19
 isInterface: true
 ---
 
@@ -25,10 +25,10 @@ The coordinate system uses center-based coordinates matching the main rendering 
 
 | Property | Type | Description |
 | ------ | ------ | ------ |
-| <a id="changedtouches"></a> `changedTouches` | [`TouchPosition`](TouchPosition.md)[] | Touches that changed during this event |
-| <a id="deltatime"></a> `deltaTime` | `number` | Milliseconds elapsed since the previous update for this touch |
-| <a id="originalevent"></a> `originalEvent` | `TouchEvent` | Original browser event |
-| <a id="previoustouch"></a> `previousTouch?` | [`TouchPosition`](TouchPosition.md) | The previous position for this touch if available |
-| <a id="previoustouches"></a> `previousTouches` | [`TouchPosition`](TouchPosition.md)[] | Active touches snapshot before this event |
-| <a id="touch"></a> `touch` | [`TouchPosition`](TouchPosition.md) | The touch point that triggered this event |
-| <a id="touches"></a> `touches` | [`TouchPosition`](TouchPosition.md)[] | All active touches mapped to grid coordinates |
+| <a id="changedtouches"></a> `changedTouches` | [`TouchPosition`](TouchPosition.md)[] | Touches that changed during this event. |
+| <a id="deltatime"></a> `deltaTime` | `number` | Milliseconds elapsed since the previous update for this touch. |
+| <a id="originalevent"></a> `originalEvent` | `TouchEvent` | Original browser event. |
+| <a id="previoustouch"></a> `previousTouch?` | [`TouchPosition`](TouchPosition.md) | The previous position for this touch if available. |
+| <a id="previoustouches"></a> `previousTouches` | [`TouchPosition`](TouchPosition.md)[] | Active touches snapshot before this event. |
+| <a id="touch"></a> `touch` | [`TouchPosition`](TouchPosition.md) | The touch point that triggered this event. |
+| <a id="touches"></a> `touches` | [`TouchPosition`](TouchPosition.md)[] | All active touches mapped to grid coordinates. |

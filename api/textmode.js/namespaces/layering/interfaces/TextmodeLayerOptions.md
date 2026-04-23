@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: layering
 kind: Interface
-lastModified: 2026-04-07
+lastModified: 2026-04-19
 isInterface: true
 ---
 
@@ -23,7 +23,7 @@ Options for configuring a new TextmodeLayer via [TextmodeLayerManager.add](../cl
 | ------ | ------ | ------ |
 | <a id="blendmode"></a> `blendMode?` | \| `"normal"` \| `"additive"` \| `"multiply"` \| `"screen"` \| `"subtract"` \| `"darken"` \| `"lighten"` \| `"overlay"` \| `"softLight"` \| `"hardLight"` \| `"colorDodge"` \| `"colorBurn"` \| `"difference"` \| `"exclusion"` | The blend mode used when rendering this layer. Default is `'normal'`. |
 | <a id="fontsize"></a> `fontSize?` | `number` | The font size for the layer's text. Default is `16`. |
-| <a id="fontsource"></a> `fontSource?` | `string` \| [`TextmodeFont`](../../loadables/classes/TextmodeFont.md) | Source for the font to use in this layer. Can be a URL/path to a font file, or an existing TextmodeFont instance. Existing TextmodeFont inputs are forked per layer to keep resources independent. |
+| <a id="fontsource"></a> `fontSource?` | `string` \| [`TextmodeFont`](../../fonts/classes/TextmodeFont.md) | Source for the font to use in this layer. Can be a URL/path to a font file, or an existing TextmodeFont instance. Existing TextmodeFont inputs are forked per layer to keep resources independent. |
 | <a id="offsetx"></a> `offsetX?` | `number` | The horizontal offset of the layer in pixels. Default is `0`. |
 | <a id="offsety"></a> `offsetY?` | `number` | The vertical offset of the layer in pixels. Default is `0`. |
 | <a id="opacity"></a> `opacity?` | `number` | The opacity of the layer, between 0 (fully transparent) and 1 (fully opaque). Default is `1`. |

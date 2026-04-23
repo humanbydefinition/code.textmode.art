@@ -2,12 +2,12 @@
 layout: doc
 editLink: true
 title: TouchLongPressHandler
-description: Touch long press event handler function type
+description: Touch long press event handler function type.
 category: Type Aliases
 api: true
 namespace: input.touch
 kind: TypeAlias
-lastModified: 2026-04-07
+lastModified: 2026-04-19
 ---
 
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [touch](../index.md) / TouchLongPressHandler
@@ -18,7 +18,7 @@ lastModified: 2026-04-07
 type TouchLongPressHandler = (data) => void;
 ```
 
-Touch long press event handler function type
+Touch long press event handler function type.
 
 ## Parameters
 

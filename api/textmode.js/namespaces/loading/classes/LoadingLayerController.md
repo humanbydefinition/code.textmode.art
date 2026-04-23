@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: loading
 kind: Class
-lastModified: 2026-04-07
+lastModified: 2026-04-19
 hasConstructor: false
 ---
 
@@ -19,7 +19,7 @@ Controls the internal loading layer lifecycle and rendering behavior.
 
 ## Extends
 
-- `LayerController`\<[`LoadingScreenRendererContext`](../interfaces/LoadingScreenRendererContext.md)\>
+- `InternalLayerController`\<[`LoadingScreenRendererContext`](../interfaces/LoadingScreenRendererContext.md)\>
 
 ## Properties
 
@@ -32,7 +32,7 @@ _isInitialized: boolean = false;
 #### Inherited from
 
 ```ts
-LayerController._isInitialized
+InternalLayerController._isInitialized
 ```
 
 ***
@@ -46,7 +46,7 @@ _layer: TextmodeLayer;
 #### Inherited from
 
 ```ts
-LayerController._layer
+InternalLayerController._layer
 ```
 
 ***
@@ -72,7 +72,7 @@ _dispose(): void;
 #### Inherited from
 
 ```ts
-LayerController._dispose
+InternalLayerController._dispose
 ```
 
 ***
@@ -96,5 +96,5 @@ draw(callback?): void;
 #### Inherited from
 
 ```ts
-LayerController.draw
+InternalLayerController.draw
 ```

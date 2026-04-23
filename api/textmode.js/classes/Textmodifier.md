@@ -6,7 +6,7 @@ description: Manages textmode rendering on a HTMLCanvasElement and provides meth
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-04-07
+lastModified: 2026-04-19
 hasConstructor: false
 ---
 
@@ -23,6 +23,20 @@ If a canvas is provided, it will use that canvas instead.
 
 ## Properties
 
+### gamepads
+
+```ts
+readonly gamepads: readonly TextmodeGamepadSnapshot[];
+```
+
+Get the currently connected gamepads as a compact readonly list.
+
+The returned array is sorted by browser `Gamepad.index`, but unlike the browser API
+it does not contain sparse `null` holes for disconnected slots. Use
+[Textmodifier.gamepad](#gamepad) when you need to resolve a specific browser slot index.
+
+***
+
 ### lastKeyPressed
 
 ```ts
@@ -36,7 +50,7 @@ Returns the key string of the last pressed key, or null if no key has been press
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
 	t.background(0);
@@ -47,6 +61,10 @@ t.draw(() => {
 		t.charColor(255, 255, 255);
 		t.point();
 	}
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
@@ -233,6 +251,283 @@ t.draw(() => {
 
 ***
 
+### mouseIsPressed
+
+```ts
+readonly mouseIsPressed: boolean;
+```
+
+Get whether a mouse button is currently being held down.
+
+This value stays `true` after a press begins on the canvas and returns to `false` when the
+button is released, including releases that occur outside the canvas after the interaction
+starts. Use it inside `draw()` for polling-style interactions.
+
+#### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+const sparks = [];
+
+t.draw(() => {
+	t.background(0);
+
+	if (t.mouseIsPressed && t.mouse.x !== Number.NEGATIVE_INFINITY) {
+		for (let i = 0; i < 3; i++) {
+			sparks.push({
+				x: t.mouse.x + (Math.random() - 0.5) * 2,
+				y: t.mouse.y + (Math.random() - 0.5) * 2,
+				vx: (Math.random() - 0.5) * 0.6,
+				vy: (Math.random() - 0.5) * 0.6,
+				life: 1,
+			});
+		}
+	}
+
+	for (let i = sparks.length - 1; i >= 0; i--) {
+		const spark = sparks[i];
+		spark.x += spark.vx;
+		spark.y += spark.vy;
+		spark.life -= 0.025;
+
+		if (spark.life <= 0) {
+			sparks.splice(i, 1);
+			continue;
+		}
+
+		t.push();
+		t.translate(spark.x, spark.y);
+		t.char(t.mouseIsPressed ? '*' : '.');
+		t.charColor(255, 140 + spark.life * 115, 80, spark.life * 255);
+		t.point();
+		t.pop();
+	}
+
+	if (t.mouse.x !== Number.NEGATIVE_INFINITY) {
+		t.push();
+		t.translate(t.mouse.x, t.mouse.y);
+		t.char(t.mouseIsPressed ? '@' : '+');
+		t.charColor(t.mouseIsPressed ? 255 : 180, t.mouseIsPressed ? 220 : 180, 120);
+		t.point();
+		t.pop();
+	}
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/Textmodifier/mouseIsPressed/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
+
+***
+
+### movedX
+
+```ts
+readonly movedX: number;
+```
+
+Get the horizontal mouse movement accumulated since the previous rendered frame.
+
+This is especially useful while pointer lock is active, where absolute mouse coordinates
+stop being meaningful and relative movement becomes the primary input signal.
+
+#### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+let cursor = { x: 0, y: 0 };
+
+t.mouseClicked(() => {
+	if (document.pointerLockElement === t.canvas) {
+		t.exitPointerLock();
+	} else {
+		t.requestPointerLock();
+	}
+});
+
+t.draw(() => {
+	t.background(0);
+
+	if (document.pointerLockElement === t.canvas) {
+		cursor.x += t.movedX * 0.08;
+		cursor.y += t.movedY * 0.08;
+	}
+
+	cursor.x = Math.max(-t.grid.cols / 2, Math.min(t.grid.cols / 2, cursor.x));
+	cursor.y = Math.max(-t.grid.rows / 2, Math.min(t.grid.rows / 2, cursor.y));
+
+	t.push();
+	t.translate(cursor.x, cursor.y);
+	t.char(document.pointerLockElement === t.canvas ? '@' : '+');
+	t.charColor(document.pointerLockElement === t.canvas ? 255 : 180, 220, 120);
+	t.point();
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/Textmodifier/requestPointerLock/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
+
+***
+
+### movedY
+
+```ts
+readonly movedY: number;
+```
+
+Get the vertical mouse movement accumulated since the previous rendered frame.
+
+This is especially useful while pointer lock is active, where absolute mouse coordinates
+stop being meaningful and relative movement becomes the primary input signal.
+
+#### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+let cursor = { x: 0, y: 0 };
+
+t.mouseClicked(() => {
+	if (document.pointerLockElement === t.canvas) {
+		t.exitPointerLock();
+	} else {
+		t.requestPointerLock();
+	}
+});
+
+t.draw(() => {
+	t.background(0);
+
+	if (document.pointerLockElement === t.canvas) {
+		cursor.x += t.movedX * 0.08;
+		cursor.y += t.movedY * 0.08;
+	}
+
+	cursor.x = Math.max(-t.grid.cols / 2, Math.min(t.grid.cols / 2, cursor.x));
+	cursor.y = Math.max(-t.grid.rows / 2, Math.min(t.grid.rows / 2, cursor.y));
+
+	t.push();
+	t.translate(cursor.x, cursor.y);
+	t.char(document.pointerLockElement === t.canvas ? '@' : '+');
+	t.charColor(document.pointerLockElement === t.canvas ? 255 : 180, 220, 120);
+	t.point();
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/Textmodifier/requestPointerLock/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
+
+***
+
+### pmouse
+
+```ts
+readonly pmouse: MousePosition;
+```
+
+Get the mouse position from the previous rendered frame.
+
+Unlike `previousPosition` in mouse event callbacks, this value is updated exactly once per
+rendered frame. Use it inside `draw()` to measure frame-to-frame mouse motion or draw trails.
+
+If no previous frame position is available yet, it returns
+`{ x: Number.NEGATIVE_INFINITY, y: Number.NEGATIVE_INFINITY }`.
+
+#### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+const segments = [];
+
+t.draw(() => {
+	t.background(0);
+
+	const mouseInside = t.mouse.x !== Number.NEGATIVE_INFINITY;
+	const previousInside = t.pmouse.x !== Number.NEGATIVE_INFINITY;
+
+	if (mouseInside && previousInside) {
+		segments.push({
+			x1: t.pmouse.x,
+			y1: t.pmouse.y,
+			x2: t.mouse.x,
+			y2: t.mouse.y,
+			life: 1,
+		});
+	}
+
+	for (let i = segments.length - 1; i >= 0; i--) {
+		const segment = segments[i];
+		segment.life -= 0.03;
+
+		if (segment.life <= 0) {
+			segments.splice(i, 1);
+			continue;
+		}
+
+		t.push();
+		t.char('-');
+		t.lineWeight(1);
+		t.charColor(100, 180 + segment.life * 75, 255, segment.life * 255);
+		t.line(segment.x1, segment.y1, segment.x2, segment.y2);
+		t.pop();
+	}
+
+	if (mouseInside) {
+		t.push();
+		t.translate(t.mouse.x, t.mouse.y);
+		t.char('@');
+		t.charColor(255, 220, 120);
+		t.point();
+		t.pop();
+	}
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/Textmodifier/pmouse/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
+
+***
+
 ### pressedKeys
 
 ```ts
@@ -246,7 +541,7 @@ Returns an array of key strings that are currently being held down.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
 	t.background(0);
@@ -261,6 +556,10 @@ t.draw(() => {
 		t.point();
 		t.pop();
 	});
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
@@ -634,14 +933,17 @@ t.windowResized(() => {
 #### Get Signature
 
 ```ts
-get font(): TextmodeFont;
+get font(): 
+  | TextmodeFont
+  | TextmodeTileset;
 ```
 
 Get the current font object used for rendering the base layer.
 
 ##### Returns
 
-[`TextmodeFont`](../namespaces/loadables/classes/TextmodeFont.md)
+  \| [`TextmodeFont`](../namespaces/fonts/classes/TextmodeFont.md)
+  \| [`TextmodeTileset`](../namespaces/fonts/classes/TextmodeTileset.md)
 
 ##### Example
 
@@ -714,7 +1016,7 @@ The number of frames rendered since the sketch started.
 ##### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 function drawLabel(text, y) {
 	t.push();
@@ -753,6 +1055,10 @@ t.draw(() => {
 
 	drawLabel(`frameCount: ${t.frameCount}`, -12);
 });
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
 ```
 <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
   <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
@@ -787,7 +1093,7 @@ point in time-based patterns.
 ##### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 function drawLabel(text, y) {
 	t.push();
@@ -827,6 +1133,10 @@ t.draw(() => {
 
 	drawLabel('press SPACE to reset frameCount', -12);
 	drawLabel(`frameCount: ${t.frameCount}`, -9);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
@@ -1271,7 +1581,7 @@ Number of milliseconds since starting the sketch.
 ##### Examples
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 function drawLabel(text, y) {
 	t.push();
@@ -1302,6 +1612,10 @@ t.draw(() => {
 
 	drawLabel(`millis: ${Math.floor(t.millis)}`, -12);
 });
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
 ```
 <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
   <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
@@ -1313,7 +1627,7 @@ t.draw(() => {
 </div>
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 function drawLabel(text, y) {
 	t.push();
@@ -1345,6 +1659,10 @@ t.draw(() => {
 	t.pop();
 
 	drawLabel('millis / 1000 drives horizontal motion', -12);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
@@ -1514,13 +1832,13 @@ get overlay():
   | TextmodeImage;
 ```
 
-If in overlay mode, returns the [TextmodeImage](../namespaces/loadables/classes/TextmodeImage.md) instance capturing the target canvas/video content,
+If in overlay mode, returns the [TextmodeImage](../namespaces/media/classes/TextmodeImage.md) instance capturing the target canvas/video content,
 allowing further configuration of the conversion parameters.
 
 ##### Returns
 
   \| `undefined`
-  \| [`TextmodeImage`](../namespaces/loadables/classes/TextmodeImage.md)
+  \| [`TextmodeImage`](../namespaces/media/classes/TextmodeImage.md)
 
 ##### Example
 
@@ -3401,7 +3719,7 @@ A TextmodeColor instance
 ##### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 // Create reusable colors
 const red = t.color(255, 50, 50);
@@ -3432,6 +3750,10 @@ t.draw(() => {
   // Center shape
   t.charColor(yellow);
   t.ellipse(12, 12);
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
@@ -3815,7 +4137,7 @@ A Promise that resolves to a compiled shader
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let customShader;
 
@@ -3859,6 +4181,10 @@ t.draw(() => {
     t.rect(10, 10);
   }
 });
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
 ```
 <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
   <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
@@ -3892,7 +4218,7 @@ The texture automatically updates each frame to capture the latest content from 
 
 #### Returns
 
-[`TextmodeTexture`](../namespaces/loadables/classes/TextmodeTexture.md)
+[`TextmodeTexture`](../namespaces/media/classes/TextmodeTexture.md)
 
 A TextmodeTexture that can be drawn with image()
 
@@ -3925,7 +4251,7 @@ See MDN for all options: https://developer.mozilla.org/en-US/docs/Web/CSS/cursor
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 const target = { width: 30, height: 15 };
 
 t.draw(() => {
@@ -3945,6 +4271,10 @@ t.draw(() => {
 		t.mouse.y < halfRectHeight;
 
 	t.cursor(hovering ? 'pointer' : 'default');
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
@@ -4053,7 +4383,7 @@ Time elapsed between current and previous frame in milliseconds.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let x = -40;
 const speed = 0.05;
@@ -4090,6 +4420,10 @@ t.draw(() => {
 	t.pop();
 
 	drawLabel(`deltaTime(): ${t.deltaTime().toFixed(2)} ms`, -12);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
@@ -4174,6 +4508,84 @@ t.windowResized(() => {
 
 ***
 
+### doubleClicked()
+
+```ts
+doubleClicked(callback): void;
+```
+
+Set a callback function that will be called when the mouse is double-clicked.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `callback` | [`MouseEventHandler`](../namespaces/input/namespaces/mouse/type-aliases/MouseEventHandler.md) | The function to call when the mouse is double-clicked |
+
+#### Returns
+
+`void`
+
+#### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+const bursts = [];
+
+t.doubleClicked((data) => {
+	if (data.position.x === Number.NEGATIVE_INFINITY) return;
+
+	for (let i = 0; i < 16; i++) {
+		const angle = (Math.PI * 2 * i) / 16;
+		bursts.push({
+			x: data.position.x,
+			y: data.position.y,
+			vx: Math.cos(angle) * 0.8,
+			vy: Math.sin(angle) * 0.8,
+			life: 1,
+		});
+	}
+});
+
+t.draw(() => {
+	t.background(0);
+
+	for (let i = bursts.length - 1; i >= 0; i--) {
+		const burst = bursts[i];
+		burst.x += burst.vx;
+		burst.y += burst.vy;
+		burst.life -= 0.02;
+
+		if (burst.life <= 0) {
+			bursts.splice(i, 1);
+			continue;
+		}
+
+		t.push();
+		t.translate(burst.x, burst.y);
+		t.char(['*', '+', '·'][i % 3]);
+		t.charColor(255, 180 + burst.life * 75, 80, burst.life * 255);
+		t.point();
+		t.pop();
+	}
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/Textmodifier/doubleClicked/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
+
+***
+
 ### doubleTap()
 
 ```ts
@@ -4198,7 +4610,7 @@ helper lets you supply a dedicated handler when you want to treat double taps di
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let pulse = 0;
 let activeColor = t.color(100, 200, 255);
@@ -4224,6 +4636,10 @@ t.draw(() => {
 		t.rect(size + 5, size + 5);
 		t.pop();
 	}
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
@@ -4460,6 +4876,67 @@ t.windowResized(() => {
     <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
     <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
     <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/Textmodifier/ellipsoid/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
+
+***
+
+### exitPointerLock()
+
+```ts
+exitPointerLock(): void;
+```
+
+Exit pointer lock if the textmode canvas currently owns it.
+
+#### Returns
+
+`void`
+
+#### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+let cursor = { x: 0, y: 0 };
+
+t.mouseClicked(() => {
+	if (document.pointerLockElement === t.canvas) {
+		t.exitPointerLock();
+	} else {
+		t.requestPointerLock();
+	}
+});
+
+t.draw(() => {
+	t.background(0);
+
+	if (document.pointerLockElement === t.canvas) {
+		cursor.x += t.movedX * 0.08;
+		cursor.y += t.movedY * 0.08;
+	}
+
+	cursor.x = Math.max(-t.grid.cols / 2, Math.min(t.grid.cols / 2, cursor.x));
+	cursor.y = Math.max(-t.grid.rows / 2, Math.min(t.grid.rows / 2, cursor.y));
+
+	t.push();
+	t.translate(cursor.x, cursor.y);
+	t.char(document.pointerLockElement === t.canvas ? '@' : '+');
+	t.charColor(document.pointerLockElement === t.canvas ? 255 : 180, 220, 120);
+	t.point();
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/Textmodifier/requestPointerLock/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
   </div>
 </div>
 
@@ -4997,6 +5474,31 @@ t.windowResized(() => {
 
 ***
 
+### gamepad()
+
+```ts
+gamepad(index): 
+  | undefined
+  | TextmodeGamepadSnapshot;
+```
+
+Resolve a connected gamepad by its browser-assigned slot index.
+
+Returns `undefined` when that slot is currently absent or disconnected.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `index` | `number` | The browser `Gamepad.index` to resolve. |
+
+#### Returns
+
+  \| `undefined`
+  \| [`TextmodeGamepadSnapshot`](../namespaces/input/namespaces/gamepad/interfaces/TextmodeGamepadSnapshot.md)
+
+***
+
 ### image()
 
 ```ts
@@ -5012,7 +5514,7 @@ Draw a TextmodeFramebuffer, TextmodeImage, TextmodeVideo, or TextmodeTexture to 
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `source` | \| [`TextmodeFramebuffer`](TextmodeFramebuffer.md) \| [`TextmodeImage`](../namespaces/loadables/classes/TextmodeImage.md) \| [`TextmodeTexture`](../namespaces/loadables/classes/TextmodeTexture.md) \| [`TextmodeVideo`](../namespaces/loadables/classes/TextmodeVideo.md) | The TextmodeFramebuffer, TextmodeImage, TextmodeVideo, or TextmodeTexture to render |
+| `source` | \| [`TextmodeFramebuffer`](TextmodeFramebuffer.md) \| [`TextmodeImage`](../namespaces/media/classes/TextmodeImage.md) \| [`TextmodeTexture`](../namespaces/media/classes/TextmodeTexture.md) \| [`TextmodeVideo`](../namespaces/media/classes/TextmodeVideo.md) | The TextmodeFramebuffer, TextmodeImage, TextmodeVideo, or TextmodeTexture to render |
 | `width?` | `number` | Width in grid cells to potentially scale the content (defaults to ideal fit, respecting aspect ratio) |
 | `height?` | `number` | Height in grid cells to potentially scale the content (defaults to ideal fit, respecting aspect ratio) |
 
@@ -5236,7 +5738,7 @@ true if the key is currently pressed, false otherwise
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let playerX = 0;
 let playerY = 0;
@@ -5261,6 +5763,10 @@ t.draw(() => {
 	t.charColor(255, 255, 0);
 	t.translate(playerX, playerY);
 	t.point();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
@@ -5291,7 +5797,7 @@ True if the render loop is currently active, false otherwise.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 function drawLabel(text, y) {
 	t.push();
@@ -5331,6 +5837,10 @@ t.draw(() => {
 	drawLabel(`isLooping(): ${t.isLooping()}`, -12);
 	drawLabel('click to toggle loop state', -9);
 });
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
 ```
 <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
   <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
@@ -5364,7 +5874,7 @@ Set a callback function that will be called when a key is pressed down.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let lastKey = '?';
 let pulse = 0;
@@ -5385,6 +5895,10 @@ t.draw(() => {
 	t.char(lastKey.length ? lastKey[0] : '?');
 	t.point();
 	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
@@ -5419,7 +5933,7 @@ Set a callback function that will be called when a key is released.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let lastRelease = '?';
 let fade = 0;
@@ -5438,6 +5952,10 @@ t.draw(() => {
 	t.char(lastRelease.length ? lastRelease[0] : '?');
 	t.point();
 });
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
 ```
 <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
   <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
@@ -5445,6 +5963,80 @@ t.draw(() => {
     <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
     <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
     <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/Textmodifier/keyReleased/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
+
+***
+
+### keyTyped()
+
+```ts
+keyTyped(callback): void;
+```
+
+Set a callback function that will be called when a printable character is typed.
+
+This only fires for keys that produce character input, such as letters, numbers,
+punctuation, and space. It does not fire for modifier keys or control-key chords.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `callback` | [`KeyboardEventHandler`](../namespaces/input/namespaces/keyboard/type-aliases/KeyboardEventHandler.md) | The function to call when a printable character is typed |
+
+#### Returns
+
+`void`
+
+#### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+const glyphs = [];
+
+t.keyTyped((data) => {
+	glyphs.push({
+		char: data.key,
+		x: (Math.random() - 0.5) * t.grid.cols,
+		y: (Math.random() - 0.5) * t.grid.rows,
+		life: 1,
+	});
+});
+
+t.draw(() => {
+	t.background(0);
+
+	for (let i = glyphs.length - 1; i >= 0; i--) {
+		const glyph = glyphs[i];
+		glyph.life -= 0.015;
+		glyph.y -= 0.04;
+
+		if (glyph.life <= 0) {
+			glyphs.splice(i, 1);
+			continue;
+		}
+
+		t.push();
+		t.translate(glyph.x, glyph.y);
+		t.char(glyph.char);
+		t.charColor(120 + glyph.life * 135, 180, 255, glyph.life * 255);
+		t.point();
+		t.pop();
+	}
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/Textmodifier/keyTyped/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
   </div>
 </div>
 
@@ -5728,7 +6320,7 @@ loadFont(fontSource, setActive): Promise<TextmodeFont>;
 
 Load a font, optionally setting it as the base layer's active font.
 
-Accepts either a URL string to load a new font, or an existing [TextmodeFont](../namespaces/loadables/classes/TextmodeFont.md)
+Accepts either a URL string to load a new font, or an existing [TextmodeFont](../namespaces/fonts/classes/TextmodeFont.md)
 instance to use as a reusable source.
 
 If `setActive` is true (default), the font is set as the base layer's font.
@@ -5741,12 +6333,12 @@ which creates a layer-local fork rather than sharing a mutable instance by refer
 
 | Parameter | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
-| `fontSource` | \| `string` \| [`TextmodeFont`](../namespaces/loadables/classes/TextmodeFont.md) | `undefined` | The URL of the font to load, or an existing TextmodeFont instance. |
+| `fontSource` | `string` \| [`TextmodeFont`](../namespaces/fonts/classes/TextmodeFont.md) | `undefined` | The URL of the font to load, or an existing TextmodeFont instance. |
 | `setActive` | `boolean` | `true` | Whether to set the font as the base layer's active font. Defaults to `true`. |
 
 #### Returns
 
-`Promise`\<[`TextmodeFont`](../namespaces/loadables/classes/TextmodeFont.md)\>
+`Promise`\<[`TextmodeFont`](../namespaces/fonts/classes/TextmodeFont.md)\>
 
 The loaded TextmodeFont instance.
 
@@ -5823,7 +6415,7 @@ This function returns a Promise that resolves when the image has loaded.
 
 #### Returns
 
-`Promise`\<[`TextmodeImage`](../namespaces/loadables/classes/TextmodeImage.md)\>
+`Promise`\<[`TextmodeImage`](../namespaces/media/classes/TextmodeImage.md)\>
 
 A Promise that resolves to a TextmodeImage object
 
@@ -5869,6 +6461,38 @@ t.windowResized(() => {
 
 ***
 
+### loadTileset()
+
+```ts
+loadTileset(tilesetSource, setActive): Promise<TextmodeTileset>;
+```
+
+Load a tileset, optionally setting it as the base layer's active glyph source.
+
+Accepts either tileset load options or an existing [TextmodeTileset](../namespaces/fonts/classes/TextmodeTileset.md)
+instance to use as a reusable source.
+
+If `setActive` is true (default), the tileset is set as the base layer's glyph source.
+If `setActive` is false, the tileset is loaded/initialized and returned without modifying the layer.
+
+The returned tileset can be reused on other layers via [TextmodeLayer.loadTileset](../namespaces/layering/classes/TextmodeLayer.md#loadtileset),
+which creates a layer-local fork rather than sharing a mutable instance by reference.
+
+#### Parameters
+
+| Parameter | Type | Default value | Description |
+| ------ | ------ | ------ | ------ |
+| `tilesetSource` | \| [`TextmodeTilesetOptions`](../namespaces/fonts/interfaces/TextmodeTilesetOptions.md) \| [`TextmodeTileset`](../namespaces/fonts/classes/TextmodeTileset.md) | `undefined` | Tileset load options or an existing TextmodeTileset instance. |
+| `setActive` | `boolean` | `true` | Whether to set the tileset as the base layer's active glyph source. Defaults to `true`. |
+
+#### Returns
+
+`Promise`\<[`TextmodeTileset`](../namespaces/fonts/classes/TextmodeTileset.md)\>
+
+The loaded TextmodeTileset instance.
+
+***
+
 ### loadVideo()
 
 ```ts
@@ -5885,7 +6509,7 @@ Load a video and return a TextmodeVideo that can be drawn with image().
 
 #### Returns
 
-`Promise`\<[`TextmodeVideo`](../namespaces/loadables/classes/TextmodeVideo.md)\>
+`Promise`\<[`TextmodeVideo`](../namespaces/media/classes/TextmodeVideo.md)\>
 
 #### Example
 
@@ -5955,7 +6579,7 @@ configured tolerance. The event includes the press duration in milliseconds.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 const bursts = [];
 
@@ -5990,6 +6614,10 @@ t.draw(() => {
 		t.char('?');
 		t.rect(1, 1);
 	}
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
@@ -6130,7 +6758,7 @@ Resume the rendering loop if it was stopped by [noLoop](#noloop).
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600, fontSize: 16 });
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
 
 let paused = false;
 let resumed = 0;
@@ -6177,6 +6805,10 @@ t.draw(() => {
 
 	drawLabel(paused ? 'click to call loop()' : 'auto-pause at frame 90', -12);
 	drawLabel(`loop() calls: ${resumed}`, -9, paused ? 255 : 140);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
@@ -6273,6 +6905,78 @@ t.windowResized(() => {
     <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
     <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
     <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/Textmodifier/mouseClicked/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
+
+***
+
+### mouseDragged()
+
+```ts
+mouseDragged(callback): void;
+```
+
+Set a callback function that will be called when the mouse moves while a button is held down.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `callback` | [`MouseEventHandler`](../namespaces/input/namespaces/mouse/type-aliases/MouseEventHandler.md) | The function to call when the mouse is dragged |
+
+#### Returns
+
+`void`
+
+#### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+const trail = [];
+
+t.mouseDragged((data) => {
+	if (data.position.x === Number.NEGATIVE_INFINITY) return;
+
+	trail.push({
+		x: data.position.x,
+		y: data.position.y,
+		life: 1,
+		char: ['#', '@', '*'][Math.floor(Math.random() * 3)],
+	});
+});
+
+t.draw(() => {
+	t.background(0);
+
+	for (let i = trail.length - 1; i >= 0; i--) {
+		const point = trail[i];
+		point.life -= 0.02;
+
+		if (point.life <= 0) {
+			trail.splice(i, 1);
+			continue;
+		}
+
+		t.push();
+		t.translate(point.x, point.y);
+		t.char(point.char);
+		t.charColor(255, 160 + point.life * 95, 80);
+		t.point();
+		t.pop();
+	}
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/Textmodifier/mouseDragged/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
   </div>
 </div>
 
@@ -6470,7 +7174,7 @@ Set a callback function that will be called when the mouse is released.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 const lines = [];
 let dragStart = null;
@@ -6533,6 +7237,10 @@ t.draw(() => {
 		t.pop();
 	}
 });
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
 ```
 <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
   <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
@@ -6566,7 +7274,7 @@ Set a callback function that will be called when the mouse wheel is scrolled.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 const rings = [];
 
@@ -6628,6 +7336,10 @@ t.draw(() => {
 
 		t.pop();
 	}
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
@@ -6825,6 +7537,137 @@ t.draw(() => {
     <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/Textmodifier/noLoop/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
   </div>
 </div>
+
+***
+
+### off()
+
+```ts
+off<K>(event, handler): void;
+```
+
+Remove a previously registered event listener.
+
+The handler reference must be the same function instance that was passed to `on()` or `once()`.
+
+#### Type Parameters
+
+| Type Parameter | Description |
+| ------ | ------ |
+| `K` *extends* \| keyof MouseEventMap \| keyof KeyboardEventMap \| keyof TouchEventMap \| keyof GamepadEventMap | Event name from the [InputEventMap](../namespaces/input/type-aliases/InputEventMap.md). |
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `event` | `K` | The event the handler was attached to. |
+| `handler` | [`InputEventMap`](../namespaces/input/type-aliases/InputEventMap.md)\[`K`\] | The exact function reference to remove. |
+
+#### Returns
+
+`void`
+
+#### Example
+
+```ts
+function onPress(data) { console.log(data.position); }
+t.on('mousePressed', onPress);
+
+// Later
+t.off('mousePressed', onPress);
+```
+
+***
+
+### on()
+
+```ts
+on<K>(event, handler): () => void;
+```
+
+Register an event listener. Multiple listeners can coexist on the same event —
+unlike the legacy single-callback methods (e.g. `mousePressed()`), calling `on()`
+never replaces existing listeners.
+
+#### Type Parameters
+
+| Type Parameter | Description |
+| ------ | ------ |
+| `K` *extends* \| keyof MouseEventMap \| keyof KeyboardEventMap \| keyof TouchEventMap \| keyof GamepadEventMap | Event name from the [InputEventMap](../namespaces/input/type-aliases/InputEventMap.md). |
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `event` | `K` | The event to listen for (e.g. `'mousePressed'`, `'keyReleased'`, `'gamepadConnected'`, `'pinch'`). |
+| `handler` | [`InputEventMap`](../namespaces/input/type-aliases/InputEventMap.md)\[`K`\] | The callback to invoke when the event fires. |
+
+#### Returns
+
+A dispose function that removes this specific listener.
+
+```ts
+(): void;
+```
+
+##### Returns
+
+`void`
+
+#### Example
+
+```ts
+// Add a click listener
+const dispose = t.on('mouseClicked', (data) => {
+  console.log('Clicked at', data.position.x, data.position.y);
+});
+
+// Later, remove it
+dispose();
+```
+
+***
+
+### once()
+
+```ts
+once<K>(event, handler): () => void;
+```
+
+Register a one-shot event listener that automatically removes itself after the first invocation.
+
+#### Type Parameters
+
+| Type Parameter | Description |
+| ------ | ------ |
+| `K` *extends* \| keyof MouseEventMap \| keyof KeyboardEventMap \| keyof TouchEventMap \| keyof GamepadEventMap | Event name from the [InputEventMap](../namespaces/input/type-aliases/InputEventMap.md). |
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `event` | `K` | The event to listen for. |
+| `handler` | [`InputEventMap`](../namespaces/input/type-aliases/InputEventMap.md)\[`K`\] | The callback to invoke once. |
+
+#### Returns
+
+A dispose function that removes the listener before it fires (if needed).
+
+```ts
+(): void;
+```
+
+##### Returns
+
+`void`
+
+#### Example
+
+```ts
+t.once('keyPressed', (data) => {
+  console.log('First key press was:', data.key);
+});
+```
 
 ***
 
@@ -7323,7 +8166,7 @@ Use with [push](#push) to isolate style changes within a block.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
   t.background(0);
@@ -7338,6 +8181,10 @@ t.draw(() => {
     t.rect(8, 8);
     t.pop(); // Restore state - next iteration starts fresh
   }
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
@@ -7560,6 +8407,74 @@ t.draw(() => {
     <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
     <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
     <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/Textmodifier/redraw/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
+  </div>
+</div>
+
+***
+
+### requestPointerLock()
+
+```ts
+requestPointerLock(): boolean;
+```
+
+Request browser pointer lock for the textmode canvas.
+
+When pointer lock is active, mouse movement is reported as relative deltas via
+[Textmodifier.movedX](#movedx) and [Textmodifier.movedY](#movedy), allowing infinite-look and
+first-person style controls.
+
+#### Returns
+
+`boolean`
+
+`true` if the browser exposes pointer lock and the request was initiated,
+otherwise `false`.
+
+#### Example
+
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+let cursor = { x: 0, y: 0 };
+
+t.mouseClicked(() => {
+	if (document.pointerLockElement === t.canvas) {
+		t.exitPointerLock();
+	} else {
+		t.requestPointerLock();
+	}
+});
+
+t.draw(() => {
+	t.background(0);
+
+	if (document.pointerLockElement === t.canvas) {
+		cursor.x += t.movedX * 0.08;
+		cursor.y += t.movedY * 0.08;
+	}
+
+	cursor.x = Math.max(-t.grid.cols / 2, Math.min(t.grid.cols / 2, cursor.x));
+	cursor.y = Math.max(-t.grid.rows / 2, Math.min(t.grid.rows / 2, cursor.y));
+
+	t.push();
+	t.translate(cursor.x, cursor.y);
+	t.char(document.pointerLockElement === t.canvas ? '@' : '+');
+	t.charColor(document.pointerLockElement === t.canvas ? 255 : 180, 220, 120);
+	t.point();
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
+  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
+  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
+    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
+    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/Textmodifier/requestPointerLock/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
   </div>
 </div>
 
@@ -9836,6 +10751,34 @@ t.windowResized(() => {
     <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/Textmodifier/triangle/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
   </div>
 </div>
+
+***
+
+### useTileColors()
+
+```ts
+useTileColors(enabled?): boolean | void;
+```
+
+Get or set whether the base layer should use authored tileset colors directly during the final ASCII pass.
+
+This is equivalent to calling [TextmodeLayer.useTileColors](../namespaces/layering/classes/TextmodeLayer.md#usetilecolors) on
+[base layer](#layers).
+
+When disabled (default), tilesets on the base layer are recolored through the current
+character (`primary`) and cell (`secondary`) colors.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `enabled?` | `boolean` | Whether the base layer should use authored tileset colors directly. |
+
+#### Returns
+
+`boolean` \| `void`
+
+The current base-layer tileset-color mode if called without arguments.
 
 ***
 

@@ -2,12 +2,12 @@
 layout: doc
 editLink: true
 title: TouchTapHandler
-description: Touch tap event handler function type
+description: Touch tap event handler function type.
 category: Type Aliases
 api: true
 namespace: input.touch
 kind: TypeAlias
-lastModified: 2026-04-07
+lastModified: 2026-04-19
 ---
 
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [touch](../index.md) / TouchTapHandler
@@ -18,7 +18,7 @@ lastModified: 2026-04-07
 type TouchTapHandler = (data) => void;
 ```
 
-Touch tap event handler function type
+Touch tap event handler function type.
 
 ## Parameters
 

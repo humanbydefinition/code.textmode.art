@@ -1,117 +1,38 @@
 ---
 layout: doc
 editLink: true
-title: TextmodeVideo
-description: Represents a video element for textmode rendering via Textmodifier.loadVideo.
+title: TextmodeTexture
+description: Represents an external texture source for textmode rendering via Textmodifier.createTexture.
 category: Classes
 api: true
-namespace: loadables
+namespace: media
 kind: Class
-lastModified: 2026-04-07
+lastModified: 2026-04-19
 hasConstructor: false
 ---
 
-[textmode.js](../../../index.md) / [loadables](../index.md) / TextmodeVideo
+[textmode.js](../../../index.md) / [media](../index.md) / TextmodeTexture
 
-# Class: TextmodeVideo
+# Class: TextmodeTexture
 
-Represents a video element for textmode rendering via [Textmodifier.loadVideo](../../../classes/Textmodifier.md#loadvideo).
+Represents an external texture source for textmode rendering via [Textmodifier.createTexture](../../../classes/Textmodifier.md#createtexture).
+
+This class enables integration with other WebGL-based libraries like three.js, p5.js, Babylon.js,
+hydra-synth, or any library that renders to a canvas element.
 
 It can be drawn to the canvas via [Textmodifier.image](../../../classes/Textmodifier.md#image).
 
-A video uploaded currently runs through an adjustable brightness-converter that converts
-the video frames into a textmode representation using characters.
-Those adjustable options are available via chainable methods on this class.
-
-## Example
-
-```javascript
-const VIDEO_URL = 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4';
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
-
-let video;
-
-function drawLabel(text, y) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(255);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
-
-t.setup(async () => {
-	video = await t.loadVideo(VIDEO_URL);
-	await video.play();
-	video.loop();
-	video.characters(' .:-=+*#%@');
-});
-
-t.draw(() => {
-	t.background(0);
-	if (!video) return;
-
-	t.image(video);
-	drawLabel('TextmodeVideo via loadVideo()', Math.floor(t.grid.rows / 2) - 2);
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeVideo/creation/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
+The texture automatically updates each frame to capture the latest content from the source canvas or video.
 
 ## Extends
 
-- [`TextmodeTexture`](TextmodeTexture.md)
+- [`TextmodeSource`](TextmodeSource.md)
+
+## Extended by
+
+- [`TextmodeVideo`](TextmodeVideo.md)
 
 ## Accessors
-
-### currentTime
-
-#### Get Signature
-
-```ts
-get currentTime(): number;
-```
-
-Current playback time in seconds.
-
-##### Returns
-
-`number`
-
-***
-
-### duration
-
-#### Get Signature
-
-```ts
-get duration(): number;
-```
-
-Total duration of the video in seconds.
-
-##### Returns
-
-`number`
-
-***
 
 ### height
 
@@ -129,23 +50,7 @@ Ideal height in grid cells.
 
 #### Inherited from
 
-[`TextmodeTexture`](TextmodeTexture.md).[`height`](TextmodeTexture.md#height)
-
-***
-
-### isPlaying
-
-#### Get Signature
-
-```ts
-get isPlaying(): boolean;
-```
-
-Whether the video is currently playing.
-
-##### Returns
-
-`boolean`
+[`TextmodeSource`](TextmodeSource.md).[`height`](TextmodeSource.md#height)
 
 ***
 
@@ -165,7 +70,7 @@ Original pixel height.
 
 #### Inherited from
 
-[`TextmodeTexture`](TextmodeTexture.md).[`originalHeight`](TextmodeTexture.md#originalheight)
+[`TextmodeSource`](TextmodeSource.md).[`originalHeight`](TextmodeSource.md#originalheight)
 
 ***
 
@@ -185,7 +90,7 @@ Original pixel width.
 
 #### Inherited from
 
-[`TextmodeTexture`](TextmodeTexture.md).[`originalWidth`](TextmodeTexture.md#originalwidth)
+[`TextmodeSource`](TextmodeSource.md).[`originalWidth`](TextmodeSource.md#originalwidth)
 
 ***
 
@@ -202,10 +107,6 @@ The source element this texture captures from.
 ##### Returns
 
 `HTMLCanvasElement` \| `HTMLVideoElement`
-
-#### Inherited from
-
-[`TextmodeTexture`](TextmodeTexture.md).[`source`](TextmodeTexture.md#source)
 
 ***
 
@@ -225,23 +126,7 @@ Return the WebGL texture currently backing this source.
 
 #### Inherited from
 
-[`TextmodeTexture`](TextmodeTexture.md).[`texture`](TextmodeTexture.md#texture)
-
-***
-
-### videoElement
-
-#### Get Signature
-
-```ts
-get videoElement(): HTMLVideoElement;
-```
-
-The underlying HTML video element.
-
-##### Returns
-
-`HTMLVideoElement`
+[`TextmodeSource`](TextmodeSource.md).[`texture`](TextmodeSource.md#texture)
 
 ***
 
@@ -261,7 +146,7 @@ Ideal width in grid cells.
 
 #### Inherited from
 
-[`TextmodeTexture`](TextmodeTexture.md).[`width`](TextmodeTexture.md#width)
+[`TextmodeSource`](TextmodeSource.md).[`width`](TextmodeSource.md#width)
 
 ## Methods
 
@@ -277,7 +162,7 @@ _hasFrameOverrides(): boolean;
 
 #### Inherited from
 
-[`TextmodeTexture`](TextmodeTexture.md).[`_hasFrameOverrides`](TextmodeTexture.md#hasframeoverrides)
+[`TextmodeSource`](TextmodeSource.md).[`_hasFrameOverrides`](TextmodeSource.md#hasframeoverrides)
 
 ***
 
@@ -399,7 +284,7 @@ t.windowResized(() => {
 
 #### Inherited from
 
-[`TextmodeTexture`](TextmodeTexture.md).[`background`](TextmodeTexture.md#background)
+[`TextmodeSource`](TextmodeSource.md).[`background`](TextmodeSource.md#background)
 
 ***
 
@@ -504,7 +389,7 @@ t.windowResized(() => {
 
 #### Inherited from
 
-[`TextmodeTexture`](TextmodeTexture.md).[`cellColor`](TextmodeTexture.md#cellcolor)
+[`TextmodeSource`](TextmodeSource.md).[`cellColor`](TextmodeSource.md#cellcolor)
 
 ***
 
@@ -624,7 +509,7 @@ t.windowResized(() => {
 
 #### Inherited from
 
-[`TextmodeTexture`](TextmodeTexture.md).[`cellColorMode`](TextmodeTexture.md#cellcolormode)
+[`TextmodeSource`](TextmodeSource.md).[`cellColorMode`](TextmodeSource.md#cellcolormode)
 
 ***
 
@@ -736,7 +621,7 @@ t.windowResized(() => {
 
 #### Inherited from
 
-[`TextmodeTexture`](TextmodeTexture.md).[`characters`](TextmodeTexture.md#characters)
+[`TextmodeSource`](TextmodeSource.md).[`characters`](TextmodeSource.md#characters)
 
 ***
 
@@ -842,7 +727,7 @@ t.windowResized(() => {
 
 #### Inherited from
 
-[`TextmodeTexture`](TextmodeTexture.md).[`charColor`](TextmodeTexture.md#charcolor)
+[`TextmodeSource`](TextmodeSource.md).[`charColor`](TextmodeSource.md#charcolor)
 
 ***
 
@@ -959,7 +844,7 @@ t.windowResized(() => {
 
 #### Inherited from
 
-[`TextmodeTexture`](TextmodeTexture.md).[`charColorMode`](TextmodeTexture.md#charcolormode)
+[`TextmodeSource`](TextmodeSource.md).[`charColorMode`](TextmodeSource.md#charcolormode)
 
 ***
 
@@ -1066,7 +951,7 @@ t.windowResized(() => {
 
 #### Inherited from
 
-[`TextmodeTexture`](TextmodeTexture.md).[`charRotation`](TextmodeTexture.md#charrotation)
+[`TextmodeSource`](TextmodeSource.md).[`charRotation`](TextmodeSource.md#charrotation)
 
 ***
 
@@ -1164,7 +1049,7 @@ t.windowResized(() => {
 
 #### Inherited from
 
-[`TextmodeTexture`](TextmodeTexture.md).[`conversionMode`](TextmodeTexture.md#conversionmode)
+[`TextmodeSource`](TextmodeSource.md).[`conversionMode`](TextmodeSource.md#conversionmode)
 
 ***
 
@@ -1185,9 +1070,9 @@ and [Textmodifier.createTexture](../../../classes/Textmodifier.md#createtexture)
 
 `void`
 
-#### Overrides
+#### Inherited from
 
-[`TextmodeTexture`](TextmodeTexture.md).[`dispose`](TextmodeTexture.md#dispose)
+[`TextmodeSource`](TextmodeSource.md).[`dispose`](TextmodeSource.md#dispose)
 
 ***
 
@@ -1302,7 +1187,7 @@ t.windowResized(() => {
 
 #### Inherited from
 
-[`TextmodeTexture`](TextmodeTexture.md).[`flipX`](TextmodeTexture.md#flipx)
+[`TextmodeSource`](TextmodeSource.md).[`flipX`](TextmodeSource.md#flipx)
 
 ***
 
@@ -1417,7 +1302,7 @@ t.windowResized(() => {
 
 #### Inherited from
 
-[`TextmodeTexture`](TextmodeTexture.md).[`flipY`](TextmodeTexture.md#flipy)
+[`TextmodeSource`](TextmodeSource.md).[`flipY`](TextmodeSource.md#flipy)
 
 ***
 
@@ -1529,562 +1414,4 @@ t.windowResized(() => {
 
 #### Inherited from
 
-[`TextmodeTexture`](TextmodeTexture.md).[`invert`](TextmodeTexture.md#invert)
-
-***
-
-### loop()
-
-```ts
-loop(shouldLoop): this;
-```
-
-Set whether the video should loop.
-
-#### Parameters
-
-| Parameter | Type | Default value | Description |
-| ------ | ------ | ------ | ------ |
-| `shouldLoop` | `boolean` | `true` | Whether to loop (defaults to true) |
-
-#### Returns
-
-`this`
-
-#### Example
-
-```javascript
-const VIDEO_URL = 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4';
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
-
-let video;
-
-function drawLabel(text, y) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(255);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
-
-t.setup(async () => {
-	video = await t.loadVideo(VIDEO_URL);
-	video.characters(' .:-=+*#%@');
-	video.loop(false);
-	await video.play();
-});
-
-t.draw(() => {
-	t.background(0);
-	if (!video) return;
-
-	t.image(video);
-	drawLabel('loop(false) with manual restart', Math.floor(t.grid.rows / 2) - 2);
-
-	if (!video.isPlaying && video.currentTime >= video.duration) {
-		video.time(0);
-		void video.play();
-	}
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeVideo/loop/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
-
-***
-
-### pause()
-
-```ts
-pause(): void;
-```
-
-Pause the video.
-
-#### Returns
-
-`void`
-
-#### Example
-
-```javascript
-const VIDEO_URL = 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4';
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
-
-let video;
-
-function drawLabel(text, y) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(255);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
-
-t.setup(async () => {
-	video = await t.loadVideo(VIDEO_URL);
-	video.characters(' .:-=+*#%@');
-	video.loop();
-	await video.play();
-});
-
-t.draw(() => {
-	t.background(0);
-	if (!video) return;
-
-	t.image(video);
-	drawLabel(video.isPlaying ? 'click to pause()' : 'click to resume with play()', Math.floor(t.grid.rows / 2) - 2);
-});
-
-t.mouseClicked(async () => {
-	if (!video) return;
-
-	if (video.isPlaying) {
-		video.pause();
-		return;
-	}
-
-	await video.play();
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeVideo/pause/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
-
-***
-
-### play()
-
-```ts
-play(): Promise<void>;
-```
-
-Play the video.
-
-#### Returns
-
-`Promise`\<`void`\>
-
-Promise that resolves when playback starts
-
-#### Example
-
-```javascript
-const VIDEO_URL = 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4';
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
-
-let video;
-
-function drawLabel(text, y) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(255);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
-
-t.setup(async () => {
-	video = await t.loadVideo(VIDEO_URL);
-	video.characters(' .:-=+*#%@');
-	await video.play();
-	video.pause();
-	video.time(0);
-});
-
-t.draw(() => {
-	t.background(0);
-	if (!video) return;
-
-	t.image(video);
-	drawLabel(video.isPlaying ? 'click to restart playback' : 'click to call play()', Math.floor(t.grid.rows / 2) - 2);
-});
-
-t.mouseClicked(async () => {
-	if (!video) return;
-
-	video.time(0);
-	await video.play();
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeVideo/play/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
-
-***
-
-### speed()
-
-```ts
-speed(rate): this;
-```
-
-Set the playback speed.
-
-#### Parameters
-
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `rate` | `number` | Playback rate (1.0 = normal speed) |
-
-#### Returns
-
-`this`
-
-#### Example
-
-```javascript
-const VIDEO_URL = 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4';
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
-
-let video;
-
-function drawLabel(text, y) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(255);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
-
-t.setup(async () => {
-	video = await t.loadVideo(VIDEO_URL);
-	video.characters(' .:-=+*#%@');
-	video.loop();
-	await video.play();
-});
-
-t.draw(() => {
-	t.background(0);
-	if (!video) return;
-
-	const halfWidth = t.grid.cols / 2;
-	const normalizedX = (t.mouse.x + halfWidth) / t.grid.cols;
-	const clampedX = Math.max(0, Math.min(1, normalizedX));
-	const rate = 0.1 + clampedX * 3.9;
-
-	video.speed(rate);
-	t.image(video);
-	drawLabel(`speed(${rate.toFixed(1)})`, Math.floor(t.grid.rows / 2) - 2);
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeVideo/speed/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
-
-***
-
-### stop()
-
-```ts
-stop(): void;
-```
-
-Stop the video and reset to beginning.
-
-#### Returns
-
-`void`
-
-#### Example
-
-```javascript
-const VIDEO_URL = 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4';
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
-
-let video;
-let restartTimeout = null;
-
-function drawLabel(text, y) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(255);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
-
-t.setup(async () => {
-	video = await t.loadVideo(VIDEO_URL);
-	video.characters(' .:-=+*#%@');
-	video.loop();
-	await video.play();
-});
-
-t.draw(() => {
-	t.background(0);
-	if (!video) return;
-
-	t.image(video);
-	drawLabel("press 's' to stop()", Math.floor(t.grid.rows / 2) - 2);
-});
-
-t.keyPressed(() => {
-	if (!video || !t.isKeyPressed('s')) return;
-
-	video.stop();
-	if (restartTimeout) clearTimeout(restartTimeout);
-	restartTimeout = setTimeout(() => {
-		void video.play();
-		restartTimeout = null;
-	}, 1000);
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeVideo/stop/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
-
-***
-
-### time()
-
-```ts
-time(seconds): this;
-```
-
-Set the current time position in the video.
-
-#### Parameters
-
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `seconds` | `number` | Time in seconds |
-
-#### Returns
-
-`this`
-
-#### Example
-
-```javascript
-const VIDEO_URL = 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4';
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
-
-let video;
-
-function drawLabel(text, y) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(255);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
-
-t.setup(async () => {
-	video = await t.loadVideo(VIDEO_URL);
-	video.characters(' .:-=+*#%@');
-	video.loop();
-	await video.play();
-});
-
-t.draw(() => {
-	t.background(0);
-	if (!video) return;
-
-	t.image(video);
-	drawLabel('click to jump with time()', Math.floor(t.grid.rows / 2) - 2);
-	drawLabel(`${video.currentTime.toFixed(1)}s / ${video.duration.toFixed(1)}s`, Math.floor(t.grid.rows / 2) - 4);
-});
-
-t.mouseClicked(() => {
-	if (!video) return;
-
-	video.time(Math.random() * video.duration);
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeVideo/time/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
-
-***
-
-### volume()
-
-```ts
-volume(level): this;
-```
-
-Set the volume.
-
-#### Parameters
-
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `level` | `number` | Volume level (0.0-1.0) Videos loaded through [Textmodifier.loadVideo](../../../classes/Textmodifier.md#loadvideo) start muted to satisfy autoplay rules. Unmute the underlying [videoElement](#videoelement) in response to a user gesture before expecting audible volume changes. |
-
-#### Returns
-
-`this`
-
-#### Example
-
-```javascript
-const VIDEO_URL = 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4';
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
-
-let video;
-let audioEnabled = false;
-
-function drawLabel(text, y) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(255);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
-
-t.setup(async () => {
-	video = await t.loadVideo(VIDEO_URL);
-	video.characters(' .:-=+*#%@');
-	video.loop();
-	await video.play();
-});
-
-t.draw(() => {
-	t.background(0);
-	if (!video) return;
-
-	t.image(video);
-
-	if (audioEnabled) {
-		const halfHeight = t.grid.rows / 2;
-		const normalizedY = (t.mouse.y + halfHeight) / t.grid.rows;
-		const level = 1 - Math.max(0, Math.min(1, normalizedY));
-
-		video.volume(level);
-		drawLabel(`volume(${level.toFixed(2)})`, Math.floor(t.grid.rows / 2) - 4);
-	} else {
-		drawLabel('click once to unmute videoElement', Math.floor(t.grid.rows / 2) - 4);
-	}
-
-	drawLabel('move vertically to change volume()', Math.floor(t.grid.rows / 2) - 2);
-});
-
-t.mouseClicked(async () => {
-	if (!video || audioEnabled) return;
-
-	video.videoElement.muted = false;
-	audioEnabled = true;
-	await video.play();
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeVideo/volume/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
+[`TextmodeSource`](TextmodeSource.md).[`invert`](TextmodeSource.md#invert)

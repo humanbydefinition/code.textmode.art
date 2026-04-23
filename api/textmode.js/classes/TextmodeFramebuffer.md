@@ -6,7 +6,7 @@ description: Framebuffer class for managing offscreen rendering targets initiali
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-04-07
+lastModified: 2026-04-19
 hasConstructor: false
 ---
 
@@ -155,8 +155,8 @@ and pushes renderer state so drawing commands are isolated from the previous tar
 
 ```javascript
 const t = textmode.create({
-	width: 720,
-	height: 420,
+	width: window.innerWidth,
+	height: window.innerHeight,
 	fontSize: 16,
 });
 
@@ -203,6 +203,10 @@ t.draw(() => {
 
 	writeLine('BEGIN() BINDS THE FBO', -11, [220, 230, 255]);
 });
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
 ```
 <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
   <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
@@ -239,8 +243,8 @@ Call this when a custom framebuffer is no longer needed to release GPU resources
 
 ```javascript
 const t = textmode.create({
-	width: 720,
-	height: 420,
+	width: window.innerWidth,
+	height: window.innerHeight,
 	fontSize: 16,
 });
 
@@ -295,6 +299,10 @@ t.draw(() => {
 
 	writeLine('DISPOSE BEFORE REBUILDING', 8, [220, 230, 255]);
 });
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
 ```
 <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
   <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
@@ -338,8 +346,8 @@ and viewport state from the renderer stack.
 
 ```javascript
 const t = textmode.create({
-	width: 720,
-	height: 420,
+	width: window.innerWidth,
+	height: window.innerHeight,
 	fontSize: 16,
 });
 
@@ -383,6 +391,10 @@ t.draw(() => {
 	}
 
 	writeLine('END() RETURNS TO THE MAIN CANVAS', 11, [220, 230, 255]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
@@ -459,8 +471,8 @@ is resized to match the new dimensions.
 
 ```javascript
 const t = textmode.create({
-	width: 720,
-	height: 420,
+	width: window.innerWidth,
+	height: window.innerHeight,
 	fontSize: 16,
 });
 
@@ -505,6 +517,10 @@ t.draw(() => {
 	t.pop();
 
 	writeLine('FRAMEBUFFER.RESIZE()', -11, [220, 230, 255]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">

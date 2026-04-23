@@ -1,30 +1,31 @@
 ---
 layout: doc
 editLink: true
-title: TextmodePluginAPI
-description: An extended API provided to plugins when they are installed on a Textmodifier instance.
+title: TextmodePluginContext
+description: Host-provided context passed to plugins when they are installed on a Textmodifier instance.
 category: Interfaces
 api: true
 namespace: plugins
 kind: Interface
-lastModified: 2026-04-07
+lastModified: 2026-04-19
 isInterface: true
 ---
 
-[textmode.js](../../../index.md) / [plugins](../index.md) / TextmodePluginAPI
+[textmode.js](../../../index.md) / [plugins](../index.md) / TextmodePluginContext
 
-# Interface: TextmodePluginAPI
+# Interface: TextmodePluginContext
 
-An extended API provided to plugins when they are installed on a [Textmodifier](../../../classes/Textmodifier.md) instance.
+Host-provided context passed to plugins when they are installed on a [Textmodifier](../../../classes/Textmodifier.md) instance.
 
 ## Properties
 
 | Property | Type | Description |
 | ------ | ------ | ------ |
 | <a id="asciiframebuffer"></a> `asciiFramebuffer` | [`TextmodeFramebuffer`](../../../classes/TextmodeFramebuffer.md) | The framebuffer containing the ASCII representation (from base layer).<br/> This framebuffer only has a single render target. |
-| <a id="canvas"></a> `canvas` | `TextmodeCanvas` | The canvas used by the Textmodifier instance. |
+| <a id="canvas"></a> `canvas` | [`TextmodeCanvasHandle`](TextmodeCanvasHandle.md) | A stable handle for the canvas used by the Textmodifier instance. |
 | <a id="drawframebuffer"></a> `drawFramebuffer` | [`TextmodeFramebuffer`](../../../classes/TextmodeFramebuffer.md) | The framebuffer the user draws to with 3 render targets (from base layer). |
-| <a id="font"></a> `font` | [`TextmodeFont`](../../loadables/classes/TextmodeFont.md) | The font used by the Textmodifier instance (from base layer). |
+| <a id="font"></a> `font` | \| [`TextmodeFont`](../../fonts/classes/TextmodeFont.md) \| [`TextmodeTileset`](../../fonts/classes/TextmodeTileset.md) | The active glyph source used by the Textmodifier instance (from base layer). |
+| <a id="glyphatlas"></a> `glyphAtlas` | `TextmodeGlyphAtlas` | Backend-neutral glyph atlas used by the Textmodifier instance (from base layer). |
 | <a id="grid"></a> `grid` | [`TextmodeGrid`](../../../classes/TextmodeGrid.md) | The grid used by the Textmodifier instance (from base layer). |
 | <a id="layermanager"></a> `layerManager` | [`TextmodeLayerManager`](../../layering/classes/TextmodeLayerManager.md) | The layer manager for accessing and managing all layers. |
 | <a id="renderer"></a> `renderer` | `GLRenderer` | The WebGL renderer used by the Textmodifier instance. |
@@ -169,7 +170,7 @@ Happens outside of the draw framebuffer being bound after the final result is dr
 
 | Parameter | Type |
 | ------ | ------ |
-| `callback` | () => `void` |
+| `callback` | [`TextmodePluginHook`](../type-aliases/TextmodePluginHook.md) |
 
 #### Returns
 
@@ -200,7 +201,7 @@ Useful for plugins that need to finalize initialization after user setup.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | () => `void` \| `Promise`\<`void`\> | The callback to invoke after setup. |
+| `callback` | [`SetupLifecycleHook`](../type-aliases/SetupLifecycleHook.md) | The callback to invoke after setup. |
 
 #### Returns
 
@@ -229,7 +230,7 @@ Happens just before any framebuffer
 
 | Parameter | Type |
 | ------ | ------ |
-| `callback` | () => `void` |
+| `callback` | [`TextmodePluginHook`](../type-aliases/TextmodePluginHook.md) |
 
 #### Returns
 
@@ -260,7 +261,7 @@ Useful for plugins that need to prepare resources or state before user setup.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | () => `void` \| `Promise`\<`void`\> | The callback to invoke before setup. |
+| `callback` | [`SetupLifecycleHook`](../type-aliases/SetupLifecycleHook.md) | The callback to invoke before setup. |
 
 #### Returns
 

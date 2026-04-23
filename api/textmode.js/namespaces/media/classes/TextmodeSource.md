@@ -1,36 +1,30 @@
 ---
 layout: doc
 editLink: true
-title: TextmodeTexture
-description: Represents an external texture source for textmode rendering via Textmodifier.createTexture.
+title: TextmodeSource
+description: Abstract base class representing a textmode source asset (image, video, texture).
 category: Classes
 api: true
-namespace: loadables
+namespace: media
 kind: Class
-lastModified: 2026-04-07
+lastModified: 2026-04-19
 hasConstructor: false
 ---
 
-[textmode.js](../../../index.md) / [loadables](../index.md) / TextmodeTexture
+[textmode.js](../../../index.md) / [media](../index.md) / TextmodeSource
 
-# Class: TextmodeTexture
+# Abstract Class: TextmodeSource
 
-Represents an external texture source for textmode rendering via [Textmodifier.createTexture](../../../classes/Textmodifier.md#createtexture).
-
-This class enables integration with other WebGL-based libraries like three.js, p5.js, Babylon.js,
-hydra-synth, or any library that renders to a canvas element.
-
-It can be drawn to the canvas via [Textmodifier.image](../../../classes/Textmodifier.md#image).
-
-The texture automatically updates each frame to capture the latest content from the source canvas or video.
+Abstract base class representing a textmode source asset (image, video, texture).
 
 ## Extends
 
-- [`TextmodeSource`](TextmodeSource.md)
+- `Disposable`
 
 ## Extended by
 
-- [`TextmodeVideo`](TextmodeVideo.md)
+- [`TextmodeImage`](TextmodeImage.md)
+- [`TextmodeTexture`](TextmodeTexture.md)
 
 ## Accessors
 
@@ -48,10 +42,6 @@ Ideal height in grid cells.
 
 `number`
 
-#### Inherited from
-
-[`TextmodeSource`](TextmodeSource.md).[`height`](TextmodeSource.md#height)
-
 ***
 
 ### originalHeight
@@ -67,10 +57,6 @@ Original pixel height.
 ##### Returns
 
 `number`
-
-#### Inherited from
-
-[`TextmodeSource`](TextmodeSource.md).[`originalHeight`](TextmodeSource.md#originalheight)
 
 ***
 
@@ -88,26 +74,6 @@ Original pixel width.
 
 `number`
 
-#### Inherited from
-
-[`TextmodeSource`](TextmodeSource.md).[`originalWidth`](TextmodeSource.md#originalwidth)
-
-***
-
-### source
-
-#### Get Signature
-
-```ts
-get source(): HTMLCanvasElement | HTMLVideoElement;
-```
-
-The source element this texture captures from.
-
-##### Returns
-
-`HTMLCanvasElement` \| `HTMLVideoElement`
-
 ***
 
 ### texture
@@ -123,10 +89,6 @@ Return the WebGL texture currently backing this source.
 ##### Returns
 
 `WebGLTexture`
-
-#### Inherited from
-
-[`TextmodeSource`](TextmodeSource.md).[`texture`](TextmodeSource.md#texture)
 
 ***
 
@@ -144,10 +106,6 @@ Ideal width in grid cells.
 
 `number`
 
-#### Inherited from
-
-[`TextmodeSource`](TextmodeSource.md).[`width`](TextmodeSource.md#width)
-
 ## Methods
 
 ### \_hasFrameOverrides()
@@ -159,10 +117,6 @@ _hasFrameOverrides(): boolean;
 #### Returns
 
 `boolean`
-
-#### Inherited from
-
-[`TextmodeSource`](TextmodeSource.md).[`_hasFrameOverrides`](TextmodeSource.md#hasframeoverrides)
 
 ***
 
@@ -282,10 +236,6 @@ t.windowResized(() => {
   </div>
 </div>
 
-#### Inherited from
-
-[`TextmodeSource`](TextmodeSource.md).[`background`](TextmodeSource.md#background)
-
 ***
 
 ### cellColor()
@@ -298,7 +248,7 @@ cellColor(
    a?): this;
 ```
 
-Defines the cell color when [cellColorMode](TextmodeSource.md#cellcolormode) is `'fixed'`.
+Defines the cell color when [cellColorMode](#cellcolormode) is `'fixed'`.
 
 #### Parameters
 
@@ -386,10 +336,6 @@ t.windowResized(() => {
     <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeSource/cellColor/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
   </div>
 </div>
-
-#### Inherited from
-
-[`TextmodeSource`](TextmodeSource.md).[`cellColor`](TextmodeSource.md#cellcolor)
 
 ***
 
@@ -507,10 +453,6 @@ t.windowResized(() => {
   </div>
 </div>
 
-#### Inherited from
-
-[`TextmodeSource`](TextmodeSource.md).[`cellColorMode`](TextmodeSource.md#cellcolormode)
-
 ***
 
 ### characters()
@@ -619,10 +561,6 @@ t.windowResized(() => {
   </div>
 </div>
 
-#### Inherited from
-
-[`TextmodeSource`](TextmodeSource.md).[`characters`](TextmodeSource.md#characters)
-
 ***
 
 ### charColor()
@@ -635,7 +573,7 @@ charColor(
    a?): this;
 ```
 
-Defines the character color when [charColorMode](TextmodeSource.md#charcolormode) is `'fixed'`.
+Defines the character color when [charColorMode](#charcolormode) is `'fixed'`.
 
 #### Parameters
 
@@ -724,10 +662,6 @@ t.windowResized(() => {
     <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeSource/charColor/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
   </div>
 </div>
-
-#### Inherited from
-
-[`TextmodeSource`](TextmodeSource.md).[`charColor`](TextmodeSource.md#charcolor)
 
 ***
 
@@ -842,10 +776,6 @@ t.windowResized(() => {
   </div>
 </div>
 
-#### Inherited from
-
-[`TextmodeSource`](TextmodeSource.md).[`charColorMode`](TextmodeSource.md#charcolormode)
-
 ***
 
 ### charRotation()
@@ -949,10 +879,6 @@ t.windowResized(() => {
   </div>
 </div>
 
-#### Inherited from
-
-[`TextmodeSource`](TextmodeSource.md).[`charRotation`](TextmodeSource.md#charrotation)
-
 ***
 
 ### conversionMode()
@@ -1047,10 +973,6 @@ t.windowResized(() => {
   </div>
 </div>
 
-#### Inherited from
-
-[`TextmodeSource`](TextmodeSource.md).[`conversionMode`](TextmodeSource.md#conversionmode)
-
 ***
 
 ### dispose()
@@ -1070,9 +992,11 @@ and [Textmodifier.createTexture](../../../classes/Textmodifier.md#createtexture)
 
 `void`
 
-#### Inherited from
+#### Overrides
 
-[`TextmodeSource`](TextmodeSource.md).[`dispose`](TextmodeSource.md#dispose)
+```ts
+Disposable.dispose
+```
 
 ***
 
@@ -1185,10 +1109,6 @@ t.windowResized(() => {
   </div>
 </div>
 
-#### Inherited from
-
-[`TextmodeSource`](TextmodeSource.md).[`flipX`](TextmodeSource.md#flipx)
-
 ***
 
 ### flipY()
@@ -1300,10 +1220,6 @@ t.windowResized(() => {
   </div>
 </div>
 
-#### Inherited from
-
-[`TextmodeSource`](TextmodeSource.md).[`flipY`](TextmodeSource.md#flipy)
-
 ***
 
 ### invert()
@@ -1411,7 +1327,3 @@ t.windowResized(() => {
     <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeSource/invert/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
   </div>
 </div>
-
-#### Inherited from
-
-[`TextmodeSource`](TextmodeSource.md).[`invert`](TextmodeSource.md#invert)

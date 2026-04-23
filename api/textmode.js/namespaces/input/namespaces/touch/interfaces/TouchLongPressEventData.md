@@ -2,12 +2,12 @@
 layout: doc
 editLink: true
 title: TouchLongPressEventData
-description: Long press event data
+description: Long press event data.
 category: Interfaces
 api: true
 namespace: input.touch
 kind: Interface
-lastModified: 2026-04-07
+lastModified: 2026-04-19
 isInterface: true
 ---
 
@@ -15,12 +15,12 @@ isInterface: true
 
 # Interface: TouchLongPressEventData
 
-Long press event data
+Long press event data.
 
 ## Properties
 
 | Property | Type | Description |
 | ------ | ------ | ------ |
-| <a id="duration"></a> `duration` | `number` | Duration in milliseconds the press was held |
-| <a id="originalevent"></a> `originalEvent` | `TouchEvent` | Original browser event |
-| <a id="touch"></a> `touch` | [`TouchPosition`](TouchPosition.md) | Touch position at the time the long press fired |
+| <a id="duration"></a> `duration` | `number` | Duration in milliseconds the press was held. |
+| <a id="originalevent"></a> `originalEvent` | `TouchEvent` | Original browser event. |
+| <a id="touch"></a> `touch` | [`TouchPosition`](TouchPosition.md) | Touch position at the time the long press fired. |

@@ -6,7 +6,7 @@ description: Error handling levels to control how errors are reported and handle
 category: Enumerations
 api: true
 kind: Enum
-lastModified: 2026-04-07
+lastModified: 2026-04-19
 ---
 
 [textmode.js](../index.md) / TextmodeErrorLevel

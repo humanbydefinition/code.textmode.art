@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 namespace: plugins
 kind: TypeAlias
-lastModified: 2026-04-07
+lastModified: 2026-04-19
 ---
 
 [textmode.js](../../../index.md) / [plugins](../index.md) / SetupLifecycleHook
