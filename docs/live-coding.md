@@ -142,7 +142,7 @@ t.draw(() => {
 });
 ```
 
-The `t.overlay` property gives you access to the Hydra canvas as a [`TextmodeImage`](/api/textmode.js/namespaces/loadables/classes/TextmodeImage), which you can configure and draw just like any other loaded image.
+The `t.overlay` property gives you access to the Hydra canvas as a [`TextmodeImage`](/api/textmode.js/namespaces/media/classes/TextmodeImage), which you can configure and draw just like any other loaded image.
 
 ## Strudel audio reactivity
 

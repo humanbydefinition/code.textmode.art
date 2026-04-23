@@ -13,7 +13,7 @@ This section covers how to work with images and videos in `textmode.js`. Both ar
 
 ### Loading images
 
-Use the [`loadImage()`](/api/textmode.js/classes/Textmodifier#loadimage) method to load image files. This method returns a Promise that resolves to a [`TextmodeImage`](/api/textmode.js/namespaces/loadables/classes/TextmodeImage) instance:
+Use the [`loadImage()`](/api/textmode.js/classes/Textmodifier#loadimage) method to load image files. This method returns a Promise that resolves to a [`TextmodeImage`](/api/textmode.js/namespaces/media/classes/TextmodeImage) instance:
 
 ```js
 import { textmode } from 'textmode.js'
@@ -52,7 +52,7 @@ t.draw(() => {
 
 ### Customizing image conversion
 
-The [`TextmodeImage`](/api/textmode.js/namespaces/loadables/classes/TextmodeImage) instance returned by `loadImage()` provides several methods to customize how the image is converted to textmode graphics:
+The [`TextmodeImage`](/api/textmode.js/namespaces/media/classes/TextmodeImage) instance returned by `loadImage()` provides several methods to customize how the image is converted to textmode graphics:
 
 ```js
 t.setup(async () => {
@@ -103,7 +103,7 @@ Videos work similarly to images but with additional playback controls. Video fra
 
 ### Loading videos
 
-Use the [`loadVideo()`](/api/textmode.js/classes/Textmodifier#loadvideo) method to load video files. This returns a Promise that resolves to a [`TextmodeVideo`](/api/textmode.js/namespaces/loadables/classes/TextmodeVideo) instance:
+Use the [`loadVideo()`](/api/textmode.js/classes/Textmodifier#loadvideo) method to load video files. This returns a Promise that resolves to a [`TextmodeVideo`](/api/textmode.js/namespaces/media/classes/TextmodeVideo) instance:
 
 ```js
 const t = textmode.create({ width: 800, height: 600 });
@@ -123,7 +123,7 @@ t.setup(async () => {
 
 ### Video playback control
 
-The [`TextmodeVideo`](/api/textmode.js/namespaces/loadables/classes/TextmodeVideo) class provides standard video playback methods:
+The [`TextmodeVideo`](/api/textmode.js/namespaces/media/classes/TextmodeVideo) class provides standard video playback methods:
 
 ```js
 // Play the video
