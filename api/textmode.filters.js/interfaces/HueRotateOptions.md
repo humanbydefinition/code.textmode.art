@@ -1,11 +1,13 @@
 ---
+layout: doc
+editLink: true
 title: HueRotateOptions
 description: Configuration options for the 'hueRotate' filter.
 category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-02-06
+lastModified: 2026-04-23
 isInterface: true
 ---
 
@@ -30,7 +32,7 @@ const t = textmode.create({
 let video;
 
 t.setup(async () => {
-  video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+  video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
   video.play();
   video.loop();
   video.characters(' .:-=+*#%@');
