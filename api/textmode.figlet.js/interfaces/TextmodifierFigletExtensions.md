@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-04-18
+lastModified: 2026-04-19
 isInterface: true
 ---
 
@@ -43,8 +43,6 @@ A parsed FIGlet font instance.
 #### Example
 
 ```javascript
-const { textmode, FigletPlugin } = window;
-
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
@@ -89,7 +87,7 @@ function drawGrid(grid, originX, originY, color = [124, 214, 255]) {
 }
 
 t.setup(async () => {
-	font = await t.loadFigFont(window.FigletExampleFonts.bulbhead);
+	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Bulbhead.flf');
 	t.figFont(font);
 	rendered = font.renderText('LOAD');
 });
@@ -147,8 +145,6 @@ A parsed FIGlet font instance.
 #### Example
 
 ```javascript
-const { textmode, FigletPlugin } = window;
-
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
@@ -193,7 +189,7 @@ function drawGrid(grid, originX, originY, color = [255, 120, 150]) {
 }
 
 t.setup(async () => {
-	const response = await fetch(window.FigletExampleFonts.bulbhead);
+	const response = await fetch('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Bulbhead.flf');
 	const data = await response.text();
 	font = t.parseFigFont('Bulbhead copy', data);
 	t.figFont(font);
@@ -248,8 +244,6 @@ The currently active FIGlet font, if any.
 ##### Example
 
 ```javascript
-const { textmode, FigletPlugin } = window;
-
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
@@ -276,8 +270,8 @@ function writeLabel(text, y, color = [220, 220, 220]) {
 
 t.setup(async () => {
 	[bulbhead, colossal] = await Promise.all([
-		t.loadFigFont(window.FigletExampleFonts.bulbhead),
-		t.loadFigFont(window.FigletExampleFonts.colossal),
+		t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Bulbhead.flf'),
+		t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Colossal.flf'),
 	]);
 
 	t.figTextAlign('center');
@@ -368,8 +362,6 @@ Render a FIGlet string onto the current textmode grid using the active FIGlet fo
 #### Example
 
 ```javascript
-const { textmode, FigletPlugin } = window;
-
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
@@ -399,7 +391,7 @@ function getWaveColor(phase, seed, from, to) {
 }
 
 t.setup(async () => {
-	font = await t.loadFigFont(window.FigletExampleFonts.bulbhead);
+	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Bulbhead.flf');
 	t.figFont(font);
 	t.figTextAlign('center');
 	t.figTextBaseline('center');
@@ -463,8 +455,6 @@ Width in grid cells.
 #### Example
 
 ```javascript
-const { textmode, FigletPlugin } = window;
-
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
@@ -507,7 +497,7 @@ function drawHorizontalMeasure(originX, y, cols, color = [255, 120, 150]) {
 }
 
 t.setup(async () => {
-	font = await t.loadFigFont(window.FigletExampleFonts.bulbhead);
+	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Bulbhead.flf');
 	t.figFont(font);
 	t.figTextAlign('center');
 	t.figTextBaseline('center');
@@ -570,8 +560,6 @@ Height in grid cells.
 #### Example
 
 ```javascript
-const { textmode, FigletPlugin } = window;
-
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
@@ -615,7 +603,7 @@ function drawVerticalMeasure(x, originY, rows, color = [255, 120, 150]) {
 }
 
 t.setup(async () => {
-	font = await t.loadFigFont(window.FigletExampleFonts.bulbhead);
+	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Bulbhead.flf');
 	t.figFont(font);
 	t.figTextAlign('center');
 	t.figTextBaseline('center');
@@ -685,8 +673,6 @@ Width and height in grid cells.
 #### Example
 
 ```javascript
-const { textmode, FigletPlugin } = window;
-
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
@@ -741,7 +727,7 @@ function drawFrame(cols, rows, originX, originY, color = [255, 120, 150]) {
 }
 
 t.setup(async () => {
-	font = await t.loadFigFont(window.FigletExampleFonts.bulbhead);
+	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Bulbhead.flf');
 	t.figFont(font);
 	t.figTextAlign('center');
 	t.figTextBaseline('center');
@@ -800,8 +786,6 @@ The current alignment mode.
 ##### Example
 
 ```javascript
-const { textmode, FigletPlugin } = window;
-
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
@@ -838,7 +822,7 @@ function drawVerticalGuide(col, top, bottom, color = [64, 72, 96]) {
 }
 
 t.setup(async () => {
-	font = await t.loadFigFont(window.FigletExampleFonts.bulbhead);
+	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Bulbhead.flf');
 	t.figFont(font);
 	t.figTextBaseline('center');
 });
@@ -933,8 +917,6 @@ The current baseline mode.
 ##### Example
 
 ```javascript
-const { textmode, FigletPlugin } = window;
-
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
@@ -971,7 +953,7 @@ function drawHorizontalGuide(row, left, right, color = [64, 72, 96]) {
 }
 
 t.setup(async () => {
-	font = await t.loadFigFont(window.FigletExampleFonts.bulbhead);
+	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Bulbhead.flf');
 	t.figFont(font);
 	t.figTextAlign('center');
 });

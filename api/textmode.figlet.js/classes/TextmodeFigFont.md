@@ -7,7 +7,7 @@ category: Classes
 api: true
 kind: Class
 ecosystem: textmode.js
-lastModified: 2026-04-18
+lastModified: 2026-04-19
 hasConstructor: false
 ---
 
@@ -40,8 +40,6 @@ The display name associated with this FIGfont.
 ##### Example
 
 ```javascript
-const { textmode, FigletPlugin } = window;
-
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
@@ -86,7 +84,7 @@ function drawGrid(grid, originX, originY, color = [124, 214, 255]) {
 }
 
 t.setup(async () => {
-	font = await t.loadFigFont(window.FigletExampleFonts.bulbhead);
+	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Bulbhead.flf');
 	rendered = font.renderText(font.name.toUpperCase());
 });
 
@@ -135,8 +133,6 @@ The parsed FIGfont header metadata.
 ##### Example
 
 ```javascript
-const { textmode, FigletPlugin } = window;
-
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
@@ -181,7 +177,7 @@ function drawGrid(grid, originX, originY, color = [255, 214, 102]) {
 }
 
 t.setup(async () => {
-	font = await t.loadFigFont(window.FigletExampleFonts.colossal);
+	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Colossal.flf');
 	rendered = font.renderText('HDR');
 });
 
@@ -231,8 +227,6 @@ Parsed FIGcharacters keyed by Unicode code point.
 ##### Example
 
 ```javascript
-const { textmode, FigletPlugin } = window;
-
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
@@ -277,7 +271,7 @@ function drawGrid(grid, originX, originY, color = [124, 214, 255]) {
 }
 
 t.setup(async () => {
-	font = await t.loadFigFont(window.FigletExampleFonts.bulbhead);
+	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Bulbhead.flf');
 	rendered = font.renderText('ABC');
 });
 
@@ -329,8 +323,6 @@ Hardblank character declared by the font.
 ##### Example
 
 ```javascript
-const { textmode, FigletPlugin } = window;
-
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
@@ -375,7 +367,7 @@ function drawGrid(grid, originX, originY, color = [255, 214, 102]) {
 }
 
 t.setup(async () => {
-	font = await t.loadFigFont(window.FigletExampleFonts.bulbhead);
+	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Bulbhead.flf');
 	rendered = font.renderText('A B');
 });
 
@@ -427,8 +419,6 @@ Number of rows in each FIGcharacter.
 ##### Example
 
 ```javascript
-const { textmode, FigletPlugin } = window;
-
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
@@ -485,7 +475,7 @@ function drawRuler(x, y, height) {
 }
 
 t.setup(async () => {
-	font = await t.loadFigFont(window.FigletExampleFonts.colossal);
+	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Colossal.flf');
 	rendered = font.renderText('HI');
 });
 
@@ -538,8 +528,6 @@ Baseline row declared by the font.
 ##### Example
 
 ```javascript
-const { textmode, FigletPlugin } = window;
-
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
@@ -596,7 +584,7 @@ function drawBaseline(originX, originY, cols, baseline) {
 }
 
 t.setup(async () => {
-	font = await t.loadFigFont(window.FigletExampleFonts.colossal);
+	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Colossal.flf');
 	rendered = font.renderText('BASE');
 });
 
@@ -649,8 +637,6 @@ Default horizontal layout implied by the header metadata.
 ##### Example
 
 ```javascript
-const { textmode, FigletPlugin } = window;
-
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
@@ -688,7 +674,7 @@ function drawPlan(renderPlan, originX, originY, color = [124, 214, 255]) {
 }
 
 t.setup(async () => {
-	font = await t.loadFigFont(window.FigletExampleFonts.bulbhead);
+	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Bulbhead.flf');
 	plan = font.planText('LAYOUT', {
 		horizontalLayout: font.defaultLayout,
 	});
@@ -740,8 +726,6 @@ Default print direction implied by the FIGfont header metadata.
 ##### Example
 
 ```javascript
-const { textmode, FigletPlugin } = window;
-
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
@@ -779,7 +763,7 @@ function drawPlan(renderPlan, originX, originY, color = [255, 214, 102]) {
 }
 
 t.setup(async () => {
-	font = await t.loadFigFont(window.FigletExampleFonts.bulbhead);
+	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Bulbhead.flf');
 	plan = font.planText('FLOW', {
 		direction: 'font',
 	});
@@ -831,8 +815,6 @@ Default vertical layout implied by the FIGfont header metadata.
 ##### Example
 
 ```javascript
-const { textmode, FigletPlugin } = window;
-
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
@@ -877,7 +859,7 @@ function drawGrid(grid, originX, originY, color = [124, 214, 255]) {
 }
 
 t.setup(async () => {
-	font = await t.loadFigFont(window.FigletExampleFonts.bulbhead);
+	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Bulbhead.flf');
 	rendered = font.renderText('UP\nDOWN', {
 		verticalLayout: font.defaultVerticalLayout,
 	});
@@ -935,8 +917,6 @@ The matching FIGcharacter, if present.
 #### Example
 
 ```javascript
-const { textmode, FigletPlugin } = window;
-
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
@@ -982,7 +962,7 @@ function drawLines(lines, originX, originY, color = [124, 214, 255]) {
 }
 
 t.setup(async () => {
-	font = await t.loadFigFont(window.FigletExampleFonts.bulbhead);
+	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Bulbhead.flf');
 	figCharacter = font.getCharacter('A');
 	previewLines = (figCharacter?.lines ?? []).map((line) => line.replaceAll(font.hardblank, ' '));
 });
@@ -1038,8 +1018,6 @@ Plan a string into positioned FIGlet cells and logical lines.
 #### Example
 
 ```javascript
-const { textmode, FigletPlugin } = window;
-
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
@@ -1083,7 +1061,7 @@ function drawPlan(renderPlan, originX, originY) {
 }
 
 t.setup(async () => {
-	font = await t.loadFigFont(window.FigletExampleFonts.bulbhead);
+	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Bulbhead.flf');
 	plan = font.planText('PLAN TEXT WRAPS WORDS', {
 		maxCols: 58,
 		wrap: 'word',
@@ -1141,8 +1119,6 @@ Render a string into a FIGlet sub-character grid.
 #### Example
 
 ```javascript
-const { textmode, FigletPlugin } = window;
-
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
@@ -1188,7 +1164,7 @@ function drawGrid(grid, originX, originY) {
 }
 
 t.setup(async () => {
-	font = await t.loadFigFont(window.FigletExampleFonts.isometric1);
+	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Isometric1.flf');
 	rendered = font.renderText('GRID\nAPI');
 });
 
@@ -1247,8 +1223,6 @@ Measure rendered FIGlet text without drawing it.
 #### Example
 
 ```javascript
-const { textmode, FigletPlugin } = window;
-
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
@@ -1323,7 +1297,7 @@ function drawBounds(cols, rows, originX, originY, color = [255, 120, 150]) {
 }
 
 t.setup(async () => {
-	font = await t.loadFigFont(window.FigletExampleFonts.colossal);
+	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Colossal.flf');
 	measurement = font.measureText('MEASURE');
 	rendered = font.renderText('MEASURE');
 });

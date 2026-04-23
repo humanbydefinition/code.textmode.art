@@ -7,7 +7,7 @@ category: API Reference
 api: true
 kind: Project
 ecosystem: textmode.js
-lastModified: 2026-04-18
+lastModified: 2026-04-19
 ---
 
 # textmode.figlet.js
