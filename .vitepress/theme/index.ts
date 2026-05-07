@@ -53,14 +53,11 @@ const HeroLayout = defineComponent({
   setup(_, { slots }) {
     return () => h(DefaultTheme.Layout, null, {
       ...slots,
-      'home-hero-info-after': () => h('div', {
-        class: 'textmode-hero-wrapper',
-        innerHTML: `
-          <div class="textmode-hero-container">
-            <canvas class="textmode-hero-canvas"></canvas>
-          </div>
-        `
-      }),
+      'home-hero-info-after': () => h('div', { class: 'textmode-hero-wrapper' }, [
+        h('div', { class: 'textmode-hero-container' }, [
+          h('canvas', { class: 'textmode-hero-canvas' })
+        ])
+      ]),
       'aside-bottom': () => h(AsideLinks),
       'doc-after': () => h(DocFooter),
       'layout-bottom': () => h(NotificationToast)
