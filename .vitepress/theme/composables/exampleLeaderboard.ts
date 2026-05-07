@@ -84,13 +84,13 @@ function createLeaderboardEntry(
 ): Omit<ExampleLeaderboardEntry, 'rank'> {
   const contributor = getIdentity(author)
   const sketchCount = sketches.length
-  const authorKey = contributor?.login ?? author.toLowerCase()
+  const login = contributor?.login ?? author.toLowerCase()
   const sketchesUntilRole = Math.max(0, discordRoleReward.unlockCount - sketchCount)
 
   return {
-    authorKey,
+    authorKey: login,
     name: contributor?.name ?? author,
-    login: contributor?.login ?? author.toLowerCase(),
+    login,
     avatar: getAvatar(contributor, author),
     profile: getProfile(contributor, author),
     links: contributor?.links ?? [],
@@ -98,7 +98,7 @@ function createLeaderboardEntry(
     progressPercent: Math.min(100, Math.round((sketchCount / discordRoleReward.unlockCount) * 100)),
     sketchesUntilRole,
     hasUnlockedRole: sketchesUntilRole === 0,
-    isBot: botLogins.has(authorKey.toLowerCase()),
+    isBot: botLogins.has(login.toLowerCase()),
     sketches: sketches.slice().sort((left, right) => left.title.localeCompare(right.title)),
   }
 }
