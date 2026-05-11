@@ -26,7 +26,6 @@ import Testimonials from './components/Testimonials/Testimonials.vue'
 import ContributorsGrid from './components/Contributors/ContributorsGrid.vue'
 import WhatWillYouCreate from './components/WhatWillYouCreate/WhatWillYouCreate.vue'
 import ApiLanding from './components/ApiLanding/ApiLanding.vue'
-import ExampleLeaderboard from './components/Leaderboard/ExampleLeaderboard.vue'
 import { GalleryGrid } from './components/Gallery'
 
 // Blog
@@ -88,7 +87,6 @@ const baseTheme: Theme = {
     app.component('WhatWillYouCreate', WhatWillYouCreate)
     app.component('GalleryGrid', GalleryGrid)
     app.component('ApiLanding', ApiLanding)
-    app.component('ExampleLeaderboard', ExampleLeaderboard)
 
     // Set up hero sketch router
     setupHeroSketchRouter(router)
