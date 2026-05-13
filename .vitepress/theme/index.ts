@@ -13,7 +13,6 @@ import 'vitepress-plugin-codesandbox/style.css'
 
 // Components
 import TextmodeSandbox from './components/TextmodeSandbox.vue'
-import FontShowcase from './components/FontShowcase/FontShowcase.vue'
 import SupportGrid from './components/Support/SupportGrid.vue'
 import TextmodeWhatIs from './components/TextmodeWhatIs.vue'
 import HomeCta from './components/HomeCta/HomeCta.vue'
@@ -76,7 +75,6 @@ const baseTheme: Theme = {
     // Register components
     app.component('Sandbox', Sandbox)
     app.component('TextmodeSandbox', TextmodeSandbox)
-    app.component('FontShowcase', FontShowcase)
     app.component('SupportGrid', SupportGrid)
     app.component('TextmodeWhatIs', TextmodeWhatIs)
     app.component('HomeCta', HomeCta)

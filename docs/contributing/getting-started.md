@@ -53,7 +53,7 @@ Always create a new branch for your changes:
 
 ```bash
 # Use a descriptive branch name
-git checkout -b add-font-ursafont
+git checkout -b improve-font-docs
 # or
 git checkout -b fix-typo-fundamentals
 # or
@@ -68,7 +68,6 @@ Understanding the project layout helps you find what you need:
 .vitepress/
 ├── config.mts          # VitePress configuration
 ├── data/
-│   ├── fonts.json      # Font showcase data
 │   ├── sketches.json   # Example sketch metadata
 │   └── contributors.json # Optional contributor profile metadata
 └── theme/              # Custom theme components
@@ -86,7 +85,6 @@ public/                 # Static assets (fonts, images, SVGs)
 ## Key files
 
 - **[`.vitepress/config.mts`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/config.mts)** - VitePress configuration
-- **[`.vitepress/data/fonts.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/fonts.json)** - Font showcase data
 - **[`.vitepress/data/sketches.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/sketches.json)** - Example sketch metadata used by the docs
 - **[`.all-contributorsrc`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.all-contributorsrc)** - Canonical contributor registry
 - **[`.vitepress/data/contributors.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contributors.json)** - Optional social/profile metadata for the website
@@ -130,7 +128,7 @@ If the build succeeds, you're ready to submit!
 git add .
 
 # Commit with a clear message
-git commit -m "Add Ursafont to font showcase"
+git commit -m "Clarify custom font loading docs"
 ```
 
 Write clear commit messages that describe **what** you changed and **why**.
@@ -182,10 +180,10 @@ You'll appear on the [Contributors page](/docs/contributors) when your PR is mer
 
 ## Common tasks
 
-### Adding a font
+### Suggesting a font or resource
 
-1. Add entry to `.vitepress/data/fonts.json`
-2. (Optional) Add preview image to `public/font_previews/`
+1. Visit [`humanbydefinition/awesome-textmode`](https://github.com/humanbydefinition/awesome-textmode)
+2. Add your entry there or open an issue
 3. Submit pull request
 
 ### Adding a sketch

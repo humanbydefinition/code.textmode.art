@@ -1,6 +1,6 @@
 ---
 title: Contributing
-description: Overview of contribution opportunities for textmode.js, including font suggestions, example sketches, and documentation improvements.
+description: Overview of contribution opportunities for textmode.js, including example sketches and documentation improvements.
 ---
 
 # Contributing
@@ -15,10 +15,6 @@ This contributing guide is a work in progress and may not answer all questions. 
 
 There are many ways you can help improve textmode.js and its documentation:
 
-### 🔤 [Suggest a font](/docs/contributing/suggest-a-font)
-
-Help expand the collection of pixel fonts that work well with textmode.js. We're always looking for new monospaced fonts that shine at small pixel sizes.
-
 ### 🎨 [Submit an example sketch](/docs/contributing/submit-a-sketch)
 
 Share your creative work! Example sketches help others learn and showcase what's possible with textmode.js.
@@ -26,6 +22,8 @@ Share your creative work! Example sketches help others learn and showcase what's
 ### 📝 [Improve documentation](/docs/contributing/improve-docs)
 
 Help make the docs clearer and more helpful by fixing typos, improving explanations, or adding code examples.
+
+If you want to suggest fonts or other textmode resources, contribute to [`awesome-textmode`](https://github.com/humanbydefinition/awesome-textmode).
 
 ### 🐛 Report issues
 

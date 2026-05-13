@@ -104,7 +104,7 @@
       :is-open="isLightboxOpen"
       :current-index="0"
       :images="lightboxImages"
-      :font-name="item.title"
+      :title="item.title"
       @close="closeLightbox"
       @update-index="() => {}"
     />
@@ -114,7 +114,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { UiIcon, UiBadge } from '../ui'
-import ImageLightbox from '../FontShowcase/ImageLightbox.vue'
+import ImageLightbox from './ImageLightbox.vue'
 import type { GalleryItem, GalleryItemType } from './types'
 
 defineOptions({ name: 'GalleryCard' })

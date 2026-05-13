@@ -1,11 +1,11 @@
 ---
 title: Fonts
-description: A curated showcase of monospaced bitmap fonts perfect for textmode.js. Learn how to load custom fonts for your ASCII art projects.
+description: Learn how to load custom fonts for textmode.js and discover recommended textmode fonts through the awesome-textmode project.
 ---
 
 # Fonts
 
-`textmode.js` works best with monospaced bitmap fonts that are perfect for creating ASCII art, textmode graphics, and retro computing aesthetics. This page showcases a curated collection of fonts that work exceptionally well with the library.
+`textmode.js` works best with monospaced bitmap fonts for ASCII art, textmode graphics, and retro computing aesthetics.
 
 ## Font requirements
 
@@ -47,14 +47,12 @@ textmodifier.loadFont("https://example.com/path/to/font.ttf");
 ```
 :::
 
-## Featured fonts
+## Discover fonts
 
 :::info
-Please respect the individual licenses of each font. Some fonts are released under permissive licenses like CC0, while others may have specific usage requirements. Always check the license before using a font in your projects.
+The curated font list now lives in [`awesome-textmode`](https://github.com/humanbydefinition/awesome-textmode), a separate GitHub repository for textmode resources.
 :::
 
-<FontShowcase />
-
-## Contributing
-
-Have a great monospaced font that works well with `textmode.js`? We'd love to feature it! Check out our [Contributing Guide](/docs/contributing/index.md#suggest-a-font) for details on how to suggest fonts for inclusion in this showcase.
+- Browse the full project: [`humanbydefinition/awesome-textmode`](https://github.com/humanbydefinition/awesome-textmode)
+- Jump straight to the font listings: [Fonts](https://github.com/humanbydefinition/awesome-textmode#fonts) and [Font Collections](https://github.com/humanbydefinition/awesome-textmode#font-collections)
+- If you want to suggest a font or another textmode resource, open a pull request or issue in that repository

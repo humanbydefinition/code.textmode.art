@@ -11,7 +11,7 @@
         tabindex="0"
         role="dialog"
         aria-modal="true"
-        :aria-label="`${fontName} font preview gallery`"
+        :aria-label="`${title} image gallery`"
       >
         <button
           class="lightbox-close"
@@ -44,7 +44,7 @@
               <img
                 :key="currentImage"
                 :src="currentImage"
-                :alt="`${fontName} preview ${currentIndex + 1} of ${images.length}`"
+                :alt="`${title} preview ${currentIndex + 1} of ${images.length}`"
                 class="lightbox-image"
                 @click.stop
               />
@@ -70,7 +70,7 @@
         </div>
 
         <div class="lightbox-title">
-          {{ fontName }}
+          {{ title }}
         </div>
       </div>
     </Transition>
@@ -78,20 +78,20 @@
 </template>
 
 <script setup lang="ts">
-import { computed, ref, watch, onMounted, onUnmounted } from 'vue'
+import { computed, ref, watch, onUnmounted } from 'vue'
 
 interface Props {
   isOpen: boolean
   currentIndex: number
   images: string[]
-  fontName: string
+  title: string
 }
 
 const props = withDefaults(defineProps<Props>(), {
   isOpen: false,
   currentIndex: 0,
   images: () => [],
-  fontName: ''
+  title: ''
 })
 
 const emit = defineEmits<{
