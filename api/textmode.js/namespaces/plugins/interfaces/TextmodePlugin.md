@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: plugins
 kind: Interface
-lastModified: 2026-04-23
+lastModified: 2026-05-13
 isInterface: true
 ---
 
@@ -23,8 +23,8 @@ Create plugins by implementing this interface.
 
 | Property | Type | Description |
 | ------ | ------ | ------ |
-| <a id="name"></a> `name` | `string` | Unique name for the plugin. |
-| <a id="version"></a> `version?` | `string` | Version string for the plugin. |
+| <a id="property-name"></a> `name` | `string` | Unique name for the plugin. |
+| <a id="property-version"></a> `version?` | `string` | Version string for the plugin. |
 
 ## Methods
 
@@ -141,20 +141,14 @@ t.mouseClicked(() => {
 	}
 
 	t.destroy();
-	document.body.innerHTML = '<div style="padding: 24px; color: #e4e4e7; background: #09090b; min-height: 100vh;">plugin.uninstall() ran after destroy()</div>';
+	document.body.innerHTML =
+		'<div style="padding: 24px; color: #e4e4e7; background: #09090b; min-height: 100vh;">plugin.uninstall() ran after destroy()</div>';
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-  </div>
-</div>
 
 ***
 
@@ -271,17 +265,11 @@ t.mouseClicked(() => {
 	}
 
 	t.destroy();
-	document.body.innerHTML = '<div style="padding: 24px; color: #e4e4e7; background: #09090b; min-height: 100vh;">plugin.uninstall() ran after destroy()</div>';
+	document.body.innerHTML =
+		'<div style="padding: 24px; color: #e4e4e7; background: #09090b; min-height: 100vh;">plugin.uninstall() ran after destroy()</div>';
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-  </div>
-</div>

@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: input.touch
 kind: Interface
-lastModified: 2026-04-23
+lastModified: 2026-05-13
 isInterface: true
 ---
 
@@ -21,6 +21,6 @@ Long press event data.
 
 | Property | Type | Description |
 | ------ | ------ | ------ |
-| <a id="duration"></a> `duration` | `number` | Duration in milliseconds the press was held. |
-| <a id="originalevent"></a> `originalEvent` | `TouchEvent` | Original browser event. |
-| <a id="touch"></a> `touch` | [`TouchPosition`](TouchPosition.md) | Touch position at the time the long press fired. |
+| <a id="property-duration"></a> `duration` | `number` | Duration in milliseconds the press was held. |
+| <a id="property-originalevent"></a> `originalEvent` | `TouchEvent` | Original browser event. |
+| <a id="property-touch"></a> `touch` | [`TouchPosition`](TouchPosition.md) | Touch position at the time the long press fired. |

@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: media
 kind: Class
-lastModified: 2026-04-23
+lastModified: 2026-05-13
 hasConstructor: false
 ---
 
@@ -66,14 +66,6 @@ t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeVideo/creation/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 ## Extends
 
@@ -130,9 +122,12 @@ t.draw(() => {
 
 	if (video) {
 		t.image(video, t.grid.cols - 8, t.grid.rows - 10);
-		label(`videoElement ${video.videoElement ? 'ready' : 'pending'}`, Math.floor(t.grid.rows * 0.20));
-		label(`current ${video.currentTime.toFixed(1)}s / ${video.duration.toFixed(1)}s`, Math.floor(t.grid.rows * 0.30));
-		label(`isPlaying ${video.isPlaying ? 'true' : 'false'}`, Math.floor(t.grid.rows * 0.40), [120, 205, 255]);
+		label(`videoElement ${video.videoElement ? 'ready' : 'pending'}`, Math.floor(t.grid.rows * 0.2));
+		label(
+			`current ${video.currentTime.toFixed(1)}s / ${video.duration.toFixed(1)}s`,
+			Math.floor(t.grid.rows * 0.3)
+		);
+		label(`isPlaying ${video.isPlaying ? 'true' : 'false'}`, Math.floor(t.grid.rows * 0.4), [120, 205, 255]);
 	}
 
 	label('click to toggle play / pause', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
@@ -155,14 +150,6 @@ t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeVideo/currentTime/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 ***
 
@@ -215,9 +202,12 @@ t.draw(() => {
 
 	if (video) {
 		t.image(video, t.grid.cols - 8, t.grid.rows - 10);
-		label(`videoElement ${video.videoElement ? 'ready' : 'pending'}`, Math.floor(t.grid.rows * 0.20));
-		label(`current ${video.currentTime.toFixed(1)}s / ${video.duration.toFixed(1)}s`, Math.floor(t.grid.rows * 0.30));
-		label(`isPlaying ${video.isPlaying ? 'true' : 'false'}`, Math.floor(t.grid.rows * 0.40), [120, 205, 255]);
+		label(`videoElement ${video.videoElement ? 'ready' : 'pending'}`, Math.floor(t.grid.rows * 0.2));
+		label(
+			`current ${video.currentTime.toFixed(1)}s / ${video.duration.toFixed(1)}s`,
+			Math.floor(t.grid.rows * 0.3)
+		);
+		label(`isPlaying ${video.isPlaying ? 'true' : 'false'}`, Math.floor(t.grid.rows * 0.4), [120, 205, 255]);
 	}
 
 	label('click to toggle play / pause', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
@@ -240,14 +230,6 @@ t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeVideo/currentTime/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 ***
 
@@ -268,30 +250,18 @@ Ideal height in grid cells.
 ##### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-const sourceCanvas = document.createElement('canvas');
-sourceCanvas.width = 192;
-sourceCanvas.height = 96;
+let source;
 
-const sourceContext = sourceCanvas.getContext('2d');
-let source = null;
-
-function renderSource() {
-	if (!sourceContext) {
-		return;
-	}
-
-	sourceContext.fillStyle = '#020617';
-	sourceContext.fillRect(0, 0, sourceCanvas.width, sourceCanvas.height);
-	sourceContext.fillStyle = '#34d399';
-	sourceContext.fillRect(18, 18, sourceCanvas.width - 36, sourceCanvas.height - 36);
-}
-
-function label(text, y, color = [220, 220, 220]) {
+function drawCenteredText(text, y, rgb = [255, 255, 255]) {
 	t.push();
 	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
+	t.charColor(rgb[0], rgb[1], rgb[2]);
 
 	for (let i = 0; i < text.length; i++) {
 		t.push();
@@ -304,36 +274,61 @@ function label(text, y, color = [220, 220, 220]) {
 	t.pop();
 }
 
+function createSourceCanvas() {
+	const canvas = document.createElement('canvas');
+	canvas.width = 128;
+	canvas.height = 256;
+	const ctx = canvas.getContext('2d');
+	if (!ctx) return canvas;
+
+	ctx.fillStyle = '#1e293b';
+	ctx.fillRect(0, 0, 128, 256);
+	ctx.strokeStyle = '#ffffff';
+	ctx.lineWidth = 4;
+	ctx.strokeRect(10, 10, 108, 236);
+
+	return canvas;
+}
+
 t.setup(() => {
-	renderSource();
-	source = t.createTexture(sourceCanvas);
+	source = t.createTexture(createSourceCanvas());
 	source.characters(' .:-=+*#%@');
 });
 
 t.draw(() => {
-	t.background(5, 7, 18);
+	t.background(6, 10, 22);
 
-	if (source) {
-		t.image(source, t.grid.cols - 8, t.grid.rows - 10);
-		label(`width ${source.width}  height ${source.height}`, Math.floor(t.grid.rows * 0.24));
-		label(`original ${source.originalWidth} x ${source.originalHeight}`, Math.floor(t.grid.rows * 0.34), [120, 205, 255]);
-	}
+	if (!source) return;
 
-	label('TextmodeSource dimensions', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
+	const h = source.height;
+
+	t.push();
+	t.translate(0, 0);
+	t.charColor(140, 220, 255, 100);
+	t.char('|');
+	t.rect(1, h);
+	t.pop();
+
+	t.push();
+	t.charColor(255, 255, 255);
+	t.translate(0, -Math.floor(h / 2));
+	t.char('-');
+	t.point();
+	t.translate(0, h - 1);
+	t.char('-');
+	t.point();
+	t.pop();
+
+	drawCenteredText('TextmodeSource.height', -12, [240, 245, 255]);
+	drawCenteredText('The ideal height of the source in grid cells.', -10, [150, 170, 200]);
+
+	drawCenteredText(`${h} CELLS`, 12, [140, 220, 255]);
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeSource/width/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 #### Inherited from
 
@@ -390,9 +385,12 @@ t.draw(() => {
 
 	if (video) {
 		t.image(video, t.grid.cols - 8, t.grid.rows - 10);
-		label(`videoElement ${video.videoElement ? 'ready' : 'pending'}`, Math.floor(t.grid.rows * 0.20));
-		label(`current ${video.currentTime.toFixed(1)}s / ${video.duration.toFixed(1)}s`, Math.floor(t.grid.rows * 0.30));
-		label(`isPlaying ${video.isPlaying ? 'true' : 'false'}`, Math.floor(t.grid.rows * 0.40), [120, 205, 255]);
+		label(`videoElement ${video.videoElement ? 'ready' : 'pending'}`, Math.floor(t.grid.rows * 0.2));
+		label(
+			`current ${video.currentTime.toFixed(1)}s / ${video.duration.toFixed(1)}s`,
+			Math.floor(t.grid.rows * 0.3)
+		);
+		label(`isPlaying ${video.isPlaying ? 'true' : 'false'}`, Math.floor(t.grid.rows * 0.4), [120, 205, 255]);
 	}
 
 	label('click to toggle play / pause', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
@@ -415,14 +413,6 @@ t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeVideo/currentTime/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 ***
 
@@ -443,30 +433,19 @@ Original pixel height.
 ##### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-const sourceCanvas = document.createElement('canvas');
-sourceCanvas.width = 192;
-sourceCanvas.height = 96;
+let source;
+const PIXEL_HEIGHT = 512;
 
-const sourceContext = sourceCanvas.getContext('2d');
-let source = null;
-
-function renderSource() {
-	if (!sourceContext) {
-		return;
-	}
-
-	sourceContext.fillStyle = '#020617';
-	sourceContext.fillRect(0, 0, sourceCanvas.width, sourceCanvas.height);
-	sourceContext.fillStyle = '#34d399';
-	sourceContext.fillRect(18, 18, sourceCanvas.width - 36, sourceCanvas.height - 36);
-}
-
-function label(text, y, color = [220, 220, 220]) {
+function drawCenteredText(text, y, rgb = [255, 255, 255]) {
 	t.push();
 	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
+	t.charColor(rgb[0], rgb[1], rgb[2]);
 
 	for (let i = 0; i < text.length; i++) {
 		t.push();
@@ -480,35 +459,31 @@ function label(text, y, color = [220, 220, 220]) {
 }
 
 t.setup(() => {
-	renderSource();
-	source = t.createTexture(sourceCanvas);
+	const canvas = document.createElement('canvas');
+	canvas.width = 128;
+	canvas.height = PIXEL_HEIGHT;
+	source = t.createTexture(canvas);
 	source.characters(' .:-=+*#%@');
 });
 
 t.draw(() => {
-	t.background(5, 7, 18);
+	t.background(6, 10, 22);
 
-	if (source) {
-		t.image(source, t.grid.cols - 8, t.grid.rows - 10);
-		label(`width ${source.width}  height ${source.height}`, Math.floor(t.grid.rows * 0.24));
-		label(`original ${source.originalWidth} x ${source.originalHeight}`, Math.floor(t.grid.rows * 0.34), [120, 205, 255]);
-	}
+	if (!source) return;
 
-	label('TextmodeSource dimensions', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
+	const oh = source.originalHeight;
+
+	drawCenteredText('TextmodeSource.originalHeight', -8, [240, 245, 255]);
+	drawCenteredText('The raw pixel height of the source asset.', -6, [150, 170, 200]);
+
+	drawCenteredText(`${oh} PIXELS`, 6, [255, 225, 140]);
+	drawCenteredText('This value is independent of the grid resolution.', 9, [100, 120, 150]);
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeSource/width/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 #### Inherited from
 
@@ -533,30 +508,19 @@ Original pixel width.
 ##### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-const sourceCanvas = document.createElement('canvas');
-sourceCanvas.width = 192;
-sourceCanvas.height = 96;
+let source;
+const PIXEL_WIDTH = 512;
 
-const sourceContext = sourceCanvas.getContext('2d');
-let source = null;
-
-function renderSource() {
-	if (!sourceContext) {
-		return;
-	}
-
-	sourceContext.fillStyle = '#020617';
-	sourceContext.fillRect(0, 0, sourceCanvas.width, sourceCanvas.height);
-	sourceContext.fillStyle = '#34d399';
-	sourceContext.fillRect(18, 18, sourceCanvas.width - 36, sourceCanvas.height - 36);
-}
-
-function label(text, y, color = [220, 220, 220]) {
+function drawCenteredText(text, y, rgb = [255, 255, 255]) {
 	t.push();
 	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
+	t.charColor(rgb[0], rgb[1], rgb[2]);
 
 	for (let i = 0; i < text.length; i++) {
 		t.push();
@@ -570,35 +534,31 @@ function label(text, y, color = [220, 220, 220]) {
 }
 
 t.setup(() => {
-	renderSource();
-	source = t.createTexture(sourceCanvas);
+	const canvas = document.createElement('canvas');
+	canvas.width = PIXEL_WIDTH;
+	canvas.height = 128;
+	source = t.createTexture(canvas);
 	source.characters(' .:-=+*#%@');
 });
 
 t.draw(() => {
-	t.background(5, 7, 18);
+	t.background(6, 10, 22);
 
-	if (source) {
-		t.image(source, t.grid.cols - 8, t.grid.rows - 10);
-		label(`width ${source.width}  height ${source.height}`, Math.floor(t.grid.rows * 0.24));
-		label(`original ${source.originalWidth} x ${source.originalHeight}`, Math.floor(t.grid.rows * 0.34), [120, 205, 255]);
-	}
+	if (!source) return;
 
-	label('TextmodeSource dimensions', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
+	const ow = source.originalWidth;
+
+	drawCenteredText('TextmodeSource.originalWidth', -8, [240, 245, 255]);
+	drawCenteredText('The raw pixel width of the source asset.', -6, [150, 170, 200]);
+
+	drawCenteredText(`${ow} PIXELS`, 6, [255, 225, 140]);
+	drawCenteredText('This value is independent of the grid resolution.', 9, [100, 120, 150]);
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeSource/width/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 #### Inherited from
 
@@ -679,21 +639,17 @@ t.draw(() => {
 	t.image(texture, t.grid.cols - 8, t.grid.rows - 10);
 
 	drawLabel('createTexture(canvas)', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
-	drawLabel(`source matches ${texture.source === sourceCanvas ? 'yes' : 'no'}`, Math.floor(t.grid.rows * 0.30), [120, 205, 255]);
+	drawLabel(
+		`source matches ${texture.source === sourceCanvas ? 'yes' : 'no'}`,
+		Math.floor(t.grid.rows * 0.3),
+		[120, 205, 255]
+	);
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/Textmodifier/createTexture/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 #### Inherited from
 
@@ -771,21 +727,17 @@ t.draw(() => {
 	}
 
 	label('TextmodeSource.texture', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
-	label(source && source.texture ? 'webgl texture available' : 'texture pending', Math.floor(t.grid.rows * 0.30), [120, 205, 255]);
+	label(
+		source && source.texture ? 'webgl texture available' : 'texture pending',
+		Math.floor(t.grid.rows * 0.3),
+		[120, 205, 255]
+	);
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeSource/texture/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 #### Inherited from
 
@@ -842,9 +794,12 @@ t.draw(() => {
 
 	if (video) {
 		t.image(video, t.grid.cols - 8, t.grid.rows - 10);
-		label(`videoElement ${video.videoElement ? 'ready' : 'pending'}`, Math.floor(t.grid.rows * 0.20));
-		label(`current ${video.currentTime.toFixed(1)}s / ${video.duration.toFixed(1)}s`, Math.floor(t.grid.rows * 0.30));
-		label(`isPlaying ${video.isPlaying ? 'true' : 'false'}`, Math.floor(t.grid.rows * 0.40), [120, 205, 255]);
+		label(`videoElement ${video.videoElement ? 'ready' : 'pending'}`, Math.floor(t.grid.rows * 0.2));
+		label(
+			`current ${video.currentTime.toFixed(1)}s / ${video.duration.toFixed(1)}s`,
+			Math.floor(t.grid.rows * 0.3)
+		);
+		label(`isPlaying ${video.isPlaying ? 'true' : 'false'}`, Math.floor(t.grid.rows * 0.4), [120, 205, 255]);
 	}
 
 	label('click to toggle play / pause', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
@@ -867,14 +822,6 @@ t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeVideo/currentTime/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 ***
 
@@ -895,30 +842,18 @@ Ideal width in grid cells.
 ##### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-const sourceCanvas = document.createElement('canvas');
-sourceCanvas.width = 192;
-sourceCanvas.height = 96;
+let source;
 
-const sourceContext = sourceCanvas.getContext('2d');
-let source = null;
-
-function renderSource() {
-	if (!sourceContext) {
-		return;
-	}
-
-	sourceContext.fillStyle = '#020617';
-	sourceContext.fillRect(0, 0, sourceCanvas.width, sourceCanvas.height);
-	sourceContext.fillStyle = '#34d399';
-	sourceContext.fillRect(18, 18, sourceCanvas.width - 36, sourceCanvas.height - 36);
-}
-
-function label(text, y, color = [220, 220, 220]) {
+function drawCenteredText(text, y, rgb = [255, 255, 255]) {
 	t.push();
 	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
+	t.charColor(rgb[0], rgb[1], rgb[2]);
 
 	for (let i = 0; i < text.length; i++) {
 		t.push();
@@ -931,36 +866,62 @@ function label(text, y, color = [220, 220, 220]) {
 	t.pop();
 }
 
+function createSourceCanvas() {
+	const canvas = document.createElement('canvas');
+	canvas.width = 256;
+	canvas.height = 128;
+	const ctx = canvas.getContext('2d');
+	if (!ctx) return canvas;
+
+	ctx.fillStyle = '#1e293b';
+	ctx.fillRect(0, 0, 256, 128);
+	ctx.strokeStyle = '#ffffff';
+	ctx.lineWidth = 4;
+	ctx.strokeRect(10, 10, 236, 108);
+
+	return canvas;
+}
+
 t.setup(() => {
-	renderSource();
-	source = t.createTexture(sourceCanvas);
+	source = t.createTexture(createSourceCanvas());
 	source.characters(' .:-=+*#%@');
 });
 
 t.draw(() => {
-	t.background(5, 7, 18);
+	t.background(6, 10, 22);
 
-	if (source) {
-		t.image(source, t.grid.cols - 8, t.grid.rows - 10);
-		label(`width ${source.width}  height ${source.height}`, Math.floor(t.grid.rows * 0.24));
-		label(`original ${source.originalWidth} x ${source.originalHeight}`, Math.floor(t.grid.rows * 0.34), [120, 205, 255]);
-	}
+	if (!source) return;
 
-	label('TextmodeSource dimensions', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
+	const w = source.width;
+
+	t.push();
+	t.translate(0, 0);
+	t.charColor(140, 220, 255, 100);
+	t.char('=');
+	t.rect(w, 1);
+	t.pop();
+
+	t.push();
+	t.charColor(255, 255, 255);
+	t.translate(-Math.floor(w / 2), 0);
+	t.char('[');
+	t.point();
+	t.translate(w - 1, 0);
+	t.char(']');
+	t.point();
+	t.pop();
+
+	drawCenteredText('TextmodeSource.width', -12, [240, 245, 255]);
+	drawCenteredText('The ideal width of the source in grid cells.', -10, [150, 170, 200]);
+
+	drawCenteredText(`${w} CELLS`, 10, [140, 220, 255]);
+	drawCenteredText('Calculated to fit the current grid aspect ratio.', 12, [100, 120, 150]);
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeSource/width/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 #### Inherited from
 
@@ -1014,35 +975,18 @@ This instance for chaining.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-let plainSource;
-let backgroundSource;
+let sourceA, sourceB;
 
-function createTransparentCanvas() {
-	const canvas = document.createElement('canvas');
-	canvas.width = 160;
-	canvas.height = 160;
-
-	const ctx = canvas.getContext('2d');
-	if (!ctx) return canvas;
-
-	ctx.clearRect(0, 0, canvas.width, canvas.height);
-	ctx.fillStyle = '#ffffff';
-	ctx.beginPath();
-	ctx.arc(canvas.width / 2, canvas.height / 2, 48, 0, Math.PI * 2);
-	ctx.fill();
-
-	ctx.fillStyle = '#000000';
-	ctx.fillRect(canvas.width / 2 - 10, canvas.height / 2 - 10, 20, 20);
-
-	return canvas;
-}
-
-function drawLabel(text, x, y) {
+function drawCenteredText(text, y, rgb = [255, 255, 255]) {
 	t.push();
-	t.translate(x - Math.floor(text.length / 2), y);
-	t.charColor(255);
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(rgb[0], rgb[1], rgb[2]);
 
 	for (let i = 0; i < text.length; i++) {
 		t.push();
@@ -1055,50 +999,71 @@ function drawLabel(text, x, y) {
 	t.pop();
 }
 
+function createTransparentCanvas() {
+	const canvas = document.createElement('canvas');
+	canvas.width = 128;
+	canvas.height = 128;
+	const ctx = canvas.getContext('2d');
+	if (!ctx) return canvas;
+
+	ctx.clearRect(0, 0, 128, 128);
+	ctx.lineWidth = 10;
+	ctx.strokeStyle = '#ffffff';
+	ctx.strokeRect(20, 20, 88, 88);
+
+	// Inner solid white circle
+	ctx.fillStyle = '#ffffff';
+	ctx.beginPath();
+	ctx.arc(64, 64, 30, 0, Math.PI * 2);
+	ctx.fill();
+
+	return canvas;
+}
+
 t.setup(() => {
 	const canvas = createTransparentCanvas();
 
-	plainSource = t.createTexture(canvas);
-	plainSource.characters(' .:-=+*#%@');
+	// Source A: Default transparency behavior (falls back to black)
+	sourceA = t.createTexture(canvas);
+	sourceA.characters(' .:-=+*#%@');
 
-	backgroundSource = t.createTexture(canvas);
-	backgroundSource.characters(' .:-=+*#%@');
-	backgroundSource.background(255, 0, 0);
+	sourceB = t.createTexture(canvas);
+	sourceB.characters(' .:-=+*#%@');
 });
 
 t.draw(() => {
-	t.background(40);
-	if (!plainSource || !backgroundSource) return;
+	t.background(6, 10, 22);
 
-	const size = Math.min(plainSource.width, plainSource.height) * 0.7;
-	const offset = Math.floor(size * 0.7);
+	if (!sourceA || !sourceB) return;
+
+	const time = t.frameCount * 0.05;
+	const pulse = 0.5 + 0.5 * Math.sin(time);
+
+	sourceB.background(pulse * 255, 100, 255 - pulse * 155);
+
+	drawCenteredText('TextmodeSource.background', -12, [240, 245, 255]);
+	drawCenteredText('Fills transparent source pixels before conversion.', -10, [150, 170, 200]);
+
+	const imgW = 20;
+	const imgH = 12;
 
 	t.push();
-	t.translate(-offset, 0);
-	t.image(plainSource, size, size);
+	t.translate(-12, 0);
+	t.image(sourceA, imgW, imgH);
 	t.pop();
+	drawCenteredText('DEFAULT FALLBACK', 8, [140, 180, 255]);
 
 	t.push();
-	t.translate(offset, 0);
-	t.image(backgroundSource, size, size);
+	t.translate(12, 0);
+	t.image(sourceB, imgW, imgH);
 	t.pop();
-
-	drawLabel('default transparent fallback', -offset, Math.floor(t.grid.rows / 2) - 2);
-	drawLabel('background(255, 0, 0)', offset, Math.floor(t.grid.rows / 2) - 2);
+	drawCenteredText('CUSTOM BACKGROUND', 12, [255, 180, 100]);
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeSource/background/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 #### Inherited from
 
@@ -1136,31 +1101,18 @@ This instance for chaining.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-let source;
+let techSource;
 
-function createGradientCanvas() {
-	const canvas = document.createElement('canvas');
-	canvas.width = 160;
-	canvas.height = 160;
-
-	const ctx = canvas.getContext('2d');
-	if (!ctx) return canvas;
-
-	const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-	gradient.addColorStop(0, '#050505');
-	gradient.addColorStop(1, '#f5f5f5');
-	ctx.fillStyle = gradient;
-	ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-	return canvas;
-}
-
-function drawLabel(text, y) {
+function drawCenteredText(text, y, rgb = [255, 255, 255]) {
 	t.push();
 	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(255);
+	t.charColor(rgb[0], rgb[1], rgb[2]);
 
 	for (let i = 0; i < text.length; i++) {
 		t.push();
@@ -1173,37 +1125,72 @@ function drawLabel(text, y) {
 	t.pop();
 }
 
+function createTechCanvas() {
+	const canvas = document.createElement('canvas');
+	canvas.width = 128;
+	canvas.height = 128;
+	const ctx = canvas.getContext('2d');
+	if (!ctx) return canvas;
+
+	ctx.fillStyle = '#000000';
+	ctx.fillRect(0, 0, 128, 128);
+
+	ctx.strokeStyle = '#ffffff';
+	ctx.lineWidth = 4;
+
+	for (let i = 0; i < 3; i++) {
+		ctx.beginPath();
+		ctx.arc(64, 64, 20 + i * 20, 0, Math.PI * 2);
+		ctx.stroke();
+	}
+
+	ctx.beginPath();
+	ctx.moveTo(64, 10);
+	ctx.lineTo(64, 118);
+	ctx.moveTo(10, 64);
+	ctx.lineTo(118, 64);
+	ctx.stroke();
+
+	return canvas;
+}
+
 t.setup(() => {
-	source = t.createTexture(createGradientCanvas());
-	source.characters(' .:-=+*#%@');
-	source.charColorMode('fixed');
-	source.charColor(255);
-	source.cellColorMode('fixed');
+	techSource = t.createTexture(createTechCanvas());
+
+	techSource.characters(' .:-=+*#%@');
+
+	techSource.charColorMode('fixed').charColor(255);
+
+	techSource.cellColorMode('fixed');
 });
 
 t.draw(() => {
-	t.background(0);
-	if (!source) return;
+	t.background(6, 10, 22);
 
-	const blue = 32 + Math.round(64 * (1 + Math.sin(t.frameCount * 0.05)));
-	source.cellColor('#000033');
-	source.cellColor(0, 0, blue);
-	t.image(source, source.width, source.height);
-	drawLabel('cellColor(0, 0, blue)', Math.floor(t.grid.rows / 2) - 2);
+	if (!techSource) return;
+
+	const time = t.frameCount * 0.04;
+	const red = Math.round(40 + 40 * Math.sin(time));
+	const blue = Math.round(80 + 40 * Math.cos(time * 0.7));
+
+	techSource.cellColor(red, 40, blue);
+
+	drawCenteredText('TextmodeSource.cellColor', -12, [240, 245, 255]);
+	drawCenteredText('Overriding the background color of every cell in a source.', -10, [150, 170, 200]);
+
+	t.push();
+	t.translate(0, 0);
+	t.image(techSource, 24, 14);
+	t.pop();
+
+	drawCenteredText('MODE: FIXED', 9, [140, 255, 180]);
+	drawCenteredText(`CELL_COLOR: [${red}, 40, ${blue}]`, 11, [140, 220, 255]);
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeSource/cellColor/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 #### Inherited from
 
@@ -1234,33 +1221,18 @@ This instance for chaining.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-let sampledSource;
-let fixedSource;
+let sourceA, sourceB;
 
-function createColorCanvas() {
-	const canvas = document.createElement('canvas');
-	canvas.width = 160;
-	canvas.height = 160;
-
-	const ctx = canvas.getContext('2d');
-	if (!ctx) return canvas;
-
-	const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-	gradient.addColorStop(0, '#00c2ff');
-	gradient.addColorStop(0.5, '#00ff88');
-	gradient.addColorStop(1, '#ffee00');
-	ctx.fillStyle = gradient;
-	ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-	return canvas;
-}
-
-function drawLabel(text, x, y) {
+function drawCenteredText(text, y, rgb = [255, 255, 255]) {
 	t.push();
-	t.translate(x - Math.floor(text.length / 2), y);
-	t.charColor(255);
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(rgb[0], rgb[1], rgb[2]);
 
 	for (let i = 0; i < text.length; i++) {
 		t.push();
@@ -1273,57 +1245,63 @@ function drawLabel(text, x, y) {
 	t.pop();
 }
 
+function createGradientCanvas() {
+	const canvas = document.createElement('canvas');
+	canvas.width = 128;
+	canvas.height = 128;
+	const ctx = canvas.getContext('2d');
+	if (!ctx) return canvas;
+
+	const grad = ctx.createLinearGradient(0, 0, 128, 128);
+	grad.addColorStop(0, '#ff4400');
+	grad.addColorStop(0.5, '#00ffaa');
+	grad.addColorStop(1, '#0088ff');
+	ctx.fillStyle = grad;
+	ctx.fillRect(0, 0, 128, 128);
+
+	return canvas;
+}
+
 t.setup(() => {
-	const canvas = createColorCanvas();
+	const canvas = createGradientCanvas();
 
-	sampledSource = t.createTexture(canvas);
-	sampledSource.characters(' .:-=+*#%@');
-	sampledSource.charColorMode('sampled');
-	sampledSource.cellColorMode('sampled');
+	sourceA = t.createTexture(canvas);
+	sourceA.characters(' .:-=+*#%@');
+	sourceA.cellColorMode('sampled');
 
-	fixedSource = t.createTexture(canvas);
-	fixedSource.characters(' .:-=+*#%@');
-	fixedSource.charColorMode('sampled');
-	fixedSource.cellColorMode('fixed');
-	fixedSource.cellColor('#120022');
+	sourceB = t.createTexture(canvas);
+	sourceB.characters(' .:-=+*#%@');
+	sourceB.cellColorMode('fixed').cellColor(20, 30, 60);
 });
 
 t.draw(() => {
-	t.background(0);
-	if (!sampledSource || !fixedSource) return;
+	t.background(6, 10, 22);
 
-	const pulse = 64 + Math.round(64 * (1 + Math.sin(t.frameCount * 0.05)));
-	fixedSource.cellColor(pulse, 0, 40);
+	if (!sourceA || !sourceB) return;
 
-	const size = Math.min(sampledSource.width, sampledSource.height) * 0.7;
-	const offset = Math.floor(size * 0.7);
+	drawCenteredText('TextmodeSource.cellColorMode', -12, [240, 245, 255]);
+	drawCenteredText('Determines if cells use source colors or a fixed override.', -10, [150, 170, 200]);
 
-	t.push();
-	t.translate(-offset, 0);
-	t.image(sampledSource, size, size);
-	t.pop();
+	const imgW = 20;
+	const imgH = 12;
 
 	t.push();
-	t.translate(offset, 0);
-	t.image(fixedSource, size, size);
+	t.translate(-12, 0);
+	t.image(sourceA, imgW, imgH);
 	t.pop();
+	drawCenteredText("MODE: 'sampled'", 8, [140, 180, 255]);
 
-	drawLabel("cellColorMode('sampled')", -offset, Math.floor(t.grid.rows / 2) - 2);
-	drawLabel("cellColorMode('fixed')", offset, Math.floor(t.grid.rows / 2) - 2);
+	t.push();
+	t.translate(12, 0);
+	t.image(sourceB, imgW, imgH);
+	t.pop();
+	drawCenteredText("MODE: 'fixed'", 12, [255, 180, 100]);
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeSource/cellColorMode/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 #### Inherited from
 
@@ -1428,14 +1406,6 @@ t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeSource/characters/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 #### Inherited from
 
@@ -1473,31 +1443,18 @@ This instance for chaining.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-let source;
+let techSource;
 
-function createGradientCanvas() {
-	const canvas = document.createElement('canvas');
-	canvas.width = 160;
-	canvas.height = 160;
-
-	const ctx = canvas.getContext('2d');
-	if (!ctx) return canvas;
-
-	const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-	gradient.addColorStop(0, '#000000');
-	gradient.addColorStop(1, '#ffffff');
-	ctx.fillStyle = gradient;
-	ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-	return canvas;
-}
-
-function drawLabel(text, y) {
+function drawCenteredText(text, y, rgb = [255, 255, 255]) {
 	t.push();
 	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(255);
+	t.charColor(rgb[0], rgb[1], rgb[2]);
 
 	for (let i = 0; i < text.length; i++) {
 		t.push();
@@ -1510,38 +1467,69 @@ function drawLabel(text, y) {
 	t.pop();
 }
 
+function createTechCanvas() {
+	const canvas = document.createElement('canvas');
+	canvas.width = 128;
+	canvas.height = 128;
+	const ctx = canvas.getContext('2d');
+	if (!ctx) return canvas;
+
+	ctx.fillStyle = '#000000';
+	ctx.fillRect(0, 0, 128, 128);
+
+	ctx.strokeStyle = '#ffffff';
+	ctx.lineWidth = 4;
+
+	for (let i = 0; i < 3; i++) {
+		ctx.beginPath();
+		ctx.arc(64, 64, 20 + i * 20, 0, Math.PI * 2);
+		ctx.stroke();
+	}
+
+	ctx.beginPath();
+	ctx.moveTo(64, 10);
+	ctx.lineTo(64, 118);
+	ctx.moveTo(10, 64);
+	ctx.lineTo(118, 64);
+	ctx.stroke();
+
+	return canvas;
+}
+
 t.setup(() => {
-	source = t.createTexture(createGradientCanvas());
-	source.characters(' .:-=+*#%@');
-	source.charColorMode('fixed');
-	source.cellColorMode('fixed');
-	source.cellColor(0);
+	techSource = t.createTexture(createTechCanvas());
+	techSource.characters(' .:-=+*#%@');
+
+	techSource.charColorMode('fixed');
 });
 
 t.draw(() => {
-	t.background(0);
-	if (!source) return;
+	t.background(6, 10, 22);
 
-	const red = 150 + 100 * Math.sin(t.frameCount * 0.05);
-	const blue = 150 + 100 * Math.cos(t.frameCount * 0.05);
+	if (!techSource) return;
 
-	source.charColor(red, 100, blue);
-	t.image(source, source.width, source.height);
-	drawLabel('charColor(r, 100, b)', Math.floor(t.grid.rows / 2) - 2);
+	const time = t.frameCount * 0.04;
+	const r = Math.round(150 + 105 * Math.sin(time));
+	const g = Math.round(150 + 105 * Math.cos(time * 0.7));
+
+	techSource.charColor(r, g, 100);
+
+	drawCenteredText('TextmodeSource.charColor', -12, [240, 245, 255]);
+	drawCenteredText('Overriding the character color of every cell in a source.', -10, [150, 170, 200]);
+
+	t.push();
+	t.translate(0, 0);
+	t.image(techSource, 24, 14);
+	t.pop();
+
+	drawCenteredText('MODE: FIXED', 9, [140, 255, 180]);
+	drawCenteredText(`CHAR_COLOR: [${r}, ${g}, 100]`, 11, [255, 225, 140]);
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeSource/charColor/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 #### Inherited from
 
@@ -1572,33 +1560,18 @@ This instance for chaining.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-let sampledSource;
-let fixedSource;
+let sourceA, sourceB;
 
-function createColorCanvas() {
-	const canvas = document.createElement('canvas');
-	canvas.width = 160;
-	canvas.height = 160;
-
-	const ctx = canvas.getContext('2d');
-	if (!ctx) return canvas;
-
-	const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-	gradient.addColorStop(0, '#ffcc00');
-	gradient.addColorStop(0.5, '#ff0055');
-	gradient.addColorStop(1, '#3300ff');
-	ctx.fillStyle = gradient;
-	ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-	return canvas;
-}
-
-function drawLabel(text, x, y) {
+function drawCenteredText(text, y, rgb = [255, 255, 255]) {
 	t.push();
-	t.translate(x - Math.floor(text.length / 2), y);
-	t.charColor(255);
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(rgb[0], rgb[1], rgb[2]);
 
 	for (let i = 0; i < text.length; i++) {
 		t.push();
@@ -1611,54 +1584,63 @@ function drawLabel(text, x, y) {
 	t.pop();
 }
 
+function createGradientCanvas() {
+	const canvas = document.createElement('canvas');
+	canvas.width = 128;
+	canvas.height = 128;
+	const ctx = canvas.getContext('2d');
+	if (!ctx) return canvas;
+
+	const grad = ctx.createLinearGradient(0, 0, 128, 128);
+	grad.addColorStop(0, '#ffcc00');
+	grad.addColorStop(0.5, '#ff0055');
+	grad.addColorStop(1, '#3300ff');
+	ctx.fillStyle = grad;
+	ctx.fillRect(0, 0, 128, 128);
+
+	return canvas;
+}
+
 t.setup(() => {
-	const canvas = createColorCanvas();
+	const canvas = createGradientCanvas();
 
-	sampledSource = t.createTexture(canvas);
-	sampledSource.characters(' .:-=+*#%@');
-	sampledSource.charColorMode('sampled');
-	sampledSource.cellColorMode('sampled');
+	sourceA = t.createTexture(canvas);
+	sourceA.characters(' .:-=+*#%@');
+	sourceA.charColorMode('sampled');
 
-	fixedSource = t.createTexture(canvas);
-	fixedSource.characters(' .:-=+*#%@');
-	fixedSource.charColorMode('fixed');
-	fixedSource.charColor(255, 80, 80);
-	fixedSource.cellColorMode('sampled');
+	sourceB = t.createTexture(canvas);
+	sourceB.characters(' .:-=+*#%@');
+	sourceB.charColorMode('fixed').charColor(140, 255, 180);
 });
 
 t.draw(() => {
-	t.background(0);
-	if (!sampledSource || !fixedSource) return;
+	t.background(6, 10, 22);
 
-	const size = Math.min(sampledSource.width, sampledSource.height) * 0.7;
-	const offset = Math.floor(size * 0.7);
+	if (!sourceA || !sourceB) return;
+
+	drawCenteredText('TextmodeSource.charColorMode', -12, [240, 245, 255]);
+	drawCenteredText('Determines if characters use source colors or a fixed override.', -10, [150, 170, 200]);
+
+	const imgW = 20;
+	const imgH = 12;
 
 	t.push();
-	t.translate(-offset, 0);
-	t.image(sampledSource, size, size);
+	t.translate(-12, 0);
+	t.image(sourceA, imgW, imgH);
 	t.pop();
+	drawCenteredText("MODE: 'sampled'", 8, [140, 180, 255]);
 
 	t.push();
-	t.translate(offset, 0);
-	t.image(fixedSource, size, size);
+	t.translate(12, 0);
+	t.image(sourceB, imgW, imgH);
 	t.pop();
-
-	drawLabel("charColorMode('sampled')", -offset, Math.floor(t.grid.rows / 2) - 2);
-	drawLabel("charColorMode('fixed')", offset, Math.floor(t.grid.rows / 2) - 2);
+	drawCenteredText("MODE: 'fixed'", 12, [255, 180, 100]);
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeSource/charColorMode/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 #### Inherited from
 
@@ -1689,31 +1671,18 @@ This instance for chaining.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-let source;
+let pointerSource;
 
-function createCheckerCanvas() {
-	const canvas = document.createElement('canvas');
-	canvas.width = 160;
-	canvas.height = 160;
-
-	const ctx = canvas.getContext('2d');
-	if (!ctx) return canvas;
-
-	ctx.fillStyle = '#ffffff';
-	ctx.fillRect(0, 0, canvas.width, canvas.height);
-	ctx.fillStyle = '#000000';
-	ctx.fillRect(0, 0, canvas.width / 2, canvas.height / 2);
-	ctx.fillRect(canvas.width / 2, canvas.height / 2, canvas.width / 2, canvas.height / 2);
-
-	return canvas;
-}
-
-function drawLabel(text, x, y) {
+function drawCenteredText(text, y, rgb = [255, 255, 255]) {
 	t.push();
-	t.translate(x - Math.floor(text.length / 2), y);
-	t.charColor(255);
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(rgb[0], rgb[1], rgb[2]);
 
 	for (let i = 0; i < text.length; i++) {
 		t.push();
@@ -1726,46 +1695,63 @@ function drawLabel(text, x, y) {
 	t.pop();
 }
 
+function createPointerCanvas() {
+	const canvas = document.createElement('canvas');
+	canvas.width = 128;
+	canvas.height = 128;
+	const ctx = canvas.getContext('2d');
+	if (!ctx) return canvas;
+
+	ctx.fillStyle = '#000000';
+	ctx.fillRect(0, 0, 128, 128);
+
+	ctx.fillStyle = '#ffffff';
+	ctx.beginPath();
+	ctx.moveTo(64, 20); // Top
+	ctx.lineTo(100, 100); // Bottom Right
+	ctx.lineTo(28, 100); // Bottom Left
+	ctx.closePath();
+	ctx.fill();
+
+	return canvas;
+}
+
 t.setup(() => {
-	source = t.createTexture(createCheckerCanvas());
-	source.characters(' .:-=+*#%@');
+	const canvas = createPointerCanvas();
+	pointerSource = t.createTexture(canvas);
+	pointerSource.characters('#+- ');
 });
 
 t.draw(() => {
-	t.background(0);
-	if (!source) return;
+	t.background(6, 10, 22);
 
-	const size = Math.min(source.width, source.height) * 0.7;
-	const offset = Math.floor(size * 0.7);
+	if (!pointerSource) return;
 
-	source.charRotation(0);
+	drawCenteredText('TextmodeSource.charRotation', -12, [240, 245, 255]);
+	drawCenteredText('Rotating the individual characters within their cells.', -10, [150, 170, 200]);
+
+	const imgW = 20;
+	const imgH = 12;
+
 	t.push();
-	t.translate(-offset, 0);
-	t.image(source, size, size);
+	t.translate(-12, 0);
+	pointerSource.charRotation(0);
+	t.image(pointerSource, imgW, imgH);
 	t.pop();
+	drawCenteredText('0 DEGREES', 8, [140, 180, 255]);
 
-	source.charRotation(90);
 	t.push();
-	t.translate(offset, 0);
-	t.image(source, size, size);
+	t.translate(12, 0);
+	pointerSource.charRotation(90);
+	t.image(pointerSource, imgW, imgH);
 	t.pop();
-
-	drawLabel('charRotation(0)', -offset, Math.floor(t.grid.rows / 2) - 2);
-	drawLabel('charRotation(90)', offset, Math.floor(t.grid.rows / 2) - 2);
+	drawCenteredText('90 DEGREES', 12, [255, 180, 100]);
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeSource/charRotation/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 #### Inherited from
 
@@ -1856,14 +1842,6 @@ t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeSource/conversionMode/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 #### Inherited from
 
@@ -1922,7 +1900,7 @@ t.draw(() => {
 	}
 
 	label('click to dispose video', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
-	label(disposed ? 'video disposed' : 'video active', Math.floor(t.grid.rows * 0.30), [120, 205, 255]);
+	label(disposed ? 'video disposed' : 'video active', Math.floor(t.grid.rows * 0.3), [120, 205, 255]);
 });
 
 t.mouseClicked(() => {
@@ -1938,14 +1916,6 @@ t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeVideo/dispose/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 #### Overrides
 
@@ -1956,7 +1926,7 @@ t.windowResized(() => {
 ### flipX()
 
 ```ts
-flipX(v): this;
+flipX(v?): this;
 ```
 
 Set horizontal flip indicator flag.
@@ -1976,39 +1946,18 @@ This instance for chaining.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-let source;
+let sourceA, sourceB;
 
-function createArrowCanvas() {
-	const canvas = document.createElement('canvas');
-	canvas.width = 160;
-	canvas.height = 160;
-
-	const ctx = canvas.getContext('2d');
-	if (!ctx) return canvas;
-
-	ctx.fillStyle = '#111111';
-	ctx.fillRect(0, 0, canvas.width, canvas.height);
-	ctx.fillStyle = '#ffffff';
-	ctx.beginPath();
-	ctx.moveTo(24, 80);
-	ctx.lineTo(104, 28);
-	ctx.lineTo(104, 60);
-	ctx.lineTo(136, 60);
-	ctx.lineTo(136, 100);
-	ctx.lineTo(104, 100);
-	ctx.lineTo(104, 132);
-	ctx.closePath();
-	ctx.fill();
-
-	return canvas;
-}
-
-function drawLabel(text, x, y) {
+function drawCenteredText(text, y, rgb = [255, 255, 255]) {
 	t.push();
-	t.translate(x - Math.floor(text.length / 2), y);
-	t.charColor(255);
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(rgb[0], rgb[1], rgb[2]);
 
 	for (let i = 0; i < text.length; i++) {
 		t.push();
@@ -2021,46 +1970,65 @@ function drawLabel(text, x, y) {
 	t.pop();
 }
 
+function createGradientCanvas() {
+	const canvas = document.createElement('canvas');
+	canvas.width = 128;
+	canvas.height = 128;
+	const ctx = canvas.getContext('2d');
+	if (!ctx) return canvas;
+
+	// Linear gray gradient from top-left to bottom-right
+	const grad = ctx.createLinearGradient(0, 0, 128, 128);
+	grad.addColorStop(0, '#000000');
+	grad.addColorStop(1, '#ffffff');
+	ctx.fillStyle = grad;
+	ctx.fillRect(0, 0, 128, 128);
+
+	return canvas;
+}
+
 t.setup(() => {
-	source = t.createTexture(createArrowCanvas());
-	source.characters(' .:-=+*#%@');
+	const canvas = createGradientCanvas();
+
+	// Source A: Normal orientation
+	sourceA = t.createTexture(canvas);
+	sourceA.characters(' .:-=+*#%@');
+	sourceA.flipX(false);
+
+	// Source B: Flipped horizontally
+	sourceB = t.createTexture(canvas);
+	sourceB.characters(' .:-=+*#%@');
+	sourceB.flipX(true);
 });
 
 t.draw(() => {
-	t.background(5, 5, 15);
-	if (!source) return;
+	t.background(6, 10, 22);
 
-	const size = Math.min(source.width, source.height) * 0.7;
-	const offset = Math.floor(size * 0.7);
+	if (!sourceA || !sourceB) return;
 
-	source.flipX(false);
+	drawCenteredText('TextmodeSource.flipX', -12, [240, 245, 255]);
+	drawCenteredText('Mirroring the source texture horizontally.', -10, [150, 170, 200]);
+
+	const imgW = 20;
+	const imgH = 12;
+
 	t.push();
-	t.translate(-offset, 0);
-	t.image(source, size, size);
+	t.translate(-12, 0);
+	t.image(sourceA, imgW, imgH);
 	t.pop();
+	drawCenteredText('NORMAL', 8, [140, 180, 255]);
 
-	source.flipX(true);
 	t.push();
-	t.translate(offset, 0);
-	t.image(source, size, size);
+	t.translate(12, 0);
+	t.image(sourceB, imgW, imgH);
 	t.pop();
-
-	drawLabel('flipX(false)', -offset, Math.floor(t.grid.rows / 2) - 2);
-	drawLabel('flipX(true)', offset, Math.floor(t.grid.rows / 2) - 2);
+	drawCenteredText('FLIP_X', 12, [255, 180, 100]);
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeSource/flipX/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 #### Inherited from
 
@@ -2071,7 +2039,7 @@ t.windowResized(() => {
 ### flipY()
 
 ```ts
-flipY(v): this;
+flipY(v?): this;
 ```
 
 Set vertical flip indicator flag.
@@ -2091,39 +2059,18 @@ This instance for chaining.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-let source;
+let sourceA, sourceB;
 
-function createArrowCanvas() {
-	const canvas = document.createElement('canvas');
-	canvas.width = 160;
-	canvas.height = 160;
-
-	const ctx = canvas.getContext('2d');
-	if (!ctx) return canvas;
-
-	ctx.fillStyle = '#101010';
-	ctx.fillRect(0, 0, canvas.width, canvas.height);
-	ctx.fillStyle = '#ffffff';
-	ctx.beginPath();
-	ctx.moveTo(80, 24);
-	ctx.lineTo(132, 104);
-	ctx.lineTo(100, 104);
-	ctx.lineTo(100, 136);
-	ctx.lineTo(60, 136);
-	ctx.lineTo(60, 104);
-	ctx.lineTo(28, 104);
-	ctx.closePath();
-	ctx.fill();
-
-	return canvas;
-}
-
-function drawLabel(text, x, y) {
+function drawCenteredText(text, y, rgb = [255, 255, 255]) {
 	t.push();
-	t.translate(x - Math.floor(text.length / 2), y);
-	t.charColor(255);
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(rgb[0], rgb[1], rgb[2]);
 
 	for (let i = 0; i < text.length; i++) {
 		t.push();
@@ -2136,46 +2083,65 @@ function drawLabel(text, x, y) {
 	t.pop();
 }
 
+function createGradientCanvas() {
+	const canvas = document.createElement('canvas');
+	canvas.width = 128;
+	canvas.height = 128;
+	const ctx = canvas.getContext('2d');
+	if (!ctx) return canvas;
+
+	// Linear gray gradient from top-left to bottom-right
+	const grad = ctx.createLinearGradient(0, 0, 128, 128);
+	grad.addColorStop(0, '#000000');
+	grad.addColorStop(1, '#ffffff');
+	ctx.fillStyle = grad;
+	ctx.fillRect(0, 0, 128, 128);
+
+	return canvas;
+}
+
 t.setup(() => {
-	source = t.createTexture(createArrowCanvas());
-	source.characters(' .:-=+*#%@');
+	const canvas = createGradientCanvas();
+
+	// Source A: Normal orientation
+	sourceA = t.createTexture(canvas);
+	sourceA.characters(' .:-=+*#%@');
+	sourceA.flipY(false);
+
+	// Source B: Flipped vertically
+	sourceB = t.createTexture(canvas);
+	sourceB.characters(' .:-=+*#%@');
+	sourceB.flipY(true);
 });
 
 t.draw(() => {
-	t.background(0);
-	if (!source) return;
+	t.background(6, 10, 22);
 
-	const size = Math.min(source.width, source.height) * 0.7;
-	const offset = Math.floor(size * 0.7);
+	if (!sourceA || !sourceB) return;
 
-	source.flipY(false);
+	drawCenteredText('TextmodeSource.flipY', -12, [240, 245, 255]);
+	drawCenteredText('Mirroring the source texture vertically.', -10, [150, 170, 200]);
+
+	const imgW = 20;
+	const imgH = 12;
+
 	t.push();
-	t.translate(-offset, 0);
-	t.image(source, size, size);
+	t.translate(-12, 0);
+	t.image(sourceA, imgW, imgH);
 	t.pop();
+	drawCenteredText('NORMAL', 8, [140, 180, 255]);
 
-	source.flipY(true);
 	t.push();
-	t.translate(offset, 0);
-	t.image(source, size, size);
+	t.translate(12, 0);
+	t.image(sourceB, imgW, imgH);
 	t.pop();
-
-	drawLabel('flipY(false)', -offset, Math.floor(t.grid.rows / 2) - 2);
-	drawLabel('flipY(true)', offset, Math.floor(t.grid.rows / 2) - 2);
+	drawCenteredText('FLIP_Y', 12, [255, 180, 100]);
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeSource/flipY/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 #### Inherited from
 
@@ -2186,7 +2152,7 @@ t.windowResized(() => {
 ### invert()
 
 ```ts
-invert(v): this;
+invert(v?): this;
 ```
 
 Set the invert flag, swapping character and cell colors when enabled.
@@ -2206,32 +2172,18 @@ This instance for chaining.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-let normalSource;
-let invertedSource;
+let gradientSource;
 
-function createGradientCanvas() {
-	const canvas = document.createElement('canvas');
-	canvas.width = 160;
-	canvas.height = 160;
-
-	const ctx = canvas.getContext('2d');
-	if (!ctx) return canvas;
-
-	const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-	gradient.addColorStop(0, '#050505');
-	gradient.addColorStop(1, '#f5f5f5');
-	ctx.fillStyle = gradient;
-	ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-	return canvas;
-}
-
-function drawLabel(text, x, y) {
+function drawCenteredText(text, y, rgb = [255, 255, 255]) {
 	t.push();
-	t.translate(x - Math.floor(text.length / 2), y);
-	t.charColor(255);
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(rgb[0], rgb[1], rgb[2]);
 
 	for (let i = 0; i < text.length; i++) {
 		t.push();
@@ -2244,50 +2196,58 @@ function drawLabel(text, x, y) {
 	t.pop();
 }
 
+function createGradientCanvas() {
+	const canvas = document.createElement('canvas');
+	canvas.width = 128;
+	canvas.height = 128;
+	const ctx = canvas.getContext('2d');
+	if (!ctx) return canvas;
+
+	const grad = ctx.createLinearGradient(0, 0, 128, 128);
+	grad.addColorStop(0, '#000000');
+	grad.addColorStop(1, '#ffffff');
+	ctx.fillStyle = grad;
+	ctx.fillRect(0, 0, 128, 128);
+
+	return canvas;
+}
+
 t.setup(() => {
 	const canvas = createGradientCanvas();
-
-	normalSource = t.createTexture(canvas);
-	normalSource.characters(' .:-=+*#%@');
-
-	invertedSource = t.createTexture(canvas);
-	invertedSource.characters(' .:-=+*#%@');
-	invertedSource.invert(true);
+	gradientSource = t.createTexture(canvas);
+	gradientSource.characters(' .:-=+*#%@');
 });
 
 t.draw(() => {
-	t.background(0);
-	if (!normalSource || !invertedSource) return;
+	t.background(6, 10, 22);
 
-	const size = Math.min(normalSource.width, normalSource.height) * 0.7;
-	const offset = Math.floor(size * 0.7);
+	if (!gradientSource) return;
+
+	drawCenteredText('TextmodeSource.invert', -12, [240, 245, 255]);
+	drawCenteredText('Swapping character and cell color roles.', -10, [150, 170, 200]);
+
+	const imgW = 20;
+	const imgH = 12;
 
 	t.push();
-	t.translate(-offset, 0);
-	t.image(normalSource, size, size);
+	t.translate(-12, 0);
+	gradientSource.invert(false);
+	t.image(gradientSource, imgW, imgH);
 	t.pop();
+	drawCenteredText('NORMAL', 8, [140, 180, 255]);
 
 	t.push();
-	t.translate(offset, 0);
-	t.image(invertedSource, size, size);
+	t.translate(12, 0);
+	gradientSource.invert(true);
+	t.image(gradientSource, imgW, imgH);
 	t.pop();
-
-	drawLabel('invert(false)', -offset, Math.floor(t.grid.rows / 2) - 2);
-	drawLabel('invert(true)', offset, Math.floor(t.grid.rows / 2) - 2);
+	drawCenteredText('INVERTED', 12, [255, 180, 100]);
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeSource/invert/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 #### Inherited from
 
@@ -2298,7 +2258,7 @@ t.windowResized(() => {
 ### loop()
 
 ```ts
-loop(shouldLoop): this;
+loop(shouldLoop?): this;
 ```
 
 Set whether the video should loop.
@@ -2361,14 +2321,6 @@ t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeVideo/loop/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 ***
 
@@ -2438,14 +2390,6 @@ t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeVideo/pause/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 ***
 
@@ -2514,14 +2458,6 @@ t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeVideo/play/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 ***
 
@@ -2592,14 +2528,6 @@ t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeVideo/speed/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 ***
 
@@ -2670,14 +2598,6 @@ t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeVideo/stop/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 ***
 
@@ -2749,14 +2669,6 @@ t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeVideo/time/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 ***
 
@@ -2842,11 +2754,3 @@ t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeVideo/volume/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>

@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: conversion
 kind: Interface
-lastModified: 2026-04-23
+lastModified: 2026-05-13
 isInterface: true
 ---
 
@@ -26,7 +26,7 @@ To register a custom strategy, implement this interface and pass it to [Textmode
 
 | Property | Modifier | Type | Description |
 | ------ | ------ | ------ | ------ |
-| <a id="id"></a> `id` | `readonly` | `string` | Unique identifier for this conversion strategy. This ID is used to select the strategy via [TextmodeSource.conversionMode](../../media/classes/TextmodeSource.md#conversionmode). |
+| <a id="property-id"></a> `id` | `readonly` | `string` | Unique identifier for this conversion strategy. This ID is used to select the strategy via [TextmodeSource.conversionMode](../../media/classes/TextmodeSource.md#conversionmode). |
 
 ## Methods
 
@@ -156,7 +156,11 @@ t.draw(() => {
 
 	drawLabel('custom conversion strategy', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
 	drawLabel(`has pulse ${t.conversions.has('pulse') ? 'yes' : 'no'}`, Math.floor(t.grid.rows * 0.28));
-	drawLabel(strategyActive ? 'click to unregister' : 'refresh to restore strategy', Math.floor(t.grid.rows * 0.36), [120, 205, 255]);
+	drawLabel(
+		strategyActive ? 'click to unregister' : 'refresh to restore strategy',
+		Math.floor(t.grid.rows * 0.36),
+		[120, 205, 255]
+	);
 });
 
 t.mouseClicked(() => {
@@ -173,13 +177,6 @@ t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-  </div>
-</div>
 
 ***
 
@@ -306,7 +303,11 @@ t.draw(() => {
 
 	drawLabel('custom conversion strategy', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
 	drawLabel(`has pulse ${t.conversions.has('pulse') ? 'yes' : 'no'}`, Math.floor(t.grid.rows * 0.28));
-	drawLabel(strategyActive ? 'click to unregister' : 'refresh to restore strategy', Math.floor(t.grid.rows * 0.36), [120, 205, 255]);
+	drawLabel(
+		strategyActive ? 'click to unregister' : 'refresh to restore strategy',
+		Math.floor(t.grid.rows * 0.36),
+		[120, 205, 255]
+	);
 });
 
 t.mouseClicked(() => {
@@ -323,10 +324,3 @@ t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-  </div>
-</div>

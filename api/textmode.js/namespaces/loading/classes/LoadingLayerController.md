@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: loading
 kind: Class
-lastModified: 2026-04-23
+lastModified: 2026-05-13
 hasConstructor: false
 ---
 
@@ -90,7 +90,7 @@ If not set, the layer will use the default template.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback?` | (`context`) => `void` |  |
+| `callback?` | (`context`) => `void` | - |
 
 #### Returns
 

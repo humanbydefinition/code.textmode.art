@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-04-23
+lastModified: 2026-05-13
 isInterface: true
 ---
 
@@ -59,4 +59,4 @@ t.windowResized(() => {
 
 | Property | Type | Description |
 | ------ | ------ | ------ |
-| <a id="amount"></a> `amount` | `number` | Glitch intensity. - `0.0` = no glitch effect - `0.5` = subtle glitching - `1.0+` = intense, chaotic glitching **Default** `0.0` |
+| <a id="property-amount"></a> `amount` | `number` | Glitch intensity. - `0.0` = no glitch effect - `0.5` = subtle glitching - `1.0+` = intense, chaotic glitching **Default** `0.0` |

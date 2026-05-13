@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: fonts
 kind: Class
-lastModified: 2026-04-23
+lastModified: 2026-05-13
 hasConstructor: false
 ---
 
@@ -22,6 +22,44 @@ used by vector fonts, and exposed through the shared glyph-atlas contract.
 
 `fontSize()` changes on a tileset only affect the effective output cell size.
 The native atlas stays at the authored tile resolution.
+
+## Example
+
+```javascript
+const TILE_COLUMNS = 16;
+const TILE_ROWS = 16;
+const TILE_COUNT = TILE_COLUMNS * TILE_ROWS;
+
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+
+function label(text, y, color = [220, 220, 220]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(5, 7, 18);
+
+	label('TextmodeTileset.creation', -6, [255, 225, 140]);
+	label('t.loadTileset(options)', 0, [180, 200, 220]);
+	label('async bitmap loading', 4, [150, 170, 200]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 
 ## Extends
 
@@ -86,7 +124,6 @@ t.setup(async () => {
 			columns: TILE_COLUMNS,
 			rows: TILE_ROWS,
 			count: TILE_COUNT,
-			fontSize: 16,
 		},
 		false
 	);
@@ -100,31 +137,16 @@ t.draw(() => {
 		return;
 	}
 
-	const nativeDimensions = tileset.nativeCellDimensions;
-	const maxGlyphDimensions = tileset.maxGlyphDimensions;
-	const cellDimensions = tileset.cellDimensions;
+	const dims = tileset.cellDimensions;
 
-	label('TextmodeTileset dimensions', -7, [255, 225, 140]);
-	label('T64 tileset source', -3);
-	label(`native ${nativeDimensions.width} x ${nativeDimensions.height}`, 1);
-	label(`max ${maxGlyphDimensions.width} x ${maxGlyphDimensions.height}`, 5);
-	label(`cell ${cellDimensions.width} x ${cellDimensions.height}`, 9);
-	label(`cellWidth ${tileset.cellWidth}  cellHeight ${tileset.cellHeight}`, 13);
-	label(`fontSize ${tileset.fontSize}`, 17, [120, 205, 255]);
+	label('TextmodeTileset.cellDimensions', -4, [255, 225, 140]);
+	label(`cellDimensions: ${dims.width} x ${dims.height} px`, 2, [120, 205, 255]);
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeTileset/nativeCellDimensions/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 #### Implementation of
 
@@ -182,7 +204,6 @@ t.setup(async () => {
 			columns: TILE_COLUMNS,
 			rows: TILE_ROWS,
 			count: TILE_COUNT,
-			fontSize: 16,
 		},
 		false
 	);
@@ -196,31 +217,14 @@ t.draw(() => {
 		return;
 	}
 
-	const nativeDimensions = tileset.nativeCellDimensions;
-	const maxGlyphDimensions = tileset.maxGlyphDimensions;
-	const cellDimensions = tileset.cellDimensions;
-
-	label('TextmodeTileset dimensions', -7, [255, 225, 140]);
-	label('T64 tileset source', -3);
-	label(`native ${nativeDimensions.width} x ${nativeDimensions.height}`, 1);
-	label(`max ${maxGlyphDimensions.width} x ${maxGlyphDimensions.height}`, 5);
-	label(`cell ${cellDimensions.width} x ${cellDimensions.height}`, 9);
-	label(`cellWidth ${tileset.cellWidth}  cellHeight ${tileset.cellHeight}`, 13);
-	label(`fontSize ${tileset.fontSize}`, 17, [120, 205, 255]);
+	label('TextmodeTileset.cellHeight', -4, [255, 225, 140]);
+	label('cellHeight: ' + tileset.cellHeight + ' px', 2, [120, 205, 255]);
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeTileset/nativeCellDimensions/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 #### Implementation of
 
@@ -278,7 +282,6 @@ t.setup(async () => {
 			columns: TILE_COLUMNS,
 			rows: TILE_ROWS,
 			count: TILE_COUNT,
-			fontSize: 16,
 		},
 		false
 	);
@@ -292,31 +295,14 @@ t.draw(() => {
 		return;
 	}
 
-	const nativeDimensions = tileset.nativeCellDimensions;
-	const maxGlyphDimensions = tileset.maxGlyphDimensions;
-	const cellDimensions = tileset.cellDimensions;
-
-	label('TextmodeTileset dimensions', -7, [255, 225, 140]);
-	label('T64 tileset source', -3);
-	label(`native ${nativeDimensions.width} x ${nativeDimensions.height}`, 1);
-	label(`max ${maxGlyphDimensions.width} x ${maxGlyphDimensions.height}`, 5);
-	label(`cell ${cellDimensions.width} x ${cellDimensions.height}`, 9);
-	label(`cellWidth ${tileset.cellWidth}  cellHeight ${tileset.cellHeight}`, 13);
-	label(`fontSize ${tileset.fontSize}`, 17, [120, 205, 255]);
+	label('TextmodeTileset.cellWidth', -4, [255, 225, 140]);
+	label('cellWidth: ' + tileset.cellWidth + ' px', 2, [120, 205, 255]);
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeTileset/nativeCellDimensions/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 #### Implementation of
 
@@ -387,27 +373,30 @@ t.draw(() => {
 		return;
 	}
 
-	const atlas = tileset.framebuffer;
-	label('TextmodeTileset atlas', -6, [255, 225, 140]);
-	label('T64 bitmap tileset', -2);
-	label(`characters ${tileset.characters.length}  map ${tileset.characterMap.size}`, 2);
-	label(`source sheet ${TILE_COLUMNS} x ${TILE_ROWS}`, 6);
-	label(`normalized atlas ${tileset.columns} x ${tileset.rows}`, 10);
-	label(`framebuffer ${atlas.width} x ${atlas.height}`, 14, [120, 205, 255]);
+	const charIndex = Math.floor(t.frameCount * 0.1) % tileset.characters.length;
+	const glyph = tileset.characters[charIndex];
+	const currentChar = glyph.character;
+	const mapGlyph = tileset.characterMap.get(currentChar);
+
+	label('TextmodeTileset.characterMap', -8, [255, 225, 140]);
+
+	if (mapGlyph) {
+		t.push();
+		t.translate(0, 0);
+		t.char(currentChar);
+		t.charColor(255, 255, 255);
+		t.point();
+		t.pop();
+
+		label('char: ' + currentChar, 6, [180, 200, 220]);
+		label('map.size: ' + tileset.characterMap.size, 10, [150, 170, 200]);
+	}
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeTileset/characters/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 #### Implementation of
 
@@ -478,27 +467,31 @@ t.draw(() => {
 		return;
 	}
 
-	const atlas = tileset.framebuffer;
-	label('TextmodeTileset atlas', -6, [255, 225, 140]);
-	label('T64 bitmap tileset', -2);
-	label(`characters ${tileset.characters.length}  map ${tileset.characterMap.size}`, 2);
-	label(`source sheet ${TILE_COLUMNS} x ${TILE_ROWS}`, 6);
-	label(`normalized atlas ${tileset.columns} x ${tileset.rows}`, 10);
-	label(`framebuffer ${atlas.width} x ${atlas.height}`, 14, [120, 205, 255]);
+	const chars = tileset.characters;
+	const cols = 16;
+	const startX = -Math.floor(cols / 2);
+	const startY = -Math.floor(chars.length / cols / 2);
+
+	for (let i = 0; i < chars.length; i++) {
+		const glyph = chars[i];
+		t.push();
+		t.translate(startX + (i % cols), startY + Math.floor(i / cols));
+
+		// Use the character index safely.
+		t.char(glyph.character);
+
+		t.charColor(255, 255, 255);
+		t.point();
+		t.pop();
+	}
+
+	label('TextmodeTileset.characters', Math.floor(t.grid.rows / 2) - 3, [255, 225, 140]);
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeTileset/characters/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 #### Implementation of
 
@@ -569,27 +562,14 @@ t.draw(() => {
 		return;
 	}
 
-	const atlas = tileset.framebuffer;
-	label('TextmodeTileset atlas', -6, [255, 225, 140]);
-	label('T64 bitmap tileset', -2);
-	label(`characters ${tileset.characters.length}  map ${tileset.characterMap.size}`, 2);
-	label(`source sheet ${TILE_COLUMNS} x ${TILE_ROWS}`, 6);
-	label(`normalized atlas ${tileset.columns} x ${tileset.rows}`, 10);
-	label(`framebuffer ${atlas.width} x ${atlas.height}`, 14, [120, 205, 255]);
+	label('TextmodeTileset.columns', -4, [255, 225, 140]);
+	label('columns: ' + tileset.columns, 2, [120, 205, 255]);
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeTileset/characters/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 #### Implementation of
 
@@ -660,27 +640,17 @@ t.draw(() => {
 		return;
 	}
 
-	const atlas = tileset.framebuffer;
-	label('TextmodeTileset atlas', -6, [255, 225, 140]);
-	label('T64 bitmap tileset', -2);
-	label(`characters ${tileset.characters.length}  map ${tileset.characterMap.size}`, 2);
-	label(`source sheet ${TILE_COLUMNS} x ${TILE_ROWS}`, 6);
-	label(`normalized atlas ${tileset.columns} x ${tileset.rows}`, 10);
-	label(`framebuffer ${atlas.width} x ${atlas.height}`, 14, [120, 205, 255]);
+	const atlas = tileset.fontFramebuffer;
+
+	label('TextmodeTileset.fontFramebuffer', -6, [255, 225, 140]);
+	label('backing atlas framebuffer', -2, [180, 200, 220]);
+	label(atlas.width + ' x ' + atlas.height + ' px', 4, [150, 170, 200]);
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeTileset/characters/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 ***
 
@@ -732,7 +702,6 @@ t.setup(async () => {
 			columns: TILE_COLUMNS,
 			rows: TILE_ROWS,
 			count: TILE_COUNT,
-			fontSize: 16,
 		},
 		false
 	);
@@ -746,31 +715,14 @@ t.draw(() => {
 		return;
 	}
 
-	const nativeDimensions = tileset.nativeCellDimensions;
-	const maxGlyphDimensions = tileset.maxGlyphDimensions;
-	const cellDimensions = tileset.cellDimensions;
-
-	label('TextmodeTileset dimensions', -7, [255, 225, 140]);
-	label('T64 tileset source', -3);
-	label(`native ${nativeDimensions.width} x ${nativeDimensions.height}`, 1);
-	label(`max ${maxGlyphDimensions.width} x ${maxGlyphDimensions.height}`, 5);
-	label(`cell ${cellDimensions.width} x ${cellDimensions.height}`, 9);
-	label(`cellWidth ${tileset.cellWidth}  cellHeight ${tileset.cellHeight}`, 13);
-	label(`fontSize ${tileset.fontSize}`, 17, [120, 205, 255]);
+	label('TextmodeTileset.fontSize', -4, [255, 225, 140]);
+	label('fontSize: ' + tileset.fontSize, 2, [120, 205, 255]);
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeTileset/nativeCellDimensions/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 ***
 
@@ -836,26 +788,16 @@ t.draw(() => {
 	}
 
 	const atlas = tileset.framebuffer;
-	label('TextmodeTileset atlas', -6, [255, 225, 140]);
-	label('T64 bitmap tileset', -2);
-	label(`characters ${tileset.characters.length}  map ${tileset.characterMap.size}`, 2);
-	label(`source sheet ${TILE_COLUMNS} x ${TILE_ROWS}`, 6);
-	label(`normalized atlas ${tileset.columns} x ${tileset.rows}`, 10);
-	label(`framebuffer ${atlas.width} x ${atlas.height}`, 14, [120, 205, 255]);
+
+	label('TextmodeTileset.framebuffer', -6, [255, 225, 140]);
+	label(atlas.width + ' x ' + atlas.height + ' px', 0, [180, 200, 220]);
+	label(tileset.columns + ' cols x ' + tileset.rows + ' rows', 4, [150, 170, 200]);
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeTileset/characters/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 #### Implementation of
 
@@ -918,7 +860,6 @@ t.setup(async () => {
 			columns: TILE_COLUMNS,
 			rows: TILE_ROWS,
 			count: TILE_COUNT,
-			fontSize: 16,
 		},
 		false
 	);
@@ -932,31 +873,16 @@ t.draw(() => {
 		return;
 	}
 
-	const nativeDimensions = tileset.nativeCellDimensions;
-	const maxGlyphDimensions = tileset.maxGlyphDimensions;
-	const cellDimensions = tileset.cellDimensions;
+	const dims = tileset.maxGlyphDimensions;
 
-	label('TextmodeTileset dimensions', -7, [255, 225, 140]);
-	label('T64 tileset source', -3);
-	label(`native ${nativeDimensions.width} x ${nativeDimensions.height}`, 1);
-	label(`max ${maxGlyphDimensions.width} x ${maxGlyphDimensions.height}`, 5);
-	label(`cell ${cellDimensions.width} x ${cellDimensions.height}`, 9);
-	label(`cellWidth ${tileset.cellWidth}  cellHeight ${tileset.cellHeight}`, 13);
-	label(`fontSize ${tileset.fontSize}`, 17, [120, 205, 255]);
+	label('TextmodeTileset.maxGlyphDimensions', -4, [255, 225, 140]);
+	label(`maxGlyphDimensions: ${dims.width} x ${dims.height} px`, 2, [120, 205, 255]);
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeTileset/nativeCellDimensions/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 ***
 
@@ -1013,7 +939,6 @@ t.setup(async () => {
 			columns: TILE_COLUMNS,
 			rows: TILE_ROWS,
 			count: TILE_COUNT,
-			fontSize: 16,
 		},
 		false
 	);
@@ -1027,31 +952,16 @@ t.draw(() => {
 		return;
 	}
 
-	const nativeDimensions = tileset.nativeCellDimensions;
-	const maxGlyphDimensions = tileset.maxGlyphDimensions;
-	const cellDimensions = tileset.cellDimensions;
+	const dims = tileset.nativeCellDimensions;
 
-	label('TextmodeTileset dimensions', -7, [255, 225, 140]);
-	label('T64 tileset source', -3);
-	label(`native ${nativeDimensions.width} x ${nativeDimensions.height}`, 1);
-	label(`max ${maxGlyphDimensions.width} x ${maxGlyphDimensions.height}`, 5);
-	label(`cell ${cellDimensions.width} x ${cellDimensions.height}`, 9);
-	label(`cellWidth ${tileset.cellWidth}  cellHeight ${tileset.cellHeight}`, 13);
-	label(`fontSize ${tileset.fontSize}`, 17, [120, 205, 255]);
+	label('TextmodeTileset.nativeCellDimensions', -4, [255, 225, 140]);
+	label(`nativeCellDimensions: ${dims.width} x ${dims.height} px`, 2, [120, 205, 255]);
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeTileset/nativeCellDimensions/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 ***
 
@@ -1116,27 +1026,14 @@ t.draw(() => {
 		return;
 	}
 
-	const atlas = tileset.framebuffer;
-	label('TextmodeTileset atlas', -6, [255, 225, 140]);
-	label('T64 bitmap tileset', -2);
-	label(`characters ${tileset.characters.length}  map ${tileset.characterMap.size}`, 2);
-	label(`source sheet ${TILE_COLUMNS} x ${TILE_ROWS}`, 6);
-	label(`normalized atlas ${tileset.columns} x ${tileset.rows}`, 10);
-	label(`framebuffer ${atlas.width} x ${atlas.height}`, 14, [120, 205, 255]);
+	label('TextmodeTileset.rows', -4, [255, 225, 140]);
+	label('rows: ' + tileset.rows, 2, [120, 205, 255]);
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeTileset/characters/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 #### Implementation of
 
@@ -1207,27 +1104,14 @@ t.draw(() => {
 		return;
 	}
 
-	const atlas = tileset.framebuffer;
-	label('TextmodeTileset atlas', -6, [255, 225, 140]);
-	label('T64 bitmap tileset', -2);
-	label(`characters ${tileset.characters.length}  map ${tileset.characterMap.size}`, 2);
-	label(`source sheet ${TILE_COLUMNS} x ${TILE_ROWS}`, 6);
-	label(`normalized atlas ${tileset.columns} x ${tileset.rows}`, 10);
-	label(`framebuffer ${atlas.width} x ${atlas.height}`, 14, [120, 205, 255]);
+	label('TextmodeTileset.textureColumns', -4, [255, 225, 140]);
+	label('textureColumns: ' + tileset.textureColumns, 2, [120, 205, 255]);
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeTileset/characters/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 ***
 
@@ -1292,27 +1176,14 @@ t.draw(() => {
 		return;
 	}
 
-	const atlas = tileset.framebuffer;
-	label('TextmodeTileset atlas', -6, [255, 225, 140]);
-	label('T64 bitmap tileset', -2);
-	label(`characters ${tileset.characters.length}  map ${tileset.characterMap.size}`, 2);
-	label(`source sheet ${TILE_COLUMNS} x ${TILE_ROWS}`, 6);
-	label(`normalized atlas ${tileset.columns} x ${tileset.rows}`, 10);
-	label(`framebuffer ${atlas.width} x ${atlas.height}`, 14, [120, 205, 255]);
+	label('TextmodeTileset.textureRows', -4, [255, 225, 140]);
+	label('textureRows: ' + tileset.textureRows, 2, [120, 205, 255]);
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeTileset/characters/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 ## Methods
 
@@ -1390,14 +1261,6 @@ t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeTileset/dispose/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 #### Overrides
 

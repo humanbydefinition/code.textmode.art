@@ -6,7 +6,7 @@ description: The main entry point for the textmode.js library.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-04-23
+lastModified: 2026-05-13
 hasConstructor: false
 ---
 
@@ -70,14 +70,6 @@ t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/Textmode/creation/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 ## Accessors
 
@@ -126,20 +118,13 @@ t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/humanbydefinition.png" alt="humanbydefinition avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/humanbydefinition" target="_blank" rel="noopener noreferrer">@humanbydefinition</a></strong></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">📷 <a href="https://www.instagram.com/humanbydefinition/" target="_blank" rel="noopener noreferrer">Instagram</a>&nbsp;•&nbsp; 🐘 <a href="https://mastodon.social/@humanbydefinition" target="_blank" rel="noopener noreferrer">Mastodon</a>&nbsp;•&nbsp; 🦋 <a href="https://bsky.app/profile/humanbydefinition" target="_blank" rel="noopener noreferrer">BlueSky</a>&nbsp;•&nbsp; 🌐 <a href="https://code.textmode.art" target="_blank" rel="noopener noreferrer">Website</a></span>
-  </div>
-</div>
 
 ## Methods
 
 ### create()
 
 ```ts
-static create(opts): Textmodifier;
+static create(opts?): Textmodifier;
 ```
 
 Create a new [Textmodifier](Textmodifier.md) instance with optional configuration.
@@ -214,14 +199,6 @@ t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/Textmode/create/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 ***
 
@@ -246,15 +223,21 @@ Set the global error handling level for the library. This applies to all [Textmo
 #### Example
 
 ```javascript
-const level = TextmodeErrorLevel.WARNING;
+const levels = [
+	{ name: 'SILENT', value: TextmodeErrorLevel.SILENT, summary: 'no output' },
+	{ name: 'WARNING', value: TextmodeErrorLevel.WARNING, summary: 'console.warn()' },
+	{ name: 'ERROR', value: TextmodeErrorLevel.ERROR, summary: 'console.error()' },
+	{ name: 'THROW', value: TextmodeErrorLevel.THROW, summary: 'throws' },
+];
 
-textmode.setErrorLevel(level);
+let activeIndex = 1;
+textmode.setErrorLevel(levels[activeIndex].value);
 
-const levels = ['SILENT', 'WARNING', 'ERROR', 'THROW'];
-const summaries = ['no output', 'console.warn()', 'console.error()', 'throws'];
-const color = [255, 210, 90];
-
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
 function drawCenteredText(text, y, rgb = [255, 255, 255]) {
 	t.push();
@@ -273,28 +256,29 @@ function drawCenteredText(text, y, rgb = [255, 255, 255]) {
 }
 
 t.draw(() => {
+	const cycle = 180;
+	const idx = Math.floor(t.frameCount / cycle) % levels.length;
+
+	if (idx !== activeIndex) {
+		activeIndex = idx;
+		textmode.setErrorLevel(levels[activeIndex].value);
+	}
+
+	const level = levels[activeIndex];
 	const pulse = 0.65 + 0.35 * Math.sin(t.frameCount * 0.08);
 	const glow = Math.round(80 * pulse);
-	const activeColor = [color[0], Math.min(255, color[1] + glow), color[2]];
-	const meter = levels.map((_, index) => (index <= level ? '|' : '░')).join('');
+	const activeColor = [255, Math.min(255, 210 + glow), 90];
+	const meter = levels.map((_, i) => (i <= activeIndex ? '|' : '░')).join('');
 
 	t.background(18, 20, 28);
 
 	drawCenteredText('ERROR LEVEL', -4, [180, 190, 210]);
-	drawCenteredText(levels[level], -1, activeColor);
+	drawCenteredText(level.name, -1, activeColor);
 	drawCenteredText(meter, 1, activeColor);
-	drawCenteredText(summaries[level], 4, [220, 220, 220]);
+	drawCenteredText(level.summary, 4, [220, 220, 220]);
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/Textmode/setErrorLevel/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>

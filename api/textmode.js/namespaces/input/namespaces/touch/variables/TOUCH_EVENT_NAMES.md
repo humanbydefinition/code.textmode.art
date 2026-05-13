@@ -7,7 +7,7 @@ category: Variables
 api: true
 namespace: input.touch
 kind: Variable
-lastModified: 2026-04-23
+lastModified: 2026-05-13
 ---
 
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [touch](../index.md) / TOUCH\_EVENT\_NAMES

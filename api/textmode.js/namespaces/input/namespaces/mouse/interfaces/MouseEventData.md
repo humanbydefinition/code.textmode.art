@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: input.mouse
 kind: Interface
-lastModified: 2026-04-23
+lastModified: 2026-05-13
 isInterface: true
 ---
 
@@ -21,10 +21,10 @@ Mouse event data passed to event handlers.
 
 | Property | Type | Description |
 | ------ | ------ | ------ |
-| <a id="button"></a> `button?` | `number` | Mouse button that triggered the event *(for click events)*. |
-| <a id="delta"></a> `delta?` | `object` | Scroll delta for wheel events. |
+| <a id="property-button"></a> `button?` | `number` | Mouse button that triggered the event *(for click events)*. |
+| <a id="property-delta"></a> `delta?` | `object` | Scroll delta for wheel events. |
 | `delta.x` | `number` | Scroll delta in X direction. |
 | `delta.y` | `number` | Scroll delta in Y direction. |
-| <a id="originalevent"></a> `originalEvent` | `MouseEvent` \| `WheelEvent` | Original DOM event. |
-| <a id="position"></a> `position` | `GridPosition` | Current mouse position in grid coordinates. |
-| <a id="previousposition"></a> `previousPosition` | `GridPosition` | Previous mouse position in grid coordinates. |
+| <a id="property-originalevent"></a> `originalEvent` | `MouseEvent` \| `WheelEvent` | Original DOM event. |
+| <a id="property-position"></a> `position` | `GridPosition` | Current mouse position in grid coordinates. |
+| <a id="property-previousposition"></a> `previousPosition` | `GridPosition` | Previous mouse position in grid coordinates. |

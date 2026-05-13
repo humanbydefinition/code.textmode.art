@@ -7,12 +7,12 @@ category: Type Aliases
 api: true
 namespace: input.gamepad
 kind: TypeAlias
-lastModified: 2026-04-23
+lastModified: 2026-05-13
 ---
 
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [gamepad](../index.md) / GamepadButtonEventHandler
 
-# Type Alias: GamepadButtonEventHandler()
+# Type Alias: GamepadButtonEventHandler
 
 ```ts
 type GamepadButtonEventHandler = (data) => void;

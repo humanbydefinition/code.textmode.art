@@ -7,7 +7,7 @@ category: Enumerations
 api: true
 namespace: errors
 kind: Enum
-lastModified: 2026-04-23
+lastModified: 2026-05-13
 ---
 
 [textmode.js](../../../index.md) / [errors](../index.md) / TextmodeErrorLevel
@@ -34,7 +34,7 @@ textmode.setErrorLevel(TextmodeErrorLevel.WARNING);
 
 | Enumeration Member | Value | Description |
 | ------ | ------ | ------ |
-| <a id="error"></a> `ERROR` | `2` | Log validation failures as errors. |
-| <a id="silent"></a> `SILENT` | `0` | Suppress all error output. Validation failures are handled silently without any console messages. |
-| <a id="throw"></a> `THROW` | `3` | Throw exceptions on validation failures *(default behavior)*. |
-| <a id="warning"></a> `WARNING` | `1` | Log validation failures as warnings. |
+| <a id="enumeration-member-error"></a> `ERROR` | `2` | Log validation failures as errors. |
+| <a id="enumeration-member-silent"></a> `SILENT` | `0` | Suppress all error output. Validation failures are handled silently without any console messages. |
+| <a id="enumeration-member-throw"></a> `THROW` | `3` | Throw exceptions on validation failures *(default behavior)*. |
+| <a id="enumeration-member-warning"></a> `WARNING` | `1` | Log validation failures as warnings. |

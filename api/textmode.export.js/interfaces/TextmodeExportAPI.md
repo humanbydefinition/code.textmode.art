@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-04-23
+lastModified: 2026-05-13
 isInterface: true
 ---
 
@@ -21,7 +21,7 @@ Runtime export helpers that `createExportPlugin` attaches to the `Textmodifier` 
 
 | Property | Type | Description |
 | ------ | ------ | ------ |
-| <a id="exportoverlay"></a> `exportOverlay` | [`ExportOverlayController`](ExportOverlayController.md) | Controller for managing the export overlay UI visibility at runtime. |
+| <a id="property-exportoverlay"></a> `exportOverlay` | [`ExportOverlayController`](ExportOverlayController.md) | Controller for managing the export overlay UI visibility at runtime. |
 
 ## Methods
 
@@ -181,6 +181,88 @@ The textual representation of the artwork.
 
 ```ts
 const text = t.toString({ preserveTrailingSpaces: false });
+```
+
+***
+
+### toJSON()
+
+```ts
+toJSON(options?): TextmodeLayerJSON;
+```
+
+Produces the current base layer as structured JSON data.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `options?` | [`JSONExportOptions`](../type-aliases/JSONExportOptions.md) | Export options. |
+
+#### Returns
+
+[`TextmodeLayerJSON`](TextmodeLayerJSON.md)
+
+The JSON document representing the current base layer.
+
+#### Example
+
+```ts
+const layer = t.toJSON({ colorMode: 'hex', includeMetadata: true });
+```
+
+***
+
+### toJSONString()
+
+```ts
+toJSONString(options?): string;
+```
+
+Produces the current base layer as a JSON string.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `options?` | [`JSONExportOptions`](../type-aliases/JSONExportOptions.md) | Export options. |
+
+#### Returns
+
+`string`
+
+Serialized JSON string for the current base layer.
+
+#### Example
+
+```ts
+const json = t.toJSONString({ pretty: false, colorMode: 'hex' });
+```
+
+***
+
+### saveJSON()
+
+```ts
+saveJSON(options?): void;
+```
+
+Downloads the current base layer as a JSON file.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `options?` | [`JSONExportOptions`](../type-aliases/JSONExportOptions.md) | Export options. |
+
+#### Returns
+
+`void`
+
+#### Example
+
+```ts
+t.saveJSON({ filename: 'frame', pretty: true });
 ```
 
 ***

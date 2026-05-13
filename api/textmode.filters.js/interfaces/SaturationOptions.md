@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-04-23
+lastModified: 2026-05-13
 isInterface: true
 ---
 
@@ -59,4 +59,4 @@ t.windowResized(() => {
 
 | Property | Type | Description |
 | ------ | ------ | ------ |
-| <a id="amount"></a> `amount` | `number` | Saturation multiplier. - `0.0` = grayscale (no color) - `1.0` = normal saturation (no change) - `> 1.0` = vivid/oversaturated colors **Default** `1.0` |
+| <a id="property-amount"></a> `amount` | `number` | Saturation multiplier. - `0.0` = grayscale (no color) - `1.0` = normal saturation (no change) - `> 1.0` = vivid/oversaturated colors **Default** `1.0` |

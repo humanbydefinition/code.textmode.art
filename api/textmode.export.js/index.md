@@ -2,17 +2,17 @@
 layout: doc
 editLink: true
 title: textmode.export.js
-description: Export plugin for textmode.js - save artworks as images, videos, SVG, and text.
+description: Export plugin for textmode.js - save artworks as images, videos, SVG, JSON, and text.
 category: API Reference
 api: true
 kind: Project
 ecosystem: textmode.js
-lastModified: 2026-04-23
+lastModified: 2026-05-13
 ---
 
 # textmode.export.js
 
-Export plugin for textmode.js - save artworks as images, videos, SVG, and text.
+Export plugin for textmode.js - save artworks as images, videos, SVG, JSON, and text.
 
 This plugin adds comprehensive export capabilities to textmode.js instances,
 allowing you to save your generative artworks in multiple formats with a
@@ -28,6 +28,7 @@ convenient overlay UI for quick access to all export options.
 
 ### Text formats
 - [TXT](type-aliases/TXTExportOptions.md) - Save text content as plain text
+- [JSON](type-aliases/JSONExportOptions.md) - Save base-layer data as structured JSON
 
 ### Animation formats
 - [GIF](type-aliases/GIFExportOptions.md) - Save as animated GIF
@@ -37,6 +38,7 @@ convenient overlay UI for quick access to all export options.
 
 | Interface | Description |
 | ------ | ------ |
+| [TextmodeLayerJSON](interfaces/TextmodeLayerJSON.md) | Layer document exported by the JSON exporter. |
 | [ExportOverlayController](interfaces/ExportOverlayController.md) | Controller for managing the export overlay UI visibility at runtime. |
 | [TextmodeExportAPI](interfaces/TextmodeExportAPI.md) | Runtime export helpers that `createExportPlugin` attaches to the `Textmodifier` instance. |
 | [~~TextmodeExportPluginOptions~~](interfaces/TextmodeExportPluginOptions.md) | Options for configuring the export plugin. |
@@ -48,6 +50,7 @@ convenient overlay UI for quick access to all export options.
 | [GIFExportProgress](type-aliases/GIFExportProgress.md) | Progress information emitted during the GIF export process. |
 | [GIFExportOptions](type-aliases/GIFExportOptions.md) | Options for exporting the textmode content to GIF format. |
 | [ImageExportOptions](type-aliases/ImageExportOptions.md) | Options for exporting the textmode content to image format. |
+| [JSONExportOptions](type-aliases/JSONExportOptions.md) | Options for exporting the textmode content to JSON format. |
 | [SVGExportOptions](type-aliases/SVGExportOptions.md) | Options for exporting the textmode content to SVG format. |
 | [TXTExportOptions](type-aliases/TXTExportOptions.md) | Options for exporting the textmode content to TXT format. |
 | [VideoExportProgress](type-aliases/VideoExportProgress.md) | Progress information emitted during the video export process. |

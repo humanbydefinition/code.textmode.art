@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 namespace: fonts
 kind: TypeAlias
-lastModified: 2026-04-23
+lastModified: 2026-05-13
 ---
 
 [textmode.js](../../../index.md) / [fonts](../index.md) / TextmodeGlyph
@@ -45,7 +45,7 @@ RGB-encoded glyph identity used by the render pipeline and exposed through chara
 ### glyphData?
 
 ```ts
-optional glyphData: GlyphData | null;
+optional glyphData?: GlyphData | null;
 ```
 
 Glyph outline data including advance width and path information.

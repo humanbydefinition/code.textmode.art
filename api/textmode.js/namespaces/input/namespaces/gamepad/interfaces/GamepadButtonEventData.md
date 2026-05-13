@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: input.gamepad
 kind: Interface
-lastModified: 2026-04-23
+lastModified: 2026-05-13
 isInterface: true
 ---
 
@@ -21,8 +21,8 @@ Button edge payload emitted when a button crosses configured thresholds.
 
 | Property | Type | Description |
 | ------ | ------ | ------ |
-| <a id="button"></a> `button` | [`TextmodeGamepadButtonSnapshot`](TextmodeGamepadButtonSnapshot.md) | Current button snapshot. |
-| <a id="buttonindex"></a> `buttonIndex` | `number` | Button index in the raw `buttons` array. |
-| <a id="gamepad"></a> `gamepad` | [`TextmodeGamepadSnapshot`](TextmodeGamepadSnapshot.md) | The gamepad whose button changed state. |
-| <a id="previousbutton"></a> `previousButton` | [`TextmodeGamepadButtonSnapshot`](TextmodeGamepadButtonSnapshot.md) | Previous-frame button snapshot. |
-| <a id="standardbuttonname"></a> `standardButtonName?` | [`TextmodeStandardButtonName`](../type-aliases/TextmodeStandardButtonName.md) | Semantic button alias for standard-mapped controllers. |
+| <a id="property-button"></a> `button` | [`TextmodeGamepadButtonSnapshot`](TextmodeGamepadButtonSnapshot.md) | Current button snapshot. |
+| <a id="property-buttonindex"></a> `buttonIndex` | `number` | Button index in the raw `buttons` array. |
+| <a id="property-gamepad"></a> `gamepad` | [`TextmodeGamepadSnapshot`](TextmodeGamepadSnapshot.md) | The gamepad whose button changed state. |
+| <a id="property-previousbutton"></a> `previousButton` | [`TextmodeGamepadButtonSnapshot`](TextmodeGamepadButtonSnapshot.md) | Previous-frame button snapshot. |
+| <a id="property-standardbuttonname"></a> `standardButtonName?` | [`TextmodeStandardButtonName`](../type-aliases/TextmodeStandardButtonName.md) | Semantic button alias for standard-mapped controllers. |

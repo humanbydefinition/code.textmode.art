@@ -6,7 +6,7 @@ description: Options for creating a framebuffer via Textmodifier.createFramebuff
 category: Type Aliases
 api: true
 kind: TypeAlias
-lastModified: 2026-04-23
+lastModified: 2026-05-13
 ---
 
 [textmode.js](../index.md) / TextmodeFramebufferOptions
@@ -24,7 +24,7 @@ Options for creating a framebuffer via [Textmodifier.createFramebuffer](../class
 ### attachments?
 
 ```ts
-optional attachments: number;
+optional attachments?: number;
 ```
 
 Number of color attachments *(1-8)*
@@ -39,7 +39,7 @@ Going above 3 is only recommended for advanced use cases involving custom shader
 ### height?
 
 ```ts
-optional height: number;
+optional height?: number;
 ```
 
 Height of the framebuffer in grid cells
@@ -49,7 +49,7 @@ Height of the framebuffer in grid cells
 ### width?
 
 ```ts
-optional width: number;
+optional width?: number;
 ```
 
 Width of the framebuffer in grid cells

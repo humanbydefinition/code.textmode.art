@@ -6,7 +6,7 @@ description: Framebuffer class for managing offscreen rendering targets initiali
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-04-23
+lastModified: 2026-05-13
 hasConstructor: false
 ---
 
@@ -81,23 +81,23 @@ t.draw(() => {
 	t.background(4, 6, 14);
 	t.image(framebuffer, framebuffer.width, framebuffer.height);
 
-	drawLabel(`width ${framebuffer.width}  height ${framebuffer.height}`, -Math.floor(t.grid.rows * 0.34), [255, 220, 140]);
+	drawLabel(
+		`width ${framebuffer.width}  height ${framebuffer.height}`,
+		-Math.floor(t.grid.rows * 0.34),
+		[255, 220, 140]
+	);
 	drawLabel(`framebuffer ${framebuffer.framebuffer ? 'allocated' : 'missing'}`, Math.floor(t.grid.rows * 0.28));
-	drawLabel(`textures ${framebuffer.textures.length}  attachments ${framebuffer.attachmentCount}`, Math.floor(t.grid.rows * 0.36), [120, 205, 255]);
+	drawLabel(
+		`textures ${framebuffer.textures.length}  attachments ${framebuffer.attachmentCount}`,
+		Math.floor(t.grid.rows * 0.36),
+		[120, 205, 255]
+	);
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeFramebuffer/framebuffer/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 ***
 
@@ -106,14 +106,14 @@ t.windowResized(() => {
 #### Get Signature
 
 ```ts
-get framebuffer(): null | WebGLFramebuffer;
+get framebuffer(): WebGLFramebuffer | null;
 ```
 
 The underlying WebGLFramebuffer handle.
 
 ##### Returns
 
-`null` \| `WebGLFramebuffer`
+`WebGLFramebuffer` \| `null`
 
 ##### Example
 
@@ -151,23 +151,23 @@ t.draw(() => {
 	t.background(4, 6, 14);
 	t.image(framebuffer, framebuffer.width, framebuffer.height);
 
-	drawLabel(`width ${framebuffer.width}  height ${framebuffer.height}`, -Math.floor(t.grid.rows * 0.34), [255, 220, 140]);
+	drawLabel(
+		`width ${framebuffer.width}  height ${framebuffer.height}`,
+		-Math.floor(t.grid.rows * 0.34),
+		[255, 220, 140]
+	);
 	drawLabel(`framebuffer ${framebuffer.framebuffer ? 'allocated' : 'missing'}`, Math.floor(t.grid.rows * 0.28));
-	drawLabel(`textures ${framebuffer.textures.length}  attachments ${framebuffer.attachmentCount}`, Math.floor(t.grid.rows * 0.36), [120, 205, 255]);
+	drawLabel(
+		`textures ${framebuffer.textures.length}  attachments ${framebuffer.attachmentCount}`,
+		Math.floor(t.grid.rows * 0.36),
+		[120, 205, 255]
+	);
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeFramebuffer/framebuffer/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 ***
 
@@ -221,23 +221,23 @@ t.draw(() => {
 	t.background(4, 6, 14);
 	t.image(framebuffer, framebuffer.width, framebuffer.height);
 
-	drawLabel(`width ${framebuffer.width}  height ${framebuffer.height}`, -Math.floor(t.grid.rows * 0.34), [255, 220, 140]);
+	drawLabel(
+		`width ${framebuffer.width}  height ${framebuffer.height}`,
+		-Math.floor(t.grid.rows * 0.34),
+		[255, 220, 140]
+	);
 	drawLabel(`framebuffer ${framebuffer.framebuffer ? 'allocated' : 'missing'}`, Math.floor(t.grid.rows * 0.28));
-	drawLabel(`textures ${framebuffer.textures.length}  attachments ${framebuffer.attachmentCount}`, Math.floor(t.grid.rows * 0.36), [120, 205, 255]);
+	drawLabel(
+		`textures ${framebuffer.textures.length}  attachments ${framebuffer.attachmentCount}`,
+		Math.floor(t.grid.rows * 0.36),
+		[120, 205, 255]
+	);
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeFramebuffer/framebuffer/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 #### Implementation of
 
@@ -297,23 +297,23 @@ t.draw(() => {
 	t.background(4, 6, 14);
 	t.image(framebuffer, framebuffer.width, framebuffer.height);
 
-	drawLabel(`width ${framebuffer.width}  height ${framebuffer.height}`, -Math.floor(t.grid.rows * 0.34), [255, 220, 140]);
+	drawLabel(
+		`width ${framebuffer.width}  height ${framebuffer.height}`,
+		-Math.floor(t.grid.rows * 0.34),
+		[255, 220, 140]
+	);
 	drawLabel(`framebuffer ${framebuffer.framebuffer ? 'allocated' : 'missing'}`, Math.floor(t.grid.rows * 0.28));
-	drawLabel(`textures ${framebuffer.textures.length}  attachments ${framebuffer.attachmentCount}`, Math.floor(t.grid.rows * 0.36), [120, 205, 255]);
+	drawLabel(
+		`textures ${framebuffer.textures.length}  attachments ${framebuffer.attachmentCount}`,
+		Math.floor(t.grid.rows * 0.36),
+		[120, 205, 255]
+	);
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeFramebuffer/framebuffer/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 #### Implementation of
 
@@ -373,23 +373,23 @@ t.draw(() => {
 	t.background(4, 6, 14);
 	t.image(framebuffer, framebuffer.width, framebuffer.height);
 
-	drawLabel(`width ${framebuffer.width}  height ${framebuffer.height}`, -Math.floor(t.grid.rows * 0.34), [255, 220, 140]);
+	drawLabel(
+		`width ${framebuffer.width}  height ${framebuffer.height}`,
+		-Math.floor(t.grid.rows * 0.34),
+		[255, 220, 140]
+	);
 	drawLabel(`framebuffer ${framebuffer.framebuffer ? 'allocated' : 'missing'}`, Math.floor(t.grid.rows * 0.28));
-	drawLabel(`textures ${framebuffer.textures.length}  attachments ${framebuffer.attachmentCount}`, Math.floor(t.grid.rows * 0.36), [120, 205, 255]);
+	drawLabel(
+		`textures ${framebuffer.textures.length}  attachments ${framebuffer.attachmentCount}`,
+		Math.floor(t.grid.rows * 0.36),
+		[120, 205, 255]
+	);
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeFramebuffer/framebuffer/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 #### Implementation of
 
@@ -423,62 +423,62 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-const fb = t.createFramebuffer({ width: 18, height: 10 });
+const fb = t.createFramebuffer({ width: 20, height: 12 });
 
-function writeLine(text, y, color) {
-	const startX = -((text.length - 1) * 0.5);
-	t.charColor(...color);
-
+function drawLabel(target, text, x, y, col = [255, 255, 255]) {
+	target.push();
+	target.translate(x, y);
+	target.charColor(...col);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(startX + i, y);
-		t.char(text[i]);
-		t.point();
-		t.pop();
+		target.push();
+		target.translate(i, 0);
+		target.char(text[i]);
+		target.point();
+		target.pop();
 	}
+	target.pop();
 }
 
 t.draw(() => {
-	fb.begin();
-	t.background(16, 10, 28);
+	const time = t.frameCount * 0.05;
 
-	for (let i = 0; i < 12; i++) {
-		const angle = t.frameCount * 0.03 + i * 0.52;
+	fb.begin();
+	t.background(15, 10, 30);
+
+	for (let i = 0; i < 15; i++) {
+		const angle = time + i * 0.5;
 		t.push();
-		t.charColor(255, 170 + i * 5, 90 + i * 10);
-		t.char(i % 2 === 0 ? '+' : '*');
-		t.translate(Math.cos(angle) * 5, Math.sin(angle) * 3);
-		t.point();
+		t.charColor(255, 150 + i * 5, 100 + i * 8);
+		t.char('@');
+		t.translate(Math.cos(angle) * 6, Math.sin(angle) * 4);
+		t.rect(2, 2);
 		t.pop();
 	}
+
+	drawLabel(t, 'OFF-SCREEN', -(10 - 1) / 2, 0, [255, 220, 150]);
 
 	fb.end();
 
 	t.background(6, 8, 18);
+	const { cols, rows } = t.grid;
+
 	for (let i = 0; i < 4; i++) {
-		const angle = t.frameCount * 0.015 + i * (Math.PI / 2);
+		const angle = time * 0.3 + i * (Math.PI / 2);
 		t.push();
-		t.translate(Math.cos(angle) * 14, Math.sin(angle) * 8);
-		t.rotateZ(i * 90 + t.frameCount);
+		t.translate(Math.cos(angle) * 16, Math.sin(angle) * 8);
+
 		t.image(fb);
 		t.pop();
 	}
 
-	writeLine('BEGIN() BINDS THE FBO', -11, [220, 230, 255]);
+	const title = '--- FRAMEBUFFER BEGIN() ---';
+	drawLabel(t, title, -(title.length - 1) / 2, -(rows - 1) / 2 + 2, [180, 220, 255]);
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeFramebuffer/begin/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 #### Implementation of
 
@@ -511,20 +511,22 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-let generation = 0;
 let fb;
+let fbSize = 10;
+let growing = true;
 
-function writeLine(text, y, color) {
-	const startX = -((text.length - 1) * 0.5);
-	t.charColor(...color);
-
+function drawLabel(text, x, y, col = [255, 255, 255]) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(...col);
 	for (let i = 0; i < text.length; i++) {
 		t.push();
-		t.translate(startX + i, y);
+		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
 		t.pop();
 	}
+	t.pop();
 }
 
 function rebuildFramebuffer() {
@@ -532,49 +534,61 @@ function rebuildFramebuffer() {
 		fb.dispose();
 	}
 
-	generation += 1;
+	if (growing) {
+		fbSize += 4;
+		if (fbSize >= 26) growing = false;
+	} else {
+		fbSize -= 4;
+		if (fbSize <= 10) growing = true;
+	}
 
-	fb = t.createFramebuffer({
-		width: 12 + (generation % 3) * 4,
-		height: 8 + (generation % 2) * 2,
-	});
+	fb = t.createFramebuffer({ width: fbSize, height: fbSize });
 
 	fb.begin();
-	t.background(14, 12, 30);
-	writeLine(`GEN ${generation}`, -1, [255, 220, 140]);
-	writeLine('REBUILT', 2, [120, 210, 255]);
+	t.background(10, 5, 20);
+	t.charColor(255, 100, 150);
+	t.char('+');
+	t.rect(fbSize, fbSize);
+
+	const sizeText = `${fbSize}x${fbSize}`;
+	drawLabel(sizeText, -(sizeText.length - 1) / 2, 0, [255, 200, 100]);
 	fb.end();
 }
 
 rebuildFramebuffer();
 
 t.draw(() => {
-	if (t.frameCount > 0 && t.frameCount % 150 === 0) {
+	t.background(10, 15, 25);
+	const { rows } = t.grid;
+	const time = t.frameCount * 0.05;
+
+	if (t.frameCount % 60 === 0) {
 		rebuildFramebuffer();
 	}
 
-	t.background(6, 8, 18);
 	t.push();
-	t.translate(0, -4);
-	t.rotateZ(Math.sin(t.frameCount * 0.03) * 8);
+	t.translate(0, -2);
+	t.rotateZ(Math.sin(time) * 4);
+
+	t.char(' ');
+	t.charColor(255, 255, 255);
+	t.cellColor(150, 50, 100, 100);
+	t.rect(fb.width + 2, fb.height + 2);
+
 	t.image(fb);
 	t.pop();
 
-	writeLine('DISPOSE BEFORE REBUILDING', 8, [220, 230, 255]);
+	const title = '--- DISPOSE & REBUILD ---';
+	drawLabel(title, -(title.length - 1) / 2, -(rows - 1) / 2 + 2, [180, 220, 255]);
+
+	const hint = 'FBO is destroyed and recreated every 60 frames';
+	drawLabel(hint, -(hint.length - 1) / 2, (rows - 1) / 2 - 2, [150, 150, 200]);
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeFramebuffer/dispose/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 #### Implementation of
 
@@ -660,14 +674,6 @@ t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeFramebuffer/end/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 #### Implementation of
 
@@ -734,7 +740,8 @@ t.draw(() => {
 	framebuffer.end();
 
 	const pixels = framebuffer.readPixels(1);
-	const centerIndex = ((Math.floor(framebuffer.height / 2) * framebuffer.width) + Math.floor(framebuffer.width / 2)) * 4;
+	const centerIndex =
+		(Math.floor(framebuffer.height / 2) * framebuffer.width + Math.floor(framebuffer.width / 2)) * 4;
 	const rgba = pixels.slice(centerIndex, centerIndex + 4);
 
 	t.background(6, 8, 18);
@@ -749,14 +756,6 @@ t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeFramebuffer/readPixels/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 #### Implementation of
 
@@ -844,14 +843,6 @@ t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeFramebuffer/resize/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 #### Implementation of
 

@@ -6,7 +6,7 @@ description: All media conversion related modules and types.
 category: Namespaces
 api: true
 kind: Namespace
-lastModified: 2026-04-23
+lastModified: 2026-05-13
 ---
 
 [textmode.js](../../index.md) / conversion

@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: filters
 kind: Interface
-lastModified: 2026-04-23
+lastModified: 2026-05-13
 isInterface: true
 ---
 
@@ -24,7 +24,7 @@ or an object with named properties.
 
 | Property | Type | Description |
 | ------ | ------ | ------ |
-| <a id="grayscale"></a> `grayscale` | \| `number` \| `void` \| \{ `amount?`: `number`; \} | Converts to grayscale. Amount: 0-1, default 1 |
-| <a id="invert"></a> `invert` | `void` | Inverts all colors (no params needed) |
-| <a id="sepia"></a> `sepia` | \| `number` \| `void` \| \{ `amount?`: `number`; \} | Applies sepia tone. Amount: 0-1, default 1 |
-| <a id="threshold"></a> `threshold` | \| `number` \| \{ `threshold?`: `number`; \} | Black/white threshold. Threshold: 0-1, default 0.5 |
+| <a id="property-grayscale"></a> `grayscale` | \| `number` \| `void` \| \{ `amount?`: `number`; \} | Converts to grayscale. Amount: 0-1, default 1 |
+| <a id="property-invert"></a> `invert` | `void` | Inverts all colors (no params needed) |
+| <a id="property-sepia"></a> `sepia` | \| `number` \| `void` \| \{ `amount?`: `number`; \} | Applies sepia tone. Amount: 0-1, default 1 |
+| <a id="property-threshold"></a> `threshold` | \| `number` \| \{ `threshold?`: `number`; \} | Black/white threshold. Threshold: 0-1, default 0.5 |

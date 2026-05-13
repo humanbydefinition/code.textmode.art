@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-04-23
+lastModified: 2026-05-13
 isInterface: true
 ---
 
@@ -58,4 +58,4 @@ t.windowResized(() => {
 
 | Property | Type | Description |
 | ------ | ------ | ------ |
-| <a id="amount"></a> `amount` | `number` | Contrast multiplier. - `1.0` = normal contrast (no change) - `> 1.0` = more contrast (darker darks, brighter brights) - `< 1.0` = less contrast (more gray/washed out) - `0.0` = solid gray **Default** `1.0` |
+| <a id="property-amount"></a> `amount` | `number` | Contrast multiplier. - `1.0` = normal contrast (no change) - `> 1.0` = more contrast (darker darks, brighter brights) - `< 1.0` = less contrast (more gray/washed out) - `0.0` = solid gray **Default** `1.0` |
