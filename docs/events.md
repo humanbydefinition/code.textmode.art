@@ -5,14 +5,14 @@ description: Handle mouse, keyboard, touch, gesture, and gamepad input in textmo
 
 # Event handling
 
-`textmode.js` includes a unified input system for mouse, keyboard, touch, gesture, and gamepad input. You can use the familiar single-callback helpers such as `mousePressed()` and `keyReleased()`, or the newer shared event API with `on()`, `off()`, and `once()`.
+`textmode.js` includes a unified input system for mouse, keyboard, touch, gesture, and gamepad input. You can use the familiar single-callback helpers such as [`mousePressed()`](/api/textmode.js/classes/Textmodifier#mousepressed) and [`keyReleased()`](/api/textmode.js/classes/Textmodifier#keyreleased), or the newer shared event API with [`on()`](/api/textmode.js/classes/Textmodifier#on), [`off()`](/api/textmode.js/classes/Textmodifier#off), and [`once()`](/api/textmode.js/classes/Textmodifier#once).
 
 ## Two ways to register input
 
 There are two event styles in the library:
 
-- **Legacy single-callback methods** such as `mousePressed()`, `touchStarted()`, or `gamepadConnected()`
-- **Shared multi-listener methods**: `on()`, `off()`, and `once()`
+- **Legacy single-callback methods** such as [`mousePressed()`](/api/textmode.js/classes/Textmodifier#mousepressed), [`touchStarted()`](/api/textmode.js/classes/Textmodifier#touchstarted), or [`gamepadConnected()`](/api/textmode.js/classes/Textmodifier#gamepadconnected)
+- **Shared multi-listener methods**: [`on()`](/api/textmode.js/classes/Textmodifier#on), [`off()`](/api/textmode.js/classes/Textmodifier#off), and [`once()`](/api/textmode.js/classes/Textmodifier#once)
 
 The single-callback helpers are convenient when you only need one handler for a given event. The shared event API is better when you want multiple listeners or explicit teardown.
 
@@ -46,43 +46,43 @@ disposeMove();
 
 ### Keyboard
 
-- `keyPressed`
-- `keyTyped`
-- `keyReleased`
+- [`keyPressed()`](/api/textmode.js/classes/Textmodifier#keypressed)
+- [`keyTyped()`](/api/textmode.js/classes/Textmodifier#keytyped)
+- [`keyReleased()`](/api/textmode.js/classes/Textmodifier#keyreleased)
 
 ### Mouse
 
-- `mouseClicked`
-- `doubleClicked`
-- `mousePressed`
-- `mouseReleased`
-- `mouseMoved`
-- `mouseDragged`
-- `mouseScrolled`
+- [`mouseClicked()`](/api/textmode.js/classes/Textmodifier#mouseclicked)
+- [`doubleClicked()`](/api/textmode.js/classes/Textmodifier#doubleclicked)
+- [`mousePressed()`](/api/textmode.js/classes/Textmodifier#mousepressed)
+- [`mouseReleased()`](/api/textmode.js/classes/Textmodifier#mousereleased)
+- [`mouseMoved()`](/api/textmode.js/classes/Textmodifier#mousemoved)
+- [`mouseDragged()`](/api/textmode.js/classes/Textmodifier#mousedragged)
+- [`mouseScrolled()`](/api/textmode.js/classes/Textmodifier#mousescrolled)
 
 ### Touch lifecycle
 
-- `touchStarted`
-- `touchMoved`
-- `touchEnded`
-- `touchCancelled`
+- [`touchStarted()`](/api/textmode.js/classes/Textmodifier#touchstarted)
+- [`touchMoved()`](/api/textmode.js/classes/Textmodifier#touchmoved)
+- [`touchEnded()`](/api/textmode.js/classes/Textmodifier#touchended)
+- [`touchCancelled()`](/api/textmode.js/classes/Textmodifier#touchcancelled)
 
 ### Touch gestures
 
-- `tap`
-- `doubleTap`
-- `longPress`
-- `swipe`
-- `pinch`
-- `rotateGesture`
+- [`tap()`](/api/textmode.js/classes/Textmodifier#tap)
+- [`doubleTap()`](/api/textmode.js/classes/Textmodifier#doubletap)
+- [`longPress()`](/api/textmode.js/classes/Textmodifier#longpress)
+- [`swipe()`](/api/textmode.js/classes/Textmodifier#swipe)
+- [`pinch()`](/api/textmode.js/classes/Textmodifier#pinch)
+- [`rotateGesture()`](/api/textmode.js/classes/Textmodifier#rotategesture)
 
 ### Gamepad
 
-- `gamepadConnected`
-- `gamepadDisconnected`
-- `gamepadButtonPressed`
-- `gamepadButtonReleased`
-- `gamepadAxisChanged`
+- [`gamepadConnected()`](/api/textmode.js/classes/Textmodifier#gamepadconnected)
+- [`gamepadDisconnected()`](/api/textmode.js/classes/Textmodifier#gamepaddisconnected)
+- [`gamepadButtonPressed()`](/api/textmode.js/classes/Textmodifier#gamepadbuttonpressed)
+- [`gamepadButtonReleased()`](/api/textmode.js/classes/Textmodifier#gamepadbuttonreleased)
+- [`gamepadAxisChanged()`](/api/textmode.js/classes/Textmodifier#gamepadaxischanged)
 
 ## Mouse input
 
@@ -98,11 +98,11 @@ When the mouse is outside the grid, `x` and `y` are set to `Number.NEGATIVE_INFI
 
 Use these properties inside `draw()`:
 
-- `t.mouse`
-- `t.pmouse`
-- `t.mouseIsPressed`
-- `t.movedX`
-- `t.movedY`
+- [`t.mouse`](/api/textmode.js/classes/Textmodifier#mouse)
+- [`t.pmouse`](/api/textmode.js/classes/Textmodifier#pmouse)
+- [`t.mouseIsPressed`](/api/textmode.js/classes/Textmodifier#mouseispressed)
+- [`t.movedX`](/api/textmode.js/classes/Textmodifier#movedx)
+- [`t.movedY`](/api/textmode.js/classes/Textmodifier#movedy)
 
 ```js
 const t = textmode.create({ width: 800, height: 600 });
@@ -170,9 +170,9 @@ t.draw(() => {
 
 Mouse input also includes:
 
-- `t.cursor(...)`
-- `t.requestPointerLock()`
-- `t.exitPointerLock()`
+- [`t.cursor(...)`](/api/textmode.js/classes/Textmodifier#cursor)
+- [`t.requestPointerLock()`](/api/textmode.js/classes/Textmodifier#requestpointerlock)
+- [`t.exitPointerLock()`](/api/textmode.js/classes/Textmodifier#exitpointerlock)
 
 Pointer lock is useful when you want relative mouse movement through `t.movedX` and `t.movedY`, for example in camera controls or first-person navigation.
 
@@ -199,11 +199,11 @@ Keyboard callbacks receive:
 
 Use these helpers when you want continuous key state:
 
-- `t.isKeyPressed(key)`
-- `t.lastKeyPressed`
-- `t.lastKeyReleased`
-- `t.pressedKeys`
-- `t.modifierState`
+- [`t.isKeyPressed(key)`](/api/textmode.js/classes/Textmodifier#iskeypressed)
+- [`t.lastKeyPressed`](/api/textmode.js/classes/Textmodifier#lastkeypressed)
+- [`t.lastKeyReleased`](/api/textmode.js/classes/Textmodifier#lastkeyreleased)
+- [`t.pressedKeys`](/api/textmode.js/classes/Textmodifier#pressedkeys)
+- [`t.modifierState`](/api/textmode.js/classes/Textmodifier#modifierstate)
 
 ```js
 const t = textmode.create({ width: 800, height: 600 });
@@ -255,7 +255,7 @@ Touch lifecycle callbacks receive:
 - `deltaTime`
 - `originalEvent`
 
-The current active touches are also available through `t.touches`.
+The current active touches are also available through [`t.touches`](/api/textmode.js/classes/Textmodifier#touches).
 
 ```js
 const t = textmode.create({ width: 800, height: 600 });
@@ -280,12 +280,12 @@ t.draw(() => {
 
 `textmode.js` includes built-in gesture recognition:
 
-- `tap`
-- `doubleTap`
-- `longPress`
-- `swipe`
-- `pinch`
-- `rotateGesture`
+- [`tap()`](/api/textmode.js/classes/Textmodifier#tap)
+- [`doubleTap()`](/api/textmode.js/classes/Textmodifier#doubletap)
+- [`longPress()`](/api/textmode.js/classes/Textmodifier#longpress)
+- [`swipe()`](/api/textmode.js/classes/Textmodifier#swipe)
+- [`pinch()`](/api/textmode.js/classes/Textmodifier#pinch)
+- [`rotateGesture()`](/api/textmode.js/classes/Textmodifier#rotategesture)
 
 ### Gesture payloads
 
@@ -324,11 +324,11 @@ t.draw(() => {
 
 Gamepad callbacks are useful for connection changes and discrete button or axis transitions:
 
-- `gamepadConnected`
-- `gamepadDisconnected`
-- `gamepadButtonPressed`
-- `gamepadButtonReleased`
-- `gamepadAxisChanged`
+- [`gamepadConnected()`](/api/textmode.js/classes/Textmodifier#gamepadconnected)
+- [`gamepadDisconnected()`](/api/textmode.js/classes/Textmodifier#gamepaddisconnected)
+- [`gamepadButtonPressed()`](/api/textmode.js/classes/Textmodifier#gamepadbuttonpressed)
+- [`gamepadButtonReleased()`](/api/textmode.js/classes/Textmodifier#gamepadbuttonreleased)
+- [`gamepadAxisChanged()`](/api/textmode.js/classes/Textmodifier#gamepadaxischanged)
 
 Gamepad event payloads include:
 
@@ -340,8 +340,8 @@ Gamepad event payloads include:
 
 For continuous control, poll:
 
-- `t.gamepads`
-- `t.gamepad(index)`
+- [`t.gamepads`](/api/textmode.js/classes/Textmodifier#gamepads)
+- [`t.gamepad(index)`](/api/textmode.js/classes/Textmodifier#gamepad)
 
 `t.gamepads` returns a compact list of connected controllers without sparse holes. For standard-mapped controllers, each snapshot may also expose `standard.leftStick`, `standard.rightStick`, `standard.faceButtons`, `standard.shoulders`, `standard.center`, and `standard.dpad`.
 
@@ -374,7 +374,7 @@ t.draw(() => {
 });
 ```
 
-`gamepadAxisChanged()` is derived from per-frame polling, so for analog sticks and triggers, polling `t.gamepads` inside `draw()` is usually the simplest approach.
+[`gamepadAxisChanged()`](/api/textmode.js/classes/Textmodifier#gamepadaxischanged) is derived from per-frame polling, so for analog sticks and triggers, polling [`t.gamepads`](/api/textmode.js/classes/Textmodifier#gamepads) inside `draw()` is usually the simplest approach.
 
 ## Choosing an approach
 
@@ -397,8 +397,8 @@ In practice, interactive sketches often use both.
 ## Related APIs
 
 - [`Textmodifier`](/api/textmode.js/classes/Textmodifier)
-- [`input`](/api/textmode.js/namespaces/input/index.md)
-- [`input.keyboard`](/api/textmode.js/namespaces/input/namespaces/keyboard/index.md)
-- [`input.mouse`](/api/textmode.js/namespaces/input/namespaces/mouse/index.md)
-- [`input.touch`](/api/textmode.js/namespaces/input/namespaces/touch/index.md)
-- [`input.gamepad`](/api/textmode.js/namespaces/input/namespaces/gamepad/index.md)
+- [`input`](/api/textmode.js/namespaces/input/)
+- [`input.keyboard`](/api/textmode.js/namespaces/input/namespaces/keyboard/)
+- [`input.mouse`](/api/textmode.js/namespaces/input/namespaces/mouse/)
+- [`input.touch`](/api/textmode.js/namespaces/input/namespaces/touch/)
+- [`input.gamepad`](/api/textmode.js/namespaces/input/namespaces/gamepad/)
