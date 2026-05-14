@@ -14,11 +14,11 @@ Before installing anything locally, you can try `textmode.js` directly in your b
 🌐 **[editor.textmode.art](https://editor.textmode.art)**
 
 The web editor is specifically designed for `textmode.js` and provides:
-- ✨ **Zero setup required** - Start coding immediately
-- 🚀 **Live preview** - See your creations in real-time  
-- 💾 **Save & share** - Export your sketches and share with others
-- 📚 **Built-in examples** - Learn from interactive examples
-- 🔧 **Full API access** - All `textmode.js` features available
+- **Zero setup required** - Start coding immediately
+- **Live preview** - See your creations in real-time  
+- **Save & share** - Export your sketches and share with others
+- **Built-in examples** - Learn from interactive examples
+- **Full API access** - All `textmode.js` features available
 
 The web editor is perfect for learning, prototyping, or creating quick experiments without any local setup!
 
