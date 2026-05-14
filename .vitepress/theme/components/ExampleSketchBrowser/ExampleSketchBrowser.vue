@@ -39,13 +39,35 @@
       </button>
     </div>
 
-    <div ref="browserWrapperRef" class="example-sketch-browser__stage">
-      <Transition name="example-sketch-browser__fade" mode="out-in">
-        <component
-          :is="currentSketchComponent"
+    <div
+      ref="browserWrapperRef"
+      class="example-sketch-browser__stage"
+      :class="{ 'example-sketch-browser__stage--switching': isSwitching }"
+      :aria-busy="isSwitching"
+    >
+      <Transition
+        :name="transitionName"
+        mode="out-in"
+        @after-enter="finishSwitch"
+        @after-leave="cleanupRetiredSandpackElements"
+      >
+        <div
           v-if="currentSketchComponent"
           :key="`${renderKey}-${currentSketchId}`"
-        />
+          class="example-sketch-browser__sketch"
+        >
+          <component :is="currentSketchComponent" />
+        </div>
+      </Transition>
+
+      <Transition name="example-sketch-browser__veil">
+        <div
+          v-if="isSwitching"
+          class="example-sketch-browser__loading"
+          aria-hidden="true"
+        >
+          <div class="example-sketch-browser__loading-bar" />
+        </div>
       </Transition>
     </div>
   </div>
@@ -66,6 +88,7 @@ interface SketchMeta {
 }
 
 type SketchMetadataMap = Record<string, SketchMeta>
+type SwitchDirection = 'next' | 'previous' | 'random'
 
 const showcaseModules = import.meta.glob<Component>(
   '../../../../docs/examples/showcase/*.md'
@@ -95,6 +118,8 @@ const browserWrapperRef = ref<HTMLElement | null>(null)
 const currentIndex = ref(0)
 const renderKey = ref(0)
 const isSwitching = ref(false)
+const switchDirection = ref<SwitchDirection>('next')
+let switchFallbackTimer: ReturnType<typeof setTimeout> | null = null
 
 const hasSketches = computed(() => sketchIds.length > 0)
 const canRandomize = computed(() => sketchIds.length > 1)
@@ -108,8 +133,39 @@ const currentSketchComponent = computed(() => {
 const currentPosition = computed(() => {
   return hasSketches.value ? currentIndex.value + 1 : 0
 })
+const transitionName = computed(() => {
+  if (switchDirection.value === 'previous') {
+    return 'example-sketch-browser__slide-previous'
+  }
 
-function cleanupSandpackElements() {
+  if (switchDirection.value === 'random') {
+    return 'example-sketch-browser__switch-random'
+  }
+
+  return 'example-sketch-browser__slide-next'
+})
+
+function clearSwitchFallbackTimer() {
+  if (switchFallbackTimer) {
+    clearTimeout(switchFallbackTimer)
+    switchFallbackTimer = null
+  }
+}
+
+function finishSwitch() {
+  if (!isSwitching.value) {
+    return
+  }
+
+  clearSwitchFallbackTimer()
+  isSwitching.value = false
+}
+
+function cleanupRetiredSandpackElements() {
+  cleanupSandpackElements({ includeHiddenBodyIframes: true })
+}
+
+function cleanupSandpackElements(options: { includeHiddenBodyIframes?: boolean } = {}) {
   if (typeof document === 'undefined') {
     return
   }
@@ -129,6 +185,10 @@ function cleanupSandpackElements() {
     }
   })
 
+  if (!options.includeHiddenBodyIframes) {
+    return
+  }
+
   const hiddenIframes = document.querySelectorAll('body > iframe[style*="display: none"]')
   hiddenIframes.forEach((iframe) => {
     const src = (iframe as HTMLIFrameElement).src || ''
@@ -143,7 +203,7 @@ function cleanupSandpackElements() {
   })
 }
 
-async function showSketch(nextIndex: number) {
+async function showSketch(nextIndex: number, direction: SwitchDirection) {
   if (!hasSketches.value || isSwitching.value) {
     return
   }
@@ -153,22 +213,36 @@ async function showSketch(nextIndex: number) {
     return
   }
 
+  const nextSketchId = sketchIds[normalizedIndex]
+  const loader = getSketchLoader(nextSketchId)
+
+  clearSwitchFallbackTimer()
+  switchDirection.value = direction
   isSwitching.value = true
+
+  try {
+    if (loader) {
+      await loader()
+    }
+  } catch (error) {
+    console.error(`Failed to load example sketch "${nextSketchId}".`, error)
+    finishSwitch()
+    return
+  }
+
   currentIndex.value = normalizedIndex
   renderKey.value += 1
 
   await nextTick()
-  cleanupSandpackElements()
-
-  isSwitching.value = false
+  switchFallbackTimer = setTimeout(finishSwitch, 1500)
 }
 
 function showPreviousSketch() {
-  void showSketch(currentIndex.value - 1)
+  void showSketch(currentIndex.value - 1, 'previous')
 }
 
 function showNextSketch() {
-  void showSketch(currentIndex.value + 1)
+  void showSketch(currentIndex.value + 1, 'next')
 }
 
 function showRandomSketch() {
@@ -177,11 +251,12 @@ function showRandomSketch() {
   }
 
   const offset = Math.floor(Math.random() * (sketchIds.length - 1)) + 1
-  void showSketch(currentIndex.value + offset)
+  void showSketch(currentIndex.value + offset, 'random')
 }
 
 onBeforeUnmount(() => {
-  cleanupSandpackElements()
+  clearSwitchFallbackTimer()
+  cleanupRetiredSandpackElements()
 })
 </script>
 
@@ -252,18 +327,133 @@ onBeforeUnmount(() => {
 }
 
 .example-sketch-browser__stage {
+  overflow: hidden;
   position: relative;
   min-height: var(--example-sketch-browser-height);
+  border-radius: 8px;
+  background: #000;
+  isolation: isolate;
 }
 
-.example-sketch-browser__fade-enter-active,
-.example-sketch-browser__fade-leave-active {
+.example-sketch-browser__sketch {
+  position: relative;
+  z-index: 1;
+  min-height: var(--example-sketch-browser-height);
+  will-change: opacity, transform;
+}
+
+.example-sketch-browser__stage--switching .example-sketch-browser__sketch {
+  pointer-events: none;
+}
+
+.example-sketch-browser__slide-next-enter-active,
+.example-sketch-browser__slide-next-leave-active,
+.example-sketch-browser__slide-previous-enter-active,
+.example-sketch-browser__slide-previous-leave-active,
+.example-sketch-browser__switch-random-enter-active,
+.example-sketch-browser__switch-random-leave-active {
+  transition:
+    opacity 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.example-sketch-browser__slide-next-leave-active,
+.example-sketch-browser__slide-previous-leave-active,
+.example-sketch-browser__switch-random-leave-active {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+}
+
+.example-sketch-browser__slide-next-enter-active,
+.example-sketch-browser__slide-previous-enter-active,
+.example-sketch-browser__switch-random-enter-active {
+  z-index: 2;
+}
+
+.example-sketch-browser__slide-next-enter-from {
+  opacity: 0;
+  transform: translate3d(24px, 0, 0) scale(0.992);
+}
+
+.example-sketch-browser__slide-next-leave-to {
+  opacity: 0;
+  transform: translate3d(-24px, 0, 0) scale(0.992);
+}
+
+.example-sketch-browser__slide-previous-enter-from {
+  opacity: 0;
+  transform: translate3d(-24px, 0, 0) scale(0.992);
+}
+
+.example-sketch-browser__slide-previous-leave-to {
+  opacity: 0;
+  transform: translate3d(24px, 0, 0) scale(0.992);
+}
+
+.example-sketch-browser__switch-random-enter-from {
+  opacity: 0;
+  transform: translate3d(0, 10px, 0) scale(0.985);
+}
+
+.example-sketch-browser__switch-random-leave-to {
+  opacity: 0;
+  transform: translate3d(0, -8px, 0) scale(1.01);
+}
+
+.example-sketch-browser__loading {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  overflow: hidden;
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.example-sketch-browser__loading::before {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(
+      90deg,
+      transparent,
+      color-mix(in srgb, var(--vp-c-bg) 16%, transparent),
+      transparent
+    );
+  content: '';
+}
+
+.example-sketch-browser__loading-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 34%;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--vp-c-brand-1);
+  box-shadow: var(--textmode-glow);
+  animation: example-sketch-browser-progress 0.9s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+.example-sketch-browser__veil-enter-active,
+.example-sketch-browser__veil-leave-active {
   transition: opacity 0.18s ease;
 }
 
-.example-sketch-browser__fade-enter-from,
-.example-sketch-browser__fade-leave-to {
+.example-sketch-browser__veil-enter-from,
+.example-sketch-browser__veil-leave-to {
   opacity: 0;
+}
+
+@keyframes example-sketch-browser-progress {
+  from {
+    transform: translate3d(-110%, 0, 0);
+  }
+
+  to {
+    transform: translate3d(320%, 0, 0);
+  }
 }
 
 .example-sketch-browser :deep(.textmode-sandbox-wrapper) {
@@ -292,6 +482,32 @@ onBeforeUnmount(() => {
 
 .example-sketch-browser :deep(.sp-preview-container) {
   background: #000;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .example-sketch-browser__slide-next-enter-active,
+  .example-sketch-browser__slide-next-leave-active,
+  .example-sketch-browser__slide-previous-enter-active,
+  .example-sketch-browser__slide-previous-leave-active,
+  .example-sketch-browser__switch-random-enter-active,
+  .example-sketch-browser__switch-random-leave-active,
+  .example-sketch-browser__veil-enter-active,
+  .example-sketch-browser__veil-leave-active {
+    transition: opacity 0.12s ease;
+  }
+
+  .example-sketch-browser__slide-next-enter-from,
+  .example-sketch-browser__slide-next-leave-to,
+  .example-sketch-browser__slide-previous-enter-from,
+  .example-sketch-browser__slide-previous-leave-to,
+  .example-sketch-browser__switch-random-enter-from,
+  .example-sketch-browser__switch-random-leave-to {
+    transform: none;
+  }
+
+  .example-sketch-browser__loading-bar {
+    animation: none;
+  }
 }
 
 @media (max-width: 768px) {
