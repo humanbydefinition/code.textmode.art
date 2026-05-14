@@ -171,10 +171,8 @@ async function initWebcam() {
 
 // Handle window resize
 function handleResize() {
-    if (tm) {
-        // textmode.js will automatically handle the resize
-        tm.resize();
-    }
+    // Overlay mode follows the video element automatically.
+    // No explicit textmode.js resize call is needed here.
 }
 
 // Initialize when page loads
