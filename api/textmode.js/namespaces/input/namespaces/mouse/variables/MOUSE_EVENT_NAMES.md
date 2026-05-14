@@ -7,7 +7,7 @@ category: Variables
 api: true
 namespace: input.mouse
 kind: Variable
-lastModified: 2026-05-13
+lastModified: 2026-05-14
 ---
 
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [mouse](../index.md) / MOUSE\_EVENT\_NAMES

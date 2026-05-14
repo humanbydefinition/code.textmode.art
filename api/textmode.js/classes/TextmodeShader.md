@@ -6,7 +6,7 @@ description: Shader class for managing WebGL shader programs initialized via Tex
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-05-13
+lastModified: 2026-05-14
 hasConstructor: false
 ---
 

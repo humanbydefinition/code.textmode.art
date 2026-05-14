@@ -7,7 +7,7 @@ category: Namespaces
 api: true
 namespace: input
 kind: Namespace
-lastModified: 2026-05-13
+lastModified: 2026-05-14
 ---
 
 [textmode.js](../../../../index.md) / [input](../../index.md) / gamepad
@@ -23,7 +23,7 @@ Types and interfaces for gamepad event handling
 | [GamepadAxisEventData](interfaces/GamepadAxisEventData.md) | Axis change payload emitted when an axis crosses configured thresholds. |
 | [GamepadButtonEventData](interfaces/GamepadButtonEventData.md) | Button edge payload emitted when a button crosses configured thresholds. |
 | [GamepadConnectionEventData](interfaces/GamepadConnectionEventData.md) | Connection lifecycle payload emitted by the gamepad manager. |
-| [GamepadEventMap](interfaces/GamepadEventMap.md) | Event map for all gamepad events emitted by the GamepadInput. |
+| [GamepadEventMap](interfaces/GamepadEventMap.md) | Event map for all gamepad events emitted by the gamepad input manager. |
 | [TextmodeGamepadButtonSnapshot](interfaces/TextmodeGamepadButtonSnapshot.md) | Immutable snapshot of a single gamepad button for the current frame. |
 | [TextmodeGamepadSnapshot](interfaces/TextmodeGamepadSnapshot.md) | Immutable frame snapshot for a connected gamepad. |
 | [TextmodeGamepadStickSnapshot](interfaces/TextmodeGamepadStickSnapshot.md) | Normalized two-axis stick state for standard-mapped controllers. |

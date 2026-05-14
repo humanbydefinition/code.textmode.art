@@ -6,7 +6,7 @@ description: Plugin system types for extending textmode.js functionality.
 category: Namespaces
 api: true
 kind: Namespace
-lastModified: 2026-05-13
+lastModified: 2026-05-14
 ---
 
 [textmode.js](../../index.md) / plugins

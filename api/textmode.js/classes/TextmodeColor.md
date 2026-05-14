@@ -6,7 +6,7 @@ description: Represents a color in the textmode.js rendering system.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-05-13
+lastModified: 2026-05-14
 hasConstructor: false
 ---
 

@@ -6,7 +6,7 @@ description: All types and interfaces related to input event handling.
 category: Namespaces
 api: true
 kind: Namespace
-lastModified: 2026-05-13
+lastModified: 2026-05-14
 ---
 
 [textmode.js](../../index.md) / input

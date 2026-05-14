@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: layering
 kind: Class
-lastModified: 2026-05-13
+lastModified: 2026-05-14
 hasConstructor: false
 ---
 
@@ -29,7 +29,7 @@ Plugins can extend TextmodeLayer with additional methods using the plugin API's
 method for hydra-like procedural generation.
 
 The base layer, which is always present at the bottom of the layer stack,
-can be accessed via Textmodifier.layers.base.
+can be accessed via [Textmodifier.layers](../../../classes/Textmodifier.md#layers) as `t.layers.base`.
 
 ## Accessors
 

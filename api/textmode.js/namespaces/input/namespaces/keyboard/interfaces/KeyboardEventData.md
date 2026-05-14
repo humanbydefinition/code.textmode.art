@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: input.keyboard
 kind: Interface
-lastModified: 2026-05-13
+lastModified: 2026-05-14
 isInterface: true
 ---
 

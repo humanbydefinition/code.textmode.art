@@ -6,7 +6,7 @@ description: Mutable camera object used for p5-style camera workflows.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-05-13
+lastModified: 2026-05-14
 hasConstructor: true
 ---
 

@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: loading
 kind: Class
-lastModified: 2026-05-13
+lastModified: 2026-05-14
 hasConstructor: false
 ---
 
@@ -20,40 +20,6 @@ Controls the internal loading layer lifecycle and rendering behavior.
 ## Extends
 
 - `InternalLayerController`\<[`LoadingScreenRendererContext`](../interfaces/LoadingScreenRendererContext.md)\>
-
-## Properties
-
-### \_isInitialized
-
-```ts
-_isInitialized: boolean = false;
-```
-
-Indicates whether the internal layer has been initialized and is ready for rendering.
-Prevents rendering and resource access before the layer is fully set up.
-
-#### Inherited from
-
-```ts
-InternalLayerController._isInitialized
-```
-
-***
-
-### \_layer
-
-```ts
-_layer: TextmodeLayer;
-```
-
-The internal layer instance managed by this controller.
-Guaranteed to be initialized and available after the controller's `_initialize` method resolves.
-
-#### Inherited from
-
-```ts
-InternalLayerController._layer
-```
 
 ## Methods
 

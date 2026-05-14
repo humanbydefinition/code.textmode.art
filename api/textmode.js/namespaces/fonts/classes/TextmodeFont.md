@@ -2,12 +2,12 @@
 layout: doc
 editLink: true
 title: TextmodeFont
-description: Manages the font used for rendering characters via TextmodeLayer.loadFont.
+description: Manages the font used for rendering characters via layering.TextmodeLayer.loadFont.
 category: Classes
 api: true
 namespace: fonts
 kind: Class
-lastModified: 2026-05-13
+lastModified: 2026-05-14
 hasConstructor: false
 ---
 
@@ -15,12 +15,12 @@ hasConstructor: false
 
 # Class: TextmodeFont
 
-Manages the font used for rendering characters via TextmodeLayer.loadFont.
+Manages the font used for rendering characters via [layering.TextmodeLayer.loadFont](../../layering/classes/TextmodeLayer.md#loadfont).
 
 This class coordinates font loading, character extraction, texture atlas creation,
 and provides character information.
 
-Each TextmodeLayer has its own instance of this class to allow for
+Each [layering.TextmodeLayer](../../layering/classes/TextmodeLayer.md) has its own instance of this class to allow for
 layer-specific font configurations.
 
 ## Example

@@ -6,7 +6,7 @@ description: All error handling related modules and types.
 category: Namespaces
 api: true
 kind: Namespace
-lastModified: 2026-05-13
+lastModified: 2026-05-14
 ---
 
 [textmode.js](../../index.md) / errors
@@ -27,3 +27,9 @@ All error handling related modules and types.
 | ------ | ------ |
 | [ErrorLayerController](classes/ErrorLayerController.md) | Controls the dedicated internal error layer lifecycle and rendering behavior. |
 | [TextmodeError](classes/TextmodeError.md) | Custom error class for textmode.js exceptions. |
+
+## Interfaces
+
+| Interface | Description |
+| ------ | ------ |
+| [ErrorScreenRendererContext](interfaces/ErrorScreenRendererContext.md) | Context object passed to error renderer callbacks. |

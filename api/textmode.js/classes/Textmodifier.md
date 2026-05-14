@@ -6,7 +6,7 @@ description: Manages textmode rendering on a HTMLCanvasElement and provides meth
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-05-13
+lastModified: 2026-05-14
 hasConstructor: false
 ---
 
@@ -5615,7 +5615,7 @@ doubleTap(callback): void;
 
 Register a callback for double tap gestures.
 
-Double taps reuse the same TouchTapEventData as taps with `taps` set to `2`. This
+Double taps reuse the same [input.touch.TouchTapEventData](../namespaces/input/namespaces/touch/interfaces/TouchTapEventData.md) as taps with `taps` set to `2`. This
 helper lets you supply a dedicated handler when you want to treat double taps differently.
 
 #### Parameters
@@ -12232,7 +12232,7 @@ tap(callback): void;
 Register a callback for tap gestures.
 
 A tap is fired when the user quickly touches and releases the canvas without travelling far.
-Use TouchTapEventData.taps to determine whether the gesture is a single or multi tap.
+Use [input.touch.TouchTapEventData.taps](../namespaces/input/namespaces/touch/interfaces/TouchTapEventData.md#property-taps) to determine whether the gesture is a single or multi tap.
 
 #### Parameters
 
@@ -12634,7 +12634,7 @@ touchStarted(callback): void;
 
 Set a callback function that will be called when a touch point begins.
 
-The callback receives TouchEventData containing the touch that triggered the event,
+The callback receives [input.touch.TouchEventData](../namespaces/input/namespaces/touch/interfaces/TouchEventData.md) containing the touch that triggered the event,
 all active touches, and the original DOM event. Use this to react when the user places one or
 more fingers on the canvas.
 

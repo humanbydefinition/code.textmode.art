@@ -2,12 +2,12 @@
 layout: doc
 editLink: true
 title: TouchEventMap
-description: Event map for all touch events emitted by the TouchInput.
+description: Event map for all touch events emitted by the touch input manager.
 category: Interfaces
 api: true
 namespace: input.touch
 kind: Interface
-lastModified: 2026-05-13
+lastModified: 2026-05-14
 isInterface: true
 ---
 
@@ -15,7 +15,7 @@ isInterface: true
 
 # Interface: TouchEventMap
 
-Event map for all touch events emitted by the TouchInput.
+Event map for all touch events emitted by the touch input manager.
 
 ## Properties
 

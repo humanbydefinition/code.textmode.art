@@ -2,12 +2,12 @@
 layout: doc
 editLink: true
 title: GamepadEventMap
-description: Event map for all gamepad events emitted by the GamepadInput.
+description: Event map for all gamepad events emitted by the gamepad input manager.
 category: Interfaces
 api: true
 namespace: input.gamepad
 kind: Interface
-lastModified: 2026-05-13
+lastModified: 2026-05-14
 isInterface: true
 ---
 
@@ -15,7 +15,7 @@ isInterface: true
 
 # Interface: GamepadEventMap
 
-Event map for all gamepad events emitted by the GamepadInput.
+Event map for all gamepad events emitted by the gamepad input manager.
 
 ## Properties
 

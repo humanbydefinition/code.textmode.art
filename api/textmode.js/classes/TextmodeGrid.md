@@ -6,7 +6,7 @@ description: Manages the grid of each TextmodeLayer instance.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-05-13
+lastModified: 2026-05-14
 hasConstructor: false
 ---
 
