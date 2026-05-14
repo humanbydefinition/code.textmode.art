@@ -25,7 +25,14 @@ const docsSidebar: DefaultTheme.SidebarItem[] = [
       { text: 'Advanced features', link: '/docs/advanced' },
       { text: 'Framework integration', link: '/docs/framework-integration' },
       { text: 'Exporting', link: '/docs/exporting' },
-      { text: 'Live coding', link: '/docs/live-coding' },
+      {
+        text: 'Live coding',
+        collapsed: true,
+        items: [
+          { text: 'flok.cc', link: '/docs/live-coding-flok-cc' },
+          { text: 'synth.textmode.art', link: '/docs/live-coding-synth-textmode-art' },
+        ]
+      },
       { text: 'Examples', link: '/docs/examples' },
       {
         text: 'Contributing',
