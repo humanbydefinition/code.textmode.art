@@ -4,22 +4,12 @@ description: Explore interactive examples showcasing textmode.js capabilities - 
 aside: false
 ---
 
-# Examples
+# Built with `#textmodejs`
 
-Experience `textmode.js` in action with our interactive demos.
+Explore interactive examples showcasing `textmode.js` capabilities - from generative patterns to classic effects. Hover over the demo and click **Open Sandbox** to open it in CodeSandbox, where you can view the source, adjust parameters, and make it your own.
 
-## Built with `#textmodejs`
+<ExampleSketchBrowser />
 
-Explore interactive examples showcasing textmode.js capabilities - from generative patterns to classic effects. Hover over any demo and click **Open Sandbox** to open it in CodeSandbox, where you can view the source, adjust parameters, and make it your own.
-
-<!--@include: ./examples/showcase/wave-interference.md-->
----
-<!--@include: ./examples/showcase/digital-rain.md-->
----
-<!--@include: ./examples/showcase/plasma-field.md-->
----
-<!--@include: ./examples/showcase/entity-wave-prop.md-->
----
 ## Getting started
 
-Ready to add textmode effects to your project? Check out our [Installation](/docs/installation) and [Fundamentals](/docs/fundamentals) to get started.
+Ready to add textmode to your project? Check out our [Installation](/docs/installation) and [Fundamentals](/docs/fundamentals) to get started.
