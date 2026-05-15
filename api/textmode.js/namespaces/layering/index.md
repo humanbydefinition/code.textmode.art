@@ -15,26 +15,21 @@ lastModified: 2026-05-15
 
 All modules and types related to multi-layered textmode rendering.
 
-## References
+## Classes
 
-### TEXTMODE\_LAYER\_BLEND\_MODES
+| Class | Description |
+| ------ | ------ |
+| [TextmodeLayer](classes/TextmodeLayer.md) | A single layer within a multi-layered textmode rendering context. |
+| [TextmodeLayerManager](classes/TextmodeLayerManager.md) | Manages the stack of layers within a [Textmodifier](../../classes/Textmodifier.md) instance. |
 
-Re-exports [TEXTMODE_LAYER_BLEND_MODES](../../variables/TEXTMODE_LAYER_BLEND_MODES.md)
+## Interfaces
 
-***
+| Interface | Description |
+| ------ | ------ |
+| [TextmodeLayerOptions](interfaces/TextmodeLayerOptions.md) | Options for configuring a new TextmodeLayer via [TextmodeLayerManager.add](classes/TextmodeLayerManager.md#add). |
 
-### TextmodeLayer
+## Variables
 
-Re-exports [TextmodeLayer](../../classes/TextmodeLayer.md)
-
-***
-
-### TextmodeLayerManager
-
-Re-exports [TextmodeLayerManager](../../classes/TextmodeLayerManager.md)
-
-***
-
-### TextmodeLayerOptions
-
-Re-exports [TextmodeLayerOptions](../../interfaces/TextmodeLayerOptions.md)
+| Variable | Description |
+| ------ | ------ |
+| [TEXTMODE\_LAYER\_BLEND\_MODES](variables/TEXTMODE_LAYER_BLEND_MODES.md) | Blend modes available for [TextmodeLayer](classes/TextmodeLayer.md) compositing in 2D mode. |

@@ -870,7 +870,7 @@ when converting images/videos/canvases into textmode representations.
 
 ##### Returns
 
-[`TextmodeConversionManager`](TextmodeConversionManager.md)
+[`TextmodeConversionManager`](../namespaces/conversion/classes/TextmodeConversionManager.md)
 
 ##### Example
 
@@ -942,7 +942,7 @@ Provides access to the error layer controller to display fatal errors in a user-
 
 ##### Returns
 
-[`ErrorLayerController`](ErrorLayerController.md)
+[`ErrorLayerController`](../namespaces/errors/classes/ErrorLayerController.md)
 
 ##### Example
 
@@ -1001,11 +1001,11 @@ get filters(): TextmodeFilterManager;
 Access the filter manager for this Textmodifier instance.
 
 Use this to register custom filters that can be applied both globally
-(via [filter](#filter)) and on individual layers (via [TextmodeLayer.filter](TextmodeLayer.md#filter)).
+(via [filter](#filter)) and on individual layers (via [TextmodeLayer.filter](../namespaces/layering/classes/TextmodeLayer.md#filter)).
 
 ##### Returns
 
-[`TextmodeFilterManager`](TextmodeFilterManager.md)
+[`TextmodeFilterManager`](../namespaces/filters/classes/TextmodeFilterManager.md)
 
 ##### Examples
 
@@ -1135,8 +1135,8 @@ Get the current font object used for rendering the base layer.
 
 ##### Returns
 
-  \| [`TextmodeFont`](TextmodeFont.md)
-  \| [`TextmodeTileset`](TextmodeTileset.md)
+  \| [`TextmodeFont`](../namespaces/fonts/classes/TextmodeFont.md)
+  \| [`TextmodeTileset`](../namespaces/fonts/classes/TextmodeTileset.md)
 
 ##### Example
 
@@ -1651,7 +1651,7 @@ Each layer has its own grid, font, draw callback, and filters.
 
 ##### Returns
 
-[`TextmodeLayerManager`](TextmodeLayerManager.md)
+[`TextmodeLayerManager`](../namespaces/layering/classes/TextmodeLayerManager.md)
 
 ##### Example
 
@@ -1705,7 +1705,7 @@ Provides access to the loading layer controller to control boot-time loading UX.
 
 ##### Returns
 
-[`LoadingLayerController`](LoadingLayerController.md)
+[`LoadingLayerController`](../namespaces/loading/classes/LoadingLayerController.md)
 
 ##### Example
 
@@ -2003,15 +2003,18 @@ t.windowResized(() => {
 #### Get Signature
 
 ```ts
-get overlay(): TextmodeImage | undefined;
+get overlay(): 
+  | TextmodeImage
+  | undefined;
 ```
 
-If in overlay mode, returns the [TextmodeImage](TextmodeImage.md) instance capturing the target canvas/video content,
+If in overlay mode, returns the [TextmodeImage](../namespaces/media/classes/TextmodeImage.md) instance capturing the target canvas/video content,
 allowing further configuration of the conversion parameters.
 
 ##### Returns
 
-[`TextmodeImage`](TextmodeImage.md) \| `undefined`
+  \| [`TextmodeImage`](../namespaces/media/classes/TextmodeImage.md)
+  \| `undefined`
 
 ##### Example
 
@@ -5161,7 +5164,7 @@ The texture automatically updates each frame to capture the latest content from 
 
 #### Returns
 
-[`TextmodeTexture`](TextmodeTexture.md)
+[`TextmodeTexture`](../namespaces/media/classes/TextmodeTexture.md)
 
 A TextmodeTexture that can be drawn with image()
 
@@ -5673,7 +5676,7 @@ Set a draw callback function for the base layer.
 
 This callback function is where all drawing commands should be placed for textmode rendering on the main layer.
 
-If multiple layers are added via [Textmodifier.layers](#layers), each layer has its own draw callback set via [TextmodeLayer.draw](TextmodeLayer.md#draw).
+If multiple layers are added via [Textmodifier.layers](#layers), each layer has its own draw callback set via [TextmodeLayer.draw](../namespaces/layering/classes/TextmodeLayer.md#draw).
 This allows for complex multi-layered compositions with independent rendering logic per layer.
 
 Calling this method is equivalent to setting the draw callback on the base layer,
@@ -6222,14 +6225,14 @@ queued per frame and will be applied in order.
 
 | Type Parameter |
 | ------ |
-| `T` *extends* [`BuiltInFilterName`](../type-aliases/BuiltInFilterName.md) |
+| `T` *extends* [`BuiltInFilterName`](../namespaces/filters/type-aliases/BuiltInFilterName.md) |
 
 ##### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
 | `name` | `T` | The name of the filter to apply (built-in or custom) |
-| `params?` | [`BuiltInFilterParams`](../interfaces/BuiltInFilterParams.md)\[`T`\] | Optional parameters for the filter |
+| `params?` | [`BuiltInFilterParams`](../namespaces/filters/interfaces/BuiltInFilterParams.md)\[`T`\] | Optional parameters for the filter |
 
 ##### Returns
 
@@ -7452,7 +7455,7 @@ Draw a TextmodeFramebuffer, TextmodeImage, TextmodeVideo, or TextmodeTexture to 
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `source` | \| [`TextmodeFramebuffer`](TextmodeFramebuffer.md) \| [`TextmodeImage`](TextmodeImage.md) \| [`TextmodeTexture`](TextmodeTexture.md) \| [`TextmodeVideo`](TextmodeVideo.md) | The TextmodeFramebuffer, TextmodeImage, TextmodeVideo, or TextmodeTexture to render |
+| `source` | \| [`TextmodeFramebuffer`](TextmodeFramebuffer.md) \| [`TextmodeImage`](../namespaces/media/classes/TextmodeImage.md) \| [`TextmodeTexture`](../namespaces/media/classes/TextmodeTexture.md) \| [`TextmodeVideo`](../namespaces/media/classes/TextmodeVideo.md) | The TextmodeFramebuffer, TextmodeImage, TextmodeVideo, or TextmodeTexture to render |
 | `width?` | `number` | Width in grid cells to potentially scale the content (defaults to ideal fit, respecting aspect ratio) |
 | `height?` | `number` | Height in grid cells to potentially scale the content (defaults to ideal fit, respecting aspect ratio) |
 
@@ -8348,25 +8351,25 @@ loadFont(fontSource, setActive?): Promise<TextmodeFont>;
 
 Load a font, optionally setting it as the base layer's active font.
 
-Accepts either a URL string to load a new font, or an existing [TextmodeFont](TextmodeFont.md)
+Accepts either a URL string to load a new font, or an existing [TextmodeFont](../namespaces/fonts/classes/TextmodeFont.md)
 instance to use as a reusable source.
 
 If `setActive` is true (default), the font is set as the base layer's font.
 If `setActive` is false, the font is loaded/initialized and returned without modifying the layer.
 
-The returned font can be reused on other layers via [TextmodeLayer.loadFont](TextmodeLayer.md#loadfont),
+The returned font can be reused on other layers via [TextmodeLayer.loadFont](../namespaces/layering/classes/TextmodeLayer.md#loadfont),
 which creates a layer-local fork rather than sharing a mutable instance by reference.
 
 #### Parameters
 
 | Parameter | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
-| `fontSource` | `string` \| [`TextmodeFont`](TextmodeFont.md) | `undefined` | The URL of the font to load, or an existing TextmodeFont instance. |
+| `fontSource` | `string` \| [`TextmodeFont`](../namespaces/fonts/classes/TextmodeFont.md) | `undefined` | The URL of the font to load, or an existing TextmodeFont instance. |
 | `setActive` | `boolean` | `true` | Whether to set the font as the base layer's active font. Defaults to `true`. |
 
 #### Returns
 
-`Promise`\<[`TextmodeFont`](TextmodeFont.md)\>
+`Promise`\<[`TextmodeFont`](../namespaces/fonts/classes/TextmodeFont.md)\>
 
 The loaded TextmodeFont instance.
 
@@ -8433,7 +8436,7 @@ This function returns a Promise that resolves when the image has loaded.
 
 #### Returns
 
-`Promise`\<[`TextmodeImage`](TextmodeImage.md)\>
+`Promise`\<[`TextmodeImage`](../namespaces/media/classes/TextmodeImage.md)\>
 
 A Promise that resolves to a TextmodeImage object
 
@@ -8476,25 +8479,25 @@ loadTileset(tilesetSource, setActive?): Promise<TextmodeTileset>;
 
 Load a tileset, optionally setting it as the base layer's active glyph source.
 
-Accepts either tileset load options or an existing [TextmodeTileset](TextmodeTileset.md)
+Accepts either tileset load options or an existing [TextmodeTileset](../namespaces/fonts/classes/TextmodeTileset.md)
 instance to use as a reusable source.
 
 If `setActive` is true (default), the tileset is set as the base layer's glyph source.
 If `setActive` is false, the tileset is loaded/initialized and returned without modifying the layer.
 
-The returned tileset can be reused on other layers via [TextmodeLayer.loadTileset](TextmodeLayer.md#loadtileset),
+The returned tileset can be reused on other layers via [TextmodeLayer.loadTileset](../namespaces/layering/classes/TextmodeLayer.md#loadtileset),
 which creates a layer-local fork rather than sharing a mutable instance by reference.
 
 #### Parameters
 
 | Parameter | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
-| `tilesetSource` | \| [`TextmodeTilesetOptions`](../interfaces/TextmodeTilesetOptions.md) \| [`TextmodeTileset`](TextmodeTileset.md) | `undefined` | Tileset load options or an existing TextmodeTileset instance. |
+| `tilesetSource` | \| [`TextmodeTilesetOptions`](../namespaces/fonts/interfaces/TextmodeTilesetOptions.md) \| [`TextmodeTileset`](../namespaces/fonts/classes/TextmodeTileset.md) | `undefined` | Tileset load options or an existing TextmodeTileset instance. |
 | `setActive` | `boolean` | `true` | Whether to set the tileset as the base layer's active glyph source. Defaults to `true`. |
 
 #### Returns
 
-`Promise`\<[`TextmodeTileset`](TextmodeTileset.md)\>
+`Promise`\<[`TextmodeTileset`](../namespaces/fonts/classes/TextmodeTileset.md)\>
 
 The loaded TextmodeTileset instance.
 
@@ -8650,7 +8653,7 @@ Load a video and return a TextmodeVideo that can be drawn with image().
 
 #### Returns
 
-`Promise`\<[`TextmodeVideo`](TextmodeVideo.md)\>
+`Promise`\<[`TextmodeVideo`](../namespaces/media/classes/TextmodeVideo.md)\>
 
 #### Example
 
@@ -9718,14 +9721,14 @@ The handler reference must be the same function instance that was passed to `on(
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `K` *extends* \| keyof MouseEventMap \| keyof KeyboardEventMap \| keyof TouchEventMap \| keyof GamepadEventMap | Event name from the [InputEventMap](../type-aliases/InputEventMap.md). |
+| `K` *extends* \| keyof MouseEventMap \| keyof KeyboardEventMap \| keyof TouchEventMap \| keyof GamepadEventMap | Event name from the [InputEventMap](../namespaces/input/type-aliases/InputEventMap.md). |
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
 | `event` | `K` | The event the handler was attached to. |
-| `handler` | [`InputEventMap`](../type-aliases/InputEventMap.md)\[`K`\] | The exact function reference to remove. |
+| `handler` | [`InputEventMap`](../namespaces/input/type-aliases/InputEventMap.md)\[`K`\] | The exact function reference to remove. |
 
 #### Returns
 
@@ -9757,14 +9760,14 @@ never replaces existing listeners.
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `K` *extends* \| keyof MouseEventMap \| keyof KeyboardEventMap \| keyof TouchEventMap \| keyof GamepadEventMap | Event name from the [InputEventMap](../type-aliases/InputEventMap.md). |
+| `K` *extends* \| keyof MouseEventMap \| keyof KeyboardEventMap \| keyof TouchEventMap \| keyof GamepadEventMap | Event name from the [InputEventMap](../namespaces/input/type-aliases/InputEventMap.md). |
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
 | `event` | `K` | The event to listen for (e.g. `'mousePressed'`, `'keyReleased'`, `'gamepadConnected'`, `'pinch'`). |
-| `handler` | [`InputEventMap`](../type-aliases/InputEventMap.md)\[`K`\] | The callback to invoke when the event fires. |
+| `handler` | [`InputEventMap`](../namespaces/input/type-aliases/InputEventMap.md)\[`K`\] | The callback to invoke when the event fires. |
 
 #### Returns
 
@@ -9798,14 +9801,14 @@ Register a one-shot event listener that automatically removes itself after the f
 
 | Type Parameter | Description |
 | ------ | ------ |
-| `K` *extends* \| keyof MouseEventMap \| keyof KeyboardEventMap \| keyof TouchEventMap \| keyof GamepadEventMap | Event name from the [InputEventMap](../type-aliases/InputEventMap.md). |
+| `K` *extends* \| keyof MouseEventMap \| keyof KeyboardEventMap \| keyof TouchEventMap \| keyof GamepadEventMap | Event name from the [InputEventMap](../namespaces/input/type-aliases/InputEventMap.md). |
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
 | `event` | `K` | The event to listen for. |
-| `handler` | [`InputEventMap`](../type-aliases/InputEventMap.md)\[`K`\] | The callback to invoke once. |
+| `handler` | [`InputEventMap`](../namespaces/input/type-aliases/InputEventMap.md)\[`K`\] | The callback to invoke once. |
 
 #### Returns
 
@@ -13393,7 +13396,7 @@ useTileColors(enabled?): boolean | void;
 
 Get or set whether the base layer should use authored tileset colors directly during the final ASCII pass.
 
-This is equivalent to calling [TextmodeLayer.useTileColors](TextmodeLayer.md#usetilecolors) on
+This is equivalent to calling [TextmodeLayer.useTileColors](../namespaces/layering/classes/TextmodeLayer.md#usetilecolors) on
 [base layer](#layers).
 
 When disabled (default), tilesets on the base layer are recolored through the current

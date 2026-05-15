@@ -214,7 +214,7 @@ Set the global error handling level for the library. This applies to all [Textmo
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `level` | [`TextmodeErrorLevel`](../enumerations/TextmodeErrorLevel.md) | The error handling level to set. |
+| `level` | [`TextmodeErrorLevel`](../namespaces/errors/enumerations/TextmodeErrorLevel.md) | The error handling level to set. |
 
 #### Returns
 
