@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: input.gamepad
 kind: Interface
-lastModified: 2026-04-23
+lastModified: 2026-05-15
 isInterface: true
 ---
 
@@ -21,11 +21,11 @@ Immutable frame snapshot for a connected gamepad.
 
 | Property | Type | Description |
 | ------ | ------ | ------ |
-| <a id="axes"></a> `axes` | readonly `number`[] | Raw axis values in browser order. |
-| <a id="buttons"></a> `buttons` | readonly [`TextmodeGamepadButtonSnapshot`](TextmodeGamepadButtonSnapshot.md)[] | Raw button states in browser order. |
-| <a id="connected"></a> `connected` | `boolean` | Whether the controller is currently connected. |
-| <a id="id"></a> `id` | `string` | Browser-reported identifier string. |
-| <a id="index"></a> `index` | `number` | Browser-assigned gamepad slot index. |
-| <a id="mapping"></a> `mapping` | `""` \| `"standard"` | Recognized browser mapping type used by textmode.js. |
-| <a id="standard"></a> `standard?` | [`TextmodeStandardGamepadSnapshot`](TextmodeStandardGamepadSnapshot.md) | Optional semantic helpers for standard-mapped controllers. |
-| <a id="timestamp"></a> `timestamp` | `number` | Browser-provided timestamp for the current state sample. |
+| <a id="property-axes"></a> `axes` | readonly `number`[] | Raw axis values in browser order. |
+| <a id="property-buttons"></a> `buttons` | readonly [`TextmodeGamepadButtonSnapshot`](TextmodeGamepadButtonSnapshot.md)[] | Raw button states in browser order. |
+| <a id="property-connected"></a> `connected` | `boolean` | Whether the controller is currently connected. |
+| <a id="property-id"></a> `id` | `string` | Browser-reported identifier string. |
+| <a id="property-index"></a> `index` | `number` | Browser-assigned gamepad slot index. |
+| <a id="property-mapping"></a> `mapping` | `""` \| `"standard"` | Recognized browser mapping type used by textmode.js. |
+| <a id="property-standard"></a> `standard?` | [`TextmodeStandardGamepadSnapshot`](TextmodeStandardGamepadSnapshot.md) | Optional semantic helpers for standard-mapped controllers. |
+| <a id="property-timestamp"></a> `timestamp` | `number` | Browser-provided timestamp for the current state sample. |

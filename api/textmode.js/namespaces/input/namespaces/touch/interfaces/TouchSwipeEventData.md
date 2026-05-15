@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: input.touch
 kind: Interface
-lastModified: 2026-04-23
+lastModified: 2026-05-15
 isInterface: true
 ---
 
@@ -21,12 +21,12 @@ Swipe event data reported when the finger travels a minimum distance within a ti
 
 | Property | Type | Description |
 | ------ | ------ | ------ |
-| <a id="direction"></a> `direction` | `object` | Normalised swipe direction vector. |
+| <a id="property-direction"></a> `direction` | `object` | Normalised swipe direction vector. |
 | `direction.x` | `number` | - |
 | `direction.y` | `number` | - |
-| <a id="distance"></a> `distance` | `number` | Total distance travelled in CSS pixels. |
-| <a id="originalevent"></a> `originalEvent` | `TouchEvent` | Original browser event. |
-| <a id="touch"></a> `touch` | [`TouchPosition`](TouchPosition.md) | Touch point at the end of the swipe. |
-| <a id="velocity"></a> `velocity` | `object` | Velocity in CSS pixels per millisecond. |
+| <a id="property-distance"></a> `distance` | `number` | Total distance travelled in CSS pixels. |
+| <a id="property-originalevent"></a> `originalEvent` | `TouchEvent` | Original browser event. |
+| <a id="property-touch"></a> `touch` | [`TouchPosition`](TouchPosition.md) | Touch point at the end of the swipe. |
+| <a id="property-velocity"></a> `velocity` | `object` | Velocity in CSS pixels per millisecond. |
 | `velocity.x` | `number` | Velocity in X direction. |
 | `velocity.y` | `number` | Velocity in Y direction. |

@@ -11,7 +11,7 @@ category: Functions
 api: true
 kind: Function
 ecosystem: textmode.js
-lastModified: 2026-04-23
+lastModified: 2026-05-15
 ---
 
 [textmode.export.js](../index.md) / createTextmodeExportPlugin
@@ -19,7 +19,7 @@ lastModified: 2026-04-23
 # Function: createTextmodeExportPlugin()
 
 ```ts
-function createTextmodeExportPlugin(options): TextmodePlugin;
+function createTextmodeExportPlugin(options?): TextmodePlugin;
 ```
 
 Creates the `textmode.export.js` plugin for textmode.js.

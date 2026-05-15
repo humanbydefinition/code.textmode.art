@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-04-23
+lastModified: 2026-05-15
 ---
 
 [textmode.export.js](../index.md) / TXTExportOptions
@@ -25,7 +25,7 @@ Options for exporting the textmode content to TXT format.
 ### filename?
 
 ```ts
-optional filename: string;
+optional filename?: string;
 ```
 
 The filename to save the TXT file as.
@@ -37,7 +37,7 @@ If not provided, a default filename is used.
 ### preserveTrailingSpaces?
 
 ```ts
-optional preserveTrailingSpaces: boolean;
+optional preserveTrailingSpaces?: boolean;
 ```
 
 Whether to preserve trailing spaces on each line.
@@ -51,7 +51,7 @@ Defaults to `false`.
 ### emptyCharacter?
 
 ```ts
-optional emptyCharacter: string;
+optional emptyCharacter?: string;
 ```
 
 Character to use for empty cells *(when no character is rendered in it)*.

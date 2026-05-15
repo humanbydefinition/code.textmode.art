@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: input.gamepad
 kind: Interface
-lastModified: 2026-04-23
+lastModified: 2026-05-15
 isInterface: true
 ---
 
@@ -21,4 +21,4 @@ Connection lifecycle payload emitted by the gamepad manager.
 
 | Property | Type | Description |
 | ------ | ------ | ------ |
-| <a id="gamepad"></a> `gamepad` | [`TextmodeGamepadSnapshot`](TextmodeGamepadSnapshot.md) | The gamepad snapshot associated with this lifecycle transition. |
+| <a id="property-gamepad"></a> `gamepad` | [`TextmodeGamepadSnapshot`](TextmodeGamepadSnapshot.md) | The gamepad snapshot associated with this lifecycle transition. |

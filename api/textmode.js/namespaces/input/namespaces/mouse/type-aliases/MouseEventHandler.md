@@ -7,12 +7,12 @@ category: Type Aliases
 api: true
 namespace: input.mouse
 kind: TypeAlias
-lastModified: 2026-04-23
+lastModified: 2026-05-15
 ---
 
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [mouse](../index.md) / MouseEventHandler
 
-# Type Alias: MouseEventHandler()
+# Type Alias: MouseEventHandler
 
 ```ts
 type MouseEventHandler = (data) => void;

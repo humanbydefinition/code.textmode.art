@@ -7,7 +7,7 @@ category: Namespaces
 api: true
 namespace: input
 kind: Namespace
-lastModified: 2026-04-23
+lastModified: 2026-05-15
 ---
 
 [textmode.js](../../../../index.md) / [input](../../index.md) / touch
@@ -21,7 +21,7 @@ Types and interfaces for touch event handling
 | Interface | Description |
 | ------ | ------ |
 | [TouchEventData](interfaces/TouchEventData.md) | Touch event data. |
-| [TouchEventMap](interfaces/TouchEventMap.md) | Event map for all touch events emitted by the TouchInput. |
+| [TouchEventMap](interfaces/TouchEventMap.md) | Event map for all touch events emitted by the touch input manager. |
 | [TouchLongPressEventData](interfaces/TouchLongPressEventData.md) | Long press event data. |
 | [TouchPinchEventData](interfaces/TouchPinchEventData.md) | Pinch gesture event data describing the scaling factor between the initial and current distance. |
 | [TouchPosition](interfaces/TouchPosition.md) | Touch position expressed both in grid and client coordinates. |

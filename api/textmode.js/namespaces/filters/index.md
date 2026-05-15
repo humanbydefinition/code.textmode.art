@@ -6,7 +6,7 @@ description: All filter related modules and types.
 category: Namespaces
 api: true
 kind: Namespace
-lastModified: 2026-04-23
+lastModified: 2026-05-15
 ---
 
 [textmode.js](../../index.md) / filters
@@ -20,24 +20,29 @@ such as blur, sharpen, edge detection, and color adjustments.
 Filters can also be applied globally to all layers as post-processing effects.
 
 While `textmode.js` only offers a basic set of filters,
-additional filters can be implemented and registered via the [TextmodeFilterManager](classes/TextmodeFilterManager.md),
+additional filters can be implemented and registered via the [TextmodeFilterManager](../../classes/TextmodeFilterManager.md),
 which is accessible through [Textmodifier.filters](../../classes/Textmodifier.md#filters).
 
-## Classes
+## References
 
-| Class | Description |
-| ------ | ------ |
-| [TextmodeFilterManager](classes/TextmodeFilterManager.md) | Manages filter registration, shader compilation, and filter chain application. |
+### BuiltInFilterName
 
-## Interfaces
+Re-exports [BuiltInFilterName](../../type-aliases/BuiltInFilterName.md)
 
-| Interface | Description |
-| ------ | ------ |
-| [BuiltInFilterParams](interfaces/BuiltInFilterParams.md) | Filter parameter types for built-in filters. |
+***
 
-## Type Aliases
+### BuiltInFilterParams
 
-| Type Alias | Description |
-| ------ | ------ |
-| [BuiltInFilterName](type-aliases/BuiltInFilterName.md) | Built-in filter names provided by textmode.js |
-| [FilterName](type-aliases/FilterName.md) | Filter name type that allows both built-in and custom filter names |
+Re-exports [BuiltInFilterParams](../../interfaces/BuiltInFilterParams.md)
+
+***
+
+### FilterName
+
+Re-exports [FilterName](../../type-aliases/FilterName.md)
+
+***
+
+### TextmodeFilterManager
+
+Re-exports [TextmodeFilterManager](../../classes/TextmodeFilterManager.md)

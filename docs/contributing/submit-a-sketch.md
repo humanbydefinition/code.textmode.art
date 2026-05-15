@@ -41,10 +41,6 @@ Right now, that means:
 
 As a rule of thumb: if an API page includes a **View sketch on GitHub** link, submit your change to the repository linked there.
 
-:::tip Recognition and rewards
-Accepted showcase and API example sketches both count toward the [Leaderboard](/docs/leaderboard). Once you reach the current unlock threshold of **3 accepted sketches**, you become eligible for the `Textmodeller` role in Discord.
-:::
-
 ## What makes a good sketch?
 
 The best sketches are:
@@ -93,15 +89,11 @@ If you are not sure which repository owns a given API example, open an issue fir
 
 - Your sketch can appear on the landing page as part of the rotating featured set
 - It can also appear on the [Examples](/docs/examples) page
-- Accepted sketches also count toward the [Leaderboard](/docs/leaderboard)
-- Reaching 3 accepted sketches makes you eligible for the `Textmodeller` Discord role
 - You help expand the public showcase of what people are building with `textmode.js`
 
 ### For API example sketches
 
 - Your sketch can improve a specific generated API reference entry for `textmode.js`, `textmode.synth.js`, or another package that adopts the same workflow
-- Accepted examples can count toward the [Leaderboard](/docs/leaderboard)
-- Reaching 3 accepted sketches makes you eligible for the `Textmodeller` Discord role
 - You help turn the supported API docs into a better learning resource
 
 ## Questions?

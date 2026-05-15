@@ -1,244 +1,247 @@
 ---
-title: Images and Videos
-description: Learn how to load and display images and videos as ASCII art in textmode.js, including customization of brightness conversion and playback controls.
+title: Media
+description: Load images, videos, and live textures in textmode.js, convert them through the current glyph atlas, and control how they render as textmode graphics.
 ---
 
-# Images and videos
+# Media
 
-This section covers how to work with images and videos in `textmode.js`. Both are automatically converted to character-based representations using an adjustable brightness conversion process, allowing you to create dynamic ASCII art from visual media.
+`textmode.js` can render three kinds of media sources:
 
-## Working with images
+- [`TextmodeImage`](/api/textmode.js/namespaces/media/classes/TextmodeImage.md) from [`t.loadImage()`](/api/textmode.js/classes/Textmodifier#loadimage)
+- [`TextmodeVideo`](/api/textmode.js/namespaces/media/classes/TextmodeVideo.md) from [`t.loadVideo()`](/api/textmode.js/classes/Textmodifier#loadvideo)
+- [`TextmodeTexture`](/api/textmode.js/namespaces/media/classes/TextmodeTexture.md) from [`t.createTexture()`](/api/textmode.js/classes/Textmodifier#createtexture)
 
-`textmode.js` supports loading and displaying image files as textmode graphics. Images are automatically converted to character-based representations that can be rendered on the textmode canvas.
+All three inherit from [`TextmodeSource`](/api/textmode.js/namespaces/media/classes/TextmodeSource.md), so they share the same conversion and styling API.
 
-### Loading images
-
-Use the [`loadImage()`](/api/textmode.js/classes/Textmodifier#loadimage) method to load image files. This method returns a Promise that resolves to a [`TextmodeImage`](/api/textmode.js/namespaces/media/classes/TextmodeImage) instance:
-
-```js
-import { textmode } from 'textmode.js'
-
-const t = textmode.create({ width: 800, height: 600 });
-
-let myImage;
-
-t.setup(async () => {
-    myImage = await t.loadImage('https://upload.wikimedia.org/wikipedia/commons/0/07/El_Gouna_Turtle_House_R01.jpg');
-    myImage.characters(' .:-=+*#%@');
-    myImage.invert(true);
-});
-
-t.draw(() => {
-    t.background(220);
-    t.image(myImage);
-});
-```
-
-Supported formats include PNG, JPEG, WebP, and other formats supported by the browser.
-
-### Drawing images
-
-Once loaded, images can be drawn to the canvas using the [`image()`](/api/textmode.js/classes/Textmodifier#image) method:
+Draw any of them with [`t.image()`](/api/textmode.js/classes/Textmodifier#image):
 
 ```js
-t.draw(() => {
-    // Draw image at full grid size
-    t.image(myImage);
-    
-    // Or draw with specific dimensions
-    // t.image(image, 40, 20);
-});
+t.image(source);
 ```
 
-### Customizing image conversion
+Media sources are converted through the current layer's active font or tileset when they are drawn. That means the same image, video, or texture can be reused across layers with different glyph styles.
 
-The [`TextmodeImage`](/api/textmode.js/namespaces/media/classes/TextmodeImage) instance returned by `loadImage()` provides several methods to customize how the image is converted to textmode graphics:
+## Choosing a source type
+
+Use [`t.loadImage()`](/api/textmode.js/classes/Textmodifier#loadimage) for static image files:
 
 ```js
-t.setup(async () => {
-    myImage = await t.loadImage('path/to/image.png');
-    
-    // Set character set for brightness mapping
-    // Characters are ordered from darkest to brightest
-    myImage.characters(" .:-=+*#%@");
-    
-    // Control character color mode
-    myImage.charColorMode("sampled"); // "sampled" or "fixed"
-    
-    // Control cell background color mode
-    myImage.cellColorMode("fixed"); // "sampled" or "fixed"
-    
-    // Set fixed character color (when charColorMode is "fixed")
-    myImage.charColor(255, 255, 255);
-    
-    // Set fixed cell background color (when cellColorMode is "fixed")
-    myImage.cellColor(0, 0, 0);
-    
-    // Flip characters horizontally
-    myImage.flipX(true);
-    
-    // Flip characters vertically
-    myImage.flipY(true);
-    
-    // Swap character and cell colors
-    myImage.invert(true);
-    
-    // Rotate characters (in degrees)
-    myImage.charRotation(90);
-});
+const image = await t.loadImage('./images/poster.png');
 ```
 
-### Image conversion modes
+Use [`t.loadVideo()`](/api/textmode.js/classes/Textmodifier#loadvideo) for video files:
 
-The conversion process maps each pixel's brightness to a character from your chosen character set. You have fine control over the color sampling:
+```js
+const video = await t.loadVideo('./videos/loop.mp4');
+await video.play();
+```
 
-- **`charColorMode("sampled")`**: Character colors are sampled from the original image pixels
-- **`charColorMode("fixed")`**: All characters use the color set by `charColor()`
-- **`cellColorMode("sampled")`**: Cell backgrounds are sampled from the original image
-- **`cellColorMode("fixed")`**: All cell backgrounds use the color set by `cellColor()`
+Use [`t.createTexture()`](/api/textmode.js/classes/Textmodifier#createtexture) when the source already exists as a live `canvas` or `video` element:
 
-## Working with videos
+```js
+const sourceCanvas = document.createElement('canvas');
+const texture = t.createTexture(sourceCanvas);
+```
 
-Videos work similarly to images but with additional playback controls. Video frames are converted to textmode graphics in real-time, creating animated ASCII art.
+[`TextmodeTexture`](/api/textmode.js/namespaces/media/classes/TextmodeTexture.md) is the right choice for integrations with tools such as `three.js`, `p5.js`, `hydra-synth`, or any custom canvas pipeline. The texture updates automatically each frame from its source element.
 
-### Loading videos
+## Loading images
 
-Use the [`loadVideo()`](/api/textmode.js/classes/Textmodifier#loadvideo) method to load video files. This returns a Promise that resolves to a [`TextmodeVideo`](/api/textmode.js/namespaces/media/classes/TextmodeVideo) instance:
+[`t.loadImage()`](/api/textmode.js/classes/Textmodifier#loadimage) returns a [`TextmodeImage`](/api/textmode.js/namespaces/media/classes/TextmodeImage.md):
 
 ```js
 const t = textmode.create({ width: 800, height: 600 });
 
-let myVideo;
+let image;
 
 t.setup(async () => {
-    myVideo = await t.loadVideo('path/to/video.mp4');
-    
-    // Start playback
-    myVideo.play();
-    
-    // Enable looping
-    myVideo.loop();
-});
-```
-
-### Video playback control
-
-The [`TextmodeVideo`](/api/textmode.js/namespaces/media/classes/TextmodeVideo) class provides standard video playback methods:
-
-```js
-// Play the video
-myVideo.play();
-
-// Pause the video
-myVideo.pause();
-
-// Enable/disable looping
-myVideo.loop(); // Enable looping
-myVideo.noLoop(); // Disable looping
-
-// Set playback speed (1.0 = normal speed)
-myVideo.speed(0.5); // Half speed
-myVideo.speed(2.0); // Double speed
-
-// Jump to a specific time (in seconds)
-myVideo.time(5.0);
-
-// Get current playback time
-const currentTime = myVideo.time();
-
-// Get video duration
-const duration = myVideo.duration();
-```
-
-### Drawing videos
-
-Videos are drawn the same way as images using the [`image()`](/api/textmode.js/classes/Textmodifier#image) method:
-
-```js
-t.draw(() => {
-    // Draw video at full grid size
-    t.image(myVideo);
-    
-    // Or draw with specific dimensions
-    // t.image(myVideo, 60, 40);
-});
-```
-
-### Customizing video conversion
-
-Just like images, videos support the same conversion customization methods:
-
-```js
-t.setup(async () => {
-    myVideo = await t.loadVideo('path/to/video.mp4');
-    
-    // Customize character set
-    myVideo.characters(" .:-=+*#%@");
-    
-    // Set color modes
-    myVideo.charColorMode("sampled");
-    myVideo.cellColorMode("fixed");
-    myVideo.cellColor(0, 0, 0);
-    
-    // Apply transformations
-    myVideo.flipX(false);
-    myVideo.flipY(false);
-    myVideo.invert(false);
-    myVideo.charRotation(0);
-    
-    // Start playback
-    myVideo.play();
-    myVideo.loop();
-});
-```
-
-### Preloading video frames
-
-For canvas video capturing purposes, you may want to preload the video to allow for synchronous playback without frame drops while recording. Use the `loadVideo()` options to set a target frame rate and optionally provide progress callbacks:
-
-```js
-t.setup(async () => {
-    myVideo = await t.loadVideo('path/to/video.mp4', {
-        frameRate: 30, // Preload at 30 fps
-        onProgress: (progress) => {
-            console.log(`Preloading: ${(progress * 100).toFixed(1)}%`);
-        },
-        onComplete: () => {
-            console.log('Preloading complete!');
-        },
-        onError: (error) => {
-            console.error('Preload error:', error);
-        }
-    });
+  image = await t.loadImage('./images/poster.png');
+  image.characters(' .:-=+*#%@');
 });
 
 t.draw(() => {
-    t.background(0);
-    t.image(myVideo.frame(t.frameCount));
-});
+  t.background(0);
 
+  if (image) {
+    t.image(image);
+  }
+});
 ```
 
-## Combining images and videos with transformations
-
-Both images and videos can be transformed using the standard textmode.js transformation methods:
+The default draw size respects the media aspect ratio and fits it to the current grid. You can also supply an explicit size in grid cells:
 
 ```js
-t.draw(() => {
-    // Rotate the image
-    t.push();
-    t.rotateZ(t.frameCount * 2);
-    t.image(image, 40, 30);
-    t.pop();
+t.image(image, 48, 32);
+```
 
-    // Scale and position the video
-    t.push();
-    t.translate(20, 10);
-    t.image(myVideo, 30, 20);
-    t.pop();
+## Loading videos
+
+[`t.loadVideo()`](/api/textmode.js/classes/Textmodifier#loadvideo) returns a [`TextmodeVideo`](/api/textmode.js/namespaces/media/classes/TextmodeVideo.md), which extends [`TextmodeTexture`](/api/textmode.js/namespaces/media/classes/TextmodeTexture.md) and updates as the video plays.
+
+```js
+const t = textmode.create({ width: 800, height: 600 });
+
+let video;
+
+t.setup(async () => {
+  video = await t.loadVideo('./videos/loop.mp4');
+  video.characters(' .:-=+*#%@');
+  video.loop(true);
+  await video.play();
+});
+
+t.draw(() => {
+  t.background(0);
+
+  if (video) {
+    t.image(video, 50, 30);
+  }
 });
 ```
 
-## Summary
+[`TextmodeVideo`](/api/textmode.js/namespaces/media/classes/TextmodeVideo.md) also provides playback controls and state:
 
-Images and videos provide powerful ways to integrate visual media into your textmode.js creations. By adjusting the conversion parameters and combining them with transformations, you can create unique ASCII art effects from any visual source.
+- [`play()`](/api/textmode.js/namespaces/media/classes/TextmodeVideo.md#play)
+- [`pause()`](/api/textmode.js/namespaces/media/classes/TextmodeVideo.md#pause)
+- [`stop()`](/api/textmode.js/namespaces/media/classes/TextmodeVideo.md#stop)
+- [`loop()`](/api/textmode.js/namespaces/media/classes/TextmodeVideo.md#loop)
+- [`speed()`](/api/textmode.js/namespaces/media/classes/TextmodeVideo.md#speed)
+- [`time()`](/api/textmode.js/namespaces/media/classes/TextmodeVideo.md#time)
+- [`volume()`](/api/textmode.js/namespaces/media/classes/TextmodeVideo.md#volume)
+- [`currentTime`](/api/textmode.js/namespaces/media/classes/TextmodeVideo.md#currenttime), [`duration`](/api/textmode.js/namespaces/media/classes/TextmodeVideo.md#duration), and [`isPlaying`](/api/textmode.js/namespaces/media/classes/TextmodeVideo.md#isplaying)
+
+Videos loaded through `loadVideo()` start muted to satisfy browser autoplay rules. If you need audible playback, unmute the underlying [`videoElement`](/api/textmode.js/namespaces/media/classes/TextmodeVideo.md#videoelement) in response to a user gesture.
+
+## Creating live textures
+
+[`t.createTexture()`](/api/textmode.js/classes/Textmodifier#createtexture) creates a [`TextmodeTexture`](/api/textmode.js/namespaces/media/classes/TextmodeTexture.md) from an existing `HTMLCanvasElement` or `HTMLVideoElement`.
+
+```js
+const t = textmode.create({ width: 800, height: 600, fontSize: 16 });
+
+const sourceCanvas = document.createElement('canvas');
+sourceCanvas.width = 180;
+sourceCanvas.height = 120;
+
+const ctx = sourceCanvas.getContext('2d');
+const texture = t.createTexture(sourceCanvas);
+
+texture.characters(' .:-=+*#%@');
+
+t.draw(() => {
+  if (ctx) {
+    ctx.fillStyle = '#050816';
+    ctx.fillRect(0, 0, sourceCanvas.width, sourceCanvas.height);
+
+    ctx.fillStyle = '#fef08a';
+    ctx.fillRect(40, 20, 100, 80);
+  }
+
+  t.background(0);
+  t.image(texture, texture.width, texture.height);
+});
+```
+
+This is the best path when another library is already rendering to a canvas and you want `textmode.js` to reinterpret that output as character graphics.
+
+## Shared source controls
+
+Because images, videos, and textures all extend [`TextmodeSource`](/api/textmode.js/namespaces/media/classes/TextmodeSource.md), they support the same controls.
+
+### Character mapping
+
+Use [`characters()`](/api/textmode.js/namespaces/media/classes/TextmodeSource.md#characters) to define the brightness ramp, ordered from darkest to brightest:
+
+```js
+source.characters(' .:-=+*#%@');
+```
+
+This changes which glyphs are used during media conversion. Since conversion happens through the current layer's active font or tileset, the same character ramp will take on different visual styles depending on the glyph source in use.
+
+### Conversion mode
+
+Use [`conversionMode()`](/api/textmode.js/namespaces/media/classes/TextmodeSource.md#conversionmode) to choose the conversion strategy:
+
+```js
+source.conversionMode('brightness');
+```
+
+`brightness` is the built-in mode in `textmode.js`. Additional conversion modes may be added by plugins or add-on libraries.
+
+### Character and cell colors
+
+Use [`charColorMode()`](/api/textmode.js/namespaces/media/classes/TextmodeSource.md#charcolormode) and [`cellColorMode()`](/api/textmode.js/namespaces/media/classes/TextmodeSource.md#cellcolormode) to choose whether colors are sampled from the source or fixed explicitly:
+
+```js
+source.charColorMode('sampled');
+source.cellColorMode('fixed');
+source.cellColor(0, 0, 0);
+```
+
+- `'sampled'`: colors come from the source media
+- `'fixed'`: colors come from [`charColor()`](/api/textmode.js/namespaces/media/classes/TextmodeSource.md#charcolor) or [`cellColor()`](/api/textmode.js/namespaces/media/classes/TextmodeSource.md#cellcolor)
+
+For sources with transparency, use [`background()`](/api/textmode.js/namespaces/media/classes/TextmodeSource.md#background) to define the color used behind transparent pixels:
+
+```js
+source.background(10, 14, 24);
+```
+
+### Orientation and glyph transforms
+
+All media sources also support:
+
+- [`invert()`](/api/textmode.js/namespaces/media/classes/TextmodeSource.md#invert)
+- [`flipX()`](/api/textmode.js/namespaces/media/classes/TextmodeSource.md#flipx)
+- [`flipY()`](/api/textmode.js/namespaces/media/classes/TextmodeSource.md#flipy)
+- [`charRotation()`](/api/textmode.js/namespaces/media/classes/TextmodeSource.md#charrotation)
+
+```js
+source
+  .flipX(true)
+  .invert(true)
+  .charRotation(90);
+```
+
+These transforms affect the textmode conversion result rather than editing the original file or canvas.
+
+## Sizing and aspect ratio
+
+Every [`TextmodeSource`](/api/textmode.js/namespaces/media/classes/TextmodeSource.md) exposes both original pixel dimensions and ideal grid dimensions:
+
+- [`originalWidth`](/api/textmode.js/namespaces/media/classes/TextmodeSource.md#originalwidth)
+- [`originalHeight`](/api/textmode.js/namespaces/media/classes/TextmodeSource.md#originalheight)
+- [`width`](/api/textmode.js/namespaces/media/classes/TextmodeSource.md#width)
+- [`height`](/api/textmode.js/namespaces/media/classes/TextmodeSource.md#height)
+
+`originalWidth` and `originalHeight` are the native pixel size of the media. `width` and `height` are the grid-cell dimensions that best fit the current textmode grid while preserving aspect ratio.
+
+That makes this pattern useful when you want the default fitted size explicitly:
+
+```js
+t.image(source, source.width, source.height);
+```
+
+When the grid changes, the ideal fitted size updates automatically.
+
+## Lifecycle
+
+Media sources can be disposed manually through [`dispose()`](/api/textmode.js/namespaces/media/classes/TextmodeSource.md#dispose):
+
+```js
+source.dispose();
+```
+
+That is optional in most sketches. Sources created by [`loadImage()`](/api/textmode.js/classes/Textmodifier#loadimage), [`loadVideo()`](/api/textmode.js/classes/Textmodifier#loadvideo), and [`createTexture()`](/api/textmode.js/classes/Textmodifier#createtexture) are disposed automatically when the parent `Textmodifier` instance is destroyed.
+
+## Related APIs
+
+- [`Textmodifier.loadImage()`](/api/textmode.js/classes/Textmodifier#loadimage)
+- [`Textmodifier.loadVideo()`](/api/textmode.js/classes/Textmodifier#loadvideo)
+- [`Textmodifier.createTexture()`](/api/textmode.js/classes/Textmodifier#createtexture)
+- [`Textmodifier.image()`](/api/textmode.js/classes/Textmodifier#image)
+- [`media`](/api/textmode.js/namespaces/media/)
+- [`TextmodeSource`](/api/textmode.js/namespaces/media/classes/TextmodeSource.md)
+- [`TextmodeImage`](/api/textmode.js/namespaces/media/classes/TextmodeImage.md)
+- [`TextmodeTexture`](/api/textmode.js/namespaces/media/classes/TextmodeTexture.md)
+- [`TextmodeVideo`](/api/textmode.js/namespaces/media/classes/TextmodeVideo.md)

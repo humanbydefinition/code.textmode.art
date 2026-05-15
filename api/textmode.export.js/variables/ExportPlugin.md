@@ -7,7 +7,7 @@ category: Variables
 api: true
 kind: Variable
 ecosystem: textmode.js
-lastModified: 2026-04-23
+lastModified: 2026-05-15
 ---
 
 [textmode.export.js](../index.md) / ExportPlugin
@@ -21,7 +21,7 @@ const ExportPlugin: TextmodePlugin;
 Export plugin for textmode.js.
 
 Add this plugin to your textmode.js instance to enable exporting artworks
-as images, videos, SVG, and text files. Includes an overlay UI for quick
+as images, videos, SVG, JSON, and text files. Includes an overlay UI for quick
 access to all export options, which can be controlled at runtime.
 
 ## Example

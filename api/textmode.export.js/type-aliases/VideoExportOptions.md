@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-04-23
+lastModified: 2026-05-15
 ---
 
 [textmode.export.js](../index.md) / VideoExportOptions
@@ -25,7 +25,7 @@ Options for exporting the textmode content to video format.
 ### filename?
 
 ```ts
-optional filename: string;
+optional filename?: string;
 ```
 
 Target filename without extension. Defaults to an auto-generated value.
@@ -35,7 +35,7 @@ Target filename without extension. Defaults to an auto-generated value.
 ### frameCount?
 
 ```ts
-optional frameCount: number;
+optional frameCount?: number;
 ```
 
 Desired total number of frames to capture. Defaults to `300`.
@@ -45,7 +45,7 @@ Desired total number of frames to capture. Defaults to `300`.
 ### frameRate?
 
 ```ts
-optional frameRate: number;
+optional frameRate?: number;
 ```
 
 Target frame rate for the export, in frames per second. Defaults to `60`.
@@ -55,7 +55,7 @@ Target frame rate for the export, in frames per second. Defaults to `60`.
 ### quality?
 
 ```ts
-optional quality: number;
+optional quality?: number;
 ```
 
 Encoder quality between 0.0 and 1.0. Higher values request higher fidelity. Defaults to `1.0` *(lossless)*.
@@ -65,17 +65,17 @@ Encoder quality between 0.0 and 1.0. Higher values request higher fidelity. Defa
 ### transparent?
 
 ```ts
-optional transparent: boolean;
+optional transparent?: boolean;
 ```
 
 When true, attempts to preserve alpha data in the recording *(experimental)*. Defaults to `false`.
 
 ***
 
-### onProgress()?
+### onProgress?
 
 ```ts
-optional onProgress: (progress) => void;
+optional onProgress?: (progress) => void;
 ```
 
 Progress callback invoked throughout the recording lifecycle.
@@ -95,7 +95,7 @@ Progress callback invoked throughout the recording lifecycle.
 ### debugLogging?
 
 ```ts
-optional debugLogging: boolean;
+optional debugLogging?: boolean;
 ```
 
 Enables verbose logging. Defaults to `false`.

@@ -7,12 +7,12 @@ category: Type Aliases
 api: true
 namespace: input.touch
 kind: TypeAlias
-lastModified: 2026-04-23
+lastModified: 2026-05-15
 ---
 
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [touch](../index.md) / TouchSwipeHandler
 
-# Type Alias: TouchSwipeHandler()
+# Type Alias: TouchSwipeHandler
 
 ```ts
 type TouchSwipeHandler = (data) => void;

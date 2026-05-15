@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: input.touch
 kind: Interface
-lastModified: 2026-04-23
+lastModified: 2026-05-15
 isInterface: true
 ---
 
@@ -21,6 +21,6 @@ Tap (single or double) event data.
 
 | Property | Type | Description |
 | ------ | ------ | ------ |
-| <a id="originalevent"></a> `originalEvent` | `TouchEvent` | Original browser event. |
-| <a id="taps"></a> `taps` | `1` \| `2` | Number of taps recognised (1 or 2). |
-| <a id="touch"></a> `touch` | [`TouchPosition`](TouchPosition.md) | Position of the tap. |
+| <a id="property-originalevent"></a> `originalEvent` | `TouchEvent` | Original browser event. |
+| <a id="property-taps"></a> `taps` | `1` \| `2` | Number of taps recognised (1 or 2). |
+| <a id="property-touch"></a> `touch` | [`TouchPosition`](TouchPosition.md) | Position of the tap. |

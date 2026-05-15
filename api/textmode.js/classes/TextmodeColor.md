@@ -6,7 +6,7 @@ description: Represents a color in the textmode.js rendering system.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-04-23
+lastModified: 2026-05-15
 hasConstructor: false
 ---
 
@@ -24,56 +24,83 @@ Use [Textmodifier.color](Textmodifier.md#color) to create colors.
 ## Example
 
 ```javascript
-// Demonstrating color creation and manipulation
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+	t.push();
+	t.translate(-Math.floor(text.length / 2), y);
+	t.charColor(rgb[0], rgb[1], rgb[2]);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
 
 t.draw(() => {
-  t.background(10, 5, 15);
+	t.background(6, 10, 22);
 
-  const time = t.frameCount * 0.02;
-  const count = 100;
+	drawCenteredText('TextmodeColor.creation', -6, [240, 245, 255]);
 
-  for (let i = 0; i < count; i++) {
-    const angle = (i / count) * Math.PI * 2 * 3 + time;
-    const radius = 5 + i * 0.4;
-    const x = Math.cos(angle) * radius;
-    const y = Math.sin(angle) * radius;
+	const col1 = t.color(255, 120, 80);
+	t.push();
+	t.translate(-6, 0);
+	t.charColor(col1.r, col1.g, col1.b);
 
-    t.push();
-    t.translate(x, y);
+	const label1 = 'RGB: 255, 120, 80';
+	for (let i = 0; i < label1.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(label1[i]);
+		t.point();
+		t.pop();
+	}
+	t.pop();
 
-    // Demonstrate different color creation methods based on index
-    let col;
-    if (i % 3 === 0) {
-      // RGB: Warm colors
-      col = t.color(255, i * 2, 50);
-    } else if (i % 3 === 1) {
-      // Hex: Teal accents
-      col = t.color('#00FFCC');
-    } else {
-      // Grayscale: White stars
-      col = t.color(255, 150);
-    }
+	const col2 = t.color('#80FFB0');
+	t.push();
+	t.translate(-6, 4);
+	t.charColor(col2.r, col2.g, col2.b);
 
-    t.charColor(col);
-    t.char(i % 5 === 0 ? '+' : '#');
-    t.point();
-    t.pop();
-  }
+	const label2 = 'Hex: #80FFB0';
+	for (let i = 0; i < label2.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(label2[i]);
+		t.point();
+		t.pop();
+	}
+	t.pop();
+
+	const col3 = t.color(180);
+	t.push();
+	t.translate(-6, 8);
+	t.charColor(col3.r, col3.g, col3.b);
+
+	const label3 = 'Gray: 180';
+	for (let i = 0; i < label3.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(label3[i]);
+		t.point();
+		t.pop();
+	}
+	t.pop();
 });
 
 t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeColor/creation/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 ## Properties
 
@@ -88,46 +115,36 @@ Alpha component (0-255).
 #### Example
 
 ```javascript
-// Alpha transparency
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
-  t.background(0);
+	t.background(0);
 
-  const time = t.frameCount * 0.05;
-  const trailLen = 15;
+	const time = t.frameCount * 0.05;
+	const trailLen = 15;
 
-  for (let i = 0; i < trailLen; i++) {
-    // Create a fading white color
-    const alpha = 255 * (1 - i / trailLen);
-    const col = t.color(255, 255, 255, alpha);
+	for (let i = 0; i < trailLen; i++) {
+		const alpha = 255 * (1 - i / trailLen);
+		const col = t.color(255, 255, 255, alpha);
 
-    // Circular motion with lag
-    const tOffset = time - i * 0.1;
-    const x = Math.cos(tOffset) * 15;
-    const y = Math.sin(tOffset) * 15;
+		// Circular motion with lag
+		const tOffset = time - i * 0.1;
+		const x = Math.cos(tOffset) * 15;
+		const y = Math.sin(tOffset) * 15;
 
-    t.push();
-    t.translate(x, y);
-    t.char(col.a > 128 ? '@' : '.'); // Use alpha property to change char
-    t.charColor(col);
-    t.point();
-    t.pop();
-  }
+		t.push();
+		t.translate(x, y);
+		t.char(col.a > 128 ? '@' : '.'); // Use alpha property to change char
+		t.charColor(col);
+		t.point();
+		t.pop();
+	}
 });
 
 t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeColor/a/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 ***
 
@@ -142,43 +159,55 @@ Blue component (0-255).
 #### Example
 
 ```javascript
-// Blue channel waves
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
 t.draw(() => {
-  t.background(0, 0, 20);
+	t.background(6, 10, 22);
 
-  for (let y = -10; y < 10; y++) {
-    const phase = y * 0.2 + t.frameCount * 0.05;
-    const offset = Math.sin(phase) * 5;
+	const time = t.frameCount * 0.02;
 
-    // Generate a color for this wave
-    const waveColor = t.color(50, 100, 150 + Math.sin(phase) * 100);
+	for (let y = -6; y <= 6; y++) {
+		const phase = y * 0.3 + time;
+		const wave = Math.sin(phase);
+		const shapedWave = 0.7 * Math.sin(phase) + 0.3 * Math.sin(phase * 3);
+		const blue = Math.round(50 + shapedWave * 180);
+		const c = t.color(80, 120, blue);
 
-    t.push();
-    t.translate(0, y * 2);
-    t.char('~');
+		const offset = shapedWave * 3;
 
-    // Read the blue component to modulate opacity
-    t.charColor(100, 200, waveColor.b, waveColor.b); // Blue determines alpha
+		t.push();
+		t.translate(offset, y);
+		t.charColor(c.r, c.g, c.b);
+		t.char('~');
+		t.rect(Math.abs(shapedWave) * 12 + 2, 1);
+		t.pop();
+	}
 
-    t.rect(t.grid.cols * 0.8 + offset, 1);
-    t.pop();
-  }
+	const centerBlue = Math.round(50 + Math.abs(Math.sin(time)) * 180);
+	const label = `blue: ${t.color(80, 120, centerBlue).b}`;
+	t.push();
+	t.translate(-Math.floor(label.length / 2), 10);
+	t.charColor(80, 120, centerBlue);
+
+	for (let i = 0; i < label.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(label[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
 });
 
 t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeColor/b/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 ***
 
@@ -193,62 +222,55 @@ Green component (0-255).
 #### Example
 
 ```javascript
-// Green channel visualization
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
 t.draw(() => {
-  t.background(0, 10, 0); // Dim phosphor background
+	t.background(6, 10, 22);
 
-  const time = (t.frameCount * 0.05) % (Math.PI * 2);
-  const radius = Math.min(t.grid.cols, t.grid.rows) * 0.4;
+	const time = t.frameCount * 0.02;
 
-  // Scan the grid area
-  for (let y = -radius; y < radius; y++) {
-    for (let x = -radius; x < radius; x++) {
-      if (x * x + y * y > radius * radius) continue;
+	for (let y = -6; y <= 6; y++) {
+		const phase = y * 0.3 + time;
+		const wave = Math.sin(phase);
+		const shapedWave = 0.7 * Math.sin(phase) + 0.3 * Math.sin(phase * 3);
+		const green = Math.round(50 + shapedWave * 180);
+		const c = t.color(80, green, 120);
 
-      // Calculate angle of point relative to center
-      let a = Math.atan2(y, x);
-      if (a < 0) a += Math.PI * 2;
+		const offset = shapedWave * 3;
 
-      // Calculate distance from scan line angle
-      let diff = time - a;
-      if (diff < 0) diff += Math.PI * 2;
+		t.push();
+		t.translate(offset, y);
+		t.charColor(c.r, c.g, c.b);
+		t.char('~');
+		t.rect(Math.abs(shapedWave) * 12 + 2, 1);
+		t.pop();
+	}
 
-      // Fade out trail
-      const brightness = Math.max(0, 255 - diff * 100);
+	const centerGreen = Math.round(50 + Math.abs(Math.sin(time)) * 180);
+	const label = `green: ${t.color(80, centerGreen, 120).g}`;
+	t.push();
+	t.translate(-Math.floor(label.length / 2), 10);
+	t.charColor(80, centerGreen, 120);
 
-      // Blip targets
-      const isTarget = (Math.abs(x - 10) < 2 && Math.abs(y + 5) < 2);
-      const g = isTarget ? Math.max(brightness, 150 + Math.sin(t.frameCount*0.5)*100) : brightness;
+	for (let i = 0; i < label.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(label[i]);
+		t.point();
+		t.pop();
+	}
 
-      const col = t.color(0, g, 0);
-
-      if (col.g > 20) {
-        t.push();
-        t.translate(x, y);
-        t.charColor(col);
-        // Use green intensity to pick character
-        t.char(col.g > 180 ? '█' : col.g > 80 ? '▒' : '·');
-        t.point();
-        t.pop();
-      }
-    }
-  }
+	t.pop();
 });
 
 t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeColor/g/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 ***
 
@@ -263,45 +285,54 @@ Red component (0-255).
 #### Example
 
 ```javascript
-// Visualizing the red component
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
 t.draw(() => {
-  t.background(0);
+	t.background(6, 10, 22);
 
-  const cols = 20;
-  const step = t.grid.cols / cols;
+	const time = t.frameCount * 0.02;
 
-  for (let i = 0; i < cols; i++) {
-    // Create a dynamic color
-    const r = (Math.sin(t.frameCount * 0.05 + i * 0.5) * 0.5 + 0.5) * 255;
-    const col = t.color(r, 0, 0);
+	for (let y = -6; y <= 6; y++) {
+		const phase = y * 0.3 + time;
+		const shapedWave = 0.7 * Math.sin(phase) + 0.3 * Math.sin(phase * 3);
+		const red = Math.round(80 + shapedWave * 175);
+		const c = t.color(red, 40, 40);
 
-    t.push();
-    t.translate((i - cols / 2) * step + step / 2, 0);
+		const offset = shapedWave * 3;
 
-    // Use the red component property to drive height
-    const height = (col.r / 255) * t.grid.rows * 0.8;
+		t.push();
+		t.translate(offset, y);
+		t.charColor(c.r, c.g, c.b);
+		t.char('~');
+		t.rect(Math.abs(shapedWave) * 12 + 2, 1);
+		t.pop();
+	}
 
-    t.charColor(col);
-    t.char('|');
-    t.rect(step - 1, height);
-    t.pop();
-  }
+	const centerRed = Math.round(80 + Math.abs(Math.sin(time)) * 175);
+	const label = `red: ${t.color(centerRed, 40, 40).r}`;
+	t.push();
+	t.translate(-Math.floor(label.length / 2), 10);
+	t.charColor(centerRed, 40, 40);
+
+	for (let i = 0; i < label.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(label[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
 });
 
 t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeColor/r/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 ## Accessors
 
@@ -396,14 +427,6 @@ t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeColor/normalized/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 ***
 
@@ -487,14 +510,6 @@ t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeColor/rgb/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 ***
 
@@ -591,14 +606,6 @@ t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeColor/rgba/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>
 
 ## Methods
 
@@ -628,38 +635,27 @@ A new TextmodeColor instance with the updated alpha.
 #### Example
 
 ```javascript
-// Modifying alpha of a base color
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 t.draw(() => {
-  t.background(0);
+	t.background(0);
 
-  const base = t.color(50, 150, 255);
+	const base = t.color(50, 150, 255);
 
-  // Draw overlapping plates with varying opacity
-  for (let i = 0; i < 5; i++) {
-    t.push();
-    t.translate((i - 2) * 5, Math.sin(t.frameCount * 0.05 + i) * 5);
+	for (let i = 0; i < 5; i++) {
+		t.push();
+		t.translate((i - 2) * 5, Math.sin(t.frameCount * 0.05 + i) * 5);
 
-    // Create a variation of the base color
-    const opacity = 100 + i * 30;
-    t.charColor(base.withAlpha(opacity));
+		const opacity = 100 + i * 30;
+		t.charColor(base.withAlpha(opacity));
 
-    t.char(String.fromCharCode(65 + i));
-    t.rect(12, 12);
-    t.pop();
-  }
+		t.char(String.fromCharCode(65 + i));
+		t.rect(12, 12);
+		t.pop();
+	}
 });
 
 t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
-<div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:nowrap;min-width:0;">
-  <img src="https://github.com/codex.png" alt="codex avatar" width="72" height="72" style="border-radius:12px;box-shadow:0 2px 6px rgba(0,0,0,0.35);" />
-  <div style="display:flex;flex-direction:column;gap:0.2rem;min-width:0;">
-    <span style="display:inline-flex;align-items:baseline;gap:0.45rem;flex-wrap:wrap;"><strong><a href="https://github.com/codex" target="_blank" rel="noopener noreferrer">@codex</a></strong><span style="font-size:0.85em;font-weight:400;line-height:1.4;color:rgba(160,160,170,0.95);"><em>{ai-generated}</em></span></span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">Replace it with your own sketch, claim the credit, and climb the <a href="/docs/leaderboard">leaderboard</a>.</span>
-    <span style="font-size:0.95em;line-height:1.4;color:rgba(160,160,170,0.95);">↗ <a href="https://github.com/humanbydefinition/textmode.js/blob/main/examples/TextmodeColor/withAlpha/sketch.js" target="_blank" rel="noopener noreferrer">View sketch on GitHub</a></span>
-  </div>
-</div>

@@ -7,7 +7,7 @@ category: Namespaces
 api: true
 namespace: input
 kind: Namespace
-lastModified: 2026-04-23
+lastModified: 2026-05-15
 ---
 
 [textmode.js](../../../../index.md) / [input](../../index.md) / mouse
@@ -21,7 +21,7 @@ Types and interfaces for mouse event handling
 | Interface | Description |
 | ------ | ------ |
 | [MouseEventData](interfaces/MouseEventData.md) | Mouse event data passed to event handlers. |
-| [MouseEventMap](interfaces/MouseEventMap.md) | Event map for all mouse events emitted by the MouseInput. |
+| [MouseEventMap](interfaces/MouseEventMap.md) | Event map for all mouse events emitted by the mouse input manager. |
 
 ## Type Aliases
 

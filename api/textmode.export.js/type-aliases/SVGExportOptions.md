@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-04-23
+lastModified: 2026-05-15
 ---
 
 [textmode.export.js](../index.md) / SVGExportOptions
@@ -25,7 +25,7 @@ Options for exporting the textmode content to SVG format.
 ### filename?
 
 ```ts
-optional filename: string;
+optional filename?: string;
 ```
 
 The filename to save the SVG file as.
@@ -37,7 +37,7 @@ If not provided, a default filename is used.
 ### includeBackgroundRectangles?
 
 ```ts
-optional includeBackgroundRectangles: boolean;
+optional includeBackgroundRectangles?: boolean;
 ```
 
 Whether to include cell background rectangles in the SVG output.
@@ -51,7 +51,7 @@ Defaults to `true`.
 ### drawMode?
 
 ```ts
-optional drawMode: "fill" | "stroke";
+optional drawMode?: "fill" | "stroke";
 ```
 
 The drawing mode for ASCII characters.
@@ -67,7 +67,7 @@ Defaults to `'fill'`.
 ### strokeWidth?
 
 ```ts
-optional strokeWidth: number;
+optional strokeWidth?: number;
 ```
 
 The stroke width to use when drawMode is set to `'stroke'`.

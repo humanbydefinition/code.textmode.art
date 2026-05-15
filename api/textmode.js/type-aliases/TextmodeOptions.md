@@ -6,7 +6,7 @@ description: Options when creating a Textmodifier instance via textmode.create.
 category: Type Aliases
 api: true
 kind: TypeAlias
-lastModified: 2026-04-23
+lastModified: 2026-05-15
 ---
 
 [textmode.js](../index.md) / TextmodeOptions
@@ -24,7 +24,7 @@ Options when creating a [Textmodifier](../classes/Textmodifier.md) instance via 
 ### canvas?
 
 ```ts
-optional canvas: HTMLCanvasElement | HTMLVideoElement;
+optional canvas?: HTMLCanvasElement | HTMLVideoElement;
 ```
 
 An existing [HTMLCanvasElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement) to use instead of letting `textmode.js` create its own canvas.
@@ -38,7 +38,7 @@ If using `overlay` mode, this should be the target canvas or video element to ov
 ### fontSize?
 
 ```ts
-optional fontSize: number;
+optional fontSize?: number;
 ```
 
 The font size to use for text rendering. Defaults to 16.
@@ -48,7 +48,7 @@ The font size to use for text rendering. Defaults to 16.
 ### fontSource?
 
 ```ts
-optional fontSource: string;
+optional fontSource?: string;
 ```
 
 URL or path to a custom font file *(.otf/.ttf/.woff)*.
@@ -58,7 +58,7 @@ URL or path to a custom font file *(.otf/.ttf/.woff)*.
 ### frameRate?
 
 ```ts
-optional frameRate: number;
+optional frameRate?: number;
 ```
 
 Maximum frames per second for auto rendering. Defaults to 60.
@@ -68,7 +68,7 @@ Maximum frames per second for auto rendering. Defaults to 60.
 ### gl?
 
 ```ts
-optional gl: WebGL2RenderingContext;
+optional gl?: WebGL2RenderingContext;
 ```
 
 Use an external WebGL2 context instead of creating a new one.
@@ -80,7 +80,7 @@ that share the same canvas.
 ### height?
 
 ```ts
-optional height: number;
+optional height?: number;
 ```
 
 The height of the canvas when creating a new canvas. Defaults to 600.
@@ -90,7 +90,7 @@ The height of the canvas when creating a new canvas. Defaults to 600.
 ### loadingScreen?
 
 ```ts
-optional loadingScreen: LoadingScreenOptions;
+optional loadingScreen?: LoadingScreenOptions;
 ```
 
 Configure the built-in loading screen experience.
@@ -100,14 +100,14 @@ Configure the built-in loading screen experience.
 ### overlay?
 
 ```ts
-optional overlay: boolean;
+optional overlay?: boolean;
 ```
 
 Use `textmode.js` in overlay mode,
 which sets up the textmode `<canvas>` on top of an existing HTMLCanvasElement or HTMLVideoElement,
 automatically resizing and positioning it to match the target element.
 
-In this mode `textmode.js` fetches the content of the target element and loads it into an adjustable [media.TextmodeImage](../namespaces/media/classes/TextmodeImage.md),
+In this mode `textmode.js` fetches the content of the target element and loads it into an adjustable [media.TextmodeImage](../classes/TextmodeImage.md),
 that can be accessed via [Textmodifier.overlay](../classes/Textmodifier.md#overlay), and drawn via [Textmodifier.image](../classes/Textmodifier.md#image).
 
 Useful for applying textmode conversion to p5.js sketches, YouTube videos, and sooo much more.
@@ -121,7 +121,7 @@ since the overlay target automatically updates the size.
 ### plugins?
 
 ```ts
-optional plugins: TextmodePlugin[];
+optional plugins?: TextmodePlugin[];
 ```
 
 List of plugins to install when the Textmodifier instance is created.
@@ -131,7 +131,7 @@ List of plugins to install when the Textmodifier instance is created.
 ### width?
 
 ```ts
-optional width: number;
+optional width?: number;
 ```
 
 The width of the canvas when creating a new canvas. Defaults to 800.

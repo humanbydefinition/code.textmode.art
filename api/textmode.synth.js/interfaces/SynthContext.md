@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-04-23
+lastModified: 2026-05-15
 isInterface: true
 ---
 
@@ -40,11 +40,11 @@ t.windowResized(() => {
 
 | Property | Type | Description |
 | ------ | ------ | ------ |
-| <a id="time"></a> `time` | `number` | Current time in seconds |
-| <a id="framecount"></a> `frameCount` | `number` | Current frame count |
-| <a id="width"></a> `width` | `number` | Grid width in pixels |
-| <a id="height"></a> `height` | `number` | Grid height in pixels |
-| <a id="cols"></a> `cols` | `number` | Grid columns |
-| <a id="rows"></a> `rows` | `number` | Grid rows |
-| <a id="bpm"></a> `bpm` | `number` | Current BPM (beats per minute) for array modulation timing |
-| <a id="onerror"></a> `onError?` | (`error`, `uniformName`) => `void` | Optional callback for handling dynamic parameter evaluation errors |
+| <a id="property-time"></a> `time` | `number` | Current time in seconds |
+| <a id="property-framecount"></a> `frameCount` | `number` | Current frame count |
+| <a id="property-width"></a> `width` | `number` | Grid width in pixels |
+| <a id="property-height"></a> `height` | `number` | Grid height in pixels |
+| <a id="property-cols"></a> `cols` | `number` | Grid columns |
+| <a id="property-rows"></a> `rows` | `number` | Grid rows |
+| <a id="property-bpm"></a> `bpm` | `number` | Current BPM (beats per minute) for array modulation timing |
+| <a id="property-onerror"></a> `onError?` | (`error`, `uniformName`) => `void` | Optional callback for handling dynamic parameter evaluation errors |

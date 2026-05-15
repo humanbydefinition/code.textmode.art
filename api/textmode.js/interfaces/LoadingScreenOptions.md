@@ -1,0 +1,24 @@
+---
+layout: doc
+editLink: true
+title: LoadingScreenOptions
+description: Options for configuring the loading screen.
+category: Interfaces
+api: true
+kind: Interface
+lastModified: 2026-05-15
+isInterface: true
+---
+
+[textmode.js](../index.md) / LoadingScreenOptions
+
+# Interface: LoadingScreenOptions
+
+Options for configuring the loading screen.
+
+## Properties
+
+| Property | Type | Description |
+| ------ | ------ | ------ |
+| <a id="property-transition"></a> `transition?` | `"none"` \| `"fade"` | Transition mode for loading completion. Default is `'fade'`. Use `'none'` to skip the fade (treated as `transitionDuration: 0`). |
+| <a id="property-transitionduration"></a> `transitionDuration?` | `number` | Fade duration in milliseconds. Default is `500`. |

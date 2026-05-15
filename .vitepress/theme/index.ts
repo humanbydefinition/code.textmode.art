@@ -13,7 +13,6 @@ import 'vitepress-plugin-codesandbox/style.css'
 
 // Components
 import TextmodeSandbox from './components/TextmodeSandbox.vue'
-import FontShowcase from './components/FontShowcase/FontShowcase.vue'
 import SupportGrid from './components/Support/SupportGrid.vue'
 import TextmodeWhatIs from './components/TextmodeWhatIs.vue'
 import HomeCta from './components/HomeCta/HomeCta.vue'
@@ -26,7 +25,7 @@ import Testimonials from './components/Testimonials/Testimonials.vue'
 import ContributorsGrid from './components/Contributors/ContributorsGrid.vue'
 import WhatWillYouCreate from './components/WhatWillYouCreate/WhatWillYouCreate.vue'
 import ApiLanding from './components/ApiLanding/ApiLanding.vue'
-import ExampleLeaderboard from './components/Leaderboard/ExampleLeaderboard.vue'
+import ExampleSketchBrowser from './components/ExampleSketchBrowser/ExampleSketchBrowser.vue'
 import { GalleryGrid } from './components/Gallery'
 
 // Blog
@@ -77,7 +76,6 @@ const baseTheme: Theme = {
     // Register components
     app.component('Sandbox', Sandbox)
     app.component('TextmodeSandbox', TextmodeSandbox)
-    app.component('FontShowcase', FontShowcase)
     app.component('SupportGrid', SupportGrid)
     app.component('TextmodeWhatIs', TextmodeWhatIs)
     app.component('HomeCta', HomeCta)
@@ -88,7 +86,7 @@ const baseTheme: Theme = {
     app.component('WhatWillYouCreate', WhatWillYouCreate)
     app.component('GalleryGrid', GalleryGrid)
     app.component('ApiLanding', ApiLanding)
-    app.component('ExampleLeaderboard', ExampleLeaderboard)
+    app.component('ExampleSketchBrowser', ExampleSketchBrowser)
 
     // Set up hero sketch router
     setupHeroSketchRouter(router)

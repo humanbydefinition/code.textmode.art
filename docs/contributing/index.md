@@ -1,6 +1,6 @@
 ---
 title: Contributing
-description: Overview of contribution opportunities for textmode.js, including font suggestions, example sketches, and documentation improvements.
+description: Overview of contribution opportunities for textmode.js, including example sketches and documentation improvements.
 ---
 
 # Contributing
@@ -15,21 +15,15 @@ This contributing guide is a work in progress and may not answer all questions. 
 
 There are many ways you can help improve textmode.js and its documentation:
 
-### 🔤 [Suggest a font](/docs/contributing/suggest-a-font)
-
-Help expand the collection of pixel fonts that work well with textmode.js. We're always looking for new monospaced fonts that shine at small pixel sizes.
-
 ### 🎨 [Submit an example sketch](/docs/contributing/submit-a-sketch)
 
 Share your creative work! Example sketches help others learn and showcase what's possible with textmode.js.
 
-### 🏆 [Track the leaderboard](/docs/leaderboard)
-
-See who is contributing accepted example sketches to the docs, how close contributors are to the Discord role unlock, and how rankings update on each redeploy.
-
 ### 📝 [Improve documentation](/docs/contributing/improve-docs)
 
 Help make the docs clearer and more helpful by fixing typos, improving explanations, or adding code examples.
+
+If you want to suggest fonts or other textmode resources, contribute to [`awesome-textmode`](https://github.com/humanbydefinition/awesome-textmode).
 
 ### 🐛 Report issues
 
@@ -47,8 +41,6 @@ Ready to contribute? Check out our [Getting Started guide](/docs/contributing/ge
 ## Credits
 
 All contributors are recognized on the [Contributors page](/docs/contributors) and in the [README](https://github.com/humanbydefinition/code.textmode.art#contributors) using the [All Contributors](https://allcontributors.org/) specification.
-
-Accepted example sketch contributions also appear on the [Leaderboard](/docs/leaderboard), which recalculates automatically whenever the documentation is redeployed.
 
 Maintainers update contributor recognition with `npm run contributors:add -- <github-username> <contribution[,contribution]>` and `npm run contributors:generate`.
 If you want extra social links on the website, add them to [`.vitepress/data/contributors.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contributors.json).

@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-04-23
+lastModified: 2026-05-15
 ---
 
 [textmode.export.js](../index.md) / GIFExportOptions
@@ -25,7 +25,7 @@ Options for exporting the textmode content to GIF format.
 ### filename?
 
 ```ts
-optional filename: string;
+optional filename?: string;
 ```
 
 Target filename without extension. Defaults to an auto-generated value.
@@ -35,7 +35,7 @@ Target filename without extension. Defaults to an auto-generated value.
 ### frameCount?
 
 ```ts
-optional frameCount: number;
+optional frameCount?: number;
 ```
 
 Desired total number of frames to capture. Defaults to `300`.
@@ -45,7 +45,7 @@ Desired total number of frames to capture. Defaults to `300`.
 ### frameRate?
 
 ```ts
-optional frameRate: number;
+optional frameRate?: number;
 ```
 
 Target frame rate for the export, in frames per second. Defaults to `60`.
@@ -55,7 +55,7 @@ Target frame rate for the export, in frames per second. Defaults to `60`.
 ### scale?
 
 ```ts
-optional scale: number;
+optional scale?: number;
 ```
 
 Scale factor for the output image.
@@ -69,17 +69,17 @@ Defaults to `1.0`.
 ### repeat?
 
 ```ts
-optional repeat: number;
+optional repeat?: number;
 ```
 
 GIF loop count. 0 = loop forever. Defaults to `0`.
 
 ***
 
-### onProgress()?
+### onProgress?
 
 ```ts
-optional onProgress: (progress) => void;
+optional onProgress?: (progress) => void;
 ```
 
 Progress callback invoked throughout the recording lifecycle.

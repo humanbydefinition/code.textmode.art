@@ -28,7 +28,7 @@ If you can imagine it as a grid of characters and colors, you can probably build
 At its core, `textmode.js` gives you:
 
 - A **grid of cells** instead of pixels, exposed via `t.grid.cols` and `t.grid.rows`
-- A single **animation loop** (`t.draw(() => { ... })`) where you render each frame
+- An **animation loop** (`t.draw(() => { ... })`) where you render each frame
 - A set of **drawing primitives** (`rect`, `line`, `ellipse`, `triangle`, etc.) that fill cells
 - **Cell properties** like `char`, `charColor`, and `cellColor` to control glyphs and colors
 - Familiar **state helpers** like `push`/`pop`, `translate`, and `rotate` for composing scenes

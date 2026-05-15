@@ -1,286 +1,326 @@
 ---
 title: Exporting
-description: Learn how to export your textmode.js creations to TXT, SVG, PNG/JPG images, animated GIFs, and WebM video using the textmode.export.js plugin.
+description: Export textmode.js sketches with textmode.export.js as TXT, JSON, SVG, raster images, animated GIFs, and WebM video.
 ---
 
 # Exporting
 
-Once you've created your ASCII art with `textmode.js`, you'll likely want to save or share it. Since `textmode.js` [v0.4.0](https://github.com/humanbydefinition/textmode.js/releases/tag/0.4.0), the library no longer includes built-in export functions directly, but instead offers them through an official add-on library [`textmode.export.js`](https://github.com/humanbydefinition/textmode.export.js).
+Exporting in `textmode.js` is provided by the official add-on library [`textmode.export.js`](/api/textmode.export.js/).
 
-Make sure to install `textmode.export.js` alongside `textmode.js` in your project to access the export features. An installation guide can be found in the [textmode.export.js README](https://github.com/humanbydefinition/textmode.export.js#installation).
+Install the export plugin alongside `textmode.js`, then add [`ExportPlugin`](/api/textmode.export.js/variables/ExportPlugin.md) to your sketch:
 
-Besides exporting programmatically, `textmode.export.js` also offers a handy overlay UI for quick exports directly from the canvas. This is especially useful for testing and sharing your creations without writing any additional code.
+```js
+import { textmode } from 'textmode.js';
+import { ExportPlugin } from 'textmode.export.js';
 
-Prefer to keep everything in code? Pass `overlay: false` to `createExportPlugin` when you install the plugin to skip the overlay UI.
+const t = textmode.create({
+  width: 800,
+  height: 600,
+  fontSize: 16,
+  plugins: [ExportPlugin],
+});
+```
 
-## Overview
+Once installed, the plugin adds runtime export helpers directly to your `Textmodifier` instance.
 
-`textmode.export.js` currently supports exporting your ASCII art in five main formats:
+## What can be exported
 
-- **📄 TXT** - Plain text format for sharing and displaying in terminals
-- **🎨 SVG** - Scalable vector graphics for web, print and plotting
-- **🖼️ Images** - PNG, JPG, and WebP for general sharing
-- **🎞️ Animated GIFs** - Simple animations in GIF format
-- **📹 Video** - High-quality video export in WebM format
+`textmode.export.js` covers six export targets:
+
+- plain text via [`toString()`](#text-export) and [`saveStrings()`](#text-export)
+- structured layer data via [`toJSON()`](#json-export), [`toJSONString()`](#json-export), and [`saveJSON()`](#json-export)
+- SVG via [`toSVG()`](#svg-export) and [`saveSVG()`](#svg-export)
+- raster images via [`saveCanvas()`](#image-export) and [`copyCanvas()`](#image-export)
+- animated GIF via [`saveGIF()`](#gif-export)
+- WebM video via [`saveWEBM()`](#video-export)
+
+## Two export models
+
+`textmode.export.js` has two different export paths, and the distinction matters:
+
+- **Canvas capture** exports the final presented canvas exactly as it appears on screen. This includes layering, compositing, shaders, filters, and post-processing. Use this for:
+  - [`saveCanvas()`](#image-export)
+  - [`copyCanvas()`](#image-export)
+  - [`saveGIF()`](#gif-export)
+  - [`saveWEBM()`](#video-export)
+
+- **Base-layer data export** reads the base layer draw framebuffer and converts it into another representation. This is useful when you want editable or structured output rather than a screenshot. Use this for:
+  - [`toString()`](#text-export) / [`saveStrings()`](#text-export)
+  - [`toSVG()`](#svg-export) / [`saveSVG()`](#svg-export)
+  - [`toJSON()`](#json-export) / [`toJSONString()`](#json-export) / [`saveJSON()`](#json-export)
+
+If your sketch depends on additional layers and you need the exact final composition, use raster or video export rather than TXT, SVG, or JSON.
+
+## Overlay
+
+The plugin also mounts an export overlay UI automatically. It gives you quick access to all supported formats without writing custom UI code.
+
+Control it at runtime through [`t.exportOverlay`](/api/textmode.export.js/interfaces/ExportOverlayController.md):
+
+```js
+t.exportOverlay.hide();
+t.exportOverlay.show();
+t.exportOverlay.toggle();
+```
+
+The overlay supports clipboard export for:
+
+- text
+- JSON
+- SVG
+- raster images
 
 ## Text export
 
-Text export generates pure ASCII/text content that can be displayed in any text editor, terminal, or shared as plain text.
-
-### Basic usage
+Use text export when you want plain character output.
 
 ```js
-// Get ASCII content as a string
-const textContent = textmodifier.toString();
-console.log(textContent);
+const text = t.toString();
+console.log(text);
 
-// Save directly to a TXT file
-textmodifier.saveStrings({
-    filename: 'my_ascii_art'
+t.saveStrings({
+  filename: 'frame',
 });
 ```
 
-### Advanced options
+You can customize whitespace handling:
 
 ```js
-// Generate with custom options
-const textContent = textmodifier.toString({
-    preserveTrailingSpaces: true,
-    emptyCharacter: '·'
-});
-
-// Save with options
-textmodifier.saveStrings({
-    filename: 'detailed_ascii_art',
-    preserveTrailingSpaces: false,
-    emptyCharacter: ' '
+const text = t.toString({
+  preserveTrailingSpaces: true,
+  emptyCharacter: '.',
 });
 ```
 
-### Text export options
+Available [`TXTExportOptions`](/api/textmode.export.js/type-aliases/TXTExportOptions.md):
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `filename` | `string` | auto-generated | Filename for the exported file *(without extension)* |
-| `preserveTrailingSpaces` | `boolean` | `false` | Keep trailing spaces on each line |
-| `emptyCharacter` | `string` | `' '` | Character to use for empty cells |
+- `filename`
+- `preserveTrailingSpaces`
+- `emptyCharacter`
 
-::: tip Some use cases
-- Sharing ASCII art on social media or forums
-- Displaying in terminals or console applications
-- Creating retro-style documentation
-- Generating content for text-based games
-:::
+Text export comes from the base layer grid. It does not export the final composited canvas.
+
+## JSON export
+
+JSON export is useful when you want structured layer data for tooling, storage, or further processing.
+
+```js
+const layerData = t.toJSON();
+const jsonString = t.toJSONString();
+
+t.saveJSON({
+  filename: 'frame',
+});
+```
+
+The exported document is a [`TextmodeLayerJSON`](/api/textmode.export.js/interfaces/TextmodeLayerJSON.md) object with:
+
+- canvas dimensions
+- grid dimensions
+- base-layer cell data
+- per-cell character, foreground, background, and transform state
+- optional metadata about export time and generator version
+
+Example with explicit formatting options:
+
+```js
+t.saveJSON({
+  filename: 'frame',
+  pretty: true,
+  colorMode: 'hex',
+  includeMetadata: true,
+});
+```
+
+Available [`JSONExportOptions`](/api/textmode.export.js/type-aliases/JSONExportOptions.md):
+
+- `filename`
+- `pretty`
+- `colorMode`
+- `includeMetadata`
+
+`toJSON()` returns the structured object. `toJSONString()` returns serialized JSON text.
+
+Like TXT export, JSON export reads the base layer rather than the final presented canvas.
 
 ## SVG export
 
-SVG export creates scalable vector graphics that maintain crisp quality at any size, and can be customized further easily using tools like Adobe Illustrator or Inkscape.
-
-### Basic usage
+SVG export turns the current base layer into vector paths.
 
 ```js
-// Generate SVG content as a string
-const svgContent = textmodifier.toSVG();
+const svg = t.toSVG();
 
-// Use the SVG content (e.g., display in DOM)
-document.getElementById('svg-container').innerHTML = svgContent;
-
-// Save directly to an SVG file
-textmodifier.saveSVG({
-    filename: 'my_ascii_art'
+t.saveSVG({
+  filename: 'poster',
 });
 ```
 
-### Advanced configuration
+You can control whether cell background rectangles are included and whether glyphs are filled or stroked:
 
 ```js
-// Generate with custom styling
-const svgContent = textmodifier.toSVG({
-    includeBackgroundRectangles: true,
-    drawMode: 'stroke',
-    strokeWidth: 2.0,
-});
-
-// Save with settings
-textmodifier.saveSVG({
-    filename: 'professional_ascii',
-    includeBackgroundRectangles: false, // No cell background rectangles
-    drawMode: 'fill',
+t.saveSVG({
+  filename: 'outline',
+  includeBackgroundRectangles: true,
+  drawMode: 'stroke',
+  strokeWidth: 1.5,
 });
 ```
 
-### SVG export options
+Available [`SVGExportOptions`](/api/textmode.export.js/type-aliases/SVGExportOptions.md):
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `filename` | `string` | auto-generated | Filename for the exported file (without extension) |
-| `includeBackgroundRectangles` | `boolean` | `true` | Include cell background rectangles |
-| `drawMode` | `'fill' \| 'stroke'` | `'fill'` | Character rendering mode |
-| `strokeWidth` | `number` | `1.0` | Stroke width when using `'stroke'` mode |
+- `filename`
+- `includeBackgroundRectangles`
+- `drawMode`
+- `strokeWidth`
 
-::: tip Some use cases
-- Web integration where scalability is important
-- Print media requiring crisp text
-- Creating icons or logos from ASCII art
-:::
+SVG export is path-based and uses glyph outline data from the active base-layer font. In practice, this is the right export path for sketches using [`TextmodeFont`](/api/textmode.js/namespaces/fonts/classes/TextmodeFont.md). If you need exact bitmap tileset output, use image, GIF, or WebM export instead.
 
 ## Image export
 
-Image export creates raster images in popular formats, perfect for sharing on social media, embedding in documents, or general use.
-
-### Basic usage
+Use [`saveCanvas()`](/api/textmode.export.js/interfaces/TextmodeExportAPI.md#savecanvas) when you want a raster export of the final presented canvas.
 
 ```js
-// Save as PNG (default)
-textmodifier.saveCanvas();
-
-// Save in different formats
-textmodifier.saveCanvas({
-    filename: 'high_quality',
-    format: 'webp'
-});
-textmodifier.saveCanvas({
-    filename: 'compatible',
-    format: 'jpg'
+await t.saveCanvas({
+  filename: 'still',
+  format: 'png',
 });
 ```
 
-### High-quality export
+Supported image formats:
+
+- `png`
+- `jpg`
+- `webp`
+
+You can also scale the export:
 
 ```js
-// Export high-resolution image
-textmodifier.saveCanvas({
-    filename: 'hires_ascii',
-    format: 'png',
-    scale: 3.0, // 3x larger
-});
-
-textmodifier.saveCanvas({
-    filename: 'web_optimized',
-    format: 'webp',
-    scale: 1.5,
-});
-
-textmodifier.saveCanvas({
-    filename: 'print_ready',
-    format: 'png',
-    scale: 5.0,
+await t.saveCanvas({
+  filename: 'still-2x',
+  format: 'png',
+  scale: 2,
 });
 ```
 
-### Image export options
+Available [`ImageExportOptions`](/api/textmode.export.js/type-aliases/ImageExportOptions.md):
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `filename` | `string` | auto-generated | Filename for the exported file (without extension) |
-| `format` | `'png' \| 'jpg' \| 'webp'` | `'png'` | Image format |
-| `scale` | `number` | `1.0` | Scale factor for output size |
+- `filename`
+- `format`
+- `scale`
 
-### Format comparison
+To copy the current raster result to the clipboard instead of downloading it:
 
-| Format | Transparency | File Size | Quality | Best For |
-|--------|-------------|-----------|---------|----------|
-| **PNG** | ✅ Yes | Large | Lossless | High quality, transparency needed |
-| **JPG** | ❌ No | Small | Lossy | Web sharing, smaller files |
-| **WebP** | ✅ Yes | Smallest | Lossy/Lossless | Modern web, best compression |
+```js
+await t.copyCanvas({
+  format: 'png',
+  scale: 2,
+});
+```
 
-::: tip Some use cases
-- Social media sharing
-- Embedding in documents or presentations
-- When vector formats aren't supported
-- Creating thumbnails or previews
-:::
+This path captures the final browser canvas, so it is the correct choice when you want the exact visual result of a layered or filtered sketch.
 
 ## GIF export
 
-GIF export captures a sequence of frames from your sketch and encodes them into an animated GIF.
-
-### Basic usage
+Use [`saveGIF()`](/api/textmode.export.js/interfaces/TextmodeExportAPI.md#savegif) to record a sequence of future frames and encode them as an animated GIF.
 
 ```js
-// Record a short looping GIF
-textmodifier.saveGIF({
-    filename: 'animated_ascii',
-    frameCount: 180,
-    frameRate: 30,
+await t.saveGIF({
+  filename: 'loop',
+  frameCount: 180,
+  frameRate: 30,
 });
 ```
 
-### Progress and customization
+You can scale the captured frames and control loop behavior:
 
 ```js
-textmodifier.saveGIF({
-    filename: 'hires_loop',
-    scale: 2.0,          // Upscale output
-    repeat: 0,           // Loop forever
-    onProgress(progress) {
-        console.log(`GIF status: ${progress.state}`, progress);
-    },
+await t.saveGIF({
+  filename: 'loop-2x',
+  frameCount: 240,
+  frameRate: 60,
+  scale: 2,
+  repeat: 0,
+  onProgress(progress) {
+    console.log(progress.state, progress.frameIndex, progress.totalFrames);
+  },
 });
 ```
 
-### GIF export options
+Available [`GIFExportOptions`](/api/textmode.export.js/type-aliases/GIFExportOptions.md):
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `filename` | `string` | auto-generated | Filename for the exported file *(without extension)* |
-| `frameCount` | `number` | `300` | Total number of frames to capture |
-| `frameRate` | `number` | `60` | Frames captured per second |
-| `scale` | `number` | `1.0` | Scale factor for the rendered frames |
-| `repeat` | `number` | `0` | Loop count (`0` = loop forever) |
-| `onProgress` | (`progress: GIFExportProgress`) => `void` | - | Progress callback fired during recording |
+- `filename`
+- `frameCount`
+- `frameRate`
+- `scale`
+- `repeat`
+- `onProgress`
 
-::: tip Some use cases
-- Sharing animated ASCII art on social media
-- Creating looping backgrounds or stickers
-- Previewing timeline-based animations without video tooling
-:::
+GIF export works by registering a post-draw hook and capturing the next rendered frames from the canvas. It does not export frames retroactively.
 
 ## Video export
 
-Video export records a WebM video with higher fidelity and optional alpha support - ideal when you need smooth playback or post-production editing.
-
-### Basic usage
+Use [`saveWEBM()`](/api/textmode.export.js/interfaces/TextmodeExportAPI.md#savewebm) to record a WebM video of the final presented canvas.
 
 ```js
-// Capture a quick demo video
-textmodifier.saveWEBM({
-    filename: 'demo_capture',
-    frameCount: 240,
-    frameRate: 60,
+await t.saveWEBM({
+  filename: 'capture',
+  frameCount: 240,
+  frameRate: 60,
 });
 ```
 
-### Advanced configuration
+You can control encoder quality and optionally request transparent output:
 
 ```js
-textmodifier.saveWEBM({
-    filename: 'presentation',
-    quality: 0.85,           // Balance quality vs. size
-    transparent: true,       // Try to keep alpha (experimental)
-    onProgress(progress) {
-        if (progress.state === 'encoding') {
-            console.log('Encoding video…');
-        }
-    },
+await t.saveWEBM({
+  filename: 'capture-alpha',
+  frameCount: 240,
+  frameRate: 60,
+  quality: 0.85,
+  transparent: true,
+  onProgress(progress) {
+    console.log(progress.state, progress.frameIndex, progress.totalFrames);
+  },
 });
 ```
 
-### Video export options
+Available [`VideoExportOptions`](/api/textmode.export.js/type-aliases/VideoExportOptions.md):
 
-| Option | Type | Default | Description |
-|--------|------|---------|-------------|
-| `filename` | `string` | auto-generated | Filename for the exported file *(without extension)* |
-| `frameCount` | `number` | `300` | Total number of frames to capture |
-| `frameRate` | `number` | `60` | Frames captured per second |
-| `quality` | `number` | `1.0` | Encoder quality (`0.0`–`1.0`) |
-| `transparent` | `boolean` | `false` | Preserve alpha during recording *(experimental)* |
-| `onProgress` | (`progress: VideoExportProgress`) => `void` | — | Progress callback fired during capture/encoding |
+- `filename`
+- `frameCount`
+- `frameRate`
+- `quality`
+- `transparent`
+- `onProgress`
+- `debugLogging`
 
-::: tip Some use cases
-- Demo reels and long-form captures
-- Integrating with video editors for compositing
-- Capturing footage with transparency for overlays
-:::
+Like GIF export, WebM recording captures upcoming frames through a post-draw hook, so the animation needs to keep rendering while the export runs.
 
-Ready to share your creations with the world? Start exporting your ASCII masterpieces! 🎨
+## Choosing the right format
+
+Use TXT when you want raw characters.
+
+Use JSON when you want structured base-layer data.
+
+Use SVG when you want scalable vector output from font-based glyphs.
+
+Use PNG, JPG, or WebP when you want a still image of the exact final canvas.
+
+Use GIF when you want a lightweight looping animation.
+
+Use WebM when you want smoother playback, better quality, or video-oriented workflows.
+
+## Related APIs
+
+- [`textmode.export.js`](/api/textmode.export.js/)
+- [`ExportPlugin`](/api/textmode.export.js/variables/ExportPlugin.md)
+- [`TextmodeExportAPI`](/api/textmode.export.js/interfaces/TextmodeExportAPI.md)
+- [`ExportOverlayController`](/api/textmode.export.js/interfaces/ExportOverlayController.md)
+- [`ImageExportOptions`](/api/textmode.export.js/type-aliases/ImageExportOptions.md)
+- [`TXTExportOptions`](/api/textmode.export.js/type-aliases/TXTExportOptions.md)
+- [`JSONExportOptions`](/api/textmode.export.js/type-aliases/JSONExportOptions.md)
+- [`SVGExportOptions`](/api/textmode.export.js/type-aliases/SVGExportOptions.md)
+- [`GIFExportOptions`](/api/textmode.export.js/type-aliases/GIFExportOptions.md)
+- [`GIFExportProgress`](/api/textmode.export.js/type-aliases/GIFExportProgress.md)
+- [`VideoExportOptions`](/api/textmode.export.js/type-aliases/VideoExportOptions.md)
+- [`VideoExportProgress`](/api/textmode.export.js/type-aliases/VideoExportProgress.md)
