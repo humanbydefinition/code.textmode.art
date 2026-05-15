@@ -7,7 +7,7 @@ category: Functions
 api: true
 kind: Function
 ecosystem: textmode.js
-lastModified: 2026-05-13
+lastModified: 2026-05-15
 ---
 
 [textmode.synth.js](../index.md) / src
@@ -45,7 +45,7 @@ Equivalent to hydra's `src(o0)`.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `source?` | \| `TextmodeSource` \| `TextmodeLayer` \| () => `TextmodeSource` \| `TextmodeLayer` \| `undefined` | Optional source to sample from: TextmodeLayer for cross-layer, or TextmodeImage/TextmodeVideo for media |
+| `source?` | \| `TextmodeSource` \| `TextmodeLayer` \| (() => `TextmodeSource` \| `TextmodeLayer` \| `undefined`) | Optional source to sample from: TextmodeLayer for cross-layer, or TextmodeImage/TextmodeVideo for media |
 
 ## Returns
 

@@ -6,7 +6,7 @@ description: The main entry point for the textmode.js library.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-05-14
+lastModified: 2026-05-15
 hasConstructor: false
 ---
 
@@ -214,7 +214,7 @@ Set the global error handling level for the library. This applies to all [Textmo
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `level` | [`TextmodeErrorLevel`](../namespaces/errors/enumerations/TextmodeErrorLevel.md) | The error handling level to set. |
+| `level` | [`TextmodeErrorLevel`](../enumerations/TextmodeErrorLevel.md) | The error handling level to set. |
 
 #### Returns
 

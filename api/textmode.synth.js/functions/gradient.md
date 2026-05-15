@@ -7,7 +7,7 @@ category: Functions
 api: true
 kind: Function
 ecosystem: textmode.js
-lastModified: 2026-05-13
+lastModified: 2026-05-15
 ---
 
 [textmode.synth.js](../index.md) / gradient
@@ -24,7 +24,7 @@ Generate a rotating radial gradient.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `speed?` | `number` \| `number`[] \| (`ctx`) => `number` | Rotation speed (default: 0.0) |
+| `speed?` | `number` \| `number`[] \| ((`ctx`) => `number`) | Rotation speed (default: 0.0) |
 
 ## Returns
 

@@ -7,7 +7,7 @@ category: Functions
 api: true
 kind: Function
 ecosystem: textmode.js
-lastModified: 2026-05-13
+lastModified: 2026-05-15
 ---
 
 [textmode.synth.js](../index.md) / osc
@@ -27,9 +27,9 @@ Generate oscillating patterns using sine waves.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `frequency?` | `number` \| `number`[] \| (`ctx`) => `number` | Frequency of the oscillation (default: 60.0) |
-| `sync?` | `number` \| `number`[] \| (`ctx`) => `number` | Synchronization offset (default: 0.1) |
-| `offset?` | `number` \| `number`[] \| (`ctx`) => `number` | Phase offset (default: 0.0) |
+| `frequency?` | `number` \| `number`[] \| ((`ctx`) => `number`) | Frequency of the oscillation (default: 60.0) |
+| `sync?` | `number` \| `number`[] \| ((`ctx`) => `number`) | Synchronization offset (default: 0.1) |
+| `offset?` | `number` \| `number`[] \| ((`ctx`) => `number`) | Phase offset (default: 0.0) |
 
 ## Returns
 

@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-05-13
+lastModified: 2026-05-15
 ---
 
 [textmode.synth.js](../index.md) / SynthParameterValue
@@ -19,8 +19,8 @@ type SynthParameterValue =
   | number
   | number[]
   | string
-  | (ctx) => number
-  | (ctx) => number[]
+  | ((ctx) => number)
+  | ((ctx) => number[])
   | SynthSource
   | null;
 ```

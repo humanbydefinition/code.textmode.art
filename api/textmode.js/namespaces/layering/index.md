@@ -6,7 +6,7 @@ description: All modules and types related to multi-layered textmode rendering.
 category: Namespaces
 api: true
 kind: Namespace
-lastModified: 2026-05-14
+lastModified: 2026-05-15
 ---
 
 [textmode.js](../../index.md) / layering
@@ -15,21 +15,26 @@ lastModified: 2026-05-14
 
 All modules and types related to multi-layered textmode rendering.
 
-## Classes
+## References
 
-| Class | Description |
-| ------ | ------ |
-| [TextmodeLayer](classes/TextmodeLayer.md) | A single layer within a multi-layered textmode rendering context. |
-| [TextmodeLayerManager](classes/TextmodeLayerManager.md) | Manages the stack of layers within a [Textmodifier](../../classes/Textmodifier.md) instance. |
+### TEXTMODE\_LAYER\_BLEND\_MODES
 
-## Interfaces
+Re-exports [TEXTMODE_LAYER_BLEND_MODES](../../variables/TEXTMODE_LAYER_BLEND_MODES.md)
 
-| Interface | Description |
-| ------ | ------ |
-| [TextmodeLayerOptions](interfaces/TextmodeLayerOptions.md) | Options for configuring a new TextmodeLayer via [TextmodeLayerManager.add](classes/TextmodeLayerManager.md#add). |
+***
 
-## Variables
+### TextmodeLayer
 
-| Variable | Description |
-| ------ | ------ |
-| [TEXTMODE\_LAYER\_BLEND\_MODES](variables/TEXTMODE_LAYER_BLEND_MODES.md) | Blend modes available for [TextmodeLayer](classes/TextmodeLayer.md) compositing in 2D mode. |
+Re-exports [TextmodeLayer](../../classes/TextmodeLayer.md)
+
+***
+
+### TextmodeLayerManager
+
+Re-exports [TextmodeLayerManager](../../classes/TextmodeLayerManager.md)
+
+***
+
+### TextmodeLayerOptions
+
+Re-exports [TextmodeLayerOptions](../../interfaces/TextmodeLayerOptions.md)

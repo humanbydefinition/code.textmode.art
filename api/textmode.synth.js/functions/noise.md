@@ -7,7 +7,7 @@ category: Functions
 api: true
 kind: Function
 ecosystem: textmode.js
-lastModified: 2026-05-13
+lastModified: 2026-05-15
 ---
 
 [textmode.synth.js](../index.md) / noise
@@ -24,8 +24,8 @@ Generate Perlin noise patterns.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `scale?` | `number` \| `number`[] \| (`ctx`) => `number` | Scale of the noise pattern (default: 10.0) |
-| `offset?` | `number` \| `number`[] \| (`ctx`) => `number` | Offset in noise space (default: 0.1) |
+| `scale?` | `number` \| `number`[] \| ((`ctx`) => `number`) | Scale of the noise pattern (default: 10.0) |
+| `offset?` | `number` \| `number`[] \| ((`ctx`) => `number`) | Offset in noise space (default: 0.1) |
 
 ## Returns
 

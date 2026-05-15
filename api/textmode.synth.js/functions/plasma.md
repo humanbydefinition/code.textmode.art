@@ -7,7 +7,7 @@ category: Functions
 api: true
 kind: Function
 ecosystem: textmode.js
-lastModified: 2026-05-13
+lastModified: 2026-05-15
 ---
 
 [textmode.synth.js](../index.md) / plasma
@@ -28,10 +28,10 @@ Generate plasma-like sine field patterns.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `scale?` | `number` \| `number`[] \| (`ctx`) => `number` | Spatial scale of the plasma (default: 10.0) |
-| `speed?` | `number` \| `number`[] \| (`ctx`) => `number` | Animation speed (default: 0.5) |
-| `phase?` | `number` \| `number`[] \| (`ctx`) => `number` | Phase offset (default: 0.0) |
-| `contrast?` | `number` \| `number`[] \| (`ctx`) => `number` | Contrast adjustment (default: 1.0) |
+| `scale?` | `number` \| `number`[] \| ((`ctx`) => `number`) | Spatial scale of the plasma (default: 10.0) |
+| `speed?` | `number` \| `number`[] \| ((`ctx`) => `number`) | Animation speed (default: 0.5) |
+| `phase?` | `number` \| `number`[] \| ((`ctx`) => `number`) | Phase offset (default: 0.0) |
+| `contrast?` | `number` \| `number`[] \| ((`ctx`) => `number`) | Contrast adjustment (default: 1.0) |
 
 ## Returns
 

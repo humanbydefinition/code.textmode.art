@@ -7,7 +7,7 @@ category: Functions
 api: true
 kind: Function
 ecosystem: textmode.js
-lastModified: 2026-05-13
+lastModified: 2026-05-15
 ---
 
 [textmode.synth.js](../index.md) / shape
@@ -27,9 +27,9 @@ Generate geometric shapes (polygons).
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `sides?` | `number` \| `number`[] \| (`ctx`) => `number` | Number of sides (default: 3) |
-| `radius?` | `number` \| `number`[] \| (`ctx`) => `number` | Radius of the shape (default: 0.3) |
-| `smoothing?` | `number` \| `number`[] \| (`ctx`) => `number` | Edge smoothing amount (default: 0.01) |
+| `sides?` | `number` \| `number`[] \| ((`ctx`) => `number`) | Number of sides (default: 3) |
+| `radius?` | `number` \| `number`[] \| ((`ctx`) => `number`) | Radius of the shape (default: 0.3) |
+| `smoothing?` | `number` \| `number`[] \| ((`ctx`) => `number`) | Edge smoothing amount (default: 0.01) |
 
 ## Returns
 

@@ -7,12 +7,12 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-05-13
+lastModified: 2026-05-15
 ---
 
 [textmode.synth.js](../index.md) / DynamicErrorCallback
 
-# Type Alias: DynamicErrorCallback()
+# Type Alias: DynamicErrorCallback
 
 ```ts
 type DynamicErrorCallback = (error, uniformName) => void;

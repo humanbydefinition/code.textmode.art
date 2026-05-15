@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-05-13
+lastModified: 2026-05-15
 ---
 
 [textmode.synth.js](../index.md) / EasingFunction
@@ -15,7 +15,7 @@ lastModified: 2026-05-13
 # Type Alias: EasingFunction
 
 ```ts
-type EasingFunction = keyof typeof EASING_FUNCTIONS | (t) => number;
+type EasingFunction = keyof typeof EASING_FUNCTIONS | ((t) => number);
 ```
 
 Easing functions from https://gist.github.com/gre/1650294
