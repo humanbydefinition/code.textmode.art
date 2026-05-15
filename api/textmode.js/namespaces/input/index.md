@@ -24,26 +24,16 @@ All types and interfaces related to input event handling.
 | [mouse](namespaces/mouse/index.md) | Types and interfaces for mouse event handling |
 | [touch](namespaces/touch/index.md) | Types and interfaces for touch event handling |
 
-## References
+## Type Aliases
 
-### INPUT\_EVENT\_NAMES
+| Type Alias | Description |
+| ------ | ------ |
+| [InputEventMap](type-aliases/InputEventMap.md) | Union of every input event emitted by the library. |
+| [InputEventName](type-aliases/InputEventName.md) | Every valid event name accepted by [Textmodifier.on](../../classes/Textmodifier.md#on), [Textmodifier.off](../../classes/Textmodifier.md#off), and [Textmodifier.once](../../classes/Textmodifier.md#once). |
+| [InputEventOwner](type-aliases/InputEventOwner.md) | Input subsystem that owns a given event name. |
 
-Re-exports [INPUT_EVENT_NAMES](../../variables/INPUT_EVENT_NAMES.md)
+## Variables
 
-***
-
-### InputEventMap
-
-Re-exports [InputEventMap](../../type-aliases/InputEventMap.md)
-
-***
-
-### InputEventName
-
-Re-exports [InputEventName](../../type-aliases/InputEventName.md)
-
-***
-
-### InputEventOwner
-
-Re-exports [InputEventOwner](../../type-aliases/InputEventOwner.md)
+| Variable | Description |
+| ------ | ------ |
+| [INPUT\_EVENT\_NAMES](variables/INPUT_EVENT_NAMES.md) | Flat readonly list of every input event name accepted by [Textmodifier.on](../../classes/Textmodifier.md#on), [Textmodifier.off](../../classes/Textmodifier.md#off), and [Textmodifier.once](../../classes/Textmodifier.md#once). |

@@ -15,26 +15,21 @@ lastModified: 2026-05-15
 
 All loading screen related modules and types.
 
-## References
+## Classes
 
-### LoadingLayerController
+| Class | Description |
+| ------ | ------ |
+| [LoadingLayerController](classes/LoadingLayerController.md) | Controls the internal loading layer lifecycle and rendering behavior. |
 
-Re-exports [LoadingLayerController](../../classes/LoadingLayerController.md)
+## Interfaces
 
-***
+| Interface | Description |
+| ------ | ------ |
+| [LoadingScreenOptions](interfaces/LoadingScreenOptions.md) | Options for configuring the loading screen. |
+| [LoadingScreenRendererContext](interfaces/LoadingScreenRendererContext.md) | Context object passed to loading renderer callbacks. |
 
-### LoadingScreenOptions
+## Type Aliases
 
-Re-exports [LoadingScreenOptions](../../interfaces/LoadingScreenOptions.md)
-
-***
-
-### LoadingScreenRendererContext
-
-Re-exports [LoadingScreenRendererContext](../../interfaces/LoadingScreenRendererContext.md)
-
-***
-
-### LoadingScreenState
-
-Re-exports [LoadingScreenState](../../type-aliases/LoadingScreenState.md)
+| Type Alias | Description |
+| ------ | ------ |
+| [LoadingScreenState](type-aliases/LoadingScreenState.md) | Internal state of the loading screen. |

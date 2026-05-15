@@ -47,50 +47,20 @@ const MyPlugin: TextmodePlugin = {
 };
 ```
 
-## References
+## Interfaces
 
-### LayerExtensionImplementation
+| Interface | Description |
+| ------ | ------ |
+| [TextmodeCanvasHandle](interfaces/TextmodeCanvasHandle.md) | Stable read-only canvas handle exposed to plugins. |
+| [TextmodePlugin](interfaces/TextmodePlugin.md) | A plugin interface for extending the functionality of a [Textmodifier](../../classes/Textmodifier.md) instance. |
+| [TextmodePluginContext](interfaces/TextmodePluginContext.md) | Host-provided context passed to plugins when they are installed on a [Textmodifier](../../classes/Textmodifier.md) instance. |
 
-Re-exports [LayerExtensionImplementation](../../type-aliases/LayerExtensionImplementation.md)
+## Type Aliases
 
-***
-
-### LayerLifecycleHook
-
-Re-exports [LayerLifecycleHook](../../type-aliases/LayerLifecycleHook.md)
-
-***
-
-### LayerRenderHook
-
-Re-exports [LayerRenderHook](../../type-aliases/LayerRenderHook.md)
-
-***
-
-### SetupLifecycleHook
-
-Re-exports [SetupLifecycleHook](../../type-aliases/SetupLifecycleHook.md)
-
-***
-
-### TextmodeCanvasHandle
-
-Re-exports [TextmodeCanvasHandle](../../interfaces/TextmodeCanvasHandle.md)
-
-***
-
-### TextmodePlugin
-
-Re-exports [TextmodePlugin](../../interfaces/TextmodePlugin.md)
-
-***
-
-### TextmodePluginContext
-
-Re-exports [TextmodePluginContext](../../interfaces/TextmodePluginContext.md)
-
-***
-
-### TextmodePluginHook
-
-Re-exports [TextmodePluginHook](../../type-aliases/TextmodePluginHook.md)
+| Type Alias | Description |
+| ------ | ------ |
+| [LayerExtensionImplementation](type-aliases/LayerExtensionImplementation.md) | Type for layer extension method implementations. |
+| [LayerLifecycleHook](type-aliases/LayerLifecycleHook.md) | Callback type for layer lifecycle events. |
+| [LayerRenderHook](type-aliases/LayerRenderHook.md) | Callback type for layer render hooks. |
+| [SetupLifecycleHook](type-aliases/SetupLifecycleHook.md) | Callback type for setup lifecycle hooks. |
+| [TextmodePluginHook](type-aliases/TextmodePluginHook.md) | Callback type for simple plugin hooks without parameters. |

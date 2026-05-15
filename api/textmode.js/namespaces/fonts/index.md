@@ -15,32 +15,22 @@ lastModified: 2026-05-15
 
 All font rendering related modules and types.
 
-## References
+## Classes
 
-### GlyphData
+| Class | Description |
+| ------ | ------ |
+| [TextmodeFont](classes/TextmodeFont.md) | Manages the font used for rendering characters via [layering.TextmodeLayer.loadFont](../layering/classes/TextmodeLayer.md#loadfont). |
+| [TextmodeTileset](classes/TextmodeTileset.md) | Manages a bitmap tileset as a normalized glyph atlas. |
 
-Re-exports [GlyphData](../../interfaces/GlyphData.md)
+## Interfaces
 
-***
+| Interface | Description |
+| ------ | ------ |
+| [GlyphData](interfaces/GlyphData.md) | Glyph outline data for a character *([TextmodeFont](classes/TextmodeFont.md) only)*. |
+| [TextmodeTilesetOptions](interfaces/TextmodeTilesetOptions.md) | Configuration used to load a tileset image into a normalized glyph atlas. |
 
-### TextmodeFont
+## Type Aliases
 
-Re-exports [TextmodeFont](../../classes/TextmodeFont.md)
-
-***
-
-### TextmodeGlyph
-
-Re-exports [TextmodeGlyph](../../type-aliases/TextmodeGlyph.md)
-
-***
-
-### TextmodeTileset
-
-Re-exports [TextmodeTileset](../../classes/TextmodeTileset.md)
-
-***
-
-### TextmodeTilesetOptions
-
-Re-exports [TextmodeTilesetOptions](../../interfaces/TextmodeTilesetOptions.md)
+| Type Alias | Description |
+| ------ | ------ |
+| [TextmodeGlyph](type-aliases/TextmodeGlyph.md) | Represents a single glyph entry in a textmode glyph atlas. |
