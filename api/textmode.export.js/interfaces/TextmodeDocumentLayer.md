@@ -1,7 +1,7 @@
 ---
 layout: doc
 editLink: true
-title: TextmodeLayersJSONLayer
+title: TextmodeDocumentLayer
 description: Single layer entry in an all-layers JSON export.
 category: Interfaces
 api: true
@@ -11,9 +11,9 @@ lastModified: 2026-05-16
 isInterface: true
 ---
 
-[textmode.export.js](../index.md) / TextmodeLayersJSONLayer
+[textmode.export.js](../index.md) / TextmodeDocumentLayer
 
-# Interface: TextmodeLayersJSONLayer
+# Interface: TextmodeDocumentLayer
 
 Single layer entry in an all-layers JSON export.
 
