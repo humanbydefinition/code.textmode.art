@@ -1,46 +1,50 @@
 ---
 title: Support
-description: Support the development of textmode.js and related projects. Learn about different ways to contribute financially and emotionally to the ASCII art library.
+description: Support the ongoing development of textmode.js and the surrounding creative coding ecosystem.
 comment: false
 prev: false
 next: false
 lastUpdated: false
 ---
 
-# Support `textmode.js`
+# Support development
 
-If you enjoy using `textmode.js` and would like to support my textmode endeavors and its continued development, your contribution is greatly appreciated.
+`textmode.js` is an independent creative coding project. If the library, docs, examples, or related tools have helped you make something, your support helps keep the work moving.
 
 :::info
-`textmode.js` remains free and accessible forever for everyone to use and enjoy, regardless of any contributions. Your support is greatly appreciated but never required to use the library or access its features.
+`textmode.js` remains free to use. Support is appreciated, but never required to use the library, read the documentation, or access its features.
 :::
 
-## Support emotionally \<3
+## What support makes possible
 
-If you like `textmode.js`, please consider sharing your love for the library with your friends!
+Your support helps fund the slow, practical work behind the ecosystem:
 
-A simple "thank you" or a shoutout on social media can go a long way in helping me to stay motivated and inspired to keep working on this project. I love hearing from you and seeing the projects you create with `textmode.js`!
+- maintaining the core `textmode.js` renderer;
+- improving documentation, examples, and API references;
+- developing official add-ons such as export, synth, filters, and FIGlet support;
+- testing browser behavior across real creative coding workflows;
+- building small tools and experiments around textmode art.
 
-## Support financially
+It also sends a very useful signal: that this work matters to people who are building things with it.
 
-If you would like to support the development of `textmode.js` and related projects, you can do so by making a voluntary financial contribution. Your support will help me to continue working on this project and to create more textmode-related tools for the community.
+## Financial support
+
+If you would like to support development financially, you can make a voluntary contribution through one of the options below.
 
 :::warning Important Notice
 This is a personal project, not a registered charity or non-profit organization. Any financial contributions are voluntary gifts that do not entitle you to any special rights, features, or services. Contributions may be processed through third-party payment providers and are subject to their respective terms and privacy policies.
 :::
 
-Thank you for considering to support this project and being part of this creative journey! Your support means the world to me and helps to keep this project alive and thriving.
-
 <SupportGrid />
 
-## Other ways to support
+## Other meaningful support
 
-You can also support the project by:
-- ⭐ **Starring** the repository on GitHub
-- 📣 **Sharing** it with your creative coding community
-- 🐛 **Reporting bugs** or suggesting features
-- 🎨 **Showing** what you've created using the library
-- 💬 **Joining** our Discord community
-- .. and much more!
+Financial support is not the only way to help. These actions also make the project stronger:
 
-Thanks a ton for your support and being here!
+- star the repositories you use.
+- share work made with `textmode.js`.
+- mention the library when you publish a sketch, stream, article, or project.
+- contribute focused documentation improvements.
+- submit examples that show real creative use cases.
+
+Thank you for supporting `textmode.js` and the broader textmode ecosystem!
