@@ -7,7 +7,7 @@ description: Extend textmode.js with installable plugins, lifecycle hooks, layer
 
 Plugins extend a [`Textmodifier`](/api/textmode.js/classes/Textmodifier) instance at creation time. They can register lifecycle hooks, add methods to layers, manage plugin state, and integrate with the renderer.
 
-Use plugins when an add-on needs to participate in the rendering lifecycle rather than only exporting helper functions.
+Use plugins when an add-on needs to participate in the rendering lifecycle rather than only exporting helper functions. (⊃｡•́‿•̀｡)⊃
 
 ## Install plugins
 

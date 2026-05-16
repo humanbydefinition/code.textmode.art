@@ -5,7 +5,7 @@ description: Move, rotate, scale, isolate, reset, and manually apply transform m
 
 # Transforms
 
-Transforms change the coordinate system for future drawing. They are one of the main ways to compose motion and layout in `textmode.js`.
+Transforms change the coordinate system for future drawing. They are one of the main ways to compose motion and layout in `textmode.js`. (ノ^\_^)ノ
 
 ## Translate
 
@@ -79,12 +79,7 @@ t.resetMatrix();
 [`applyMatrix()`](/api/textmode.js/classes/Textmodifier#applymatrix) applies a custom matrix when you need lower-level transform control:
 
 ```js
-t.applyMatrix(
-  1, 0, 0, 0,
-  0, 1, 0, 0,
-  0, 0, 1, 0,
-  4, 0, 0, 1
-);
+t.applyMatrix(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 4, 0, 0, 1);
 ```
 
 Most sketches should prefer `translate`, `rotate`, and `scale`; `applyMatrix` is for integrations and advanced projection experiments.
@@ -116,4 +111,3 @@ t.pop();
 - [`Textmodifier.resetMatrix()`](/api/textmode.js/classes/Textmodifier#resetmatrix)
 - [`Textmodifier.push()`](/api/textmode.js/classes/Textmodifier#push)
 - [`Textmodifier.pop()`](/api/textmode.js/classes/Textmodifier#pop)
-

@@ -5,7 +5,7 @@ description: Compose textmode.js scenes with base and user layers, blend modes, 
 
 # Layers and compositing
 
-Layers let you build a composition from independent render passes. Each layer has its own draw callback, grid, font, framebuffers, opacity, blend mode, filter sequences, and camera state.
+Layers let you build a composition from independent render passes. Each layer has its own draw callback, grid, font, framebuffers, opacity, blend mode, filter sequences, and camera state. (ﾉ◕ヮ◕)ﾉ\*:･ﾟ✧
 
 Access layers through [`t.layers`](/api/textmode.js/classes/Textmodifier#layers), a [`TextmodeLayerManager`](/api/textmode.js/namespaces/layering/classes/TextmodeLayerManager.md).
 

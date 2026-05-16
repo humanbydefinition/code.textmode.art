@@ -5,7 +5,7 @@ description: Compatibility index for the former combined filters and conversions
 
 # Filters and conversions
 
-This page has been split because filters and media conversion are different parts of the rendering model.
+This page has been split because filters and media conversion are different parts of the rendering model. (・・？)
 
 ## Filters
 
@@ -16,4 +16,3 @@ This page has been split because filters and media conversion are different part
 [Media conversion](/docs/media-conversion) turns images, videos, and live textures into renderable textmode cells inside the grid system.
 
 The old URL is kept for compatibility. New docs should link to the focused pages above.
-

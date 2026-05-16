@@ -11,7 +11,7 @@ description: Load images, videos, and live textures in textmode.js, convert them
 - [`TextmodeVideo`](/api/textmode.js/namespaces/media/classes/TextmodeVideo.md) from [`t.loadVideo()`](/api/textmode.js/classes/Textmodifier#loadvideo)
 - [`TextmodeTexture`](/api/textmode.js/namespaces/media/classes/TextmodeTexture.md) from [`t.createTexture()`](/api/textmode.js/classes/Textmodifier#createtexture)
 
-All three inherit from [`TextmodeSource`](/api/textmode.js/namespaces/media/classes/TextmodeSource.md), so they share the same conversion and styling API.
+All three inherit from [`TextmodeSource`](/api/textmode.js/namespaces/media/classes/TextmodeSource.md), so they share the same conversion and styling API. (っ＾▿＾)っ
 
 Draw any of them with [`t.image()`](/api/textmode.js/classes/Textmodifier#image):
 
@@ -26,20 +26,20 @@ Media sources are converted through the current layer's active font or tileset w
 Use [`t.loadImage()`](/api/textmode.js/classes/Textmodifier#loadimage) for static image files:
 
 ```js
-const image = await t.loadImage('./images/poster.png');
+const image = await t.loadImage("./images/poster.png");
 ```
 
 Use [`t.loadVideo()`](/api/textmode.js/classes/Textmodifier#loadvideo) for video files:
 
 ```js
-const video = await t.loadVideo('./videos/loop.mp4');
+const video = await t.loadVideo("./videos/loop.mp4");
 await video.play();
 ```
 
 Use [`t.createTexture()`](/api/textmode.js/classes/Textmodifier#createtexture) when the source already exists as a live `canvas` or `video` element:
 
 ```js
-const sourceCanvas = document.createElement('canvas');
+const sourceCanvas = document.createElement("canvas");
 const texture = t.createTexture(sourceCanvas);
 ```
 
@@ -55,8 +55,8 @@ const t = textmode.create({ width: 800, height: 600 });
 let image;
 
 t.setup(async () => {
-  image = await t.loadImage('./images/poster.png');
-  image.characters(' .:-=+*#%@');
+  image = await t.loadImage("./images/poster.png");
+  image.characters(" .:-=+*#%@");
 });
 
 t.draw(() => {
@@ -84,8 +84,8 @@ const t = textmode.create({ width: 800, height: 600 });
 let video;
 
 t.setup(async () => {
-  video = await t.loadVideo('./videos/loop.mp4');
-  video.characters(' .:-=+*#%@');
+  video = await t.loadVideo("./videos/loop.mp4");
+  video.characters(" .:-=+*#%@");
   video.loop(true);
   await video.play();
 });
@@ -119,21 +119,21 @@ Videos loaded through `loadVideo()` start muted to satisfy browser autoplay rule
 ```js
 const t = textmode.create({ width: 800, height: 600, fontSize: 16 });
 
-const sourceCanvas = document.createElement('canvas');
+const sourceCanvas = document.createElement("canvas");
 sourceCanvas.width = 180;
 sourceCanvas.height = 120;
 
-const ctx = sourceCanvas.getContext('2d');
+const ctx = sourceCanvas.getContext("2d");
 const texture = t.createTexture(sourceCanvas);
 
-texture.characters(' .:-=+*#%@');
+texture.characters(" .:-=+*#%@");
 
 t.draw(() => {
   if (ctx) {
-    ctx.fillStyle = '#050816';
+    ctx.fillStyle = "#050816";
     ctx.fillRect(0, 0, sourceCanvas.width, sourceCanvas.height);
 
-    ctx.fillStyle = '#fef08a';
+    ctx.fillStyle = "#fef08a";
     ctx.fillRect(40, 20, 100, 80);
   }
 
@@ -153,7 +153,7 @@ Because images, videos, and textures all extend [`TextmodeSource`](/api/textmode
 Use [`characters()`](/api/textmode.js/namespaces/media/classes/TextmodeSource.md#characters) to define the brightness ramp, ordered from darkest to brightest:
 
 ```js
-source.characters(' .:-=+*#%@');
+source.characters(" .:-=+*#%@");
 ```
 
 This changes which glyphs are used during media conversion. Since conversion happens through the current layer's active font or tileset, the same character ramp will take on different visual styles depending on the glyph source in use.
@@ -163,7 +163,7 @@ This changes which glyphs are used during media conversion. Since conversion hap
 Use [`conversionMode()`](/api/textmode.js/namespaces/media/classes/TextmodeSource.md#conversionmode) to choose the conversion strategy:
 
 ```js
-source.conversionMode('brightness');
+source.conversionMode("brightness");
 ```
 
 `brightness` is the built-in mode in `textmode.js`. Additional conversion modes may be added by plugins or add-on libraries.
@@ -175,8 +175,8 @@ See [Media conversion](/docs/media-conversion) for a deeper explanation of how s
 Use [`charColorMode()`](/api/textmode.js/namespaces/media/classes/TextmodeSource.md#charcolormode) and [`cellColorMode()`](/api/textmode.js/namespaces/media/classes/TextmodeSource.md#cellcolormode) to choose whether colors are sampled from the source or fixed explicitly:
 
 ```js
-source.charColorMode('sampled');
-source.cellColorMode('fixed');
+source.charColorMode("sampled");
+source.cellColorMode("fixed");
 source.cellColor(0, 0, 0);
 ```
 
@@ -199,10 +199,7 @@ All media sources also support:
 - [`charRotation()`](/api/textmode.js/namespaces/media/classes/TextmodeSource.md#charrotation)
 
 ```js
-source
-  .flipX(true)
-  .invert(true)
-  .charRotation(90);
+source.flipX(true).invert(true).charRotation(90);
 ```
 
 These transforms affect the textmode conversion result rather than editing the original file or canvas.

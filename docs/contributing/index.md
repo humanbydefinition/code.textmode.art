@@ -5,7 +5,7 @@ description: Overview of contribution opportunities for textmode.js, including e
 
 # Contributing
 
-Thank you for your interest in contributing! This documentation site thrives on community input, and there are many ways to help - no matter your skill level.
+Thank you for your interest in contributing! This documentation site thrives on community input, and there are many ways to help - no matter your skill level. (＾ω＾)
 
 :::warning Work in progress
 This contributing guide is a work in progress and may not answer all questions. If you have suggestions or need help, please open an issue or join the [Discord community](https://discord.gg/sjrw8QXNks).

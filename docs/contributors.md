@@ -10,7 +10,7 @@ import { contributors } from '../.vitepress/theme/composables/contributors'
 
 # Contributors
 
-`textmode.js` is built with passion and maintained by creative minds who believe in making textmode graphics accessible to everyone.
+`textmode.js` is built with passion and maintained by creative minds who believe in making textmode graphics accessible to everyone. (人´∀｀)．☆．。．:\*･°
 
 :::info About this page
 This page follows the [**All Contributors**](https://allcontributors.org/) specification and uses the same contributor data as the project README.

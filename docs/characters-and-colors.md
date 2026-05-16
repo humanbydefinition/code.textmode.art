@@ -11,14 +11,14 @@ Every cell has three main pieces of visual state:
 - a character color
 - a cell background color
 
-The drawing API exposes these as [`char()`](/api/textmode.js/classes/Textmodifier#char), [`charColor()`](/api/textmode.js/classes/Textmodifier#charcolor), and [`cellColor()`](/api/textmode.js/classes/Textmodifier#cellcolor).
+The drawing API exposes these as [`char()`](/api/textmode.js/classes/Textmodifier#char), [`charColor()`](/api/textmode.js/classes/Textmodifier#charcolor), and [`cellColor()`](/api/textmode.js/classes/Textmodifier#cellcolor). (⌐■_■)
 
 ## Characters
 
 Use [`char()`](/api/textmode.js/classes/Textmodifier#char) to choose the glyph for future drawing:
 
 ```js
-t.char('@');
+t.char("@");
 t.rect(10, 6);
 ```
 
@@ -29,7 +29,7 @@ You can pass a string or a numeric glyph index. When called without arguments, `
 [`charColor()`](/api/textmode.js/classes/Textmodifier#charcolor) controls the foreground glyph color. [`cellColor()`](/api/textmode.js/classes/Textmodifier#cellcolor) controls the cell background:
 
 ```js
-t.char('A');
+t.char("A");
 t.charColor(255, 220, 120);
 t.cellColor(16, 20, 32);
 t.rect(12, 8);
@@ -81,7 +81,7 @@ These methods affect how future glyphs are rendered:
 - [`invert()`](/api/textmode.js/classes/Textmodifier#invert)
 
 ```js
-t.char('>');
+t.char(">");
 t.charRotation(t.frameCount * 4);
 t.flipX(t.frameCount % 60 < 30);
 t.point();
@@ -107,4 +107,3 @@ See [Fonts and tilesets](/docs/fonts) for the full tileset workflow.
 - [`Textmodifier.color()`](/api/textmode.js/classes/Textmodifier#color)
 - [`TextmodeColor`](/api/textmode.js/classes/TextmodeColor)
 - [`Textmodifier.useTileColors()`](/api/textmode.js/classes/Textmodifier#usetilecolors)
-

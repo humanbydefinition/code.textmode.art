@@ -7,7 +7,7 @@ description: Create custom GLSL shaders for textmode.js, write MRT outputs, pass
 
 Custom shaders let you generate or process cell data on the GPU. `textmode.js` uses WebGL2 and expects GLSL ES 3.00 for custom fragment shaders.
 
-Use shaders when a visual is easier to express procedurally or when a CPU loop would be too slow.
+Use shaders when a visual is easier to express procedurally or when a CPU loop would be too slow. (｡◕‿◕｡)
 
 ## Filter shaders
 

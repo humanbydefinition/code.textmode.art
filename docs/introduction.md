@@ -9,7 +9,6 @@ description: Introduction to textmode.js, a creative-coding library for real-tim
 
 The library is designed to be approachable for all skill levels. Whether you're just getting into creative coding or building production systems, `textmode.js` aims to feel familiar if you know tools like Processing or p5.js, while still exposing advanced features when you need them.
 
-
 ## What can you build with it?
 
 `textmode.js` is built for creative, text‑driven visuals. Common use cases include:
@@ -20,8 +19,7 @@ The library is designed to be approachable for all skill levels. Whether you're 
 - Live coding performances and streaming overlays
 - Experimental web experiences that lean into text and glyphs
 
-If you can imagine it as a grid of characters and colors, you can probably build it with `textmode.js`.
-
+If you can imagine it as a grid of characters and colors, you can probably build it with `textmode.js`. (＾▽＾)
 
 ## How it feels to use
 
@@ -35,18 +33,17 @@ At its core, `textmode.js` gives you:
 
 You write straightforward JavaScript or TypeScript, and `textmode.js` handles batching, instancing, and GPU details behind the scenes.
 
-
 ## Key capabilities
 
 Here’s a high‑level overview of what the library offers. Later pages dive into each area in detail.
 
-- Real‑time* ASCII/textmode rendering with a simple drawing API
-- Font system with runtime font loading and dynamic sizing *(supports TTF/OTF/WOFF)*
+- Real‑time\* ASCII/textmode rendering with a simple drawing API
+- Font system with runtime font loading and dynamic sizing _(supports TTF/OTF/WOFF)_
 - Dynamic layering system with blend modes and opacity for multi‑layered textmode scenes
 - Filter system with built-in filters and support for custom filter shaders
 - Load images and videos as sources and render them as textmode with adjustable converters
 - Author custom filter shaders in [`GLSL ES 3.00`](https://registry.khronos.org/OpenGL/specs/es/3.0/GLSL_ES_Specification_3.00.pdf) for advanced effects
-- Flexible exporting: TXT, SVG, raster images *(PNG/JPG/WebP)*, animated GIFs, and video *(WebM)*
+- Flexible exporting: TXT, SVG, raster images _(PNG/JPG/WebP)_, animated GIFs, and video _(WebM)_
 - Animation loop control: `frameRate`, `loop`/`noLoop`, `redraw`, `frameCount`, etc.
 - Framework-agnostic: Use `textmode.js` with any canvas-based framework or library
 - Zero dependencies, written in TypeScript, with comprehensive type definitions
@@ -54,7 +51,6 @@ Here’s a high‑level overview of what the library offers. Later pages dive in
 :::info
 Actual performance depends on your scene complexity and the target device. For complex work, consider authoring filter shaders to keep heavy effects on the GPU.
 :::
-
 
 ## Acknowledgments
 

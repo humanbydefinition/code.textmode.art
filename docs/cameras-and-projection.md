@@ -5,7 +5,7 @@ description: Control 3D views in textmode.js with camera objects, direct camera 
 
 # Cameras and projection
 
-Cameras control how 3D content is viewed. You can use direct p5-style camera calls or create a mutable [`TextmodeCamera`](/api/textmode.js/classes/TextmodeCamera) object.
+Cameras control how 3D content is viewed. You can use direct p5-style camera calls or create a mutable [`TextmodeCamera`](/api/textmode.js/classes/TextmodeCamera) object. (¬‿¬)σ
 
 ## Direct camera calls
 
@@ -15,11 +15,7 @@ Use [`camera()`](/api/textmode.js/classes/Textmodifier#camera) to set eye positi
 t.draw(() => {
   t.background(0);
 
-  t.camera(
-    0, 0, 60,
-    0, 0, 0,
-    0, 1, 0
-  );
+  t.camera(0, 0, 60, 0, 0, 0, 0, 1, 0);
 
   t.box(12, 12, 12);
 });
@@ -113,4 +109,3 @@ This is useful when a foreground HUD, a 2D base layer, and a 3D scene need diffe
 - [`Textmodifier.perspective()`](/api/textmode.js/classes/Textmodifier#perspective)
 - [`Textmodifier.ortho()`](/api/textmode.js/classes/Textmodifier#ortho)
 - [`TextmodeCamera`](/api/textmode.js/classes/TextmodeCamera)
-

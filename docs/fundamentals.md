@@ -5,7 +5,7 @@ description: Compatibility index for the former Fundamentals page, now split int
 
 # Fundamentals
 
-This page has been split into focused guides so each topic is easier to find, read, and maintain.
+This page has been split into focused guides so each topic is easier to find, read, and maintain. (｡･ω･｡)ﾉ
 
 ## Start here
 
@@ -27,4 +27,3 @@ This page has been split into focused guides so each topic is easier to find, re
 - [Media sources](/docs/loadables)
 
 The old URL is kept for compatibility. New docs should link to the focused pages above.
-

@@ -5,7 +5,7 @@ description: A guide on how to improve the textmode.js documentation, from fixin
 
 # Improve documentation
 
-Clear, accurate documentation is essential for any open-source project. Your contributions to the docs help everyone using textmode.js!
+Clear, accurate documentation is essential for any open-source project. Your contributions to the docs help everyone using textmode.js! φ(・ω・｀)
 
 ## Types of documentation improvements
 
