@@ -27,7 +27,7 @@ The web editor is perfect for learning, prototyping, or creating quick experimen
 To get started with `textmode.js`, you'll need:
 - A **modern web browser** with `WebGL2` support *(Chrome, Firefox, Safari, Edge, etc.)*
 - A [`<canvas>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas) in your project *(optional, otherwise the library will create one for you)*
-- [Node.js 16+](https://nodejs.org/) and `npm` *(optional, for ESM installation)*
+- [Node.js 20.8.1+](https://nodejs.org/) and `npm` *(optional, for ESM installation)*
 
 :::warning
 `textmode.js` is currently fully dependent on `WebGL2`. Ensure your target browsers support it. You can check compatibility on [caniuse.com](https://caniuse.com/webgl2).

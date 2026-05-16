@@ -15,17 +15,17 @@ This contributing guide is a work in progress and may not answer all questions. 
 
 There are many ways you can help improve textmode.js and its documentation:
 
-### 🎨 [Submit an example sketch](/docs/contributing/submit-a-sketch)
+### [Submit an example sketch](/docs/contributing/submit-a-sketch)
 
 Share your creative work! Example sketches help others learn and showcase what's possible with textmode.js.
 
-### 📝 [Improve documentation](/docs/contributing/improve-docs)
+### [Improve documentation](/docs/contributing/improve-docs)
 
 Help make the docs clearer and more helpful by fixing typos, improving explanations, or adding code examples.
 
 If you want to suggest fonts or other textmode resources, contribute to [`awesome-textmode`](https://github.com/humanbydefinition/awesome-textmode).
 
-### 🐛 Report issues
+### Report issues
 
 Found something wrong? Open an issue describing:
 
@@ -50,4 +50,4 @@ If you want extra social links on the website, add them to [`.vitepress/data/con
 - Open an [issue](https://github.com/humanbydefinition/code.textmode.art/issues)
 - Join the [Discord community](https://discord.gg/sjrw8QXNks)
 
-Thank you for helping to make the textmode.js documentation better! 🎉
+Thank you for helping to make the textmode.js documentation better!

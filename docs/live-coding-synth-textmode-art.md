@@ -140,8 +140,6 @@ If you already work with Hydra-style source chains, the workflow will feel famil
 
 `synth.textmode.art` can generate share links that encode the current sketch directly in the URL. When a shared sketch is opened, the code is shown behind an unlock step before it runs.
 
-This makes it easier to exchange patches while keeping sketch execution explicit.
-
 ## Related APIs
 
 - [`textmode.js`](/api/textmode.js/)

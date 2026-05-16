@@ -53,11 +53,11 @@ Always create a new branch for your changes:
 
 ```bash
 # Use a descriptive branch name
-git checkout -b improve-font-docs
+git checkout -b clarify-installation-docs
 # or
-git checkout -b fix-typo-fundamentals
+git checkout -b fix-typo-first-sketch
 # or
-git checkout -b improve-animation-examples
+git checkout -b improve-export-docs
 ```
 
 ## Project structure
@@ -79,7 +79,7 @@ docs/                   # Documentation pages (you'll mostly edit here)
 
 api/                    # Auto-generated API reference
 blog/                   # Blog posts
-public/                 # Static assets (fonts, images, SVGs)
+public/                 # Static assets (images, SVGs)
 ```
 
 ## Key files
@@ -128,7 +128,7 @@ If the build succeeds, you're ready to submit!
 git add .
 
 # Commit with a clear message
-git commit -m "Clarify custom font loading docs"
+git commit -m "Clarify first sketch setup"
 ```
 
 Write clear commit messages that describe **what** you changed and **why**.
@@ -179,12 +179,6 @@ You'll appear on the [Contributors page](/docs/contributors) when your PR is mer
 - **Have fun!** - Contributing should be enjoyable
 
 ## Common tasks
-
-### Suggesting a font or resource
-
-1. Visit [`humanbydefinition/awesome-textmode`](https://github.com/humanbydefinition/awesome-textmode)
-2. Add your entry there or open an issue
-3. Submit pull request
 
 ### Adding a sketch
 

@@ -168,6 +168,8 @@ source.conversionMode('brightness');
 
 `brightness` is the built-in mode in `textmode.js`. Additional conversion modes may be added by plugins or add-on libraries.
 
+See [Media conversion](/docs/media-conversion) for a deeper explanation of how source pixels become renderable textmode cells.
+
 ### Character and cell colors
 
 Use [`charColorMode()`](/api/textmode.js/namespaces/media/classes/TextmodeSource.md#charcolormode) and [`cellColorMode()`](/api/textmode.js/namespaces/media/classes/TextmodeSource.md#cellcolormode) to choose whether colors are sampled from the source or fixed explicitly:
@@ -245,3 +247,4 @@ That is optional in most sketches. Sources created by [`loadImage()`](/api/textm
 - [`TextmodeImage`](/api/textmode.js/namespaces/media/classes/TextmodeImage.md)
 - [`TextmodeTexture`](/api/textmode.js/namespaces/media/classes/TextmodeTexture.md)
 - [`TextmodeVideo`](/api/textmode.js/namespaces/media/classes/TextmodeVideo.md)
+- [Media conversion](/docs/media-conversion)
