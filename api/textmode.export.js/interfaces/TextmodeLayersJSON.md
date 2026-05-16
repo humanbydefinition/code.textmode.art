@@ -1,8 +1,8 @@
 ---
 layout: doc
 editLink: true
-title: TextmodeLayerJSON
-description: Layer document exported by the JSON exporter.
+title: TextmodeLayersJSON
+description: Layer stack document exported by the JSON exporter.
 category: Interfaces
 api: true
 kind: Interface
@@ -11,11 +11,11 @@ lastModified: 2026-05-16
 isInterface: true
 ---
 
-[textmode.export.js](../index.md) / TextmodeLayerJSON
+[textmode.export.js](../index.md) / TextmodeLayersJSON
 
-# Interface: TextmodeLayerJSON
+# Interface: TextmodeLayersJSON
 
-Layer document exported by the JSON exporter.
+Layer stack document exported by the JSON exporter.
 
 ## Properties
 
@@ -23,12 +23,9 @@ Layer document exported by the JSON exporter.
 | ------ | ------ |
 | <a id="property-schema"></a> `$schema` | `string` |
 | <a id="property-format"></a> `format` | `"textmode.layer"` |
-| <a id="property-formatversion"></a> `formatVersion` | `"1.0.0"` |
+| <a id="property-formatversion"></a> `formatVersion` | `"1.1.0"` |
 | <a id="property-metadata"></a> `metadata?` | [`JSONExportMetadata`](JSONExportMetadata.md) |
 | <a id="property-canvas"></a> `canvas` | `object` |
 | `canvas.width` | `number` |
 | `canvas.height` | `number` |
-| <a id="property-grid"></a> `grid` | [`JSONLayerGrid`](JSONLayerGrid.md) |
-| <a id="property-layer"></a> `layer` | `object` |
-| `layer.id` | `string` |
-| `layer.cells` | [`JSONObjectRowsCellCollection`](JSONObjectRowsCellCollection.md) |
+| <a id="property-layers"></a> `layers` | [`TextmodeLayersJSONLayer`](TextmodeLayersJSONLayer.md)[] |

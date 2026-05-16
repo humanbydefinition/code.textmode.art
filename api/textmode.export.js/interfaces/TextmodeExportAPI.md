@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-05-15
+lastModified: 2026-05-16
 isInterface: true
 ---
 
@@ -83,7 +83,7 @@ await t.copyCanvas({ format: 'png' });
 saveSVG(options?): void;
 ```
 
-Downloads the current frame as an SVG file.
+Downloads the selected layer as an SVG file.
 
 #### Parameters
 
@@ -98,7 +98,7 @@ Downloads the current frame as an SVG file.
 #### Example
 
 ```ts
-t.saveSVG({ filename: 'poster', includeBackgroundRectangles: true });
+t.saveSVG({ filename: 'poster', layer: t.layers.base, includeBackgroundRectangles: true });
 ```
 
 ***
@@ -109,7 +109,7 @@ t.saveSVG({ filename: 'poster', includeBackgroundRectangles: true });
 saveStrings(options?): void;
 ```
 
-Downloads the current text content as a plain-text file.
+Downloads the selected layer's text content as a plain-text file.
 
 #### Parameters
 
@@ -124,7 +124,7 @@ Downloads the current text content as a plain-text file.
 #### Example
 
 ```ts
-t.saveStrings({ filename: 'frame', preserveTrailingSpaces: true });
+t.saveStrings({ filename: 'frame', layer: t.layers.base, preserveTrailingSpaces: true });
 ```
 
 ***
@@ -135,7 +135,7 @@ t.saveStrings({ filename: 'frame', preserveTrailingSpaces: true });
 toSVG(options?): string;
 ```
 
-Generates the SVG markup for the current frame.
+Generates SVG markup for the selected layer.
 
 #### Parameters
 
@@ -152,7 +152,7 @@ The SVG content representing the artwork.
 #### Example
 
 ```ts
-const svg = t.toSVG({ drawMode: 'stroke', strokeWidth: 1.5 });
+const svg = t.toSVG({ layer: t.layers.base, drawMode: 'stroke', strokeWidth: 1.5 });
 ```
 
 ***
@@ -163,7 +163,7 @@ const svg = t.toSVG({ drawMode: 'stroke', strokeWidth: 1.5 });
 toString(options?): string;
 ```
 
-Produces the current text content as a string.
+Produces the selected layer's text content as a string.
 
 #### Parameters
 
@@ -180,7 +180,7 @@ The textual representation of the artwork.
 #### Example
 
 ```ts
-const text = t.toString({ preserveTrailingSpaces: false });
+const text = t.toString({ layer: t.layers.base, preserveTrailingSpaces: false });
 ```
 
 ***
@@ -188,10 +188,12 @@ const text = t.toString({ preserveTrailingSpaces: false });
 ### toJSON()
 
 ```ts
-toJSON(options?): TextmodeLayerJSON;
+toJSON(options?): 
+  | TextmodeLayerJSON
+  | TextmodeLayersJSON;
 ```
 
-Produces the current base layer as structured JSON data.
+Produces the selected layer or layer stack as structured JSON data.
 
 #### Parameters
 
@@ -201,14 +203,16 @@ Produces the current base layer as structured JSON data.
 
 #### Returns
 
-[`TextmodeLayerJSON`](TextmodeLayerJSON.md)
+  \| [`TextmodeLayerJSON`](TextmodeLayerJSON.md)
+  \| [`TextmodeLayersJSON`](TextmodeLayersJSON.md)
 
-The JSON document representing the current base layer.
+The JSON document representing the selected layer or layer stack.
 
 #### Example
 
 ```ts
-const layer = t.toJSON({ colorMode: 'hex', includeMetadata: true });
+const layer = t.toJSON({ layer: t.layers.base, colorMode: 'hex', includeMetadata: true });
+const stack = t.toJSON({ target: 'all' });
 ```
 
 ***
@@ -219,7 +223,7 @@ const layer = t.toJSON({ colorMode: 'hex', includeMetadata: true });
 toJSONString(options?): string;
 ```
 
-Produces the current base layer as a JSON string.
+Produces the selected layer or layer stack as a JSON string.
 
 #### Parameters
 
@@ -231,12 +235,13 @@ Produces the current base layer as a JSON string.
 
 `string`
 
-Serialized JSON string for the current base layer.
+Serialized JSON string for the selected layer or layer stack.
 
 #### Example
 
 ```ts
-const json = t.toJSONString({ pretty: false, colorMode: 'hex' });
+const json = t.toJSONString({ layer: t.layers.base, pretty: false, colorMode: 'hex' });
+const stackJson = t.toJSONString({ target: 'all' });
 ```
 
 ***
@@ -247,7 +252,7 @@ const json = t.toJSONString({ pretty: false, colorMode: 'hex' });
 saveJSON(options?): void;
 ```
 
-Downloads the current base layer as a JSON file.
+Downloads the selected layer or layer stack as a JSON file.
 
 #### Parameters
 
@@ -262,7 +267,8 @@ Downloads the current base layer as a JSON file.
 #### Example
 
 ```ts
-t.saveJSON({ filename: 'frame', pretty: true });
+t.saveJSON({ filename: 'frame', layer: t.layers.base, pretty: true });
+t.saveJSON({ filename: 'stack', target: 'all' });
 ```
 
 ***
