@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-05-15
+lastModified: 2026-05-16
 ---
 
 [textmode.export.js](../index.md) / TXTExportOptions
@@ -15,44 +15,15 @@ lastModified: 2026-05-15
 # Type Alias: TXTExportOptions
 
 ```ts
-type TXTExportOptions = object;
+type TXTExportOptions = LayerExportOptions & object;
 ```
 
 Options for exporting the textmode content to TXT format.
 
-## Properties
+## Type Declaration
 
-### filename?
-
-```ts
-optional filename?: string;
-```
-
-The filename to save the TXT file as.
-
-If not provided, a default filename is used.
-
-***
-
-### preserveTrailingSpaces?
-
-```ts
-optional preserveTrailingSpaces?: boolean;
-```
-
-Whether to preserve trailing spaces on each line.
-
-When `false`, trailing spaces are trimmed from each line.
-
-Defaults to `false`.
-
-***
-
-### emptyCharacter?
-
-```ts
-optional emptyCharacter?: string;
-```
-
-Character to use for empty cells *(when no character is rendered in it)*.
-Defaults to space `' '`.
+| Name | Type | Description |
+| ------ | ------ | ------ |
+| `filename?` | `string` | The filename to save the TXT file as. If not provided, a default filename is used. |
+| `preserveTrailingSpaces?` | `boolean` | Whether to preserve trailing spaces on each line. When `false`, trailing spaces are trimmed from each line. Defaults to `false`. |
+| `emptyCharacter?` | `string` | Character to use for empty cells *(when no character is rendered in it)*. Defaults to space `' '`. |

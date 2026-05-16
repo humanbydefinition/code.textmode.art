@@ -10,8 +10,8 @@ Exporting in `textmode.js` is provided by the official add-on library [`textmode
 Install the export plugin alongside `textmode.js`, then add [`ExportPlugin`](/api/textmode.export.js/variables/ExportPlugin.md) to your sketch:
 
 ```js
-import { textmode } from 'textmode.js';
-import { ExportPlugin } from 'textmode.export.js';
+import { textmode } from "textmode.js";
+import { ExportPlugin } from "textmode.export.js";
 
 const t = textmode.create({
   width: 800,
@@ -44,12 +44,12 @@ Once installed, the plugin adds runtime export helpers directly to your `Textmod
   - [`saveGIF()`](#gif-export)
   - [`saveWEBM()`](#video-export)
 
-- **Base-layer data export** reads the base layer draw framebuffer and converts it into another representation. This is useful when you want editable or structured output rather than a screenshot. Use this for:
+- **Layer data export** reads layer draw framebuffer data and converts it into another representation. TXT and SVG export one selected layer. JSON exports one selected layer by default, or the full descriptive layer stack with `target: 'all'`. Use this for:
   - [`toString()`](#text-export) / [`saveStrings()`](#text-export)
   - [`toSVG()`](#svg-export) / [`saveSVG()`](#svg-export)
   - [`toJSON()`](#json-export) / [`toJSONString()`](#json-export) / [`saveJSON()`](#json-export)
 
-If your sketch depends on additional layers and you need the exact final composition, use raster or video export rather than TXT, SVG, or JSON.
+If your sketch depends on layer compositing and you need the exact final composition, use raster or video export rather than TXT, SVG, or JSON.
 
 ## Overlay
 
@@ -70,6 +70,8 @@ The overlay supports clipboard export for:
 - SVG
 - raster images
 
+For TXT, SVG, and selected-layer JSON export, the overlay shows a layer selector populated from the current layer stack. For JSON export, the `target` selector switches between `selected layer` and `all layers`; `all layers` ignores the layer selector and exports the full descriptive layer stack.
+
 ## Text export
 
 Use text export when you want plain character output.
@@ -79,7 +81,7 @@ const text = t.toString();
 console.log(text);
 
 t.saveStrings({
-  filename: 'frame',
+  filename: "frame",
 });
 ```
 
@@ -87,18 +89,20 @@ You can customize whitespace handling:
 
 ```js
 const text = t.toString({
+  layer: t.layers.base,
   preserveTrailingSpaces: true,
-  emptyCharacter: '.',
+  emptyCharacter: ".",
 });
 ```
 
 Available [`TXTExportOptions`](/api/textmode.export.js/type-aliases/TXTExportOptions.md):
 
 - `filename`
+- `layer`
 - `preserveTrailingSpaces`
 - `emptyCharacter`
 
-Text export comes from the base layer grid. It does not export the final composited canvas.
+Text export comes from the selected layer grid. It does not export the final composited canvas.
 
 ## JSON export
 
@@ -109,15 +113,15 @@ const layerData = t.toJSON();
 const jsonString = t.toJSONString();
 
 t.saveJSON({
-  filename: 'frame',
+  filename: "frame",
 });
 ```
 
-The exported document is a [`TextmodeLayerJSON`](/api/textmode.export.js/interfaces/TextmodeLayerJSON.md) object with:
+By default, the exported document is a [`TextmodeLayerJSON`](/api/textmode.export.js/interfaces/TextmodeLayerJSON.md) object with `formatVersion: "1.0.0"` and:
 
 - canvas dimensions
 - grid dimensions
-- base-layer cell data
+- selected-layer cell data
 - per-cell character, foreground, background, and transform state
 - optional metadata about export time and generator version
 
@@ -125,33 +129,49 @@ Example with explicit formatting options:
 
 ```js
 t.saveJSON({
-  filename: 'frame',
+  filename: "frame",
+  layer: t.layers.base,
   pretty: true,
-  colorMode: 'hex',
+  colorMode: "hex",
   includeMetadata: true,
 });
 ```
 
+To export the base layer plus every user-created layer, use `target: 'all'`:
+
+```js
+const stackData = t.toJSON({ target: "all" });
+
+t.saveJSON({
+  target: "all",
+  filename: "layer-stack",
+});
+```
+
+All-layer JSON exports use [`TextmodeLayersJSON`](/api/textmode.export.js/interfaces/TextmodeLayersJSON.md) with `formatVersion: "1.1.0"`. They include hidden layers and preserve each layer's `visible`, `opacity`, `blendMode`, `offsetX`, `offsetY`, and `rotationZ` values. This is descriptive layer data, not a flattened composite.
+
 Available [`JSONExportOptions`](/api/textmode.export.js/type-aliases/JSONExportOptions.md):
 
 - `filename`
+- `target`
+- `layer`
 - `pretty`
 - `colorMode`
 - `includeMetadata`
 
 `toJSON()` returns the structured object. `toJSONString()` returns serialized JSON text.
 
-Like TXT export, JSON export reads the base layer rather than the final presented canvas.
+Like TXT export, JSON export reads layer data rather than the final presented canvas.
 
 ## SVG export
 
-SVG export turns the current base layer into vector paths.
+SVG export turns the selected layer into vector paths.
 
 ```js
 const svg = t.toSVG();
 
 t.saveSVG({
-  filename: 'poster',
+  filename: "poster",
 });
 ```
 
@@ -159,9 +179,10 @@ You can control whether cell background rectangles are included and whether glyp
 
 ```js
 t.saveSVG({
-  filename: 'outline',
+  filename: "outline",
+  layer: t.layers.base,
   includeBackgroundRectangles: true,
-  drawMode: 'stroke',
+  drawMode: "stroke",
   strokeWidth: 1.5,
 });
 ```
@@ -169,11 +190,12 @@ t.saveSVG({
 Available [`SVGExportOptions`](/api/textmode.export.js/type-aliases/SVGExportOptions.md):
 
 - `filename`
+- `layer`
 - `includeBackgroundRectangles`
 - `drawMode`
 - `strokeWidth`
 
-SVG export is path-based and uses glyph outline data from the active base-layer font. In practice, this is the right export path for sketches using [`TextmodeFont`](/api/textmode.js/namespaces/fonts/classes/TextmodeFont.md). If you need exact bitmap tileset output, use image, GIF, or WebM export instead.
+SVG export is path-based and uses glyph outline data from the selected layer font. In practice, this is the right export path for sketches using [`TextmodeFont`](/api/textmode.js/namespaces/fonts/classes/TextmodeFont.md). If you need exact bitmap tileset output, use image, GIF, or WebM export instead.
 
 ## Image export
 
@@ -181,8 +203,8 @@ Use [`saveCanvas()`](/api/textmode.export.js/interfaces/TextmodeExportAPI.md#sav
 
 ```js
 await t.saveCanvas({
-  filename: 'still',
-  format: 'png',
+  filename: "still",
+  format: "png",
 });
 ```
 
@@ -196,8 +218,8 @@ You can also scale the export:
 
 ```js
 await t.saveCanvas({
-  filename: 'still-2x',
-  format: 'png',
+  filename: "still-2x",
+  format: "png",
   scale: 2,
 });
 ```
@@ -212,7 +234,7 @@ To copy the current raster result to the clipboard instead of downloading it:
 
 ```js
 await t.copyCanvas({
-  format: 'png',
+  format: "png",
   scale: 2,
 });
 ```
@@ -225,7 +247,7 @@ Use [`saveGIF()`](/api/textmode.export.js/interfaces/TextmodeExportAPI.md#savegi
 
 ```js
 await t.saveGIF({
-  filename: 'loop',
+  filename: "loop",
   frameCount: 180,
   frameRate: 30,
 });
@@ -235,7 +257,7 @@ You can scale the captured frames and control loop behavior:
 
 ```js
 await t.saveGIF({
-  filename: 'loop-2x',
+  filename: "loop-2x",
   frameCount: 240,
   frameRate: 60,
   scale: 2,
@@ -263,7 +285,7 @@ Use [`saveWEBM()`](/api/textmode.export.js/interfaces/TextmodeExportAPI.md#savew
 
 ```js
 await t.saveWEBM({
-  filename: 'capture',
+  filename: "capture",
   frameCount: 240,
   frameRate: 60,
 });
@@ -273,7 +295,7 @@ You can control encoder quality and optionally request transparent output:
 
 ```js
 await t.saveWEBM({
-  filename: 'capture-alpha',
+  filename: "capture-alpha",
   frameCount: 240,
   frameRate: 60,
   quality: 0.85,
@@ -296,29 +318,19 @@ Available [`VideoExportOptions`](/api/textmode.export.js/type-aliases/VideoExpor
 
 Like GIF export, WebM recording captures upcoming frames through a post-draw hook, so the animation needs to keep rendering while the export runs.
 
-## Choosing the right format
-
-Use TXT when you want raw characters.
-
-Use JSON when you want structured base-layer data.
-
-Use SVG when you want scalable vector output from font-based glyphs.
-
-Use PNG, JPG, or WebP when you want a still image of the exact final canvas.
-
-Use GIF when you want a lightweight looping animation.
-
-Use WebM when you want smoother playback, better quality, or video-oriented workflows.
-
 ## Related APIs
 
 - [`textmode.export.js`](/api/textmode.export.js/)
 - [`ExportPlugin`](/api/textmode.export.js/variables/ExportPlugin.md)
 - [`TextmodeExportAPI`](/api/textmode.export.js/interfaces/TextmodeExportAPI.md)
 - [`ExportOverlayController`](/api/textmode.export.js/interfaces/ExportOverlayController.md)
+- [`LayerExportOptions`](/api/textmode.export.js/interfaces/LayerExportOptions.md)
 - [`ImageExportOptions`](/api/textmode.export.js/type-aliases/ImageExportOptions.md)
 - [`TXTExportOptions`](/api/textmode.export.js/type-aliases/TXTExportOptions.md)
 - [`JSONExportOptions`](/api/textmode.export.js/type-aliases/JSONExportOptions.md)
+- [`JSONExportTarget`](/api/textmode.export.js/type-aliases/JSONExportTarget.md)
+- [`TextmodeLayerJSON`](/api/textmode.export.js/interfaces/TextmodeLayerJSON.md)
+- [`TextmodeLayersJSON`](/api/textmode.export.js/interfaces/TextmodeLayersJSON.md)
 - [`SVGExportOptions`](/api/textmode.export.js/type-aliases/SVGExportOptions.md)
 - [`GIFExportOptions`](/api/textmode.export.js/type-aliases/GIFExportOptions.md)
 - [`GIFExportProgress`](/api/textmode.export.js/type-aliases/GIFExportProgress.md)

@@ -1,46 +1,56 @@
 ---
 title: Support
-description: Support the development of textmode.js and related projects. Learn about different ways to contribute financially and emotionally to the ASCII art library.
+description: Support the ongoing development of textmode.js through sharing, attribution, contributions, and voluntary financial support.
 comment: false
 prev: false
 next: false
 lastUpdated: false
 ---
 
-# Support `textmode.js`
+# Support development
 
-If you enjoy using `textmode.js` and would like to support my textmode endeavors and its continued development, your contribution is greatly appreciated.
+`textmode.js` is an independent creative coding project. If the library, documentation, examples, or related tools have helped you make something, there are a few meaningful ways to support continued development.
 
 :::info
-`textmode.js` remains free and accessible forever for everyone to use and enjoy, regardless of any contributions. Your support is greatly appreciated but never required to use the library or access its features.
+`textmode.js` remains free to use. Support is appreciated, but never required to use the library, read the documentation, or access its features.
 :::
 
-## Support emotionally \<3
+## General ways to support
 
-If you like `textmode.js`, please consider sharing your love for the library with your friends!
+The most helpful support is often simple and public:
 
-A simple "thank you" or a shoutout on social media can go a long way in helping me to stay motivated and inspired to keep working on this project. I love hearing from you and seeing the projects you create with `textmode.js`!
+- Share work you made with `textmode.js`.
+- Mention `textmode.js` when you publish a sketch, stream, article, class, workshop, or project.
+- Star the repositories you use.
+- Submit examples that show real creative use cases.
+- Improve documentation when something was confusing.
+- Report focused bugs with a small reproduction.
 
-## Support financially
+These signals matter. They help other people discover the library, and show which parts of the ecosystem are worth improving next.
 
-If you would like to support the development of `textmode.js` and related projects, you can do so by making a voluntary financial contribution. Your support will help me to continue working on this project and to create more textmode-related tools for the community.
+## What support helps sustain
+
+Support helps make room for the maintenance work behind the visible releases:
+
+- keeping the core renderer stable across browser and dependency changes.
+- improving documentation, examples, and generated API references.
+- maintaining official add-ons such as export, synth, filters, and FIGlet support.
+- testing real creative coding workflows rather than only isolated API calls.
+- building small tools and experiments around textmode art.
+
+Support helps keep the project active, stable, and responsive to the needs of people actually using it.
+
+## Financial support
+
+If you would like to support development financially, you can make a voluntary contribution through one of the options below. Financial support does not buy feature priority, private support, special access, or control over the project. It is simply a way to help fund independent maintenance and future development.
 
 :::warning Important Notice
 This is a personal project, not a registered charity or non-profit organization. Any financial contributions are voluntary gifts that do not entitle you to any special rights, features, or services. Contributions may be processed through third-party payment providers and are subject to their respective terms and privacy policies.
 :::
 
-Thank you for considering to support this project and being part of this creative journey! Your support means the world to me and helps to keep this project alive and thriving.
-
 <SupportGrid />
 
-## Other ways to support
 
-You can also support the project by:
-- ⭐ **Starring** the repository on GitHub
-- 📣 **Sharing** it with your creative coding community
-- 🐛 **Reporting bugs** or suggesting features
-- 🎨 **Showing** what you've created using the library
-- 💬 **Joining** our Discord community
-- .. and much more!
+---
 
-Thanks a ton for your support and being here!
+Thank you for supporting `textmode.js` in whatever way feels right for you. Seeing the library used, shared, and improved by other people is the best part of keeping it alive.

@@ -9,7 +9,7 @@ Clear, accurate documentation is essential for any open-source project. Your con
 
 ## Types of documentation improvements
 
-### 🔍 Fix typos and errors
+### Fix typos and errors
 
 Small fixes make a big difference:
 
@@ -20,7 +20,7 @@ Small fixes make a big difference:
 
 These contributions are always welcome and don't require deep technical knowledge!
 
-### 📚 Improve explanations
+### Improve explanations
 
 Help make concepts clearer:
 
@@ -29,7 +29,7 @@ Help make concepts clearer:
 - **Improve structure** - Reorganize content for better flow
 - **Simplify complex topics** - Break down difficult concepts
 
-### 💻 Add code examples
+### Add code examples
 
 Examples are one of the best ways to learn:
 
@@ -38,7 +38,7 @@ Examples are one of the best ways to learn:
 - **Create step-by-step tutorials** - Guide users through complete workflows
 - **Add inline comments** - Explain what code does and why
 
-### 🎯 Enhance existing pages
+### Enhance existing pages
 
 Make pages more helpful:
 
@@ -71,19 +71,43 @@ For significant changes or additions:
 
 ```
 docs/
-├── introduction.md        # Getting started with textmode.js
-├── installation.md        # Setup and installation
-├── fundamentals.md        # Core concepts
-├── events.md              # Event handling
-├── fonts.md               # Working with fonts
-├── loadables.md           # Images and videos
-├── advanced.md            # Advanced features
-├── framework-integration.md # Framework integration
-├── exporting.md           # Exporting content
-├── examples.md            # Example showcase
-├── contributing/          # Contributing guides (this section)
-└── examples/              # Detailed example pages
+├── introduction.md              # What textmode.js is for
+├── installation.md              # Setup and import paths
+├── first-sketch.md              # First runnable sketch
+├── fundamentals.md              # Compatibility index
+├── sketch-lifecycle.md          # create/setup/draw/resize/destroy
+├── grid-and-coordinates.md      # Grid model and coordinate mapping
+├── drawing-shapes.md            # 2D primitives
+├── characters-and-colors.md     # Glyph and color state
+├── animation-and-timing.md      # Loop and time controls
+├── transforms.md                # Matrix and transform state
+├── events.md                    # Input events
+├── fonts.md                     # Fonts and tilesets
+├── loadables.md                 # Media sources
+├── layers-and-compositing.md    # Layer stack and blend modes
+├── filters.md                   # Layer and final-output filters
+├── media-conversion.md          # Media-to-textmode conversion
+├── filters-and-conversions.md   # Compatibility index
+├── framebuffers.md              # Offscreen rendering
+├── shaders.md                   # Custom GLSL cell shaders
+├── 3d-drawing.md                # 3D primitives
+├── cameras-and-projection.md    # Camera and projection APIs
+├── lighting.md                  # 3D lighting
+├── loading-and-errors.md        # Internal loading/error overlays
+├── plugins.md                   # Plugin extension points
+├── framework-integration.md     # Integration paths
+├── exporting.md                 # Export formats
+├── live-coding*.md              # Live coding environments
+├── advanced.md                  # Compatibility index
+├── examples.md                  # Gallery browser
+├── contributors.md              # Contributor credits
+├── support.md                   # Support options
+├── contributing/                # Contributing guides
+├── examples/                    # Reusable included examples
+└── legal/                       # Legal pages
 ```
+
+Generated API reference pages live under `api/`, not `docs/`. Regenerate them from the source package with that package's TypeDoc script, then copy the generated output into this site; do not hand-edit generated API markdown.
 
 ## Writing guidelines
 

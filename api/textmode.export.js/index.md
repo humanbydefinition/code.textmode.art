@@ -7,7 +7,7 @@ category: API Reference
 api: true
 kind: Project
 ecosystem: textmode.js
-lastModified: 2026-05-15
+lastModified: 2026-05-16
 ---
 
 # textmode.export.js
@@ -28,7 +28,7 @@ convenient overlay UI for quick access to all export options.
 
 ### Text formats
 - [TXT](type-aliases/TXTExportOptions.md) - Save text content as plain text
-- [JSON](type-aliases/JSONExportOptions.md) - Save base-layer data as structured JSON
+- [JSON](type-aliases/JSONExportOptions.md) - Save layer data as structured JSON
 
 ### Animation formats
 - [GIF](type-aliases/GIFExportOptions.md) - Save as animated GIF
@@ -38,7 +38,16 @@ convenient overlay UI for quick access to all export options.
 
 | Interface | Description |
 | ------ | ------ |
+| [LayerExportOptions](interfaces/LayerExportOptions.md) | Shared option for exporters that read layer framebuffer data. |
+| [JSONRGBAColor](interfaces/JSONRGBAColor.md) | RGBA color representation used in JSON exports. |
+| [JSONCellTransform](interfaces/JSONCellTransform.md) | Cell transform data for JSON exports. |
+| [JSONObjectRowCell](interfaces/JSONObjectRowCell.md) | Rich per-cell representation for readable JSON exports. |
+| [JSONObjectRowsCellCollection](interfaces/JSONObjectRowsCellCollection.md) | Row-based cell encoding. |
+| [JSONLayerGrid](interfaces/JSONLayerGrid.md) | Grid dimensions exported for a layer. |
+| [JSONExportMetadata](interfaces/JSONExportMetadata.md) | Optional export metadata. |
 | [TextmodeLayerJSON](interfaces/TextmodeLayerJSON.md) | Layer document exported by the JSON exporter. |
+| [TextmodeLayersJSONLayer](interfaces/TextmodeLayersJSONLayer.md) | Single layer entry in an all-layers JSON export. |
+| [TextmodeLayersJSON](interfaces/TextmodeLayersJSON.md) | Layer stack document exported by the JSON exporter. |
 | [ExportOverlayController](interfaces/ExportOverlayController.md) | Controller for managing the export overlay UI visibility at runtime. |
 | [TextmodeExportAPI](interfaces/TextmodeExportAPI.md) | Runtime export helpers that `createExportPlugin` attaches to the `Textmodifier` instance. |
 | [~~TextmodeExportPluginOptions~~](interfaces/TextmodeExportPluginOptions.md) | Options for configuring the export plugin. |
@@ -50,6 +59,10 @@ convenient overlay UI for quick access to all export options.
 | [GIFExportProgress](type-aliases/GIFExportProgress.md) | Progress information emitted during the GIF export process. |
 | [GIFExportOptions](type-aliases/GIFExportOptions.md) | Options for exporting the textmode content to GIF format. |
 | [ImageExportOptions](type-aliases/ImageExportOptions.md) | Options for exporting the textmode content to image format. |
+| [JSONExportTarget](type-aliases/JSONExportTarget.md) | Target scope for JSON export. |
+| [JSONExportColorMode](type-aliases/JSONExportColorMode.md) | Supported JSON color output modes. |
+| [JSONColorValue](type-aliases/JSONColorValue.md) | Color value used in the exported JSON document. |
+| [JSONCellCollection](type-aliases/JSONCellCollection.md) | Supported JSON cell collection variants. |
 | [JSONExportOptions](type-aliases/JSONExportOptions.md) | Options for exporting the textmode content to JSON format. |
 | [SVGExportOptions](type-aliases/SVGExportOptions.md) | Options for exporting the textmode content to SVG format. |
 | [TXTExportOptions](type-aliases/TXTExportOptions.md) | Options for exporting the textmode content to TXT format. |
