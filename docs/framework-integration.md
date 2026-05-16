@@ -5,7 +5,7 @@ description: Integrate textmode.js with framework-owned canvases, overlay target
 
 # Framework integration
 
-`textmode.js` is framework-agnostic, but there is no single integration pattern that fits every host environment.
+`textmode.js` is framework-agnostic, but there is no single integration pattern that fits every host environment. (・∀・)人(・∀・)
 
 In practice, there are four useful ways to integrate it:
 
@@ -60,9 +60,9 @@ const t = textmode.create({
 
 t.setup(() => {
   t.overlay
-    .characters(' .:-=+*#%@')
-    .charColorMode('sampled')
-    .cellColorMode('fixed')
+    .characters(" .:-=+*#%@")
+    .charColorMode("sampled")
+    .cellColorMode("fixed")
     .cellColor(0, 0, 0);
 });
 
@@ -103,9 +103,9 @@ t.setup(() => {
   sourceTex = t.createTexture(sourceCanvas);
 
   sourceTex
-    .characters(' .:-=+*#%@')
-    .charColorMode('sampled')
-    .cellColorMode('fixed')
+    .characters(" .:-=+*#%@")
+    .charColorMode("sampled")
+    .cellColorMode("fixed")
     .cellColor(0);
 });
 

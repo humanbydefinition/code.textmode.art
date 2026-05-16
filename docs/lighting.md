@@ -5,7 +5,7 @@ description: Add ambient and point lights to textmode.js scenes and control poin
 
 # Lighting
 
-Lighting affects rendered output in the current layer, including 2D primitives, 3D primitives, and media or framebuffer content drawn through `image()`. It shades character and cell colors while preserving alpha.
+Lighting affects rendered output in the current layer, including 2D primitives, 3D primitives, and media or framebuffer content drawn through `image()`. It shades character and cell colors while preserving alpha. (☆▽☆)
 
 ## Ambient light
 
@@ -19,7 +19,7 @@ You can pass grayscale, RGB/RGBA components, CSS strings, arrays, or [`TextmodeC
 
 ```js
 t.ambientLight(80, 90, 120);
-t.ambientLight('#223344');
+t.ambientLight("#223344");
 ```
 
 Multiple ambient lights are additive.
@@ -35,7 +35,7 @@ t.pointLight(255, 220, 180, 20, -20, 40);
 You can also pass an object position:
 
 ```js
-t.pointLight('#ffe0a0', { x: 20, y: -20, z: 40 });
+t.pointLight("#ffe0a0", { x: 20, y: -20, z: 40 });
 ```
 
 Up to five point lights are supported per frame. Additional point lights are ignored.
@@ -78,7 +78,7 @@ t.draw(() => {
   t.pointLight(255, 220, 160, 18, -18, 40);
 
   t.rotateY(t.frameCount);
-  t.char('#');
+  t.char("#");
   t.charColor(180, 220, 255);
   t.sphere(8);
 });

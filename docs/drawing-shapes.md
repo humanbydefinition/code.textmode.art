@@ -5,12 +5,12 @@ description: Draw points, lines, rectangles, ellipses, triangles, arcs, and Bezi
 
 # Drawing shapes
 
-Shape functions draw into the active grid using the current character, color, transform, and shader state.
+Shape functions draw into the active grid using the current character, color, transform, and shader state. 〆(・∀・＠)
 
 For the quickest mental model: set drawing state first, then call a primitive.
 
 ```js
-t.char('A');
+t.char("A");
 t.charColor(255, 120, 80);
 t.cellColor(0);
 t.rect(10, 6);
@@ -48,11 +48,11 @@ When called without arguments, `lineWeight()` returns the current line weight.
 Most drawing state is sticky until changed:
 
 ```js
-t.char('#');
+t.char("#");
 t.charColor(255, 0, 0);
 t.rect(8, 8);
 
-t.char('*');
+t.char("*");
 t.charColor(80, 200, 255);
 t.ellipse(8, 8);
 ```
@@ -62,7 +62,7 @@ Use [`push()`](/api/textmode.js/classes/Textmodifier#push) and [`pop()`](/api/te
 ```js
 t.push();
 t.translate(-10, 0);
-t.char('@');
+t.char("@");
 t.rect(6, 6);
 t.pop();
 
@@ -82,4 +82,3 @@ Use [3D drawing](/docs/3d-drawing) when you need volume, depth, cameras, or ligh
 - [`Textmodifier.triangle()`](/api/textmode.js/classes/Textmodifier#triangle)
 - [`Textmodifier.arc()`](/api/textmode.js/classes/Textmodifier#arc)
 - [`Textmodifier.bezierCurve()`](/api/textmode.js/classes/Textmodifier#beziercurve)
-

@@ -5,7 +5,7 @@ description: Compatibility index for the former Advanced features page, now spli
 
 # Advanced features
 
-This page has been split into focused capability guides.
+This page has been split into focused capability guides. ( •̀ᴗ•́ )و ̑̑
 
 ## Rendering techniques
 

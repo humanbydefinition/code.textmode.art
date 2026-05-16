@@ -5,7 +5,7 @@ description: Understand the textmode.js create, setup, draw, resize, manual rend
 
 # Sketch lifecycle
 
-Most sketches follow the same lifecycle:
+Most sketches follow the same lifecycle. (¬‿¬)ﾉ
 
 1. Create a [`Textmodifier`](/api/textmode.js/classes/Textmodifier) with [`textmode.create()`](/api/textmode.js/classes/textmode#create).
 2. Load resources or calculate layout in [`setup()`](/api/textmode.js/classes/Textmodifier#setup).
@@ -36,7 +36,7 @@ Use `width` and `height` when `textmode.js` creates the canvas. Use `canvas` whe
 let font;
 
 t.setup(async () => {
-  font = await t.loadFont('./fonts/display.woff');
+  font = await t.loadFont("./fonts/display.woff");
   console.log(t.grid.cols, t.grid.rows);
 });
 ```
@@ -50,7 +50,7 @@ Use setup when you need access to initialized resources such as `t.grid`, `t.fon
 ```js
 t.draw(() => {
   t.background(0);
-  t.char('*');
+  t.char("*");
   t.rotateZ(t.frameCount);
   t.rect(8, 8);
 });
@@ -77,7 +77,7 @@ By default, `textmode.js` renders automatically. For framework integration, prev
 ```js
 t.noLoop();
 
-button.addEventListener('click', () => {
+button.addEventListener("click", () => {
   t.redraw();
 });
 ```
@@ -109,4 +109,3 @@ This disposes textmode-managed resources, input listeners, media sources, frameb
 - [`Textmodifier.draw()`](/api/textmode.js/classes/Textmodifier#draw)
 - [`Textmodifier.windowResized()`](/api/textmode.js/classes/Textmodifier#windowresized)
 - [`Textmodifier.destroy()`](/api/textmode.js/classes/Textmodifier#destroy)
-

@@ -5,7 +5,7 @@ description: Handle mouse, keyboard, touch, gesture, and gamepad input in textmo
 
 # Event handling
 
-`textmode.js` includes a unified input system for mouse, keyboard, touch, gesture, and gamepad input. You can use the familiar single-callback helpers such as [`mousePressed()`](/api/textmode.js/classes/Textmodifier#mousepressed) and [`keyReleased()`](/api/textmode.js/classes/Textmodifier#keyreleased), or the newer shared event API with [`on()`](/api/textmode.js/classes/Textmodifier#on), [`off()`](/api/textmode.js/classes/Textmodifier#off), and [`once()`](/api/textmode.js/classes/Textmodifier#once).
+`textmode.js` includes a unified input system for mouse, keyboard, touch, gesture, and gamepad input. You can use the familiar single-callback helpers such as [`mousePressed()`](/api/textmode.js/classes/Textmodifier#mousepressed) and [`keyReleased()`](/api/textmode.js/classes/Textmodifier#keyreleased), or the newer shared event API with [`on()`](/api/textmode.js/classes/Textmodifier#on), [`off()`](/api/textmode.js/classes/Textmodifier#off), and [`once()`](/api/textmode.js/classes/Textmodifier#once). (•̀ᴗ•́)و
 
 ## Two ways to register input
 
@@ -21,22 +21,22 @@ The single-callback helpers are convenient when you only need one handler for a 
 ```js
 const t = textmode.create({ width: 800, height: 600 });
 
-const disposeMove = t.on('mouseMoved', (data) => {
-  console.log('mouse moved to', data.position.x, data.position.y);
+const disposeMove = t.on("mouseMoved", (data) => {
+  console.log("mouse moved to", data.position.x, data.position.y);
 });
 
-t.once('keyPressed', (data) => {
-  console.log('first key press:', data.key);
+t.once("keyPressed", (data) => {
+  console.log("first key press:", data.key);
 });
 
 function onPress(data) {
-  console.log('mouse pressed at', data.position);
+  console.log("mouse pressed at", data.position);
 }
 
-t.on('mousePressed', onPress);
+t.on("mousePressed", onPress);
 
 // Later:
-t.off('mousePressed', onPress);
+t.off("mousePressed", onPress);
 disposeMove();
 ```
 
@@ -116,7 +116,7 @@ t.draw(() => {
 
   t.push();
   t.translate(t.mouse.x, t.mouse.y);
-  t.char('@');
+  t.char("@");
   t.charColor(255, 120, 80);
   t.point();
   t.pop();
@@ -138,7 +138,8 @@ const t = textmode.create({ width: 800, height: 600 });
 const trail = [];
 
 t.mouseDragged((data) => {
-  if (!Number.isFinite(data.position.x) || !Number.isFinite(data.position.y)) return;
+  if (!Number.isFinite(data.position.x) || !Number.isFinite(data.position.y))
+    return;
   trail.push({ x: data.position.x, y: data.position.y, age: 0 });
 });
 
@@ -158,7 +159,7 @@ t.draw(() => {
 
     t.push();
     t.translate(p.x, p.y);
-    t.char('*');
+    t.char("*");
     t.charColor(brightness, brightness, 255);
     t.point();
     t.pop();
@@ -213,14 +214,14 @@ let y = 0;
 t.draw(() => {
   t.background(0);
 
-  if (t.isKeyPressed('ArrowLeft')) x -= 1;
-  if (t.isKeyPressed('ArrowRight')) x += 1;
-  if (t.isKeyPressed('ArrowUp')) y -= 1;
-  if (t.isKeyPressed('ArrowDown')) y += 1;
+  if (t.isKeyPressed("ArrowLeft")) x -= 1;
+  if (t.isKeyPressed("ArrowRight")) x += 1;
+  if (t.isKeyPressed("ArrowUp")) y -= 1;
+  if (t.isKeyPressed("ArrowDown")) y += 1;
 
   t.push();
   t.translate(x, y);
-  t.char('#');
+  t.char("#");
   t.charColor(255, 255, 0);
   t.point();
   t.pop();
@@ -268,7 +269,7 @@ t.draw(() => {
 
     t.push();
     t.translate(touch.x, touch.y);
-    t.char('●');
+    t.char("●");
     t.charColor(0, 220, 255);
     t.point();
     t.pop();
@@ -309,7 +310,7 @@ t.draw(() => {
 
   t.push();
   t.scale(scale, scale);
-  t.char('X');
+  t.char("X");
   t.charColor(255, 255, 255);
   t.point();
   t.pop();
@@ -351,7 +352,7 @@ let x = 0;
 let y = 0;
 
 t.gamepadConnected((data) => {
-  console.log('connected:', data.gamepad.id);
+  console.log("connected:", data.gamepad.id);
 });
 
 t.draw(() => {
@@ -367,7 +368,7 @@ t.draw(() => {
 
   t.push();
   t.translate(Math.round(x), Math.round(y));
-  t.char('█');
+  t.char("█");
   t.charColor(80, 255, 120);
   t.point();
   t.pop();

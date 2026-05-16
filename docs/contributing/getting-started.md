@@ -5,7 +5,7 @@ description: A step-by-step guide to setting up your local environment for contr
 
 # Getting started
 
-Ready to contribute to textmode.js documentation? This guide will help you set up your local development environment.
+Ready to contribute to textmode.js documentation? This guide will help you set up your local development environment. (ง •̀ω•́)ง
 
 ## Prerequisites
 

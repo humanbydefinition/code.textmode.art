@@ -7,7 +7,7 @@ description: Apply built-in and custom fragment-shader filters to textmode.js la
 
 Filters are fragment-shader post-processing passes. They run on already-rendered ASCII textures: either a single layer's ASCII result, the final composited output from all layers, or the final texture immediately before presentation.
 
-Use filters when you want to process rendered textmode imagery with effects such as inversion, thresholding, scanlines, bloom, glitch, or custom GLSL.
+Use filters when you want to process rendered textmode imagery with effects such as inversion, thresholding, scanlines, bloom, glitch, or custom GLSL. (✧ω✧)
 
 ## Filter scopes
 

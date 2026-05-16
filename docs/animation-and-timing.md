@@ -5,7 +5,7 @@ description: Control frame rate, frame counters, elapsed time, manual redraws, a
 
 # Animation and timing
 
-`textmode.js` runs an automatic draw loop by default. Timing APIs help you animate consistently and coordinate rendering with other systems.
+`textmode.js` runs an automatic draw loop by default. Timing APIs help you animate consistently and coordinate rendering with other systems. (〜￣▽￣)〜
 
 ## Frame count
 
@@ -52,7 +52,7 @@ t.draw(() => {
 
   t.background(0);
   t.translate(x, 0);
-  t.char('*');
+  t.char("*");
   t.point();
 });
 ```
@@ -120,4 +120,3 @@ This is common when sampling another canvas with [`createTexture()`](/api/textmo
 - [`Textmodifier.targetFrameRate()`](/api/textmode.js/classes/Textmodifier#targetframerate)
 - [`Textmodifier.noLoop()`](/api/textmode.js/classes/Textmodifier#noloop)
 - [`Textmodifier.redraw()`](/api/textmode.js/classes/Textmodifier#redraw)
-

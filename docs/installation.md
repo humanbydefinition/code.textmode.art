@@ -5,7 +5,7 @@ description: Guide to installing textmode.js, a creative-coding library for real
 
 # Installation
 
-Getting started with `textmode.js` is straightforward! This guide will walk you through the installation process for different environments and provide you with everything you need to begin creating ASCII art in the browser.
+Getting started with `textmode.js` is straightforward. This guide will walk you through the installation process for different environments and provide you with everything you need to begin creating ASCII art in the browser. (ง •̀\_•́)ง
 
 ## Try it online first
 
@@ -14,8 +14,9 @@ Before installing anything locally, you can try `textmode.js` directly in your b
 🌐 **[editor.textmode.art](https://editor.textmode.art)**
 
 The web editor is specifically designed for `textmode.js` and provides:
+
 - **Zero setup required** - Start coding immediately
-- **Live preview** - See your creations in real-time  
+- **Live preview** - See your creations in real-time
 - **Save & share** - Export your sketches and share with others
 - **Built-in examples** - Learn from interactive examples
 - **Full API access** - All `textmode.js` features available
@@ -25,9 +26,10 @@ The web editor is perfect for learning, prototyping, or creating quick experimen
 ## Prerequisites
 
 To get started with `textmode.js`, you'll need:
-- A **modern web browser** with `WebGL2` support *(Chrome, Firefox, Safari, Edge, etc.)*
-- A [`<canvas>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas) in your project *(optional, otherwise the library will create one for you)*
-- [Node.js 20.8.1+](https://nodejs.org/) and `npm` *(optional, for ESM installation)*
+
+- A **modern web browser** with `WebGL2` support _(Chrome, Firefox, Safari, Edge, etc.)_
+- A [`<canvas>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/canvas) in your project _(optional, otherwise the library will create one for you)_
+- [Node.js 20.8.1+](https://nodejs.org/) and `npm` _(optional, for ESM installation)_
 
 :::warning
 `textmode.js` is currently fully dependent on `WebGL2`. Ensure your target browsers support it. You can check compatibility on [caniuse.com](https://caniuse.com/webgl2).
@@ -43,43 +45,43 @@ To use `textmode.js` in a UMD environment, download the latest `umd` build from 
 <!-- index.html -->
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>textmode.js sketch</title>
 
     <!-- Import textmode.js from CDN -->
     <script src="https://cdn.jsdelivr.net/npm/textmode.js@latest/dist/textmode.umd.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <script src="sketch.js"></script>
-</body>
+  </body>
 </html>
 ```
 
 ```javascript
 // sketch.js
 const t = textmode.create({
-    width: window.innerWidth,
-    height: window.innerHeight,
-    fontSize: 16,
-    frameRate: 60
+  width: window.innerWidth,
+  height: window.innerHeight,
+  fontSize: 16,
+  frameRate: 60,
 });
 
 t.setup(() => {
-    // Optional setup code here (e.g., load fonts/shaders, initialize variables that access 't')
+  // Optional setup code here (e.g., load fonts/shaders, initialize variables that access 't')
 });
 
 t.draw(() => {
-    t.background(32); // Dark gray background
+  t.background(32); // Dark gray background
 
-    t.char('A');
-    t.charColor(255, 0, 0); // Cover the top-left quarter of the grid with a rectangle of red 'A's
-    t.rect(t.grid.cols / 2, t.grid.rows / 2);
+  t.char("A");
+  t.charColor(255, 0, 0); // Cover the top-left quarter of the grid with a rectangle of red 'A's
+  t.rect(t.grid.cols / 2, t.grid.rows / 2);
 
-    // ...add your drawing code here!
+  // ...add your drawing code here!
 });
 
 t.windowResized(() => {
-    t.resizeCanvas(window.innerWidth, window.innerHeight);
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -97,13 +99,13 @@ Then, you can import it in your JavaScript or TypeScript files:
 <!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
+  <head>
+    <meta charset="utf-8" />
     <title>textmode.js sketch</title>
-</head>
-<body>
+  </head>
+  <body>
     <script type="module" src="./sketch.js"></script>
-</body>
+  </body>
 </html>
 ```
 
@@ -111,30 +113,30 @@ Then, you can import it in your JavaScript or TypeScript files:
 // sketch.js
 
 // Import textmode.js
-import { textmode } from 'textmode.js';
+import { textmode } from "textmode.js";
 
 const t = textmode.create({
-    width: window.innerWidth,
-    height: window.innerHeight,
-    fontSize: 16,
-    frameRate: 60
+  width: window.innerWidth,
+  height: window.innerHeight,
+  fontSize: 16,
+  frameRate: 60,
 });
 
 t.setup(() => {
-    // Optional setup code here (e.g., load fonts/shaders, initialize variables that access 't')
+  // Optional setup code here (e.g., load fonts/shaders, initialize variables that access 't')
 });
 
 t.draw(() => {
-    t.background(32); // Dark gray background
+  t.background(32); // Dark gray background
 
-    t.char('A');
-    t.charColor(255, 0, 0); // Cover the top-left quarter of the grid with a rectangle of red 'A's
-    t.rect(t.grid.cols / 2, t.grid.rows / 2);
+  t.char("A");
+  t.charColor(255, 0, 0); // Cover the top-left quarter of the grid with a rectangle of red 'A's
+  t.rect(t.grid.cols / 2, t.grid.rows / 2);
 
-    // ...add your drawing code here!
+  // ...add your drawing code here!
 });
 
 t.windowResized(() => {
-    t.resizeCanvas(window.innerWidth, window.innerHeight);
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```

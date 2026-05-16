@@ -5,7 +5,7 @@ description: Render textmode.js content offscreen, draw framebuffer results back
 
 # Framebuffers
 
-Framebuffers let you render offscreen and use the result later. They are useful for multi-pass effects, feedback loops, cached render passes, readback, and shader workflows.
+Framebuffers let you render offscreen and use the result later. They are useful for multi-pass effects, feedback loops, cached render passes, readback, and shader workflows. (＠\_＠)
 
 Create them with [`createFramebuffer()`](/api/textmode.js/classes/Textmodifier#createframebuffer).
 

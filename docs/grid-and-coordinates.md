@@ -5,7 +5,7 @@ description: Learn how textmode.js maps pixels to text cells, center-based coord
 
 # Grid and coordinates
 
-`textmode.js` renders a grid of character cells. Your code works mostly in cell coordinates, while the library handles canvas pixels, font metrics, and WebGL rendering.
+`textmode.js` renders a grid of character cells. Your code works mostly in cell coordinates, while the library handles canvas pixels, font metrics, and WebGL rendering. (⊙_⊙)
 
 ## Center-based coordinates
 
@@ -22,12 +22,12 @@ The drawing coordinate system is centered:
 t.draw(() => {
   t.background(0);
 
-  t.char('+');
+  t.char("+");
   t.charColor(255);
   t.point(); // draws at the center
 
   t.translate(10, -4);
-  t.char('@');
+  t.char("@");
   t.point(); // draws 10 cells right and 4 cells up
 });
 ```
@@ -55,7 +55,7 @@ The grid depends on canvas size, font size, and the active font or tileset. When
 t.draw(() => {
   t.background(0);
 
-  t.char('#');
+  t.char("#");
   t.charColor(255, 120, 80);
   t.rect(t.grid.cols, t.grid.rows);
 });
@@ -108,7 +108,7 @@ t.mousePressed((data) => {
 Return to responsive topmost-layer mapping with:
 
 ```js
-t.inputGrid('topmost');
+t.inputGrid("topmost");
 ```
 
 ## Related APIs
@@ -118,4 +118,3 @@ t.inputGrid('topmost');
 - [`Textmodifier.inputGrid()`](/api/textmode.js/classes/Textmodifier#inputgrid)
 - [`Textmodifier.width`](/api/textmode.js/classes/Textmodifier#width)
 - [`Textmodifier.height`](/api/textmode.js/classes/Textmodifier#height)
-

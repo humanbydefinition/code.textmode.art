@@ -9,7 +9,7 @@ There are now two different sketch contribution paths in the `textmode.js` / `te
 - **Gallery / showcase sketches** live in the [`code.textmode.art`](https://github.com/humanbydefinition/code.textmode.art) repository and power the public documentation showcase.
 - **API example sketches** belong to the repository that owns the source example used by the generated API docs.
 
-This page explains the difference so you can submit your sketch to the right repository.
+This page explains the difference so you can submit your sketch to the right repository. (ﾉ◕ヮ◕)ﾉ\*:･ﾟ
 
 ## Choose the right track
 

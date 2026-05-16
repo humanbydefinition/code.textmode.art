@@ -25,6 +25,8 @@ const synthItem = {
 - [**flok.cc**](/docs/live-coding-flok-cc): a collaborative performance environment where `textmode.js` sits alongside Hydra, Strudel, and other live coding tools.
 - [**synth.textmode.art**](/docs/live-coding-synth-textmode-art): a dedicated single-surface live coding app for procedural ASCII synthesis built around `textmode.js` and `textmode.synth.js`.
 
+Both are browser-native, fast to try, and built for playful iteration. ヽ(⌐■_■)ノ♪
+
 ## flok.cc
 
 [flok.cc](https://flok.cc/) is a browser-native collaborative live coding environment. The `textmode.js` integration exposes a global `t` [`Textmodifier`](/api/textmode.js/classes/Textmodifier) instance inside a dedicated panel, which makes it possible to perform textmode visuals alongside Hydra, Strudel, Mercury, and other tools in the same session.

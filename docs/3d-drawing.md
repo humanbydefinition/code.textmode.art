@@ -5,7 +5,7 @@ description: Draw textmode.js 3D primitives with depth, transforms, cameras, and
 
 # 3D drawing
 
-`textmode.js` includes 3D primitives that render as textmode cells. The API is intentionally close to p5-style creative coding while keeping the textmode character and color model.
+`textmode.js` includes 3D primitives that render as textmode cells. The API is intentionally close to p5-style creative coding while keeping the textmode character and color model. (ﾉ≧∀≦)ﾉ
 
 ## 3D primitives
 
@@ -22,7 +22,7 @@ Available methods:
 t.draw(() => {
   t.background(8, 10, 24);
 
-  t.char('A');
+  t.char("A");
   t.charColor(255, 180, 90);
   t.cellColor(0);
 
@@ -87,7 +87,7 @@ t.pointLight(255, 220, 180, 20, -20, 40);
 3D primitives still use textmode state:
 
 ```js
-t.char('#');
+t.char("#");
 t.charColor(120, 220, 255);
 t.cellColor(4, 8, 16);
 t.charRotation(45);
@@ -105,4 +105,3 @@ The result is not a pixel-shaded mesh. It is a mesh expressed through character 
 - [`Textmodifier.cylinder()`](/api/textmode.js/classes/Textmodifier#cylinder)
 - [`Textmodifier.ellipsoid()`](/api/textmode.js/classes/Textmodifier#ellipsoid)
 - [Transforms](/docs/transforms)
-

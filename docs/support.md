@@ -9,7 +9,7 @@ lastUpdated: false
 
 # Support development
 
-`textmode.js` is an independent creative coding project. If the library, documentation, examples, or related tools have helped you make something, there are a few meaningful ways to support continued development.
+`textmode.js` is an independent creative coding project. If the library, documentation, examples, or related tools have helped you make something, there are a few meaningful ways to support continued development. (｡•̀ᴗ-)✧
 
 :::info
 `textmode.js` remains free to use. Support is appreciated, but never required to use the library, read the documentation, or access its features.
@@ -49,7 +49,6 @@ This is a personal project, not a registered charity or non-profit organization.
 :::
 
 <SupportGrid />
-
 
 ---
 

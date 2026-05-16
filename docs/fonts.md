@@ -5,7 +5,7 @@ description: Load vector fonts and bitmap tilesets in textmode.js, manage glyph 
 
 # Fonts and tilesets
 
-Every `textmode.js` layer renders through a glyph atlas. That atlas can come from either a vector font or a bitmap tileset.
+Every `textmode.js` layer renders through a glyph atlas. That atlas can come from either a vector font or a bitmap tileset. (⌐▨_▨)
 
 - Use a [`TextmodeFont`](/api/textmode.js/namespaces/fonts/classes/TextmodeFont.md) when you want characters extracted from a font file such as `.ttf`, `.otf`, or `.woff`.
 - Use a [`TextmodeTileset`](/api/textmode.js/namespaces/fonts/classes/TextmodeTileset.md) when you want to render from an authored image sheet, such as a PETSCII, terminal, or sprite-style character set.
@@ -39,7 +39,7 @@ const t = textmode.create({
   width: 800,
   height: 600,
   fontSize: 16,
-  fontSource: './fonts/FROGBLOCK-V2.1.ttf',
+  fontSource: "./fonts/FROGBLOCK-V2.1.ttf",
 });
 ```
 
@@ -49,14 +49,14 @@ Use [`t.loadFont()`](/api/textmode.js/classes/Textmodifier#loadfont) to replace 
 
 ```js
 t.setup(async () => {
-  await t.loadFont('./fonts/FROGBLOCK-V2.1.ttf');
+  await t.loadFont("./fonts/FROGBLOCK-V2.1.ttf");
 });
 ```
 
 `loadFont()` also accepts a second `setActive` argument. When set to `false`, the font is initialized and returned without changing the active base-layer glyph source:
 
 ```js
-const accentFont = await t.loadFont('./fonts/CHUNKY.ttf', false);
+const accentFont = await t.loadFont("./fonts/CHUNKY.ttf", false);
 ```
 
 This is useful when you want to preload a font and apply it to another layer later.
@@ -67,12 +67,12 @@ Each layer can load its own font through [`TextmodeLayer.loadFont()`](/api/textm
 
 ```js
 const t = textmode.create({ width: 800, height: 600 });
-const accentLayer = t.layers.add({ fontSize: 16, blendMode: 'additive' });
+const accentLayer = t.layers.add({ fontSize: 16, blendMode: "additive" });
 
 t.setup(async () => {
-  await t.loadFont('./fonts/FROGBLOCK-V2.1.ttf');
+  await t.loadFont("./fonts/FROGBLOCK-V2.1.ttf");
 
-  const accentFont = await t.loadFont('./fonts/CHUNKY.ttf', false);
+  const accentFont = await t.loadFont("./fonts/CHUNKY.ttf", false);
   await accentLayer.loadFont(accentFont);
 });
 ```
@@ -90,7 +90,7 @@ let tileset;
 
 t.setup(async () => {
   tileset = await t.loadTileset({
-    source: './tilesets/T64.png',
+    source: "./tilesets/T64.png",
     columns: 16,
     rows: 16,
     count: 256,
@@ -101,12 +101,15 @@ t.setup(async () => {
 Like `loadFont()`, [`loadTileset()`](/api/textmode.js/classes/Textmodifier#loadtileset) also accepts `setActive = false` so you can preload a tileset and assign it later:
 
 ```js
-const sharedTileset = await t.loadTileset({
-  source: './tilesets/T64.png',
-  columns: 16,
-  rows: 16,
-  count: 256,
-}, false);
+const sharedTileset = await t.loadTileset(
+  {
+    source: "./tilesets/T64.png",
+    columns: 16,
+    rows: 16,
+    count: 256,
+  },
+  false,
+);
 ```
 
 ### Reuse a tileset on another layer
@@ -115,15 +118,18 @@ Use [`TextmodeLayer.loadTileset()`](/api/textmode.js/namespaces/layering/classes
 
 ```js
 const tilesLayer = t.layers.add({ fontSize: 8 });
-const previewLayer = t.layers.add({ fontSize: 32, blendMode: 'additive' });
+const previewLayer = t.layers.add({ fontSize: 32, blendMode: "additive" });
 
 t.setup(async () => {
-  const tileset = await t.loadTileset({
-    source: './tilesets/T64.png',
-    columns: 16,
-    rows: 16,
-    count: 256,
-  }, false);
+  const tileset = await t.loadTileset(
+    {
+      source: "./tilesets/T64.png",
+      columns: 16,
+      rows: 16,
+      count: 256,
+    },
+    false,
+  );
 
   await tilesLayer.loadTileset(tileset);
   await previewLayer.loadTileset(tileset);
@@ -163,13 +169,10 @@ For explicit mappings, `map` can be:
 
 ```js
 await t.loadTileset({
-  source: './tilesets/icons.png',
+  source: "./tilesets/icons.png",
   columns: 4,
   rows: 2,
-  map: [
-    'ABCD',
-    'EFGH',
-  ],
+  map: ["ABCD", "EFGH"],
 });
 ```
 
@@ -182,7 +185,7 @@ In that example:
 You can then draw by character:
 
 ```js
-t.char('A');
+t.char("A");
 t.point();
 ```
 
@@ -207,7 +210,7 @@ If you want to preserve the original colors from the tileset image, use:
 ```js
 t.setup(async () => {
   await t.loadTileset({
-    source: './tilesets/colored-icons.png',
+    source: "./tilesets/colored-icons.png",
     columns: 16,
     rows: 16,
     count: 256,

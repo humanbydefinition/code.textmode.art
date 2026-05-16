@@ -5,7 +5,7 @@ description: Configure textmode.js loading screens, customize internal overlay r
 
 # Loading and errors
 
-`textmode.js` includes internal layers for boot-time loading and runtime errors. They use the same renderer and textmode drawing API as your sketch, but are managed separately from user layers.
+`textmode.js` includes internal layers for boot-time loading and runtime errors. They use the same renderer and textmode drawing API as your sketch, but are managed separately from user layers. (⌒_⌒;)
 
 ## Loading screen options
 
@@ -16,7 +16,7 @@ const t = textmode.create({
   width: 800,
   height: 600,
   loadingScreen: {
-    transition: 'fade',
+    transition: "fade",
     transitionDuration: 400,
   },
 });
@@ -32,7 +32,7 @@ Use [`t.loading.draw()`](/api/textmode.js/namespaces/loading/classes/LoadingLaye
 t.setup(async () => {
   t.loading.draw(({ textmodifier: tm }) => {
     tm.background(6, 10, 18);
-    tm.char('*');
+    tm.char("*");
     tm.charColor(255, 220, 120);
     tm.point();
   });
@@ -56,7 +56,7 @@ Runtime errors thrown from setup or draw are captured and displayed through the 
 ```js
 t.draw(() => {
   if (shouldFail) {
-    throw new Error('Something went wrong in draw().');
+    throw new Error("Something went wrong in draw().");
   }
 });
 ```
@@ -86,7 +86,7 @@ The callback receives an [`ErrorScreenRendererContext`](/api/textmode.js/namespa
 Use [`textmode.setErrorLevel()`](/api/textmode.js/classes/textmode#seterrorlevel) to control global validation/error reporting:
 
 ```js
-import { textmode, TextmodeErrorLevel } from 'textmode.js';
+import { textmode, TextmodeErrorLevel } from "textmode.js";
 
 textmode.setErrorLevel(TextmodeErrorLevel.WARNING);
 ```
@@ -101,4 +101,3 @@ Available levels are documented in [`TextmodeErrorLevel`](/api/textmode.js/names
 - [`Textmodifier.errors`](/api/textmode.js/classes/Textmodifier#errors)
 - [`ErrorLayerController`](/api/textmode.js/namespaces/errors/classes/ErrorLayerController.md)
 - [`textmode.setErrorLevel()`](/api/textmode.js/classes/textmode#seterrorlevel)
-

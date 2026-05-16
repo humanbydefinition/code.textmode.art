@@ -15,7 +15,7 @@ const synthItem = {
 
 # synth.textmode.art
 
-[`synth.textmode.art`](https://synth.textmode.art/) is a browser-based live coding environment for procedural text generation and ASCII synthesis. It combines `textmode.js` with `textmode.synth.js` to provide a focused workflow for building animated textmode patches directly in the browser.
+[`synth.textmode.art`](https://synth.textmode.art/) is a browser-based live coding environment for procedural text generation and ASCII synthesis. It combines `textmode.js` with `textmode.synth.js` to provide a focused workflow for building animated textmode patches directly in the browser. (〜￣△￣)〜
 
 Unlike [flok.cc](/docs/live-coding-flok-cc), which is built around collaborative sessions and multi-tool performances, `synth.textmode.art` is a dedicated single-surface environment for writing and iterating on textmode synth sketches.
 
@@ -47,22 +47,13 @@ This lets you drive structure, foreground color, and background color independen
 ```js
 t.fontSize(16);
 
-const characters = voronoi(8, 0.3)
-  .rotate(() => t.secs * 0.2);
+const characters = voronoi(8, 0.3).rotate(() => t.secs * 0.2);
 
-const colors = gradient()
-  .scrollX(0.5)
-  .colorama(0.5);
+const colors = gradient().scrollX(0.5).colorama(0.5);
 
-const background = osc(10, 0.1, 0.5)
-  .rotate(1.57)
-  .modulate(noise(3, 0.1), 0.5);
+const background = osc(10, 0.1, 0.5).rotate(1.57).modulate(noise(3, 0.1), 0.5);
 
-t.layers.base.synth(
-  char(characters)
-    .charColor(colors)
-    .cellColor(background)
-);
+t.layers.base.synth(char(characters).charColor(colors).cellColor(background));
 ```
 
 This patch uses three different synth sources:
@@ -76,18 +67,11 @@ This patch uses three different synth sources:
 One of the most useful controls in `synth.textmode.art` is `charMap(...)`, which limits the glyph set used by `char(...)`.
 
 ```js
-const matrixData = noise(4, 0.2)
-  .pixelate(30)
-  .scrollY(1, 0.2);
+const matrixData = noise(4, 0.2).pixelate(30).scrollY(1, 0.2);
 
-const matrixColor = solid(0, 1, 0)
-  .mult(noise());
+const matrixColor = solid(0, 1, 0).mult(noise());
 
-t.layers.base.synth(
-  char(matrixData)
-    .charMap('01')
-    .charColor(matrixColor)
-);
+t.layers.base.synth(char(matrixData).charMap("01").charColor(matrixColor));
 ```
 
 Changing the character map can completely change the look of a patch, even when the underlying source stays the same.
@@ -101,24 +85,21 @@ t.layers.base.synth(
   char(osc(10, 0.1, 0.5).kaleid(6))
     .charColor(gradient().hue(() => t.secs * 0.1))
     .cellColor(solid(0.05, 0.05, 0.1))
-    .charMap("░▒▓█")
+    .charMap("░▒▓█"),
 );
 
-const layer2 = t.layers.add({ blendMode: 'screen', opacity: 0.7 });
+const layer2 = t.layers.add({ blendMode: "screen", opacity: 0.7 });
 
 layer2.synth(
   char(voronoi(12, 0.2))
     .charColor(osc(5, 0.1).colorama(0.3))
     .cellColor(solid(0, 0, 0, 0))
-    .charMap("○●◐◑")
+    .charMap("○●◐◑"),
 );
 
 layer2.draw(() => {
   const time = t.secs;
-  layer2.offset(
-    Math.sin(time * 0.5) * 50,
-    Math.cos(time * 0.5) * 50
-  );
+  layer2.offset(Math.sin(time * 0.5) * 50, Math.cos(time * 0.5) * 50);
 });
 ```
 

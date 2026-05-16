@@ -5,7 +5,7 @@ description: Create your first textmode.js sketch and learn the smallest useful 
 
 # First sketch
 
-This page shows the smallest complete `textmode.js` sketch: create a canvas, draw one frame repeatedly, and keep the canvas responsive.
+This page shows the smallest complete `textmode.js` sketch: create a canvas, draw one frame repeatedly, and keep the canvas responsive. (ﾉ´ヮ`)ﾉ\*: ･ﾟ
 
 If you have not installed the library yet, start with [Installation](/docs/installation).
 
@@ -14,7 +14,7 @@ If you have not installed the library yet, start with [Installation](/docs/insta
 The main entry point is [`textmode.create()`](/api/textmode.js/classes/textmode#create). It returns a [`Textmodifier`](/api/textmode.js/classes/Textmodifier) instance, conventionally named `t`:
 
 ```js
-import { textmode } from 'textmode.js';
+import { textmode } from "textmode.js";
 
 const t = textmode.create({
   width: window.innerWidth,
@@ -34,7 +34,7 @@ Use [`draw()`](/api/textmode.js/classes/Textmodifier#draw) for animation. The ca
 t.draw(() => {
   t.background(18, 20, 28);
 
-  t.char('@');
+  t.char("@");
   t.charColor(255, 180, 90);
   t.cellColor(0, 0, 0);
 
@@ -53,8 +53,8 @@ Use [`setup()`](/api/textmode.js/classes/Textmodifier#setup) for work that shoul
 let poster;
 
 t.setup(async () => {
-  poster = await t.loadImage('./poster.png');
-  poster.characters(' .:-=+*#%@');
+  poster = await t.loadImage("./poster.png");
+  poster.characters(" .:-=+*#%@");
 });
 ```
 
@@ -73,7 +73,7 @@ t.windowResized(() => {
 ## Complete sketch
 
 ```js
-import { textmode } from 'textmode.js';
+import { textmode } from "textmode.js";
 
 const t = textmode.create({
   width: window.innerWidth,
@@ -85,7 +85,7 @@ const t = textmode.create({
 t.draw(() => {
   t.background(18, 20, 28);
 
-  t.char('@');
+  t.char("@");
   t.charColor(255, 180, 90);
   t.cellColor(0, 0, 0);
 
@@ -104,4 +104,3 @@ t.windowResized(() => {
 - [Grid and coordinates](/docs/grid-and-coordinates) explains how positions map to cells.
 - [Drawing shapes](/docs/drawing-shapes) covers the built-in primitives.
 - [Characters and colors](/docs/characters-and-colors) covers glyph and color state.
-

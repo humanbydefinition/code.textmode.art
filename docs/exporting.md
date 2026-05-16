@@ -5,7 +5,7 @@ description: Export textmode.js sketches with textmode.export.js as TXT, JSON, S
 
 # Exporting
 
-Exporting in `textmode.js` is provided by the official add-on library [`textmode.export.js`](/api/textmode.export.js/).
+Exporting in `textmode.js` is provided by the official add-on library [`textmode.export.js`](/api/textmode.export.js/). (╯✧▽✧)╯
 
 Install the export plugin alongside `textmode.js`, then add [`ExportPlugin`](/api/textmode.export.js/variables/ExportPlugin.md) to your sketch:
 

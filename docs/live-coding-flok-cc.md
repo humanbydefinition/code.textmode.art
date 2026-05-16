@@ -15,7 +15,7 @@ const flokItem = {
 
 # flok.cc
 
-[`flok.cc`](https://flok.cc/) is a collaborative live coding environment that runs entirely in the browser. `textmode.js` is integrated as a first-class panel target, which makes it a strong fit for performances where ASCII visuals need to live beside Hydra, Strudel, Mercury, or other browser-native tools.
+[`flok.cc`](https://flok.cc/) is a collaborative live coding environment that runs entirely in the browser. `textmode.js` is integrated as a first-class panel target, which makes it a strong fit for performances where ASCII visuals need to live beside Hydra, Strudel, Mercury, or other browser-native tools. (ง'̀-'́)ง
 
 If you want a dedicated solo synth surface instead, see [synth.textmode.art](/docs/live-coding-synth-textmode-art).
 
@@ -59,7 +59,7 @@ t.draw(() => {
 
       t.push();
       t.translate(x, y, 0);
-      t.char(wave > 0.5 ? '▓' : wave > 0 ? '▒' : '░');
+      t.char(wave > 0.5 ? "▓" : wave > 0 ? "▒" : "░");
       t.charColor(0, 150 + wave * 100, 255);
       t.point();
       t.pop();
@@ -75,11 +75,17 @@ Press `Ctrl+Enter` or `Cmd+Enter` to evaluate your code immediately.
 You can load fonts, images, and videos dynamically during a performance:
 
 ```js
-await t.loadFont('https://cdn.jsdelivr.net/gh/damianvila/font-bescii/fonts/v2.0/Bescii-Mono.ttf');
+await t.loadFont(
+  "https://cdn.jsdelivr.net/gh/damianvila/font-bescii/fonts/v2.0/Bescii-Mono.ttf",
+);
 t.fontSize(8);
 
-const img = await t.loadImage('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80');
-const vid = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
+const img = await t.loadImage(
+  "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80",
+);
+const vid = await t.loadVideo(
+  "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4",
+);
 
 vid.play();
 vid.loop();
@@ -141,13 +147,13 @@ Enable analysis in the Strudel panel with `.analyze("flok-master")`:
 $: s("bd bd:1, ~ <sd sd:2>, [hh hh:1]*4 hh:2")
   .bank("RolandTR909")
   .gain(0.8)
-  .analyze("flok-master")
+  .analyze("flok-master");
 
 $: note("<c2 [c2 eb2] f2 [eb2 d2]>/2")
   .s("sawtooth")
   .cutoff(sine.range(180, 600).slow(4))
   .gain(0.45)
-  .analyze("flok-master")
+  .analyze("flok-master");
 ```
 
 Then use the FFT bins in the `textmode` panel:
@@ -267,7 +273,7 @@ t.draw(() => {
     direction: [dirX, dirY],
   });
 
-  t.filter("glitch", (Math.sin(t.frameCount * 0.005)) % 0.5);
+  t.filter("glitch", Math.sin(t.frameCount * 0.005) % 0.5);
 });
 ```
 
@@ -288,13 +294,13 @@ This combines Hydra conversion, Strudel FFT analysis, layering, and filters:
 $: s("bd bd:1, ~ <sd sd:2>, [hh hh:1]*4 hh:2")
   .bank("RolandTR909")
   .gain(0.8)
-  .analyze("flok-master")
+  .analyze("flok-master");
 
 $: note("<c2 [c2 eb2] f2 [eb2 d2]>/2".slow(1.5))
   .s("sawtooth")
   .cutoff(sine.range(180, 600).slow(4))
   .gain(0.45)
-  .analyze("flok-master")
+  .analyze("flok-master");
 ```
 
 **textmode panel**
@@ -367,7 +373,7 @@ t.draw(() => {
     direction: [Math.cos(angle), Math.sin(angle)],
   });
 
-  t.filter("glitch", (Math.sin(t.frameCount * 0.005)) % 0.5);
+  t.filter("glitch", Math.sin(t.frameCount * 0.005) % 0.5);
 });
 ```
 
