@@ -103,8 +103,7 @@ docs/
 ├── contributors.md              # Contributor credits
 ├── support.md                   # Support options
 ├── contributing/                # Contributing guides
-├── examples/                    # Reusable included examples
-└── api/                         # Generated API reference
+└── examples/                    # Reusable included examples
 ```
 
 Generated API reference pages live under `api/`, not `docs/`. Regenerate them from the source package with that package's TypeDoc script, then copy the generated output into this site; do not hand-edit generated API markdown.
