@@ -13,7 +13,7 @@
           Analytics preferences
         </h2>
         <p id="analytics-consent-description" class="analytics-consent__body">
-          Self-hosted Umami helps us understand which docs are useful. It only runs if you allow it.
+          We use privacy-friendly analytics, hosted on our own server, to improve code.textmode.art. It only runs if you allow analytics.
         </p>
         <a class="analytics-consent__link" href="/docs/legal/data-protection-policy">
           Data protection policy
