@@ -188,9 +188,7 @@ const text = t.toString({ layer: t.layers.base, preserveTrailingSpaces: false })
 ### toJSON()
 
 ```ts
-toJSON(options?): 
-  | TextmodeLayerJSON
-  | TextmodeLayersJSON;
+toJSON(options?): TextmodeDocumentJSON;
 ```
 
 Produces the selected layer or layer stack as structured JSON data.
@@ -203,8 +201,7 @@ Produces the selected layer or layer stack as structured JSON data.
 
 #### Returns
 
-  \| [`TextmodeLayerJSON`](TextmodeLayerJSON.md)
-  \| [`TextmodeLayersJSON`](TextmodeLayersJSON.md)
+[`TextmodeDocumentJSON`](../type-aliases/TextmodeDocumentJSON.md)
 
 The JSON document representing the selected layer or layer stack.
 

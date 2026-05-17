@@ -21,7 +21,7 @@ This documentation is built with [VitePress](https://vitepress.dev/) and is host
 
 As service providers, Hetzner may collect certain technically necessary data *(including IP addresses)* in accordance with their privacy policy.
 
-This website uses Umami for anonymous analytics. Umami is a privacy-friendly, cookie-less analytics solution that anonymizes all collected data and does not track users across websites.
+This website can use Umami for anonymous analytics after you allow analytics in the privacy controls. Umami is a privacy-friendly, cookie-less analytics solution that anonymizes collected data and does not track users across websites.
 
 **Related resources:**
 - [Hetzner privacy policy](https://www.hetzner.com/legal/privacy-policy)
@@ -30,7 +30,7 @@ This website uses Umami for anonymous analytics. Umami is a privacy-friendly, co
 
 ## Analytics
 
-We use Umami, a privacy-focused analytics tool, to collect anonymous usage statistics about our website. This helps us understand how users interact with our documentation and improve the user experience.
+If you consent, we use Umami, a privacy-focused analytics tool, to collect anonymous usage statistics about our website. This helps us understand how users interact with our documentation and improve the user experience.
 
 Umami does not use cookies and does not collect any personally identifiable information. All data is anonymized and we cannot identify individual users through this analytics tool.
 
@@ -40,13 +40,14 @@ The following anonymous data may be collected:
 - Country of origin (based on anonymized IP)
 - Session duration and navigation paths
 
-As Umami does not use cookies and does not collect personal data, consent for this type of analytics is not required under GDPR.
+Umami analytics is only activated after consent. If you reject or later withdraw analytics consent, we store this preference locally and prevent the Umami tracking script from loading.
 
 ## Local Storage
 
 This website uses browser local storage to save non-personal preferences and enhance your user experience. Specifically:
 
 - **Notification preferences**: When you dismiss certain notifications or information banners, your preference is saved locally in your browser to prevent showing the same message repeatedly.
+- **Analytics consent preference**: Your analytics choice is saved under `textmodejs_analytics_consent_v1`. If you reject analytics, the site also stores `umami.disabled` with the value `1` so Umami remains disabled for this browser.
 
 This data:
 - Is stored only in your browser's local storage
@@ -54,11 +55,11 @@ This data:
 - Is never transmitted to our servers or any third party
 - Can be deleted at any time by clearing your browser's local storage
 
-No consent is required for this type of local storage as it serves only to improve usability and does not track or identify users (Art. 6(1)(f) GDPR - legitimate interest).
+No consent is required for local storage that is necessary to remember your privacy or interface preferences. This storage is not used to track or identify you.
 
 ## No User Data Collection (Except as Described Below)
 
-This website is primarily an informational documentation site. Apart from the anonymized analytics described above, local storage for preferences, and the optional features described below, we do not:
+This website is primarily an informational documentation site. Apart from analytics after consent, local storage for preferences, and the optional features described below, we do not:
 - Require user registration or authentication for general use of the site
 - Collect any personal information from visitors on our own servers
 - Process or store any user-specific data beyond what is technically necessary for hosting
@@ -111,9 +112,9 @@ We do not store any payment information, credit card details, or financial data 
 
 ## Your Rights
 
-Under the GDPR, you have various rights regarding the processing of your personal data. In the context of this documentation site, these rights are relevant in particular where third-party services such as Umami (analytics), payment providers or the optional comments feature (giscus / GitHub) process personal data.
+Under the GDPR, you have various rights regarding the processing of your personal data. In the context of this documentation site, these rights are relevant in particular where services such as Umami (analytics after consent), payment providers or the optional comments feature (giscus / GitHub) process personal data.
 
-For analytics and comment data, you can manage many settings directly in your browser or your GitHub account. For payment-related data, please refer to the respective provider's privacy policy. You may also contact us if you have questions regarding how these services are integrated into this site; we will forward your request to the appropriate provider where necessary.
+For analytics, you can reopen the privacy controls from the footer and change your decision at any time. For comment data, you can manage many settings directly in your browser or your GitHub account. For payment-related data, please refer to the respective provider's privacy policy. You may also contact us if you have questions regarding how these services are integrated into this site; we will forward your request to the appropriate provider where necessary.
 
 For any questions about our data practices, please contact us via email at [hello@textmode.art](mailto:hello@textmode.art).
 

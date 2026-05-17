@@ -28,7 +28,7 @@ Once installed, the plugin adds runtime export helpers directly to your `Textmod
 `textmode.export.js` covers six export targets:
 
 - plain text via [`toString()`](#text-export) and [`saveStrings()`](#text-export)
-- structured layer data via [`toJSON()`](#json-export), [`toJSONString()`](#json-export), and [`saveJSON()`](#json-export)
+- structured document data via [`toJSON()`](#json-export), [`toJSONString()`](#json-export), and [`saveJSON()`](#json-export)
 - SVG via [`toSVG()`](#svg-export) and [`saveSVG()`](#svg-export)
 - raster images via [`saveCanvas()`](#image-export) and [`copyCanvas()`](#image-export)
 - animated GIF via [`saveGIF()`](#gif-export)
@@ -106,10 +106,10 @@ Text export comes from the selected layer grid. It does not export the final com
 
 ## JSON export
 
-JSON export is useful when you want structured layer data for tooling, storage, or further processing.
+JSON export is useful when you want structured document data for tooling, storage, or further processing.
 
 ```js
-const layerData = t.toJSON();
+const documentData = t.toJSON();
 const jsonString = t.toJSONString();
 
 t.saveJSON({
@@ -117,7 +117,7 @@ t.saveJSON({
 });
 ```
 
-By default, the exported document is a [`TextmodeLayerJSON`](/api/textmode.export.js/interfaces/TextmodeLayerJSON.md) object with `formatVersion: "1.0.0"` and:
+By default, the exported document is a [`TextmodeSelectedDocumentJSON`](/api/textmode.export.js/interfaces/TextmodeSelectedDocumentJSON.md) object with `format: "textmode.document"`, `formatVersion: "2.0.0"`, `target: "selected"`, and:
 
 - canvas dimensions
 - grid dimensions
@@ -148,7 +148,7 @@ t.saveJSON({
 });
 ```
 
-All-layer JSON exports use [`TextmodeLayersJSON`](/api/textmode.export.js/interfaces/TextmodeLayersJSON.md) with `formatVersion: "1.1.0"`. They include hidden layers and preserve each layer's `visible`, `opacity`, `blendMode`, `offsetX`, `offsetY`, and `rotationZ` values. This is descriptive layer data, not a flattened composite.
+All-layer JSON exports use [`TextmodeAllDocumentJSON`](/api/textmode.export.js/interfaces/TextmodeAllDocumentJSON.md) with `format: "textmode.document"`, `formatVersion: "2.0.0"`, and `target: "all"`. They include hidden layers and preserve each layer's `visible`, `opacity`, `blendMode`, `offsetX`, `offsetY`, and `rotationZ` values. This is descriptive layer data, not a flattened composite.
 
 Available [`JSONExportOptions`](/api/textmode.export.js/type-aliases/JSONExportOptions.md):
 
@@ -329,8 +329,9 @@ Like GIF export, WebM recording captures upcoming frames through a post-draw hoo
 - [`TXTExportOptions`](/api/textmode.export.js/type-aliases/TXTExportOptions.md)
 - [`JSONExportOptions`](/api/textmode.export.js/type-aliases/JSONExportOptions.md)
 - [`JSONExportTarget`](/api/textmode.export.js/type-aliases/JSONExportTarget.md)
-- [`TextmodeLayerJSON`](/api/textmode.export.js/interfaces/TextmodeLayerJSON.md)
-- [`TextmodeLayersJSON`](/api/textmode.export.js/interfaces/TextmodeLayersJSON.md)
+- [`TextmodeSelectedDocumentJSON`](/api/textmode.export.js/interfaces/TextmodeSelectedDocumentJSON.md)
+- [`TextmodeAllDocumentJSON`](/api/textmode.export.js/interfaces/TextmodeAllDocumentJSON.md)
+- [`TextmodeDocumentJSON`](/api/textmode.export.js/type-aliases/TextmodeDocumentJSON.md)
 - [`SVGExportOptions`](/api/textmode.export.js/type-aliases/SVGExportOptions.md)
 - [`GIFExportOptions`](/api/textmode.export.js/type-aliases/GIFExportOptions.md)
 - [`GIFExportProgress`](/api/textmode.export.js/type-aliases/GIFExportProgress.md)

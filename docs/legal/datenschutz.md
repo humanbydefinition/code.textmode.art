@@ -21,7 +21,7 @@ Diese Dokumentation wurde mit [VitePress](https://vitepress.dev/) erstellt und w
 
 Als Dienstleister kann Hetzner bestimmte technisch notwendige Daten (einschließlich IP-Adressen) gemäß ihrer Datenschutzerklärung erfassen.
 
-Diese Website verwendet Umami für anonyme Analysen. Umami ist eine datenschutzfreundliche, cookie-lose Analyselösung, die alle gesammelten Daten anonymisiert und Benutzer nicht über Websites hinweg verfolgt.
+Diese Website kann Umami nach Ihrer Einwilligung für anonyme Analysen verwenden. Umami ist eine datenschutzfreundliche, cookie-lose Analyselösung, die gesammelte Daten anonymisiert und Benutzer nicht über Websites hinweg verfolgt.
 
 **Verwandte Ressourcen:**
 - [Hetzner Datenschutzerklärung](https://www.hetzner.com/de/legal/privacy-policy)
@@ -30,7 +30,7 @@ Diese Website verwendet Umami für anonyme Analysen. Umami ist eine datenschutzf
 
 ## Analysen
 
-Wir verwenden Umami, ein datenschutzorientiertes Analysetool, um anonyme Nutzungsstatistiken über unsere Website zu sammeln. Dies hilft uns zu verstehen, wie Benutzer mit unserer Dokumentation interagieren und die Benutzererfahrung zu verbessern.
+Wenn Sie einwilligen, verwenden wir Umami, ein datenschutzorientiertes Analysetool, um anonyme Nutzungsstatistiken über unsere Website zu sammeln. Dies hilft uns zu verstehen, wie Benutzer mit unserer Dokumentation interagieren und die Benutzererfahrung zu verbessern.
 
 Umami verwendet keine Cookies und sammelt keine personenbezogenen Daten. Alle Daten werden anonymisiert und wir können einzelne Benutzer durch dieses Analysetool nicht identifizieren.
 
@@ -40,13 +40,14 @@ Folgende anonyme Daten können erfasst werden:
 - Herkunftsland (basierend auf anonymisierter IP)
 - Sitzungsdauer und Navigationspfade
 
-Da Umami keine Cookies verwendet und keine personenbezogenen Daten sammelt, ist eine Einwilligung für diese Art von Analysen gemäß DSGVO nicht erforderlich.
+Umami-Analysen werden nur nach Ihrer Einwilligung aktiviert. Wenn Sie Analysen ablehnen oder Ihre Einwilligung später widerrufen, speichern wir diese Präferenz lokal und verhindern, dass das Umami-Tracking-Skript geladen wird.
 
 ## Local Storage (Lokaler Speicher)
 
 Diese Website verwendet den lokalen Speicher Ihres Browsers, um nicht-personenbezogene Präferenzen zu speichern und Ihre Benutzererfahrung zu verbessern. Konkret:
 
 - **Benachrichtigungspräferenzen**: Wenn Sie bestimmte Benachrichtigungen oder Informationsbanner schließen, wird Ihre Präferenz lokal in Ihrem Browser gespeichert, um zu verhindern, dass dieselbe Nachricht wiederholt angezeigt wird.
+- **Analyse-Einwilligung**: Ihre Entscheidung zu Analysen wird unter `textmodejs_analytics_consent_v1` gespeichert. Wenn Sie Analysen ablehnen, speichert die Website zusätzlich `umami.disabled` mit dem Wert `1`, damit Umami für diesen Browser deaktiviert bleibt.
 
 Diese Daten:
 - Werden nur im lokalen Speicher Ihres Browsers gespeichert
@@ -54,11 +55,11 @@ Diese Daten:
 - Werden niemals an unsere Server oder Dritte übertragen
 - Können jederzeit durch Löschen des lokalen Speichers Ihres Browsers entfernt werden
 
-Für diese Art der lokalen Speicherung ist keine Einwilligung erforderlich, da sie nur der Verbesserung der Benutzerfreundlichkeit dient und keine Benutzer verfolgt oder identifiziert (Art. 6 Abs. 1 lit. f DSGVO - berechtigtes Interesse).
+Für lokalen Speicher, der notwendig ist, um Ihre Datenschutz- oder Oberflächenpräferenzen zu speichern, ist keine Einwilligung erforderlich. Diese Speicherung wird nicht verwendet, um Sie zu verfolgen oder zu identifizieren.
 
 ## Keine Erhebung von Benutzerdaten (außer wie nachfolgend beschrieben)
 
-Diese Website ist in erster Linie eine informative Dokumentationsseite. Abgesehen von den oben beschriebenen anonymen Analysen, dem lokalen Speicher für Präferenzen und den nachfolgend beschriebenen optionalen Funktionen:
+Diese Website ist in erster Linie eine informative Dokumentationsseite. Abgesehen von Analysen nach Einwilligung, dem lokalen Speicher für Präferenzen und den nachfolgend beschriebenen optionalen Funktionen:
 - Erfordern wir für die allgemeine Nutzung der Seite keine Benutzerregistrierung oder Authentifizierung
 - Sammeln wir auf unseren eigenen Servern keine personenbezogenen Informationen von Besuchern
 - Verarbeiten oder speichern wir keine benutzerspezifischen Daten über das für den Betrieb der Website technisch Notwendige hinaus
@@ -111,9 +112,9 @@ Wir speichern keine Zahlungsinformationen, Kreditkartendaten oder Finanzdaten au
 
 ## Ihre Rechte
 
-Gemäß der DSGVO haben Sie verschiedene Rechte in Bezug auf die Verarbeitung Ihrer personenbezogenen Daten. Im Zusammenhang mit dieser Dokumentationsseite sind diese Rechte insbesondere dort relevant, wo Drittanbieter-Dienste wie Umami (Analysen), Zahlungsanbieter oder die optionale Kommentarfunktion (giscus / GitHub) personenbezogene Daten verarbeiten.
+Gemäß der DSGVO haben Sie verschiedene Rechte in Bezug auf die Verarbeitung Ihrer personenbezogenen Daten. Im Zusammenhang mit dieser Dokumentationsseite sind diese Rechte insbesondere dort relevant, wo Dienste wie Umami (Analysen nach Einwilligung), Zahlungsanbieter oder die optionale Kommentarfunktion (giscus / GitHub) personenbezogene Daten verarbeiten.
 
-Für Analyse- und Kommentar-Daten können Sie viele Einstellungen direkt in Ihrem Browser bzw. in Ihrem GitHub-Konto verwalten. Für zahlungsbezogene Daten verweisen wir auf die jeweilige Datenschutzerklärung des Anbieters. Sie können sich auch an uns wenden, wenn Sie Fragen zur Einbindung dieser Dienste auf dieser Website haben; wir leiten Ihre Anfrage bei Bedarf an den entsprechenden Anbieter weiter.
+Für Analysen können Sie die Datenschutz-Einstellungen über den Footer erneut öffnen und Ihre Entscheidung jederzeit ändern. Für Kommentar-Daten können Sie viele Einstellungen direkt in Ihrem Browser bzw. in Ihrem GitHub-Konto verwalten. Für zahlungsbezogene Daten verweisen wir auf die jeweilige Datenschutzerklärung des Anbieters. Sie können sich auch an uns wenden, wenn Sie Fragen zur Einbindung dieser Dienste auf dieser Website haben; wir leiten Ihre Anfrage bei Bedarf an den entsprechenden Anbieter weiter.
 
 Bei Fragen zu unseren Datenschutzpraktiken kontaktieren Sie uns bitte per E-Mail unter [hello@textmode.art](mailto:hello@textmode.art).
 

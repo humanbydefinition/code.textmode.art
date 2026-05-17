@@ -7,13 +7,7 @@ const baseHeaders: HeadConfig[] = [
   ['link', { href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap', rel: 'stylesheet' }],
 ]
 
-const umamiScript: HeadConfig = ['script', {
-  defer: 'true',
-  src: 'https://analytics.textmode.art/script.js',
-  'data-website-id': 'f5bf4e2e-1d33-4785-b51c-9c55da523767'
-}]
-
-export const head: HeadConfig[] = [...baseHeaders, umamiScript]
+export const head: HeadConfig[] = [...baseHeaders]
 
 export const transformHead = ({ pageData }: TransformContext): HeadConfig[] => {
   const canonicalUrl = `https://code.textmode.art/${pageData.relativePath.replace(/index\.md$/, '').replace(/\.md$/, '')}`
