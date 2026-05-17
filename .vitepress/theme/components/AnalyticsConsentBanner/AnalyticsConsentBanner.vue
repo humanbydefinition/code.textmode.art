@@ -15,7 +15,12 @@
         <p id="analytics-consent-description" class="analytics-consent__body">
           We use privacy-friendly analytics, hosted on our own server, to improve code.textmode.art. It only runs if you allow analytics.
         </p>
-        <a class="analytics-consent__link" href="/docs/legal/data-protection-policy">
+        <a
+          class="analytics-consent__link"
+          href="https://legal.textmode.art/projects/code.textmode.art/en/privacy"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
           Data protection policy
         </a>
       </div>
