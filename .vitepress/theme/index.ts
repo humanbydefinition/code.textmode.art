@@ -18,6 +18,7 @@ import TextmodeWhatIs from './components/TextmodeWhatIs.vue'
 import HomeCta from './components/HomeCta/HomeCta.vue'
 import AsideLinks from './components/AsideLinks/AsideLinks.vue'
 import NotificationToast from './components/NotificationToast/NotificationToast.vue'
+import AnalyticsConsentBanner from './components/AnalyticsConsentBanner/AnalyticsConsentBanner.vue'
 import DocFooter from './components/DocFooter/DocFooter.vue'
 import FeaturedSketches from './components/FeaturedSketches/FeaturedSketches.vue'
 import CommunitySupport from './components/CommunitySupport/CommunitySupport.vue'
@@ -62,7 +63,10 @@ const HeroLayout = defineComponent({
       }),
       'aside-bottom': () => h(AsideLinks),
       'doc-after': () => h(DocFooter),
-      'layout-bottom': () => h(NotificationToast)
+      'layout-bottom': () => h('div', [
+        h(NotificationToast),
+        h(AnalyticsConsentBanner)
+      ])
     })
   }
 })

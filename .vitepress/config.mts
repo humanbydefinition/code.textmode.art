@@ -31,7 +31,7 @@ const themeConfig = {
 
   footer: {
     copyright: 'Copyright © 2025-2026 <a href="https://textmode.art" target="_blank">textmode.art</a>. Built with <a href="https://vitepress.dev" target="_blank">VitePress</a>. Created by <a href="https://github.com/humanbydefinition" target="_blank">humanbydefinition</a>.',
-    message: '<a href="/docs/legal/imprint">Imprint</a> | <a href="/docs/legal/data-protection-policy">Data Protection Policy</a>'
+    message: '<a href="/docs/legal/imprint">Imprint</a> | <a href="/docs/legal/data-protection-policy">Data Protection Policy</a> | <button type="button" class="textmode-privacy-settings-trigger" data-analytics-consent-open>Privacy Settings</button>'
   },
 
   socialLinks: [
