@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: layering
 kind: Class
-lastModified: 2026-05-15
+lastModified: 2026-05-19
 hasConstructor: false
 ---
 

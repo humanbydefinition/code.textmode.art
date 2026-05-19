@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: media
 kind: Class
-lastModified: 2026-05-15
+lastModified: 2026-05-19
 hasConstructor: false
 ---
 
@@ -286,28 +286,10 @@ Return the WebGL texture currently backing this source.
 ##### Example
 
 ```javascript
+const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80';
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
 
-const sourceCanvas = document.createElement('canvas');
-sourceCanvas.width = 180;
-sourceCanvas.height = 120;
-
-const sourceContext = sourceCanvas.getContext('2d');
 let source = null;
-
-function renderSource() {
-	if (!sourceContext) {
-		return;
-	}
-
-	const gradient = sourceContext.createLinearGradient(0, 0, sourceCanvas.width, sourceCanvas.height);
-	gradient.addColorStop(0, '#020617');
-	gradient.addColorStop(1, '#1d4ed8');
-	sourceContext.fillStyle = gradient;
-	sourceContext.fillRect(0, 0, sourceCanvas.width, sourceCanvas.height);
-	sourceContext.fillStyle = '#f97316';
-	sourceContext.fillRect(24, 24, 132, 72);
-}
 
 function label(text, y, color = [220, 220, 220]) {
 	t.push();
@@ -325,9 +307,8 @@ function label(text, y, color = [220, 220, 220]) {
 	t.pop();
 }
 
-t.setup(() => {
-	renderSource();
-	source = t.createTexture(sourceCanvas);
+t.setup(async () => {
+	source = await t.loadImage(IMAGE_URL);
 	source.characters(' .:-=+*#%@');
 });
 
@@ -453,18 +434,6 @@ t.windowResized(() => {
 
 ## Methods
 
-### \_hasFrameOverrides()
-
-```ts
-_hasFrameOverrides(): boolean;
-```
-
-#### Returns
-
-`boolean`
-
-***
-
 ### background()
 
 ```ts
@@ -587,6 +556,135 @@ t.windowResized(() => {
 
 ***
 
+### brightnessRange()
+
+```ts
+brightnessRange(start, end): this;
+```
+
+Capture only source pixels whose brightness is inside the inclusive byte range.
+
+Pixels outside the range are discarded by the built-in brightness converter,
+leaving the corresponding textmode cells transparent.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `start` | `number` | Minimum brightness to capture, from 0 (black) to 255 (white). |
+| `end` | `number` | Maximum brightness to capture, from 0 (black) to 255 (white). |
+
+#### Returns
+
+`this`
+
+This instance for chaining.
+
+#### Example
+
+```javascript
+const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80';
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 8,
+});
+
+const ranges = [
+	{
+		label: '0-84',
+		start: 0,
+		end: 84,
+		characters: ' .:-',
+		charColor: '#38bdf8',
+	},
+	{
+		label: '85-170',
+		start: 85,
+		end: 170,
+		characters: '=+*#',
+		charColor: '#facc15',
+	},
+	{
+		label: '171-255',
+		start: 171,
+		end: 255,
+		characters: '%@',
+		charColor: '#f8fafc',
+	},
+];
+
+let rangeSources = [];
+
+function drawText(text, x, y, color = [235, 240, 255]) {
+	t.push();
+	t.translate(x - Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+	t.cellColor(0, 0, 0);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+function drawRangeSource(source, x, y, width, height, label, color) {
+	t.push();
+	t.translate(x, y);
+	t.image(source, width, height);
+	t.pop();
+
+	drawText(label, x, y + Math.floor(height * 0.5) + 3, color);
+}
+
+t.setup(async () => {
+	rangeSources = await Promise.all(
+		ranges.map(async (range) => {
+			const source = await t.loadImage(IMAGE_URL);
+			source.brightnessRange(range.start, range.end);
+			source.characters(range.characters);
+			source.charColorMode('fixed');
+			source.charColor(range.charColor);
+			source.cellColorMode('fixed');
+			source.cellColor('#00000000');
+			return source;
+		})
+	);
+});
+
+t.draw(() => {
+	t.background(4, 7, 18);
+	if (rangeSources.length === 0) return;
+
+	const gap = Math.max(4, Math.floor(t.grid.cols * 0.035));
+	const panelWidth = Math.max(12, Math.floor((t.grid.cols - gap * 4) / 3));
+	const panelHeight = Math.max(10, Math.min(t.grid.rows - 12, Math.floor(panelWidth * 0.72)));
+	const totalWidth = panelWidth * 3 + gap * 2;
+	const startX = -Math.floor(totalWidth * 0.5) + Math.floor(panelWidth * 0.5);
+	const y = -1;
+
+	drawText('TextmodeSource.brightnessRange()', 0, -Math.floor(t.grid.rows * 0.5) + 2, [255, 225, 120]);
+
+	for (let i = 0; i < rangeSources.length; i++) {
+		const range = ranges[i];
+		const x = startX + i * (panelWidth + gap);
+		const color = i === 0 ? [56, 189, 248] : i === 1 ? [250, 204, 21] : [248, 250, 252];
+		drawRangeSource(rangeSources[i], x, y, panelWidth, panelHeight, range.label, color);
+	}
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
+***
+
 ### cellColor()
 
 ```ts
@@ -617,6 +715,7 @@ This instance for chaining.
 #### Example
 
 ```javascript
+const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80';
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
@@ -641,42 +740,10 @@ function drawCenteredText(text, y, rgb = [255, 255, 255]) {
 	t.pop();
 }
 
-function createTechCanvas() {
-	const canvas = document.createElement('canvas');
-	canvas.width = 128;
-	canvas.height = 128;
-	const ctx = canvas.getContext('2d');
-	if (!ctx) return canvas;
-
-	ctx.fillStyle = '#000000';
-	ctx.fillRect(0, 0, 128, 128);
-
-	ctx.strokeStyle = '#ffffff';
-	ctx.lineWidth = 4;
-
-	for (let i = 0; i < 3; i++) {
-		ctx.beginPath();
-		ctx.arc(64, 64, 20 + i * 20, 0, Math.PI * 2);
-		ctx.stroke();
-	}
-
-	ctx.beginPath();
-	ctx.moveTo(64, 10);
-	ctx.lineTo(64, 118);
-	ctx.moveTo(10, 64);
-	ctx.lineTo(118, 64);
-	ctx.stroke();
-
-	return canvas;
-}
-
-t.setup(() => {
-	techSource = t.createTexture(createTechCanvas());
-
+t.setup(async () => {
+	techSource = await t.loadImage(IMAGE_URL);
 	techSource.characters(' .:-=+*#%@');
-
 	techSource.charColorMode('fixed').charColor(255);
-
 	techSource.cellColorMode('fixed');
 });
 
@@ -733,6 +800,7 @@ This instance for chaining.
 #### Example
 
 ```javascript
+const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80';
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
@@ -757,31 +825,12 @@ function drawCenteredText(text, y, rgb = [255, 255, 255]) {
 	t.pop();
 }
 
-function createGradientCanvas() {
-	const canvas = document.createElement('canvas');
-	canvas.width = 128;
-	canvas.height = 128;
-	const ctx = canvas.getContext('2d');
-	if (!ctx) return canvas;
-
-	const grad = ctx.createLinearGradient(0, 0, 128, 128);
-	grad.addColorStop(0, '#ff4400');
-	grad.addColorStop(0.5, '#00ffaa');
-	grad.addColorStop(1, '#0088ff');
-	ctx.fillStyle = grad;
-	ctx.fillRect(0, 0, 128, 128);
-
-	return canvas;
-}
-
-t.setup(() => {
-	const canvas = createGradientCanvas();
-
-	sourceA = t.createTexture(canvas);
+t.setup(async () => {
+	sourceA = await t.loadImage(IMAGE_URL);
 	sourceA.characters(' .:-=+*#%@');
 	sourceA.cellColorMode('sampled');
 
-	sourceB = t.createTexture(canvas);
+	sourceB = await t.loadImage(IMAGE_URL);
 	sourceB.characters(' .:-=+*#%@');
 	sourceB.cellColorMode('fixed').cellColor(20, 30, 60);
 });
@@ -840,27 +889,11 @@ This instance for chaining.
 #### Example
 
 ```javascript
+const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80';
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let sparseSource;
 let denseSource;
-
-function createGradientCanvas() {
-	const canvas = document.createElement('canvas');
-	canvas.width = 160;
-	canvas.height = 160;
-
-	const ctx = canvas.getContext('2d');
-	if (!ctx) return canvas;
-
-	const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-	gradient.addColorStop(0, '#000000');
-	gradient.addColorStop(1, '#ffffff');
-	ctx.fillStyle = gradient;
-	ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-	return canvas;
-}
 
 function drawLabel(text, x, y) {
 	t.push();
@@ -878,13 +911,11 @@ function drawLabel(text, x, y) {
 	t.pop();
 }
 
-t.setup(() => {
-	const canvas = createGradientCanvas();
-
-	sparseSource = t.createTexture(canvas);
+t.setup(async () => {
+	sparseSource = await t.loadImage(IMAGE_URL);
 	sparseSource.characters(' .oO@');
 
-	denseSource = t.createTexture(canvas);
+	denseSource = await t.loadImage(IMAGE_URL);
 	denseSource.characters(' .:-=+*#%@');
 });
 
@@ -946,6 +977,7 @@ This instance for chaining.
 #### Example
 
 ```javascript
+const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80';
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
@@ -970,39 +1002,9 @@ function drawCenteredText(text, y, rgb = [255, 255, 255]) {
 	t.pop();
 }
 
-function createTechCanvas() {
-	const canvas = document.createElement('canvas');
-	canvas.width = 128;
-	canvas.height = 128;
-	const ctx = canvas.getContext('2d');
-	if (!ctx) return canvas;
-
-	ctx.fillStyle = '#000000';
-	ctx.fillRect(0, 0, 128, 128);
-
-	ctx.strokeStyle = '#ffffff';
-	ctx.lineWidth = 4;
-
-	for (let i = 0; i < 3; i++) {
-		ctx.beginPath();
-		ctx.arc(64, 64, 20 + i * 20, 0, Math.PI * 2);
-		ctx.stroke();
-	}
-
-	ctx.beginPath();
-	ctx.moveTo(64, 10);
-	ctx.lineTo(64, 118);
-	ctx.moveTo(10, 64);
-	ctx.lineTo(118, 64);
-	ctx.stroke();
-
-	return canvas;
-}
-
-t.setup(() => {
-	techSource = t.createTexture(createTechCanvas());
+t.setup(async () => {
+	techSource = await t.loadImage(IMAGE_URL);
 	techSource.characters(' .:-=+*#%@');
-
 	techSource.charColorMode('fixed');
 });
 
@@ -1059,6 +1061,7 @@ This instance for chaining.
 #### Example
 
 ```javascript
+const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80';
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
@@ -1083,31 +1086,12 @@ function drawCenteredText(text, y, rgb = [255, 255, 255]) {
 	t.pop();
 }
 
-function createGradientCanvas() {
-	const canvas = document.createElement('canvas');
-	canvas.width = 128;
-	canvas.height = 128;
-	const ctx = canvas.getContext('2d');
-	if (!ctx) return canvas;
-
-	const grad = ctx.createLinearGradient(0, 0, 128, 128);
-	grad.addColorStop(0, '#ffcc00');
-	grad.addColorStop(0.5, '#ff0055');
-	grad.addColorStop(1, '#3300ff');
-	ctx.fillStyle = grad;
-	ctx.fillRect(0, 0, 128, 128);
-
-	return canvas;
-}
-
-t.setup(() => {
-	const canvas = createGradientCanvas();
-
-	sourceA = t.createTexture(canvas);
+t.setup(async () => {
+	sourceA = await t.loadImage(IMAGE_URL);
 	sourceA.characters(' .:-=+*#%@');
 	sourceA.charColorMode('sampled');
 
-	sourceB = t.createTexture(canvas);
+	sourceB = await t.loadImage(IMAGE_URL);
 	sourceB.characters(' .:-=+*#%@');
 	sourceB.charColorMode('fixed').charColor(140, 255, 180);
 });
@@ -1250,6 +1234,141 @@ t.windowResized(() => {
 
 ***
 
+### clearConversions()
+
+```ts
+clearConversions(): this;
+```
+
+Clear this source's conversion stack and return to single-mode conversion.
+
+The active mode selected through [conversionMode](#conversionmode) is preserved.
+
+#### Returns
+
+`this`
+
+This instance for chaining.
+
+#### Example
+
+```javascript
+const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80';
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 8,
+});
+
+const stackedBrightnessPasses = [
+	{
+		mode: 'brightness',
+		brightnessStart: 0,
+		brightnessEnd: 70,
+		characters: ' .,:',
+		charColorMode: 'fixed',
+		charColor: '#0ea5e9',
+		cellColorMode: 'fixed',
+		cellColor: '#00000000',
+	},
+	{
+		mode: 'brightness',
+		brightnessStart: 71,
+		brightnessEnd: 160,
+		characters: '==++**',
+		flipX: true,
+		charColorMode: 'fixed',
+		charColor: '#fb7185',
+		cellColorMode: 'fixed',
+		cellColor: '#00000000',
+	},
+	{
+		mode: 'brightness',
+		brightnessStart: 161,
+		brightnessEnd: 255,
+		characters: '##@@',
+		charRotation: 90,
+		charColorMode: 'fixed',
+		charColor: '#fef3c7',
+		cellColorMode: 'fixed',
+		cellColor: '#00000000',
+	},
+];
+
+let stackedSource;
+let clearedSource;
+
+function drawText(text, x, y, color = [235, 240, 255]) {
+	t.push();
+	t.translate(x - Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+	t.cellColor(0, 0, 0);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+function applyStack(source) {
+	source.conversions(stackedBrightnessPasses);
+}
+
+function clearToSingleBrightness(source) {
+	source.clearConversions();
+	source.conversionMode('brightness');
+	source.brightnessRange(0, 255);
+	source.characters(' .:-=+*#%@');
+	source.charColorMode('sampled');
+	source.cellColorMode('fixed');
+}
+
+function drawPanel(source, x, y, width, height, label, accent) {
+	t.push();
+	t.translate(x, y);
+	t.image(source, width, height);
+	t.pop();
+
+	drawText(label, x, y + Math.floor(height * 0.5) + 3, accent);
+}
+
+t.setup(async () => {
+	stackedSource = await t.loadImage(IMAGE_URL);
+	applyStack(stackedSource);
+
+	clearedSource = await t.loadImage(IMAGE_URL);
+	applyStack(clearedSource);
+	clearToSingleBrightness(clearedSource);
+});
+
+t.draw(() => {
+	t.background(4, 7, 18);
+	if (!stackedSource || !clearedSource) return;
+
+	const gap = Math.max(5, Math.floor(t.grid.cols * 0.06));
+	const panelWidth = Math.max(16, Math.floor((t.grid.cols - gap * 3) / 2));
+	const panelHeight = Math.max(12, Math.min(t.grid.rows - 12, Math.floor(panelWidth * 0.65)));
+	const leftX = -Math.floor(panelWidth * 0.5) - Math.floor(gap * 0.5);
+	const rightX = Math.floor(panelWidth * 0.5) + Math.floor(gap * 0.5);
+	const y = -1;
+
+	drawText('TextmodeSource.clearConversions()', 0, -Math.floor(t.grid.rows * 0.5) + 2, [255, 225, 120]);
+	drawPanel(stackedSource, leftX, y, panelWidth, panelHeight, 'stack active', [255, 255, 255]);
+	drawPanel(clearedSource, rightX, y, panelWidth, panelHeight, 'cleared to single', [150, 180, 210]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
+***
+
 ### conversionMode()
 
 ```ts
@@ -1277,27 +1396,10 @@ This instance for chaining.
 #### Example
 
 ```javascript
+const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80';
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let source;
-
-function createGradientCanvas() {
-	const canvas = document.createElement('canvas');
-	canvas.width = 160;
-	canvas.height = 160;
-
-	const ctx = canvas.getContext('2d');
-	if (!ctx) return canvas;
-
-	const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-	gradient.addColorStop(0, '#040404');
-	gradient.addColorStop(0.5, '#888888');
-	gradient.addColorStop(1, '#f8f8f8');
-	ctx.fillStyle = gradient;
-	ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-	return canvas;
-}
 
 function drawLabel(text, y) {
 	t.push();
@@ -1315,8 +1417,8 @@ function drawLabel(text, y) {
 	t.pop();
 }
 
-t.setup(() => {
-	source = t.createTexture(createGradientCanvas());
+t.setup(async () => {
+	source = await t.loadImage(IMAGE_URL);
 	source.conversionMode('brightness');
 	source.characters(' .:-=+*#%@');
 });
@@ -1327,6 +1429,135 @@ t.draw(() => {
 
 	t.image(source, source.width, source.height);
 	drawLabel("conversionMode('brightness')", Math.floor(t.grid.rows / 2) - 2);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
+***
+
+### conversions()
+
+```ts
+conversions(steps): this;
+```
+
+Set an ordered conversion stack for this source.
+
+Each step renders the same source with its own conversion mode and optional
+overrides. Later steps are drawn on top of earlier steps.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `steps` | [`TextmodeConversionStep`](../../conversion/interfaces/TextmodeConversionStep.md)[] | Ordered conversion passes to apply when this source is drawn. |
+
+#### Returns
+
+`this`
+
+This instance for chaining.
+
+#### Example
+
+```javascript
+const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80';
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 8,
+});
+
+const brightnessPasses = [
+	{
+		mode: 'brightness',
+		brightnessStart: 0,
+		brightnessEnd: 78,
+		characters: ' .,:;',
+		charColorMode: 'fixed',
+		charColor: '#38bdf8',
+		cellColorMode: 'fixed',
+		cellColor: '#00000000',
+	},
+	{
+		mode: 'brightness',
+		brightnessStart: 79,
+		brightnessEnd: 168,
+		characters: '--==++**',
+		charColorMode: 'fixed',
+		charColor: '#facc15',
+		cellColorMode: 'fixed',
+		cellColor: '#00000000',
+	},
+	{
+		mode: 'brightness',
+		brightnessStart: 169,
+		brightnessEnd: 255,
+		characters: '##%%@@',
+		charRotation: 90,
+		charColorMode: 'fixed',
+		charColor: '#f8fafc',
+		cellColorMode: 'fixed',
+		cellColor: '#00000000',
+	},
+];
+
+let plainSource;
+let stackedSource;
+
+function drawText(text, x, y, color = [235, 240, 255]) {
+	t.push();
+	t.translate(x - Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+	t.cellColor(0, 0, 0);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+function drawPanel(source, x, y, width, height, label, accent) {
+	t.push();
+	t.translate(x, y);
+	t.image(source, width, height);
+	t.pop();
+
+	drawText(label, x, y + Math.floor(height * 0.5) + 3, accent);
+}
+
+t.setup(async () => {
+	plainSource = await t.loadImage(IMAGE_URL);
+	plainSource.characters(' .:-=+*#%@');
+	plainSource.charColorMode('sampled');
+	plainSource.cellColorMode('fixed');
+
+	stackedSource = await t.loadImage(IMAGE_URL);
+	stackedSource.conversions(brightnessPasses);
+});
+
+t.draw(() => {
+	t.background(4, 7, 18);
+	if (!plainSource || !stackedSource) return;
+
+	const gap = Math.max(5, Math.floor(t.grid.cols * 0.06));
+	const panelWidth = Math.max(16, Math.floor((t.grid.cols - gap * 3) / 2));
+	const panelHeight = Math.max(12, Math.min(t.grid.rows - 12, Math.floor(panelWidth * 0.67)));
+	const leftX = -Math.floor(panelWidth * 0.5) - Math.floor(gap * 0.5);
+	const rightX = Math.floor(panelWidth * 0.5) + Math.floor(gap * 0.5);
+	const y = -1;
+
+	drawText('TextmodeSource.conversions()', 0, -Math.floor(t.grid.rows * 0.5) + 2, [255, 225, 120]);
+	drawPanel(plainSource, leftX, y, panelWidth, panelHeight, 'single brightness', [150, 180, 210]);
+	drawPanel(stackedSource, rightX, y, panelWidth, panelHeight, 'stacked ranges', [255, 255, 255]);
 });
 
 t.windowResized(() => {
@@ -1356,28 +1587,11 @@ and [Textmodifier.createTexture](../../../classes/Textmodifier.md#createtexture)
 #### Example
 
 ```javascript
+const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80';
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
 
-const sourceCanvas = document.createElement('canvas');
-sourceCanvas.width = 160;
-sourceCanvas.height = 120;
-
-const sourceContext = sourceCanvas.getContext('2d');
 let source = null;
 let disposed = false;
-
-function renderSource() {
-	if (!sourceContext) {
-		return;
-	}
-
-	sourceContext.fillStyle = '#050816';
-	sourceContext.fillRect(0, 0, sourceCanvas.width, sourceCanvas.height);
-	sourceContext.fillStyle = '#60a5fa';
-	sourceContext.fillRect(24, 20, 112, 80);
-	sourceContext.fillStyle = '#fef08a';
-	sourceContext.fillRect(56, 34, 48, 52);
-}
 
 function label(text, y, color = [220, 220, 220]) {
 	t.push();
@@ -1395,9 +1609,8 @@ function label(text, y, color = [220, 220, 220]) {
 	t.pop();
 }
 
-t.setup(() => {
-	renderSource();
-	source = t.createTexture(sourceCanvas);
+t.setup(async () => {
+	source = await t.loadImage(IMAGE_URL);
 	source.characters(' .:-=+*#%@');
 });
 
@@ -1457,6 +1670,7 @@ This instance for chaining.
 #### Example
 
 ```javascript
+const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80';
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
@@ -1481,33 +1695,12 @@ function drawCenteredText(text, y, rgb = [255, 255, 255]) {
 	t.pop();
 }
 
-function createGradientCanvas() {
-	const canvas = document.createElement('canvas');
-	canvas.width = 128;
-	canvas.height = 128;
-	const ctx = canvas.getContext('2d');
-	if (!ctx) return canvas;
-
-	// Linear gray gradient from top-left to bottom-right
-	const grad = ctx.createLinearGradient(0, 0, 128, 128);
-	grad.addColorStop(0, '#000000');
-	grad.addColorStop(1, '#ffffff');
-	ctx.fillStyle = grad;
-	ctx.fillRect(0, 0, 128, 128);
-
-	return canvas;
-}
-
-t.setup(() => {
-	const canvas = createGradientCanvas();
-
-	// Source A: Normal orientation
-	sourceA = t.createTexture(canvas);
+t.setup(async () => {
+	sourceA = await t.loadImage(IMAGE_URL);
 	sourceA.characters(' .:-=+*#%@');
 	sourceA.flipX(false);
 
-	// Source B: Flipped horizontally
-	sourceB = t.createTexture(canvas);
+	sourceB = await t.loadImage(IMAGE_URL);
 	sourceB.characters(' .:-=+*#%@');
 	sourceB.flipX(true);
 });
@@ -1566,6 +1759,7 @@ This instance for chaining.
 #### Example
 
 ```javascript
+const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80';
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
@@ -1590,33 +1784,12 @@ function drawCenteredText(text, y, rgb = [255, 255, 255]) {
 	t.pop();
 }
 
-function createGradientCanvas() {
-	const canvas = document.createElement('canvas');
-	canvas.width = 128;
-	canvas.height = 128;
-	const ctx = canvas.getContext('2d');
-	if (!ctx) return canvas;
-
-	// Linear gray gradient from top-left to bottom-right
-	const grad = ctx.createLinearGradient(0, 0, 128, 128);
-	grad.addColorStop(0, '#000000');
-	grad.addColorStop(1, '#ffffff');
-	ctx.fillStyle = grad;
-	ctx.fillRect(0, 0, 128, 128);
-
-	return canvas;
-}
-
-t.setup(() => {
-	const canvas = createGradientCanvas();
-
-	// Source A: Normal orientation
-	sourceA = t.createTexture(canvas);
+t.setup(async () => {
+	sourceA = await t.loadImage(IMAGE_URL);
 	sourceA.characters(' .:-=+*#%@');
 	sourceA.flipY(false);
 
-	// Source B: Flipped vertically
-	sourceB = t.createTexture(canvas);
+	sourceB = await t.loadImage(IMAGE_URL);
 	sourceB.characters(' .:-=+*#%@');
 	sourceB.flipY(true);
 });
@@ -1675,6 +1848,7 @@ This instance for chaining.
 #### Example
 
 ```javascript
+const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80';
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
@@ -1699,25 +1873,8 @@ function drawCenteredText(text, y, rgb = [255, 255, 255]) {
 	t.pop();
 }
 
-function createGradientCanvas() {
-	const canvas = document.createElement('canvas');
-	canvas.width = 128;
-	canvas.height = 128;
-	const ctx = canvas.getContext('2d');
-	if (!ctx) return canvas;
-
-	const grad = ctx.createLinearGradient(0, 0, 128, 128);
-	grad.addColorStop(0, '#000000');
-	grad.addColorStop(1, '#ffffff');
-	ctx.fillStyle = grad;
-	ctx.fillRect(0, 0, 128, 128);
-
-	return canvas;
-}
-
-t.setup(() => {
-	const canvas = createGradientCanvas();
-	gradientSource = t.createTexture(canvas);
+t.setup(async () => {
+	gradientSource = await t.loadImage(IMAGE_URL);
 	gradientSource.characters(' .:-=+*#%@');
 });
 

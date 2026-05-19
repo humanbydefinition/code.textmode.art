@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: conversion
 kind: Interface
-lastModified: 2026-05-15
+lastModified: 2026-05-19
 isInterface: true
 ---
 
@@ -59,31 +59,12 @@ The compiled GLShader instance.
 #### Example
 
 ```javascript
+const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80';
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let source = null;
 let strategyActive = false;
 let pulseShader = null;
-
-function makeGradientCanvas() {
-	const canvas = document.createElement('canvas');
-	canvas.width = 180;
-	canvas.height = 120;
-
-	const ctx = canvas.getContext('2d');
-	if (!ctx) {
-		return canvas;
-	}
-
-	const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-	gradient.addColorStop(0, '#04070f');
-	gradient.addColorStop(0.5, '#3478f6');
-	gradient.addColorStop(1, '#f6a54b');
-	ctx.fillStyle = gradient;
-	ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-	return canvas;
-}
 
 function drawLabel(text, y, color = [220, 220, 220]) {
 	t.push();
@@ -141,7 +122,7 @@ t.setup(async () => {
 		}),
 	});
 
-	source = t.createTexture(makeGradientCanvas());
+	source = await t.loadImage(IMAGE_URL);
 	source.characters(' .:-=+*#%@');
 	source.conversionMode('pulse');
 	strategyActive = true;
@@ -206,31 +187,12 @@ An object mapping uniform names to values.
 #### Example
 
 ```javascript
+const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80';
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
 let source = null;
 let strategyActive = false;
 let pulseShader = null;
-
-function makeGradientCanvas() {
-	const canvas = document.createElement('canvas');
-	canvas.width = 180;
-	canvas.height = 120;
-
-	const ctx = canvas.getContext('2d');
-	if (!ctx) {
-		return canvas;
-	}
-
-	const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-	gradient.addColorStop(0, '#04070f');
-	gradient.addColorStop(0.5, '#3478f6');
-	gradient.addColorStop(1, '#f6a54b');
-	ctx.fillStyle = gradient;
-	ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-	return canvas;
-}
 
 function drawLabel(text, y, color = [220, 220, 220]) {
 	t.push();
@@ -288,7 +250,7 @@ t.setup(async () => {
 		}),
 	});
 
-	source = t.createTexture(makeGradientCanvas());
+	source = await t.loadImage(IMAGE_URL);
 	source.characters(' .:-=+*#%@');
 	source.conversionMode('pulse');
 	strategyActive = true;

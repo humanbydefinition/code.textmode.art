@@ -6,7 +6,7 @@ description: Plugin system types for extending textmode.js functionality.
 category: Namespaces
 api: true
 kind: Namespace
-lastModified: 2026-05-15
+lastModified: 2026-05-19
 ---
 
 [textmode.js](../../index.md) / plugins
@@ -63,4 +63,5 @@ const MyPlugin: TextmodePlugin = {
 | [LayerLifecycleHook](type-aliases/LayerLifecycleHook.md) | Callback type for layer lifecycle events. |
 | [LayerRenderHook](type-aliases/LayerRenderHook.md) | Callback type for layer render hooks. |
 | [SetupLifecycleHook](type-aliases/SetupLifecycleHook.md) | Callback type for setup lifecycle hooks. |
+| [SourceExtensionImplementation](type-aliases/SourceExtensionImplementation.md) | Type for source extension method implementations. |
 | [TextmodePluginHook](type-aliases/TextmodePluginHook.md) | Callback type for simple plugin hooks without parameters. |

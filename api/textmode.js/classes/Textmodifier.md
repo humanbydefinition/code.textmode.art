@@ -6,7 +6,7 @@ description: Manages textmode rendering on a HTMLCanvasElement and provides meth
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-05-15
+lastModified: 2026-05-19
 hasConstructor: false
 ---
 
@@ -309,12 +309,16 @@ Returns an object with boolean properties for each modifier key.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 640, height: 640, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-function drawLabel(text, x, y, color = 180) {
+function drawText(text, x, y, r = 180, g = r, b = r) {
 	t.push();
 	t.translate(x - Math.floor(text.length / 2), y);
-	t.charColor(color);
+	t.charColor(r, g, b);
 
 	for (let i = 0; i < text.length; i++) {
 		t.push();
@@ -327,47 +331,90 @@ function drawLabel(text, x, y, color = 180) {
 	t.pop();
 }
 
-function drawPanel(x, y, label, active, hue) {
-	const pulse = 4 + Math.sin(t.frameCount * 0.08) * 2;
-	const glow = active ? 255 : 70;
-	const cell = active ? hue : 15;
-	const icon = active ? '*' : '.';
-	const status = active ? 'ON' : 'OFF';
+function drawPanel(x, y, label, active, themeColors) {
+	const borderChar = active ? '█' : '░';
+	const status = active ? ' ACTIVE ' : ' INACTIVE';
+
+	const activeR = active ? themeColors.active[0] : themeColors.idle[0];
+	const activeG = active ? themeColors.active[1] : themeColors.idle[1];
+	const activeB = active ? themeColors.active[2] : themeColors.idle[2];
 
 	t.push();
 	t.translate(x, y);
-	t.charColor(glow, glow, glow);
-	t.cellColor(cell, active ? hue : 15, 20);
-	t.char(icon);
-	t.rect(10 + pulse, 6 + pulse * 0.3);
 
-	t.charColor(active ? 0 : 190, active ? 0 : 190, active ? 0 : 190);
-	drawLabel(label, 0, -1, active ? 0 : 200);
-	drawLabel(status, 0, 1, active ? 0 : 120);
+	// Panel glowing container
+	t.char(borderChar);
+	t.charColor(activeR, activeG, activeB, active ? 255 : 120);
+	t.rect(14, 6);
+
+	// Invert character content for the active text label
+	drawText(label, 0, -1, active ? 255 : 160, active ? 255 : 160, active ? 255 : 180);
+	drawText(status, 0, 1, activeR, activeG, activeB);
+
 	t.pop();
 }
 
 t.draw(() => {
+	t.background(6, 8, 14);
+
 	const { shift, ctrl, alt, meta } = t.modifierState;
 	const activeCount = [shift, ctrl, alt, meta].filter(Boolean).length;
-	const orbit = activeCount === 0 ? 0 : 6 + Math.sin(t.frameCount * 0.05) * 2;
 
-	t.background(0);
+	const cols = t.grid.cols;
+	const rows = t.grid.rows;
 
-	drawPanel(-12, -8, 'SHIFT', shift, 255);
-	drawPanel(12, -8, 'CTRL', ctrl, 220);
-	drawPanel(-12, 8, 'ALT', alt, 180);
-	drawPanel(12, 8, 'META', meta, 140);
+	// Header JSDoc terminal console title
+	drawText('COGNITIVE INTERACTIVE KEYBOARD SENSORS', 0, -Math.floor(rows / 2) + 4, 100, 200, 255);
+	drawText(
+		'PRESS AND HOLD MODIFIER KEYS ON YOUR KEYBOARD TO TELEPORT THE SIGNAL',
+		0,
+		-Math.floor(rows / 2) + 6,
+		120,
+		140,
+		160
+	);
 
-	drawLabel('hold shift ctrl alt or cmd', 0, -15, 200);
-	drawLabel(activeCount === 0 ? 'idle input state' : `${activeCount} modifier active`, 0, 15, 160);
+	// Color configurations for the 4 key panels
+	const themeShift = { active: [255, 100, 100], idle: [60, 40, 40] }; // Red
+	const themeCtrl = { active: [255, 200, 50], idle: [60, 55, 30] }; // Yellow
+	const themeAlt = { active: [100, 255, 150], idle: [30, 60, 45] }; // Green
+	const themeMeta = { active: [100, 180, 255], idle: [30, 45, 60] }; // Cyan
 
+	// Responsive quad layout
+	const spacingX = Math.max(12, Math.floor(cols / 4));
+	const spacingY = Math.max(6, Math.floor(rows / 4));
+
+	drawPanel(-spacingX, -spacingY, 'SHIFT KEY', shift, themeShift);
+	drawPanel(spacingX, -spacingY, 'CTRL KEY', ctrl, themeCtrl);
+	drawPanel(-spacingX, spacingY, 'ALT KEY', alt, themeAlt);
+	drawPanel(spacingX, spacingY, 'META / CMD', meta, themeMeta);
+
+	// Central visual connection matrix
 	t.push();
-	t.rotateZ(t.frameCount * 2);
-	t.char(activeCount === 0 ? '+' : '#');
-	t.charColor(255, 220 - activeCount * 20, 120 + activeCount * 30);
-	t.rect(4 + orbit * 0.2, 4 + orbit * 0.2);
+	const pulse = 1 + Math.sin(t.frameCount * 0.1) * 0.25;
+	t.rotateZ(t.frameCount * (1 + activeCount * 2));
+	t.char(activeCount > 0 ? '☼' : '·');
+	t.charColor(activeCount > 0 ? 255 : 80, activeCount > 0 ? 220 : 90, activeCount > 0 ? 150 : 100);
+	t.rect(4 * pulse + activeCount * 4, 4 * pulse + activeCount * 4);
 	t.pop();
+
+	// Telemetry stats footer
+	const infoStr =
+		activeCount === 0
+			? 'STATUS: IDLE PORT - WAITING FOR INPUT...'
+			: `STATUS: ACTIVE GATEWAY - ${activeCount} KEYS BINDING`;
+	drawText(
+		infoStr,
+		0,
+		Math.floor(rows / 2) - 4,
+		activeCount > 0 ? 100 : 140,
+		activeCount > 0 ? 255 : 140,
+		activeCount > 0 ? 180 : 150
+	);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -771,33 +818,112 @@ available. Use this inside a draw loop to react to active multi-touch scenarios.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-t.draw(() => {
-	t.background(0);
+function drawText(text, x, y, r = 180, g = r, b = r) {
+	t.push();
+	t.translate(x - Math.floor(text.length / 2), y);
+	t.charColor(r, g, b);
 
-	for (const touch of t.touches) {
+	for (let i = 0; i < text.length; i++) {
 		t.push();
-		t.translate(touch.x, touch.y);
-
-		const pulse = 1 + Math.sin(t.frameCount * 0.2) * 0.5;
-		const radius = (touch.pressure || 0.5) * 20 * pulse;
-
-		t.char('○');
-		t.charColor(255, 100, 150);
-		t.ellipse(radius, radius);
-
-		t.char(((touch.id % 9) + 1).toString());
-		t.charColor(255);
+		t.translate(i, 0);
+		t.char(text[i]);
 		t.point();
 		t.pop();
 	}
 
-	if (t.touches.length === 0) {
-		t.char('?');
-		t.charColor(80);
-		t.point();
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(6, 8, 14);
+
+	const cols = t.grid.cols;
+	const rows = t.grid.rows;
+
+	// Telemetry header
+	drawText('MULTI-TOUCH HUD GEOMETRY NET', 0, -Math.floor(rows / 2) + 4, 100, 200, 255);
+	drawText(
+		'Tap multiple fingers on touchpad or drag mouse to triangulate signals',
+		0,
+		-Math.floor(rows / 2) + 6,
+		120,
+		140,
+		160
+	);
+
+	// Multi-point compilation: supports real multi-touch and desktop mouse drag fallback
+	const activePoints = [...t.touches];
+	if (activePoints.length === 0 && t.mouse && t.mouseIsPressed) {
+		activePoints.push({
+			id: 0,
+			x: t.mouse.x,
+			y: t.mouse.y,
+			pressure: 0.75,
+		});
 	}
+
+	// 1. Draw connecting triangulation lines between all active fingers
+	t.charColor(50, 80, 120);
+	for (let i = 0; i < activePoints.length; i++) {
+		for (let j = i + 1; j < activePoints.length; j++) {
+			t.line(activePoints[i].x, activePoints[i].y, activePoints[j].x, activePoints[j].y);
+		}
+	}
+
+	// 2. Draw rings and detailed coordinate text for each active touch point
+	activePoints.forEach((touch, idx) => {
+		const id = touch.id ?? idx;
+		t.push();
+		t.translate(touch.x, touch.y);
+
+		// Dynamic color based on touch ID
+		const r = Math.floor(130 + 125 * Math.sin(id * 1.5 + t.frameCount * 0.05));
+		const g = Math.floor(180 + 75 * Math.cos(id * 0.8));
+		const b = 255;
+
+		const pressure = touch.pressure ?? 0.5;
+		const pulse = 1 + Math.sin(t.frameCount * 0.1) * 0.15;
+		const radius = 3 + pressure * 10 * pulse;
+
+		// Bounding indicator ring
+		t.char('○');
+		t.charColor(r, g, b, 180);
+		t.ellipse(radius, radius);
+
+		// Core marker character
+		t.char('█');
+		t.charColor(r, g, b);
+		t.rect(1.5, 1.5);
+		t.pop();
+
+		// Digital metrics label drawn next to the touch point
+		const label = `ID:${id} (${touch.x.toFixed(0)}, ${touch.y.toFixed(0)}) P:${pressure.toFixed(2)}`;
+		drawText(label, touch.x, touch.y - radius - 1, r, g, b);
+	});
+
+	// Telemetry active stats footer
+	const statsStr =
+		activePoints.length === 0
+			? 'GRID TELEMETRY LINK: WAITING FOR INPUT SIGNALS...'
+			: `GRID TELEMETRY LINK: ${activePoints.length} SENSOR SIGNALS ESTABLISHED`;
+	drawText(
+		statsStr,
+		0,
+		Math.floor(rows / 2) - 4,
+		activePoints.length > 0 ? 100 : 140,
+		activePoints.length > 0 ? 255 : 140,
+		activePoints.length > 0 ? 180 : 150
+	);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -875,6 +1001,7 @@ when converting images/videos/canvases into textmode representations.
 ##### Example
 
 ```javascript
+const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80';
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
 
 let img;
@@ -895,21 +1022,8 @@ function label(text, y, color = [220, 220, 220]) {
 }
 
 t.setup(async () => {
-	const source = document.createElement('canvas');
-	source.width = 96;
-	source.height = 64;
-	const ctx = source.getContext('2d');
-	ctx.fillStyle = '#111827';
-	ctx.fillRect(0, 0, source.width, source.height);
-	ctx.fillStyle = '#38bdf8';
-	ctx.fillRect(8, 8, 28, 48);
-	ctx.fillStyle = '#f59e0b';
-	ctx.beginPath();
-	ctx.arc(66, 32, 18, 0, Math.PI * 2);
-	ctx.fill();
-
 	hasBrightness = t.conversions.has('brightness');
-	img = await t.loadImage(source.toDataURL());
+	img = await t.loadImage(IMAGE_URL);
 	if (hasBrightness) img.conversionMode('brightness');
 	img.characters(' .:-=+*#%@');
 });
@@ -1711,51 +1825,148 @@ Provides access to the loading layer controller to control boot-time loading UX.
 
 ```javascript
 const t = textmode.create({
-	width: 800,
-	height: 600,
-	loadingScreen: { transitionDuration: 400 },
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+	loadingScreen: { transitionDuration: 600 },
 });
 
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
+const startTime = Date.now();
+
 t.setup(async () => {
+	// Register a beautiful retro system boot loader
 	t.loading.draw((ctx) => {
 		const tm = ctx.textmodifier;
+		tm.background(8, 10, 18);
 
-		tm.background(6, 10, 18);
+		const elapsed = Date.now() - startTime;
+		const duration = 2000;
+		const progress = Math.min(1.0, elapsed / duration);
+		const percent = Math.floor(progress * 100);
+
+		// Dynamic ASCII terminal spinner
+		const spinners = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'];
+		const spinner = spinners[Math.floor(elapsed / 80) % spinners.length];
+
+		const rows = tm.grid.rows;
+
+		// 1. Draw Title
+		const title = 'TEXTMODE DIAGNOSTIC CONSOLE v0.13.0';
 		tm.push();
-		tm.translate(-8, -6, 0);
-		tm.charColor(255, 255, 255);
-		tm.char('*');
-		tm.point();
-		tm.pop();
-
-		const label = 'CUSTOM LOADING';
-		for (let i = 0; i < label.length; i++) {
+		tm.translate(-Math.floor(title.length / 2), -Math.floor(rows / 2) + 4);
+		tm.charColor(100, 200, 255);
+		for (let i = 0; i < title.length; i++) {
 			tm.push();
-			tm.translate(i - label.length / 2 + 0.5, 0, 0);
-			tm.char(label[i]);
-			tm.charColor(255, 220, 120);
+			tm.translate(i, 0);
+			tm.char(title[i]);
 			tm.point();
 			tm.pop();
 		}
+		tm.pop();
+
+		// 2. Draw Loading Progress Bar: [=========--------] 58%
+		const barWidth = 30;
+		const filledWidth = Math.floor(barWidth * progress);
+		const barStr = `[${'='.repeat(filledWidth)}${'-'.repeat(barWidth - filledWidth)}] ${percent}%`;
+
+		tm.push();
+		tm.translate(-Math.floor(barStr.length / 2), 0);
+		tm.charColor(255, 220, 100);
+		for (let i = 0; i < barStr.length; i++) {
+			tm.push();
+			tm.translate(i, 0);
+			tm.char(barStr[i]);
+			tm.point();
+			tm.pop();
+		}
+		tm.pop();
+
+		// Spinner and active state next to bar
+		tm.push();
+		tm.translate(Math.floor(barStr.length / 2) + 3, 0);
+		tm.char(spinner);
+		tm.charColor(100, 255, 150);
+		tm.point();
+		tm.pop();
+
+		// 3. Draw diagnostic console messages appearing sequentially
+		const logs = [
+			'ALLOCATING TEXTURE CELL GRID BUFFERS...',
+			'COMPILING HIGH-PRECISION MRT SHADERS...',
+			'LINKING RENDERING PIPELINES...',
+			'MOUNTING RETRO GLYPH TEXTURE MAPS...',
+			'BOOTING TEXTMODIFIER CORE GRAPHICS ENVIRONMENT...',
+		];
+
+		const visibleCount = Math.min(logs.length, Math.floor(progress * (logs.length + 1)));
+
+		tm.push();
+		tm.translate(-24, 4);
+		for (let i = 0; i < visibleCount; i++) {
+			const line = `> [OK] ${logs[i]}`;
+			tm.push();
+			tm.translate(0, i * 2);
+			tm.charColor(80, 160 + i * 20, 100);
+			for (let j = 0; j < line.length; j++) {
+				tm.push();
+				tm.translate(j, 0);
+				tm.char(line[j]);
+				tm.point();
+				tm.pop();
+			}
+			tm.pop();
+		}
+		tm.pop();
 	});
 
-	await wait(1200);
+	// Give the user a proper aesthetic system-boot presentation duration
+	await wait(2400);
 });
 
 t.draw(() => {
-	t.background(8, 12, 24);
+	t.background(6, 12, 24);
 
-	const label = 'LOADING COMPLETE';
+	const cols = t.grid.cols;
+	const rows = t.grid.rows;
+
+	// Render a retro grid design when system is loaded
+	const borderChar = '▒';
+	t.charColor(50, 80, 140);
+	t.char(borderChar);
+	t.rect(cols, 3);
+
+	// Glowing operational state panel
+	const label = 'SYSTEM READY : OK';
+	t.push();
+	t.translate(-Math.floor(label.length / 2), 0);
+	t.charColor(100, 255, 180);
 	for (let i = 0; i < label.length; i++) {
 		t.push();
-		t.translate(i - label.length / 2 + 0.5, 0);
+		t.translate(i, 0);
 		t.char(label[i]);
-		t.charColor(120, 220, 255);
 		t.point();
 		t.pop();
 	}
+	t.pop();
+
+	const desc = 'Diagnostics complete. Grid pipeline initialized.';
+	t.push();
+	t.translate(-Math.floor(desc.length / 2), 3);
+	t.charColor(130, 150, 180);
+	for (let i = 0; i < desc.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(desc[i]);
+		t.point();
+		t.pop();
+	}
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -1867,12 +2078,16 @@ t.windowResized(() => {
 ```
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-function drawLabel(text, y) {
+function drawText(text, x, y, r = 180, g = r, b = r) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(180);
+	t.translate(x - Math.floor(text.length / 2), y);
+	t.charColor(r, g, b);
 
 	for (let i = 0; i < text.length; i++) {
 		t.push();
@@ -1887,33 +2102,98 @@ function drawLabel(text, y) {
 
 t.keyPressed((data) => {
 	if (data.key === ' ') {
-		t.millis = 0;
+		t.millis = 0; // Directly mutates and resets the time state of the sketch
 	}
 });
 
 t.draw(() => {
-	t.background(0);
+	t.background(6, 8, 14);
 
-	const duration = 3000;
 	const elapsed = t.millis;
-	const progress = (elapsed % duration) / duration;
-	const barWidth = 40;
-	const barHeight = 4;
-	const width = barWidth * progress;
+	const secs = elapsed / 1000;
+	const minutes = Math.floor(secs / 60);
+	const displaySecs = (secs % 60).toFixed(3);
 
-	t.charColor(64);
-	t.char('-');
-	t.rect(barWidth, barHeight);
+	const cols = t.grid.cols;
+	const rows = t.grid.rows;
+
+	// 1. Digital Telemetry Clock HUD
+	drawText('CHRONOMETRY TIME SENSOR', 0, -Math.floor(rows / 2) + 4, 100, 200, 255);
+	drawText('PRESS [SPACEBAR] TO RESET TIME STATE', 0, -Math.floor(rows / 2) + 6, 120, 140, 160);
+
+	const clockStr = `${minutes.toString().padStart(2, '0')}:${displaySecs.padStart(6, '0')}s`;
+	drawText(clockStr, 0, -4, 255, 230, 120);
+	drawText(`${elapsed.toFixed(0)} ms`, 0, -2, 180, 180, 200);
+
+	// 2. Circular Radar Sweep
+	// Complete 360-degree sweep every 3 seconds
+	const duration = 3000;
+	const progress = (elapsed % duration) / duration;
+	const angle = progress * Math.PI * 2;
 
 	t.push();
-	t.translate(-barWidth / 2 + width / 2, 0);
-	t.char('=');
-	t.charColor(100, 200, 255);
-	t.rect(width, barHeight);
+	t.translate(0, 3);
+	const radarDots = 20;
+	for (let i = 0; i < radarDots; i++) {
+		const stepAngle = (i / radarDots) * Math.PI * 2;
+		const r = 6;
+		const px = Math.cos(stepAngle) * r * 1.6;
+		const py = Math.sin(stepAngle) * r;
+
+		t.push();
+		t.translate(px, py);
+		t.char(i % 2 === 0 ? '·' : 'o');
+
+		// Fade out dots depending on their angular distance behind the current sweep hand
+		let diff = angle - stepAngle;
+		if (diff < 0) diff += Math.PI * 2;
+		const intensity = Math.max(0.15, 1.0 - diff / (Math.PI * 2));
+
+		t.charColor(Math.floor(100 * intensity), Math.floor(255 * intensity), Math.floor(150 * intensity));
+		t.point();
+		t.pop();
+	}
+
+	// Active sweep line hand
+	const hx = Math.cos(angle) * 9.6;
+	const hy = Math.sin(angle) * 6;
+	t.push();
+	t.charColor(100, 255, 180);
+	t.char('▲');
+	t.translate(hx, hy);
+	t.rect(1.5, 1.5);
+	t.pop();
 	t.pop();
 
-	drawLabel('press SPACE to reset millis', -8);
-	drawLabel(`${(elapsed / 1000).toFixed(1)}s`, -5);
+	// 3. Linear progress wave running across the bottom
+	const margin = 8;
+	const barWidth = cols - margin * 2;
+	const fillWidth = barWidth * progress;
+
+	t.push();
+	t.translate(0, Math.floor(rows / 2) - 5);
+
+	// Background track
+	t.charColor(40, 45, 55);
+	t.char('▒');
+	t.push();
+	t.translate(-barWidth / 2 + barWidth / 2, 0);
+	t.rect(barWidth, 2);
+	t.pop();
+
+	// Energy filler
+	t.charColor(100, 200, 255);
+	t.char('█');
+	t.push();
+	t.translate(-barWidth / 2 + fillWidth / 2, 0);
+	t.rect(fillWidth, 2);
+	t.pop();
+
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -2020,31 +2300,72 @@ allowing further configuration of the conversion parameters.
 
 ```javascript
 const sourceCanvas = document.createElement('canvas');
-sourceCanvas.width = 360;
-sourceCanvas.height = 240;
-sourceCanvas.style.cssText = 'display:block;margin:0 auto;background:#050816;';
+sourceCanvas.width = window.innerWidth;
+sourceCanvas.height = window.innerHeight;
+sourceCanvas.style.cssText = 'display:block;width:100vw;height:100vh;background:#050816;';
+document.body.style.margin = '0';
+document.body.style.overflow = 'hidden';
 document.body.appendChild(sourceCanvas);
 
 const source = sourceCanvas.getContext('2d');
-const t = textmode.create({ canvas: sourceCanvas, overlay: true, fontSize: 8 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	canvas: sourceCanvas,
+	overlay: true,
+	fontSize: 8,
+});
+
+function resizeSource() {
+	sourceCanvas.width = window.innerWidth;
+	sourceCanvas.height = window.innerHeight;
+	sourceCanvas.style.width = window.innerWidth + 'px';
+	sourceCanvas.style.height = window.innerHeight + 'px';
+}
 
 function paint(time) {
-	source.fillStyle = '#050816';
-	source.fillRect(0, 0, sourceCanvas.width, sourceCanvas.height);
+	const w = sourceCanvas.width;
+	const h = sourceCanvas.height;
+	const cx = w / 2;
+	const cy = h / 2;
+	const sweep = time * 0.001;
+	const gradient = source.createLinearGradient(0, 0, w, h);
+
+	gradient.addColorStop(0, '#050816');
+	gradient.addColorStop(0.45, '#0f172a');
+	gradient.addColorStop(1, '#111827');
+	source.fillStyle = gradient;
+	source.fillRect(0, 0, w, h);
+
+	for (let i = 0; i < 11; i++) {
+		const angle = sweep * (0.45 + i * 0.04) + i * 0.72;
+		const radius = Math.min(w, h) * (0.12 + i * 0.025);
+		const x = cx + Math.cos(angle) * radius * 1.8;
+		const y = cy + Math.sin(angle) * radius;
+		const size = Math.max(22, Math.min(w, h) * (0.035 + i * 0.002));
+
+		source.fillStyle = i % 2 === 0 ? '#38bdf8' : '#f59e0b';
+		source.globalAlpha = 0.28 + (i % 4) * 0.08;
+		source.beginPath();
+		source.arc(x, y, size, 0, Math.PI * 2);
+		source.fill();
+	}
+
+	source.globalAlpha = 1;
 	source.fillStyle = '#38bdf8';
-	source.fillRect(40 + Math.sin(time * 0.0012) * 60, 30, 80, 80);
+	source.fillRect(cx - 190 + Math.sin(time * 0.0012) * 70, cy - 74, 150, 112);
 	source.fillStyle = '#f59e0b';
 	source.beginPath();
-	source.arc(220, 120 + Math.sin(time * 0.0018) * 50, 38, 0, Math.PI * 2);
+	source.arc(cx + 128, cy + Math.sin(time * 0.0018) * 72, 58, 0, Math.PI * 2);
 	source.fill();
 	source.fillStyle = '#e4e4e7';
-	source.font = '24px monospace';
-	source.fillText('overlay', 118, 210);
+	source.font = '28px monospace';
+
 	requestAnimationFrame(paint);
 }
 
 t.setup(() => {
-	t.overlay.characters(' .:-=+*#%@').charColorMode('sampled').cellColorMode('fixed').cellColor(0, 0, 0);
+	t.overlay.characters(' .:-=+*#%@').charColorMode('sampled').cellColorMode('fixed').cellColor(3, 6, 12);
 	requestAnimationFrame(paint);
 });
 
@@ -2053,6 +2374,11 @@ t.draw(() => {
 	if (t.overlay) {
 		t.image(t.overlay, t.grid.cols, t.grid.rows);
 	}
+});
+
+t.windowResized(() => {
+	resizeSource();
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -4941,29 +5267,79 @@ A Promise that resolves to a compiled shader ready for use with [shader](#shader
 
 ```javascript
 const t = textmode.create({
-	width: 800,
-	height: 600,
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
 });
 
-let waveShader;
+let warpShader;
 
 t.setup(async () => {
-	waveShader = await t.createFilterShader('./shader.frag');
+	warpShader = await t.createFilterShader(`#version 300 es
+		precision highp float;
+		in vec2 v_uv;
+		uniform float u_time;
+		uniform vec2 u_mouse;
+		layout(location = 0) out vec4 o_character;
+		layout(location = 1) out vec4 o_primaryColor;
+		layout(location = 2) out vec4 o_secondaryColor;
 
-	// Or create from inline source
-	//   precision highp float;
-	//   in vec2 v_uv;
-	//   in vec3 v_character;
-	//   layout(location = 0) out vec4 o_character;
-	// `);
+		void main() {
+			// Center coordinates
+			vec2 p = v_uv - vec2(0.5);
+			float d = length(p);
+
+			// Interactive wave effect based on mouse distance
+			vec2 m = u_mouse - vec2(0.5);
+			float mouseDist = length(v_uv - u_mouse);
+			float wave = sin(d * 40.0 - u_time * 5.0) * 0.03;
+			float mouseWave = sin(mouseDist * 20.0 - u_time * 8.0) * 0.05 * exp(-mouseDist * 3.0);
+
+			// Apply wave offsets to UV
+			vec2 uvWarped = v_uv + p * (wave + mouseWave);
+
+			// Procedural text character selection based on warp intensity
+			float val = abs(sin(uvWarped.x * 20.0) * cos(uvWarped.y * 20.0));
+			float charValue = step(0.15, val) * fract(val * 9.0);
+
+			// Color palettes with smooth gradient interpolation
+			vec3 primary = vec3(0.1, 0.4 + sin(u_time + d * 4.0) * 0.4, 0.8 + cos(d * 5.0) * 0.2);
+			vec3 secondary = vec3(0.05, 0.08, 0.15 + sin(u_time * 0.5) * 0.05);
+
+			// Enhance mouse interaction area
+			if (mouseDist < 0.25) {
+				float glow = (0.25 - mouseDist) / 0.25;
+				primary += vec3(glow * 0.6, glow * 0.2, 0.0);
+				secondary += vec3(0.05 * glow, 0.0, 0.05 * glow);
+				charValue = fract(charValue + u_time * 0.2);
+			}
+
+			o_character = vec4(charValue, 0.0, 0.0, 1.0);
+			o_primaryColor = vec4(primary, 1.0);
+			o_secondaryColor = vec4(secondary, 1.0);
+		}
+	`);
 });
 
 t.draw(() => {
-	if (waveShader) {
-		t.shader(waveShader);
-		t.setUniform('u_time', t.frameCount * 0.003);
+	t.background(8, 12, 24);
+
+	if (warpShader) {
+		t.shader(warpShader);
+		t.setUniform('u_time', t.frameCount * 0.002);
+
+		// Normalize mouse coordinates [0, 1]
+		const mx = t.mouse ? Math.max(0, Math.min(1, (t.mouse.x + t.grid.cols / 2) / t.grid.cols)) : 0.5;
+		const my = t.mouse ? Math.max(0, Math.min(1, (t.mouse.y + t.grid.rows / 2) / t.grid.rows)) : 0.5;
+		t.setUniform('u_mouse', [mx, 1.0 - my]);
+
 		t.rect(t.grid.cols, t.grid.rows);
+		t.resetShader();
 	}
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -7467,23 +7843,102 @@ Draw a TextmodeFramebuffer, TextmodeImage, TextmodeVideo, or TextmodeTexture to 
 
 ```javascript
 const t = textmode.create({
-	width: 800,
-	height: 600,
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
 });
 
-const fb = t.createFramebuffer({ width: 30, height: 20 });
+// Create offscreen framebuffer for rendering the nebula texture
+const fb = t.createFramebuffer({ width: 40, height: 40 });
 
 t.draw(() => {
+	// ── Phase 1: Render Procedural Nebula to Offscreen Framebuffer ──
 	fb.begin();
 	t.clear();
-	t.charColor(255, 0, 0);
-	t.char('A');
-	t.rect(20, 10);
+
+	const time = t.frameCount * 0.03;
+	const count = 48;
+
+	for (let i = 0; i < count; i++) {
+		const angle = (i / count) * Math.PI * 4 + time;
+		const r = (i / count) * 16 + 2;
+
+		const x = Math.cos(angle) * r;
+		const y = Math.sin(angle) * r;
+
+		t.push();
+		t.translate(x, y);
+
+		// Dynamic color transition based on node index
+		const red = Math.floor(128 + 127 * Math.sin(i * 0.2 + time));
+		const green = Math.floor(80 + 175 * Math.cos(i * 0.15 - time));
+		const blue = Math.floor(200 + 55 * Math.sin(time));
+
+		t.charColor(red, green, blue);
+
+		// Multi-layered visual shapes
+		if (i % 3 === 0) {
+			t.char('✦');
+		} else if (i % 3 === 1) {
+			t.char('•');
+		} else {
+			t.char('﹡');
+		}
+
+		t.point();
+		t.pop();
+	}
 	fb.end();
 
-	t.background(0);
+	// ── Phase 2: Composite FBO Instances onto Main Responsive Canvas ──
+	t.background(8, 10, 16);
 
-	t.image(fb);
+	const cols = t.grid.cols;
+	const rows = t.grid.rows;
+
+	// Draw beautiful grid of nested FBO viewports
+	const gridX = Math.floor(cols / 4);
+	const gridY = Math.floor(rows / 3);
+
+	// Display labels
+	t.push();
+	t.translate(-Math.floor(cols / 2) + 4, -Math.floor(rows / 2) + 4);
+	t.charColor(100, 200, 255);
+	t.char('✦');
+	t.point();
+	// Inline draw title
+	t.translate(2, 0);
+	const title = 'OFFSCREEN FRAMEBUFFER MULTI-COMPOSITING GRID';
+	for (let i = 0; i < title.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(title[i]);
+		t.point();
+		t.pop();
+	}
+	t.pop();
+
+	// Draw 3 FBO instances with different transformation parameters
+	for (let slot = 0; slot < 3; slot++) {
+		const posX = (slot - 1) * gridX * 1.3;
+		const posY = 2;
+
+		t.push();
+		t.translate(posX, posY);
+
+		// Varying spin speeds and scales per slot
+		const spin = t.frameCount * 0.015 * (slot + 1);
+		t.rotateZ(spin);
+
+		const scaleVal = 1.0 + Math.sin(t.frameCount * 0.05 + slot) * 0.15;
+		t.image(fb, Math.floor(28 * scaleVal), Math.floor(28 * scaleVal));
+
+		t.pop();
+	}
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -10013,20 +10468,96 @@ the initial distance and the change since the previous update, enabling zoom int
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
-
-let currentScale = 1;
-
-t.pinch((data) => {
-	currentScale = Math.max(0.5, Math.min(5, data.scale));
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
 });
 
+let targetScale = 1.0;
+let currentScale = 1.0;
+
+t.pinch((data) => {
+	targetScale = Math.max(0.2, Math.min(5.0, data.scale));
+});
+
+// Fallback scroll wheel support for desktop browsers
+window.addEventListener(
+	'wheel',
+	(e) => {
+		targetScale = Math.max(0.2, Math.min(5.0, targetScale - e.deltaY * 0.0015));
+	},
+	{ passive: true }
+);
+
+function drawText(text, x, y, r = 180, g = r, b = r) {
+	t.push();
+	t.translate(x - Math.floor(text.length / 2), y);
+	t.charColor(r, g, b);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
 t.draw(() => {
-	t.background(0);
-	const size = 20 * currentScale;
-	t.char('▒');
-	t.charColor(255, 100 + currentScale * 20, 150);
-	t.rect(size, size);
+	t.background(6, 8, 14);
+
+	const cols = t.grid.cols;
+	const rows = t.grid.rows;
+
+	// Easing for super smooth zooming transitions
+	currentScale += (targetScale - currentScale) * 0.1;
+
+	// Draw instructions
+	drawText('MANDALA PINCH & SCROLL VIEWER', 0, -Math.floor(rows / 2) + 4, 100, 200, 255);
+	drawText('Pinch on touchpads or use mouse scroll wheel to scale', 0, -Math.floor(rows / 2) + 6, 120, 140, 160);
+	drawText(`SCALE: ${currentScale.toFixed(2)}x`, 0, Math.floor(rows / 2) - 4, 255, 220, 100);
+
+	// Render the complex concentric geometric mandala
+	t.push();
+	t.rotateZ(t.frameCount * 0.5 + currentScale * 30); // Rotate based on frame and zoom level
+
+	const rings = 8;
+	for (let ring = 1; ring <= rings; ring++) {
+		const points = 6 + ring * 4;
+		const r = ring * 3 * currentScale;
+
+		for (let i = 0; i < points; i++) {
+			const angle = (i / points) * Math.PI * 2 + ring * 0.1;
+			const px = Math.cos(angle) * r * 1.5;
+			const py = Math.sin(angle) * r;
+
+			t.push();
+			t.translate(px, py);
+
+			// Choose character based on ring layer
+			const chars = ['·', 'o', '*', '+', 'X', '☼', '▒', '█'];
+			const charSym = chars[(ring - 1) % chars.length];
+			t.char(charSym);
+
+			// Dynamic rainbow/gold gradients
+			const hueR = Math.floor(130 + 125 * Math.sin(angle + currentScale));
+			const hueG = Math.floor(180 + 75 * Math.cos(angle * 2));
+			const hueB = Math.floor(255 - ring * 20);
+			t.charColor(hueR, hueG, hueB);
+
+			t.point();
+			t.pop();
+		}
+	}
+
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -10427,20 +10958,86 @@ Use with [pop](#pop) to isolate style changes within a block.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-t.draw(() => {
-	t.background(0);
+function label(text, x, y, color = [180, 190, 210]) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(color[0], color[1], color[2]);
 
-	for (let i = 0; i < 3; i++) {
+	for (let i = 0; i < text.length; i++) {
 		t.push();
-		t.translate(i * 12 - 12, 0);
-		t.rotateZ(t.frameCount * (1 + i * 0.5));
-		t.charColor(100 + i * 70, 255 - i * 50, 150);
-		t.char(['*', '@', '#'][i]);
-		t.rect(8, 8);
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
 		t.pop();
 	}
+
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(5, 7, 13);
+
+	const cols = t.grid.cols;
+	const rows = t.grid.rows;
+	const time = t.frameCount * 0.025;
+
+	label('push() saves the current transform', -Math.floor(cols / 2) + 4, -Math.floor(rows / 2) + 4, [230, 235, 245]);
+	label(
+		'each orbit draws in its own temporary coordinate system',
+		-Math.floor(cols / 2) + 4,
+		-Math.floor(rows / 2) + 6,
+		[140, 155, 180]
+	);
+
+	t.charColor(35, 45, 70);
+	for (let y = -Math.floor(rows / 2) + 10; y < Math.floor(rows / 2) - 4; y += 3) {
+		for (let x = -Math.floor(cols / 2) + 4; x < Math.floor(cols / 2) - 4; x += 8) {
+			t.push();
+			t.translate(x, y);
+			t.char('.');
+			t.point();
+			t.pop();
+		}
+	}
+
+	t.push();
+	t.rotateZ(time * 8);
+	t.char('@');
+	t.charColor(255, 235, 150);
+	t.rect(6, 6);
+
+	for (let ring = 0; ring < 4; ring++) {
+		t.push();
+		t.rotateZ(time * (20 + ring * 11));
+
+		for (let i = 0; i < 10; i++) {
+			const angle = (i / 10) * Math.PI * 2;
+
+			t.push();
+			t.translate(Math.cos(angle) * (8 + ring * 5) * 1.6, Math.sin(angle) * (8 + ring * 5));
+			t.rotateZ(-time * (30 + ring * 8));
+			t.char(['+', '*', 'o', '#'][ring]);
+			t.charColor(80 + ring * 42, 210 - ring * 20, 255 - ring * 35, 185);
+			t.rect(2 + ring, 2 + ring);
+			t.pop();
+		}
+
+		t.pop();
+	}
+
+	t.pop();
+
+	label('pop() restores the parent transform', -Math.floor(cols / 2) + 4, Math.floor(rows / 2) - 4, [245, 190, 100]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -10526,16 +11123,41 @@ allowing you to trigger rendering on demand.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
 let manualMode = false;
 let bursts = 0;
-let rings = 1;
+let stepCount = 0;
 
-function drawLabel(text, y, color = 180) {
+// Particle system state
+const particles = [];
+const pegs = [];
+
+// Populate a stable grid of pegs for particles to bounce off
+function initSimulator() {
+	pegs.length = 0;
+	particles.length = 0;
+
+	// Draw 3 rows of pegs in triangular fashion
+	for (let row = 0; row < 4; row++) {
+		const colsInRow = 5 + row;
+		const startX = -colsInRow * 2.5;
+		for (let c = 0; c < colsInRow; c++) {
+			pegs.push({ x: startX + c * 5 + 2.5, y: -6 + row * 4 });
+		}
+	}
+}
+
+initSimulator();
+
+function drawText(text, x, y, r = 180, g = r, b = r) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color);
+	t.translate(x - Math.floor(text.length / 2), y);
+	t.charColor(r, g, b);
 
 	for (let i = 0; i < text.length; i++) {
 		t.push();
@@ -10548,13 +11170,52 @@ function drawLabel(text, y, color = 180) {
 	t.pop();
 }
 
-function triggerRedraw(count) {
-	if (!manualMode) {
-		return;
+function advanceSimulator() {
+	stepCount++;
+
+	// Spawn new particles periodically
+	if (stepCount % 3 === 0) {
+		particles.push({
+			x: Math.random() * 4 - 2,
+			y: -14,
+			vx: Math.random() * 0.4 - 0.2,
+			vy: 0.5,
+			color: [Math.floor(100 + Math.random() * 155), 200, 255],
+		});
 	}
 
+	// Update active particles under simple physical gravity
+	for (let i = particles.length - 1; i >= 0; i--) {
+		const p = particles[i];
+		p.vy += 0.08; // Gravity
+		p.x += p.vx;
+		p.y += p.vy;
+
+		// Collide with pegs
+		pegs.forEach((peg) => {
+			const dx = p.x - peg.x;
+			const dy = p.y - peg.y;
+			const dist = Math.sqrt(dx * dx + dy * dy);
+			if (dist < 1.6) {
+				// Bounce off peg
+				p.vy = -Math.abs(p.vy) * 0.4;
+				p.vx = (dx / dist) * 0.6 + (Math.random() * 0.2 - 0.1);
+				p.y = peg.y + (dy / dist) * 1.6;
+			}
+		});
+
+		// Remove out of bounds particles
+		if (p.y > 15) {
+			particles.splice(i, 1);
+		}
+	}
+}
+
+function triggerRedraw(count) {
+	if (!manualMode) return;
+
 	bursts++;
-	rings = (rings % 5) + 1;
+	// Force textmode to execute the draw loop exactly 'count' times
 	t.redraw(count);
 }
 
@@ -10562,9 +11223,8 @@ t.keyPressed((data) => {
 	if (data.key === ' ') {
 		triggerRedraw(1);
 	}
-
 	if (data.key === 'Enter') {
-		triggerRedraw(3);
+		triggerRedraw(5);
 	}
 });
 
@@ -10573,26 +11233,60 @@ t.mousePressed(() => {
 });
 
 t.draw(() => {
-	if (!manualMode && t.frameCount >= 90) {
+	// Auto-pause at frame 60 to shift into step-by-step diagnostic mode
+	if (!manualMode && t.frameCount >= 60) {
 		manualMode = true;
-		t.noLoop();
+		t.noLoop(); // Pauses the continuous animation loop
 	}
 
-	t.background(0);
+	// Update physics
+	advanceSimulator();
 
-	for (let i = 0; i < rings; i++) {
+	t.background(6, 8, 14);
+
+	const cols = t.grid.cols;
+	const rows = t.grid.rows;
+
+	// Draw Console telemetry instructions
+	drawText('RENDER LOOP STEP TELEMETRY', 0, -Math.floor(rows / 2) + 4, 100, 200, 255);
+	drawText(
+		manualMode ? 'STATUS: PAUSED (MANUAL MODE)' : 'STATUS: CONTINUOUS REELING (AUTO PAUSING...)',
+		0,
+		-Math.floor(rows / 2) + 6,
+		manualMode ? 255 : 100,
+		manualMode ? 120 : 255,
+		manualMode ? 100 : 150
+	);
+
+	// Controls instructions HUD
+	drawText('CLICK / SPACEBAR = redraw(1) step', 0, Math.floor(rows / 2) - 6, 180, 200, 220);
+	drawText('ENTER KEY = redraw(5) steps burst', 0, Math.floor(rows / 2) - 4, 255, 220, 100);
+	drawText(`STEPS: ${stepCount} | BURSTS: ${bursts}`, 0, Math.floor(rows / 2) - 2, 140, 150, 160);
+
+	// Draw peg structures
+	t.charColor(100, 120, 150);
+	t.char('*');
+	pegs.forEach((peg) => {
 		t.push();
-		t.rotateZ(t.frameCount * 4 + i * 22);
-		t.char(i % 2 === 0 ? 'O' : '+');
-		t.charColor(80 + i * 35, 160 + i * 15, 255);
-		t.rect(6 + i * 4, 6 + i * 4);
+		t.translate(peg.x, peg.y);
+		t.point();
 		t.pop();
-	}
+	});
 
-	drawLabel(manualMode ? 'manual redraw mode' : 'auto pause at frame 90', -12, 220);
-	drawLabel('space/click = redraw(1)', -9);
-	drawLabel('enter = redraw(3)', -6);
-	drawLabel(`bursts: ${bursts}`, 12, manualMode ? 255 : 120);
+	// Draw active particles with physical trails
+	particles.forEach((p) => {
+		t.push();
+		t.translate(p.x, p.y);
+		t.char('o');
+		t.charColor(...p.color);
+		t.rect(1.5, 1.5);
+		t.pop();
+	});
+});
+
+t.windowResized(() => {
+	initSimulator();
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -10917,36 +11611,92 @@ Resize the canvas and adjust all related components accordingly.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 600, height: 400 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-let direction = 1;
-
-function drawLabel(label, y, color) {
-	const startX = -label.length / 2;
-	t.charColor(...color);
-
-	for (let i = 0; i < label.length; i++) {
+function drawText(text, x, y, r = 180, g = r, b = r) {
+	t.push();
+	t.translate(x - Math.floor(text.length / 2), y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
 		t.push();
-		t.translate(startX + i + 0.5, y);
-		t.char(label[i]);
+		t.translate(i, 0);
+		t.char(text[i]);
 		t.point();
 		t.pop();
 	}
+	t.pop();
 }
 
 t.draw(() => {
-	if (t.frameCount % 90 === 0) {
-		const nextWidth = direction > 0 ? 800 : 600;
-		const nextHeight = direction > 0 ? 600 : 400;
-		t.resizeCanvas(nextWidth, nextHeight);
-		direction *= -1;
-		return;
-	}
+	t.background(6, 8, 14);
 
-	t.background(10, 16, 28);
-	drawLabel(`${t.width} x ${t.height}`, -2, [255, 230, 120]);
-	drawLabel('resizeCanvas()', 0, [220, 240, 255]);
-	drawLabel('updates grid + viewport', 2, [120, 220, 255]);
+	const cols = t.grid.cols;
+	const rows = t.grid.rows;
+
+	// Glowing outer bounding box
+	t.push();
+	t.charColor(30, 45, 65);
+	t.char('█');
+	t.ellipse(cols - 4, rows - 4);
+	t.pop();
+
+	// Telemetry Labels
+	drawText('GRID VIEWPORT TELEMETRY COMPASS', 0, -Math.floor(rows / 2) + 4, 100, 200, 255);
+	drawText(
+		'Resize window to test reactive cell grid metrics in real-time',
+		0,
+		-Math.floor(rows / 2) + 6,
+		120,
+		140,
+		160
+	);
+
+	// Central Radar / Crosshair
+	t.push();
+	t.translate(0, 0);
+
+	// Outer radar ring
+	t.push();
+	const pulse = 1.0 + Math.sin(t.frameCount * 0.08) * 0.08;
+	t.charColor(50, 80, 120);
+	t.char('·');
+	t.ellipse(24 * pulse, 24 * pulse);
+	t.pop();
+
+	// Inner crosshair indicators
+	t.push();
+	t.charColor(0, 255, 180);
+	t.char('+');
+	t.point();
+	t.pop();
+
+	// Compass Axes Lines
+	t.charColor(25, 35, 50);
+	t.line(-Math.floor(cols / 2) + 6, 0, Math.floor(cols / 2) - 6, 0);
+	t.line(0, -Math.floor(rows / 2) + 8, 0, Math.floor(rows / 2) - 8);
+
+	t.pop();
+
+	// Digital Telemetry Readings
+	const wStr = `CANVAS_WIDTH: ${window.innerWidth} PX`;
+	const hStr = `CANVAS_HEIGHT: ${window.innerHeight} PX`;
+	const gridStr = `GRID_CELLS: ${cols} COLUMNS x ${rows} ROWS`;
+
+	drawText(wStr, 0, 4, 255, 180, 50);
+	drawText(hStr, 0, 6, 255, 180, 50);
+	drawText(gridStr, 0, 8, 100, 255, 180);
+
+	// Status signal
+	const blink = Math.round(150 + 105 * Math.sin(t.frameCount * 0.12));
+	drawText('STATUS: ONLINE // GRID COMPILER SYNC ACTIVE', 0, Math.floor(rows / 2) - 5, 0, blink, blink * 0.8);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -10971,24 +11721,79 @@ All geometries rotate around the center of the shape.
 ##### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-t.draw(() => {
-	t.background(0);
-
-	for (let i = 0; i < 3; i++) {
+function drawText(text, x, y, r = 180, g = r, b = r) {
+	t.push();
+	t.translate(x - Math.floor(text.length / 2), y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
 		t.push();
-		t.translate(i * 15 - 15, 0, 0);
-
-		const angle = t.frameCount * (1.5 + i * 0.5);
-		// Each shape rotates around different combinations of axes
-		t.rotate(angle * 0.7, angle * 0.5, angle);
-
-		t.char(['T', 'X', 'T'][i]);
-		t.charColor(100 + i * 60, 200 - i * 40, 255);
-		t.rect(10, 10);
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
 		t.pop();
 	}
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(6, 8, 14);
+
+	const cols = t.grid.cols;
+	const rows = t.grid.rows;
+
+	// Title Info
+	drawText('NATIVE 3D ASCII ENGINE VIEWPORT', 0, -Math.floor(rows / 2) + 4, 100, 200, 255);
+	drawText(
+		'Three-dimensional primitives rotating dynamically on multi-axes',
+		0,
+		-Math.floor(rows / 2) + 6,
+		120,
+		140,
+		160
+	);
+
+	const time = t.frameCount;
+	const spacing = Math.floor(cols / 4);
+
+	// Shape 1: 3D Box (Left)
+	t.push();
+	t.translate(-spacing, 2);
+	t.rotate(time * 0.8, time * 0.5, 0);
+	t.char('▒');
+	t.charColor(255, 120, 100);
+	t.box(10, 10, 10);
+	t.pop();
+	drawText('3D BOX', -spacing, 10, 255, 120, 100);
+
+	// Shape 2: 3D Torus (Center)
+	t.push();
+	t.translate(0, 2);
+	t.rotate(time, 0, time * 0.6);
+	t.char('█');
+	t.charColor(100, 255, 180);
+	t.torus(8, 3);
+	t.pop();
+	drawText('3D TORUS', 0, 10, 100, 255, 180);
+
+	// Shape 3: 3D Cylinder (Right)
+	t.push();
+	t.translate(spacing, 2);
+	t.rotate(0, time * 1.2, time * 0.4);
+	t.char('░');
+	t.charColor(100, 180, 255);
+	t.cylinder(6, 12);
+	t.pop();
+	drawText('3D CYLINDER', spacing, 10, 100, 180, 255);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -11072,27 +11877,119 @@ along with the gesture centre in grid coordinates. Ideal for dial-like interacti
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
 let rotation = 0;
+let targetRotation = 0;
+let dragStartX = 0;
+let dragStartRotation = 0;
+let dragging = false;
 
 t.rotateGesture((data) => {
-	rotation += data.deltaRotation;
+	addRotation(data.deltaRotation);
+});
+
+t.mousePressed(() => {
+	if (!t.mouse) return;
+	dragging = true;
+	dragStartX = t.mouse.x;
+	dragStartRotation = targetRotation;
+});
+
+t.mouseReleased(() => {
+	dragging = false;
+});
+
+t.mouseDragged(() => {
+	if (!dragging || !t.mouse) return;
+	const nextRotation = dragStartRotation + (t.mouse.x - dragStartX) * 3;
+	if (Number.isFinite(nextRotation)) {
+		targetRotation = nextRotation;
+	}
+});
+
+t.mouseScrolled((data) => {
+	addRotation((data.delta?.y ?? 0) * 0.08);
 });
 
 t.draw(() => {
-	t.background(0);
-	t.rotateZ(rotation);
-	t.char('☼');
-	t.charColor(100, 255, 200);
-	t.rect(20, 20);
+	t.background(5, 8, 14);
+	if (!Number.isFinite(rotation) || !Number.isFinite(targetRotation)) {
+		rotation = 0;
+		targetRotation = 0;
+	}
+	rotation += (targetRotation - rotation) * 0.12;
+
+	const rows = t.grid.rows;
+	const top = -Math.floor(rows / 2) + 4;
+
+	drawText('rotate gesture compass', 0, top, [235, 240, 250]);
+	drawText('twist on touch, or drag/scroll horizontally on desktop', 0, top + 2, [130, 150, 180]);
+	drawText(`rotation ${Math.round(rotation)} deg`, 0, Math.floor(rows / 2) - 4, [255, 210, 110]);
+
+	for (let ring = 0; ring < 5; ring++) {
+		const points = 20 + ring * 8;
+		const radius = 5 + ring * 4;
+
+		for (let i = 0; i < points; i++) {
+			const angle = (i / points) * Math.PI * 2 + rotation * 0.017 + ring * 0.35;
+			t.push();
+			t.translate(Math.cos(angle) * radius * 1.65, Math.sin(angle) * radius);
+			t.char(['.', ':', '+', '*', '#'][ring]);
+			t.charColor(70 + ring * 35, 120 + ring * 18, 220 - ring * 16, 115 + ring * 22);
+			t.point();
+			t.pop();
+		}
+	}
 
 	t.push();
-	t.translate(15, 0);
-	t.char('•');
-	t.charColor(255, 100, 100);
-	t.rect(5, 5);
+	t.rotateZ(rotation);
+	t.char('*');
+	t.charColor(100, 255, 200);
+	t.rect(18, 18);
+
+	for (let i = 0; i < 8; i++) {
+		const angle = (i / 8) * Math.PI * 2;
+		t.push();
+		t.translate(Math.cos(angle) * 18 * 1.6, Math.sin(angle) * 18);
+		t.rotateZ(-rotation * 1.5);
+		t.char(i % 2 === 0 ? '>' : '|');
+		t.charColor(255, 150 + i * 8, 90);
+		t.rect(3, 3);
+		t.pop();
+	}
+
 	t.pop();
+});
+
+function addRotation(delta) {
+	if (Number.isFinite(delta)) {
+		targetRotation += delta;
+	}
+}
+
+function drawText(text, x, y, color) {
+	t.push();
+	t.translate(x - Math.floor(text.length / 2), y);
+	t.charColor(color[0], color[1], color[2]);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -11776,40 +12673,86 @@ This behavior matches p5.js, allowing multiple draw calls with the same shader.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-let glitchShader;
+let matrixShader;
 
 t.setup(async () => {
-	glitchShader = await t.createFilterShader(`#version 300 es
-  precision highp float;
-  in vec2 v_uv;
-  uniform float u_intensity;
-  layout(location = 0) out vec4 o_character;
-  layout(location = 1) out vec4 o_primaryColor;
-  layout(location = 2) out vec4 o_secondaryColor;
+	// A self-contained cyberpunk matrix screen shader
+	matrixShader = await t.createFilterShader(`#version 300 es
+		precision highp float;
+		in vec2 v_uv;
+		uniform float u_time;
+		uniform vec2 u_mouse;
+		layout(location = 0) out vec4 o_character;
+		layout(location = 1) out vec4 o_primaryColor;
+		layout(location = 2) out vec4 o_secondaryColor;
 
-  void main() {
-    vec2 offset = vec2(sin(v_uv.y * 50.0) * u_intensity, 0.0);
-    float pattern = fract(v_uv.x * 20.0 + offset.x);
-    vec3 color = vec3(pattern, 1.0 - pattern, 0.5);
-    o_character = vec4(pattern, 0.0, 0.0, 0.0);
-    o_primaryColor = vec4(color, 1.0);
-    o_secondaryColor = vec4(color * 0.5, 1.0);
-  }
-`);
+		// Simple pseudo-random hash
+		float hash(float x) {
+			return fract(sin(x) * 43758.5453);
+		}
+
+		void main() {
+			// Columns and falling speed calculations
+			float colIndex = floor(v_uv.x * 60.0);
+			float speed = 1.5 + hash(colIndex) * 2.5;
+			float dropOffset = u_time * speed + hash(colIndex * 12.7) * 20.0;
+
+			// Row coordinates
+			float cellY = fract(v_uv.y * 30.0 - dropOffset);
+			float charValue = step(0.1, cellY) * fract(cellY * 7.0);
+
+			// Dynamic light green rain drops with bright head tips
+			vec3 greenRain = vec3(0.0, 1.0 - cellY * 0.7, 0.2);
+			if (cellY > 0.9) {
+				greenRain = vec3(0.8, 1.0, 0.9); // Bright tip
+			}
+
+			// Add CRT scanline effects
+			float scanline = sin(v_uv.y * 400.0 - u_time * 10.0) * 0.15;
+			vec3 finalColor = greenRain - vec3(scanline);
+
+			// Dynamic distortion near the mouse coordinates
+			float distToMouse = distance(v_uv, u_mouse);
+			if (distToMouse < 0.18) {
+				float factor = (0.18 - distToMouse) / 0.18;
+				finalColor += vec3(factor * 0.6, 0.0, factor * 0.3); // Glow red
+				charValue = fract(charValue * 3.0 + u_time);
+			}
+
+			o_character = vec4(charValue, 0.0, 0.0, 1.0);
+			o_primaryColor = vec4(finalColor, 1.0);
+			o_secondaryColor = vec4(0.01, 0.03, 0.01, 1.0); // Dark green terminal background
+		}
+	`);
 });
 
 t.draw(() => {
-	t.shader(glitchShader);
-	t.setUniform('u_intensity', Math.sin(t.frameCount * 0.1) * 0.02);
+	t.background(0);
 
-	t.translate(10, 10);
-	t.rect(20, 20);
-	t.translate(25, 0);
-	t.rect(20, 20);
+	if (matrixShader) {
+		t.shader(matrixShader);
+		t.setUniform('u_time', t.frameCount * 0.001);
 
-	t.resetShader();
+		// Normalized mouse coordinates
+		const mx = t.mouse ? Math.max(0, Math.min(1, (t.mouse.x + t.grid.cols / 2) / t.grid.cols)) : 0.5;
+		const my = t.mouse ? Math.max(0, Math.min(1, (t.mouse.y + t.grid.rows / 2) / t.grid.rows)) : 0.5;
+		// Invert Y to match shader coords
+		t.setUniform('u_mouse', [mx, 1.0 - my]);
+
+		// Draw rectangle covering grid to apply the matrix shader
+		t.rect(t.grid.cols, t.grid.rows);
+		t.resetShader();
+	}
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -12174,50 +13117,153 @@ velocity in CSS pixels per millisecond. Useful for panning, flicks, or quick sho
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-let arrow = '•';
-let r = 128;
-let g = 128;
-let b = 128;
+const particles = [];
 
+// Native touch swipe gesture
 t.swipe((data) => {
-	const horizontal = Math.abs(data.direction.x) >= Math.abs(data.direction.y);
+	launchParticles(data.direction.x, data.direction.y);
+});
 
-	if (horizontal) {
-		if (data.direction.x < 0) {
-			arrow = '◀';
-			r = 100;
-			g = 100;
-			b = 255;
-		} else {
-			arrow = '▶';
-			r = 255;
-			g = 255;
-			b = 100;
-		}
-		return;
-	}
+// Interactive mouse swipe simulator for desktop dev testing
+let dragStartX = 0;
+let dragStartY = 0;
 
-	if (data.direction.y < 0) {
-		arrow = '▲';
-		r = 255;
-		g = 100;
-		b = 100;
-	} else {
-		arrow = '▼';
-		r = 100;
-		g = 255;
-		b = 100;
+window.addEventListener('mousedown', (e) => {
+	dragStartX = e.clientX;
+	dragStartY = e.clientY;
+});
+
+window.addEventListener('mouseup', (e) => {
+	const dx = e.clientX - dragStartX;
+	const dy = e.clientY - dragStartY;
+	const len = Math.sqrt(dx * dx + dy * dy);
+	if (len > 35) {
+		launchParticles(dx / len, dy / len);
 	}
 });
 
-t.draw(() => {
-	t.background(0);
-	const size = 8 + Math.sin(t.frameCount * 0.1) * 2;
-	t.char(arrow);
+function launchParticles(dirX, dirY) {
+	// Determine dominant direction and character
+	let charSym = '•';
+	let color = [100, 200, 255]; // Cyan default
+
+	if (Math.abs(dirX) >= Math.abs(dirY)) {
+		if (dirX < 0) {
+			charSym = 'W';
+			color = [100, 150, 255]; // Blue
+		} else {
+			charSym = 'E';
+			color = [255, 200, 100]; // Gold
+		}
+	} else {
+		if (dirY < 0) {
+			charSym = 'N';
+			color = [255, 100, 100]; // Red
+		} else {
+			charSym = 'S';
+			color = [100, 255, 150]; // Green
+		}
+	}
+
+	// Spawn a stream of kinetic elements from the center of the canvas
+	const count = 8;
+	for (let i = 0; i < count; i++) {
+		const spread = Math.random() * 0.4 - 0.2;
+		particles.push({
+			x: 0,
+			y: 0,
+			vx: (dirX + spread) * (1.5 + Math.random() * 1.5),
+			vy: (dirY + spread) * (1.0 + Math.random() * 1.0),
+			char: charSym,
+			color: color,
+			alpha: 255,
+			size: 2 + Math.random() * 4,
+		});
+	}
+}
+
+function drawText(text, x, y, r = 180, g = r, b = r) {
+	t.push();
+	t.translate(x - Math.floor(text.length / 2), y);
 	t.charColor(r, g, b);
-	t.rect(size, size);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(6, 8, 14);
+
+	const cols = t.grid.cols;
+	const rows = t.grid.rows;
+
+	// Telemetry instructions hud
+	drawText('GESTURAL SWIPE LAUNCHER', 0, -Math.floor(rows / 2) + 4, 100, 200, 255);
+	drawText('Swipe or drag-and-release mouse to shoot kinetic particles', 0, -Math.floor(rows / 2) + 6, 120, 140, 160);
+	drawText(`ACTIVE STREAM: ${particles.length} PARTICLES`, 0, Math.floor(rows / 2) - 4, 255, 220, 100);
+
+	// Update and render active kinetic particles
+	for (let i = particles.length - 1; i >= 0; i--) {
+		const p = particles[i];
+		p.x += p.vx;
+		p.y += p.vy;
+
+		// Bouncing collision against grid walls with energy friction loss
+		const limitX = cols / 2 - 2;
+		const limitY = rows / 2 - 2;
+
+		if (p.x < -limitX) {
+			p.x = -limitX;
+			p.vx *= -0.85;
+		}
+		if (p.x > limitX) {
+			p.x = limitX;
+			p.vx *= -0.85;
+		}
+		if (p.y < -limitY) {
+			p.y = -limitY;
+			p.vy *= -0.85;
+		}
+		if (p.y > limitY) {
+			p.y = limitY;
+			p.vy *= -0.85;
+		}
+
+		// Apply simple air friction resistance
+		p.vx *= 0.98;
+		p.vy *= 0.98;
+
+		// Fade out over lifetime
+		p.alpha -= 1.8;
+		if (p.alpha <= 0) {
+			particles.splice(i, 1);
+			continue;
+		}
+
+		t.push();
+		t.translate(p.x, p.y);
+		t.char(p.char);
+		t.charColor(p.color[0], p.color[1], p.color[2], p.alpha);
+		t.rect(p.size, p.size);
+		t.pop();
+	}
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -12247,36 +13293,108 @@ Use [input.touch.TouchTapEventData.taps](../namespaces/input/namespaces/touch/in
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
-
-const markers = [];
-
-t.tap((data) => {
-	markers.push({ x: data.touch.x, y: data.touch.y, life: 60 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
 });
 
-t.draw(() => {
-	t.background(0);
+const ripples = [];
 
-	for (let i = markers.length - 1; i >= 0; i--) {
-		const marker = markers[i];
+t.tap((data) => {
+	spawnRipple(data.touch.x, data.touch.y);
+});
 
+// Interactive mouse fallback for desktop browsers
+t.mousePressed(() => {
+	if (t.mouse) {
+		spawnRipple(t.mouse.x, t.mouse.y);
+	}
+});
+
+function spawnRipple(x, y) {
+	// Create a new pulsing concentric wave
+	ripples.push({
+		x: x,
+		y: y,
+		radius: 0,
+		maxRadius: 15 + Math.random() * 15,
+		color: [Math.floor(100 + Math.random() * 155), Math.floor(150 + Math.random() * 105), 255],
+		alpha: 255,
+	});
+}
+
+function drawText(text, x, y, r = 180, g = r, b = r) {
+	t.push();
+	t.translate(x - Math.floor(text.length / 2), y);
+	t.charColor(r, g, b);
+
+	for (let i = 0; i < text.length; i++) {
 		t.push();
-		t.translate(marker.x, marker.y);
-		t.char('X');
-		t.charColor(255, 100, 100, (marker.life / 60) * 255);
-		t.rect(3, 3);
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
 		t.pop();
-
-		marker.life -= 1;
-		if (marker.life <= 0) markers.splice(i, 1);
 	}
 
-	if (markers.length === 0) {
-		t.charColor(100);
-		t.char('?');
-		t.rect(1, 1);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(6, 8, 14);
+
+	const cols = t.grid.cols;
+	const rows = t.grid.rows;
+
+	// Draw diagnostic header details
+	drawText('CONCENTRIC RIPPLE EXPLORER', 0, -Math.floor(rows / 2) + 4, 100, 200, 255);
+	drawText(
+		'Tap anywhere on the screen or click with mouse to trigger waves',
+		0,
+		-Math.floor(rows / 2) + 6,
+		120,
+		140,
+		160
+	);
+
+	// Update and render all active concentric ripples
+	for (let idx = ripples.length - 1; idx >= 0; idx--) {
+		const r = ripples[idx];
+		r.radius += 0.45; // Wave expanding speed
+
+		// Fade out as it expands
+		const ageRatio = r.radius / r.maxRadius;
+		r.alpha = Math.max(0, 255 * (1.0 - ageRatio));
+
+		if (r.alpha <= 0 || r.radius >= r.maxRadius) {
+			ripples.splice(idx, 1);
+			continue;
+		}
+
+		// Draw concentric rings using circle drawing points
+		const steps = Math.floor(8 + r.radius * 3.5);
+		for (let s = 0; s < steps; s++) {
+			const angle = (s / steps) * Math.PI * 2;
+			const rx = Math.cos(angle) * r.radius * 1.5;
+			const ry = Math.sin(angle) * r.radius;
+
+			t.push();
+			t.translate(r.x + rx, r.y + ry);
+
+			// Dynamic wave characters based on ripple age/radius
+			const waveChars = ['☼', 'O', 'o', '°', '·'];
+			const charIdx = Math.floor(ageRatio * waveChars.length) % waveChars.length;
+			t.char(waveChars[charIdx]);
+
+			t.charColor(r.color[0], r.color[1], r.color[2], r.alpha);
+			t.point();
+			t.pop();
+		}
 	}
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -12477,37 +13595,100 @@ leaves the window. Treat this as an aborted touch and clean up any in-progress s
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-let message = 'OK';
-let colorIntensity = 100;
+let message = 'READY';
+let color = [120, 190, 255];
+let shock = 0;
+let touchAge = 0;
 
 t.touchStarted(() => {
-	message = 'TOUCH';
-	colorIntensity = 200;
+	message = 'TOUCH STARTED';
+	color = [120, 255, 190];
+	shock = 1;
+	touchAge = 0;
 });
 
 t.touchEnded(() => {
-	message = 'OK';
-	colorIntensity = 100;
+	message = 'TOUCH ENDED';
+	color = [255, 210, 120];
+	shock = 0.45;
 });
 
 t.touchCancelled(() => {
-	message = 'CANCEL';
-	colorIntensity = 0;
+	message = 'TOUCH CANCELLED';
+	color = [255, 90, 110];
+	shock = 1.5;
 });
 
 t.draw(() => {
-	t.background(0);
-	t.char(message.charAt(0));
-	t.charColor(255, colorIntensity, colorIntensity);
-	t.rotateZ(t.frameCount * 0.1);
-	t.rect(15, 15);
+	t.background(6, 7, 12);
 
-	if (message === 'CANCEL' && t.frameCount % 60 === 0) {
-		message = 'OK';
-		colorIntensity = 100;
+	const rows = t.grid.rows;
+	const top = -Math.floor(rows / 2) + 4;
+	const radius = 7 + shock * 5 + Math.sin(t.frameCount * 0.05) * 1.5;
+
+	touchAge++;
+	shock *= 0.94;
+
+	drawText('touch cancelled', 0, top, [235, 240, 250]);
+	drawText('leave the touch surface or let the browser interrupt a gesture', 0, top + 2, [130, 150, 180]);
+	drawText(message, 0, Math.floor(rows / 2) - 5, color);
+	drawText(`age ${touchAge} frames`, 0, Math.floor(rows / 2) - 3, [120, 140, 170]);
+
+	for (let ring = 0; ring < 6; ring++) {
+		const points = 18 + ring * 6;
+		const ringRadius = radius + ring * 3;
+
+		for (let i = 0; i < points; i++) {
+			const angle = (i / points) * Math.PI * 2 + t.frameCount * 0.015 * (ring % 2 === 0 ? 1 : -1);
+			const alpha = 80 + Math.max(0, shock) * 80 + ring * 14;
+
+			t.push();
+			t.translate(Math.cos(angle) * ringRadius * 1.65, Math.sin(angle) * ringRadius);
+			t.rotateZ(t.frameCount * 0.3 + ring * 12);
+			t.char(['.', ':', '+', '*', 'x', '#'][ring]);
+			t.charColor(color[0], color[1] - ring * 12, color[2], alpha);
+			t.point();
+			t.pop();
+		}
 	}
+
+	t.push();
+	t.rotateZ(t.frameCount * 0.7);
+	t.char(message === 'TOUCH CANCELLED' ? '!' : '+');
+	t.charColor(color[0], color[1], color[2]);
+	t.rect(11 + shock * 6, 11 + shock * 6);
+	t.pop();
+
+	if (message !== 'READY' && touchAge > 180 && shock < 0.02) {
+		message = 'READY';
+		color = [120, 190, 255];
+	}
+});
+
+function drawText(text, x, y, textColor) {
+	t.push();
+	t.translate(x - Math.floor(text.length / 2), y);
+	t.charColor(textColor[0], textColor[1], textColor[2]);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -12537,36 +13718,104 @@ event. Use it to finalise state such as drawing strokes or completing gestures.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
-
-const ghosts = [];
-
-t.touchEnded((data) => {
-	ghosts.push({ x: data.touch.x, y: data.touch.y, alpha: 255 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
 });
 
-t.draw(() => {
-	t.background(0);
+const sparks = [];
 
-	for (let i = ghosts.length - 1; i >= 0; i--) {
-		const ghost = ghosts[i];
+t.touchEnded((data) => {
+	explode(data.touch.x, data.touch.y);
+});
+
+// Interactive mouse fallback for desktop browsers
+t.mouseReleased(() => {
+	if (t.mouse) {
+		explode(t.mouse.x, t.mouse.y);
+	}
+});
+
+function explode(x, y) {
+	const sparkCount = 24 + Math.floor(Math.random() * 16);
+	const baseColor = [Math.floor(120 + Math.random() * 135), Math.floor(120 + Math.random() * 135), 255];
+
+	for (let i = 0; i < sparkCount; i++) {
+		const angle = Math.random() * Math.PI * 2;
+		const speed = 0.5 + Math.random() * 1.5;
+		sparks.push({
+			x: x,
+			y: y,
+			vx: Math.cos(angle) * speed * 1.5,
+			vy: Math.sin(angle) * speed - 0.2, // Shoot slightly upward initial impulse
+			char: ['*', 'o', '+', '·', '°'][Math.floor(Math.random() * 5)],
+			color: baseColor,
+			alpha: 255,
+			size: 1 + Math.random() * 2,
+		});
+	}
+}
+
+function drawText(text, x, y, r = 180, g = r, b = r) {
+	t.push();
+	t.translate(x - Math.floor(text.length / 2), y);
+	t.charColor(r, g, b);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(6, 8, 14);
+
+	const cols = t.grid.cols;
+	const rows = t.grid.rows;
+
+	// Telemetry instruction labels
+	drawText('CELESTIAL FIREWORK LAUNCHER', 0, -Math.floor(rows / 2) + 4, 100, 200, 255);
+	drawText(
+		'Tap or drag-and-release anywhere on screen to detonate sparks',
+		0,
+		-Math.floor(rows / 2) + 6,
+		120,
+		140,
+		160
+	);
+
+	// Update and draw active firework sparks
+	for (let i = sparks.length - 1; i >= 0; i--) {
+		const s = sparks[i];
+		s.vy += 0.04; // Gravity drift
+		s.x += s.vx;
+		s.y += s.vy;
+
+		s.alpha -= 3.5; // Easing fade out
+		if (s.alpha <= 0) {
+			sparks.splice(i, 1);
+			continue;
+		}
 
 		t.push();
-		t.translate(ghost.x, ghost.y);
-		t.char('○');
-		t.charColor(255, 100, 100, ghost.alpha);
-		t.ellipse(10, 10);
+		t.translate(s.x, s.y);
+		t.char(s.char);
+		// Random sparkling flicker
+		const flicker = Math.random() > 0.3 ? s.alpha : s.alpha * 0.4;
+		t.charColor(s.color[0], s.color[1], s.color[2], flicker);
+		t.rect(s.size, s.size);
 		t.pop();
-
-		ghost.alpha -= 10;
-		if (ghost.alpha <= 0) ghosts.splice(i, 1);
 	}
+});
 
-	if (ghosts.length === 0) {
-		t.charColor(100);
-		t.char('?');
-		t.rect(1, 1);
-	}
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -12596,31 +13845,100 @@ The provided callback is invoked continuously while the browser reports move eve
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
-
-let posX = 0;
-let posY = 0;
-
-t.touchMoved((data) => {
-	const { touch, previousTouch } = data;
-
-	if (previousTouch) {
-		posX += touch.x - previousTouch.x;
-		posY += touch.y - previousTouch.y;
-	}
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
 });
 
-t.draw(() => {
-	t.background(0);
-	t.push();
-	t.translate(posX, posY);
+const trail = [];
+const MAX_TRAIL = 40;
 
-	const r = Math.abs(Math.sin(posX * 0.05)) * 255;
-	const b = Math.abs(Math.cos(posY * 0.05)) * 255;
-	t.charColor(r, 200, b);
-	t.char('◈');
-	t.rect(8, 8);
+t.touchMoved((data) => {
+	const { touch } = data;
+	trail.push({ x: touch.x, y: touch.y, age: 0 });
+	if (trail.length > MAX_TRAIL) trail.shift();
+});
+
+function drawText(text, x, y, r = 180, g = r, b = r) {
+	t.push();
+	t.translate(x - Math.floor(text.length / 2), y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
 	t.pop();
+}
+
+t.draw(() => {
+	t.background(6, 8, 14);
+
+	const cols = t.grid.cols;
+	const rows = t.grid.rows;
+
+	// Draw informative title
+	drawText('NEON FLUID TOUCH PAINTBRUSH', 0, -Math.floor(rows / 2) + 4, 100, 200, 255);
+	drawText(
+		'Drag finger or click-and-drag mouse to paint glowing neon vectors',
+		0,
+		-Math.floor(rows / 2) + 6,
+		120,
+		140,
+		160
+	);
+
+	// Desktop mouse drawing fallback
+	if (t.mouse && t.mouseIsPressed) {
+		trail.push({ x: t.mouse.x, y: t.mouse.y, age: 0 });
+		if (trail.length > MAX_TRAIL) trail.shift();
+	}
+
+	// Update ages and draw trail paths
+	for (let i = 0; i < trail.length; i++) {
+		const node = trail[i];
+		node.age++;
+
+		const ratio = i / trail.length;
+		const fade = Math.max(0, 1.0 - node.age / 120);
+
+		if (fade <= 0) continue;
+
+		t.push();
+		t.translate(node.x, node.y);
+
+		// Neon color interpolation: Hot pink to Electric cyan
+		const r = Math.floor((255 * ratio + 100 * (1 - ratio)) * fade);
+		const g = Math.floor((100 * ratio + 255 * (1 - ratio)) * fade);
+		const b = Math.floor(255 * fade);
+
+		t.charColor(r, g, b);
+
+		// Size decreases as particle ages
+		const size = Math.max(1, Math.floor(5 * ratio * fade));
+
+		// Draw pulsing brush cells
+		if (i % 2 === 0) {
+			t.char('💮');
+		} else {
+			t.char('•');
+		}
+
+		t.ellipse(size, size);
+		t.pop();
+	}
+
+	// Draw trail count diagnostic footer
+	const sizeStr = `TRAIL_ELEMENTS: ${trail.length} / ${MAX_TRAIL}`;
+	drawText(sizeStr, 0, Math.floor(rows / 2) - 4, 100, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+	trail.length = 0;
 });
 ```
 
@@ -12651,42 +13969,129 @@ more fingers on the canvas.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: 800, height: 600 });
-
-const ripples = [];
-
-t.touchStarted((data) => {
-	ripples.push({
-		x: data.touch.x,
-		y: data.touch.y,
-		r: Math.random() * 255,
-		g: Math.random() * 255,
-		b: Math.random() * 255,
-		startFrame: t.frameCount,
-	});
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
 });
 
+const galaxies = [];
+
+t.touchStarted((data) => {
+	spawnGalaxy(data.touch.x, data.touch.y);
+});
+
+// Interactive mouse fallback for desktop browsers
+t.mousePressed(() => {
+	if (t.mouse) {
+		spawnGalaxy(t.mouse.x, t.mouse.y);
+	}
+});
+
+function spawnGalaxy(x, y) {
+	galaxies.push({
+		x: x,
+		y: y,
+		radius: 0.1,
+		maxRadius: 18 + Math.random() * 12,
+		speed: 0.05 + Math.random() * 0.05,
+		rotSpeed: 0.02 + Math.random() * 0.05,
+		angleOffset: Math.random() * Math.PI,
+		color: [255, Math.floor(100 + Math.random() * 155), Math.floor(180 + Math.random() * 75)],
+		alpha: 255,
+	});
+}
+
+function drawText(text, x, y, r = 180, g = r, b = r) {
+	t.push();
+	t.translate(x - Math.floor(text.length / 2), y);
+	t.charColor(r, g, b);
+
+	for (let i = 0; i < text.length; i++) {
+		t.push();
+		t.translate(i, 0);
+		t.char(text[i]);
+		t.point();
+		t.pop();
+	}
+
+	t.pop();
+}
+
 t.draw(() => {
-	t.background(0);
+	t.background(6, 8, 14);
 
-	for (let i = ripples.length - 1; i >= 0; i--) {
-		const ripple = ripples[i];
-		const age = t.frameCount - ripple.startFrame;
-		const size = age * 0.5;
-		const alpha = Math.max(0, 255 - age * 4);
+	const cols = t.grid.cols;
+	const rows = t.grid.rows;
 
-		if (alpha <= 0) {
-			ripples.splice(i, 1);
+	// Telemetry hud instructions
+	drawText('GENERATIVE CEL-GALAXY SEEDER', 0, -Math.floor(rows / 2) + 4, 100, 200, 255);
+	drawText(
+		'Tap anywhere on screen or click to seed new spinning spiral systems',
+		0,
+		-Math.floor(rows / 2) + 6,
+		120,
+		140,
+		160
+	);
+
+	// Update and render active generative galaxies
+	for (let idx = galaxies.length - 1; idx >= 0; idx--) {
+		const g = galaxies[idx];
+		g.radius += g.speed * 6; // Growth rate
+
+		const ageRatio = g.radius / g.maxRadius;
+		g.alpha = Math.max(0, 255 * (1.0 - ageRatio));
+
+		if (g.alpha <= 0 || g.radius >= g.maxRadius) {
+			galaxies.splice(idx, 1);
 			continue;
 		}
 
 		t.push();
-		t.translate(ripple.x, ripple.y);
-		t.char('O');
-		t.charColor(ripple.r, ripple.g, ripple.b, alpha);
-		t.ellipse(size, size);
+		t.translate(g.x, g.y);
+
+		// Render a gorgeous 4-arm spiral galaxy structure
+		const arms = 4;
+		const starsPerArm = 18;
+		for (let arm = 0; arm < arms; arm++) {
+			const baseAngle = (arm / arms) * Math.PI * 2 + g.angleOffset;
+
+			for (let s = 0; s < starsPerArm; s++) {
+				const starRatio = s / starsPerArm;
+				// Spiral wrapping physics
+				const angle = baseAngle + starRatio * 4.5 + t.frameCount * g.rotSpeed;
+				const currentR = starRatio * g.radius;
+
+				const px = Math.cos(angle) * currentR * 1.5;
+				const py = Math.sin(angle) * currentR;
+
+				t.push();
+				t.translate(px, py);
+
+				// Star character density matching center-to-edge
+				const starChars = ['█', '☼', 'O', 'o', '*', '·'];
+				const charIdx = Math.floor(starRatio * starChars.length) % starChars.length;
+				t.char(starChars[charIdx]);
+
+				// Dynamic core-glow gradient
+				t.charColor(
+					g.color[0],
+					Math.floor(g.color[1] * (1 - starRatio)),
+					g.color[2],
+					g.alpha * (1 - starRatio * 0.5)
+				);
+				t.point();
+				t.pop();
+			}
+		}
+
 		t.pop();
 	}
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
