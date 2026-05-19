@@ -1,0 +1,21 @@
+---
+layout: doc
+editLink: true
+title: TextmodeConversionStepOptions
+description: Custom options passed to conversion strategies for one conversion stack pass.
+category: Type Aliases
+api: true
+namespace: conversion
+kind: TypeAlias
+lastModified: 2026-05-19
+---
+
+[textmode.js](../../../index.md) / [conversion](../index.md) / TextmodeConversionStepOptions
+
+# Type Alias: TextmodeConversionStepOptions
+
+```ts
+type TextmodeConversionStepOptions = Record<string, unknown>;
+```
+
+Custom options passed to conversion strategies for one conversion stack pass.

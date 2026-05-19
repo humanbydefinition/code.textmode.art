@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: plugins
 kind: Interface
-lastModified: 2026-05-15
+lastModified: 2026-05-19
 isInterface: true
 ---
 
@@ -65,6 +65,44 @@ The method will be available on all existing and future layer instances.
 api.extendLayer('synth', function(source: SynthSource) {
   // `this` is the TextmodeLayer instance
   this.setPluginState('synth', { source, compiled: compile(source) });
+});
+```
+
+***
+
+### extendSource()
+
+```ts
+extendSource<TArgs, TReturn>(methodName, implementation): void;
+```
+
+Extend TextmodeSource instances with a new method.
+The method will be available on image, video, texture, and overlay sources.
+
+#### Type Parameters
+
+| Type Parameter |
+| ------ |
+| `TArgs` *extends* `unknown`[] |
+| `TReturn` |
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `methodName` | `string` | The name of the method to add. |
+| `implementation` | (`this`, ...`args`) => `TReturn` | The implementation function. `this` will be bound to the TextmodeSource instance. |
+
+#### Returns
+
+`void`
+
+#### Example
+
+```ts
+api.extendSource('edgeDetection', function() {
+  // `this` is the TextmodeSource instance
+  return this.conversionMode('edge');
 });
 ```
 
@@ -1053,4 +1091,30 @@ t.mouseClicked(() => {
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
+```
+
+***
+
+### removeSourceExtension()
+
+```ts
+removeSourceExtension(methodName): void;
+```
+
+Remove a method extension from TextmodeSource.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `methodName` | `string` | The name of the method to remove. |
+
+#### Returns
+
+`void`
+
+#### Example
+
+```ts
+api.removeSourceExtension('edgeDetection');
 ```

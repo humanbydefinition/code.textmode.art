@@ -6,8 +6,8 @@ description: Mutable camera object used for p5-style camera workflows.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-05-15
-hasConstructor: true
+lastModified: 2026-05-19
+hasConstructor: false
 ---
 
 [textmode.js](../index.md) / TextmodeCamera
@@ -19,41 +19,6 @@ Mutable camera object used for p5-style camera workflows.
 Instances can be created with [Textmodifier.createCamera](Textmodifier.md#createcamera) and activated with
 [Textmodifier.setCamera](Textmodifier.md#setcamera). Mutating the object does not affect rendering until
 it is applied again with `setCamera`.
-
-## Constructors
-
-### Constructor
-
-```ts
-new TextmodeCamera(
-   eyeX?, 
-   eyeY?, 
-   eyeZ?, 
-   targetX?, 
-   targetY?, 
-   targetZ?, 
-   upX?, 
-   upY?, 
-   upZ?): TextmodeCamera;
-```
-
-#### Parameters
-
-| Parameter | Type | Default value |
-| ------ | ------ | ------ |
-| `eyeX` | `number` | `0` |
-| `eyeY` | `number` | `0` |
-| `eyeZ` | `number` | `0` |
-| `targetX` | `number` | `0` |
-| `targetY` | `number` | `0` |
-| `targetZ` | `number` | `0` |
-| `upX` | `number` | `0` |
-| `upY` | `number` | `1` |
-| `upZ` | `number` | `0` |
-
-#### Returns
-
-`TextmodeCamera`
 
 ## Accessors
 

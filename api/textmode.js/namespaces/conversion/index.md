@@ -6,7 +6,7 @@ description: All media conversion related modules and types.
 category: Namespaces
 api: true
 kind: Namespace
-lastModified: 2026-05-15
+lastModified: 2026-05-19
 ---
 
 [textmode.js](../../index.md) / conversion
@@ -32,6 +32,8 @@ but custom strategies can be registered via [conversion.TextmodeConversionManage
 | Interface | Description |
 | ------ | ------ |
 | [TextmodeConversionContext](interfaces/TextmodeConversionContext.md) | Interface for the context provided to conversion strategies during shader and uniform creation. |
+| [TextmodeConversionPassContext](interfaces/TextmodeConversionPassContext.md) | Metadata describing the active pass while a conversion stack is being rendered. |
+| [TextmodeConversionStep](interfaces/TextmodeConversionStep.md) | One pass in a source-level conversion stack. |
 | [TextmodeConversionStrategy](interfaces/TextmodeConversionStrategy.md) | Interface for defining a custom textmode conversion strategy. |
 
 ## Type Aliases
@@ -39,4 +41,6 @@ but custom strategies can be registered via [conversion.TextmodeConversionManage
 | Type Alias | Description |
 | ------ | ------ |
 | [BuiltInConversionMode](type-aliases/BuiltInConversionMode.md) | Built-in conversion mode names provided by textmode.js |
+| [TextmodeColorInput](type-aliases/TextmodeColorInput.md) | Color input accepted by conversion stack steps. |
 | [TextmodeConversionMode](type-aliases/TextmodeConversionMode.md) | Type representing the available textmode conversion modes |
+| [TextmodeConversionStepOptions](type-aliases/TextmodeConversionStepOptions.md) | Custom options passed to conversion strategies for one conversion stack pass. |
