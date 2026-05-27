@@ -6,7 +6,7 @@ description: All font rendering related modules and types.
 category: Namespaces
 api: true
 kind: Namespace
-lastModified: 2026-05-19
+lastModified: 2026-05-27
 ---
 
 [textmode.js](../../index.md) / fonts
@@ -19,8 +19,8 @@ All font rendering related modules and types.
 
 | Class | Description |
 | ------ | ------ |
-| [TextmodeFont](classes/TextmodeFont.md) | Manages the font used for rendering characters via [layering.TextmodeLayer.loadFont](../layering/classes/TextmodeLayer.md#loadfont). |
-| [TextmodeTileset](classes/TextmodeTileset.md) | Manages a bitmap tileset as a normalized glyph atlas. |
+| [TextmodeFont](classes/TextmodeFont.md) | Vector font glyph source for textmode rendering. |
+| [TextmodeTileset](classes/TextmodeTileset.md) | Bitmap tileset glyph source for textmode rendering. |
 
 ## Interfaces
 

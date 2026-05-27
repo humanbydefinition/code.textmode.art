@@ -6,7 +6,7 @@ description: ~ travelling without arriving
 category: API Reference
 api: true
 kind: Project
-lastModified: 2026-05-19
+lastModified: 2026-05-27
 ---
 
 # textmode.js
@@ -33,11 +33,11 @@ lastModified: 2026-05-19
 | ------ | ------ |
 | [textmode](classes/textmode.md) | The main entry point for the `textmode.js` library. |
 | [TextmodeCamera](classes/TextmodeCamera.md) | Mutable camera object used for p5-style camera workflows. |
-| [TextmodeColor](classes/TextmodeColor.md) | Represents a color in the `textmode.js` rendering system. |
+| [TextmodeColor](classes/TextmodeColor.md) | Color value used by textmode drawing APIs. |
 | [TextmodeFramebuffer](classes/TextmodeFramebuffer.md) | Framebuffer class for managing offscreen rendering targets initialized via [Textmodifier.createFramebuffer](classes/Textmodifier.md#createframebuffer). |
-| [TextmodeGrid](classes/TextmodeGrid.md) | Manages the grid of each `TextmodeLayer` instance. |
-| [TextmodeShader](classes/TextmodeShader.md) | Shader class for managing WebGL shader programs initialized via [Textmodifier.createFilterShader](classes/Textmodifier.md#createfiltershader) or [Textmodifier.createShader](classes/Textmodifier.md#createshader). |
-| [Textmodifier](classes/Textmodifier.md) | Manages textmode rendering on a [`HTMLCanvasElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement) and provides methods for drawing, font management, event handling, layer management, animation control, and more. The heart of the `textmode.js` library. |
+| [TextmodeGrid](classes/TextmodeGrid.md) | Grid used by a textmode layer. |
+| [TextmodeShader](classes/TextmodeShader.md) | WebGL shader program created by [Textmodifier.createFilterShader](classes/Textmodifier.md#createfiltershader) or [Textmodifier.createShader](classes/Textmodifier.md#createshader). |
+| [Textmodifier](classes/Textmodifier.md) | The main `textmode.js` drawing context. |
 
 ## Type Aliases
 

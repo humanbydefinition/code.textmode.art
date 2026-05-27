@@ -6,7 +6,7 @@ description: Options when creating a Textmodifier instance via textmode.create.
 category: Type Aliases
 api: true
 kind: TypeAlias
-lastModified: 2026-05-19
+lastModified: 2026-05-27
 ---
 
 [textmode.js](../index.md) / TextmodeOptions
@@ -27,7 +27,8 @@ Options when creating a [Textmodifier](../classes/Textmodifier.md) instance via 
 optional canvas?: HTMLCanvasElement | HTMLVideoElement;
 ```
 
-An existing [HTMLCanvasElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement) to use instead of letting `textmode.js` create its own canvas.
+Existing [HTMLCanvasElement](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement)
+or HTMLVideoElement to use instead of letting `textmode.js` create a canvas.
 
 **Note:**
 If using `overlay` mode, this should be the target canvas or video element to overlay on.
@@ -51,7 +52,7 @@ The font size to use for text rendering. Defaults to 16.
 optional fontSource?: string;
 ```
 
-URL or path to a custom font file *(.otf/.ttf/.woff)*.
+URL or path to a custom font file *(.otf, .ttf, or .woff)*.
 
 ***
 
@@ -103,18 +104,16 @@ Configure the built-in loading screen experience.
 optional overlay?: boolean;
 ```
 
-Use `textmode.js` in overlay mode,
-which sets up the textmode `<canvas>` on top of an existing HTMLCanvasElement or HTMLVideoElement,
-automatically resizing and positioning it to match the target element.
+Render `textmode.js` as an overlay on top of an existing canvas or video element.
 
-In this mode `textmode.js` fetches the content of the target element and loads it into an adjustable [media.TextmodeImage](../namespaces/media/classes/TextmodeImage.md),
-that can be accessed via [Textmodifier.overlay](../classes/Textmodifier.md#overlay), and drawn via [Textmodifier.image](../classes/Textmodifier.md#image).
+Overlay mode creates a textmode `<canvas>` that follows the target element's
+size and position. The target content is exposed as an adjustable
+[media.TextmodeImage](../namespaces/media/classes/TextmodeImage.md) through [Textmodifier.overlay](../classes/Textmodifier.md#overlay) and can be drawn
+with [Textmodifier.image](../classes/Textmodifier.md#image).
 
-Useful for applying textmode conversion to p5.js sketches, YouTube videos, and sooo much more.
-
-All functionality of `textmode.js` remains available.
-Resizing the `textmode.js` canvas is not recommended though,
-since the overlay target automatically updates the size.
+This is useful for applying textmode conversion to p5.js sketches, videos,
+and other canvas-based renderers. Manual textmode canvas resizing is not
+recommended in overlay mode because the target element controls the size.
 
 ***
 
@@ -125,6 +124,18 @@ optional plugins?: TextmodePlugin[];
 ```
 
 List of plugins to install when the Textmodifier instance is created.
+
+***
+
+### seed?
+
+```ts
+optional seed?: TextmodeRandomSeed;
+```
+
+Seed used by the instance-scoped random generator.
+
+Set this when a sketch should produce the same random sequence each time it runs.
 
 ***
 

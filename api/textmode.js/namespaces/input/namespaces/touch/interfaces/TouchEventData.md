@@ -2,12 +2,12 @@
 layout: doc
 editLink: true
 title: TouchEventData
-description: Touch event data.
+description: Touch event payload passed to input callbacks.
 category: Interfaces
 api: true
 namespace: input.touch
 kind: Interface
-lastModified: 2026-05-19
+lastModified: 2026-05-27
 isInterface: true
 ---
 
@@ -15,7 +15,7 @@ isInterface: true
 
 # Interface: TouchEventData
 
-Touch event data.
+Touch event payload passed to input callbacks.
 
 The coordinate system uses center-based coordinates matching the main rendering space:
 - `(0, 0)` is the center cell of the grid

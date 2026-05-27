@@ -6,7 +6,7 @@ description: The main entry point for the textmode.js library.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-05-19
+lastModified: 2026-05-27
 hasConstructor: false
 ---
 
@@ -16,7 +16,7 @@ hasConstructor: false
 
 The main entry point for the `textmode.js` library.
 
-Provides static methods for creating [Textmodifier](Textmodifier.md) instances and managing global settings.
+Use it to create [Textmodifier](Textmodifier.md) instances and configure global library settings.
 
 ## Example
 
@@ -26,24 +26,8 @@ const t = textmode.create({
 	height: window.innerHeight,
 });
 
-const label = 'textmode.create()';
+const labelLayer = t.layers.add();
 const chars = 'TEXTMODE';
-
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
 
 t.draw(() => {
 	t.background(8, 12, 24);
@@ -61,9 +45,32 @@ t.draw(() => {
 		t.point();
 		t.pop();
 	}
+});
 
-	drawCenteredText(label, 0, [240, 245, 255]);
-	drawCenteredText('creates a Textmodifier', 5, [140, 170, 210]);
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODE.CREATION', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: INITIALIZATION FUNCTION', x, y++, 100, 220, 255);
+	drawText('Creates a Textmodifier instance.', x, y++, 140, 160, 190);
+	drawText('Configures default viewport/canvas.', x, y++, 140, 160, 190);
 });
 
 t.windowResized(() => {
@@ -81,37 +88,53 @@ t.windowResized(() => {
 get static version(): string;
 ```
 
-Returns the version of `textmode.js` being used.
+The current `textmode.js` package version.
 
 ##### Returns
 
 `string`
 
-The version string of the library.
+The package version string.
 
 ##### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+});
 
-const versionLabel = `VERSION: ${textmode.version}`;
+const labelLayer = t.layers.add();
 
 t.draw(() => {
-	t.background(0, 20, 0);
+	t.background(6, 12, 10);
+});
 
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-versionLabel.length / 2, 0);
-	t.charColor(0, 255, 0);
-
-	for (let i = 0; i < versionLabel.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(versionLabel[i]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODE.VERSION', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: EXPOSES LIBRARY VERSION', x, y++, 100, 220, 255);
+	drawText('Retrieves active semantic version.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`VERSION: ${textmode.version}`, x, y++, 140, 190, 255);
 });
 
 t.windowResized(() => {
@@ -127,19 +150,19 @@ t.windowResized(() => {
 static create(opts?): Textmodifier;
 ```
 
-Create a new [Textmodifier](Textmodifier.md) instance with optional configuration.
+Create a [Textmodifier](Textmodifier.md) instance.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `opts` | [`TextmodeOptions`](../type-aliases/TextmodeOptions.md) | Configuration options for the Textmodifier instance |
+| `opts` | [`TextmodeOptions`](../type-aliases/TextmodeOptions.md) | Optional instance configuration. |
 
 #### Returns
 
 [`Textmodifier`](Textmodifier.md)
 
-A new Textmodifier instance
+The created Textmodifier instance.
 
 #### Example
 
@@ -150,24 +173,8 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-const label = 'textmode.create()';
+const labelLayer = t.layers.add();
 const chars = ['.', '+', '*', 'o'];
-
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
 
 t.draw(() => {
 	t.background(6, 14, 22);
@@ -190,9 +197,33 @@ t.draw(() => {
 			t.pop();
 		}
 	}
+});
 
-	drawCenteredText(label, 0, [240, 245, 255]);
-	drawCenteredText('returns a Textmodifier', 5, [130, 180, 230]);
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODE.CREATE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: STATIC CONTEXT BUILDER', x, y++, 100, 220, 255);
+	drawText('Instantiates a sketch instance.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('Returns fully configured t context.', x, y++, 140, 190, 255);
 });
 
 t.windowResized(() => {
@@ -208,13 +239,13 @@ t.windowResized(() => {
 static setErrorLevel(level): void;
 ```
 
-Set the global error handling level for the library. This applies to all [Textmodifier](Textmodifier.md) instances present.
+Set the global error handling level for all [Textmodifier](Textmodifier.md) instances.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `level` | [`TextmodeErrorLevel`](../namespaces/errors/enumerations/TextmodeErrorLevel.md) | The error handling level to set. |
+| `level` | [`TextmodeErrorLevel`](../namespaces/errors/enumerations/TextmodeErrorLevel.md) | Error handling level to use. |
 
 #### Returns
 
@@ -239,21 +270,7 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
+const labelLayer = t.layers.add();
 
 t.draw(() => {
 	const cycle = 180;
@@ -264,18 +281,39 @@ t.draw(() => {
 		textmode.setErrorLevel(levels[activeIndex].value);
 	}
 
-	const level = levels[activeIndex];
-	const pulse = 0.65 + 0.35 * Math.sin(t.frameCount * 0.08);
-	const glow = Math.round(80 * pulse);
-	const activeColor = [255, Math.min(255, 210 + glow), 90];
-	const meter = levels.map((_, i) => (i <= activeIndex ? '|' : '░')).join('');
-
 	t.background(18, 20, 28);
+});
 
-	drawCenteredText('ERROR LEVEL', -4, [180, 190, 210]);
-	drawCenteredText(level.name, -1, activeColor);
-	drawCenteredText(meter, 1, activeColor);
-	drawCenteredText(level.summary, 4, [220, 220, 220]);
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const level = levels[activeIndex];
+	const meter = levels.map((_, i) => (i <= activeIndex ? '|' : '.')).join('');
+
+	drawText('TEXTMODE.SETERRORLEVEL', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: GLOBAL ERROR HANDLING', x, y++, 100, 220, 255);
+	drawText('Sets library diagnostic severity.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`ACTIVE LEVEL: ${level.name}`, x, y++, 255, 210, 90);
+	drawText(`LEVEL METER : ${meter}`, x, y++, 255, 210, 90);
+	drawText(`BEHAVIOR    : ${level.summary}`, x, y++, 140, 190, 255);
 });
 
 t.windowResized(() => {

@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: plugins
 kind: Interface
-lastModified: 2026-05-19
+lastModified: 2026-05-27
 isInterface: true
 ---
 
@@ -50,44 +50,14 @@ Called when the plugin is installed on a [Textmodifier](../../../classes/Textmod
 #### Example
 
 ```javascript
-let counters = {
-	preSetup: 0,
-	postSetup: 0,
-	preDraw: 0,
-	postDraw: 0,
-	preRender: 0,
-	postRender: 0,
-	disposed: 0,
-	uninstalled: 0,
-};
+let installed = false;
+let installTime = '';
 
-const hookPlugin = {
-	name: 'hook-plugin',
-	install(_textmodifier, context) {
-		context.registerPreSetupHook(() => {
-			counters.preSetup += 1;
-		});
-		context.registerPostSetupHook(() => {
-			counters.postSetup += 1;
-		});
-		context.registerPreDrawHook(() => {
-			counters.preDraw += 1;
-		});
-		context.registerPostDrawHook(() => {
-			counters.postDraw += 1;
-		});
-		context.registerLayerDisposedHook(() => {
-			counters.disposed += 1;
-		});
-		context.registerLayerPreRenderHook(() => {
-			counters.preRender += 1;
-		});
-		context.registerLayerPostRenderHook(() => {
-			counters.postRender += 1;
-		});
-	},
-	uninstall() {
-		counters.uninstalled += 1;
+const myPlugin = {
+	name: 'install-plugin',
+	install(textmodifier, context) {
+		installed = true;
+		installTime = new Date().toLocaleTimeString();
 	},
 };
 
@@ -95,54 +65,41 @@ const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
 	fontSize: 16,
-	plugins: [hookPlugin],
+	plugins: [myPlugin],
 });
 
-const layer = t.layers.add({ fontSize: 16, blendMode: 'screen' });
+const labelLayer = t.layers.add();
 
-function label(text, y, color = [220, 220, 220]) {
+t.draw(() => {
+	t.background(6, 8, 20);
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-t.draw(() => {
-	t.background(5, 7, 18);
-	label('plugin lifecycle + hooks', -8, [255, 225, 140]);
-	label(`setup ${counters.preSetup}/${counters.postSetup}`, -4);
-	label(`draw ${counters.preDraw}/${counters.postDraw}`, 0);
-	label(`render ${counters.preRender}/${counters.postRender}`, 4);
-	label(`disposed ${counters.disposed}  uninstall ${counters.uninstalled}`, 8, [120, 205, 255]);
-	label('click to destroy textmode', 12, [255, 180, 120]);
-});
-
-layer.draw(() => {
+labelLayer.draw(() => {
 	t.clear();
-	t.push();
-	t.rotateZ(t.frameCount * 1.2);
-	t.charColor(120, 205, 255);
-	t.rect(18, 8);
-	t.pop();
-});
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
 
-t.mouseClicked(() => {
-	if (counters.uninstalled > 0) {
-		return;
-	}
-
-	t.destroy();
-	document.body.innerHTML =
-		'<div style="padding: 24px; color: #e4e4e7; background: #09090b; min-height: 100vh;">plugin.uninstall() ran after destroy()</div>';
+	drawText('PLUGINS.INSTALL', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: PLUGIN INITIALIZATION HOOK', x, y++, 100, 220, 255);
+	drawText('Runs on textmode instance creation.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`INSTALLED : ${installed}`, x, y++, 140, 190, 255);
+	drawText(`TRIGGERED : ${installTime}`, x, y++, 140, 190, 255);
 });
 
 t.windowResized(() => {
@@ -174,44 +131,13 @@ Called when the plugin is uninstalled from a [Textmodifier](../../../classes/Tex
 #### Example
 
 ```javascript
-let counters = {
-	preSetup: 0,
-	postSetup: 0,
-	preDraw: 0,
-	postDraw: 0,
-	preRender: 0,
-	postRender: 0,
-	disposed: 0,
-	uninstalled: 0,
-};
+let uninstalled = false;
 
-const hookPlugin = {
-	name: 'hook-plugin',
-	install(_textmodifier, context) {
-		context.registerPreSetupHook(() => {
-			counters.preSetup += 1;
-		});
-		context.registerPostSetupHook(() => {
-			counters.postSetup += 1;
-		});
-		context.registerPreDrawHook(() => {
-			counters.preDraw += 1;
-		});
-		context.registerPostDrawHook(() => {
-			counters.postDraw += 1;
-		});
-		context.registerLayerDisposedHook(() => {
-			counters.disposed += 1;
-		});
-		context.registerLayerPreRenderHook(() => {
-			counters.preRender += 1;
-		});
-		context.registerLayerPostRenderHook(() => {
-			counters.postRender += 1;
-		});
-	},
-	uninstall() {
-		counters.uninstalled += 1;
+const myPlugin = {
+	name: 'uninstall-plugin',
+	install(textmodifier, context) {},
+	uninstall(textmodifier, context) {
+		uninstalled = true;
 	},
 };
 
@@ -219,54 +145,47 @@ const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
 	fontSize: 16,
-	plugins: [hookPlugin],
+	plugins: [myPlugin],
 });
 
-const layer = t.layers.add({ fontSize: 16, blendMode: 'screen' });
-
-function label(text, y, color = [220, 220, 220]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
+const labelLayer = t.layers.add();
 
 t.draw(() => {
-	t.background(5, 7, 18);
-	label('plugin lifecycle + hooks', -8, [255, 225, 140]);
-	label(`setup ${counters.preSetup}/${counters.postSetup}`, -4);
-	label(`draw ${counters.preDraw}/${counters.postDraw}`, 0);
-	label(`render ${counters.preRender}/${counters.postRender}`, 4);
-	label(`disposed ${counters.disposed}  uninstall ${counters.uninstalled}`, 8, [120, 205, 255]);
-	label('click to destroy textmode', 12, [255, 180, 120]);
-});
-
-layer.draw(() => {
-	t.clear();
-	t.push();
-	t.rotateZ(t.frameCount * 1.2);
-	t.charColor(120, 205, 255);
-	t.rect(18, 8);
-	t.pop();
+	t.background(6, 8, 20);
 });
 
 t.mouseClicked(() => {
-	if (counters.uninstalled > 0) {
-		return;
-	}
-
+	if (uninstalled) return;
 	t.destroy();
 	document.body.innerHTML =
-		'<div style="padding: 24px; color: #e4e4e7; background: #09090b; min-height: 100vh;">plugin.uninstall() ran after destroy()</div>';
+		'<div style="padding: 24px; color: #e4e4e7; background: #09090b; min-height: 100vh;">plugin.uninstall() executed successfully.</div>';
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('PLUGINS.UNINSTALL', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: PLUGIN CLEANUP HOOK', x, y++, 100, 220, 255);
+	drawText('Executes when the sketch is destroyed.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(uninstalled ? 'Status: Cleaned Up' : 'Status: Active (Click to uninstall)', x, y++, 140, 190, 255);
 });
 
 t.windowResized(() => {

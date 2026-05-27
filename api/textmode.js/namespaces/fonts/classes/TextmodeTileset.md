@@ -2,12 +2,12 @@
 layout: doc
 editLink: true
 title: TextmodeTileset
-description: Manages a bitmap tileset as a normalized glyph atlas.
+description: Bitmap tileset glyph source for textmode rendering.
 category: Classes
 api: true
 namespace: fonts
 kind: Class
-lastModified: 2026-05-19
+lastModified: 2026-05-27
 hasConstructor: false
 ---
 
@@ -15,7 +15,7 @@ hasConstructor: false
 
 # Class: TextmodeTileset
 
-Manages a bitmap tileset as a normalized glyph atlas.
+Bitmap tileset glyph source for textmode rendering.
 
 Tiles are imported from a source sheet, repacked into the same contiguous atlas layout
 used by vector fonts, and exposed through the shared glyph-atlas contract.
@@ -26,34 +26,75 @@ The native atlas stays at the authored tile resolution.
 ## Example
 
 ```javascript
+const T64_URL = 'https://littlebitspace.com/resources/fonts/T64.png';
 const TILE_COLUMNS = 16;
 const TILE_ROWS = 16;
 const TILE_COUNT = TILE_COLUMNS * TILE_ROWS;
 
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-function label(text, y, color = [220, 220, 220]) {
+const labelLayer = t.layers.add();
+
+let tileset = null;
+
+function tilesetOptions() {
+	return {
+		source: T64_URL,
+		columns: TILE_COLUMNS,
+		rows: TILE_ROWS,
+		count: TILE_COUNT,
+		fontSize: 16,
+	};
+}
+
+t.setup(async () => {
+	tileset = await t.loadTileset(tilesetOptions());
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
 t.draw(() => {
 	t.background(5, 7, 18);
+	if (!tileset) return;
+	const startX = -Math.floor(TILE_COLUMNS / 2);
+	const startY = -Math.floor(TILE_ROWS / 2);
+	for (let i = 0; i < TILE_COUNT; i++) {
+		t.push();
+		t.translate(startX + (i % TILE_COLUMNS), startY + Math.floor(i / TILE_COLUMNS));
+		t.char(i);
+		t.charColor(120 + i * 6, 220, 255 - i * 7);
+		t.point();
+		t.pop();
+	}
+});
 
-	label('TextmodeTileset.creation', -6, [255, 225, 140]);
-	label('t.loadTileset(options)', 0, [180, 200, 220]);
-	label('async bitmap loading', 4, [150, 170, 200]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODETILESET.CREATION', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: TILESET ATLAS DATA', x, y++, 100, 220, 255);
+	drawText('T64 web tileset feeds glyphs.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('T64 READY', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -79,7 +120,7 @@ t.windowResized(() => {
 get cellDimensions(): object;
 ```
 
-Returns the effective tile cell dimensions used by the layer grid.
+Effective tile cell dimensions used by the layer grid.
 
 ##### Returns
 
@@ -93,54 +134,76 @@ Returns the effective tile cell dimensions used by the layer grid.
 ##### Example
 
 ```javascript
+const T64_URL = 'https://littlebitspace.com/resources/fonts/T64.png';
 const TILE_COLUMNS = 16;
 const TILE_ROWS = 16;
 const TILE_COUNT = TILE_COLUMNS * TILE_ROWS;
 
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
 
 let tileset = null;
 
-function label(text, y, color = [220, 220, 220]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
+function tilesetOptions() {
+	return {
+		source: T64_URL,
+		columns: TILE_COLUMNS,
+		rows: TILE_ROWS,
+		count: TILE_COUNT,
+		fontSize: 16,
+	};
 }
 
 t.setup(async () => {
-	tileset = await t.loadTileset(
-		{
-			source: 'https://littlebitspace.com/resources/fonts/T64.png',
-			columns: TILE_COLUMNS,
-			rows: TILE_ROWS,
-			count: TILE_COUNT,
-		},
-		false
-	);
+	tileset = await t.loadTileset(tilesetOptions());
 });
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.draw(() => {
 	t.background(5, 7, 18);
-
-	if (!tileset) {
-		label('loading tileset...', 0, [255, 225, 140]);
-		return;
+	if (!tileset) return;
+	const startX = -Math.floor(TILE_COLUMNS / 2);
+	const startY = -Math.floor(TILE_ROWS / 2);
+	for (let i = 0; i < TILE_COUNT; i++) {
+		t.push();
+		t.translate(startX + (i % TILE_COLUMNS), startY + Math.floor(i / TILE_COLUMNS));
+		t.char(i);
+		t.charColor(120 + i * 6, 220, 255 - i * 7);
+		t.point();
+		t.pop();
 	}
+});
 
-	const dims = tileset.cellDimensions;
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
 
-	label('TextmodeTileset.cellDimensions', -4, [255, 225, 140]);
-	label(`cellDimensions: ${dims.width} x ${dims.height} px`, 2, [120, 205, 255]);
+	drawText('TEXTMODETILESET.CELLDIMENSIONS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: TILESET ATLAS DATA', x, y++, 100, 220, 255);
+	drawText('T64 web tileset feeds glyphs.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	const d = tileset.cellDimensions;
+	drawText(`CELL: ${d.width}x${d.height}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -164,7 +227,7 @@ TextmodeGlyphAtlas.cellDimensions
 get cellHeight(): number;
 ```
 
-Returns the effective tile cell height used by the layer grid.
+Effective tile cell height used by the layer grid.
 
 ##### Returns
 
@@ -173,52 +236,75 @@ Returns the effective tile cell height used by the layer grid.
 ##### Example
 
 ```javascript
+const T64_URL = 'https://littlebitspace.com/resources/fonts/T64.png';
 const TILE_COLUMNS = 16;
 const TILE_ROWS = 16;
 const TILE_COUNT = TILE_COLUMNS * TILE_ROWS;
 
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
 
 let tileset = null;
 
-function label(text, y, color = [220, 220, 220]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
+function tilesetOptions() {
+	return {
+		source: T64_URL,
+		columns: TILE_COLUMNS,
+		rows: TILE_ROWS,
+		count: TILE_COUNT,
+		fontSize: 16,
+	};
 }
 
 t.setup(async () => {
-	tileset = await t.loadTileset(
-		{
-			source: 'https://littlebitspace.com/resources/fonts/T64.png',
-			columns: TILE_COLUMNS,
-			rows: TILE_ROWS,
-			count: TILE_COUNT,
-		},
-		false
-	);
+	tileset = await t.loadTileset(tilesetOptions());
 });
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.draw(() => {
 	t.background(5, 7, 18);
-
-	if (!tileset) {
-		label('loading tileset...', 0, [255, 225, 140]);
-		return;
+	if (!tileset) return;
+	const startX = -Math.floor(TILE_COLUMNS / 2);
+	const startY = -Math.floor(TILE_ROWS / 2);
+	for (let i = 0; i < TILE_COUNT; i++) {
+		t.push();
+		t.translate(startX + (i % TILE_COLUMNS), startY + Math.floor(i / TILE_COLUMNS));
+		t.char(i);
+		t.charColor(120 + i * 6, 220, 255 - i * 7);
+		t.point();
+		t.pop();
 	}
+});
 
-	label('TextmodeTileset.cellHeight', -4, [255, 225, 140]);
-	label('cellHeight: ' + tileset.cellHeight + ' px', 2, [120, 205, 255]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODETILESET.CELLHEIGHT', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: TILESET ATLAS DATA', x, y++, 100, 220, 255);
+	drawText('T64 web tileset feeds glyphs.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`HEIGHT: ${tileset.cellHeight}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -242,7 +328,7 @@ TextmodeGlyphAtlas.cellHeight
 get cellWidth(): number;
 ```
 
-Returns the effective tile cell width used by the layer grid.
+Effective tile cell width used by the layer grid.
 
 ##### Returns
 
@@ -251,52 +337,75 @@ Returns the effective tile cell width used by the layer grid.
 ##### Example
 
 ```javascript
+const T64_URL = 'https://littlebitspace.com/resources/fonts/T64.png';
 const TILE_COLUMNS = 16;
 const TILE_ROWS = 16;
 const TILE_COUNT = TILE_COLUMNS * TILE_ROWS;
 
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
 
 let tileset = null;
 
-function label(text, y, color = [220, 220, 220]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
+function tilesetOptions() {
+	return {
+		source: T64_URL,
+		columns: TILE_COLUMNS,
+		rows: TILE_ROWS,
+		count: TILE_COUNT,
+		fontSize: 16,
+	};
 }
 
 t.setup(async () => {
-	tileset = await t.loadTileset(
-		{
-			source: 'https://littlebitspace.com/resources/fonts/T64.png',
-			columns: TILE_COLUMNS,
-			rows: TILE_ROWS,
-			count: TILE_COUNT,
-		},
-		false
-	);
+	tileset = await t.loadTileset(tilesetOptions());
 });
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.draw(() => {
 	t.background(5, 7, 18);
-
-	if (!tileset) {
-		label('loading tileset...', 0, [255, 225, 140]);
-		return;
+	if (!tileset) return;
+	const startX = -Math.floor(TILE_COLUMNS / 2);
+	const startY = -Math.floor(TILE_ROWS / 2);
+	for (let i = 0; i < TILE_COUNT; i++) {
+		t.push();
+		t.translate(startX + (i % TILE_COLUMNS), startY + Math.floor(i / TILE_COLUMNS));
+		t.char(i);
+		t.charColor(120 + i * 6, 220, 255 - i * 7);
+		t.point();
+		t.pop();
 	}
+});
 
-	label('TextmodeTileset.cellWidth', -4, [255, 225, 140]);
-	label('cellWidth: ' + tileset.cellWidth + ' px', 2, [120, 205, 255]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODETILESET.CELLWIDTH', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: TILESET ATLAS DATA', x, y++, 100, 220, 255);
+	drawText('T64 web tileset feeds glyphs.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`WIDTH: ${tileset.cellWidth}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -320,7 +429,7 @@ TextmodeGlyphAtlas.cellWidth
 get characterMap(): Map<string, TextmodeGlyph>;
 ```
 
-Returns the character-to-glyph lookup map for the tileset.
+Character-to-glyph lookup map for the tileset.
 
 ##### Returns
 
@@ -329,68 +438,75 @@ Returns the character-to-glyph lookup map for the tileset.
 ##### Example
 
 ```javascript
+const T64_URL = 'https://littlebitspace.com/resources/fonts/T64.png';
 const TILE_COLUMNS = 16;
 const TILE_ROWS = 16;
 const TILE_COUNT = TILE_COLUMNS * TILE_ROWS;
 
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
 
 let tileset = null;
 
-function label(text, y, color = [220, 220, 220]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
+function tilesetOptions() {
+	return {
+		source: T64_URL,
+		columns: TILE_COLUMNS,
+		rows: TILE_ROWS,
+		count: TILE_COUNT,
+		fontSize: 16,
+	};
 }
 
 t.setup(async () => {
-	tileset = await t.loadTileset(
-		{
-			source: 'https://littlebitspace.com/resources/fonts/T64.png',
-			columns: TILE_COLUMNS,
-			rows: TILE_ROWS,
-			count: TILE_COUNT,
-		},
-		false
-	);
+	tileset = await t.loadTileset(tilesetOptions());
 });
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.draw(() => {
 	t.background(5, 7, 18);
-
-	if (!tileset) {
-		label('loading tileset...', 0, [255, 225, 140]);
-		return;
-	}
-
-	const charIndex = Math.floor(t.frameCount * 0.1) % tileset.characters.length;
-	const glyph = tileset.characters[charIndex];
-	const currentChar = glyph.character;
-	const mapGlyph = tileset.characterMap.get(currentChar);
-
-	label('TextmodeTileset.characterMap', -8, [255, 225, 140]);
-
-	if (mapGlyph) {
+	if (!tileset) return;
+	const startX = -Math.floor(TILE_COLUMNS / 2);
+	const startY = -Math.floor(TILE_ROWS / 2);
+	for (let i = 0; i < TILE_COUNT; i++) {
 		t.push();
-		t.translate(0, 0);
-		t.char(currentChar);
-		t.charColor(255, 255, 255);
+		t.translate(startX + (i % TILE_COLUMNS), startY + Math.floor(i / TILE_COLUMNS));
+		t.char(i);
+		t.charColor(120 + i * 6, 220, 255 - i * 7);
 		t.point();
 		t.pop();
-
-		label('char: ' + currentChar, 6, [180, 200, 220]);
-		label('map.size: ' + tileset.characterMap.size, 10, [150, 170, 200]);
 	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODETILESET.CHARACTERMAP', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: TILESET ATLAS DATA', x, y++, 100, 220, 255);
+	drawText('T64 web tileset feeds glyphs.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`MAP SIZE: ${tileset.characterMap.size}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -414,7 +530,7 @@ TextmodeGlyphAtlas.characterMap
 get characters(): readonly TextmodeGlyph[];
 ```
 
-Returns the array of glyphs generated from the tileset mapping.
+Glyphs generated from the tileset mapping.
 
 ##### Returns
 
@@ -423,69 +539,75 @@ readonly [`TextmodeGlyph`](../type-aliases/TextmodeGlyph.md)[]
 ##### Example
 
 ```javascript
+const T64_URL = 'https://littlebitspace.com/resources/fonts/T64.png';
 const TILE_COLUMNS = 16;
 const TILE_ROWS = 16;
 const TILE_COUNT = TILE_COLUMNS * TILE_ROWS;
 
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
 
 let tileset = null;
 
-function label(text, y, color = [220, 220, 220]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
+function tilesetOptions() {
+	return {
+		source: T64_URL,
+		columns: TILE_COLUMNS,
+		rows: TILE_ROWS,
+		count: TILE_COUNT,
+		fontSize: 16,
+	};
 }
 
 t.setup(async () => {
-	tileset = await t.loadTileset(
-		{
-			source: 'https://littlebitspace.com/resources/fonts/T64.png',
-			columns: TILE_COLUMNS,
-			rows: TILE_ROWS,
-			count: TILE_COUNT,
-		},
-		false
-	);
+	tileset = await t.loadTileset(tilesetOptions());
 });
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.draw(() => {
 	t.background(5, 7, 18);
-
-	if (!tileset) {
-		label('loading tileset...', 0, [255, 225, 140]);
-		return;
-	}
-
-	const chars = tileset.characters;
-	const cols = 16;
-	const startX = -Math.floor(cols / 2);
-	const startY = -Math.floor(chars.length / cols / 2);
-
-	for (let i = 0; i < chars.length; i++) {
-		const glyph = chars[i];
+	if (!tileset) return;
+	const startX = -Math.floor(TILE_COLUMNS / 2);
+	const startY = -Math.floor(TILE_ROWS / 2);
+	for (let i = 0; i < TILE_COUNT; i++) {
 		t.push();
-		t.translate(startX + (i % cols), startY + Math.floor(i / cols));
-
-		// Use the character index safely.
-		t.char(glyph.character);
-
-		t.charColor(255, 255, 255);
+		t.translate(startX + (i % TILE_COLUMNS), startY + Math.floor(i / TILE_COLUMNS));
+		t.char(i);
+		t.charColor(120 + i * 6, 220, 255 - i * 7);
 		t.point();
 		t.pop();
 	}
+});
 
-	label('TextmodeTileset.characters', Math.floor(t.grid.rows / 2) - 3, [255, 225, 140]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODETILESET.CHARACTERS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: TILESET ATLAS DATA', x, y++, 100, 220, 255);
+	drawText('T64 web tileset feeds glyphs.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`COUNT: ${tileset.characters.length}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -509,7 +631,7 @@ TextmodeGlyphAtlas.characters
 get columns(): number;
 ```
 
-Returns the number of columns in the normalized glyph atlas.
+Number of columns in the normalized glyph atlas.
 
 ##### Returns
 
@@ -518,52 +640,75 @@ Returns the number of columns in the normalized glyph atlas.
 ##### Example
 
 ```javascript
+const T64_URL = 'https://littlebitspace.com/resources/fonts/T64.png';
 const TILE_COLUMNS = 16;
 const TILE_ROWS = 16;
 const TILE_COUNT = TILE_COLUMNS * TILE_ROWS;
 
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
 
 let tileset = null;
 
-function label(text, y, color = [220, 220, 220]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
+function tilesetOptions() {
+	return {
+		source: T64_URL,
+		columns: TILE_COLUMNS,
+		rows: TILE_ROWS,
+		count: TILE_COUNT,
+		fontSize: 16,
+	};
 }
 
 t.setup(async () => {
-	tileset = await t.loadTileset(
-		{
-			source: 'https://littlebitspace.com/resources/fonts/T64.png',
-			columns: TILE_COLUMNS,
-			rows: TILE_ROWS,
-			count: TILE_COUNT,
-		},
-		false
-	);
+	tileset = await t.loadTileset(tilesetOptions());
 });
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.draw(() => {
 	t.background(5, 7, 18);
-
-	if (!tileset) {
-		label('loading tileset...', 0, [255, 225, 140]);
-		return;
+	if (!tileset) return;
+	const startX = -Math.floor(TILE_COLUMNS / 2);
+	const startY = -Math.floor(TILE_ROWS / 2);
+	for (let i = 0; i < TILE_COUNT; i++) {
+		t.push();
+		t.translate(startX + (i % TILE_COLUMNS), startY + Math.floor(i / TILE_COLUMNS));
+		t.char(i);
+		t.charColor(120 + i * 6, 220, 255 - i * 7);
+		t.point();
+		t.pop();
 	}
+});
 
-	label('TextmodeTileset.columns', -4, [255, 225, 140]);
-	label('columns: ' + tileset.columns, 2, [120, 205, 255]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODETILESET.COLUMNS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: TILESET ATLAS DATA', x, y++, 100, 220, 255);
+	drawText('T64 web tileset feeds glyphs.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`COLUMNS: ${tileset.columns}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -587,7 +732,7 @@ TextmodeGlyphAtlas.columns
 get fontFramebuffer(): TextmodeFramebuffer;
 ```
 
-Returns the tileset atlas framebuffer backing this glyph atlas.
+Tileset atlas framebuffer backing this glyph atlas.
 
 ##### Returns
 
@@ -596,55 +741,76 @@ Returns the tileset atlas framebuffer backing this glyph atlas.
 ##### Example
 
 ```javascript
+const T64_URL = 'https://littlebitspace.com/resources/fonts/T64.png';
 const TILE_COLUMNS = 16;
 const TILE_ROWS = 16;
 const TILE_COUNT = TILE_COLUMNS * TILE_ROWS;
 
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
 
 let tileset = null;
 
-function label(text, y, color = [220, 220, 220]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
+function tilesetOptions() {
+	return {
+		source: T64_URL,
+		columns: TILE_COLUMNS,
+		rows: TILE_ROWS,
+		count: TILE_COUNT,
+		fontSize: 16,
+	};
 }
 
 t.setup(async () => {
-	tileset = await t.loadTileset(
-		{
-			source: 'https://littlebitspace.com/resources/fonts/T64.png',
-			columns: TILE_COLUMNS,
-			rows: TILE_ROWS,
-			count: TILE_COUNT,
-		},
-		false
-	);
+	tileset = await t.loadTileset(tilesetOptions());
 });
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.draw(() => {
 	t.background(5, 7, 18);
-
-	if (!tileset) {
-		label('loading tileset...', 0, [255, 225, 140]);
-		return;
+	if (!tileset) return;
+	const startX = -Math.floor(TILE_COLUMNS / 2);
+	const startY = -Math.floor(TILE_ROWS / 2);
+	for (let i = 0; i < TILE_COUNT; i++) {
+		t.push();
+		t.translate(startX + (i % TILE_COLUMNS), startY + Math.floor(i / TILE_COLUMNS));
+		t.char(i);
+		t.charColor(120 + i * 6, 220, 255 - i * 7);
+		t.point();
+		t.pop();
 	}
+});
 
-	const atlas = tileset.fontFramebuffer;
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
 
-	label('TextmodeTileset.fontFramebuffer', -6, [255, 225, 140]);
-	label('backing atlas framebuffer', -2, [180, 200, 220]);
-	label(atlas.width + ' x ' + atlas.height + ' px', 4, [150, 170, 200]);
+	drawText('TEXTMODETILESET.FONTFRAMEBUFFER', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: TILESET ATLAS DATA', x, y++, 100, 220, 255);
+	drawText('T64 web tileset feeds glyphs.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	const ready = Boolean(tileset.fontFramebuffer);
+	drawText(`FONT FBO: ${ready}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -662,7 +828,7 @@ t.windowResized(() => {
 get fontSize(): number;
 ```
 
-Returns the effective font size used to scale tileset cells.
+Effective font size used to scale tileset cells.
 
 ##### Returns
 
@@ -671,52 +837,75 @@ Returns the effective font size used to scale tileset cells.
 ##### Example
 
 ```javascript
+const T64_URL = 'https://littlebitspace.com/resources/fonts/T64.png';
 const TILE_COLUMNS = 16;
 const TILE_ROWS = 16;
 const TILE_COUNT = TILE_COLUMNS * TILE_ROWS;
 
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
 
 let tileset = null;
 
-function label(text, y, color = [220, 220, 220]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
+function tilesetOptions() {
+	return {
+		source: T64_URL,
+		columns: TILE_COLUMNS,
+		rows: TILE_ROWS,
+		count: TILE_COUNT,
+		fontSize: 16,
+	};
 }
 
 t.setup(async () => {
-	tileset = await t.loadTileset(
-		{
-			source: 'https://littlebitspace.com/resources/fonts/T64.png',
-			columns: TILE_COLUMNS,
-			rows: TILE_ROWS,
-			count: TILE_COUNT,
-		},
-		false
-	);
+	tileset = await t.loadTileset(tilesetOptions());
 });
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.draw(() => {
 	t.background(5, 7, 18);
-
-	if (!tileset) {
-		label('loading tileset...', 0, [255, 225, 140]);
-		return;
+	if (!tileset) return;
+	const startX = -Math.floor(TILE_COLUMNS / 2);
+	const startY = -Math.floor(TILE_ROWS / 2);
+	for (let i = 0; i < TILE_COUNT; i++) {
+		t.push();
+		t.translate(startX + (i % TILE_COLUMNS), startY + Math.floor(i / TILE_COLUMNS));
+		t.char(i);
+		t.charColor(120 + i * 6, 220, 255 - i * 7);
+		t.point();
+		t.pop();
 	}
+});
 
-	label('TextmodeTileset.fontSize', -4, [255, 225, 140]);
-	label('fontSize: ' + tileset.fontSize, 2, [120, 205, 255]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODETILESET.FONTSIZE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: TILESET ATLAS DATA', x, y++, 100, 220, 255);
+	drawText('T64 web tileset feeds glyphs.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`FONT SIZE: ${tileset.fontSize}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -734,7 +923,7 @@ t.windowResized(() => {
 get framebuffer(): TextmodeFramebuffer;
 ```
 
-Returns the normalized glyph atlas framebuffer used by the ASCII shader.
+Normalized glyph atlas framebuffer used by the ASCII shader.
 
 ##### Returns
 
@@ -743,55 +932,76 @@ Returns the normalized glyph atlas framebuffer used by the ASCII shader.
 ##### Example
 
 ```javascript
+const T64_URL = 'https://littlebitspace.com/resources/fonts/T64.png';
 const TILE_COLUMNS = 16;
 const TILE_ROWS = 16;
 const TILE_COUNT = TILE_COLUMNS * TILE_ROWS;
 
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
 
 let tileset = null;
 
-function label(text, y, color = [220, 220, 220]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
+function tilesetOptions() {
+	return {
+		source: T64_URL,
+		columns: TILE_COLUMNS,
+		rows: TILE_ROWS,
+		count: TILE_COUNT,
+		fontSize: 16,
+	};
 }
 
 t.setup(async () => {
-	tileset = await t.loadTileset(
-		{
-			source: 'https://littlebitspace.com/resources/fonts/T64.png',
-			columns: TILE_COLUMNS,
-			rows: TILE_ROWS,
-			count: TILE_COUNT,
-		},
-		false
-	);
+	tileset = await t.loadTileset(tilesetOptions());
 });
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.draw(() => {
 	t.background(5, 7, 18);
-
-	if (!tileset) {
-		label('loading tileset...', 0, [255, 225, 140]);
-		return;
+	if (!tileset) return;
+	const startX = -Math.floor(TILE_COLUMNS / 2);
+	const startY = -Math.floor(TILE_ROWS / 2);
+	for (let i = 0; i < TILE_COUNT; i++) {
+		t.push();
+		t.translate(startX + (i % TILE_COLUMNS), startY + Math.floor(i / TILE_COLUMNS));
+		t.char(i);
+		t.charColor(120 + i * 6, 220, 255 - i * 7);
+		t.point();
+		t.pop();
 	}
+});
 
-	const atlas = tileset.framebuffer;
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
 
-	label('TextmodeTileset.framebuffer', -6, [255, 225, 140]);
-	label(atlas.width + ' x ' + atlas.height + ' px', 0, [180, 200, 220]);
-	label(tileset.columns + ' cols x ' + tileset.rows + ' rows', 4, [150, 170, 200]);
+	drawText('TEXTMODETILESET.FRAMEBUFFER', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: TILESET ATLAS DATA', x, y++, 100, 220, 255);
+	drawText('T64 web tileset feeds glyphs.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	const ready = Boolean(tileset.framebuffer);
+	drawText(`FBO READY: ${ready}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -815,7 +1025,7 @@ TextmodeGlyphAtlas.framebuffer
 get maxGlyphDimensions(): object;
 ```
 
-Returns the effective tile dimensions used by the layer grid.
+Effective tile dimensions used by the layer grid.
 
 ##### Returns
 
@@ -829,54 +1039,76 @@ Returns the effective tile dimensions used by the layer grid.
 ##### Example
 
 ```javascript
+const T64_URL = 'https://littlebitspace.com/resources/fonts/T64.png';
 const TILE_COLUMNS = 16;
 const TILE_ROWS = 16;
 const TILE_COUNT = TILE_COLUMNS * TILE_ROWS;
 
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
 
 let tileset = null;
 
-function label(text, y, color = [220, 220, 220]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
+function tilesetOptions() {
+	return {
+		source: T64_URL,
+		columns: TILE_COLUMNS,
+		rows: TILE_ROWS,
+		count: TILE_COUNT,
+		fontSize: 16,
+	};
 }
 
 t.setup(async () => {
-	tileset = await t.loadTileset(
-		{
-			source: 'https://littlebitspace.com/resources/fonts/T64.png',
-			columns: TILE_COLUMNS,
-			rows: TILE_ROWS,
-			count: TILE_COUNT,
-		},
-		false
-	);
+	tileset = await t.loadTileset(tilesetOptions());
 });
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.draw(() => {
 	t.background(5, 7, 18);
-
-	if (!tileset) {
-		label('loading tileset...', 0, [255, 225, 140]);
-		return;
+	if (!tileset) return;
+	const startX = -Math.floor(TILE_COLUMNS / 2);
+	const startY = -Math.floor(TILE_ROWS / 2);
+	for (let i = 0; i < TILE_COUNT; i++) {
+		t.push();
+		t.translate(startX + (i % TILE_COLUMNS), startY + Math.floor(i / TILE_COLUMNS));
+		t.char(i);
+		t.charColor(120 + i * 6, 220, 255 - i * 7);
+		t.point();
+		t.pop();
 	}
+});
 
-	const dims = tileset.maxGlyphDimensions;
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
 
-	label('TextmodeTileset.maxGlyphDimensions', -4, [255, 225, 140]);
-	label(`maxGlyphDimensions: ${dims.width} x ${dims.height} px`, 2, [120, 205, 255]);
+	drawText('TEXTMODETILESET.MAXGLYPHDIMENSIONS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: TILESET ATLAS DATA', x, y++, 100, 220, 255);
+	drawText('T64 web tileset feeds glyphs.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	const d = tileset.maxGlyphDimensions;
+	drawText(`MAX: ${d.width}x${d.height}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -894,7 +1126,7 @@ t.windowResized(() => {
 get nativeCellDimensions(): object;
 ```
 
-Returns the authored tile dimensions from the source tileset in pixels.
+Authored tile dimensions from the source tileset in pixels.
 
 ##### Returns
 
@@ -908,54 +1140,76 @@ Returns the authored tile dimensions from the source tileset in pixels.
 ##### Example
 
 ```javascript
+const T64_URL = 'https://littlebitspace.com/resources/fonts/T64.png';
 const TILE_COLUMNS = 16;
 const TILE_ROWS = 16;
 const TILE_COUNT = TILE_COLUMNS * TILE_ROWS;
 
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
 
 let tileset = null;
 
-function label(text, y, color = [220, 220, 220]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
+function tilesetOptions() {
+	return {
+		source: T64_URL,
+		columns: TILE_COLUMNS,
+		rows: TILE_ROWS,
+		count: TILE_COUNT,
+		fontSize: 16,
+	};
 }
 
 t.setup(async () => {
-	tileset = await t.loadTileset(
-		{
-			source: 'https://littlebitspace.com/resources/fonts/T64.png',
-			columns: TILE_COLUMNS,
-			rows: TILE_ROWS,
-			count: TILE_COUNT,
-		},
-		false
-	);
+	tileset = await t.loadTileset(tilesetOptions());
 });
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.draw(() => {
 	t.background(5, 7, 18);
-
-	if (!tileset) {
-		label('loading tileset...', 0, [255, 225, 140]);
-		return;
+	if (!tileset) return;
+	const startX = -Math.floor(TILE_COLUMNS / 2);
+	const startY = -Math.floor(TILE_ROWS / 2);
+	for (let i = 0; i < TILE_COUNT; i++) {
+		t.push();
+		t.translate(startX + (i % TILE_COLUMNS), startY + Math.floor(i / TILE_COLUMNS));
+		t.char(i);
+		t.charColor(120 + i * 6, 220, 255 - i * 7);
+		t.point();
+		t.pop();
 	}
+});
 
-	const dims = tileset.nativeCellDimensions;
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
 
-	label('TextmodeTileset.nativeCellDimensions', -4, [255, 225, 140]);
-	label(`nativeCellDimensions: ${dims.width} x ${dims.height} px`, 2, [120, 205, 255]);
+	drawText('TEXTMODETILESET.NATIVECELLDIMENSIONS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: TILESET ATLAS DATA', x, y++, 100, 220, 255);
+	drawText('T64 web tileset feeds glyphs.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	const d = tileset.nativeCellDimensions;
+	drawText(`NATIVE: ${d.width}x${d.height}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -973,7 +1227,7 @@ t.windowResized(() => {
 get rows(): number;
 ```
 
-Returns the number of rows in the normalized glyph atlas.
+Number of rows in the normalized glyph atlas.
 
 ##### Returns
 
@@ -982,52 +1236,75 @@ Returns the number of rows in the normalized glyph atlas.
 ##### Example
 
 ```javascript
+const T64_URL = 'https://littlebitspace.com/resources/fonts/T64.png';
 const TILE_COLUMNS = 16;
 const TILE_ROWS = 16;
 const TILE_COUNT = TILE_COLUMNS * TILE_ROWS;
 
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
 
 let tileset = null;
 
-function label(text, y, color = [220, 220, 220]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
+function tilesetOptions() {
+	return {
+		source: T64_URL,
+		columns: TILE_COLUMNS,
+		rows: TILE_ROWS,
+		count: TILE_COUNT,
+		fontSize: 16,
+	};
 }
 
 t.setup(async () => {
-	tileset = await t.loadTileset(
-		{
-			source: 'https://littlebitspace.com/resources/fonts/T64.png',
-			columns: TILE_COLUMNS,
-			rows: TILE_ROWS,
-			count: TILE_COUNT,
-		},
-		false
-	);
+	tileset = await t.loadTileset(tilesetOptions());
 });
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.draw(() => {
 	t.background(5, 7, 18);
-
-	if (!tileset) {
-		label('loading tileset...', 0, [255, 225, 140]);
-		return;
+	if (!tileset) return;
+	const startX = -Math.floor(TILE_COLUMNS / 2);
+	const startY = -Math.floor(TILE_ROWS / 2);
+	for (let i = 0; i < TILE_COUNT; i++) {
+		t.push();
+		t.translate(startX + (i % TILE_COLUMNS), startY + Math.floor(i / TILE_COLUMNS));
+		t.char(i);
+		t.charColor(120 + i * 6, 220, 255 - i * 7);
+		t.point();
+		t.pop();
 	}
+});
 
-	label('TextmodeTileset.rows', -4, [255, 225, 140]);
-	label('rows: ' + tileset.rows, 2, [120, 205, 255]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODETILESET.ROWS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: TILESET ATLAS DATA', x, y++, 100, 220, 255);
+	drawText('T64 web tileset feeds glyphs.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`ROWS: ${tileset.rows}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -1051,7 +1328,7 @@ TextmodeGlyphAtlas.rows
 get textureColumns(): number;
 ```
 
-Returns the number of columns in the repacked tileset texture atlas.
+Number of columns in the repacked tileset atlas.
 
 ##### Returns
 
@@ -1060,52 +1337,75 @@ Returns the number of columns in the repacked tileset texture atlas.
 ##### Example
 
 ```javascript
+const T64_URL = 'https://littlebitspace.com/resources/fonts/T64.png';
 const TILE_COLUMNS = 16;
 const TILE_ROWS = 16;
 const TILE_COUNT = TILE_COLUMNS * TILE_ROWS;
 
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
 
 let tileset = null;
 
-function label(text, y, color = [220, 220, 220]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
+function tilesetOptions() {
+	return {
+		source: T64_URL,
+		columns: TILE_COLUMNS,
+		rows: TILE_ROWS,
+		count: TILE_COUNT,
+		fontSize: 16,
+	};
 }
 
 t.setup(async () => {
-	tileset = await t.loadTileset(
-		{
-			source: 'https://littlebitspace.com/resources/fonts/T64.png',
-			columns: TILE_COLUMNS,
-			rows: TILE_ROWS,
-			count: TILE_COUNT,
-		},
-		false
-	);
+	tileset = await t.loadTileset(tilesetOptions());
 });
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.draw(() => {
 	t.background(5, 7, 18);
-
-	if (!tileset) {
-		label('loading tileset...', 0, [255, 225, 140]);
-		return;
+	if (!tileset) return;
+	const startX = -Math.floor(TILE_COLUMNS / 2);
+	const startY = -Math.floor(TILE_ROWS / 2);
+	for (let i = 0; i < TILE_COUNT; i++) {
+		t.push();
+		t.translate(startX + (i % TILE_COLUMNS), startY + Math.floor(i / TILE_COLUMNS));
+		t.char(i);
+		t.charColor(120 + i * 6, 220, 255 - i * 7);
+		t.point();
+		t.pop();
 	}
+});
 
-	label('TextmodeTileset.textureColumns', -4, [255, 225, 140]);
-	label('textureColumns: ' + tileset.textureColumns, 2, [120, 205, 255]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODETILESET.TEXTURECOLUMNS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: TILESET ATLAS DATA', x, y++, 100, 220, 255);
+	drawText('T64 web tileset feeds glyphs.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`TEX COLS: ${tileset.textureColumns}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -1123,7 +1423,7 @@ t.windowResized(() => {
 get textureRows(): number;
 ```
 
-Returns the number of rows in the repacked tileset texture atlas.
+Number of rows in the repacked tileset atlas.
 
 ##### Returns
 
@@ -1132,52 +1432,75 @@ Returns the number of rows in the repacked tileset texture atlas.
 ##### Example
 
 ```javascript
+const T64_URL = 'https://littlebitspace.com/resources/fonts/T64.png';
 const TILE_COLUMNS = 16;
 const TILE_ROWS = 16;
 const TILE_COUNT = TILE_COLUMNS * TILE_ROWS;
 
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
 
 let tileset = null;
 
-function label(text, y, color = [220, 220, 220]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
+function tilesetOptions() {
+	return {
+		source: T64_URL,
+		columns: TILE_COLUMNS,
+		rows: TILE_ROWS,
+		count: TILE_COUNT,
+		fontSize: 16,
+	};
 }
 
 t.setup(async () => {
-	tileset = await t.loadTileset(
-		{
-			source: 'https://littlebitspace.com/resources/fonts/T64.png',
-			columns: TILE_COLUMNS,
-			rows: TILE_ROWS,
-			count: TILE_COUNT,
-		},
-		false
-	);
+	tileset = await t.loadTileset(tilesetOptions());
 });
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.draw(() => {
 	t.background(5, 7, 18);
-
-	if (!tileset) {
-		label('loading tileset...', 0, [255, 225, 140]);
-		return;
+	if (!tileset) return;
+	const startX = -Math.floor(TILE_COLUMNS / 2);
+	const startY = -Math.floor(TILE_ROWS / 2);
+	for (let i = 0; i < TILE_COUNT; i++) {
+		t.push();
+		t.translate(startX + (i % TILE_COLUMNS), startY + Math.floor(i / TILE_COLUMNS));
+		t.char(i);
+		t.charColor(120 + i * 6, 220, 255 - i * 7);
+		t.point();
+		t.pop();
 	}
+});
 
-	label('TextmodeTileset.textureRows', -4, [255, 225, 140]);
-	label('textureRows: ' + tileset.textureRows, 2, [120, 205, 255]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODETILESET.TEXTUREROWS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: TILESET ATLAS DATA', x, y++, 100, 220, 255);
+	drawText('T64 web tileset feeds glyphs.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`TEX ROWS: ${tileset.textureRows}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -1202,59 +1525,83 @@ Dispose the tileset and release its shared atlas resources.
 #### Example
 
 ```javascript
+const T64_URL = 'https://littlebitspace.com/resources/fonts/T64.png';
 const TILE_COLUMNS = 16;
 const TILE_ROWS = 16;
 const TILE_COUNT = TILE_COLUMNS * TILE_ROWS;
 
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
-
-let tileset = null;
-let disposed = false;
-
-function label(text, y, color = [220, 220, 220]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
-
-t.setup(async () => {
-	tileset = await t.loadTileset(
-		{
-			source: 'https://littlebitspace.com/resources/fonts/T64.png',
-			columns: TILE_COLUMNS,
-			rows: TILE_ROWS,
-			count: TILE_COUNT,
-		},
-		false
-	);
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
 });
 
-t.draw(() => {
-	t.background(5, 7, 18);
+const labelLayer = t.layers.add();
 
-	label('click to dispose tileset', -4, [255, 225, 140]);
-	label(disposed ? 'tileset disposed' : 'tileset active', 0);
-	label('T64  16 x 16  8 x 8 cells', 4);
-	label('this frees atlas resources early', 8, [120, 205, 255]);
+let tileset = null;
+
+function tilesetOptions() {
+	return {
+		source: T64_URL,
+		columns: TILE_COLUMNS,
+		rows: TILE_ROWS,
+		count: TILE_COUNT,
+		fontSize: 16,
+	};
+}
+
+let disposed = false;
+
+t.setup(async () => {
+	await t.loadTileset(tilesetOptions());
+	tileset = await t.loadTileset(tilesetOptions(), false);
 });
 
 t.mouseClicked(() => {
-	if (!tileset || disposed) {
-		return;
+	if (tileset && !disposed) {
+		tileset.dispose();
+		disposed = true;
 	}
+});
 
-	tileset.dispose();
-	disposed = true;
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(5, 7, 18);
+	if (!tileset) return;
+	const startX = -Math.floor(TILE_COLUMNS / 2);
+	const startY = -Math.floor(TILE_ROWS / 2);
+	for (let i = 0; i < TILE_COUNT; i++) {
+		t.push();
+		t.translate(startX + (i % TILE_COLUMNS), startY + Math.floor(i / TILE_COLUMNS));
+		t.char(i);
+		t.charColor(120 + i * 6, 220, 255 - i * 7);
+		t.point();
+		t.pop();
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	let y = -Math.floor(t.grid.rows / 2) + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODETILESET.DISPOSE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: TILESET ATLAS DATA', x, y++, 100, 220, 255);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`STATUS: ${disposed ? 'OFF' : 'ON'}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {

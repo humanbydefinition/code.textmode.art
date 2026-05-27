@@ -2,12 +2,12 @@
 layout: doc
 editLink: true
 title: TextmodeConversionManager
-description: Manages conversion strategy registration and retrieval.
+description: Registers image-to-textmode conversion strategies for a Textmodifier instance.
 category: Classes
 api: true
 namespace: conversion
 kind: Class
-lastModified: 2026-05-19
+lastModified: 2026-05-27
 hasConstructor: false
 ---
 
@@ -15,13 +15,7 @@ hasConstructor: false
 
 # Class: TextmodeConversionManager
 
-Manages conversion strategy registration and retrieval.
-
-This class provides:
-- A registry for custom and built-in conversion strategies
-- Instance-scoped conversion strategies per Textmodifier
-
-Used for image-to-ASCII conversion modes.
+Registers image-to-textmode conversion strategies for a Textmodifier instance.
 
 Access via [Textmodifier.conversions](../../../classes/Textmodifier.md#conversions).
 
@@ -64,28 +58,11 @@ true if the strategy exists
 #### Example
 
 ```javascript
-const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80';
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
-let source = null;
-let strategyActive = false;
+const labelLayer = t.layers.add();
+let hasCustom = false;
 let pulseShader = null;
-
-function drawLabel(text, y, color = [220, 220, 220]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
 
 t.setup(async () => {
 	const vert = `#version 300 es
@@ -102,61 +79,74 @@ t.setup(async () => {
 		precision highp float;
 		in vec2 v_uv;
 		uniform sampler2D u_image;
-		uniform float u_time;
 		layout(location = 0) out vec4 o_character;
 		layout(location = 1) out vec4 o_primaryColor;
 		layout(location = 2) out vec4 o_secondaryColor;
-
 		void main() {
-			vec4 sampleColor = texture(u_image, v_uv);
-			float luma = dot(sampleColor.rgb, vec3(0.299, 0.587, 0.114));
-			float pulse = 0.5 + 0.5 * sin(u_time + v_uv.x * 8.0);
-			o_character = vec4(luma * pulse, 0.0, 0.0, 0.0);
-			o_primaryColor = vec4(sampleColor.rgb, 1.0);
-			o_secondaryColor = vec4(vec3(0.03, 0.05, 0.1), 1.0);
+			vec4 col = texture(u_image, v_uv);
+			o_character = vec4(col.r, 0.0, 0.0, 0.0);
+			o_primaryColor = vec4(col.rgb, 1.0);
+			o_secondaryColor = vec4(0.0, 0.0, 0.0, 1.0);
 		}
 	`;
 
 	pulseShader = await t.createShader(vert, frag);
-	t.conversions.register({
-		id: 'pulse',
-		createShader: () => pulseShader,
-		createUniforms: (context) => ({
-			u_image: context.source.texture,
-			u_time: t.frameCount * 0.05,
-		}),
-	});
-
-	source = await t.loadImage(IMAGE_URL);
-	source.characters(' .:-=+*#%@');
-	source.conversionMode('pulse');
-	strategyActive = true;
 });
 
 t.draw(() => {
-	t.background(5, 8, 18);
-
-	if (source) {
-		t.image(source, t.grid.cols - 8, t.grid.rows - 10);
-	}
-
-	drawLabel('custom conversion strategy', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
-	drawLabel(`has pulse ${t.conversions.has('pulse') ? 'yes' : 'no'}`, Math.floor(t.grid.rows * 0.28));
-	drawLabel(
-		strategyActive ? 'click to unregister' : 'refresh to restore strategy',
-		Math.floor(t.grid.rows * 0.36),
-		[120, 205, 255]
-	);
+	t.background(6, 8, 20);
+	hasCustom = t.conversions.has('custom-mode');
 });
 
 t.mouseClicked(() => {
-	if (!strategyActive || !source) {
-		return;
+	if (hasCustom) {
+		t.conversions.unregister('custom-mode');
+	} else {
+		t.conversions.register({
+			id: 'custom-mode',
+			createShader: () => pulseShader,
+			createUniforms: (ctx) => ({ u_image: ctx.source.texture }),
+		});
 	}
+});
 
-	source.conversionMode('brightness');
-	t.conversions.unregister('pulse');
-	strategyActive = false;
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const isDefault = t.conversions.has('brightness');
+
+	drawText('CONVERSION.HAS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: CHECK REGISTERED STRATEGY', x, y++, 100, 220, 255);
+	drawText('Performs a key lookup in conversions.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`has('brightness') : ${isDefault}`, x, y++, 180, 255, 180);
+	drawText(
+		`has('custom-mode'): ${hasCustom}`,
+		x,
+		y++,
+		hasCustom ? 180 : 255,
+		hasCustom ? 255 : 120,
+		hasCustom ? 180 : 120
+	);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(hasCustom ? 'Click to unregister.' : 'Click to register custom-mode.', x, y++, 120, 205, 255);
 });
 
 t.windowResized(() => {
@@ -222,96 +212,78 @@ true if the strategy was unregistered, false if it wasn't found
 const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80';
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
-let source = null;
-let strategyActive = false;
-let pulseShader = null;
-
-function drawLabel(text, y, color = [220, 220, 220]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
+const labelLayer = t.layers.add();
+let img = null;
+let registered = false;
+let customShader = null;
 
 t.setup(async () => {
-	const vert = `#version 300 es
-		in vec4 a_position;
-		in vec2 a_uv;
-		out vec2 v_uv;
-		void main() {
-			gl_Position = a_position;
-			v_uv = a_uv;
-		}
-	`;
+	const vert = `#version 300 es\nin vec4 a_position; in vec2 a_uv; out vec2 v_uv; void main() { gl_Position = a_position; v_uv = a_uv; }`;
+	const frag = `#version 300 es\nprecision highp float; in vec2 v_uv; uniform sampler2D u_image; layout(location = 0) out vec4 o_character; layout(location = 1) out vec4 o_primaryColor; layout(location = 2) out vec4 o_secondaryColor; void main() { vec4 col = texture(u_image, v_uv); float greenLuma = col.g; o_character = vec4(greenLuma * 0.8, 0.0, 0.0, 0.0); o_primaryColor = vec4(0.1, 0.9, 0.3, 1.0); o_secondaryColor = vec4(0.01, 0.05, 0.02, 1.0); }`;
 
-	const frag = `#version 300 es
-		precision highp float;
-		in vec2 v_uv;
-		uniform sampler2D u_image;
-		uniform float u_time;
-		layout(location = 0) out vec4 o_character;
-		layout(location = 1) out vec4 o_primaryColor;
-		layout(location = 2) out vec4 o_secondaryColor;
+	customShader = await t.createShader(vert, frag);
 
-		void main() {
-			vec4 sampleColor = texture(u_image, v_uv);
-			float luma = dot(sampleColor.rgb, vec3(0.299, 0.587, 0.114));
-			float pulse = 0.5 + 0.5 * sin(u_time + v_uv.x * 8.0);
-			o_character = vec4(luma * pulse, 0.0, 0.0, 0.0);
-			o_primaryColor = vec4(sampleColor.rgb, 1.0);
-			o_secondaryColor = vec4(vec3(0.03, 0.05, 0.1), 1.0);
-		}
-	`;
-
-	pulseShader = await t.createShader(vert, frag);
 	t.conversions.register({
-		id: 'pulse',
-		createShader: () => pulseShader,
-		createUniforms: (context) => ({
-			u_image: context.source.texture,
-			u_time: t.frameCount * 0.05,
-		}),
+		id: 'green-custom',
+		createShader: () => customShader,
+		createUniforms: (ctx) => ({ u_image: ctx.source.texture }),
 	});
 
-	source = await t.loadImage(IMAGE_URL);
-	source.characters(' .:-=+*#%@');
-	source.conversionMode('pulse');
-	strategyActive = true;
+	img = await t.loadImage(IMAGE_URL);
+	img.characters(' .:-=+*#%@');
+	img.conversionMode('green-custom');
+	registered = true;
 });
 
 t.draw(() => {
-	t.background(5, 8, 18);
-
-	if (source) {
-		t.image(source, t.grid.cols - 8, t.grid.rows - 10);
+	t.background(6, 8, 20);
+	if (img) {
+		t.image(img, t.grid.cols - 8, t.grid.rows - 10);
 	}
-
-	drawLabel('custom conversion strategy', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
-	drawLabel(`has pulse ${t.conversions.has('pulse') ? 'yes' : 'no'}`, Math.floor(t.grid.rows * 0.28));
-	drawLabel(
-		strategyActive ? 'click to unregister' : 'refresh to restore strategy',
-		Math.floor(t.grid.rows * 0.36),
-		[120, 205, 255]
-	);
 });
 
 t.mouseClicked(() => {
-	if (!strategyActive || !source) {
-		return;
-	}
+	if (!registered || !img) return;
+	img.conversionMode('brightness');
+	t.conversions.unregister('green-custom');
+	registered = false;
+});
 
-	source.conversionMode('brightness');
-	t.conversions.unregister('pulse');
-	strategyActive = false;
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const mode = registered ? 'green-custom' : 'brightness';
+
+	drawText('CONVERSION.UNREGISTER', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: DISPOSE CONVERSION STRATEGY', x, y++, 100, 220, 255);
+	drawText('Removes registered custom logic.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`ACTIVE MODE: ${mode}`, x, y++, 140, 190, 255);
+	drawText(
+		registered ? 'Click to unregister green-custom.' : 'Strategy unregistered successfully.',
+		x,
+		y++,
+		180,
+		255,
+		180
+	);
 });
 
 t.windowResized(() => {

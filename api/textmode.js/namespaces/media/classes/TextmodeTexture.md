@@ -2,12 +2,12 @@
 layout: doc
 editLink: true
 title: TextmodeTexture
-description: Represents an external texture source for textmode rendering via Textmodifier.createTexture.
+description: Dynamic texture source for external canvas or video content.
 category: Classes
 api: true
 namespace: media
 kind: Class
-lastModified: 2026-05-19
+lastModified: 2026-05-27
 hasConstructor: false
 ---
 
@@ -15,14 +15,11 @@ hasConstructor: false
 
 # Class: TextmodeTexture
 
-Represents an external texture source for textmode rendering via [Textmodifier.createTexture](../../../classes/Textmodifier.md#createtexture).
+Dynamic texture source for external canvas or video content.
 
-This class enables integration with other WebGL-based libraries like three.js, p5.js, Babylon.js,
-hydra-synth, or any library that renders to a canvas element.
-
-It can be drawn to the canvas via [Textmodifier.image](../../../classes/Textmodifier.md#image).
-
-The texture automatically updates each frame to capture the latest content from the source canvas or video.
+Create one with [Textmodifier.createTexture](../../../classes/Textmodifier.md#createtexture) and draw it with
+[Textmodifier.image](../../../classes/Textmodifier.md#image). The texture refreshes each frame so it can mirror
+renderers such as three.js, p5.js, Babylon.js, or hydra-synth.
 
 ## Extends
 
@@ -42,7 +39,7 @@ The texture automatically updates each frame to capture the latest content from 
 get height(): number;
 ```
 
-Ideal height in grid cells.
+Ideal draw height in grid cells.
 
 ##### Returns
 
@@ -57,73 +54,71 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-let source;
+const labelLayer = t.layers.add();
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+let source = null;
+let disposed = false;
 
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
-
-function createSourceCanvas() {
+function createImageUrl() {
 	const canvas = document.createElement('canvas');
-	canvas.width = 128;
-	canvas.height = 256;
+	canvas.width = 96;
+	canvas.height = 64;
 	const ctx = canvas.getContext('2d');
-	if (!ctx) return canvas;
-
-	ctx.fillStyle = '#1e293b';
-	ctx.fillRect(0, 0, 128, 256);
-	ctx.strokeStyle = '#ffffff';
-	ctx.lineWidth = 4;
-	ctx.strokeRect(10, 10, 108, 236);
-
-	return canvas;
+	const gradient = ctx.createLinearGradient(0, 0, 96, 64);
+	gradient.addColorStop(0, '#0ea5e9');
+	gradient.addColorStop(1, '#f59e0b');
+	ctx.fillStyle = gradient;
+	ctx.fillRect(0, 0, 96, 64);
+	ctx.fillStyle = '#020617';
+	ctx.fillRect(16, 16, 64, 32);
+	ctx.fillStyle = '#f8fafc';
+	ctx.fillRect(28, 26, 40, 12);
+	return canvas.toDataURL();
 }
 
-t.setup(() => {
-	source = t.createTexture(createSourceCanvas());
-	source.characters(' .:-=+*#%@');
+function configureSource(value) {
+	value.characters(' .:-=+*#%@');
+	value.charColorMode('sampled');
+	value.cellColorMode('fixed');
+}
+
+t.setup(async () => {
+	source = await t.loadImage(createImageUrl());
+	configureSource(source);
 });
 
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
 t.draw(() => {
-	t.background(6, 10, 22);
+	t.background(5, 8, 18);
+	if (!source || disposed) return;
+	t.image(source, Math.floor(t.grid.cols * 0.55), Math.floor(t.grid.rows * 0.55));
+});
 
-	if (!source) return;
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
 
-	const h = source.height;
-
-	t.push();
-	t.translate(0, 0);
-	t.charColor(140, 220, 255, 100);
-	t.char('|');
-	t.rect(1, h);
-	t.pop();
-
-	t.push();
-	t.charColor(255, 255, 255);
-	t.translate(0, -Math.floor(h / 2));
-	t.char('-');
-	t.point();
-	t.translate(0, h - 1);
-	t.char('-');
-	t.point();
-	t.pop();
-
-	drawCenteredText('TextmodeSource.height', -12, [240, 245, 255]);
-	drawCenteredText('The ideal height of the source in grid cells.', -10, [150, 170, 200]);
-
-	drawCenteredText(`${h} CELLS`, 12, [140, 220, 255]);
+	drawText('TEXTMODESOURCE.HEIGHT', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SOURCE SETTINGS', x, y++, 100, 220, 255);
+	drawText('Image source conversion API.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	const h = source ? source.height : 0;
+	drawText(`HEIGHT: ${h}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -145,7 +140,7 @@ t.windowResized(() => {
 get originalHeight(): number;
 ```
 
-Original pixel height.
+Original source height in pixels.
 
 ##### Returns
 
@@ -160,45 +155,71 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-let source;
-const PIXEL_HEIGHT = 512;
+const labelLayer = t.layers.add();
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+let source = null;
+let disposed = false;
+
+function createImageUrl() {
+	const canvas = document.createElement('canvas');
+	canvas.width = 96;
+	canvas.height = 64;
+	const ctx = canvas.getContext('2d');
+	const gradient = ctx.createLinearGradient(0, 0, 96, 64);
+	gradient.addColorStop(0, '#0ea5e9');
+	gradient.addColorStop(1, '#f59e0b');
+	ctx.fillStyle = gradient;
+	ctx.fillRect(0, 0, 96, 64);
+	ctx.fillStyle = '#020617';
+	ctx.fillRect(16, 16, 64, 32);
+	ctx.fillStyle = '#f8fafc';
+	ctx.fillRect(28, 26, 40, 12);
+	return canvas.toDataURL();
+}
+
+function configureSource(value) {
+	value.characters(' .:-=+*#%@');
+	value.charColorMode('sampled');
+	value.cellColorMode('fixed');
+}
+
+t.setup(async () => {
+	source = await t.loadImage(createImageUrl());
+	configureSource(source);
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-t.setup(() => {
-	const canvas = document.createElement('canvas');
-	canvas.width = 128;
-	canvas.height = PIXEL_HEIGHT;
-	source = t.createTexture(canvas);
-	source.characters(' .:-=+*#%@');
+t.draw(() => {
+	t.background(5, 8, 18);
+	if (!source || disposed) return;
+	t.image(source, Math.floor(t.grid.cols * 0.55), Math.floor(t.grid.rows * 0.55));
 });
 
-t.draw(() => {
-	t.background(6, 10, 22);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
 
-	if (!source) return;
-
-	const oh = source.originalHeight;
-
-	drawCenteredText('TextmodeSource.originalHeight', -8, [240, 245, 255]);
-	drawCenteredText('The raw pixel height of the source asset.', -6, [150, 170, 200]);
-
-	drawCenteredText(`${oh} PIXELS`, 6, [255, 225, 140]);
-	drawCenteredText('This value is independent of the grid resolution.', 9, [100, 120, 150]);
+	drawText('TEXTMODESOURCE.ORIGINALHEIGHT', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SOURCE SETTINGS', x, y++, 100, 220, 255);
+	drawText('Image source conversion API.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	const h = source ? source.originalHeight : 0;
+	drawText(`ORIG H: ${h}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -220,7 +241,7 @@ t.windowResized(() => {
 get originalWidth(): number;
 ```
 
-Original pixel width.
+Original source width in pixels.
 
 ##### Returns
 
@@ -235,45 +256,71 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-let source;
-const PIXEL_WIDTH = 512;
+const labelLayer = t.layers.add();
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+let source = null;
+let disposed = false;
+
+function createImageUrl() {
+	const canvas = document.createElement('canvas');
+	canvas.width = 96;
+	canvas.height = 64;
+	const ctx = canvas.getContext('2d');
+	const gradient = ctx.createLinearGradient(0, 0, 96, 64);
+	gradient.addColorStop(0, '#0ea5e9');
+	gradient.addColorStop(1, '#f59e0b');
+	ctx.fillStyle = gradient;
+	ctx.fillRect(0, 0, 96, 64);
+	ctx.fillStyle = '#020617';
+	ctx.fillRect(16, 16, 64, 32);
+	ctx.fillStyle = '#f8fafc';
+	ctx.fillRect(28, 26, 40, 12);
+	return canvas.toDataURL();
+}
+
+function configureSource(value) {
+	value.characters(' .:-=+*#%@');
+	value.charColorMode('sampled');
+	value.cellColorMode('fixed');
+}
+
+t.setup(async () => {
+	source = await t.loadImage(createImageUrl());
+	configureSource(source);
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-t.setup(() => {
-	const canvas = document.createElement('canvas');
-	canvas.width = PIXEL_WIDTH;
-	canvas.height = 128;
-	source = t.createTexture(canvas);
-	source.characters(' .:-=+*#%@');
+t.draw(() => {
+	t.background(5, 8, 18);
+	if (!source || disposed) return;
+	t.image(source, Math.floor(t.grid.cols * 0.55), Math.floor(t.grid.rows * 0.55));
 });
 
-t.draw(() => {
-	t.background(6, 10, 22);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
 
-	if (!source) return;
-
-	const ow = source.originalWidth;
-
-	drawCenteredText('TextmodeSource.originalWidth', -8, [240, 245, 255]);
-	drawCenteredText('The raw pixel width of the source asset.', -6, [150, 170, 200]);
-
-	drawCenteredText(`${ow} PIXELS`, 6, [255, 225, 140]);
-	drawCenteredText('This value is independent of the grid resolution.', 9, [100, 120, 150]);
+	drawText('TEXTMODESOURCE.ORIGINALWIDTH', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SOURCE SETTINGS', x, y++, 100, 220, 255);
+	drawText('Image source conversion API.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	const w = source ? source.originalWidth : 0;
+	drawText(`ORIG W: ${w}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -295,7 +342,7 @@ t.windowResized(() => {
 get source(): HTMLCanvasElement | HTMLVideoElement;
 ```
 
-The source element this texture captures from.
+Source element this texture captures.
 
 ##### Returns
 
@@ -304,67 +351,64 @@ The source element this texture captures from.
 ##### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-const sourceCanvas = document.createElement('canvas');
-sourceCanvas.width = 180;
-sourceCanvas.height = 120;
+const labelLayer = t.layers.add();
 
-const sourceContext = sourceCanvas.getContext('2d');
-const texture = t.createTexture(sourceCanvas);
-texture.characters(' .:-=+*#%@');
+let texture = null;
+let sourceCanvas = null;
 
-function drawSourceCanvas() {
-	if (!sourceContext) {
-		return;
-	}
-
-	const time = t.frameCount * 0.05;
-	sourceContext.fillStyle = '#050816';
-	sourceContext.fillRect(0, 0, sourceCanvas.width, sourceCanvas.height);
-
-	const gradient = sourceContext.createLinearGradient(0, 0, sourceCanvas.width, sourceCanvas.height);
-	gradient.addColorStop(0, '#1d4ed8');
-	gradient.addColorStop(1, '#fb7185');
-	sourceContext.fillStyle = gradient;
-	sourceContext.fillRect(18, 18, sourceCanvas.width - 36, sourceCanvas.height - 36);
-
-	sourceContext.save();
-	sourceContext.translate(sourceCanvas.width / 2, sourceCanvas.height / 2);
-	sourceContext.rotate(time * 0.8);
-	sourceContext.fillStyle = '#fef08a';
-	sourceContext.fillRect(-18, -44, 36, 88);
-	sourceContext.restore();
-}
-
-function drawLabel(text, y, color = [220, 220, 220]) {
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
+t.setup(() => {
+	sourceCanvas = document.createElement('canvas');
+	sourceCanvas.width = 120;
+	sourceCanvas.height = 80;
+	texture = t.createTexture(sourceCanvas);
+	texture.characters(' .:-=+*#%@');
+});
+
 t.draw(() => {
-	drawSourceCanvas();
+	t.background(8, 10, 18);
+	if (!texture) return;
+	const ctx = sourceCanvas.getContext('2d');
+	ctx.fillStyle = '#0a0d1a';
+	ctx.fillRect(0, 0, sourceCanvas.width, sourceCanvas.height);
+	ctx.fillStyle = '#38bdf8';
+	ctx.beginPath();
+	ctx.arc(60 + Math.sin(t.frameCount * 0.05) * 30, 40, 18, 0, Math.PI * 2);
+	ctx.fill();
+	t.image(texture, Math.floor(t.grid.cols * 0.5), Math.floor(t.grid.rows * 0.5));
+});
 
-	t.background(5, 7, 18);
-	t.image(texture, t.grid.cols - 8, t.grid.rows - 10);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
 
-	drawLabel('createTexture(canvas)', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
-	drawLabel(
-		`source matches ${texture.source === sourceCanvas ? 'yes' : 'no'}`,
-		Math.floor(t.grid.rows * 0.3),
-		[120, 205, 255]
-	);
+	drawText('TEXTMODETEXTURE.SOURCE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: BACKING ELEMENT', x, y++, 100, 220, 255);
+	drawText('Texture keeps its source.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	const size = sourceCanvas ? sourceCanvas.width + 'x' + sourceCanvas.height : '0x0';
+	drawText(`SIZE: ${size}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -382,7 +426,7 @@ t.windowResized(() => {
 get texture(): WebGLTexture;
 ```
 
-Return the WebGL texture currently backing this source.
+WebGL texture backing this source.
 
 ##### Returns
 
@@ -391,45 +435,77 @@ Return the WebGL texture currently backing this source.
 ##### Example
 
 ```javascript
-const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80';
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
 
 let source = null;
+let disposed = false;
 
-function label(text, y, color = [220, 220, 220]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
+function createImageUrl() {
+	const canvas = document.createElement('canvas');
+	canvas.width = 96;
+	canvas.height = 64;
+	const ctx = canvas.getContext('2d');
+	const gradient = ctx.createLinearGradient(0, 0, 96, 64);
+	gradient.addColorStop(0, '#0ea5e9');
+	gradient.addColorStop(1, '#f59e0b');
+	ctx.fillStyle = gradient;
+	ctx.fillRect(0, 0, 96, 64);
+	ctx.fillStyle = '#020617';
+	ctx.fillRect(16, 16, 64, 32);
+	ctx.fillStyle = '#f8fafc';
+	ctx.fillRect(28, 26, 40, 12);
+	return canvas.toDataURL();
+}
 
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
+function configureSource(value) {
+	value.characters(' .:-=+*#%@');
+	value.charColorMode('sampled');
+	value.cellColorMode('fixed');
 }
 
 t.setup(async () => {
-	source = await t.loadImage(IMAGE_URL);
-	source.characters(' .:-=+*#%@');
+	source = await t.loadImage(createImageUrl());
+	configureSource(source);
 });
 
-t.draw(() => {
-	t.background(5, 7, 18);
-
-	if (source) {
-		t.image(source, t.grid.cols - 8, t.grid.rows - 10);
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
 	}
+	t.pop();
+}
 
-	label('TextmodeSource.texture', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
-	label(
-		source && source.texture ? 'webgl texture available' : 'texture pending',
-		Math.floor(t.grid.rows * 0.3),
-		[120, 205, 255]
-	);
+t.draw(() => {
+	t.background(5, 8, 18);
+	if (!source || disposed) return;
+	t.image(source, Math.floor(t.grid.cols * 0.55), Math.floor(t.grid.rows * 0.55));
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODESOURCE.TEXTURE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SOURCE SETTINGS', x, y++, 100, 220, 255);
+	drawText('Image source conversion API.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	const state = source && source.texture ? 'READY' : 'WAIT';
+	drawText(`TEXTURE: ${state}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -451,7 +527,7 @@ t.windowResized(() => {
 get width(): number;
 ```
 
-Ideal width in grid cells.
+Ideal draw width in grid cells.
 
 ##### Returns
 
@@ -466,74 +542,71 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-let source;
+const labelLayer = t.layers.add();
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+let source = null;
+let disposed = false;
 
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
-
-function createSourceCanvas() {
+function createImageUrl() {
 	const canvas = document.createElement('canvas');
-	canvas.width = 256;
-	canvas.height = 128;
+	canvas.width = 96;
+	canvas.height = 64;
 	const ctx = canvas.getContext('2d');
-	if (!ctx) return canvas;
-
-	ctx.fillStyle = '#1e293b';
-	ctx.fillRect(0, 0, 256, 128);
-	ctx.strokeStyle = '#ffffff';
-	ctx.lineWidth = 4;
-	ctx.strokeRect(10, 10, 236, 108);
-
-	return canvas;
+	const gradient = ctx.createLinearGradient(0, 0, 96, 64);
+	gradient.addColorStop(0, '#0ea5e9');
+	gradient.addColorStop(1, '#f59e0b');
+	ctx.fillStyle = gradient;
+	ctx.fillRect(0, 0, 96, 64);
+	ctx.fillStyle = '#020617';
+	ctx.fillRect(16, 16, 64, 32);
+	ctx.fillStyle = '#f8fafc';
+	ctx.fillRect(28, 26, 40, 12);
+	return canvas.toDataURL();
 }
 
-t.setup(() => {
-	source = t.createTexture(createSourceCanvas());
-	source.characters(' .:-=+*#%@');
+function configureSource(value) {
+	value.characters(' .:-=+*#%@');
+	value.charColorMode('sampled');
+	value.cellColorMode('fixed');
+}
+
+t.setup(async () => {
+	source = await t.loadImage(createImageUrl());
+	configureSource(source);
 });
 
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
 t.draw(() => {
-	t.background(6, 10, 22);
+	t.background(5, 8, 18);
+	if (!source || disposed) return;
+	t.image(source, Math.floor(t.grid.cols * 0.55), Math.floor(t.grid.rows * 0.55));
+});
 
-	if (!source) return;
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
 
-	const w = source.width;
-
-	t.push();
-	t.translate(0, 0);
-	t.charColor(140, 220, 255, 100);
-	t.char('=');
-	t.rect(w, 1);
-	t.pop();
-
-	t.push();
-	t.charColor(255, 255, 255);
-	t.translate(-Math.floor(w / 2), 0);
-	t.char('[');
-	t.point();
-	t.translate(w - 1, 0);
-	t.char(']');
-	t.point();
-	t.pop();
-
-	drawCenteredText('TextmodeSource.width', -12, [240, 245, 255]);
-	drawCenteredText('The ideal width of the source in grid cells.', -10, [150, 170, 200]);
-
-	drawCenteredText(`${w} CELLS`, 10, [140, 220, 255]);
-	drawCenteredText('Calculated to fit the current grid aspect ratio.', 12, [100, 120, 150]);
+	drawText('TEXTMODESOURCE.WIDTH', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SOURCE SETTINGS', x, y++, 100, 220, 255);
+	drawText('Image source conversion API.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	const w = source ? source.width : 0;
+	drawText(`WIDTH: ${w}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -557,7 +630,7 @@ background(
    a?): this;
 ```
 
-Defines the background color used for transparent pixels.
+Set the background color used for transparent pixels.
 
 #### Parameters
 
@@ -583,23 +656,8 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
+const labelLayer = t.layers.add();
 let sourceA, sourceB;
-
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
 
 function createTransparentCanvas() {
 	const canvas = document.createElement('canvas');
@@ -613,7 +671,6 @@ function createTransparentCanvas() {
 	ctx.strokeStyle = '#ffffff';
 	ctx.strokeRect(20, 20, 88, 88);
 
-	// Inner solid white circle
 	ctx.fillStyle = '#ffffff';
 	ctx.beginPath();
 	ctx.arc(64, 64, 30, 0, Math.PI * 2);
@@ -625,7 +682,6 @@ function createTransparentCanvas() {
 t.setup(() => {
 	const canvas = createTransparentCanvas();
 
-	// Source A: Default transparency behavior (falls back to black)
 	sourceA = t.createTexture(canvas);
 	sourceA.characters(' .:-=+*#%@');
 
@@ -635,16 +691,11 @@ t.setup(() => {
 
 t.draw(() => {
 	t.background(6, 10, 22);
-
 	if (!sourceA || !sourceB) return;
 
 	const time = t.frameCount * 0.05;
 	const pulse = 0.5 + 0.5 * Math.sin(time);
-
 	sourceB.background(pulse * 255, 100, 255 - pulse * 155);
-
-	drawCenteredText('TextmodeSource.background', -12, [240, 245, 255]);
-	drawCenteredText('Fills transparent source pixels before conversion.', -10, [150, 170, 200]);
 
 	const imgW = 20;
 	const imgH = 12;
@@ -653,13 +704,39 @@ t.draw(() => {
 	t.translate(-12, 0);
 	t.image(sourceA, imgW, imgH);
 	t.pop();
-	drawCenteredText('DEFAULT FALLBACK', 8, [140, 180, 255]);
 
 	t.push();
 	t.translate(12, 0);
 	t.image(sourceB, imgW, imgH);
 	t.pop();
-	drawCenteredText('CUSTOM BACKGROUND', 12, [255, 180, 100]);
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODESOURCE.BACKGROUND', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: TRANSPARENT PIXEL FILL', x, y++, 100, 220, 255);
+	drawText('Fills transparent pixels before mapping.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('Left  : DEFAULT BLACK FALLBACK', x, y++, 140, 180, 255);
+	drawText('Right : CUSTOM BG PULSE FILL', x, y++, 255, 180, 100);
 });
 
 t.windowResized(() => {
@@ -707,56 +784,20 @@ const t = textmode.create({
 	fontSize: 8,
 });
 
+const labelLayer = t.layers.add();
 const ranges = [
-	{
-		label: '0-84',
-		start: 0,
-		end: 84,
-		characters: ' .:-',
-		charColor: '#38bdf8',
-	},
-	{
-		label: '85-170',
-		start: 85,
-		end: 170,
-		characters: '=+*#',
-		charColor: '#facc15',
-	},
-	{
-		label: '171-255',
-		start: 171,
-		end: 255,
-		characters: '%@',
-		charColor: '#f8fafc',
-	},
+	{ label: '0-84', start: 0, end: 84, characters: ' .:-', charColor: '#38bdf8' },
+	{ label: '85-170', start: 85, end: 170, characters: '=+*#', charColor: '#facc15' },
+	{ label: '171-255', start: 171, end: 255, characters: '%@', charColor: '#f8fafc' },
 ];
 
 let rangeSources = [];
 
-function drawText(text, x, y, color = [235, 240, 255]) {
-	t.push();
-	t.translate(x - Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-	t.cellColor(0, 0, 0);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
-
-function drawRangeSource(source, x, y, width, height, label, color) {
+function drawRangeSource(source, x, y, width, height) {
 	t.push();
 	t.translate(x, y);
 	t.image(source, width, height);
 	t.pop();
-
-	drawText(label, x, y + Math.floor(height * 0.5) + 3, color);
 }
 
 t.setup(async () => {
@@ -785,14 +826,39 @@ t.draw(() => {
 	const startX = -Math.floor(totalWidth * 0.5) + Math.floor(panelWidth * 0.5);
 	const y = -1;
 
-	drawText('TextmodeSource.brightnessRange()', 0, -Math.floor(t.grid.rows * 0.5) + 2, [255, 225, 120]);
-
 	for (let i = 0; i < rangeSources.length; i++) {
-		const range = ranges[i];
 		const x = startX + i * (panelWidth + gap);
-		const color = i === 0 ? [56, 189, 248] : i === 1 ? [250, 204, 21] : [248, 250, 252];
-		drawRangeSource(rangeSources[i], x, y, panelWidth, panelHeight, range.label, color);
+		drawRangeSource(rangeSources[i], x, y, panelWidth, panelHeight);
 	}
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODESOURCE.BRIGHTNESSRANGE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SUB-BRIGHTNESS CONVERSIONS', x, y++, 100, 220, 255);
+	drawText('Filters characters by brightness range.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('Left  : 0-84   (Shadows)', x, y++, 56, 189, 248);
+	drawText('Mid   : 85-170 (Midtones)', x, y++, 250, 204, 21);
+	drawText('Right : 171-255(Highlights)', x, y++, 248, 250, 252);
 });
 
 t.windowResized(() => {
@@ -816,7 +882,7 @@ cellColor(
    a?): this;
 ```
 
-Defines the cell color when [cellColorMode](TextmodeSource.md#cellcolormode) is `'fixed'`.
+Set the cell color used when [cellColorMode](TextmodeSource.md#cellcolormode) is `'fixed'`.
 
 #### Parameters
 
@@ -840,26 +906,13 @@ const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
-	fontSize: 16,
+	fontSize: 8,
 });
 
-let techSource;
-
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
+const labelLayer = t.layers.add();
+let techSource = null;
+let red = 40;
+let blue = 80;
 
 t.setup(async () => {
 	techSource = await t.loadImage(IMAGE_URL);
@@ -874,21 +927,42 @@ t.draw(() => {
 	if (!techSource) return;
 
 	const time = t.frameCount * 0.04;
-	const red = Math.round(40 + 40 * Math.sin(time));
-	const blue = Math.round(80 + 40 * Math.cos(time * 0.7));
+	red = Math.round(40 + 40 * Math.sin(time));
+	blue = Math.round(80 + 40 * Math.cos(time * 0.7));
 
 	techSource.cellColor(red, 40, blue);
-
-	drawCenteredText('TextmodeSource.cellColor', -12, [240, 245, 255]);
-	drawCenteredText('Overriding the background color of every cell in a source.', -10, [150, 170, 200]);
 
 	t.push();
 	t.translate(0, 0);
 	t.image(techSource, 24, 14);
 	t.pop();
+});
 
-	drawCenteredText('MODE: FIXED', 9, [140, 255, 180]);
-	drawCenteredText(`CELL_COLOR: [${red}, 40, ${blue}]`, 11, [140, 220, 255]);
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODESOURCE.CELLCOLOR', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SET CONSTANT CELL COLOR', x, y++, 100, 220, 255);
+	drawText('Sets color used in fixed coloring mode.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`CELL COLOR: RGB(${red},40,${blue})`, x, y++, 140, 190, 255);
 });
 
 t.windowResized(() => {
@@ -908,13 +982,13 @@ t.windowResized(() => {
 cellColorMode(mode): this;
 ```
 
-Set cell color mode: `'sampled'` *(from source)* or `'fixed'`.
+Set whether cell color is sampled from the source or fixed.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `mode` | `"fixed"` \| `"sampled"` | The cell color mode |
+| `mode` | `"fixed"` \| `"sampled"` | Cell color mode. |
 
 #### Returns
 
@@ -929,26 +1003,12 @@ const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
-	fontSize: 16,
+	fontSize: 8,
 });
 
-let sourceA, sourceB;
-
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
+const labelLayer = t.layers.add();
+let sourceA = null;
+let sourceB = null;
 
 t.setup(async () => {
 	sourceA = await t.loadImage(IMAGE_URL);
@@ -965,9 +1025,6 @@ t.draw(() => {
 
 	if (!sourceA || !sourceB) return;
 
-	drawCenteredText('TextmodeSource.cellColorMode', -12, [240, 245, 255]);
-	drawCenteredText('Determines if cells use source colors or a fixed override.', -10, [150, 170, 200]);
-
 	const imgW = 20;
 	const imgH = 12;
 
@@ -975,13 +1032,38 @@ t.draw(() => {
 	t.translate(-12, 0);
 	t.image(sourceA, imgW, imgH);
 	t.pop();
-	drawCenteredText("MODE: 'sampled'", 8, [140, 180, 255]);
 
 	t.push();
 	t.translate(12, 0);
 	t.image(sourceB, imgW, imgH);
 	t.pop();
-	drawCenteredText("MODE: 'fixed'", 12, [255, 180, 100]);
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODESOURCE.CELLCOLORMODE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SET CELL COLORING MODE', x, y++, 100, 220, 255);
+	drawText('Sets mode used for cell backgrounds.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CELL COLOR MODE: sampled & fixed', x, y++, 140, 190, 255);
 });
 
 t.windowResized(() => {
@@ -1001,13 +1083,13 @@ t.windowResized(() => {
 characters(chars): this;
 ```
 
-Define the characters to use for brightness mapping as a string.
+Set the characters used for brightness mapping.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `chars` | `string` | String of characters to map |
+| `chars` | `string` | Characters to map from dark to bright. |
 
 #### Returns
 
@@ -1018,55 +1100,78 @@ This instance for chaining.
 #### Example
 
 ```javascript
-const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80';
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-let sparseSource;
-let denseSource;
+const labelLayer = t.layers.add();
 
-function drawLabel(text, x, y) {
-	t.push();
-	t.translate(x - Math.floor(text.length / 2), y);
-	t.charColor(255);
+let source = null;
+let disposed = false;
 
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
+function createImageUrl() {
+	const canvas = document.createElement('canvas');
+	canvas.width = 96;
+	canvas.height = 64;
+	const ctx = canvas.getContext('2d');
+	const gradient = ctx.createLinearGradient(0, 0, 96, 64);
+	gradient.addColorStop(0, '#0ea5e9');
+	gradient.addColorStop(1, '#f59e0b');
+	ctx.fillStyle = gradient;
+	ctx.fillRect(0, 0, 96, 64);
+	ctx.fillStyle = '#020617';
+	ctx.fillRect(16, 16, 64, 32);
+	ctx.fillStyle = '#f8fafc';
+	ctx.fillRect(28, 26, 40, 12);
+	return canvas.toDataURL();
+}
 
-	t.pop();
+function configureSource(value) {
+	value.characters(' .:-=+*#%@');
+	value.charColorMode('sampled');
+	value.cellColorMode('fixed');
 }
 
 t.setup(async () => {
-	sparseSource = await t.loadImage(IMAGE_URL);
-	sparseSource.characters(' .oO@');
-
-	denseSource = await t.loadImage(IMAGE_URL);
-	denseSource.characters(' .:-=+*#%@');
+	source = await t.loadImage(createImageUrl());
+	configureSource(source);
+	source.characters(' .oO@');
 });
 
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
 t.draw(() => {
-	t.background(0);
-	if (!sparseSource || !denseSource) return;
+	t.background(5, 8, 18);
+	if (!source || disposed) return;
+	t.image(source, Math.floor(t.grid.cols * 0.55), Math.floor(t.grid.rows * 0.55));
+});
 
-	const size = Math.min(sparseSource.width, sparseSource.height) * 0.7;
-	const offset = Math.floor(size * 0.7);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
 
-	t.push();
-	t.translate(-offset, 0);
-	t.image(sparseSource, size, size);
-	t.pop();
-
-	t.push();
-	t.translate(offset, 0);
-	t.image(denseSource, size, size);
-	t.pop();
-
-	drawLabel("characters(' .oO@')", -offset, Math.floor(t.grid.rows / 2) - 2);
-	drawLabel("characters(' .:-=+*#%@')", offset, Math.floor(t.grid.rows / 2) - 2);
+	drawText('TEXTMODESOURCE.CHARACTERS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SOURCE SETTINGS', x, y++, 100, 220, 255);
+	drawText('Image source conversion API.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	const chars = ' .oO@';
+	drawText(`CHARS: ${chars}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -1090,7 +1195,7 @@ charColor(
    a?): this;
 ```
 
-Defines the character color when [charColorMode](TextmodeSource.md#charcolormode) is `'fixed'`.
+Set the character color used when [charColorMode](TextmodeSource.md#charcolormode) is `'fixed'`.
 
 #### Parameters
 
@@ -1114,26 +1219,13 @@ const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
-	fontSize: 16,
+	fontSize: 8,
 });
 
-let techSource;
-
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
+const labelLayer = t.layers.add();
+let techSource = null;
+let r = 150;
+let g = 150;
 
 t.setup(async () => {
 	techSource = await t.loadImage(IMAGE_URL);
@@ -1147,21 +1239,42 @@ t.draw(() => {
 	if (!techSource) return;
 
 	const time = t.frameCount * 0.04;
-	const r = Math.round(150 + 105 * Math.sin(time));
-	const g = Math.round(150 + 105 * Math.cos(time * 0.7));
+	r = Math.round(150 + 105 * Math.sin(time));
+	g = Math.round(150 + 105 * Math.cos(time * 0.7));
 
 	techSource.charColor(r, g, 100);
-
-	drawCenteredText('TextmodeSource.charColor', -12, [240, 245, 255]);
-	drawCenteredText('Overriding the character color of every cell in a source.', -10, [150, 170, 200]);
 
 	t.push();
 	t.translate(0, 0);
 	t.image(techSource, 24, 14);
 	t.pop();
+});
 
-	drawCenteredText('MODE: FIXED', 9, [140, 255, 180]);
-	drawCenteredText(`CHAR_COLOR: [${r}, ${g}, 100]`, 11, [255, 225, 140]);
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODESOURCE.CHARCOLOR', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SET CONSTANT CHARACTER COLOR', x, y++, 100, 220, 255);
+	drawText('Sets color used in fixed coloring mode.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`CHAR COLOR: RGB(${r},${g},100)`, x, y++, 140, 190, 255);
 });
 
 t.windowResized(() => {
@@ -1181,13 +1294,13 @@ t.windowResized(() => {
 charColorMode(mode): this;
 ```
 
-Set character color mode: `'sampled'` *(from source)* or `'fixed'`.
+Set whether character color is sampled from the source or fixed.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `mode` | `"fixed"` \| `"sampled"` | The character color mode |
+| `mode` | `"fixed"` \| `"sampled"` | Character color mode. |
 
 #### Returns
 
@@ -1202,26 +1315,12 @@ const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
-	fontSize: 16,
+	fontSize: 8,
 });
 
-let sourceA, sourceB;
-
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
+const labelLayer = t.layers.add();
+let sourceA = null;
+let sourceB = null;
 
 t.setup(async () => {
 	sourceA = await t.loadImage(IMAGE_URL);
@@ -1238,9 +1337,6 @@ t.draw(() => {
 
 	if (!sourceA || !sourceB) return;
 
-	drawCenteredText('TextmodeSource.charColorMode', -12, [240, 245, 255]);
-	drawCenteredText('Determines if characters use source colors or a fixed override.', -10, [150, 170, 200]);
-
 	const imgW = 20;
 	const imgH = 12;
 
@@ -1248,13 +1344,38 @@ t.draw(() => {
 	t.translate(-12, 0);
 	t.image(sourceA, imgW, imgH);
 	t.pop();
-	drawCenteredText("MODE: 'sampled'", 8, [140, 180, 255]);
 
 	t.push();
 	t.translate(12, 0);
 	t.image(sourceB, imgW, imgH);
 	t.pop();
-	drawCenteredText("MODE: 'fixed'", 12, [255, 180, 100]);
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODESOURCE.CHARCOLORMODE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SET CHARACTER COLORING MODE', x, y++, 100, 220, 255);
+	drawText('Sets mode used for glyph foregrounds.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CHAR COLOR MODE: sampled & fixed', x, y++, 140, 190, 255);
 });
 
 t.windowResized(() => {
@@ -1274,13 +1395,13 @@ t.windowResized(() => {
 charRotation(degrees): this;
 ```
 
-Set the character rotation in degrees (0-360).
+Rotate generated characters.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `degrees` | `number` | Rotation in degrees |
+| `degrees` | `number` | Rotation in degrees. |
 
 #### Returns
 
@@ -1291,64 +1412,25 @@ This instance for chaining.
 #### Example
 
 ```javascript
+const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80';
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
-	fontSize: 16,
+	fontSize: 8,
 });
 
-let pointerSource;
+const labelLayer = t.layers.add();
+let pointerSource = null;
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
-
-function createPointerCanvas() {
-	const canvas = document.createElement('canvas');
-	canvas.width = 128;
-	canvas.height = 128;
-	const ctx = canvas.getContext('2d');
-	if (!ctx) return canvas;
-
-	ctx.fillStyle = '#000000';
-	ctx.fillRect(0, 0, 128, 128);
-
-	ctx.fillStyle = '#ffffff';
-	ctx.beginPath();
-	ctx.moveTo(64, 20); // Top
-	ctx.lineTo(100, 100); // Bottom Right
-	ctx.lineTo(28, 100); // Bottom Left
-	ctx.closePath();
-	ctx.fill();
-
-	return canvas;
-}
-
-t.setup(() => {
-	const canvas = createPointerCanvas();
-	pointerSource = t.createTexture(canvas);
-	pointerSource.characters('#+- ');
+t.setup(async () => {
+	pointerSource = await t.loadImage(IMAGE_URL);
+	pointerSource.characters(' .:-=+*#%@');
 });
 
 t.draw(() => {
 	t.background(6, 10, 22);
 
 	if (!pointerSource) return;
-
-	drawCenteredText('TextmodeSource.charRotation', -12, [240, 245, 255]);
-	drawCenteredText('Rotating the individual characters within their cells.', -10, [150, 170, 200]);
 
 	const imgW = 20;
 	const imgH = 12;
@@ -1358,14 +1440,39 @@ t.draw(() => {
 	pointerSource.charRotation(0);
 	t.image(pointerSource, imgW, imgH);
 	t.pop();
-	drawCenteredText('0 DEGREES', 8, [140, 180, 255]);
 
 	t.push();
 	t.translate(12, 0);
 	pointerSource.charRotation(90);
 	t.image(pointerSource, imgW, imgH);
 	t.pop();
-	drawCenteredText('90 DEGREES', 12, [255, 180, 100]);
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODESOURCE.CHARROTATION', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: GLYPH ROTATION ANGLE', x, y++, 100, 220, 255);
+	drawText('Rotates mapped characters in degrees.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('ROTATION ANGLE: 0 & 90 deg', x, y++, 140, 190, 255);
 });
 
 t.windowResized(() => {
@@ -1398,113 +1505,78 @@ This instance for chaining.
 #### Example
 
 ```javascript
-const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80';
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
-	fontSize: 8,
+	fontSize: 16,
 });
 
-const stackedBrightnessPasses = [
-	{
-		mode: 'brightness',
-		brightnessStart: 0,
-		brightnessEnd: 70,
-		characters: ' .,:',
-		charColorMode: 'fixed',
-		charColor: '#0ea5e9',
-		cellColorMode: 'fixed',
-		cellColor: '#00000000',
-	},
-	{
-		mode: 'brightness',
-		brightnessStart: 71,
-		brightnessEnd: 160,
-		characters: '==++**',
-		flipX: true,
-		charColorMode: 'fixed',
-		charColor: '#fb7185',
-		cellColorMode: 'fixed',
-		cellColor: '#00000000',
-	},
-	{
-		mode: 'brightness',
-		brightnessStart: 161,
-		brightnessEnd: 255,
-		characters: '##@@',
-		charRotation: 90,
-		charColorMode: 'fixed',
-		charColor: '#fef3c7',
-		cellColorMode: 'fixed',
-		cellColor: '#00000000',
-	},
-];
+const labelLayer = t.layers.add();
 
-let stackedSource;
-let clearedSource;
+let source = null;
+let disposed = false;
 
-function drawText(text, x, y, color = [235, 240, 255]) {
-	t.push();
-	t.translate(x - Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-	t.cellColor(0, 0, 0);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
+function createImageUrl() {
+	const canvas = document.createElement('canvas');
+	canvas.width = 96;
+	canvas.height = 64;
+	const ctx = canvas.getContext('2d');
+	const gradient = ctx.createLinearGradient(0, 0, 96, 64);
+	gradient.addColorStop(0, '#0ea5e9');
+	gradient.addColorStop(1, '#f59e0b');
+	ctx.fillStyle = gradient;
+	ctx.fillRect(0, 0, 96, 64);
+	ctx.fillStyle = '#020617';
+	ctx.fillRect(16, 16, 64, 32);
+	ctx.fillStyle = '#f8fafc';
+	ctx.fillRect(28, 26, 40, 12);
+	return canvas.toDataURL();
 }
 
-function applyStack(source) {
-	source.conversions(stackedBrightnessPasses);
-}
-
-function clearToSingleBrightness(source) {
-	source.clearConversions();
-	source.conversionMode('brightness');
-	source.brightnessRange(0, 255);
-	source.characters(' .:-=+*#%@');
-	source.charColorMode('sampled');
-	source.cellColorMode('fixed');
-}
-
-function drawPanel(source, x, y, width, height, label, accent) {
-	t.push();
-	t.translate(x, y);
-	t.image(source, width, height);
-	t.pop();
-
-	drawText(label, x, y + Math.floor(height * 0.5) + 3, accent);
+function configureSource(value) {
+	value.characters(' .:-=+*#%@');
+	value.charColorMode('sampled');
+	value.cellColorMode('fixed');
 }
 
 t.setup(async () => {
-	stackedSource = await t.loadImage(IMAGE_URL);
-	applyStack(stackedSource);
-
-	clearedSource = await t.loadImage(IMAGE_URL);
-	applyStack(clearedSource);
-	clearToSingleBrightness(clearedSource);
+	source = await t.loadImage(createImageUrl());
+	configureSource(source);
+	source.conversions([{ mode: 'brightness', characters: ' .:', charColor: '#38bdf8' }]);
+	source.clearConversions();
 });
 
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
 t.draw(() => {
-	t.background(4, 7, 18);
-	if (!stackedSource || !clearedSource) return;
+	t.background(5, 8, 18);
+	if (!source || disposed) return;
+	t.image(source, Math.floor(t.grid.cols * 0.55), Math.floor(t.grid.rows * 0.55));
+});
 
-	const gap = Math.max(5, Math.floor(t.grid.cols * 0.06));
-	const panelWidth = Math.max(16, Math.floor((t.grid.cols - gap * 3) / 2));
-	const panelHeight = Math.max(12, Math.min(t.grid.rows - 12, Math.floor(panelWidth * 0.65)));
-	const leftX = -Math.floor(panelWidth * 0.5) - Math.floor(gap * 0.5);
-	const rightX = Math.floor(panelWidth * 0.5) + Math.floor(gap * 0.5);
-	const y = -1;
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
 
-	drawText('TextmodeSource.clearConversions()', 0, -Math.floor(t.grid.rows * 0.5) + 2, [255, 225, 120]);
-	drawPanel(stackedSource, leftX, y, panelWidth, panelHeight, 'stack active', [255, 255, 255]);
-	drawPanel(clearedSource, rightX, y, panelWidth, panelHeight, 'cleared to single', [150, 180, 210]);
+	drawText('TEXTMODESOURCE.CLEARCONVERSIONS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SOURCE SETTINGS', x, y++, 100, 220, 255);
+	drawText('Image source conversion API.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('STACK: CLEARED', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -1546,25 +1618,14 @@ This instance for chaining.
 
 ```javascript
 const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80';
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 8,
+});
 
-let source;
-
-function drawLabel(text, y) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(255);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
+const labelLayer = t.layers.add();
+let source = null;
 
 t.setup(async () => {
 	source = await t.loadImage(IMAGE_URL);
@@ -1573,11 +1634,38 @@ t.setup(async () => {
 });
 
 t.draw(() => {
+	t.background(4, 7, 18);
 	t.background(0);
 	if (!source) return;
 
 	t.image(source, source.width, source.height);
-	drawLabel("conversionMode('brightness')", Math.floor(t.grid.rows / 2) - 2);
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODESOURCE.CONVERSIONMODE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SET IMAGE CONVERSION MODE', x, y++, 100, 220, 255);
+	drawText('Sets mode used for pixel mapping.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONVERSION MODE: brightness', x, y++, 140, 190, 255);
 });
 
 t.windowResized(() => {
@@ -1617,100 +1705,97 @@ This instance for chaining.
 #### Example
 
 ```javascript
-const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80';
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
-	fontSize: 8,
+	fontSize: 16,
 });
 
-const brightnessPasses = [
-	{
-		mode: 'brightness',
-		brightnessStart: 0,
-		brightnessEnd: 78,
-		characters: ' .,:;',
-		charColorMode: 'fixed',
-		charColor: '#38bdf8',
-		cellColorMode: 'fixed',
-		cellColor: '#00000000',
-	},
-	{
-		mode: 'brightness',
-		brightnessStart: 79,
-		brightnessEnd: 168,
-		characters: '--==++**',
-		charColorMode: 'fixed',
-		charColor: '#facc15',
-		cellColorMode: 'fixed',
-		cellColor: '#00000000',
-	},
-	{
-		mode: 'brightness',
-		brightnessStart: 169,
-		brightnessEnd: 255,
-		characters: '##%%@@',
-		charRotation: 90,
-		charColorMode: 'fixed',
-		charColor: '#f8fafc',
-		cellColorMode: 'fixed',
-		cellColor: '#00000000',
-	},
-];
+const labelLayer = t.layers.add();
 
-let plainSource;
-let stackedSource;
+let source = null;
 
-function drawText(text, x, y, color = [235, 240, 255]) {
-	t.push();
-	t.translate(x - Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-	t.cellColor(0, 0, 0);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
+function createImageUrl() {
+	const canvas = document.createElement('canvas');
+	Object.assign(canvas, { width: 128, height: 80 });
+	const ctx = canvas.getContext('2d');
+	const gradient = ctx.createLinearGradient(0, 0, 128, 80);
+	gradient.addColorStop(0, '#020617');
+	gradient.addColorStop(0.45, '#0ea5e9');
+	gradient.addColorStop(1, '#f8fafc');
+	ctx.fillStyle = gradient;
+	ctx.fillRect(0, 0, 128, 80);
+	ctx.fillStyle = '#f97316';
+	ctx.fillRect(15, 16, 34, 44);
+	ctx.fillStyle = '#fde68a';
+	ctx.fillRect(78, 22, 34, 34);
+	return canvas.toDataURL();
 }
 
-function drawPanel(source, x, y, width, height, label, accent) {
-	t.push();
-	t.translate(x, y);
-	t.image(source, width, height);
-	t.pop();
+function configureSource(source) {
+	source.characters(' .:-=+*#%@').charColorMode('sampled').cellColorMode('fixed').cellColor('#020617');
+}
 
-	drawText(label, x, y + Math.floor(height * 0.5) + 3, accent);
+function brightnessPass(start, end, characters, charColor) {
+	return {
+		mode: 'brightness',
+		brightnessStart: start,
+		brightnessEnd: end,
+		characters,
+		charColorMode: 'fixed',
+		charColor,
+	};
 }
 
 t.setup(async () => {
-	plainSource = await t.loadImage(IMAGE_URL);
-	plainSource.characters(' .:-=+*#%@');
-	plainSource.charColorMode('sampled');
-	plainSource.cellColorMode('fixed');
-
-	stackedSource = await t.loadImage(IMAGE_URL);
-	stackedSource.conversions(brightnessPasses);
+	source = await t.loadImage(createImageUrl());
+	configureSource(source);
+	source.conversions([
+		brightnessPass(0, 84, ' .:', '#38bdf8'),
+		brightnessPass(85, 169, '-=+', '#facc15'),
+		brightnessPass(170, 255, '*#@', '#f8fafc'),
+	]);
 });
 
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
 t.draw(() => {
-	t.background(4, 7, 18);
-	if (!plainSource || !stackedSource) return;
+	t.background(4, 7, 16);
+	if (!source) return;
 
-	const gap = Math.max(5, Math.floor(t.grid.cols * 0.06));
-	const panelWidth = Math.max(16, Math.floor((t.grid.cols - gap * 3) / 2));
-	const panelHeight = Math.max(12, Math.min(t.grid.rows - 12, Math.floor(panelWidth * 0.67)));
-	const leftX = -Math.floor(panelWidth * 0.5) - Math.floor(gap * 0.5);
-	const rightX = Math.floor(panelWidth * 0.5) + Math.floor(gap * 0.5);
-	const y = -1;
+	const width = Math.max(12, Math.floor(t.grid.cols * 0.42));
+	const height = Math.max(8, Math.floor(t.grid.rows * 0.4));
+	const y = Math.floor(t.grid.rows * 0.12);
+	t.push();
+	t.translate(0, y);
+	t.image(source, width, height);
+	t.pop();
+	drawText('STACKED SOURCE', -7, y - Math.floor(height / 2) - 2, 255, 225, 140);
+});
 
-	drawText('TextmodeSource.conversions()', 0, -Math.floor(t.grid.rows * 0.5) + 2, [255, 225, 120]);
-	drawPanel(plainSource, leftX, y, panelWidth, panelHeight, 'single brightness', [150, 180, 210]);
-	drawPanel(stackedSource, rightX, y, panelWidth, panelHeight, 'stacked ranges', [255, 255, 255]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODESOURCE.CONVERSIONS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: ORDERED SOURCE PASSES', x, y++, 100, 220, 255);
+	drawText('Three brightness ranges stack.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('PASSES: 3', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -1744,51 +1829,85 @@ and [Textmodifier.createTexture](../../../classes/Textmodifier.md#createtexture)
 #### Example
 
 ```javascript
-const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80';
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
 
 let source = null;
 let disposed = false;
 
-function label(text, y, color = [220, 220, 220]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
+function createImageUrl() {
+	const canvas = document.createElement('canvas');
+	canvas.width = 96;
+	canvas.height = 64;
+	const ctx = canvas.getContext('2d');
+	const gradient = ctx.createLinearGradient(0, 0, 96, 64);
+	gradient.addColorStop(0, '#0ea5e9');
+	gradient.addColorStop(1, '#f59e0b');
+	ctx.fillStyle = gradient;
+	ctx.fillRect(0, 0, 96, 64);
+	ctx.fillStyle = '#020617';
+	ctx.fillRect(16, 16, 64, 32);
+	ctx.fillStyle = '#f8fafc';
+	ctx.fillRect(28, 26, 40, 12);
+	return canvas.toDataURL();
+}
 
+function configureSource(value) {
+	value.characters(' .:-=+*#%@');
+	value.charColorMode('sampled');
+	value.cellColorMode('fixed');
+}
+
+t.mouseClicked(() => {
+	if (source && !disposed) {
+		source.dispose();
+		disposed = true;
+	}
+});
+
+t.setup(async () => {
+	source = await t.loadImage(createImageUrl());
+	configureSource(source);
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-t.setup(async () => {
-	source = await t.loadImage(IMAGE_URL);
-	source.characters(' .:-=+*#%@');
-});
-
 t.draw(() => {
-	t.background(5, 7, 18);
-
-	if (source && !disposed) {
-		t.image(source, t.grid.cols - 8, t.grid.rows - 10);
-	}
-
-	label('click to dispose source', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
-	label(disposed ? 'source disposed' : 'source active', Math.floor(t.grid.rows * 0.3), [120, 205, 255]);
+	t.background(5, 8, 18);
+	if (!source || disposed) return;
+	t.image(source, Math.floor(t.grid.cols * 0.55), Math.floor(t.grid.rows * 0.55));
 });
 
-t.mouseClicked(() => {
-	if (!source || disposed) {
-		return;
-	}
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
 
-	source.dispose();
-	disposed = true;
+	drawText('TEXTMODESOURCE.DISPOSE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SOURCE SETTINGS', x, y++, 100, 220, 255);
+	drawText('Image source conversion API.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	const state = disposed ? 'Disposed' : 'Active';
+	drawText(`STATUS: ${state}`, x, y++, 140, 255, 180);
+	drawText('CLICK TO DISPOSE', x, y++, 255, 225, 140);
 });
 
 t.windowResized(() => {
@@ -1808,13 +1927,13 @@ t.windowResized(() => {
 flipX(v?): this;
 ```
 
-Set horizontal flip indicator flag.
+Flip the source horizontally.
 
 #### Parameters
 
 | Parameter | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
-| `v` | `number` \| `boolean` | `true` | Flip flag |
+| `v` | `number` \| `boolean` | `true` | Whether to flip horizontally. |
 
 #### Returns
 
@@ -1829,26 +1948,12 @@ const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
-	fontSize: 16,
+	fontSize: 8,
 });
 
-let sourceA, sourceB;
-
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
+const labelLayer = t.layers.add();
+let sourceA = null;
+let sourceB = null;
 
 t.setup(async () => {
 	sourceA = await t.loadImage(IMAGE_URL);
@@ -1865,9 +1970,6 @@ t.draw(() => {
 
 	if (!sourceA || !sourceB) return;
 
-	drawCenteredText('TextmodeSource.flipX', -12, [240, 245, 255]);
-	drawCenteredText('Mirroring the source texture horizontally.', -10, [150, 170, 200]);
-
 	const imgW = 20;
 	const imgH = 12;
 
@@ -1875,13 +1977,38 @@ t.draw(() => {
 	t.translate(-12, 0);
 	t.image(sourceA, imgW, imgH);
 	t.pop();
-	drawCenteredText('NORMAL', 8, [140, 180, 255]);
 
 	t.push();
 	t.translate(12, 0);
 	t.image(sourceB, imgW, imgH);
 	t.pop();
-	drawCenteredText('FLIP_X', 12, [255, 180, 100]);
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODESOURCE.FLIPX', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: FLIP SOURCE HORIZONTALLY', x, y++, 100, 220, 255);
+	drawText('Flips image horizontally before mapping.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('FLIP X STATUS: false & true', x, y++, 140, 190, 255);
 });
 
 t.windowResized(() => {
@@ -1901,13 +2028,13 @@ t.windowResized(() => {
 flipY(v?): this;
 ```
 
-Set vertical flip indicator flag.
+Flip the source vertically.
 
 #### Parameters
 
 | Parameter | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
-| `v` | `number` \| `boolean` | `true` | Flip flag |
+| `v` | `number` \| `boolean` | `true` | Whether to flip vertically. |
 
 #### Returns
 
@@ -1922,26 +2049,12 @@ const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
-	fontSize: 16,
+	fontSize: 8,
 });
 
-let sourceA, sourceB;
-
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
+const labelLayer = t.layers.add();
+let sourceA = null;
+let sourceB = null;
 
 t.setup(async () => {
 	sourceA = await t.loadImage(IMAGE_URL);
@@ -1958,9 +2071,6 @@ t.draw(() => {
 
 	if (!sourceA || !sourceB) return;
 
-	drawCenteredText('TextmodeSource.flipY', -12, [240, 245, 255]);
-	drawCenteredText('Mirroring the source texture vertically.', -10, [150, 170, 200]);
-
 	const imgW = 20;
 	const imgH = 12;
 
@@ -1968,13 +2078,38 @@ t.draw(() => {
 	t.translate(-12, 0);
 	t.image(sourceA, imgW, imgH);
 	t.pop();
-	drawCenteredText('NORMAL', 8, [140, 180, 255]);
 
 	t.push();
 	t.translate(12, 0);
 	t.image(sourceB, imgW, imgH);
 	t.pop();
-	drawCenteredText('FLIP_Y', 12, [255, 180, 100]);
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODESOURCE.FLIPY', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: FLIP SOURCE VERTICALLY', x, y++, 100, 220, 255);
+	drawText('Flips image vertically before mapping.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('FLIP Y STATUS: false & true', x, y++, 140, 190, 255);
 });
 
 t.windowResized(() => {
@@ -1994,13 +2129,13 @@ t.windowResized(() => {
 invert(v?): this;
 ```
 
-Set the invert flag, swapping character and cell colors when enabled.
+Enable or disable source color inversion.
 
 #### Parameters
 
 | Parameter | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
-| `v` | `number` \| `boolean` | `true` | Invert flag |
+| `v` | `number` \| `boolean` | `true` | Whether to invert colors. |
 
 #### Returns
 
@@ -2015,26 +2150,11 @@ const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
-	fontSize: 16,
+	fontSize: 8,
 });
 
-let gradientSource;
-
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
+const labelLayer = t.layers.add();
+let gradientSource = null;
 
 t.setup(async () => {
 	gradientSource = await t.loadImage(IMAGE_URL);
@@ -2046,9 +2166,6 @@ t.draw(() => {
 
 	if (!gradientSource) return;
 
-	drawCenteredText('TextmodeSource.invert', -12, [240, 245, 255]);
-	drawCenteredText('Swapping character and cell color roles.', -10, [150, 170, 200]);
-
 	const imgW = 20;
 	const imgH = 12;
 
@@ -2057,14 +2174,39 @@ t.draw(() => {
 	gradientSource.invert(false);
 	t.image(gradientSource, imgW, imgH);
 	t.pop();
-	drawCenteredText('NORMAL', 8, [140, 180, 255]);
 
 	t.push();
 	t.translate(12, 0);
 	gradientSource.invert(true);
 	t.image(gradientSource, imgW, imgH);
 	t.pop();
-	drawCenteredText('INVERTED', 12, [255, 180, 100]);
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODESOURCE.INVERT', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: INVERT SOURCE BRIGHTNESS', x, y++, 100, 220, 255);
+	drawText('Inverts pixel colors before mapping.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('INVERTED STATUS: false & true', x, y++, 140, 190, 255);
 });
 
 t.windowResized(() => {

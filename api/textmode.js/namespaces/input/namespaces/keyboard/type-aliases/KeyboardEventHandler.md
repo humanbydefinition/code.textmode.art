@@ -2,12 +2,12 @@
 layout: doc
 editLink: true
 title: KeyboardEventHandler
-description: Keyboard event handler function type.
+description: Keyboard event callback signature.
 category: Type Aliases
 api: true
 namespace: input.keyboard
 kind: TypeAlias
-lastModified: 2026-05-19
+lastModified: 2026-05-27
 ---
 
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [keyboard](../index.md) / KeyboardEventHandler
@@ -18,7 +18,7 @@ lastModified: 2026-05-19
 type KeyboardEventHandler = (data) => void;
 ```
 
-Keyboard event handler function type.
+Keyboard event callback signature.
 
 ## Parameters
 

@@ -7,7 +7,7 @@ category: Namespaces
 api: true
 namespace: input
 kind: Namespace
-lastModified: 2026-05-19
+lastModified: 2026-05-27
 ---
 
 [textmode.js](../../../../index.md) / [input](../../index.md) / mouse
@@ -20,14 +20,14 @@ Types and interfaces for mouse event handling
 
 | Interface | Description |
 | ------ | ------ |
-| [MouseEventData](interfaces/MouseEventData.md) | Mouse event data passed to event handlers. |
-| [MouseEventMap](interfaces/MouseEventMap.md) | Event map for all mouse events emitted by the mouse input manager. |
+| [MouseEventData](interfaces/MouseEventData.md) | Mouse event payload passed to input callbacks. |
+| [MouseEventMap](interfaces/MouseEventMap.md) | Mouse events emitted by the mouse input manager. |
 
 ## Type Aliases
 
 | Type Alias | Description |
 | ------ | ------ |
-| [MouseEventHandler](type-aliases/MouseEventHandler.md) | Mouse event handler function type. |
+| [MouseEventHandler](type-aliases/MouseEventHandler.md) | Mouse event callback signature. |
 | [MousePosition](type-aliases/MousePosition.md) | Mouse coordinates in grid space using center-based coordinates. |
 
 ## Variables

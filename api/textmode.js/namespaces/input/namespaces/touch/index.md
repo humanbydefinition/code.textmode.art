@@ -7,7 +7,7 @@ category: Namespaces
 api: true
 namespace: input
 kind: Namespace
-lastModified: 2026-05-19
+lastModified: 2026-05-27
 ---
 
 [textmode.js](../../../../index.md) / [input](../../index.md) / touch
@@ -20,8 +20,8 @@ Types and interfaces for touch event handling
 
 | Interface | Description |
 | ------ | ------ |
-| [TouchEventData](interfaces/TouchEventData.md) | Touch event data. |
-| [TouchEventMap](interfaces/TouchEventMap.md) | Event map for all touch events emitted by the touch input manager. |
+| [TouchEventData](interfaces/TouchEventData.md) | Touch event payload passed to input callbacks. |
+| [TouchEventMap](interfaces/TouchEventMap.md) | Touch and gesture events emitted by the touch input manager. |
 | [TouchLongPressEventData](interfaces/TouchLongPressEventData.md) | Long press event data. |
 | [TouchPinchEventData](interfaces/TouchPinchEventData.md) | Pinch gesture event data describing the scaling factor between the initial and current distance. |
 | [TouchPosition](interfaces/TouchPosition.md) | Touch position expressed both in grid and client coordinates. |
@@ -33,12 +33,12 @@ Types and interfaces for touch event handling
 
 | Type Alias | Description |
 | ------ | ------ |
-| [TouchEventHandler](type-aliases/TouchEventHandler.md) | Touch event handler function type. |
-| [TouchLongPressHandler](type-aliases/TouchLongPressHandler.md) | Touch long press event handler function type. |
-| [TouchPinchHandler](type-aliases/TouchPinchHandler.md) | Touch pinch event handler function type. |
-| [TouchRotateHandler](type-aliases/TouchRotateHandler.md) | Touch rotate event handler function type. |
-| [TouchSwipeHandler](type-aliases/TouchSwipeHandler.md) | Touch swipe event handler function type. |
-| [TouchTapHandler](type-aliases/TouchTapHandler.md) | Touch tap event handler function type. |
+| [TouchEventHandler](type-aliases/TouchEventHandler.md) | Touch event callback signature. |
+| [TouchLongPressHandler](type-aliases/TouchLongPressHandler.md) | Long-press event callback signature. |
+| [TouchPinchHandler](type-aliases/TouchPinchHandler.md) | Pinch event callback signature. |
+| [TouchRotateHandler](type-aliases/TouchRotateHandler.md) | Rotate-gesture event callback signature. |
+| [TouchSwipeHandler](type-aliases/TouchSwipeHandler.md) | Swipe event callback signature. |
+| [TouchTapHandler](type-aliases/TouchTapHandler.md) | Tap event callback signature. |
 
 ## Variables
 

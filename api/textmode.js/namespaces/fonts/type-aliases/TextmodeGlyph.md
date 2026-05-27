@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 namespace: fonts
 kind: TypeAlias
-lastModified: 2026-05-19
+lastModified: 2026-05-27
 ---
 
 [textmode.js](../../../index.md) / [fonts](../index.md) / TextmodeGlyph
@@ -28,7 +28,7 @@ Represents a single glyph entry in a textmode glyph atlas.
 character: string;
 ```
 
-The character itself.
+The Unicode character used to address this glyph.
 
 ***
 

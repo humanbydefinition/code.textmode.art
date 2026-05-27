@@ -2,11 +2,11 @@
 layout: doc
 editLink: true
 title: TextmodeColor
-description: Represents a color in the textmode.js rendering system.
+description: Color value used by textmode drawing APIs.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-05-19
+lastModified: 2026-05-27
 hasConstructor: false
 ---
 
@@ -14,7 +14,7 @@ hasConstructor: false
 
 # Class: TextmodeColor
 
-Represents a color in the `textmode.js` rendering system.
+Color value used by textmode drawing APIs.
 
 Values are stored as `0-255` integers for compatibility with public APIs.
 Normalized versions are also available for shader uploads.
@@ -30,71 +30,43 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
+const labelLayer = t.layers.add();
 
 t.draw(() => {
 	t.background(6, 10, 22);
+});
 
-	drawCenteredText('TextmodeColor.creation', -6, [240, 245, 255]);
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
 
 	const col1 = t.color(255, 120, 80);
-	t.push();
-	t.translate(-6, 0);
-	t.charColor(col1.r, col1.g, col1.b);
-
-	const label1 = 'RGB: 255, 120, 80';
-	for (let i = 0; i < label1.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(label1[i]);
-		t.point();
-		t.pop();
-	}
-	t.pop();
-
 	const col2 = t.color('#80FFB0');
-	t.push();
-	t.translate(-6, 4);
-	t.charColor(col2.r, col2.g, col2.b);
-
-	const label2 = 'Hex: #80FFB0';
-	for (let i = 0; i < label2.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(label2[i]);
-		t.point();
-		t.pop();
-	}
-	t.pop();
-
 	const col3 = t.color(180);
-	t.push();
-	t.translate(-6, 8);
-	t.charColor(col3.r, col3.g, col3.b);
 
-	const label3 = 'Gray: 180';
-	for (let i = 0; i < label3.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(label3[i]);
-		t.point();
-		t.pop();
-	}
-	t.pop();
+	drawText('TEXTMODECOLOR.CREATION', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: STATIC COLOR CREATOR', x, y++, 100, 220, 255);
+	drawText('Supports RGB, Hex strings, Grays.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('RGB : 255, 120, 80', x, y++, col1.r, col1.g, col1.b);
+	drawText('Hex : #80FFB0', x, y++, col2.r, col2.g, col2.b);
+	drawText('Gray: 180', x, y++, col3.r, col3.g, col3.b);
 });
 
 t.windowResized(() => {
@@ -117,6 +89,9 @@ Alpha component (0-255).
 ```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
+const labelLayer = t.layers.add();
+let currentAlpha = 255;
+
 t.draw(() => {
 	t.background(0);
 
@@ -127,18 +102,47 @@ t.draw(() => {
 		const alpha = 255 * (1 - i / trailLen);
 		const col = t.color(255, 255, 255, alpha);
 
-		// Circular motion with lag
 		const tOffset = time - i * 0.1;
 		const x = Math.cos(tOffset) * 15;
 		const y = Math.sin(tOffset) * 15;
 
 		t.push();
 		t.translate(x, y);
-		t.char(col.a > 128 ? '@' : '.'); // Use alpha property to change char
+		t.char(col.a > 128 ? '@' : '.');
 		t.charColor(col);
 		t.point();
 		t.pop();
 	}
+
+	const activeColor = t.color(255, 255, 255, 128 + Math.round(127 * Math.sin(time)));
+	currentAlpha = activeColor.a;
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODECOLOR.A', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: ALPHA COLOR CHANNEL READ', x, y++, 100, 220, 255);
+	drawText('Accesses alpha opacity of active color.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`ALPHA VALUE : ${currentAlpha}`, x, y++, 240, 240, 240);
 });
 
 t.windowResized(() => {
@@ -165,6 +169,9 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
+const labelLayer = t.layers.add();
+let centerBlue = 0;
+
 t.draw(() => {
 	t.background(6, 10, 22);
 
@@ -172,7 +179,6 @@ t.draw(() => {
 
 	for (let y = -6; y <= 6; y++) {
 		const phase = y * 0.3 + time;
-		const wave = Math.sin(phase);
 		const shapedWave = 0.7 * Math.sin(phase) + 0.3 * Math.sin(phase * 3);
 		const blue = Math.round(50 + shapedWave * 180);
 		const c = t.color(80, 120, blue);
@@ -187,21 +193,34 @@ t.draw(() => {
 		t.pop();
 	}
 
-	const centerBlue = Math.round(50 + Math.abs(Math.sin(time)) * 180);
-	const label = `blue: ${t.color(80, 120, centerBlue).b}`;
+	centerBlue = Math.round(50 + Math.abs(Math.sin(time)) * 180);
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(label.length / 2), 10);
-	t.charColor(80, 120, centerBlue);
-
-	for (let i = 0; i < label.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(label[i]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODECOLOR.B', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: BLUE COLOR CHANNEL READ', x, y++, 100, 220, 255);
+	drawText('Accesses blue channel of active color.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`BLUE VALUE  : ${centerBlue}`, x, y++, 80, 120, centerBlue);
 });
 
 t.windowResized(() => {
@@ -228,6 +247,9 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
+const labelLayer = t.layers.add();
+let centerGreen = 0;
+
 t.draw(() => {
 	t.background(6, 10, 22);
 
@@ -235,7 +257,6 @@ t.draw(() => {
 
 	for (let y = -6; y <= 6; y++) {
 		const phase = y * 0.3 + time;
-		const wave = Math.sin(phase);
 		const shapedWave = 0.7 * Math.sin(phase) + 0.3 * Math.sin(phase * 3);
 		const green = Math.round(50 + shapedWave * 180);
 		const c = t.color(80, green, 120);
@@ -250,21 +271,34 @@ t.draw(() => {
 		t.pop();
 	}
 
-	const centerGreen = Math.round(50 + Math.abs(Math.sin(time)) * 180);
-	const label = `green: ${t.color(80, centerGreen, 120).g}`;
+	centerGreen = Math.round(50 + Math.abs(Math.sin(time)) * 180);
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(label.length / 2), 10);
-	t.charColor(80, centerGreen, 120);
-
-	for (let i = 0; i < label.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(label[i]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODECOLOR.G', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: GREEN COLOR CHANNEL READ', x, y++, 100, 220, 255);
+	drawText('Accesses green channel of active color.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`GREEN VALUE : ${centerGreen}`, x, y++, 80, centerGreen, 120);
 });
 
 t.windowResized(() => {
@@ -291,6 +325,9 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
+const labelLayer = t.layers.add();
+let centerRed = 0;
+
 t.draw(() => {
 	t.background(6, 10, 22);
 
@@ -312,21 +349,34 @@ t.draw(() => {
 		t.pop();
 	}
 
-	const centerRed = Math.round(80 + Math.abs(Math.sin(time)) * 175);
-	const label = `red: ${t.color(centerRed, 40, 40).r}`;
+	centerRed = Math.round(80 + Math.abs(Math.sin(time)) * 175);
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(label.length / 2), 10);
-	t.charColor(centerRed, 40, 40);
-
-	for (let i = 0; i < label.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(label[i]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODECOLOR.R', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: RED COLOR CHANNEL READ', x, y++, 100, 220, 255);
+	drawText('Accesses red channel of active color.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`RED VALUE : ${centerRed}`, x, y++, centerRed, 40, 40);
 });
 
 t.windowResized(() => {
@@ -344,7 +394,7 @@ t.windowResized(() => {
 get normalized(): [number, number, number, number];
 ```
 
-Returns the normalized *(0-1)* RGBA array.
+Normalized *(0-1)* RGBA tuple.
 
 Useful for passing color data to WebGL shaders.
 
@@ -359,6 +409,7 @@ A [r, g, b, a] tuple where each component is between 0.0 and 1.0.
 ```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
+const labelLayer = t.layers.add();
 const color = t.color(255, 128, 0, 255);
 const labels = ['R', 'G', 'B', 'A'];
 const colors = [
@@ -368,29 +419,21 @@ const colors = [
 	[240, 240, 240],
 ];
 
-function drawText(text, x, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
 	t.translate(x, y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	drawText(text, -Math.floor(text.length / 2), y, rgb);
-}
-
-function drawMeter(label, value, y, rgb, phase) {
+function drawMeter(label, value, y, rgb, phase, x) {
 	const blocks = Math.round(value * 10);
-	drawText(`${label} ${value.toFixed(2)}`, -13, y, rgb);
+	drawText(`${label} ${value.toFixed(2)}`, x, y, rgb[0], rgb[1], rgb[2]);
 
 	for (let i = 0; i < 10; i++) {
 		const active = i < blocks;
@@ -400,26 +443,36 @@ function drawMeter(label, value, y, rgb, phase) {
 			: [55, 65, 80];
 
 		t.push();
-		t.translate(1 + i, y);
+		t.translate(x + 13 + i, y);
 		t.charColor(meterColor[0], meterColor[1], meterColor[2]);
-		t.char(active ? '|' : '░');
+		t.char(active ? '|' : '.');
 		t.point();
 		t.pop();
 	}
 }
 
 t.draw(() => {
+	t.background(12, 16, 24);
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
 	const normalized = color.normalized;
 	const rgba = color.rgba.join(', ');
 
-	t.background(12, 16, 24);
-
-	drawCenteredText('NORMALIZED', -6, [180, 190, 220]);
-	drawCenteredText(`RGBA: ${rgba}`, -2, color.rgb);
-	drawCenteredText(`[${normalized.map((value) => value.toFixed(2)).join(', ')}]`, 0, [230, 235, 245]);
+	drawText('TEXTMODECOLOR.NORMALIZED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: NORMALIZED FLOAT VALUES', x, y++, 100, 220, 255);
+	drawText(`RGBA : [${rgba}]`, x, y++, color.rgb[0], color.rgb[1], color.rgb[2]);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
 
 	for (let i = 0; i < labels.length; i++) {
-		drawMeter(labels[i], normalized[i], 3 + i * 2, colors[i], i * 0.8);
+		drawMeter(labels[i], normalized[i], y++, colors[i], i * 0.8, x);
 	}
 });
 
@@ -438,7 +491,7 @@ t.windowResized(() => {
 get rgb(): [number, number, number];
 ```
 
-Returns a plain RGB array with integer components.
+Plain RGB tuple with integer components.
 
 ##### Returns
 
@@ -451,6 +504,7 @@ A [r, g, b] tuple with values between 0 and 255.
 ```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
+const labelLayer = t.layers.add();
 const color = t.color(50, 100, 200);
 const labels = ['R', 'G', 'B'];
 const channelColors = [
@@ -458,22 +512,6 @@ const channelColors = [
 	[120, 255, 140],
 	[120, 180, 255],
 ];
-
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
 
 t.draw(() => {
 	const [r, g, b] = color.rgb;
@@ -497,13 +535,38 @@ t.draw(() => {
 
 	t.push();
 	t.charColor(color);
-	t.char('■');
+	t.char('o');
 	t.rect(8, 4);
 	t.pop();
+});
 
-	drawCenteredText('RGB', -6, [180, 190, 220]);
-	drawCenteredText(`[${r}, ${g}, ${b}]`, 5, color.rgb);
-	drawCenteredText('red, green, blue components', 8, [170, 180, 205]);
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const [r, g, b] = color.rgb;
+
+	drawText('TEXTMODECOLOR.RGB', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: RGB COLOR COMPONENTS', x, y++, 100, 220, 255);
+	drawText('Accesses red, green, blue channels.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`RGB ARRAY : [${r}, ${g}, ${b}]`, x, y++, color.rgb[0], color.rgb[1], color.rgb[2]);
 });
 
 t.windowResized(() => {
@@ -521,7 +584,7 @@ t.windowResized(() => {
 get rgba(): [number, number, number, number];
 ```
 
-Returns a plain RGBA array with integer components.
+Plain RGBA tuple with integer components.
 
 ##### Returns
 
@@ -534,27 +597,8 @@ A [r, g, b, a] tuple with values between 0 and 255.
 ```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
+const labelLayer = t.layers.add();
 const color = t.color(255, 128, 0, 100);
-
-function drawText(text, x, y, rgb = [255, 255, 255], alpha = 255) {
-	t.push();
-	t.translate(x, y);
-	t.charColor(rgb[0], rgb[1], rgb[2], alpha);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
-
-function drawCenteredText(text, y, rgb = [255, 255, 255], alpha = 255) {
-	drawText(text, -Math.floor(text.length / 2), y, rgb, alpha);
-}
 
 function drawChecker(x, y, width, height) {
 	for (let row = 0; row < height; row++) {
@@ -562,7 +606,6 @@ function drawChecker(x, y, width, height) {
 			if ((row + col) % 2 !== 0) {
 				continue;
 			}
-
 			t.push();
 			t.translate(x + col, y + row);
 			t.charColor(90, 100, 120, 90);
@@ -573,7 +616,7 @@ function drawChecker(x, y, width, height) {
 	}
 }
 
-function drawSwatch(x, label, swatchColor, alpha = 255) {
+function drawSwatch(x, swatchColor, alpha = 255) {
 	const left = x - 4;
 	drawChecker(left, -2, 8, 4);
 
@@ -583,8 +626,6 @@ function drawSwatch(x, label, swatchColor, alpha = 255) {
 	t.char('@');
 	t.rect(8, 4);
 	t.pop();
-
-	drawText(label, x - Math.floor(label.length / 2), 4, [220, 225, 235]);
 }
 
 t.draw(() => {
@@ -593,13 +634,38 @@ t.draw(() => {
 
 	t.background(12, 16, 24);
 
-	drawCenteredText('RGBA', -7, [180, 190, 220]);
-	drawCenteredText(`[${r}, ${g}, ${b}, ${a}]`, -5, [230, 235, 245]);
+	drawSwatch(-offset, [r, g, b], 255);
+	drawSwatch(offset, [r, g, b], a);
+});
 
-	drawSwatch(-offset, 'RGBA 255', [r, g, b], 255);
-	drawSwatch(offset, `RGBA ${a}`, [r, g, b], a);
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
-	drawCenteredText('alpha changes opacity', 7, [170, 180, 205]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const [r, g, b, a] = color.rgba;
+
+	drawText('TEXTMODECOLOR.RGBA', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: RGBA COLOR SPECIFICATION', x, y++, 100, 220, 255);
+	drawText(`COLOR ARY : [${r}, ${g}, ${b}, ${a}]`, x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('Left Swatch : Alpha = 255', x, y++, 140, 190, 255);
+	drawText(`Right Swatch: Alpha = ${a}`, x, y++, 140, 190, 255);
 });
 
 t.windowResized(() => {
@@ -637,22 +703,54 @@ A new TextmodeColor instance with the updated alpha.
 ```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
+const layers = Array.from({ length: 5 }, () => t.layers.add());
+const labelLayer = t.layers.add();
+
 t.draw(() => {
 	t.background(0);
+});
 
-	const base = t.color(50, 150, 255);
+layers.forEach((layer, i) => {
+	layer.draw(() => {
+		t.clear();
 
-	for (let i = 0; i < 5; i++) {
+		const base = t.color(50, 150, 255);
+		const opacity = 100 + i * 30;
+
 		t.push();
 		t.translate((i - 2) * 5, Math.sin(t.frameCount * 0.05 + i) * 5);
-
-		const opacity = 100 + i * 30;
 		t.charColor(base.withAlpha(opacity));
-
 		t.char(String.fromCharCode(65 + i));
 		t.rect(12, 12);
 		t.pop();
+	});
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
 	}
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODECOLOR.WITHALPHA', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: CLONE COLOR WITH NEW ALPHA', x, y++, 100, 220, 255);
+	drawText('Returns copy with adjusted opacity.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('Rendering layers A-E with alpha.', x, y++, 140, 190, 255);
 });
 
 t.windowResized(() => {

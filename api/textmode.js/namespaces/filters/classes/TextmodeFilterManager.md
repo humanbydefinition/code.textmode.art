@@ -2,12 +2,12 @@
 layout: doc
 editLink: true
 title: TextmodeFilterManager
-description: Manages filter registration, shader compilation, and filter chain application.
+description: Registers filter shaders and applies layer/global filter chains.
 category: Classes
 api: true
 namespace: filters
 kind: Class
-lastModified: 2026-05-19
+lastModified: 2026-05-27
 hasConstructor: false
 ---
 
@@ -15,9 +15,7 @@ hasConstructor: false
 
 # Class: TextmodeFilterManager
 
-Manages filter registration, shader compilation, and filter chain application.
-
-Used both for layer-level filters and global post-processing filters.
+Registers filter shaders and applies layer/global filter chains.
 
 ## Example
 
@@ -61,76 +59,90 @@ true if the filter exists
 ```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
-let filterActive = false;
-
-function drawLabel(text, y, color = [220, 220, 220]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
+const labelLayer = t.layers.add();
+let hasCustom = false;
 
 t.setup(async () => {
 	const fragment = `#version 300 es
 		precision highp float;
 		in vec2 v_uv;
 		uniform sampler2D u_src;
-		uniform float u_amount;
 		out vec4 outColor;
-
 		void main() {
-			vec4 color = texture(u_src, v_uv);
-			float glow = 0.5 + 0.5 * sin((v_uv.x + v_uv.y) * 16.0 + u_amount * 6.2831853);
-			outColor = vec4(mix(color.rgb, vec3(color.b, color.r, glow), 0.6), color.a);
+			outColor = texture(u_src, v_uv);
 		}
 	`;
 
-	await t.filters.register('pulse-filter', fragment, {
-		u_amount: ['amount', 0.0],
-	});
-
-	filterActive = true;
+	await t.filters.register('custom-noop', fragment, {});
 });
 
 t.draw(() => {
 	t.background(6, 9, 20);
 
+	hasCustom = t.filters.has('custom-noop');
+
 	t.push();
-	t.rotateZ(t.frameCount * 1.2);
+	t.char('#');
+	t.rotateZ(t.frameCount * 1.5);
 	t.charColor(255, 220, 120);
-	t.cellColor(24, 38, 92);
-	t.rect(t.grid.cols - 12, t.grid.rows - 12);
+	t.rect(12, 12);
 	t.pop();
-
-	if (filterActive) {
-		t.filter('pulse-filter', (Math.sin(t.frameCount * 0.04) + 1) * 0.5);
-	}
-
-	drawLabel('custom filter registry', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
-	drawLabel(`has pulse-filter ${t.filters.has('pulse-filter') ? 'yes' : 'no'}`, Math.floor(t.grid.rows * 0.28));
-	drawLabel(
-		filterActive ? 'click to unregister' : 'refresh to re-register',
-		Math.floor(t.grid.rows * 0.36),
-		[120, 205, 255]
-	);
 });
 
-t.mouseClicked(() => {
-	if (!filterActive) {
-		return;
+t.mouseClicked(async () => {
+	if (hasCustom) {
+		t.filters.unregister('custom-noop');
+	} else {
+		const fragment = `#version 300 es
+			precision highp float;
+			in vec2 v_uv;
+			uniform sampler2D u_src;
+			out vec4 outColor;
+			void main() {
+				outColor = texture(u_src, v_uv);
+			}
+		`;
+		await t.filters.register('custom-noop', fragment, {});
 	}
+});
 
-	t.filters.unregister('pulse-filter');
-	filterActive = false;
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const isInvert = t.filters.has('invert');
+
+	drawText('FILTERS.HAS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: CHECK REGISTERED FILTER', x, y++, 100, 220, 255);
+	drawText('Performs lookup in filter registry.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`has('invert')     : ${isInvert}`, x, y++, 180, 255, 180);
+	drawText(
+		`has('custom-noop'): ${hasCustom}`,
+		x,
+		y++,
+		hasCustom ? 180 : 255,
+		hasCustom ? 255 : 120,
+		hasCustom ? 180 : 120
+	);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(hasCustom ? 'Click to unregister.' : 'Click to register custom-noop.', x, y++, 120, 205, 255);
 });
 
 t.windowResized(() => {
@@ -157,7 +169,7 @@ Register a custom filter with the given ID, shader, and uniform definitions.
 | ------ | ------ | ------ |
 | `id` | `string` | Unique filter identifier |
 | `shader` | `string` \| [`TextmodeShader`](../../../classes/TextmodeShader.md) | Pre-compiled GLShader, fragment shader source string, or path to a .frag/.glsl file |
-| `uniformDefs` | `Record`\<`string`, \[`string`, `UniformValue`\]\> | Maps uniform names to [paramName, defaultValue] tuples |
+| `uniformDefs` | `FilterUniformDefinitions` | Maps uniform names to [paramName, defaultValue] tuples |
 
 #### Returns
 
@@ -205,43 +217,22 @@ true if the filter was unregistered, false if it wasn't found
 ```javascript
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
+const labelLayer = t.layers.add();
 let filterActive = false;
-
-function drawLabel(text, y, color = [220, 220, 220]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
 
 t.setup(async () => {
 	const fragment = `#version 300 es
 		precision highp float;
 		in vec2 v_uv;
 		uniform sampler2D u_src;
-		uniform float u_amount;
 		out vec4 outColor;
-
 		void main() {
-			vec4 color = texture(u_src, v_uv);
-			float glow = 0.5 + 0.5 * sin((v_uv.x + v_uv.y) * 16.0 + u_amount * 6.2831853);
-			outColor = vec4(mix(color.rgb, vec3(color.b, color.r, glow), 0.6), color.a);
+			vec4 col = texture(u_src, v_uv);
+			outColor = vec4(col.r * 0.1, col.g * 1.5, col.b * 0.2, col.a);
 		}
 	`;
 
-	await t.filters.register('pulse-filter', fragment, {
-		u_amount: ['amount', 0.0],
-	});
-
+	await t.filters.register('green-wash', fragment, {});
 	filterActive = true;
 });
 
@@ -249,32 +240,58 @@ t.draw(() => {
 	t.background(6, 9, 20);
 
 	t.push();
+	t.char('#');
 	t.rotateZ(t.frameCount * 1.2);
 	t.charColor(255, 220, 120);
-	t.cellColor(24, 38, 92);
-	t.rect(t.grid.cols - 12, t.grid.rows - 12);
+	t.rect(14, 14);
 	t.pop();
 
-	if (filterActive) {
-		t.filter('pulse-filter', (Math.sin(t.frameCount * 0.04) + 1) * 0.5);
+	if (filterActive && t.filters.has('green-wash')) {
+		t.filter('green-wash');
 	}
-
-	drawLabel('custom filter registry', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
-	drawLabel(`has pulse-filter ${t.filters.has('pulse-filter') ? 'yes' : 'no'}`, Math.floor(t.grid.rows * 0.28));
-	drawLabel(
-		filterActive ? 'click to unregister' : 'refresh to re-register',
-		Math.floor(t.grid.rows * 0.36),
-		[120, 205, 255]
-	);
 });
 
 t.mouseClicked(() => {
-	if (!filterActive) {
-		return;
-	}
-
-	t.filters.unregister('pulse-filter');
+	if (!filterActive) return;
+	t.filters.unregister('green-wash');
 	filterActive = false;
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const stateStr = filterActive ? 'ACTIVE' : 'INACTIVE';
+
+	drawText('FILTERS.UNREGISTER', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: DISPOSE CUSTOM FILTER', x, y++, 100, 220, 255);
+	drawText('Removes registered custom shader.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`FILTER STATE: ${stateStr}`, x, y++, 140, 190, 255);
+	drawText(
+		filterActive ? 'Click to unregister green-wash.' : 'Filter unregistered successfully.',
+		x,
+		y++,
+		180,
+		255,
+		180
+	);
 });
 
 t.windowResized(() => {

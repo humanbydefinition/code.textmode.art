@@ -2,12 +2,12 @@
 layout: doc
 editLink: true
 title: GamepadButtonEventHandler
-description: Gamepad button event handler.
+description: Gamepad button event callback signature.
 category: Type Aliases
 api: true
 namespace: input.gamepad
 kind: TypeAlias
-lastModified: 2026-05-19
+lastModified: 2026-05-27
 ---
 
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [gamepad](../index.md) / GamepadButtonEventHandler
@@ -18,7 +18,7 @@ lastModified: 2026-05-19
 type GamepadButtonEventHandler = (data) => void;
 ```
 
-Gamepad button event handler.
+Gamepad button event callback signature.
 
 ## Parameters
 

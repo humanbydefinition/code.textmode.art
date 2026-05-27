@@ -2,11 +2,11 @@
 layout: doc
 editLink: true
 title: Textmodifier
-description: Manages textmode rendering on a HTMLCanvasElement and provides methods for drawing, font management, event handling, layer management, animation control, and...
+description: The main textmode.js drawing context.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-05-19
+lastModified: 2026-05-27
 hasConstructor: false
 ---
 
@@ -14,12 +14,12 @@ hasConstructor: false
 
 # Class: Textmodifier
 
-Manages textmode rendering on a [`HTMLCanvasElement`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLCanvasElement) and provides methods for drawing,
-font management, event handling, layer management, animation control, and more. The heart of the `textmode.js` library.
+The main `textmode.js` drawing context.
 
-If the `Textmodifier` instance is created without a canvas parameter,
-it creates a new `HTMLCanvasElement` to draw on using the `textmode.js` drawing API.
-If a canvas is provided, it will use that canvas instead.
+A Textmodifier manages a canvas, renderer, layers, fonts, media sources, input,
+animation, and the p5-style drawing API. When no canvas is supplied, it creates
+one; when a canvas is supplied, it renders into or over that element depending
+on the chosen options.
 
 ## Properties
 
@@ -29,7 +29,7 @@ If a canvas is provided, it will use that canvas instead.
 readonly gamepads: readonly TextmodeGamepadSnapshot[];
 ```
 
-Get the currently connected gamepads as a compact readonly list.
+Currently connected gamepads as a compact readonly list.
 
 The returned array is sorted by browser `Gamepad.index`, but unlike the browser API
 it does not contain sparse `null` holes for disconnected slots. Use
@@ -38,118 +38,53 @@ it does not contain sparse `null` holes for disconnected slots. Use
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-function drawText(text, x, y, r = 220, g = r, b = r) {
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
 	t.translate(x, y);
 	t.charColor(r, g, b);
-
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-function formatAxis(value) {
-	return (value >= 0 ? '+' : '') + value.toFixed(2);
-}
-
 t.draw(() => {
-	t.background(0);
-
-	const pads = t.gamepads;
-
-	drawText('gamepad polling api', -28, -18, 255, 255, 255);
-	drawText(
-		`connected: ${pads.length}`,
-		-28,
-		-16,
-		pads.length > 0 ? 120 : 90,
-		pads.length > 0 ? 220 : 90,
-		pads.length > 0 ? 120 : 90
-	);
-
-	if (pads.length === 0) {
-		drawText('connect a controller and press any button', -28, -6, 180, 180, 180);
-		drawText('some browsers wait for input before exposing a pad', -28, -4, 110, 110, 110);
-		return;
+	t.background(4, 6, 12);
+	const count = Math.max(1, t.gamepads.length);
+	for (let i = 0; i < 16; i++) {
+		t.push();
+		const angle = (i / 16) * Math.PI * 2 + t.frameCount * 0.03;
+		t.translate(Math.cos(angle) * (6 + count), Math.sin(angle) * 4);
+		t.char(t.gamepads.length ? '@' : '.');
+		t.charColor(80 + i * 8, 180, 255);
+		t.point();
+		t.pop();
 	}
+});
 
-	pads.slice(0, 2).forEach((pad, listIndex) => {
-		const y = -12 + listIndex * 14;
-		const slot = t.gamepad(pad.index);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
 
-		drawText(`slot ${pad.index}`, -28, y, 255, 200, 80);
-		drawText(pad.mapping === 'standard' ? 'standard' : 'raw', -21, y, 120, 180, 255);
-		drawText(slot ? 'ok' : 'missing', -13, y, slot ? 100 : 255, slot ? 160 : 80, slot ? 100 : 80);
-		drawText(pad.id.slice(0, 50), -28, y + 1, 120, 120, 120);
-
-		const axisStr = pad.axes
-			.slice(0, 6)
-			.map((v, i) => `a${i}:${formatAxis(v)}`)
-			.join(' ');
-		drawText(axisStr || 'no axes', -28, y + 3, 180, 200, 220);
-
-		const btnStr = pad.buttons
-			.slice(0, 17)
-			.map((b) => (b.value >= 0.5 ? '#' : b.value > 0.01 ? ':' : '.'))
-			.join('');
-		drawText(`btn ${btnStr}`, -28, y + 5, 180, 200, 220);
-
-		if (pad.buttons.length >= 8) {
-			const l2 = pad.buttons[6].value.toFixed(2);
-			const r2 = pad.buttons[7].value.toFixed(2);
-			drawText(`l2:${l2} r2:${r2}`, -28, y + 7, 160, 160, 180);
-		}
-
-		if (pad.standard) {
-			const face = pad.standard.faceButtons;
-			const dpad = pad.standard.dpad;
-			const ls = pad.standard.leftStick;
-			const rs = pad.standard.rightStick;
-
-			drawText(`  N:${face.north.pressed ? '#' : '.'}`, 6, y + 2, 160, 220, 160);
-			drawText(`W:${face.west.pressed ? '#' : '.'} E:${face.east.pressed ? '#' : '.'}`, 6, y + 3, 160, 220, 160);
-			drawText(`  S:${face.south.pressed ? '#' : '.'}`, 6, y + 4, 160, 220, 160);
-
-			drawText(`  U:${dpad.up.pressed ? '#' : '.'}`, 18, y + 2, 220, 180, 120);
-			drawText(
-				`L:${dpad.left.pressed ? '#' : '.'} R:${dpad.right.pressed ? '#' : '.'}`,
-				18,
-				y + 3,
-				220,
-				180,
-				120
-			);
-			drawText(`  D:${dpad.down.pressed ? '#' : '.'}`, 18, y + 4, 220, 180, 120);
-
-			drawText('L-stick', 6, y + 6, 100, 140, 180);
-			const lx = Math.round(10 + ls.x * 4);
-			const ly = Math.round(y + 8 + ls.y * 2);
-			t.push();
-			t.translate(lx, ly);
-			t.char(ls.magnitude > 0 ? '@' : '+');
-			t.charColor(255, 220, 100);
-			t.point();
-			t.pop();
-
-			drawText('R-stick', 18, y + 6, 100, 140, 180);
-			const rx = Math.round(22 + rs.x * 4);
-			const ry = Math.round(y + 8 + rs.y * 2);
-			t.push();
-			t.translate(rx, ry);
-			t.char(rs.magnitude > 0 ? '@' : '+');
-			t.charColor(100, 220, 255);
-			t.point();
-			t.pop();
-		}
-	});
+	drawText('TEXTMODIFIER.GAMEPADS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: GAMEPAD INPUT', x, y++, 100, 220, 255);
+	drawText('Works with browser pads.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`PADS: ${t.gamepads.length}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -165,9 +100,7 @@ t.windowResized(() => {
 readonly lastKeyPressed: string | null;
 ```
 
-Get the last key that was pressed.
-
-Returns the key string of the last pressed key, or null if no key has been pressed.
+Last key pressed, or `null` before any key press.
 
 #### Example
 
@@ -178,43 +111,41 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, row, rgb = [240, 245, 255]) {
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), row);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
 t.draw(() => {
 	t.background(6, 10, 22);
+	const key = t.lastKeyPressed || '?';
+	t.char(key[0] || '?');
+	t.charColor(255, 210, 120);
+	t.rect(8, 4);
+});
 
-	// Retrieve the property
-	const lastKey = t.lastKeyPressed;
-
-	t.push();
-	t.charColor(100, 255, 200);
-	if (lastKey) {
-		t.char(lastKey.length === 1 ? lastKey : '?');
-		t.rect(10, 10);
-	} else {
-		t.char('.');
-		t.rect(4, 4);
-	}
-	t.pop();
-
-	drawCenteredText('Textmodifier.lastKeyPressed', -20, [255, 255, 255]);
-	drawCenteredText('A property holding the string value of the last key pressed.', -18, [150, 170, 200]);
-	drawCenteredText('This value persists until a new key is pressed.', -16, [150, 170, 200]);
-
-	drawCenteredText(`t.lastKeyPressed = ${lastKey ? '"' + lastKey + '"' : 'null'}`, 10, [100, 255, 200]);
-	drawCenteredText('Press any key to update property', 18, [100, 100, 120]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.LASTKEYPRESSED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: LAST KEY DOWN', x, y++, 100, 220, 255);
+	drawText('Stores latest pressed key.', x, y++, 140, 160, 190);
+	drawText('Value persists until next press.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('LAST: ' + String(t.lastKeyPressed || 'NONE').slice(0, 20), x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -230,9 +161,7 @@ t.windowResized(() => {
 readonly lastKeyReleased: string | null;
 ```
 
-Get the last key that was released.
-
-Returns the key string of the last released key, or null if no key has been released.
+Last key released, or `null` before any key release.
 
 #### Example
 
@@ -243,43 +172,41 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, row, rgb = [240, 245, 255]) {
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), row);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
 t.draw(() => {
 	t.background(6, 10, 22);
+	const key = t.lastKeyReleased || '?';
+	t.char(key[0] || '?');
+	t.charColor(140, 220, 255);
+	t.rect(8, 4);
+});
 
-	// Retrieve the property
-	const lastKey = t.lastKeyReleased;
-
-	t.push();
-	t.charColor(255, 140, 180);
-	if (lastKey) {
-		t.char(lastKey.length === 1 ? lastKey : '?');
-		t.rect(10, 10);
-	} else {
-		t.char('.');
-		t.rect(4, 4);
-	}
-	t.pop();
-
-	drawCenteredText('Textmodifier.lastKeyReleased', -20, [255, 255, 255]);
-	drawCenteredText('A property holding the string value of the last key released.', -18, [150, 170, 200]);
-	drawCenteredText('Useful for detecting the end of a specific user action.', -16, [150, 170, 200]);
-
-	drawCenteredText(`t.lastKeyReleased = ${lastKey ? '"' + lastKey + '"' : 'null'}`, 10, [255, 140, 180]);
-	drawCenteredText('Press and RELEASE any key', 18, [100, 100, 120]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.LASTKEYRELEASED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: LAST KEY UP', x, y++, 100, 220, 255);
+	drawText('Stores latest released key.', x, y++, 140, 160, 190);
+	drawText('Value persists until next up.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('LAST: ' + String(t.lastKeyReleased || 'NONE').slice(0, 20), x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -295,9 +222,7 @@ t.windowResized(() => {
 readonly modifierState: object;
 ```
 
-Get current modifier key states.
-
-Returns an object with boolean properties for each modifier key.
+Current modifier key state.
 
 | Name | Type | Description |
 | ------ | ------ | ------ |
@@ -315,102 +240,50 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawText(text, x, y, r = 180, g = r, b = r) {
-	t.push();
-	t.translate(x - Math.floor(text.length / 2), y);
-	t.charColor(r, g, b);
+const labelLayer = t.layers.add();
 
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
+let active = 0;
 
-	t.pop();
-}
-
-function drawPanel(x, y, label, active, themeColors) {
-	const borderChar = active ? '█' : '░';
-	const status = active ? ' ACTIVE ' : ' INACTIVE';
-
-	const activeR = active ? themeColors.active[0] : themeColors.idle[0];
-	const activeG = active ? themeColors.active[1] : themeColors.idle[1];
-	const activeB = active ? themeColors.active[2] : themeColors.idle[2];
-
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
 	t.translate(x, y);
-
-	// Panel glowing container
-	t.char(borderChar);
-	t.charColor(activeR, activeG, activeB, active ? 255 : 120);
-	t.rect(14, 6);
-
-	// Invert character content for the active text label
-	drawText(label, 0, -1, active ? 255 : 160, active ? 255 : 160, active ? 255 : 180);
-	drawText(status, 0, 1, activeR, activeG, activeB);
-
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
 	t.pop();
 }
 
 t.draw(() => {
-	t.background(6, 8, 14);
+	t.background(6, 10, 22);
+	const m = t.modifierState;
+	active = [m.shift, m.ctrl, m.alt, m.meta].filter(Boolean).length;
+	['SHIFT', 'CTRL', 'ALT', 'META'].forEach((name, i) => {
+		const on = [m.shift, m.ctrl, m.alt, m.meta][i];
+		t.push();
+		t.translate((i - 1.5) * 7, 0);
+		t.char(on ? '#' : '.');
+		t.charColor(on ? 140 : 80, on ? 255 : 90, 180);
+		t.rect(5, 3);
+		t.pop();
+	});
+});
 
-	const { shift, ctrl, alt, meta } = t.modifierState;
-	const activeCount = [shift, ctrl, alt, meta].filter(Boolean).length;
-
-	const cols = t.grid.cols;
-	const rows = t.grid.rows;
-
-	// Header JSDoc terminal console title
-	drawText('COGNITIVE INTERACTIVE KEYBOARD SENSORS', 0, -Math.floor(rows / 2) + 4, 100, 200, 255);
-	drawText(
-		'PRESS AND HOLD MODIFIER KEYS ON YOUR KEYBOARD TO TELEPORT THE SIGNAL',
-		0,
-		-Math.floor(rows / 2) + 6,
-		120,
-		140,
-		160
-	);
-
-	// Color configurations for the 4 key panels
-	const themeShift = { active: [255, 100, 100], idle: [60, 40, 40] }; // Red
-	const themeCtrl = { active: [255, 200, 50], idle: [60, 55, 30] }; // Yellow
-	const themeAlt = { active: [100, 255, 150], idle: [30, 60, 45] }; // Green
-	const themeMeta = { active: [100, 180, 255], idle: [30, 45, 60] }; // Cyan
-
-	// Responsive quad layout
-	const spacingX = Math.max(12, Math.floor(cols / 4));
-	const spacingY = Math.max(6, Math.floor(rows / 4));
-
-	drawPanel(-spacingX, -spacingY, 'SHIFT KEY', shift, themeShift);
-	drawPanel(spacingX, -spacingY, 'CTRL KEY', ctrl, themeCtrl);
-	drawPanel(-spacingX, spacingY, 'ALT KEY', alt, themeAlt);
-	drawPanel(spacingX, spacingY, 'META / CMD', meta, themeMeta);
-
-	// Central visual connection matrix
-	t.push();
-	const pulse = 1 + Math.sin(t.frameCount * 0.1) * 0.25;
-	t.rotateZ(t.frameCount * (1 + activeCount * 2));
-	t.char(activeCount > 0 ? '☼' : '·');
-	t.charColor(activeCount > 0 ? 255 : 80, activeCount > 0 ? 220 : 90, activeCount > 0 ? 150 : 100);
-	t.rect(4 * pulse + activeCount * 4, 4 * pulse + activeCount * 4);
-	t.pop();
-
-	// Telemetry stats footer
-	const infoStr =
-		activeCount === 0
-			? 'STATUS: IDLE PORT - WAITING FOR INPUT...'
-			: `STATUS: ACTIVE GATEWAY - ${activeCount} KEYS BINDING`;
-	drawText(
-		infoStr,
-		0,
-		Math.floor(rows / 2) - 4,
-		activeCount > 0 ? 100 : 140,
-		activeCount > 0 ? 255 : 140,
-		activeCount > 0 ? 180 : 150
-	);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.MODIFIERSTATE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: MODIFIER KEYS', x, y++, 100, 220, 255);
+	drawText('Tracks Shift/Ctrl/Alt/Meta.', x, y++, 140, 160, 190);
+	drawText('Hold keys to light panels.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`ACTIVE: ${active}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -426,7 +299,7 @@ t.windowResized(() => {
 readonly mouse: GridPosition;
 ```
 
-Get the current mouse position in center-based grid coordinates.
+Current mouse position in center-based grid coordinates.
 
 Returns the mouse position as grid cell coordinates where `(0, 0)` is the center cell.
 This matches the drawing coordinate system, so coordinates can be used directly with `translate()`.
@@ -443,68 +316,58 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, row, rgb = [240, 245, 255]) {
+const labelLayer = t.layers.add();
+
+let mx = 0;
+let my = 0;
+let inside = false;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), row);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
 t.draw(() => {
 	t.background(6, 10, 22);
-
-	const mx = t.mouse.x;
-	const my = t.mouse.y;
-	const isInside = mx !== Number.NEGATIVE_INFINITY;
-
-	if (isInside) {
-		t.push();
-		t.translate(mx, 0);
-		t.charColor(40, 50, 80);
-		t.char('|');
-		t.rect(1, t.grid.rows);
-		t.pop();
-
-		t.push();
-		t.translate(0, my);
-		t.charColor(40, 50, 80);
-		t.char('-');
-		t.rect(t.grid.cols, 1);
-		t.pop();
-
+	mx = t.mouse.x;
+	my = t.mouse.y;
+	inside = mx !== Number.NEGATIVE_INFINITY;
+	t.charColor(50, 60, 90);
+	t.char('.');
+	t.line(-18, 0, 18, 0);
+	t.line(0, -10, 0, 10);
+	if (inside) {
 		t.push();
 		t.translate(mx, my);
-		t.char('☼');
-		t.charColor(255, 200, 100);
+		t.char('+');
+		t.charColor(255, 210, 120);
 		t.point();
-
-		t.translate(2, 0);
-		const coordText = `(${mx.toFixed(1)}, ${my.toFixed(1)})`;
-		t.charColor(255);
-		for (let i = 0; i < coordText.length; i++) {
-			t.push();
-			t.translate(i, 0);
-			t.char(coordText[i]);
-			t.point();
-			t.pop();
-		}
 		t.pop();
 	}
+});
 
-	drawCenteredText('Textmodifier.mouse', -20, [255, 255, 255]);
-	drawCenteredText('A property holding the current mouse position in grid cells.', -18, [150, 170, 200]);
-	drawCenteredText('Values are Number.NEGATIVE_INFINITY if outside the canvas.', -16, [150, 170, 200]);
-
-	if (!isInside) {
-		drawCenteredText('Move mouse into the canvas to track', 14, [100, 100, 120]);
-	}
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.MOUSE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: POINTER POSITION', x, y++, 100, 220, 255);
+	drawText('Reads current mouse grid cell.', x, y++, 140, 160, 190);
+	drawText('Outside canvas returns infinity.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(inside ? 'INSIDE: TRUE' : 'INSIDE: FALSE', x, y++, 140, 255, 180);
+	drawText(`X: ${mx}`, x, y++, 180, 200, 220);
+	drawText(`Y: ${my}`, x, y++, 180, 200, 220);
 });
 
 t.windowResized(() => {
@@ -520,7 +383,7 @@ t.windowResized(() => {
 readonly mouseIsPressed: boolean;
 ```
 
-Get whether a mouse button is currently being held down.
+Whether a mouse button is currently held down.
 
 This value stays `true` after a press begins on the canvas and returns to `false` when the
 button is released, including releases that occur outside the canvas after the interaction
@@ -535,54 +398,46 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-let charge = 0;
+const labelLayer = t.layers.add();
 
-function drawCenteredText(text, row, rgb = [240, 245, 255]) {
+let pressed = false;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), row);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
 t.draw(() => {
 	t.background(6, 10, 22);
-
-	const mx = t.mouse.x;
-	const my = t.mouse.y;
-	const isInside = mx !== Number.NEGATIVE_INFINITY;
-
-	if (t.mouseIsPressed && isInside) {
-		charge = Math.min(1.0, charge + 0.05);
-	} else {
-		charge = Math.max(0, charge - 0.02);
+	pressed = t.mouseIsPressed;
+	if (pressed && t.mouse.x !== Number.NEGATIVE_INFINITY) {
+		t.translate(t.mouse.x, t.mouse.y);
 	}
+	t.char(pressed ? '@' : '.');
+	t.charColor(pressed ? 140 : 80, pressed ? 255 : 90, pressed ? 180 : 100);
+	t.rect(8, 4);
+});
 
-	if (isInside) {
-		t.push();
-		t.translate(mx, my);
-		const size = 5 + charge * 20;
-		t.charColor(255, 200, 100, charge * 255);
-		t.char('☼');
-		t.ellipse(size, size);
-		t.char(t.mouseIsPressed ? '@' : '+');
-		t.charColor(255, 255, 255);
-		t.point();
-		t.pop();
-	}
-
-	drawCenteredText('Textmodifier.mouseIsPressed', -20, [255, 255, 255]);
-	drawCenteredText('Boolean state: true if any button is held.', -18, [150, 170, 200]);
-	drawCenteredText('Checked every frame in the draw loop.', -16, [150, 170, 200]);
-
-	drawCenteredText(`mouseIsPressed = ${t.mouseIsPressed}`, 10, t.mouseIsPressed ? [100, 255, 150] : [255, 100, 100]);
-	drawCenteredText('Hold Click to "Charge" the cursor', 18, [255, 200, 100]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.MOUSEISPRESSED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: BUTTON STATE', x, y++, 100, 220, 255);
+	drawText('True while mouse is held.', x, y++, 140, 160, 190);
+	drawText('Shape follows held pointer.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(pressed ? 'PRESSED: TRUE' : 'PRESSED: FALSE', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -598,7 +453,7 @@ t.windowResized(() => {
 readonly movedX: number;
 ```
 
-Get the horizontal mouse movement accumulated since the previous rendered frame.
+Horizontal mouse movement accumulated since the previous rendered frame.
 
 This is especially useful while pointer lock is active, where absolute mouse coordinates
 stop being meaningful and relative movement becomes the primary input signal.
@@ -606,35 +461,64 @@ stop being meaningful and relative movement becomes the primary input signal.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-let cursor = { x: 0, y: 0 };
+const labelLayer = t.layers.add();
+
+let cx = 0;
+let cy = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.mouseClicked(() => {
-	if (document.pointerLockElement === t.canvas) {
-		t.exitPointerLock();
-	} else {
-		t.requestPointerLock();
-	}
+	if (document.pointerLockElement === t.canvas) t.exitPointerLock();
+	else t.requestPointerLock();
 });
 
 t.draw(() => {
-	t.background(0);
-
-	if (document.pointerLockElement === t.canvas) {
-		cursor.x += t.movedX * 0.08;
-		cursor.y += t.movedY * 0.08;
+	t.background(6, 10, 22);
+	const locked = document.pointerLockElement === t.canvas;
+	if (locked) {
+		cx += t.movedX * 0.08;
+		cy += t.movedY * 0.08;
 	}
-
-	cursor.x = Math.max(-t.grid.cols / 2, Math.min(t.grid.cols / 2, cursor.x));
-	cursor.y = Math.max(-t.grid.rows / 2, Math.min(t.grid.rows / 2, cursor.y));
-
+	cx = Math.max(-20, Math.min(20, cx));
+	cy = Math.max(-10, Math.min(10, cy));
 	t.push();
-	t.translate(cursor.x, cursor.y);
-	t.char(document.pointerLockElement === t.canvas ? '@' : '+');
-	t.charColor(document.pointerLockElement === t.canvas ? 255 : 180, 220, 120);
+	t.translate(cx, cy);
+	t.char(locked ? '@' : '+');
+	t.charColor(locked ? 140 : 255, locked ? 255 : 210, 180);
 	t.point();
 	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.REQUESTPOINTERLOCK', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: LOCK POINTER', x, y++, 100, 220, 255);
+	drawText('Click toggles pointer lock.', x, y++, 140, 160, 190);
+	drawText('Movement uses movedX/movedY.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(document.pointerLockElement === t.canvas ? 'LOCKED: TRUE' : 'LOCKED: FALSE', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -650,7 +534,7 @@ t.windowResized(() => {
 readonly movedY: number;
 ```
 
-Get the vertical mouse movement accumulated since the previous rendered frame.
+Vertical mouse movement accumulated since the previous rendered frame.
 
 This is especially useful while pointer lock is active, where absolute mouse coordinates
 stop being meaningful and relative movement becomes the primary input signal.
@@ -658,35 +542,64 @@ stop being meaningful and relative movement becomes the primary input signal.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-let cursor = { x: 0, y: 0 };
+const labelLayer = t.layers.add();
+
+let cx = 0;
+let cy = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.mouseClicked(() => {
-	if (document.pointerLockElement === t.canvas) {
-		t.exitPointerLock();
-	} else {
-		t.requestPointerLock();
-	}
+	if (document.pointerLockElement === t.canvas) t.exitPointerLock();
+	else t.requestPointerLock();
 });
 
 t.draw(() => {
-	t.background(0);
-
-	if (document.pointerLockElement === t.canvas) {
-		cursor.x += t.movedX * 0.08;
-		cursor.y += t.movedY * 0.08;
+	t.background(6, 10, 22);
+	const locked = document.pointerLockElement === t.canvas;
+	if (locked) {
+		cx += t.movedX * 0.08;
+		cy += t.movedY * 0.08;
 	}
-
-	cursor.x = Math.max(-t.grid.cols / 2, Math.min(t.grid.cols / 2, cursor.x));
-	cursor.y = Math.max(-t.grid.rows / 2, Math.min(t.grid.rows / 2, cursor.y));
-
+	cx = Math.max(-20, Math.min(20, cx));
+	cy = Math.max(-10, Math.min(10, cy));
 	t.push();
-	t.translate(cursor.x, cursor.y);
-	t.char(document.pointerLockElement === t.canvas ? '@' : '+');
-	t.charColor(document.pointerLockElement === t.canvas ? 255 : 180, 220, 120);
+	t.translate(cx, cy);
+	t.char(locked ? '@' : '+');
+	t.charColor(locked ? 140 : 255, locked ? 255 : 210, 180);
 	t.point();
 	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.REQUESTPOINTERLOCK', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: LOCK POINTER', x, y++, 100, 220, 255);
+	drawText('Click toggles pointer lock.', x, y++, 140, 160, 190);
+	drawText('Movement uses movedX/movedY.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(document.pointerLockElement === t.canvas ? 'LOCKED: TRUE' : 'LOCKED: FALSE', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -702,7 +615,7 @@ t.windowResized(() => {
 readonly pmouse: GridPosition;
 ```
 
-Get the mouse position from the previous rendered frame.
+Mouse position from the previous rendered frame.
 
 Unlike `previousPosition` in mouse event callbacks, this value is updated exactly once per
 rendered frame. Use it inside `draw()` to measure frame-to-frame mouse motion or draw trails.
@@ -713,51 +626,60 @@ If no previous frame position is available yet, it returns
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-const segments = [];
+const labelLayer = t.layers.add();
+
+let px = 0;
+let py = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.draw(() => {
-	t.background(0);
-
-	const mouseInside = t.mouse.x !== Number.NEGATIVE_INFINITY;
-	const previousInside = t.pmouse.x !== Number.NEGATIVE_INFINITY;
-
-	if (mouseInside && previousInside) {
-		segments.push({
-			x1: t.pmouse.x,
-			y1: t.pmouse.y,
-			x2: t.mouse.x,
-			y2: t.mouse.y,
-			life: 1,
-		});
-	}
-
-	for (let i = segments.length - 1; i >= 0; i--) {
-		const segment = segments[i];
-		segment.life -= 0.03;
-
-		if (segment.life <= 0) {
-			segments.splice(i, 1);
-			continue;
-		}
-
-		t.push();
-		t.char('-');
-		t.lineWeight(1);
-		t.charColor(100, 180 + segment.life * 75, 255, segment.life * 255);
-		t.line(segment.x1, segment.y1, segment.x2, segment.y2);
-		t.pop();
-	}
-
-	if (mouseInside) {
+	t.background(6, 10, 22);
+	px = t.pmouse.x;
+	py = t.pmouse.y;
+	if (t.mouse.x !== Number.NEGATIVE_INFINITY) {
+		t.charColor(60, 80, 120);
+		t.char('.');
+		t.line(px, py, t.mouse.x, t.mouse.y);
 		t.push();
 		t.translate(t.mouse.x, t.mouse.y);
 		t.char('@');
-		t.charColor(255, 220, 120);
+		t.charColor(255, 210, 120);
 		t.point();
 		t.pop();
 	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.PMOUSE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: PREVIOUS MOUSE', x, y++, 100, 220, 255);
+	drawText('Draws a trail from last point.', x, y++, 140, 160, 190);
+	drawText('Updates whenever pointer moves.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`PX: ${px}`, x, y++, 180, 200, 220);
+	drawText(`PY: ${py}`, x, y++, 180, 200, 220);
 });
 
 t.windowResized(() => {
@@ -773,28 +695,57 @@ t.windowResized(() => {
 readonly pressedKeys: string[];
 ```
 
-Get all currently pressed keys.
-
-Returns an array of key strings that are currently being held down.
+Keys currently being held down.
 
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.draw(() => {
-	t.background(0);
-
-	const pressed = t.pressedKeys;
-
-	pressed.forEach((key, index) => {
+	t.background(6, 10, 22);
+	const keys = Array.from(t.pressedKeys);
+	keys.forEach((key, index) => {
 		t.push();
-		t.char(key[0] || '?');
-		t.charColor(255, 200, 100);
-		t.translate(index, 0);
+		t.translate(index * 2 - keys.length, 0);
+		t.char(String(key)[0] || '?');
+		t.charColor(255, 210, 120);
 		t.point();
 		t.pop();
 	});
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.PRESSEDKEYS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: ALL HELD KEYS', x, y++, 100, 220, 255);
+	drawText('Set lists currently held keys.', x, y++, 140, 160, 190);
+	drawText('Each key renders in center.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`COUNT: ${t.pressedKeys.size}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -810,7 +761,7 @@ t.windowResized(() => {
 readonly touches: TouchPosition[];
 ```
 
-Get the currently active touches in grid coordinates.
+Currently active touches in grid coordinates.
 
 Returns a copy of each touch, including grid position, client coordinates, and pressure when
 available. Use this inside a draw loop to react to active multi-touch scenarios.
@@ -824,102 +775,54 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawText(text, x, y, r = 180, g = r, b = r) {
-	t.push();
-	t.translate(x - Math.floor(text.length / 2), y);
-	t.charColor(r, g, b);
+const labelLayer = t.layers.add();
 
+let points = [];
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
 t.draw(() => {
-	t.background(6, 8, 14);
-
-	const cols = t.grid.cols;
-	const rows = t.grid.rows;
-
-	// Telemetry header
-	drawText('MULTI-TOUCH HUD GEOMETRY NET', 0, -Math.floor(rows / 2) + 4, 100, 200, 255);
-	drawText(
-		'Tap multiple fingers on touchpad or drag mouse to triangulate signals',
-		0,
-		-Math.floor(rows / 2) + 6,
-		120,
-		140,
-		160
-	);
-
-	// Multi-point compilation: supports real multi-touch and desktop mouse drag fallback
-	const activePoints = [...t.touches];
-	if (activePoints.length === 0 && t.mouse && t.mouseIsPressed) {
-		activePoints.push({
-			id: 0,
-			x: t.mouse.x,
-			y: t.mouse.y,
-			pressure: 0.75,
-		});
-	}
-
-	// 1. Draw connecting triangulation lines between all active fingers
-	t.charColor(50, 80, 120);
-	for (let i = 0; i < activePoints.length; i++) {
-		for (let j = i + 1; j < activePoints.length; j++) {
-			t.line(activePoints[i].x, activePoints[i].y, activePoints[j].x, activePoints[j].y);
+	t.background(6, 10, 22);
+	points = Array.from(t.touches);
+	if (points.length === 0 && t.mouseIsPressed) points = [t.mouse];
+	for (let i = 0; i < points.length; i++) {
+		const p = points[i];
+		t.push();
+		t.translate(p.x, p.y);
+		t.char(String(i));
+		t.charColor(255, 210, 120);
+		t.point();
+		t.pop();
+		if (i > 0) {
+			t.charColor(80, 120, 180);
+			t.line(points[i - 1].x, points[i - 1].y, p.x, p.y);
 		}
 	}
+});
 
-	// 2. Draw rings and detailed coordinate text for each active touch point
-	activePoints.forEach((touch, idx) => {
-		const id = touch.id ?? idx;
-		t.push();
-		t.translate(touch.x, touch.y);
-
-		// Dynamic color based on touch ID
-		const r = Math.floor(130 + 125 * Math.sin(id * 1.5 + t.frameCount * 0.05));
-		const g = Math.floor(180 + 75 * Math.cos(id * 0.8));
-		const b = 255;
-
-		const pressure = touch.pressure ?? 0.5;
-		const pulse = 1 + Math.sin(t.frameCount * 0.1) * 0.15;
-		const radius = 3 + pressure * 10 * pulse;
-
-		// Bounding indicator ring
-		t.char('○');
-		t.charColor(r, g, b, 180);
-		t.ellipse(radius, radius);
-
-		// Core marker character
-		t.char('█');
-		t.charColor(r, g, b);
-		t.rect(1.5, 1.5);
-		t.pop();
-
-		// Digital metrics label drawn next to the touch point
-		const label = `ID:${id} (${touch.x.toFixed(0)}, ${touch.y.toFixed(0)}) P:${pressure.toFixed(2)}`;
-		drawText(label, touch.x, touch.y - radius - 1, r, g, b);
-	});
-
-	// Telemetry active stats footer
-	const statsStr =
-		activePoints.length === 0
-			? 'GRID TELEMETRY LINK: WAITING FOR INPUT SIGNALS...'
-			: `GRID TELEMETRY LINK: ${activePoints.length} SENSOR SIGNALS ESTABLISHED`;
-	drawText(
-		statsStr,
-		0,
-		Math.floor(rows / 2) - 4,
-		activePoints.length > 0 ? 100 : 140,
-		activePoints.length > 0 ? 255 : 140,
-		activePoints.length > 0 ? 180 : 150
-	);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.TOUCHES', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: ACTIVE TOUCH LIST', x, y++, 100, 220, 255);
+	drawText('Shows live touch points.', x, y++, 140, 160, 190);
+	drawText('Mouse drag acts as fallback.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`TOUCHES: ${points.length}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -937,7 +840,7 @@ t.windowResized(() => {
 get canvas(): HTMLCanvasElement;
 ```
 
-Get the canvas containing the rendered output.
+Canvas containing the rendered output.
 
 ##### Returns
 
@@ -946,32 +849,82 @@ Get the canvas containing the rendered output.
 ##### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 8,
+});
 
-t.canvas.title = 'Textmodifier.canvas example';
-t.canvas.style.outline = '2px solid rgba(250, 204, 21, 0.5)';
-t.canvas.style.outlineOffset = '-2px';
-t.canvas.style.background = '#09090b';
+const labelLayer = t.layers.add();
 
-function label(text, y, color = [220, 220, 220]) {
+t.canvas.title = 'Textmodifier.canvas';
+t.canvas.dataset.example = 'canvas';
+t.canvas.style.background = '#060713';
+t.canvas.style.outlineOffset = '-4px';
+
+function updateCanvasElement() {
+	const hue = Math.floor((t.frameCount * 2) % 360);
+	t.canvas.style.outline = `3px solid hsl(${hue}, 90%, 62%)`;
+	t.canvas.style.boxShadow = `0 0 24px hsla(${hue}, 90%, 62%, 0.28)`;
+}
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
 t.draw(() => {
-	t.background(9, 11, 21);
-	label('canvas getter exposes the DOM canvas', -2, [255, 210, 90]);
-	label(`${t.canvas.width} x ${t.canvas.height} pixels`, 1);
-	label('this example adds an outline via t.canvas.style', 4, [150, 160, 190]);
+	updateCanvasElement();
+	t.background(6, 8, 20);
+
+	const cols = Math.floor(t.grid.cols / 2);
+	const rows = Math.floor(t.grid.rows / 2);
+	t.charColor(255, 190, 80);
+	for (let x = -cols; x <= cols; x += 4) {
+		t.push();
+		t.translate(x, -rows + 1);
+		t.char('=');
+		t.point();
+		t.translate(0, rows * 2 - 2);
+		t.point();
+		t.pop();
+	}
+	for (let y = -rows + 1; y < rows; y += 2) {
+		t.push();
+		t.translate(-cols + 1, y);
+		t.char('|');
+		t.point();
+		t.translate(cols * 2 - 2, 0);
+		t.point();
+		t.pop();
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	const size = `${t.canvas.width}x${t.canvas.height}`;
+	const title = t.canvas.title;
+
+	drawText('TEXTMODIFIER.CANVAS', x, y++, 255, 190, 80);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: DOM CANVAS ACCESS', x, y++, 100, 220, 255);
+	drawText('The getter returns the element.', x, y++, 140, 160, 190);
+	drawText('CSS and metadata update live.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`SIZE: ${size}`, x, y++, 140, 190, 255);
+	drawText(`TITLE: ${title}`, x, y++, 150, 240, 170);
+	drawText('DATASET: canvas', x, y++, 150, 240, 170);
 });
 
 t.windowResized(() => {
@@ -1001,40 +954,49 @@ when converting images/videos/canvases into textmode representations.
 ##### Example
 
 ```javascript
-const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80';
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-let img;
+const labelLayer = t.layers.add();
+
 let hasBrightness = false;
 
-function label(text, y, color = [220, 220, 220]) {
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
-t.setup(async () => {
+t.draw(() => {
+	t.background(6, 10, 22);
 	hasBrightness = t.conversions.has('brightness');
-	img = await t.loadImage(IMAGE_URL);
-	if (hasBrightness) img.conversionMode('brightness');
-	img.characters(' .:-=+*#%@');
+	t.char(hasBrightness ? '@' : '.');
+	t.charColor(140, 220, 255);
+	t.rect(12, 5);
 });
 
-t.draw(() => {
-	t.background(8, 10, 20);
-	if (img) {
-		t.image(img, t.grid.cols - 8, t.grid.rows - 8);
-	}
-	label('conversions', -Math.floor(t.grid.rows / 2) + 2, [255, 210, 90]);
-	label(`conversions.has('brightness'): ${hasBrightness}`, Math.floor(t.grid.rows / 2) - 3);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.CONVERSIONS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: IMAGE MAPPING', x, y++, 100, 220, 255);
+	drawText('Conversion registry maps sources.', x, y++, 140, 160, 190);
+	drawText('Built-ins can be queried.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(hasBrightness ? 'BRIGHTNESS: YES' : 'BRIGHTNESS: NO', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -1052,7 +1014,7 @@ t.windowResized(() => {
 get errors(): ErrorLayerController;
 ```
 
-Provides access to the error layer controller to display fatal errors in a user-friendly way.
+Built-in fatal error layer controller.
 
 ##### Returns
 
@@ -1061,9 +1023,15 @@ Provides access to the error layer controller to display fatal errors in a user-
 ##### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 8,
+});
 
 let triggerError = false;
+const labelLayer = t.layers.add();
+
 window.addEventListener(
 	'click',
 	() => {
@@ -1072,29 +1040,54 @@ window.addEventListener(
 	{ once: true }
 );
 
-function label(text, y, color = [220, 220, 220]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-	for (let i = 0; i < text.length; i++) {
+t.draw(() => {
+	t.background(10, 12, 24);
+
+	// Render a spinning neon cyan gear to demonstrate active draw loop
+	const time = t.frameCount * 0.05;
+	for (let i = 0; i < 8; i++) {
+		const angle = time + (i / 8) * Math.PI * 2;
 		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
+		t.translate(Math.cos(angle) * 8, Math.sin(angle) * 4);
+		t.charColor(0, 180, 255);
+		t.char('*');
 		t.point();
 		t.pop();
 	}
-	t.pop();
-}
-
-t.draw(() => {
-	t.background(10, 12, 24);
-	label('errors', -3, [255, 210, 90]);
-	label(`controller available: ${Boolean(t.errors)}`, 0);
-	label('click once to trigger a draw error overlay', 3, [150, 160, 190]);
 
 	if (triggerError) {
 		throw new Error('This example intentionally triggers the error layer.');
 	}
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODIFIER.ERRORS', x, y++, 255, 100, 100);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: AUTOMATED RUNTIME ERROR CAPTURE', x, y++, 100, 220, 255);
+	drawText('Shows fallback error overlay.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	const state = Boolean(t.errors) ? 'TRUE' : 'FALSE';
+	drawText(`ERRORS: ${state}`, x, y++, 140, 190, 255);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CLICK TO TRIGGER ERROR', x, y++, 255, 200, 100);
 });
 
 t.windowResized(() => {
@@ -1112,7 +1105,7 @@ t.windowResized(() => {
 get filters(): TextmodeFilterManager;
 ```
 
-Access the filter manager for this Textmodifier instance.
+Filter manager for this Textmodifier instance.
 
 Use this to register custom filters that can be applied both globally
 (via [filter](#filter)) and on individual layers (via [TextmodeLayer.filter](../namespaces/layering/classes/TextmodeLayer.md#filter)).
@@ -1149,83 +1142,43 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-const filters = [
-	{ name: null, label: 'NO FILTER', params: undefined },
-	{ name: 'invert', label: 'INVERT', params: undefined },
-	{ name: 'grayscale', label: 'GRAYSCALE (0.5)', params: 0.5 },
-	{ name: 'grayscale', label: 'GRAYSCALE (1.0)', params: 1.0 },
-	{ name: 'sepia', label: 'SEPIA (0.5)', params: 0.5 },
-	{ name: 'sepia', label: 'SEPIA (1.0)', params: 1.0 },
-	{ name: 'threshold', label: 'THRESHOLD (0.3)', params: 0.3 },
-	{ name: 'threshold', label: 'THRESHOLD (0.7)', params: 0.7 },
-];
+const labelLayer = t.layers.add();
 
-let filterOffset = 0;
+let count = 0;
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
 t.draw(() => {
 	t.background(6, 10, 22);
-
-	const time = t.frameCount * 0.03;
-	const idx = Math.floor((t.frameCount + filterOffset) / 120) % filters.length;
-	const filter = filters[idx];
-
-	t.push();
-	t.charColor(255, 180, 100);
-	t.cellColor(30, 50, 120);
-	t.char('@');
-	t.rotateZ(time * 50);
-	t.rect(14, 14);
-	t.pop();
-
-	for (let i = 0; i < 6; i++) {
-		const angle = time + (i / 6) * Math.PI * 2;
-		t.push();
-		t.translate(Math.round(Math.cos(angle) * 7), Math.round(Math.sin(angle) * 7));
-		t.charColor(100 + i * 25, 255, 150 + i * 15);
-		t.char('*');
-		t.point();
-		t.pop();
-	}
-
-	drawCenteredText('Textmodifier.filters', -12, [240, 245, 255]);
-	drawCenteredText('Post-processing effects on the final canvas.', -10, [150, 170, 200]);
-
-	drawCenteredText(filter.label, -6, filter.name === null ? [255, 100, 100] : [140, 255, 180]);
-	if (filter.name) {
-		const paramsStr = filter.params !== undefined ? `, ${filter.params}` : '';
-		drawCenteredText(`t.filter('${filter.name}'${paramsStr})`, -4, [140, 180, 255]);
-	}
-
-	if (filter.name) {
-		t.filter(filter.name, filter.params);
-	}
-
-	drawCenteredText(
-		`invert:${t.filters.has('invert')}  grayscale:${t.filters.has('grayscale')}  sepia:${t.filters.has('sepia')}  threshold:${t.filters.has('threshold')}`,
-		11,
-		[100, 120, 150]
-	);
-	drawCenteredText('click to advance', 13, [80, 90, 120]);
+	count = ['invert', 'grayscale', 'sepia'].filter((name) => t.filters.has(name)).length;
+	t.char('#');
+	t.charColor(140, 220, 255);
+	t.rect(12, 5);
 });
 
-t.mouseClicked(() => {
-	filterOffset += 120;
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.FILTERS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: FILTER REGISTRY', x, y++, 100, 220, 255);
+	drawText('Queries available filters.', x, y++, 140, 160, 190);
+	drawText('Registry is shared by output.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`BUILTINS: ${count}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -1245,7 +1198,7 @@ get font():
   | TextmodeTileset;
 ```
 
-Get the current font object used for rendering the base layer.
+Font or tileset used by the current drawing layer.
 
 ##### Returns
 
@@ -1255,33 +1208,51 @@ Get the current font object used for rendering the base layer.
 ##### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+let index = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.draw(() => {
-	t.background(0);
+	t.background(6, 10, 22);
+	const chars = t.font.characters;
+	index = Math.floor(t.frameCount / 6) % chars.length;
+	t.char(chars[index].character);
+	t.charColor(255, 210, 120);
+	t.rect(8, 4);
+});
 
-	const font = t.font;
-	const count = font.characters.length;
-	const info = `FONT CHARS: ${count}`;
-	const barWidth = Math.min(Math.ceil(count / 10), t.grid.cols - 4);
-
-	t.char('░');
-	t.charColor(100, 100, 100);
-	t.rect(barWidth + 2, 5);
-
-	t.char('█');
-	t.charColor(0, 150, 255);
-	t.rect(barWidth, 3);
-
-	for (let i = 0; i < info.length; i++) {
-		t.push();
-		t.translate(i - info.length / 2, 0);
-		t.char(info[i]);
-		t.cellColor(0);
-		t.charColor(255);
-		t.point();
-		t.pop();
-	}
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.FONT', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: ACTIVE FONT', x, y++, 100, 220, 255);
+	drawText('Reads glyph metadata.', x, y++, 140, 160, 190);
+	drawText('Current glyph cycles.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`GLYPHS: ${t.font.characters.length}`, x, y++, 140, 255, 180);
+	drawText(`INDEX: ${index}`, x, y++, 180, 200, 220);
 });
 
 t.windowResized(() => {
@@ -1299,7 +1270,7 @@ t.windowResized(() => {
 get frameCount(): number;
 ```
 
-Get the current frame count.
+Current frame count.
 
 The frame count starts at 0, but is incremented at the beginning of each draw cycle.
 This means that inside the first call to `draw()`, `frameCount` is 1.
@@ -1310,7 +1281,7 @@ This value is useful for timing-based animations, patterns, and state changes.
 
 `number`
 
-The number of frames rendered since the sketch started.
+Number of frames rendered since the sketch started.
 
 ##### Example
 
@@ -1321,57 +1292,44 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+const labelLayer = t.layers.add();
 
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
 t.draw(() => {
 	t.background(6, 10, 22);
-
-	const blinkOn = t.frameCount % 60 < 30;
-
 	t.push();
+	t.translate(8, 2);
 	t.rotateZ(t.frameCount * 2);
-	t.charColor(255);
-	t.cellColor(120, 40, 60);
-	t.char('X');
-	t.rect(10, 10);
+	t.char('#');
+	t.charColor(140, 220, 255);
+	t.rect(12, 2);
 	t.pop();
+});
 
-	if (blinkOn) {
-		t.push();
-		t.translate(15, 0);
-		t.charColor(100, 200, 255);
-		t.cellColor(20, 40, 80);
-		t.char('O');
-		t.rect(5, 5);
-		t.pop();
-	}
-
-	drawCenteredText('Textmodifier.frameCount', -12, [240, 245, 255]);
-	drawCenteredText('Read-only counter incremented each frame.', -10, [150, 170, 200]);
-
-	drawCenteredText(`t.frameCount = ${t.frameCount}`, -7, [140, 180, 255]);
-
-	drawCenteredText('t.rotateZ(t.frameCount * 2)  ->  continuous rotation', -4, [255, 200, 100]);
-
-	drawCenteredText(
-		blinkOn ? 't.frameCount % 60 < 30  ->  visible (30 frames)' : 't.frameCount % 60 < 30  ->  hidden (30 frames)',
-		11,
-		blinkOn ? [140, 255, 180] : [255, 100, 100]
-	);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.FRAMECOUNT', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: FRAME COUNTER', x, y++, 100, 220, 255);
+	drawText('Counter increments each frame.', x, y++, 140, 160, 190);
+	drawText('Rotation uses frameCount.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`FRAME: ${t.frameCount}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -1394,7 +1352,7 @@ point in time-based patterns.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `value` | `number` | The new frame count value. |
+| `value` | `number` | New frame count value. |
 
 ##### Returns
 
@@ -1409,64 +1367,48 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+const labelLayer = t.layers.add();
 
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
 t.keyPressed((data) => {
-	if (data.key === ' ') {
-		t.frameCount = 0;
-	}
+	if (data.key === ' ') t.frameCount = 0;
 });
 
 t.draw(() => {
 	t.background(6, 10, 22);
+	const phase = (t.frameCount % 120) / 120;
+	t.push();
+	t.translate(-16 + phase * 32, 2);
+	t.char('@');
+	t.charColor(255, 210, 120);
+	t.point();
+	t.pop();
+});
 
-	const angle = t.frameCount * 0.08;
-
-	for (let i = 0; i < 3; i++) {
-		const phase = angle + (i / 3) * Math.PI * 2;
-		const x = Math.round(Math.cos(phase) * 14);
-		const y = Math.round(Math.sin(phase) * 7);
-		const chars = ['@', '#', '*'];
-		const colors = [
-			[255, 180, 80],
-			[100, 200, 255],
-			[255, 100, 150],
-		];
-		const cellColors = [
-			[60, 40, 20],
-			[20, 40, 60],
-			[60, 20, 40],
-		];
-
-		t.push();
-		t.translate(x, y);
-		t.charColor(colors[i][0], colors[i][1], colors[i][2]);
-		t.cellColor(cellColors[i][0], cellColors[i][1], cellColors[i][2]);
-		t.char(chars[i]);
-		t.rect(4, 4);
-		t.pop();
-	}
-
-	drawCenteredText('Textmodifier.frameCount2', -12, [240, 245, 255]);
-	drawCenteredText('Writable counter — reset to replay animation.', -10, [150, 170, 200]);
-
-	drawCenteredText(`t.frameCount = ${t.frameCount}`, -7, [140, 180, 255]);
-
-	drawCenteredText('press SPACE to reset  ->  t.frameCount = 0', 12, [80, 90, 120]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.FRAMECOUNT2', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: RESET COUNTER', x, y++, 100, 220, 255);
+	drawText('Space rewinds animation.', x, y++, 140, 160, 190);
+	drawText('frameCount is writable.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`FRAME: ${t.frameCount}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -1484,8 +1426,9 @@ t.windowResized(() => {
 get grid(): TextmodeGrid | undefined;
 ```
 
-Get the grid whose layer is currently being drawn to.
-If called outside of a layers draw callback, returns the base layer's grid.
+Grid for the layer currently being drawn.
+
+Outside a layer draw callback, this returns the base layer's grid.
 
 If no grid is set (e.g., before user setup()), returns `undefined`.
 
@@ -1502,67 +1445,42 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, row, rgb = [240, 245, 255]) {
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), row);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
 t.draw(() => {
 	t.background(6, 10, 22);
-
-	const { cols, rows, cellWidth, cellHeight } = t.grid;
-	const time = t.secs;
-
-	t.push();
-	t.charColor(30, 35, 50);
+	t.charColor(50, 70, 100);
 	t.char('.');
-	t.rect(cols, rows);
-	t.pop();
+	for (let x = -20; x <= 20; x += 4) t.line(x, -10, x, 10);
+	for (let y = -10; y <= 10; y += 2) t.line(-20, y, 20, y);
+});
 
-	const scanY = Math.floor((Math.sin(time * 0.8) * 0.5 + 0.5) * rows - rows / 2);
-	const scanX = Math.floor((Math.cos(time * 1.1) * 0.5 + 0.5) * cols - cols / 2);
-
-	t.push();
-	t.translate(0, scanY);
-	t.charColor(100, 200, 255, 150);
-	t.char('-');
-	t.rect(cols, 1);
-	t.pop();
-
-	t.push();
-	t.translate(scanX, 0);
-	t.charColor(100, 255, 150, 150);
-	t.char('|');
-	t.rect(1, rows);
-	t.pop();
-
-	t.push();
-	t.translate(scanX, scanY);
-	t.char('☼');
-	t.charColor(255, 255, 255);
-	t.point();
-	t.pop();
-
-	drawCenteredText('Textmodifier.grid', -14, [255, 255, 255]);
-	drawCenteredText('Provides access to dimensions and cell properties.', -12, [150, 170, 200]);
-
-	t.push();
-	t.translate(0, 10);
-	drawCenteredText(`Grid Size: ${cols} x ${rows} cells`, 0, [140, 180, 255]);
-	drawCenteredText(`Cell Size: ${cellWidth} x ${cellHeight} pixels`, 2, [140, 180, 255]);
-	drawCenteredText(`Canvas Area: ${t.grid.width} x ${t.grid.height} pixels`, 4, [140, 180, 255]);
-	t.pop();
-
-	drawCenteredText('Resize window to see grid update', 18, [100, 100, 120]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.GRID', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: GRID METRICS', x, y++, 100, 220, 255);
+	drawText('Exposes rows, cols, and cells.', x, y++, 140, 160, 190);
+	drawText('Grid changes with window size.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`COLS: ${t.grid.cols}`, x, y++, 140, 255, 180);
+	drawText(`ROWS: ${t.grid.rows}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -1580,7 +1498,7 @@ t.windowResized(() => {
 get height(): number;
 ```
 
-Get the height of the canvas in pixels.
+Canvas height in pixels.
 
 ##### Returns
 
@@ -1589,41 +1507,46 @@ Get the height of the canvas in pixels.
 ##### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.draw(() => {
-	t.background(0);
+	t.background(6, 10, 22);
+	t.char('|');
+	t.charColor(140, 220, 255);
+	t.rect(1, t.grid.rows);
+});
 
-	const height = t.height;
-	const info = `HEIGHT: ${height}px`;
-	const arrowLength = Math.floor(t.grid.rows / 2) - 3;
-
-	for (let i = 0; i < arrowLength; i++) {
-		t.push();
-		t.translate(0, -arrowLength + i);
-		t.char(i === 0 ? '╩' : '|');
-		t.charColor(100, 255, 100);
-		t.point();
-		t.pop();
-	}
-
-	for (let i = 0; i < arrowLength; i++) {
-		t.push();
-		t.translate(0, arrowLength - i);
-		t.char(i === 0 ? '╚' : '|');
-		t.charColor(100, 255, 100);
-		t.point();
-		t.pop();
-	}
-
-	for (let i = 0; i < info.length; i++) {
-		t.push();
-		t.translate(i - info.length / 2, 0);
-		t.char(info[i]);
-		t.charColor(255);
-		t.point();
-		t.pop();
-	}
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.HEIGHT', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: CANVAS HEIGHT', x, y++, 100, 220, 255);
+	drawText('Returns pixel height.', x, y++, 140, 160, 190);
+	drawText('Line spans grid rows.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`HEIGHT: ${t.height}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -1641,7 +1564,7 @@ t.windowResized(() => {
 get isDisposed(): boolean;
 ```
 
-Check if the instance has been disposed/destroyed.
+Whether this instance has been destroyed.
 
 ##### Returns
 
@@ -1650,45 +1573,50 @@ Check if the instance has been disposed/destroyed.
 ##### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
-
-const button = document.createElement('button');
-button.textContent = 'destroy';
-button.style.cssText =
-	'position:fixed;left:12px;top:12px;padding:8px 10px;background:#18181b;color:#e4e4e7;border:1px solid #27272a;font:12px JetBrains Mono,monospace;cursor:pointer;';
-document.body.appendChild(button);
-
-const status = document.createElement('div');
-status.style.cssText =
-	'position:fixed;left:12px;top:50px;padding:8px 10px;background:#09090bcc;color:#e4e4e7;font:12px JetBrains Mono,monospace;border:1px solid #27272a;';
-status.textContent = `isDisposed = ${t.isDisposed}`;
-document.body.appendChild(status);
-
-button.addEventListener('click', () => {
-	t.destroy();
-	setTimeout(() => {
-		status.textContent = `isDisposed = ${t.isDisposed}`;
-	}, 0);
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
 });
 
-function label(text, y, color = [220, 220, 220]) {
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
+t.mouseClicked(() => {
+	if (!t.isDisposed) t.destroy();
+});
+
 t.draw(() => {
-	t.background(10, 12, 24);
-	label('isDisposed', -2, [255, 210, 90]);
-	label('click the destroy button', 1);
+	t.background(6, 10, 22);
+	t.char(t.isDisposed ? 'X' : '#');
+	t.charColor(t.isDisposed ? 255 : 140, t.isDisposed ? 120 : 220, 180);
+	t.rect(12, 5);
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.ISDISPOSED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: DISPOSED FLAG', x, y++, 100, 220, 255);
+	drawText('Click calls destroy().', x, y++, 140, 160, 190);
+	drawText('Flag reports lifecycle state.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(t.isDisposed ? 'DISPOSED: YES' : 'DISPOSED: NO', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -1715,32 +1643,54 @@ Check if rendering is currently in progress for this frame.
 ##### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
 
 let outsideFrame = false;
 setInterval(() => {
 	outsideFrame = t.isRenderingFrame;
 }, 120);
 
-function label(text, y, color = [220, 220, 220]) {
+t.draw(() => {
+	t.background(6, 10, 22);
+	t.char(t.isRenderingFrame ? '1' : '0');
+	t.charColor(120, 220, 255);
+	t.rect(12, 8);
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
-t.draw(() => {
-	t.background(10, 12, 24);
-	label('isRenderingFrame', -3, [255, 210, 90]);
-	label(`inside draw(): ${t.isRenderingFrame}`, 0);
-	label(`outside draw(): ${outsideFrame}`, 3, [150, 160, 190]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODIFIER.ISRENDERINGFRAME', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: FRAME GUARD FLAG', x, y++, 100, 220, 255);
+	drawText('Compact API demonstration.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	const inside = t.isRenderingFrame ? 'TRUE' : 'FALSE';
+	const outside = outsideFrame ? 'TRUE' : 'FALSE';
+	drawText(`INSIDE: ${inside}`, x, y++, 140, 255, 180);
+	drawText(`OUTSIDE: ${outside}`, x, y++, 180, 200, 220);
 });
 
 t.windowResized(() => {
@@ -1758,7 +1708,7 @@ t.windowResized(() => {
 get layers(): TextmodeLayerManager;
 ```
 
-Access the layer manager for this Textmodifier instance.
+Layer manager for this Textmodifier instance.
 
 Use this to create and manage multiple layers within the textmode rendering context.
 Each layer has its own grid, font, draw callback, and filters.
@@ -1770,34 +1720,56 @@ Each layer has its own grid, font, draw callback, and filters.
 ##### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
-
-const topLayer = t.layers.add();
-
-t.draw(() => {
-	t.background(0);
-
-	t.push();
-	t.rotateZ(t.frameCount);
-	t.char('▼');
-	t.charColor(50, 100, 150);
-	t.rect(40, 40);
-	t.pop();
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
 });
+
+const labelLayer = t.layers.add();
+
+const topLayer = t.layers.add({ blendMode: 'additive' });
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 topLayer.draw(() => {
 	t.clear();
+	t.char('+');
+	t.charColor(255, 210, 120);
+	t.rect(8, 4);
+});
 
-	const time = t.frameCount * 0.05;
-	const x = Math.sin(time) * 10;
+t.draw(() => {
+	t.background(6, 10, 22);
+	t.char('#');
+	t.charColor(140, 220, 255);
+	t.rect(12, 5);
+	topLayer.offset(Math.sin(t.frameCount * 0.03) * 30, 0);
+});
 
-	t.push();
-	t.char('æ');
-	t.charColor(255, 200, 0);
-	t.cellColor(0, 0, 0, 0);
-	t.translate(x, 0);
-	t.point();
-	t.pop();
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.LAYERS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: LAYER MANAGER', x, y++, 100, 220, 255);
+	drawText('Accesses the layer stack.', x, y++, 140, 160, 190);
+	drawText('Overlay layer moves in pixels.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`LAYERS: ${t.layers.all.length}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -1815,7 +1787,7 @@ t.windowResized(() => {
 get loading(): LoadingLayerController;
 ```
 
-Provides access to the loading layer controller to control boot-time loading UX.
+Built-in loading layer controller.
 
 ##### Returns
 
@@ -1828,141 +1800,54 @@ const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
 	fontSize: 16,
-	loadingScreen: { transitionDuration: 600 },
+	loadingScreen: { transitionDuration: 300 },
 });
 
-const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const labelLayer = t.layers.add();
 
-const startTime = Date.now();
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.setup(async () => {
-	// Register a beautiful retro system boot loader
 	t.loading.draw((ctx) => {
 		const tm = ctx.textmodifier;
 		tm.background(8, 10, 18);
-
-		const elapsed = Date.now() - startTime;
-		const duration = 2000;
-		const progress = Math.min(1.0, elapsed / duration);
-		const percent = Math.floor(progress * 100);
-
-		// Dynamic ASCII terminal spinner
-		const spinners = ['⠋', '⠙', '⠹', '⠸', '⠼', '⠴', '⠦', '⠧', '⠇', '⠏'];
-		const spinner = spinners[Math.floor(elapsed / 80) % spinners.length];
-
-		const rows = tm.grid.rows;
-
-		// 1. Draw Title
-		const title = 'TEXTMODE DIAGNOSTIC CONSOLE v0.13.0';
-		tm.push();
-		tm.translate(-Math.floor(title.length / 2), -Math.floor(rows / 2) + 4);
-		tm.charColor(100, 200, 255);
-		for (let i = 0; i < title.length; i++) {
-			tm.push();
-			tm.translate(i, 0);
-			tm.char(title[i]);
-			tm.point();
-			tm.pop();
-		}
-		tm.pop();
-
-		// 2. Draw Loading Progress Bar: [=========--------] 58%
-		const barWidth = 30;
-		const filledWidth = Math.floor(barWidth * progress);
-		const barStr = `[${'='.repeat(filledWidth)}${'-'.repeat(barWidth - filledWidth)}] ${percent}%`;
-
-		tm.push();
-		tm.translate(-Math.floor(barStr.length / 2), 0);
-		tm.charColor(255, 220, 100);
-		for (let i = 0; i < barStr.length; i++) {
-			tm.push();
-			tm.translate(i, 0);
-			tm.char(barStr[i]);
-			tm.point();
-			tm.pop();
-		}
-		tm.pop();
-
-		// Spinner and active state next to bar
-		tm.push();
-		tm.translate(Math.floor(barStr.length / 2) + 3, 0);
-		tm.char(spinner);
-		tm.charColor(100, 255, 150);
-		tm.point();
-		tm.pop();
-
-		// 3. Draw diagnostic console messages appearing sequentially
-		const logs = [
-			'ALLOCATING TEXTURE CELL GRID BUFFERS...',
-			'COMPILING HIGH-PRECISION MRT SHADERS...',
-			'LINKING RENDERING PIPELINES...',
-			'MOUNTING RETRO GLYPH TEXTURE MAPS...',
-			'BOOTING TEXTMODIFIER CORE GRAPHICS ENVIRONMENT...',
-		];
-
-		const visibleCount = Math.min(logs.length, Math.floor(progress * (logs.length + 1)));
-
-		tm.push();
-		tm.translate(-24, 4);
-		for (let i = 0; i < visibleCount; i++) {
-			const line = `> [OK] ${logs[i]}`;
-			tm.push();
-			tm.translate(0, i * 2);
-			tm.charColor(80, 160 + i * 20, 100);
-			for (let j = 0; j < line.length; j++) {
-				tm.push();
-				tm.translate(j, 0);
-				tm.char(line[j]);
-				tm.point();
-				tm.pop();
-			}
-			tm.pop();
-		}
-		tm.pop();
+		tm.char('#');
+		tm.charColor(100, 220, 255);
+		tm.rect(16, 4);
 	});
-
-	// Give the user a proper aesthetic system-boot presentation duration
-	await wait(2400);
+	await new Promise((resolve) => setTimeout(resolve, 400));
 });
 
 t.draw(() => {
-	t.background(6, 12, 24);
+	t.background(6, 10, 22);
+	t.char('@');
+	t.charColor(140, 255, 180);
+	t.rect(12, 5);
+});
 
-	const cols = t.grid.cols;
-	const rows = t.grid.rows;
-
-	// Render a retro grid design when system is loaded
-	const borderChar = '▒';
-	t.charColor(50, 80, 140);
-	t.char(borderChar);
-	t.rect(cols, 3);
-
-	// Glowing operational state panel
-	const label = 'SYSTEM READY : OK';
-	t.push();
-	t.translate(-Math.floor(label.length / 2), 0);
-	t.charColor(100, 255, 180);
-	for (let i = 0; i < label.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(label[i]);
-		t.point();
-		t.pop();
-	}
-	t.pop();
-
-	const desc = 'Diagnostics complete. Grid pipeline initialized.';
-	t.push();
-	t.translate(-Math.floor(desc.length / 2), 3);
-	t.charColor(130, 150, 180);
-	for (let i = 0; i < desc.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(desc[i]);
-		t.point();
-		t.pop();
-	}
-	t.pop();
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.LOADING', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: LOADING SCREEN', x, y++, 100, 220, 255);
+	drawText('Custom loading draw callback.', x, y++, 140, 160, 190);
+	drawText('Setup waits briefly.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('STATUS: READY', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -1980,7 +1865,7 @@ t.windowResized(() => {
 get millis(): number;
 ```
 
-Get the number of milliseconds since the sketch started running.
+Milliseconds since the sketch started running.
 
 `millis` keeps track of how long a sketch has been running in milliseconds
 (thousandths of a second). This information is often helpful for timing events
@@ -1995,81 +1880,59 @@ This property is connected to [secs](#secs) - setting one will affect the other.
 
 `number`
 
-Number of milliseconds since starting the sketch.
+Milliseconds since the sketch started.
 
 ##### Examples
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-function drawLabel(text, y) {
+const labelLayer = t.layers.add();
+
+let value = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(180);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
 t.draw(() => {
-	t.background(0);
-
-	const pulse = (t.millis % 1000) / 1000;
-	const scale = 1 + Math.sin(pulse * Math.PI) * 0.5;
-	const alpha = 255 * (1 - pulse);
-
-	t.char('o');
-	t.charColor(255, 50, 50, alpha);
-	t.rect(10 * scale, 10 * scale);
-
-	drawLabel(`millis: ${Math.floor(t.millis)}`, -12);
+	t.background(6, 10, 22);
+	value = t.millis / 1000;
+	const angle = (value % 6.28) * 1;
+	t.push();
+	t.translate(8, 2);
+	t.rotateZ((angle * 180) / Math.PI);
+	t.char('#');
+	t.charColor(140, 220, 255);
+	t.rect(12, 1);
+	t.pop();
 });
 
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
-
-```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
-
-function drawLabel(text, y) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(180);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
-
-t.draw(() => {
-	t.background(0);
-
-	const time = t.millis / 1000;
-	const x = Math.sin(time) * 20;
-
-	t.push();
-	t.translate(x, 0);
-	t.char('O');
-	t.charColor(100, 220, 255);
-	t.point();
-	t.pop();
-
-	drawLabel('millis / 1000 drives horizontal motion', -12);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.MILLIS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: ELAPSED TIME', x, y++, 100, 220, 255);
+	drawText('Numeric time drives motion.', x, y++, 140, 160, 190);
+	drawText('Rows stay fixed-width short.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`VALUE: ${value.toFixed(2)}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -2084,112 +1947,106 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawText(text, x, y, r = 180, g = r, b = r) {
-	t.push();
-	t.translate(x - Math.floor(text.length / 2), y);
-	t.charColor(r, g, b);
+const labelLayer = t.layers.add();
 
+let value = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
+	t.pop();
+}
 
+t.draw(() => {
+	t.background(6, 10, 22);
+	value = (t.millis % 2000) / 1000;
+	const angle = (value % 6.28) * 1;
+	t.push();
+	t.translate(8, 2);
+	t.rotateZ((angle * 180) / Math.PI);
+	t.char('#');
+	t.charColor(140, 220, 255);
+	t.rect(12, 1);
+	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.MILLIS2', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: MODULO TIMER', x, y++, 100, 220, 255);
+	drawText('Numeric time drives motion.', x, y++, 140, 160, 190);
+	drawText('Rows stay fixed-width short.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`VALUE: ${value.toFixed(2)}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
 	t.pop();
 }
 
 t.keyPressed((data) => {
-	if (data.key === ' ') {
-		t.millis = 0; // Directly mutates and resets the time state of the sketch
-	}
+	if (data.key === ' ') t.millis = 0;
 });
 
 t.draw(() => {
-	t.background(6, 8, 14);
-
-	const elapsed = t.millis;
-	const secs = elapsed / 1000;
-	const minutes = Math.floor(secs / 60);
-	const displaySecs = (secs % 60).toFixed(3);
-
-	const cols = t.grid.cols;
-	const rows = t.grid.rows;
-
-	// 1. Digital Telemetry Clock HUD
-	drawText('CHRONOMETRY TIME SENSOR', 0, -Math.floor(rows / 2) + 4, 100, 200, 255);
-	drawText('PRESS [SPACEBAR] TO RESET TIME STATE', 0, -Math.floor(rows / 2) + 6, 120, 140, 160);
-
-	const clockStr = `${minutes.toString().padStart(2, '0')}:${displaySecs.padStart(6, '0')}s`;
-	drawText(clockStr, 0, -4, 255, 230, 120);
-	drawText(`${elapsed.toFixed(0)} ms`, 0, -2, 180, 180, 200);
-
-	// 2. Circular Radar Sweep
-	// Complete 360-degree sweep every 3 seconds
-	const duration = 3000;
-	const progress = (elapsed % duration) / duration;
-	const angle = progress * Math.PI * 2;
-
-	t.push();
-	t.translate(0, 3);
-	const radarDots = 20;
-	for (let i = 0; i < radarDots; i++) {
-		const stepAngle = (i / radarDots) * Math.PI * 2;
-		const r = 6;
-		const px = Math.cos(stepAngle) * r * 1.6;
-		const py = Math.sin(stepAngle) * r;
-
+	t.background(6, 10, 22);
+	const progress = (t.millis % 3000) / 3000;
+	for (let i = 0; i < 24; i++) {
 		t.push();
-		t.translate(px, py);
-		t.char(i % 2 === 0 ? '·' : 'o');
-
-		// Fade out dots depending on their angular distance behind the current sweep hand
-		let diff = angle - stepAngle;
-		if (diff < 0) diff += Math.PI * 2;
-		const intensity = Math.max(0.15, 1.0 - diff / (Math.PI * 2));
-
-		t.charColor(Math.floor(100 * intensity), Math.floor(255 * intensity), Math.floor(150 * intensity));
+		t.translate(-12 + i, 3);
+		t.char(i / 24 < progress ? '#' : '.');
+		t.charColor(140, 220, 255);
 		t.point();
 		t.pop();
 	}
+});
 
-	// Active sweep line hand
-	const hx = Math.cos(angle) * 9.6;
-	const hy = Math.sin(angle) * 6;
-	t.push();
-	t.charColor(100, 255, 180);
-	t.char('▲');
-	t.translate(hx, hy);
-	t.rect(1.5, 1.5);
-	t.pop();
-	t.pop();
-
-	// 3. Linear progress wave running across the bottom
-	const margin = 8;
-	const barWidth = cols - margin * 2;
-	const fillWidth = barWidth * progress;
-
-	t.push();
-	t.translate(0, Math.floor(rows / 2) - 5);
-
-	// Background track
-	t.charColor(40, 45, 55);
-	t.char('▒');
-	t.push();
-	t.translate(-barWidth / 2 + barWidth / 2, 0);
-	t.rect(barWidth, 2);
-	t.pop();
-
-	// Energy filler
-	t.charColor(100, 200, 255);
-	t.char('█');
-	t.push();
-	t.translate(-barWidth / 2 + fillWidth / 2, 0);
-	t.rect(fillWidth, 2);
-	t.pop();
-
-	t.pop();
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.MILLIS3', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: RESET MILLIS', x, y++, 100, 220, 255);
+	drawText('Space resets elapsed millis.', x, y++, 140, 160, 190);
+	drawText('Progress bar loops every 3s.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`MS: ${Math.floor(t.millis)}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -2203,7 +2060,7 @@ t.windowResized(() => {
 set millis(value): void;
 ```
 
-Set the elapsed milliseconds by adjusting the internal start time.
+Set elapsed milliseconds by adjusting the internal start time.
 
 This allows seeking/scrubbing in animations. Setting `millis` will also
 affect the value returned by [secs](#secs) since they are connected.
@@ -2212,7 +2069,7 @@ affect the value returned by [secs](#secs) since they are connected.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `value` | `number` | The new elapsed time in milliseconds |
+| `value` | `number` | New elapsed time in milliseconds. |
 
 ##### Returns
 
@@ -2221,54 +2078,54 @@ affect the value returned by [secs](#secs) since they are connected.
 ##### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-function drawLabel(text, y) {
+const labelLayer = t.layers.add();
+
+let value = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(200);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
 t.draw(() => {
-	t.background(0);
+	t.background(6, 10, 22);
+	value = Math.sin(t.millis * 0.002);
+	const angle = (value % 6.28) * 1;
+	t.push();
+	t.translate(8, 2);
+	t.rotateZ((angle * 180) / Math.PI);
+	t.char('#');
+	t.charColor(140, 220, 255);
+	t.rect(12, 1);
+	t.pop();
+});
 
-	if (t.isKeyPressed(' ')) {
-		const progress = (t.mouse.x + t.grid.cols / 2) / t.grid.cols;
-		t.millis = Math.max(0, Math.min(10000, progress * 10000));
-		t.cursor('ew-resize');
-	} else {
-		t.cursor('default');
-	}
-
-	const time = t.millis;
-	const count = 120;
-	const maxRadius = Math.min(t.grid.cols, t.grid.rows) * 0.35;
-
-	for (let i = 0; i < count; i++) {
-		const pct = i / count;
-		const angle = i * 0.45 + time * 0.002;
-		const radius = pct * maxRadius;
-
-		t.push();
-		t.translate(Math.cos(angle) * radius, Math.sin(angle) * radius);
-		t.char(i % 3 === 0 ? 'O' : '.');
-		t.charColor((time * 0.1 + i * 5) % 255, 255 - ((time * 0.1 + i * 5) % 255), 200);
-		t.point();
-		t.pop();
-	}
-
-	drawLabel('hold SPACE and move mouse to set millis', Math.floor(t.grid.rows / 2) - 3);
-	drawLabel(`${Math.floor(t.millis)} ms`, Math.floor(t.grid.rows / 2) - 1);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.MILLIS4', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SMOOTH OSCILLATOR', x, y++, 100, 220, 255);
+	drawText('Numeric time drives motion.', x, y++, 140, 160, 190);
+	drawText('Rows stay fixed-width short.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`VALUE: ${value.toFixed(2)}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -2288,8 +2145,7 @@ get overlay():
   | undefined;
 ```
 
-If in overlay mode, returns the [TextmodeImage](../namespaces/media/classes/TextmodeImage.md) instance capturing the target canvas/video content,
-allowing further configuration of the conversion parameters.
+Overlay source image for the target canvas or video, when overlay mode is enabled.
 
 ##### Returns
 
@@ -2300,84 +2156,92 @@ allowing further configuration of the conversion parameters.
 
 ```javascript
 const sourceCanvas = document.createElement('canvas');
-sourceCanvas.width = window.innerWidth;
-sourceCanvas.height = window.innerHeight;
-sourceCanvas.style.cssText = 'display:block;width:100vw;height:100vh;background:#050816;';
+const sourceCtx = sourceCanvas.getContext('2d');
+
 document.body.style.margin = '0';
 document.body.style.overflow = 'hidden';
+sourceCanvas.style.position = 'fixed';
+sourceCanvas.style.inset = '0';
+sourceCanvas.style.width = '100vw';
+sourceCanvas.style.height = '100vh';
+sourceCanvas.style.display = 'block';
 document.body.appendChild(sourceCanvas);
 
-const source = sourceCanvas.getContext('2d');
 const t = textmode.create({
-	width: window.innerWidth,
-	height: window.innerHeight,
 	canvas: sourceCanvas,
 	overlay: true,
-	fontSize: 8,
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
 });
 
-function resizeSource() {
+const labelLayer = t.layers.add();
+
+function resizeSourceCanvas() {
 	sourceCanvas.width = window.innerWidth;
 	sourceCanvas.height = window.innerHeight;
-	sourceCanvas.style.width = window.innerWidth + 'px';
-	sourceCanvas.style.height = window.innerHeight + 'px';
 }
 
-function paint(time) {
-	const w = sourceCanvas.width;
-	const h = sourceCanvas.height;
-	const cx = w / 2;
-	const cy = h / 2;
-	const sweep = time * 0.001;
-	const gradient = source.createLinearGradient(0, 0, w, h);
-
-	gradient.addColorStop(0, '#050816');
-	gradient.addColorStop(0.45, '#0f172a');
-	gradient.addColorStop(1, '#111827');
-	source.fillStyle = gradient;
-	source.fillRect(0, 0, w, h);
-
-	for (let i = 0; i < 11; i++) {
-		const angle = sweep * (0.45 + i * 0.04) + i * 0.72;
-		const radius = Math.min(w, h) * (0.12 + i * 0.025);
-		const x = cx + Math.cos(angle) * radius * 1.8;
-		const y = cy + Math.sin(angle) * radius;
-		const size = Math.max(22, Math.min(w, h) * (0.035 + i * 0.002));
-
-		source.fillStyle = i % 2 === 0 ? '#38bdf8' : '#f59e0b';
-		source.globalAlpha = 0.28 + (i % 4) * 0.08;
-		source.beginPath();
-		source.arc(x, y, size, 0, Math.PI * 2);
-		source.fill();
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
 	}
-
-	source.globalAlpha = 1;
-	source.fillStyle = '#38bdf8';
-	source.fillRect(cx - 190 + Math.sin(time * 0.0012) * 70, cy - 74, 150, 112);
-	source.fillStyle = '#f59e0b';
-	source.beginPath();
-	source.arc(cx + 128, cy + Math.sin(time * 0.0018) * 72, 58, 0, Math.PI * 2);
-	source.fill();
-	source.fillStyle = '#e4e4e7';
-	source.font = '28px monospace';
-
-	requestAnimationFrame(paint);
+	t.pop();
 }
+
+function paintSourceCanvas() {
+	const pulse = t.frameCount * 0.035;
+	sourceCtx.fillStyle = '#050816';
+	sourceCtx.fillRect(0, 0, sourceCanvas.width, sourceCanvas.height);
+	sourceCtx.fillStyle = '#38bdf8';
+	sourceCtx.fillRect(sourceCanvas.width * 0.24 + Math.sin(pulse) * 30, sourceCanvas.height * 0.42, 128, 82);
+	sourceCtx.fillStyle = '#f59e0b';
+	sourceCtx.beginPath();
+	sourceCtx.arc(sourceCanvas.width * 0.68, sourceCanvas.height * 0.5, 54, 0, Math.PI * 2);
+	sourceCtx.fill();
+	sourceCtx.fillStyle = '#f8fafc';
+	sourceCtx.fillRect(sourceCanvas.width * 0.33, sourceCanvas.height * 0.68, 150, 28);
+}
+
+resizeSourceCanvas();
 
 t.setup(() => {
-	t.overlay.characters(' .:-=+*#%@').charColorMode('sampled').cellColorMode('fixed').cellColor(3, 6, 12);
-	requestAnimationFrame(paint);
+	if (!t.overlay) return;
+	t.overlay.characters(' .:-=+*#%@').charColorMode('sampled').cellColorMode('fixed').cellColor('#050816');
 });
 
 t.draw(() => {
+	paintSourceCanvas();
 	t.clear();
-	if (t.overlay) {
-		t.image(t.overlay, t.grid.cols, t.grid.rows);
-	}
+	if (!t.overlay) return;
+
+	t.image(t.overlay, t.grid.cols, t.grid.rows);
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODIFIER.OVERLAY', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: TARGET CANVAS SOURCE', x, y++, 100, 220, 255);
+	drawText('overlay samples sourceCanvas.', x, y++, 140, 160, 190);
+	drawText('Textmode renders above it.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	const state = t.overlay ? 'READY' : 'WAIT';
+	drawText(`OVERLAY: ${state}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
-	resizeSource();
+	resizeSourceCanvas();
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
@@ -2392,7 +2256,7 @@ t.windowResized(() => {
 get secs(): number;
 ```
 
-Get the number of seconds since the sketch started running.
+Seconds since the sketch started running.
 
 `secs` is a convenience property that returns the elapsed time in seconds
 instead of milliseconds. Equivalent to `millis / 1000`.
@@ -2406,7 +2270,7 @@ This property is connected to [millis](#millis) - setting one will affect the ot
 
 `number`
 
-Number of seconds since starting the sketch.
+Seconds since the sketch started.
 
 ##### Examples
 
@@ -2417,53 +2281,48 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, row, rgb = [240, 245, 255]) {
+const labelLayer = t.layers.add();
+
+let value = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), row);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
 t.draw(() => {
 	t.background(6, 10, 22);
-
-	const time = t.secs;
-	const radius = 15;
-
-	const x = Math.cos(time * 1.5) * radius;
-	const y = Math.sin(time * 2.0) * radius * 0.5;
-
+	value = t.secs;
+	const angle = (value % 6.28) * 1;
 	t.push();
-	t.translate(x, y);
-	t.char('☼');
-	t.charColor(255, 200, 100);
-	t.rect(5, 5);
+	t.translate(8, 2);
+	t.rotateZ((angle * 180) / Math.PI);
+	t.char('#');
+	t.charColor(140, 220, 255);
+	t.rect(12, 1);
 	t.pop();
+});
 
-	// Trail indicating previous seconds
-	for (let i = 1; i <= 10; i++) {
-		const pastTime = time - i * 0.1;
-		const px = Math.cos(pastTime * 1.5) * radius;
-		const py = Math.sin(pastTime * 2.0) * radius * 0.5;
-
-		t.push();
-		t.translate(px, py);
-		t.char('·');
-		t.charColor(100, 150, 255, (1 - i / 10) * 150);
-		t.point();
-		t.pop();
-	}
-
-	drawCenteredText('Textmodifier.secs', -12, [255, 255, 255]);
-	drawCenteredText('The elapsed time in seconds since the sketch started.', -10, [150, 170, 200]);
-	drawCenteredText(`t.secs = ${t.secs.toFixed(3)}`, 10, [140, 180, 255]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.SECS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: ELAPSED SECONDS', x, y++, 100, 220, 255);
+	drawText('Numeric time drives motion.', x, y++, 140, 160, 190);
+	drawText('Rows stay fixed-width short.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`VALUE: ${value.toFixed(2)}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -2478,54 +2337,48 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, row, rgb = [240, 245, 255]) {
+const labelLayer = t.layers.add();
+
+let value = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), row);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
-t.keyPressed((data) => {
-	if (data.key === ' ') {
-		// You can manually add to t.secs to "skip" time forward
-		t.secs += 1.0;
-	}
-});
-
 t.draw(() => {
 	t.background(6, 10, 22);
-
-	const cycle = 4.0;
-	const progress = (t.secs % cycle) / cycle;
-
-	const barWidth = 50;
-	const startX = -Math.floor(barWidth / 2);
-	const x = startX + progress * barWidth;
-
+	value = t.secs % 4;
+	const angle = (value % 6.28) * 1;
 	t.push();
-	t.charColor(40, 45, 60);
-	t.char('-');
-	t.rect(barWidth, 1);
+	t.translate(8, 2);
+	t.rotateZ((angle * 180) / Math.PI);
+	t.char('#');
+	t.charColor(140, 220, 255);
+	t.rect(12, 1);
 	t.pop();
+});
 
-	t.push();
-	t.translate(Math.floor(x), 0);
-	t.char('>');
-	t.charColor(100, 255, 150);
-	t.rect(4, 4);
-	t.pop();
-
-	drawCenteredText('Textmodifier.secs (Time Manipulation)', -12, [255, 255, 255]);
-	drawCenteredText('t.secs is a read-write property.', -10, [150, 170, 200]);
-	drawCenteredText('Press SPACE to jump 1.0s ahead', 10, [100, 255, 150]);
-	drawCenteredText(`Current Time: ${t.secs.toFixed(2)}s`, 12, [140, 180, 255]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.SECS2', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: LOOPING SECONDS', x, y++, 100, 220, 255);
+	drawText('Numeric time drives motion.', x, y++, 140, 160, 190);
+	drawText('Rows stay fixed-width short.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`VALUE: ${value.toFixed(2)}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -2539,7 +2392,7 @@ t.windowResized(() => {
 set secs(value): void;
 ```
 
-Set the elapsed seconds by adjusting the internal start time.
+Set elapsed seconds by adjusting the internal start time.
 
 This allows seeking/scrubbing in animations. Setting `secs` will also
 affect the value returned by [millis](#millis) since they are connected.
@@ -2548,7 +2401,7 @@ affect the value returned by [millis](#millis) since they are connected.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `value` | `number` | The new elapsed time in seconds |
+| `value` | `number` | New elapsed time in seconds. |
 
 ##### Returns
 
@@ -2563,67 +2416,51 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, row, rgb = [240, 245, 255]) {
+const labelLayer = t.layers.add();
+
+let scrub = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), row);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
+t.mouseDragged(() => {
+	scrub = t.mouse.x === Number.NEGATIVE_INFINITY ? scrub : t.mouse.x / 10;
+});
+
 t.draw(() => {
 	t.background(6, 10, 22);
-
-	const barWidth = 40;
-	const startX = -Math.floor(barWidth / 2);
-
-	// Scrubbing logic: Override t.secs while holding mouse button
-	if (t.mouseIsPressed && t.mouse.x !== Number.NEGATIVE_INFINITY) {
-		const progress = (t.mouse.x - startX) / barWidth;
-		const scrub = progress * 10;
-		t.secs = Math.max(0, Math.min(10, scrub));
-		t.cursor('grabbing');
-	} else {
-		t.cursor('default');
-	}
-
-	const time = t.secs;
-	const length = 15;
-	const angle = Math.sin(time * 2) * 60; // Pendulum swing
-
+	const value = t.mouseIsPressed ? scrub : t.secs;
 	t.push();
-	t.rotateZ(angle);
-	t.charColor(60, 70, 100);
-	t.char('|');
-	t.rect(1, length);
-
-	t.translate(0, length);
-	t.char('O');
-	t.charColor(255, 140, 180);
-	t.ellipse(8, 8);
+	t.translate(8, 2);
+	t.rotateZ(value * 40);
+	t.char('#');
+	t.charColor(140, 220, 255);
+	t.rect(10, 2);
 	t.pop();
+});
 
-	drawCenteredText('Textmodifier.secs (Time Scrubbing)', -18, [255, 255, 255]);
-	drawCenteredText('Hold Click and drag horizontally to scrub time.', -16, [150, 170, 200]);
-	drawCenteredText(`t.secs = ${t.secs.toFixed(2)}s`, 12, [255, 140, 180]);
-
-	t.push();
-	t.translate(0, 15);
-	t.charColor(40, 45, 60);
-	t.char('-');
-	t.rect(barWidth, 1);
-
-	t.translate(Math.floor((t.secs / 10) * barWidth) + startX, 0);
-	t.char('^');
-	t.charColor(255);
-	t.point();
-	t.pop();
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.SECS3', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SCRUB TIME', x, y++, 100, 220, 255);
+	drawText('Drag to scrub temporary time.', x, y++, 140, 160, 190);
+	drawText('Release to resume t.secs.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`SECS: ${t.secs.toFixed(2)}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -2641,7 +2478,7 @@ t.windowResized(() => {
 get width(): number;
 ```
 
-Get the width of the canvas in pixels.
+Canvas width in pixels.
 
 ##### Returns
 
@@ -2650,41 +2487,46 @@ Get the width of the canvas in pixels.
 ##### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.draw(() => {
-	t.background(0);
+	t.background(6, 10, 22);
+	t.char('=');
+	t.charColor(140, 220, 255);
+	t.rect(t.grid.cols, 1);
+});
 
-	const width = t.width;
-	const info = `WIDTH: ${width}px`;
-	const arrowLength = Math.floor(t.grid.cols / 2) - 4;
-
-	for (let i = 0; i < arrowLength; i++) {
-		t.push();
-		t.translate(-arrowLength + i, 0);
-		t.char(i === 0 ? '<' : '-');
-		t.charColor(255, 100, 100);
-		t.point();
-		t.pop();
-	}
-
-	for (let i = 0; i < arrowLength; i++) {
-		t.push();
-		t.translate(arrowLength - i, 0);
-		t.char(i === 0 ? '>' : '-');
-		t.charColor(255, 100, 100);
-		t.point();
-		t.pop();
-	}
-
-	for (let i = 0; i < info.length; i++) {
-		t.push();
-		t.translate(i - info.length / 2, 0);
-		t.char(info[i]);
-		t.charColor(255);
-		t.point();
-		t.pop();
-	}
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.WIDTH', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: CANVAS WIDTH', x, y++, 100, 220, 255);
+	drawText('Returns pixel width.', x, y++, 140, 160, 190);
+	drawText('Line spans grid columns.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`WIDTH: ${t.width}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -2725,71 +2567,52 @@ Lighting uses RGB only, so any provided alpha value is ignored.
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
-	fontSize: 8,
-	frameRate: 60,
+	fontSize: 16,
 });
 
-const spires = [];
+const labelLayer = t.layers.add();
 
-for (let x = -3; x <= 3; x++) {
-	for (let z = -3; z <= 3; z++) {
-		if (Math.abs(x) + Math.abs(z) > 5) {
-			continue;
-		}
+let channel = 0;
 
-		spires.push({
-			x,
-			z,
-			phase: (x + 3) * 0.7 + (z + 3) * 1.1,
-		});
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
 	}
+	t.pop();
 }
 
 t.draw(() => {
-	const time = t.frameCount * 0.02;
-	const ember = 78 + 42 * Math.sin(time * 0.9);
-	const tide = 56 + 38 * Math.cos(time * 0.7);
-	const bloom = 44 + 30 * Math.sin(time * 1.4 + 0.6);
+	t.background(6, 8, 18);
+	const time = t.frameCount * 0.025;
+	channel = 127.5 + 127.5 * Math.sin(time);
+	t.perspective(58, 0.1, 4096);
+	t.camera(16, -10, 42, 0, 0, 0);
+	t.ambientLight(channel, channel, channel, channel);
+	t.rotateY(time * 40);
+	t.char('#');
+	t.charColor(255, 255, 255);
+	t.sphere(7);
+});
 
-	t.background(3, 6, 14);
-
-	t.ambientLight(24, 24, 30);
-	t.ambientLight(ember, 42, 18);
-	t.ambientLight(14, bloom, tide);
-
-	t.camera(Math.sin(time * 0.45) * 28, -10 + Math.cos(time * 0.3) * 6, 120, 0, -6, 0);
-
-	t.push();
-	t.rotateX(18);
-	t.rotateY(time * 16);
-
-	for (let i = 0; i < spires.length; i++) {
-		const spire = spires[i];
-		const pulse = 0.5 + 0.5 * Math.sin(time * 1.6 + spire.phase);
-		const height = 6 + pulse * 10;
-		const drift = Math.sin(time * 2.1 + spire.phase * 1.3) * 1.5;
-
-		t.push();
-		t.translate(spire.x * 8, drift - height * 0.5, spire.z * 8);
-		t.rotateY(time * 30 + spire.phase * 50);
-		t.char(i % 2 === 0 ? '#' : 'H');
-		t.charColor(120 + pulse * 100, 80 + pulse * 60, 170 + pulse * 70);
-		t.cellColor(12 + pulse * 20, 10 + pulse * 14, 20 + pulse * 24);
-		t.box(4, height, 4);
-		t.pop();
-	}
-
-	t.push();
-	t.translate(0, -3 + Math.sin(time * 2) * 1.2, 0);
-	t.rotateX(90 + Math.sin(time * 1.3) * 12);
-	t.rotateY(time * 42);
-	t.char('*');
-	t.charColor(255, 220, 180);
-	t.cellColor(30, 18, 22);
-	t.torus(11, 2.6);
-	t.pop();
-
-	t.pop();
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.AMBIENTLIGHT', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: AMBIENT LIGHT', x, y++, 100, 220, 255);
+	drawText('Lighting changes surface shade.', x, y++, 140, 160, 190);
+	drawText('Scene keeps focus on one sphere.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	const level = Math.round(channel);
+	drawText(`RGBA:${level},${level},${level},${level}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -2915,58 +2738,47 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function trsMatrixY(angle, tx, ty, tz, sx, sy, sz) {
-	const c = Math.cos(angle);
-	const s = Math.sin(angle);
+const labelLayer = t.layers.add();
 
-	return new Float32Array([c * sx, 0, -s * sx, 0, 0, sy, 0, 0, s * sz, 0, c * sz, 0, tx, ty, tz, 1]);
-}
-
-function drawLabel(text, y, color = [220, 220, 220]) {
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-t.setup(() => {
-	t.perspective(60, 0.1, 4096);
-	const camera = t.createCamera();
-	camera.setPosition(0, 6, 54).lookAt(0, 0, 0);
-	t.setCamera(camera);
+t.draw(() => {
+	t.background(6, 10, 22);
+	const time = t.frameCount * 0.03;
+	const c = Math.cos(time);
+	const s = Math.sin(time);
+	t.push();
+	t.translate(8, 1);
+	t.applyMatrix(c, s, 0, 0, -s, c, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1);
+	t.char('#');
+	t.charColor(140, 220, 255);
+	t.rect(12, 4);
+	t.pop();
 });
 
-t.draw(() => {
-	const time = t.frameCount * 0.02;
-	t.background(5, 7, 18);
-
-	const left = trsMatrixY(time * 1.4, -12, 0, 0, 1.1, 1.1, 1.1);
-	t.push();
-	t.applyMatrix(left);
-	t.char('M');
-	t.charColor(255, 140, 120);
-	t.box(8, 8, 8);
-	t.pop();
-
-	const right = trsMatrixY(time * 2.0, 12, 0, 0, 1.0, 1.0, 1.0);
-	t.push();
-	t.applyMatrix(right);
-	t.scale(1.0 + Math.sin(time * 2.2) * 0.2);
-	t.char('S');
-	t.charColor(120, 205, 255);
-	t.torus(3.2, 1.3);
-	t.pop();
-
-	drawLabel('applyMatrix() + scale()', -Math.floor(t.grid.rows * 0.36), [255, 225, 140]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.APPLYMATRIX', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: CUSTOM MATRIX', x, y++, 100, 220, 255);
+	drawText('Applies a 4x4 transform.', x, y++, 140, 160, 190);
+	drawText('Matrix rotates the rectangle.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('API: t.applyMatrix(...)', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -3040,10 +2852,10 @@ Position is controlled via [translate](#translate), [push](#push), and [pop](#po
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `width` | `number` | Width of the arc in grid cells |
-| `height` | `number` | Height of the arc in grid cells |
-| `startAngle` | `number` | Starting angle in degrees |
-| `endAngle` | `number` | Ending angle in degrees |
+| `width` | `number` | Arc width in grid cells. |
+| `height` | `number` | Arc height in grid cells. |
+| `startAngle` | `number` | Starting angle in degrees. |
+| `endAngle` | `number` | Ending angle in degrees. |
 
 #### Returns
 
@@ -3058,61 +2870,52 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+const labelLayer = t.layers.add();
 
+let startDeg = 0;
+let endDeg = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
 t.draw(() => {
 	t.background(6, 10, 22);
-
-	const time = t.frameCount * 0.02;
-	const startAngle = (time * 50) % 360;
-	const endAngle = startAngle + 90 + Math.sin(time) * 45;
-
+	const time = t.frameCount * 0.03;
+	startDeg = (time * 60) % 360;
+	endDeg = startDeg + 110 + Math.sin(time) * 35;
 	t.push();
-	t.charColor(40, 50, 80);
-	t.char('.');
-	t.rect(t.grid.cols, t.grid.rows);
-	t.pop();
-
-	drawCenteredText('Textmodifier.arc', -12, [240, 245, 255]);
-	drawCenteredText('Drawing circular or elliptical paths.', -10, [150, 170, 200]);
-
-	t.push();
+	t.translate(8, 1);
 	t.char('#');
 	t.charColor(140, 180, 255);
-	t.lineWeight(1);
-
-	// Params: width, height, startAngle (deg), endAngle (deg)
-	t.arc(24, 14, startAngle, endAngle);
-
-	t.push();
-	t.charColor(60, 70, 100, 150);
-	t.char('.');
-
-	const startRad = (startAngle * Math.PI) / 180;
-	t.line(0, 0, Math.cos(startRad) * 12, Math.sin(startRad) * 7);
-
-	const endRad = (endAngle * Math.PI) / 180;
-	t.line(0, 0, Math.cos(endRad) * 12, Math.sin(endRad) * 7);
+	t.arc(22, 12, startDeg, endDeg);
+	t.charColor(60, 70, 100);
+	t.line(0, 0, Math.cos((startDeg * Math.PI) / 180) * 11, Math.sin((startDeg * Math.PI) / 180) * 6);
 	t.pop();
-	t.pop();
+});
 
-	drawCenteredText(`START: ${startAngle.toFixed(1).padStart(5, '0')} DEG`, 8, [255, 225, 140]);
-	drawCenteredText(`END:   ${endAngle.toFixed(1).padStart(5, '0')} DEG`, 10, [140, 255, 180]);
-	drawCenteredText('t.arc(width, height, start, end)', 13, [100, 120, 150]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.ARC', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: PARTIAL ELLIPSE', x, y++, 100, 220, 255);
+	drawText('Animated start and end angles.', x, y++, 140, 160, 190);
+	drawText('Guide line marks the start.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`START: ${startDeg.toFixed(1)}`, x, y++, 255, 210, 120);
+	drawText(`END: ${endDeg.toFixed(1)}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -3130,13 +2933,13 @@ t.windowResized(() => {
 background(): TextmodeColor;
 ```
 
-Get the current background color.
+Current canvas background color.
 
 ##### Returns
 
 [`TextmodeColor`](TextmodeColor.md)
 
-The current background color as a [TextmodeColor](TextmodeColor.md).
+Current background color.
 
 ##### Example
 
@@ -3147,46 +2950,48 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+const labelLayer = t.layers.add();
 
+let r = 0;
+let g = 0;
+let b = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
 t.draw(() => {
-	const time = t.frameCount * 0.02;
-
-	const r = Math.round(40 + 40 * Math.sin(time));
-	const b = Math.round(60 + 40 * Math.cos(time * 0.7));
-	t.background(r, 20, b);
-
-	const bg = t.background();
-
-	drawCenteredText('Textmodifier.background', -12, [240, 245, 255]);
-	drawCenteredText('Setting and retrieving the canvas background color.', -10, [150, 170, 200]);
-
-	t.push();
-	t.charColor(255, 225, 140);
+	const time = t.frameCount * 0.03;
+	r = Math.round(40 + 30 * Math.sin(time));
+	g = Math.round(30 + 30 * Math.sin(time + 2));
+	b = Math.round(60 + 40 * Math.sin(time + 4));
+	t.background(r, g, b);
 	t.char('#');
-	t.rect(14, 6);
-	t.pop();
+	t.charColor(240, 245, 255);
+	t.rect(12, 5);
+});
 
-	drawCenteredText('RGB GETTER READOUT', 8, [140, 255, 180]);
-	drawCenteredText(
-		`R: ${bg.r.toString().padStart(3, '0')}  G: ${bg.g.toString().padStart(3, '0')}  B: ${bg.b.toString().padStart(3, '0')}`,
-		10,
-		[140, 180, 255]
-	);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.BACKGROUND', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: CANVAS COLOR', x, y++, 100, 220, 255);
+	drawText('Sets and reads scene backdrop.', x, y++, 140, 160, 190);
+	drawText('RGB values animate softly.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`RGB: ${r},${g},${b}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -3222,42 +3027,43 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-	t.cellColor(0, 0, 0, 0);
+const labelLayer = t.layers.add();
 
+let gray = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
 t.draw(() => {
-	const time = t.frameCount * 0.05;
-	const gray = Math.round(127 + 127 * Math.sin(time));
-
+	gray = Math.round(30 + 40 * Math.sin(t.frameCount * 0.03));
 	t.background(gray);
+	t.char('@');
+	t.charColor(255, 210, 120);
+	t.rect(10, 5);
+});
 
-	// that remains perfectly visible regardless of the background brightness.
-	t.push();
-	t.cellColor(255 - gray);
-	t.charColor(gray);
-	t.char('+');
-	t.rect(20, 10);
-	t.pop();
-
-	drawCenteredText('Textmodifier.background (Grayscale)', -12, [240, 120, 255]);
-	drawCenteredText('Passing a single number sets an R=G=B gray level.', -10, [150, 170, 200]);
-
-	drawCenteredText('INVERTED CELL SCHEMATIC', 8, [255, 225, 140]);
-	drawCenteredText(`BG_VAL: ${gray.toString().padStart(3, '0')}`, 10, [140, 180, 255]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.BACKGROUND2', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: GRAY BACKGROUND', x, y++, 100, 220, 255);
+	drawText('One number sets R, G, and B.', x, y++, 140, 160, 190);
+	drawText('Gray value animates.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`GRAY: ${gray}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -3299,38 +3105,43 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+const labelLayer = t.layers.add();
 
+let useBlue = false;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
 t.draw(() => {
-	const cycle = Math.floor(t.frameCount / 60) % 3;
-	const hex = ['#1e1b4b', '#064e3b', '#4c1d95'][cycle];
-	t.background(hex);
+	useBlue = Math.floor(t.frameCount / 90) % 2 === 0;
+	t.background(useBlue ? '#10183a' : '#301820');
+	t.char(useBlue ? 'B' : 'R');
+	t.charColor(255, 230, 140);
+	t.rect(10, 5);
+});
 
-	drawCenteredText('Textmodifier.background (Hex)', -12, [240, 245, 255]);
-	drawCenteredText('Passing a hex string (e.g. #RRGGBB) to set the color.', -10, [150, 170, 200]);
-
-	t.push();
-	t.charColor(255, 255, 255, 100);
-	t.char('.');
-	t.rect(24, 1);
-	t.pop();
-
-	drawCenteredText('HEX STRING MODE', 8, [140, 220, 255]);
-	drawCenteredText(`ACTIVE: ${hex}`, 10, [255, 225, 140]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.BACKGROUND3', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: HEX BACKGROUND', x, y++, 100, 220, 255);
+	drawText('Hex strings set the color.', x, y++, 140, 160, 190);
+	drawText('Mode alternates blue and red.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(useBlue ? 'HEX: BLUE' : 'HEX: RED', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -3365,42 +3176,45 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+const labelLayer = t.layers.add();
 
+const colorA = t.color(32, 12, 20);
+const colorB = t.color(10, 24, 48);
+let useA = true;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-const colorA = t.color(100, 20, 20); // Dark Red
-const colorB = t.color(20, 20, 100); // Dark Blue
-
 t.draw(() => {
-	const time = t.frameCount * 0.05;
-	const blend = 0.5 + 0.5 * Math.sin(time);
+	useA = Math.floor(t.frameCount / 90) % 2 === 0;
+	t.background(useA ? colorA : colorB);
+	t.char(useA ? 'A' : 'B');
+	t.charColor(255, 230, 140);
+	t.rect(10, 5);
+});
 
-	t.background(blend > 0.5 ? colorA : colorB);
-
-	drawCenteredText('Textmodifier.background (Color Object)', -12, [240, 245, 255]);
-	drawCenteredText('Passing a TextmodeColor object directly for reuse.', -10, [150, 170, 200]);
-
-	t.push();
-	t.charColor(255, 225, 140);
-	t.char('#');
-	t.rect(14, 6);
-	t.pop();
-
-	drawCenteredText('REUSABLE COLOR OBJECT', 8, [140, 255, 180]);
-	drawCenteredText(`ACTIVE_ID: ${blend > 0.5 ? 'colorA' : 'colorB'}`, 10, [140, 180, 255]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.BACKGROUND4', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: COLOR OBJECT', x, y++, 100, 220, 255);
+	drawText('Reusable TextmodeColor values.', x, y++, 140, 160, 190);
+	drawText('Background switches objects.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(useA ? 'ACTIVE: COLOR A' : 'ACTIVE: COLOR B', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -3424,21 +3238,21 @@ bezierCurve(
    y2): void;
 ```
 
-Draw a smooth cubic bezier curve between two points with two control points.
+Draw a smooth cubic Bezier curve between two points.
 The curve thickness is controlled by the current [lineWeight](#lineweight) setting.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `x1` | `number` | Start point X coordinate in grid cells |
-| `y1` | `number` | Start point Y coordinate in grid cells |
-| `cp1x` | `number` | First control point X coordinate in grid cells |
-| `cp1y` | `number` | First control point Y coordinate in grid cells |
-| `cp2x` | `number` | Second control point X coordinate in grid cells |
-| `cp2y` | `number` | Second control point Y coordinate in grid cells |
-| `x2` | `number` | End point X coordinate in grid cells |
-| `y2` | `number` | End point Y coordinate in grid cells |
+| `x1` | `number` | Start point X coordinate in grid cells. |
+| `y1` | `number` | Start point Y coordinate in grid cells. |
+| `cp1x` | `number` | First control point X coordinate in grid cells. |
+| `cp1y` | `number` | First control point Y coordinate in grid cells. |
+| `cp2x` | `number` | Second control point X coordinate in grid cells. |
+| `cp2y` | `number` | Second control point Y coordinate in grid cells. |
+| `x2` | `number` | End point X coordinate in grid cells. |
+| `y2` | `number` | End point Y coordinate in grid cells. |
 
 #### Returns
 
@@ -3453,89 +3267,52 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+const labelLayer = t.layers.add();
 
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
-
-function drawPoint(x, y, char, rgb, label) {
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
 	t.translate(x, y);
-	t.char(char);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-	t.point();
-
-	t.push();
-	t.translate(1, 1);
-	t.charColor(rgb[0], rgb[1], rgb[2], 150);
-	for (let i = 0; i < label.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(label[i]);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-	t.pop();
 	t.pop();
 }
 
 t.draw(() => {
 	t.background(6, 10, 22);
-
-	const time = t.frameCount * 0.02;
-
-	const x1 = -15,
-		y1 = 0;
-	const x2 = 15,
-		y2 = 0;
-
-	const cp1x = -10 + Math.cos(time) * 5;
-	const cp1y = -8 + Math.sin(time) * 4;
-
-	const cp2x = 10 + Math.sin(time * 0.7) * 5;
-	const cp2y = 8 + Math.cos(time * 0.8) * 4;
-
+	const time = t.frameCount * 0.025;
+	const cp1x = -8 + Math.sin(time) * 6;
+	const cp1y = -7;
+	const cp2x = 8 + Math.cos(time * 0.8) * 6;
+	const cp2y = 7;
 	t.push();
-	t.charColor(40, 50, 80);
+	t.translate(7, 1);
+	t.charColor(60, 70, 100);
 	t.char('.');
-	t.rect(t.grid.cols, t.grid.rows);
-	t.pop();
-
-	drawCenteredText('Textmodifier.bezierCurve', -12, [240, 245, 255]);
-	drawCenteredText('Drawing smooth paths using four control points.', -10, [150, 170, 200]);
-
-	t.push();
-	t.charColor(60, 70, 100, 120);
-	t.char('.');
-	t.line(x1, y1, cp1x, cp1y);
-	t.line(x2, y2, cp2x, cp2y);
-	t.pop();
-
-	t.push();
+	t.line(-14, 0, cp1x, cp1y);
+	t.line(14, 0, cp2x, cp2y);
 	t.char('#');
-	t.charColor(140, 180, 255);
-	t.lineWeight(1);
-	t.bezierCurve(x1, y1, cp1x, cp1y, cp2x, cp2y, x2, y2);
+	t.charColor(140, 220, 255);
+	t.bezierCurve(-14, 0, cp1x, cp1y, cp2x, cp2y, 14, 0);
 	t.pop();
+});
 
-	drawPoint(x1, y1, 'o', [140, 255, 180], 'START');
-	drawPoint(x2, y2, 'o', [255, 140, 180], 'END');
-	drawPoint(cp1x, cp1y, '+', [255, 225, 140], 'CP1');
-	drawPoint(cp2x, cp2y, '+', [255, 225, 140], 'CP2');
-
-	drawCenteredText('CUBIC BEZIER SCHEMATIC', 10, [140, 220, 255]);
-	drawCenteredText('t.bezierCurve(x1, y1, cp1x, cp1y, cp2x, cp2y, x2, y2)', 13, [100, 120, 150]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.BEZIERCURVE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: CUBIC CURVE', x, y++, 100, 220, 255);
+	drawText('Two control points bend path.', x, y++, 140, 160, 190);
+	drawText('Guide lines show handles.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('API: t.bezierCurve(...)', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -3579,61 +3356,52 @@ const t = textmode.create({
 
 const labelLayer = t.layers.add();
 
-let w = 0,
-	h = 0,
-	d = 0;
+let spin = 0;
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-labelLayer.draw(() => {
-	t.clear();
-
-	drawCenteredText('Textmodifier.box', -12, [240, 245, 255]);
-	drawCenteredText('A 3D box primitive with width, height, and depth.', -10, [150, 170, 200]);
-
-	drawCenteredText(`WIDTH:  ${w.toFixed(1)}`, 8, [140, 180, 255]);
-	drawCenteredText(`HEIGHT: ${h.toFixed(1)}`, 10, [140, 255, 180]);
-	drawCenteredText(`DEPTH:  ${d.toFixed(1)}`, 12, [255, 225, 140]);
-
-	drawCenteredText('t.box(width, height, depth)', 15, [100, 120, 150]);
+t.draw(() => {
+	t.background(6, 8, 18);
+	const time = t.frameCount * 0.025;
+	spin = (time * 40) % 360;
+	t.perspective(58, 0.1, 4096);
+	t.camera(18, -10, 42, 0, 0, 0);
+	t.ambientLight(24, 28, 38);
+	t.pointLight([255, 210, 140], { x: 18, y: -18, z: 28 });
+	t.push();
+	t.translate(5, 1, 0);
+	t.rotateY(spin);
+	t.rotateX(18);
+	t.char('#');
+	t.charColor(140, 220, 255);
+	t.cellColor(16, 24, 42);
+	t.box(9, 7, 8);
+	t.pop();
 });
 
-t.draw(() => {
-	t.background(6, 10, 22);
-
-	const time = t.frameCount * 0.02;
-
-	w = 12 + Math.sin(time) * 4;
-	h = 8 + Math.cos(time * 0.7) * 3;
-	d = 10 + Math.sin(time * 0.5) * 4;
-
-	t.ambientLight(30, 40, 60);
-	t.pointLight([255, 225, 140], 0, -20, 30);
-	t.camera(15, -10, 40, 0, 0, 0);
-
-	t.push();
-	t.rotateX(time * 20);
-	t.rotateY(time * 30);
-	t.char('#');
-	t.charColor(140, 180, 255);
-	t.cellColor(20, 30, 60);
-
-	t.box(w, h, d);
-	t.pop();
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.BOX', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: 3D BOX', x, y++, 100, 220, 255);
+	drawText('Width, height, and depth vary.', x, y++, 140, 160, 190);
+	drawText('Camera and light reveal depth.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`SPIN: ${spin.toFixed(1)}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -3658,7 +3426,7 @@ camera(
    upZ?): void;
 ```
 
-Sets an explicit camera transform (eye, target, up) for subsequent draw calls.
+Set an explicit camera transform for subsequent draw calls.
 
 #### Parameters
 
@@ -3681,54 +3449,57 @@ Sets an explicit camera transform (eye, target, up) for subsequent draw calls.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-const scene = [
-	{ x: -14, y: -4, z: 0, char: 'A', color: [255, 120, 120] },
-	{ x: 0, y: 8, z: -12, char: 'B', color: [120, 255, 160] },
-	{ x: 14, y: -2, z: 10, char: 'C', color: [120, 180, 255] },
-];
+const labelLayer = t.layers.add();
 
-function drawScene() {
-	for (let i = 0; i < scene.length; i++) {
-		const item = scene[i];
+let eyeX = 0;
 
-		t.push();
-		t.translate(item.x, item.y, item.z);
-		t.rotateX(t.frameCount * (1 + i * 0.15));
-		t.rotateY(t.frameCount * (1.3 + i * 0.2));
-		t.char(item.char);
-		t.charColor(item.color[0], item.color[1], item.color[2]);
-		t.rect(8, 8);
-		t.pop();
-	}
-}
-
-function drawLabel(text, y) {
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y, 0);
-	t.charColor(220);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
 t.draw(() => {
-	t.background(8, 10, 24);
-
-	const time = t.frameCount * 0.02;
+	t.background(6, 8, 18);
+	const time = t.frameCount * 0.025;
+	eyeX = Math.sin(time) * 24;
 	t.perspective(58, 0.1, 4096);
-	t.camera(Math.cos(time) * 38, 12 + Math.sin(time * 0.5) * 8, Math.sin(time) * 38, 0, 0, 0);
+	t.camera(eyeX, 8, 42, 0, 0, 0);
+	t.ambientLight(25, 28, 36);
+	t.pointLight([255, 210, 140], { x: 20, y: -18, z: 28 });
+	t.push();
+	t.rotateY(time * 30);
+	t.char('#');
+	t.charColor(140, 220, 255);
+	t.box(8, 8, 8);
+	t.pop();
+});
 
-	drawScene();
-	drawLabel('camera(eyeX, eyeY, eyeZ, 0, 0, 0)', Math.floor(t.grid.rows / 2) - 3);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.CAMERA', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SET VIEW CAMERA', x, y++, 100, 220, 255);
+	drawText('Eye position moves left/right.', x, y++, 140, 160, 190);
+	drawText('Target remains at origin.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`EYE X: ${eyeX.toFixed(1)}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -3746,13 +3517,13 @@ t.windowResized(() => {
 cellColor(): TextmodeColor;
 ```
 
-Get the current cell background color.
+Current cell background color.
 
 ##### Returns
 
 [`TextmodeColor`](TextmodeColor.md)
 
-The current cell color as a [TextmodeColor](TextmodeColor.md).
+Current cell color.
 
 ##### Example
 
@@ -3765,63 +3536,42 @@ const t = textmode.create({
 
 const labelLayer = t.layers.add();
 
-let currentR = 0,
-	currentG = 0,
-	currentB = 0;
+let value = 0;
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-	t.cellColor(0, 0, 0, 0);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-labelLayer.draw(() => {
-	t.clear();
-
-	drawCenteredText('Textmodifier.cellColor', -12, [240, 245, 255]);
-	drawCenteredText('Setting the background color of individual cells.', -10, [150, 170, 200]);
-
-	drawCenteredText('RGB GETTER READOUT', 8, [140, 255, 180]);
-	drawCenteredText(
-		`R: ${currentR.toString().padStart(3, '0')}  G: ${currentG.toString().padStart(3, '0')}  B: ${currentB.toString().padStart(3, '0')}`,
-		10,
-		[140, 180, 255]
-	);
-
-	drawCenteredText('t.cellColor(r, g, b)', 13, [100, 120, 150]);
-});
-
 t.draw(() => {
 	t.background(6, 10, 22);
-
-	const time = t.frameCount * 0.03;
-	const r = Math.round(127 + 127 * Math.sin(time));
-	const g = Math.round(127 + 127 * Math.cos(time * 0.7));
-	const b = 150;
-
-	t.cellColor(r, g, b);
-
-	const cell = t.cellColor();
-	currentR = cell.r;
-	currentG = cell.g;
-	currentB = cell.b;
-
-	t.push();
-	t.charColor(255);
+	value = Math.round(80 + 80 * Math.sin(t.frameCount * 0.04));
 	t.char('#');
-	t.rect(14, 6);
-	t.pop();
+	t.cellColor(value, 50, 110);
+	t.charColor(240, 245, 255);
+	t.rect(10, 5);
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.CELLCOLOR', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: CELL BACKGROUND', x, y++, 100, 220, 255);
+	drawText('Sets the cell fill color.', x, y++, 140, 160, 190);
+	drawText('The value pulses every frame.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`R: ${value}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -3859,51 +3609,42 @@ const t = textmode.create({
 
 const labelLayer = t.layers.add();
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-	t.cellColor(0, 0, 0, 0);
+let value = 0;
 
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-labelLayer.draw(() => {
-	t.clear();
-
-	drawCenteredText('Textmodifier.cellColor (Grayscale)', -12, [240, 245, 255]);
-	drawCenteredText('Passing a single number sets an R=G=B cell background.', -10, [150, 170, 200]);
-
-	drawCenteredText('t.cellColor(gray)', 12, [100, 120, 150]);
-});
-
 t.draw(() => {
 	t.background(6, 10, 22);
+	value = Math.round(80 + 80 * Math.sin(t.frameCount * 0.04));
+	t.char('#');
+	t.cellColor(value);
+	t.charColor(240, 245, 255);
+	t.rect(10, 5);
+});
 
-	const time = t.frameCount * 0.05;
-	const gray = Math.round(127 + 127 * Math.sin(time));
-
-	t.cellColor(gray);
-
-	t.push();
-	t.charColor(255 - gray);
-	t.char('+');
-	t.rect(20, 10);
-	t.pop();
-
-	t.push();
-	t.resetCamera();
-	drawCenteredText('GRAYSCALE PULSE', 8, [255, 225, 140]);
-	drawCenteredText(`VALUE: ${gray.toString().padStart(3, '0')}`, 10, [140, 180, 255]);
-	t.pop();
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.CELLCOLOR2', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: GRAY CELL FILL', x, y++, 100, 220, 255);
+	drawText('One number sets cell fill.', x, y++, 140, 160, 190);
+	drawText('The value pulses every frame.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`GRAY: ${value}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -3947,50 +3688,42 @@ const t = textmode.create({
 
 const labelLayer = t.layers.add();
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-	t.cellColor(0, 0, 0, 0);
+let value = 0;
 
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-labelLayer.draw(() => {
-	t.clear();
-
-	drawCenteredText('Textmodifier.cellColor (Hex)', -12, [240, 245, 255]);
-	drawCenteredText('Passing a hex string (e.g. #RRGGBB) to set the background.', -10, [150, 170, 200]);
-
-	drawCenteredText('t.cellColor(hexString)', 13, [100, 120, 150]);
-});
-
 t.draw(() => {
 	t.background(6, 10, 22);
+	value = Math.round(80 + 80 * Math.sin(t.frameCount * 0.04));
+	t.char('#');
+	t.cellColor(value > 80 ? '#14385f' : '#301820');
+	t.charColor(240, 245, 255);
+	t.rect(10, 5);
+});
 
-	const cycle = Math.floor(t.frameCount / 60) % 3;
-	const hex = ['#1e1b4b', '#064e3b', '#4c1d95'][cycle];
-	t.cellColor(hex);
-
-	t.push();
-	t.charColor(255, 255, 255);
-	t.char('/');
-	t.rect(20, 8);
-	t.pop();
-
-	t.push();
-	t.resetCamera();
-	drawCenteredText('HEX STRING MODE', 8, [140, 220, 255]);
-	drawCenteredText(`ACTIVE: ${hex}`, 10, [255, 225, 140]);
-	t.pop();
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.CELLCOLOR3', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: HEX CELL FILL', x, y++, 100, 220, 255);
+	drawText('Hex strings color cell fill.', x, y++, 140, 160, 190);
+	drawText('The value pulses every frame.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(value > 80 ? 'HEX: BLUE' : 'HEX: RED', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -4027,54 +3760,43 @@ const t = textmode.create({
 
 const labelLayer = t.layers.add();
 
-const colorA = t.color(120, 20, 40); // Dark Red-Brown
-const colorB = t.color(20, 60, 100);
+let value = 0;
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-	t.cellColor(0, 0, 0, 0);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-labelLayer.draw(() => {
-	t.clear();
-
-	drawCenteredText('Textmodifier.cellColor (Color Object)', -12, [240, 245, 255]);
-	drawCenteredText('Passing a TextmodeColor object directly for reuse.', -10, [150, 170, 200]);
-
-	drawCenteredText('t.cellColor(colorObject)', 13, [100, 120, 150]);
-});
-
 t.draw(() => {
 	t.background(6, 10, 22);
+	value = Math.round(80 + 80 * Math.sin(t.frameCount * 0.04));
+	t.char('#');
+	const c = t.color(value, 40, 90);
+	t.cellColor(c);
+	t.charColor(240, 245, 255);
+	t.rect(10, 5);
+});
 
-	const cycle = Math.floor(t.frameCount / 60) % 2;
-	const activeColor = cycle === 0 ? colorA : colorB;
-
-	t.cellColor(activeColor);
-
-	t.push();
-	t.charColor(255, 225, 140);
-	t.char('@');
-	t.rect(14, 6);
-	t.pop();
-
-	t.push();
-	t.resetCamera();
-	drawCenteredText('REUSABLE COLOR OBJECT', 8, [140, 255, 180]);
-	drawCenteredText(`ACTIVE_ID: ${cycle === 0 ? 'colorA' : 'colorB'}`, 10, [140, 180, 255]);
-	t.pop();
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.CELLCOLOR4', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: CELL COLOR OBJECT', x, y++, 100, 220, 255);
+	drawText('TextmodeColor can be reused.', x, y++, 140, 160, 190);
+	drawText('The value pulses every frame.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`R: ${value}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -4092,13 +3814,13 @@ t.windowResized(() => {
 char(): string;
 ```
 
-Get the current character string used for rendering.
+Current character string used for drawing.
 
 ##### Returns
 
 `string`
 
-The current character string.
+The active character string.
 
 ##### Example
 
@@ -4111,52 +3833,42 @@ const t = textmode.create({
 
 const labelLayer = t.layers.add();
 
-let currentChar = '';
+const glyphs = ['A', 'B', 'C', '#'];
+let glyph = 'A';
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-	t.cellColor(0, 0, 0, 0);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-labelLayer.draw(() => {
-	t.clear();
-
-	drawCenteredText('Textmodifier.char', -12, [240, 245, 255]);
-	drawCenteredText('Assigning glyphs via strings and querying state.', -10, [150, 170, 200]);
-
-	drawCenteredText('GETTER READOUT', 8, [140, 255, 180]);
-	drawCenteredText(`ACTIVE_CHAR: "${currentChar}"`, 10, [140, 180, 255]);
-
-	drawCenteredText('t.char(string)', 13, [100, 120, 150]);
-});
-
 t.draw(() => {
 	t.background(6, 10, 22);
+	glyph = glyphs[Math.floor(t.frameCount / 45) % glyphs.length];
+	t.char(glyph);
+	t.charColor(255, 210, 120);
+	t.rect(8, 4);
+});
 
-	const cycle = Math.floor(t.frameCount / 60) % 3;
-	const charSet = ['@', '#', 'X'];
-
-	t.char(charSet[cycle]);
-
-	currentChar = t.char();
-
-	t.push();
-	t.charColor(255, 180, 100);
-	t.rotateZ(t.frameCount * 2);
-	t.rect(14, 14);
-	t.pop();
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.CHAR', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: ACTIVE GLYPH', x, y++, 100, 220, 255);
+	drawText('Sets the glyph for drawing.', x, y++, 140, 160, 190);
+	drawText('The selected glyph cycles.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CHAR: ' + glyph, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -4170,14 +3882,14 @@ t.windowResized(() => {
 char(value): void;
 ```
 
-Set the character to be used for subsequent rendering operations.
+Set the character used by subsequent drawing operations.
 Accepts a single character string or a character index in the current font.
 
 ##### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `value` | `string` \| `number` | The character string or font character index to set for rendering |
+| `value` | `string` \| `number` | Character string or index in the current font. |
 
 ##### Returns
 
@@ -4194,58 +3906,41 @@ const t = textmode.create({
 
 const labelLayer = t.layers.add();
 
-let currentIndex = 0;
-let currentChar = '';
+let index = 0;
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-	t.cellColor(0, 0, 0, 0);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-labelLayer.draw(() => {
-	t.clear();
-
-	drawCenteredText('Textmodifier.char (Index)', -12, [240, 245, 255]);
-	drawCenteredText('Selecting glyphs using their numeric index in the font.', -10, [150, 170, 200]);
-
-	drawCenteredText('INDEX SELECTOR', 8, [255, 225, 140]);
-	drawCenteredText(
-		`INDEX: ${currentIndex.toString().padStart(3, '0')}  RESULT: "${currentChar}"`,
-		10,
-		[140, 180, 255]
-	);
-
-	drawCenteredText('t.char(indexNumber)', 13, [100, 120, 150]);
-});
-
 t.draw(() => {
 	t.background(6, 10, 22);
+	index = Math.floor(t.frameCount / 5) % 128;
+	t.char(index);
+	t.charColor(255, 210, 120);
+	t.rect(8, 4);
+});
 
-	const time = t.frameCount * 0.2;
-	const count = t.font.characters.length;
-
-	currentIndex = Math.floor(time) % count;
-	t.char(currentIndex);
-
-	currentChar = t.char();
-
-	t.push();
-	t.charColor(120, 255, 180);
-	t.rotateZ(t.frameCount * 3);
-	t.rect(12, 12);
-	t.pop();
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.CHAR2', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: GLYPH INDEX', x, y++, 100, 220, 255);
+	drawText('Numeric indices select glyphs.', x, y++, 140, 160, 190);
+	drawText('Index cycles through the font.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`INDEX: ${index}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -4263,13 +3958,13 @@ t.windowResized(() => {
 charColor(): TextmodeColor;
 ```
 
-Get the current character color.
+Current character color.
 
 ##### Returns
 
 [`TextmodeColor`](TextmodeColor.md)
 
-The current character color as a [TextmodeColor](TextmodeColor.md).
+Current character color.
 
 ##### Example
 
@@ -4282,63 +3977,44 @@ const t = textmode.create({
 
 const labelLayer = t.layers.add();
 
-let currentR = 0,
-	currentG = 0,
-	currentB = 0;
+let current = t.color(255, 255, 255);
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+t.draw(() => {
+	t.background(6, 10, 22);
+	const r = Math.round(150 + 105 * Math.sin(t.frameCount * 0.04));
+	const g = Math.round(150 + 105 * Math.cos(t.frameCount * 0.03));
+	t.charColor(r, g, 180);
+	current = t.charColor();
+	t.char('#');
+	t.rect(14, 6);
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-	t.cellColor(0, 0, 0, 0);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
 labelLayer.draw(() => {
 	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
 
-	drawCenteredText('Textmodifier.charColor', -12, [240, 245, 255]);
-	drawCenteredText('Setting the primary stroke color of character glyphs.', -10, [150, 170, 200]);
-
-	drawCenteredText('RGB GETTER READOUT', 8, [140, 255, 180]);
-	drawCenteredText(
-		`R: ${currentR.toString().padStart(3, '0')}  G: ${currentG.toString().padStart(3, '0')}  B: ${currentB.toString().padStart(3, '0')}`,
-		10,
-		[140, 180, 255]
-	);
-
-	drawCenteredText('t.charColor(r, g, b)', 13, [100, 120, 150]);
-});
-
-t.draw(() => {
-	t.background(6, 10, 22);
-
-	const time = t.frameCount * 0.04;
-	const r = Math.round(150 + 105 * Math.sin(time));
-	const g = Math.round(150 + 105 * Math.cos(time * 0.7));
-	const b = 120;
-
-	t.charColor(r, g, b);
-
-	const col = t.charColor();
-	currentR = col.r;
-	currentG = col.g;
-	currentB = col.b;
-
-	t.push();
-	t.char('#');
-	t.rotateZ(time * 20);
-	t.rect(14, 6);
-	t.pop();
+	drawText('TEXTMODIFIER.CHARCOLOR', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: CHARACTER COLOR', x, y++, 100, 220, 255);
+	drawText('Compact API demonstration.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	const rgb = current.r + ',' + current.g + ',' + current.b;
+	drawText(`RGB: ${rgb}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -4376,56 +4052,41 @@ const t = textmode.create({
 
 const labelLayer = t.layers.add();
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-	t.cellColor(0, 0, 0, 0);
+let value = 0;
 
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-labelLayer.draw(() => {
-	t.clear();
-
-	drawCenteredText('Textmodifier.charColor (Grayscale)', -12, [240, 245, 255]);
-	drawCenteredText('Passing a single number sets an R=G=B stroke level.', -10, [150, 170, 200]);
-
-	drawCenteredText('t.charColor(gray, alpha)', 12, [100, 120, 150]);
-});
-
 t.draw(() => {
 	t.background(6, 10, 22);
+	value = Math.round(80 + 80 * Math.sin(t.frameCount * 0.04));
+	t.char('#');
+	t.charColor(value, 220);
+	t.rect(10, 5);
+});
 
-	const time = t.frameCount * 0.05;
-	const gray = Math.round(127 + 127 * Math.sin(time));
-	const alpha = Math.round(127 + 127 * Math.cos(time * 0.7));
-
-	t.charColor(gray, alpha);
-
-	t.push();
-	t.char('+');
-	t.rotateZ(time * 30);
-	t.rect(20, 10);
-	t.pop();
-
-	t.push();
-	t.resetCamera();
-	drawCenteredText('GRAYSCALE + ALPHA PULSE', 8, [255, 225, 140]);
-	drawCenteredText(
-		`GRAY: ${gray.toString().padStart(3, '0')}  ALPHA: ${alpha.toString().padStart(3, '0')}`,
-		10,
-		[140, 180, 255]
-	);
-	t.pop();
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.CHARCOLOR2', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: GRAY GLYPH COLOR', x, y++, 100, 220, 255);
+	drawText('Gray plus alpha overload.', x, y++, 140, 160, 190);
+	drawText('The value pulses every frame.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`GRAY: ${value}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -4469,50 +4130,41 @@ const t = textmode.create({
 
 const labelLayer = t.layers.add();
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-	t.cellColor(0, 0, 0, 0);
+let value = 0;
 
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-labelLayer.draw(() => {
-	t.clear();
-
-	drawCenteredText('Textmodifier.charColor (Hex)', -12, [240, 245, 255]);
-	drawCenteredText('Passing a hex string (e.g. #RRGGBB) to set the stroke.', -10, [150, 170, 200]);
-
-	drawCenteredText('t.charColor(hexString)', 13, [100, 120, 150]);
-});
-
 t.draw(() => {
 	t.background(6, 10, 22);
+	value = Math.round(80 + 80 * Math.sin(t.frameCount * 0.04));
+	t.char('#');
+	t.charColor(value > 80 ? '#facc15' : '#38bdf8');
+	t.rect(10, 5);
+});
 
-	const cycle = Math.floor(t.frameCount / 60) % 3;
-	const hex = ['#fbbf24', '#34d399', '#60a5fa'][cycle];
-	t.charColor(hex);
-
-	t.push();
-	t.char('=');
-	t.rotateZ(t.frameCount * 2);
-	t.rect(20, 8);
-	t.pop();
-
-	t.push();
-	t.resetCamera();
-	drawCenteredText('HEX STRING MODE', 8, [140, 220, 255]);
-	drawCenteredText(`ACTIVE: ${hex}`, 10, [255, 225, 140]);
-	t.pop();
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.CHARCOLOR3', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: HEX GLYPH COLOR', x, y++, 100, 220, 255);
+	drawText('Hex strings color glyphs.', x, y++, 140, 160, 190);
+	drawText('The value pulses every frame.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(value > 80 ? 'HEX: GOLD' : 'HEX: CYAN', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -4549,54 +4201,45 @@ const t = textmode.create({
 
 const labelLayer = t.layers.add();
 
-const colorA = t.color(255, 200, 100); // Gold
-const colorB = t.color(100, 200, 255); // Sky Blue
+const colorA = t.color('#64ffd0');
+const colorB = t.color('#ffc878');
+let active = 'colorA';
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+t.draw(() => {
+	t.background(6, 10, 22);
+	const useA = Math.floor(t.frameCount / 45) % 2 === 0;
+	active = useA ? 'colorA' : 'colorB';
+	t.charColor(useA ? colorA : colorB);
+	t.char('@');
+	t.rotateZ(t.frameCount * 2);
+	t.rect(10, 10);
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-	t.cellColor(0, 0, 0, 0);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
 labelLayer.draw(() => {
 	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
 
-	drawCenteredText('Textmodifier.charColor (Color Object)', -12, [240, 245, 255]);
-	drawCenteredText('Passing a TextmodeColor object directly for reuse.', -10, [150, 170, 200]);
-
-	drawCenteredText('t.charColor(colorObject)', 13, [100, 120, 150]);
-});
-
-t.draw(() => {
-	t.background(6, 10, 22);
-
-	const cycle = Math.floor(t.frameCount / 60) % 2;
-	const activeColor = cycle === 0 ? colorA : colorB;
-
-	t.charColor(activeColor);
-
-	t.push();
-	t.char('$');
-	t.rotateZ(t.frameCount * 3);
-	t.rect(14, 6);
-	t.pop();
-
-	t.push();
-	t.resetCamera();
-	drawCenteredText('REUSABLE COLOR OBJECT', 8, [140, 255, 180]);
-	drawCenteredText(`ACTIVE_ID: ${cycle === 0 ? 'colorA' : 'colorB'}`, 10, [140, 180, 255]);
-	t.pop();
+	drawText('TEXTMODIFIER.CHARCOLOR4', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: COLOR OBJECT INPUT', x, y++, 100, 220, 255);
+	drawText('Compact API demonstration.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`ACTIVE: ${active}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -4612,19 +4255,19 @@ t.windowResized(() => {
 charRotation(degrees?): number | void;
 ```
 
-Set the character rotation angle for subsequent character rendering, or get current angle.
+Set the character rotation for subsequent drawing, or get the current angle.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `degrees?` | `number` | The rotation angle in degrees (optional) |
+| `degrees?` | `number` | Rotation angle in degrees. |
 
 #### Returns
 
 `number` \| `void`
 
-The current rotation angle in degrees if called without arguments
+Current rotation angle in degrees when called without arguments.
 
 #### Example
 
@@ -4637,69 +4280,47 @@ const t = textmode.create({
 
 const labelLayer = t.layers.add();
 
-let currentAngle = 0;
+let angle = 0;
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-	t.cellColor(0, 0, 0, 0);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-labelLayer.draw(() => {
-	t.clear();
-
-	drawCenteredText('Textmodifier.charRotation', -12, [240, 245, 255]);
-	drawCenteredText('Rotating individual characters within their grid cells.', -10, [150, 170, 200]);
-
-	drawCenteredText('ROTATION GAUGE', 10, [140, 255, 180]);
-	drawCenteredText(`ANGLE: ${currentAngle.toFixed(1).padStart(5, '0')} DEG`, 12, [140, 180, 255]);
-
-	drawCenteredText('t.charRotation(degrees)', 15, [100, 120, 150]);
-});
-
 t.draw(() => {
 	t.background(6, 10, 22);
+	angle = (t.frameCount * 2) % 360;
+	for (let i = 0; i < 8; i++) {
+		t.push();
+		t.translate((i - 3.5) * 3, 0);
+		t.charRotation(angle + i * 30);
+		t.char('+');
+		t.charColor(140, 220, 255);
+		t.point();
+		t.pop();
+	}
+});
 
-	const time = t.frameCount * 1.5;
-	const angle = time % 360;
-
-	t.charRotation(angle);
-
-	currentAngle = t.charRotation();
-
-	t.push();
-	t.charRotation(0); // Ensure crosshair is static
-	t.charColor(60, 70, 100);
-	t.char('.');
-	t.line(-10, 0, 10, 0);
-	t.line(0, -6, 0, 6);
-
-	drawCenteredText('N', -8, [60, 70, 100]);
-	drawCenteredText('S', 8, [60, 70, 100]);
-	t.translate(-12, 0);
-	t.char('W');
-	t.point();
-	t.translate(24, 0);
-	t.char('E');
-	t.point();
-	t.pop();
-
-	t.push();
-	t.charColor(255, 180, 100);
-	t.char('+');
-	t.rect(10, 6);
-	t.pop();
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.CHARROTATION', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: ROTATE GLYPHS', x, y++, 100, 220, 255);
+	drawText('Rotates characters in cells.', x, y++, 140, 160, 190);
+	drawText('Transform matrix is unchanged.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`ANGLE: ${angle}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -4733,63 +4354,52 @@ const t = textmode.create({
 });
 
 const labelLayer = t.layers.add();
+
 let clearEnabled = true;
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-	t.cellColor(0, 0, 0, 0);
+t.mouseClicked(() => {
+	clearEnabled = !clearEnabled;
+	if (clearEnabled) t.clear();
+});
 
+t.draw(() => {
+	if (clearEnabled) t.clear();
+	const time = t.frameCount * 0.05;
+	t.push();
+	t.translate(Math.cos(time) * 15, Math.sin(time) * 6);
+	t.charColor(255, 225, 140);
+	t.char('#');
+	t.rect(4, 2);
+	t.pop();
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
 labelLayer.draw(() => {
 	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
 
-	drawCenteredText('Textmodifier.clear', -12, [240, 245, 255]);
-	drawCenteredText('Resetting the current layer buffer to a blank state.', -10, [150, 170, 200]);
-
-	const statusColor = clearEnabled ? [140, 255, 180] : [255, 100, 100];
-	drawCenteredText('STATUS: ' + (clearEnabled ? 'CLEAR ACTIVE' : 'CLEAR DISABLED'), 6, statusColor);
-	drawCenteredText(
-		clearEnabled ? 'The drawing buffer is wiped every frame.' : 'Buffer persists, creating motion trails.',
-		9,
-		[100, 120, 150]
-	);
-
-	drawCenteredText('t.clear()', 13, [100, 120, 150]);
-});
-
-t.draw(() => {
-	if (t.frameCount % 180 === 0) {
-		clearEnabled = !clearEnabled;
-		// Ensure a fresh start when re-enabling clear.
-		if (clearEnabled) t.clear();
-	}
-
-	if (clearEnabled) {
-		t.clear();
-	}
-
-	const time = t.frameCount * 0.05;
-	const x = Math.round(Math.cos(time) * 15);
-	const y = Math.round(Math.sin(time * 0.7) * 4);
-
-	t.push();
-	t.translate(x, y);
-	t.charColor(255, 225, 140);
-	t.char('#');
-	t.rect(4, 2);
-	t.pop();
+	drawText('TEXTMODIFIER.CLEAR', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: CLEAR LAYER BUFFER', x, y++, 100, 220, 255);
+	drawText('Compact API demonstration.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	const state = clearEnabled ? 'ON' : 'OFF';
+	drawText(`CLEAR: ${state}`, x, y++, 140, 255, 180);
+	drawText('CLICK TO TOGGLE', x, y++, 255, 225, 140);
 });
 
 t.windowResized(() => {
@@ -4833,52 +4443,42 @@ const t = textmode.create({
 
 const labelLayer = t.layers.add();
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-	t.cellColor(0, 0, 0, 0);
+let value = 0;
 
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-labelLayer.draw(() => {
-	t.clear();
-
-	drawCenteredText('Textmodifier.color (Grayscale)', -12, [240, 245, 255]);
-	drawCenteredText('Creating reusable colors from gray and alpha levels.', -10, [150, 170, 200]);
-
-	drawCenteredText('t.color(gray, alpha)', 12, [100, 120, 150]);
-});
-
 t.draw(() => {
 	t.background(6, 10, 22);
+	value = Math.round(80 + 80 * Math.sin(t.frameCount * 0.04));
+	t.char('#');
+	const c = t.color(value, 180);
+	t.charColor(c);
+	t.rect(10, 5);
+});
 
-	const time = t.frameCount * 0.04;
-
-	const count = 5;
-	for (let i = 0; i < count; i++) {
-		const phase = i / count;
-		const brightness = 100 + 155 * Math.sin(time + phase);
-		const alpha = 100 + 155 * Math.cos(time + phase);
-
-		const col = t.color(brightness, alpha);
-
-		t.push();
-		t.translate((i - 2) * 8, 0);
-		t.charColor(col);
-		t.char('#');
-		t.rect(6, 6);
-		t.pop();
-	}
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.COLOR', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: MAKE COLOR', x, y++, 100, 220, 255);
+	drawText('Creates reusable gray color.', x, y++, 140, 160, 190);
+	drawText('The value pulses every frame.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`VALUE: ${value}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -4924,56 +4524,50 @@ const t = textmode.create({
 
 const labelLayer = t.layers.add();
 
-const colorCyan = t.color(100, 220, 255);
-const colorGold = t.color(255, 225, 140, 150); // Semi-transparent
+const goldLayer = t.layers.add();
+const cyan = t.color(100, 220, 255);
+const gold = t.color(255, 225, 140, 150);
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+t.draw(() => {
+	t.background(6, 10, 22);
+	t.charColor(cyan);
+	t.char('o');
+	t.translate(Math.cos(t.frameCount * 0.03) * 10, 0);
+	t.ellipse(12, 10);
+});
+
+goldLayer.draw(() => {
+	t.clear();
+	t.charColor(gold);
+	t.char('#');
+	t.rect(12, 8);
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-	t.cellColor(0, 0, 0, 0);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
 labelLayer.draw(() => {
 	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
 
-	drawCenteredText('Textmodifier.color (RGB)', -12, [240, 245, 255]);
-	drawCenteredText('Creating reusable colors from RGB or RGBA values.', -10, [150, 170, 200]);
-
-	drawCenteredText('t.color(r, g, b, a)', 12, [100, 120, 150]);
-});
-
-t.draw(() => {
-	t.background(6, 10, 22);
-
-	const time = t.frameCount * 0.03;
-
-	t.push();
-	t.char('o');
-
-	t.push();
-	t.translate(Math.cos(time) * 10, Math.sin(time) * 5);
-	t.charColor(colorCyan);
-	t.ellipse(14, 14);
-	t.pop();
-
-	// Static golden core (semi-transparent)
-	t.push();
-	t.charColor(colorGold);
-	t.rect(10, 10);
-	t.pop();
-
-	t.pop();
+	drawText('TEXTMODIFIER.COLOR2', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: RGBA COLOR OBJECT', x, y++, 100, 220, 255);
+	drawText('Compact API demonstration.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('RGBA ALPHA: 150', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -5015,46 +4609,42 @@ const t = textmode.create({
 
 const labelLayer = t.layers.add();
 
-const baseColor = t.color('#6366f1'); // Indigo
+let value = 0;
 
-const clonedColor = t.color(baseColor);
-
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-	t.cellColor(0, 0, 0, 0);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-labelLayer.draw(() => {
-	t.clear();
-
-	drawCenteredText('Textmodifier.color (Hex/Clone)', -12, [240, 245, 255]);
-	drawCenteredText('Creating colors from hex strings or existing objects.', -10, [150, 170, 200]);
-
-	drawCenteredText('t.color("#RRGGBB") / t.color(otherColor)', 12, [100, 120, 150]);
-});
-
 t.draw(() => {
 	t.background(6, 10, 22);
-
-	t.push();
-	t.charColor(clonedColor);
+	value = Math.round(80 + 80 * Math.sin(t.frameCount * 0.04));
 	t.char('#');
-	t.rect(14, 6);
-	t.pop();
+	const c = t.color(value > 80 ? '#facc15' : '#38bdf8');
+	t.charColor(c);
+	t.rect(10, 5);
+});
 
-	drawCenteredText('CLONED INDIGO COLOR', 8, [140, 180, 255]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.COLOR3', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: HEX COLOR', x, y++, 100, 220, 255);
+	drawText('Creates color from hex string.', x, y++, 140, 160, 190);
+	drawText('The value pulses every frame.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(value > 80 ? 'HEX: GOLD' : 'HEX: CYAN', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -5094,59 +4684,52 @@ const t = textmode.create({
 
 const labelLayer = t.layers.add();
 
-let radius = 0,
-	height = 0;
+let spin = 0;
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-	t.cellColor(0, 0, 0);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-labelLayer.draw(() => {
-	t.clear();
-
-	drawCenteredText('Textmodifier.cone', -12, [240, 245, 255]);
-	drawCenteredText('A 3D cone primitive defined by radius and height.', -10, [150, 170, 200]);
-
-	drawCenteredText(`RADIUS: ${radius.toFixed(1)}`, 8, [140, 180, 255]);
-	drawCenteredText(`HEIGHT: ${height.toFixed(1)}`, 10, [255, 225, 140]);
-
-	drawCenteredText('t.cone(radius, height)', 13, [100, 120, 150]);
+t.draw(() => {
+	t.background(6, 8, 18);
+	const time = t.frameCount * 0.025;
+	spin = (time * 40) % 360;
+	t.perspective(58, 0.1, 4096);
+	t.camera(18, -10, 42, 0, 0, 0);
+	t.ambientLight(24, 28, 38);
+	t.pointLight([255, 210, 140], { x: 18, y: -18, z: 28 });
+	t.push();
+	t.translate(5, 1, 0);
+	t.rotateY(spin);
+	t.rotateX(18);
+	t.char('#');
+	t.charColor(140, 220, 255);
+	t.cellColor(16, 24, 42);
+	t.cone(5, 12);
+	t.pop();
 });
 
-t.draw(() => {
-	t.background(6, 10, 22);
-
-	const time = t.frameCount * 0.02;
-
-	radius = 6 + Math.sin(time) * 2;
-	height = 12 + Math.cos(time * 0.7) * 4;
-
-	t.ambientLight(30, 40, 60);
-	t.pointLight([255, 225, 140], 0, -20, 30);
-	t.camera(15, -10, 40, 0, 2, 0);
-
-	t.push();
-	t.rotateX(time * 20);
-	t.rotateY(time * 30);
-	t.char('#');
-	t.charColor(140, 180, 255);
-	t.cellColor(20, 30, 60);
-
-	t.cone(radius, height);
-	t.pop();
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.CONE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: 3D CONE', x, y++, 100, 220, 255);
+	drawText('Radius and height define form.', x, y++, 140, 160, 190);
+	drawText('Camera and light reveal depth.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`SPIN: ${spin.toFixed(1)}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -5162,7 +4745,7 @@ t.windowResized(() => {
 createCamera(): TextmodeCamera;
 ```
 
-Creates a camera object initialized from the current render camera state and sets it active.
+Create and activate a camera initialized from the current render camera state.
 
 Useful for workflows where camera properties are mutated over time and
 reapplied via [setCamera](#setcamera).
@@ -5174,44 +4757,26 @@ reapplied via [setCamera](#setcamera).
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
 
 let camera;
+let eyeX = 0;
 
-const scene = [
-	{ x: -14, y: -4, z: 0, char: 'A', color: [255, 120, 120] },
-	{ x: 0, y: 6, z: -10, char: 'B', color: [120, 255, 160] },
-	{ x: 14, y: -2, z: 8, char: 'C', color: [120, 180, 255] },
-];
-
-function drawScene() {
-	for (let i = 0; i < scene.length; i++) {
-		const item = scene[i];
-
-		t.push();
-		t.translate(item.x, item.y, item.z);
-		t.rotateX(t.frameCount * (1 + i * 0.15));
-		t.rotateY(t.frameCount * (1.4 + i * 0.2));
-		t.char(item.char);
-		t.charColor(item.color[0], item.color[1], item.color[2]);
-		t.rect(8, 8);
-		t.pop();
-	}
-}
-
-function drawLabel(text, y) {
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y, 0);
-	t.charColor(220);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
@@ -5221,17 +4786,32 @@ t.setup(() => {
 });
 
 t.draw(() => {
-	t.background(8, 10, 24);
-
-	const time = t.frameCount * 0.02;
-	camera
-		.setPosition(Math.cos(time) * 34, Math.sin(time * 0.6) * 10, Math.sin(time) * 34)
-		.lookAt(0, 0, 0)
-		.setUp(0, 1, 0);
+	t.background(6, 8, 18);
+	const time = t.frameCount * 0.025;
+	eyeX = Math.cos(time) * 28;
+	camera.setPosition(eyeX, 10, 38).lookAt(0, 0, 0);
 	t.setCamera(camera);
+	t.ambientLight(25, 28, 36);
+	t.pointLight([255, 210, 140], { x: 18, y: -16, z: 28 });
+	t.rotateY(time * 25);
+	t.char('@');
+	t.charColor(140, 220, 255);
+	t.sphere(6);
+});
 
-	drawScene();
-	drawLabel('createCamera() for a reusable camera object', Math.floor(t.grid.rows / 2) - 3);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.CREATECAMERA', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: MUTABLE CAMERA', x, y++, 100, 220, 255);
+	drawText('createCamera returns an object.', x, y++, 140, 160, 190);
+	drawText('setCamera applies its state.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`EYE X: ${eyeX.toFixed(1)}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -5247,7 +4827,7 @@ t.windowResized(() => {
 createFilterShader(fragmentSource): Promise<TextmodeShader>;
 ```
 
-Create a custom filter shader from fragment shader source code or a file path.
+Create a custom filter shader from fragment shader source or a file path.
 The fragment shader automatically receives the standard vertex shader inputs
 and must output to the 3 MRT attachments (character/transform, primary color, secondary color).
 
@@ -5255,13 +4835,13 @@ and must output to the 3 MRT attachments (character/transform, primary color, se
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `fragmentSource` | `string` | The fragment shader source code or a file path (e.g., './shader.frag') |
+| `fragmentSource` | `string` | Fragment shader source or file path (e.g. './shader.frag'). |
 
 #### Returns
 
 `Promise`\<[`TextmodeShader`](TextmodeShader.md)\>
 
-A Promise that resolves to a compiled shader ready for use with [shader](#shader)
+A compiled shader ready for use with [shader](#shader).
 
 #### Example
 
@@ -5272,70 +4852,53 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-let warpShader;
+const labelLayer = t.layers.add();
+
+let shaderObj;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.setup(async () => {
-	warpShader = await t.createFilterShader(`#version 300 es
-		precision highp float;
-		in vec2 v_uv;
-		uniform float u_time;
-		uniform vec2 u_mouse;
-		layout(location = 0) out vec4 o_character;
-		layout(location = 1) out vec4 o_primaryColor;
-		layout(location = 2) out vec4 o_secondaryColor;
-
-		void main() {
-			// Center coordinates
-			vec2 p = v_uv - vec2(0.5);
-			float d = length(p);
-
-			// Interactive wave effect based on mouse distance
-			vec2 m = u_mouse - vec2(0.5);
-			float mouseDist = length(v_uv - u_mouse);
-			float wave = sin(d * 40.0 - u_time * 5.0) * 0.03;
-			float mouseWave = sin(mouseDist * 20.0 - u_time * 8.0) * 0.05 * exp(-mouseDist * 3.0);
-
-			// Apply wave offsets to UV
-			vec2 uvWarped = v_uv + p * (wave + mouseWave);
-
-			// Procedural text character selection based on warp intensity
-			float val = abs(sin(uvWarped.x * 20.0) * cos(uvWarped.y * 20.0));
-			float charValue = step(0.15, val) * fract(val * 9.0);
-
-			// Color palettes with smooth gradient interpolation
-			vec3 primary = vec3(0.1, 0.4 + sin(u_time + d * 4.0) * 0.4, 0.8 + cos(d * 5.0) * 0.2);
-			vec3 secondary = vec3(0.05, 0.08, 0.15 + sin(u_time * 0.5) * 0.05);
-
-			// Enhance mouse interaction area
-			if (mouseDist < 0.25) {
-				float glow = (0.25 - mouseDist) / 0.25;
-				primary += vec3(glow * 0.6, glow * 0.2, 0.0);
-				secondary += vec3(0.05 * glow, 0.0, 0.05 * glow);
-				charValue = fract(charValue + u_time * 0.2);
-			}
-
-			o_character = vec4(charValue, 0.0, 0.0, 1.0);
-			o_primaryColor = vec4(primary, 1.0);
-			o_secondaryColor = vec4(secondary, 1.0);
-		}
-	`);
+	shaderObj = await t.createFilterShader(`#version 300 es
+	precision highp float;
+	in vec2 v_uv;
+	uniform sampler2D u_texture;
+	uniform float u_time;
+	out vec4 fragColor;
+	void main(){vec4 c=texture(u_texture,v_uv);fragColor=vec4(c.rgb*(0.7+0.3*sin(u_time)),c.a);}`);
 });
 
 t.draw(() => {
-	t.background(8, 12, 24);
+	t.background(6, 10, 22);
+	t.char('#');
+	t.charColor(140, 220, 255);
+	t.rect(16, 8);
+	if (shaderObj) t.filter(shaderObj, { u_time: t.frameCount * 0.03 });
+});
 
-	if (warpShader) {
-		t.shader(warpShader);
-		t.setUniform('u_time', t.frameCount * 0.002);
-
-		// Normalize mouse coordinates [0, 1]
-		const mx = t.mouse ? Math.max(0, Math.min(1, (t.mouse.x + t.grid.cols / 2) / t.grid.cols)) : 0.5;
-		const my = t.mouse ? Math.max(0, Math.min(1, (t.mouse.y + t.grid.rows / 2) / t.grid.rows)) : 0.5;
-		t.setUniform('u_mouse', [mx, 1.0 - my]);
-
-		t.rect(t.grid.cols, t.grid.rows);
-		t.resetShader();
-	}
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.CREATEFILTERSHADER', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: CUSTOM FILTER', x, y++, 100, 220, 255);
+	drawText('Shader affects the main drawing.', x, y++, 140, 160, 190);
+	drawText('resetShader restores default.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(shaderObj ? 'FILTER: READY' : 'FILTER: WAIT', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -5351,7 +4914,7 @@ t.windowResized(() => {
 createFramebuffer(options): TextmodeFramebuffer;
 ```
 
-Create a new framebuffer for offscreen rendering.
+Create a framebuffer for offscreen rendering.
 
 The framebuffer uses the same MRT structure as the main rendering pipeline.
 By default it allocates 3 attachments (character + color data).
@@ -5360,13 +4923,13 @@ By default it allocates 3 attachments (character + color data).
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `options` | [`TextmodeFramebufferOptions`](../type-aliases/TextmodeFramebufferOptions.md) | Configuration options for the framebuffer. |
+| `options` | [`TextmodeFramebufferOptions`](../type-aliases/TextmodeFramebufferOptions.md) | Framebuffer configuration. |
 
 #### Returns
 
 [`TextmodeFramebuffer`](TextmodeFramebuffer.md)
 
-A new Framebuffer instance.
+The created framebuffer.
 
 #### Example
 
@@ -5379,66 +4942,45 @@ const t = textmode.create({
 
 const labelLayer = t.layers.add();
 
-const fb = t.createFramebuffer({
-	width: 24,
-	height: 14,
-});
+const fb = t.createFramebuffer({ width: 24, height: 14 });
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-	t.cellColor(0, 0, 0, 0);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-labelLayer.draw(() => {
-	t.clear();
-
-	drawCenteredText('Textmodifier.createFramebuffer', -12, [240, 245, 255]);
-	drawCenteredText('Creating an offscreen buffer for nested rendering.', -10, [150, 170, 200]);
-
-	drawCenteredText('FRAMEBUFFER METRICS', 8, [140, 255, 180]);
-	drawCenteredText(`COLS: ${fb.width}  ROWS: ${fb.height}  ATTACHMENTS: ${fb.attachmentCount}`, 10, [140, 180, 255]);
-
-	drawCenteredText('t.createFramebuffer({ width, height })', 13, [100, 120, 150]);
-});
-
 t.draw(() => {
 	t.background(6, 10, 22);
-	const time = t.frameCount * 0.05;
-
 	fb.begin();
 	t.clear();
 	t.background(20, 30, 60);
-
-	t.push();
-	t.rotateZ(time * 30);
-	t.charColor(255, 180, 100);
 	t.char('#');
-	t.rect(11, 5);
-	t.pop();
-
-	t.push();
-	t.charColor(120, 180, 255);
-	t.char('+');
-	t.point();
-	t.pop();
+	t.charColor(255, 210, 120);
+	t.rect(12, 4);
 	fb.end();
-
-	t.push();
-	// t.rotateZ(Math.sin(time * 0.5) * 10);
 	t.image(fb);
-	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.CREATEFRAMEBUFFER', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: OFFSCREEN BUFFER', x, y++, 100, 220, 255);
+	drawText('Renders into a framebuffer.', x, y++, 140, 160, 190);
+	drawText('Then draws it to the scene.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`SIZE: ${fb.width} x ${fb.height}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -5454,62 +4996,86 @@ t.windowResized(() => {
 createShader(vertexSource, fragmentSource): Promise<TextmodeShader>;
 ```
 
-Create a shader from vertex and fragment source code or file paths.
-Accepts inline shader source or file paths (e.g. './shader.frag', './shader.vert', '.frag', '.vert').
+Create a shader from vertex and fragment source, or from file paths.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `vertexSource` | `string` | The vertex shader source code or a file path |
-| `fragmentSource` | `string` | The fragment shader source code or a file path |
+| `vertexSource` | `string` | Vertex shader source or file path. |
+| `fragmentSource` | `string` | Fragment shader source or file path. |
 
 #### Returns
 
 `Promise`\<[`TextmodeShader`](TextmodeShader.md)\>
 
-A Promise that resolves to a compiled shader
+The compiled shader.
 
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-let customShader;
+const labelLayer = t.layers.add();
+
+let shaderObj;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.setup(async () => {
 	const vert = `#version 300 es
-    in vec4 a_position;
-    in vec2 a_uv;
-    out vec2 v_uv;
-    void main() {
-      gl_Position = a_position;
-      v_uv = a_uv;
-    }
-  `;
-
+	in vec4 a_position;
+	in vec2 a_texCoord;
+	out vec2 v_uv;
+	void main(){gl_Position=a_position;v_uv=a_texCoord;}`;
 	const frag = `#version 300 es
-    precision highp float;
-    in vec2 v_uv;
-    layout(location = 0) out vec4 o_character;
-    layout(location = 1) out vec4 o_primaryColor;
-    layout(location = 2) out vec4 o_secondaryColor;
-
-    void main() {
-       o_character = vec4(0.1, 0.0, 0.0, 0.0);
-       o_primaryColor = vec4(1.0, 0.0, 0.0, 1.0);
-       o_secondaryColor = vec4(0.0);
-    }
-  `;
-
-	customShader = await t.createShader(vert, frag);
+	precision highp float;
+	in vec2 v_uv;
+	uniform float u_time;
+	layout(location=0) out vec4 o_character;
+	layout(location=1) out vec4 o_primaryColor;
+	layout(location=2) out vec4 o_secondaryColor;
+	void main(){float v=fract(v_uv.x*8.0+u_time);o_character=vec4(v,0,0,1);o_primaryColor=vec4(v,0.8,1.0,1);o_secondaryColor=vec4(0.02,0.04,0.08,1);}`;
+	shaderObj = await t.createShader(vert, frag);
 });
 
 t.draw(() => {
-	if (customShader) {
-		t.shader(customShader);
-		t.rect(10, 10);
+	t.background(6, 10, 22);
+	if (shaderObj) {
+		t.shader(shaderObj);
+		t.setUniform('u_time', t.frameCount * 0.02);
+		t.rect(t.grid.cols, t.grid.rows);
+		t.resetShader();
 	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.CREATESHADER', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: CUSTOM SHADER', x, y++, 100, 220, 255);
+	drawText('Shader affects the main drawing.', x, y++, 140, 160, 190);
+	drawText('resetShader restores default.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(shaderObj ? 'SHADER: READY' : 'SHADER: WAIT', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -5525,10 +5091,10 @@ t.windowResized(() => {
 createTexture(source): TextmodeTexture;
 ```
 
-Create a texture from an external canvas or video element for integration with other WebGL libraries.
+Create a dynamic texture from an external canvas or video element.
 
-This method enables seamless integration with libraries like three.js, p5.js, Babylon.js,
-hydra-synth, or any library that renders to a canvas element.
+Use this to sample canvases or videos rendered by libraries such as three.js,
+p5.js, Babylon.js, or hydra-synth.
 
 The texture automatically updates each frame to capture the latest content from the source.
 
@@ -5536,78 +5102,69 @@ The texture automatically updates each frame to capture the latest content from 
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `source` | `HTMLCanvasElement` \| `HTMLVideoElement` | Canvas or video element from an external library |
+| `source` | `HTMLCanvasElement` \| `HTMLVideoElement` | Canvas or video element to capture. |
 
 #### Returns
 
 [`TextmodeTexture`](../namespaces/media/classes/TextmodeTexture.md)
 
-A TextmodeTexture that can be drawn with image()
+A TextmodeTexture that can be drawn with [image](#image).
 
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
 
 const sourceCanvas = document.createElement('canvas');
-sourceCanvas.width = 180;
-sourceCanvas.height = 120;
+sourceCanvas.width = 64;
+sourceCanvas.height = 64;
+const ctx = sourceCanvas.getContext('2d');
+let texture;
 
-const sourceContext = sourceCanvas.getContext('2d');
-const texture = t.createTexture(sourceCanvas);
-texture.characters(' .:-=+*#%@');
-
-function drawSourceCanvas() {
-	if (!sourceContext) {
-		return;
-	}
-
-	const time = t.frameCount * 0.05;
-	sourceContext.fillStyle = '#050816';
-	sourceContext.fillRect(0, 0, sourceCanvas.width, sourceCanvas.height);
-
-	const gradient = sourceContext.createLinearGradient(0, 0, sourceCanvas.width, sourceCanvas.height);
-	gradient.addColorStop(0, '#1d4ed8');
-	gradient.addColorStop(1, '#fb7185');
-	sourceContext.fillStyle = gradient;
-	sourceContext.fillRect(18, 18, sourceCanvas.width - 36, sourceCanvas.height - 36);
-
-	sourceContext.save();
-	sourceContext.translate(sourceCanvas.width / 2, sourceCanvas.height / 2);
-	sourceContext.rotate(time * 0.8);
-	sourceContext.fillStyle = '#fef08a';
-	sourceContext.fillRect(-18, -44, 36, 88);
-	sourceContext.restore();
-}
-
-function drawLabel(text, y, color = [220, 220, 220]) {
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
+t.setup(() => {
+	texture = t.createTexture(sourceCanvas);
+});
+
 t.draw(() => {
-	drawSourceCanvas();
+	t.background(6, 10, 22);
+	ctx.fillStyle = '#10183a';
+	ctx.fillRect(0, 0, 64, 64);
+	ctx.fillStyle = '#facc15';
+	ctx.fillRect(8 + (t.frameCount % 32), 20, 16, 16);
+	if (texture) t.image(texture, 24, 14);
+});
 
-	t.background(5, 7, 18);
-	t.image(texture, t.grid.cols - 8, t.grid.rows - 10);
-
-	drawLabel('createTexture(canvas)', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
-	drawLabel(
-		`source matches ${texture.source === sourceCanvas ? 'yes' : 'no'}`,
-		Math.floor(t.grid.rows * 0.3),
-		[120, 205, 255]
-	);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.CREATETEXTURE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: CANVAS TEXTURE', x, y++, 100, 220, 255);
+	drawText('Wraps a 2D canvas source.', x, y++, 140, 160, 190);
+	drawText('Source canvas is animated.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(texture ? 'TEXTURE: READY' : 'TEXTURE: WAIT', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -5652,62 +5209,42 @@ const t = textmode.create({
 
 const labelLayer = t.layers.add();
 
-// Configuration for the interactive "Hot Zone"
-const ZONE_W = 20;
-const ZONE_H = 10;
+let hovering = false;
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-	t.cellColor(0, 0, 0, 0);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-labelLayer.draw(() => {
-	t.clear();
-
-	drawCenteredText('Textmodifier.cursor', -12, [240, 245, 255]);
-	drawCenteredText('Updating the system cursor based on grid interaction.', -10, [150, 170, 200]);
-
-	const mx = t.mouse.x === Number.NEGATIVE_INFINITY ? 'OFF' : Math.round(t.mouse.x);
-	const my = t.mouse.y === Number.NEGATIVE_INFINITY ? 'OFF' : Math.round(t.mouse.y);
-
-	const halfW = ZONE_W / 2;
-	const halfH = ZONE_H / 2;
-	const isHovering = t.mouse.x >= -halfW && t.mouse.x < halfW && t.mouse.y >= -halfH && t.mouse.y < halfH;
-
-	drawCenteredText('INTERACTION MONITOR', 8, [140, 255, 180]);
-	drawCenteredText(`MOUSE: [${mx}, ${my}]  HOVER: ${isHovering}`, 10, [140, 180, 255]);
-	drawCenteredText(`CURSOR: ${isHovering ? 'pointer' : 'default'}`, 12, [255, 225, 140]);
-
-	drawCenteredText('t.cursor(typeString)', 15, [100, 120, 150]);
-});
-
 t.draw(() => {
 	t.background(6, 10, 22);
+	hovering = Math.abs(t.mouse.x) < 8 && Math.abs(t.mouse.y) < 5;
+	t.cursor(hovering ? 'pointer' : 'default');
+	t.char(hovering ? '@' : '+');
+	t.charColor(hovering ? 255 : 120, hovering ? 210 : 180, 120);
+	t.rect(16, 10);
+});
 
-	const halfW = ZONE_W / 2;
-	const halfH = ZONE_H / 2;
-
-	const isHovering = t.mouse.x >= -halfW && t.mouse.x < halfW && t.mouse.y >= -halfH && t.mouse.y < halfH;
-
-	t.cursor(isHovering ? 'pointer' : 'default');
-
-	t.push();
-	t.char(isHovering ? '#' : '.');
-	t.charColor(isHovering ? [140, 255, 180] : [60, 70, 100]);
-	t.rect(ZONE_W, ZONE_H);
-	t.pop();
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.CURSOR', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SYSTEM CURSOR', x, y++, 100, 220, 255);
+	drawText('Hover center box for pointer.', x, y++, 140, 160, 190);
+	drawText('Cursor changes with state.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(hovering ? 'CURSOR: POINTER' : 'CURSOR: DEFAULT', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -5739,41 +5276,60 @@ Draw a cylinder mesh primitive.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-function label(text, y) {
+const labelLayer = t.layers.add();
+
+let spin = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y, 0);
-	t.charColor(220);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
 t.draw(() => {
-	const time = t.frameCount * 0.02;
-	t.background(4, 7, 15);
-	t.ambientLight(22, 24, 30);
-	t.pointLight([120, 220, 255], { x: 20, y: -12, z: 24 });
-	t.camera(Math.sin(time * 0.35) * 14, -6, 88, 0, 2, -8);
+	t.background(6, 8, 18);
+	const time = t.frameCount * 0.025;
+	spin = (time * 40) % 360;
+	t.perspective(58, 0.1, 4096);
+	t.camera(18, -10, 42, 0, 0, 0);
+	t.ambientLight(24, 28, 38);
+	t.pointLight([255, 210, 140], { x: 18, y: -18, z: 28 });
+	t.push();
+	t.translate(5, 1, 0);
+	t.rotateY(spin);
+	t.rotateX(18);
+	t.char('#');
+	t.charColor(140, 220, 255);
+	t.cellColor(16, 24, 42);
+	t.cylinder(4, 12);
+	t.pop();
+});
 
-	for (let i = 0; i < 6; i++) {
-		t.push();
-		t.translate((i - 2.5) * 9, 10 - i * 2, -i * 8);
-		t.rotateY(time * 22 + i * 12);
-		t.char(i % 2 === 0 ? '|' : 'I');
-		t.charColor(110 + i * 18, 180 + i * 10, 255 - i * 18);
-		t.cellColor(14 + i * 2, 18 + i * 2, 24 + i * 3);
-		t.cylinder(2.4 + i * 0.35, 8 + i * 3);
-		t.pop();
-	}
-
-	label('cylinder(radius, height)', Math.floor(t.grid.rows / 2) - 3);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.CYLINDER', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: 3D CYLINDER', x, y++, 100, 220, 255);
+	drawText('Radius and height define form.', x, y++, 140, 160, 190);
+	drawText('Camera and light reveal depth.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`SPIN: ${spin.toFixed(1)}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -5789,7 +5345,7 @@ t.windowResized(() => {
 deltaTime(): number;
 ```
 
-Returns the time in milliseconds between the current frame and the previous frame.
+Time in milliseconds between the current frame and the previous frame.
 
 `deltaTime()` is useful for creating frame-rate-independent animations. By multiplying
 velocities and movements by `deltaTime()`, animations will run at consistent speeds
@@ -5799,48 +5355,63 @@ regardless of the actual frame rate.
 
 `number`
 
-Time elapsed between current and previous frame in milliseconds.
+Milliseconds elapsed since the previous frame.
 
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-let x = -40;
-const speed = 0.05;
+const labelLayer = t.layers.add();
 
-function drawLabel(text, y) {
+let xPos = -18;
+let dt = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(180);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
 t.draw(() => {
-	t.background(0);
-
-	x += speed * t.deltaTime();
-	if (x > t.grid.cols / 2 + 5) {
-		x = -t.grid.cols / 2 - 5;
-	}
-
+	t.background(6, 10, 22);
+	dt = t.deltaTime();
+	xPos += dt * 0.01;
+	if (xPos > 18) xPos = -18;
+	t.charColor(60, 70, 100);
+	t.char('-');
+	t.line(-18, 0, 18, 0);
 	t.push();
-	t.translate(x, 0);
-	t.char('>');
-	t.charColor(255, 100, 50);
-	t.rect(4, 2);
+	t.translate(xPos, 0);
+	t.char('@');
+	t.charColor(140, 255, 180);
+	t.point();
 	t.pop();
+});
 
-	drawLabel(`deltaTime(): ${t.deltaTime().toFixed(2)} ms`, -12);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.DELTATIME', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: FRAME ELAPSED MS', x, y++, 100, 220, 255);
+	drawText('Motion scales by deltaTime.', x, y++, 140, 160, 190);
+	drawText('Speed stays frame-rate aware.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`DT: ${dt.toFixed(1)} MS`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -5867,43 +5438,53 @@ After calling this method, the instance should not be used and will be eligible 
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-let destroyed = false;
-const status = document.createElement('div');
-status.style.cssText =
-	'position:fixed;left:12px;top:12px;padding:8px 10px;background:#09090bcc;color:#e4e4e7;font:12px JetBrains Mono,monospace;border:1px solid #27272a;';
-status.textContent = 'destroy() will run after 3 seconds';
-document.body.appendChild(status);
+const labelLayer = t.layers.add();
 
-function label(text, y, color = [220, 220, 220]) {
+let requested = false;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
-t.draw(() => {
-	const remaining = Math.max(0, 180 - t.frameCount);
-	t.background(10, 12, 24);
-	label('destroy()', -2, [255, 210, 90]);
-	label(`frames until cleanup: ${remaining}`, 1);
+t.mouseClicked(() => {
+	requested = true;
+});
 
-	if (!destroyed && remaining === 0) {
-		destroyed = true;
-		status.textContent = 'destroy() called...';
-		t.destroy();
-		setTimeout(() => {
-			status.textContent = `destroyed, isDisposed = ${t.isDisposed}`;
-		}, 0);
-	}
+t.draw(() => {
+	t.background(12, 6, 8);
+	t.char(requested ? '!' : '#');
+	t.charColor(requested ? 255 : 140, requested ? 120 : 220, 120);
+	t.rect(12, 5);
+	if (requested && t.frameCount % 120 === 0) t.destroy();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.DESTROY', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: DISPOSE INSTANCE', x, y++, 100, 220, 255);
+	drawText('Click requests cleanup.', x, y++, 140, 160, 190);
+	drawText('Destroy runs on next cycle.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(requested ? 'REQUESTED: YES' : 'REQUESTED: NO', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -5919,13 +5500,13 @@ t.windowResized(() => {
 doubleClicked(callback): void;
 ```
 
-Set a callback function that will be called when the mouse is double-clicked.
+Register the single-callback handler for double-clicks.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`MouseEventHandler`](../namespaces/input/namespaces/mouse/type-aliases/MouseEventHandler.md) | The function to call when the mouse is double-clicked |
+| `callback` | [`MouseEventHandler`](../namespaces/input/namespaces/mouse/type-aliases/MouseEventHandler.md) | Handler to run with mouse event data when the mouse is double-clicked. |
 
 #### Returns
 
@@ -5934,46 +5515,74 @@ Set a callback function that will be called when the mouse is double-clicked.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-const bursts = [];
+const labelLayer = t.layers.add();
 
-t.doubleClicked((data) => {
-	if (data.position.x === Number.NEGATIVE_INFINITY) return;
+const pulses = [];
+let count = 0;
+let last = 'WAITING';
 
-	for (let i = 0; i < 16; i++) {
-		const angle = (Math.PI * 2 * i) / 16;
-		bursts.push({
-			x: data.position.x,
-			y: data.position.y,
-			vx: Math.cos(angle) * 0.8,
-			vy: Math.sin(angle) * 0.8,
-			life: 1,
-		});
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
 	}
+	t.pop();
+}
+
+function addPulse(label, x = 0, y = 0) {
+	count++;
+	last = label;
+	pulses.unshift({ label, x, y, life: 1 });
+	if (pulses.length > 12) pulses.length = 12;
+}
+
+t.doubleClicked(() => {
+	addPulse('DOUBLE CLICK', t.mouse.x, t.mouse.y);
 });
 
 t.draw(() => {
-	t.background(0);
+	t.background(6, 10, 22);
 
-	for (let i = bursts.length - 1; i >= 0; i--) {
-		const burst = bursts[i];
-		burst.x += burst.vx;
-		burst.y += burst.vy;
-		burst.life -= 0.02;
-
-		if (burst.life <= 0) {
-			bursts.splice(i, 1);
+	for (let i = pulses.length - 1; i >= 0; i--) {
+		const p = pulses[i];
+		p.life -= 0.02;
+		if (p.life <= 0) {
+			pulses.splice(i, 1);
 			continue;
 		}
-
 		t.push();
-		t.translate(burst.x, burst.y);
-		t.char(['*', '+', '·'][i % 3]);
-		t.charColor(255, 180 + burst.life * 75, 80, burst.life * 255);
+		t.translate(p.x, p.y - (1 - p.life) * 4);
+		t.char('*');
+		t.charColor(255, 210, 120);
 		t.point();
 		t.pop();
 	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.DOUBLECLICKED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: DOUBLE CLICK', x, y++, 100, 220, 255);
+	drawText('Event updates compact state.', x, y++, 140, 160, 190);
+	drawText('Pulses show recent triggers.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('DOUBLE: ' + count, x, y++, 140, 255, 180);
+	drawText('LAST: ' + last.slice(0, 28), x, y++, 180, 200, 220);
 });
 
 t.windowResized(() => {
@@ -5998,7 +5607,7 @@ helper lets you supply a dedicated handler when you want to treat double taps di
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`TouchTapHandler`](../namespaces/input/namespaces/touch/type-aliases/TouchTapHandler.md) | The function to call when a double tap is detected. |
+| `callback` | [`TouchTapHandler`](../namespaces/input/namespaces/touch/type-aliases/TouchTapHandler.md) | Handler to run when a double tap is detected. |
 
 #### Returns
 
@@ -6007,32 +5616,75 @@ helper lets you supply a dedicated handler when you want to treat double taps di
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-let pulse = 0;
-let activeColor = t.color(100, 200, 255);
+const labelLayer = t.layers.add();
 
-t.doubleTap(() => {
-	pulse = 20;
-	activeColor = t.color(Math.random() * 255, 200, Math.random() * 255);
+const pulses = [];
+let count = 0;
+let last = 'WAITING';
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+function addPulse(label, x = 0, y = 0) {
+	count++;
+	last = label;
+	pulses.unshift({ label, x, y, life: 1 });
+	if (pulses.length > 12) pulses.length = 12;
+}
+
+t.doubleTap((data) => {
+	const touch = data?.touch || t.mouse;
+	addPulse('DOUBLE', touch?.x || 0, touch?.y || 0);
 });
 
 t.draw(() => {
-	t.background(0);
-	if (pulse > 0) pulse -= 1;
+	t.background(6, 10, 22);
 
-	const size = 15 + pulse;
-	t.char('▓');
-	t.charColor(activeColor);
-	t.rect(size, size);
-
-	if (pulse > 0) {
+	for (let i = pulses.length - 1; i >= 0; i--) {
+		const p = pulses[i];
+		p.life -= 0.02;
+		if (p.life <= 0) {
+			pulses.splice(i, 1);
+			continue;
+		}
 		t.push();
-		t.char('░');
-		t.charColor(255, 255, 255, pulse * 12);
-		t.rect(size + 5, size + 5);
+		t.translate(p.x, p.y - (1 - p.life) * 4);
+		t.char('*');
+		t.charColor(255, 210, 120);
+		t.point();
 		t.pop();
 	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.DOUBLETAP', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: DOUBLE TAP', x, y++, 100, 220, 255);
+	drawText('Event updates compact state.', x, y++, 140, 160, 190);
+	drawText('Pulses show recent triggers.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('DOUBLE: ' + count, x, y++, 140, 255, 180);
+	drawText('LAST: ' + last.slice(0, 28), x, y++, 180, 200, 220);
 });
 
 t.windowResized(() => {
@@ -6048,15 +5700,14 @@ t.windowResized(() => {
 draw(callback): void;
 ```
 
-Set a draw callback function for the base layer.
+Set the base layer draw callback.
 
-This callback function is where all drawing commands should be placed for textmode rendering on the main layer.
+Put drawing commands for the main layer in this callback.
 
 If multiple layers are added via [Textmodifier.layers](#layers), each layer has its own draw callback set via [TextmodeLayer.draw](../namespaces/layering/classes/TextmodeLayer.md#draw).
-This allows for complex multi-layered compositions with independent rendering logic per layer.
 
-Calling this method is equivalent to setting the draw callback on the base layer,
-while the direct layer callback has precedence if both are set.
+Calling this method is equivalent to setting the callback on `textmodifier.layers.base`.
+The direct base-layer callback has precedence if both are set.
 ```js
 textmodifier.layers.base.draw(callback);
 ```
@@ -6065,7 +5716,7 @@ textmodifier.layers.base.draw(callback);
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | () => `void` | The function to call before each render |
+| `callback` | () => `void` | Function to run before each base layer render. |
 
 #### Returns
 
@@ -6074,27 +5725,52 @@ textmodifier.layers.base.draw(callback);
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+let pulse = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.draw(() => {
-	t.background(0);
+	t.background(6, 10, 22);
+	pulse = 0.5 + 0.5 * Math.sin(t.frameCount * 0.05);
+	t.push();
+	t.translate(8, 2);
+	t.char('#');
+	t.charColor(120, 120 + pulse * 120, 255);
+	t.rect(6 + pulse * 8, 3 + pulse * 4);
+	t.pop();
+});
 
-	const time = t.frameCount * 0.05;
-
-	for (let i = 0; i < 20; i++) {
-		const angle = time + i * 0.3;
-		const radius = 10 + i;
-		const x = Math.cos(angle) * radius;
-		const y = Math.sin(angle) * radius;
-
-		t.push();
-		t.translate(x, y);
-		t.rotateZ(angle);
-		t.charColor(255 - i * 10, 100 + i * 5, 200);
-		t.char(['+', 'x', 'o'][i % 3]);
-		t.rect(2, 2);
-		t.pop();
-	}
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.DRAW', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: FRAME CALLBACK', x, y++, 100, 220, 255);
+	drawText('draw() runs every frame.', x, y++, 140, 160, 190);
+	drawText('Pulse proves continuous updates.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`PULSE: ${pulse.toFixed(2)}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -6117,8 +5793,8 @@ Position is controlled via [translate](#translate), [push](#push), and [pop](#po
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `width?` | `number` | Width of the ellipse in grid cells (defaults to 1) |
-| `height?` | `number` | Height of the ellipse in grid cells (defaults to 1) |
+| `width?` | `number` | Ellipse width in grid cells. Defaults to 1. |
+| `height?` | `number` | Ellipse height in grid cells. Defaults to 1. |
 
 #### Returns
 
@@ -6133,56 +5809,51 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, row, rgb = [240, 245, 255]) {
+const labelLayer = t.layers.add();
+
+let rx = 0;
+let ry = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), row);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
 t.draw(() => {
 	t.background(6, 10, 22);
-
-	const time = t.secs;
-
-	const rx = 20 + Math.sin(time * 1.5) * 10;
-	const ry = 12 + Math.cos(time * 2.0) * 8;
-
+	const time = t.frameCount * 0.03;
+	rx = 10 + Math.sin(time) * 4;
+	ry = 5 + Math.cos(time * 0.8) * 2;
 	t.push();
-	t.charColor(100, 200, 255);
-	t.char('•');
+	t.translate(8, 1);
+	t.char('o');
+	t.charColor(140, 220, 255);
+	t.cellColor(15, 25, 50);
 	t.ellipse(rx, ry);
-
-	t.push();
-	t.charColor(255, 100, 100);
-	t.char('-');
-	t.line(0, 0, rx, 0);
-	t.translate(rx, 0);
-	t.char('>');
-	t.point();
 	t.pop();
+});
 
-	t.push();
-	t.charColor(100, 255, 100);
-	t.char('|');
-	t.line(0, 0, 0, ry);
-	t.translate(0, ry);
-	t.char('v');
-	t.point();
-	t.pop();
-	t.pop();
-
-	drawCenteredText('Textmodifier.ellipse', -22, [255, 255, 255]);
-	drawCenteredText('Draws a 2D ellipse with two radii.', -20, [150, 170, 200]);
-	drawCenteredText('radiusX for width, radiusY for height.', -18, [150, 170, 200]);
-	drawCenteredText(`t.ellipse(radiusX: ${rx.toFixed(1)}, radiusY: ${ry.toFixed(1)})`, 18, [140, 180, 255]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.ELLIPSE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: OVAL PRIMITIVE', x, y++, 100, 220, 255);
+	drawText('Radius X and Y animate.', x, y++, 140, 160, 190);
+	drawText('The shape stays centered locally.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`RX: ${rx.toFixed(1)}`, x, y++, 140, 255, 180);
+	drawText(`RY: ${ry.toFixed(1)}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -6221,46 +5892,57 @@ Draw an ellipsoid mesh primitive.
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
-	fontSize: 8, // Higher resolution for 3D geometry
+	fontSize: 16,
 });
 
-function drawCenteredText(text, row, rgb = [240, 245, 255]) {
+const labelLayer = t.layers.add();
+
+let spin = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), row);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
 t.draw(() => {
-	t.background(6, 10, 22);
-	t.ambientLight(30, 35, 50);
-	t.pointLight([255, 200, 150], { x: 30, y: -20, z: 40 });
-
-	const time = t.secs;
-
-	const rx = 15 + Math.sin(time * 1.2) * 5;
-	const ry = 10 + Math.cos(time * 1.5) * 4;
-	const rz = 20 + Math.sin(time * 0.8) * 8;
-
+	t.background(6, 8, 18);
+	const time = t.frameCount * 0.025;
+	spin = (time * 40) % 360;
+	t.perspective(58, 0.1, 4096);
+	t.camera(18, -10, 42, 0, 0, 0);
+	t.ambientLight(24, 28, 38);
+	t.pointLight([255, 210, 140], { x: 18, y: -18, z: 28 });
 	t.push();
-	t.rotateY(time * 20);
-	t.rotateX(time * 10);
-
-	t.charColor(150, 160, 200);
-	t.char('0');
-	t.ellipsoid(rx, ry, rz);
+	t.translate(5, 1, 0);
+	t.rotateY(spin);
+	t.rotateX(18);
+	t.char('#');
+	t.charColor(140, 220, 255);
+	t.cellColor(16, 24, 42);
+	t.ellipsoid(8, 5, 6);
 	t.pop();
+});
 
-	drawCenteredText('Textmodifier.ellipsoid', -35, [255, 255, 255]);
-	drawCenteredText('Draws a 3D ellipsoid with independent radii for X, Y, and Z axes.', -32, [150, 170, 200]);
-	drawCenteredText(`t.ellipsoid(${rx.toFixed(1)}, ${ry.toFixed(1)}, ${rz.toFixed(1)})`, 32, [140, 180, 255]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.ELLIPSOID', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: 3D ELLIPSOID', x, y++, 100, 220, 255);
+	drawText('Independent X, Y, Z radii.', x, y++, 140, 160, 190);
+	drawText('Camera and light reveal depth.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`SPIN: ${spin.toFixed(1)}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -6285,35 +5967,64 @@ Exit pointer lock if the textmode canvas currently owns it.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-let cursor = { x: 0, y: 0 };
+const labelLayer = t.layers.add();
+
+let cx = 0;
+let cy = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.mouseClicked(() => {
-	if (document.pointerLockElement === t.canvas) {
-		t.exitPointerLock();
-	} else {
-		t.requestPointerLock();
-	}
+	if (document.pointerLockElement === t.canvas) t.exitPointerLock();
+	else t.requestPointerLock();
 });
 
 t.draw(() => {
-	t.background(0);
-
-	if (document.pointerLockElement === t.canvas) {
-		cursor.x += t.movedX * 0.08;
-		cursor.y += t.movedY * 0.08;
+	t.background(6, 10, 22);
+	const locked = document.pointerLockElement === t.canvas;
+	if (locked) {
+		cx += t.movedX * 0.08;
+		cy += t.movedY * 0.08;
 	}
-
-	cursor.x = Math.max(-t.grid.cols / 2, Math.min(t.grid.cols / 2, cursor.x));
-	cursor.y = Math.max(-t.grid.rows / 2, Math.min(t.grid.rows / 2, cursor.y));
-
+	cx = Math.max(-20, Math.min(20, cx));
+	cy = Math.max(-10, Math.min(10, cy));
 	t.push();
-	t.translate(cursor.x, cursor.y);
-	t.char(document.pointerLockElement === t.canvas ? '@' : '+');
-	t.charColor(document.pointerLockElement === t.canvas ? 255 : 180, 220, 120);
+	t.translate(cx, cy);
+	t.char(locked ? '@' : '+');
+	t.charColor(locked ? 140 : 255, locked ? 255 : 210, 180);
 	t.point();
 	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.REQUESTPOINTERLOCK', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: LOCK POINTER', x, y++, 100, 220, 255);
+	drawText('Click toggles pointer lock.', x, y++, 140, 160, 190);
+	drawText('Movement uses movedX/movedY.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(document.pointerLockElement === t.canvas ? 'LOCKED: TRUE' : 'LOCKED: FALSE', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -6331,52 +6042,61 @@ t.windowResized(() => {
 fill(): TextmodeColor;
 ```
 
-Alias for [cellColor](#cellcolor). Get the current fill (cell background) color.
+Alias for [cellColor](#cellcolor). Current fill (cell background) color.
 
 ##### Returns
 
 [`TextmodeColor`](TextmodeColor.md)
 
-The current cell color as a [TextmodeColor](TextmodeColor.md).
+Current cell color.
 
 ##### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-function drawLabel(text, y, color = [220, 220, 220]) {
+const labelLayer = t.layers.add();
+
+let red = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
 t.draw(() => {
-	const pulse = (Math.sin(t.frameCount * 0.04) + 1) * 0.5;
-	t.background(5, 7, 18);
+	t.background(6, 10, 22);
+	red = Math.round(90 + 90 * Math.sin(t.frameCount * 0.04));
+	t.fill(red, 40, 120);
+	t.stroke(230, 245, 255);
+	t.char('.');
+	t.rect(12, 6);
+});
 
-	t.stroke(255, 140 + pulse * 80, 90);
-	t.fill(20, 50 + pulse * 90, 140 + pulse * 80);
-
-	t.push();
-	t.rotateZ(t.frameCount * 1.1);
-	t.rect(t.grid.cols - 12, t.grid.rows - 12);
-	t.pop();
-
-	const stroke = t.stroke();
-	const fill = t.fill();
-
-	drawLabel(`stroke ${stroke.r},${stroke.g},${stroke.b}`, -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
-	drawLabel(`fill ${fill.r},${fill.g},${fill.b}`, Math.floor(t.grid.rows * 0.3), [120, 205, 255]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.FILL', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SHAPE INTERIOR', x, y++, 100, 220, 255);
+	drawText('Alias for cellColor.', x, y++, 140, 160, 190);
+	drawText('stroke controls the outline.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`FILL R: ${red}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -6406,41 +6126,50 @@ Alias for [cellColor](#cellcolor). Set the fill (cell background) color using a 
 ##### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-function drawLabel(text, y, color = [220, 220, 220]) {
+const labelLayer = t.layers.add();
+
+let red = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
 t.draw(() => {
-	const pulse = (Math.sin(t.frameCount * 0.04) + 1) * 0.5;
-	t.background(5, 7, 18);
+	t.background(6, 10, 22);
+	red = Math.round(90 + 90 * Math.sin(t.frameCount * 0.04));
+	t.fill(red, 40, 120);
+	t.stroke(230, 245, 255);
+	t.char('.');
+	t.rect(12, 6);
+});
 
-	t.stroke(255, 140 + pulse * 80, 90);
-	t.fill(20, 50 + pulse * 90, 140 + pulse * 80);
-
-	t.push();
-	t.rotateZ(t.frameCount * 1.1);
-	t.rect(t.grid.cols - 12, t.grid.rows - 12);
-	t.pop();
-
-	const stroke = t.stroke();
-	const fill = t.fill();
-
-	drawLabel(`stroke ${stroke.r},${stroke.g},${stroke.b}`, -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
-	drawLabel(`fill ${fill.r},${fill.g},${fill.b}`, Math.floor(t.grid.rows * 0.3), [120, 205, 255]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.FILL', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SHAPE INTERIOR', x, y++, 100, 220, 255);
+	drawText('Alias for cellColor.', x, y++, 140, 160, 190);
+	drawText('stroke controls the outline.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`FILL R: ${red}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -6476,41 +6205,50 @@ Alias for [cellColor](#cellcolor). Set the fill (cell background) color using RG
 ##### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-function drawLabel(text, y, color = [220, 220, 220]) {
+const labelLayer = t.layers.add();
+
+let red = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
 t.draw(() => {
-	const pulse = (Math.sin(t.frameCount * 0.04) + 1) * 0.5;
-	t.background(5, 7, 18);
+	t.background(6, 10, 22);
+	red = Math.round(90 + 90 * Math.sin(t.frameCount * 0.04));
+	t.fill(red, 40, 120);
+	t.stroke(230, 245, 255);
+	t.char('.');
+	t.rect(12, 6);
+});
 
-	t.stroke(255, 140 + pulse * 80, 90);
-	t.fill(20, 50 + pulse * 90, 140 + pulse * 80);
-
-	t.push();
-	t.rotateZ(t.frameCount * 1.1);
-	t.rect(t.grid.cols - 12, t.grid.rows - 12);
-	t.pop();
-
-	const stroke = t.stroke();
-	const fill = t.fill();
-
-	drawLabel(`stroke ${stroke.r},${stroke.g},${stroke.b}`, -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
-	drawLabel(`fill ${fill.r},${fill.g},${fill.b}`, Math.floor(t.grid.rows * 0.3), [120, 205, 255]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.FILL', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SHAPE INTERIOR', x, y++, 100, 220, 255);
+	drawText('Alias for cellColor.', x, y++, 140, 160, 190);
+	drawText('stroke controls the outline.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`FILL R: ${red}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -6539,41 +6277,50 @@ Alias for [cellColor](#cellcolor). Set the fill (cell background) color using a 
 ##### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-function drawLabel(text, y, color = [220, 220, 220]) {
+const labelLayer = t.layers.add();
+
+let red = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
 t.draw(() => {
-	const pulse = (Math.sin(t.frameCount * 0.04) + 1) * 0.5;
-	t.background(5, 7, 18);
+	t.background(6, 10, 22);
+	red = Math.round(90 + 90 * Math.sin(t.frameCount * 0.04));
+	t.fill(red, 40, 120);
+	t.stroke(230, 245, 255);
+	t.char('.');
+	t.rect(12, 6);
+});
 
-	t.stroke(255, 140 + pulse * 80, 90);
-	t.fill(20, 50 + pulse * 90, 140 + pulse * 80);
-
-	t.push();
-	t.rotateZ(t.frameCount * 1.1);
-	t.rect(t.grid.cols - 12, t.grid.rows - 12);
-	t.pop();
-
-	const stroke = t.stroke();
-	const fill = t.fill();
-
-	drawLabel(`stroke ${stroke.r},${stroke.g},${stroke.b}`, -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
-	drawLabel(`fill ${fill.r},${fill.g},${fill.b}`, Math.floor(t.grid.rows * 0.3), [120, 205, 255]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.FILL', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SHAPE INTERIOR', x, y++, 100, 220, 255);
+	drawText('Alias for cellColor.', x, y++, 140, 160, 190);
+	drawText('stroke controls the outline.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`FILL R: ${red}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -6625,78 +6372,39 @@ const t = textmode.create({
 
 const labelLayer = t.layers.add();
 
-const filters = [
-	{ name: 'invert', params: undefined, label: 'INVERT' },
-	{ name: 'grayscale', params: 1.0, label: 'GRAYSCALE (1.0)' },
-	{ name: 'sepia', params: 0.8, label: 'SEPIA (0.8)' },
-	{ name: 'threshold', params: 0.5, label: 'THRESHOLD (0.5)' },
-];
-
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
 t.draw(() => {
 	t.background(6, 10, 22);
-
-	const time = t.frameCount * 0.02;
-	const count = 12;
-
-	t.push();
-	t.charColor(40, 50, 80);
-	t.char('.');
-	t.rect(t.grid.cols, t.grid.rows);
-	t.pop();
-
-	for (let i = 0; i < count; i++) {
-		const angle = (i / count) * Math.PI * 2 + time;
-		const radius = 10 + 5 * Math.sin(time * 3 + i);
-
-		t.push();
-		t.translate(Math.round(Math.cos(angle) * radius * 1.5), Math.round(Math.sin(angle) * radius));
-		t.rotateZ(angle * 50);
-		t.charColor(100 + i * 20, 255 - i * 10, 150 + i * 10);
-		t.char(['@', '%', '#', '*'][i % 4]);
-		t.rect(8, 4);
-		t.pop();
-	}
-
-	const filterIdx = Math.floor(t.frameCount / 120) % (filters.length + 1);
-
-	if (filterIdx < filters.length) {
-		const active = filters[filterIdx];
-		t.filter(active.name, active.params);
-	}
+	t.char('#');
+	t.charColor(140, 220, 255);
+	t.rect(16, 8);
+	t.filter('invert', 0.5 + 0.5 * Math.sin(t.frameCount * 0.04));
 });
 
 labelLayer.draw(() => {
 	t.clear();
-
-	drawCenteredText('Textmodifier.filter', -12, [240, 245, 255]);
-	drawCenteredText('Applying post-processing to the canvas output.', -10, [150, 170, 200]);
-
-	const filterIdx = Math.floor(t.frameCount / 120) % (filters.length + 1);
-
-	if (filterIdx < filters.length) {
-		const active = filters[filterIdx];
-		drawCenteredText('ACTIVE FILTER: ' + active.label, 10, [140, 255, 180]);
-	} else {
-		drawCenteredText('NO FILTER (NORMAL)', 10, [255, 100, 100]);
-	}
-
-	drawCenteredText('t.filter(name, params)', 13, [100, 120, 150]);
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.FILTER', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: POST FILTER', x, y++, 100, 220, 255);
+	drawText('Applies filter to final output.', x, y++, 140, 160, 190);
+	drawText('Invert amount animates.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('FILTER: INVERT', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -6744,78 +6452,39 @@ const t = textmode.create({
 
 const labelLayer = t.layers.add();
 
-const filters = [
-	{ name: 'invert', params: undefined, label: 'INVERT' },
-	{ name: 'grayscale', params: 1.0, label: 'GRAYSCALE (1.0)' },
-	{ name: 'sepia', params: 0.8, label: 'SEPIA (0.8)' },
-	{ name: 'threshold', params: 0.5, label: 'THRESHOLD (0.5)' },
-];
-
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
 t.draw(() => {
 	t.background(6, 10, 22);
-
-	const time = t.frameCount * 0.02;
-	const count = 12;
-
-	t.push();
-	t.charColor(40, 50, 80);
-	t.char('.');
-	t.rect(t.grid.cols, t.grid.rows);
-	t.pop();
-
-	for (let i = 0; i < count; i++) {
-		const angle = (i / count) * Math.PI * 2 + time;
-		const radius = 10 + 5 * Math.sin(time * 3 + i);
-
-		t.push();
-		t.translate(Math.round(Math.cos(angle) * radius * 1.5), Math.round(Math.sin(angle) * radius));
-		t.rotateZ(angle * 50);
-		t.charColor(100 + i * 20, 255 - i * 10, 150 + i * 10);
-		t.char(['@', '%', '#', '*'][i % 4]);
-		t.rect(8, 4);
-		t.pop();
-	}
-
-	const filterIdx = Math.floor(t.frameCount / 120) % (filters.length + 1);
-
-	if (filterIdx < filters.length) {
-		const active = filters[filterIdx];
-		t.filter(active.name, active.params);
-	}
+	t.char('#');
+	t.charColor(140, 220, 255);
+	t.rect(16, 8);
+	t.filter('invert', 0.5 + 0.5 * Math.sin(t.frameCount * 0.04));
 });
 
 labelLayer.draw(() => {
 	t.clear();
-
-	drawCenteredText('Textmodifier.filter', -12, [240, 245, 255]);
-	drawCenteredText('Applying post-processing to the canvas output.', -10, [150, 170, 200]);
-
-	const filterIdx = Math.floor(t.frameCount / 120) % (filters.length + 1);
-
-	if (filterIdx < filters.length) {
-		const active = filters[filterIdx];
-		drawCenteredText('ACTIVE FILTER: ' + active.label, 10, [140, 255, 180]);
-	} else {
-		drawCenteredText('NO FILTER (NORMAL)', 10, [255, 100, 100]);
-	}
-
-	drawCenteredText('t.filter(name, params)', 13, [100, 120, 150]);
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.FILTER', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: POST FILTER', x, y++, 100, 220, 255);
+	drawText('Applies filter to final output.', x, y++, 140, 160, 190);
+	drawText('Invert amount animates.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('FILTER: INVERT', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -6831,7 +6500,7 @@ t.windowResized(() => {
 finalDraw(callback): void;
 ```
 
-Set a final draw callback function for the composited output.
+Set the final post-processing callback for the composited output.
 
 This callback runs after all visible layers have been composited and after
 global filters queued via [filter](#filter) during normal draw callbacks have
@@ -6845,7 +6514,7 @@ method when you want to affect the final image made from all layers.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | () => `void` | The function to call before the final texture is presented. |
+| `callback` | () => `void` | Function to run before the final texture is presented. |
 
 #### Returns
 
@@ -6874,19 +6543,19 @@ t.finalDraw(() => {
 flipX(toggle?): boolean | void;
 ```
 
-Toggle horizontal flipping for subsequent character rendering, or get current state.
+Toggle horizontal flipping for subsequent characters, or get the current state.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `toggle?` | `boolean` | Whether to flip horizontally (optional) |
+| `toggle?` | `boolean` | Whether to flip horizontally. |
 
 #### Returns
 
 `boolean` \| `void`
 
-The current flip state if called without arguments
+Current flip state when called without arguments.
 
 #### Example
 
@@ -6897,76 +6566,53 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
 t.draw(() => {
 	t.background(6, 10, 22);
-
-	const rows = 10;
-	const time = t.frameCount * 0.04;
-
-	// Gently rock the whole field to contrast normal vs mirrored rows
-	t.push();
-	t.rotateZ(Math.sin(time * 0.4) * 6);
-
-	for (let i = 0; i < rows; i++) {
-		const phase = i / (rows - 1);
-		const y = (phase - 0.5) * t.grid.rows * 0.75;
-		const wave = Math.sin(time + i * 0.6) * 5;
-		const pulse = 0.6 + 0.4 * Math.sin(time * 2 + i * 0.9);
-
+	for (let i = 0; i < 8; i++) {
+		const y = (i - 3.5) * 2;
 		t.push();
-		t.translate(wave - 4, y);
-		t.charColor(Math.round(180 + 75 * pulse), Math.round(180 + 75 * pulse), 100);
+		t.translate(-6, y);
 		t.char('R');
+		t.charColor(140, 220, 255);
 		t.point();
 		t.pop();
-
 		t.push();
-		t.translate(-wave + 4, y);
+		t.translate(8, y);
 		t.flipX(true);
-		t.charColor(Math.round(180 + 75 * pulse), 100, Math.round(180 + 75 * pulse));
 		t.char('R');
+		t.charColor(255, 210, 120);
 		t.point();
 		t.pop();
-
-		if (i % 2 === 0) {
-			t.push();
-			t.translate(wave * 2 - 12, y);
-			t.charColor(100, Math.round(180 + 75 * pulse), 80);
-			t.char('R');
-			t.point();
-			t.pop();
-
-			t.push();
-			t.translate(-wave * 2 + 12, y);
-			t.flipX(true);
-			t.charColor(100, 80, Math.round(180 + 75 * pulse));
-			t.char('R');
-			t.point();
-			t.pop();
-		}
 	}
+});
 
-	t.pop();
-
-	drawCenteredText('Textmodifier.flipX', -14, [240, 245, 255]);
-	drawCenteredText('Mirroring glyphs horizontally.', -12, [150, 170, 200]);
-	drawCenteredText('t.flipX(false)  original  |  t.flipX(true)  mirrored', -10, [255, 200, 100]);
-
-	drawCenteredText(`t.flipX() = ${t.flipX()}`, 12, [140, 180, 255]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.FLIPX', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: MIRROR GLYPH X', x, y++, 100, 220, 255);
+	drawText('Left column is normal.', x, y++, 140, 160, 190);
+	drawText('Right column is flipped.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`FLIP X: ${t.flipX()}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -6982,19 +6628,19 @@ t.windowResized(() => {
 flipY(toggle?): boolean | void;
 ```
 
-Toggle vertical flipping for subsequent character rendering, or get current state.
+Toggle vertical flipping for subsequent characters, or get the current state.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `toggle?` | `boolean` | Whether to flip vertically (optional) |
+| `toggle?` | `boolean` | Whether to flip vertically. |
 
 #### Returns
 
 `boolean` \| `void`
 
-The current flip state if called without arguments
+Current flip state when called without arguments.
 
 #### Example
 
@@ -7005,54 +6651,53 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
 t.draw(() => {
 	t.background(6, 10, 22);
-
-	const count = 30;
-	const time = t.frameCount * 0.04;
-
-	for (let i = 0; i < count; i++) {
-		const x = (i / (count - 1) - 0.5) * t.grid.cols * 0.75;
-		const wave = Math.sin(time * 1.5 + i * 0.35) * 2.5;
-		const glow = 0.5 + 0.5 * Math.sin(time + i * 0.15);
-		const skyY = -7 + wave;
-		const waterY = 7 + wave;
-
+	for (let i = 0; i < 8; i++) {
+		const xPos = (i - 3.5) * 3;
 		t.push();
-		t.translate(x, skyY);
-		t.charColor(Math.round(160 + 95 * glow), Math.round(160 + 95 * glow), 255);
-		t.char('^');
+		t.translate(xPos, -3);
+		t.char('V');
+		t.charColor(140, 220, 255);
 		t.point();
 		t.pop();
-
 		t.push();
-		t.translate(x, waterY);
+		t.translate(xPos, 5);
 		t.flipY(true);
-		t.charColor(Math.round(30 + 40 * glow), Math.round(80 + 60 * glow), Math.round(150 + 105 * glow));
-		t.char('^');
+		t.char('V');
+		t.charColor(255, 210, 120);
 		t.point();
 		t.pop();
 	}
+});
 
-	drawCenteredText('Textmodifier.flipY', -4, [240, 245, 255]);
-	drawCenteredText('Reflecting glyphs vertically.', -2, [150, 170, 200]);
-	drawCenteredText('t.flipY(false)  original  |  t.flipY(true)  reflected', 0, [255, 200, 100]);
-
-	drawCenteredText(`t.flipY() = ${t.flipY()}`, 12, [140, 180, 255]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.FLIPY', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: MIRROR GLYPH Y', x, y++, 100, 220, 255);
+	drawText('Top row is normal.', x, y++, 140, 160, 190);
+	drawText('Bottom row is flipped.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`FLIP Y: ${t.flipY()}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -7068,19 +6713,19 @@ t.windowResized(() => {
 fontSize(size?): number | void;
 ```
 
-Get or set the font size used for rendering.
+Set or get the base layer font size.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `size?` | `number` | The font size to set. |
+| `size?` | `number` | Font size to apply. |
 
 #### Returns
 
 `number` \| `void`
 
-The current font size if called without arguments.
+Current font size when called without arguments.
 
 #### Example
 
@@ -7091,66 +6736,44 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-const sizes = [8, 16, 32];
-let sizeIndex = 1;
+const labelLayer = t.layers.add();
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+let size = 16;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
 t.draw(() => {
 	t.background(6, 10, 22);
-
-	const currentSize = t.fontSize();
-	const time = t.frameCount * 0.03;
-
-	t.push();
-	t.charColor(15, 24, 42);
-	t.char('.');
-	t.rect(t.grid.cols, t.grid.rows);
-	t.pop();
-
-	t.push();
-	t.charColor(255, 180, 100);
-	t.cellColor(40, 65, 140);
+	size = t.fontSize();
 	t.char('#');
-	t.rotateZ(time * 80);
-	t.rect(6, 6);
-	t.pop();
-
-	for (let i = 0; i < 4; i++) {
-		const angle = time + (i / 4) * Math.PI * 2;
-		t.push();
-		t.translate(Math.round(Math.cos(angle) * 5), Math.round(Math.sin(angle) * 5));
-		t.charColor(100 + i * 50, 200, 255 - i * 30);
-		t.char('*');
-		t.point();
-		t.pop();
-	}
-
-	drawCenteredText('Textmodifier.fontSize', -12, [240, 245, 255]);
-	drawCenteredText('Setting and retrieving the current font size.', -10, [150, 170, 200]);
-
-	drawCenteredText(`t.fontSize() = ${currentSize}px  |  Grid: ${t.grid.cols}x${t.grid.rows}`, -6, [140, 180, 255]);
-
-	drawCenteredText('click to cycle: 8 / 16 / 32', 11, [80, 90, 120]);
+	t.charColor(140, 220, 255);
+	t.rect(12, 5);
 });
 
-t.mouseClicked(() => {
-	sizeIndex = (sizeIndex + 1) % sizes.length;
-	t.fontSize(sizes[sizeIndex]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.FONTSIZE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: ACTIVE FONT SIZE', x, y++, 100, 220, 255);
+	drawText('Reads the current font size.', x, y++, 140, 160, 190);
+	drawText('Grid derives from cell size.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`SIZE: ${size}`, x, y++, 140, 255, 180);
+	drawText(`COLS: ${t.grid.cols}`, x, y++, 180, 200, 220);
 });
 
 t.windowResized(() => {
@@ -7166,13 +6789,13 @@ t.windowResized(() => {
 frameRate(fps?): number | void;
 ```
 
-Set the target frame rate. If called without arguments, returns the current measured frame rate.
+Set the target frame rate, or get the current measured frame rate when called without arguments.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `fps?` | `number` | The maximum frames per second for rendering (optional). |
+| `fps?` | `number` | Maximum frames per second for rendering. |
 
 #### Returns
 
@@ -7187,59 +6810,53 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+const labelLayer = t.layers.add();
 
+let measured = 0;
+let target = 60;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-t.mouseClicked(() => {
-	const current = Math.round(t.targetFrameRate());
-	t.frameRate(current === 60 ? 10 : 60);
-});
-
 t.draw(() => {
 	t.background(6, 10, 22);
+	target = Math.floor(t.frameCount / 180) % 2 === 0 ? 60 : 30;
+	t.frameRate(target);
+	measured = t.frameRate();
+	const bars = Math.round(measured / 5);
+	for (let i = 0; i < bars; i++) {
+		t.push();
+		t.translate(-18 + i, 3);
+		t.char('|');
+		t.charColor(120, 220, 255);
+		t.point();
+		t.pop();
+	}
+});
 
-	const measured = t.frameRate();
-	const targetRounded = Math.round(t.targetFrameRate());
-	const nearTarget = Math.abs(measured - targetRounded) < 5;
-
-	// Rotating arm (smooth at 60 fps, visibly choppy at 10 fps)
-	t.push();
-	t.rotateZ(t.frameCount * 3);
-	t.charColor(255, 200, 100);
-	t.cellColor(60, 40, 20);
-	t.char('#');
-	t.rect(10, 3);
-	t.pop();
-
-	t.push();
-	t.rotateZ(t.frameCount * 0.5);
-	t.translate(8, 0);
-	t.charColor(100, 200, 255);
-	t.cellColor(20, 40, 60);
-	t.char('*');
-	t.rect(3, 3);
-	t.pop();
-
-	drawCenteredText('Textmodifier.frameRate', -12, [240, 245, 255]);
-	drawCenteredText('Setting target and reading measured frame rate.', -10, [150, 170, 200]);
-
-	drawCenteredText(`t.frameRate() = ${measured.toFixed(1)} fps`, -6, nearTarget ? [140, 255, 180] : [255, 140, 100]);
-	drawCenteredText(`t.targetFrameRate() = ${targetRounded} fps`, -3, [140, 180, 255]);
-
-	drawCenteredText('click to toggle 10 / 60 fps', 11, [80, 90, 120]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.FRAMERATE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: FPS CONTROL', x, y++, 100, 220, 255);
+	drawText('Target alternates 60 and 30.', x, y++, 140, 160, 190);
+	drawText('Bars show measured rate.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`TARGET: ${target}`, x, y++, 140, 255, 180);
+	drawText(`FPS: ${measured.toFixed(1)}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -7275,60 +6892,55 @@ Returns `undefined` when that slot is currently absent or disconnected.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-function drawText(text, x, y, r = 220, g = r, b = r) {
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
 	t.translate(x, y);
 	t.charColor(r, g, b);
-
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-function formatAxis(value) {
-	return (value >= 0 ? '+' : '') + value.toFixed(2);
-}
-
 t.draw(() => {
-	t.background(0);
-
-	drawText('gamepad(index)', -28, -18, 255, 255, 255);
-	drawText('resolve specific browser slots even when indexes are sparse', -28, -16, 140, 140, 140);
-	drawText(`compact list length: ${t.gamepads.length}`, -28, -14, 120, 180, 255);
-
-	for (let slotIndex = 0; slotIndex < 4; slotIndex++) {
-		const pad = t.gamepad(slotIndex);
-		const y = -10 + slotIndex * 7;
-
-		drawText(`slot ${slotIndex}`, -28, y, 255, 200, 90);
-
-		if (!pad) {
-			drawText('empty', -20, y, 90, 90, 90);
-			drawText('connect a controller or press a button to wake the browser api', -28, y + 2, 100, 100, 100);
-			continue;
-		}
-
-		drawText(pad.id.slice(0, 48), -20, y, 180, 180, 180);
-		drawText(`mapping: ${pad.mapping || 'raw'}`, -28, y + 2, 120, 180, 255);
-
-		const axes = pad.axes
-			.slice(0, 4)
-			.map((value, axisIndex) => `a${axisIndex}:${formatAxis(value)}`)
-			.join(' ');
-		drawText(axes || 'no axes', -11, y + 2, 160, 200, 220);
-
-		const pressedCount = pad.buttons.filter((button) => button.value >= 0.5).length;
-		const triggerValue = pad.buttons[6] ? pad.buttons[6].value.toFixed(2) : '--';
-		drawText(`pressed:${pressedCount} l2:${triggerValue}`, -28, y + 4, 160, 220, 160);
+	t.background(4, 6, 12);
+	const count = Math.max(1, t.gamepads.length);
+	for (let i = 0; i < 16; i++) {
+		t.push();
+		const angle = (i / 16) * Math.PI * 2 + t.frameCount * 0.03;
+		t.translate(Math.cos(angle) * (6 + count), Math.sin(angle) * 4);
+		t.char(t.gamepads.length ? '@' : '.');
+		t.charColor(80 + i * 8, 180, 255);
+		t.point();
+		t.pop();
 	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODIFIER.GAMEPAD', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: GAMEPAD INPUT', x, y++, 100, 220, 255);
+	drawText('Works with browser pads.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	const pad = t.gamepad(0);
+	const state = pad ? 'FOUND' : 'EMPTY';
+	drawText(`SLOT 0: ${state}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -7344,7 +6956,7 @@ t.windowResized(() => {
 gamepadAxisChanged(callback): void;
 ```
 
-Set a callback function that will be called when a gamepad axis changes meaningfully.
+Register the single-callback handler for meaningful gamepad axis changes.
 
 Axis callbacks are derived from per-frame polling, not native DOM events. For continuous
 stick or trigger state, polling [Textmodifier.gamepads](#gamepads) inside `draw()` is often the
@@ -7354,7 +6966,7 @@ simpler choice; use this callback when you specifically want change notification
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`GamepadAxisEventHandler`](../namespaces/input/namespaces/gamepad/type-aliases/GamepadAxisEventHandler.md) | The function to call when an axis changes. |
+| `callback` | [`GamepadAxisEventHandler`](../namespaces/input/namespaces/gamepad/type-aliases/GamepadAxisEventHandler.md) | Handler to run with gamepad axis data when an axis changes. |
 
 #### Returns
 
@@ -7363,79 +6975,60 @@ simpler choice; use this callback when you specifically want change notification
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-const vectors = [];
+const labelLayer = t.layers.add();
 
-function drawText(text, x, y, r = 220, g = r, b = r, a = 255) {
+let lastAxis = 'waiting';
+
+t.gamepadAxisChanged((data) => {
+	const name = data.standardAxisName || 'axis ' + data.axisIndex;
+	lastAxis = name + ' ' + data.value.toFixed(2);
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
 	t.translate(x, y);
-	t.charColor(r, g, b, a);
-
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-function arrowForDelta(delta) {
-	if (delta > 0.08) return '>';
-	if (delta < -0.08) return '<';
-	return '|';
-}
-
-t.gamepadAxisChanged((data) => {
-	const label = data.standardAxisName || `axis[${data.axisIndex}]`;
-	vectors.unshift({
-		label,
-		value: data.value,
-		delta: data.delta,
-		x: -18 + (data.axisIndex % 4) * 12,
-		y: -4 + (vectors.length % 6) * 3,
-		life: 1,
-	});
-
-	if (vectors.length > 24) vectors.length = 24;
+t.draw(() => {
+	t.background(4, 6, 12);
+	const count = Math.max(1, t.gamepads.length);
+	for (let i = 0; i < 16; i++) {
+		t.push();
+		const angle = (i / 16) * Math.PI * 2 + t.frameCount * 0.03;
+		t.translate(Math.cos(angle) * (6 + count), Math.sin(angle) * 4);
+		t.char(t.gamepads.length ? '@' : '.');
+		t.charColor(80 + i * 8, 180, 255);
+		t.point();
+		t.pop();
+	}
 });
 
-t.draw(() => {
-	t.background(0);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
 
-	drawText('gamepadAxisChanged()', -28, -18, 255, 255, 255);
-	drawText('move a stick or analog trigger to emit change notifications', -28, -16, 140, 140, 140);
-
-	if (vectors.length === 0) {
-		drawText('waiting for analog movement...', -28, -4, 100, 100, 100);
-	}
-
-	for (let i = vectors.length - 1; i >= 0; i--) {
-		const vector = vectors[i];
-		vector.life -= 0.018;
-		vector.x += vector.delta * 4;
-
-		if (vector.life <= 0) {
-			vectors.splice(i, 1);
-			continue;
-		}
-
-		const a = Math.round(255 * vector.life);
-		const arrow = arrowForDelta(vector.delta);
-		drawText(arrow, Math.round(vector.x - 2), vector.y, 120, 200, 255, a);
-		drawText(
-			`${vector.label} ${(vector.value >= 0 ? '+' : '') + vector.value.toFixed(2)}`,
-			Math.round(vector.x),
-			vector.y,
-			180,
-			220,
-			255,
-			a
-		);
-	}
+	drawText('TEXTMODIFIER.GAMEPADAXISCHANGED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: GAMEPAD INPUT', x, y++, 100, 220, 255);
+	drawText('Works with browser pads.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`AXIS: ${lastAxis}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -7451,7 +7044,7 @@ t.windowResized(() => {
 gamepadButtonPressed(callback): void;
 ```
 
-Set a callback function that will be called when a gamepad button crosses the press threshold.
+Register the single-callback handler for gamepad button press events.
 
 This is a legacy-style single-callback shortcut for the `'gamepadButtonPressed'` event.
 
@@ -7459,7 +7052,7 @@ This is a legacy-style single-callback shortcut for the `'gamepadButtonPressed'`
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`GamepadButtonEventHandler`](../namespaces/input/namespaces/gamepad/type-aliases/GamepadButtonEventHandler.md) | The function to call when a button is pressed. |
+| `callback` | [`GamepadButtonEventHandler`](../namespaces/input/namespaces/gamepad/type-aliases/GamepadButtonEventHandler.md) | Handler to run with gamepad button data when a button is pressed. |
 
 #### Returns
 
@@ -7468,63 +7061,59 @@ This is a legacy-style single-callback shortcut for the `'gamepadButtonPressed'`
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-const hits = [];
+const labelLayer = t.layers.add();
 
-function drawText(text, x, y, r = 220, g = r, b = r, a = 255) {
+let lastPress = 'waiting';
+
+t.gamepadButtonPressed((data) => {
+	lastPress = data.standardButtonName || 'button ' + data.buttonIndex;
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
 	t.translate(x, y);
-	t.charColor(r, g, b, a);
-
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-t.gamepadButtonPressed((data) => {
-	const label = data.standardButtonName || `btn[${data.buttonIndex}]`;
-	hits.unshift({
-		text: `slot ${data.gamepad.index}  ${label}  ${data.button.value.toFixed(2)}`,
-		x: -24 + (hits.length % 3) * 18,
-		y: -3 + (hits.length % 5) * 3,
-		life: 1,
-	});
-
-	if (hits.length > 18) hits.length = 18;
+t.draw(() => {
+	t.background(4, 6, 12);
+	const count = Math.max(1, t.gamepads.length);
+	for (let i = 0; i < 16; i++) {
+		t.push();
+		const angle = (i / 16) * Math.PI * 2 + t.frameCount * 0.03;
+		t.translate(Math.cos(angle) * (6 + count), Math.sin(angle) * 4);
+		t.char(t.gamepads.length ? '@' : '.');
+		t.charColor(80 + i * 8, 180, 255);
+		t.point();
+		t.pop();
+	}
 });
 
-t.draw(() => {
-	t.background(0);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
 
-	drawText('gamepadButtonPressed()', -28, -18, 255, 255, 255);
-	drawText('press any gamepad button to spawn a hit marker', -28, -16, 140, 140, 140);
-	drawText(`connected: ${t.gamepads.length}`, -28, -14, 120, 180, 255);
-
-	if (hits.length === 0) {
-		drawText('waiting for a button press...', -28, -4, 100, 100, 100);
-	}
-
-	for (let i = hits.length - 1; i >= 0; i--) {
-		const hit = hits[i];
-		hit.life -= 0.02;
-		hit.y -= 0.04;
-
-		if (hit.life <= 0) {
-			hits.splice(i, 1);
-			continue;
-		}
-
-		const a = Math.round(255 * hit.life);
-		drawText('+', hit.x - 2, Math.round(hit.y), 255, 220, 90, a);
-		drawText(hit.text, hit.x, Math.round(hit.y), 255, 200, 110, a);
-	}
+	drawText('TEXTMODIFIER.GAMEPADBUTTONPRESSED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: GAMEPAD INPUT', x, y++, 100, 220, 255);
+	drawText('Works with browser pads.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`PRESS: ${lastPress}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -7540,7 +7129,7 @@ t.windowResized(() => {
 gamepadButtonReleased(callback): void;
 ```
 
-Set a callback function that will be called when a gamepad button crosses the release threshold.
+Register the single-callback handler for gamepad button release events.
 
 This is a legacy-style single-callback shortcut for the `'gamepadButtonReleased'` event.
 
@@ -7548,7 +7137,7 @@ This is a legacy-style single-callback shortcut for the `'gamepadButtonReleased'
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`GamepadButtonEventHandler`](../namespaces/input/namespaces/gamepad/type-aliases/GamepadButtonEventHandler.md) | The function to call when a button is released. |
+| `callback` | [`GamepadButtonEventHandler`](../namespaces/input/namespaces/gamepad/type-aliases/GamepadButtonEventHandler.md) | Handler to run with gamepad button data when a button is released. |
 
 #### Returns
 
@@ -7557,58 +7146,59 @@ This is a legacy-style single-callback shortcut for the `'gamepadButtonReleased'
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-const releases = [];
+const labelLayer = t.layers.add();
 
-function drawText(text, x, y, r = 220, g = r, b = r, a = 255) {
+let lastRelease = 'waiting';
+
+t.gamepadButtonReleased((data) => {
+	lastRelease = data.standardButtonName || 'button ' + data.buttonIndex;
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
 	t.translate(x, y);
-	t.charColor(r, g, b, a);
-
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-t.gamepadButtonReleased((data) => {
-	const label = data.standardButtonName || `btn[${data.buttonIndex}]`;
-	releases.unshift({
-		text: `slot ${data.gamepad.index}  ${label}`,
-		age: 0,
-	});
-
-	if (releases.length > 10) releases.length = 10;
+t.draw(() => {
+	t.background(4, 6, 12);
+	const count = Math.max(1, t.gamepads.length);
+	for (let i = 0; i < 16; i++) {
+		t.push();
+		const angle = (i / 16) * Math.PI * 2 + t.frameCount * 0.03;
+		t.translate(Math.cos(angle) * (6 + count), Math.sin(angle) * 4);
+		t.char(t.gamepads.length ? '@' : '.');
+		t.charColor(80 + i * 8, 180, 255);
+		t.point();
+		t.pop();
+	}
 });
 
-t.draw(() => {
-	t.background(0);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
 
-	drawText('gamepadButtonReleased()', -28, -18, 255, 255, 255);
-	drawText('release a held button to log its edge transition', -28, -16, 140, 140, 140);
-	drawText('release log', -28, -12, 180, 180, 180);
-	drawText('----------------------------------------', -28, -11, 60, 60, 60);
-
-	if (releases.length === 0) {
-		drawText('hold a button, then let go', -28, -6, 100, 100, 100);
-	}
-
-	for (let i = 0; i < releases.length; i++) {
-		const entry = releases[i];
-		entry.age++;
-		const fade = Math.max(0.2, 1 - entry.age / 240);
-		const a = Math.round(255 * fade);
-		const cool = 100 + Math.round(120 * fade);
-
-		drawText('v', -28, -8 + i * 2, 120, 160, 255, a);
-		drawText(entry.text, -26, -8 + i * 2, 140, 180, cool, a);
-	}
+	drawText('TEXTMODIFIER.GAMEPADBUTTONRELEASED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: GAMEPAD INPUT', x, y++, 100, 220, 255);
+	drawText('Works with browser pads.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`RELEASE: ${lastRelease}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -7624,7 +7214,7 @@ t.windowResized(() => {
 gamepadConnected(callback): void;
 ```
 
-Set a callback function that will be called when a gamepad becomes available.
+Register the single-callback handler for gamepad connection events.
 
 This is a legacy-style single-callback shortcut for the `'gamepadConnected'` event.
 Calling it replaces the previous callback registered through this same method while
@@ -7634,7 +7224,7 @@ leaving any listeners added via [Textmodifier.on](#on) untouched.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`GamepadConnectionEventHandler`](../namespaces/input/namespaces/gamepad/type-aliases/GamepadConnectionEventHandler.md) | The function to call when a controller connects. |
+| `callback` | [`GamepadConnectionEventHandler`](../namespaces/input/namespaces/gamepad/type-aliases/GamepadConnectionEventHandler.md) | Handler to run with gamepad connection data when a controller connects. |
 
 #### Returns
 
@@ -7643,80 +7233,59 @@ leaving any listeners added via [Textmodifier.on](#on) untouched.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-const bursts = [];
-const ledger = [];
+const labelLayer = t.layers.add();
 
-function drawText(text, x, y, r = 220, g = r, b = r, a = 255) {
+let lastConnect = 'waiting';
+
+t.gamepadConnected((data) => {
+	lastConnect = 'slot ' + data.gamepad.index;
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
 	t.translate(x, y);
-	t.charColor(r, g, b, a);
-
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-t.gamepadConnected((data) => {
-	const burstY = -6 + (bursts.length % 5) * 3;
-	bursts.push({
-		slot: data.gamepad.index,
-		id: data.gamepad.id.slice(0, 32),
-		x: -16 + (bursts.length % 4) * 12,
-		y: burstY,
-		radius: 0,
-		life: 1,
-	});
-
-	ledger.unshift(`slot ${data.gamepad.index}  ${data.gamepad.id.slice(0, 36)}`);
-	if (ledger.length > 6) ledger.length = 6;
+t.draw(() => {
+	t.background(4, 6, 12);
+	const count = Math.max(1, t.gamepads.length);
+	for (let i = 0; i < 16; i++) {
+		t.push();
+		const angle = (i / 16) * Math.PI * 2 + t.frameCount * 0.03;
+		t.translate(Math.cos(angle) * (6 + count), Math.sin(angle) * 4);
+		t.char(t.gamepads.length ? '@' : '.');
+		t.charColor(80 + i * 8, 180, 255);
+		t.point();
+		t.pop();
+	}
 });
 
-t.draw(() => {
-	t.background(0);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
 
-	drawText('gamepadConnected()', -28, -18, 255, 255, 255);
-	drawText('plug in or wake a controller to trigger the callback', -28, -16, 140, 140, 140);
-	drawText(`connected now: ${t.gamepads.length}`, -28, -14, 100, 200, 120);
-
-	for (let i = bursts.length - 1; i >= 0; i--) {
-		const burst = bursts[i];
-		burst.radius += 0.4;
-		burst.life -= 0.015;
-
-		if (burst.life <= 0) {
-			bursts.splice(i, 1);
-			continue;
-		}
-
-		const a = Math.round(255 * burst.life);
-		drawText(`slot ${burst.slot}`, burst.x - 2, burst.y - 2, 255, 200, 80, a);
-
-		for (let ring = 0; ring < 8; ring++) {
-			const angle = (Math.PI * 2 * ring) / 8;
-			const x = Math.round(burst.x + Math.cos(angle) * burst.radius);
-			const y = Math.round(burst.y + Math.sin(angle) * burst.radius * 0.6);
-			drawText('*', x, y, 100, 220, 140, a);
-		}
-	}
-
-	drawText('recent arrivals', -28, -8, 180, 180, 180);
-	drawText('----------------------------------------------', -28, -7, 60, 60, 60);
-
-	if (ledger.length === 0) {
-		drawText('waiting for the first connection event...', -28, -5, 100, 100, 100);
-	}
-
-	for (let i = 0; i < ledger.length; i++) {
-		drawText(ledger[i], -28, -5 + i * 2, 160, 220, 180);
-	}
+	drawText('TEXTMODIFIER.GAMEPADCONNECTED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: GAMEPAD INPUT', x, y++, 100, 220, 255);
+	drawText('Works with browser pads.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`CONNECT: ${lastConnect}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -7732,7 +7301,7 @@ t.windowResized(() => {
 gamepadDisconnected(callback): void;
 ```
 
-Set a callback function that will be called when a previously connected gamepad disappears.
+Register the single-callback handler for gamepad disconnection events.
 
 This is a legacy-style single-callback shortcut for the `'gamepadDisconnected'` event.
 
@@ -7740,7 +7309,7 @@ This is a legacy-style single-callback shortcut for the `'gamepadDisconnected'` 
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`GamepadConnectionEventHandler`](../namespaces/input/namespaces/gamepad/type-aliases/GamepadConnectionEventHandler.md) | The function to call when a controller disconnects. |
+| `callback` | [`GamepadConnectionEventHandler`](../namespaces/input/namespaces/gamepad/type-aliases/GamepadConnectionEventHandler.md) | Handler to run with gamepad connection data when a controller disconnects. |
 
 #### Returns
 
@@ -7749,64 +7318,59 @@ This is a legacy-style single-callback shortcut for the `'gamepadDisconnected'` 
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-const departures = [];
+const labelLayer = t.layers.add();
 
-function drawText(text, x, y, r = 220, g = r, b = r, a = 255) {
+let lastDisconnect = 'waiting';
+
+t.gamepadDisconnected((data) => {
+	lastDisconnect = 'slot ' + data.gamepad.index;
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
 	t.translate(x, y);
-	t.charColor(r, g, b, a);
-
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-t.gamepadDisconnected((data) => {
-	departures.unshift({
-		text: `slot ${data.gamepad.index}  ${data.gamepad.id.slice(0, 36)}`,
-		age: 0,
-	});
-
-	if (departures.length > 8) departures.length = 8;
+t.draw(() => {
+	t.background(4, 6, 12);
+	const count = Math.max(1, t.gamepads.length);
+	for (let i = 0; i < 16; i++) {
+		t.push();
+		const angle = (i / 16) * Math.PI * 2 + t.frameCount * 0.03;
+		t.translate(Math.cos(angle) * (6 + count), Math.sin(angle) * 4);
+		t.char(t.gamepads.length ? '@' : '.');
+		t.charColor(80 + i * 8, 180, 255);
+		t.point();
+		t.pop();
+	}
 });
 
-t.draw(() => {
-	t.background(0);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
 
-	drawText('gamepadDisconnected()', -28, -18, 255, 255, 255);
-	drawText('disconnect or power down a controller to record its exit', -28, -16, 140, 140, 140);
-	drawText(`connected now: ${t.gamepads.length}`, -28, -14, 120, 180, 255);
-
-	drawText('last disconnect events', -28, -10, 200, 200, 200);
-	drawText('----------------------------------------------', -28, -9, 60, 60, 60);
-
-	if (departures.length === 0) {
-		drawText('no disconnect observed yet', -28, -6, 110, 110, 110);
-		drawText('the callback fires when a previously tracked pad disappears', -28, -4, 90, 90, 90);
-	}
-
-	for (let i = departures.length - 1; i >= 0; i--) {
-		const entry = departures[i];
-		entry.age++;
-	}
-
-	for (let i = 0; i < departures.length; i++) {
-		const entry = departures[i];
-		const fade = Math.max(0.2, 1 - entry.age / 300);
-		const a = Math.round(255 * fade);
-		const marker = fade > 0.6 ? 'x' : '.';
-
-		drawText(marker, -28, -6 + i * 2, 255, 110, 110, a);
-		drawText(entry.text, -26, -6 + i * 2, 255, 160, 160, a);
-	}
+	drawText('TEXTMODIFIER.GAMEPADDISCONNECTED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: GAMEPAD INPUT', x, y++, 100, 220, 255);
+	drawText('Works with browser pads.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`DISCON: ${lastDisconnect}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -7825,15 +7389,15 @@ image(
    height?): void;
 ```
 
-Draw a TextmodeFramebuffer, TextmodeImage, TextmodeVideo, or TextmodeTexture to the current render target.
+Draw a framebuffer, image, video, or texture source to the current render target.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `source` | \| [`TextmodeFramebuffer`](TextmodeFramebuffer.md) \| [`TextmodeImage`](../namespaces/media/classes/TextmodeImage.md) \| [`TextmodeTexture`](../namespaces/media/classes/TextmodeTexture.md) \| [`TextmodeVideo`](../namespaces/media/classes/TextmodeVideo.md) | The TextmodeFramebuffer, TextmodeImage, TextmodeVideo, or TextmodeTexture to render |
-| `width?` | `number` | Width in grid cells to potentially scale the content (defaults to ideal fit, respecting aspect ratio) |
-| `height?` | `number` | Height in grid cells to potentially scale the content (defaults to ideal fit, respecting aspect ratio) |
+| `source` | \| [`TextmodeFramebuffer`](TextmodeFramebuffer.md) \| [`TextmodeImage`](../namespaces/media/classes/TextmodeImage.md) \| [`TextmodeTexture`](../namespaces/media/classes/TextmodeTexture.md) \| [`TextmodeVideo`](../namespaces/media/classes/TextmodeVideo.md) | Source to render. |
+| `width?` | `number` | Width in grid cells. Defaults to an aspect-ratio-preserving fit. |
+| `height?` | `number` | Height in grid cells. Defaults to an aspect-ratio-preserving fit. |
 
 #### Returns
 
@@ -7848,93 +7412,48 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-// Create offscreen framebuffer for rendering the nebula texture
-const fb = t.createFramebuffer({ width: 40, height: 40 });
+const labelLayer = t.layers.add();
 
-t.draw(() => {
-	// ── Phase 1: Render Procedural Nebula to Offscreen Framebuffer ──
-	fb.begin();
-	t.clear();
+const fb = t.createFramebuffer({ width: 24, height: 14 });
 
-	const time = t.frameCount * 0.03;
-	const count = 48;
-
-	for (let i = 0; i < count; i++) {
-		const angle = (i / count) * Math.PI * 4 + time;
-		const r = (i / count) * 16 + 2;
-
-		const x = Math.cos(angle) * r;
-		const y = Math.sin(angle) * r;
-
-		t.push();
-		t.translate(x, y);
-
-		// Dynamic color transition based on node index
-		const red = Math.floor(128 + 127 * Math.sin(i * 0.2 + time));
-		const green = Math.floor(80 + 175 * Math.cos(i * 0.15 - time));
-		const blue = Math.floor(200 + 55 * Math.sin(time));
-
-		t.charColor(red, green, blue);
-
-		// Multi-layered visual shapes
-		if (i % 3 === 0) {
-			t.char('✦');
-		} else if (i % 3 === 1) {
-			t.char('•');
-		} else {
-			t.char('﹡');
-		}
-
-		t.point();
-		t.pop();
-	}
-	fb.end();
-
-	// ── Phase 2: Composite FBO Instances onto Main Responsive Canvas ──
-	t.background(8, 10, 16);
-
-	const cols = t.grid.cols;
-	const rows = t.grid.rows;
-
-	// Draw beautiful grid of nested FBO viewports
-	const gridX = Math.floor(cols / 4);
-	const gridY = Math.floor(rows / 3);
-
-	// Display labels
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(cols / 2) + 4, -Math.floor(rows / 2) + 4);
-	t.charColor(100, 200, 255);
-	t.char('✦');
-	t.point();
-	// Inline draw title
-	t.translate(2, 0);
-	const title = 'OFFSCREEN FRAMEBUFFER MULTI-COMPOSITING GRID';
-	for (let i = 0; i < title.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(title[i]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
+}
 
-	// Draw 3 FBO instances with different transformation parameters
-	for (let slot = 0; slot < 3; slot++) {
-		const posX = (slot - 1) * gridX * 1.3;
-		const posY = 2;
+t.draw(() => {
+	t.background(6, 10, 22);
+	fb.begin();
+	t.clear();
+	t.background(20, 30, 60);
+	t.rotateZ(t.frameCount * 2);
+	t.char('#');
+	t.charColor(255, 210, 120);
+	t.rect(12, 4);
+	fb.end();
+	t.image(fb, 24, 14);
+});
 
-		t.push();
-		t.translate(posX, posY);
-
-		// Varying spin speeds and scales per slot
-		const spin = t.frameCount * 0.015 * (slot + 1);
-		t.rotateZ(spin);
-
-		const scaleVal = 1.0 + Math.sin(t.frameCount * 0.05 + slot) * 0.15;
-		t.image(fb, Math.floor(28 * scaleVal), Math.floor(28 * scaleVal));
-
-		t.pop();
-	}
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.IMAGE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: DRAW IMAGE SOURCE', x, y++, 100, 220, 255);
+	drawText('Framebuffer is drawn as image.', x, y++, 140, 160, 190);
+	drawText('Offscreen content rotates.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('SOURCE: FRAMEBUFFER', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -7950,11 +7469,11 @@ t.windowResized(() => {
 inputGrid(target?): void | TextmodeGrid | "topmost";
 ```
 
-Get or set the grid used for mouse and touch input coordinate mapping.
+Get or set the grid used for mouse and touch coordinate mapping.
 
 By default, input coordinates are mapped to the topmost visible layer's grid,
 which changes dynamically as layers are shown/hidden. Use this method to lock
-input mapping to a specific grid or layer, or to return to responsive mode.
+input mapping to a specific grid, or to return to responsive mode.
 
 When called without arguments, returns the current input grid mode:<br/>
 - `'topmost'` if using responsive mode (default)<br/>
@@ -7973,52 +7492,69 @@ When called without arguments, returns the current input grid mode:<br/>
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-let uiLayer;
+const labelLayer = t.layers.add();
 
-function label(text, y, color = [220, 220, 220]) {
+const inputLayer = t.layers.add();
+let locked = false;
+let mode = 'topmost';
+
+t.setup(() => {
+	inputLayer.grid.cols = 24;
+	inputLayer.grid.rows = 12;
+});
+
+t.mouseClicked(() => {
+	locked = !locked;
+	t.inputGrid(locked ? inputLayer.grid : 'topmost');
+	mode = locked ? 'locked' : 'topmost';
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
-t.setup(() => {
-	uiLayer = t.layers.add({ fontSize: 16 });
-	uiLayer.draw(() => {
-		t.clear();
-		t.char('+');
-		t.charColor(70, 100, 140);
-		t.rect(t.grid.cols - 2, t.grid.rows - 2);
-		label('top layer uses a larger grid', 0, [140, 170, 220]);
-	});
+t.draw(() => {
+	t.background(6, 10, 22);
+	t.charColor(60, 80, 120);
+	t.char('.');
+	t.rect(t.grid.cols, t.grid.rows);
 });
 
-t.draw(() => {
-	const lockBaseGrid = Math.floor(t.frameCount / 180) % 2 === 1;
-	t.inputGrid(lockBaseGrid ? t.layers.base.grid : 'topmost');
-	t.background(10, 12, 24);
+inputLayer.draw(() => {
+	t.clear();
+	t.charColor(100, 220, 255);
+	t.char('+');
+	t.rect(inputLayer.grid.cols, inputLayer.grid.rows);
+});
 
-	if (t.mouse.x !== Number.NEGATIVE_INFINITY) {
-		t.push();
-		t.translate(t.mouse.x, t.mouse.y);
-		t.char('*');
-		t.charColor(255, 210, 90);
-		t.point();
-		t.pop();
-	}
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
 
-	label('inputGrid()', -4, [255, 210, 90]);
-	label(lockBaseGrid ? 'locked to base grid' : 'responsive topmost grid', -1);
-	label('watch mouse precision change every 3 seconds', 2, [150, 160, 190]);
+	drawText('TEXTMODIFIER.INPUTGRID', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: INPUT GRID LOCK', x, y++, 100, 220, 255);
+	drawText('Mouse mapping can lock.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`MODE: ${mode}`, x, y++, 140, 255, 180);
+	drawText('CLICK TO TOGGLE', x, y++, 255, 225, 140);
 });
 
 t.windowResized(() => {
@@ -8034,43 +7570,80 @@ t.windowResized(() => {
 invert(toggle?): boolean | void;
 ```
 
-Toggle color inversion for subsequent character rendering, or get current state.
+Toggle character/cell color inversion, or get the current state.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `toggle?` | `boolean` | Whether to invert colors (optional) |
+| `toggle?` | `boolean` | Whether to invert colors. |
 
 #### Returns
 
 `boolean` \| `void`
 
-The current inversion state if called without arguments
+Current inversion state when called without arguments.
 
 #### Example
 
 ```javascript
-// Swapping foreground and background
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+});
+
+const labelLayer = t.layers.add();
 
 t.draw(() => {
-	t.background(0);
+	t.background(10, 12, 24);
 
 	const count = 15;
 	for (let i = 0; i < count; i++) {
 		t.push();
-		t.translate((i - (count - 1) / 2) * 6, 0);
+		t.translate((i - (count - 1) / 2) * 5, 0);
 
-		const shouldInvert = (i + Math.floor(t.frameCount / 30)) % 2 === 0;
+		const shouldInvert = (i + Math.floor(t.frameCount / 25)) % 2 === 0;
 		t.invert(shouldInvert);
 
 		t.charColor(255, 100, 100);
 		t.cellColor(0, 50, 100);
 		t.char('█');
-		t.rect(5, 20);
+		t.rect(4, 18);
 		t.pop();
 	}
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const invertActive = Math.floor(t.frameCount / 25) % 2 === 0;
+
+	drawText('TEXTMODIFIER.INVERT', x, y++, 255, 100, 100);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: CHROMA CHANNEL INVERSION', x, y++, 100, 220, 255);
+	drawText('Swaps char and cell colors.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	const state = invertActive ? 'INVERTED' : 'STANDARD';
+	drawText(`INVERT: ${state}`, x, y++, 120, 205, 255);
+	drawText('RECTS: 15', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('t.invert(shouldInvert)', x, y++, 100, 220, 140);
 });
 
 t.windowResized(() => {
@@ -8086,7 +7659,7 @@ t.windowResized(() => {
 isKeyPressed(key): boolean;
 ```
 
-Check if a specific key is currently being pressed.
+Check whether a key is currently pressed.
 
 #### Parameters
 
@@ -8098,7 +7671,7 @@ Check if a specific key is currently being pressed.
 
 `boolean`
 
-true if the key is currently pressed, false otherwise
+`true` when the key is currently pressed.
 
 #### Example
 
@@ -8109,98 +7682,43 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-let x = 0;
-let y = 0;
-const history = [];
+const labelLayer = t.layers.add();
 
-function drawKey(label, key, dx, dy) {
-	const active = t.isKeyPressed(key);
+let down = false;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(dx, dy);
-
-	t.cellColor(active ? [60, 100, 255] : [40, 45, 60]);
-	t.rect(3, 3);
-
-	t.charColor(active ? [255, 255, 255] : [150, 160, 180]);
-	t.translate(1, 1);
-	t.char(label);
-	t.point();
-
-	t.pop();
-}
-
-function drawCenteredText(text, row, rgb = [240, 245, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), row);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
 t.draw(() => {
 	t.background(6, 10, 22);
+	down = t.isKeyPressed(' ');
+	t.char(down ? '@' : '.');
+	t.charColor(down ? 140 : 100, down ? 255 : 120, 180);
+	t.rect(10, 5);
+});
 
-	const speed = 0.5;
-	let moving = false;
-
-	if (t.isKeyPressed('w')) {
-		y -= speed;
-		moving = true;
-	}
-	if (t.isKeyPressed('s')) {
-		y += speed;
-		moving = true;
-	}
-	if (t.isKeyPressed('a')) {
-		x -= speed;
-		moving = true;
-	}
-	if (t.isKeyPressed('d')) {
-		x += speed;
-		moving = true;
-	}
-
-	history.push({ x, y });
-	if (history.length > 20) history.shift();
-
-	history.forEach((pos, i) => {
-		const alpha = (i / history.length) * 0.5;
-		t.push();
-		t.translate(pos.x, pos.y);
-		t.charColor(100, 150, 255, alpha * 255);
-		t.char('·');
-		t.point();
-		t.pop();
-	});
-
-	t.push();
-	t.translate(x, y);
-	t.char(moving ? '☼' : '○');
-	t.charColor(100, 200, 255);
-	t.point();
-	t.pop();
-
-	drawCenteredText('Textmodifier.isKeyPressed', -12, [255, 255, 255]);
-	drawCenteredText('Returns true if the specified key is currently held down.', -10, [150, 170, 200]);
-	drawCenteredText('Use for continuous movement or real-time state checks.', -9, [150, 170, 200]);
-
-	t.push();
-	t.translate(0, 8);
-	drawKey('W', 'w', -1, -4);
-	drawKey('A', 'a', -5, 0);
-	drawKey('S', 's', -1, 0);
-	drawKey('D', 'd', 3, 0);
-	t.pop();
-
-	drawCenteredText('Press WASD to move the player', 14, [100, 255, 150]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.ISKEYPRESSED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: HELD KEY CHECK', x, y++, 100, 220, 255);
+	drawText('Hold Space to activate.', x, y++, 140, 160, 190);
+	drawText('Good for continuous motion.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(down ? 'SPACE: DOWN' : 'SPACE: UP', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -8216,34 +7734,24 @@ t.windowResized(() => {
 isLooping(): boolean;
 ```
 
-Check whether the textmodifier is currently running the automatic render loop.
+Whether the automatic render loop is currently running.
 
 #### Returns
 
 `boolean`
 
-True if the render loop is currently active, false otherwise.
+`true` when the render loop is active.
 
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-function drawLabel(text, y) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(180);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
+const labelLayer = t.layers.add();
 
 t.mousePressed(() => {
 	if (t.isLooping()) {
@@ -8255,17 +7763,40 @@ t.mousePressed(() => {
 });
 
 t.draw(() => {
-	t.background(0);
-
-	t.push();
-	t.rotateZ(t.frameCount * 5);
+	t.background(6, 10, 22);
 	t.char(t.isLooping() ? '>' : '|');
-	t.charColor(t.isLooping() ? 0 : 255, t.isLooping() ? 255 : 100, 100);
+	t.charColor(t.isLooping() ? 100 : 255, 255, 140);
+	t.rotateZ(t.frameCount * 5);
 	t.rect(10, 10);
-	t.pop();
+});
 
-	drawLabel(`isLooping(): ${t.isLooping()}`, -12);
-	drawLabel('click to toggle loop state', -9);
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODIFIER.ISLOOPING', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: LOOP STATE', x, y++, 100, 220, 255);
+	drawText('Compact API demonstration.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	const state = t.isLooping() ? 'TRUE' : 'FALSE';
+	drawText(`LOOPING: ${state}`, x, y++, 140, 255, 180);
+	drawText('CLICK TO TOGGLE', x, y++, 255, 225, 140);
 });
 
 t.windowResized(() => {
@@ -8281,13 +7812,13 @@ t.windowResized(() => {
 keyPressed(callback): void;
 ```
 
-Set a callback function that will be called when a key is pressed down.
+Register the single-callback handler for key press events.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`KeyboardEventHandler`](../namespaces/input/namespaces/keyboard/type-aliases/KeyboardEventHandler.md) | The function to call when a key is pressed |
+| `callback` | [`KeyboardEventHandler`](../namespaces/input/namespaces/keyboard/type-aliases/KeyboardEventHandler.md) | Handler to run with keyboard event data when a key is pressed. |
 
 #### Returns
 
@@ -8302,59 +7833,49 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-const keyHistory = [];
-let pulse = 0;
+const labelLayer = t.layers.add();
 
-function drawCenteredText(text, row, rgb = [240, 245, 255]) {
+let last = 'NONE';
+let count = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), row);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
 t.keyPressed((data) => {
-	keyHistory.unshift({
-		key: data.key,
-		code: data.code,
-		time: t.secs,
-	});
-
-	if (keyHistory.length > 5) keyHistory.pop();
-
-	pulse = 1.0;
+	last = data.key || 'UNKNOWN';
+	count++;
 });
 
 t.draw(() => {
 	t.background(6, 10, 22);
+	t.char(last[0] || '?');
+	t.charColor(255, 210, 120);
+	t.rect(8, 4);
+});
 
-	const lastKey = keyHistory[0] ? keyHistory[0].key : 'NONE';
-	t.push();
-	t.charColor(100, 200, 255, pulse * 255);
-	t.char(lastKey.length === 1 ? lastKey : '?');
-	t.rect(12 + pulse * 4, 12 + pulse * 4);
-	t.pop();
-
-	pulse *= 0.9; // Fade out the pulse
-
-	drawCenteredText('--- KEY EVENT LOG ---', 8, [100, 255, 150]);
-	keyHistory.forEach((entry, i) => {
-		const alpha = 1.0 - i * 0.2;
-		const logText = `Key: "${entry.key}" | Code: ${entry.code}`;
-		drawCenteredText(logText, 10 + i * 2, [200, 210, 230, alpha * 255]);
-	});
-
-	drawCenteredText('Textmodifier.keyPressed', -20, [255, 255, 255]);
-	drawCenteredText('Triggers once per key press event.', -18, [150, 170, 200]);
-	drawCenteredText('Unlike isKeyPressed, this does not repeat when held.', -16, [150, 170, 200]);
-
-	drawCenteredText('Press any key to trigger event', 20, [100, 100, 120]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.KEYPRESSED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: KEY DOWN EVENT', x, y++, 100, 220, 255);
+	drawText('Fires when a key is pressed.', x, y++, 140, 160, 190);
+	drawText('Last key is shown in center.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`COUNT: ${count}`, x, y++, 140, 255, 180);
+	drawText('LAST: ' + last.slice(0, 20), x, y++, 180, 200, 220);
 });
 
 t.windowResized(() => {
@@ -8370,13 +7891,13 @@ t.windowResized(() => {
 keyReleased(callback): void;
 ```
 
-Set a callback function that will be called when a key is released.
+Register the single-callback handler for key release events.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`KeyboardEventHandler`](../namespaces/input/namespaces/keyboard/type-aliases/KeyboardEventHandler.md) | The function to call when a key is released |
+| `callback` | [`KeyboardEventHandler`](../namespaces/input/namespaces/keyboard/type-aliases/KeyboardEventHandler.md) | Handler to run with keyboard event data when a key is released. |
 
 #### Returns
 
@@ -8391,50 +7912,49 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-let releaseInfo = null;
-let fade = 0;
+const labelLayer = t.layers.add();
 
-function drawCenteredText(text, row, rgb = [240, 245, 255]) {
+let last = 'NONE';
+let count = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), row);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
 t.keyReleased((data) => {
-	releaseInfo = {
-		key: data.key,
-		code: data.code,
-	};
-	fade = 1.0;
+	last = data.key || 'UNKNOWN';
+	count++;
 });
 
 t.draw(() => {
 	t.background(6, 10, 22);
+	t.char(last[0] || '?');
+	t.charColor(140, 220, 255);
+	t.rect(8, 4);
+});
 
-	if (releaseInfo) {
-		t.push();
-		t.charColor(255, 100, 100, fade * 255);
-		t.char(releaseInfo.key.length === 1 ? releaseInfo.key : '?');
-		t.rect(12, 12);
-		t.pop();
-
-		drawCenteredText(`Released: "${releaseInfo.key}"`, 8, [255, 150, 150, fade * 255]);
-		fade *= 0.95;
-	}
-
-	drawCenteredText('Textmodifier.keyReleased', -20, [255, 255, 255]);
-	drawCenteredText('An event callback that triggers when a key is released.', -18, [150, 170, 200]);
-	drawCenteredText('Useful for stopping actions like movement or charging.', -16, [150, 170, 200]);
-
-	drawCenteredText('Press and RELEASE any key', 18, [100, 100, 120]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.KEYRELEASED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: KEY UP EVENT', x, y++, 100, 220, 255);
+	drawText('Fires when a key is released.', x, y++, 140, 160, 190);
+	drawText('Useful for edge transitions.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`COUNT: ${count}`, x, y++, 140, 255, 180);
+	drawText('LAST: ' + last.slice(0, 20), x, y++, 180, 200, 220);
 });
 
 t.windowResized(() => {
@@ -8450,7 +7970,7 @@ t.windowResized(() => {
 keyTyped(callback): void;
 ```
 
-Set a callback function that will be called when a printable character is typed.
+Register the single-callback handler for printable character input.
 
 This only fires for keys that produce character input, such as letters, numbers,
 punctuation, and space. It does not fire for modifier keys or control-key chords.
@@ -8459,7 +7979,7 @@ punctuation, and space. It does not fire for modifier keys or control-key chords
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`KeyboardEventHandler`](../namespaces/input/namespaces/keyboard/type-aliases/KeyboardEventHandler.md) | The function to call when a printable character is typed |
+| `callback` | [`KeyboardEventHandler`](../namespaces/input/namespaces/keyboard/type-aliases/KeyboardEventHandler.md) | Handler to run with keyboard event data when a printable character is typed. |
 
 #### Returns
 
@@ -8474,78 +7994,51 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-let inputText = '';
-let lastChar = '';
-let charPulse = 0;
+const labelLayer = t.layers.add();
 
-function drawCenteredText(text, row, rgb = [240, 245, 255]) {
+let typed = '';
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), row);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
 t.keyTyped((data) => {
-	lastChar = data.key;
-	charPulse = 1.0;
-
-	// Append to our string
-	inputText += data.key;
-	if (inputText.length > 20) inputText = inputText.slice(-20);
-});
-
-t.keyPressed((data) => {
-	if (data.key === 'Backspace') {
-		inputText = inputText.slice(0, -1);
-	}
+	typed = (typed + (data.key || '')).slice(-16);
 });
 
 t.draw(() => {
 	t.background(6, 10, 22);
-
-	const cursor = t.frameCount % 60 < 30 ? '_' : ' ';
-	const display = `> ${inputText}${cursor}`;
-
-	t.push();
-	t.charColor(100, 255, 150);
-	t.translate(-Math.floor(display.length / 2), 2);
-	t.push();
-	t.cellColor(20, 40, 30);
-	t.translate(Math.floor(display.length / 2), 0);
-	t.rect(display.length + 4, 3);
-	t.pop();
-
-	for (let i = 0; i < display.length; i++) {
+	for (let i = 0; i < typed.length; i++) {
 		t.push();
-		t.translate(i, 0);
-		t.char(display[i]);
+		t.translate(i - typed.length / 2, 0);
+		t.char(typed[i]);
+		t.charColor(255, 210, 120);
 		t.point();
 		t.pop();
 	}
-	t.pop();
+});
 
-	if (charPulse > 0) {
-		t.push();
-		t.translate(0, -8);
-		t.char(lastChar);
-		t.charColor(100, 200, 255, charPulse * 255);
-		t.rect(10 + charPulse * 10, 10 + charPulse * 10);
-		t.pop();
-		charPulse *= 0.92;
-	}
-
-	drawCenteredText('Textmodifier.keyTyped', -20, [255, 255, 255]);
-	drawCenteredText('Triggers when a printable character is typed.', -18, [150, 170, 200]);
-	drawCenteredText('Best for text input, as it handles case and symbols.', -17, [150, 170, 200]);
-
-	drawCenteredText('Type on your keyboard to enter text', 14, [100, 100, 120]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.KEYTYPED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: PRINTABLE INPUT', x, y++, 100, 220, 255);
+	drawText('Collects typed characters.', x, y++, 140, 160, 190);
+	drawText('Buffer keeps the last 16.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('TEXT: ' + typed.slice(-20), x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -8587,86 +8080,52 @@ Negative inputs are clamped to `0`. If all inputs resolve to `0`, the falloff re
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
-	fontSize: 8,
-	frameRate: 60,
+	fontSize: 16,
 });
 
-function drawBeacon(x, y, z, size, glyph, colors, spin) {
+const labelLayer = t.layers.add();
+
+let value = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(x, y, z);
-	t.rotateX(20 + spin * 0.4);
-	t.rotateY(spin);
-	t.char(glyph);
-	t.charColor(colors[0], colors[1], colors[2]);
-	t.cellColor(colors[0] * 0.15, colors[1] * 0.12, colors[2] * 0.16);
-	t.box(size, size * 1.8, size);
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
 	t.pop();
 }
 
 t.draw(() => {
-	const time = t.frameCount * 0.02;
-	const focus = 0.5 + 0.5 * Math.sin(time * 0.9);
-	const linear = 0.01 + (1 - focus) * 0.09;
-	const quadratic = 0.0006 + (1 - focus) * 0.0065;
-	const lightPosition = {
-		x: Math.sin(time * 1.3) * 18,
-		y: -8 + Math.cos(time * 1.7) * 5,
-		z: 28 * Math.cos(time * 0.55),
-	};
+	t.background(6, 8, 18);
+	const time = t.frameCount * 0.025;
+	value = 0.5 + 0.5 * Math.sin(time);
+	t.perspective(58, 0.1, 4096);
+	t.camera(16, -10, 42, 0, 0, 0);
+	t.lightFalloff(1, value * 0.08, value * 0.01);
+	t.pointLight([255, 210, 120], { x: 18, y: -18, z: 28 });
+	t.rotateY(time * 40);
+	t.char('#');
+	t.charColor(140, 220, 255);
+	t.sphere(7);
+});
 
-	t.background(3, 4, 10);
-	t.ambientLight(12, 14, 18);
-	t.lightFalloff(1, linear, quadratic);
-	t.pointLight('#7ae7ff', lightPosition);
-	t.pointLight([255, 170, 80], {
-		x: -lightPosition.x * 0.55,
-		y: lightPosition.y * 0.6,
-		z: -lightPosition.z * 0.35,
-	});
-
-	t.camera(0, -10, 132, 0, -4, -34);
-
-	t.push();
-	t.rotateX(12);
-
-	for (let i = 0; i < 11; i++) {
-		const z = 24 - i * 14;
-		const breath = Math.sin(time * 1.4 + i * 0.45);
-		const pillarHeight = 9 + i * 0.45 + (breath * 0.5 + 0.5) * 3;
-		const roofY = -pillarHeight * 0.5 - 3;
-		const floorY = 12;
-
-		t.push();
-		t.translate(0, floorY, z);
-		t.char('=');
-		t.charColor(50, 80, 120);
-		t.cellColor(8, 12, 18);
-		t.box(28, 1, 8);
-		t.pop();
-
-		drawBeacon(-11, 12 - pillarHeight * 0.5, z, 2.6, 'H', [70, 190, 255], time * 40 + i * 18);
-		drawBeacon(11, 12 - pillarHeight * 0.5, z, 2.6, 'H', [255, 150, 90], -time * 36 - i * 20);
-
-		t.push();
-		t.translate(0, roofY, z);
-		t.rotateZ(Math.sin(time * 1.1 + i * 0.3) * 4);
-		t.char('-');
-		t.charColor(180, 210, 255);
-		t.cellColor(20, 28, 38);
-		t.box(22, 2, 2);
-		t.pop();
-
-		t.push();
-		t.translate(Math.sin(time * 1.2 + i) * 4, roofY - 2.6, z);
-		t.rotateY(time * 60 + i * 24);
-		t.char('o');
-		t.charColor(230, 240, 255);
-		t.cellColor(16, 20, 30);
-		t.sphere(1.4 + (focus * 0.5 + 0.5) * 0.4);
-		t.pop();
-	}
-
-	t.pop();
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.LIGHTFALLOFF', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: LIGHT FALLOFF', x, y++, 100, 220, 255);
+	drawText('Lighting changes surface shade.', x, y++, 140, 160, 190);
+	drawText('Scene keeps focus on one sphere.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`FALLOFF: ${value.toFixed(2)}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -8686,16 +8145,16 @@ line(
    y2): void;
 ```
 
-Draw a line from point (x1, y1) to point (x2, y2) with the settings.
+Draw a line from `(x1, y1)` to `(x2, y2)`.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `x1` | `number` | X-coordinate of the line start point in grid cells |
-| `y1` | `number` | Y-coordinate of the line start point in grid cells |
-| `x2` | `number` | X-coordinate of the line end point in grid cells |
-| `y2` | `number` | Y-coordinate of the line end point in grid cells |
+| `x1` | `number` | Start X coordinate in grid cells. |
+| `y1` | `number` | Start Y coordinate in grid cells. |
+| `x2` | `number` | End X coordinate in grid cells. |
+| `y2` | `number` | End Y coordinate in grid cells. |
 
 #### Returns
 
@@ -8704,36 +8163,59 @@ Draw a line from point (x1, y1) to point (x2, y2) with the settings.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+let a = 0;
+let b = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.draw(() => {
-	t.background(10, 10, 20);
+	t.background(6, 10, 22);
+	const time = t.frameCount * 0.025;
+	a = Math.sin(time) * 10;
+	b = Math.cos(time * 0.7) * 7;
+	t.charColor(60, 70, 100);
+	t.char('.');
+	t.line(-18, 0, 18, 0);
+	t.line(0, -10, 0, 10);
+	t.charColor(120, 220, 255);
+	t.char('#');
+	t.line(-18, -b, 18, b);
+	t.charColor(255, 210, 120);
+	t.line(-a, -10, a, 10);
+});
 
-	const time = t.frameCount * 0.01;
-	const lineCount = 24;
-	const radius = Math.min(t.grid.cols, t.grid.rows) * 0.4;
-
-	t.lineWeight(2);
-
-	// Spinning web of lines
-	for (let i = 0; i < lineCount; i++) {
-		const phase1 = (i / lineCount) * Math.PI * 2;
-		const phase2 = phase1 + Math.PI + Math.sin(time) * Math.PI;
-
-		const x1 = Math.cos(phase1 + time) * radius;
-		const y1 = Math.sin(phase1 * 2 + time * 1.5) * radius * 0.5;
-
-		const x2 = Math.cos(phase2 - time * 0.7) * radius * 0.8;
-		const y2 = Math.sin(phase2 * 1.5 - time) * radius;
-
-		const r = 127 + 127 * Math.sin(phase1 + time);
-		const g = 127 + 127 * Math.cos(phase1 * 0.5 + time);
-		t.charColor(r, g, 255);
-
-		t.char(['+', '-', '|', '/'][i % 4]);
-
-		t.line(x1, y1, x2, y2);
-	}
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.LINE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: DRAW SEGMENTS', x, y++, 100, 220, 255);
+	drawText('Connects two grid coordinates.', x, y++, 140, 160, 190);
+	drawText('Animated endpoints cross center.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`A: ${a.toFixed(1)}`, x, y++, 140, 255, 180);
+	drawText(`B: ${b.toFixed(1)}`, x, y++, 255, 210, 120);
 });
 
 t.windowResized(() => {
@@ -8749,46 +8231,72 @@ t.windowResized(() => {
 lineWeight(weight?): number | void;
 ```
 
-Set or get the line weight (thickness).
-
-If called with a value, sets the line weight for subsequent drawing operations.
-If called without arguments, returns the current line weight.
+Set or get line thickness for subsequent line and curve drawing.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `weight?` | `number` | The line weight (thickness) to set. |
+| `weight?` | `number` | Line thickness in grid cells. |
 
 #### Returns
 
 `number` \| `void`
 
-The current line weight if called without arguments.
+Current line weight when called without arguments.
 
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+let weight = 1;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.draw(() => {
-	t.background('#050810');
+	t.background(6, 10, 22);
+	weight = 1 + Math.floor((t.frameCount / 60) % 4);
+	t.charColor(70, 80, 110);
+	t.char('.');
+	t.line(-20, -6, 20, -6);
+	t.line(-20, 6, 20, 6);
+	t.lineWeight(weight);
+	t.charColor(120, 255, 180);
+	t.char('#');
+	t.line(-20, 0, 20, 0);
+	t.lineWeight(1);
+});
 
-	const layers = 6;
-	const spacing = 4;
-
-	for (let i = 0; i < layers; i++) {
-		const phase = t.frameCount * 0.03 + i * 0.8;
-		const pulse = 1 + 4 * (0.5 + 0.5 * Math.sin(phase));
-		const wobble = Math.sin(phase * 1.6) * 5;
-
-		t.lineWeight(Math.round(pulse));
-		t.charColor(160 + i * 12, 200, 255);
-		t.char(['-', '+', '×'][i % 3]);
-
-		const y = (i - (layers - 1) / 2) * spacing;
-		t.line(-20, y + wobble, 20, y - wobble);
-	}
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.LINEWEIGHT', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: LINE THICKNESS', x, y++, 100, 220, 255);
+	drawText('Controls stroke cell thickness.', x, y++, 140, 160, 190);
+	drawText('Weight resets after the demo line.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`WEIGHT: ${weight}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -8804,7 +8312,7 @@ t.windowResized(() => {
 loadFont(fontSource, setActive?): Promise<TextmodeFont>;
 ```
 
-Load a font, optionally setting it as the base layer's active font.
+Load a font and optionally set it as the base layer's active font.
 
 Accepts either a URL string to load a new font, or an existing [TextmodeFont](../namespaces/fonts/classes/TextmodeFont.md)
 instance to use as a reusable source.
@@ -8819,50 +8327,100 @@ which creates a layer-local fork rather than sharing a mutable instance by refer
 
 | Parameter | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
-| `fontSource` | `string` \| [`TextmodeFont`](../namespaces/fonts/classes/TextmodeFont.md) | `undefined` | The URL of the font to load, or an existing TextmodeFont instance. |
-| `setActive` | `boolean` | `true` | Whether to set the font as the base layer's active font. Defaults to `true`. |
+| `fontSource` | `string` \| [`TextmodeFont`](../namespaces/fonts/classes/TextmodeFont.md) | `undefined` | Font URL or reusable TextmodeFont instance. |
+| `setActive` | `boolean` | `true` | Whether to activate the font on the base layer. Defaults to `true`. |
 
 #### Returns
 
 `Promise`\<[`TextmodeFont`](../namespaces/fonts/classes/TextmodeFont.md)\>
 
-The loaded TextmodeFont instance.
+The loaded TextmodeFont.
 
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const BESCII_URL = 'https://cdn.jsdelivr.net/gh/damianvila/font-bescii@main/fonts/v2.0/Bescii-Mono.ttf';
+
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
 const accentLayer = t.layers.add({ fontSize: 16, blendMode: 'additive' });
+const labelLayer = t.layers.add();
 
-function drawLabel(label, y, color) {
-	const startX = -label.length / 2;
-	t.charColor(...color);
+let baseFont = null;
+let reusableFont = null;
+let loaded = false;
 
-	for (let i = 0; i < label.length; i++) {
+t.setup(async () => {
+	baseFont = await t.loadFont(BESCII_URL);
+	reusableFont = await t.loadFont(BESCII_URL, false);
+	await accentLayer.loadFont(reusableFont);
+	loaded = true;
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+function drawGlyphStrip(font, y, r, g, b) {
+	const glyphs = font.characters;
+	const count = Math.min(glyphs.length, Math.max(8, Math.floor(t.grid.cols * 0.55)));
+	const start = Math.floor((t.frameCount / 8) % glyphs.length);
+	const x = -Math.floor(count / 2);
+	for (let i = 0; i < count; i++) {
+		const glyph = glyphs[(start + i) % glyphs.length];
 		t.push();
-		t.translate(startX + i + 0.5, y);
-		t.char(label[i]);
+		t.translate(x + i, y);
+		t.char(glyph.character);
+		t.charColor(r, g, b);
 		t.point();
 		t.pop();
 	}
 }
 
-t.setup(async () => {
-	await t.loadFont('../../layering/FROGBLOCK-V2.1.ttf');
-
-	const accentFont = await t.loadFont('../../primitives/CHUNKY.ttf', false);
-	await accentLayer.loadFont(accentFont);
-});
-
 t.draw(() => {
 	t.background(5, 8, 18);
-	drawLabel('ACTIVE FONT', -4, [255, 235, 120]);
-	drawLabel('BASE LAYER', 1, [220, 240, 255]);
+	if (!loaded) return;
+
+	drawGlyphStrip(baseFont, -2, 255, 235, 120);
+	drawText('ACTIVE BASE FONT', -8, -5, 255, 235, 120);
 });
 
 accentLayer.draw(() => {
 	t.clear();
-	drawLabel('PRELOADED FONT', 6, [120, 220, 255]);
+	if (!loaded) return;
+
+	drawGlyphStrip(reusableFont, 4, 120, 220, 255);
+	drawText('REUSED ON LAYER', -7, 7, 120, 220, 255);
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODIFIER.LOADFONT', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: LOAD WEB FONT', x, y++, 100, 220, 255);
+	drawText('true activates the base layer.', x, y++, 140, 160, 190);
+	drawText('false returns a reusable font.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	const state = loaded ? 'READY' : 'LOADING';
+	drawText(`FONT: ${state}`, x, y++, 140, 255, 180);
+	if (loaded) drawText(`GLYPHS: ${baseFont.characters.length}`, x, y++, 255, 225, 140);
 });
 
 t.windowResized(() => {
@@ -8878,45 +8436,68 @@ t.windowResized(() => {
 loadImage(src): Promise<TextmodeImage>;
 ```
 
-Load an image and return a TextmodeImage that can be drawn with image().
-
-The loaded image can be rendered to the canvas using the [image](#image) method.
-This function returns a Promise that resolves when the image has loaded.
+Load an image source that can be drawn with [image](#image).
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `src` | `string` | URL of the image file |
+| `src` | `string` | Image URL. |
 
 #### Returns
 
 `Promise`\<[`TextmodeImage`](../namespaces/media/classes/TextmodeImage.md)\>
 
-A Promise that resolves to a TextmodeImage object
+The loaded TextmodeImage.
 
 #### Example
 
 ```javascript
-// Loading and rendering external assets
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-let img;
+const labelLayer = t.layers.add();
+
+let source;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.setup(async () => {
-	const url = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&q=80';
-	img = await t.loadImage(url);
-
-	img.characters(' .:-=+*#%@');
+	source = await t.loadImage('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&q=80');
+	source.characters(' .:-=+*#%@');
 });
 
 t.draw(() => {
 	t.background(0);
-	if (img) {
-		const scale = 1 + Math.sin(t.frameCount * 0.05) * 0.1;
-		t.rotateZ(Math.sin(t.frameCount * 0.02) * 5);
-		t.image(img, t.grid.cols * scale, t.grid.rows * scale);
-	}
+	if (source) t.image(source, t.grid.cols, t.grid.rows);
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.LOADIMAGE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: LOAD IMAGE', x, y++, 100, 220, 255);
+	drawText('Loads media for this example.', x, y++, 140, 160, 190);
+	drawText('HUD stays on a top layer.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(source ? 'IMAGE: READY' : 'IMAGE: WAIT', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -8932,7 +8513,7 @@ t.windowResized(() => {
 loadTileset(tilesetSource, setActive?): Promise<TextmodeTileset>;
 ```
 
-Load a tileset, optionally setting it as the base layer's active glyph source.
+Load a tileset and optionally set it as the base layer's active glyph source.
 
 Accepts either tileset load options or an existing [TextmodeTileset](../namespaces/fonts/classes/TextmodeTileset.md)
 instance to use as a reusable source.
@@ -8947,142 +8528,76 @@ which creates a layer-local fork rather than sharing a mutable instance by refer
 
 | Parameter | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
-| `tilesetSource` | \| [`TextmodeTilesetOptions`](../namespaces/fonts/interfaces/TextmodeTilesetOptions.md) \| [`TextmodeTileset`](../namespaces/fonts/classes/TextmodeTileset.md) | `undefined` | Tileset load options or an existing TextmodeTileset instance. |
-| `setActive` | `boolean` | `true` | Whether to set the tileset as the base layer's active glyph source. Defaults to `true`. |
+| `tilesetSource` | \| [`TextmodeTilesetOptions`](../namespaces/fonts/interfaces/TextmodeTilesetOptions.md) \| [`TextmodeTileset`](../namespaces/fonts/classes/TextmodeTileset.md) | `undefined` | Tileset options or reusable TextmodeTileset instance. |
+| `setActive` | `boolean` | `true` | Whether to activate the tileset on the base layer. Defaults to `true`. |
 
 #### Returns
 
 `Promise`\<[`TextmodeTileset`](../namespaces/fonts/classes/TextmodeTileset.md)\>
 
-The loaded TextmodeTileset instance.
+The loaded TextmodeTileset.
 
 #### Example
 
 ```javascript
-const TILE_COLUMNS = 16;
-const TILE_ROWS = 16;
-const TILE_COUNT = TILE_COLUMNS * TILE_ROWS;
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
-const tilesLayer = t.layers.add({ fontSize: 8 });
-const previewLayer = t.layers.add({ fontSize: 32, blendMode: 'additive' });
+const labelLayer = t.layers.add();
 
-let tileset = null;
+let source;
 
-function getActiveTile() {
-	const index = Math.floor((t.frameCount * 0.35) % TILE_COUNT);
-	return {
-		index,
-		col: index % TILE_COLUMNS,
-		row: Math.floor(index / TILE_COLUMNS),
-	};
-}
-
-function drawLabel(label, x, y, color) {
-	t.charColor(...color);
-
-	for (let i = 0; i < label.length; i++) {
-		t.push();
-		t.translate(x - label.length / 2 + i + 0.5, y);
-		t.char(label[i]);
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
+	t.pop();
 }
 
 t.setup(async () => {
-	tileset = await t.loadTileset(
-		{
-			source: 'https://littlebitspace.com/resources/fonts/T64.png',
-			columns: TILE_COLUMNS,
-			rows: TILE_ROWS,
-			count: TILE_COUNT,
-		},
-		false
-	);
-
-	await tilesLayer.loadTileset(tileset);
-	await previewLayer.loadTileset(tileset);
-
-	tilesLayer.useTileColors(false);
-	previewLayer.useTileColors(false);
+	source = await t.loadTileset({
+		source: 'https://littlebitspace.com/resources/fonts/T64.png',
+		columns: 16,
+		rows: 16,
+		count: 256,
+	});
 });
 
 t.draw(() => {
-	t.background(5, 8, 18);
-
-	drawLabel('LOAD TILESET', 0, -Math.floor(t.grid.rows * 0.42), [255, 236, 160]);
-	drawLabel('T64   16 X 16   8 X 8 CELLS', 0, -Math.floor(t.grid.rows * 0.35), [120, 210, 255]);
-
-	if (!tileset) {
-		drawLabel('LOADING TILESET...', 0, 0, [180, 190, 220]);
-		return;
-	}
-
-	const activeTile = getActiveTile();
-	drawLabel(`INDEX ${String(activeTile.index).padStart(3, '0')}`, 0, Math.floor(t.grid.rows * 0.36), [255, 220, 120]);
-	drawLabel(`COL ${activeTile.col}   ROW ${activeTile.row}`, 0, Math.floor(t.grid.rows * 0.42), [160, 190, 255]);
-});
-
-tilesLayer.draw(() => {
-	if (!tileset) {
-		return;
-	}
-
-	t.clear();
-
-	const activeTile = getActiveTile();
-	const startX = -18;
-	const startY = -7.5;
-
-	for (let index = 0; index < TILE_COUNT; index++) {
-		const col = index % TILE_COLUMNS;
-		const row = Math.floor(index / TILE_COLUMNS);
-		const distance = Math.abs(index - activeTile.index);
-		const glow = Math.max(0, 1 - distance / 32);
-
-		t.push();
-		t.translate(startX + col, startY + row);
-		t.char(index);
-		t.charColor(70 + glow * 185, 110 + glow * 120, 160 + glow * 90);
-		t.point();
-		t.pop();
+	t.background(6, 10, 22);
+	if (source) {
+		for (let i = 0; i < 64; i++) {
+			t.push();
+			t.translate((i % 16) - 8, Math.floor(i / 16));
+			t.char(i);
+			t.charColor(120, 220, 255);
+			t.point();
+			t.pop();
+		}
 	}
 });
 
-previewLayer.draw(() => {
-	if (!tileset) {
-		return;
-	}
-
+labelLayer.draw(() => {
 	t.clear();
-
-	const activeTile = getActiveTile();
-	const previewX = 13;
-	const previewY = 0;
-
-	t.push();
-	t.translate(previewX, previewY);
-	t.rotateZ(t.frameCount * 1.5);
-	t.char(activeTile.index);
-	t.charColor(255, 245, 180);
-	t.point();
-	t.pop();
-
-	for (let orbit = 0; orbit < 6; orbit++) {
-		const angle = t.frameCount * 2 + orbit * 60;
-		const radius = 4.5;
-		const orbitIndex = (activeTile.index + orbit + 1) % TILE_COUNT;
-		const x = previewX + Math.cos((angle * Math.PI) / 180) * radius;
-		const y = previewY + Math.sin((angle * Math.PI) / 180) * radius;
-
-		t.push();
-		t.translate(x, y);
-		t.char(orbitIndex);
-		t.charColor(90, 210, 255);
-		t.point();
-		t.pop();
-	}
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.LOADTILESET', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: LOAD TILESET', x, y++, 100, 220, 255);
+	drawText('Loads media for this example.', x, y++, 140, 160, 190);
+	drawText('HUD stays on a top layer.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(source ? 'TILESET: READY' : 'TILESET: WAIT', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -9098,13 +8613,13 @@ t.windowResized(() => {
 loadVideo(src): Promise<TextmodeVideo>;
 ```
 
-Load a video and return a TextmodeVideo that can be drawn with image().
+Load a video source that can be drawn with [image](#image).
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `src` | `string` | URL of the video file |
+| `src` | `string` | Video URL. |
 
 #### Returns
 
@@ -9113,26 +8628,51 @@ Load a video and return a TextmodeVideo that can be drawn with image().
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-let video;
+const labelLayer = t.layers.add();
+
+let source;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.setup(async () => {
-	const url = 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4';
-	video = await t.loadVideo(url);
-
-	video.play();
-	video.loop();
-
-	video.characters(' .:-=+*#%@');
+	source = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
+	source.play();
 });
 
 t.draw(() => {
 	t.background(0);
-	if (video) {
-		t.rotateY(t.frameCount);
-		t.image(video, 40, 30);
-	}
+	if (source) t.image(source, t.grid.cols, t.grid.rows);
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.LOADVIDEO', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: LOAD VIDEO', x, y++, 100, 220, 255);
+	drawText('Loads media for this example.', x, y++, 140, 160, 190);
+	drawText('HUD stays on a top layer.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(source ? 'VIDEO: READY' : 'VIDEO: WAIT', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -9157,7 +8697,7 @@ configured tolerance. The event includes the press duration in milliseconds.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`TouchLongPressHandler`](../namespaces/input/namespaces/touch/type-aliases/TouchLongPressHandler.md) | The function to call when a long press gesture is detected. |
+| `callback` | [`TouchLongPressHandler`](../namespaces/input/namespaces/touch/type-aliases/TouchLongPressHandler.md) | Handler to run when a long press gesture is detected. |
 
 #### Returns
 
@@ -9166,41 +8706,75 @@ configured tolerance. The event includes the press duration in milliseconds.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-const bursts = [];
+const labelLayer = t.layers.add();
+
+const pulses = [];
+let count = 0;
+let last = 'WAITING';
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+function addPulse(label, x = 0, y = 0) {
+	count++;
+	last = label;
+	pulses.unshift({ label, x, y, life: 1 });
+	if (pulses.length > 12) pulses.length = 12;
+}
 
 t.longPress((data) => {
-	bursts.push({ x: data.touch.x, y: data.touch.y, life: 0 });
+	const touch = data?.touch || t.mouse;
+	addPulse('LONG', touch?.x || 0, touch?.y || 0);
 });
 
 t.draw(() => {
-	t.background(0);
+	t.background(6, 10, 22);
 
-	for (let i = bursts.length - 1; i >= 0; i--) {
-		const burst = bursts[i];
-		burst.life += 1;
-
+	for (let i = pulses.length - 1; i >= 0; i--) {
+		const p = pulses[i];
+		p.life -= 0.02;
+		if (p.life <= 0) {
+			pulses.splice(i, 1);
+			continue;
+		}
 		t.push();
-		t.translate(burst.x, burst.y);
-		t.rotateZ(burst.life * 5);
-
-		const size = burst.life * 1.5;
-		const alpha = Math.max(0, 255 - burst.life * 4);
-
-		t.char('☼');
-		t.charColor(255, 200, 100, alpha);
-		t.rect(size, size);
+		t.translate(p.x, p.y - (1 - p.life) * 4);
+		t.char('*');
+		t.charColor(255, 210, 120);
+		t.point();
 		t.pop();
-
-		if (burst.life > 60) bursts.splice(i, 1);
 	}
+});
 
-	if (bursts.length === 0) {
-		t.charColor(100);
-		t.char('?');
-		t.rect(1, 1);
-	}
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.LONGPRESS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: LONG PRESS', x, y++, 100, 220, 255);
+	drawText('Event updates compact state.', x, y++, 140, 160, 190);
+	drawText('Pulses show recent triggers.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('LONG: ' + count, x, y++, 140, 255, 180);
+	drawText('LAST: ' + last.slice(0, 28), x, y++, 180, 200, 220);
 });
 
 t.windowResized(() => {
@@ -9222,7 +8796,7 @@ lookAt(
    upZ?): void;
 ```
 
-Updates the current look-at target (and optional up vector) for the active camera.
+Update the look-at target and optional up vector for the active camera.
 
 #### Parameters
 
@@ -9242,69 +8816,61 @@ Updates the current look-at target (and optional up vector) for the active camer
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
-
-const scene = [
-	{ x: -16, y: 0, z: 0, char: 'L', color: [255, 120, 120] },
-	{ x: 0, y: 6, z: -14, char: 'M', color: [120, 255, 160] },
-	{ x: 16, y: 0, z: 0, char: 'R', color: [120, 180, 255] },
-];
-
-function drawScene(targetX, targetY, targetZ) {
-	for (let i = 0; i < scene.length; i++) {
-		const item = scene[i];
-
-		t.push();
-		t.translate(item.x, item.y, item.z);
-		t.rotateY(t.frameCount * (1 + i * 0.2));
-		t.rotateZ(t.frameCount * (0.7 + i * 0.15));
-		t.char(item.char);
-		t.charColor(item.color[0], item.color[1], item.color[2]);
-		t.rect(8, 8);
-		t.pop();
-	}
-
-	t.push();
-	t.translate(targetX, targetY, targetZ);
-	t.char('*');
-	t.charColor(255, 255, 120);
-	t.point();
-	t.pop();
-}
-
-function drawLabel(text, y) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y, 0);
-	t.charColor(220);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
-
-t.setup(() => {
-	t.perspective(58, 0.1, 4096);
-	t.camera(0, 14, 42, 0, 0, 0);
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
 });
 
+const labelLayer = t.layers.add();
+
+let targetX = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
 t.draw(() => {
-	t.background(8, 10, 24);
-
+	t.background(6, 8, 18);
 	const time = t.frameCount * 0.03;
-	const targetX = Math.cos(time) * 12;
-	const targetY = Math.sin(time * 0.7) * 8;
-	const targetZ = Math.sin(time) * 12;
+	targetX = Math.sin(time) * 10;
+	t.perspective(58, 0.1, 4096);
+	t.camera(0, 0, 44);
+	t.lookAt(targetX, 0, 0);
+	t.ambientLight(20, 24, 34);
+	t.pointLight([255, 210, 140], { x: 16, y: -16, z: 28 });
+	t.push();
+	t.translate(targetX, 0, 0);
+	t.char('*');
+	t.charColor(255, 220, 120);
+	t.box(4, 4, 4);
+	t.pop();
+	t.char('#');
+	t.charColor(120, 220, 255);
+	t.box(8, 8, 8);
+});
 
-	t.lookAt(targetX, targetY, targetZ);
-	drawScene(targetX, targetY, targetZ);
-
-	drawLabel('lookAt() follows the moving target marker', Math.floor(t.grid.rows / 2) - 3);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.LOOKAT', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: AIM CAMERA', x, y++, 100, 220, 255);
+	drawText('Camera eye remains fixed.', x, y++, 140, 160, 190);
+	drawText('Target slides across X.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`TARGET X: ${targetX.toFixed(1)}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -9329,53 +8895,51 @@ Resume the rendering loop if it was stopped by [noLoop](#noloop).
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-let paused = false;
-let resumed = 0;
+const labelLayer = t.layers.add();
 
-function drawLabel(text, y, color = 180) {
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-t.mouseClicked(() => {
-	if (paused) {
-		paused = false;
-		resumed++;
-		t.loop();
-	}
+t.mousePressed(() => {
+	t.loop();
 });
 
 t.draw(() => {
-	t.background(0);
+	t.background(6, 10, 22);
+	t.rotateZ(t.frameCount * 3);
+	t.char('#');
+	t.charColor(140, 220, 255);
+	t.rect(10, 2);
+});
 
-	if (!paused && resumed === 0 && t.frameCount >= 90) {
-		paused = true;
-		t.noLoop();
-		t.redraw();
-	}
-
-	t.push();
-	t.rotateZ(t.frameCount * 4);
-	t.char(resumed > 0 ? '*' : 'A');
-	t.charColor(paused ? 255 : 100, paused ? 170 : 255, 160);
-	t.rect(14, 14);
-	t.pop();
-
-	drawLabel(paused ? 'click to call loop()' : 'auto-pause at frame 90', -12);
-	drawLabel(`loop() calls: ${resumed}`, -9, paused ? 255 : 140);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.LOOP', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: RESUME DRAW LOOP', x, y++, 100, 220, 255);
+	drawText('Click calls loop().', x, y++, 140, 160, 190);
+	drawText('Spinner shows active frames.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CLICK: LOOP', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -9391,13 +8955,13 @@ t.windowResized(() => {
 mouseClicked(callback): void;
 ```
 
-Set a callback function that will be called when the mouse is clicked.
+Register the single-callback handler for mouse clicks.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`MouseEventHandler`](../namespaces/input/namespaces/mouse/type-aliases/MouseEventHandler.md) | The function to call when the mouse is clicked |
+| `callback` | [`MouseEventHandler`](../namespaces/input/namespaces/mouse/type-aliases/MouseEventHandler.md) | Handler to run with mouse event data when the mouse is clicked. |
 
 #### Returns
 
@@ -9412,75 +8976,68 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-const echoes = [];
+const labelLayer = t.layers.add();
 
-function drawCenteredText(text, row, rgb = [240, 245, 255]) {
+const pulses = [];
+let count = 0;
+let last = 'WAITING';
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), row);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
-t.mouseClicked((data) => {
-	if (data.position.x === Number.NEGATIVE_INFINITY) return;
+function addPulse(label, x = 0, y = 0) {
+	count++;
+	last = label;
+	pulses.unshift({ label, x, y, life: 1 });
+	if (pulses.length > 12) pulses.length = 12;
+}
 
-	echoes.push({
-		x: data.position.x,
-		y: data.position.y,
-		time: t.secs,
-		life: 1.0,
-	});
-
-	if (echoes.length > 10) echoes.shift();
+t.mouseClicked(() => {
+	addPulse('CLICK', t.mouse.x, t.mouse.y);
 });
 
 t.draw(() => {
 	t.background(6, 10, 22);
 
-	for (let i = 0; i < echoes.length; i++) {
-		const e = echoes[i];
-		e.life *= 0.95;
-
-		if (e.life < 0.01) {
-			echoes.splice(i, 1);
-			i--;
+	for (let i = pulses.length - 1; i >= 0; i--) {
+		const p = pulses[i];
+		p.life -= 0.02;
+		if (p.life <= 0) {
+			pulses.splice(i, 1);
 			continue;
 		}
-
 		t.push();
-		t.translate(e.x, e.y);
-
-		const radius = (1.0 - e.life) * 20;
-		t.charColor(100, 200, 255, e.life * 255);
-		t.char('○');
-		t.ellipse(radius, radius);
-
-		t.charColor(50, 100, 255, e.life * 100);
-		t.char('·');
-		t.ellipse(radius * 0.6, radius * 0.6);
-
-		t.pop();
-	}
-
-	if (t.mouse.x !== Number.NEGATIVE_INFINITY) {
-		t.push();
-		t.translate(t.mouse.x, t.mouse.y);
-		t.char('+');
-		t.charColor(255);
+		t.translate(p.x, p.y - (1 - p.life) * 4);
+		t.char('*');
+		t.charColor(255, 210, 120);
 		t.point();
 		t.pop();
 	}
+});
 
-	drawCenteredText('Textmodifier.mouseClicked', -20, [255, 255, 255]);
-	drawCenteredText('An event callback that triggers on a full mouse click.', -18, [150, 170, 200]);
-	drawCenteredText('Click anywhere to create a ripple effect.', -16, [150, 170, 200]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.MOUSECLICKED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: CLICK EVENT', x, y++, 100, 220, 255);
+	drawText('Event updates compact state.', x, y++, 140, 160, 190);
+	drawText('Pulses show recent triggers.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CLICKS: ' + count, x, y++, 140, 255, 180);
+	drawText('LAST: ' + last.slice(0, 28), x, y++, 180, 200, 220);
 });
 
 t.windowResized(() => {
@@ -9496,13 +9053,13 @@ t.windowResized(() => {
 mouseDragged(callback): void;
 ```
 
-Set a callback function that will be called when the mouse moves while a button is held down.
+Register the single-callback handler for mouse dragging.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`MouseEventHandler`](../namespaces/input/namespaces/mouse/type-aliases/MouseEventHandler.md) | The function to call when the mouse is dragged |
+| `callback` | [`MouseEventHandler`](../namespaces/input/namespaces/mouse/type-aliases/MouseEventHandler.md) | Handler to run with mouse event data when the mouse is dragged. |
 
 #### Returns
 
@@ -9517,61 +9074,72 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-const trail = [];
+const labelLayer = t.layers.add();
 
-function drawCenteredText(text, row, rgb = [240, 245, 255]) {
+const pulses = [];
+let count = 0;
+let last = 'WAITING';
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), row);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
-t.mouseDragged((data) => {
-	if (data.position.x === Number.NEGATIVE_INFINITY) return;
+function addPulse(label, x = 0, y = 0) {
+	count++;
+	last = label;
+	pulses.unshift({ label, x, y, life: 1 });
+	if (pulses.length > 12) pulses.length = 12;
+}
 
-	trail.push({
-		x: data.position.x,
-		y: data.position.y,
-		life: 1.0,
-		char: ['#', '*', '•', '·'][Math.floor(Math.random() * 4)],
-	});
-
-	if (trail.length > 200) trail.shift();
+t.mouseDragged(() => {
+	addPulse('DRAG', t.mouse.x, t.mouse.y);
 });
 
 t.draw(() => {
 	t.background(6, 10, 22);
+	if (t.mouseIsPressed && t.mouse.x !== Number.NEGATIVE_INFINITY) {
+		t.charColor(120, 220, 255);
+		t.line(t.pmouse.x, t.pmouse.y, t.mouse.x, t.mouse.y);
+	}
 
-	for (let i = 0; i < trail.length; i++) {
-		const p = trail[i];
-		p.life *= 0.96;
-
-		if (p.life < 0.05) {
-			trail.splice(i, 1);
-			i--;
+	for (let i = pulses.length - 1; i >= 0; i--) {
+		const p = pulses[i];
+		p.life -= 0.02;
+		if (p.life <= 0) {
+			pulses.splice(i, 1);
 			continue;
 		}
-
 		t.push();
-		t.translate(p.x, p.y);
-		t.char(p.char);
-		t.charColor(100, 200, 255, p.life * 255);
+		t.translate(p.x, p.y - (1 - p.life) * 4);
+		t.char('*');
+		t.charColor(255, 210, 120);
 		t.point();
 		t.pop();
 	}
+});
 
-	drawCenteredText('Textmodifier.mouseDragged', -20, [255, 255, 255]);
-	drawCenteredText('Fires while moving with a button held.', -18, [150, 170, 200]);
-	drawCenteredText('Great for drawing or dragging objects.', -16, [150, 170, 200]);
-
-	drawCenteredText('Click and DRAG to paint', 18, [100, 255, 150]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.MOUSEDRAGGED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: DRAG EVENT', x, y++, 100, 220, 255);
+	drawText('Event updates compact state.', x, y++, 140, 160, 190);
+	drawText('Pulses show recent triggers.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('DRAGS: ' + count, x, y++, 140, 255, 180);
+	drawText('LAST: ' + last.slice(0, 28), x, y++, 180, 200, 220);
 });
 
 t.windowResized(() => {
@@ -9587,13 +9155,13 @@ t.windowResized(() => {
 mouseMoved(callback): void;
 ```
 
-Set a callback function that will be called when the mouse moves.
+Register the single-callback handler for mouse movement.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`MouseEventHandler`](../namespaces/input/namespaces/mouse/type-aliases/MouseEventHandler.md) | The function to call when the mouse moves |
+| `callback` | [`MouseEventHandler`](../namespaces/input/namespaces/mouse/type-aliases/MouseEventHandler.md) | Handler to run with mouse event data when the mouse moves. |
 
 #### Returns
 
@@ -9608,73 +9176,68 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, row, rgb = [240, 245, 255]) {
+const labelLayer = t.layers.add();
+
+const pulses = [];
+let count = 0;
+let last = 'WAITING';
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), row);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
+function addPulse(label, x = 0, y = 0) {
+	count++;
+	last = label;
+	pulses.unshift({ label, x, y, life: 1 });
+	if (pulses.length > 12) pulses.length = 12;
+}
+
+t.mouseMoved(() => {
+	addPulse('MOVE', t.mouse.x, t.mouse.y);
+});
+
 t.draw(() => {
 	t.background(6, 10, 22);
 
-	const mx = t.mouse.x;
-	const my = t.mouse.y;
-	const isInside = mx !== Number.NEGATIVE_INFINITY;
-
-	// Full-screen Magnetic Field Effect
-	const stepX = 6;
-	const stepY = 3;
-	const halfCols = Math.floor(t.grid.cols / 2);
-	const halfRows = Math.floor(t.grid.rows / 2);
-
-	t.charColor(60, 70, 100);
-	for (let y = -halfRows; y <= halfRows; y += stepY) {
-		for (let x = -halfCols; x <= halfCols; x += stepX) {
-			t.push();
-			t.translate(x, y);
-
-			if (isInside) {
-				const dist = Math.sqrt((mx - x) ** 2 + (my - y) ** 2);
-				const influence = Math.max(0, 1.0 - dist / 30);
-
-				const angle = Math.atan2(my - y, mx - x) * (180 / Math.PI);
-				t.rotateZ(angle);
-
-				t.charColor(60 + influence * 100, 70 + influence * 150, 100 + influence * 155);
-				t.char(influence > 0.5 ? '»' : '›');
-			} else {
-				t.char('·');
-			}
-
-			t.point();
-			t.pop();
+	for (let i = pulses.length - 1; i >= 0; i--) {
+		const p = pulses[i];
+		p.life -= 0.02;
+		if (p.life <= 0) {
+			pulses.splice(i, 1);
+			continue;
 		}
-	}
-
-	if (isInside) {
 		t.push();
-		t.translate(mx, my);
-		t.char('☼');
-		t.charColor(255, 255, 255);
+		t.translate(p.x, p.y - (1 - p.life) * 4);
+		t.char('*');
+		t.charColor(255, 210, 120);
 		t.point();
 		t.pop();
 	}
+});
 
-	drawCenteredText('Textmodifier.mouseMoved', -22, [255, 255, 255]);
-	drawCenteredText('Fires whenever the mouse moves.', -20, [150, 170, 200]);
-	drawCenteredText('Use for hover or proximity effects.', -18, [150, 170, 200]);
-
-	if (!isInside) {
-		drawCenteredText('Move mouse to attract the field', 18, [100, 150, 255]);
-	}
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.MOUSEMOVED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: MOVE EVENT', x, y++, 100, 220, 255);
+	drawText('Event updates compact state.', x, y++, 140, 160, 190);
+	drawText('Pulses show recent triggers.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('MOVES: ' + count, x, y++, 140, 255, 180);
+	drawText('LAST: ' + last.slice(0, 28), x, y++, 180, 200, 220);
 });
 
 t.windowResized(() => {
@@ -9690,13 +9253,13 @@ t.windowResized(() => {
 mousePressed(callback): void;
 ```
 
-Set a callback function that will be called when the mouse is pressed down.
+Register the single-callback handler for mouse press events.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`MouseEventHandler`](../namespaces/input/namespaces/mouse/type-aliases/MouseEventHandler.md) | The function to call when the mouse is pressed |
+| `callback` | [`MouseEventHandler`](../namespaces/input/namespaces/mouse/type-aliases/MouseEventHandler.md) | Handler to run with mouse event data when the mouse is pressed. |
 
 #### Returns
 
@@ -9711,69 +9274,68 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-let hit = { x: 0, y: 0, time: -1 };
+const labelLayer = t.layers.add();
 
-function drawCenteredText(text, row, rgb = [240, 245, 255]) {
+const pulses = [];
+let count = 0;
+let last = 'WAITING';
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), row);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
-t.mousePressed((data) => {
-	if (data.position.x === Number.NEGATIVE_INFINITY) return;
-	hit.x = data.position.x;
-	hit.y = data.position.y;
-	hit.time = t.secs;
+function addPulse(label, x = 0, y = 0) {
+	count++;
+	last = label;
+	pulses.unshift({ label, x, y, life: 1 });
+	if (pulses.length > 12) pulses.length = 12;
+}
+
+t.mousePressed(() => {
+	addPulse('MOUSE DOWN', t.mouse.x, t.mouse.y);
 });
 
 t.draw(() => {
 	t.background(6, 10, 22);
 
-	const elapsed = t.secs - hit.time;
-	const life = Math.max(0, 1.0 - elapsed * 2);
-
-	if (life > 0) {
-		const particleCount = 12;
-		for (let i = 0; i < particleCount; i++) {
-			const angle = (i / particleCount) * Math.PI * 2;
-			const r = (1.0 - life) * 30;
-			t.push();
-			t.translate(hit.x + Math.cos(angle) * r, hit.y + Math.sin(angle) * r);
-			t.charColor(255, 200, 100, life * 255);
-			t.char('*');
-			t.point();
-			t.pop();
+	for (let i = pulses.length - 1; i >= 0; i--) {
+		const p = pulses[i];
+		p.life -= 0.02;
+		if (p.life <= 0) {
+			pulses.splice(i, 1);
+			continue;
 		}
 		t.push();
-		t.translate(hit.x, hit.y);
-		t.charColor(255, 255, 255, life * 255);
-		t.char('O');
-		t.ellipse(life * 10, life * 10);
-		t.pop();
-	}
-
-	if (t.mouse.x !== Number.NEGATIVE_INFINITY) {
-		t.push();
-		t.translate(t.mouse.x, t.mouse.y);
-		t.char(t.mouseIsPressed ? '•' : '○');
-		t.charColor(255);
+		t.translate(p.x, p.y - (1 - p.life) * 4);
+		t.char('*');
+		t.charColor(255, 210, 120);
 		t.point();
 		t.pop();
 	}
+});
 
-	drawCenteredText('Textmodifier.mousePressed', -22, [255, 255, 255]);
-	drawCenteredText('Triggers once when a button is hit.', -20, [150, 170, 200]);
-	drawCenteredText('Best for one-time actions or UI hits.', -18, [150, 170, 200]);
-
-	drawCenteredText('CLICK to trigger explosion', 18, [255, 200, 100]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.MOUSEPRESSED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: PRESS EVENT', x, y++, 100, 220, 255);
+	drawText('Event updates compact state.', x, y++, 140, 160, 190);
+	drawText('Pulses show recent triggers.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('PRESSES: ' + count, x, y++, 140, 255, 180);
+	drawText('LAST: ' + last.slice(0, 28), x, y++, 180, 200, 220);
 });
 
 t.windowResized(() => {
@@ -9789,13 +9351,13 @@ t.windowResized(() => {
 mouseReleased(callback): void;
 ```
 
-Set a callback function that will be called when the mouse is released.
+Register the single-callback handler for mouse release events.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`MouseEventHandler`](../namespaces/input/namespaces/mouse/type-aliases/MouseEventHandler.md) | The function to call when the mouse is released |
+| `callback` | [`MouseEventHandler`](../namespaces/input/namespaces/mouse/type-aliases/MouseEventHandler.md) | Handler to run with mouse event data when the mouse is released. |
 
 #### Returns
 
@@ -9810,73 +9372,68 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-let dragStart = null;
-let lastRelease = null;
+const labelLayer = t.layers.add();
 
-function drawCenteredText(text, row, rgb = [240, 245, 255]) {
+const pulses = [];
+let count = 0;
+let last = 'WAITING';
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), row);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
-t.mousePressed((data) => {
-	if (data.position.x === Number.NEGATIVE_INFINITY) return;
-	dragStart = { x: data.position.x, y: data.position.y };
-});
+function addPulse(label, x = 0, y = 0) {
+	count++;
+	last = label;
+	pulses.unshift({ label, x, y, life: 1 });
+	if (pulses.length > 12) pulses.length = 12;
+}
 
-t.mouseReleased((data) => {
-	if (!dragStart) return;
-	lastRelease = {
-		x: data.position.x,
-		y: data.position.y,
-		sx: dragStart.x,
-		sy: dragStart.y,
-		time: t.secs,
-	};
-	dragStart = null;
+t.mouseReleased(() => {
+	addPulse('MOUSE UP', t.mouse.x, t.mouse.y);
 });
 
 t.draw(() => {
 	t.background(6, 10, 22);
 
-	if (dragStart && t.mouse.x !== Number.NEGATIVE_INFINITY) {
+	for (let i = pulses.length - 1; i >= 0; i--) {
+		const p = pulses[i];
+		p.life -= 0.02;
+		if (p.life <= 0) {
+			pulses.splice(i, 1);
+			continue;
+		}
 		t.push();
-		t.charColor(100, 200, 255);
-		t.char('.');
-		t.line(dragStart.x, dragStart.y, t.mouse.x, t.mouse.y);
-		t.translate(dragStart.x, dragStart.y);
-		t.char('O');
+		t.translate(p.x, p.y - (1 - p.life) * 4);
+		t.char('*');
+		t.charColor(255, 210, 120);
 		t.point();
 		t.pop();
 	}
+});
 
-	if (lastRelease) {
-		const life = Math.max(0, 1.0 - (t.secs - lastRelease.time) * 1.5);
-		if (life > 0) {
-			t.push();
-			t.charColor(255, 140, 180, life * 255);
-			t.char('-');
-			t.line(lastRelease.sx, lastRelease.sy, lastRelease.x, lastRelease.y);
-			t.translate(lastRelease.x, lastRelease.y);
-			t.char('X');
-			t.point();
-			t.pop();
-		}
-	}
-
-	drawCenteredText('Textmodifier.mouseReleased', -22, [255, 255, 255]);
-	drawCenteredText('Triggers once when a button is let go.', -20, [150, 170, 200]);
-	drawCenteredText('Used to finalize drags or projectiles.', -18, [150, 170, 200]);
-
-	drawCenteredText('Click, Drag, and RELEASE to "slingshot"', 18, [255, 140, 180]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.MOUSERELEASED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: RELEASE EVENT', x, y++, 100, 220, 255);
+	drawText('Event updates compact state.', x, y++, 140, 160, 190);
+	drawText('Pulses show recent triggers.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('RELEASES: ' + count, x, y++, 140, 255, 180);
+	drawText('LAST: ' + last.slice(0, 28), x, y++, 180, 200, 220);
 });
 
 t.windowResized(() => {
@@ -9892,13 +9449,13 @@ t.windowResized(() => {
 mouseScrolled(callback): void;
 ```
 
-Set a callback function that will be called when the mouse wheel is scrolled.
+Register the single-callback handler for mouse wheel scrolling.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`MouseEventHandler`](../namespaces/input/namespaces/mouse/type-aliases/MouseEventHandler.md) | The function to call when the mouse wheel is scrolled |
+| `callback` | [`MouseEventHandler`](../namespaces/input/namespaces/mouse/type-aliases/MouseEventHandler.md) | Handler to run with mouse event data when the mouse wheel is scrolled. |
 
 #### Returns
 
@@ -9913,49 +9470,49 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-let scale = 10.0;
-let scrollFlash = 0;
+const labelLayer = t.layers.add();
 
-function drawCenteredText(text, row, rgb = [240, 245, 255]) {
+let scale = 8;
+let delta = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), row);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
 t.mouseScrolled((data) => {
-	scale -= data.delta.y * 0.1;
-	scale = Math.max(2, Math.min(40, scale));
-	scrollFlash = 1.0;
+	delta = data.delta.y;
+	scale = Math.max(3, Math.min(18, scale - delta * 0.1));
 });
 
 t.draw(() => {
 	t.background(6, 10, 22);
+	t.char('#');
+	t.charColor(140, 220, 255);
+	t.ellipse(scale, scale * 0.6);
+});
 
-	t.push();
-	const flashColor = [100 + scrollFlash * 155, 200 + scrollFlash * 55, 255];
-	t.charColor(flashColor);
-	t.char('█');
-	t.ellipse(scale, scale);
-	t.char('○');
-	t.ellipse(scale * 0.5, scale * 0.5);
-	t.pop();
-
-	scrollFlash *= 0.9;
-
-	drawCenteredText('Textmodifier.mouseScrolled', -22, [255, 255, 255]);
-	drawCenteredText('Triggers on scroll wheel or touchpad.', -20, [150, 170, 200]);
-	drawCenteredText('Delta shows direction and speed.', -18, [150, 170, 200]);
-
-	drawCenteredText(`Current Scale: ${scale.toFixed(1)}`, 14, [100, 200, 255]);
-	drawCenteredText('Use Mouse Wheel to Zoom', 18, [100, 255, 150]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.MOUSESCROLLED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SCROLL DELTA', x, y++, 100, 220, 255);
+	drawText('Wheel or touchpad changes scale.', x, y++, 140, 160, 190);
+	drawText('Delta sign is kept visible.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`SCALE: ${scale.toFixed(1)}`, x, y++, 140, 255, 180);
+	drawText(`DELTA: ${delta.toFixed(1)}`, x, y++, 180, 200, 220);
 });
 
 t.windowResized(() => {
@@ -9985,88 +9542,52 @@ Useful when you want later draw calls in the same frame to render unlit.
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
-	fontSize: 8,
-	frameRate: 60,
+	fontSize: 16,
 });
 
-function drawReactorCluster(centerX, time, mode) {
-	const armColors =
-		mode === 'lit'
-			? [
-					[255, 170, 110],
-					[110, 190, 255],
-					[180, 120, 255],
-				]
-			: [
-					[255, 120, 120],
-					[120, 220, 160],
-					[120, 190, 255],
-				];
+const labelLayer = t.layers.add();
 
+let value = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(centerX, 0, 0);
-	t.rotateX(18);
-	t.rotateY(time * 24);
-
-	t.push();
-	t.rotateY(time * 55);
-	t.char(mode === 'lit' ? '@' : '#');
-	t.charColor(255, 235, 180);
-	t.cellColor(28, 20, 24);
-	t.sphere(4.8);
-	t.pop();
-
-	for (let i = 0; i < 3; i++) {
-		const orbit = i * 120 + time * 40;
-
-		t.push();
-		t.rotateY(orbit);
-		t.translate(15, Math.sin(time * 2 + i) * 3, 0);
-		t.rotateX(time * 70 + i * 40);
-		t.rotateZ(time * 45 + i * 25);
-		t.char(mode === 'lit' ? 'X' : '+');
-		t.charColor(armColors[i][0], armColors[i][1], armColors[i][2]);
-		t.cellColor(armColors[i][0] * 0.12, armColors[i][1] * 0.12, armColors[i][2] * 0.14);
-		t.box(4, 12, 4);
-		t.pop();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
 	}
-
-	t.push();
-	t.translate(0, -9 + Math.sin(time * 1.6) * 2, 0);
-	t.rotateX(90);
-	t.rotateY(-time * 50);
-	t.char(mode === 'lit' ? '*' : '=');
-	t.charColor(220, 240, 255);
-	t.cellColor(16, 18, 28);
-	t.torus(12, 2.2);
-	t.pop();
-
 	t.pop();
 }
 
 t.draw(() => {
-	const time = t.frameCount * 0.02;
-	const leftX = -24;
+	t.background(6, 8, 18);
+	const time = t.frameCount * 0.025;
+	value = 0.5 + 0.5 * Math.sin(time);
+	t.perspective(58, 0.1, 4096);
+	t.camera(16, -10, 42, 0, 0, 0);
+	if (value > 0.5) t.noLights();
+	else t.pointLight([255, 210, 120], { x: 18, y: -18, z: 28 });
+	t.rotateY(time * 40);
+	t.char('#');
+	t.charColor(140, 220, 255);
+	t.sphere(7);
+});
 
-	t.background(4, 5, 12);
-	t.camera(0, -6, 118, 0, -2, 0);
-
-	t.ambientLight(28, 30, 40);
-	t.lightFalloff(1, 0.025, 0.001);
-	t.pointLight([255, 170, 100], {
-		x: leftX + Math.cos(time * 1.1) * 18,
-		y: -10 + Math.sin(time * 1.7) * 6,
-		z: Math.sin(time * 1.1) * 18,
-	});
-	t.pointLight([90, 180, 255], {
-		x: leftX + Math.cos(time * 1.4 + Math.PI) * 16,
-		y: 8 + Math.cos(time * 1.3) * 4,
-		z: Math.sin(time * 1.4 + Math.PI) * 16,
-	});
-	drawReactorCluster(leftX, time, 'lit');
-
-	t.noLights();
-	drawReactorCluster(24, time, 'flat');
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.NOLIGHTS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: DISABLE LIGHTS', x, y++, 100, 220, 255);
+	drawText('Lighting changes surface shade.', x, y++, 140, 160, 190);
+	drawText('Scene keeps focus on one sphere.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(value > 0.5 ? 'LIGHTS: OFF' : 'LIGHTS: ON', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -10084,9 +9605,7 @@ noLoop(): void;
 
 Stop the automatic rendering loop.
 
-This method pauses the render loop without, allowing
-it to be resumed later with [loop](#loop). This is useful for temporarily pausing
-animation while maintaining the ability to continue it.
+Rendering can be resumed later with [loop](#loop).
 
 #### Returns
 
@@ -10101,58 +9620,55 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, row, rgb = [240, 245, 255]) {
+const labelLayer = t.layers.add();
+let paused = false;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), row);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
-function toggleLoop() {
-	if (t.isLooping) {
+t.mousePressed(() => {
+	if (t.isLooping()) {
+		paused = true;
 		t.noLoop();
+		t.redraw();
 	} else {
+		paused = false;
 		t.loop();
 	}
-}
-
-t.mousePressed(toggleLoop);
-t.keyPressed((e) => {
-	if (e.key === ' ') toggleLoop();
 });
 
 t.draw(() => {
 	t.background(6, 10, 22);
+	t.rotateZ(t.frameCount * 4);
+	t.char('#');
+	t.charColor(255, 210, 120);
+	t.rect(12, 2);
+});
 
-	const looping = t.isLooping;
-	const time = t.secs;
-
-	t.push();
-	t.rotateZ(time * 60);
-	t.charColor(looping ? [100, 255, 150] : [255, 100, 100]);
-	t.char(looping ? '☼' : '×');
-	t.rect(15, 15);
-	t.pop();
-
-	t.push();
-	t.translate(0, 10);
-	const statusText = looping ? 'STATUS: RUNNING' : 'STATUS: STOPPED';
-	drawCenteredText(statusText, 0, looping ? [100, 255, 150] : [255, 100, 100]);
-	drawCenteredText(`Frame Count: ${t.frameCount}`, 2, [140, 180, 255]);
-	t.pop();
-
-	drawCenteredText('Textmodifier.noLoop', -20, [255, 255, 255]);
-	drawCenteredText('Stops the continuous execution of the draw loop.', -18, [150, 170, 200]);
-	drawCenteredText('Use loop() to restart or redraw() for a single frame.', -16, [150, 170, 200]);
-
-	drawCenteredText('Click or Press SPACE to toggle loop', 18, [100, 100, 120]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.NOLOOP', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: PAUSE DRAW LOOP', x, y++, 100, 220, 255);
+	drawText('Click toggles noLoop/loop.', x, y++, 140, 160, 190);
+	drawText('Events still resume drawing.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	const state = paused ? 'PAUSED' : 'LOOPING';
+	drawText(`STATE: ${state}`, x, y++, 140, 255, 180);
+	drawText('CLICK: TOGGLE LOOP', x, y++, 255, 225, 140);
 });
 
 t.windowResized(() => {
@@ -10168,7 +9684,7 @@ t.windowResized(() => {
 off<K>(event, handler): void;
 ```
 
-Remove a previously registered event listener.
+Remove a previously registered input event listener.
 
 The handler reference must be the same function instance that was passed to `on()` or `once()`.
 
@@ -10207,7 +9723,9 @@ t.off('mousePressed', onPress);
 on<K>(event, handler): () => void;
 ```
 
-Register an event listener. Multiple listeners can coexist on the same event —
+Register an input event listener.
+
+Multiple listeners can coexist on the same event;
 unlike the legacy single-callback methods (e.g. `mousePressed()`), calling `on()`
 never replaces existing listeners.
 
@@ -10250,7 +9768,7 @@ dispose();
 once<K>(event, handler): () => void;
 ```
 
-Register a one-shot event listener that automatically removes itself after the first invocation.
+Register an input event listener that removes itself after the first invocation.
 
 #### Type Parameters
 
@@ -10287,7 +9805,7 @@ t.once('keyPressed', (data) => {
 ortho(near?, far?): void;
 ```
 
-Enables orthographic projection for subsequent shape rendering operations.
+Enable orthographic projection for subsequent shape drawing.
 
 By default, textmode uses a perspective projection. Calling this method switches to an
 orthographic projection, where objects maintain their size regardless of depth (Z position).
@@ -10298,8 +9816,8 @@ The projection mode is reset to perspective at the beginning of each frame.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `near?` | `number` | Optional near clipping plane distance. |
-| `far?` | `number` | Optional far clipping plane distance. |
+| `near?` | `number` | Near clipping plane distance. |
+| `far?` | `number` | Far clipping plane distance. |
 
 #### Returns
 
@@ -10308,45 +9826,54 @@ The projection mode is reset to perspective at the beginning of each frame.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-function drawLabel(text, y) {
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y, 0);
-	t.charColor(220);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
 t.draw(() => {
-	t.background(0);
+	t.background(6, 8, 18);
 	t.ortho();
-
-	const count = 12;
-
-	for (let i = 0; i < count; i++) {
-		const angle = (i / count) * Math.PI * 2 + t.frameCount * 0.02;
-		const x = Math.cos(angle) * 20;
-		const y = Math.sin(angle) * 20;
-		const z = Math.sin(t.frameCount * 0.05 + i) * 50;
-
+	t.camera(0, 0, 42);
+	for (let i = 0; i < 3; i++) {
 		t.push();
-		t.translate(x, y, z);
-		t.charColor(200, 255, 100);
-		t.char('#');
-		t.rect(5, 5);
+		t.translate((i - 1) * 9, 0, i * -12);
+		t.rotateY(t.frameCount + i * 35);
+		t.char('+');
+		t.charColor(120 + i * 40, 220, 255);
+		t.box(6, 6, 6);
 		t.pop();
 	}
+});
 
-	drawLabel('ortho(): z depth no longer changes size', Math.floor(t.grid.rows / 2) - 3);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.ORTHO', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: ORTHO PROJECTION', x, y++, 100, 220, 255);
+	drawText('Depth no longer changes scale.', x, y++, 140, 160, 190);
+	drawText('Boxes keep equal apparent size.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('API: t.ortho()', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -10365,7 +9892,7 @@ perspective(
    far?): void;
 ```
 
-Enables perspective projection and optionally sets projection parameters.
+Enable perspective projection and optionally set projection parameters.
 
 The default perspective is tuned to match textmode.js legacy depth behavior.
 
@@ -10373,9 +9900,9 @@ The default perspective is tuned to match textmode.js legacy depth behavior.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `fov?` | `number` | Vertical field-of-view in degrees (optional). |
-| `near?` | `number` | Near clipping plane distance (optional, must be > 0). |
-| `far?` | `number` | Far clipping plane distance (optional, must be > near). |
+| `fov?` | `number` | Vertical field-of-view in degrees. |
+| `near?` | `number` | Near clipping plane distance; must be greater than 0. |
+| `far?` | `number` | Far clipping plane distance; must be greater than `near`. |
 
 #### Returns
 
@@ -10384,57 +9911,56 @@ The default perspective is tuned to match textmode.js legacy depth behavior.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-const scene = [
-	{ x: -16, y: 0, z: -18, char: 'A', color: [255, 120, 120] },
-	{ x: 0, y: 0, z: 0, char: 'B', color: [120, 255, 160] },
-	{ x: 16, y: 0, z: 18, char: 'C', color: [120, 180, 255] },
-];
+const labelLayer = t.layers.add();
 
-function drawLabel(text, y) {
+let fov = 60;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y, 0);
-	t.charColor(220);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-function drawScene() {
-	for (let i = 0; i < scene.length; i++) {
-		const item = scene[i];
-
+t.draw(() => {
+	t.background(6, 8, 18);
+	fov = 60 + Math.sin(t.frameCount * 0.03) * 25;
+	t.perspective(fov, 0.1, 4096);
+	t.camera(0, 0, 44, 0, 0, 0);
+	for (let i = 0; i < 3; i++) {
 		t.push();
-		t.translate(item.x, item.y, item.z);
-		t.rotateY(t.frameCount * (1.2 + i * 0.2));
-		t.rotateX(t.frameCount * (0.8 + i * 0.15));
-		t.char(item.char);
-		t.charColor(item.color[0], item.color[1], item.color[2]);
-		t.rect(8, 8);
+		t.translate((i - 1) * 8, 0, i * -12);
+		t.char('#');
+		t.charColor(120 + i * 40, 220, 255 - i * 20);
+		t.box(6, 6, 6);
 		t.pop();
 	}
-}
+});
 
-t.draw(() => {
-	t.background(8, 10, 24);
-
-	const progress = (t.mouse.x + t.grid.cols / 2) / t.grid.cols;
-	const fov = 30 + Math.max(0, Math.min(1, progress)) * 70;
-
-	t.perspective(fov, 0.1, 4096);
-	t.camera(0, 0, 58, 0, 0, 0);
-	drawScene();
-
-	drawLabel(`perspective(${fov.toFixed(1)}, 0.1, 4096)`, Math.floor(t.grid.rows / 2) - 3);
-	drawLabel('move mouse horizontally to change fov', Math.floor(t.grid.rows / 2) - 1);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.PERSPECTIVE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: FOV PROJECTION', x, y++, 100, 220, 255);
+	drawText('FOV breathes wide to narrow.', x, y++, 140, 160, 190);
+	drawText('Depth changes apparent size.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`FOV: ${fov.toFixed(1)}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -10459,7 +9985,7 @@ the initial distance and the change since the previous update, enabling zoom int
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`TouchPinchHandler`](../namespaces/input/namespaces/touch/type-aliases/TouchPinchHandler.md) | The function to call when a pinch gesture is detected. |
+| `callback` | [`TouchPinchHandler`](../namespaces/input/namespaces/touch/type-aliases/TouchPinchHandler.md) | Handler to run when a pinch gesture is detected. |
 
 #### Returns
 
@@ -10474,86 +10000,53 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-let targetScale = 1.0;
-let currentScale = 1.0;
+const labelLayer = t.layers.add();
 
-t.pinch((data) => {
-	targetScale = Math.max(0.2, Math.min(5.0, data.scale));
-});
+let scale = 1;
 
-// Fallback scroll wheel support for desktop browsers
-window.addEventListener(
-	'wheel',
-	(e) => {
-		targetScale = Math.max(0.2, Math.min(5.0, targetScale - e.deltaY * 0.0015));
-	},
-	{ passive: true }
-);
-
-function drawText(text, x, y, r = 180, g = r, b = r) {
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(x - Math.floor(text.length / 2), y);
+	t.translate(x, y);
 	t.charColor(r, g, b);
-
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
+t.pinch((data) => {
+	scale = Math.max(0.3, Math.min(4, data.scale));
+});
+
+t.mouseScrolled((data) => {
+	scale = Math.max(0.3, Math.min(4, scale - data.delta.y * 0.01));
+});
+
 t.draw(() => {
-	t.background(6, 8, 14);
-
-	const cols = t.grid.cols;
-	const rows = t.grid.rows;
-
-	// Easing for super smooth zooming transitions
-	currentScale += (targetScale - currentScale) * 0.1;
-
-	// Draw instructions
-	drawText('MANDALA PINCH & SCROLL VIEWER', 0, -Math.floor(rows / 2) + 4, 100, 200, 255);
-	drawText('Pinch on touchpads or use mouse scroll wheel to scale', 0, -Math.floor(rows / 2) + 6, 120, 140, 160);
-	drawText(`SCALE: ${currentScale.toFixed(2)}x`, 0, Math.floor(rows / 2) - 4, 255, 220, 100);
-
-	// Render the complex concentric geometric mandala
+	t.background(6, 10, 22);
 	t.push();
-	t.rotateZ(t.frameCount * 0.5 + currentScale * 30); // Rotate based on frame and zoom level
-
-	const rings = 8;
-	for (let ring = 1; ring <= rings; ring++) {
-		const points = 6 + ring * 4;
-		const r = ring * 3 * currentScale;
-
-		for (let i = 0; i < points; i++) {
-			const angle = (i / points) * Math.PI * 2 + ring * 0.1;
-			const px = Math.cos(angle) * r * 1.5;
-			const py = Math.sin(angle) * r;
-
-			t.push();
-			t.translate(px, py);
-
-			// Choose character based on ring layer
-			const chars = ['·', 'o', '*', '+', 'X', '☼', '▒', '█'];
-			const charSym = chars[(ring - 1) % chars.length];
-			t.char(charSym);
-
-			// Dynamic rainbow/gold gradients
-			const hueR = Math.floor(130 + 125 * Math.sin(angle + currentScale));
-			const hueG = Math.floor(180 + 75 * Math.cos(angle * 2));
-			const hueB = Math.floor(255 - ring * 20);
-			t.charColor(hueR, hueG, hueB);
-
-			t.point();
-			t.pop();
-		}
-	}
-
+	t.rotateZ(t.frameCount * 0.5);
+	t.char('#');
+	t.charColor(140, 220, 255);
+	t.rect(8 * scale, 8 * scale);
 	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.PINCH', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: PINCH SCALE', x, y++, 100, 220, 255);
+	drawText('Pinch or scroll changes scale.', x, y++, 140, 160, 190);
+	drawText('Shape size follows gesture.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`SCALE: ${scale.toFixed(2)}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -10569,7 +10062,7 @@ t.windowResized(() => {
 point(): void;
 ```
 
-Draw a 1x1 rectangle with the current settings.
+Draw one grid cell with the current settings.
 
 #### Returns
 
@@ -10584,85 +10077,48 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, row, rgb = [240, 245, 255]) {
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), row);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
 t.draw(() => {
 	t.background(6, 10, 22);
-
-	const time = t.frameCount * 0.05;
-
-	t.char('.');
-	t.charColor(40, 45, 60);
-	for (let y = -15; y <= 15; y += 5) {
-		for (let x = -30; x <= 30; x += 10) {
-			t.push();
-			t.translate(x, y);
-			t.point();
-			t.pop();
-		}
-	}
-
-	const count = 40;
+	const count = 24;
 	for (let i = 0; i < count; i++) {
-		const angle = time + i * 0.2;
-		const r = i * 0.6;
-		const x = Math.cos(angle) * r;
-		const y = Math.sin(angle) * r;
-
+		const angle = t.frameCount * 0.03 + (i / count) * Math.PI * 2;
+		const radius = 5 + (i % 4) * 2;
 		t.push();
-		t.translate(x, y);
-		t.char(['•', '·', '°', '*'][i % 4]);
-		t.charColor(100, 150 + i * 2, 255, (1 - i / count) * 255);
+		t.translate(Math.cos(angle) * radius * 1.6, Math.sin(angle) * radius);
+		t.char(i % 2 === 0 ? '+' : '.');
+		t.charColor(120 + i * 4, 180, 255 - i * 3);
 		t.point();
 		t.pop();
 	}
+});
 
-	let px = 0,
-		py = 0;
-	if (t.mouse.x !== Number.NEGATIVE_INFINITY) {
-		px = t.mouse.x;
-		py = t.mouse.y;
-	} else {
-		px = Math.sin(time * 0.7) * 20;
-		py = Math.cos(time * 0.5) * 10;
-	}
-
-	t.push();
-	t.translate(px, py);
-	t.char('☼');
-	t.charColor(255, 200, 100);
-	t.point();
-
-	t.translate(2, 0);
-	t.charColor(255);
-	const label = `point(${Math.floor(px)}, ${Math.floor(py)})`;
-	for (let i = 0; i < label.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(label[i]);
-		t.point();
-		t.pop();
-	}
-	t.pop();
-
-	drawCenteredText('Textmodifier.point', -20, [255, 255, 255]);
-	drawCenteredText('Draws the current character and color at the origin.', -18, [150, 170, 200]);
-
-	if (t.mouse.x === Number.NEGATIVE_INFINITY) {
-		drawCenteredText('Move mouse to control the tracker', 20, [100, 100, 120]);
-	}
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.POINT', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: DRAW ONE CELL', x, y++, 100, 220, 255);
+	drawText('point() stamps the active glyph.', x, y++, 140, 160, 190);
+	drawText('Each dot uses its own transform.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('API: t.point()', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -10712,72 +10168,52 @@ Up to five point lights are supported per frame. Additional calls are ignored.
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
-	fontSize: 8,
-	frameRate: 60,
+	fontSize: 16,
 });
 
-const orbitLights = [
-	{ color: [255, 120, 90], radius: 22, lift: 10, speed: 0.8, phase: 0 },
-	{ color: [255, 220, 90], radius: 18, lift: 8, speed: -1.05, phase: Math.PI * 0.4 },
-	{ color: [100, 220, 255], radius: 24, lift: 12, speed: 0.62, phase: Math.PI * 0.8 },
-	{ color: [120, 255, 170], radius: 16, lift: 9, speed: -0.9, phase: Math.PI * 1.2 },
-	{ color: [190, 120, 255], radius: 20, lift: 7, speed: 1.2, phase: Math.PI * 1.6 },
-];
+const labelLayer = t.layers.add();
+
+let value = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.draw(() => {
-	const time = t.frameCount * 0.02;
-
-	t.background(2, 4, 10);
+	t.background(6, 8, 18);
+	const time = t.frameCount * 0.025;
+	value = 0.5 + 0.5 * Math.sin(time);
+	t.perspective(58, 0.1, 4096);
+	t.camera(16, -10, 42, 0, 0, 0);
 	t.ambientLight(20, 20, 28);
-	t.lightFalloff(1, 0.018, 0.0009);
-	t.camera(Math.sin(time * 0.28) * 22, -6 + Math.sin(time * 0.21) * 8, 118, 0, 0, 0);
+	t.pointLight([255, 210, 120], { x: Math.sin(time) * 24, y: -18, z: 28 });
+	t.rotateY(time * 40);
+	t.char('#');
+	t.charColor(140, 220, 255);
+	t.sphere(7);
+});
 
-	for (let i = 0; i < orbitLights.length; i++) {
-		const light = orbitLights[i];
-		const angle = time * light.speed * 0.1 * Math.PI * 2 + light.phase;
-
-		t.pointLight(light.color, {
-			x: Math.cos(angle) * light.radius,
-			y: Math.sin(angle * 1.7) * light.lift,
-			z: Math.sin(angle) * light.radius,
-		});
-	}
-
-	t.push();
-	t.rotateX(18);
-	t.rotateY(time * 28);
-
-	for (let i = 0; i < 6; i++) {
-		t.push();
-		t.rotateY(i * 60 + time * 12);
-		t.translate(14, Math.sin(time * 2 + i) * 2, 0);
-		t.rotateX(time * 40 + i * 25);
-		t.char(i % 2 === 0 ? 'X' : 'H');
-		t.charColor(120 + i * 18, 130 + (i % 3) * 30, 255 - i * 16);
-		t.cellColor(16 + i * 6, 18 + i * 4, 28 + i * 3);
-		t.box(4, 12, 4);
-		t.pop();
-	}
-
-	t.push();
-	t.rotateY(-time * 55);
-	t.char('@');
-	t.charColor(245, 245, 255);
-	t.cellColor(20, 22, 32);
-	t.sphere(5.5);
-	t.pop();
-
-	t.push();
-	t.translate(0, 0, 0);
-	t.rotateX(90);
-	t.rotateY(time * 48);
-	t.char('*');
-	t.charColor(220, 230, 255);
-	t.cellColor(18, 20, 32);
-	t.torus(12, 2.2);
-	t.pop();
-
-	t.pop();
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.POINTLIGHT', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: POINT LIGHT', x, y++, 100, 220, 255);
+	drawText('Lighting changes surface shade.', x, y++, 140, 160, 190);
+	drawText('Scene keeps focus on one sphere.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`SWEEP: ${value.toFixed(2)}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -10874,20 +10310,54 @@ Use with [push](#push) to isolate style changes within a block.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.draw(() => {
-	t.background(0);
+	t.background(6, 10, 22);
+	const time = t.frameCount * 0.03;
+	t.push();
+	t.rotateZ(time * 30);
+	t.translate(10, 0);
+	t.char('#');
+	t.charColor(140, 255, 180);
+	t.rect(4, 3);
+	t.pop();
+	t.charColor(255, 210, 120);
+	t.char('+');
+	t.rect(5, 1);
+});
 
-	for (let i = 0; i < 3; i++) {
-		t.push();
-		t.translate(i * 12 - 12, 0);
-		t.rotateZ(t.frameCount * (1 + i * 0.5));
-		t.charColor(100 + i * 70, 255 - i * 50, 150);
-		t.char(['*', '@', '#'][i]);
-		t.rect(8, 8);
-		t.pop();
-	}
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.POP', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: RESTORE STATE', x, y++, 100, 220, 255);
+	drawText('pop() returns to prior state.', x, y++, 140, 160, 190);
+	drawText('Center mark is not rotated.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('API: t.pop()', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -10903,14 +10373,14 @@ t.windowResized(() => {
 postDraw(callback): void;
 ```
 
-Set a post-draw callback function for the base layer.
+Set the base layer post-draw callback.
 
 This callback runs after the base layer's draw callback, ASCII conversion, and
 any filters queued on the base layer during draw. Filters queued on
 `t.layers.base` inside this callback are applied to the base layer before
 other layers are composited on top.
 
-Calling this method is equivalent to setting the post-draw callback on the base layer:
+Calling this method is equivalent to setting the callback on `textmodifier.layers.base`:
 ```js
 textmodifier.layers.base.postDraw(callback);
 ```
@@ -10919,7 +10389,7 @@ textmodifier.layers.base.postDraw(callback);
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | () => `void` | The function to call after the base layer has been drawn and filtered. |
+| `callback` | () => `void` | Function to run after the base layer has been drawn and filtered. |
 
 #### Returns
 
@@ -10964,76 +10434,584 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function label(text, x, y, color = [180, 190, 210]) {
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
 	t.translate(x, y);
-	t.charColor(color[0], color[1], color[2]);
-
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
 t.draw(() => {
-	t.background(5, 7, 13);
+	t.background(6, 10, 22);
+	const time = t.frameCount * 0.03;
+	for (let i = 0; i < 5; i++) {
+		t.push();
+		t.rotateZ(time * 20 + i * 72);
+		t.translate(8 + i, 0);
+		t.char('*');
+		t.charColor(120 + i * 20, 220, 255 - i * 20);
+		t.point();
+		t.pop();
+	}
+	t.charColor(255, 210, 120);
+	t.char('+');
+	t.point();
+});
 
-	const cols = t.grid.cols;
-	const rows = t.grid.rows;
-	const time = t.frameCount * 0.025;
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.PUSH', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SAVE STATE', x, y++, 100, 220, 255);
+	drawText('push() stores transform state.', x, y++, 140, 160, 190);
+	drawText('Each spoke restores cleanly.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('API: t.push()', x, y++, 140, 255, 180);
+});
 
-	label('push() saves the current transform', -Math.floor(cols / 2) + 4, -Math.floor(rows / 2) + 4, [230, 235, 245]);
-	label(
-		'each orbit draws in its own temporary coordinate system',
-		-Math.floor(cols / 2) + 4,
-		-Math.floor(rows / 2) + 6,
-		[140, 155, 180]
-	);
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 
-	t.charColor(35, 45, 70);
-	for (let y = -Math.floor(rows / 2) + 10; y < Math.floor(rows / 2) - 4; y += 3) {
-		for (let x = -Math.floor(cols / 2) + 4; x < Math.floor(cols / 2) - 4; x += 8) {
-			t.push();
-			t.translate(x, y);
-			t.char('.');
-			t.point();
-			t.pop();
-		}
+***
+
+### random()
+
+#### Call Signature
+
+```ts
+random(): number;
+```
+
+Return a random number from 0 up to, but not including, 1.
+
+When the sketch is created with `seed`, or after calling [randomSeed](#randomseed),
+this method returns a reproducible sequence. This pseudo-random generator is
+intended for creative coding and is not cryptographically secure.
+
+##### Returns
+
+`number`
+
+Random number in the range [0, 1).
+
+##### Example
+
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+	seed: 'random-demo',
+});
+
+const labelLayer = t.layers.add();
+const characters = Array.from('░▒▓█+*#');
+let mark = { x: 0, y: 0, char: '*', r: 255, g: 255, b: 255 };
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(5, 8, 18);
+	if (t.frameCount % 12 === 1) {
+		mark = {
+			x: Math.floor(t.random(-18, 18)),
+			y: Math.floor(t.random(-9, 9)),
+			char: t.random(characters) ?? '*',
+			r: Math.floor(t.random(120, 256)),
+			g: Math.floor(t.random(120, 256)),
+			b: Math.floor(t.random(120, 256)),
+		};
 	}
 
 	t.push();
-	t.rotateZ(time * 8);
-	t.char('@');
-	t.charColor(255, 235, 150);
-	t.rect(6, 6);
+	t.translate(mark.x, mark.y);
+	t.char(mark.char);
+	t.charColor(mark.r, mark.g, mark.b);
+	t.point();
+	t.pop();
+});
 
-	for (let ring = 0; ring < 4; ring++) {
-		t.push();
-		t.rotateZ(time * (20 + ring * 11));
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.RANDOM', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SEEDED CHOICES', x, y++, 100, 220, 255);
+	drawText('The mark uses random ranges.', x, y++, 140, 160, 190);
+	drawText('The seed repeats this sequence.', x, y++, 140, 160, 190);
+});
 
-		for (let i = 0; i < 10; i++) {
-			const angle = (i / 10) * Math.PI * 2;
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 
-			t.push();
-			t.translate(Math.cos(angle) * (8 + ring * 5) * 1.6, Math.sin(angle) * (8 + ring * 5));
-			t.rotateZ(-time * (30 + ring * 8));
-			t.char(['+', '*', 'o', '#'][ring]);
-			t.charColor(80 + ring * 42, 210 - ring * 20, 255 - ring * 35, 185);
-			t.rect(2 + ring, 2 + ring);
-			t.pop();
-		}
+#### Call Signature
 
-		t.pop();
+```ts
+random(max): number;
+```
+
+Return a random number from 0 up to, but not including, `max`.
+
+##### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `max` | `number` | Upper bound, exclusive. |
+
+##### Returns
+
+`number`
+
+Random number in the range [0, max).
+
+##### Example
+
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+	seed: 'random-demo',
+});
+
+const labelLayer = t.layers.add();
+const characters = Array.from('░▒▓█+*#');
+let mark = { x: 0, y: 0, char: '*', r: 255, g: 255, b: 255 };
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(5, 8, 18);
+	if (t.frameCount % 12 === 1) {
+		mark = {
+			x: Math.floor(t.random(-18, 18)),
+			y: Math.floor(t.random(-9, 9)),
+			char: t.random(characters) ?? '*',
+			r: Math.floor(t.random(120, 256)),
+			g: Math.floor(t.random(120, 256)),
+			b: Math.floor(t.random(120, 256)),
+		};
 	}
 
+	t.push();
+	t.translate(mark.x, mark.y);
+	t.char(mark.char);
+	t.charColor(mark.r, mark.g, mark.b);
+	t.point();
 	t.pop();
+});
 
-	label('pop() restores the parent transform', -Math.floor(cols / 2) + 4, Math.floor(rows / 2) - 4, [245, 190, 100]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.RANDOM', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SEEDED CHOICES', x, y++, 100, 220, 255);
+	drawText('The mark uses random ranges.', x, y++, 140, 160, 190);
+	drawText('The seed repeats this sequence.', x, y++, 140, 160, 190);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
+#### Call Signature
+
+```ts
+random(min, max): number;
+```
+
+Return a random number from `min` up to, but not including, `max`.
+
+##### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `min` | `number` | Lower bound, inclusive. |
+| `max` | `number` | Upper bound, exclusive. |
+
+##### Returns
+
+`number`
+
+Random number in the range [min, max).
+
+##### Example
+
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+	seed: 'random-demo',
+});
+
+const labelLayer = t.layers.add();
+const characters = Array.from('░▒▓█+*#');
+let mark = { x: 0, y: 0, char: '*', r: 255, g: 255, b: 255 };
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(5, 8, 18);
+	if (t.frameCount % 12 === 1) {
+		mark = {
+			x: Math.floor(t.random(-18, 18)),
+			y: Math.floor(t.random(-9, 9)),
+			char: t.random(characters) ?? '*',
+			r: Math.floor(t.random(120, 256)),
+			g: Math.floor(t.random(120, 256)),
+			b: Math.floor(t.random(120, 256)),
+		};
+	}
+
+	t.push();
+	t.translate(mark.x, mark.y);
+	t.char(mark.char);
+	t.charColor(mark.r, mark.g, mark.b);
+	t.point();
+	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.RANDOM', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SEEDED CHOICES', x, y++, 100, 220, 255);
+	drawText('The mark uses random ranges.', x, y++, 140, 160, 190);
+	drawText('The seed repeats this sequence.', x, y++, 140, 160, 190);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
+#### Call Signature
+
+```ts
+random<T>(choices): T | undefined;
+```
+
+Return a random element from an array.
+
+##### Type Parameters
+
+| Type Parameter |
+| ------ |
+| `T` |
+
+##### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `choices` | readonly `T`[] | Values to choose from. |
+
+##### Returns
+
+`T` \| `undefined`
+
+A random array element, or `undefined` when the array is empty.
+
+##### Example
+
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+	seed: 'random-demo',
+});
+
+const labelLayer = t.layers.add();
+const characters = Array.from('░▒▓█+*#');
+let mark = { x: 0, y: 0, char: '*', r: 255, g: 255, b: 255 };
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(5, 8, 18);
+	if (t.frameCount % 12 === 1) {
+		mark = {
+			x: Math.floor(t.random(-18, 18)),
+			y: Math.floor(t.random(-9, 9)),
+			char: t.random(characters) ?? '*',
+			r: Math.floor(t.random(120, 256)),
+			g: Math.floor(t.random(120, 256)),
+			b: Math.floor(t.random(120, 256)),
+		};
+	}
+
+	t.push();
+	t.translate(mark.x, mark.y);
+	t.char(mark.char);
+	t.charColor(mark.r, mark.g, mark.b);
+	t.point();
+	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.RANDOM', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SEEDED CHOICES', x, y++, 100, 220, 255);
+	drawText('The mark uses random ranges.', x, y++, 140, 160, 190);
+	drawText('The seed repeats this sequence.', x, y++, 140, 160, 190);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
+***
+
+### randomSeed()
+
+```ts
+randomSeed(seed): void;
+```
+
+Reset the main sketch random generator to a seed.
+
+This also clears named streams created with [randomStream](#randomstream), so future
+stream lookups are derived from the new root seed.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `seed` | `TextmodeRandomSeed` | Seed used to restart the sequence. |
+
+#### Returns
+
+`void`
+
+#### Example
+
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+const points = [];
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+function rebuildPoints() {
+	t.randomSeed('repeatable-grid');
+	points.length = 0;
+	for (let i = 0; i < 28; i++) {
+		points.push({
+			x: Math.floor(t.random(-20, 20)),
+			y: Math.floor(t.random(-9, 9)),
+			char: t.random(['.', '+', '*', '#']) ?? '.',
+		});
+	}
+}
+
+rebuildPoints();
+
+t.draw(() => {
+	t.background(8, 7, 18);
+	if (t.frameCount % 120 === 1) {
+		rebuildPoints();
+	}
+
+	for (const point of points) {
+		t.push();
+		t.translate(point.x, point.y);
+		t.char(point.char);
+		t.charColor(120, 240, 255);
+		t.point();
+		t.pop();
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.RANDOMSEED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: RESET SEQUENCE', x, y++, 100, 220, 255);
+	drawText('The same points return.', x, y++, 140, 160, 190);
+	drawText('The seed is set every loop.', x, y++, 140, 160, 190);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
+***
+
+### randomStream()
+
+```ts
+randomStream(name): TextmodeRandom;
+```
+
+Get an independent deterministic random stream for a name.
+
+Named streams are derived from the current root seed and stream name. Consuming
+values from one stream does not affect the main generator or other named streams.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `name` | `string` | Stream name. |
+
+#### Returns
+
+`TextmodeRandom`
+
+A deterministic random generator for the given stream name.
+
+#### Example
+
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+	seed: 'stream-demo',
+});
+
+const labelLayer = t.layers.add();
+const leftStream = t.randomStream('left');
+const rightStream = t.randomStream('right');
+let leftY = 0;
+let rightY = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(6, 10, 18);
+	if (t.frameCount % 16 === 1) {
+		leftY = Math.floor(leftStream.random(-9, 9));
+		rightY = Math.floor(rightStream.random(-9, 9));
+	}
+
+	t.push();
+	t.translate(-8, leftY);
+	t.char('L');
+	t.charColor(130, 255, 190);
+	t.point();
+	t.translate(16, rightY - leftY);
+	t.char('R');
+	t.charColor(255, 190, 130);
+	t.point();
+	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.RANDOMSTREAM', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: NAMED STREAMS', x, y++, 100, 220, 255);
+	drawText('Left and right are separate.', x, y++, 140, 160, 190);
+	drawText('One stream cannot move another.', x, y++, 140, 160, 190);
 });
 
 t.windowResized(() => {
@@ -11056,8 +11034,8 @@ Position is controlled via [translate](#translate), [push](#push), and [pop](#po
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `width?` | `number` | Width of the rectangle in grid cells (defaults to 1) |
-| `height?` | `number` | Height of the rectangle in grid cells (defaults to 1) |
+| `width?` | `number` | Rectangle width in grid cells. Defaults to 1. |
+| `height?` | `number` | Rectangle height in grid cells. Defaults to 1. |
 
 #### Returns
 
@@ -11066,30 +11044,58 @@ Position is controlled via [translate](#translate), [push](#push), and [pop](#po
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+let widthCells = 0;
+let heightCells = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.draw(() => {
-	t.background(0);
+	t.background(6, 10, 22);
+	const time = t.frameCount * 0.03;
+	widthCells = 12 + Math.round(Math.sin(time) * 5);
+	heightCells = 6 + Math.round(Math.cos(time * 0.8) * 3);
+	t.push();
+	t.translate(8, 1);
+	t.rotateZ(Math.sin(time) * 8);
+	t.char('#');
+	t.charColor(120, 220, 255);
+	t.cellColor(20, 30, 60);
+	t.rect(widthCells, heightCells);
+	t.pop();
+});
 
-	const time = t.frameCount * 0.5;
-	const squareCount = 64;
-	const maxSize = Math.max(t.grid.cols, t.grid.rows) * 1.5;
-
-	for (let i = squareCount; i > 0; i--) {
-		const progress = i / squareCount;
-		const size = maxSize * Math.pow(progress, 1.5);
-		const rotation = time + i * 15;
-
-		t.push();
-		t.rotateZ(rotation);
-
-		const brightness = Math.round(255 * (1 - progress));
-		t.charColor(brightness, Math.round(brightness * 0.5), 255);
-		t.char(['░', '▒', '▓', '█'][i % 4]);
-
-		t.rect(size, size);
-		t.pop();
-	}
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.RECT', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: RECTANGLE SHAPE', x, y++, 100, 220, 255);
+	drawText('Draws width by height cells.', x, y++, 140, 160, 190);
+	drawText('Scene shifted clear of the HUD.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`W: ${widthCells}`, x, y++, 140, 255, 180);
+	drawText(`H: ${heightCells}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -11105,7 +11111,7 @@ t.windowResized(() => {
 redraw(n?): void;
 ```
 
-Execute the render function a specified number of times.
+Render a fixed number of frames on demand.
 
 This method is useful when the render loop has been stopped with [noLoop](#noloop),
 allowing you to trigger rendering on demand.
@@ -11114,7 +11120,7 @@ allowing you to trigger rendering on demand.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `n?` | `number` | The number of times to execute the render function. Defaults to 1. |
+| `n?` | `number` | Number of frames to render. Defaults to 1. |
 
 #### Returns
 
@@ -11129,163 +11135,75 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-let manualMode = false;
-let bursts = 0;
-let stepCount = 0;
+const labelLayer = t.layers.add();
 
-// Particle system state
-const particles = [];
-const pegs = [];
+let steps = 0;
+let lastRequest = 1;
 
-// Populate a stable grid of pegs for particles to bounce off
-function initSimulator() {
-	pegs.length = 0;
-	particles.length = 0;
-
-	// Draw 3 rows of pegs in triangular fashion
-	for (let row = 0; row < 4; row++) {
-		const colsInRow = 5 + row;
-		const startX = -colsInRow * 2.5;
-		for (let c = 0; c < colsInRow; c++) {
-			pegs.push({ x: startX + c * 5 + 2.5, y: -6 + row * 4 });
-		}
-	}
-}
-
-initSimulator();
-
-function drawText(text, x, y, r = 180, g = r, b = r) {
-	t.push();
-	t.translate(x - Math.floor(text.length / 2), y);
-	t.charColor(r, g, b);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
-
-function advanceSimulator() {
-	stepCount++;
-
-	// Spawn new particles periodically
-	if (stepCount % 3 === 0) {
-		particles.push({
-			x: Math.random() * 4 - 2,
-			y: -14,
-			vx: Math.random() * 0.4 - 0.2,
-			vy: 0.5,
-			color: [Math.floor(100 + Math.random() * 155), 200, 255],
-		});
-	}
-
-	// Update active particles under simple physical gravity
-	for (let i = particles.length - 1; i >= 0; i--) {
-		const p = particles[i];
-		p.vy += 0.08; // Gravity
-		p.x += p.vx;
-		p.y += p.vy;
-
-		// Collide with pegs
-		pegs.forEach((peg) => {
-			const dx = p.x - peg.x;
-			const dy = p.y - peg.y;
-			const dist = Math.sqrt(dx * dx + dy * dy);
-			if (dist < 1.6) {
-				// Bounce off peg
-				p.vy = -Math.abs(p.vy) * 0.4;
-				p.vx = (dx / dist) * 0.6 + (Math.random() * 0.2 - 0.1);
-				p.y = peg.y + (dy / dist) * 1.6;
-			}
-		});
-
-		// Remove out of bounds particles
-		if (p.y > 15) {
-			particles.splice(i, 1);
-		}
-	}
-}
-
-function triggerRedraw(count) {
-	if (!manualMode) return;
-
-	bursts++;
-	// Force textmode to execute the draw loop exactly 'count' times
-	t.redraw(count);
-}
-
-t.keyPressed((data) => {
-	if (data.key === ' ') {
-		triggerRedraw(1);
-	}
-	if (data.key === 'Enter') {
-		triggerRedraw(5);
-	}
+t.setup(() => {
+	t.noLoop();
 });
 
 t.mousePressed(() => {
-	triggerRedraw(1);
+	lastRequest = 1;
+	t.redraw();
 });
 
-t.draw(() => {
-	// Auto-pause at frame 60 to shift into step-by-step diagnostic mode
-	if (!manualMode && t.frameCount >= 60) {
-		manualMode = true;
-		t.noLoop(); // Pauses the continuous animation loop
+t.keyPressed(() => {
+	lastRequest = 5;
+	t.redraw(5);
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
 	}
+	t.pop();
+}
 
-	// Update physics
-	advanceSimulator();
-
+t.draw(() => {
+	steps++;
 	t.background(6, 8, 14);
 
-	const cols = t.grid.cols;
-	const rows = t.grid.rows;
-
-	// Draw Console telemetry instructions
-	drawText('RENDER LOOP STEP TELEMETRY', 0, -Math.floor(rows / 2) + 4, 100, 200, 255);
-	drawText(
-		manualMode ? 'STATUS: PAUSED (MANUAL MODE)' : 'STATUS: CONTINUOUS REELING (AUTO PAUSING...)',
-		0,
-		-Math.floor(rows / 2) + 6,
-		manualMode ? 255 : 100,
-		manualMode ? 120 : 255,
-		manualMode ? 100 : 150
-	);
-
-	// Controls instructions HUD
-	drawText('CLICK / SPACEBAR = redraw(1) step', 0, Math.floor(rows / 2) - 6, 180, 200, 220);
-	drawText('ENTER KEY = redraw(5) steps burst', 0, Math.floor(rows / 2) - 4, 255, 220, 100);
-	drawText(`STEPS: ${stepCount} | BURSTS: ${bursts}`, 0, Math.floor(rows / 2) - 2, 140, 150, 160);
-
-	// Draw peg structures
-	t.charColor(100, 120, 150);
-	t.char('*');
-	pegs.forEach((peg) => {
+	const width = Math.max(12, Math.floor(t.grid.cols * 0.6));
+	for (let i = 0; i < width; i++) {
+		const phase = steps * 0.32 + i * 0.45;
+		const x = i - Math.floor(width / 2);
+		const y = Math.round(Math.sin(phase) * 5);
 		t.push();
-		t.translate(peg.x, peg.y);
+		t.translate(x, y + 2);
+		t.char(i % 3 === 0 ? '+' : '*');
+		t.charColor(90 + (i % 12) * 12, 200, 255);
 		t.point();
 		t.pop();
-	});
+	}
+});
 
-	// Draw active particles with physical trails
-	particles.forEach((p) => {
-		t.push();
-		t.translate(p.x, p.y);
-		t.char('o');
-		t.charColor(...p.color);
-		t.rect(1.5, 1.5);
-		t.pop();
-	});
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODIFIER.REDRAW', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: MANUAL RENDER STEPS', x, y++, 100, 220, 255);
+	drawText('setup pauses with noLoop().', x, y++, 140, 160, 190);
+	drawText('redraw(n) renders n frames.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`FRAMES: ${steps}`, x, y++, 140, 255, 180);
+	drawText(`LAST REQUEST: ${lastRequest}`, x, y++, 255, 225, 140);
+	drawText('CLICK: REDRAW 1', x, y++, 255, 225, 140);
+	drawText('ANY KEY: REDRAW 5', x, y++, 255, 225, 140);
 });
 
 t.windowResized(() => {
-	initSimulator();
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
@@ -11314,35 +11232,64 @@ otherwise `false`.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-let cursor = { x: 0, y: 0 };
+const labelLayer = t.layers.add();
+
+let cx = 0;
+let cy = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.mouseClicked(() => {
-	if (document.pointerLockElement === t.canvas) {
-		t.exitPointerLock();
-	} else {
-		t.requestPointerLock();
-	}
+	if (document.pointerLockElement === t.canvas) t.exitPointerLock();
+	else t.requestPointerLock();
 });
 
 t.draw(() => {
-	t.background(0);
-
-	if (document.pointerLockElement === t.canvas) {
-		cursor.x += t.movedX * 0.08;
-		cursor.y += t.movedY * 0.08;
+	t.background(6, 10, 22);
+	const locked = document.pointerLockElement === t.canvas;
+	if (locked) {
+		cx += t.movedX * 0.08;
+		cy += t.movedY * 0.08;
 	}
-
-	cursor.x = Math.max(-t.grid.cols / 2, Math.min(t.grid.cols / 2, cursor.x));
-	cursor.y = Math.max(-t.grid.rows / 2, Math.min(t.grid.rows / 2, cursor.y));
-
+	cx = Math.max(-20, Math.min(20, cx));
+	cy = Math.max(-10, Math.min(10, cy));
 	t.push();
-	t.translate(cursor.x, cursor.y);
-	t.char(document.pointerLockElement === t.canvas ? '@' : '+');
-	t.charColor(document.pointerLockElement === t.canvas ? 255 : 180, 220, 120);
+	t.translate(cx, cy);
+	t.char(locked ? '@' : '+');
+	t.charColor(locked ? 140 : 255, locked ? 255 : 210, 180);
 	t.point();
 	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.REQUESTPOINTERLOCK', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: LOCK POINTER', x, y++, 100, 220, 255);
+	drawText('Click toggles pointer lock.', x, y++, 140, 160, 190);
+	drawText('Movement uses movedX/movedY.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(document.pointerLockElement === t.canvas ? 'LOCKED: TRUE' : 'LOCKED: FALSE', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -11358,7 +11305,7 @@ t.windowResized(() => {
 resetCamera(): void;
 ```
 
-Resets to the default auto camera behavior.
+Reset to the default auto camera behavior.
 
 This clears any active explicit camera and returns view calculation to renderer-managed defaults.
 
@@ -11369,71 +11316,55 @@ This clears any active explicit camera and returns view calculation to renderer-
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-let customCamera;
-let autoMode = false;
+const labelLayer = t.layers.add();
 
-const scene = [
-	{ x: -12, y: 0, z: -10, char: 'A', color: [255, 120, 120] },
-	{ x: 0, y: 0, z: 0, char: 'B', color: [120, 255, 160] },
-	{ x: 12, y: 0, z: 10, char: 'C', color: [120, 180, 255] },
-];
+let custom = true;
 
-function drawScene() {
-	for (let i = 0; i < scene.length; i++) {
-		const item = scene[i];
-
-		t.push();
-		t.translate(item.x, item.y, item.z);
-		t.rotateX(t.frameCount * (0.8 + i * 0.1));
-		t.rotateY(t.frameCount * (1.1 + i * 0.15));
-		t.char(item.char);
-		t.charColor(item.color[0], item.color[1], item.color[2]);
-		t.rect(8, 8);
-		t.pop();
-	}
-}
-
-function drawLabel(text, y) {
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y, 0);
-	t.charColor(220);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-t.setup(() => {
-	t.perspective(58, 0.1, 4096);
-	customCamera = t.createCamera();
-	customCamera.setPosition(0, 14, 34).lookAt(0, 0, 0);
-	t.setCamera(customCamera);
-});
-
-t.mouseClicked(() => {
-	autoMode = !autoMode;
-
-	if (autoMode) {
-		t.resetCamera();
-		return;
-	}
-
-	t.setCamera(customCamera);
-});
-
 t.draw(() => {
-	t.background(8, 10, 24);
-	drawScene();
-	drawLabel('click to toggle resetCamera()', Math.floor(t.grid.rows / 2) - 3);
-	drawLabel(autoMode ? 'auto camera active' : 'custom camera active', Math.floor(t.grid.rows / 2) - 1);
+	t.background(6, 8, 18);
+	custom = Math.floor(t.frameCount / 120) % 2 === 0;
+	if (custom) {
+		t.camera(Math.sin(t.frameCount * 0.03) * 20, 10, 38, 0, 0, 0);
+	} else {
+		t.resetCamera();
+	}
+	t.char('#');
+	t.charColor(140, 220, 255);
+	t.rotateY(t.frameCount);
+	t.box(8, 8, 8);
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.RESETCAMERA', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: RESTORE CAMERA', x, y++, 100, 220, 255);
+	drawText('Alternates custom and reset.', x, y++, 140, 160, 190);
+	drawText('resetCamera returns auto view.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(custom ? 'MODE: CUSTOM' : 'MODE: RESET', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -11460,45 +11391,56 @@ This clears translation, rotation, and scale state for subsequent draw calls.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-function drawLabel(text, y, color = [220, 220, 220]) {
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
 t.draw(() => {
-	t.background(5, 7, 18);
-
+	t.background(6, 10, 22);
+	const time = t.frameCount * 0.04;
 	t.push();
-	t.translate(-8, 0);
-	t.rotateZ(t.frameCount * 1.6);
-	t.charColor(255, 140, 120);
-	t.rect(10, 10);
-	t.pop();
-
-	t.push();
-	t.translate(8, 0);
-	t.rotateZ(t.frameCount * 1.6);
+	t.rotateZ(time * 40);
+	t.translate(12, 0);
+	t.charColor(120, 220, 255);
+	t.char('#');
+	t.rect(6, 3);
 	t.resetMatrix();
-	t.translate(8, 0);
-	t.charColor(120, 205, 255);
-	t.rect(10, 10);
+	t.charColor(255, 210, 120);
+	t.translate(8, 3);
+	t.char('+');
+	t.rect(5, 1);
 	t.pop();
+});
 
-	drawLabel('left keeps rotation', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
-	drawLabel('right calls resetMatrix()', Math.floor(t.grid.rows * 0.3), [120, 205, 255]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.RESETMATRIX', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: CLEAR TRANSFORM', x, y++, 100, 220, 255);
+	drawText('resetMatrix drops transforms.', x, y++, 140, 160, 190);
+	drawText('Yellow bar uses fresh matrix.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('API: t.resetMatrix()', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -11526,60 +11468,71 @@ Equivalent to calling `shader(null)`.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-let portalShader;
+const labelLayer = t.layers.add();
+
+let shaderObj;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.setup(async () => {
-	portalShader = await t.createFilterShader(`#version 300 es
-    precision highp float;
-    in vec2 v_uv;
-    uniform float u_time;
-    layout(location = 0) out vec4 o_char;
-    layout(location = 1) out vec4 o_prim;
-    layout(location = 2) out vec4 o_sec;
-
-    void main() {
-      vec2 p = v_uv * 2.0 - 1.0;
-      float r = length(p);
-      float a = atan(p.y, p.x);
-
-      float charPattern = floor(r * 8.0) / 8.0 + sin(a * 6.0 + u_time * 0.3) * 0.1;
-      o_char = vec4(charPattern, 0.0, 0.0, 1.0);
-
-      float wave = sin(r * 20.0 - u_time * 5.0 + sin(a * 10.0));
-      o_prim = vec4(0.5 + 0.5 * cos(u_time + r * 2.0), 0.2 + wave * 0.3, 0.8, 1.0);
-      o_sec = vec4(0.0);
-    }
-  `);
+	const vert = `#version 300 es
+	in vec4 a_position;
+	in vec2 a_texCoord;
+	out vec2 v_uv;
+	void main(){gl_Position=a_position;v_uv=a_texCoord;}`;
+	const frag = `#version 300 es
+	precision highp float;
+	in vec2 v_uv;
+	uniform float u_time;
+	layout(location=0) out vec4 o_character;
+	layout(location=1) out vec4 o_primaryColor;
+	layout(location=2) out vec4 o_secondaryColor;
+	void main(){float v=fract(v_uv.x*8.0+u_time);o_character=vec4(v,0,0,1);o_primaryColor=vec4(v,0.8,1.0,1);o_secondaryColor=vec4(0.02,0.04,0.08,1);}`;
+	shaderObj = await t.createShader(vert, frag);
 });
 
 t.draw(() => {
-	t.background(0);
-
-	if (portalShader) {
-		t.shader(portalShader);
+	t.background(6, 10, 22);
+	if (shaderObj && Math.floor(t.frameCount / 90) % 2 === 0) {
+		t.shader(shaderObj);
 		t.setUniform('u_time', t.frameCount * 0.02);
-
-		t.rect(t.grid.cols, t.grid.rows);
 	}
-
+	t.rect(t.grid.cols, t.grid.rows);
 	t.resetShader();
+	t.char('#');
+	t.charColor(255, 210, 120);
+	t.rect(10, 5);
+});
 
-	const count = 8;
-	for (let i = 0; i < count; i++) {
-		const angle = t.frameCount * 0.05 + (i / count) * Math.PI * 2;
-		const x = Math.cos(angle) * 15;
-		const y = Math.sin(angle) * 15;
-
-		t.push();
-		t.translate(x, y);
-		t.rotateZ(angle * 2);
-		t.char('♦');
-		t.charColor(255, 200, 100);
-		t.rect(5, 5);
-		t.pop();
-	}
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.RESETSHADER', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: RESTORE SHADER', x, y++, 100, 220, 255);
+	drawText('Shader affects the main drawing.', x, y++, 140, 160, 190);
+	drawText('resetShader restores default.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('RESET AFTER FULLSCREEN', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -11617,82 +11570,47 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawText(text, x, y, r = 180, g = r, b = r) {
+const labelLayer = t.layers.add();
+
+let resized = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(x - Math.floor(text.length / 2), y);
+	t.translate(x, y);
 	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
+t.mouseClicked(() => {
+	resized++;
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+
 t.draw(() => {
-	t.background(6, 8, 14);
+	t.background(6, 10, 22);
+	t.char('#');
+	t.charColor(140, 220, 255);
+	t.rect(12, 5);
+});
 
-	const cols = t.grid.cols;
-	const rows = t.grid.rows;
-
-	// Glowing outer bounding box
-	t.push();
-	t.charColor(30, 45, 65);
-	t.char('█');
-	t.ellipse(cols - 4, rows - 4);
-	t.pop();
-
-	// Telemetry Labels
-	drawText('GRID VIEWPORT TELEMETRY COMPASS', 0, -Math.floor(rows / 2) + 4, 100, 200, 255);
-	drawText(
-		'Resize window to test reactive cell grid metrics in real-time',
-		0,
-		-Math.floor(rows / 2) + 6,
-		120,
-		140,
-		160
-	);
-
-	// Central Radar / Crosshair
-	t.push();
-	t.translate(0, 0);
-
-	// Outer radar ring
-	t.push();
-	const pulse = 1.0 + Math.sin(t.frameCount * 0.08) * 0.08;
-	t.charColor(50, 80, 120);
-	t.char('·');
-	t.ellipse(24 * pulse, 24 * pulse);
-	t.pop();
-
-	// Inner crosshair indicators
-	t.push();
-	t.charColor(0, 255, 180);
-	t.char('+');
-	t.point();
-	t.pop();
-
-	// Compass Axes Lines
-	t.charColor(25, 35, 50);
-	t.line(-Math.floor(cols / 2) + 6, 0, Math.floor(cols / 2) - 6, 0);
-	t.line(0, -Math.floor(rows / 2) + 8, 0, Math.floor(rows / 2) - 8);
-
-	t.pop();
-
-	// Digital Telemetry Readings
-	const wStr = `CANVAS_WIDTH: ${window.innerWidth} PX`;
-	const hStr = `CANVAS_HEIGHT: ${window.innerHeight} PX`;
-	const gridStr = `GRID_CELLS: ${cols} COLUMNS x ${rows} ROWS`;
-
-	drawText(wStr, 0, 4, 255, 180, 50);
-	drawText(hStr, 0, 6, 255, 180, 50);
-	drawText(gridStr, 0, 8, 100, 255, 180);
-
-	// Status signal
-	const blink = Math.round(150 + 105 * Math.sin(t.frameCount * 0.12));
-	drawText('STATUS: ONLINE // GRID COMPILER SYNC ACTIVE', 0, Math.floor(rows / 2) - 5, 0, blink, blink * 0.8);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.RESIZECANVAS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: RESIZE CANVAS', x, y++, 100, 220, 255);
+	drawText('Click calls resizeCanvas.', x, y++, 140, 160, 190);
+	drawText('Window callback does the same.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`CLICKS: ${resized}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -11710,7 +11628,7 @@ t.windowResized(() => {
 rotate(): void;
 ```
 
-Sets the rotation angles for subsequent shape rendering operations.
+Set rotation for subsequent shape drawing.
 
 All geometries rotate around the center of the shape.
 
@@ -11727,69 +11645,51 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawText(text, x, y, r = 180, g = r, b = r) {
+const labelLayer = t.layers.add();
+
+let value = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(x - Math.floor(text.length / 2), y);
+	t.translate(x, y);
 	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
 t.draw(() => {
-	t.background(6, 8, 14);
-
-	const cols = t.grid.cols;
-	const rows = t.grid.rows;
-
-	// Title Info
-	drawText('NATIVE 3D ASCII ENGINE VIEWPORT', 0, -Math.floor(rows / 2) + 4, 100, 200, 255);
-	drawText(
-		'Three-dimensional primitives rotating dynamically on multi-axes',
-		0,
-		-Math.floor(rows / 2) + 6,
-		120,
-		140,
-		160
-	);
-
-	const time = t.frameCount;
-	const spacing = Math.floor(cols / 4);
-
-	// Shape 1: 3D Box (Left)
+	t.background(6, 10, 22);
+	const time = t.frameCount * 0.04;
+	value = (time * 60) % 360;
+	t.charColor(50, 60, 90);
+	t.char('.');
+	t.line(-18, 0, 18, 0);
+	t.line(0, -10, 0, 10);
 	t.push();
-	t.translate(-spacing, 2);
-	t.rotate(time * 0.8, time * 0.5, 0);
-	t.char('▒');
-	t.charColor(255, 120, 100);
-	t.box(10, 10, 10);
+	t.rotate(value);
+	t.char('#');
+	t.charColor(140, 255, 180);
+	t.rect(6, 4);
 	t.pop();
-	drawText('3D BOX', -spacing, 10, 255, 120, 100);
+});
 
-	// Shape 2: 3D Torus (Center)
-	t.push();
-	t.translate(0, 2);
-	t.rotate(time, 0, time * 0.6);
-	t.char('█');
-	t.charColor(100, 255, 180);
-	t.torus(8, 3);
-	t.pop();
-	drawText('3D TORUS', 0, 10, 100, 255, 180);
-
-	// Shape 3: 3D Cylinder (Right)
-	t.push();
-	t.translate(spacing, 2);
-	t.rotate(0, time * 1.2, time * 0.4);
-	t.char('░');
-	t.charColor(100, 180, 255);
-	t.cylinder(6, 12);
-	t.pop();
-	drawText('3D CYLINDER', spacing, 10, 100, 180, 255);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.ROTATE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: ROTATE IN 2D', x, y++, 100, 220, 255);
+	drawText('Rotates around the Z axis.', x, y++, 140, 160, 190);
+	drawText('Grid cross shows original axes.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`DEG: ${value.toFixed(1)}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -11868,7 +11768,7 @@ along with the gesture centre in grid coordinates. Ideal for dial-like interacti
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`TouchRotateHandler`](../namespaces/input/namespaces/touch/type-aliases/TouchRotateHandler.md) | The function to call when a rotation gesture is detected. |
+| `callback` | [`TouchRotateHandler`](../namespaces/input/namespaces/touch/type-aliases/TouchRotateHandler.md) | Handler to run when a rotation gesture is detected. |
 
 #### Returns
 
@@ -11883,110 +11783,58 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
+const labelLayer = t.layers.add();
+
 let rotation = 0;
-let targetRotation = 0;
-let dragStartX = 0;
-let dragStartRotation = 0;
-let dragging = false;
+let dragStart = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.rotateGesture((data) => {
-	addRotation(data.deltaRotation);
+	rotation += data.deltaRotation;
 });
 
 t.mousePressed(() => {
-	if (!t.mouse) return;
-	dragging = true;
-	dragStartX = t.mouse.x;
-	dragStartRotation = targetRotation;
-});
-
-t.mouseReleased(() => {
-	dragging = false;
+	dragStart = t.mouse.x;
 });
 
 t.mouseDragged(() => {
-	if (!dragging || !t.mouse) return;
-	const nextRotation = dragStartRotation + (t.mouse.x - dragStartX) * 3;
-	if (Number.isFinite(nextRotation)) {
-		targetRotation = nextRotation;
-	}
-});
-
-t.mouseScrolled((data) => {
-	addRotation((data.delta?.y ?? 0) * 0.08);
+	rotation += (t.mouse.x - dragStart) * 0.5;
+	dragStart = t.mouse.x;
 });
 
 t.draw(() => {
-	t.background(5, 8, 14);
-	if (!Number.isFinite(rotation) || !Number.isFinite(targetRotation)) {
-		rotation = 0;
-		targetRotation = 0;
-	}
-	rotation += (targetRotation - rotation) * 0.12;
-
-	const rows = t.grid.rows;
-	const top = -Math.floor(rows / 2) + 4;
-
-	drawText('rotate gesture compass', 0, top, [235, 240, 250]);
-	drawText('twist on touch, or drag/scroll horizontally on desktop', 0, top + 2, [130, 150, 180]);
-	drawText(`rotation ${Math.round(rotation)} deg`, 0, Math.floor(rows / 2) - 4, [255, 210, 110]);
-
-	for (let ring = 0; ring < 5; ring++) {
-		const points = 20 + ring * 8;
-		const radius = 5 + ring * 4;
-
-		for (let i = 0; i < points; i++) {
-			const angle = (i / points) * Math.PI * 2 + rotation * 0.017 + ring * 0.35;
-			t.push();
-			t.translate(Math.cos(angle) * radius * 1.65, Math.sin(angle) * radius);
-			t.char(['.', ':', '+', '*', '#'][ring]);
-			t.charColor(70 + ring * 35, 120 + ring * 18, 220 - ring * 16, 115 + ring * 22);
-			t.point();
-			t.pop();
-		}
-	}
-
-	t.push();
+	t.background(6, 10, 22);
 	t.rotateZ(rotation);
-	t.char('*');
-	t.charColor(100, 255, 200);
-	t.rect(18, 18);
-
-	for (let i = 0; i < 8; i++) {
-		const angle = (i / 8) * Math.PI * 2;
-		t.push();
-		t.translate(Math.cos(angle) * 18 * 1.6, Math.sin(angle) * 18);
-		t.rotateZ(-rotation * 1.5);
-		t.char(i % 2 === 0 ? '>' : '|');
-		t.charColor(255, 150 + i * 8, 90);
-		t.rect(3, 3);
-		t.pop();
-	}
-
-	t.pop();
+	t.char('#');
+	t.charColor(140, 220, 255);
+	t.rect(14, 4);
 });
 
-function addRotation(delta) {
-	if (Number.isFinite(delta)) {
-		targetRotation += delta;
-	}
-}
-
-function drawText(text, x, y, color) {
-	t.push();
-	t.translate(x - Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.ROTATEGESTURE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: ROTATE GESTURE', x, y++, 100, 220, 255);
+	drawText('Touch twist or drag rotates.', x, y++, 140, 160, 190);
+	drawText('Rotation accumulates over time.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`DEG: ${rotation.toFixed(1)}`, x, y++, 140, 255, 180);
+});
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
@@ -12001,7 +11849,7 @@ t.windowResized(() => {
 rotateX(degrees?): number | void;
 ```
 
-Sets the X-axis rotation angle for subsequent shape rendering operations, or gets the current angle.
+Set X-axis rotation for subsequent shape drawing, or get the current angle.
 
 All geometries rotate around the center of the shape.
 
@@ -12009,13 +11857,13 @@ All geometries rotate around the center of the shape.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `degrees?` | `number` | The rotation angle in degrees around the X-axis. If not provided, returns the current accumulated rotation. |
+| `degrees?` | `number` | Rotation angle in degrees around the X axis. |
 
 #### Returns
 
 `number` \| `void`
 
-The current X-axis rotation in degrees if called without arguments.
+Current X-axis rotation in degrees when called without arguments.
 
 #### Example
 
@@ -12026,59 +11874,51 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, row, rgb = [240, 245, 255]) {
+const labelLayer = t.layers.add();
+
+let value = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), row);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
 t.draw(() => {
 	t.background(6, 10, 22);
-
-	const time = t.frameCount * 2;
-	let angle = time;
-
-	if (t.mouse.y !== Number.NEGATIVE_INFINITY) {
-		angle = t.mouse.y * 10;
-	}
-
+	const time = t.frameCount * 0.04;
+	value = (time * 70) % 360;
+	t.charColor(50, 60, 90);
+	t.char('.');
+	t.line(-18, 0, 18, 0);
+	t.line(0, -10, 0, 10);
 	t.push();
-	t.charColor(40, 50, 80);
-	for (let i = -2; i <= 2; i++) {
-		t.push();
-		t.translate(0, i * 10, 0);
-		t.char('-');
-		t.rect(60, 1);
-		t.pop();
-	}
+	t.rotateX(value);
+	t.char('#');
+	t.charColor(140, 255, 180);
+	t.rect(6, 4);
 	t.pop();
+});
 
-	t.push();
-	t.rotateX(angle);
-	const currentAngle = t.rotateX();
-	const intensity = Math.abs(Math.cos((currentAngle * Math.PI) / 180));
-	t.charColor(120, 255, 180);
-	t.char(intensity > 0.3 ? '█' : '▒');
-	t.rect(30, 15);
-	t.pop();
-
-	drawCenteredText(`Current X-Angle: ${Math.floor(currentAngle % 360)}°`, 12, [255, 225, 140]);
-
-	drawCenteredText('Textmodifier.rotateX', -18, [255, 255, 255]);
-	drawCenteredText('Rotates the coordinate system around the X-axis (Pitch).', -16, [150, 170, 200]);
-	drawCenteredText('t.rotateX(degrees)', 18, [140, 180, 255]);
-
-	if (t.mouse.y === Number.NEGATIVE_INFINITY) {
-		drawCenteredText('Move mouse Y to control rotation', 21, [100, 100, 120]);
-	}
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.ROTATEX', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: X AXIS ROTATION', x, y++, 100, 220, 255);
+	drawText('Pitch changes vertical plane.', x, y++, 140, 160, 190);
+	drawText('Grid cross shows original axes.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`DEG: ${value.toFixed(1)}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -12094,7 +11934,7 @@ t.windowResized(() => {
 rotateY(degrees?): number | void;
 ```
 
-Sets the Y-axis rotation angle for subsequent shape rendering operations, or gets the current angle.
+Set Y-axis rotation for subsequent shape drawing, or get the current angle.
 
 All geometries rotate around the center of the shape.
 
@@ -12102,13 +11942,13 @@ All geometries rotate around the center of the shape.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `degrees?` | `number` | The rotation angle in degrees around the Y-axis. If not provided, returns the current accumulated rotation. |
+| `degrees?` | `number` | Rotation angle in degrees around the Y axis. |
 
 #### Returns
 
 `number` \| `void`
 
-The current Y-axis rotation in degrees if called without arguments.
+Current Y-axis rotation in degrees when called without arguments.
 
 #### Example
 
@@ -12119,59 +11959,51 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, row, rgb = [240, 245, 255]) {
+const labelLayer = t.layers.add();
+
+let value = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), row);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
 t.draw(() => {
 	t.background(6, 10, 22);
-
-	const time = t.frameCount * 2;
-	let angle = time;
-
-	if (t.mouse.x !== Number.NEGATIVE_INFINITY) {
-		angle = t.mouse.x * 10;
-	}
-
+	const time = t.frameCount * 0.04;
+	value = (time * 70) % 360;
+	t.charColor(50, 60, 90);
+	t.char('.');
+	t.line(-18, 0, 18, 0);
+	t.line(0, -10, 0, 10);
 	t.push();
-	t.charColor(40, 50, 80);
-	for (let i = -2; i <= 2; i++) {
-		t.push();
-		t.translate(i * 15, 0, 0);
-		t.char('|');
-		t.rect(1, 40);
-		t.pop();
-	}
+	t.rotateY(value);
+	t.char('#');
+	t.charColor(140, 255, 180);
+	t.rect(6, 4);
 	t.pop();
+});
 
-	t.push();
-	t.rotateY(angle);
-	const currentAngle = t.rotateY();
-	const side = Math.cos((currentAngle * Math.PI) / 180);
-	t.charColor(100, 200, 255);
-	t.char(Math.abs(side) > 0.2 ? '█' : '│');
-	t.rect(15, 30);
-	t.pop();
-
-	drawCenteredText(`Current Y-Angle: ${Math.floor(currentAngle % 360)}°`, 12, [255, 225, 140]);
-
-	drawCenteredText('Textmodifier.rotateY', -18, [255, 255, 255]);
-	drawCenteredText('Rotates the coordinate system around the Y-axis (Yaw).', -16, [150, 170, 200]);
-	drawCenteredText('t.rotateY(degrees)', 18, [140, 180, 255]);
-
-	if (t.mouse.x === Number.NEGATIVE_INFINITY) {
-		drawCenteredText('Move mouse X to control rotation', 21, [100, 100, 120]);
-	}
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.ROTATEY', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: Y AXIS ROTATION', x, y++, 100, 220, 255);
+	drawText('Yaw turns the rectangle.', x, y++, 140, 160, 190);
+	drawText('Grid cross shows original axes.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`DEG: ${value.toFixed(1)}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -12187,7 +12019,7 @@ t.windowResized(() => {
 rotateZ(degrees?): number | void;
 ```
 
-Sets the Z-axis rotation angle for subsequent shape rendering operations, or gets the current angle.
+Set Z-axis rotation for subsequent shape drawing, or get the current angle.
 
 All geometries rotate around the center of the shape.
 
@@ -12195,13 +12027,13 @@ All geometries rotate around the center of the shape.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `degrees?` | `number` | The rotation angle in degrees around the Z-axis. If not provided, returns the current accumulated rotation. |
+| `degrees?` | `number` | Rotation angle in degrees around the Z axis. |
 
 #### Returns
 
 `number` \| `void`
 
-The current Z-axis rotation in degrees if called without arguments.
+Current Z-axis rotation in degrees when called without arguments.
 
 #### Example
 
@@ -12212,59 +12044,51 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, row, rgb = [240, 245, 255]) {
+const labelLayer = t.layers.add();
+
+let value = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), row);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
 t.draw(() => {
 	t.background(6, 10, 22);
-
-	const time = t.frameCount * 2;
-	let angle = time;
-
-	if (t.mouse.x !== Number.NEGATIVE_INFINITY) {
-		angle = Math.atan2(t.mouse.y, t.mouse.x) * (180 / Math.PI);
-	}
-
+	const time = t.frameCount * 0.04;
+	value = (time * 70) % 360;
+	t.charColor(50, 60, 90);
+	t.char('.');
+	t.line(-18, 0, 18, 0);
+	t.line(0, -10, 0, 10);
 	t.push();
-	t.charColor(40, 50, 80);
-	for (let i = 0; i < 8; i++) {
-		t.push();
-		t.rotateZ(i * 45);
-		t.char('-');
-		t.translate(15, 0);
-		t.rect(20, 1);
-		t.pop();
-	}
+	t.rotateZ(value);
+	t.char('#');
+	t.charColor(140, 255, 180);
+	t.rect(6, 4);
 	t.pop();
+});
 
-	t.push();
-	t.rotateZ(angle);
-	const currentAngle = t.rotateZ();
-	t.charColor(255, 140, 180);
-	t.char('+');
-	t.rect(20, 20);
-	t.pop();
-
-	drawCenteredText(`Current Z-Angle: ${Math.floor(currentAngle % 360)}°`, 12, [255, 225, 140]);
-
-	drawCenteredText('Textmodifier.rotateZ', -18, [255, 255, 255]);
-	drawCenteredText('Rotates the coordinate system around the Z-axis (Roll).', -16, [150, 170, 200]);
-	drawCenteredText('t.rotateZ(degrees)', 18, [140, 180, 255]);
-
-	if (t.mouse.x === Number.NEGATIVE_INFINITY) {
-		drawCenteredText('Move mouse to control angle', 21, [100, 100, 120]);
-	}
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.ROTATEZ', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: Z AXIS ROTATION', x, y++, 100, 220, 255);
+	drawText('Roll matches 2D rotation.', x, y++, 140, 160, 190);
+	drawText('Grid cross shows original axes.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`DEG: ${value.toFixed(1)}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -12306,58 +12130,53 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function trsMatrixY(angle, tx, ty, tz, sx, sy, sz) {
-	const c = Math.cos(angle);
-	const s = Math.sin(angle);
+const labelLayer = t.layers.add();
 
-	return new Float32Array([c * sx, 0, -s * sx, 0, 0, sy, 0, 0, s * sz, 0, c * sz, 0, tx, ty, tz, 1]);
-}
+let value = 1;
 
-function drawLabel(text, y, color = [220, 220, 220]) {
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-t.setup(() => {
-	t.perspective(60, 0.1, 4096);
-	const camera = t.createCamera();
-	camera.setPosition(0, 6, 54).lookAt(0, 0, 0);
-	t.setCamera(camera);
+t.draw(() => {
+	t.background(6, 10, 22);
+	const time = t.frameCount * 0.04;
+	value = 0.7 + 0.4 * Math.sin(time);
+	t.charColor(50, 60, 90);
+	t.char('.');
+	t.line(-18, 0, 18, 0);
+	t.line(0, -10, 0, 10);
+	t.push();
+	t.translate(8, 1);
+	t.scale(value, value);
+	t.char('#');
+	t.charColor(140, 255, 180);
+	t.cellColor(20, 50, 90);
+	t.rect(10, 5);
+	t.pop();
 });
 
-t.draw(() => {
-	const time = t.frameCount * 0.02;
-	t.background(5, 7, 18);
-
-	const left = trsMatrixY(time * 1.4, -12, 0, 0, 1.1, 1.1, 1.1);
-	t.push();
-	t.applyMatrix(left);
-	t.char('M');
-	t.charColor(255, 140, 120);
-	t.box(8, 8, 8);
-	t.pop();
-
-	const right = trsMatrixY(time * 2.0, 12, 0, 0, 1.0, 1.0, 1.0);
-	t.push();
-	t.applyMatrix(right);
-	t.scale(1.0 + Math.sin(time * 2.2) * 0.2);
-	t.char('S');
-	t.charColor(120, 205, 255);
-	t.torus(3.2, 1.3);
-	t.pop();
-
-	drawLabel('applyMatrix() + scale()', -Math.floor(t.grid.rows * 0.36), [255, 225, 140]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.SCALE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: RESIZE MODEL', x, y++, 100, 220, 255);
+	drawText('Scales following geometry.', x, y++, 140, 160, 190);
+	drawText('Grid cross shows original axes.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`SCALE: ${value.toFixed(2)}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -12373,7 +12192,7 @@ t.windowResized(() => {
 setCamera(camera): void;
 ```
 
-Sets the active camera from a previously created camera object.
+Activate a previously created camera object.
 
 #### Parameters
 
@@ -12388,68 +12207,68 @@ Sets the active camera from a previously created camera object.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
 
 let cameraA;
 let cameraB;
-let useA = true;
+let active = false;
 
-const scene = [
-	{ x: -16, y: 0, z: 0, char: 'L', color: [255, 120, 120] },
-	{ x: 0, y: 0, z: -12, char: 'M', color: [120, 255, 160] },
-	{ x: 16, y: 0, z: 0, char: 'R', color: [120, 180, 255] },
-];
-
-function drawScene() {
-	for (let i = 0; i < scene.length; i++) {
-		const item = scene[i];
-
-		t.push();
-		t.translate(item.x, item.y, item.z);
-		t.rotateY(t.frameCount * (0.9 + i * 0.2));
-		t.rotateZ(t.frameCount * (0.7 + i * 0.15));
-		t.char(item.char);
-		t.charColor(item.color[0], item.color[1], item.color[2]);
-		t.rect(8, 8);
-		t.pop();
-	}
-}
-
-function drawLabel(text, y) {
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y, 0);
-	t.charColor(220);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
 t.setup(() => {
 	t.perspective(58, 0.1, 4096);
 	cameraA = t.createCamera();
-	cameraA.setPosition(-32, 10, 24).lookAt(0, 0, 0);
-
-	cameraB = cameraA.copy().setPosition(32, 10, 24).lookAt(0, 0, 0);
-	t.setCamera(cameraA);
-});
-
-t.mouseClicked(() => {
-	useA = !useA;
-	t.setCamera(useA ? cameraA : cameraB);
+	cameraA.setPosition(-28, 10, 36).lookAt(0, 0, 0);
+	cameraB = t.createCamera();
+	cameraB.setPosition(28, 10, 36).lookAt(0, 0, 0);
 });
 
 t.draw(() => {
-	t.background(8, 10, 24);
-	drawScene();
-	drawLabel('click to switch setCamera(cameraA / cameraB)', Math.floor(t.grid.rows / 2) - 3);
-	drawLabel(useA ? 'cameraA active' : 'cameraB active', Math.floor(t.grid.rows / 2) - 1);
+	t.background(6, 8, 18);
+	active = Math.floor(t.frameCount / 120) % 2 === 0;
+	t.setCamera(active ? cameraA : cameraB);
+	t.ambientLight(25, 28, 36);
+	t.pointLight([255, 210, 140], { x: 18, y: -16, z: 28 });
+	for (let i = 0; i < 3; i++) {
+		t.push();
+		t.translate((i - 1) * 9, 0, i * -8);
+		t.rotateY(t.frameCount + i * 30);
+		t.char('#');
+		t.charColor(120 + i * 40, 220, 255 - i * 20);
+		t.box(5, 5, 5);
+		t.pop();
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.SETCAMERA', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: ACTIVATE CAMERA', x, y++, 100, 220, 255);
+	drawText('Two camera objects alternate.', x, y++, 140, 160, 190);
+	drawText('Scene proves viewpoint change.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(active ? 'ACTIVE: CAMERA A' : 'ACTIVE: CAMERA B', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -12465,14 +12284,14 @@ t.windowResized(() => {
 setUniform(name, value): void;
 ```
 
-Set a uniform value for the current custom shader.
+Set a uniform value on the current custom shader.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `name` | `string` | The name of the uniform variable |
-| `value` | `UniformValue` | The value to set |
+| `name` | `string` | Uniform variable name. |
+| `value` | `UniformValue` | Uniform value. |
 
 #### Returns
 
@@ -12481,33 +12300,73 @@ Set a uniform value for the current custom shader.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
-
-let pulseShader;
-t.setup(async () => {
-	pulseShader = await t.createFilterShader(`#version 300 es
-    precision highp float;
-    in vec2 v_uv;
-    uniform float u_time;
-    layout(location = 0) out vec4 o_char;
-    layout(location = 1) out vec4 o_col;
-    layout(location = 2) out vec4 o_bg;
-    void main() {
-      float p = 0.5 + 0.5 * sin(u_time + v_uv.x);
-      o_char = vec4(p, 0.0, 0.0, 1.0);
-      o_col = vec4(v_uv, 1.0, 1.0);
-      o_bg = vec4(0.0, 0.0, 0.0, 1.0);
-    }
-  `);
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
 });
+
+const labelLayer = t.layers.add();
+
+let customShader = null;
+
+t.setup(async () => {
+	customShader = await t.createFilterShader(`#version 300 es
+precision highp float;
+in vec2 v_uv;
+uniform float u_time;
+uniform vec2 u_mouse;
+layout(location = 0) out vec4 o_character;
+layout(location = 1) out vec4 o_primaryColor;
+layout(location = 2) out vec4 o_secondaryColor;
+void main() {
+	float wave = sin((v_uv.x + v_uv.y + u_time) * 24.0);
+	float glyph = step(0.0, wave);
+	float glow = 0.4 + 0.6 * distance(v_uv, u_mouse);
+	o_character = vec4(glyph, 0.0, 0.0, 1.0);
+	o_primaryColor = vec4(0.3, glow, 1.0, 1.0);
+	o_secondaryColor = vec4(0.02, 0.03, 0.08, 1.0);
+}`);
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.draw(() => {
 	t.background(0);
-	if (pulseShader) {
-		t.shader(pulseShader);
-		t.setUniform('u_time', t.frameCount * 0.001);
-		t.rect(t.grid.cols, t.grid.rows);
-	}
+	if (!customShader) return;
+	t.shader(customShader);
+	const time = t.frameCount * 0.02;
+	const mx = (Math.sin(time) + 1) * 0.5;
+	const my = (Math.cos(time) + 1) * 0.5;
+	t.setUniform('u_time', time);
+	t.setUniform('u_mouse', [mx, my]);
+	t.rect(t.grid.cols, t.grid.rows);
+	t.resetShader();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODIFIER.SETUNIFORM', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: CUSTOM SHADER', x, y++, 100, 220, 255);
+	drawText('Uniforms drive GLSL state.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('UNIFORM: u_time', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -12523,13 +12382,13 @@ t.windowResized(() => {
 setUniforms(uniforms): void;
 ```
 
-Set multiple uniform values for the current custom shader.
+Set multiple uniform values on the current custom shader.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `uniforms` | `Record`\<`string`, `UniformValue`\> | Object containing uniform name-value pairs |
+| `uniforms` | `Record`\<`string`, `UniformValue`\> | Uniform name-value pairs. |
 
 #### Returns
 
@@ -12538,37 +12397,72 @@ Set multiple uniform values for the current custom shader.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
-
-let ripple;
-t.setup(async () => {
-	ripple = await t.createFilterShader(`#version 300 es
-    precision highp float;
-    in vec2 v_uv;
-    uniform float u_time; uniform vec2 u_mouse;
-    layout(location = 0) out vec4 o_c;
-    layout(location = 1) out vec4 o_p;
-    layout(location = 2) out vec4 o_s;
-    void main() {
-      float d = length(v_uv - u_mouse);
-      float w = 0.5 + 0.5 * sin(d * 20.0 - u_time);
-      o_c = vec4(w, 0.0, 0.0, 1.0);
-      o_p = vec4(0.2, 0.5, 1.0, 1.0);
-      o_s = vec4(0.0);
-    }
-  `);
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
 });
+
+const labelLayer = t.layers.add();
+
+let customShader = null;
+
+t.setup(async () => {
+	customShader = await t.createFilterShader(`#version 300 es
+precision highp float;
+in vec2 v_uv;
+uniform float u_time;
+uniform vec2 u_mouse;
+layout(location = 0) out vec4 o_character;
+layout(location = 1) out vec4 o_primaryColor;
+layout(location = 2) out vec4 o_secondaryColor;
+void main() {
+	float wave = sin((v_uv.x + v_uv.y + u_time) * 24.0);
+	float glyph = step(0.0, wave);
+	float glow = 0.4 + 0.6 * distance(v_uv, u_mouse);
+	o_character = vec4(glyph, 0.0, 0.0, 1.0);
+	o_primaryColor = vec4(0.3, glow, 1.0, 1.0);
+	o_secondaryColor = vec4(0.02, 0.03, 0.08, 1.0);
+}`);
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.draw(() => {
 	t.background(0);
-	if (ripple) {
-		t.shader(ripple);
-		t.setUniforms({
-			u_time: t.frameCount * 0.05,
-			u_mouse: [t.mouse.x, t.mouse.y],
-		});
-		t.rect(t.grid.cols, t.grid.rows);
-	}
+	if (!customShader) return;
+	t.shader(customShader);
+	const time = t.frameCount * 0.02;
+	const mx = (Math.sin(time) + 1) * 0.5;
+	const my = (Math.cos(time) + 1) * 0.5;
+	t.setUniforms({ u_time: time, u_mouse: [mx, my] });
+	t.rect(t.grid.cols, t.grid.rows);
+	t.resetShader();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODIFIER.SETUNIFORMS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: CUSTOM SHADER', x, y++, 100, 220, 255);
+	drawText('Uniforms drive GLSL state.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('UNIFORMS: 2', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -12584,7 +12478,7 @@ t.windowResized(() => {
 setup(callback): Promise<void>;
 ```
 
-Set a setup callback function that will be executed once when initialization is complete.
+Set the setup callback that runs once initialization is complete.
 
 This callback is called after font loading and grid initialization, allowing access to
 properties like `textmodifier.grid.cols` for calculating layout or setup variables.
@@ -12595,7 +12489,7 @@ The callback can be asynchronous (return a Promise).
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | () => `void` \| `Promise`\<`void`\> | The function to call when setup is complete |
+| `callback` | () => `void` \| `Promise`\<`void`\> | Function to run after setup is complete. |
 
 #### Returns
 
@@ -12604,42 +12498,58 @@ The callback can be asynchronous (return a Promise).
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-let stamp;
+const labelLayer = t.layers.add();
 
-function drawLabel(label, y, color) {
-	const startX = -label.length / 2;
-	t.charColor(...color);
+let seed = 0;
 
-	for (let i = 0; i < label.length; i++) {
-		t.push();
-		t.translate(startX + i + 0.5, y);
-		t.char(label[i]);
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
+	t.pop();
 }
 
 t.setup(() => {
-	stamp = t.createFramebuffer({ width: 18, height: 6 });
-
-	stamp.begin();
-	t.background(35, 20, 70);
-	drawLabel('READY', 0, [255, 210, 120]);
-	stamp.end();
+	seed = Math.floor(Math.random() * 999);
 });
 
 t.draw(() => {
-	t.background(6, 10, 18);
-	drawLabel('SETUP RUNS ONCE', -8, [220, 240, 255]);
-
-	for (let i = 0; i < 5; i++) {
+	t.background(6, 10, 22);
+	const time = t.frameCount * 0.03;
+	for (let i = 0; i < 8; i++) {
 		t.push();
-		t.translate(Math.sin(t.frameCount * 0.03 + i) * 16, i * 4 - 1);
-		t.image(stamp);
+		t.translate(Math.cos(time + i) * 12, Math.sin(time + i) * 6);
+		t.char(String((seed + i) % 10));
+		t.charColor(120 + i * 12, 220, 255 - i * 10);
+		t.point();
 		t.pop();
 	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.SETUP', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: ONE-TIME INIT', x, y++, 100, 220, 255);
+	drawText('setup() runs before drawing.', x, y++, 140, 160, 190);
+	drawText('Seed is created once.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`SEED: ${seed}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -12655,7 +12565,7 @@ t.windowResized(() => {
 shader(shader): void;
 ```
 
-Set a custom shader for subsequent rendering operations.
+Set a custom shader for subsequent drawing operations.
 
 The shader persists until explicitly reset via [resetShader](#resetshader) or by calling `shader(null)`.
 This behavior matches p5.js, allowing multiple draw calls with the same shader.
@@ -12664,7 +12574,7 @@ This behavior matches p5.js, allowing multiple draw calls with the same shader.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `shader` | [`TextmodeShader`](TextmodeShader.md) \| `null` | The custom shader to use, or `null` to reset to the default shader. |
+| `shader` | [`TextmodeShader`](TextmodeShader.md) \| `null` | Custom shader to use, or `null` to reset to the default shader. |
 
 #### Returns
 
@@ -12679,76 +12589,68 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-let matrixShader;
+const labelLayer = t.layers.add();
+
+let customShader = null;
 
 t.setup(async () => {
-	// A self-contained cyberpunk matrix screen shader
-	matrixShader = await t.createFilterShader(`#version 300 es
-		precision highp float;
-		in vec2 v_uv;
-		uniform float u_time;
-		uniform vec2 u_mouse;
-		layout(location = 0) out vec4 o_character;
-		layout(location = 1) out vec4 o_primaryColor;
-		layout(location = 2) out vec4 o_secondaryColor;
-
-		// Simple pseudo-random hash
-		float hash(float x) {
-			return fract(sin(x) * 43758.5453);
-		}
-
-		void main() {
-			// Columns and falling speed calculations
-			float colIndex = floor(v_uv.x * 60.0);
-			float speed = 1.5 + hash(colIndex) * 2.5;
-			float dropOffset = u_time * speed + hash(colIndex * 12.7) * 20.0;
-
-			// Row coordinates
-			float cellY = fract(v_uv.y * 30.0 - dropOffset);
-			float charValue = step(0.1, cellY) * fract(cellY * 7.0);
-
-			// Dynamic light green rain drops with bright head tips
-			vec3 greenRain = vec3(0.0, 1.0 - cellY * 0.7, 0.2);
-			if (cellY > 0.9) {
-				greenRain = vec3(0.8, 1.0, 0.9); // Bright tip
-			}
-
-			// Add CRT scanline effects
-			float scanline = sin(v_uv.y * 400.0 - u_time * 10.0) * 0.15;
-			vec3 finalColor = greenRain - vec3(scanline);
-
-			// Dynamic distortion near the mouse coordinates
-			float distToMouse = distance(v_uv, u_mouse);
-			if (distToMouse < 0.18) {
-				float factor = (0.18 - distToMouse) / 0.18;
-				finalColor += vec3(factor * 0.6, 0.0, factor * 0.3); // Glow red
-				charValue = fract(charValue * 3.0 + u_time);
-			}
-
-			o_character = vec4(charValue, 0.0, 0.0, 1.0);
-			o_primaryColor = vec4(finalColor, 1.0);
-			o_secondaryColor = vec4(0.01, 0.03, 0.01, 1.0); // Dark green terminal background
-		}
-	`);
+	customShader = await t.createFilterShader(`#version 300 es
+precision highp float;
+in vec2 v_uv;
+uniform float u_time;
+uniform vec2 u_mouse;
+layout(location = 0) out vec4 o_character;
+layout(location = 1) out vec4 o_primaryColor;
+layout(location = 2) out vec4 o_secondaryColor;
+void main() {
+	float wave = sin((v_uv.x + v_uv.y + u_time) * 24.0);
+	float glyph = step(0.0, wave);
+	float glow = 0.4 + 0.6 * distance(v_uv, u_mouse);
+	o_character = vec4(glyph, 0.0, 0.0, 1.0);
+	o_primaryColor = vec4(0.3, glow, 1.0, 1.0);
+	o_secondaryColor = vec4(0.02, 0.03, 0.08, 1.0);
+}`);
 });
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.draw(() => {
 	t.background(0);
+	if (!customShader) return;
+	t.shader(customShader);
+	const time = t.frameCount * 0.02;
+	const mx = (Math.sin(time) + 1) * 0.5;
+	const my = (Math.cos(time) + 1) * 0.5;
+	t.setUniform('u_time', time);
+	t.setUniform('u_mouse', [mx, my]);
+	t.rect(t.grid.cols, t.grid.rows);
+	t.resetShader();
+});
 
-	if (matrixShader) {
-		t.shader(matrixShader);
-		t.setUniform('u_time', t.frameCount * 0.001);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
 
-		// Normalized mouse coordinates
-		const mx = t.mouse ? Math.max(0, Math.min(1, (t.mouse.x + t.grid.cols / 2) / t.grid.cols)) : 0.5;
-		const my = t.mouse ? Math.max(0, Math.min(1, (t.mouse.y + t.grid.rows / 2) / t.grid.rows)) : 0.5;
-		// Invert Y to match shader coords
-		t.setUniform('u_mouse', [mx, 1.0 - my]);
-
-		// Draw rectangle covering grid to apply the matrix shader
-		t.rect(t.grid.cols, t.grid.rows);
-		t.resetShader();
-	}
+	drawText('TEXTMODIFIER.SHADER', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: CUSTOM SHADER', x, y++, 100, 220, 255);
+	drawText('Uniforms drive GLSL state.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	const state = customShader ? 'READY' : 'WAIT';
+	drawText(`SHADER: ${state}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -12779,51 +12681,60 @@ Draw a sphere mesh primitive.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-function label(text, y) {
+const labelLayer = t.layers.add();
+
+let spin = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y, 0);
-	t.charColor(220);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
 t.draw(() => {
-	const time = t.frameCount * 0.02;
-	t.background(4, 6, 16);
-	t.ambientLight(18, 20, 26);
-	t.pointLight([120, 210, 255], { x: 18, y: -10, z: 26 });
-	t.pointLight([255, 150, 100], { x: -20, y: 8, z: -18 });
-	t.camera(Math.cos(time * 0.45) * 16, -5, 76, 0, 0, 0);
-
+	t.background(6, 8, 18);
+	const time = t.frameCount * 0.025;
+	spin = (time * 40) % 360;
+	t.perspective(58, 0.1, 4096);
+	t.camera(18, -10, 42, 0, 0, 0);
+	t.ambientLight(24, 28, 38);
+	t.pointLight([255, 210, 140], { x: 18, y: -18, z: 28 });
 	t.push();
-	t.rotateY(time * 38);
-	t.rotateX(16);
-	t.char('@');
-	t.charColor(230, 240, 255);
-	t.cellColor(18, 24, 34);
-	t.sphere(10 + Math.sin(time * 1.3) * 1.5);
+	t.translate(5, 1, 0);
+	t.rotateY(spin);
+	t.rotateX(18);
+	t.char('#');
+	t.charColor(140, 220, 255);
+	t.cellColor(16, 24, 42);
+	t.sphere(7);
 	t.pop();
+});
 
-	for (let i = 0; i < 3; i++) {
-		t.push();
-		t.rotateY(i * 120 + time * (46 + i * 12));
-		t.translate(20, Math.sin(time * 2 + i) * 4, 0);
-		t.char(['o', '*', '+'][i]);
-		t.charColor(255, 180 - i * 30, 120 + i * 50);
-		t.cellColor(18, 12, 22 + i * 6);
-		t.sphere(2.2 + i * 0.7);
-		t.pop();
-	}
-
-	label('sphere(radius)', Math.floor(t.grid.rows / 2) - 3);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.SPHERE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: 3D SPHERE', x, y++, 100, 220, 255);
+	drawText('Radius defines all axes.', x, y++, 140, 160, 190);
+	drawText('Camera and light reveal depth.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`SPIN: ${spin.toFixed(1)}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -12841,52 +12752,61 @@ t.windowResized(() => {
 stroke(): TextmodeColor;
 ```
 
-Alias for [charColor](#charcolor). Get the current stroke (character) color.
+Alias for [charColor](#charcolor). Current stroke (character) color.
 
 ##### Returns
 
 [`TextmodeColor`](TextmodeColor.md)
 
-The current character color as a [TextmodeColor](TextmodeColor.md).
+Current character color.
 
 ##### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-function drawLabel(text, y, color = [220, 220, 220]) {
+const labelLayer = t.layers.add();
+
+let red = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
 t.draw(() => {
-	const pulse = (Math.sin(t.frameCount * 0.04) + 1) * 0.5;
-	t.background(5, 7, 18);
+	t.background(6, 10, 22);
+	red = Math.round(120 + 100 * Math.sin(t.frameCount * 0.04));
+	t.fill(20, 30, 60);
+	t.stroke(red, 0, 0);
+	t.char('.');
+	t.rect(14, 6);
+});
 
-	t.stroke(255, 140 + pulse * 80, 90);
-	t.fill(20, 50 + pulse * 90, 140 + pulse * 80);
-
-	t.push();
-	t.rotateZ(t.frameCount * 1.1);
-	t.rect(t.grid.cols - 12, t.grid.rows - 12);
-	t.pop();
-
-	const stroke = t.stroke();
-	const fill = t.fill();
-
-	drawLabel(`stroke ${stroke.r},${stroke.g},${stroke.b}`, -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
-	drawLabel(`fill ${fill.r},${fill.g},${fill.b}`, Math.floor(t.grid.rows * 0.3), [120, 205, 255]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.STROKE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SHAPE OUTLINE', x, y++, 100, 220, 255);
+	drawText('stroke colors shape edges.', x, y++, 140, 160, 190);
+	drawText('fill controls interior cells.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`STROKE R: ${red}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -12916,41 +12836,50 @@ Alias for [charColor](#charcolor). Set the stroke (character) color using a gray
 ##### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-function drawLabel(text, y, color = [220, 220, 220]) {
+const labelLayer = t.layers.add();
+
+let red = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
 t.draw(() => {
-	const pulse = (Math.sin(t.frameCount * 0.04) + 1) * 0.5;
-	t.background(5, 7, 18);
+	t.background(6, 10, 22);
+	red = Math.round(120 + 100 * Math.sin(t.frameCount * 0.04));
+	t.fill(20, 30, 60);
+	t.stroke(red, 0, 0);
+	t.char('.');
+	t.rect(14, 6);
+});
 
-	t.stroke(255, 140 + pulse * 80, 90);
-	t.fill(20, 50 + pulse * 90, 140 + pulse * 80);
-
-	t.push();
-	t.rotateZ(t.frameCount * 1.1);
-	t.rect(t.grid.cols - 12, t.grid.rows - 12);
-	t.pop();
-
-	const stroke = t.stroke();
-	const fill = t.fill();
-
-	drawLabel(`stroke ${stroke.r},${stroke.g},${stroke.b}`, -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
-	drawLabel(`fill ${fill.r},${fill.g},${fill.b}`, Math.floor(t.grid.rows * 0.3), [120, 205, 255]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.STROKE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SHAPE OUTLINE', x, y++, 100, 220, 255);
+	drawText('stroke colors shape edges.', x, y++, 140, 160, 190);
+	drawText('fill controls interior cells.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`STROKE R: ${red}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -12986,41 +12915,50 @@ Alias for [charColor](#charcolor). Set the stroke (character) color using RGB(A)
 ##### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-function drawLabel(text, y, color = [220, 220, 220]) {
+const labelLayer = t.layers.add();
+
+let red = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
 t.draw(() => {
-	const pulse = (Math.sin(t.frameCount * 0.04) + 1) * 0.5;
-	t.background(5, 7, 18);
+	t.background(6, 10, 22);
+	red = Math.round(120 + 100 * Math.sin(t.frameCount * 0.04));
+	t.fill(20, 30, 60);
+	t.stroke(red, 0, 0);
+	t.char('.');
+	t.rect(14, 6);
+});
 
-	t.stroke(255, 140 + pulse * 80, 90);
-	t.fill(20, 50 + pulse * 90, 140 + pulse * 80);
-
-	t.push();
-	t.rotateZ(t.frameCount * 1.1);
-	t.rect(t.grid.cols - 12, t.grid.rows - 12);
-	t.pop();
-
-	const stroke = t.stroke();
-	const fill = t.fill();
-
-	drawLabel(`stroke ${stroke.r},${stroke.g},${stroke.b}`, -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
-	drawLabel(`fill ${fill.r},${fill.g},${fill.b}`, Math.floor(t.grid.rows * 0.3), [120, 205, 255]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.STROKE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SHAPE OUTLINE', x, y++, 100, 220, 255);
+	drawText('stroke colors shape edges.', x, y++, 140, 160, 190);
+	drawText('fill controls interior cells.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`STROKE R: ${red}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -13049,41 +12987,50 @@ Alias for [charColor](#charcolor). Set the stroke (character) color using a CSS 
 ##### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-function drawLabel(text, y, color = [220, 220, 220]) {
+const labelLayer = t.layers.add();
+
+let red = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
 t.draw(() => {
-	const pulse = (Math.sin(t.frameCount * 0.04) + 1) * 0.5;
-	t.background(5, 7, 18);
+	t.background(6, 10, 22);
+	red = Math.round(120 + 100 * Math.sin(t.frameCount * 0.04));
+	t.fill(20, 30, 60);
+	t.stroke(red, 0, 0);
+	t.char('.');
+	t.rect(14, 6);
+});
 
-	t.stroke(255, 140 + pulse * 80, 90);
-	t.fill(20, 50 + pulse * 90, 140 + pulse * 80);
-
-	t.push();
-	t.rotateZ(t.frameCount * 1.1);
-	t.rect(t.grid.cols - 12, t.grid.rows - 12);
-	t.pop();
-
-	const stroke = t.stroke();
-	const fill = t.fill();
-
-	drawLabel(`stroke ${stroke.r},${stroke.g},${stroke.b}`, -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
-	drawLabel(`fill ${fill.r},${fill.g},${fill.b}`, Math.floor(t.grid.rows * 0.3), [120, 205, 255]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.STROKE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SHAPE OUTLINE', x, y++, 100, 220, 255);
+	drawText('stroke colors shape edges.', x, y++, 140, 160, 190);
+	drawText('fill controls interior cells.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`STROKE R: ${red}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -13101,14 +13048,14 @@ swipe(callback): void;
 
 Register a callback for swipe gestures.
 
-Swipes provide the dominant direction (`up`, `down`, `left`, `right`), travelled distance, and
-velocity in CSS pixels per millisecond. Useful for panning, flicks, or quick shortcuts.
+Swipes provide a normalised direction vector, travelled distance, and velocity in CSS pixels
+per millisecond. Useful for panning, flicks, or quick shortcuts.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`TouchSwipeHandler`](../namespaces/input/namespaces/touch/type-aliases/TouchSwipeHandler.md) | The function to call when a swipe gesture is detected. |
+| `callback` | [`TouchSwipeHandler`](../namespaces/input/namespaces/touch/type-aliases/TouchSwipeHandler.md) | Handler to run when a swipe gesture is detected. |
 
 #### Returns
 
@@ -13123,143 +13070,77 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
+const labelLayer = t.layers.add();
+
 const particles = [];
+let last = 'NONE';
+let sx = 0;
+let sy = 0;
 
-// Native touch swipe gesture
-t.swipe((data) => {
-	launchParticles(data.direction.x, data.direction.y);
-});
-
-// Interactive mouse swipe simulator for desktop dev testing
-let dragStartX = 0;
-let dragStartY = 0;
-
-window.addEventListener('mousedown', (e) => {
-	dragStartX = e.clientX;
-	dragStartY = e.clientY;
-});
-
-window.addEventListener('mouseup', (e) => {
-	const dx = e.clientX - dragStartX;
-	const dy = e.clientY - dragStartY;
-	const len = Math.sqrt(dx * dx + dy * dy);
-	if (len > 35) {
-		launchParticles(dx / len, dy / len);
-	}
-});
-
-function launchParticles(dirX, dirY) {
-	// Determine dominant direction and character
-	let charSym = '•';
-	let color = [100, 200, 255]; // Cyan default
-
-	if (Math.abs(dirX) >= Math.abs(dirY)) {
-		if (dirX < 0) {
-			charSym = 'W';
-			color = [100, 150, 255]; // Blue
-		} else {
-			charSym = 'E';
-			color = [255, 200, 100]; // Gold
-		}
-	} else {
-		if (dirY < 0) {
-			charSym = 'N';
-			color = [255, 100, 100]; // Red
-		} else {
-			charSym = 'S';
-			color = [100, 255, 150]; // Green
-		}
-	}
-
-	// Spawn a stream of kinetic elements from the center of the canvas
-	const count = 8;
-	for (let i = 0; i < count; i++) {
-		const spread = Math.random() * 0.4 - 0.2;
-		particles.push({
-			x: 0,
-			y: 0,
-			vx: (dirX + spread) * (1.5 + Math.random() * 1.5),
-			vy: (dirY + spread) * (1.0 + Math.random() * 1.0),
-			char: charSym,
-			color: color,
-			alpha: 255,
-			size: 2 + Math.random() * 4,
-		});
-	}
-}
-
-function drawText(text, x, y, r = 180, g = r, b = r) {
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(x - Math.floor(text.length / 2), y);
+	t.translate(x, y);
 	t.charColor(r, g, b);
-
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
+function launch(dx, dy) {
+	last = Math.abs(dx) > Math.abs(dy) ? (dx > 0 ? 'RIGHT' : 'LEFT') : dy > 0 ? 'DOWN' : 'UP';
+	for (let i = 0; i < 8; i++) particles.push({ x: 0, y: 0, vx: dx * (1 + i * 0.1), vy: dy * (1 + i * 0.1), life: 1 });
+}
+
+t.swipe((data) => {
+	launch(data.direction.x, data.direction.y);
+});
+
+t.mousePressed(() => {
+	sx = t.mouse.x;
+	sy = t.mouse.y;
+});
+
+t.mouseReleased(() => {
+	const dx = t.mouse.x - sx;
+	const dy = t.mouse.y - sy;
+	const len = Math.hypot(dx, dy);
+	if (len > 4) launch(dx / len, dy / len);
+});
+
 t.draw(() => {
-	t.background(6, 8, 14);
-
-	const cols = t.grid.cols;
-	const rows = t.grid.rows;
-
-	// Telemetry instructions hud
-	drawText('GESTURAL SWIPE LAUNCHER', 0, -Math.floor(rows / 2) + 4, 100, 200, 255);
-	drawText('Swipe or drag-and-release mouse to shoot kinetic particles', 0, -Math.floor(rows / 2) + 6, 120, 140, 160);
-	drawText(`ACTIVE STREAM: ${particles.length} PARTICLES`, 0, Math.floor(rows / 2) - 4, 255, 220, 100);
-
-	// Update and render active kinetic particles
+	t.background(6, 10, 22);
 	for (let i = particles.length - 1; i >= 0; i--) {
 		const p = particles[i];
 		p.x += p.vx;
 		p.y += p.vy;
-
-		// Bouncing collision against grid walls with energy friction loss
-		const limitX = cols / 2 - 2;
-		const limitY = rows / 2 - 2;
-
-		if (p.x < -limitX) {
-			p.x = -limitX;
-			p.vx *= -0.85;
-		}
-		if (p.x > limitX) {
-			p.x = limitX;
-			p.vx *= -0.85;
-		}
-		if (p.y < -limitY) {
-			p.y = -limitY;
-			p.vy *= -0.85;
-		}
-		if (p.y > limitY) {
-			p.y = limitY;
-			p.vy *= -0.85;
-		}
-
-		// Apply simple air friction resistance
-		p.vx *= 0.98;
-		p.vy *= 0.98;
-
-		// Fade out over lifetime
-		p.alpha -= 1.8;
-		if (p.alpha <= 0) {
-			particles.splice(i, 1);
-			continue;
-		}
-
+		p.life -= 0.025;
+		if (p.life <= 0) particles.splice(i, 1);
 		t.push();
 		t.translate(p.x, p.y);
-		t.char(p.char);
-		t.charColor(p.color[0], p.color[1], p.color[2], p.alpha);
-		t.rect(p.size, p.size);
+		t.char('*');
+		t.charColor(255, 210, 120);
+		t.point();
 		t.pop();
 	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.SWIPE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SWIPE DIRECTION', x, y++, 100, 220, 255);
+	drawText('Swipe or drag/release.', x, y++, 140, 160, 190);
+	drawText('Particles follow direction.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('LAST: ' + last, x, y++, 140, 255, 180);
+	drawText(`ACTIVE: ${particles.length}`, x, y++, 180, 200, 220);
 });
 
 t.windowResized(() => {
@@ -13284,7 +13165,7 @@ Use [input.touch.TouchTapEventData.taps](../namespaces/input/namespaces/touch/in
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`TouchTapHandler`](../namespaces/input/namespaces/touch/type-aliases/TouchTapHandler.md) | The function to call when a tap gesture is detected. |
+| `callback` | [`TouchTapHandler`](../namespaces/input/namespaces/touch/type-aliases/TouchTapHandler.md) | Handler to run when a tap gesture is detected. |
 
 #### Returns
 
@@ -13299,98 +13180,69 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-const ripples = [];
+const labelLayer = t.layers.add();
 
-t.tap((data) => {
-	spawnRipple(data.touch.x, data.touch.y);
-});
+const pulses = [];
+let count = 0;
+let last = 'WAITING';
 
-// Interactive mouse fallback for desktop browsers
-t.mousePressed(() => {
-	if (t.mouse) {
-		spawnRipple(t.mouse.x, t.mouse.y);
-	}
-});
-
-function spawnRipple(x, y) {
-	// Create a new pulsing concentric wave
-	ripples.push({
-		x: x,
-		y: y,
-		radius: 0,
-		maxRadius: 15 + Math.random() * 15,
-		color: [Math.floor(100 + Math.random() * 155), Math.floor(150 + Math.random() * 105), 255],
-		alpha: 255,
-	});
-}
-
-function drawText(text, x, y, r = 180, g = r, b = r) {
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(x - Math.floor(text.length / 2), y);
+	t.translate(x, y);
 	t.charColor(r, g, b);
-
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
+function addPulse(label, x = 0, y = 0) {
+	count++;
+	last = label;
+	pulses.unshift({ label, x, y, life: 1 });
+	if (pulses.length > 12) pulses.length = 12;
+}
+
+t.tap((data) => {
+	const touch = data?.touch || t.mouse;
+	addPulse('TAPS', touch?.x || 0, touch?.y || 0);
+});
+
 t.draw(() => {
-	t.background(6, 8, 14);
+	t.background(6, 10, 22);
 
-	const cols = t.grid.cols;
-	const rows = t.grid.rows;
-
-	// Draw diagnostic header details
-	drawText('CONCENTRIC RIPPLE EXPLORER', 0, -Math.floor(rows / 2) + 4, 100, 200, 255);
-	drawText(
-		'Tap anywhere on the screen or click with mouse to trigger waves',
-		0,
-		-Math.floor(rows / 2) + 6,
-		120,
-		140,
-		160
-	);
-
-	// Update and render all active concentric ripples
-	for (let idx = ripples.length - 1; idx >= 0; idx--) {
-		const r = ripples[idx];
-		r.radius += 0.45; // Wave expanding speed
-
-		// Fade out as it expands
-		const ageRatio = r.radius / r.maxRadius;
-		r.alpha = Math.max(0, 255 * (1.0 - ageRatio));
-
-		if (r.alpha <= 0 || r.radius >= r.maxRadius) {
-			ripples.splice(idx, 1);
+	for (let i = pulses.length - 1; i >= 0; i--) {
+		const p = pulses[i];
+		p.life -= 0.02;
+		if (p.life <= 0) {
+			pulses.splice(i, 1);
 			continue;
 		}
-
-		// Draw concentric rings using circle drawing points
-		const steps = Math.floor(8 + r.radius * 3.5);
-		for (let s = 0; s < steps; s++) {
-			const angle = (s / steps) * Math.PI * 2;
-			const rx = Math.cos(angle) * r.radius * 1.5;
-			const ry = Math.sin(angle) * r.radius;
-
-			t.push();
-			t.translate(r.x + rx, r.y + ry);
-
-			// Dynamic wave characters based on ripple age/radius
-			const waveChars = ['☼', 'O', 'o', '°', '·'];
-			const charIdx = Math.floor(ageRatio * waveChars.length) % waveChars.length;
-			t.char(waveChars[charIdx]);
-
-			t.charColor(r.color[0], r.color[1], r.color[2], r.alpha);
-			t.point();
-			t.pop();
-		}
+		t.push();
+		t.translate(p.x, p.y - (1 - p.life) * 4);
+		t.char('*');
+		t.charColor(255, 210, 120);
+		t.point();
+		t.pop();
 	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.TAP', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: TAP GESTURE', x, y++, 100, 220, 255);
+	drawText('Event updates compact state.', x, y++, 140, 160, 190);
+	drawText('Pulses show recent triggers.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('TAPS: ' + count, x, y++, 140, 255, 180);
+	drawText('LAST: ' + last.slice(0, 28), x, y++, 180, 200, 220);
 });
 
 t.windowResized(() => {
@@ -13408,19 +13260,19 @@ targetFrameRate(fps?): number | void;
 
 Set or get the target frame rate limit.
 
-Works similarly to [frameRate](#framerate), but gets the target frame rate instead of the current measured frame rate.
+Unlike [frameRate](#framerate), the getter returns the configured target instead of the measured rate.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `fps?` | `number` | Optional new target frame rate. If not provided, returns current target frame rate. |
+| `fps?` | `number` | New target frame rate. |
 
 #### Returns
 
 `number` \| `void`
 
-Current target frame rate when getting, void when setting
+Current target frame rate when called without arguments.
 
 #### Example
 
@@ -13431,70 +13283,49 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-const targets = [15, 30, 60];
-let targetIndex = 2;
+const labelLayer = t.layers.add();
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+let target = 60;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-t.mouseClicked(() => {
-	targetIndex = (targetIndex + 1) % targets.length;
-	t.targetFrameRate(targets[targetIndex]);
-});
-
 t.draw(() => {
 	t.background(6, 10, 22);
+	target = Math.floor(t.frameCount / 150) % 2 === 0 ? 24 : 60;
+	t.targetFrameRate(target);
+	for (let i = 0; i < target / 4; i++) {
+		t.push();
+		t.translate(-18 + i, 3);
+		t.char('+');
+		t.charColor(120, 220, 255);
+		t.point();
+		t.pop();
+	}
+});
 
-	const target = Math.round(t.targetFrameRate());
-	const time = t.frameCount;
-
-	// Three concentric rotating elements at different speeds —
-	// all slow down and speed up together when target changes
-	t.push();
-	t.rotateZ(time * 1.5);
-	t.charColor(255, 180, 100);
-	t.cellColor(60, 40, 20);
-	t.char('#');
-	t.rect(10, 3);
-	t.pop();
-
-	t.push();
-	t.rotateZ(time * -0.8);
-	t.translate(8, 0);
-	t.charColor(100, 200, 255);
-	t.cellColor(20, 40, 60);
-	t.char('*');
-	t.rect(3, 3);
-	t.pop();
-
-	t.push();
-	t.rotateZ(time * 0.4);
-	t.translate(13, 0);
-	t.charColor(255, 100, 150);
-	t.cellColor(60, 20, 40);
-	t.char('o');
-	t.rect(2, 2);
-	t.pop();
-
-	drawCenteredText('Textmodifier.targetFrameRate', -12, [240, 245, 255]);
-	drawCenteredText('Getting and setting the target frame rate.', -10, [150, 170, 200]);
-
-	drawCenteredText(`t.targetFrameRate() = ${target} fps`, -6, [140, 180, 255]);
-
-	drawCenteredText('click to cycle: 15 / 30 / 60', 11, [80, 90, 120]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.TARGETFRAMERATE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: TARGET FPS', x, y++, 100, 220, 255);
+	drawText('Sets desired draw cadence.', x, y++, 140, 160, 190);
+	drawText('Readout is kept compact.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`TARGET: ${t.targetFrameRate()}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -13526,42 +13357,60 @@ Draw a torus mesh primitive.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 8 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-function label(text, y) {
+const labelLayer = t.layers.add();
+
+let spin = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y, 0);
-	t.charColor(220);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
 t.draw(() => {
-	const time = t.frameCount * 0.02;
-	t.background(5, 5, 15);
-	t.ambientLight(22, 20, 28);
-	t.pointLight([255, 220, 140], { x: Math.sin(time) * 24, y: -10, z: 18 });
-	t.camera(0, -4, 76, 0, 0, 0);
+	t.background(6, 8, 18);
+	const time = t.frameCount * 0.025;
+	spin = (time * 40) % 360;
+	t.perspective(58, 0.1, 4096);
+	t.camera(18, -10, 42, 0, 0, 0);
+	t.ambientLight(24, 28, 38);
+	t.pointLight([255, 210, 140], { x: 18, y: -18, z: 28 });
+	t.push();
+	t.translate(5, 1, 0);
+	t.rotateY(spin);
+	t.rotateX(18);
+	t.char('#');
+	t.charColor(140, 220, 255);
+	t.cellColor(16, 24, 42);
+	t.torus(8, 2);
+	t.pop();
+});
 
-	for (let i = 0; i < 3; i++) {
-		t.push();
-		t.translate((i - 1) * 14, 0, -i * 8);
-		t.rotateX(90 + Math.sin(time * 1.5 + i) * 22);
-		t.rotateY(time * (50 + i * 18));
-		t.char(['*', '0', '+'][i]);
-		t.charColor(255 - i * 30, 180 + i * 20, 140 + i * 35);
-		t.cellColor(20 + i * 2, 12 + i * 2, 24 + i * 4);
-		t.torus(6 + i * 2.5, 1.5 + i * 0.8);
-		t.pop();
-	}
-
-	label('torus(radius, tubeRadius)', Math.floor(t.grid.rows / 2) - 3);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.TORUS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: 3D TORUS', x, y++, 100, 220, 255);
+	drawText('Major and tube radius define ring.', x, y++, 140, 160, 190);
+	drawText('Camera and light reveal depth.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`SPIN: ${spin.toFixed(1)}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -13577,7 +13426,7 @@ t.windowResized(() => {
 touchCancelled(callback): void;
 ```
 
-Set a callback function that will be called when a touch is cancelled by the browser.
+Register the single-callback handler for browser-cancelled touches.
 
 Cancellation can occur when the browser takes ownership for scrolling or if the gesture
 leaves the window. Treat this as an aborted touch and clean up any in-progress state.
@@ -13586,7 +13435,7 @@ leaves the window. Treat this as an aborted touch and clean up any in-progress s
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`TouchEventHandler`](../namespaces/input/namespaces/touch/type-aliases/TouchEventHandler.md) | The function to call when a touch is cancelled. |
+| `callback` | [`TouchEventHandler`](../namespaces/input/namespaces/touch/type-aliases/TouchEventHandler.md) | Handler to run when a touch is cancelled. |
 
 #### Returns
 
@@ -13601,91 +13450,70 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-let message = 'READY';
-let color = [120, 190, 255];
-let shock = 0;
-let touchAge = 0;
+const labelLayer = t.layers.add();
 
-t.touchStarted(() => {
-	message = 'TOUCH STARTED';
-	color = [120, 255, 190];
-	shock = 1;
-	touchAge = 0;
-});
+const pulses = [];
+let count = 0;
+let last = 'WAITING';
 
-t.touchEnded(() => {
-	message = 'TOUCH ENDED';
-	color = [255, 210, 120];
-	shock = 0.45;
-});
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
-t.touchCancelled(() => {
-	message = 'TOUCH CANCELLED';
-	color = [255, 90, 110];
-	shock = 1.5;
+function addPulse(label, x = 0, y = 0) {
+	count++;
+	last = label;
+	pulses.unshift({ label, x, y, life: 1 });
+	if (pulses.length > 12) pulses.length = 12;
+}
+
+t.touchCancelled((data) => {
+	const touch = data?.touch || t.mouse;
+	addPulse('CANCELS', touch?.x || 0, touch?.y || 0);
 });
 
 t.draw(() => {
-	t.background(6, 7, 12);
+	t.background(6, 10, 22);
 
-	const rows = t.grid.rows;
-	const top = -Math.floor(rows / 2) + 4;
-	const radius = 7 + shock * 5 + Math.sin(t.frameCount * 0.05) * 1.5;
-
-	touchAge++;
-	shock *= 0.94;
-
-	drawText('touch cancelled', 0, top, [235, 240, 250]);
-	drawText('leave the touch surface or let the browser interrupt a gesture', 0, top + 2, [130, 150, 180]);
-	drawText(message, 0, Math.floor(rows / 2) - 5, color);
-	drawText(`age ${touchAge} frames`, 0, Math.floor(rows / 2) - 3, [120, 140, 170]);
-
-	for (let ring = 0; ring < 6; ring++) {
-		const points = 18 + ring * 6;
-		const ringRadius = radius + ring * 3;
-
-		for (let i = 0; i < points; i++) {
-			const angle = (i / points) * Math.PI * 2 + t.frameCount * 0.015 * (ring % 2 === 0 ? 1 : -1);
-			const alpha = 80 + Math.max(0, shock) * 80 + ring * 14;
-
-			t.push();
-			t.translate(Math.cos(angle) * ringRadius * 1.65, Math.sin(angle) * ringRadius);
-			t.rotateZ(t.frameCount * 0.3 + ring * 12);
-			t.char(['.', ':', '+', '*', 'x', '#'][ring]);
-			t.charColor(color[0], color[1] - ring * 12, color[2], alpha);
-			t.point();
-			t.pop();
+	for (let i = pulses.length - 1; i >= 0; i--) {
+		const p = pulses[i];
+		p.life -= 0.02;
+		if (p.life <= 0) {
+			pulses.splice(i, 1);
+			continue;
 		}
-	}
-
-	t.push();
-	t.rotateZ(t.frameCount * 0.7);
-	t.char(message === 'TOUCH CANCELLED' ? '!' : '+');
-	t.charColor(color[0], color[1], color[2]);
-	t.rect(11 + shock * 6, 11 + shock * 6);
-	t.pop();
-
-	if (message !== 'READY' && touchAge > 180 && shock < 0.02) {
-		message = 'READY';
-		color = [120, 190, 255];
-	}
-});
-
-function drawText(text, x, y, textColor) {
-	t.push();
-	t.translate(x - Math.floor(text.length / 2), y);
-	t.charColor(textColor[0], textColor[1], textColor[2]);
-
-	for (let i = 0; i < text.length; i++) {
 		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
+		t.translate(p.x, p.y - (1 - p.life) * 4);
+		t.char('*');
+		t.charColor(255, 210, 120);
 		t.point();
 		t.pop();
 	}
+});
 
-	t.pop();
-}
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.TOUCHCANCELLED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: TOUCH CANCEL', x, y++, 100, 220, 255);
+	drawText('Event updates compact state.', x, y++, 140, 160, 190);
+	drawText('Pulses show recent triggers.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CANCELS: ' + count, x, y++, 140, 255, 180);
+	drawText('LAST: ' + last.slice(0, 28), x, y++, 180, 200, 220);
+});
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
@@ -13700,7 +13528,7 @@ t.windowResized(() => {
 touchEnded(callback): void;
 ```
 
-Set a callback function that will be called when a touch ends normally.
+Register the single-callback handler for touch end events.
 
 This fires after the finger leaves the canvas surface and the browser raises a `touchend`
 event. Use it to finalise state such as drawing strokes or completing gestures.
@@ -13709,7 +13537,7 @@ event. Use it to finalise state such as drawing strokes or completing gestures.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`TouchEventHandler`](../namespaces/input/namespaces/touch/type-aliases/TouchEventHandler.md) | The function to call when a touch ends. |
+| `callback` | [`TouchEventHandler`](../namespaces/input/namespaces/touch/type-aliases/TouchEventHandler.md) | Handler to run when a touch ends. |
 
 #### Returns
 
@@ -13724,94 +13552,69 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-const sparks = [];
+const labelLayer = t.layers.add();
 
-t.touchEnded((data) => {
-	explode(data.touch.x, data.touch.y);
-});
+const pulses = [];
+let count = 0;
+let last = 'WAITING';
 
-// Interactive mouse fallback for desktop browsers
-t.mouseReleased(() => {
-	if (t.mouse) {
-		explode(t.mouse.x, t.mouse.y);
-	}
-});
-
-function explode(x, y) {
-	const sparkCount = 24 + Math.floor(Math.random() * 16);
-	const baseColor = [Math.floor(120 + Math.random() * 135), Math.floor(120 + Math.random() * 135), 255];
-
-	for (let i = 0; i < sparkCount; i++) {
-		const angle = Math.random() * Math.PI * 2;
-		const speed = 0.5 + Math.random() * 1.5;
-		sparks.push({
-			x: x,
-			y: y,
-			vx: Math.cos(angle) * speed * 1.5,
-			vy: Math.sin(angle) * speed - 0.2, // Shoot slightly upward initial impulse
-			char: ['*', 'o', '+', '·', '°'][Math.floor(Math.random() * 5)],
-			color: baseColor,
-			alpha: 255,
-			size: 1 + Math.random() * 2,
-		});
-	}
-}
-
-function drawText(text, x, y, r = 180, g = r, b = r) {
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(x - Math.floor(text.length / 2), y);
+	t.translate(x, y);
 	t.charColor(r, g, b);
-
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
+function addPulse(label, x = 0, y = 0) {
+	count++;
+	last = label;
+	pulses.unshift({ label, x, y, life: 1 });
+	if (pulses.length > 12) pulses.length = 12;
+}
+
+t.touchEnded((data) => {
+	const touch = data?.touch || t.mouse;
+	addPulse('ENDS', touch?.x || 0, touch?.y || 0);
+});
+
 t.draw(() => {
-	t.background(6, 8, 14);
+	t.background(6, 10, 22);
 
-	const cols = t.grid.cols;
-	const rows = t.grid.rows;
-
-	// Telemetry instruction labels
-	drawText('CELESTIAL FIREWORK LAUNCHER', 0, -Math.floor(rows / 2) + 4, 100, 200, 255);
-	drawText(
-		'Tap or drag-and-release anywhere on screen to detonate sparks',
-		0,
-		-Math.floor(rows / 2) + 6,
-		120,
-		140,
-		160
-	);
-
-	// Update and draw active firework sparks
-	for (let i = sparks.length - 1; i >= 0; i--) {
-		const s = sparks[i];
-		s.vy += 0.04; // Gravity drift
-		s.x += s.vx;
-		s.y += s.vy;
-
-		s.alpha -= 3.5; // Easing fade out
-		if (s.alpha <= 0) {
-			sparks.splice(i, 1);
+	for (let i = pulses.length - 1; i >= 0; i--) {
+		const p = pulses[i];
+		p.life -= 0.02;
+		if (p.life <= 0) {
+			pulses.splice(i, 1);
 			continue;
 		}
-
 		t.push();
-		t.translate(s.x, s.y);
-		t.char(s.char);
-		// Random sparkling flicker
-		const flicker = Math.random() > 0.3 ? s.alpha : s.alpha * 0.4;
-		t.charColor(s.color[0], s.color[1], s.color[2], flicker);
-		t.rect(s.size, s.size);
+		t.translate(p.x, p.y - (1 - p.life) * 4);
+		t.char('*');
+		t.charColor(255, 210, 120);
+		t.point();
 		t.pop();
 	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.TOUCHENDED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: TOUCH END', x, y++, 100, 220, 255);
+	drawText('Event updates compact state.', x, y++, 140, 160, 190);
+	drawText('Pulses show recent triggers.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('ENDS: ' + count, x, y++, 140, 255, 180);
+	drawText('LAST: ' + last.slice(0, 28), x, y++, 180, 200, 220);
 });
 
 t.windowResized(() => {
@@ -13827,7 +13630,7 @@ t.windowResized(() => {
 touchMoved(callback): void;
 ```
 
-Set a callback function that will be called when a touch point moves across the canvas.
+Register the single-callback handler for touch movement.
 
 The provided callback is invoked continuously while the browser reports move events. Use the
 `previousTouch` and `deltaTime` fields to derive velocity or gesture behaviour.
@@ -13836,7 +13639,7 @@ The provided callback is invoked continuously while the browser reports move eve
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`TouchEventHandler`](../namespaces/input/namespaces/touch/type-aliases/TouchEventHandler.md) | The function to call when a touch moves. |
+| `callback` | [`TouchEventHandler`](../namespaces/input/namespaces/touch/type-aliases/TouchEventHandler.md) | Handler to run when a touch moves. |
 
 #### Returns
 
@@ -13851,94 +13654,73 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-const trail = [];
-const MAX_TRAIL = 40;
+const labelLayer = t.layers.add();
 
-t.touchMoved((data) => {
-	const { touch } = data;
-	trail.push({ x: touch.x, y: touch.y, age: 0 });
-	if (trail.length > MAX_TRAIL) trail.shift();
-});
+const pulses = [];
+let count = 0;
+let last = 'WAITING';
 
-function drawText(text, x, y, r = 180, g = r, b = r) {
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(x - Math.floor(text.length / 2), y);
+	t.translate(x, y);
 	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
+function addPulse(label, x = 0, y = 0) {
+	count++;
+	last = label;
+	pulses.unshift({ label, x, y, life: 1 });
+	if (pulses.length > 12) pulses.length = 12;
+}
+
+t.touchMoved((data) => {
+	const touch = data?.touch || t.mouse;
+	addPulse('MOVES', touch?.x || 0, touch?.y || 0);
+});
+
 t.draw(() => {
-	t.background(6, 8, 14);
+	t.background(6, 10, 22);
 
-	const cols = t.grid.cols;
-	const rows = t.grid.rows;
-
-	// Draw informative title
-	drawText('NEON FLUID TOUCH PAINTBRUSH', 0, -Math.floor(rows / 2) + 4, 100, 200, 255);
-	drawText(
-		'Drag finger or click-and-drag mouse to paint glowing neon vectors',
-		0,
-		-Math.floor(rows / 2) + 6,
-		120,
-		140,
-		160
-	);
-
-	// Desktop mouse drawing fallback
-	if (t.mouse && t.mouseIsPressed) {
-		trail.push({ x: t.mouse.x, y: t.mouse.y, age: 0 });
-		if (trail.length > MAX_TRAIL) trail.shift();
-	}
-
-	// Update ages and draw trail paths
-	for (let i = 0; i < trail.length; i++) {
-		const node = trail[i];
-		node.age++;
-
-		const ratio = i / trail.length;
-		const fade = Math.max(0, 1.0 - node.age / 120);
-
-		if (fade <= 0) continue;
-
-		t.push();
-		t.translate(node.x, node.y);
-
-		// Neon color interpolation: Hot pink to Electric cyan
-		const r = Math.floor((255 * ratio + 100 * (1 - ratio)) * fade);
-		const g = Math.floor((100 * ratio + 255 * (1 - ratio)) * fade);
-		const b = Math.floor(255 * fade);
-
-		t.charColor(r, g, b);
-
-		// Size decreases as particle ages
-		const size = Math.max(1, Math.floor(5 * ratio * fade));
-
-		// Draw pulsing brush cells
-		if (i % 2 === 0) {
-			t.char('💮');
-		} else {
-			t.char('•');
+	for (let i = pulses.length - 1; i >= 0; i--) {
+		const p = pulses[i];
+		p.life -= 0.02;
+		if (p.life <= 0) {
+			pulses.splice(i, 1);
+			continue;
 		}
-
-		t.ellipse(size, size);
+		t.push();
+		t.translate(p.x, p.y - (1 - p.life) * 4);
+		t.char('*');
+		t.charColor(255, 210, 120);
+		t.point();
 		t.pop();
 	}
+});
 
-	// Draw trail count diagnostic footer
-	const sizeStr = `TRAIL_ELEMENTS: ${trail.length} / ${MAX_TRAIL}`;
-	drawText(sizeStr, 0, Math.floor(rows / 2) - 4, 100, 255, 180);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.TOUCHMOVED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: TOUCH MOVE', x, y++, 100, 220, 255);
+	drawText('Event updates compact state.', x, y++, 140, 160, 190);
+	drawText('Pulses show recent triggers.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('MOVES: ' + count, x, y++, 140, 255, 180);
+	drawText('LAST: ' + last.slice(0, 28), x, y++, 180, 200, 220);
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
-	trail.length = 0;
 });
 ```
 
@@ -13950,7 +13732,7 @@ t.windowResized(() => {
 touchStarted(callback): void;
 ```
 
-Set a callback function that will be called when a touch point begins.
+Register the single-callback handler for touch start events.
 
 The callback receives [input.touch.TouchEventData](../namespaces/input/namespaces/touch/interfaces/TouchEventData.md) containing the touch that triggered the event,
 all active touches, and the original DOM event. Use this to react when the user places one or
@@ -13960,7 +13742,7 @@ more fingers on the canvas.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | [`TouchEventHandler`](../namespaces/input/namespaces/touch/type-aliases/TouchEventHandler.md) | The function to call when a touch starts. |
+| `callback` | [`TouchEventHandler`](../namespaces/input/namespaces/touch/type-aliases/TouchEventHandler.md) | Handler to run when a touch starts. |
 
 #### Returns
 
@@ -13975,119 +13757,69 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-const galaxies = [];
+const labelLayer = t.layers.add();
 
-t.touchStarted((data) => {
-	spawnGalaxy(data.touch.x, data.touch.y);
-});
+const pulses = [];
+let count = 0;
+let last = 'WAITING';
 
-// Interactive mouse fallback for desktop browsers
-t.mousePressed(() => {
-	if (t.mouse) {
-		spawnGalaxy(t.mouse.x, t.mouse.y);
-	}
-});
-
-function spawnGalaxy(x, y) {
-	galaxies.push({
-		x: x,
-		y: y,
-		radius: 0.1,
-		maxRadius: 18 + Math.random() * 12,
-		speed: 0.05 + Math.random() * 0.05,
-		rotSpeed: 0.02 + Math.random() * 0.05,
-		angleOffset: Math.random() * Math.PI,
-		color: [255, Math.floor(100 + Math.random() * 155), Math.floor(180 + Math.random() * 75)],
-		alpha: 255,
-	});
-}
-
-function drawText(text, x, y, r = 180, g = r, b = r) {
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(x - Math.floor(text.length / 2), y);
+	t.translate(x, y);
 	t.charColor(r, g, b);
-
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
+function addPulse(label, x = 0, y = 0) {
+	count++;
+	last = label;
+	pulses.unshift({ label, x, y, life: 1 });
+	if (pulses.length > 12) pulses.length = 12;
+}
+
+t.touchStarted((data) => {
+	const touch = data?.touch || t.mouse;
+	addPulse('STARTS', touch?.x || 0, touch?.y || 0);
+});
+
 t.draw(() => {
-	t.background(6, 8, 14);
+	t.background(6, 10, 22);
 
-	const cols = t.grid.cols;
-	const rows = t.grid.rows;
-
-	// Telemetry hud instructions
-	drawText('GENERATIVE CEL-GALAXY SEEDER', 0, -Math.floor(rows / 2) + 4, 100, 200, 255);
-	drawText(
-		'Tap anywhere on screen or click to seed new spinning spiral systems',
-		0,
-		-Math.floor(rows / 2) + 6,
-		120,
-		140,
-		160
-	);
-
-	// Update and render active generative galaxies
-	for (let idx = galaxies.length - 1; idx >= 0; idx--) {
-		const g = galaxies[idx];
-		g.radius += g.speed * 6; // Growth rate
-
-		const ageRatio = g.radius / g.maxRadius;
-		g.alpha = Math.max(0, 255 * (1.0 - ageRatio));
-
-		if (g.alpha <= 0 || g.radius >= g.maxRadius) {
-			galaxies.splice(idx, 1);
+	for (let i = pulses.length - 1; i >= 0; i--) {
+		const p = pulses[i];
+		p.life -= 0.02;
+		if (p.life <= 0) {
+			pulses.splice(i, 1);
 			continue;
 		}
-
 		t.push();
-		t.translate(g.x, g.y);
-
-		// Render a gorgeous 4-arm spiral galaxy structure
-		const arms = 4;
-		const starsPerArm = 18;
-		for (let arm = 0; arm < arms; arm++) {
-			const baseAngle = (arm / arms) * Math.PI * 2 + g.angleOffset;
-
-			for (let s = 0; s < starsPerArm; s++) {
-				const starRatio = s / starsPerArm;
-				// Spiral wrapping physics
-				const angle = baseAngle + starRatio * 4.5 + t.frameCount * g.rotSpeed;
-				const currentR = starRatio * g.radius;
-
-				const px = Math.cos(angle) * currentR * 1.5;
-				const py = Math.sin(angle) * currentR;
-
-				t.push();
-				t.translate(px, py);
-
-				// Star character density matching center-to-edge
-				const starChars = ['█', '☼', 'O', 'o', '*', '·'];
-				const charIdx = Math.floor(starRatio * starChars.length) % starChars.length;
-				t.char(starChars[charIdx]);
-
-				// Dynamic core-glow gradient
-				t.charColor(
-					g.color[0],
-					Math.floor(g.color[1] * (1 - starRatio)),
-					g.color[2],
-					g.alpha * (1 - starRatio * 0.5)
-				);
-				t.point();
-				t.pop();
-			}
-		}
-
+		t.translate(p.x, p.y - (1 - p.life) * 4);
+		t.char('*');
+		t.charColor(255, 210, 120);
+		t.point();
 		t.pop();
 	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.TOUCHSTARTED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: TOUCH BEGIN', x, y++, 100, 220, 255);
+	drawText('Event updates compact state.', x, y++, 140, 160, 190);
+	drawText('Pulses show recent triggers.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('STARTS: ' + count, x, y++, 140, 255, 180);
+	drawText('LAST: ' + last.slice(0, 28), x, y++, 180, 200, 220);
 });
 
 t.windowResized(() => {
@@ -14106,7 +13838,7 @@ translate(
    z?): void;
 ```
 
-Sets the translation offsets for subsequent shape rendering operations.
+Translate subsequent shape drawing.
 
 All geometries are displaced by the specified amounts. Similar to p5.js translate().
 
@@ -14114,9 +13846,9 @@ All geometries are displaced by the specified amounts. Similar to p5.js translat
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `x?` | `number` | Translation along the X-axis in grid cells (optional, defaults to 0) |
-| `y?` | `number` | Translation along the Y-axis in grid cells (optional, defaults to 0) |
-| `z?` | `number` | Translation along the Z-axis in grid cells (optional, defaults to 0) |
+| `x?` | `number` | Translation along the X axis in grid cells. Defaults to 0. |
+| `y?` | `number` | Translation along the Y axis in grid cells. Defaults to 0. |
+| `z?` | `number` | Translation along the Z axis in grid cells. Defaults to 0. |
 
 #### Returns
 
@@ -14131,61 +13863,51 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, row, rgb = [240, 245, 255]) {
+const labelLayer = t.layers.add();
+
+let value = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), row);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
 t.draw(() => {
 	t.background(6, 10, 22);
+	const time = t.frameCount * 0.04;
+	value = Math.sin(time) * 12;
+	t.charColor(50, 60, 90);
+	t.char('.');
+	t.line(-18, 0, 18, 0);
+	t.line(0, -10, 0, 10);
+	t.push();
+	t.translate(value, Math.cos(time) * 5, 0);
+	t.char('#');
+	t.charColor(140, 255, 180);
+	t.rect(6, 4);
+	t.pop();
+});
 
-	const time = t.frameCount * 0.03;
-	const radius = 15;
-
-	const count = 12;
-	for (let i = 0; i < count; i++) {
-		const angle = (i / count) * Math.PI * 2 + time;
-		const x = Math.cos(angle) * radius;
-		const y = Math.sin(angle * 0.5) * radius * 0.5;
-		const z = Math.sin(angle) * radius;
-
-		t.push();
-		t.translate(x, y, z);
-
-		const alpha = 100 + (z / radius) * 155;
-		t.charColor(100, 200, 255, alpha);
-		t.char('☼');
-		t.point();
-
-		if (i === 0) {
-			t.push();
-			t.translate(2, 0);
-			t.charColor(255, 255, 255, alpha);
-			const coordText = `(${x.toFixed(1)}, ${y.toFixed(1)}, ${z.toFixed(1)})`;
-			for (let j = 0; j < coordText.length; j++) {
-				t.push();
-				t.translate(j, 0);
-				t.char(coordText[j]);
-				t.point();
-				t.pop();
-			}
-			t.pop();
-		}
-		t.pop();
-	}
-
-	drawCenteredText('Textmodifier.translate', -12, [255, 255, 255]);
-	drawCenteredText('Moves the coordinate system by (x, y, z) cells.', -10, [150, 170, 200]);
-	drawCenteredText('t.translate(x, y, z)', 10, [140, 180, 255]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.TRANSLATE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: MOVE ORIGIN', x, y++, 100, 220, 255);
+	drawText('Moves x, y, and z together.', x, y++, 140, 160, 190);
+	drawText('Grid cross shows original axes.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`X: ${value.toFixed(1)}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -14203,13 +13925,13 @@ t.windowResized(() => {
 translateX(): number;
 ```
 
-Gets the current accumulated X-axis translation offset.
+Current accumulated X-axis translation.
 
 ##### Returns
 
 `number`
 
-The current X-axis translation in grid cells.
+Current X-axis translation in grid cells.
 
 ##### Example
 
@@ -14220,59 +13942,51 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, row, rgb = [240, 245, 255]) {
+const labelLayer = t.layers.add();
+
+let value = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), row);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
 t.draw(() => {
 	t.background(6, 10, 22);
-
-	const time = t.frameCount * 0.05;
-	const xPos = Math.sin(time) * 20;
-
+	const time = t.frameCount * 0.04;
+	value = Math.sin(time) * 16;
+	t.charColor(50, 60, 90);
+	t.char('.');
+	t.line(-18, 0, 18, 0);
+	t.line(0, -10, 0, 10);
 	t.push();
-	t.charColor(60, 70, 100);
-	t.translate(-30, 0);
-	t.char('-');
-	t.rect(60, 1);
+	t.translateX(value);
+	t.char('#');
+	t.charColor(140, 255, 180);
+	t.rect(6, 4);
 	t.pop();
+});
 
-	t.push();
-	t.translateX(xPos);
-
-	const currentX = t.translateX();
-
-	t.charColor(120, 255, 180);
-	t.char('X');
-	t.rect(5, 5);
-
-	t.push();
-	t.translate(0, 4);
-	const label = `X: ${currentX.toFixed(1)}`;
-	t.translate(-Math.floor(label.length / 2), 0);
-	t.charColor(255);
-	for (let i = 0; i < label.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(label[i]);
-		t.point();
-		t.pop();
-	}
-	t.pop();
-	t.pop();
-
-	drawCenteredText('Textmodifier.translateX', -12, [255, 255, 255]);
-	drawCenteredText('Sets or returns the horizontal translation.', -10, [150, 170, 200]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.TRANSLATEX', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: MOVE X ONLY', x, y++, 100, 220, 255);
+	drawText('Getter returns current X.', x, y++, 140, 160, 190);
+	drawText('Grid cross shows original axes.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`X: ${value.toFixed(1)}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -14286,13 +14000,13 @@ t.windowResized(() => {
 translateX(pixels): void;
 ```
 
-Sets the X-axis translation offset for subsequent shape rendering operations.
+Translate subsequent shapes along the X axis.
 
 ##### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `pixels` | `number` | The translation offset in grid cells along the X-axis. |
+| `pixels` | `number` | Translation offset in grid cells. |
 
 ##### Returns
 
@@ -14307,44 +14021,47 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, row, rgb = [240, 245, 255]) {
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), row);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
 t.draw(() => {
 	t.background(6, 10, 22);
-
 	const time = t.frameCount * 0.04;
-	const count = 30;
-
-	// Multiple elements oscillating in X
-	for (let i = 0; i < count; i++) {
-		const phase = i / count;
-		const y = (phase - 0.5) * 30;
-		const xOffset = Math.sin(time + phase * 6) * 20;
-
+	for (let i = 0; i < 4; i++) {
 		t.push();
-		t.translateY(y);
-		t.translateX(xOffset);
-
-		t.charColor(120, 255, 180, (phase * 0.8 + 0.2) * 255);
-		t.char('█');
-		t.rect(4, 1);
+		t.translateY((i - 1.5) * 4);
+		t.translateX(Math.sin(time + i) * 14);
+		t.char(String(i + 1));
+		t.charColor(120 + i * 30, 220, 255 - i * 20);
+		t.rect(4, 2);
 		t.pop();
 	}
+});
 
-	drawCenteredText('Textmodifier.translateX (Field)', -16, [255, 255, 255]);
-	drawCenteredText('Applying individual X translations to multiple layers.', -14, [150, 170, 200]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.TRANSLATEX2', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: LAYERED X MOTION', x, y++, 100, 220, 255);
+	drawText('Independent rows move on X.', x, y++, 140, 160, 190);
+	drawText('Each block uses local state.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('API: t.translateX(x)', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -14362,13 +14079,13 @@ t.windowResized(() => {
 translateY(): number;
 ```
 
-Gets the current accumulated Y-axis translation offset.
+Current accumulated Y-axis translation.
 
 ##### Returns
 
 `number`
 
-The current Y-axis translation in grid cells.
+Current Y-axis translation in grid cells.
 
 ##### Example
 
@@ -14379,58 +14096,51 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, row, rgb = [240, 245, 255]) {
+const labelLayer = t.layers.add();
+
+let value = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), row);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
 t.draw(() => {
 	t.background(6, 10, 22);
-
-	const time = t.frameCount * 0.05;
-	const yPos = Math.sin(time) * 12;
-
+	const time = t.frameCount * 0.04;
+	value = Math.cos(time) * 8;
+	t.charColor(50, 60, 90);
+	t.char('.');
+	t.line(-18, 0, 18, 0);
+	t.line(0, -10, 0, 10);
 	t.push();
-	t.charColor(60, 70, 100);
-	t.translate(0, -15);
-	t.char('|');
-	t.rect(1, 30);
+	t.translateY(value);
+	t.char('#');
+	t.charColor(140, 255, 180);
+	t.rect(6, 4);
 	t.pop();
+});
 
-	t.push();
-	t.translateY(yPos);
-
-	const currentY = t.translateY();
-
-	t.charColor(255, 140, 180);
-	t.char('Y');
-	t.rect(5, 5);
-
-	t.push();
-	t.translate(4, 0);
-	const label = `Y: ${currentY.toFixed(1)}`;
-	t.charColor(255);
-	for (let i = 0; i < label.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(label[i]);
-		t.point();
-		t.pop();
-	}
-	t.pop();
-	t.pop();
-
-	drawCenteredText('Textmodifier.translateY', -12, [255, 255, 255]);
-	drawCenteredText('Sets or returns the vertical translation.', -10, [150, 170, 200]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.TRANSLATEY', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: MOVE Y ONLY', x, y++, 100, 220, 255);
+	drawText('Getter returns current Y.', x, y++, 140, 160, 190);
+	drawText('Grid cross shows original axes.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`Y: ${value.toFixed(1)}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -14444,13 +14154,13 @@ t.windowResized(() => {
 translateY(pixels): void;
 ```
 
-Sets the Y-axis translation offset for subsequent shape rendering operations.
+Translate subsequent shapes along the Y axis.
 
 ##### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `pixels` | `number` | The translation offset in grid cells along the Y-axis. |
+| `pixels` | `number` | Translation offset in grid cells. |
 
 ##### Returns
 
@@ -14465,45 +14175,47 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, row, rgb = [240, 245, 255]) {
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), row);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
 t.draw(() => {
 	t.background(6, 10, 22);
-
-	const count = 40;
-	const speed = 0.5;
-
-	// Cascading elements using translateY
-	for (let i = 0; i < count; i++) {
-		const x = (i / count - 0.5) * 60;
-		const offset = (i * 7.5) % 30;
-		const y = ((t.frameCount * speed + offset) % 30) - 15;
-
+	const time = t.frameCount * 0.04;
+	for (let i = 0; i < 5; i++) {
 		t.push();
-		t.translateX(x);
-		t.translateY(y);
-
-		const brightness = (1 - (y + 15) / 30) * 255;
-		t.charColor(255, 140, 180, brightness);
+		t.translateX((i - 2) * 6);
+		t.translateY(Math.sin(time + i) * 7);
 		t.char('|');
-		t.point();
+		t.charColor(120, 180 + i * 12, 255);
+		t.rect(2, 5);
 		t.pop();
 	}
+});
 
-	drawCenteredText('Textmodifier.translateY (Cascading)', -16, [255, 255, 255]);
-	drawCenteredText('Simulating vertical motion with wrapping translateY.', -14, [150, 170, 200]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.TRANSLATEY2', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: STACKED Y MOTION', x, y++, 100, 220, 255);
+	drawText('Columns move vertically.', x, y++, 140, 160, 190);
+	drawText('translateY keeps X unchanged.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('API: t.translateY(y)', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -14521,13 +14233,13 @@ t.windowResized(() => {
 translateZ(): number;
 ```
 
-Gets the current accumulated Z-axis translation offset.
+Current accumulated Z-axis translation.
 
 ##### Returns
 
 `number`
 
-The current Z-axis translation in grid cells.
+Current Z-axis translation in grid cells.
 
 ##### Example
 
@@ -14538,70 +14250,53 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, row, rgb = [240, 245, 255]) {
+const labelLayer = t.layers.add();
+
+let value = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), row);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
 t.draw(() => {
 	t.background(6, 10, 22);
-
-	const time = t.frameCount * 0.03;
-	const zPos = Math.sin(time) * 40;
-
+	const time = t.frameCount * 0.04;
+	value = Math.sin(time) * 24;
+	t.charColor(50, 60, 90);
+	t.char('.');
+	t.line(-18, 0, 18, 0);
+	t.line(0, -10, 0, 10);
 	t.push();
-	t.charColor(40, 50, 80);
-	for (let i = -2; i <= 2; i++) {
-		t.push();
-		t.translate(i * 10, 0, 0);
-		t.char('|');
-		t.rect(1, 40);
-		t.pop();
-		t.push();
-		t.translate(0, i * 10, 0);
-		t.char('-');
-		t.rect(40, 1);
-		t.pop();
-	}
+	t.perspective(60, 0.1, 4096);
+	t.camera(0, 0, 46, 0, 0, 0);
+	t.translateZ(value);
+	t.char('#');
+	t.charColor(140, 255, 180);
+	t.rect(6, 4);
 	t.pop();
+});
 
-	t.push();
-	t.translateZ(zPos);
-
-	const currentZ = t.translateZ();
-
-	// Fade based on depth
-	const alpha = 255 * (1 - (currentZ + 40) / 120);
-	t.charColor(140, 180, 255, alpha);
-	t.char('Z');
-	t.rect(8, 8);
-
-	t.push();
-	t.translate(0, 6);
-	const label = `Z: ${currentZ.toFixed(1)}`;
-	t.translate(-Math.floor(label.length / 2), 0);
-	t.charColor(255, 255, 255, alpha);
-	for (let i = 0; i < label.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(label[i]);
-		t.point();
-		t.pop();
-	}
-	t.pop();
-	t.pop();
-
-	drawCenteredText('Textmodifier.translateZ', -12, [255, 255, 255]);
-	drawCenteredText('Sets or returns the depth (Z) translation.', -10, [150, 170, 200]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.TRANSLATEZ', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: MOVE Z ONLY', x, y++, 100, 220, 255);
+	drawText('Depth changes apparent scale.', x, y++, 140, 160, 190);
+	drawText('Grid cross shows original axes.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`Z: ${value.toFixed(1)}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -14615,13 +14310,13 @@ t.windowResized(() => {
 translateZ(pixels): void;
 ```
 
-Sets the Z-axis translation offset for subsequent shape rendering operations.
+Translate subsequent shapes along the Z axis.
 
 ##### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `pixels` | `number` | The translation offset in grid cells along the Z-axis. |
+| `pixels` | `number` | Translation offset in grid cells. |
 
 ##### Returns
 
@@ -14636,78 +14331,49 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, row, rgb = [240, 245, 255]) {
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), row);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
 t.draw(() => {
 	t.background(6, 10, 22);
-
-	const time = t.frameCount * 0.05;
-	const zOsc = Math.sin(time) * 30;
-
-	t.push();
-	t.charColor(30, 40, 60);
-	t.char('.');
-	t.rect(40, 20);
-	t.pop();
-
-	t.push();
-	t.translateZ(0); // Standard depth
-	t.charColor(100, 120, 150);
-	t.char('O');
-	t.rect(15, 15);
-	t.pop();
-
-	t.push();
-	// Move the core back and forth through the ring
-	t.translateZ(zOsc);
-
-	const currentZ = t.translateZ();
-	const isAhead = currentZ > 0;
-
-	if (isAhead) {
-		t.charColor(255, 200, 100);
-		t.char('☼');
-	} else {
-		t.charColor(100, 150, 255);
-		t.char('•');
-	}
-
-	t.rect(6, 6);
-
-	t.push();
-	t.translate(0, 5);
-	const zLabel = `Z: ${currentZ.toFixed(1)}`;
-	t.translate(-Math.floor(zLabel.length / 2), 0);
-	t.charColor(255);
-	for (let i = 0; i < zLabel.length; i++) {
+	t.perspective(58, 0.1, 4096);
+	t.camera(0, 0, 48, 0, 0, 0);
+	const time = t.frameCount * 0.03;
+	for (let i = 0; i < 4; i++) {
 		t.push();
-		t.translate(i, 0);
-		t.char(zLabel[i]);
-		t.point();
+		t.translate((i - 1.5) * 7, 0, 0);
+		t.translateZ(Math.sin(time + i) * 18);
+		t.char('#');
+		t.charColor(120 + i * 30, 220, 255 - i * 20);
+		t.box(4, 4, 4);
 		t.pop();
 	}
-	t.pop();
-	t.pop();
+});
 
-	drawCenteredText('Textmodifier.translateZ (Depth Interaction)', -12, [255, 255, 255]);
-	drawCenteredText('Objects with higher Z values are rendered in front.', -10, [150, 170, 200]);
-	drawCenteredText(
-		isAhead ? 'Core is IN FRONT of Ring' : 'Core is BEHIND Ring',
-		12,
-		isAhead ? [255, 200, 100] : [100, 150, 255]
-	);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.TRANSLATEZ2', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: DEPTH MOTION', x, y++, 100, 220, 255);
+	drawText('Boxes move toward camera.', x, y++, 140, 160, 190);
+	drawText('Z changes perspective scale.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('API: t.translateZ(z)', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -14735,12 +14401,12 @@ Draw a triangle with the current settings.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `x1` | `number` | X-coordinate of the first vertex in grid cells |
-| `y1` | `number` | Y-coordinate of the first vertex in grid cells |
-| `x2` | `number` | X-coordinate of the second vertex in grid cells |
-| `y2` | `number` | Y-coordinate of the second vertex in grid cells |
-| `x3` | `number` | X-coordinate of the third vertex in grid cells |
-| `y3` | `number` | Y-coordinate of the third vertex in grid cells |
+| `x1` | `number` | First vertex X coordinate in grid cells. |
+| `y1` | `number` | First vertex Y coordinate in grid cells. |
+| `x2` | `number` | Second vertex X coordinate in grid cells. |
+| `y2` | `number` | Second vertex Y coordinate in grid cells. |
+| `x3` | `number` | Third vertex X coordinate in grid cells. |
+| `y3` | `number` | Third vertex Y coordinate in grid cells. |
 
 #### Returns
 
@@ -14749,41 +14415,52 @@ Draw a triangle with the current settings.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.draw(() => {
-	t.background(5, 5, 10);
+	t.background(6, 10, 22);
+	const time = t.frameCount * 0.03;
+	t.push();
+	t.translate(8, 2);
+	t.rotateZ(Math.sin(time) * 18);
+	t.char('^');
+	t.charColor(255, 210, 120);
+	t.cellColor(30, 20, 10);
+	t.triangle(-9, 6, 0, -7, 9, 6);
+	t.pop();
+});
 
-	const time = t.frameCount * 0.02;
-	const count = 12;
-	const radius = Math.min(t.grid.cols, t.grid.rows) * 0.35;
-
-	for (let i = 0; i < count; i++) {
-		const angle = (i / count) * Math.PI * 2;
-		const pulse = 0.5 + 0.5 * Math.sin(time + i * 0.5);
-
-		const x = Math.cos(angle + time * 0.5) * radius * pulse;
-		const y = Math.sin(angle + time * 0.5) * radius * pulse;
-
-		t.push();
-		t.translate(x, y);
-		t.rotateZ(i * 30 + time * 100);
-
-		t.charColor(150 + pulse * 105, 100, 255 - pulse * 100);
-		t.char(['/', '\\', '|', '-'][i % 4]);
-		t.lineWeight(1 + Math.floor(pulse * 3));
-
-		const s = 4 + pulse * 8;
-		t.triangle(
-			0,
-			-s, // Top vertex
-			-s,
-			s * 0.7, // Bottom left
-			s,
-			s * 0.7 // Bottom right
-		);
-		t.pop();
-	}
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.TRIANGLE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: THREE POINT SHAPE', x, y++, 100, 220, 255);
+	drawText('Uses three explicit vertices.', x, y++, 140, 160, 190);
+	drawText('Rotation shows the filled area.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('API: t.triangle(...)', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -14799,10 +14476,9 @@ t.windowResized(() => {
 useTileColors(enabled?): boolean | void;
 ```
 
-Get or set whether the base layer should use authored tileset colors directly during the final ASCII pass.
+Configure authored tileset color preservation on the base layer.
 
-This is equivalent to calling [TextmodeLayer.useTileColors](../namespaces/layering/classes/TextmodeLayer.md#usetilecolors) on
-[base layer](#layers).
+This is equivalent to calling [TextmodeLayer.useTileColors](../namespaces/layering/classes/TextmodeLayer.md#usetilecolors) on the base layer.
 
 When disabled (default), tilesets on the base layer are recolored through the current
 character (`primary`) and cell (`secondary`) colors.
@@ -14811,81 +14487,61 @@ character (`primary`) and cell (`secondary`) colors.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `enabled?` | `boolean` | Whether the base layer should use authored tileset colors directly. |
+| `enabled?` | `boolean` | Whether to preserve authored tileset colors. |
 
 #### Returns
 
 `boolean` \| `void`
 
-The current base-layer tileset-color mode if called without arguments.
+Current base-layer tileset-color mode when called without arguments.
 
 #### Example
 
 ```javascript
-const TILE_COLUMNS = 16;
-const TILE_ROWS = 16;
-const TILE_COUNT = TILE_COLUMNS * TILE_ROWS;
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const labelLayer = t.layers.add();
 
-let tileset = null;
-let usesTileColors = false;
+let authored = false;
 
-function activeTileIndex() {
-	return Math.floor((t.frameCount * 0.35) % TILE_COUNT);
-}
-
-function drawLabel(text, y, color = [220, 220, 220]) {
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-t.setup(async () => {
-	tileset = await t.loadTileset({
-		source: 'https://littlebitspace.com/resources/fonts/T64.png',
-		columns: TILE_COLUMNS,
-		rows: TILE_ROWS,
-		count: TILE_COUNT,
-	});
-});
-
 t.draw(() => {
-	t.background(4, 7, 18);
-
-	if (!tileset) {
-		drawLabel('loading tileset...', 0, [255, 225, 140]);
-		return;
-	}
-
-	const tileIndex = activeTileIndex();
-	t.useTileColors(usesTileColors);
-	t.char(tileIndex);
-	t.charColor(255, 90, 90);
-	t.cellColor(20, 60, 160);
-	t.point();
-
-	drawLabel('base layer tileset colors', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
-	drawLabel('T64  16 x 16  8 x 8 cells', Math.floor(t.grid.rows * 0.2));
-	drawLabel(
-		usesTileColors ? 'authored colors enabled' : 'char + cell recolor active',
-		Math.floor(t.grid.rows * 0.28)
-	);
-	drawLabel('click to toggle useTileColors()', Math.floor(t.grid.rows * 0.36), [120, 205, 255]);
+	t.background(6, 10, 22);
+	authored = Math.floor(t.frameCount / 120) % 2 === 0;
+	t.useTileColors(authored);
+	t.char(65);
+	t.charColor(255, 210, 120);
+	t.rect(12, 5);
 });
 
-t.mouseClicked(() => {
-	usesTileColors = !usesTileColors;
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.USETILECOLORS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: TILE COLORS', x, y++, 100, 220, 255);
+	drawText('Toggles authored tile color.', x, y++, 140, 160, 190);
+	drawText('charColor handles recolor mode.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(authored ? 'MODE: AUTHORED' : 'MODE: RECOLOR', x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -14901,13 +14557,13 @@ t.windowResized(() => {
 windowResized(callback): void;
 ```
 
-Set a callback function that will be called when the window is resized.
+Set the callback that runs after a window resize.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | () => `void` | The function to call when the window is resized. |
+| `callback` | () => `void` | Function to run after the window is resized. |
 
 #### Returns
 
@@ -14916,26 +14572,52 @@ Set a callback function that will be called when the window is resized.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-function drawLabel(label, y, color) {
-	const startX = -label.length / 2;
-	t.charColor(...color);
+const labelLayer = t.layers.add();
 
-	for (let i = 0; i < label.length; i++) {
-		t.push();
-		t.translate(startX + i + 0.5, y);
-		t.char(label[i]);
+let resizes = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
+	t.pop();
 }
 
+window.addEventListener('resize', () => {
+	resizes++;
+});
+
 t.draw(() => {
-	t.background(8, 12, 24);
-	drawLabel('WINDOW RESIZED', -6, [255, 230, 120]);
-	drawLabel(`${t.width} x ${t.height}`, 0, [220, 240, 255]);
-	drawLabel('stretch the browser window', 6, [120, 220, 255]);
+	t.background(6, 10, 22);
+	t.char('#');
+	t.charColor(140, 220, 255);
+	t.rect(12, 5);
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.WINDOWRESIZED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: RESIZE CALLBACK', x, y++, 100, 220, 255);
+	drawText('windowResized keeps canvas fit.', x, y++, 140, 160, 190);
+	drawText('Browser resize updates count.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`RESIZES: ${resizes}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {

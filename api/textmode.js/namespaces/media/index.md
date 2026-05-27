@@ -6,7 +6,7 @@ description: All media asset related modules and types.
 category: Namespaces
 api: true
 kind: Namespace
-lastModified: 2026-05-19
+lastModified: 2026-05-27
 ---
 
 [textmode.js](../../index.md) / media
@@ -19,7 +19,7 @@ All media asset related modules and types.
 
 | Class | Description |
 | ------ | ------ |
-| [TextmodeImage](classes/TextmodeImage.md) | Represents an image uploaded for textmode rendering via [Textmodifier.loadImage](../../classes/Textmodifier.md#loadimage). |
-| [TextmodeSource](classes/TextmodeSource.md) | Abstract base class representing a textmode source asset (image, video, texture). |
-| [TextmodeTexture](classes/TextmodeTexture.md) | Represents an external texture source for textmode rendering via [Textmodifier.createTexture](../../classes/Textmodifier.md#createtexture). |
-| [TextmodeVideo](classes/TextmodeVideo.md) | Represents a video element for textmode rendering via [Textmodifier.loadVideo](../../classes/Textmodifier.md#loadvideo). |
+| [TextmodeImage](classes/TextmodeImage.md) | Image source for textmode rendering. |
+| [TextmodeSource](classes/TextmodeSource.md) | Shared base for textmode image, video, and dynamic texture sources. |
+| [TextmodeTexture](classes/TextmodeTexture.md) | Dynamic texture source for external canvas or video content. |
+| [TextmodeVideo](classes/TextmodeVideo.md) | Video source for textmode rendering. |
