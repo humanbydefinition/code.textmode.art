@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: conversion
 kind: Interface
-lastModified: 2026-05-19
+lastModified: 2026-05-27
 isInterface: true
 ---
 
@@ -37,7 +37,7 @@ createShader(context): TextmodeShader;
 ```
 
 Create the shader program for this conversion strategy.
-This method is called once when the strategy is first used for a given source.
+Called once when the strategy is first used for a given source.
 
 The shader must output to 3 render targets (MRT):
 - location 0: Character data (R=char index, G=unused, B=unused, A=unused)
@@ -62,25 +62,9 @@ The compiled GLShader instance.
 const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80';
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
-let source = null;
-let strategyActive = false;
-let pulseShader = null;
-
-function drawLabel(text, y, color = [220, 220, 220]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
+const labelLayer = t.layers.add();
+let img = null;
+let blueShader = null;
 
 t.setup(async () => {
 	const vert = `#version 300 es
@@ -97,61 +81,62 @@ t.setup(async () => {
 		precision highp float;
 		in vec2 v_uv;
 		uniform sampler2D u_image;
-		uniform float u_time;
 		layout(location = 0) out vec4 o_character;
 		layout(location = 1) out vec4 o_primaryColor;
 		layout(location = 2) out vec4 o_secondaryColor;
-
 		void main() {
-			vec4 sampleColor = texture(u_image, v_uv);
-			float luma = dot(sampleColor.rgb, vec3(0.299, 0.587, 0.114));
-			float pulse = 0.5 + 0.5 * sin(u_time + v_uv.x * 8.0);
-			o_character = vec4(luma * pulse, 0.0, 0.0, 0.0);
-			o_primaryColor = vec4(sampleColor.rgb, 1.0);
-			o_secondaryColor = vec4(vec3(0.03, 0.05, 0.1), 1.0);
+			vec4 col = texture(u_image, v_uv);
+			float blueLuma = col.b;
+			o_character = vec4(blueLuma * 0.9, 0.0, 0.0, 0.0);
+			o_primaryColor = vec4(0.2, 0.6, 1.0, 1.0);
+			o_secondaryColor = vec4(0.01, 0.03, 0.08, 1.0);
 		}
 	`;
 
-	pulseShader = await t.createShader(vert, frag);
+	blueShader = await t.createShader(vert, frag);
+
 	t.conversions.register({
-		id: 'pulse',
-		createShader: () => pulseShader,
-		createUniforms: (context) => ({
-			u_image: context.source.texture,
-			u_time: t.frameCount * 0.05,
-		}),
+		id: 'blue-mrt',
+		createShader: () => blueShader,
+		createUniforms: (ctx) => ({ u_image: ctx.source.texture }),
 	});
 
-	source = await t.loadImage(IMAGE_URL);
-	source.characters(' .:-=+*#%@');
-	source.conversionMode('pulse');
-	strategyActive = true;
+	img = await t.loadImage(IMAGE_URL);
+	img.characters(' .:-=+*#%@');
+	img.conversionMode('blue-mrt');
 });
 
 t.draw(() => {
-	t.background(5, 8, 18);
-
-	if (source) {
-		t.image(source, t.grid.cols - 8, t.grid.rows - 10);
+	t.background(6, 8, 20);
+	if (img) {
+		t.image(img, t.grid.cols - 8, t.grid.rows - 10);
 	}
-
-	drawLabel('custom conversion strategy', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
-	drawLabel(`has pulse ${t.conversions.has('pulse') ? 'yes' : 'no'}`, Math.floor(t.grid.rows * 0.28));
-	drawLabel(
-		strategyActive ? 'click to unregister' : 'refresh to restore strategy',
-		Math.floor(t.grid.rows * 0.36),
-		[120, 205, 255]
-	);
 });
 
-t.mouseClicked(() => {
-	if (!strategyActive || !source) {
-		return;
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
 	}
+	t.pop();
+}
 
-	source.conversionMode('brightness');
-	t.conversions.unregister('pulse');
-	strategyActive = false;
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('CONVERSION.CREATESHADER', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: DYNAMIC SHADER REGISTER', x, y++, 100, 220, 255);
+	drawText('Outputs custom MRT locations for', x, y++, 140, 160, 190);
+	drawText('character, primary & secondary.', x, y++, 140, 160, 190);
 });
 
 t.windowResized(() => {
@@ -168,7 +153,7 @@ createUniforms(context): Record<string, UniformValue>;
 ```
 
 Create uniform values for this conversion strategy.
-This method is called every frame before rendering the conversion pass.
+Called every frame before rendering the conversion pass.
 
 Use this to pass dynamic values (like time or source texture) to your shader.
 
@@ -190,25 +175,9 @@ An object mapping uniform names to values.
 const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80';
 const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
 
-let source = null;
-let strategyActive = false;
-let pulseShader = null;
-
-function drawLabel(text, y, color = [220, 220, 220]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
+const labelLayer = t.layers.add();
+let img = null;
+let animatedShader = null;
 
 t.setup(async () => {
 	const vert = `#version 300 es
@@ -229,57 +198,66 @@ t.setup(async () => {
 		layout(location = 0) out vec4 o_character;
 		layout(location = 1) out vec4 o_primaryColor;
 		layout(location = 2) out vec4 o_secondaryColor;
-
 		void main() {
-			vec4 sampleColor = texture(u_image, v_uv);
-			float luma = dot(sampleColor.rgb, vec3(0.299, 0.587, 0.114));
-			float pulse = 0.5 + 0.5 * sin(u_time + v_uv.x * 8.0);
-			o_character = vec4(luma * pulse, 0.0, 0.0, 0.0);
-			o_primaryColor = vec4(sampleColor.rgb, 1.0);
-			o_secondaryColor = vec4(vec3(0.03, 0.05, 0.1), 1.0);
+			vec4 col = texture(u_image, v_uv);
+			float wave = 0.5 + 0.5 * sin(u_time + v_uv.x * 12.0);
+			float luma = dot(col.rgb, vec3(0.299, 0.587, 0.114));
+			o_character = vec4(luma * wave * 0.95, 0.0, 0.0, 0.0);
+			o_primaryColor = vec4(col.r, col.g * wave, col.b * 1.5, 1.0);
+			o_secondaryColor = vec4(0.02, 0.03, 0.06, 1.0);
 		}
 	`;
 
-	pulseShader = await t.createShader(vert, frag);
+	animatedShader = await t.createShader(vert, frag);
+
 	t.conversions.register({
-		id: 'pulse',
-		createShader: () => pulseShader,
-		createUniforms: (context) => ({
-			u_image: context.source.texture,
-			u_time: t.frameCount * 0.05,
+		id: 'time-wave',
+		createShader: () => animatedShader,
+		createUniforms: (ctx) => ({
+			u_image: ctx.source.texture,
+			u_time: t.frameCount * 0.04,
 		}),
 	});
 
-	source = await t.loadImage(IMAGE_URL);
-	source.characters(' .:-=+*#%@');
-	source.conversionMode('pulse');
-	strategyActive = true;
+	img = await t.loadImage(IMAGE_URL);
+	img.characters(' .:-=+*#%@');
+	img.conversionMode('time-wave');
 });
 
 t.draw(() => {
-	t.background(5, 8, 18);
-
-	if (source) {
-		t.image(source, t.grid.cols - 8, t.grid.rows - 10);
+	t.background(6, 8, 20);
+	if (img) {
+		t.image(img, t.grid.cols - 8, t.grid.rows - 10);
 	}
-
-	drawLabel('custom conversion strategy', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
-	drawLabel(`has pulse ${t.conversions.has('pulse') ? 'yes' : 'no'}`, Math.floor(t.grid.rows * 0.28));
-	drawLabel(
-		strategyActive ? 'click to unregister' : 'refresh to restore strategy',
-		Math.floor(t.grid.rows * 0.36),
-		[120, 205, 255]
-	);
 });
 
-t.mouseClicked(() => {
-	if (!strategyActive || !source) {
-		return;
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
 	}
+	t.pop();
+}
 
-	source.conversionMode('brightness');
-	t.conversions.unregister('pulse');
-	strategyActive = false;
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const timeVal = t.frameCount * 0.04;
+
+	drawText('CONVERSION.CREATEUNIFORMS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: RENDERING UNIFORMS BINDING', x, y++, 100, 220, 255);
+	drawText('Binds time-based animation values.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`TIME UNIFORM: ${timeVal.toFixed(2)}`, x, y++, 120, 205, 255);
 });
 
 t.windowResized(() => {

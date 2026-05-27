@@ -2,12 +2,12 @@
 layout: doc
 editLink: true
 title: MouseEventData
-description: Mouse event data passed to event handlers.
+description: Mouse event payload passed to input callbacks.
 category: Interfaces
 api: true
 namespace: input.mouse
 kind: Interface
-lastModified: 2026-05-19
+lastModified: 2026-05-27
 isInterface: true
 ---
 
@@ -15,7 +15,7 @@ isInterface: true
 
 # Interface: MouseEventData
 
-Mouse event data passed to event handlers.
+Mouse event payload passed to input callbacks.
 
 ## Properties
 

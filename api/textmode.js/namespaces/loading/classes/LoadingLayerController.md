@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: loading
 kind: Class
-lastModified: 2026-05-19
+lastModified: 2026-05-27
 hasConstructor: false
 ---
 
@@ -29,7 +29,7 @@ Controls the internal loading layer lifecycle and rendering behavior.
 _dispose(): void;
 ```
 
-Disposes of the internal layer and its resources.
+Dispose of the internal layer.
 
 #### Returns
 
@@ -49,8 +49,7 @@ InternalLayerController._dispose
 draw(callback?): void;
 ```
 
-Overridable method to set a custom draw callback for rendering the internal layer.
-If not set, the layer will use the default template.
+Set a custom renderer for the internal layer.
 
 #### Parameters
 

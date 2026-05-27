@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: layering
 kind: Class
-lastModified: 2026-05-19
+lastModified: 2026-05-27
 hasConstructor: false
 ---
 
@@ -17,12 +17,11 @@ hasConstructor: false
 
 A single layer within a multi-layered textmode rendering context.
 
-Layers are composited together using various blend modes
-to create complex visual effects. Each layer can be independently
-manipulated in terms of visibility, opacity, blend mode, and position.
+Each layer has its own draw callback, grid, glyph source, filters, camera state,
+opacity, blend mode, offset, and rotation.
 
-You can draw on each layer by providing a draw callback function,
-like you would with the base layer's [Textmodifier.draw](../../../classes/Textmodifier.md#draw) method.
+Draw on a layer by providing a callback, similar to [Textmodifier.draw](../../../classes/Textmodifier.md#draw)
+on the base layer.
 
 Plugins can extend TextmodeLayer with additional methods using the plugin API's
 `extendLayer` function. For example, the `textmode-synth` plugin adds a `.synth()`
@@ -43,7 +42,7 @@ get asciiFramebuffer():
   | undefined;
 ```
 
-Get the framebuffer containing the rendered textmode output for this layer.
+Framebuffer containing this layer's rendered textmode output.
 
 ##### Returns
 
@@ -60,17 +59,16 @@ const t = textmode.create({
 });
 
 const layer = t.layers.add({ blendMode: 'screen' });
+const labelLayer = t.layers.add();
 
-function drawLabel(text, x, y, col = [255, 255, 255]) {
+function drawText(text, x, y, rgb = [255, 255, 255]) {
 	t.push();
 	t.translate(x, y);
-	t.charColor(...col);
+	t.charColor(rgb[0], rgb[1], rgb[2]);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
@@ -87,26 +85,28 @@ layer.draw(() => {
 
 t.draw(() => {
 	t.background(8, 10, 18);
+});
 
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
 	const fb = layer.asciiFramebuffer;
-	const { cols, rows } = t.grid;
 
-	if (fb) {
-		const pixels = fb.readPixels(0);
-		const cx = Math.floor(fb.width / 2);
-		const cy = Math.floor(fb.height / 2);
-		const index = (cy * fb.width + cx) * 4;
+	drawText('TEXTMODELAYER.ASCIIFRAMEBUFFER', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: READ ASCII OUTPUT', x, y++, [100, 220, 255]);
+	drawText('Samples the converted texture.', x, y++, [140, 160, 190]);
+	drawText('Center pixel updates each frame.', x, y++, [140, 160, 190]);
+	if (!fb) return;
 
-		const r = pixels[index];
-		const g = pixels[index + 1];
-		const b = pixels[index + 2];
-
-		const title = '--- ASCII FRAMEBUFFER ---';
-		drawLabel(title, -(title.length - 1) / 2, -(rows - 1) / 2 + 2, [255, 220, 100]);
-
-		const info = `Read center pixel: rgb(${r}, ${g}, ${b})`;
-		drawLabel(info, -(info.length - 1) / 2, (rows - 1) / 2 - 2, [150, 180, 255]);
-	}
+	const pixels = fb.readPixels(0);
+	const index = (Math.floor(fb.height / 2) * fb.width + Math.floor(fb.width / 2)) * 4;
+	const rgb = `${pixels[index]}, ${pixels[index + 1]}, ${pixels[index + 2]}`;
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText(`RGB: ${rgb}`, x, y++, [140, 255, 180]);
 });
 
 t.windowResized(() => {
@@ -126,8 +126,9 @@ get drawFramebuffer():
   | undefined;
 ```
 
-Returns the draw framebuffer for this layer.
-If the layer is not yet initialized, returns undefined.
+Draw framebuffer for this layer.
+
+Returns `undefined` before the layer is initialized.
 
 ##### Returns
 
@@ -144,21 +145,24 @@ const t = textmode.create({
 });
 
 const sourceLayer = t.layers.add();
+const labelLayer = t.layers.add();
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, rgb = [255, 255, 255]) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
+	t.translate(x, y);
 	t.charColor(rgb[0], rgb[1], rgb[2]);
 
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 
 	t.pop();
+}
+
+function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+	drawText(text, -Math.floor(text.length / 2), y, rgb);
 }
 
 sourceLayer.draw(() => {
@@ -177,11 +181,7 @@ sourceLayer.draw(() => {
 t.draw(() => {
 	t.background(6, 10, 22);
 
-	// The drawFramebuffer property provides access to the internal WebGL
 	const fb = sourceLayer.drawFramebuffer;
-
-	drawCenteredText('TextmodeLayer.drawFramebuffer', -12, [240, 245, 255]);
-	drawCenteredText('Capturing the pre-ASCII raw drawing state.', -10, [150, 170, 200]);
 
 	if (fb) {
 		t.push();
@@ -190,8 +190,26 @@ t.draw(() => {
 		t.pop();
 
 		drawCenteredText('INTERNAL DATA BUFFER', 10, [140, 220, 255]);
-		drawCenteredText(`${fb.width} x ${fb.height} COORDINATE UNITS`, 12, [100, 120, 150]);
 	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	const fb = sourceLayer.drawFramebuffer;
+
+	drawText('TEXTMODELAYER.DRAWFRAMEBUFFER', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: RAW DRAW BUFFER', x, y++, [100, 220, 255]);
+	drawText('Captures pre-ASCII drawing.', x, y++, [140, 160, 190]);
+	drawText('Image preview reads the buffer.', x, y++, [140, 160, 190]);
+	if (!fb) return;
+
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText(`SIZE: ${fb.width} x ${fb.height}`, x, y++, [140, 255, 180]);
 });
 
 t.windowResized(() => {
@@ -211,7 +229,7 @@ get font():
   | TextmodeTileset;
 ```
 
-The font used by this layer.
+Font or tileset used by this layer.
 
 ##### Returns
 
@@ -227,19 +245,18 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-const bigFontLayer = t.layers.add({ fontSize: 24, blendMode: 'additive' });
+const bigFontLayer = t.layers.add({ fontSize: 32, blendMode: 'additive' });
+const labelLayer = t.layers.add();
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, rgb = [255, 255, 255]) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
+	t.translate(x, y);
 	t.charColor(rgb[0], rgb[1], rgb[2]);
 
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 
 	t.pop();
@@ -248,17 +265,11 @@ function drawCenteredText(text, y, rgb = [255, 255, 255]) {
 t.draw(() => {
 	t.background(6, 10, 22);
 
-	drawCenteredText('TextmodeLayer.font', -12, [240, 245, 255]);
-	drawCenteredText('Each layer maintains its own independent font state.', -10, [150, 170, 200]);
-
 	t.push();
 	t.charColor(40, 50, 80);
 	t.char('.');
 	t.rect(t.grid.cols, t.grid.rows);
 	t.pop();
-
-	const baseFont = t.layers.base.font;
-	drawCenteredText(`BASE FONT: ${baseFont.fontSize} PX`, 12, [140, 180, 255]);
 });
 
 bigFontLayer.draw(() => {
@@ -283,9 +294,25 @@ bigFontLayer.draw(() => {
 			t.pop();
 		}
 	}
+});
 
-	drawCenteredText('LAYER FONT (ADDITIVE)', -4, [255, 225, 140]);
-	drawCenteredText(`${font.fontSize} PX`, 6, [255, 225, 140]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	const baseSize = t.layers.base.font.fontSize;
+	const layerSize = bigFontLayer.font.fontSize;
+
+	drawText('TEXTMODELAYER.FONT', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: LAYER FONT STATE', x, y++, [100, 220, 255]);
+	drawText('Base and overlay keep fonts apart.', x, y++, [140, 160, 190]);
+	drawText('Large font layer uses additive.', x, y++, [140, 160, 190]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText(`BASE FONT: ${baseSize} PX`, x, y++, [140, 180, 255]);
+	drawText(`LAYER FONT: ${layerSize} PX`, x, y++, [255, 225, 140]);
 });
 
 t.windowResized(() => {
@@ -303,7 +330,7 @@ t.windowResized(() => {
 get grid(): TextmodeGrid | undefined;
 ```
 
-Get the grid associated with this layer.
+Grid associated with this layer.
 
 ##### Returns
 
@@ -319,18 +346,17 @@ const t = textmode.create({
 });
 
 const densityLayer = t.layers.add({ fontSize: 8, blendMode: 'screen' });
+const labelLayer = t.layers.add();
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, rgb = [255, 255, 255]) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
+	t.translate(x, y);
 	t.charColor(rgb[0], rgb[1], rgb[2]);
 
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 
 	t.pop();
@@ -339,26 +365,16 @@ function drawCenteredText(text, y, rgb = [255, 255, 255]) {
 t.draw(() => {
 	t.background(6, 10, 22);
 
-	const g = t.grid;
-
-	drawCenteredText('TextmodeLayer.grid', -12, [240, 245, 255]);
-	drawCenteredText('Every layer has its own independent coordinate grid.', -10, [150, 170, 200]);
-
 	t.push();
 	t.translate(-10, 0);
 	t.charColor(100, 150, 255, 100);
 	t.char('+');
 	t.rect(14, 10);
 	t.pop();
-
-	drawCenteredText(`BASE GRID: ${g.cols} x ${g.rows}`, 8, [140, 180, 255]);
 });
 
 densityLayer.draw(() => {
 	t.clear();
-
-	// Access this specific layer's grid via the .grid property.
-	const g = densityLayer.grid;
 
 	t.push();
 	t.translate(20, 0);
@@ -366,8 +382,24 @@ densityLayer.draw(() => {
 	t.char('.');
 	t.rect(28, 20);
 	t.pop();
+});
 
-	drawCenteredText(`LAYER GRID: ${g.cols} x ${g.rows}`, 12, [255, 225, 140]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	const g = densityLayer.grid;
+
+	drawText('TEXTMODELAYER.GRID', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: INDEPENDENT GRID', x, y++, [100, 220, 255]);
+	drawText('Each layer gets its own grid.', x, y++, [140, 160, 190]);
+	drawText('Font size changes cell count.', x, y++, [140, 160, 190]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText(`BASE: ${t.grid.cols} x ${t.grid.rows}`, x, y++, [140, 180, 255]);
+	drawText(`LAYER: ${g.cols} x ${g.rows}`, x, y++, [255, 225, 140]);
 });
 
 t.windowResized(() => {
@@ -385,8 +417,9 @@ t.windowResized(() => {
 get height(): number;
 ```
 
-Returns the height of the final ASCII framebuffer in pixels.
-If the layer is not yet initialized, returns 0.
+Height of the final ASCII framebuffer in pixels.
+
+Returns `0` before the layer is initialized.
 
 ##### Returns
 
@@ -402,18 +435,17 @@ const t = textmode.create({
 });
 
 const detailLayer = t.layers.add({ fontSize: 8 });
+const labelLayer = t.layers.add();
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, rgb = [255, 255, 255]) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
+	t.translate(x, y);
 	t.charColor(rgb[0], rgb[1], rgb[2]);
 
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 
 	t.pop();
@@ -422,24 +454,34 @@ function drawCenteredText(text, y, rgb = [255, 255, 255]) {
 t.draw(() => {
 	t.background(6, 10, 22);
 
-	const h = detailLayer.height;
-	const g = detailLayer.grid;
-
 	t.push();
 	t.translate(0, 0);
 	t.char('|');
 	t.charColor(120, 180, 255, 100);
 	t.rect(1, t.grid.rows);
 	t.pop();
-
-	drawCenteredText('TextmodeLayer.height', -12, [240, 245, 255]);
-	drawCenteredText('Total pixel height of the layer ASCII framebuffer.', -10, [150, 170, 200]);
-	drawCenteredText(`${h} PIXELS`, 10, [140, 220, 255]);
-	drawCenteredText(`${g.rows} ROWS x ${g.cellHeight}PX`, 12, [100, 120, 150]);
 });
 
 detailLayer.draw(() => {
 	t.clear();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	const g = detailLayer.grid;
+
+	drawText('TEXTMODELAYER.HEIGHT', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: LAYER PIXEL HEIGHT', x, y++, [100, 220, 255]);
+	drawText('Reports ASCII framebuffer height.', x, y++, [140, 160, 190]);
+	drawText('Finer font size gives more rows.', x, y++, [140, 160, 190]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText(`${detailLayer.height} PIXELS`, x, y++, [140, 255, 180]);
+	drawText(`${g.rows} ROWS x ${g.cellHeight}PX`, x, y++, [120, 200, 255]);
 });
 
 t.windowResized(() => {
@@ -457,8 +499,9 @@ t.windowResized(() => {
 get texture(): WebGLTexture | undefined;
 ```
 
-Returns the WebGL texture of the final ASCII framebuffer.
-If the layer is not yet initialized, returns undefined.
+WebGL texture of the final ASCII framebuffer.
+
+Returns `undefined` before the layer is initialized.
 
 ##### Returns
 
@@ -467,20 +510,24 @@ If the layer is not yet initialized, returns undefined.
 ##### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
-const layer = t.layers.add({ fontSize: 16, blendMode: 'screen' });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
 
-function label(text, y, color = [220, 220, 220]) {
+const layer = t.layers.add({ fontSize: 16, blendMode: 'screen' });
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, rgb = [220, 230, 255]) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
+	t.translate(x, y);
+	t.charColor(rgb[0], rgb[1], rgb[2]);
 
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 
 	t.pop();
@@ -488,14 +535,6 @@ function label(text, y, color = [220, 220, 220]) {
 
 t.draw(() => {
 	t.background(5, 7, 18);
-
-	const textureMatches = layer.texture === layer.asciiFramebuffer.textures[0];
-	label('TextmodeLayer.texture', -Math.floor(t.grid.rows * 0.34), [255, 225, 140]);
-	label(
-		textureMatches ? 'texture matches ascii framebuffer' : 'texture pending',
-		Math.floor(t.grid.rows * 0.3),
-		[120, 205, 255]
-	);
 });
 
 layer.draw(() => {
@@ -505,6 +544,23 @@ layer.draw(() => {
 	t.charColor(120, 205, 255);
 	t.rect(18, 8);
 	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	const ready = layer.texture === layer.asciiFramebuffer.textures[0];
+
+	drawText('TEXTMODELAYER.TEXTURE', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: ASCII TEXTURE HANDLE', x, y++, [100, 220, 255]);
+	drawText('Exposes the composited texture.', x, y++, [140, 160, 190]);
+	drawText('Matches asciiFramebuffer tex 0.', x, y++, [140, 160, 190]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText(ready ? 'TEXTURE: READY' : 'TEXTURE: PENDING', x, y++, [140, 255, 180]);
 });
 
 t.windowResized(() => {
@@ -522,8 +578,9 @@ t.windowResized(() => {
 get width(): number;
 ```
 
-Returns the width of the final ASCII framebuffer in pixels.
-If the layer is not yet initialized, returns 0.
+Width of the final ASCII framebuffer in pixels.
+
+Returns `0` before the layer is initialized.
 
 ##### Returns
 
@@ -539,18 +596,17 @@ const t = textmode.create({
 });
 
 const detailLayer = t.layers.add({ fontSize: 8 });
+const labelLayer = t.layers.add();
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, rgb = [255, 255, 255]) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
+	t.translate(x, y);
 	t.charColor(rgb[0], rgb[1], rgb[2]);
 
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 
 	t.pop();
@@ -559,24 +615,34 @@ function drawCenteredText(text, y, rgb = [255, 255, 255]) {
 t.draw(() => {
 	t.background(6, 10, 22);
 
-	const w = detailLayer.width;
-	const g = detailLayer.grid;
-
 	t.push();
 	t.translate(0, 0);
 	t.char('=');
 	t.charColor(120, 180, 255, 100);
 	t.rect(t.grid.cols, 1);
 	t.pop();
-
-	drawCenteredText('TextmodeLayer.width', -12, [240, 245, 255]);
-	drawCenteredText('Total pixel width of the layer ASCII framebuffer.', -10, [150, 170, 200]);
-	drawCenteredText(`${w} PIXELS`, 6, [140, 220, 255]);
-	drawCenteredText(`${g.cols} CELLS x ${g.cellWidth}PX`, 8, [100, 120, 150]);
 });
 
 detailLayer.draw(() => {
 	t.clear();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	const g = detailLayer.grid;
+
+	drawText('TEXTMODELAYER.WIDTH', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: LAYER PIXEL WIDTH', x, y++, [100, 220, 255]);
+	drawText('Reports ASCII framebuffer width.', x, y++, [140, 160, 190]);
+	drawText('A finer layer has more cells.', x, y++, [140, 160, 190]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText(`${detailLayer.width} PIXELS`, x, y++, [140, 255, 180]);
+	drawText(`${g.cols} CELLS x ${g.cellWidth}PX`, x, y++, [120, 200, 255]);
 });
 
 t.windowResized(() => {
@@ -607,13 +673,15 @@ blendMode(mode?):
   | "colorBurn";
 ```
 
-Set or get the layer's blend mode for compositing with layers below.
+Set or get this layer's blend mode.
+
+Available modes are listed in [TEXTMODE\_LAYER\_BLEND\_MODES](../variables/TEXTMODE_LAYER_BLEND_MODES.md).
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `mode?` | \| `"normal"` \| `"darken"` \| `"difference"` \| `"exclusion"` \| `"lighten"` \| `"multiply"` \| `"overlay"` \| `"screen"` \| `"additive"` \| `"subtract"` \| `"softLight"` \| `"hardLight"` \| `"colorDodge"` \| `"colorBurn"` | The blend mode to set. |
+| `mode?` | \| `"normal"` \| `"darken"` \| `"difference"` \| `"exclusion"` \| `"lighten"` \| `"multiply"` \| `"overlay"` \| `"screen"` \| `"additive"` \| `"subtract"` \| `"softLight"` \| `"hardLight"` \| `"colorDodge"` \| `"colorBurn"` | Blend mode to apply. |
 
 #### Returns
 
@@ -633,23 +701,7 @@ Set or get the layer's blend mode for compositing with layers below.
   \| `"colorDodge"`
   \| `"colorBurn"`
 
-The current blend mode if no parameter is provided.
-
-**Available blend modes:**
-- `'normal'` - Standard alpha compositing
-- `'additive'` - Adds colors together (great for glow/energy effects)
-- `'multiply'` - Darkens by multiplying colors
-- `'screen'` - Lightens; inverse of multiply
-- `'subtract'` - Subtracts layer from base
-- `'darken'` - Takes minimum of each channel
-- `'lighten'` - Takes maximum of each channel
-- `'overlay'` - Combines multiply/screen for contrast
-- `'softLight'` - Subtle contrast enhancement
-- `'hardLight'` - Intense overlay effect
-- `'colorDodge'` - Brightens base by blend color
-- `'colorBurn'` - Darkens base by blend color
-- `'difference'` - Absolute difference; creates inverted effects
-- `'exclusion'` - Softer difference effect
+Current blend mode when called without arguments.
 
 #### Example
 
@@ -670,19 +722,22 @@ const colors = [
 ];
 
 const layers = blendModes.map((mode) => t.layers.add({ blendMode: mode, opacity: 0.9 }));
+const labelLayer = t.layers.add();
 
-function drawLabel(text, x, y, col = [255, 255, 255]) {
+function drawText(text, x, y, rgb = [255, 255, 255]) {
 	t.push();
 	t.translate(x, y);
-	t.charColor(...col);
+	t.charColor(rgb[0], rgb[1], rgb[2]);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
+}
+
+function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+	drawText(text, -Math.floor(text.length / 2), y, rgb);
 }
 
 t.draw(() => {
@@ -708,14 +763,29 @@ t.draw(() => {
 			t.char('@');
 			t.rect(14, 8);
 
-			drawLabel(blendModes[i], -(blendModes[i].length - 1) / 2, 0, [255, 255, 255]);
+			drawCenteredText(blendModes[i], 0, [255, 255, 255]);
 
 			t.pop();
 		});
 	});
+});
 
-	const title = '--- BLEND MODES ---';
-	drawLabel(title, -(title.length - 1) / 2, -(rows - 1) / 2 + 2, [255, 220, 100]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	const active = blendModes[Math.floor(t.frameCount / 80) % blendModes.length];
+
+	drawText('TEXTMODELAYER.BLENDMODE', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: PER-LAYER BLENDING', x, y++, [100, 220, 255]);
+	drawText('Each layer composites differently.', x, y++, [140, 160, 190]);
+	drawText('Opacity is set per layer too.', x, y++, [140, 160, 190]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText(`MODES: ${blendModes.length}`, x, y++, [140, 255, 180]);
+	drawText(`WATCH: ${active}`, x, y++, [120, 200, 255]);
 });
 
 t.windowResized(() => {
@@ -763,21 +833,91 @@ Set explicit camera parameters for this layer.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
 const scene = t.layers.add();
+const labelLayer = t.layers.add();
+
+let camX = 0;
+const camY = 10;
+const camZ = 42;
+
+function drawText(text, x, y, color = [200, 220, 255]) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(color[0], color[1], color[2]);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.draw(() => {
 	t.background(8, 10, 18);
-	scene.camera(Math.sin(t.frameCount * 0.03) * 18, 10, 42, 0, 0, 0);
+
+	const time = t.frameCount * 0.03;
+	camX = Math.sin(time) * 22;
+
+	// Update layer camera
+	scene.camera(camX, camY, camZ, 0, 0, 0);
 });
 
 scene.draw(() => {
 	t.clear();
-	t.rotateY(t.frameCount * 2);
-	t.rotateX(25);
+	t.pointLight([255, 200, 120], { x: 20, y: -15, z: 30 });
+
+	// Rotate center shape group
+	t.push();
+	t.rotateY(t.frameCount * 1.5);
+
+	// Center cube
+	t.push();
 	t.char('#');
 	t.charColor(120, 220, 255);
-	t.box(16, 16, 16);
+	t.box(8, 8, 8);
+	t.pop();
+
+	// Left pillar
+	t.push();
+	t.translate(-12, 0, 0);
+	t.char('H');
+	t.charColor(255, 120, 120);
+	t.box(4, 12, 4);
+	t.pop();
+
+	// Right pillar
+	t.push();
+	t.translate(12, 0, 0);
+	t.char('O');
+	t.charColor(120, 255, 120);
+	t.box(4, 12, 4);
+	t.pop();
+
+	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const eyeStr = `Cam Eye   : [${camX.toFixed(1)}, ${camY.toFixed(1)}, ${camZ.toFixed(1)}]`;
+	drawText('TEXTMODELAYER.CAMERA', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: LAYER CAMERA', x, y++, [100, 220, 255]);
+	drawText('Sets a 3D camera on one layer.', x, y++, [140, 160, 190]);
+	drawText('Base background stays flat.', x, y++, [140, 160, 190]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText(eyeStr, x, y++, [120, 255, 180]);
+	drawText('Target: [0.0, 0.0, 0.0]', x, y++, [200, 200, 200]);
 });
 
 t.windowResized(() => {
@@ -793,7 +933,7 @@ t.windowResized(() => {
 createCamera(): TextmodeCamera;
 ```
 
-Create a camera initialized from this layer's camera state and set it active for this layer.
+Create and activate a camera initialized from this layer's camera state.
 
 #### Returns
 
@@ -804,32 +944,101 @@ The created camera.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
 const scene = t.layers.add();
+const labelLayer = t.layers.add();
+
 let camera;
+let camX = 0;
+const camY = 8;
+const camZ = 46;
 
 t.setup(() => {
 	camera = scene.createCamera();
 	scene.setCamera(camera);
 });
 
+function drawText(text, x, y, color = [200, 220, 255]) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(color[0], color[1], color[2]);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
 t.draw(() => {
 	t.background(8, 10, 18);
-	camera.setPosition(Math.sin(t.frameCount * 0.03) * 18, 8, 46);
-	camera.lookAt(0, 0, 0);
-});
 
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
+	camX = Math.sin(t.frameCount * 0.03) * 22;
+
+	// Move and aim the layer camera each frame
+	camera.setPosition(camX, camY, camZ);
+	camera.lookAt(0, 0, 0);
 });
 
 scene.draw(() => {
 	t.clear();
-	t.rotateY(t.frameCount * 2);
-	t.rotateX(20);
+	t.pointLight([255, 200, 120], { x: 20, y: -15, z: 30 });
+
+	// Rotate center shape group
+	t.push();
+	t.rotateY(t.frameCount * 1.5);
+
+	// Center cube
+	t.push();
 	t.char('#');
 	t.charColor(120, 220, 255);
-	t.box(16, 16, 16);
+	t.box(8, 8, 8);
+	t.pop();
+
+	// Left pillar
+	t.push();
+	t.translate(-12, 0, 0);
+	t.char('H');
+	t.charColor(255, 120, 120);
+	t.box(4, 12, 4);
+	t.pop();
+
+	// Right pillar
+	t.push();
+	t.translate(12, 0, 0);
+	t.char('O');
+	t.charColor(120, 255, 120);
+	t.box(4, 12, 4);
+	t.pop();
+
+	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const eyeStr = `Cam Eye   : [${camX.toFixed(1)}, ${camY.toFixed(1)}, ${camZ.toFixed(1)}]`;
+	drawText('TEXTMODELAYER.CREATECAMERA', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: OWNED CAMERA', x, y++, [100, 220, 255]);
+	drawText('Creates a camera for this layer.', x, y++, [140, 160, 190]);
+	drawText('Then setCamera activates it.', x, y++, [140, 160, 190]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText(eyeStr, x, y++, [120, 255, 180]);
+	drawText('Target: [0.0, 0.0, 0.0]', x, y++, [200, 200, 200]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -847,7 +1056,7 @@ Delete plugin-specific state from this layer.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `pluginName` | `string` | Unique identifier for the plugin. |
+| `pluginName` | `string` | Plugin identifier. |
 
 #### Returns
 
@@ -863,19 +1072,20 @@ const t = textmode.create({
 });
 
 const layer = t.layers.add();
+const labelLayer = t.layers.add();
 const PLUGIN_NAME = 'monitor';
+let stateDeleted = false;
+let latestAngle = 0;
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, rgb = [255, 255, 255]) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
+	t.translate(x, y);
 	t.charColor(rgb[0], rgb[1], rgb[2]);
 
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 
 	t.pop();
@@ -884,6 +1094,7 @@ function drawCenteredText(text, y, rgb = [255, 255, 255]) {
 t.mousePressed(() => {
 	if (layer.hasPluginState(PLUGIN_NAME)) {
 		layer.deletePluginState(PLUGIN_NAME);
+		stateDeleted = true;
 	}
 });
 
@@ -897,6 +1108,7 @@ layer.draw(() => {
 	const state = layer.getPluginState(PLUGIN_NAME);
 
 	state.angle += 0.05;
+	latestAngle = state.angle;
 
 	t.push();
 	t.rotateZ((state.angle * 180) / Math.PI);
@@ -904,17 +1116,29 @@ layer.draw(() => {
 	t.char('#');
 	t.rect(8, 4);
 	t.pop();
-
-	drawCenteredText('TextmodeLayer.deletePluginState', -10, [240, 245, 255]);
-	drawCenteredText('Click to delete the "monitor" plugin state.', -8, [150, 170, 200]);
-
-	const statusColor = layer.hasPluginState(PLUGIN_NAME) ? [120, 255, 150] : [255, 100, 100];
-	drawCenteredText('STATE: ' + (layer.hasPluginState(PLUGIN_NAME) ? 'ACTIVE' : 'DELETED'), 6, statusColor);
-	drawCenteredText('VALUE: ' + state.angle.toFixed(2), 8, [180, 200, 220]);
 });
 
 t.draw(() => {
 	t.background(6, 10, 22);
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	const statusColor = stateDeleted ? [255, 180, 100] : [120, 255, 150];
+
+	drawText('TEXTMODELAYER.DELETEPLUGINSTATE', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: DELETE PLUGIN STATE', x, y++, [100, 220, 255]);
+	drawText('Click clears the monitor state.', x, y++, [140, 160, 190]);
+	drawText('Draw recreates it next frame.', x, y++, [140, 160, 190]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText(stateDeleted ? 'STATE: RECREATED' : 'STATE: ACTIVE', x, y++, statusColor);
+	drawText(`ANGLE: ${latestAngle.toFixed(2)}`, x, y++, [180, 200, 220]);
+	stateDeleted = false;
 });
 
 t.windowResized(() => {
@@ -930,17 +1154,15 @@ t.windowResized(() => {
 draw(callback): void;
 ```
 
-Define this layer's draw callback. The callback is executed each frame
-and should contain all drawing commands for this layer.
+Set this layer's draw callback.
 
-Inside the callback, use `t` (your `Textmodifier` instance) to access drawing
-methods like `char()`, `charColor()`, `translate()`, and `rect()`.
+The callback runs each frame and should contain this layer's drawing commands.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | () => `void` | The function to call when drawing this layer. |
+| `callback` | () => `void` | Function to run when drawing this layer. |
 
 #### Returns
 
@@ -957,18 +1179,17 @@ const t = textmode.create({
 
 const backLayer = t.layers.add({ opacity: 0.6 });
 const effectLayer = t.layers.add({ blendMode: 'additive' });
+const labelLayer = t.layers.add();
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, rgb = [255, 255, 255]) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
+	t.translate(x, y);
 	t.charColor(rgb[0], rgb[1], rgb[2]);
 
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 
 	t.pop();
@@ -976,7 +1197,6 @@ function drawCenteredText(text, y, rgb = [255, 255, 255]) {
 
 t.draw(() => {
 	t.background(6, 10, 22);
-	drawCenteredText('TextmodeLayer.draw', -12, [240, 245, 255]);
 
 	t.push();
 	t.charColor(40, 50, 80);
@@ -1018,8 +1238,22 @@ effectLayer.draw(() => {
 	t.char('#');
 	t.rect(8, 4);
 	t.pop();
+});
 
-	drawCenteredText('INDEPENDENT LAYER CONTEXTS', 10, [150, 170, 200]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODELAYER.DRAW', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: LAYER DRAW CALLBACK', x, y++, [100, 220, 255]);
+	drawText('Base, back, and effect draw apart.', x, y++, [140, 160, 190]);
+	drawText('Each callback owns its buffer.', x, y++, [140, 160, 190]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('LAYERS: BASE + 2', x, y++, [140, 255, 180]);
 });
 
 t.windowResized(() => {
@@ -1037,7 +1271,7 @@ t.windowResized(() => {
 filter<T>(name, params?): void;
 ```
 
-Apply a post-processing filter to this layer's rendered output.
+Queue a post-processing filter for this layer.
 
 Filters are applied after ASCII conversion in the order they are called.
 Call this method within your layer's draw callback to apply effects.
@@ -1058,8 +1292,8 @@ Call this method within your layer's draw callback to apply effects.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `name` | `T` | The name of the filter to apply (built-in or custom registered filter) |
-| `params?` | [`BuiltInFilterParams`](../../filters/interfaces/BuiltInFilterParams.md)\[`T`\] | Optional parameters for the filter |
+| `name` | `T` | Built-in or registered filter name. |
+| `params?` | [`BuiltInFilterParams`](../../filters/interfaces/BuiltInFilterParams.md)\[`T`\] | Optional filter parameters. |
 
 ##### Returns
 
@@ -1075,6 +1309,7 @@ const t = textmode.create({
 });
 
 const effectLayer = t.layers.add();
+const labelLayer = t.layers.add();
 
 const filters = [
 	{ name: 'invert', params: undefined, label: 'INVERT' },
@@ -1083,17 +1318,15 @@ const filters = [
 	{ name: 'threshold', params: 0.5, label: 'THRESHOLD (0.5)' },
 ];
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, rgb = [255, 255, 255]) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
+	t.translate(x, y);
 	t.charColor(rgb[0], rgb[1], rgb[2]);
 
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 
 	t.pop();
@@ -1107,9 +1340,6 @@ t.draw(() => {
 	t.char('.');
 	t.rect(t.grid.cols, t.grid.rows);
 	t.pop();
-
-	drawCenteredText('TextmodeLayer.filter', -12, [240, 245, 255]);
-	drawCenteredText('Applying post-processing to specific layers.', -10, [150, 170, 200]);
 });
 
 effectLayer.draw(() => {
@@ -1132,11 +1362,25 @@ effectLayer.draw(() => {
 	if (filterIdx < filters.length) {
 		const active = filters[filterIdx];
 		effectLayer.filter(active.name, active.params);
-
-		drawCenteredText('ACTIVE FILTER: ' + active.label, 10, [140, 255, 180]);
-	} else {
-		drawCenteredText('NO FILTER (NORMAL)', 10, [255, 100, 100]);
 	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	const filterIdx = Math.floor(t.frameCount / 120) % (filters.length + 1);
+	const active = filterIdx < filters.length ? filters[filterIdx].label : 'NORMAL';
+
+	drawText('TEXTMODELAYER.FILTER', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: LAYER POST FILTERS', x, y++, [100, 220, 255]);
+	drawText('Only the effect layer changes.', x, y++, [140, 160, 190]);
+	drawText('Base grid remains unfiltered.', x, y++, [140, 160, 190]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText(`ACTIVE: ${active}`, x, y++, [140, 255, 180]);
 });
 
 t.windowResized(() => {
@@ -1150,7 +1394,7 @@ t.windowResized(() => {
 filter<TParams>(name, params?): void;
 ```
 
-Apply a custom filter registered via `t.layers.filters.register()`.
+Queue a registered custom filter for this layer.
 
 ##### Type Parameters
 
@@ -1162,8 +1406,8 @@ Apply a custom filter registered via `t.layers.filters.register()`.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `name` | `string` | The name of the custom filter |
-| `params?` | `TParams` | Optional parameters for the custom filter |
+| `name` | `string` | Custom filter name. |
+| `params?` | `TParams` | Optional filter parameters. |
 
 ##### Returns
 
@@ -1177,7 +1421,7 @@ Apply a custom filter registered via `t.layers.filters.register()`.
 fontSize(size?): number | void;
 ```
 
-Get or set the font size for this layer.
+Get or set this layer's font size.
 
 Changing the font size will re-initialize the layer's grid based on the new character dimensions.
 
@@ -1185,13 +1429,13 @@ Changing the font size will re-initialize the layer's grid based on the new char
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `size?` | `number` | The font size to set. |
+| `size?` | `number` | Font size to apply. |
 
 #### Returns
 
 `number` \| `void`
 
-The current font size if called without arguments.
+Current font size when called without arguments.
 
 #### Example
 
@@ -1203,18 +1447,17 @@ const t = textmode.create({
 });
 
 const detailLayer = t.layers.add({ fontSize: 8, blendMode: 'screen' });
+const labelLayer = t.layers.add();
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, rgb = [255, 255, 255]) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
+	t.translate(x, y);
 	t.charColor(rgb[0], rgb[1], rgb[2]);
 
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 
 	t.pop();
@@ -1223,17 +1466,12 @@ function drawCenteredText(text, y, rgb = [255, 255, 255]) {
 t.draw(() => {
 	t.background(6, 10, 22);
 
-	drawCenteredText('TextmodeLayer.fontSize', -12, [240, 245, 255]);
-	drawCenteredText('FontSize determines the grid resolution of each layer.', -10, [150, 170, 200]);
-
 	t.push();
 	t.translate(0, 0);
 	t.charColor(40, 50, 80);
 	t.char('#');
 	t.rect(20, 10);
 	t.pop();
-
-	drawCenteredText(`BASE LAYER: ${t.layers.base.fontSize()} PX`, 7, [140, 180, 255]);
 });
 
 detailLayer.draw(() => {
@@ -1254,8 +1492,23 @@ detailLayer.draw(() => {
 		t.pop();
 	}
 	t.pop();
+});
 
-	drawCenteredText(`DETAIL LAYER: ${detailLayer.fontSize()} PX`, 12, [255, 225, 140]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODELAYER.FONTSIZE', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: PER-LAYER RESOLUTION', x, y++, [100, 220, 255]);
+	drawText('Smaller font gives denser cells.', x, y++, [140, 160, 190]);
+	drawText('Layer grids update independently.', x, y++, [140, 160, 190]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText(`BASE: ${t.layers.base.fontSize()} PX`, x, y++, [140, 180, 255]);
+	drawText(`DETAIL: ${detailLayer.fontSize()} PX`, x, y++, [255, 225, 140]);
 });
 
 t.windowResized(() => {
@@ -1283,13 +1536,13 @@ Retrieve plugin-specific state stored on this layer.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `pluginName` | `string` | Unique identifier for the plugin. |
+| `pluginName` | `string` | Plugin identifier. |
 
 #### Returns
 
 `T` \| `undefined`
 
-The stored state object, or undefined if not set.
+Stored state, or `undefined` when not set.
 
 #### Example
 
@@ -1301,19 +1554,19 @@ const t = textmode.create({
 });
 
 const trackerLayer = t.layers.add();
+const labelLayer = t.layers.add();
 const PLUGIN_NAME = 'tracker';
+let latestX = 0;
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, rgb = [255, 255, 255]) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
+	t.translate(x, y);
 	t.charColor(rgb[0], rgb[1], rgb[2]);
 
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 
 	t.pop();
@@ -1333,6 +1586,7 @@ trackerLayer.draw(() => {
 	if (state) {
 		state.x += state.speed;
 		const xPos = Math.round(Math.cos(state.x) * state.amplitude);
+		latestX = xPos;
 
 		t.push();
 		t.translate(xPos, 0);
@@ -1347,13 +1601,6 @@ trackerLayer.draw(() => {
 		t.point();
 		t.pop();
 		t.pop();
-
-		drawCenteredText('TextmodeLayer.getPluginState', -10, [240, 245, 255]);
-		drawCenteredText('Retrieving persistent state data from the layer.', -8, [150, 170, 200]);
-
-		drawCenteredText('STATE MONITOR', 6, [140, 255, 180]);
-		drawCenteredText(`X: ${xPos.toString().padStart(3, ' ')}`, 8, [180, 200, 220]);
-		drawCenteredText(`SPEED: ${state.speed.toFixed(2)}`, 10, [180, 200, 220]);
 	}
 });
 
@@ -1365,6 +1612,25 @@ t.draw(() => {
 	t.char('.');
 	t.rect(t.grid.cols, 1);
 	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	const state = trackerLayer.getPluginState(PLUGIN_NAME);
+	const xText = latestX.toString().padStart(3, ' ');
+
+	drawText('TEXTMODELAYER.GETPLUGINSTATE', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: READ PLUGIN STATE', x, y++, [100, 220, 255]);
+	drawText('Persistent data drives motion.', x, y++, [140, 160, 190]);
+	drawText('The layer owns the stored object.', x, y++, [140, 160, 190]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText(`X: ${xText}`, x, y++, [180, 200, 220]);
+	drawText(`SPEED: ${state.speed.toFixed(2)}`, x, y++, [180, 200, 220]);
 });
 
 t.windowResized(() => {
@@ -1380,19 +1646,19 @@ t.windowResized(() => {
 hasPluginState(pluginName): boolean;
 ```
 
-Check if plugin-specific state exists on this layer.
+Check whether plugin-specific state exists on this layer.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `pluginName` | `string` | Unique identifier for the plugin. |
+| `pluginName` | `string` | Plugin identifier. |
 
 #### Returns
 
 `boolean`
 
-True if state exists, false otherwise.
+`true` when state exists.
 
 #### Example
 
@@ -1404,19 +1670,19 @@ const t = textmode.create({
 });
 
 const layer = t.layers.add();
+const labelLayer = t.layers.add();
 const PLUGIN_NAME = 'module';
+let exists = false;
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, rgb = [255, 255, 255]) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
+	t.translate(x, y);
 	t.charColor(rgb[0], rgb[1], rgb[2]);
 
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 
 	t.pop();
@@ -1433,11 +1699,8 @@ t.draw(() => {
 		}
 	}
 
-	const exists = layer.hasPluginState(PLUGIN_NAME);
+	exists = layer.hasPluginState(PLUGIN_NAME);
 	const statusColor = exists ? [120, 255, 150] : [255, 100, 100];
-
-	drawCenteredText('TextmodeLayer.hasPluginState', -10, [240, 245, 255]);
-	drawCenteredText('Checking for the presence of specific plugin data.', -8, [150, 170, 200]);
 
 	t.push();
 	t.translate(0, 0);
@@ -1452,9 +1715,24 @@ t.draw(() => {
 	t.point();
 	t.pop();
 	t.pop();
+});
 
-	drawCenteredText(exists ? 'STATUS: CONNECTED' : 'STATUS: DISCONNECTED', 6, statusColor);
-	drawCenteredText(`hasPluginState('${PLUGIN_NAME}'): ${exists}`, 9, [140, 180, 255]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	const statusColor = exists ? [120, 255, 150] : [255, 100, 100];
+
+	drawText('TEXTMODELAYER.HASPLUGINSTATE', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: CHECK PLUGIN STATE', x, y++, [100, 220, 255]);
+	drawText('The module state toggles on/off.', x, y++, [140, 160, 190]);
+	drawText('hasPluginState returns a boolean.', x, y++, [140, 160, 190]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText(exists ? 'STATUS: CONNECTED' : 'STATUS: DISCONNECTED', x, y++, statusColor);
+	drawText(`HAS '${PLUGIN_NAME}': ${exists}`, x, y++, [140, 180, 255]);
 });
 
 t.windowResized(() => {
@@ -1486,18 +1764,18 @@ const t = textmode.create({
 });
 
 const signalLayer = t.layers.add({ blendMode: 'additive' });
+const labelLayer = t.layers.add();
+let isVisible = true;
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, rgb = [255, 255, 255]) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
+	t.translate(x, y);
 	t.charColor(rgb[0], rgb[1], rgb[2]);
 
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 
 	t.pop();
@@ -1507,11 +1785,12 @@ t.draw(() => {
 	t.background(6, 10, 22);
 
 	if (t.frameCount % 120 === 0) {
-		if (signalLayer._visible) {
+		if (isVisible) {
 			signalLayer.hide();
 		} else {
 			signalLayer.show();
 		}
+		isVisible = !isVisible;
 	}
 
 	t.push();
@@ -1519,15 +1798,6 @@ t.draw(() => {
 	t.char('.');
 	t.rect(t.grid.cols, t.grid.rows);
 	t.pop();
-
-	drawCenteredText('TextmodeLayer.hide', -10, [240, 245, 255]);
-	drawCenteredText('Hiding a layer stops it from being composited.', -8, [150, 170, 200]);
-
-	const isVisible = signalLayer._visible;
-	const statusColor = isVisible ? [140, 255, 180] : [255, 100, 100];
-
-	drawCenteredText(isVisible ? 'LAYER: VISIBLE' : 'LAYER: HIDDEN', 6, statusColor);
-	drawCenteredText('The draw() callback still runs, but output is hidden.', 9, [100, 120, 150]);
 });
 
 signalLayer.draw(() => {
@@ -1540,6 +1810,23 @@ signalLayer.draw(() => {
 	const size = 6 + Math.sin(time) * 2;
 	t.rect(Math.round(size * 1.5), Math.round(size));
 	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	const statusColor = isVisible ? [140, 255, 180] : [255, 100, 100];
+
+	drawText('TEXTMODELAYER.HIDE', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: HIDE COMPOSITING', x, y++, [100, 220, 255]);
+	drawText('Layer draw keeps running.', x, y++, [140, 160, 190]);
+	drawText('Hidden output is not composited.', x, y++, [140, 160, 190]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText(isVisible ? 'LAYER: VISIBLE' : 'LAYER: HIDDEN', x, y++, statusColor);
 });
 
 t.windowResized(() => {
@@ -1555,19 +1842,19 @@ t.windowResized(() => {
 loadFont(fontSource): Promise<TextmodeFont>;
 ```
 
-Load a font into this layer from a URL/path or from an existing [TextmodeFont](../../fonts/classes/TextmodeFont.md).
+Load a font into this layer from a URL/path or existing [TextmodeFont](../../fonts/classes/TextmodeFont.md).
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `fontSource` | `string` \| [`TextmodeFont`](../../fonts/classes/TextmodeFont.md) | The URL/path to the font file, or an existing TextmodeFont to fork from. |
+| `fontSource` | `string` \| [`TextmodeFont`](../../fonts/classes/TextmodeFont.md) | Font URL/path or TextmodeFont to fork from. |
 
 #### Returns
 
 `Promise`\<[`TextmodeFont`](../../fonts/classes/TextmodeFont.md)\>
 
-The loaded TextmodeFont instance.
+The loaded TextmodeFont.
 
 #### Example
 
@@ -1579,18 +1866,17 @@ const t = textmode.create({
 });
 
 const detailedLayer = t.layers.add({ blendMode: 'screen' });
+const labelLayer = t.layers.add();
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, rgb = [255, 255, 255]) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
+	t.translate(x, y);
 	t.charColor(rgb[0], rgb[1], rgb[2]);
 
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 
 	t.pop();
@@ -1603,17 +1889,12 @@ t.setup(async () => {
 t.draw(() => {
 	t.background(6, 10, 22);
 
-	drawCenteredText('TextmodeLayer.loadFont', -12, [240, 245, 255]);
-	drawCenteredText('Fonts are isolated to their specific layer.', -10, [150, 170, 200]);
-
 	t.push();
 	t.translate(0, 0);
 	t.charColor(40, 50, 80);
 	t.char('#');
 	t.rect(14, 8);
 	t.pop();
-
-	drawCenteredText('BASE FONT: URSA (DEFAULT)', 10, [140, 180, 255]);
 });
 
 detailedLayer.draw(() => {
@@ -1625,8 +1906,23 @@ detailedLayer.draw(() => {
 	t.char('0'); // A distinctive glyph in Frogblock
 	t.rect(8, 4);
 	t.pop();
+});
 
-	drawCenteredText('LOADED FONT: FROGBLOCK', 12, [255, 225, 140]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODELAYER.LOADFONT', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: LOAD FONT PER LAYER', x, y++, [100, 220, 255]);
+	drawText('Base keeps the default font.', x, y++, [140, 160, 190]);
+	drawText('Overlay loads Frogblock.', x, y++, [140, 160, 190]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('BASE: URSA DEFAULT', x, y++, [140, 180, 255]);
+	drawText('LAYER: FROGBLOCK', x, y++, [255, 225, 140]);
 });
 
 t.windowResized(() => {
@@ -1642,19 +1938,19 @@ t.windowResized(() => {
 loadTileset(tilesetSource): Promise<TextmodeTileset>;
 ```
 
-Load a tileset into this layer from load options or from an existing [TextmodeTileset](../../fonts/classes/TextmodeTileset.md).
+Load a tileset into this layer from options or an existing [TextmodeTileset](../../fonts/classes/TextmodeTileset.md).
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `tilesetSource` | \| [`TextmodeTilesetOptions`](../../fonts/interfaces/TextmodeTilesetOptions.md) \| [`TextmodeTileset`](../../fonts/classes/TextmodeTileset.md) | Tileset load options or an existing TextmodeTileset to fork from. |
+| `tilesetSource` | \| [`TextmodeTilesetOptions`](../../fonts/interfaces/TextmodeTilesetOptions.md) \| [`TextmodeTileset`](../../fonts/classes/TextmodeTileset.md) | Tileset options or TextmodeTileset to fork from. |
 
 #### Returns
 
 `Promise`\<[`TextmodeTileset`](../../fonts/classes/TextmodeTileset.md)\>
 
-The loaded TextmodeTileset instance.
+The loaded TextmodeTileset.
 
 #### Example
 
@@ -1665,22 +1961,18 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-// Each layer can have its own tileset and color behavior.
 const tilesLayer = t.layers.add();
+const labelLayer = t.layers.add();
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, color = [200, 220, 255]) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
+	t.translate(x, y);
+	t.charColor(color[0], color[1], color[2]);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
@@ -1691,47 +1983,63 @@ t.setup(async () => {
 		rows: 16,
 		count: 256,
 	});
+
+	// Use authored colors from the tileset PNG
+	tilesLayer.useTileColors(true);
 });
 
 t.draw(() => {
 	t.background(6, 10, 22);
-
-	drawCenteredText('TextmodeLayer.loadTileset', -12, [240, 245, 255]);
-	drawCenteredText('Bitmaps repacked into per-layer glyph atlases.', -10, [150, 170, 200]);
-
-	t.push();
-	t.charColor(40, 50, 80);
-	t.char('.');
-	t.rect(t.grid.cols, 1);
-	t.pop();
-
-	drawCenteredText('CLICK TO TOGGLE useTileColors()', 10, [140, 220, 255]);
 });
 
 tilesLayer.draw(() => {
 	t.clear();
+
 	const font = tilesLayer.font;
 	if (!font || font.characters.length === 0) return;
 
-	const time = t.frameCount * 0.05;
+	const time = t.frameCount * 0.04;
 	const activeTile = Math.floor(time) % font.characters.length;
 
-	t.push();
-	t.translate(0, 0);
-	t.char(activeTile);
+	const cols = 16;
+	const startX = -Math.floor(cols / 2);
+	const startY = -4;
 
-	t.charColor(120, 255, 180);
-	t.cellColor(20, 40, 60);
-	t.rect(10, 6);
-	t.pop();
+	// Draw all tiles in a grid
+	for (let i = 0; i < font.characters.length; i++) {
+		const col = i % cols;
+		const row = Math.floor(i / cols);
+		t.push();
+		t.translate(startX + col, startY + row);
+		t.char(i);
 
-	const mode = tilesLayer.useTileColors();
-	const statusColor = mode ? [255, 225, 140] : [140, 180, 255];
-	drawCenteredText('MODE: ' + (mode ? 'AUTHORED COLORS' : 'RECOLORED'), 6, statusColor);
+		// Highlight the currently cycled tile
+		if (i === activeTile) {
+			t.charColor(255, 255, 100);
+		}
+
+		t.point();
+		t.pop();
+	}
 });
 
-t.mouseClicked(() => {
-	tilesLayer.useTileColors(!tilesLayer.useTileColors());
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	const font = tilesLayer.font;
+	const count = font ? font.characters.length : 0;
+
+	drawText('TEXTMODELAYER.LOADTILESET', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: LOAD TILESET', x, y++, [100, 220, 255]);
+	drawText('Loads bitmap glyphs into a layer.', x, y++, [140, 160, 190]);
+	drawText('Tile colors are authored in PNG.', x, y++, [140, 160, 190]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText(`TILES LOADED: ${count}`, x, y++, [120, 255, 180]);
+	drawText('SOURCE: T64 PNG, 16 x 16', x, y++, [160, 160, 160]);
 });
 
 t.windowResized(() => {
@@ -1773,34 +2081,95 @@ Update this layer camera's target and optional up vector.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
-const scene = t.layers.add();
-
-t.draw(() => {
-	const x = Math.sin(t.frameCount * 0.04) * 8;
-	const y = Math.cos(t.frameCount * 0.03) * 5;
-	t.background(8, 10, 18);
-	scene.camera(0, 0, 46);
-	scene.lookAt(x, y, 0);
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
 });
 
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
+const scene = t.layers.add();
+const labelLayer = t.layers.add();
+
+let targetX = 0;
+let targetY = 0;
+
+function drawText(text, x, y, color = [200, 220, 255]) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(color[0], color[1], color[2]);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(8, 10, 18);
+
+	targetX = Math.sin(t.frameCount * 0.04) * 12;
+	targetY = Math.cos(t.frameCount * 0.03) * 7;
+
+	// Camera stays fixed — only the look target moves
+	scene.camera(0, 0, 46);
+	scene.lookAt(targetX, targetY, 0);
 });
 
 scene.draw(() => {
 	t.clear();
+
+	// Static reference pillars spread around the scene
 	t.push();
-	t.translate(Math.sin(t.frameCount * 0.04) * 8, Math.cos(t.frameCount * 0.03) * 5, 0);
-	t.char('*');
-	t.charColor(255, 220, 120);
-	t.box(4, 4, 4);
+	t.translate(-16, 4, -10);
+	t.char('H');
+	t.charColor(100, 130, 200);
+	t.box(5, 14, 5);
 	t.pop();
 
-	t.rotateY(t.frameCount * 2);
-	t.char('#');
-	t.charColor(120, 220, 255);
-	t.box(12, 12, 12);
+	t.push();
+	t.translate(16, 4, -10);
+	t.char('H');
+	t.charColor(100, 130, 200);
+	t.box(5, 14, 5);
+	t.pop();
+
+	t.push();
+	t.translate(0, 8, -18);
+	t.char('+');
+	t.charColor(80, 100, 160);
+	t.box(30, 2, 2);
+	t.pop();
+
+	// Moving glowing target — the camera tracks this
+	t.push();
+	t.translate(targetX, targetY, 0);
+	t.char('*');
+	t.charColor(255, 230, 80);
+	t.box(4, 4, 4);
+	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	const tgtStr = `Cam Target: [${targetX.toFixed(1)}, ${targetY.toFixed(1)}, 0.0]`;
+
+	drawText('TEXTMODELAYER.LOOKAT', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: CAMERA TARGET', x, y++, [100, 220, 255]);
+	drawText('Camera eye stays fixed.', x, y++, [140, 160, 190]);
+	drawText('lookAt follows a moving target.', x, y++, [140, 160, 190]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('Eye: [0.0, 0.0, 46.0]', x, y++, [200, 200, 200]);
+	drawText(tgtStr, x, y++, [120, 255, 180]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -1817,14 +2186,14 @@ offset(x?, y?):
 };
 ```
 
-Set or get the layer's offset in pixels.
+Set or get this layer's compositing offset in pixels.
 
 #### Parameters
 
 | Parameter | Type | Default value | Description |
 | ------ | ------ | ------ | ------ |
-| `x?` | `number` | `undefined` | The x offset in pixels. |
-| `y?` | `number` | `0` | The y offset in pixels. |
+| `x?` | `number` | `undefined` | Horizontal offset in pixels. |
+| `y?` | `number` | `0` | Vertical offset in pixels. |
 
 #### Returns
 
@@ -1834,7 +2203,7 @@ Set or get the layer's offset in pixels.
   `y`: `number`;
 \}
 
-The current offset if no parameters are provided.
+Current offset when called without arguments.
 
 #### Example
 
@@ -1846,18 +2215,18 @@ const t = textmode.create({
 });
 
 const offsetLayer = t.layers.add({ blendMode: 'additive' });
+const labelLayer = t.layers.add();
+let currentOffset = { x: 0, y: 0 };
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, rgb = [255, 255, 255]) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
+	t.translate(x, y);
 	t.charColor(rgb[0], rgb[1], rgb[2]);
 
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 
 	t.pop();
@@ -1872,6 +2241,7 @@ t.draw(() => {
 	const offX = Math.round(Math.cos(time) * (g.width * 0.25));
 	const offY = Math.round(Math.sin(time * 0.7) * (g.height * 0.25));
 
+	currentOffset = { x: offX, y: offY };
 	offsetLayer.offset(offX, offY);
 
 	const targetGridX = Math.round(offX / g.cellWidth);
@@ -1888,12 +2258,6 @@ t.draw(() => {
 	t.char('+');
 	t.point();
 	t.pop();
-
-	drawCenteredText('TextmodeLayer.offset', -12, [240, 245, 255]);
-	drawCenteredText('Translating the entire layer coordinate system in pixels.', -10, [150, 170, 200]);
-
-	drawCenteredText(`OFFSET X: ${offX} PX`, 8, [255, 180, 100]);
-	drawCenteredText(`OFFSET Y: ${offY} PX`, 10, [255, 180, 100]);
 });
 
 offsetLayer.draw(() => {
@@ -1904,6 +2268,23 @@ offsetLayer.draw(() => {
 	t.char('#');
 	t.rect(7, 3);
 	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODELAYER.OFFSET', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: PIXEL OFFSET', x, y++, [100, 220, 255]);
+	drawText('Moves the layer during composite.', x, y++, [140, 160, 190]);
+	drawText('Drawing coordinates stay local.', x, y++, [140, 160, 190]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText(`OFFSET X: ${currentOffset.x} PX`, x, y++, [255, 180, 100]);
+	drawText(`OFFSET Y: ${currentOffset.y} PX`, x, y++, [255, 180, 100]);
 });
 
 t.windowResized(() => {
@@ -1919,19 +2300,19 @@ t.windowResized(() => {
 opacity(opacity?): number | void;
 ```
 
-Define or retrieve the layer's opacity.
+Set or get this layer's opacity.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `opacity?` | `number` | The opacity value to set (between 0 and 1). |
+| `opacity?` | `number` | Opacity from `0` to `1`. |
 
 #### Returns
 
 `number` \| `void`
 
-The current opacity if no parameter is provided.
+Current opacity when called without arguments.
 
 #### Example
 
@@ -1943,35 +2324,36 @@ const t = textmode.create({
 });
 
 const pulseLayer = t.layers.add({ blendMode: 'additive' });
+const labelLayer = t.layers.add();
+let currentOpacity = 1;
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, rgb = [255, 255, 255]) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
+	t.translate(x, y);
 	t.charColor(rgb[0], rgb[1], rgb[2]);
 
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 
 	t.pop();
 }
 
-function drawMeter(value, y, rgb) {
+function drawMeter(value, x, y, rgb) {
 	const width = 20;
 	const activeBlocks = Math.round(value * width);
 
 	t.push();
-	t.translate(-width / 2, y);
+	t.translate(x, y);
 	for (let i = 0; i < width; i++) {
 		const active = i < activeBlocks;
+		const color = active ? rgb : [60, 70, 100];
 		t.push();
 		t.translate(i, 0);
 		t.char(active ? '|' : '.');
-		t.charColor(active ? rgb : [60, 70, 100]);
+		t.charColor(color[0], color[1], color[2]);
 		t.point();
 		t.pop();
 	}
@@ -1984,7 +2366,7 @@ t.draw(() => {
 	const time = t.frameCount * 0.04;
 	const opacity = 0.5 + 0.5 * Math.sin(time);
 
-	// Update the layer's opacity property.
+	currentOpacity = opacity;
 	pulseLayer.opacity(opacity);
 
 	t.push();
@@ -1992,12 +2374,6 @@ t.draw(() => {
 	t.char('.');
 	t.rect(t.grid.cols, t.grid.rows);
 	t.pop();
-
-	drawCenteredText('TextmodeLayer.opacity', -10, [240, 245, 255]);
-	drawCenteredText('Controlling the alpha transparency of a layer.', -8, [150, 170, 200]);
-
-	drawMeter(opacity, 6, [255, 225, 140]);
-	drawCenteredText(`OPACITY: ${opacity.toFixed(2)}`, 8, [255, 225, 140]);
 });
 
 pulseLayer.draw(() => {
@@ -2008,6 +2384,23 @@ pulseLayer.draw(() => {
 	t.char('#');
 	t.rect(12, 6);
 	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODELAYER.OPACITY', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: LAYER ALPHA', x, y++, [100, 220, 255]);
+	drawText('Pulse layer fades in and out.', x, y++, [140, 160, 190]);
+	drawText('Opacity is clamped from 0 to 1.', x, y++, [140, 160, 190]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawMeter(currentOpacity, x, y++, [255, 225, 140]);
+	drawText(`OPACITY: ${currentOpacity.toFixed(2)}`, x, y++, [255, 225, 140]);
 });
 
 t.windowResized(() => {
@@ -2039,8 +2432,14 @@ Enable orthographic projection for this layer.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
 const scene = t.layers.add();
+const labelLayer = t.layers.add();
 
 t.draw(() => {
 	t.background(8, 10, 18);
@@ -2052,7 +2451,20 @@ t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 
+function drawText(text, x, y, rgb = [220, 230, 255]) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(rgb[0], rgb[1], rgb[2]);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
 scene.draw(() => {
+	t.clear();
 	for (let i = 0; i < 3; i++) {
 		t.push();
 		t.translate((i - 1) * 10, 0, i * -12);
@@ -2062,6 +2474,20 @@ scene.draw(() => {
 		t.box(8, 8, 8);
 		t.pop();
 	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODELAYER.ORTHO', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: ORTHOGRAPHIC CAMERA', x, y++, [100, 220, 255]);
+	drawText('Depth no longer changes scale.', x, y++, [140, 160, 190]);
+	drawText('Boxes stay evenly sized.', x, y++, [140, 160, 190]);
 });
 ```
 
@@ -2093,30 +2519,94 @@ Enable perspective projection for this layer.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
 const scene = t.layers.add();
+const labelLayer = t.layers.add();
+
+let fov = 60;
+
+function drawText(text, x, y, color = [200, 220, 255]) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(color[0], color[1], color[2]);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.draw(() => {
-	const fov = 30 + (Math.sin(t.frameCount * 0.03) + 1) * 0.5 * 70;
 	t.background(8, 10, 18);
+
+	// FOV oscillates between 20° (telephoto) and 100° (wide)
+	fov = 60 + Math.sin(t.frameCount * 0.025) * 40;
+
 	scene.perspective(fov, 0.1, 256);
 	scene.camera(0, 0, 44);
+	scene.lookAt(0, 0, 0);
+});
+
+scene.draw(() => {
+	t.clear();
+	t.pointLight([255, 210, 130], { x: -20, y: -25, z: 30 });
+
+	// Three columns at increasing depth to show perspective compression
+	const depths = [0, -12, -24];
+	const colors = [
+		[120, 200, 255],
+		[160, 220, 180],
+		[255, 180, 120],
+	];
+
+	for (let i = 0; i < 3; i++) {
+		t.push();
+		t.translate(0, 0, depths[i]);
+		t.char('#');
+		t.charColor(colors[i][0], colors[i][1], colors[i][2]);
+		t.box(8, 8, 8);
+		t.pop();
+	}
+
+	// Floor grid for depth reference
+	t.push();
+	t.char('.');
+	t.charColor(40, 55, 80);
+	for (let x = -24; x <= 24; x += 8) {
+		t.line(x, 6, 4, x, 6, -32);
+	}
+	for (let z = 4; z >= -32; z -= 8) {
+		t.line(-24, 6, z, 24, 6, z);
+	}
+	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const fovStr = `FOV: ${fov.toFixed(1)} deg`;
+	drawText('TEXTMODELAYER.PERSPECTIVE', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: PERSPECTIVE FOV', x, y++, [100, 220, 255]);
+	drawText('FOV changes depth compression.', x, y++, [140, 160, 190]);
+	drawText('Near/far clip the layer camera.', x, y++, [140, 160, 190]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText(fovStr, x, y++, [120, 255, 180]);
+	drawText('NEAR: 0.1  FAR: 256.0', x, y++, [200, 200, 200]);
 });
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-
-scene.draw(() => {
-	for (let i = 0; i < 3; i++) {
-		t.push();
-		t.translate((i - 1) * 10, 0, i * -12);
-		t.rotateY(t.frameCount * 2 + i * 20);
-		t.char('#');
-		t.charColor(120 + i * 40, 220, 255);
-		t.box(8, 8, 8);
-		t.pop();
-	}
 });
 ```
 
@@ -2128,7 +2618,7 @@ scene.draw(() => {
 postDraw(callback): void;
 ```
 
-Define this layer's post-draw callback.
+Set this layer's post-draw callback.
 
 The callback is executed after the layer has been converted to ASCII and after
 any filters queued in [filter](#filter) during [draw](#draw) have been applied.
@@ -2139,7 +2629,7 @@ before the layer is composited with the rest of the scene.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | () => `void` | The function to call after this layer has been drawn and filtered. |
+| `callback` | () => `void` | Function to run after this layer has been drawn and filtered. |
 
 #### Returns
 
@@ -2179,33 +2669,96 @@ Reset this layer to default auto camera behavior.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
-const scene = t.layers.add();
-let custom = true;
-
-t.mousePressed(() => {
-	custom = !custom;
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
 });
+
+const scene = t.layers.add();
+const labelLayer = t.layers.add();
+
+let useCustomCamera = true;
+
+function drawText(text, x, y, color = [200, 220, 255]) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(color[0], color[1], color[2]);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
 
 t.draw(() => {
 	t.background(8, 10, 18);
-	if (custom) {
-		scene.camera(Math.sin(t.frameCount * 0.03) * 18, 8, 42);
+
+	// Alternate every 150 frames so the contrast is clear
+	useCustomCamera = Math.floor(t.frameCount / 150) % 2 === 0;
+
+	if (useCustomCamera) {
+		// Dramatic off-axis perspective with moving eye
+		const camX = Math.sin(t.frameCount * 0.02) * 18;
+		scene.camera(camX, -14, 42, 0, 0, 0);
 	} else {
+		// Discard custom camera — auto view is restored
 		scene.resetCamera();
 	}
 });
 
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-
 scene.draw(() => {
 	t.clear();
-	t.rotateY(t.frameCount * 2);
-	t.char('*');
-	t.charColor(custom ? 255 : 120, 220, 255);
-	t.box(16, 16, 16);
+	t.pointLight([255, 210, 130], { x: -20, y: -25, z: 30 });
+
+	const positions = [
+		[-12, 0, 0],
+		[0, 0, -12],
+		[12, 0, 0],
+	];
+	const colors = [
+		[120, 200, 255],
+		[200, 160, 255],
+		[255, 180, 120],
+	];
+
+	for (let i = 0; i < 3; i++) {
+		t.push();
+		t.translate(positions[i][0], positions[i][1], positions[i][2]);
+		t.char('#');
+		t.charColor(colors[i][0], colors[i][1], colors[i][2]);
+		t.box(7, 7, 7);
+		t.pop();
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODELAYER.RESETCAMERA', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: RESET LAYER CAMERA', x, y++, [100, 220, 255]);
+
+	if (useCustomCamera) {
+		drawText('MODE: CUSTOM CAMERA', x, y++, [255, 200, 100]);
+		drawText('camera() override is active.', x, y++, [140, 160, 190]);
+	} else {
+		drawText('MODE: AUTO CAMERA', x, y++, [120, 255, 180]);
+		drawText('resetCamera restored default.', x, y++, [140, 160, 190]);
+	}
+
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	const remaining = 150 - (t.frameCount % 150);
+	drawText(`SWITCH IN: ${remaining} FRAMES`, x, y++, [200, 200, 200]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -2217,7 +2770,7 @@ scene.draw(() => {
 rotateZ(z?): number | void;
 ```
 
-Set or get the layer's rotation in degrees around its center.
+Set or get this layer's compositing rotation in degrees.
 
 The rotation is applied during compositing around the center of the layer's
 rectangular bounds. The rotation origin remains at the center even when
@@ -2227,13 +2780,13 @@ an offset is applied.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `z?` | `number` | The rotation angle in degrees. Positive values rotate clockwise. |
+| `z?` | `number` | Rotation angle in degrees. Positive values rotate clockwise. |
 
 #### Returns
 
 `number` \| `void`
 
-The current rotation in degrees if no parameter is provided.
+Current rotation in degrees when called without arguments.
 
 #### Example
 
@@ -2245,18 +2798,18 @@ const t = textmode.create({
 });
 
 const scannerLayer = t.layers.add({ blendMode: 'additive' });
+const labelLayer = t.layers.add();
+let currentAngle = 0;
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, rgb = [255, 255, 255]) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
+	t.translate(x, y);
 	t.charColor(rgb[0], rgb[1], rgb[2]);
 
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 
 	t.pop();
@@ -2268,6 +2821,7 @@ t.draw(() => {
 	const time = t.frameCount * 1.5;
 	const angle = time % 360;
 
+	currentAngle = angle;
 	scannerLayer.rotateZ(angle);
 
 	t.push();
@@ -2276,11 +2830,6 @@ t.draw(() => {
 	t.line(-15, 0, 15, 0);
 	t.line(0, -8, 0, 8);
 	t.pop();
-
-	drawCenteredText('TextmodeLayer.rotateZ', -12, [240, 245, 255]);
-	drawCenteredText('Rotating the entire layer coordinate system in degrees.', -10, [150, 170, 200]);
-
-	drawCenteredText(`ANGLE: ${angle.toFixed(1).padStart(5, '0')} DEG`, 10, [140, 180, 255]);
 });
 
 scannerLayer.draw(() => {
@@ -2300,6 +2849,22 @@ scannerLayer.draw(() => {
 	t.pop();
 });
 
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODELAYER.ROTATEZ', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: COMPOSITE ROTATION', x, y++, [100, 220, 255]);
+	drawText('Layer output rotates around center.', x, y++, [140, 160, 190]);
+	drawText('Draw callback remains unrotated.', x, y++, [140, 160, 190]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText(`ANGLE: ${currentAngle.toFixed(1)} DEG`, x, y++, [140, 255, 180]);
+});
+
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
@@ -2313,7 +2878,7 @@ t.windowResized(() => {
 setCamera(camera): void;
 ```
 
-Set the active camera for this layer.
+Activate a camera for this layer.
 
 #### Parameters
 
@@ -2328,41 +2893,99 @@ Set the active camera for this layer.
 #### Example
 
 ```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
-const scene = t.layers.add();
-let useLeft = true;
-let left;
-let right;
-
-t.setup(() => {
-	left = scene.createCamera();
-	right = scene.createCamera();
-	left.setPosition(-18, 10, 38);
-	right.setPosition(18, 10, 38);
-	left.lookAt(0, 0, 0);
-	right.lookAt(0, 0, 0);
-	scene.setCamera(left);
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
 });
 
-t.mousePressed(() => {
-	useLeft = !useLeft;
-	scene.setCamera(useLeft ? left : right);
+const scene = t.layers.add();
+const labelLayer = t.layers.add();
+
+let camA;
+let camB;
+let activeCam = 'A';
+
+function drawText(text, x, y, color = [200, 220, 255]) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(color[0], color[1], color[2]);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+t.setup(() => {
+	camA = scene.createCamera();
+	camA.setPosition(-22, -8, 40).lookAt(0, 0, 0);
+	camB = scene.createCamera();
+	camB.setPosition(22, 12, 36).lookAt(0, 0, 0);
+	scene.setCamera(camA);
 });
 
 t.draw(() => {
 	t.background(8, 10, 18);
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
+	const slot = Math.floor(t.frameCount / 150) % 2;
+	if (slot === 0 && activeCam !== 'A') {
+		scene.setCamera(camA);
+		activeCam = 'A';
+	} else if (slot === 1 && activeCam !== 'B') {
+		scene.setCamera(camB);
+		activeCam = 'B';
+	}
 });
 
 scene.draw(() => {
 	t.clear();
-	t.rotateY(t.frameCount * 2);
-	t.char('@');
-	t.charColor(useLeft ? 255 : 120, 220, useLeft ? 120 : 255);
-	t.box(16, 16, 16);
+	t.pointLight([255, 210, 130], { x: -20, y: -25, z: 30 });
+	const positions = [
+		[-12, 0, 0],
+		[0, 0, -12],
+		[12, 0, 0],
+	];
+	const colors = [
+		[120, 200, 255],
+		[200, 160, 255],
+		[255, 180, 120],
+	];
+	for (let i = 0; i < 3; i++) {
+		t.push();
+		t.translate(positions[i][0], positions[i][1], positions[i][2]);
+		t.char('#');
+		t.charColor(colors[i][0], colors[i][1], colors[i][2]);
+		t.box(7, 7, 7);
+		t.pop();
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	const isA = activeCam === 'A';
+	drawText('TEXTMODELAYER.SETCAMERA', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: SWAP ACTIVE CAMERA', x, y++, [100, 220, 255]);
+	drawText('Two owned cameras alternate.', x, y++, [140, 160, 190]);
+	drawText('setCamera selects the view.', x, y++, [140, 160, 190]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText(`ACTIVE: CAMERA ${activeCam}`, x, y++, isA ? [120, 200, 255] : [255, 180, 120]);
+	if (isA) {
+		drawText('EYE: [-22, -8, 40]', x, y++, [200, 200, 200]);
+	} else {
+		drawText('EYE: [22, 12, 36]', x, y++, [200, 200, 200]);
+	}
+	const remaining = 150 - (t.frameCount % 150);
+	drawText(`SWITCH IN: ${remaining} FRAMES`, x, y++, [160, 160, 160]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
@@ -2387,8 +3010,8 @@ Plugins can use this to attach their own data to layer instances.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `pluginName` | `string` | Unique identifier for the plugin. |
-| `state` | `T` | The state object to store. |
+| `pluginName` | `string` | Plugin identifier. |
+| `state` | `T` | State object to store. |
 
 #### Returns
 
@@ -2404,19 +3027,19 @@ const t = textmode.create({
 });
 
 const moduleLayer = t.layers.add();
+const labelLayer = t.layers.add();
 const PLUGIN_NAME = 'core-data';
+let currentPower = 0;
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, rgb = [255, 255, 255]) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
+	t.translate(x, y);
 	t.charColor(rgb[0], rgb[1], rgb[2]);
 
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 
 	t.pop();
@@ -2436,6 +3059,7 @@ moduleLayer.draw(() => {
 
 	if (state) {
 		state.power = 0.5 + 0.5 * Math.sin(t.frameCount * 0.05);
+		currentPower = state.power;
 
 		t.push();
 		t.charColor(140, 220, 255);
@@ -2443,13 +3067,6 @@ moduleLayer.draw(() => {
 		const size = 4 + Math.round(state.power * 4);
 		t.rect(size * 2, size);
 		t.pop();
-
-		drawCenteredText('TextmodeLayer.setPluginState', -12, [240, 245, 255]);
-		drawCenteredText('Attaching persistent data objects to a layer.', -10, [150, 170, 200]);
-
-		drawCenteredText('SYSTEM CONFIGURATION', 8, [255, 225, 140]);
-		drawCenteredText(`ID: ${state.id}  SYNC: ${state.sync}`, 10, [180, 200, 220]);
-		drawCenteredText(`PWR_LOAD: ${Math.round(state.power * 100)}%`, 12, [140, 220, 255]);
 	}
 });
 
@@ -2461,6 +3078,27 @@ t.draw(() => {
 	t.char('.');
 	t.rect(t.grid.cols, t.grid.rows);
 	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	const state = moduleLayer.getPluginState(PLUGIN_NAME);
+	const load = Math.round(currentPower * 100);
+
+	drawText('TEXTMODELAYER.SETPLUGINSTATE', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: STORE PLUGIN STATE', x, y++, [100, 220, 255]);
+	drawText('Attaches data to a layer.', x, y++, [140, 160, 190]);
+	drawText('The object persists each frame.', x, y++, [140, 160, 190]);
+	if (!state) return;
+
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText(`ID: ${state.id}`, x, y++, [180, 200, 220]);
+	drawText(`PWR LOAD: ${load}%`, x, y++, [140, 220, 255]);
 });
 
 t.windowResized(() => {
@@ -2492,18 +3130,18 @@ const t = textmode.create({
 });
 
 const displayLayer = t.layers.add({ visible: false, blendMode: 'additive' });
+const labelLayer = t.layers.add();
+let isVisible = false;
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, rgb = [255, 255, 255]) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
+	t.translate(x, y);
 	t.charColor(rgb[0], rgb[1], rgb[2]);
 
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 
 	t.pop();
@@ -2513,11 +3151,12 @@ t.draw(() => {
 	t.background(6, 10, 22);
 
 	if (t.frameCount % 120 === 0) {
-		if (displayLayer._visible) {
+		if (isVisible) {
 			displayLayer.hide();
 		} else {
 			displayLayer.show();
 		}
+		isVisible = !isVisible;
 	}
 
 	t.push();
@@ -2525,15 +3164,6 @@ t.draw(() => {
 	t.char('.');
 	t.rect(t.grid.cols, t.grid.rows);
 	t.pop();
-
-	drawCenteredText('TextmodeLayer.show', -10, [240, 245, 255]);
-	drawCenteredText('Revealing a hidden layer for compositing.', -8, [150, 170, 200]);
-
-	const isVisible = displayLayer._visible;
-	const statusColor = isVisible ? [140, 255, 180] : [255, 100, 100];
-
-	drawCenteredText(isVisible ? 'LAYER: VISIBLE' : 'LAYER: HIDDEN', 6, statusColor);
-	drawCenteredText('The show() method restores a layer to the stack.', 9, [100, 120, 150]);
 });
 
 displayLayer.draw(() => {
@@ -2554,6 +3184,23 @@ displayLayer.draw(() => {
 	t.pop();
 });
 
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	const statusColor = isVisible ? [140, 255, 180] : [255, 100, 100];
+
+	drawText('TEXTMODELAYER.SHOW', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: SHOW HIDDEN LAYER', x, y++, [100, 220, 255]);
+	drawText('show() restores compositing.', x, y++, [140, 160, 190]);
+	drawText('hide() pauses visible output.', x, y++, [140, 160, 190]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText(isVisible ? 'LAYER: VISIBLE' : 'LAYER: HIDDEN', x, y++, statusColor);
+});
+
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
@@ -2567,7 +3214,7 @@ t.windowResized(() => {
 useTileColors(enabled?): boolean | void;
 ```
 
-Get or set whether this layer should use authored tileset colors directly during the final ASCII pass.
+Configure authored tileset color preservation for this layer.
 
 When disabled (default), tileset texels are remapped to the current character (`primary`)
 and cell (`secondary`) colors. Vector/font atlases always use character/cell recoloring
@@ -2577,13 +3224,13 @@ regardless of this setting.
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `enabled?` | `boolean` | Whether this layer should use authored tileset colors directly. |
+| `enabled?` | `boolean` | Whether to preserve authored tileset colors. |
 
 #### Returns
 
 `boolean` \| `void`
 
-The current layer tileset-color mode if called without arguments.
+Current tileset-color mode when called without arguments.
 
 #### Example
 
@@ -2594,22 +3241,20 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-// Each layer can have its own tileset and color behavior.
 const tilesLayer = t.layers.add();
+const labelLayer = t.layers.add();
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+let useAuthored = false;
+
+function drawText(text, x, y, color = [200, 220, 255]) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
+	t.translate(x, y);
+	t.charColor(color[0], color[1], color[2]);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
@@ -2624,43 +3269,63 @@ t.setup(async () => {
 
 t.draw(() => {
 	t.background(6, 10, 22);
-
-	drawCenteredText('TextmodeLayer.loadTileset', -12, [240, 245, 255]);
-	drawCenteredText('Bitmaps repacked into per-layer glyph atlases.', -10, [150, 170, 200]);
-
-	t.push();
-	t.charColor(40, 50, 80);
-	t.char('.');
-	t.rect(t.grid.cols, 1);
-	t.pop();
-
-	drawCenteredText('CLICK TO TOGGLE useTileColors()', 10, [140, 220, 255]);
+	useAuthored = Math.floor(t.frameCount / 150) % 2 === 0;
+	tilesLayer.useTileColors(useAuthored);
 });
 
 tilesLayer.draw(() => {
 	t.clear();
+
 	const font = tilesLayer.font;
 	if (!font || font.characters.length === 0) return;
 
-	const time = t.frameCount * 0.05;
-	const activeTile = Math.floor(time) % font.characters.length;
+	const cols = 16;
+	const rows = 8;
+	const startX = -Math.floor(cols / 2);
+	const startY = -3;
 
-	t.push();
-	t.translate(0, 0);
-	t.char(activeTile);
+	for (let row = 0; row < rows; row++) {
+		for (let col = 0; col < cols; col++) {
+			const tileIndex = row * cols + col;
+			if (tileIndex >= font.characters.length) break;
 
-	t.charColor(120, 255, 180);
-	t.cellColor(20, 40, 60);
-	t.rect(10, 6);
-	t.pop();
+			t.push();
+			t.translate(startX + col, startY + row);
+			t.char(tileIndex);
+			const hue = (tileIndex / font.characters.length) * 360;
+			const r = Math.round(128 + 100 * Math.sin((hue * Math.PI) / 180));
+			const g = Math.round(128 + 100 * Math.sin(((hue + 120) * Math.PI) / 180));
+			const b = Math.round(128 + 100 * Math.sin(((hue + 240) * Math.PI) / 180));
+			t.charColor(r, g, b);
 
-	const mode = tilesLayer.useTileColors();
-	const statusColor = mode ? [255, 225, 140] : [140, 180, 255];
-	drawCenteredText('MODE: ' + (mode ? 'AUTHORED COLORS' : 'RECOLORED'), 6, statusColor);
+			t.point();
+			t.pop();
+		}
+	}
 });
 
-t.mouseClicked(() => {
-	tilesLayer.useTileColors(!tilesLayer.useTileColors());
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODELAYER.USETILECOLORS', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: TILESET COLOR SOURCE', x, y++, [100, 220, 255]);
+
+	if (useAuthored) {
+		drawText('MODE: AUTHORED COLORS', x, y++, [255, 210, 100]);
+		drawText('Tile PNG colors show directly.', x, y++, [140, 160, 190]);
+	} else {
+		drawText('MODE: RECOLORED', x, y++, [120, 255, 180]);
+		drawText('charColor palette is applied.', x, y++, [140, 160, 190]);
+	}
+
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	const remaining = 150 - (t.frameCount % 150);
+	drawText(`SWITCH IN: ${remaining} FRAMES`, x, y++, [160, 160, 160]);
 });
 
 t.windowResized(() => {

@@ -7,7 +7,7 @@ category: Namespaces
 api: true
 namespace: input
 kind: Namespace
-lastModified: 2026-05-19
+lastModified: 2026-05-27
 ---
 
 [textmode.js](../../../../index.md) / [input](../../index.md) / keyboard
@@ -20,13 +20,13 @@ Types and interfaces for keyboard event handling
 
 | Interface | Description |
 | ------ | ------ |
-| [KeyboardEventData](interfaces/KeyboardEventData.md) | Key event data passed to event handlers. |
+| [KeyboardEventData](interfaces/KeyboardEventData.md) | Keyboard event payload passed to input callbacks. |
 
 ## Type Aliases
 
 | Type Alias | Description |
 | ------ | ------ |
-| [KeyboardEventHandler](type-aliases/KeyboardEventHandler.md) | Keyboard event handler function type. |
+| [KeyboardEventHandler](type-aliases/KeyboardEventHandler.md) | Keyboard event callback signature. |
 
 ## Variables
 

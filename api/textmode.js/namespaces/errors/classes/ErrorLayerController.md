@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: errors
 kind: Class
-lastModified: 2026-05-19
+lastModified: 2026-05-27
 hasConstructor: true
 ---
 
@@ -29,7 +29,7 @@ Controls the dedicated internal error layer lifecycle and rendering behavior.
 new ErrorLayerController(textmodifier): ErrorLayerController;
 ```
 
-Initializes a new ErrorLayerController.
+Create an internal error-layer controller.
 
 #### Parameters
 
@@ -55,8 +55,7 @@ InternalLayerController<ErrorScreenRendererContext>.constructor
 draw(callback?): void;
 ```
 
-Overridable method to set a custom draw callback for rendering the internal layer.
-If not set, the layer will use the default template.
+Set a custom renderer for the internal layer.
 
 #### Parameters
 

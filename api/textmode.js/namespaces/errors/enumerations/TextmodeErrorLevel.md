@@ -2,26 +2,23 @@
 layout: doc
 editLink: true
 title: TextmodeErrorLevel
-description: Error handling levels to control how errors are reported and handled.
+description: Controls how validation failures are reported.
 category: Enumerations
 api: true
 namespace: errors
 kind: Enum
-lastModified: 2026-05-19
+lastModified: 2026-05-27
 ---
 
 [textmode.js](../../../index.md) / [errors](../index.md) / TextmodeErrorLevel
 
 # Enumeration: TextmodeErrorLevel
 
-Error handling levels to control how errors are reported and handled.
-
-Determines how validation failures and errors are processed throughout the library.
-Each level provides different behavior for error reporting and execution flow control.
+Controls how validation failures are reported.
 
 > [!NOTE]
-> This feature is currently not fully implemented across all modules,
-> and most `textmode.js` functions will still throw errors if used incorrectly.
+> This setting currently covers validation paths that use the shared error handler.
+> Other runtime failures may still throw.
 
 ## Example
 

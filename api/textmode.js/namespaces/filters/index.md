@@ -6,7 +6,7 @@ description: All filter related modules and types.
 category: Namespaces
 api: true
 kind: Namespace
-lastModified: 2026-05-19
+lastModified: 2026-05-27
 ---
 
 [textmode.js](../../index.md) / filters
@@ -27,7 +27,7 @@ which is accessible through [Textmodifier.filters](../../classes/Textmodifier.md
 
 | Class | Description |
 | ------ | ------ |
-| [TextmodeFilterManager](classes/TextmodeFilterManager.md) | Manages filter registration, shader compilation, and filter chain application. |
+| [TextmodeFilterManager](classes/TextmodeFilterManager.md) | Registers filter shaders and applies layer/global filter chains. |
 
 ## Interfaces
 

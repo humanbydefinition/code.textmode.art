@@ -2,11 +2,11 @@
 layout: doc
 editLink: true
 title: TextmodeGrid
-description: Manages the grid of each TextmodeLayer instance.
+description: Grid used by a textmode layer.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-05-19
+lastModified: 2026-05-27
 hasConstructor: false
 ---
 
@@ -14,11 +14,10 @@ hasConstructor: false
 
 # Class: TextmodeGrid
 
-Manages the grid of each `TextmodeLayer` instance.
+Grid used by a textmode layer.
 
-The grid determines how characters are positioned and sized on the canvas.
-By default, the grid is responsive, meaning it recalculates the number of columns
-and rows based on the canvas size and the font size.
+The grid determines how characters are positioned and sized. By default, it is
+responsive and recalculates columns and rows from the canvas size and glyph cell size.
 
 You can manually set `cols` and `rows` to lock the grid to a specific size.
 
@@ -31,69 +30,44 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-let isLocked = false;
+const labelLayer = t.layers.add();
 
-t.setup(() => {
-	t.grid.cols = 40;
-	t.grid.rows = 20;
-	isLocked = true;
+t.draw(() => {
+	t.background(6, 10, 22);
+
+	t.push();
+	t.char('+');
+	t.charColor(100, 255, 180);
+	t.rect(t.grid.cols, t.grid.rows);
+	t.pop();
 });
 
-function drawLabel(text, x, y, col = [255, 255, 255]) {
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
 	t.translate(x, y);
-	t.charColor(...col);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
-t.draw(() => {
-	t.background(10, 15, 24);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
 
-	const { cols, rows } = t.grid;
-	const time = t.frameCount * 0.05;
-
-	t.char('.');
-	t.charColor(60, 80, 110);
-	t.rect(cols, rows);
-
-	const scanX = Math.floor((Math.sin(time * 0.7) * 0.5 + 0.5) * cols);
-	t.push();
-	t.translate(scanX - (cols - 1) / 2, 0);
-	t.char('|');
-	t.charColor(100, 200, 255);
-	t.rect(1, rows);
-	t.pop();
-
-	const title = '--- TEXTMODE GRID CREATION ---';
-	drawLabel(title, -(title.length - 1) / 2, -(rows - 1) / 2 + 2, [255, 220, 100]);
-
-	const modeText = isLocked ? 'MODE: LOCKED (FIXED 40x20)' : 'MODE: RESPONSIVE (AUTO)';
-	drawLabel(modeText, -(modeText.length - 1) / 2, -1, isLocked ? [255, 100, 100] : [100, 255, 100]);
-
-	const dimText = `CURRENT SIZE: ${cols} x ${rows}`;
-	drawLabel(dimText, -(dimText.length - 1) / 2, 1, [150, 180, 255]);
-
-	const hint = 'Click to toggle responsiveness';
-	drawLabel(hint, -(hint.length - 1) / 2, (rows - 1) / 2 - 3, [120, 120, 120]);
-});
-
-t.mousePressed(() => {
-	isLocked = !isLocked;
-
-	if (isLocked) {
-		t.grid.cols = 40;
-		t.grid.rows = 20;
-	} else {
-		t.grid.responsive();
-		t.grid.reset();
-	}
+	drawText('TEXTMODEGRID.CREATION', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: CHARACTER GRID INSTANCE', x, y++, 100, 220, 255);
+	drawText('Manages positioning and layout.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	const dims = t.grid.cols + 'x' + t.grid.rows;
+	drawText(`GRID: ${dims}`, x, y++, 100, 255, 180);
 });
 
 t.windowResized(() => {
@@ -111,7 +85,7 @@ t.windowResized(() => {
 get cellHeight(): number;
 ```
 
-Returns the height of each cell in the grid in screen pixels.
+Height of each grid cell in screen pixels.
 
 ##### Returns
 
@@ -126,56 +100,44 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
+const labelLayer = t.layers.add();
 
 t.draw(() => {
 	t.background(6, 10, 22);
 
-	const h = t.grid.cellHeight;
+	t.push();
+	t.translate(14, 0);
+	t.charColor(255, 180, 100);
+	t.char('▲');
+	t.rect(1, t.grid.cellHeight);
+	t.pop();
+});
 
-	drawCenteredText('TextmodeGrid.cellHeight', -8, [240, 245, 255]);
-	drawCenteredText(`${h} PIXELS`, 6, [255, 225, 140]);
-
-	for (let y = -3; y <= 3; y++) {
-		const isTarget = y === 0;
-
-		t.push();
-		t.translate(0, y);
-
-		if (isTarget) {
-			t.char('#');
-			t.charColor(255, 225, 140);
-
-			t.push();
-			t.translate(-3, 0);
-			t.char('>');
-			t.point();
-			t.translate(6, 0);
-			t.char('<');
-			t.point();
-			t.pop();
-		} else {
-			t.char('.');
-			t.charColor(100, 120, 150);
-		}
-
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODEGRID.CELLHEIGHT', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: INDIVIDUAL CELL PIXEL HEIGHT', x, y++, 100, 220, 255);
+	drawText('Height in pixels of a single cell.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`CELL H: ${t.grid.cellHeight} px`, x, y++, 255, 180, 100);
 });
 
 t.windowResized(() => {
@@ -193,7 +155,7 @@ t.windowResized(() => {
 get cellWidth(): number;
 ```
 
-Returns the width of each cell in the grid in screen pixels.
+Width of each grid cell in screen pixels.
 
 ##### Returns
 
@@ -208,56 +170,44 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
+const labelLayer = t.layers.add();
 
 t.draw(() => {
 	t.background(6, 10, 22);
 
-	const w = t.grid.cellWidth;
+	t.push();
+	t.translate(0, 0);
+	t.charColor(255, 180, 100);
+	t.char('◄');
+	t.rect(t.grid.cellWidth, 1);
+	t.pop();
+});
 
-	drawCenteredText('TextmodeGrid.cellWidth', -8, [240, 245, 255]);
-	drawCenteredText(`${w} PIXELS`, 6, [120, 255, 180]);
-
-	for (let x = -3; x <= 3; x++) {
-		const isTarget = x === 0;
-
-		t.push();
-		t.translate(x, 0);
-
-		if (isTarget) {
-			t.char('#');
-			t.charColor(120, 255, 180);
-
-			t.push();
-			t.translate(0, -3);
-			t.char('v');
-			t.point();
-			t.translate(0, 6);
-			t.char('^');
-			t.point();
-			t.pop();
-		} else {
-			t.char('.');
-			t.charColor(100, 120, 150);
-		}
-
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODEGRID.CELLWIDTH', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: INDIVIDUAL CELL PIXEL WIDTH', x, y++, 100, 220, 255);
+	drawText('Width in pixels of a single cell.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`CELL PIXEL WIDTH: ${t.grid.cellWidth} px`, x, y++, 255, 180, 100);
 });
 
 t.windowResized(() => {
@@ -275,7 +225,7 @@ t.windowResized(() => {
 get cols(): number;
 ```
 
-Returns the number of columns in the grid.
+Number of columns in the grid.
 
 ##### Returns
 
@@ -290,49 +240,20 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
+const labelLayer = t.layers.add();
 
 t.draw(() => {
 	t.background(6, 10, 22);
 
 	const cols = t.grid.cols;
-
-	drawCenteredText('TextmodeGrid.cols', -8, [240, 245, 255]);
-	drawCenteredText(`${cols} COLUMNS`, 6, [140, 180, 255]);
-
 	const halfWidth = Math.floor(cols / 2);
 
-	for (let x = -halfWidth; x < halfWidth; x++) {
-		t.push();
-		t.translate(x, 0);
-
-		const isMarker = (x + halfWidth) % 5 === 0;
-
-		if (isMarker) {
-			t.char('|');
-			t.charColor(140, 180, 255);
-		} else {
-			t.char('-');
-			t.charColor(60, 70, 100);
-		}
-
-		t.point();
-		t.pop();
-	}
+	t.push();
+	t.translate(0, 0);
+	t.char('=');
+	t.charColor(100, 160, 255, 120);
+	t.rect(cols, 1);
+	t.pop();
 
 	t.push();
 	t.charColor(255, 255, 255);
@@ -343,6 +264,33 @@ t.draw(() => {
 	t.char('>');
 	t.point();
 	t.pop();
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODEGRID.COLS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: COLUMN COUNT READOUT', x, y++, 100, 220, 255);
+	drawText('Number of character columns in grid.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`GRID COLUMNS: ${t.grid.cols} cells`, x, y++, 100, 160, 255);
 });
 
 t.windowResized(() => {
@@ -356,7 +304,7 @@ t.windowResized(() => {
 set cols(newCols): void;
 ```
 
-Sets the number of columns and locks grid sizing until `responsive()` is called.
+Set the number of columns and lock grid sizing until `responsive()` is called.
 
 ##### Parameters
 
@@ -377,51 +325,67 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawLabel(text, x, y, col = [255, 255, 255]) {
+const labelLayer = t.layers.add();
+
+t.draw(() => {
+	t.background(6, 10, 22);
+
+	// Animate column count dynamically between 16 and 40
+	const cols = 28 + Math.floor(Math.sin(t.frameCount * 0.05) * 12);
+	t.grid.cols = cols;
+
+	const rows = t.grid.rows;
+	const halfWidth = Math.floor(cols / 2);
+	const halfHeight = Math.floor(rows / 2);
+
+	t.push();
+	t.translate(-halfWidth, -halfHeight);
+	for (let r = 0; r < rows; r++) {
+		for (let c = 0; c < cols; c++) {
+			const wave = Math.sin(c * 0.3 + t.frameCount * 0.08) * 0.4 + 0.5;
+			const rNormalized = r / rows;
+
+			t.push();
+			t.translate(c, r);
+			if (Math.abs(rNormalized - wave) < 0.15) {
+				t.char('★');
+				t.charColor(100, 255, 180);
+			} else {
+				t.char('.');
+				t.charColor(50, 70, 100);
+			}
+			t.point();
+			t.pop();
+		}
+	}
+	t.pop();
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
 	t.translate(x, y);
-	t.charColor(...col);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
-t.draw(() => {
-	t.background(10, 25, 10);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
 
-	const { cols, rows } = t.grid;
-	const time = t.frameCount * 0.1;
-
-	t.charColor(0, 200, 100);
-	t.char('|');
-	for (let x = 0; x < cols; x++) {
-		const h = Math.floor(6 + Math.sin(time + x * 0.2) * 4);
-		t.push();
-		t.translate(x - (cols - 1) / 2, 0);
-		t.rect(1, h);
-		t.pop();
-	}
-
-	const title = '--- GRID.COLS SETTER ---';
-	drawLabel(title, -(title.length - 1) / 2, -(rows - 1) / 2 + 2, [200, 255, 200]);
-
-	const valText = `COLS: ${cols}`;
-	drawLabel(valText, -(valText.length - 1) / 2, 0, [255, 255, 255]);
-
-	const hint = 'Move mouse to resize columns';
-	drawLabel(hint, -(hint.length - 1) / 2, (rows - 1) / 2 - 2, [120, 150, 120]);
-});
-
-t.mouseMoved((e) => {
-	if (e.position.x !== Number.NEGATIVE_INFINITY) {
-		const targetCols = Math.floor(40 + e.position.x * 2);
-		t.grid.cols = Math.max(5, Math.min(100, targetCols));
-	}
+	drawText('TEXTMODEGRID.SETCOLS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: MUTATE COLUMN COUNT', x, y++, 100, 220, 255);
+	drawText('Dynamically overrides grid width.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`GRID COLS: ${t.grid.cols} cells`, x, y++, 100, 180, 255);
 });
 
 t.windowResized(() => {
@@ -439,7 +403,7 @@ t.windowResized(() => {
 get height(): number;
 ```
 
-Returns the total height of the grid in screen pixels.
+Total grid height in screen pixels.
 
 This is equal to `rows * cellHeight`.
 
@@ -456,48 +420,57 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
+const labelLayer = t.layers.add();
 
 t.draw(() => {
 	t.background(6, 10, 22);
 
-	const h = t.grid.height;
 	const rows = t.grid.rows;
 	const halfHeight = Math.floor(rows / 2);
 
 	t.push();
-	t.translate(0, 0);
+	t.translate(14, 0);
 	t.char('|');
-	t.charColor(255, 140, 180, 100);
+	t.charColor(140, 255, 180, 100);
 	t.rect(1, rows);
 	t.pop();
 
 	t.push();
 	t.charColor(255, 255, 255);
-	t.translate(0, -halfHeight);
-	t.char('-');
+	t.translate(14, -halfHeight);
+	t.char('▲');
 	t.point();
 	t.translate(0, rows - 1);
-	t.char('-');
+	t.char('▼');
 	t.point();
 	t.pop();
+});
 
-	drawCenteredText('TextmodeGrid.height', -12, [240, 245, 255]);
-	drawCenteredText(`${h} PIXELS`, 12, [255, 140, 180]);
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODEGRID.HEIGHT', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: TOTAL GRID PIXEL HEIGHT', x, y++, 100, 220, 255);
+	drawText('Returns pixel height of grid.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`GRID PIXEL HEIGHT: ${t.grid.height} px`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -515,7 +488,7 @@ t.windowResized(() => {
 get offsetX(): number;
 ```
 
-Returns the horizontal offset (margin) in pixels from the canvas edge to the grid.
+Horizontal offset in pixels from the canvas edge to the grid.
 
 ##### Returns
 
@@ -530,56 +503,49 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+const labelLayer = t.layers.add();
 
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
 t.draw(() => {
 	t.background(6, 10, 22);
-
-	const offset = t.grid.offsetX;
 	const cols = t.grid.cols;
-	const halfWidth = Math.floor(cols / 2);
-
+	const rows = t.grid.rows;
+	const left = -Math.floor(cols / 2);
+	const top = -Math.floor(rows / 2);
+	t.charColor(60, 80, 120);
+	t.char('#');
+	t.rect(cols, rows);
 	t.push();
-	t.translate(-halfWidth, 0);
-	t.charColor(140, 255, 220, 150);
-	t.char('|');
-	t.rect(1, 7);
-
-	t.push();
-	t.translate(-2, 0);
-	t.char('<');
-	t.point();
-	t.translate(-1, 0);
-	t.char('-');
-	t.point();
+	t.translate(0, 1);
+	t.charColor(100, 255, 180);
+	drawText(`OFFSET X: ${t.grid.offsetX}px`, left + 4, 0, 100, 255, 180);
 	t.pop();
-	t.pop();
+});
 
-	t.push();
-	t.char('.');
-	t.charColor(60, 70, 100, 80);
-	t.translate(0, 0);
-	t.rect(cols, 1);
-	t.pop();
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
 
-	// They will overwrite/clip the lines if they occupy the same cells
-	drawCenteredText('TextmodeGrid.offsetX', -8, [240, 245, 255]);
-	drawCenteredText('Horizontal margin from canvas edge to grid.', -6, [150, 170, 200]);
-	drawCenteredText(`${offset} PX`, 4, [140, 255, 220]);
+	drawText('TEXTMODEGRID.OFFSETX', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: HORIZONTAL OFFSET', x, y++, 100, 220, 255);
+	drawText('Grid centers inside canvas.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`PIXELS: ${t.grid.offsetX}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -597,7 +563,7 @@ t.windowResized(() => {
 get offsetY(): number;
 ```
 
-Returns the vertical offset (margin) in pixels from the canvas edge to the grid.
+Vertical offset in pixels from the canvas edge to the grid.
 
 ##### Returns
 
@@ -612,55 +578,49 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+const labelLayer = t.layers.add();
 
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
 t.draw(() => {
 	t.background(6, 10, 22);
-
-	const offset = t.grid.offsetY;
+	const cols = t.grid.cols;
 	const rows = t.grid.rows;
-	const halfHeight = Math.floor(rows / 2);
-
+	const left = -Math.floor(cols / 2);
+	const top = -Math.floor(rows / 2);
+	t.charColor(60, 80, 120);
+	t.char('#');
+	t.rect(cols, rows);
 	t.push();
-	t.translate(0, -halfHeight);
-	t.charColor(255, 180, 140, 150);
-	t.char('-');
-	t.rect(11, 1);
-
-	t.push();
-	t.translate(0, -2);
-	t.char('^');
-	t.point();
-	t.translate(0, -1);
-	t.char('|');
-	t.point();
+	t.translate(1, 0);
+	t.charColor(100, 255, 180);
+	drawText(`OFFSET Y: ${t.grid.offsetY}px`, left + 4, 0, 100, 255, 180);
 	t.pop();
-	t.pop();
+});
 
-	t.push();
-	t.char('.');
-	t.charColor(60, 70, 100, 80);
-	t.translate(0, 0);
-	t.rect(1, rows);
-	t.pop();
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
 
-	drawCenteredText('TextmodeGrid.offsetY', -12, [240, 245, 255]);
-	drawCenteredText('Vertical margin from canvas edge to grid.', -10, [150, 170, 200]);
-	drawCenteredText(`${offset} PX`, 4, [255, 180, 140]);
+	drawText('TEXTMODEGRID.OFFSETY', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: VERTICAL OFFSET', x, y++, 100, 220, 255);
+	drawText('Grid centers inside canvas.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`PIXELS: ${t.grid.offsetY}`, x, y++, 140, 255, 180);
 });
 
 t.windowResized(() => {
@@ -678,7 +638,7 @@ t.windowResized(() => {
 get rows(): number;
 ```
 
-Returns the number of rows in the grid.
+Number of rows in the grid.
 
 ##### Returns
 
@@ -693,21 +653,7 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
+const labelLayer = t.layers.add();
 
 t.draw(() => {
 	t.background(6, 10, 22);
@@ -715,36 +661,49 @@ t.draw(() => {
 	const rows = t.grid.rows;
 	const halfHeight = Math.floor(rows / 2);
 
-	for (let y = -halfHeight; y < halfHeight; y++) {
-		t.push();
-		t.translate(0, y);
-
-		const isMarker = (y + halfHeight) % 5 === 0;
-
-		if (isMarker) {
-			t.char('-');
-			t.charColor(140, 180, 255, 180);
-		} else {
-			t.char('|');
-			t.charColor(60, 70, 100, 100);
-		}
-
-		t.point();
-		t.pop();
-	}
+	t.push();
+	t.translate(14, 0);
+	t.char('|');
+	t.charColor(100, 180, 255, 120);
+	t.rect(1, rows);
+	t.pop();
 
 	t.push();
 	t.charColor(255, 255, 255);
-	t.translate(0, -halfHeight);
-	t.char('^');
+	t.translate(14, -halfHeight);
+	t.char('▲');
 	t.point();
 	t.translate(0, rows - 1);
-	t.char('v');
+	t.char('▼');
 	t.point();
 	t.pop();
+});
 
-	drawCenteredText('TextmodeGrid.rows', -12, [240, 245, 255]);
-	drawCenteredText(`${rows} ROWS`, 12, [140, 180, 255]);
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODEGRID.ROWS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: ROW COUNT READOUT', x, y++, 100, 220, 255);
+	drawText('Number of character rows in grid.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`GRID ROWS: ${t.grid.rows} cells`, x, y++, 100, 180, 255);
 });
 
 t.windowResized(() => {
@@ -758,7 +717,7 @@ t.windowResized(() => {
 set rows(newRows): void;
 ```
 
-Sets the number of rows and locks grid sizing until `responsive()` is called.
+Set the number of rows and lock grid sizing until `responsive()` is called.
 
 ##### Parameters
 
@@ -779,51 +738,67 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawLabel(text, x, y, col = [255, 255, 255]) {
+const labelLayer = t.layers.add();
+
+t.draw(() => {
+	t.background(6, 10, 22);
+
+	const cols = t.grid.cols;
+	// Animate row count dynamically between 12 and 28
+	const rows = 20 + Math.floor(Math.sin(t.frameCount * 0.05) * 8);
+	t.grid.rows = rows;
+
+	const halfWidth = Math.floor(cols / 2);
+	const halfHeight = Math.floor(rows / 2);
+
+	t.push();
+	t.translate(-halfWidth, -halfHeight);
+	for (let r = 0; r < rows; r++) {
+		for (let c = 0; c < cols; c++) {
+			const wave = Math.sin(r * 0.3 + t.frameCount * 0.08) * 0.4 + 0.5;
+			const cNormalized = c / cols;
+
+			t.push();
+			t.translate(c, r);
+			if (Math.abs(cNormalized - wave) < 0.15) {
+				t.char('★');
+				t.charColor(255, 180, 100);
+			} else {
+				t.char('.');
+				t.charColor(70, 50, 100);
+			}
+			t.point();
+			t.pop();
+		}
+	}
+	t.pop();
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
 	t.translate(x, y);
-	t.charColor(...col);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
-t.draw(() => {
-	t.background(20, 10, 25);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
 
-	const { cols, rows } = t.grid;
-	const time = t.frameCount * 0.1;
-
-	t.charColor(150, 100, 255);
-	t.char('=');
-	for (let y = 0; y < rows; y++) {
-		const w = Math.floor(10 + Math.sin(time + y * 0.3) * 8);
-		t.push();
-		t.translate(0, y - (rows - 1) / 2);
-		t.rect(w, 1);
-		t.pop();
-	}
-
-	const title = '--- GRID.ROWS SETTER ---';
-	drawLabel(title, -(title.length - 1) / 2, -(rows - 1) / 2 + 2, [220, 180, 255]);
-
-	const valText = `ROWS: ${rows}`;
-	drawLabel(valText, -(valText.length - 1) / 2, 0, [255, 255, 255]);
-
-	const hint = 'Move mouse to resize rows';
-	drawLabel(hint, -(hint.length - 1) / 2, (rows - 1) / 2 - 2, [150, 120, 150]);
-});
-
-t.mouseMoved((e) => {
-	if (e.position.y !== Number.NEGATIVE_INFINITY) {
-		const targetRows = Math.floor(20 + e.position.y * 2);
-		t.grid.rows = Math.max(5, Math.min(60, targetRows));
-	}
+	drawText('TEXTMODEGRID.SETROWS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: MUTATE ROW COUNT', x, y++, 100, 220, 255);
+	drawText('Dynamically overrides grid height.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`GRID ROWS: ${t.grid.rows} cells`, x, y++, 100, 180, 255);
 });
 
 t.windowResized(() => {
@@ -841,7 +816,7 @@ t.windowResized(() => {
 get width(): number;
 ```
 
-Returns the total width of the grid in screen pixels.
+Total grid width in screen pixels.
 
 This is equal to `cols * cellWidth`.
 
@@ -858,26 +833,11 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
+const labelLayer = t.layers.add();
 
 t.draw(() => {
 	t.background(6, 10, 22);
 
-	const w = t.grid.width;
 	const cols = t.grid.cols;
 	const halfWidth = Math.floor(cols / 2);
 
@@ -897,9 +857,33 @@ t.draw(() => {
 	t.char(']');
 	t.point();
 	t.pop();
+});
 
-	drawCenteredText('TextmodeGrid.width', -8, [240, 245, 255]);
-	drawCenteredText(`${w} PIXELS`, 6, [255, 140, 180]);
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODEGRID.WIDTH', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: TOTAL GRID PIXEL WIDTH', x, y++, 100, 220, 255);
+	drawText('Returns pixel width of character grid.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`GRID PIXEL WIDTH: ${t.grid.width} px`, x, y++, 255, 140, 180);
 });
 
 t.windowResized(() => {
@@ -915,7 +899,7 @@ t.windowResized(() => {
 reset(): void;
 ```
 
-Reset the grid to the default number of columns and rows based on the current canvas dimensions, and the grid cell dimensions.
+Recalculate columns and rows from the current canvas and cell dimensions.
 
 If either `cols` or `rows` were manually set, this method does nothing.
 Make sure to call `responsive()` first to restore responsive sizing.
@@ -936,61 +920,65 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-let isLocked = false;
-let resetAnim = 0;
+const labelLayer = t.layers.add();
+let gridStatus = 'CUSTOM (26x12)';
 
-function drawLabel(text, x, y, col = [255, 255, 255]) {
+t.setup(() => {
+	t.grid.cols = 26;
+	t.grid.rows = 12;
+});
+
+t.draw(() => {
+	t.background(6, 10, 22);
+
+	t.push();
+	t.char('+');
+	t.charColor(100, 255, 150);
+	t.rect(t.grid.cols, t.grid.rows);
+	t.pop();
+});
+
+t.mouseClicked(() => {
+	if (t.grid.cols === 26 && t.grid.rows === 12) {
+		t.grid.responsive();
+		t.grid.reset();
+		gridStatus = 'RESET TO VIEWPORT';
+	} else {
+		t.grid.cols = 26;
+		t.grid.rows = 12;
+		gridStatus = 'CUSTOM (26x12)';
+	}
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
 	t.translate(x, y);
-	t.charColor(...col);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
 	t.pop();
 }
 
-t.draw(() => {
-	t.background(15, 15, 20);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
 
-	const { cols, rows } = t.grid;
-
-	t.char('+');
-	t.charColor(40, 40, 60);
-	t.rect(cols, rows);
-
-	if (resetAnim > 0) {
-		t.char(' ');
-		t.charColor(100, 150, 255);
-		t.rect(cols * resetAnim, rows * resetAnim);
-		resetAnim *= 0.9;
-		if (resetAnim < 0.01) resetAnim = 0;
-	}
-
-	const stateText = isLocked ? 'MANUAL OVERRIDE: ON' : 'MANUAL OVERRIDE: OFF';
-	drawLabel(stateText, -(stateText.length - 1) / 2, -1, isLocked ? [255, 180, 100] : [100, 180, 255]);
-
-	const sizeText = `GRID SIZE: ${cols}x${rows}`;
-	drawLabel(sizeText, -(sizeText.length - 1) / 2, 1, [150, 150, 180]);
-
-	const hint = 'Click to toggle t.grid.reset()';
-	drawLabel(hint, -(hint.length - 1) / 2, (rows - 1) / 2 - 2, [80, 80, 80]);
-});
-
-t.mousePressed(() => {
-	isLocked = !isLocked;
-
-	if (isLocked) {
-		t.grid.cols = 32;
-		t.grid.rows = 16;
-	} else {
-		t.grid.responsive();
-		t.grid.reset();
-		resetAnim = 1.0;
-	}
+	drawText('TEXTMODEGRID.RESET', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: RESET GRID TO FIT VIEWPORT', x, y++, 100, 220, 255);
+	drawText('Resets grid size to viewport.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`GRID STATUS: ${gridStatus}`, x, y++, 140, 190, 255);
+	const dims = t.grid.cols + 'x' + t.grid.rows;
+	drawText(`DIMS: ${dims}`, x, y++, 140, 190, 255);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('Click to toggle custom grid size.', x, y++, 120, 205, 255);
 });
 
 t.windowResized(() => {
@@ -1006,7 +994,7 @@ t.windowResized(() => {
 responsive(): void;
 ```
 
-Restores responsive sizing so subsequent `t.resizeCanvas` calls recompute cols/rows.
+Restore responsive sizing so subsequent canvas resizes recompute columns and rows.
 
 A grid becomes non-responsive when either `cols` or `rows` is manually set.
 
@@ -1023,21 +1011,8 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
+const labelLayer = t.layers.add();
 let isLocked = false;
-
-function drawLabel(text, x, y, col = [255, 255, 255]) {
-	t.push();
-	t.translate(x, y);
-	t.charColor(...col);
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-	t.pop();
-}
 
 t.draw(() => {
 	t.background(10, 20, 15);
@@ -1060,12 +1035,6 @@ t.draw(() => {
 	t.char(' ');
 	t.charColor(isLocked ? [255, 100, 100] : [100, 255, 150]);
 	t.rect(cols - 2, rows - 2);
-
-	const modeText = isLocked ? 'GRID: LOCKED (26x12)' : 'GRID: RESPONSIVE';
-	drawLabel(modeText, -(modeText.length - 1) / 2, 0, isLocked ? [255, 150, 150] : [150, 255, 200]);
-
-	const hint = 'Click to toggle';
-	drawLabel(hint, -(hint.length - 1) / 2, (rows - 1) / 2 - 2, [100, 100, 100]);
 });
 
 t.mousePressed(() => {
@@ -1078,6 +1047,35 @@ t.mousePressed(() => {
 		t.grid.responsive();
 		t.grid.reset();
 	}
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const modeText = isLocked ? 'LOCKED (26x12)' : 'RESPONSIVE';
+
+	drawText('TEXTMODEGRID.RESPONSIVE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: AUTO-RESPONSIVE GRID', x, y++, 100, 220, 255);
+	drawText(`GRID STATE: ${modeText}`, x, y++, isLocked ? 255 : 150, isLocked ? 150 : 255, isLocked ? 150 : 200);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('Click anywhere to toggle grid lock.', x, y++, 140, 190, 255);
 });
 
 t.windowResized(() => {

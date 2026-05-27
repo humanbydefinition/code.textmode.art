@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: input.touch
 kind: Interface
-lastModified: 2026-05-19
+lastModified: 2026-05-27
 isInterface: true
 ---
 
@@ -41,6 +41,6 @@ When the touch is outside the grid bounds, `x` and `y` are set to
 | <a id="property-pressure"></a> `pressure?` | `number` | Touch pressure (0-1) when supported. | - |
 | <a id="property-radiusx"></a> `radiusX?` | `number` | Contact ellipse radius on the X axis in CSS pixels. | - |
 | <a id="property-radiusy"></a> `radiusY?` | `number` | Contact ellipse radius on the Y axis in CSS pixels. | - |
-| <a id="property-rotationangle"></a> `rotationAngle?` | `number` | Contact ellipse angle in radians when provided. | - |
+| <a id="property-rotationangle"></a> `rotationAngle?` | `number` | Contact ellipse angle in degrees when provided. | - |
 | <a id="property-x"></a> `x` | `number` | The X coordinate (column), often relative to the grid's center. | `GridPosition.x` |
 | <a id="property-y"></a> `y` | `number` | The Y coordinate (row), often relative to the grid's center. | `GridPosition.y` |

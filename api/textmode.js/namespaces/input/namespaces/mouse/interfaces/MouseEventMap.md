@@ -2,12 +2,12 @@
 layout: doc
 editLink: true
 title: MouseEventMap
-description: Event map for all mouse events emitted by the mouse input manager.
+description: Mouse events emitted by the mouse input manager.
 category: Interfaces
 api: true
 namespace: input.mouse
 kind: Interface
-lastModified: 2026-05-19
+lastModified: 2026-05-27
 isInterface: true
 ---
 
@@ -15,7 +15,7 @@ isInterface: true
 
 # Interface: MouseEventMap
 
-Event map for all mouse events emitted by the mouse input manager.
+Mouse events emitted by the mouse input manager.
 
 ## Properties
 

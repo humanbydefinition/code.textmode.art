@@ -2,12 +2,12 @@
 layout: doc
 editLink: true
 title: TouchSwipeHandler
-description: Touch swipe event handler function type.
+description: Swipe event callback signature.
 category: Type Aliases
 api: true
 namespace: input.touch
 kind: TypeAlias
-lastModified: 2026-05-19
+lastModified: 2026-05-27
 ---
 
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [touch](../index.md) / TouchSwipeHandler
@@ -18,7 +18,7 @@ lastModified: 2026-05-19
 type TouchSwipeHandler = (data) => void;
 ```
 
-Touch swipe event handler function type.
+Swipe event callback signature.
 
 ## Parameters
 

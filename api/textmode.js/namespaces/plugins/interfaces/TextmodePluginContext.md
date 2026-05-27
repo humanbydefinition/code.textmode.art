@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: plugins
 kind: Interface
-lastModified: 2026-05-19
+lastModified: 2026-05-27
 isInterface: true
 ---
 
@@ -131,44 +131,15 @@ A function to unregister the hook.
 #### Example
 
 ```javascript
-let counters = {
-	preSetup: 0,
-	postSetup: 0,
-	preDraw: 0,
-	postDraw: 0,
-	preRender: 0,
-	postRender: 0,
-	disposed: 0,
-	uninstalled: 0,
-};
+let disposedCount = 0;
+let layerToDispose = null;
 
 const hookPlugin = {
-	name: 'hook-plugin',
-	install(_textmodifier, context) {
-		context.registerPreSetupHook(() => {
-			counters.preSetup += 1;
-		});
-		context.registerPostSetupHook(() => {
-			counters.postSetup += 1;
-		});
-		context.registerPreDrawHook(() => {
-			counters.preDraw += 1;
-		});
-		context.registerPostDrawHook(() => {
-			counters.postDraw += 1;
-		});
+	name: 'layer-disposed-hook-plugin',
+	install(textmodifier, context) {
 		context.registerLayerDisposedHook(() => {
-			counters.disposed += 1;
+			disposedCount += 1;
 		});
-		context.registerLayerPreRenderHook(() => {
-			counters.preRender += 1;
-		});
-		context.registerLayerPostRenderHook(() => {
-			counters.postRender += 1;
-		});
-	},
-	uninstall() {
-		counters.uninstalled += 1;
 	},
 };
 
@@ -179,51 +150,55 @@ const t = textmode.create({
 	plugins: [hookPlugin],
 });
 
-const layer = t.layers.add({ fontSize: 16, blendMode: 'screen' });
+const labelLayer = t.layers.add();
 
-function label(text, y, color = [220, 220, 220]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
-
-t.draw(() => {
-	t.background(5, 7, 18);
-	label('plugin lifecycle + hooks', -8, [255, 225, 140]);
-	label(`setup ${counters.preSetup}/${counters.postSetup}`, -4);
-	label(`draw ${counters.preDraw}/${counters.postDraw}`, 0);
-	label(`render ${counters.preRender}/${counters.postRender}`, 4);
-	label(`disposed ${counters.disposed}  uninstall ${counters.uninstalled}`, 8, [120, 205, 255]);
-	label('click to destroy textmode', 12, [255, 180, 120]);
+t.setup(() => {
+	layerToDispose = t.layers.add({ fontSize: 16 });
 });
 
-layer.draw(() => {
-	t.clear();
-	t.push();
-	t.rotateZ(t.frameCount * 1.2);
-	t.charColor(120, 205, 255);
-	t.rect(18, 8);
-	t.pop();
+t.draw(() => {
+	t.background(6, 8, 20);
 });
 
 t.mouseClicked(() => {
-	if (counters.uninstalled > 0) {
-		return;
-	}
+	if (!layerToDispose) return;
+	layerToDispose.dispose();
+	layerToDispose = null;
+});
 
-	t.destroy();
-	document.body.innerHTML =
-		'<div style="padding: 24px; color: #e4e4e7; background: #09090b; min-height: 100vh;">plugin.uninstall() ran after destroy()</div>';
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('PLUGINS.REGISTERLAYERDISPOSEDHOOK', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: LAYER DISPOSED HOOK', x, y++, 100, 220, 255);
+	drawText('Runs when a layer is disposed.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`DISPOSED COUNT : ${disposedCount}`, x, y++, 140, 190, 255);
+	drawText(
+		layerToDispose ? 'Click to dispose layer.' : 'Layer has been disposed successfully.',
+		x,
+		y++,
+		180,
+		255,
+		180
+	);
 });
 
 t.windowResized(() => {
@@ -257,44 +232,14 @@ A function to unregister the hook.
 #### Example
 
 ```javascript
-let counters = {
-	preSetup: 0,
-	postSetup: 0,
-	preDraw: 0,
-	postDraw: 0,
-	preRender: 0,
-	postRender: 0,
-	disposed: 0,
-	uninstalled: 0,
-};
+let postRenderCount = 0;
 
 const hookPlugin = {
-	name: 'hook-plugin',
-	install(_textmodifier, context) {
-		context.registerPreSetupHook(() => {
-			counters.preSetup += 1;
-		});
-		context.registerPostSetupHook(() => {
-			counters.postSetup += 1;
-		});
-		context.registerPreDrawHook(() => {
-			counters.preDraw += 1;
-		});
-		context.registerPostDrawHook(() => {
-			counters.postDraw += 1;
-		});
-		context.registerLayerDisposedHook(() => {
-			counters.disposed += 1;
-		});
-		context.registerLayerPreRenderHook(() => {
-			counters.preRender += 1;
-		});
+	name: 'layer-post-render-hook-plugin',
+	install(textmodifier, context) {
 		context.registerLayerPostRenderHook(() => {
-			counters.postRender += 1;
+			postRenderCount += 1;
 		});
-	},
-	uninstall() {
-		counters.uninstalled += 1;
 	},
 };
 
@@ -305,51 +250,37 @@ const t = textmode.create({
 	plugins: [hookPlugin],
 });
 
-const layer = t.layers.add({ fontSize: 16, blendMode: 'screen' });
+const labelLayer = t.layers.add();
 
-function label(text, y, color = [220, 220, 220]) {
+t.draw(() => {
+	t.background(6, 8, 20);
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-t.draw(() => {
-	t.background(5, 7, 18);
-	label('plugin lifecycle + hooks', -8, [255, 225, 140]);
-	label(`setup ${counters.preSetup}/${counters.postSetup}`, -4);
-	label(`draw ${counters.preDraw}/${counters.postDraw}`, 0);
-	label(`render ${counters.preRender}/${counters.postRender}`, 4);
-	label(`disposed ${counters.disposed}  uninstall ${counters.uninstalled}`, 8, [120, 205, 255]);
-	label('click to destroy textmode', 12, [255, 180, 120]);
-});
-
-layer.draw(() => {
+labelLayer.draw(() => {
 	t.clear();
-	t.push();
-	t.rotateZ(t.frameCount * 1.2);
-	t.charColor(120, 205, 255);
-	t.rect(18, 8);
-	t.pop();
-});
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
 
-t.mouseClicked(() => {
-	if (counters.uninstalled > 0) {
-		return;
-	}
-
-	t.destroy();
-	document.body.innerHTML =
-		'<div style="padding: 24px; color: #e4e4e7; background: #09090b; min-height: 100vh;">plugin.uninstall() ran after destroy()</div>';
+	drawText('PLUGINS.REGISTERLAYERPOSTRENDERHOOK', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: LAYER POST-RENDER HOOK', x, y++, 100, 220, 255);
+	drawText('Runs after drawing framebuffers.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`INVOCATIONS : ${postRenderCount}`, x, y++, 140, 190, 255);
 });
 
 t.windowResized(() => {
@@ -384,44 +315,14 @@ A function to unregister the hook.
 #### Example
 
 ```javascript
-let counters = {
-	preSetup: 0,
-	postSetup: 0,
-	preDraw: 0,
-	postDraw: 0,
-	preRender: 0,
-	postRender: 0,
-	disposed: 0,
-	uninstalled: 0,
-};
+let preRenderCount = 0;
 
 const hookPlugin = {
-	name: 'hook-plugin',
-	install(_textmodifier, context) {
-		context.registerPreSetupHook(() => {
-			counters.preSetup += 1;
-		});
-		context.registerPostSetupHook(() => {
-			counters.postSetup += 1;
-		});
-		context.registerPreDrawHook(() => {
-			counters.preDraw += 1;
-		});
-		context.registerPostDrawHook(() => {
-			counters.postDraw += 1;
-		});
-		context.registerLayerDisposedHook(() => {
-			counters.disposed += 1;
-		});
+	name: 'layer-pre-render-hook-plugin',
+	install(textmodifier, context) {
 		context.registerLayerPreRenderHook(() => {
-			counters.preRender += 1;
+			preRenderCount += 1;
 		});
-		context.registerLayerPostRenderHook(() => {
-			counters.postRender += 1;
-		});
-	},
-	uninstall() {
-		counters.uninstalled += 1;
 	},
 };
 
@@ -432,51 +333,37 @@ const t = textmode.create({
 	plugins: [hookPlugin],
 });
 
-const layer = t.layers.add({ fontSize: 16, blendMode: 'screen' });
+const labelLayer = t.layers.add();
 
-function label(text, y, color = [220, 220, 220]) {
+t.draw(() => {
+	t.background(6, 8, 20);
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-t.draw(() => {
-	t.background(5, 7, 18);
-	label('plugin lifecycle + hooks', -8, [255, 225, 140]);
-	label(`setup ${counters.preSetup}/${counters.postSetup}`, -4);
-	label(`draw ${counters.preDraw}/${counters.postDraw}`, 0);
-	label(`render ${counters.preRender}/${counters.postRender}`, 4);
-	label(`disposed ${counters.disposed}  uninstall ${counters.uninstalled}`, 8, [120, 205, 255]);
-	label('click to destroy textmode', 12, [255, 180, 120]);
-});
-
-layer.draw(() => {
+labelLayer.draw(() => {
 	t.clear();
-	t.push();
-	t.rotateZ(t.frameCount * 1.2);
-	t.charColor(120, 205, 255);
-	t.rect(18, 8);
-	t.pop();
-});
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
 
-t.mouseClicked(() => {
-	if (counters.uninstalled > 0) {
-		return;
-	}
-
-	t.destroy();
-	document.body.innerHTML =
-		'<div style="padding: 24px; color: #e4e4e7; background: #09090b; min-height: 100vh;">plugin.uninstall() ran after destroy()</div>';
+	drawText('PLUGINS.REGISTERLAYERPRERENDERHOOK', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: LAYER PRE-RENDER HOOK', x, y++, 100, 220, 255);
+	drawText('Runs before drawing framebuffers.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`INVOCATIONS : ${preRenderCount}`, x, y++, 140, 190, 255);
 });
 
 t.windowResized(() => {
@@ -510,44 +397,14 @@ A function to unregister the hook.
 #### Example
 
 ```javascript
-let counters = {
-	preSetup: 0,
-	postSetup: 0,
-	preDraw: 0,
-	postDraw: 0,
-	preRender: 0,
-	postRender: 0,
-	disposed: 0,
-	uninstalled: 0,
-};
+let postDrawCounter = 0;
 
 const hookPlugin = {
-	name: 'hook-plugin',
-	install(_textmodifier, context) {
-		context.registerPreSetupHook(() => {
-			counters.preSetup += 1;
-		});
-		context.registerPostSetupHook(() => {
-			counters.postSetup += 1;
-		});
-		context.registerPreDrawHook(() => {
-			counters.preDraw += 1;
-		});
+	name: 'post-draw-hook-plugin',
+	install(textmodifier, context) {
 		context.registerPostDrawHook(() => {
-			counters.postDraw += 1;
+			postDrawCounter += 1;
 		});
-		context.registerLayerDisposedHook(() => {
-			counters.disposed += 1;
-		});
-		context.registerLayerPreRenderHook(() => {
-			counters.preRender += 1;
-		});
-		context.registerLayerPostRenderHook(() => {
-			counters.postRender += 1;
-		});
-	},
-	uninstall() {
-		counters.uninstalled += 1;
 	},
 };
 
@@ -558,51 +415,37 @@ const t = textmode.create({
 	plugins: [hookPlugin],
 });
 
-const layer = t.layers.add({ fontSize: 16, blendMode: 'screen' });
+const labelLayer = t.layers.add();
 
-function label(text, y, color = [220, 220, 220]) {
+t.draw(() => {
+	t.background(6, 8, 20);
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-t.draw(() => {
-	t.background(5, 7, 18);
-	label('plugin lifecycle + hooks', -8, [255, 225, 140]);
-	label(`setup ${counters.preSetup}/${counters.postSetup}`, -4);
-	label(`draw ${counters.preDraw}/${counters.postDraw}`, 0);
-	label(`render ${counters.preRender}/${counters.postRender}`, 4);
-	label(`disposed ${counters.disposed}  uninstall ${counters.uninstalled}`, 8, [120, 205, 255]);
-	label('click to destroy textmode', 12, [255, 180, 120]);
-});
-
-layer.draw(() => {
+labelLayer.draw(() => {
 	t.clear();
-	t.push();
-	t.rotateZ(t.frameCount * 1.2);
-	t.charColor(120, 205, 255);
-	t.rect(18, 8);
-	t.pop();
-});
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
 
-t.mouseClicked(() => {
-	if (counters.uninstalled > 0) {
-		return;
-	}
-
-	t.destroy();
-	document.body.innerHTML =
-		'<div style="padding: 24px; color: #e4e4e7; background: #09090b; min-height: 100vh;">plugin.uninstall() ran after destroy()</div>';
+	drawText('PLUGINS.REGISTERPOSTDRAWHOOK', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: POST-DRAW LIFECYCLE HOOK', x, y++, 100, 220, 255);
+	drawText('Runs each frame after user draw().', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`INVOCATIONS : ${postDrawCounter}`, x, y++, 140, 190, 255);
 });
 
 t.windowResized(() => {
@@ -638,44 +481,14 @@ A function to unregister the hook.
 #### Example
 
 ```javascript
-let counters = {
-	preSetup: 0,
-	postSetup: 0,
-	preDraw: 0,
-	postDraw: 0,
-	preRender: 0,
-	postRender: 0,
-	disposed: 0,
-	uninstalled: 0,
-};
+let postSetupCounter = 0;
 
 const hookPlugin = {
-	name: 'hook-plugin',
-	install(_textmodifier, context) {
-		context.registerPreSetupHook(() => {
-			counters.preSetup += 1;
-		});
+	name: 'post-setup-hook-plugin',
+	install(textmodifier, context) {
 		context.registerPostSetupHook(() => {
-			counters.postSetup += 1;
+			postSetupCounter += 1;
 		});
-		context.registerPreDrawHook(() => {
-			counters.preDraw += 1;
-		});
-		context.registerPostDrawHook(() => {
-			counters.postDraw += 1;
-		});
-		context.registerLayerDisposedHook(() => {
-			counters.disposed += 1;
-		});
-		context.registerLayerPreRenderHook(() => {
-			counters.preRender += 1;
-		});
-		context.registerLayerPostRenderHook(() => {
-			counters.postRender += 1;
-		});
-	},
-	uninstall() {
-		counters.uninstalled += 1;
 	},
 };
 
@@ -686,51 +499,37 @@ const t = textmode.create({
 	plugins: [hookPlugin],
 });
 
-const layer = t.layers.add({ fontSize: 16, blendMode: 'screen' });
+const labelLayer = t.layers.add();
 
-function label(text, y, color = [220, 220, 220]) {
+t.draw(() => {
+	t.background(6, 8, 20);
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-t.draw(() => {
-	t.background(5, 7, 18);
-	label('plugin lifecycle + hooks', -8, [255, 225, 140]);
-	label(`setup ${counters.preSetup}/${counters.postSetup}`, -4);
-	label(`draw ${counters.preDraw}/${counters.postDraw}`, 0);
-	label(`render ${counters.preRender}/${counters.postRender}`, 4);
-	label(`disposed ${counters.disposed}  uninstall ${counters.uninstalled}`, 8, [120, 205, 255]);
-	label('click to destroy textmode', 12, [255, 180, 120]);
-});
-
-layer.draw(() => {
+labelLayer.draw(() => {
 	t.clear();
-	t.push();
-	t.rotateZ(t.frameCount * 1.2);
-	t.charColor(120, 205, 255);
-	t.rect(18, 8);
-	t.pop();
-});
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
 
-t.mouseClicked(() => {
-	if (counters.uninstalled > 0) {
-		return;
-	}
-
-	t.destroy();
-	document.body.innerHTML =
-		'<div style="padding: 24px; color: #e4e4e7; background: #09090b; min-height: 100vh;">plugin.uninstall() ran after destroy()</div>';
+	drawText('PLUGINS.REGISTERPOSTSETUPHOOK', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: POST-SETUP LIFECYCLE HOOK', x, y++, 100, 220, 255);
+	drawText('Runs immediately after user setup.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`INVOCATIONS : ${postSetupCounter}`, x, y++, 140, 190, 255);
 });
 
 t.windowResized(() => {
@@ -764,44 +563,14 @@ A function to unregister the hook.
 #### Example
 
 ```javascript
-let counters = {
-	preSetup: 0,
-	postSetup: 0,
-	preDraw: 0,
-	postDraw: 0,
-	preRender: 0,
-	postRender: 0,
-	disposed: 0,
-	uninstalled: 0,
-};
+let preDrawCounter = 0;
 
 const hookPlugin = {
-	name: 'hook-plugin',
-	install(_textmodifier, context) {
-		context.registerPreSetupHook(() => {
-			counters.preSetup += 1;
-		});
-		context.registerPostSetupHook(() => {
-			counters.postSetup += 1;
-		});
+	name: 'pre-draw-hook-plugin',
+	install(textmodifier, context) {
 		context.registerPreDrawHook(() => {
-			counters.preDraw += 1;
+			preDrawCounter += 1;
 		});
-		context.registerPostDrawHook(() => {
-			counters.postDraw += 1;
-		});
-		context.registerLayerDisposedHook(() => {
-			counters.disposed += 1;
-		});
-		context.registerLayerPreRenderHook(() => {
-			counters.preRender += 1;
-		});
-		context.registerLayerPostRenderHook(() => {
-			counters.postRender += 1;
-		});
-	},
-	uninstall() {
-		counters.uninstalled += 1;
 	},
 };
 
@@ -812,51 +581,37 @@ const t = textmode.create({
 	plugins: [hookPlugin],
 });
 
-const layer = t.layers.add({ fontSize: 16, blendMode: 'screen' });
+const labelLayer = t.layers.add();
 
-function label(text, y, color = [220, 220, 220]) {
+t.draw(() => {
+	t.background(6, 8, 20);
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-t.draw(() => {
-	t.background(5, 7, 18);
-	label('plugin lifecycle + hooks', -8, [255, 225, 140]);
-	label(`setup ${counters.preSetup}/${counters.postSetup}`, -4);
-	label(`draw ${counters.preDraw}/${counters.postDraw}`, 0);
-	label(`render ${counters.preRender}/${counters.postRender}`, 4);
-	label(`disposed ${counters.disposed}  uninstall ${counters.uninstalled}`, 8, [120, 205, 255]);
-	label('click to destroy textmode', 12, [255, 180, 120]);
-});
-
-layer.draw(() => {
+labelLayer.draw(() => {
 	t.clear();
-	t.push();
-	t.rotateZ(t.frameCount * 1.2);
-	t.charColor(120, 205, 255);
-	t.rect(18, 8);
-	t.pop();
-});
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
 
-t.mouseClicked(() => {
-	if (counters.uninstalled > 0) {
-		return;
-	}
-
-	t.destroy();
-	document.body.innerHTML =
-		'<div style="padding: 24px; color: #e4e4e7; background: #09090b; min-height: 100vh;">plugin.uninstall() ran after destroy()</div>';
+	drawText('PLUGINS.REGISTERPREDRAWHOOK', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: PRE-DRAW LIFECYCLE HOOK', x, y++, 100, 220, 255);
+	drawText('Runs each frame before user draw().', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`INVOCATIONS : ${preDrawCounter}`, x, y++, 140, 190, 255);
 });
 
 t.windowResized(() => {
@@ -892,44 +647,14 @@ A function to unregister the hook.
 #### Example
 
 ```javascript
-let counters = {
-	preSetup: 0,
-	postSetup: 0,
-	preDraw: 0,
-	postDraw: 0,
-	preRender: 0,
-	postRender: 0,
-	disposed: 0,
-	uninstalled: 0,
-};
+let preSetupCounter = 0;
 
 const hookPlugin = {
-	name: 'hook-plugin',
-	install(_textmodifier, context) {
+	name: 'pre-setup-hook-plugin',
+	install(textmodifier, context) {
 		context.registerPreSetupHook(() => {
-			counters.preSetup += 1;
+			preSetupCounter += 1;
 		});
-		context.registerPostSetupHook(() => {
-			counters.postSetup += 1;
-		});
-		context.registerPreDrawHook(() => {
-			counters.preDraw += 1;
-		});
-		context.registerPostDrawHook(() => {
-			counters.postDraw += 1;
-		});
-		context.registerLayerDisposedHook(() => {
-			counters.disposed += 1;
-		});
-		context.registerLayerPreRenderHook(() => {
-			counters.preRender += 1;
-		});
-		context.registerLayerPostRenderHook(() => {
-			counters.postRender += 1;
-		});
-	},
-	uninstall() {
-		counters.uninstalled += 1;
 	},
 };
 
@@ -940,51 +665,37 @@ const t = textmode.create({
 	plugins: [hookPlugin],
 });
 
-const layer = t.layers.add({ fontSize: 16, blendMode: 'screen' });
+const labelLayer = t.layers.add();
 
-function label(text, y, color = [220, 220, 220]) {
+t.draw(() => {
+	t.background(6, 8, 20);
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-t.draw(() => {
-	t.background(5, 7, 18);
-	label('plugin lifecycle + hooks', -8, [255, 225, 140]);
-	label(`setup ${counters.preSetup}/${counters.postSetup}`, -4);
-	label(`draw ${counters.preDraw}/${counters.postDraw}`, 0);
-	label(`render ${counters.preRender}/${counters.postRender}`, 4);
-	label(`disposed ${counters.disposed}  uninstall ${counters.uninstalled}`, 8, [120, 205, 255]);
-	label('click to destroy textmode', 12, [255, 180, 120]);
-});
-
-layer.draw(() => {
+labelLayer.draw(() => {
 	t.clear();
-	t.push();
-	t.rotateZ(t.frameCount * 1.2);
-	t.charColor(120, 205, 255);
-	t.rect(18, 8);
-	t.pop();
-});
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
 
-t.mouseClicked(() => {
-	if (counters.uninstalled > 0) {
-		return;
-	}
-
-	t.destroy();
-	document.body.innerHTML =
-		'<div style="padding: 24px; color: #e4e4e7; background: #09090b; min-height: 100vh;">plugin.uninstall() ran after destroy()</div>';
+	drawText('PLUGINS.REGISTERPRESETUPHOOK', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: PRE-SETUP LIFECYCLE HOOK', x, y++, 100, 220, 255);
+	drawText('Runs after install, before setup.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`INVOCATIONS : ${preSetupCounter}`, x, y++, 140, 190, 255);
 });
 
 t.windowResized(() => {
@@ -1040,22 +751,7 @@ const t = textmode.create({
 });
 
 const layer = t.layers.add({ fontSize: 16 });
-
-function label(text, y, color = [220, 220, 220]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(color[0], color[1], color[2]);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-
-	t.pop();
-}
+const labelLayer = t.layers.add();
 
 t.setup(() => {
 	layer.pulse(0.6);
@@ -1063,9 +759,6 @@ t.setup(() => {
 
 t.draw(() => {
 	t.background(5, 7, 18);
-	label('removeLayerExtension()', -6, [255, 225, 140]);
-	label(extensionRemoved ? 'pulse() removed from layers' : 'pulse() available on every layer', -2);
-	label('click to remove extension', 2, [120, 205, 255]);
 });
 
 layer.draw(() => {
@@ -1074,6 +767,7 @@ layer.draw(() => {
 	const amount = state?.amount ?? 0;
 
 	t.push();
+	t.char('#');
 	t.rotateZ(t.frameCount * (1 + amount));
 	t.charColor(255, 180, 120);
 	t.rect(14, 8);
@@ -1084,8 +778,36 @@ t.mouseClicked(() => {
 	if (!removePulse || extensionRemoved) {
 		return;
 	}
-
 	removePulse();
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('PLUGINS.REMOVELAYEREXTENSION', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: REMOVE LAYER EXTENSIONS', x, y++, 100, 220, 255);
+	const statusMsg = extensionRemoved ? 'pulse() was removed.' : 'pulse() is available on layer.';
+	drawText(statusMsg, x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	const clickMsg = extensionRemoved ? 'pulse() removed successfully.' : 'Click to remove pulse() extension.';
+	drawText(clickMsg, x, y++, 120, 205, 255);
 });
 
 t.windowResized(() => {

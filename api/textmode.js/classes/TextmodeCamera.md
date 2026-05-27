@@ -6,7 +6,7 @@ description: Mutable camera object used for p5-style camera workflows.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-05-19
+lastModified: 2026-05-27
 hasConstructor: false
 ---
 
@@ -30,7 +30,7 @@ it is applied again with `setCamera`.
 get eyeX(): number;
 ```
 
-Get the current x position of the camera eye.
+Current X position of the camera eye.
 
 ##### Returns
 
@@ -48,27 +48,32 @@ const t = textmode.create({
 const labelLayer = t.layers.add();
 let eyeValue = 0;
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, r = 200, g = 220, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-labelLayer.draw(() => {
-	t.clear();
-	drawCenteredText('TextmodeCamera.eyeX', -8, [240, 245, 255]);
-	drawCenteredText('eyeX: ' + eyeValue.toFixed(1), 6, [180, 200, 220]);
-});
+function drawScene() {
+	t.push();
+	t.char('.');
+	t.charColor(50, 70, 110);
+	for (let x = -20; x <= 20; x += 4) t.line(x, 0, -20, x, 0, 20);
+	for (let z = -20; z <= 20; z += 4) t.line(-20, 0, z, 20, 0, z);
+	t.pop();
+	t.push();
+	t.translate(0, 4, 0);
+	t.char('+');
+	t.charColor(120, 200, 255);
+	t.box(6, 8, 6);
+	t.pop();
+}
 
 t.setup(() => {
 	t.perspective(58, 0.1, 4096);
@@ -77,18 +82,31 @@ t.setup(() => {
 t.draw(() => {
 	t.background(6, 10, 22);
 
+	// Camera sweeps left/right along the X axis
 	const cam = t
 		.createCamera()
-		.setPosition(Math.sin(t.frameCount * 0.02) * 12, 0, 20)
+		.setPosition(Math.sin(t.frameCount * 0.02) * 16, 8, 28)
 		.lookAt(0, 0, 0);
 
 	eyeValue = cam.eyeX;
 	t.setCamera(cam);
+	drawScene();
+	t.resetCamera();
+});
 
-	t.char('+');
-	t.charColor(120, 180, 255);
-	t.line(-10, 0, 10, 0);
-	t.line(0, -5, 0, 5);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('EYEX', x, y++, 100, 255, 140);
+	drawText('--------------------------------', x, y++, 80, 100, 150);
+	drawText('Camera eye X position (left/right)', x, y++, 100, 220, 255);
+	drawText('Camera sweeps along the X axis.', x, y++, 140, 160, 190);
+	drawText('--------------------------------', x, y++, 80, 100, 150);
+	drawText(`eyeX = ${eyeValue.toFixed(2)}`, x, y++, 120, 255, 180);
 });
 
 t.windowResized(() => {
@@ -106,7 +124,7 @@ t.windowResized(() => {
 get eyeY(): number;
 ```
 
-Get the current y position of the camera eye.
+Current Y position of the camera eye.
 
 ##### Returns
 
@@ -124,27 +142,32 @@ const t = textmode.create({
 const labelLayer = t.layers.add();
 let eyeValue = 0;
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, r = 200, g = 220, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-labelLayer.draw(() => {
-	t.clear();
-	drawCenteredText('TextmodeCamera.eyeY', -8, [240, 245, 255]);
-	drawCenteredText('eyeY: ' + eyeValue.toFixed(1), 6, [180, 200, 220]);
-});
+function drawScene() {
+	t.push();
+	t.char('.');
+	t.charColor(50, 70, 110);
+	for (let x = -20; x <= 20; x += 4) t.line(x, 0, -20, x, 0, 20);
+	for (let z = -20; z <= 20; z += 4) t.line(-20, 0, z, 20, 0, z);
+	t.pop();
+	t.push();
+	t.translate(0, 4, 0);
+	t.char('+');
+	t.charColor(180, 120, 255);
+	t.box(6, 8, 6);
+	t.pop();
+}
 
 t.setup(() => {
 	t.perspective(58, 0.1, 4096);
@@ -153,18 +176,29 @@ t.setup(() => {
 t.draw(() => {
 	t.background(6, 10, 22);
 
-	const cam = t
-		.createCamera()
-		.setPosition(0, Math.sin(t.frameCount * 0.02) * 12, 20)
-		.lookAt(0, 0, 0);
+	// Camera rises and falls along the Y axis
+	const camY = 8 + Math.sin(t.frameCount * 0.02) * 12;
+	const cam = t.createCamera().setPosition(0, camY, 28).lookAt(0, 0, 0);
 
 	eyeValue = cam.eyeY;
 	t.setCamera(cam);
+	drawScene();
+	t.resetCamera();
+});
 
-	t.char('+');
-	t.charColor(120, 180, 255);
-	t.line(-10, 0, 10, 0);
-	t.line(0, -5, 0, 5);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('EYEY', x, y++, 100, 255, 140);
+	drawText('--------------------------------', x, y++, 80, 100, 150);
+	drawText('Camera eye Y position (up/down).', x, y++, 100, 220, 255);
+	drawText('Camera rises and falls on Y axis.', x, y++, 140, 160, 190);
+	drawText('--------------------------------', x, y++, 80, 100, 150);
+	drawText(`eyeY = ${eyeValue.toFixed(2)}`, x, y++, 120, 255, 180);
 });
 
 t.windowResized(() => {
@@ -182,7 +216,7 @@ t.windowResized(() => {
 get eyeZ(): number;
 ```
 
-Get the current z position of the camera eye.
+Current Z position of the camera eye.
 
 ##### Returns
 
@@ -200,27 +234,32 @@ const t = textmode.create({
 const labelLayer = t.layers.add();
 let eyeValue = 0;
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, r = 200, g = 220, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-labelLayer.draw(() => {
-	t.clear();
-	drawCenteredText('TextmodeCamera.eyeZ', -8, [240, 245, 255]);
-	drawCenteredText('eyeZ: ' + eyeValue.toFixed(1), 6, [180, 200, 220]);
-});
+function drawScene() {
+	t.push();
+	t.char('.');
+	t.charColor(50, 70, 110);
+	for (let x = -20; x <= 20; x += 4) t.line(x, 0, -20, x, 0, 20);
+	for (let z = -20; z <= 20; z += 4) t.line(-20, 0, z, 20, 0, z);
+	t.pop();
+	t.push();
+	t.translate(0, 4, 0);
+	t.char('+');
+	t.charColor(255, 180, 80);
+	t.box(6, 8, 6);
+	t.pop();
+}
 
 t.setup(() => {
 	t.perspective(58, 0.1, 4096);
@@ -229,18 +268,29 @@ t.setup(() => {
 t.draw(() => {
 	t.background(6, 10, 22);
 
-	const cam = t
-		.createCamera()
-		.setPosition(0, 0, 20 + Math.sin(t.frameCount * 0.02) * 12)
-		.lookAt(0, 0, 0);
+	// Camera zooms in and out along Z (dolly)
+	const camZ = 20 + Math.sin(t.frameCount * 0.02) * 14;
+	const cam = t.createCamera().setPosition(0, 8, camZ).lookAt(0, 0, 0);
 
 	eyeValue = cam.eyeZ;
 	t.setCamera(cam);
+	drawScene();
+	t.resetCamera();
+});
 
-	t.char('+');
-	t.charColor(120, 180, 255);
-	t.line(-10, 0, 10, 0);
-	t.line(0, -5, 0, 5);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('EYEZ', x, y++, 100, 255, 140);
+	drawText('--------------------------------', x, y++, 80, 100, 150);
+	drawText('Camera eye Z position (depth).', x, y++, 100, 220, 255);
+	drawText('Camera dollies in/out on Z axis.', x, y++, 140, 160, 190);
+	drawText('--------------------------------', x, y++, 80, 100, 150);
+	drawText(`eyeZ = ${eyeValue.toFixed(2)}`, x, y++, 120, 255, 180);
 });
 
 t.windowResized(() => {
@@ -258,7 +308,7 @@ t.windowResized(() => {
 get targetX(): number;
 ```
 
-Get the current x position of the camera target.
+Current X position of the camera target.
 
 ##### Returns
 
@@ -276,46 +326,73 @@ const t = textmode.create({
 const labelLayer = t.layers.add();
 let targetValue = 0;
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, r = 200, g = 220, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-labelLayer.draw(() => {
-	t.clear();
-	drawCenteredText('TextmodeCamera.targetX', -8, [240, 245, 255]);
-	drawCenteredText('targetX: ' + targetValue.toFixed(1), 6, [180, 200, 220]);
+function drawScene(tx) {
+	t.push();
+	t.char('.');
+	t.charColor(50, 70, 110);
+	for (let x = -20; x <= 20; x += 4) t.line(x, 0, -20, x, 0, 20);
+	for (let z = -20; z <= 20; z += 4) t.line(-20, 0, z, 20, 0, z);
+	t.pop();
+	// Moving target on X axis
+	t.push();
+	t.translate(tx, 3, 0);
+	t.char('*');
+	t.charColor(255, 200, 80);
+	t.ellipse(3, 3);
+	t.pop();
+	// Static reference pillars
+	for (let i = -2; i <= 2; i++) {
+		t.push();
+		t.translate(i * 8, 2, -6);
+		t.char('#');
+		t.charColor(80, 110, 180);
+		t.box(2, 4, 2);
+		t.pop();
+	}
+}
+
+t.setup(() => {
+	t.perspective(58, 0.1, 4096);
 });
 
 t.draw(() => {
 	t.background(6, 10, 22);
 
 	const time = t.frameCount * 0.02;
-	const cam = t.createCamera().setPosition(0, 10, 30);
-
-	cam.lookAt(Math.sin(time) * 12, 0, 0);
-
+	const tx = Math.sin(time) * 14;
+	const cam = t.createCamera().setPosition(0, 10, 30).lookAt(tx, 0, 0);
 	targetValue = cam.targetX;
 
 	t.setCamera(cam);
+	drawScene(tx);
+	t.resetCamera();
+});
 
-	t.push();
-	t.char('+');
-	t.charColor(120, 180, 255);
-	t.line(-10, 0, 10, 0);
-	t.line(0, -5, 0, 5);
-	t.pop();
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TARGETX', x, y++, 100, 255, 140);
+	drawText('--------------------------------', x, y++, 80, 100, 150);
+	drawText('Camera look-at X coordinate.', x, y++, 100, 220, 255);
+	drawText('* target pans left and right.', x, y++, 140, 160, 190);
+	drawText('--------------------------------', x, y++, 80, 100, 150);
+	drawText(`targetX = ${targetValue.toFixed(2)}`, x, y++, 120, 255, 180);
 });
 
 t.windowResized(() => {
@@ -333,7 +410,7 @@ t.windowResized(() => {
 get targetY(): number;
 ```
 
-Get the current y position of the camera target.
+Current Y position of the camera target.
 
 ##### Returns
 
@@ -351,46 +428,71 @@ const t = textmode.create({
 const labelLayer = t.layers.add();
 let targetValue = 0;
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, r = 200, g = 220, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-labelLayer.draw(() => {
-	t.clear();
-	drawCenteredText('TextmodeCamera.targetY', -8, [240, 245, 255]);
-	drawCenteredText('targetY: ' + targetValue.toFixed(1), 6, [180, 200, 220]);
+function drawScene(ty) {
+	t.push();
+	t.char('.');
+	t.charColor(50, 70, 110);
+	for (let x = -20; x <= 20; x += 4) t.line(x, 0, -20, x, 0, 20);
+	for (let z = -20; z <= 20; z += 4) t.line(-20, 0, z, 20, 0, z);
+	t.pop();
+	// Target rising and falling on Y axis
+	t.push();
+	t.translate(0, ty, 0);
+	t.char('*');
+	t.charColor(255, 180, 255);
+	t.ellipse(3, 3);
+	t.pop();
+	// Tall pillar as vertical reference
+	t.push();
+	t.translate(0, 8, -6);
+	t.char('|');
+	t.charColor(80, 110, 180);
+	t.box(2, 16, 2);
+	t.pop();
+}
+
+t.setup(() => {
+	t.perspective(58, 0.1, 4096);
 });
 
 t.draw(() => {
 	t.background(6, 10, 22);
 
 	const time = t.frameCount * 0.02;
-	const cam = t.createCamera().setPosition(0, 10, 30);
-
-	cam.lookAt(0, Math.sin(time) * 12, 0);
-
+	const ty = Math.sin(time) * 10;
+	const cam = t.createCamera().setPosition(0, 10, 30).lookAt(0, ty, 0);
 	targetValue = cam.targetY;
 
 	t.setCamera(cam);
+	drawScene(ty);
+	t.resetCamera();
+});
 
-	t.push();
-	t.char('+');
-	t.charColor(120, 180, 255);
-	t.line(-10, 0, 10, 0);
-	t.line(0, -5, 0, 5);
-	t.pop();
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TARGETY', x, y++, 100, 255, 140);
+	drawText('--------------------------------', x, y++, 80, 100, 150);
+	drawText('Camera look-at Y coordinate.', x, y++, 100, 220, 255);
+	drawText('* target rises and falls on Y.', x, y++, 140, 160, 190);
+	drawText('--------------------------------', x, y++, 80, 100, 150);
+	drawText(`targetY = ${targetValue.toFixed(2)}`, x, y++, 120, 255, 180);
 });
 
 t.windowResized(() => {
@@ -408,7 +510,7 @@ t.windowResized(() => {
 get targetZ(): number;
 ```
 
-Get the current z position of the camera target.
+Current Z position of the camera target.
 
 ##### Returns
 
@@ -426,46 +528,73 @@ const t = textmode.create({
 const labelLayer = t.layers.add();
 let targetValue = 0;
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, r = 200, g = 220, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-labelLayer.draw(() => {
-	t.clear();
-	drawCenteredText('TextmodeCamera.targetZ', -8, [240, 245, 255]);
-	drawCenteredText('targetZ: ' + targetValue.toFixed(1), 6, [180, 200, 220]);
+function drawScene(tz) {
+	t.push();
+	t.char('.');
+	t.charColor(50, 70, 110);
+	for (let x = -20; x <= 20; x += 4) t.line(x, 0, -20, x, 0, 20);
+	for (let z = -20; z <= 20; z += 4) t.line(-20, 0, z, 20, 0, z);
+	t.pop();
+	// Target moving along the Z (depth) axis
+	t.push();
+	t.translate(0, 3, tz);
+	t.char('*');
+	t.charColor(80, 255, 200);
+	t.ellipse(3, 3);
+	t.pop();
+	// Row of depth markers along Z
+	for (let i = -2; i <= 2; i++) {
+		t.push();
+		t.translate(0, 2, i * 7);
+		t.char('#');
+		t.charColor(80, 110, 160);
+		t.box(2, 4, 2);
+		t.pop();
+	}
+}
+
+t.setup(() => {
+	t.perspective(58, 0.1, 4096);
 });
 
 t.draw(() => {
 	t.background(6, 10, 22);
 
 	const time = t.frameCount * 0.02;
-	const cam = t.createCamera().setPosition(0, 10, 30);
-
-	cam.lookAt(0, 0, Math.sin(time) * 12);
-
+	const tz = Math.sin(time) * 12;
+	const cam = t.createCamera().setPosition(16, 12, 30).lookAt(0, 0, tz);
 	targetValue = cam.targetZ;
 
 	t.setCamera(cam);
+	drawScene(tz);
+	t.resetCamera();
+});
 
-	t.push();
-	t.char('+');
-	t.charColor(120, 180, 255);
-	t.line(-10, 0, 10, 0);
-	t.line(0, -5, 0, 5);
-	t.pop();
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TARGETZ', x, y++, 100, 255, 140);
+	drawText('--------------------------------', x, y++, 80, 100, 150);
+	drawText('Camera look-at Z coordinate.', x, y++, 100, 220, 255);
+	drawText('* target moves in depth on Z.', x, y++, 140, 160, 190);
+	drawText('--------------------------------', x, y++, 80, 100, 150);
+	drawText(`targetZ = ${targetValue.toFixed(2)}`, x, y++, 120, 255, 180);
 });
 
 t.windowResized(() => {
@@ -483,7 +612,7 @@ t.windowResized(() => {
 get upX(): number;
 ```
 
-Get the current x component of the camera up vector.
+Current X component of the camera up vector.
 
 ##### Returns
 
@@ -501,34 +630,25 @@ const t = textmode.create({
 const labelLayer = t.layers.add();
 let upValue = 0;
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, r = 200, g = 220, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-function drawEnvironment() {
+function drawScene() {
 	t.push();
 	t.char('.');
 	t.charColor(60, 80, 120);
-	for (let x = -20; x <= 20; x += 4) {
-		t.line(x, 0, -20, x, 0, 20);
-	}
-	for (let z = -20; z <= 20; z += 4) {
-		t.line(-20, 0, z, 20, 0, z);
-	}
+	for (let x = -20; x <= 20; x += 4) t.line(x, 0, -20, x, 0, 20);
+	for (let z = -20; z <= 20; z += 4) t.line(-20, 0, z, 20, 0, z);
 	t.pop();
-
 	t.push();
 	t.translate(0, 5, 0);
 	t.char('#');
@@ -537,26 +657,38 @@ function drawEnvironment() {
 	t.pop();
 }
 
-labelLayer.draw(() => {
-	t.clear();
-	drawCenteredText('TextmodeCamera.upX', -8, [240, 245, 255]);
-	drawCenteredText('upX: ' + upValue.toFixed(2), 6, [120, 255, 180]);
+t.setup(() => {
+	t.perspective(58, 0.1, 4096);
 });
 
 t.draw(() => {
 	t.background(6, 10, 22);
 
 	const time = t.frameCount * 0.03;
-	// Looking from +Z, tilted down slightly
 	const cam = t.createCamera().setPosition(0, 10, 40).lookAt(0, 0, 0);
-
-	// Oscillating the X component of the "up" vector creates a roll (tilt) effect
+	// Tilting upX rolls the horizon left/right
 	cam.setUp(Math.sin(time) * 1.5, 1, 0);
 
 	upValue = cam.upX;
 	t.setCamera(cam);
+	drawScene();
+	t.resetCamera();
+});
 
-	drawEnvironment();
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('UPX', x, y++, 100, 255, 140);
+	drawText('--------------------------------', x, y++, 80, 100, 150);
+	drawText('X component of the up vector.', x, y++, 100, 220, 255);
+	drawText('Oscillating upX tilts/rolls the', x, y++, 140, 160, 190);
+	drawText('horizon left and right.', x, y++, 140, 160, 190);
+	drawText('--------------------------------', x, y++, 80, 100, 150);
+	drawText(`upX = ${upValue.toFixed(3)}`, x, y++, 120, 255, 180);
 });
 
 t.windowResized(() => {
@@ -574,7 +706,7 @@ t.windowResized(() => {
 get upY(): number;
 ```
 
-Get the current y component of the camera up vector.
+Current Y component of the camera up vector.
 
 ##### Returns
 
@@ -592,34 +724,25 @@ const t = textmode.create({
 const labelLayer = t.layers.add();
 let upValue = 0;
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, r = 200, g = 220, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-function drawEnvironment() {
+function drawScene() {
 	t.push();
 	t.char('.');
 	t.charColor(60, 80, 120);
-	for (let x = -20; x <= 20; x += 4) {
-		t.line(x, 0, -20, x, 0, 20);
-	}
-	for (let z = -20; z <= 20; z += 4) {
-		t.line(-20, 0, z, 20, 0, z);
-	}
+	for (let x = -20; x <= 20; x += 4) t.line(x, 0, -20, x, 0, 20);
+	for (let z = -20; z <= 20; z += 4) t.line(-20, 0, z, 20, 0, z);
 	t.pop();
-
 	t.push();
 	t.translate(0, 5, 0);
 	t.char('#');
@@ -628,27 +751,38 @@ function drawEnvironment() {
 	t.pop();
 }
 
-labelLayer.draw(() => {
-	t.clear();
-	drawCenteredText('TextmodeCamera.upY', -8, [240, 245, 255]);
-	drawCenteredText('upY: ' + upValue.toFixed(2), 6, [120, 255, 180]);
+t.setup(() => {
+	t.perspective(58, 0.1, 4096);
 });
 
 t.draw(() => {
 	t.background(6, 10, 22);
 
 	const time = t.frameCount * 0.03;
-	// Looking from +X, tilted down slightly
+	// Side-on view; oscillating upY with a fixed upZ creates a roll
 	const cam = t.createCamera().setPosition(40, 10, 0).lookAt(0, 0, 0);
-
-	// Oscillating the Y component while keeping a fixed Z component
-	// creates a roll effect from this side-on perspective.
 	cam.setUp(0, Math.sin(time) * 1.5, 1);
 
 	upValue = cam.upY;
 	t.setCamera(cam);
+	drawScene();
+	t.resetCamera();
+});
 
-	drawEnvironment();
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('UPY', x, y++, 100, 255, 140);
+	drawText('--------------------------------', x, y++, 80, 100, 150);
+	drawText('Y component of the up vector.', x, y++, 100, 220, 255);
+	drawText('Normally 1.0 for a world-up cam.', x, y++, 140, 160, 190);
+	drawText('Oscillating it here creates roll.', x, y++, 140, 160, 190);
+	drawText('--------------------------------', x, y++, 80, 100, 150);
+	drawText(`upY = ${upValue.toFixed(3)}`, x, y++, 120, 255, 180);
 });
 
 t.windowResized(() => {
@@ -666,7 +800,7 @@ t.windowResized(() => {
 get upZ(): number;
 ```
 
-Get the current z component of the camera up vector.
+Current Z component of the camera up vector.
 
 ##### Returns
 
@@ -684,34 +818,25 @@ const t = textmode.create({
 const labelLayer = t.layers.add();
 let upValue = 0;
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, r = 200, g = 220, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-function drawEnvironment() {
+function drawScene() {
 	t.push();
 	t.char('.');
 	t.charColor(60, 80, 120);
-	for (let x = -20; x <= 20; x += 4) {
-		t.line(x, 0, -20, x, 0, 20);
-	}
-	for (let z = -20; z <= 20; z += 4) {
-		t.line(-20, 0, z, 20, 0, z);
-	}
+	for (let x = -20; x <= 20; x += 4) t.line(x, 0, -20, x, 0, 20);
+	for (let z = -20; z <= 20; z += 4) t.line(-20, 0, z, 20, 0, z);
 	t.pop();
-
 	t.push();
 	t.translate(0, 5, 0);
 	t.char('#');
@@ -720,27 +845,38 @@ function drawEnvironment() {
 	t.pop();
 }
 
-labelLayer.draw(() => {
-	t.clear();
-	drawCenteredText('TextmodeCamera.upZ', -8, [240, 245, 255]);
-	drawCenteredText('upZ: ' + upValue.toFixed(2), 6, [120, 255, 180]);
+t.setup(() => {
+	t.perspective(58, 0.1, 4096);
 });
 
 t.draw(() => {
 	t.background(6, 10, 22);
 
 	const time = t.frameCount * 0.03;
-	// Looking from +Y (top-down), offset slightly on Z to see depth
+	// Top-down view; oscillating upZ spins the horizon
 	const cam = t.createCamera().setPosition(0, 40, 10).lookAt(0, 0, 0);
-
-	// Oscillating the Z component while keeping a fixed X component
-	// creates a roll (twisting) effect from this top-down perspective.
 	cam.setUp(1, 0, Math.sin(time) * 1.5);
 
 	upValue = cam.upZ;
 	t.setCamera(cam);
+	drawScene();
+	t.resetCamera();
+});
 
-	drawEnvironment();
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('UPZ', x, y++, 100, 255, 140);
+	drawText('--------------------------------', x, y++, 80, 100, 150);
+	drawText('Z component of the up vector.', x, y++, 100, 220, 255);
+	drawText('From top-down, upZ spins the', x, y++, 140, 160, 190);
+	drawText('horizon like a compass needle.', x, y++, 140, 160, 190);
+	drawText('--------------------------------', x, y++, 80, 100, 150);
+	drawText(`upZ = ${upValue.toFixed(3)}`, x, y++, 120, 255, 180);
 });
 
 t.windowResized(() => {
@@ -771,20 +907,35 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
-	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
+const labelLayer = t.layers.add();
 
+function drawText(text, x, y, r = 200, g = 220, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+function drawScene() {
+	t.push();
+	t.char('#');
+	t.charColor(60, 80, 120);
+	for (let x = -20; x <= 20; x += 4) t.line(x, 0, -20, x, 0, 20);
+	for (let z = -20; z <= 20; z += 4) t.line(-20, 0, z, 20, 0, z);
+	t.pop();
+	for (let i = 0; i < 3; i++) {
+		t.push();
+		t.translate((i - 1) * 8, 3, 0);
+		t.char(['A', 'B', 'C'][i]);
+		t.charColor(120 + i * 50, 180, 255 - i * 40);
+		t.box(4, 6, 4);
 		t.pop();
 	}
-
-	t.pop();
 }
 
 t.setup(() => {
@@ -794,26 +945,29 @@ t.setup(() => {
 t.draw(() => {
 	t.background(6, 10, 22);
 
-	const original = t.createCamera().setPosition(-10, 5, 20).lookAt(0, 0, 0);
-	const clone = original.copy().setPosition(10, 5, 20);
+	const original = t.createCamera().setPosition(-10, 8, 28).lookAt(0, 0, 0);
+	const clone = original.copy().setPosition(10, 8, 28);
 
 	const active = Math.floor(t.frameCount / 120) % 2 === 0 ? original : clone;
 	t.setCamera(active);
-
-	for (let i = 0; i < 3; i++) {
-		t.push();
-		t.translate((i - 1) * 8, 0, -i * 6);
-		t.char(['A', 'B', 'C'][i]);
-		t.charColor(120 + i * 40, 180, 255);
-		t.ellipse(4, 3);
-		t.pop();
-	}
-
+	drawScene();
 	t.resetCamera();
+});
 
-	drawCenteredText('TextmodeCamera.copy', -8, [240, 245, 255]);
-	drawCenteredText('original: ' + original.eyeX + ', ' + original.eyeY + ', ' + original.eyeZ, 6, [180, 200, 220]);
-	drawCenteredText('clone: ' + clone.eyeX + ', ' + clone.eyeY + ', ' + clone.eyeZ, 10, [80, 255, 140]);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const which = Math.floor(t.frameCount / 120) % 2 === 0 ? 'original' : 'clone';
+	drawText('COPY', x, y++, 100, 255, 140);
+	drawText('--------------------------------', x, y++, 80, 100, 150);
+	drawText('Clone a camera with its state.', x, y++, 100, 220, 255);
+	drawText('Switches view every 120 frames.', x, y++, 140, 160, 190);
+	drawText('--------------------------------', x, y++, 80, 100, 150);
+	drawText(`Active: ${which}`, x, y++, 120, 255, 180);
 });
 
 t.windowResized(() => {
@@ -856,35 +1010,47 @@ const t = textmode.create({
 });
 
 const labelLayer = t.layers.add();
-let targetX = 0;
-let targetY = 0;
-let targetZ = 0;
+let tx = 0,
+	ty = 0,
+	tz = 0;
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, r = 200, g = 220, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-labelLayer.draw(() => {
-	t.clear();
-	drawCenteredText('TextmodeCamera.lookAt', -8, [240, 245, 255]);
-	drawCenteredText(
-		'target: ' + targetX.toFixed(1) + ', ' + targetY.toFixed(1) + ', ' + targetZ.toFixed(1),
-		6,
-		[180, 200, 220]
-	);
-});
+function drawScene() {
+	t.push();
+	t.char('.');
+	t.charColor(50, 70, 110);
+	for (let x = -20; x <= 20; x += 4) t.line(x, 0, -20, x, 0, 20);
+	for (let z = -20; z <= 20; z += 4) t.line(-20, 0, z, 20, 0, z);
+	t.pop();
+	// Target marker: a glowing cross at the look-at point
+	t.push();
+	t.translate(tx, ty, tz);
+	t.char('*');
+	t.charColor(255, 220, 80);
+	t.ellipse(3, 3);
+	t.pop();
+	// Static pillars around the scene
+	for (let i = 0; i < 4; i++) {
+		const angle = (i * Math.PI) / 2;
+		t.push();
+		t.translate(Math.cos(angle) * 12, 3, Math.sin(angle) * 12);
+		t.char('#');
+		t.charColor(80, 120, 200);
+		t.box(2, 6, 2);
+		t.pop();
+	}
+}
 
 t.setup(() => {
 	t.perspective(58, 0.1, 4096);
@@ -894,17 +1060,30 @@ t.draw(() => {
 	t.background(6, 10, 22);
 
 	const time = t.frameCount * 0.02;
-	targetX = Math.cos(time) * 8;
-	targetY = Math.sin(time * 0.7) * 5;
-	targetZ = Math.sin(time) * 8;
+	tx = Math.cos(time) * 10;
+	ty = Math.sin(time * 0.7) * 4;
+	tz = Math.sin(time) * 10;
 
-	const cam = t.createCamera().setPosition(0, 10, 30).lookAt(targetX, targetY, targetZ);
+	const cam = t.createCamera().setPosition(0, 12, 30).lookAt(tx, ty, tz);
 	t.setCamera(cam);
+	drawScene();
+	t.resetCamera();
+});
 
-	t.char('+');
-	t.charColor(120, 180, 255);
-	t.line(-10, 0, 10, 0);
-	t.line(0, -5, 0, 5);
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('LOOKAT', x, y++, 100, 255, 140);
+	drawText('--------------------------------', x, y++, 80, 100, 150);
+	drawText('Aim the camera at a 3D point.', x, y++, 100, 220, 255);
+	drawText('* marker shows the look target.', x, y++, 140, 160, 190);
+	drawText('--------------------------------', x, y++, 80, 100, 150);
+	const target = `${tx.toFixed(1)},${ty.toFixed(1)},${tz.toFixed(1)}`;
+	drawText(`TARGET: ${target}`, x, y++, 120, 255, 180);
 });
 
 t.windowResized(() => {
@@ -947,53 +1126,74 @@ const t = textmode.create({
 });
 
 const labelLayer = t.layers.add();
-let eyeX = 0;
-let eyeY = 0;
-let eyeZ = 0;
+let ex = 0,
+	ey = 0,
+	ez = 0;
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, r = 200, g = 220, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-labelLayer.draw(() => {
-	t.clear();
-	drawCenteredText('TextmodeCamera.move', -8, [240, 245, 255]);
-	drawCenteredText('eye: ' + eyeX.toFixed(1) + ', ' + eyeY.toFixed(1) + ', ' + eyeZ.toFixed(1), 6, [180, 200, 220]);
+function drawScene() {
+	t.push();
+	t.char('.');
+	t.charColor(50, 70, 110);
+	for (let x = -20; x <= 20; x += 4) t.line(x, 0, -20, x, 0, 20);
+	for (let z = -20; z <= 20; z += 4) t.line(-20, 0, z, 20, 0, z);
+	t.pop();
+	for (let i = 0; i < 5; i++) {
+		t.push();
+		t.translate(-16 + i * 8, 3, 0);
+		t.char(['@', '#', '+', '*', 'O'][i]);
+		t.charColor(100 + i * 30, 180, 255 - i * 30);
+		t.box(3, 6, 3);
+		t.pop();
+	}
+}
+
+t.setup(() => {
+	t.perspective(58, 0.1, 4096);
 });
 
 t.draw(() => {
 	t.background(6, 10, 22);
 
 	const time = t.frameCount * 0.02;
-	const cam = t.createCamera().setPosition(0, 6, 30).lookAt(0, 6, 0);
+	// Start at a fixed position then move() adds an offset
+	const cam = t.createCamera().setPosition(0, 8, 30).lookAt(0, 3, 0);
+	cam.move(Math.sin(time) * 14, 0, 0);
 
-	cam.move(Math.sin(time) * 12 - eyeX, 0, 0);
-
-	eyeX = cam.eyeX;
-	eyeY = cam.eyeY;
-	eyeZ = cam.eyeZ;
-
+	ex = cam.eyeX;
+	ey = cam.eyeY;
+	ez = cam.eyeZ;
 	t.setCamera(cam);
+	drawScene();
+	t.resetCamera();
+});
 
-	t.push();
-	t.translate(0, 6, 0);
-	t.char('+');
-	t.charColor(120, 180, 255);
-	t.line(-10, 0, 10, 0);
-	t.line(0, -5, 0, 5);
-	t.pop();
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('MOVE', x, y++, 100, 255, 140);
+	drawText('--------------------------------', x, y++, 80, 100, 150);
+	drawText('Translate eye by an offset.', x, y++, 100, 220, 255);
+	drawText('Shifts position without resetting', x, y++, 140, 160, 190);
+	drawText('the look-at target.', x, y++, 140, 160, 190);
+	drawText('--------------------------------', x, y++, 80, 100, 150);
+	const eye = `${ex.toFixed(1)},${ey.toFixed(1)},${ez.toFixed(1)}`;
+	drawText(`EYE: ${eye}`, x, y++, 120, 255, 180);
 });
 
 t.windowResized(() => {
@@ -1036,49 +1236,81 @@ const t = textmode.create({
 });
 
 const labelLayer = t.layers.add();
-let posX = 0;
-let posY = 0;
-let posZ = 0;
+let px = 0,
+	py = 0,
+	pz = 0;
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, r = 200, g = 220, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-labelLayer.draw(() => {
-	t.clear();
-	drawCenteredText('TextmodeCamera.setPosition', -8, [240, 245, 255]);
-	drawCenteredText('pos: ' + posX.toFixed(1) + ', ' + posY.toFixed(1) + ', ' + posZ.toFixed(1), 6, [180, 200, 220]);
+function drawScene() {
+	t.push();
+	t.char('.');
+	t.charColor(50, 70, 110);
+	for (let x = -20; x <= 20; x += 4) t.line(x, 0, -20, x, 0, 20);
+	for (let z = -20; z <= 20; z += 4) t.line(-20, 0, z, 20, 0, z);
+	t.pop();
+	// Central subject
+	t.push();
+	t.translate(0, 4, 0);
+	t.char('@');
+	t.charColor(120, 220, 255);
+	t.box(5, 8, 5);
+	t.pop();
+	// Corner pillars
+	for (let i = 0; i < 4; i++) {
+		const a = (i * Math.PI) / 2 + Math.PI / 4;
+		t.push();
+		t.translate(Math.cos(a) * 12, 2, Math.sin(a) * 12);
+		t.char('#');
+		t.charColor(80, 100, 160);
+		t.box(2, 4, 2);
+		t.pop();
+	}
+}
+
+t.setup(() => {
+	t.perspective(58, 0.1, 4096);
 });
 
 t.draw(() => {
 	t.background(6, 10, 22);
 
+	// Camera orbits the scene on the XZ plane
 	const time = t.frameCount * 0.02;
-	posX = Math.cos(time) * 20;
-	posY = 8;
-	posZ = Math.sin(time) * 20;
+	px = Math.cos(time) * 24;
+	py = 8;
+	pz = Math.sin(time) * 24;
 
-	const cam = t.createCamera().setPosition(posX, posY, posZ).lookAt(0, 0, 0);
+	const cam = t.createCamera().setPosition(px, py, pz).lookAt(0, 0, 0);
 	t.setCamera(cam);
+	drawScene();
+	t.resetCamera();
+});
 
-	t.push();
-	t.char('+');
-	t.charColor(120, 180, 255);
-	t.line(-10, 0, 10, 0);
-	t.line(0, -5, 0, 5);
-	t.pop();
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('SETPOSITION', x, y++, 100, 255, 140);
+	drawText('--------------------------------', x, y++, 80, 100, 150);
+	drawText('Place the camera eye in 3D space.', x, y++, 100, 220, 255);
+	drawText('Camera orbits the central object.', x, y++, 140, 160, 190);
+	drawText('--------------------------------', x, y++, 80, 100, 150);
+	const pos = `${px.toFixed(1)},${py.toFixed(1)},${pz.toFixed(1)}`;
+	drawText(`POS: ${pos}`, x, y++, 120, 255, 180);
 });
 
 t.windowResized(() => {
@@ -1121,52 +1353,71 @@ const t = textmode.create({
 });
 
 const labelLayer = t.layers.add();
-let upX = 0;
-let upY = 1;
-let upZ = 0;
+let ux = 0,
+	uy = 1,
+	uz = 0;
 
-function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+function drawText(text, x, y, r = 200, g = 220, b = 255) {
 	t.push();
-	t.translate(-Math.floor(text.length / 2), y);
-	t.charColor(rgb[0], rgb[1], rgb[2]);
-
+	t.translate(x, y);
+	t.charColor(r, g, b);
 	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(i, 0);
 		t.char(text[i]);
 		t.point();
-		t.pop();
+		t.translate(1, 0);
 	}
-
 	t.pop();
 }
 
-labelLayer.draw(() => {
-	t.clear();
-	drawCenteredText('TextmodeCamera.setUp', -8, [240, 245, 255]);
-	drawCenteredText('up: ' + upX.toFixed(2) + ', ' + upY.toFixed(2) + ', ' + upZ.toFixed(2), 6, [180, 200, 220]);
+function drawScene() {
+	t.push();
+	t.char('.');
+	t.charColor(60, 80, 120);
+	for (let x = -20; x <= 20; x += 4) t.line(x, 0, -20, x, 0, 20);
+	for (let z = -20; z <= 20; z += 4) t.line(-20, 0, z, 20, 0, z);
+	t.pop();
+	t.push();
+	t.translate(0, 5, 0);
+	t.char('#');
+	t.charColor(200, 220, 255);
+	t.box(4, 10, 4);
+	t.pop();
+}
+
+t.setup(() => {
+	t.perspective(58, 0.1, 4096);
 });
 
 t.draw(() => {
 	t.background(6, 10, 22);
 
-	const time = t.frameCount * 0.02;
-	const cam = t.createCamera().setPosition(0, 0, 30).lookAt(0, 0, 0);
+	const time = t.frameCount * 0.03;
+	const cam = t.createCamera().setPosition(0, 10, 40).lookAt(0, 0, 0);
+	// Oscillating the X component of 'up' creates a rolling tilt
+	cam.setUp(Math.sin(time) * 1.5, 1, 0);
 
-	cam.setUp(Math.sin(time) * 0.8, 1, Math.cos(time) * 0.6);
-
-	upX = cam.upX;
-	upY = cam.upY;
-	upZ = cam.upZ;
-
+	ux = cam.upX;
+	uy = cam.upY;
+	uz = cam.upZ;
 	t.setCamera(cam);
+	drawScene();
+	t.resetCamera();
+});
 
-	t.push();
-	t.char('+');
-	t.charColor(120, 180, 255);
-	t.line(-10, 0, 10, 0);
-	t.line(0, -5, 0, 5);
-	t.pop();
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('SETUP', x, y++, 100, 255, 140);
+	drawText('--------------------------------', x, y++, 80, 100, 150);
+	drawText('Set the camera up vector.', x, y++, 100, 220, 255);
+	drawText('Tilting upX rolls the horizon.', x, y++, 140, 160, 190);
+	drawText('--------------------------------', x, y++, 80, 100, 150);
+	const up = `${ux.toFixed(2)},${uy.toFixed(2)},${uz.toFixed(2)}`;
+	drawText(`UP: ${up}`, x, y++, 120, 255, 180);
 });
 
 t.windowResized(() => {

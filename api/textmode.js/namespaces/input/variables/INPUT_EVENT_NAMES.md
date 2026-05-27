@@ -7,7 +7,7 @@ category: Variables
 api: true
 namespace: input
 kind: Variable
-lastModified: 2026-05-19
+lastModified: 2026-05-27
 ---
 
 [textmode.js](../../../index.md) / [input](../index.md) / INPUT\_EVENT\_NAMES

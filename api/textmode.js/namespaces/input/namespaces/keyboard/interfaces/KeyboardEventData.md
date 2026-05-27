@@ -2,12 +2,12 @@
 layout: doc
 editLink: true
 title: KeyboardEventData
-description: Key event data passed to event handlers.
+description: Keyboard event payload passed to input callbacks.
 category: Interfaces
 api: true
 namespace: input.keyboard
 kind: Interface
-lastModified: 2026-05-19
+lastModified: 2026-05-27
 isInterface: true
 ---
 
@@ -15,7 +15,7 @@ isInterface: true
 
 # Interface: KeyboardEventData
 
-Key event data passed to event handlers.
+Keyboard event payload passed to input callbacks.
 
 ## Properties
 
@@ -23,7 +23,7 @@ Key event data passed to event handlers.
 | ------ | ------ | ------ |
 | <a id="property-altkey"></a> `altKey` | `boolean` | Whether Alt key is held down. |
 | <a id="property-ctrlkey"></a> `ctrlKey` | `boolean` | Whether Ctrl key is held down. |
-| <a id="property-ispressed"></a> `isPressed` | `boolean` | Whether this key is currently being held down (for keyPressed) or was released (for keyReleased). |
+| <a id="property-ispressed"></a> `isPressed` | `boolean` | Whether this key is currently held down for this event. |
 | <a id="property-key"></a> `key` | `string` | The key that was pressed/released (e.g., 'a', 'Enter', 'ArrowLeft'). |
 | <a id="property-keycode"></a> `keyCode` | `number` | The key code (for compatibility). |
 | <a id="property-metakey"></a> `metaKey` | `boolean` | Whether Meta key (Windows/Cmd) is held down. |

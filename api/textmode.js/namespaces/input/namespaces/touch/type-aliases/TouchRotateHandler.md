@@ -2,12 +2,12 @@
 layout: doc
 editLink: true
 title: TouchRotateHandler
-description: Touch rotate event handler function type.
+description: Rotate-gesture event callback signature.
 category: Type Aliases
 api: true
 namespace: input.touch
 kind: TypeAlias
-lastModified: 2026-05-19
+lastModified: 2026-05-27
 ---
 
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [touch](../index.md) / TouchRotateHandler
@@ -18,7 +18,7 @@ lastModified: 2026-05-19
 type TouchRotateHandler = (data) => void;
 ```
 
-Touch rotate event handler function type.
+Rotate-gesture event callback signature.
 
 ## Parameters
 

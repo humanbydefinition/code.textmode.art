@@ -2,12 +2,12 @@
 layout: doc
 editLink: true
 title: TextmodeError
-description: Custom error class for textmode.js exceptions.
+description: Error type that formats optional context data alongside the main message.
 category: Classes
 api: true
 namespace: errors
 kind: Class
-lastModified: 2026-05-19
+lastModified: 2026-05-27
 hasConstructor: true
 ---
 
@@ -15,10 +15,7 @@ hasConstructor: true
 
 # Class: TextmodeError
 
-Custom error class for textmode.js exceptions.
-
-Provides formatted error messages with optional context data to help
-debug issues.
+Error type that formats optional context data alongside the main message.
 
 ## Extends
 
@@ -35,7 +32,7 @@ new TextmodeError(
    options?): TextmodeError;
 ```
 
-Creates a new TextmodeError instance.
+Create a textmode.js error.
 
 #### Parameters
 
