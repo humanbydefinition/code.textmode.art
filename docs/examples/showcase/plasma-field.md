@@ -1,4 +1,7 @@
-
+---
+title: Plasma Field
+description: Animated plasma field effect using textmode.js - vibrant color gradients and flowing character patterns on a textmode grid.
+---
 
 ::: textmode-sandbox {template=static hideEditor sketchId=plasma-field}
 

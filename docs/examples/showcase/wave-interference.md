@@ -1,4 +1,7 @@
-
+---
+title: Wave Interference
+description: Real-time wave interference pattern rendered as ASCII art with textmode.js - overlapping sine waves create complex textmode visuals.
+---
 
 ::: textmode-sandbox {template=static hideEditor sketchId=wave-interference}
 

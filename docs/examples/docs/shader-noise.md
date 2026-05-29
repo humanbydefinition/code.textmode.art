@@ -1,3 +1,8 @@
+---
+title: Shader Noise
+description: Create procedural noise patterns and shader-based effects with GLSL ES 3.00 custom filter shaders in textmode.js.
+---
+
 ::: textmode-sandbox {template=static rtl hideEditor}
 
 ```html index.html [readonly]

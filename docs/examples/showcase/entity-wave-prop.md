@@ -1,3 +1,8 @@
+---
+title: Entity Wave Propagation
+description: Entity-based wave propagation simulation rendered as textmode ASCII art - particles carry wave states across a character grid.
+---
+
 ::: textmode-sandbox {template=static hideEditor sketchId=entity-wave-prop}
 
 ```html index.html [readonly]

@@ -1,3 +1,8 @@
+---
+title: p5.js Integration
+description: Use textmode.js with p5.js sketches to render creative coding projects as real-time ASCII textmode graphics.
+---
+
 ::: details p5.js {open}
 
 ::: textmode-sandbox {template=static}

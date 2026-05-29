@@ -1,3 +1,8 @@
+---
+title: Three.js Integration
+description: Combine Three.js 3D rendering with textmode.js to create real-time ASCII art from WebGL 3D scenes.
+---
+
 ::: details three.js
 
 ::: textmode-sandbox {template=static}

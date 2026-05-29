@@ -56,14 +56,18 @@ export const transformHead = ({ pageData }: TransformContext): HeadConfig[] => {
   const ogDescription = pageData.description || defaultDescription
   const ogImage = 'https://code.textmode.art/png/textmodejs_banner.png'
 
-  // Detect if it's a blog post or the home page
+  // Detect page types
   const isBlogPost = pageData.relativePath.startsWith('blog/') && pageData.relativePath !== 'blog/index.md';
   const isHomePage = pageData.relativePath === 'index.md';
+  const isDocsPage = pageData.relativePath.startsWith('docs/') && !pageData.relativePath.endsWith('/index.md');
 
   const ogType = isBlogPost ? 'article' : 'website';
 
   const head: HeadConfig[] = [
     ['link', { rel: 'canonical', href: canonicalUrl }],
+    // Meta
+    ['meta', { name: 'description', content: ogDescription }],
+    ['meta', { name: 'robots', content: 'index, follow' }],
     // Open Graph
     ['meta', { property: 'og:type', content: ogType }],
     ['meta', { property: 'og:site_name', content: 'textmode.js' }],
@@ -79,11 +83,6 @@ export const transformHead = ({ pageData }: TransformContext): HeadConfig[] => {
     ['meta', { name: 'twitter:description', content: ogDescription }],
     ['meta', { name: 'twitter:image', content: ogImage }],
     ['meta', { name: 'twitter:image:alt', content: 'textmode.js - Real-time ASCII art library' }],
-    ['script', { type: 'application/ld+json' }, JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": breadcrumbItems
-    })]
   ]
 
   // Add Keywords (from frontmatter or default)
@@ -94,26 +93,58 @@ export const transformHead = ({ pageData }: TransformContext): HeadConfig[] => {
     head.push(['meta', { name: 'keywords', content: keywords }]);
   }
 
-  // Schema for SoftwareApplication (Home only)
+  // Schema: Home page with consolidated @graph
   if (isHomePage) {
     head.push(['script', { type: 'application/ld+json' }, JSON.stringify({
       "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "textmode.js",
-      "operatingSystem": "Any",
-      "applicationCategory": "DeveloperApplication",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD"
-      },
-      "description": "textmode.js is a lightweight creative coding library for creating real-time ASCII art on the web.",
-      "url": "https://code.textmode.art"
+      "@graph": [
+        {
+          "@type": "Organization",
+          "name": "textmode.js",
+          "url": "https://code.textmode.art",
+          "logo": "https://code.textmode.art/svg/doc_logo.svg",
+          "sameAs": [
+            "https://github.com/humanbydefinition/textmode.js",
+            "https://discord.gg/sjrw8QXNks"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "name": "textmode.js",
+          "url": "https://code.textmode.art",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://code.textmode.art/search?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+          }
+        },
+        {
+          "@type": "SoftwareApplication",
+          "name": "textmode.js",
+          "operatingSystem": "Any",
+          "applicationCategory": "DeveloperApplication",
+          "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+          },
+          "description": "textmode.js is a lightweight creative coding library for creating real-time ASCII art on the web.",
+          "url": "https://code.textmode.art"
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": breadcrumbItems
+        }
+      ]
     })]);
   }
-
-  // Schema for Articles (Blog Posts only)
-  if (isBlogPost) {
+  // Schema: Blog posts
+  else if (isBlogPost) {
+    head.push(['script', { type: 'application/ld+json' }, JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": breadcrumbItems
+    })]);
     head.push(['script', { type: 'application/ld+json' }, JSON.stringify({
       "@context": "https://schema.org",
       "@type": "BlogPosting",
@@ -126,6 +157,43 @@ export const transformHead = ({ pageData }: TransformContext): HeadConfig[] => {
         "name": pageData.frontmatter.author || "textmode.js team",
         "url": "https://code.textmode.art"
       }]
+    })]);
+  }
+  // Schema: Documentation pages (TechArticle)
+  else if (isDocsPage) {
+    head.push(['script', { type: 'application/ld+json' }, JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": breadcrumbItems
+    })]);
+    const techArticle: Record<string, unknown> = {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": pageData.title,
+      "description": ogDescription,
+      "author": {
+        "@type": "Organization",
+        "name": "textmode.js",
+        "url": "https://code.textmode.art"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "textmode.js",
+        "url": "https://code.textmode.art"
+      },
+      "url": canonicalUrl
+    };
+    if (pageData.lastUpdated) {
+      techArticle.dateModified = new Date(pageData.lastUpdated).toISOString();
+    }
+    head.push(['script', { type: 'application/ld+json' }, JSON.stringify(techArticle)]);
+  }
+  // Schema: All other pages
+  else {
+    head.push(['script', { type: 'application/ld+json' }, JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": breadcrumbItems
     })]);
   }
 
