@@ -1,3 +1,8 @@
+---
+title: Webcam Integration
+description: Render a live webcam feed as real-time textmode ASCII art using textmode.js media converters.
+---
+
 ::: details webcam {closed}
 
 ::: textmode-sandbox {template=static}

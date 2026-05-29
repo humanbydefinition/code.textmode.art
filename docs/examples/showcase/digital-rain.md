@@ -1,3 +1,8 @@
+---
+title: Digital Rain
+description: Classic Matrix-style digital rain effect built with textmode.js - cascading character glyphs with dynamic coloring and timing.
+---
+
 ::: textmode-sandbox {template=static hideEditor sketchId=digital-rain}
 
 ```html index.html [readonly]

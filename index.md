@@ -96,9 +96,13 @@ Simple, powerful, and ready for your wildest ideas.
 
 <FeaturedSketches :count="3" />
 
+<!-- Testimonials section disabled until real testimonials are collected -->
+<!--
 <hr />
 
 <Testimonials />
+
+-->
 
 <hr />
 

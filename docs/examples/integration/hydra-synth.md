@@ -1,3 +1,8 @@
+---
+title: Hydra Synth Integration
+description: Combine Hydra live-coding visuals with textmode.js to create real-time ASCII art from video synthesizer outputs.
+---
+
 ::: details hydra-synth {closed}
 
 ::: textmode-sandbox {template=static}

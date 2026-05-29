@@ -1,3 +1,8 @@
+---
+title: Video Integration
+description: Load and render video files as real-time textmode ASCII art with textmode.js media source converters.
+---
+
 ::: details video {closed}
 
 ::: textmode-sandbox {template=static}

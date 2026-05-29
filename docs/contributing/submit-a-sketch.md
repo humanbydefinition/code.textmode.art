@@ -1,5 +1,6 @@
 ---
 title: Submit a Sketch
+description: How to submit your textmode.js sketch or example to the code.textmode.art documentation showcase and gallery.
 ---
 
 # Submit an example sketch
