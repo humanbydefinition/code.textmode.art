@@ -1,4 +1,7 @@
 node_modules
-.vitepress/dist
-.vitepress/cache
+.vitepress/.cache/
+.vitepress/.temp
+.vitepress/cache/
+.vitepress/dist/
+.vitepress/temp/
 .gemini
