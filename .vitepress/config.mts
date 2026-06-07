@@ -5,6 +5,18 @@ import { renderSandbox } from 'vitepress-plugin-sandpack'
 import { withMermaid } from 'vitepress-plugin-mermaid'
 import { head, nav, sidebar, blog, transformHead } from './configs/index.mts'
 
+function renderSearchContent(src: string, env: any, md: any) {
+  const isApiPage = env.relativePath?.startsWith('api/textmode.js/')
+  const searchableSource = isApiPage
+    ? src
+        .replace(/:::\s*textmode-api-sandbox\b[^\n]*\n[\s\S]*?\n:::/g, '')
+        .replace(/```(?:javascript|js)[^\n]*\n[\s\S]*?\n```/g, '')
+    : src
+  const html = md.render(searchableSource, env)
+
+  return env.frontmatter?.search === false ? '' : html
+}
+
 const themeConfig = {
   logo: '/svg/doc_logo.svg',
 
@@ -21,6 +33,9 @@ const themeConfig = {
 
   search: {
     provider: 'local' as const,
+    options: {
+      _render: renderSearchContent,
+    },
   },
 
   outline: {
@@ -65,6 +80,16 @@ export default withMermaid(defineConfig({
         .use(container, 'textmode-sandbox', {
           render(tokens: any[], idx: number) {
             const sandboxHtml = renderSandbox(tokens, idx, 'textmode-sandbox');
+            if (tokens[idx].nesting === 1) {
+              return `<ClientOnly>${sandboxHtml}`;
+            }
+
+            return `${sandboxHtml}</ClientOnly>`;
+          },
+        })
+        .use(container, 'textmode-api-sandbox', {
+          render(tokens: any[], idx: number) {
+            const sandboxHtml = renderSandbox(tokens, idx, 'textmode-api-sandbox');
             if (tokens[idx].nesting === 1) {
               return `<ClientOnly>${sandboxHtml}`;
             }

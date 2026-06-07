@@ -534,7 +534,44 @@ body::-webkit-scrollbar-thumb:hover {
   }
 }
 
-/* 
+/*
+ * API pages with live Sandpack examples need the horizontal room for the sketch.
+ * The TextmodeApiSandbox component applies this document class only while mounted.
+ */
+@media (min-width: 960px) {
+  .has-textmode-api-sandbox .VPDoc.has-aside .aside {
+    display: none;
+  }
+
+  .has-textmode-api-sandbox .VPDoc.has-aside .container {
+    max-width: 100%;
+  }
+
+  .has-textmode-api-sandbox .VPDoc.has-aside .content {
+    max-width: 100% !important;
+    padding-right: 0;
+  }
+
+  .has-textmode-api-sandbox .VPDoc.has-aside .content-container {
+    max-width: 100% !important;
+  }
+}
+
+@media (min-width: 1280px) {
+  .has-textmode-api-sandbox .VPDoc.has-aside .content,
+  .has-textmode-api-sandbox .VPDoc.has-aside .content-container {
+    max-width: 1040px !important;
+  }
+}
+
+@media (min-width: 1440px) {
+  .has-textmode-api-sandbox .VPDoc.has-aside .content,
+  .has-textmode-api-sandbox .VPDoc.has-aside .content-container {
+    max-width: 1180px !important;
+  }
+}
+
+/*
  * Custom scrollbar for sidebar navigation (#app > div > aside)
  * Matches the style used on the aside outline
  */

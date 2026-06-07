@@ -36,6 +36,7 @@ import 'vitepress-plugin-blog/style.css'
 // Composables
 import { useComments, setupHeroSketchRouter } from './composables'
 import type { GiscusConfig } from './composables'
+import TextmodeApiSandbox from './components/TextmodeApiSandbox.vue'
 
 const giscusConfig: GiscusConfig = {
   repo: 'humanbydefinition/textmode.js',
@@ -80,6 +81,7 @@ const baseTheme: Theme = {
     // Register components
     app.component('Sandbox', Sandbox)
     app.component('TextmodeSandbox', TextmodeSandbox)
+    app.component('TextmodeApiSandbox', TextmodeApiSandbox)
     app.component('SupportGrid', SupportGrid)
     app.component('TextmodeWhatIs', TextmodeWhatIs)
     app.component('HomeCta', HomeCta)
