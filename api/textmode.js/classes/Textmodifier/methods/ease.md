@@ -1,0 +1,41 @@
+---
+layout: doc
+editLink: true
+title: ease
+description: Apply an easing curve to a normalized amount.
+category: Methods
+api: true
+owner: Textmodifier
+kind: Method
+lastModified: 2026-06-07
+---
+
+[textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / ease
+
+# Method: ease()
+
+```ts
+ease(name, amount): number;
+```
+
+Apply an easing curve to a normalized amount.
+
+Inputs are clamped to the 0-1 range for animation-friendly behavior.
+Outputs are not clamped, so back, elastic, and bounce curves can overshoot.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `name` | \| `"linear"` \| `"inQuad"` \| `"outQuad"` \| `"inOutQuad"` \| `"inCubic"` \| `"outCubic"` \| `"inOutCubic"` \| `"inQuart"` \| `"outQuart"` \| `"inOutQuart"` \| `"inQuint"` \| `"outQuint"` \| `"inOutQuint"` \| `"inSine"` \| `"outSine"` \| `"inOutSine"` \| `"inExpo"` \| `"outExpo"` \| `"inOutExpo"` \| `"inCirc"` \| `"outCirc"` \| `"inOutCirc"` \| `"inBack"` \| `"outBack"` \| `"inOutBack"` \| `"inElastic"` \| `"outElastic"` \| `"inOutElastic"` \| `"inBounce"` \| `"outBounce"` \| `"inOutBounce"` | Easing curve name. |
+| `amount` | `number` | Normalized amount to ease. |
+
+## Returns
+
+`number`
+
+Eased amount.
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.js" encoded-files="W3siaW5mbyI6Imh0bWwgaW5kZXguaHRtbCBbaGlkZGVuXSBbcmVhZG9ubHldIiwiY29kZSI6IjwhRE9DVFlQRSBodG1sPlxuPGh0bWwgbGFuZz1cImVuXCI-XG4gIDxoZWFkPlxuICAgIDxtZXRhIGNoYXJzZXQ9XCJ1dGYtOFwiIC8-XG4gICAgPG1ldGEgbmFtZT1cInZpZXdwb3J0XCIgY29udGVudD1cIndpZHRoPWRldmljZS13aWR0aCwgaW5pdGlhbC1zY2FsZT0xXCIgLz5cbiAgICA8dGl0bGU-ZWFzZTwvdGl0bGU-XG4gICAgPHN0eWxlPlxuICAgICAgaHRtbCxcbiAgICAgIGJvZHkge1xuICAgICAgICBtYXJnaW46IDA7XG4gICAgICAgIG1pbi1oZWlnaHQ6IDEwMCU7XG4gICAgICAgIG92ZXJmbG93OiBoaWRkZW47XG4gICAgICAgIGJhY2tncm91bmQ6ICMwMDA7XG4gICAgICB9XG5cbiAgICAgIGNhbnZhcyB7XG4gICAgICAgIGRpc3BsYXk6IGJsb2NrO1xuICAgICAgfVxuICAgIDwvc3R5bGU-XG4gICAgPHNjcmlwdCBzcmM9XCJodHRwczovL3VucGtnLmNvbS90ZXh0bW9kZS5qc0AwLjE2LjAtYmV0YS4xL2Rpc3QvdGV4dG1vZGUudW1kLmpzXCI-PC9zY3JpcHQ-XG4gIDwvaGVhZD5cbiAgPGJvZHk-XG4gICAgPHNjcmlwdCB0eXBlPVwibW9kdWxlXCIgc3JjPVwic2tldGNoLmpzXCI-PC9zY3JpcHQ-XG4gIDwvYm9keT5cbjwvaHRtbD4ifSx7ImluZm8iOiJqcyBza2V0Y2guanMgW2FjdGl2ZV0iLCJjb2RlIjoiY29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7XG5cdHBpeGVsRGVuc2l0eTogMSxcblx0d2lkdGg6IHdpbmRvdy5pbm5lcldpZHRoLFxuXHRoZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCxcblx0Zm9udFNpemU6IDE2LFxufSk7XG5cbmNvbnN0IGxhYmVsTGF5ZXIgPSB0LmxheWVycy5hZGQoKTtcbmNvbnN0IGR1cmF0aW9uID0gMTIwO1xuY29uc3QgY3VydmVzID0gW1xuXHR7IG5hbWU6ICdsaW5lYXInLCBjaGFyOiAnbycsIHk6IC02LCBjb2xvcjogWzEyMCwgMTkwLCAyNTVdIH0sXG5cdHsgbmFtZTogJ2luUXVhZCcsIGNoYXI6ICdxJywgeTogLTMsIGNvbG9yOiBbMjU1LCAyMTAsIDEyMF0gfSxcblx0eyBuYW1lOiAnb3V0U2luZScsIGNoYXI6ICdzJywgeTogMCwgY29sb3I6IFsyNTUsIDE0MCwgMTgwXSB9LFxuXHR7IG5hbWU6ICdpbk91dEN1YmljJywgY2hhcjogJ0AnLCB5OiAzLCBjb2xvcjogWzEyMCwgMjU1LCAxNzBdIH0sXG5cdHsgbmFtZTogJ291dEJvdW5jZScsIGNoYXI6ICdiJywgeTogNiwgY29sb3I6IFsxOTAsIDE2MCwgMjU1XSB9LFxuXTtcblxuZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkge1xuXHR0LnB1c2goKTtcblx0dC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpO1xuXHR0LmNoYXJDb2xvcihyLCBnLCBiKTtcblx0dC5wcmludCh0ZXh0LCB4LCB5KTtcblx0dC5wb3AoKTtcbn1cblxuZnVuY3Rpb24gcGxvdCh4LCB5LCBjaGFyLCByLCBnLCBiKSB7XG5cdHQucHVzaCgpO1xuXHR0LnRyYW5zbGF0ZShNYXRoLnJvdW5kKHgpLCB5KTtcblx0dC5jaGFyQ29sb3IociwgZywgYik7XG5cdHQuY2hhcihjaGFyKTtcblx0dC5wb2ludCgpO1xuXHR0LnBvcCgpO1xufVxuXG50LmRyYXcoKCkgPT4ge1xuXHR0LmJhY2tncm91bmQoNSwgOCwgMTgpO1xuXG5cdGNvbnN0IGFtb3VudCA9ICh0LmZyYW1lQ291bnQgJSBkdXJhdGlvbikgLyBkdXJhdGlvbjtcblx0Y29uc3QgbGFiZWxXaWR0aCA9IDEwO1xuXHRjb25zdCB3aWR0aCA9IE1hdGgubWF4KDgsIE1hdGgubWluKDI0LCB0LmdyaWQuY29scyAtIGxhYmVsV2lkdGggLSAxMCkpO1xuXHRjb25zdCB0b3RhbFdpZHRoID0gbGFiZWxXaWR0aCArIDIgKyB3aWR0aDtcblx0Y29uc3QgbGFiZWxYID0gLU1hdGguZmxvb3IodG90YWxXaWR0aCAvIDIpO1xuXHRjb25zdCBsZWZ0ID0gbGFiZWxYICsgbGFiZWxXaWR0aCArIDI7XG5cblx0Zm9yIChjb25zdCBjdXJ2ZSBvZiBjdXJ2ZXMpIHtcblx0XHRjb25zdCBlYXNlZCA9IHQuZWFzZShjdXJ2ZS5uYW1lLCBhbW91bnQpO1xuXHRcdGNvbnN0IHggPSB0LmxlcnAobGVmdCwgbGVmdCArIHdpZHRoLCBlYXNlZCk7XG5cdFx0Y29uc3QgW3IsIGcsIGJdID0gY3VydmUuY29sb3I7XG5cblx0XHRkcmF3VGV4dChjdXJ2ZS5uYW1lLCBsYWJlbFgsIGN1cnZlLnkgLSAxLCByLCBnLCBiKTtcblxuXHRcdGZvciAobGV0IHN0ZXAgPSAwOyBzdGVwIDw9IHdpZHRoOyBzdGVwKyspIHtcblx0XHRcdHBsb3QobGVmdCArIHN0ZXAsIGN1cnZlLnksICctJywgNzAsIDk1LCAxNDApO1xuXHRcdH1cblxuXHRcdHBsb3QoeCwgY3VydmUueSwgY3VydmUuY2hhciwgciwgZywgYik7XG5cdH1cbn0pO1xuXG5sYWJlbExheWVyLmRyYXcoKCkgPT4ge1xuXHR0LmNsZWFyKCk7XG5cdGNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpO1xuXHRjb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpO1xuXHRsZXQgeSA9IHRvcCArIDM7XG5cdGNvbnN0IHggPSBsZWZ0ICsgMztcblx0Y29uc3QgYW1vdW50ID0gKHQuZnJhbWVDb3VudCAlIGR1cmF0aW9uKSAvIGR1cmF0aW9uO1xuXG5cdGRyYXdUZXh0KCdURVhUTU9ESUZJRVIuRUFTRScsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7XG5cdGRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApO1xuXHRkcmF3VGV4dCgnQ1VSVkVTIElOIE1PVElPTicsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7XG5cdGRyYXdUZXh0KCdzYW1lIGFtb3VudCwgZGlmZmVyZW50IHRpbWluZycsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7XG5cdGRyYXdUZXh0KGBhbW91bnQ6ICR7YW1vdW50LnRvRml4ZWQoMil9YCwgeCwgeSsrLCAyMjAsIDIzMCwgMjU1KTtcbn0pO1xuXG50LndpbmRvd1Jlc2l6ZWQoKCkgPT4ge1xuXHR0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTtcbn0pOyJ9XQ" />

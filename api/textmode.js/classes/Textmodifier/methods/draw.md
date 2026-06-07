@@ -1,0 +1,45 @@
+---
+layout: doc
+editLink: true
+title: draw
+description: Set the base layer draw callback.
+category: Methods
+api: true
+owner: Textmodifier
+kind: Method
+lastModified: 2026-06-07
+---
+
+[textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / draw
+
+# Method: draw()
+
+```ts
+draw(callback): void;
+```
+
+Set the base layer draw callback.
+
+Put drawing commands for the main layer in this callback.
+
+If multiple layers are added via [Textmodifier.layers](../accessors/layers.md), each layer has its own draw callback set via [TextmodeLayer.draw](../../../namespaces/layering/classes/TextmodeLayer/methods/draw.md).
+
+Calling this method is equivalent to setting the callback on `textmodifier.layers.base`.
+The direct base-layer callback has precedence if both are set.
+```js
+textmodifier.layers.base.draw(callback);
+```
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `callback` | () => `void` | Function to run before each base layer render. |
+
+## Returns
+
+`void`
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.js" encoded-files="W3siaW5mbyI6Imh0bWwgaW5kZXguaHRtbCBbaGlkZGVuXSBbcmVhZG9ubHldIiwiY29kZSI6IjwhRE9DVFlQRSBodG1sPlxuPGh0bWwgbGFuZz1cImVuXCI-XG4gIDxoZWFkPlxuICAgIDxtZXRhIGNoYXJzZXQ9XCJ1dGYtOFwiIC8-XG4gICAgPG1ldGEgbmFtZT1cInZpZXdwb3J0XCIgY29udGVudD1cIndpZHRoPWRldmljZS13aWR0aCwgaW5pdGlhbC1zY2FsZT0xXCIgLz5cbiAgICA8dGl0bGU-ZHJhdzwvdGl0bGU-XG4gICAgPHN0eWxlPlxuICAgICAgaHRtbCxcbiAgICAgIGJvZHkge1xuICAgICAgICBtYXJnaW46IDA7XG4gICAgICAgIG1pbi1oZWlnaHQ6IDEwMCU7XG4gICAgICAgIG92ZXJmbG93OiBoaWRkZW47XG4gICAgICAgIGJhY2tncm91bmQ6ICMwMDA7XG4gICAgICB9XG5cbiAgICAgIGNhbnZhcyB7XG4gICAgICAgIGRpc3BsYXk6IGJsb2NrO1xuICAgICAgfVxuICAgIDwvc3R5bGU-XG4gICAgPHNjcmlwdCBzcmM9XCJodHRwczovL3VucGtnLmNvbS90ZXh0bW9kZS5qc0AwLjE2LjAtYmV0YS4xL2Rpc3QvdGV4dG1vZGUudW1kLmpzXCI-PC9zY3JpcHQ-XG4gIDwvaGVhZD5cbiAgPGJvZHk-XG4gICAgPHNjcmlwdCB0eXBlPVwibW9kdWxlXCIgc3JjPVwic2tldGNoLmpzXCI-PC9zY3JpcHQ-XG4gIDwvYm9keT5cbjwvaHRtbD4ifSx7ImluZm8iOiJqcyBza2V0Y2guanMgW2FjdGl2ZV0iLCJjb2RlIjoiY29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7XG5cdHBpeGVsRGVuc2l0eTogMSxcblx0d2lkdGg6IHdpbmRvdy5pbm5lcldpZHRoLFxuXHRoZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCxcblx0Zm9udFNpemU6IDE2LFxufSk7XG5cbmNvbnN0IGxhYmVsTGF5ZXIgPSB0LmxheWVycy5hZGQoKTtcblxubGV0IHB1bHNlID0gMDtcblxuZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkge1xuXHR0LnB1c2goKTtcblx0dC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpO1xuXHR0LmNoYXJDb2xvcihyLCBnLCBiKTtcblx0dC5wcmludCh0ZXh0LCB4LCB5KTtcblx0dC5wb3AoKTtcbn1cblxudC5kcmF3KCgpID0-IHtcblx0dC5iYWNrZ3JvdW5kKDYsIDEwLCAyMik7XG5cdHB1bHNlID0gMC41ICsgMC41ICogTWF0aC5zaW4odC5mcmFtZUNvdW50ICogMC4wNSk7XG5cdHQucHVzaCgpO1xuXHR0LnRyYW5zbGF0ZSg4LCAyKTtcblx0dC5jaGFyKCcjJyk7XG5cdHQuY2hhckNvbG9yKDEyMCwgMTIwICsgcHVsc2UgKiAxMjAsIDI1NSk7XG5cdHQucmVjdCg2ICsgcHVsc2UgKiA4LCAzICsgcHVsc2UgKiA0KTtcblx0dC5wb3AoKTtcbn0pO1xuXG5sYWJlbExheWVyLmRyYXcoKCkgPT4ge1xuXHR0LmNsZWFyKCk7XG5cdGNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpO1xuXHRjb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpO1xuXHRsZXQgeSA9IHRvcCArIDM7XG5cdGNvbnN0IHggPSBsZWZ0ICsgMztcblx0ZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5EUkFXJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTtcblx0ZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTtcblx0ZHJhd1RleHQoJ0NPTkNFUFQ6IEZSQU1FIENBTExCQUNLJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTtcblx0ZHJhd1RleHQoJ2RyYXcoKSBydW5zIGV2ZXJ5IGZyYW1lLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7XG5cdGRyYXdUZXh0KCdQdWxzZSBwcm92ZXMgY29udGludW91cyB1cGRhdGVzLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7XG5cdGRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7XG5cdGRyYXdUZXh0KGBQVUxTRTogJHtwdWxzZS50b0ZpeGVkKDIpfWAsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7XG59KTtcblxudC53aW5kb3dSZXNpemVkKCgpID0-IHtcblx0dC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7XG59KTsifV0" />

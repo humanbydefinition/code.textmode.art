@@ -1,0 +1,37 @@
+---
+layout: doc
+editLink: true
+title: install
+description: Called when the plugin is installed on a Textmodifier instance.
+category: Methods
+api: true
+owner: TextmodePlugin
+namespace: plugins
+kind: Method
+lastModified: 2026-06-07
+---
+
+[textmode.js](../../../../../index.md) / [plugins](../../../index.md) / [TextmodePlugin](../../TextmodePlugin.md) / install
+
+# Method: install()
+
+```ts
+install(textmodifier, context): void | Promise<void>;
+```
+
+Called when the plugin is installed on a [Textmodifier](../../../../../classes/Textmodifier.md) instance.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `textmodifier` | [`Textmodifier`](../../../../../classes/Textmodifier.md) | The Textmodifier instance the plugin is being installed on. |
+| `context` | [`TextmodePluginContext`](../../TextmodePluginContext.md) | A host-provided context exposing the Textmodifier runtime and plugin hook registration methods. |
+
+## Returns
+
+`void` \| `Promise`\<`void`\>
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.js" encoded-files="W3siaW5mbyI6Imh0bWwgaW5kZXguaHRtbCBbaGlkZGVuXSBbcmVhZG9ubHldIiwiY29kZSI6IjwhRE9DVFlQRSBodG1sPlxuPGh0bWwgbGFuZz1cImVuXCI-XG4gIDxoZWFkPlxuICAgIDxtZXRhIGNoYXJzZXQ9XCJ1dGYtOFwiIC8-XG4gICAgPG1ldGEgbmFtZT1cInZpZXdwb3J0XCIgY29udGVudD1cIndpZHRoPWRldmljZS13aWR0aCwgaW5pdGlhbC1zY2FsZT0xXCIgLz5cbiAgICA8dGl0bGU-aW5zdGFsbDwvdGl0bGU-XG4gICAgPHN0eWxlPlxuICAgICAgaHRtbCxcbiAgICAgIGJvZHkge1xuICAgICAgICBtYXJnaW46IDA7XG4gICAgICAgIG1pbi1oZWlnaHQ6IDEwMCU7XG4gICAgICAgIG92ZXJmbG93OiBoaWRkZW47XG4gICAgICAgIGJhY2tncm91bmQ6ICMwMDA7XG4gICAgICB9XG5cbiAgICAgIGNhbnZhcyB7XG4gICAgICAgIGRpc3BsYXk6IGJsb2NrO1xuICAgICAgfVxuICAgIDwvc3R5bGU-XG4gICAgPHNjcmlwdCBzcmM9XCJodHRwczovL3VucGtnLmNvbS90ZXh0bW9kZS5qc0AwLjE2LjAtYmV0YS4xL2Rpc3QvdGV4dG1vZGUudW1kLmpzXCI-PC9zY3JpcHQ-XG4gIDwvaGVhZD5cbiAgPGJvZHk-XG4gICAgPHNjcmlwdCB0eXBlPVwibW9kdWxlXCIgc3JjPVwic2tldGNoLmpzXCI-PC9zY3JpcHQ-XG4gIDwvYm9keT5cbjwvaHRtbD4ifSx7ImluZm8iOiJqcyBza2V0Y2guanMgW2FjdGl2ZV0iLCJjb2RlIjoibGV0IGluc3RhbGxlZCA9IGZhbHNlO1xubGV0IGluc3RhbGxUaW1lID0gJyc7XG5cbmNvbnN0IG15UGx1Z2luID0ge1xuXHRuYW1lOiAnaW5zdGFsbC1wbHVnaW4nLFxuXHRpbnN0YWxsKHRleHRtb2RpZmllciwgY29udGV4dCkge1xuXHRcdGluc3RhbGxlZCA9IHRydWU7XG5cdFx0aW5zdGFsbFRpbWUgPSBuZXcgRGF0ZSgpLnRvTG9jYWxlVGltZVN0cmluZygpO1xuXHR9LFxufTtcblxuY29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7XG5cdHBpeGVsRGVuc2l0eTogMSxcblx0d2lkdGg6IHdpbmRvdy5pbm5lcldpZHRoLFxuXHRoZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCxcblx0Zm9udFNpemU6IDE2LFxuXHRwbHVnaW5zOiBbbXlQbHVnaW5dLFxufSk7XG5cbmNvbnN0IGxhYmVsTGF5ZXIgPSB0LmxheWVycy5hZGQoKTtcblxudC5kcmF3KCgpID0-IHtcblx0dC5iYWNrZ3JvdW5kKDYsIDgsIDIwKTtcbn0pO1xuXG5mdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7XG5cdHQucHVzaCgpO1xuXHR0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7XG5cdHQuY2hhckNvbG9yKHIsIGcsIGIpO1xuXHR0LnByaW50KHRleHQsIHgsIHkpO1xuXHR0LnBvcCgpO1xufVxuXG5sYWJlbExheWVyLmRyYXcoKCkgPT4ge1xuXHR0LmNsZWFyKCk7XG5cdGNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpO1xuXHRjb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpO1xuXHRsZXQgeSA9IHRvcCArIDM7XG5cdGNvbnN0IHggPSBsZWZ0ICsgMztcblxuXHRkcmF3VGV4dCgnUExVR0lOUy5JTlNUQUxMJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTtcblx0ZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTtcblx0ZHJhd1RleHQoJ0NPTkNFUFQ6IFBMVUdJTiBJTklUSUFMSVpBVElPTiBIT09LJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTtcblx0ZHJhd1RleHQoJ1J1bnMgb24gdGV4dG1vZGUgaW5zdGFuY2UgY3JlYXRpb24uJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTtcblx0ZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTtcblx0ZHJhd1RleHQoYElOU1RBTExFRCA6ICR7aW5zdGFsbGVkfWAsIHgsIHkrKywgMTQwLCAxOTAsIDI1NSk7XG5cdGRyYXdUZXh0KGBUUklHR0VSRUQgOiAke2luc3RhbGxUaW1lfWAsIHgsIHkrKywgMTQwLCAxOTAsIDI1NSk7XG59KTtcblxudC53aW5kb3dSZXNpemVkKCgpID0-IHtcblx0dC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7XG59KTsifV0" />

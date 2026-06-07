@@ -1,0 +1,40 @@
+---
+layout: doc
+editLink: true
+title: image
+description: Draw a framebuffer, image, video, or texture source to the currently bound framebuffer.
+category: Methods
+api: true
+owner: Textmodifier
+kind: Method
+lastModified: 2026-06-07
+---
+
+[textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / image
+
+# Method: image()
+
+```ts
+image(
+   source, 
+   width?, 
+   height?): void;
+```
+
+Draw a framebuffer, image, video, or texture source to the currently bound framebuffer.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `source` | \| [`TextmodeFramebuffer`](../../TextmodeFramebuffer.md) \| [`TextmodeImage`](../../../namespaces/media/classes/TextmodeImage.md) \| [`TextmodeTexture`](../../../namespaces/media/classes/TextmodeTexture.md) \| [`TextmodeVideo`](../../../namespaces/media/classes/TextmodeVideo.md) | Source to render. |
+| `width?` | `number` | Width in grid cells. Defaults to an aspect-ratio-preserving fit. |
+| `height?` | `number` | Height in grid cells. Defaults to an aspect-ratio-preserving fit. |
+
+## Returns
+
+`void`
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.js" encoded-files="W3siaW5mbyI6Imh0bWwgaW5kZXguaHRtbCBbaGlkZGVuXSBbcmVhZG9ubHldIiwiY29kZSI6IjwhRE9DVFlQRSBodG1sPlxuPGh0bWwgbGFuZz1cImVuXCI-XG4gIDxoZWFkPlxuICAgIDxtZXRhIGNoYXJzZXQ9XCJ1dGYtOFwiIC8-XG4gICAgPG1ldGEgbmFtZT1cInZpZXdwb3J0XCIgY29udGVudD1cIndpZHRoPWRldmljZS13aWR0aCwgaW5pdGlhbC1zY2FsZT0xXCIgLz5cbiAgICA8dGl0bGU-aW1hZ2U8L3RpdGxlPlxuICAgIDxzdHlsZT5cbiAgICAgIGh0bWwsXG4gICAgICBib2R5IHtcbiAgICAgICAgbWFyZ2luOiAwO1xuICAgICAgICBtaW4taGVpZ2h0OiAxMDAlO1xuICAgICAgICBvdmVyZmxvdzogaGlkZGVuO1xuICAgICAgICBiYWNrZ3JvdW5kOiAjMDAwO1xuICAgICAgfVxuXG4gICAgICBjYW52YXMge1xuICAgICAgICBkaXNwbGF5OiBibG9jaztcbiAgICAgIH1cbiAgICA8L3N0eWxlPlxuICAgIDxzY3JpcHQgc3JjPVwiaHR0cHM6Ly91bnBrZy5jb20vdGV4dG1vZGUuanNAMC4xNi4wLWJldGEuMS9kaXN0L3RleHRtb2RlLnVtZC5qc1wiPjwvc2NyaXB0PlxuICA8L2hlYWQ-XG4gIDxib2R5PlxuICAgIDxzY3JpcHQgdHlwZT1cIm1vZHVsZVwiIHNyYz1cInNrZXRjaC5qc1wiPjwvc2NyaXB0PlxuICA8L2JvZHk-XG48L2h0bWw-In0seyJpbmZvIjoianMgc2tldGNoLmpzIFthY3RpdmVdIiwiY29kZSI6ImNvbnN0IHQgPSB0ZXh0bW9kZS5jcmVhdGUoe1xuXHRwaXhlbERlbnNpdHk6IDEsXG5cdHdpZHRoOiB3aW5kb3cuaW5uZXJXaWR0aCxcblx0aGVpZ2h0OiB3aW5kb3cuaW5uZXJIZWlnaHQsXG5cdGZvbnRTaXplOiAxNixcbn0pO1xuXG5jb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7XG5cbmNvbnN0IGZiID0gdC5jcmVhdGVGcmFtZWJ1ZmZlcih7IHdpZHRoOiAyNCwgaGVpZ2h0OiAxNCB9KTtcblxuZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkge1xuXHR0LnB1c2goKTtcblx0dC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpO1xuXHR0LmNoYXJDb2xvcihyLCBnLCBiKTtcblx0dC5wcmludCh0ZXh0LCB4LCB5KTtcblx0dC5wb3AoKTtcbn1cblxudC5kcmF3KCgpID0-IHtcblx0dC5iYWNrZ3JvdW5kKDYsIDEwLCAyMik7XG5cdGZiLmJlZ2luKCk7XG5cdHQuY2xlYXIoKTtcblx0dC5iYWNrZ3JvdW5kKDIwLCAzMCwgNjApO1xuXHR0LnJvdGF0ZVoodC5mcmFtZUNvdW50ICogMik7XG5cdHQuY2hhcignIycpO1xuXHR0LmNoYXJDb2xvcigyNTUsIDIxMCwgMTIwKTtcblx0dC5yZWN0KDEyLCA0KTtcblx0ZmIuZW5kKCk7XG5cdHQuaW1hZ2UoZmIsIDI0LCAxNCk7XG59KTtcblxubGFiZWxMYXllci5kcmF3KCgpID0-IHtcblx0dC5jbGVhcigpO1xuXHRjb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTtcblx0Y29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTtcblx0bGV0IHkgPSB0b3AgKyAzO1xuXHRjb25zdCB4ID0gbGVmdCArIDM7XG5cdGRyYXdUZXh0KCdURVhUTU9ESUZJRVIuSU1BR0UnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApO1xuXHRkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApO1xuXHRkcmF3VGV4dCgnQ09OQ0VQVDogRFJBVyBJTUFHRSBTT1VSQ0UnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpO1xuXHRkcmF3VGV4dCgnRnJhbWVidWZmZXIgaXMgZHJhd24gYXMgaW1hZ2UuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTtcblx0ZHJhd1RleHQoJ09mZnNjcmVlbiBjb250ZW50IHJvdGF0ZXMuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTtcblx0ZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTtcblx0ZHJhd1RleHQoJ1NPVVJDRTogRlJBTUVCVUZGRVInLCB4LCB5KyssIDE0MCwgMjU1LCAxODApO1xufSk7XG5cbnQud2luZG93UmVzaXplZCgoKSA9PiB7XG5cdHQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpO1xufSk7In1d" />

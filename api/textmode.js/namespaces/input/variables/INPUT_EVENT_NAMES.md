@@ -7,7 +7,7 @@ category: Variables
 api: true
 namespace: input
 kind: Variable
-lastModified: 2026-05-27
+lastModified: 2026-06-07
 ---
 
 [textmode.js](../../../index.md) / [input](../index.md) / INPUT\_EVENT\_NAMES
@@ -18,5 +18,5 @@ lastModified: 2026-05-27
 const INPUT_EVENT_NAMES: readonly ["keyPressed", "keyTyped", "keyReleased", "mouseClicked", "doubleClicked", "mousePressed", "mouseReleased", "mouseMoved", "mouseDragged", "mouseScrolled", "touchStarted", "touchMoved", "touchEnded", "touchCancelled", "tap", "doubleTap", "longPress", "swipe", "pinch", "rotateGesture", "gamepadConnected", "gamepadDisconnected", "gamepadButtonPressed", "gamepadButtonReleased", "gamepadAxisChanged"];
 ```
 
-Flat readonly list of every input event name accepted by [Textmodifier.on](../../../classes/Textmodifier.md#on), [Textmodifier.off](../../../classes/Textmodifier.md#off), and
-[Textmodifier.once](../../../classes/Textmodifier.md#once).
+Flat readonly list of every input event name accepted by [Textmodifier.on](../../../classes/Textmodifier/methods/on.md), [Textmodifier.off](../../../classes/Textmodifier/methods/off.md), and
+[Textmodifier.once](../../../classes/Textmodifier/methods/once.md).

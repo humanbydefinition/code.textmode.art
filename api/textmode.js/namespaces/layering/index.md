@@ -6,7 +6,7 @@ description: All modules and types related to multi-layered textmode rendering.
 category: Namespaces
 api: true
 kind: Namespace
-lastModified: 2026-05-27
+lastModified: 2026-06-07
 ---
 
 [textmode.js](../../index.md) / layering
@@ -26,7 +26,7 @@ All modules and types related to multi-layered textmode rendering.
 
 | Interface | Description |
 | ------ | ------ |
-| [TextmodeLayerOptions](interfaces/TextmodeLayerOptions.md) | Options for layers created with [TextmodeLayerManager.add](classes/TextmodeLayerManager.md#add). |
+| [TextmodeLayerOptions](interfaces/TextmodeLayerOptions.md) | Options for layers created with [TextmodeLayerManager.add](classes/TextmodeLayerManager/methods/add.md). |
 
 ## Variables
 

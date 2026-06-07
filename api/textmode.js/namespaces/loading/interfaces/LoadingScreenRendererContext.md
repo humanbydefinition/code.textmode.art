@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: loading
 kind: Interface
-lastModified: 2026-05-27
+lastModified: 2026-06-07
 isInterface: true
 ---
 
@@ -19,7 +19,7 @@ Context object passed to loading renderer callbacks.
 
 ## Properties
 
-| Property | Type | Description |
-| ------ | ------ | ------ |
-| <a id="property-grid"></a> `grid` | [`TextmodeGrid`](../../../classes/TextmodeGrid.md) | Grid metadata for positioning. |
-| <a id="property-textmodifier"></a> `textmodifier` | [`Textmodifier`](../../../classes/Textmodifier.md) | The Textmodifier instance for rendering text and graphics. |
+| Property | Description |
+| ------ | ------ |
+| [grid](LoadingScreenRendererContext/properties/grid.md) | Grid metadata for positioning. |
+| [textmodifier](LoadingScreenRendererContext/properties/textmodifier.md) | The Textmodifier instance for rendering text and graphics. |

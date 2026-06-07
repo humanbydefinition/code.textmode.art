@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: conversion
 kind: Interface
-lastModified: 2026-05-27
+lastModified: 2026-06-07
 isInterface: true
 ---
 
@@ -19,18 +19,18 @@ One pass in a source-level conversion stack.
 
 ## Properties
 
-| Property | Type | Description |
-| ------ | ------ | ------ |
-| <a id="property-brightnessend"></a> `brightnessEnd?` | `number` | Maximum captured brightness for this pass in byte-space (0-255). Requires brightnessStart. |
-| <a id="property-brightnessstart"></a> `brightnessStart?` | `number` | Minimum captured brightness for this pass in byte-space (0-255). Requires brightnessEnd. |
-| <a id="property-cellcolor"></a> `cellColor?` | [`TextmodeColorInput`](../type-aliases/TextmodeColorInput.md) | Fixed cell color for this pass. |
-| <a id="property-cellcolormode"></a> `cellColorMode?` | `"fixed"` \| `"sampled"` | Cell color mode for this pass. |
-| <a id="property-characters"></a> `characters?` | `string` | Characters used by this pass when the strategy maps through a character palette. |
-| <a id="property-charcolor"></a> `charColor?` | [`TextmodeColorInput`](../type-aliases/TextmodeColorInput.md) | Fixed character color for this pass. |
-| <a id="property-charcolormode"></a> `charColorMode?` | `"fixed"` \| `"sampled"` | Character color mode for this pass. |
-| <a id="property-charrotation"></a> `charRotation?` | `number` | Character rotation in degrees for this pass. |
-| <a id="property-flipx"></a> `flipX?` | `number` \| `boolean` | Flip characters horizontally for this pass. |
-| <a id="property-flipy"></a> `flipY?` | `number` \| `boolean` | Flip characters vertically for this pass. |
-| <a id="property-invert"></a> `invert?` | `number` \| `boolean` | Invert character/cell colors for this pass. |
-| <a id="property-mode"></a> `mode` | `string` | Conversion mode to run for this pass. |
-| <a id="property-options"></a> `options?` | [`TextmodeConversionStepOptions`](../type-aliases/TextmodeConversionStepOptions.md) | Strategy-specific options for this pass. |
+| Property | Description |
+| ------ | ------ |
+| [brightnessEnd](TextmodeConversionStep/properties/brightnessEnd.md) | Maximum captured brightness for this pass in byte-space (0-255). Requires brightnessStart. |
+| [brightnessStart](TextmodeConversionStep/properties/brightnessStart.md) | Minimum captured brightness for this pass in byte-space (0-255). Requires brightnessEnd. |
+| [cellColor](TextmodeConversionStep/properties/cellColor.md) | Fixed cell color for this pass. |
+| [cellColorMode](TextmodeConversionStep/properties/cellColorMode.md) | Cell color mode for this pass. |
+| [characters](TextmodeConversionStep/properties/characters.md) | Characters used by this pass when the strategy maps through a character palette. |
+| [charColor](TextmodeConversionStep/properties/charColor.md) | Fixed character color for this pass. |
+| [charColorMode](TextmodeConversionStep/properties/charColorMode.md) | Character color mode for this pass. |
+| [charRotation](TextmodeConversionStep/properties/charRotation.md) | Character rotation in degrees for this pass. |
+| [flipX](TextmodeConversionStep/properties/flipX.md) | Flip characters horizontally for this pass. |
+| [flipY](TextmodeConversionStep/properties/flipY.md) | Flip characters vertically for this pass. |
+| [invert](TextmodeConversionStep/properties/invert.md) | Invert character/cell colors for this pass. |
+| [mode](TextmodeConversionStep/properties/mode.md) | Conversion mode to run for this pass. |
+| [options](TextmodeConversionStep/properties/options.md) | Strategy-specific options for this pass. |

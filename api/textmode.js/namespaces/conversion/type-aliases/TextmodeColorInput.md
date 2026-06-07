@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 namespace: conversion
 kind: TypeAlias
-lastModified: 2026-05-27
+lastModified: 2026-06-07
 ---
 
 [textmode.js](../../../index.md) / [conversion](../index.md) / TextmodeColorInput
@@ -19,7 +19,7 @@ type TextmodeColorInput =
   | number
   | string
   | TextmodeColor
-  | ColorTuple;
+  | TextmodeColorTuple;
 ```
 
 Color input accepted by conversion stack steps.

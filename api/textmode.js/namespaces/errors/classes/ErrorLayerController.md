@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: errors
 kind: Class
-lastModified: 2026-05-27
+lastModified: 2026-06-07
 hasConstructor: true
 ---
 
@@ -23,52 +23,12 @@ Controls the dedicated internal error layer lifecycle and rendering behavior.
 
 ## Constructors
 
-### Constructor
-
-```ts
-new ErrorLayerController(textmodifier): ErrorLayerController;
-```
-
-Create an internal error-layer controller.
-
-#### Parameters
-
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `textmodifier` | [`Textmodifier`](../../../classes/Textmodifier.md) | Textmodifier instance to render on. |
-
-#### Returns
-
-`ErrorLayerController`
-
-#### Overrides
-
-```ts
-InternalLayerController<ErrorScreenRendererContext>.constructor
-```
+| Constructor | Description |
+| ------ | ------ |
+| [constructor](ErrorLayerController/constructors/constructor.md) | Create an internal error-layer controller. |
 
 ## Methods
 
-### draw()
-
-```ts
-draw(callback?): void;
-```
-
-Set a custom renderer for the internal layer.
-
-#### Parameters
-
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `callback?` | (`context`) => `void` | Custom draw callback that receives the rendering context. |
-
-#### Returns
-
-`void`
-
-#### Inherited from
-
-```ts
-InternalLayerController.draw
-```
+| Method | Description |
+| ------ | ------ |
+| [draw](ErrorLayerController/methods/draw.md) | Set a custom renderer for the internal layer. |

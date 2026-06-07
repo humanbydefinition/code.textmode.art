@@ -6,7 +6,7 @@ description: All media conversion related modules and types.
 category: Namespaces
 api: true
 kind: Namespace
-lastModified: 2026-05-27
+lastModified: 2026-06-07
 ---
 
 [textmode.js](../../index.md) / conversion
@@ -19,13 +19,13 @@ Responsible for converting images and videos into textmode-renderable formats
 using various conversion strategies, like brightness- or edge-detection-based conversion.
 
 `textmode.js` only comes with a built-in `'brightness'`-based conversion strategy,
-but custom strategies can be registered via [conversion.TextmodeConversionManager.register](classes/TextmodeConversionManager.md#register).
+but custom strategies can be registered via [conversion.TextmodeConversionManager.register](classes/TextmodeConversionManager/methods/register.md).
 
 ## Classes
 
 | Class | Description |
 | ------ | ------ |
-| [TextmodeConversionManager](classes/TextmodeConversionManager.md) | Registers image-to-textmode conversion strategies for a Textmodifier instance. |
+| [TextmodeConversionManager](classes/TextmodeConversionManager.md) | Registers conversion strategies for a Textmodifier instance. |
 
 ## Interfaces
 

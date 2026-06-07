@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: input.touch
 kind: Interface
-lastModified: 2026-05-27
+lastModified: 2026-06-07
 isInterface: true
 ---
 
@@ -19,12 +19,10 @@ Rotate gesture event data describing the angle change between the initial and cu
 
 ## Properties
 
-| Property | Type | Description |
-| ------ | ------ | ------ |
-| <a id="property-center"></a> `center` | `object` | Centre of the gesture in grid coordinates. |
-| `center.x` | `number` | Grid X coordinate *(column)*. |
-| `center.y` | `number` | Grid Y coordinate *(row)*. |
-| <a id="property-deltarotation"></a> `deltaRotation` | `number` | Change in rotation since the previous callback. |
-| <a id="property-originalevent"></a> `originalEvent` | `TouchEvent` | Original browser event. |
-| <a id="property-rotation"></a> `rotation` | `number` | Total rotation in degrees relative to the initial angle. |
-| <a id="property-touches"></a> `touches` | \[[`TouchPosition`](TouchPosition.md), [`TouchPosition`](TouchPosition.md)\] | Touch points participating in the rotation, always two entries. |
+| Property | Description |
+| ------ | ------ |
+| [center](TouchRotateEventData/properties/center.md) | Centre of the gesture in grid coordinates. |
+| [deltaRotation](TouchRotateEventData/properties/deltaRotation.md) | Change in rotation since the previous callback. |
+| [originalEvent](TouchRotateEventData/properties/originalEvent.md) | Original browser event. |
+| [rotation](TouchRotateEventData/properties/rotation.md) | Total rotation in degrees relative to the initial angle. |
+| [touches](TouchRotateEventData/properties/touches.md) | Touch points participating in the rotation, always two entries. |

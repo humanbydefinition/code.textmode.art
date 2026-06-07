@@ -1,0 +1,53 @@
+---
+layout: doc
+editLink: true
+title: camera
+description: Set explicit camera parameters for this layer.
+category: Methods
+api: true
+owner: TextmodeLayer
+namespace: layering
+kind: Method
+lastModified: 2026-06-07
+---
+
+[textmode.js](../../../../../index.md) / [layering](../../../index.md) / [TextmodeLayer](../../TextmodeLayer.md) / camera
+
+# Method: camera()
+
+```ts
+camera(
+   eyeX, 
+   eyeY, 
+   eyeZ, 
+   targetX?, 
+   targetY?, 
+   targetZ?, 
+   upX?, 
+   upY?, 
+   upZ?): void;
+```
+
+Set explicit camera parameters for this layer.
+
+## Parameters
+
+| Parameter | Type | Default value |
+| ------ | ------ | ------ |
+| `eyeX` | `number` | `undefined` |
+| `eyeY` | `number` | `undefined` |
+| `eyeZ` | `number` | `undefined` |
+| `targetX` | `number` | `0` |
+| `targetY` | `number` | `0` |
+| `targetZ` | `number` | `0` |
+| `upX` | `number` | `0` |
+| `upY` | `number` | `1` |
+| `upZ` | `number` | `0` |
+
+## Returns
+
+`void`
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.js" encoded-files="W3siaW5mbyI6Imh0bWwgaW5kZXguaHRtbCBbaGlkZGVuXSBbcmVhZG9ubHldIiwiY29kZSI6IjwhRE9DVFlQRSBodG1sPlxuPGh0bWwgbGFuZz1cImVuXCI-XG4gIDxoZWFkPlxuICAgIDxtZXRhIGNoYXJzZXQ9XCJ1dGYtOFwiIC8-XG4gICAgPG1ldGEgbmFtZT1cInZpZXdwb3J0XCIgY29udGVudD1cIndpZHRoPWRldmljZS13aWR0aCwgaW5pdGlhbC1zY2FsZT0xXCIgLz5cbiAgICA8dGl0bGU-Y2FtZXJhPC90aXRsZT5cbiAgICA8c3R5bGU-XG4gICAgICBodG1sLFxuICAgICAgYm9keSB7XG4gICAgICAgIG1hcmdpbjogMDtcbiAgICAgICAgbWluLWhlaWdodDogMTAwJTtcbiAgICAgICAgb3ZlcmZsb3c6IGhpZGRlbjtcbiAgICAgICAgYmFja2dyb3VuZDogIzAwMDtcbiAgICAgIH1cblxuICAgICAgY2FudmFzIHtcbiAgICAgICAgZGlzcGxheTogYmxvY2s7XG4gICAgICB9XG4gICAgPC9zdHlsZT5cbiAgICA8c2NyaXB0IHNyYz1cImh0dHBzOi8vdW5wa2cuY29tL3RleHRtb2RlLmpzQDAuMTYuMC1iZXRhLjEvZGlzdC90ZXh0bW9kZS51bWQuanNcIj48L3NjcmlwdD5cbiAgPC9oZWFkPlxuICA8Ym9keT5cbiAgICA8c2NyaXB0IHR5cGU9XCJtb2R1bGVcIiBzcmM9XCJza2V0Y2guanNcIj48L3NjcmlwdD5cbiAgPC9ib2R5PlxuPC9odG1sPiJ9LHsiaW5mbyI6ImpzIHNrZXRjaC5qcyBbYWN0aXZlXSIsImNvZGUiOiJjb25zdCB0ID0gdGV4dG1vZGUuY3JlYXRlKHtcblx0cGl4ZWxEZW5zaXR5OiAxLFxuXHR3aWR0aDogd2luZG93LmlubmVyV2lkdGgsXG5cdGhlaWdodDogd2luZG93LmlubmVySGVpZ2h0LFxuXHRmb250U2l6ZTogMTYsXG59KTtcblxuY29uc3Qgc2NlbmUgPSB0LmxheWVycy5hZGQoKTtcbmNvbnN0IGxhYmVsTGF5ZXIgPSB0LmxheWVycy5hZGQoKTtcblxubGV0IGNhbVggPSAwO1xuY29uc3QgY2FtWSA9IDEwO1xuY29uc3QgY2FtWiA9IDQyO1xuXG5mdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCBjb2xvciA9IFsyMDAsIDIyMCwgMjU1XSkge1xuXHR0LnB1c2goKTtcblx0dC50cmFuc2xhdGUoeCwgeSk7XG5cdHQuY2hhckNvbG9yKGNvbG9yWzBdLCBjb2xvclsxXSwgY29sb3JbMl0pO1xuXHRmb3IgKGxldCBpID0gMDsgaSA8IHRleHQubGVuZ3RoOyBpKyspIHtcblx0XHR0LmNoYXIodGV4dFtpXSk7XG5cdFx0dC5wb2ludCgpO1xuXHRcdHQudHJhbnNsYXRlKDEsIDApO1xuXHR9XG5cdHQucG9wKCk7XG59XG5cbnQuZHJhdygoKSA9PiB7XG5cdHQuYmFja2dyb3VuZCg4LCAxMCwgMTgpO1xuXG5cdGNvbnN0IHRpbWUgPSB0LmZyYW1lQ291bnQgKiAwLjAzO1xuXHRjYW1YID0gTWF0aC5zaW4odGltZSkgKiAyMjtcblxuXHQvLyBVcGRhdGUgbGF5ZXIgY2FtZXJhXG5cdHNjZW5lLmNhbWVyYShjYW1YLCBjYW1ZLCBjYW1aLCAwLCAwLCAwKTtcbn0pO1xuXG5zY2VuZS5kcmF3KCgpID0-IHtcblx0dC5jbGVhcigpO1xuXHR0LnBvaW50TGlnaHQoWzI1NSwgMjAwLCAxMjBdLCB7IHg6IDIwLCB5OiAtMTUsIHo6IDMwIH0pO1xuXG5cdC8vIFJvdGF0ZSBjZW50ZXIgc2hhcGUgZ3JvdXBcblx0dC5wdXNoKCk7XG5cdHQucm90YXRlWSh0LmZyYW1lQ291bnQgKiAxLjUpO1xuXG5cdC8vIENlbnRlciBjdWJlXG5cdHQucHVzaCgpO1xuXHR0LmNoYXIoJyMnKTtcblx0dC5jaGFyQ29sb3IoMTIwLCAyMjAsIDI1NSk7XG5cdHQuYm94KDgsIDgsIDgpO1xuXHR0LnBvcCgpO1xuXG5cdC8vIExlZnQgcGlsbGFyXG5cdHQucHVzaCgpO1xuXHR0LnRyYW5zbGF0ZSgtMTIsIDAsIDApO1xuXHR0LmNoYXIoJ0gnKTtcblx0dC5jaGFyQ29sb3IoMjU1LCAxMjAsIDEyMCk7XG5cdHQuYm94KDQsIDEyLCA0KTtcblx0dC5wb3AoKTtcblxuXHQvLyBSaWdodCBwaWxsYXJcblx0dC5wdXNoKCk7XG5cdHQudHJhbnNsYXRlKDEyLCAwLCAwKTtcblx0dC5jaGFyKCdPJyk7XG5cdHQuY2hhckNvbG9yKDEyMCwgMjU1LCAxMjApO1xuXHR0LmJveCg0LCAxMiwgNCk7XG5cdHQucG9wKCk7XG5cblx0dC5wb3AoKTtcbn0pO1xuXG5sYWJlbExheWVyLmRyYXcoKCkgPT4ge1xuXHR0LmNsZWFyKCk7XG5cdGNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpO1xuXHRjb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpO1xuXHRsZXQgeSA9IHRvcCArIDM7XG5cdGNvbnN0IHggPSBsZWZ0ICsgMztcblxuXHRjb25zdCBleWVTdHIgPSBgQ2FtIEV5ZSAgIDogWyR7Y2FtWC50b0ZpeGVkKDEpfSwgJHtjYW1ZLnRvRml4ZWQoMSl9LCAke2NhbVoudG9GaXhlZCgxKX1dYDtcblx0ZHJhd1RleHQoJ1RFWFRNT0RFTEFZRVIuQ0FNRVJBJywgeCwgeSsrLCBbMTAwLCAyNTUsIDE0MF0pO1xuXHRkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCBbODAsIDEwMCwgMTUwXSk7XG5cdGRyYXdUZXh0KCdDT05DRVBUOiBMQVlFUiBDQU1FUkEnLCB4LCB5KyssIFsxMDAsIDIyMCwgMjU1XSk7XG5cdGRyYXdUZXh0KCdTZXRzIGEgM0QgY2FtZXJhIG9uIG9uZSBsYXllci4nLCB4LCB5KyssIFsxNDAsIDE2MCwgMTkwXSk7XG5cdGRyYXdUZXh0KCdCYXNlIGJhY2tncm91bmQgc3RheXMgZmxhdC4nLCB4LCB5KyssIFsxNDAsIDE2MCwgMTkwXSk7XG5cdGRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIFs4MCwgMTAwLCAxNTBdKTtcblx0ZHJhd1RleHQoZXllU3RyLCB4LCB5KyssIFsxMjAsIDI1NSwgMTgwXSk7XG5cdGRyYXdUZXh0KCdUYXJnZXQ6IFswLjAsIDAuMCwgMC4wXScsIHgsIHkrKywgWzIwMCwgMjAwLCAyMDBdKTtcbn0pO1xuXG50LndpbmRvd1Jlc2l6ZWQoKCkgPT4ge1xuXHR0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTtcbn0pOyJ9XQ" />

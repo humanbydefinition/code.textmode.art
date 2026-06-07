@@ -2,12 +2,12 @@
 layout: doc
 editLink: true
 title: setGlobalErrorCallback
-description: setGlobalErrorCallback function API reference for textmode.synth.js.
+description: Set a global error callback for dynamic parameter evaluation errors.
 category: Functions
 api: true
 kind: Function
 ecosystem: textmode.js
-lastModified: 2026-05-15
+lastModified: 2026-06-07
 ---
 
 [textmode.synth.js](../index.md) / setGlobalErrorCallback
@@ -35,23 +35,4 @@ notifications whenever a dynamic parameter fails to evaluate.
 
 ## Example
 
-```javascript
-setGlobalErrorCallback((error, uniformName) => {
-  console.error(`[Synth] Parameter "${uniformName}" error:`, error);
-});
-
-const t = textmode.create({
-  width: window.innerWidth,
-  height: window.innerHeight,
-  plugins: [SynthPlugin]
-});
-
-t.layers.base.synth(
-  osc(8, 0.1, 1.2)
-    .modulate(noise((ctx) => 1 + Math.sin(ctx.time) * 0.5), 0.2)
-);
-
-t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
+<TextmodeApiSandbox profile="textmode.synth.js" encoded-files="W3siaW5mbyI6Imh0bWwgaW5kZXguaHRtbCBbaGlkZGVuXSBbcmVhZG9ubHldIiwiY29kZSI6IjwhRE9DVFlQRSBodG1sPlxuPGh0bWwgbGFuZz1cImVuXCI-XG4gIDxoZWFkPlxuICAgIDxtZXRhIGNoYXJzZXQ9XCJ1dGYtOFwiIC8-XG4gICAgPG1ldGEgbmFtZT1cInZpZXdwb3J0XCIgY29udGVudD1cIndpZHRoPWRldmljZS13aWR0aCwgaW5pdGlhbC1zY2FsZT0xXCIgLz5cbiAgICA8dGl0bGU-c2V0R2xvYmFsRXJyb3JDYWxsYmFjazwvdGl0bGU-XG4gICAgPHN0eWxlPlxuICAgICAgaHRtbCxcbiAgICAgIGJvZHkge1xuICAgICAgICBtYXJnaW46IDA7XG4gICAgICAgIG1pbi1oZWlnaHQ6IDEwMCU7XG4gICAgICAgIG92ZXJmbG93OiBoaWRkZW47XG4gICAgICAgIGJhY2tncm91bmQ6ICMwMDA7XG4gICAgICB9XG5cbiAgICAgIGNhbnZhcyB7XG4gICAgICAgIGRpc3BsYXk6IGJsb2NrO1xuICAgICAgfVxuICAgIDwvc3R5bGU-XG4gICAgPHNjcmlwdCBzcmM9XCJodHRwczovL3VucGtnLmNvbS90ZXh0bW9kZS5qc0AwLjE2LjAtYmV0YS4xL2Rpc3QvdGV4dG1vZGUudW1kLmpzXCI-PC9zY3JpcHQ-XG4gICAgPHNjcmlwdCBzcmM9XCJodHRwczovL3VucGtnLmNvbS90ZXh0bW9kZS5zeW50aC5qc0AxLjYuMC9kaXN0L3RleHRtb2RlLnN5bnRoLnVtZC5qc1wiPjwvc2NyaXB0PlxuICA8L2hlYWQ-XG4gIDxib2R5PlxuICAgIDxzY3JpcHQgdHlwZT1cIm1vZHVsZVwiIHNyYz1cInNrZXRjaC5qc1wiPjwvc2NyaXB0PlxuICA8L2JvZHk-XG48L2h0bWw-In0seyJpbmZvIjoianMgc2tldGNoLmpzIFthY3RpdmVdIiwiY29kZSI6InNldEdsb2JhbEVycm9yQ2FsbGJhY2soKGVycm9yLCB1bmlmb3JtTmFtZSkgPT4ge1xuICBjb25zb2xlLmVycm9yKGBbU3ludGhdIFBhcmFtZXRlciBcIiR7dW5pZm9ybU5hbWV9XCIgZXJyb3I6YCwgZXJyb3IpO1xufSk7XG5cbmNvbnN0IHQgPSB0ZXh0bW9kZS5jcmVhdGUoe1xuICB3aWR0aDogd2luZG93LmlubmVyV2lkdGgsXG4gIGhlaWdodDogd2luZG93LmlubmVySGVpZ2h0LFxuICBwbHVnaW5zOiBbU3ludGhQbHVnaW5dXG59KTtcblxudC5sYXllcnMuYmFzZS5zeW50aChcbiAgb3NjKDgsIDAuMSwgMS4yKVxuICAgIC5tb2R1bGF0ZShub2lzZSgoY3R4KSA9PiAxICsgTWF0aC5zaW4oY3R4LnRpbWUpICogMC41KSwgMC4yKVxuKTtcblxudC53aW5kb3dSZXNpemVkKCgpID0-IHtcbiAgdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7XG59KTsifV0" />
