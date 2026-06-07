@@ -35,7 +35,7 @@ t.cellColor(16, 20, 32);
 t.rect(12, 8);
 ```
 
-Color methods accept grayscale values, RGB/RGBA numbers, CSS color strings, and [`TextmodeColor`](/api/textmode.js/classes/TextmodeColor) instances.
+Color methods accept grayscale values, RGB/RGBA numbers, CSS color strings, and [`TextmodeColor`](/api/textmode.js/namespaces/color/classes/TextmodeColor) instances.
 
 ## p5-style aliases
 
@@ -55,7 +55,7 @@ t.rect(20, 10);
 
 ## Color helpers
 
-Use [`color()`](/api/textmode.js/classes/Textmodifier#color) to create a reusable [`TextmodeColor`](/api/textmode.js/classes/TextmodeColor):
+Use [`color()`](/api/textmode.js/classes/Textmodifier#color) to create a reusable [`TextmodeColor`](/api/textmode.js/namespaces/color/classes/TextmodeColor):
 
 ```js
 const amber = t.color(255, 190, 90);
@@ -66,10 +66,10 @@ t.rect(8, 8);
 
 Useful color properties include:
 
-- [`rgb`](/api/textmode.js/classes/TextmodeColor#rgb)
-- [`rgba`](/api/textmode.js/classes/TextmodeColor#rgba)
-- [`normalized`](/api/textmode.js/classes/TextmodeColor#normalized)
-- [`withAlpha()`](/api/textmode.js/classes/TextmodeColor#withalpha)
+- [`rgb`](/api/textmode.js/namespaces/color/classes/TextmodeColor#rgb)
+- [`rgba`](/api/textmode.js/namespaces/color/classes/TextmodeColor#rgba)
+- [`normalized`](/api/textmode.js/namespaces/color/classes/TextmodeColor#normalized)
+- [`withAlpha()`](/api/textmode.js/namespaces/color/classes/TextmodeColor#withalpha)
 
 ## Glyph transforms
 
@@ -105,5 +105,5 @@ See [Fonts and tilesets](/docs/fonts) for the full tileset workflow.
 - [`Textmodifier.charColor()`](/api/textmode.js/classes/Textmodifier#charcolor)
 - [`Textmodifier.cellColor()`](/api/textmode.js/classes/Textmodifier#cellcolor)
 - [`Textmodifier.color()`](/api/textmode.js/classes/Textmodifier#color)
-- [`TextmodeColor`](/api/textmode.js/classes/TextmodeColor)
+- [`TextmodeColor`](/api/textmode.js/namespaces/color/classes/TextmodeColor)
 - [`Textmodifier.useTileColors()`](/api/textmode.js/classes/Textmodifier#usetilecolors)
