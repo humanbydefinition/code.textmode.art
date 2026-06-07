@@ -39,72 +39,7 @@ The display name associated with this FIGfont.
 
 ##### Example
 
-```javascript
-const t = textmode.create({
-	width: window.innerWidth,
-	height: window.innerHeight,
-	fontSize: 8,
-	frameRate: 60,
-	plugins: [FigletPlugin],
-});
-
-let font;
-let rendered;
-
-function writeLabel(text, y, color = [220, 220, 220]) {
-	const startX = -Math.floor(text.length / 2);
-	t.charColor(...color);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(startX + i, y);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-}
-
-function drawGrid(grid, originX, originY, color = [124, 214, 255]) {
-	t.charColor(...color);
-
-	for (let row = 0; row < grid.length; row++) {
-		for (let col = 0; col < grid[row].length; col++) {
-			const cell = grid[row][col];
-			if (cell === ' ') {
-				continue;
-			}
-
-			t.push();
-			t.translate(originX + col, originY + row);
-			t.char(cell);
-			t.point();
-			t.pop();
-		}
-	}
-}
-
-t.setup(async () => {
-	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Bulbhead.flf');
-	rendered = font.renderText(font.name.toUpperCase());
-});
-
-t.draw(() => {
-	t.background(8, 10, 16);
-
-	if (!font || !rendered) {
-		writeLabel('loading font name metadata...', 0, [255, 214, 102]);
-		return;
-	}
-
-	writeLabel('TextmodeFigFont.name', -12, [255, 214, 102]);
-	drawGrid(rendered.grid, -Math.floor(rendered.cols / 2), -6);
-	writeLabel(`font.name -> ${font.name}`, 9, [220, 230, 255]);
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
+<TextmodeApiSandbox profile="textmode.figlet.js" language="javascript" title="TextmodeFigFont" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJZnJhbWVSYXRlOiA2MCwKCXBsdWdpbnM6IFtGaWdsZXRQbHVnaW5dLAp9KTsKCmxldCBmb250OwpsZXQgcmVuZGVyZWQ7CgpmdW5jdGlvbiB3cml0ZUxhYmVsKHRleHQsIHksIGNvbG9yID0gWzIyMCwgMjIwLCAyMjBdKSB7Cgljb25zdCBzdGFydFggPSAtTWF0aC5mbG9vcih0ZXh0Lmxlbmd0aCAvIDIpOwoJdC5jaGFyQ29sb3IoLi4uY29sb3IpOwoKCWZvciAobGV0IGkgPSAwOyBpIDwgdGV4dC5sZW5ndGg7IGkrKykgewoJCXQucHVzaCgpOwoJCXQudHJhbnNsYXRlKHN0YXJ0WCArIGksIHkpOwoJCXQuY2hhcih0ZXh0W2ldKTsKCQl0LnBvaW50KCk7CgkJdC5wb3AoKTsKCX0KfQoKZnVuY3Rpb24gZHJhd0dyaWQoZ3JpZCwgb3JpZ2luWCwgb3JpZ2luWSwgY29sb3IgPSBbMTI0LCAyMTQsIDI1NV0pIHsKCXQuY2hhckNvbG9yKC4uLmNvbG9yKTsKCglmb3IgKGxldCByb3cgPSAwOyByb3cgPCBncmlkLmxlbmd0aDsgcm93KyspIHsKCQlmb3IgKGxldCBjb2wgPSAwOyBjb2wgPCBncmlkW3Jvd10ubGVuZ3RoOyBjb2wrKykgewoJCQljb25zdCBjZWxsID0gZ3JpZFtyb3ddW2NvbF07CgkJCWlmIChjZWxsID09PSAnICcpIHsKCQkJCWNvbnRpbnVlOwoJCQl9CgoJCQl0LnB1c2goKTsKCQkJdC50cmFuc2xhdGUob3JpZ2luWCArIGNvbCwgb3JpZ2luWSArIHJvdyk7CgkJCXQuY2hhcihjZWxsKTsKCQkJdC5wb2ludCgpOwoJCQl0LnBvcCgpOwoJCX0KCX0KfQoKdC5zZXR1cChhc3luYyAoKSA9PiB7Cglmb250ID0gYXdhaXQgdC5sb2FkRmlnRm9udCgnaHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL3hlcm8vZmlnbGV0LWZvbnRzQG1hc3Rlci9CdWxiaGVhZC5mbGYnKTsKCXJlbmRlcmVkID0gZm9udC5yZW5kZXJUZXh0KGZvbnQubmFtZS50b1VwcGVyQ2FzZSgpKTsKfSk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDgsIDEwLCAxNik7CgoJaWYgKCFmb250IHx8ICFyZW5kZXJlZCkgewoJCXdyaXRlTGFiZWwoJ2xvYWRpbmcgZm9udCBuYW1lIG1ldGFkYXRhLi4uJywgMCwgWzI1NSwgMjE0LCAxMDJdKTsKCQlyZXR1cm47Cgl9CgoJd3JpdGVMYWJlbCgnVGV4dG1vZGVGaWdGb250Lm5hbWUnLCAtMTIsIFsyNTUsIDIxNCwgMTAyXSk7CglkcmF3R3JpZChyZW5kZXJlZC5ncmlkLCAtTWF0aC5mbG9vcihyZW5kZXJlZC5jb2xzIC8gMiksIC02KTsKCXdyaXRlTGFiZWwoYGZvbnQubmFtZSAtPiAke2ZvbnQubmFtZX1gLCA5LCBbMjIwLCAyMzAsIDI1NV0pOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
 
 ***
 
@@ -124,73 +59,7 @@ The parsed FIGfont header metadata.
 
 ##### Example
 
-```javascript
-const t = textmode.create({
-	width: window.innerWidth,
-	height: window.innerHeight,
-	fontSize: 8,
-	frameRate: 60,
-	plugins: [FigletPlugin],
-});
-
-let font;
-let rendered;
-
-function writeLabel(text, y, color = [220, 220, 220]) {
-	const startX = -Math.floor(text.length / 2);
-	t.charColor(...color);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(startX + i, y);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-}
-
-function drawGrid(grid, originX, originY, color = [255, 214, 102]) {
-	t.charColor(...color);
-
-	for (let row = 0; row < grid.length; row++) {
-		for (let col = 0; col < grid[row].length; col++) {
-			const cell = grid[row][col];
-			if (cell === ' ') {
-				continue;
-			}
-
-			t.push();
-			t.translate(originX + col, originY + row);
-			t.char(cell);
-			t.point();
-			t.pop();
-		}
-	}
-}
-
-t.setup(async () => {
-	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Colossal.flf');
-	rendered = font.renderText('HDR');
-});
-
-t.draw(() => {
-	t.background(7, 9, 18);
-
-	if (!font || !rendered) {
-		writeLabel('loading font header metadata...', 0, [255, 214, 102]);
-		return;
-	}
-
-	writeLabel('TextmodeFigFont.header', -12, [255, 214, 102]);
-	drawGrid(rendered.grid, -Math.floor(rendered.cols / 2), -6, [255, 120, 150]);
-	writeLabel(`signature: ${font.header.signature} | rows: ${font.header.height}`, 8, [220, 230, 255]);
-	writeLabel(`baseline: ${font.header.baseline} | fullLayout: ${font.header.fullLayout}`, 11, [160, 180, 220]);
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
+<TextmodeApiSandbox profile="textmode.figlet.js" language="javascript" title="TextmodeFigFont" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJZnJhbWVSYXRlOiA2MCwKCXBsdWdpbnM6IFtGaWdsZXRQbHVnaW5dLAp9KTsKCmxldCBmb250OwpsZXQgcmVuZGVyZWQ7CgpmdW5jdGlvbiB3cml0ZUxhYmVsKHRleHQsIHksIGNvbG9yID0gWzIyMCwgMjIwLCAyMjBdKSB7Cgljb25zdCBzdGFydFggPSAtTWF0aC5mbG9vcih0ZXh0Lmxlbmd0aCAvIDIpOwoJdC5jaGFyQ29sb3IoLi4uY29sb3IpOwoKCWZvciAobGV0IGkgPSAwOyBpIDwgdGV4dC5sZW5ndGg7IGkrKykgewoJCXQucHVzaCgpOwoJCXQudHJhbnNsYXRlKHN0YXJ0WCArIGksIHkpOwoJCXQuY2hhcih0ZXh0W2ldKTsKCQl0LnBvaW50KCk7CgkJdC5wb3AoKTsKCX0KfQoKZnVuY3Rpb24gZHJhd0dyaWQoZ3JpZCwgb3JpZ2luWCwgb3JpZ2luWSwgY29sb3IgPSBbMjU1LCAyMTQsIDEwMl0pIHsKCXQuY2hhckNvbG9yKC4uLmNvbG9yKTsKCglmb3IgKGxldCByb3cgPSAwOyByb3cgPCBncmlkLmxlbmd0aDsgcm93KyspIHsKCQlmb3IgKGxldCBjb2wgPSAwOyBjb2wgPCBncmlkW3Jvd10ubGVuZ3RoOyBjb2wrKykgewoJCQljb25zdCBjZWxsID0gZ3JpZFtyb3ddW2NvbF07CgkJCWlmIChjZWxsID09PSAnICcpIHsKCQkJCWNvbnRpbnVlOwoJCQl9CgoJCQl0LnB1c2goKTsKCQkJdC50cmFuc2xhdGUob3JpZ2luWCArIGNvbCwgb3JpZ2luWSArIHJvdyk7CgkJCXQuY2hhcihjZWxsKTsKCQkJdC5wb2ludCgpOwoJCQl0LnBvcCgpOwoJCX0KCX0KfQoKdC5zZXR1cChhc3luYyAoKSA9PiB7Cglmb250ID0gYXdhaXQgdC5sb2FkRmlnRm9udCgnaHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL3hlcm8vZmlnbGV0LWZvbnRzQG1hc3Rlci9Db2xvc3NhbC5mbGYnKTsKCXJlbmRlcmVkID0gZm9udC5yZW5kZXJUZXh0KCdIRFInKTsKfSk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDcsIDksIDE4KTsKCglpZiAoIWZvbnQgfHwgIXJlbmRlcmVkKSB7CgkJd3JpdGVMYWJlbCgnbG9hZGluZyBmb250IGhlYWRlciBtZXRhZGF0YS4uLicsIDAsIFsyNTUsIDIxNCwgMTAyXSk7CgkJcmV0dXJuOwoJfQoKCXdyaXRlTGFiZWwoJ1RleHRtb2RlRmlnRm9udC5oZWFkZXInLCAtMTIsIFsyNTUsIDIxNCwgMTAyXSk7CglkcmF3R3JpZChyZW5kZXJlZC5ncmlkLCAtTWF0aC5mbG9vcihyZW5kZXJlZC5jb2xzIC8gMiksIC02LCBbMjU1LCAxMjAsIDE1MF0pOwoJd3JpdGVMYWJlbChgc2lnbmF0dXJlOiAke2ZvbnQuaGVhZGVyLnNpZ25hdHVyZX0gfCByb3dzOiAke2ZvbnQuaGVhZGVyLmhlaWdodH1gLCA4LCBbMjIwLCAyMzAsIDI1NV0pOwoJd3JpdGVMYWJlbChgYmFzZWxpbmU6ICR7Zm9udC5oZWFkZXIuYmFzZWxpbmV9IHwgZnVsbExheW91dDogJHtmb250LmhlYWRlci5mdWxsTGF5b3V0fWAsIDExLCBbMTYwLCAxODAsIDIyMF0pOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
 
 ***
 
@@ -210,75 +79,7 @@ Parsed FIGcharacters keyed by Unicode code point.
 
 ##### Example
 
-```javascript
-const t = textmode.create({
-	width: window.innerWidth,
-	height: window.innerHeight,
-	fontSize: 8,
-	frameRate: 60,
-	plugins: [FigletPlugin],
-});
-
-let font;
-let rendered;
-
-function writeLabel(text, y, color = [220, 220, 220]) {
-	const startX = -Math.floor(text.length / 2);
-	t.charColor(...color);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(startX + i, y);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-}
-
-function drawGrid(grid, originX, originY, color = [124, 214, 255]) {
-	t.charColor(...color);
-
-	for (let row = 0; row < grid.length; row++) {
-		for (let col = 0; col < grid[row].length; col++) {
-			const cell = grid[row][col];
-			if (cell === ' ') {
-				continue;
-			}
-
-			t.push();
-			t.translate(originX + col, originY + row);
-			t.char(cell);
-			t.point();
-			t.pop();
-		}
-	}
-}
-
-t.setup(async () => {
-	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Bulbhead.flf');
-	rendered = font.renderText('ABC');
-});
-
-t.draw(() => {
-	t.background(8, 10, 16);
-
-	if (!font || !rendered) {
-		writeLabel('loading character map...', 0, [255, 214, 102]);
-		return;
-	}
-
-	const previewCodes = [32, 33, 34, 35, 36].filter((code) => font.characters.has(code)).join(', ');
-
-	writeLabel('TextmodeFigFont.characters', -12, [255, 214, 102]);
-	drawGrid(rendered.grid, -Math.floor(rendered.cols / 2), -6);
-	writeLabel(`font.characters.size -> ${font.characters.size}`, 8, [220, 230, 255]);
-	writeLabel(`first codes: ${previewCodes}`, 11, [160, 180, 220]);
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
+<TextmodeApiSandbox profile="textmode.figlet.js" language="javascript" title="TextmodeFigFont" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJZnJhbWVSYXRlOiA2MCwKCXBsdWdpbnM6IFtGaWdsZXRQbHVnaW5dLAp9KTsKCmxldCBmb250OwpsZXQgcmVuZGVyZWQ7CgpmdW5jdGlvbiB3cml0ZUxhYmVsKHRleHQsIHksIGNvbG9yID0gWzIyMCwgMjIwLCAyMjBdKSB7Cgljb25zdCBzdGFydFggPSAtTWF0aC5mbG9vcih0ZXh0Lmxlbmd0aCAvIDIpOwoJdC5jaGFyQ29sb3IoLi4uY29sb3IpOwoKCWZvciAobGV0IGkgPSAwOyBpIDwgdGV4dC5sZW5ndGg7IGkrKykgewoJCXQucHVzaCgpOwoJCXQudHJhbnNsYXRlKHN0YXJ0WCArIGksIHkpOwoJCXQuY2hhcih0ZXh0W2ldKTsKCQl0LnBvaW50KCk7CgkJdC5wb3AoKTsKCX0KfQoKZnVuY3Rpb24gZHJhd0dyaWQoZ3JpZCwgb3JpZ2luWCwgb3JpZ2luWSwgY29sb3IgPSBbMTI0LCAyMTQsIDI1NV0pIHsKCXQuY2hhckNvbG9yKC4uLmNvbG9yKTsKCglmb3IgKGxldCByb3cgPSAwOyByb3cgPCBncmlkLmxlbmd0aDsgcm93KyspIHsKCQlmb3IgKGxldCBjb2wgPSAwOyBjb2wgPCBncmlkW3Jvd10ubGVuZ3RoOyBjb2wrKykgewoJCQljb25zdCBjZWxsID0gZ3JpZFtyb3ddW2NvbF07CgkJCWlmIChjZWxsID09PSAnICcpIHsKCQkJCWNvbnRpbnVlOwoJCQl9CgoJCQl0LnB1c2goKTsKCQkJdC50cmFuc2xhdGUob3JpZ2luWCArIGNvbCwgb3JpZ2luWSArIHJvdyk7CgkJCXQuY2hhcihjZWxsKTsKCQkJdC5wb2ludCgpOwoJCQl0LnBvcCgpOwoJCX0KCX0KfQoKdC5zZXR1cChhc3luYyAoKSA9PiB7Cglmb250ID0gYXdhaXQgdC5sb2FkRmlnRm9udCgnaHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL3hlcm8vZmlnbGV0LWZvbnRzQG1hc3Rlci9CdWxiaGVhZC5mbGYnKTsKCXJlbmRlcmVkID0gZm9udC5yZW5kZXJUZXh0KCdBQkMnKTsKfSk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDgsIDEwLCAxNik7CgoJaWYgKCFmb250IHx8ICFyZW5kZXJlZCkgewoJCXdyaXRlTGFiZWwoJ2xvYWRpbmcgY2hhcmFjdGVyIG1hcC4uLicsIDAsIFsyNTUsIDIxNCwgMTAyXSk7CgkJcmV0dXJuOwoJfQoKCWNvbnN0IHByZXZpZXdDb2RlcyA9IFszMiwgMzMsIDM0LCAzNSwgMzZdLmZpbHRlcigoY29kZSkgPT4gZm9udC5jaGFyYWN0ZXJzLmhhcyhjb2RlKSkuam9pbignLCAnKTsKCgl3cml0ZUxhYmVsKCdUZXh0bW9kZUZpZ0ZvbnQuY2hhcmFjdGVycycsIC0xMiwgWzI1NSwgMjE0LCAxMDJdKTsKCWRyYXdHcmlkKHJlbmRlcmVkLmdyaWQsIC1NYXRoLmZsb29yKHJlbmRlcmVkLmNvbHMgLyAyKSwgLTYpOwoJd3JpdGVMYWJlbChgZm9udC5jaGFyYWN0ZXJzLnNpemUgLT4gJHtmb250LmNoYXJhY3RlcnMuc2l6ZX1gLCA4LCBbMjIwLCAyMzAsIDI1NV0pOwoJd3JpdGVMYWJlbChgZmlyc3QgY29kZXM6ICR7cHJldmlld0NvZGVzfWAsIDExLCBbMTYwLCAxODAsIDIyMF0pOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
 
 ***
 
@@ -298,75 +99,7 @@ Hardblank character declared by the font.
 
 ##### Example
 
-```javascript
-const t = textmode.create({
-	width: window.innerWidth,
-	height: window.innerHeight,
-	fontSize: 8,
-	frameRate: 60,
-	plugins: [FigletPlugin],
-});
-
-let font;
-let rendered;
-
-function writeLabel(text, y, color = [220, 220, 220]) {
-	const startX = -Math.floor(text.length / 2);
-	t.charColor(...color);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(startX + i, y);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-}
-
-function drawGrid(grid, originX, originY, color = [255, 214, 102]) {
-	t.charColor(...color);
-
-	for (let row = 0; row < grid.length; row++) {
-		for (let col = 0; col < grid[row].length; col++) {
-			const cell = grid[row][col];
-			if (cell === ' ') {
-				continue;
-			}
-
-			t.push();
-			t.translate(originX + col, originY + row);
-			t.char(cell);
-			t.point();
-			t.pop();
-		}
-	}
-}
-
-t.setup(async () => {
-	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Bulbhead.flf');
-	rendered = font.renderText('A B');
-});
-
-t.draw(() => {
-	t.background(9, 10, 18);
-
-	if (!font || !rendered) {
-		writeLabel('loading hardblank metadata...', 0, [255, 214, 102]);
-		return;
-	}
-
-	const codePoint = font.hardblank.codePointAt(0);
-
-	writeLabel('TextmodeFigFont.hardblank', -12, [255, 214, 102]);
-	drawGrid(rendered.grid, -Math.floor(rendered.cols / 2), -6, [124, 214, 255]);
-	writeLabel(`font.hardblank -> "${font.hardblank}"`, 8, [220, 230, 255]);
-	writeLabel(`code point: ${codePoint}`, 11, [160, 180, 220]);
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
+<TextmodeApiSandbox profile="textmode.figlet.js" language="javascript" title="TextmodeFigFont" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJZnJhbWVSYXRlOiA2MCwKCXBsdWdpbnM6IFtGaWdsZXRQbHVnaW5dLAp9KTsKCmxldCBmb250OwpsZXQgcmVuZGVyZWQ7CgpmdW5jdGlvbiB3cml0ZUxhYmVsKHRleHQsIHksIGNvbG9yID0gWzIyMCwgMjIwLCAyMjBdKSB7Cgljb25zdCBzdGFydFggPSAtTWF0aC5mbG9vcih0ZXh0Lmxlbmd0aCAvIDIpOwoJdC5jaGFyQ29sb3IoLi4uY29sb3IpOwoKCWZvciAobGV0IGkgPSAwOyBpIDwgdGV4dC5sZW5ndGg7IGkrKykgewoJCXQucHVzaCgpOwoJCXQudHJhbnNsYXRlKHN0YXJ0WCArIGksIHkpOwoJCXQuY2hhcih0ZXh0W2ldKTsKCQl0LnBvaW50KCk7CgkJdC5wb3AoKTsKCX0KfQoKZnVuY3Rpb24gZHJhd0dyaWQoZ3JpZCwgb3JpZ2luWCwgb3JpZ2luWSwgY29sb3IgPSBbMjU1LCAyMTQsIDEwMl0pIHsKCXQuY2hhckNvbG9yKC4uLmNvbG9yKTsKCglmb3IgKGxldCByb3cgPSAwOyByb3cgPCBncmlkLmxlbmd0aDsgcm93KyspIHsKCQlmb3IgKGxldCBjb2wgPSAwOyBjb2wgPCBncmlkW3Jvd10ubGVuZ3RoOyBjb2wrKykgewoJCQljb25zdCBjZWxsID0gZ3JpZFtyb3ddW2NvbF07CgkJCWlmIChjZWxsID09PSAnICcpIHsKCQkJCWNvbnRpbnVlOwoJCQl9CgoJCQl0LnB1c2goKTsKCQkJdC50cmFuc2xhdGUob3JpZ2luWCArIGNvbCwgb3JpZ2luWSArIHJvdyk7CgkJCXQuY2hhcihjZWxsKTsKCQkJdC5wb2ludCgpOwoJCQl0LnBvcCgpOwoJCX0KCX0KfQoKdC5zZXR1cChhc3luYyAoKSA9PiB7Cglmb250ID0gYXdhaXQgdC5sb2FkRmlnRm9udCgnaHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL3hlcm8vZmlnbGV0LWZvbnRzQG1hc3Rlci9CdWxiaGVhZC5mbGYnKTsKCXJlbmRlcmVkID0gZm9udC5yZW5kZXJUZXh0KCdBIEInKTsKfSk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDksIDEwLCAxOCk7CgoJaWYgKCFmb250IHx8ICFyZW5kZXJlZCkgewoJCXdyaXRlTGFiZWwoJ2xvYWRpbmcgaGFyZGJsYW5rIG1ldGFkYXRhLi4uJywgMCwgWzI1NSwgMjE0LCAxMDJdKTsKCQlyZXR1cm47Cgl9CgoJY29uc3QgY29kZVBvaW50ID0gZm9udC5oYXJkYmxhbmsuY29kZVBvaW50QXQoMCk7CgoJd3JpdGVMYWJlbCgnVGV4dG1vZGVGaWdGb250LmhhcmRibGFuaycsIC0xMiwgWzI1NSwgMjE0LCAxMDJdKTsKCWRyYXdHcmlkKHJlbmRlcmVkLmdyaWQsIC1NYXRoLmZsb29yKHJlbmRlcmVkLmNvbHMgLyAyKSwgLTYsIFsxMjQsIDIxNCwgMjU1XSk7Cgl3cml0ZUxhYmVsKGBmb250LmhhcmRibGFuayAtPiAiJHtmb250LmhhcmRibGFua30iYCwgOCwgWzIyMCwgMjMwLCAyNTVdKTsKCXdyaXRlTGFiZWwoYGNvZGUgcG9pbnQ6ICR7Y29kZVBvaW50fWAsIDExLCBbMTYwLCAxODAsIDIyMF0pOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
 
 ***
 
@@ -386,88 +119,7 @@ Number of rows in each FIGcharacter.
 
 ##### Example
 
-```javascript
-const t = textmode.create({
-	width: window.innerWidth,
-	height: window.innerHeight,
-	fontSize: 8,
-	frameRate: 60,
-	plugins: [FigletPlugin],
-});
-
-let font;
-let rendered;
-
-function writeLabel(text, y, color = [220, 220, 220]) {
-	const startX = -Math.floor(text.length / 2);
-	t.charColor(...color);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(startX + i, y);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-}
-
-function drawGrid(grid, originX, originY, color = [124, 214, 255]) {
-	t.charColor(...color);
-
-	for (let row = 0; row < grid.length; row++) {
-		for (let col = 0; col < grid[row].length; col++) {
-			const cell = grid[row][col];
-			if (cell === ' ') {
-				continue;
-			}
-
-			t.push();
-			t.translate(originX + col, originY + row);
-			t.char(cell);
-			t.point();
-			t.pop();
-		}
-	}
-}
-
-function drawRuler(x, y, height) {
-	t.charColor(255, 120, 150);
-	t.char('|');
-
-	for (let row = 0; row < height; row++) {
-		t.push();
-		t.translate(x, y + row);
-		t.point();
-		t.pop();
-	}
-}
-
-t.setup(async () => {
-	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Colossal.flf');
-	rendered = font.renderText('HI');
-});
-
-t.draw(() => {
-	t.background(8, 10, 18);
-
-	if (!font || !rendered) {
-		writeLabel('loading font height...', 0, [255, 214, 102]);
-		return;
-	}
-
-	const originX = -Math.floor(rendered.cols / 2);
-	const originY = -6;
-
-	writeLabel('TextmodeFigFont.height', -12, [255, 214, 102]);
-	drawRuler(originX - 2, originY, font.height);
-	drawGrid(rendered.grid, originX, originY);
-	writeLabel(`font.height -> ${font.height} rows`, 9, [220, 230, 255]);
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
+<TextmodeApiSandbox profile="textmode.figlet.js" language="javascript" title="TextmodeFigFont" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJZnJhbWVSYXRlOiA2MCwKCXBsdWdpbnM6IFtGaWdsZXRQbHVnaW5dLAp9KTsKCmxldCBmb250OwpsZXQgcmVuZGVyZWQ7CgpmdW5jdGlvbiB3cml0ZUxhYmVsKHRleHQsIHksIGNvbG9yID0gWzIyMCwgMjIwLCAyMjBdKSB7Cgljb25zdCBzdGFydFggPSAtTWF0aC5mbG9vcih0ZXh0Lmxlbmd0aCAvIDIpOwoJdC5jaGFyQ29sb3IoLi4uY29sb3IpOwoKCWZvciAobGV0IGkgPSAwOyBpIDwgdGV4dC5sZW5ndGg7IGkrKykgewoJCXQucHVzaCgpOwoJCXQudHJhbnNsYXRlKHN0YXJ0WCArIGksIHkpOwoJCXQuY2hhcih0ZXh0W2ldKTsKCQl0LnBvaW50KCk7CgkJdC5wb3AoKTsKCX0KfQoKZnVuY3Rpb24gZHJhd0dyaWQoZ3JpZCwgb3JpZ2luWCwgb3JpZ2luWSwgY29sb3IgPSBbMTI0LCAyMTQsIDI1NV0pIHsKCXQuY2hhckNvbG9yKC4uLmNvbG9yKTsKCglmb3IgKGxldCByb3cgPSAwOyByb3cgPCBncmlkLmxlbmd0aDsgcm93KyspIHsKCQlmb3IgKGxldCBjb2wgPSAwOyBjb2wgPCBncmlkW3Jvd10ubGVuZ3RoOyBjb2wrKykgewoJCQljb25zdCBjZWxsID0gZ3JpZFtyb3ddW2NvbF07CgkJCWlmIChjZWxsID09PSAnICcpIHsKCQkJCWNvbnRpbnVlOwoJCQl9CgoJCQl0LnB1c2goKTsKCQkJdC50cmFuc2xhdGUob3JpZ2luWCArIGNvbCwgb3JpZ2luWSArIHJvdyk7CgkJCXQuY2hhcihjZWxsKTsKCQkJdC5wb2ludCgpOwoJCQl0LnBvcCgpOwoJCX0KCX0KfQoKZnVuY3Rpb24gZHJhd1J1bGVyKHgsIHksIGhlaWdodCkgewoJdC5jaGFyQ29sb3IoMjU1LCAxMjAsIDE1MCk7Cgl0LmNoYXIoJ3wnKTsKCglmb3IgKGxldCByb3cgPSAwOyByb3cgPCBoZWlnaHQ7IHJvdysrKSB7CgkJdC5wdXNoKCk7CgkJdC50cmFuc2xhdGUoeCwgeSArIHJvdyk7CgkJdC5wb2ludCgpOwoJCXQucG9wKCk7Cgl9Cn0KCnQuc2V0dXAoYXN5bmMgKCkgPT4gewoJZm9udCA9IGF3YWl0IHQubG9hZEZpZ0ZvbnQoJ2h0dHBzOi8vY2RuLmpzZGVsaXZyLm5ldC9naC94ZXJvL2ZpZ2xldC1mb250c0BtYXN0ZXIvQ29sb3NzYWwuZmxmJyk7CglyZW5kZXJlZCA9IGZvbnQucmVuZGVyVGV4dCgnSEknKTsKfSk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDgsIDEwLCAxOCk7CgoJaWYgKCFmb250IHx8ICFyZW5kZXJlZCkgewoJCXdyaXRlTGFiZWwoJ2xvYWRpbmcgZm9udCBoZWlnaHQuLi4nLCAwLCBbMjU1LCAyMTQsIDEwMl0pOwoJCXJldHVybjsKCX0KCgljb25zdCBvcmlnaW5YID0gLU1hdGguZmxvb3IocmVuZGVyZWQuY29scyAvIDIpOwoJY29uc3Qgb3JpZ2luWSA9IC02OwoKCXdyaXRlTGFiZWwoJ1RleHRtb2RlRmlnRm9udC5oZWlnaHQnLCAtMTIsIFsyNTUsIDIxNCwgMTAyXSk7CglkcmF3UnVsZXIob3JpZ2luWCAtIDIsIG9yaWdpblksIGZvbnQuaGVpZ2h0KTsKCWRyYXdHcmlkKHJlbmRlcmVkLmdyaWQsIG9yaWdpblgsIG9yaWdpblkpOwoJd3JpdGVMYWJlbChgZm9udC5oZWlnaHQgLT4gJHtmb250LmhlaWdodH0gcm93c2AsIDksIFsyMjAsIDIzMCwgMjU1XSk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
 
 ***
 
@@ -487,88 +139,7 @@ Baseline row declared by the font.
 
 ##### Example
 
-```javascript
-const t = textmode.create({
-	width: window.innerWidth,
-	height: window.innerHeight,
-	fontSize: 8,
-	frameRate: 60,
-	plugins: [FigletPlugin],
-});
-
-let font;
-let rendered;
-
-function writeLabel(text, y, color = [220, 220, 220]) {
-	const startX = -Math.floor(text.length / 2);
-	t.charColor(...color);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(startX + i, y);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-}
-
-function drawGrid(grid, originX, originY, color = [124, 214, 255]) {
-	t.charColor(...color);
-
-	for (let row = 0; row < grid.length; row++) {
-		for (let col = 0; col < grid[row].length; col++) {
-			const cell = grid[row][col];
-			if (cell === ' ') {
-				continue;
-			}
-
-			t.push();
-			t.translate(originX + col, originY + row);
-			t.char(cell);
-			t.point();
-			t.pop();
-		}
-	}
-}
-
-function drawBaseline(originX, originY, cols, baseline) {
-	t.charColor(255, 120, 150);
-	t.char('-');
-
-	for (let col = 0; col < cols; col++) {
-		t.push();
-		t.translate(originX + col, originY + baseline);
-		t.point();
-		t.pop();
-	}
-}
-
-t.setup(async () => {
-	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Colossal.flf');
-	rendered = font.renderText('BASE');
-});
-
-t.draw(() => {
-	t.background(7, 10, 18);
-
-	if (!font || !rendered) {
-		writeLabel('loading baseline metadata...', 0, [255, 214, 102]);
-		return;
-	}
-
-	const originX = -Math.floor(rendered.cols / 2);
-	const originY = -7;
-
-	writeLabel('TextmodeFigFont.baseline', -13, [255, 214, 102]);
-	drawBaseline(originX, originY, rendered.cols, font.baseline);
-	drawGrid(rendered.grid, originX, originY);
-	writeLabel(`font.baseline -> row ${font.baseline}`, 10, [220, 230, 255]);
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
+<TextmodeApiSandbox profile="textmode.figlet.js" language="javascript" title="TextmodeFigFont" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJZnJhbWVSYXRlOiA2MCwKCXBsdWdpbnM6IFtGaWdsZXRQbHVnaW5dLAp9KTsKCmxldCBmb250OwpsZXQgcmVuZGVyZWQ7CgpmdW5jdGlvbiB3cml0ZUxhYmVsKHRleHQsIHksIGNvbG9yID0gWzIyMCwgMjIwLCAyMjBdKSB7Cgljb25zdCBzdGFydFggPSAtTWF0aC5mbG9vcih0ZXh0Lmxlbmd0aCAvIDIpOwoJdC5jaGFyQ29sb3IoLi4uY29sb3IpOwoKCWZvciAobGV0IGkgPSAwOyBpIDwgdGV4dC5sZW5ndGg7IGkrKykgewoJCXQucHVzaCgpOwoJCXQudHJhbnNsYXRlKHN0YXJ0WCArIGksIHkpOwoJCXQuY2hhcih0ZXh0W2ldKTsKCQl0LnBvaW50KCk7CgkJdC5wb3AoKTsKCX0KfQoKZnVuY3Rpb24gZHJhd0dyaWQoZ3JpZCwgb3JpZ2luWCwgb3JpZ2luWSwgY29sb3IgPSBbMTI0LCAyMTQsIDI1NV0pIHsKCXQuY2hhckNvbG9yKC4uLmNvbG9yKTsKCglmb3IgKGxldCByb3cgPSAwOyByb3cgPCBncmlkLmxlbmd0aDsgcm93KyspIHsKCQlmb3IgKGxldCBjb2wgPSAwOyBjb2wgPCBncmlkW3Jvd10ubGVuZ3RoOyBjb2wrKykgewoJCQljb25zdCBjZWxsID0gZ3JpZFtyb3ddW2NvbF07CgkJCWlmIChjZWxsID09PSAnICcpIHsKCQkJCWNvbnRpbnVlOwoJCQl9CgoJCQl0LnB1c2goKTsKCQkJdC50cmFuc2xhdGUob3JpZ2luWCArIGNvbCwgb3JpZ2luWSArIHJvdyk7CgkJCXQuY2hhcihjZWxsKTsKCQkJdC5wb2ludCgpOwoJCQl0LnBvcCgpOwoJCX0KCX0KfQoKZnVuY3Rpb24gZHJhd0Jhc2VsaW5lKG9yaWdpblgsIG9yaWdpblksIGNvbHMsIGJhc2VsaW5lKSB7Cgl0LmNoYXJDb2xvcigyNTUsIDEyMCwgMTUwKTsKCXQuY2hhcignLScpOwoKCWZvciAobGV0IGNvbCA9IDA7IGNvbCA8IGNvbHM7IGNvbCsrKSB7CgkJdC5wdXNoKCk7CgkJdC50cmFuc2xhdGUob3JpZ2luWCArIGNvbCwgb3JpZ2luWSArIGJhc2VsaW5lKTsKCQl0LnBvaW50KCk7CgkJdC5wb3AoKTsKCX0KfQoKdC5zZXR1cChhc3luYyAoKSA9PiB7Cglmb250ID0gYXdhaXQgdC5sb2FkRmlnRm9udCgnaHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL3hlcm8vZmlnbGV0LWZvbnRzQG1hc3Rlci9Db2xvc3NhbC5mbGYnKTsKCXJlbmRlcmVkID0gZm9udC5yZW5kZXJUZXh0KCdCQVNFJyk7Cn0pOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg3LCAxMCwgMTgpOwoKCWlmICghZm9udCB8fCAhcmVuZGVyZWQpIHsKCQl3cml0ZUxhYmVsKCdsb2FkaW5nIGJhc2VsaW5lIG1ldGFkYXRhLi4uJywgMCwgWzI1NSwgMjE0LCAxMDJdKTsKCQlyZXR1cm47Cgl9CgoJY29uc3Qgb3JpZ2luWCA9IC1NYXRoLmZsb29yKHJlbmRlcmVkLmNvbHMgLyAyKTsKCWNvbnN0IG9yaWdpblkgPSAtNzsKCgl3cml0ZUxhYmVsKCdUZXh0bW9kZUZpZ0ZvbnQuYmFzZWxpbmUnLCAtMTMsIFsyNTUsIDIxNCwgMTAyXSk7CglkcmF3QmFzZWxpbmUob3JpZ2luWCwgb3JpZ2luWSwgcmVuZGVyZWQuY29scywgZm9udC5iYXNlbGluZSk7CglkcmF3R3JpZChyZW5kZXJlZC5ncmlkLCBvcmlnaW5YLCBvcmlnaW5ZKTsKCXdyaXRlTGFiZWwoYGZvbnQuYmFzZWxpbmUgLT4gcm93ICR7Zm9udC5iYXNlbGluZX1gLCAxMCwgWzIyMCwgMjMwLCAyNTVdKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
 
 ***
 
@@ -588,68 +159,7 @@ Default horizontal layout implied by the header metadata.
 
 ##### Example
 
-```javascript
-const t = textmode.create({
-	width: window.innerWidth,
-	height: window.innerHeight,
-	fontSize: 8,
-	frameRate: 60,
-	plugins: [FigletPlugin],
-});
-
-let font;
-let plan;
-
-function writeLabel(text, y, color = [220, 220, 220]) {
-	const startX = -Math.floor(text.length / 2);
-	t.charColor(...color);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(startX + i, y);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-}
-
-function drawPlan(renderPlan, originX, originY, color = [124, 214, 255]) {
-	t.charColor(...color);
-
-	for (const cell of renderPlan.cells) {
-		t.push();
-		t.translate(originX + cell.col, originY + cell.row);
-		t.char(cell.char);
-		t.point();
-		t.pop();
-	}
-}
-
-t.setup(async () => {
-	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Bulbhead.flf');
-	plan = font.planText('LAYOUT', {
-		horizontalLayout: font.defaultLayout,
-	});
-});
-
-t.draw(() => {
-	t.background(8, 10, 18);
-
-	if (!font || !plan) {
-		writeLabel('loading default layout...', 0, [255, 214, 102]);
-		return;
-	}
-
-	writeLabel('TextmodeFigFont.defaultLayout', -12, [255, 214, 102]);
-	drawPlan(plan, -Math.floor(plan.cols / 2), -6);
-	writeLabel(`font.defaultLayout -> ${font.defaultLayout}`, 8, [220, 230, 255]);
-	writeLabel(`planned width: ${plan.cols} cols`, 11, [160, 180, 220]);
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
+<TextmodeApiSandbox profile="textmode.figlet.js" language="javascript" title="TextmodeFigFont" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJZnJhbWVSYXRlOiA2MCwKCXBsdWdpbnM6IFtGaWdsZXRQbHVnaW5dLAp9KTsKCmxldCBmb250OwpsZXQgcGxhbjsKCmZ1bmN0aW9uIHdyaXRlTGFiZWwodGV4dCwgeSwgY29sb3IgPSBbMjIwLCAyMjAsIDIyMF0pIHsKCWNvbnN0IHN0YXJ0WCA9IC1NYXRoLmZsb29yKHRleHQubGVuZ3RoIC8gMik7Cgl0LmNoYXJDb2xvciguLi5jb2xvcik7CgoJZm9yIChsZXQgaSA9IDA7IGkgPCB0ZXh0Lmxlbmd0aDsgaSsrKSB7CgkJdC5wdXNoKCk7CgkJdC50cmFuc2xhdGUoc3RhcnRYICsgaSwgeSk7CgkJdC5jaGFyKHRleHRbaV0pOwoJCXQucG9pbnQoKTsKCQl0LnBvcCgpOwoJfQp9CgpmdW5jdGlvbiBkcmF3UGxhbihyZW5kZXJQbGFuLCBvcmlnaW5YLCBvcmlnaW5ZLCBjb2xvciA9IFsxMjQsIDIxNCwgMjU1XSkgewoJdC5jaGFyQ29sb3IoLi4uY29sb3IpOwoKCWZvciAoY29uc3QgY2VsbCBvZiByZW5kZXJQbGFuLmNlbGxzKSB7CgkJdC5wdXNoKCk7CgkJdC50cmFuc2xhdGUob3JpZ2luWCArIGNlbGwuY29sLCBvcmlnaW5ZICsgY2VsbC5yb3cpOwoJCXQuY2hhcihjZWxsLmNoYXIpOwoJCXQucG9pbnQoKTsKCQl0LnBvcCgpOwoJfQp9Cgp0LnNldHVwKGFzeW5jICgpID0-IHsKCWZvbnQgPSBhd2FpdCB0LmxvYWRGaWdGb250KCdodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvZ2gveGVyby9maWdsZXQtZm9udHNAbWFzdGVyL0J1bGJoZWFkLmZsZicpOwoJcGxhbiA9IGZvbnQucGxhblRleHQoJ0xBWU9VVCcsIHsKCQlob3Jpem9udGFsTGF5b3V0OiBmb250LmRlZmF1bHRMYXlvdXQsCgl9KTsKfSk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDgsIDEwLCAxOCk7CgoJaWYgKCFmb250IHx8ICFwbGFuKSB7CgkJd3JpdGVMYWJlbCgnbG9hZGluZyBkZWZhdWx0IGxheW91dC4uLicsIDAsIFsyNTUsIDIxNCwgMTAyXSk7CgkJcmV0dXJuOwoJfQoKCXdyaXRlTGFiZWwoJ1RleHRtb2RlRmlnRm9udC5kZWZhdWx0TGF5b3V0JywgLTEyLCBbMjU1LCAyMTQsIDEwMl0pOwoJZHJhd1BsYW4ocGxhbiwgLU1hdGguZmxvb3IocGxhbi5jb2xzIC8gMiksIC02KTsKCXdyaXRlTGFiZWwoYGZvbnQuZGVmYXVsdExheW91dCAtPiAke2ZvbnQuZGVmYXVsdExheW91dH1gLCA4LCBbMjIwLCAyMzAsIDI1NV0pOwoJd3JpdGVMYWJlbChgcGxhbm5lZCB3aWR0aDogJHtwbGFuLmNvbHN9IGNvbHNgLCAxMSwgWzE2MCwgMTgwLCAyMjBdKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
 
 ***
 
@@ -669,68 +179,7 @@ Default print direction implied by the FIGfont header metadata.
 
 ##### Example
 
-```javascript
-const t = textmode.create({
-	width: window.innerWidth,
-	height: window.innerHeight,
-	fontSize: 8,
-	frameRate: 60,
-	plugins: [FigletPlugin],
-});
-
-let font;
-let plan;
-
-function writeLabel(text, y, color = [220, 220, 220]) {
-	const startX = -Math.floor(text.length / 2);
-	t.charColor(...color);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(startX + i, y);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-}
-
-function drawPlan(renderPlan, originX, originY, color = [255, 214, 102]) {
-	t.charColor(...color);
-
-	for (const cell of renderPlan.cells) {
-		t.push();
-		t.translate(originX + cell.col, originY + cell.row);
-		t.char(cell.char);
-		t.point();
-		t.pop();
-	}
-}
-
-t.setup(async () => {
-	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Bulbhead.flf');
-	plan = font.planText('FLOW', {
-		direction: 'font',
-	});
-});
-
-t.draw(() => {
-	t.background(9, 10, 18);
-
-	if (!font || !plan) {
-		writeLabel('loading print direction metadata...', 0, [255, 214, 102]);
-		return;
-	}
-
-	writeLabel('TextmodeFigFont.defaultPrintDirection', -12, [255, 214, 102]);
-	drawPlan(plan, -Math.floor(plan.cols / 2), -6, [124, 214, 255]);
-	writeLabel(`font.defaultPrintDirection -> ${font.defaultPrintDirection}`, 8, [220, 230, 255]);
-	writeLabel(`effective plan.direction -> ${plan.direction}`, 11, [160, 180, 220]);
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
+<TextmodeApiSandbox profile="textmode.figlet.js" language="javascript" title="TextmodeFigFont" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJZnJhbWVSYXRlOiA2MCwKCXBsdWdpbnM6IFtGaWdsZXRQbHVnaW5dLAp9KTsKCmxldCBmb250OwpsZXQgcGxhbjsKCmZ1bmN0aW9uIHdyaXRlTGFiZWwodGV4dCwgeSwgY29sb3IgPSBbMjIwLCAyMjAsIDIyMF0pIHsKCWNvbnN0IHN0YXJ0WCA9IC1NYXRoLmZsb29yKHRleHQubGVuZ3RoIC8gMik7Cgl0LmNoYXJDb2xvciguLi5jb2xvcik7CgoJZm9yIChsZXQgaSA9IDA7IGkgPCB0ZXh0Lmxlbmd0aDsgaSsrKSB7CgkJdC5wdXNoKCk7CgkJdC50cmFuc2xhdGUoc3RhcnRYICsgaSwgeSk7CgkJdC5jaGFyKHRleHRbaV0pOwoJCXQucG9pbnQoKTsKCQl0LnBvcCgpOwoJfQp9CgpmdW5jdGlvbiBkcmF3UGxhbihyZW5kZXJQbGFuLCBvcmlnaW5YLCBvcmlnaW5ZLCBjb2xvciA9IFsyNTUsIDIxNCwgMTAyXSkgewoJdC5jaGFyQ29sb3IoLi4uY29sb3IpOwoKCWZvciAoY29uc3QgY2VsbCBvZiByZW5kZXJQbGFuLmNlbGxzKSB7CgkJdC5wdXNoKCk7CgkJdC50cmFuc2xhdGUob3JpZ2luWCArIGNlbGwuY29sLCBvcmlnaW5ZICsgY2VsbC5yb3cpOwoJCXQuY2hhcihjZWxsLmNoYXIpOwoJCXQucG9pbnQoKTsKCQl0LnBvcCgpOwoJfQp9Cgp0LnNldHVwKGFzeW5jICgpID0-IHsKCWZvbnQgPSBhd2FpdCB0LmxvYWRGaWdGb250KCdodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvZ2gveGVyby9maWdsZXQtZm9udHNAbWFzdGVyL0J1bGJoZWFkLmZsZicpOwoJcGxhbiA9IGZvbnQucGxhblRleHQoJ0ZMT1cnLCB7CgkJZGlyZWN0aW9uOiAnZm9udCcsCgl9KTsKfSk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDksIDEwLCAxOCk7CgoJaWYgKCFmb250IHx8ICFwbGFuKSB7CgkJd3JpdGVMYWJlbCgnbG9hZGluZyBwcmludCBkaXJlY3Rpb24gbWV0YWRhdGEuLi4nLCAwLCBbMjU1LCAyMTQsIDEwMl0pOwoJCXJldHVybjsKCX0KCgl3cml0ZUxhYmVsKCdUZXh0bW9kZUZpZ0ZvbnQuZGVmYXVsdFByaW50RGlyZWN0aW9uJywgLTEyLCBbMjU1LCAyMTQsIDEwMl0pOwoJZHJhd1BsYW4ocGxhbiwgLU1hdGguZmxvb3IocGxhbi5jb2xzIC8gMiksIC02LCBbMTI0LCAyMTQsIDI1NV0pOwoJd3JpdGVMYWJlbChgZm9udC5kZWZhdWx0UHJpbnREaXJlY3Rpb24gLT4gJHtmb250LmRlZmF1bHRQcmludERpcmVjdGlvbn1gLCA4LCBbMjIwLCAyMzAsIDI1NV0pOwoJd3JpdGVMYWJlbChgZWZmZWN0aXZlIHBsYW4uZGlyZWN0aW9uIC0-ICR7cGxhbi5kaXJlY3Rpb259YCwgMTEsIFsxNjAsIDE4MCwgMjIwXSk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
 
 ***
 
@@ -750,75 +199,7 @@ Default vertical layout implied by the FIGfont header metadata.
 
 ##### Example
 
-```javascript
-const t = textmode.create({
-	width: window.innerWidth,
-	height: window.innerHeight,
-	fontSize: 8,
-	frameRate: 60,
-	plugins: [FigletPlugin],
-});
-
-let font;
-let rendered;
-
-function writeLabel(text, y, color = [220, 220, 220]) {
-	const startX = -Math.floor(text.length / 2);
-	t.charColor(...color);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(startX + i, y);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-}
-
-function drawGrid(grid, originX, originY, color = [124, 214, 255]) {
-	t.charColor(...color);
-
-	for (let row = 0; row < grid.length; row++) {
-		for (let col = 0; col < grid[row].length; col++) {
-			const cell = grid[row][col];
-			if (cell === ' ') {
-				continue;
-			}
-
-			t.push();
-			t.translate(originX + col, originY + row);
-			t.char(cell);
-			t.point();
-			t.pop();
-		}
-	}
-}
-
-t.setup(async () => {
-	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Bulbhead.flf');
-	rendered = font.renderText('UP\nDOWN', {
-		verticalLayout: font.defaultVerticalLayout,
-	});
-});
-
-t.draw(() => {
-	t.background(8, 10, 18);
-
-	if (!font || !rendered) {
-		writeLabel('loading vertical layout metadata...', 0, [255, 214, 102]);
-		return;
-	}
-
-	writeLabel('TextmodeFigFont.defaultVerticalLayout', -13, [255, 214, 102]);
-	drawGrid(rendered.grid, -Math.floor(rendered.cols / 2), -8);
-	writeLabel(`font.defaultVerticalLayout -> ${font.defaultVerticalLayout}`, 9, [220, 230, 255]);
-	writeLabel(`rendered height: ${rendered.rows} rows`, 12, [160, 180, 220]);
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
+<TextmodeApiSandbox profile="textmode.figlet.js" language="javascript" title="TextmodeFigFont" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJZnJhbWVSYXRlOiA2MCwKCXBsdWdpbnM6IFtGaWdsZXRQbHVnaW5dLAp9KTsKCmxldCBmb250OwpsZXQgcmVuZGVyZWQ7CgpmdW5jdGlvbiB3cml0ZUxhYmVsKHRleHQsIHksIGNvbG9yID0gWzIyMCwgMjIwLCAyMjBdKSB7Cgljb25zdCBzdGFydFggPSAtTWF0aC5mbG9vcih0ZXh0Lmxlbmd0aCAvIDIpOwoJdC5jaGFyQ29sb3IoLi4uY29sb3IpOwoKCWZvciAobGV0IGkgPSAwOyBpIDwgdGV4dC5sZW5ndGg7IGkrKykgewoJCXQucHVzaCgpOwoJCXQudHJhbnNsYXRlKHN0YXJ0WCArIGksIHkpOwoJCXQuY2hhcih0ZXh0W2ldKTsKCQl0LnBvaW50KCk7CgkJdC5wb3AoKTsKCX0KfQoKZnVuY3Rpb24gZHJhd0dyaWQoZ3JpZCwgb3JpZ2luWCwgb3JpZ2luWSwgY29sb3IgPSBbMTI0LCAyMTQsIDI1NV0pIHsKCXQuY2hhckNvbG9yKC4uLmNvbG9yKTsKCglmb3IgKGxldCByb3cgPSAwOyByb3cgPCBncmlkLmxlbmd0aDsgcm93KyspIHsKCQlmb3IgKGxldCBjb2wgPSAwOyBjb2wgPCBncmlkW3Jvd10ubGVuZ3RoOyBjb2wrKykgewoJCQljb25zdCBjZWxsID0gZ3JpZFtyb3ddW2NvbF07CgkJCWlmIChjZWxsID09PSAnICcpIHsKCQkJCWNvbnRpbnVlOwoJCQl9CgoJCQl0LnB1c2goKTsKCQkJdC50cmFuc2xhdGUob3JpZ2luWCArIGNvbCwgb3JpZ2luWSArIHJvdyk7CgkJCXQuY2hhcihjZWxsKTsKCQkJdC5wb2ludCgpOwoJCQl0LnBvcCgpOwoJCX0KCX0KfQoKdC5zZXR1cChhc3luYyAoKSA9PiB7Cglmb250ID0gYXdhaXQgdC5sb2FkRmlnRm9udCgnaHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL3hlcm8vZmlnbGV0LWZvbnRzQG1hc3Rlci9CdWxiaGVhZC5mbGYnKTsKCXJlbmRlcmVkID0gZm9udC5yZW5kZXJUZXh0KCdVUFxuRE9XTicsIHsKCQl2ZXJ0aWNhbExheW91dDogZm9udC5kZWZhdWx0VmVydGljYWxMYXlvdXQsCgl9KTsKfSk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDgsIDEwLCAxOCk7CgoJaWYgKCFmb250IHx8ICFyZW5kZXJlZCkgewoJCXdyaXRlTGFiZWwoJ2xvYWRpbmcgdmVydGljYWwgbGF5b3V0IG1ldGFkYXRhLi4uJywgMCwgWzI1NSwgMjE0LCAxMDJdKTsKCQlyZXR1cm47Cgl9CgoJd3JpdGVMYWJlbCgnVGV4dG1vZGVGaWdGb250LmRlZmF1bHRWZXJ0aWNhbExheW91dCcsIC0xMywgWzI1NSwgMjE0LCAxMDJdKTsKCWRyYXdHcmlkKHJlbmRlcmVkLmdyaWQsIC1NYXRoLmZsb29yKHJlbmRlcmVkLmNvbHMgLyAyKSwgLTgpOwoJd3JpdGVMYWJlbChgZm9udC5kZWZhdWx0VmVydGljYWxMYXlvdXQgLT4gJHtmb250LmRlZmF1bHRWZXJ0aWNhbExheW91dH1gLCA5LCBbMjIwLCAyMzAsIDI1NV0pOwoJd3JpdGVMYWJlbChgcmVuZGVyZWQgaGVpZ2h0OiAke3JlbmRlcmVkLnJvd3N9IHJvd3NgLCAxMiwgWzE2MCwgMTgwLCAyMjBdKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
 
 ## Methods
 
@@ -844,75 +225,7 @@ The matching FIGcharacter, if present.
 
 #### Example
 
-```javascript
-const t = textmode.create({
-	width: window.innerWidth,
-	height: window.innerHeight,
-	fontSize: 8,
-	frameRate: 60,
-	plugins: [FigletPlugin],
-});
-
-let font;
-let figCharacter;
-let previewLines = [];
-
-function writeLabel(text, y, color = [220, 220, 220]) {
-	const startX = -Math.floor(text.length / 2);
-	t.charColor(...color);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(startX + i, y);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-}
-
-function drawLines(lines, originX, originY, color = [124, 214, 255]) {
-	t.charColor(...color);
-
-	for (let row = 0; row < lines.length; row++) {
-		for (let col = 0; col < lines[row].length; col++) {
-			const cell = lines[row][col];
-			if (cell === ' ') {
-				continue;
-			}
-
-			t.push();
-			t.translate(originX + col, originY + row);
-			t.char(cell);
-			t.point();
-			t.pop();
-		}
-	}
-}
-
-t.setup(async () => {
-	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Bulbhead.flf');
-	figCharacter = font.getCharacter('A');
-	previewLines = (figCharacter?.lines ?? []).map((line) => line.replaceAll(font.hardblank, ' '));
-});
-
-t.draw(() => {
-	t.background(10, 9, 18);
-
-	if (!font || !figCharacter) {
-		writeLabel('resolving FIGcharacter metadata with getCharacter()', 0, [255, 214, 102]);
-		return;
-	}
-
-	writeLabel('TextmodeFigFont.getCharacter', -10, [255, 214, 102]);
-	drawLines(previewLines, -Math.floor(figCharacter.width / 2), -4, [124, 214, 255]);
-	writeLabel(`glyph: ${String.fromCodePoint(figCharacter.code)} (${figCharacter.code})`, 6, [220, 230, 255]);
-	writeLabel(`width: ${figCharacter.width} | rows: ${figCharacter.lines.length}`, 9, [160, 180, 220]);
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
+<TextmodeApiSandbox profile="textmode.figlet.js" language="javascript" title="TextmodeFigFont" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJZnJhbWVSYXRlOiA2MCwKCXBsdWdpbnM6IFtGaWdsZXRQbHVnaW5dLAp9KTsKCmxldCBmb250OwpsZXQgZmlnQ2hhcmFjdGVyOwpsZXQgcHJldmlld0xpbmVzID0gW107CgpmdW5jdGlvbiB3cml0ZUxhYmVsKHRleHQsIHksIGNvbG9yID0gWzIyMCwgMjIwLCAyMjBdKSB7Cgljb25zdCBzdGFydFggPSAtTWF0aC5mbG9vcih0ZXh0Lmxlbmd0aCAvIDIpOwoJdC5jaGFyQ29sb3IoLi4uY29sb3IpOwoKCWZvciAobGV0IGkgPSAwOyBpIDwgdGV4dC5sZW5ndGg7IGkrKykgewoJCXQucHVzaCgpOwoJCXQudHJhbnNsYXRlKHN0YXJ0WCArIGksIHkpOwoJCXQuY2hhcih0ZXh0W2ldKTsKCQl0LnBvaW50KCk7CgkJdC5wb3AoKTsKCX0KfQoKZnVuY3Rpb24gZHJhd0xpbmVzKGxpbmVzLCBvcmlnaW5YLCBvcmlnaW5ZLCBjb2xvciA9IFsxMjQsIDIxNCwgMjU1XSkgewoJdC5jaGFyQ29sb3IoLi4uY29sb3IpOwoKCWZvciAobGV0IHJvdyA9IDA7IHJvdyA8IGxpbmVzLmxlbmd0aDsgcm93KyspIHsKCQlmb3IgKGxldCBjb2wgPSAwOyBjb2wgPCBsaW5lc1tyb3ddLmxlbmd0aDsgY29sKyspIHsKCQkJY29uc3QgY2VsbCA9IGxpbmVzW3Jvd11bY29sXTsKCQkJaWYgKGNlbGwgPT09ICcgJykgewoJCQkJY29udGludWU7CgkJCX0KCgkJCXQucHVzaCgpOwoJCQl0LnRyYW5zbGF0ZShvcmlnaW5YICsgY29sLCBvcmlnaW5ZICsgcm93KTsKCQkJdC5jaGFyKGNlbGwpOwoJCQl0LnBvaW50KCk7CgkJCXQucG9wKCk7CgkJfQoJfQp9Cgp0LnNldHVwKGFzeW5jICgpID0-IHsKCWZvbnQgPSBhd2FpdCB0LmxvYWRGaWdGb250KCdodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvZ2gveGVyby9maWdsZXQtZm9udHNAbWFzdGVyL0J1bGJoZWFkLmZsZicpOwoJZmlnQ2hhcmFjdGVyID0gZm9udC5nZXRDaGFyYWN0ZXIoJ0EnKTsKCXByZXZpZXdMaW5lcyA9IChmaWdDaGFyYWN0ZXI_LmxpbmVzID8_IFtdKS5tYXAoKGxpbmUpID0-IGxpbmUucmVwbGFjZUFsbChmb250LmhhcmRibGFuaywgJyAnKSk7Cn0pOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCgxMCwgOSwgMTgpOwoKCWlmICghZm9udCB8fCAhZmlnQ2hhcmFjdGVyKSB7CgkJd3JpdGVMYWJlbCgncmVzb2x2aW5nIEZJR2NoYXJhY3RlciBtZXRhZGF0YSB3aXRoIGdldENoYXJhY3RlcigpJywgMCwgWzI1NSwgMjE0LCAxMDJdKTsKCQlyZXR1cm47Cgl9CgoJd3JpdGVMYWJlbCgnVGV4dG1vZGVGaWdGb250LmdldENoYXJhY3RlcicsIC0xMCwgWzI1NSwgMjE0LCAxMDJdKTsKCWRyYXdMaW5lcyhwcmV2aWV3TGluZXMsIC1NYXRoLmZsb29yKGZpZ0NoYXJhY3Rlci53aWR0aCAvIDIpLCAtNCwgWzEyNCwgMjE0LCAyNTVdKTsKCXdyaXRlTGFiZWwoYGdseXBoOiAke1N0cmluZy5mcm9tQ29kZVBvaW50KGZpZ0NoYXJhY3Rlci5jb2RlKX0gKCR7ZmlnQ2hhcmFjdGVyLmNvZGV9KWAsIDYsIFsyMjAsIDIzMCwgMjU1XSk7Cgl3cml0ZUxhYmVsKGB3aWR0aDogJHtmaWdDaGFyYWN0ZXIud2lkdGh9IHwgcm93czogJHtmaWdDaGFyYWN0ZXIubGluZXMubGVuZ3RofWAsIDksIFsxNjAsIDE4MCwgMjIwXSk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
 
 ***
 
@@ -937,75 +250,7 @@ Plan a string into positioned FIGlet cells and logical lines.
 
 #### Example
 
-```javascript
-const t = textmode.create({
-	width: window.innerWidth,
-	height: window.innerHeight,
-	fontSize: 8,
-	frameRate: 60,
-	plugins: [FigletPlugin],
-});
-
-let font;
-let plan;
-
-const palette = [
-	[255, 214, 102],
-	[124, 214, 255],
-	[255, 120, 150],
-];
-
-function writeLabel(text, y, color = [220, 220, 220]) {
-	const startX = -Math.floor(text.length / 2);
-	t.charColor(...color);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(startX + i, y);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-}
-
-function drawPlan(renderPlan, originX, originY) {
-	for (const cell of renderPlan.cells) {
-		const color = palette[cell.lineIndex % palette.length];
-		t.charColor(...color);
-		t.push();
-		t.translate(originX + cell.col, originY + cell.row);
-		t.char(cell.char);
-		t.point();
-		t.pop();
-	}
-}
-
-t.setup(async () => {
-	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Bulbhead.flf');
-	plan = font.planText('PLAN TEXT WRAPS WORDS', {
-		maxCols: 58,
-		wrap: 'word',
-	});
-});
-
-t.draw(() => {
-	t.background(7, 10, 18);
-
-	if (!font || !plan) {
-		writeLabel('planning FIGlet layout with planText()', 0, [255, 214, 102]);
-		return;
-	}
-
-	writeLabel('TextmodeFigFont.planText', -12, [255, 214, 102]);
-	drawPlan(plan, -Math.floor(plan.cols / 2), -6);
-	writeLabel(`lines: ${plan.lines.length} | direction: ${plan.direction}`, 8, [220, 230, 255]);
-	writeLabel(`bounds: ${plan.cols} cols x ${plan.rows} rows`, 11, [160, 180, 220]);
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
+<TextmodeApiSandbox profile="textmode.figlet.js" language="javascript" title="TextmodeFigFont" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJZnJhbWVSYXRlOiA2MCwKCXBsdWdpbnM6IFtGaWdsZXRQbHVnaW5dLAp9KTsKCmxldCBmb250OwpsZXQgcGxhbjsKCmNvbnN0IHBhbGV0dGUgPSBbCglbMjU1LCAyMTQsIDEwMl0sCglbMTI0LCAyMTQsIDI1NV0sCglbMjU1LCAxMjAsIDE1MF0sCl07CgpmdW5jdGlvbiB3cml0ZUxhYmVsKHRleHQsIHksIGNvbG9yID0gWzIyMCwgMjIwLCAyMjBdKSB7Cgljb25zdCBzdGFydFggPSAtTWF0aC5mbG9vcih0ZXh0Lmxlbmd0aCAvIDIpOwoJdC5jaGFyQ29sb3IoLi4uY29sb3IpOwoKCWZvciAobGV0IGkgPSAwOyBpIDwgdGV4dC5sZW5ndGg7IGkrKykgewoJCXQucHVzaCgpOwoJCXQudHJhbnNsYXRlKHN0YXJ0WCArIGksIHkpOwoJCXQuY2hhcih0ZXh0W2ldKTsKCQl0LnBvaW50KCk7CgkJdC5wb3AoKTsKCX0KfQoKZnVuY3Rpb24gZHJhd1BsYW4ocmVuZGVyUGxhbiwgb3JpZ2luWCwgb3JpZ2luWSkgewoJZm9yIChjb25zdCBjZWxsIG9mIHJlbmRlclBsYW4uY2VsbHMpIHsKCQljb25zdCBjb2xvciA9IHBhbGV0dGVbY2VsbC5saW5lSW5kZXggJSBwYWxldHRlLmxlbmd0aF07CgkJdC5jaGFyQ29sb3IoLi4uY29sb3IpOwoJCXQucHVzaCgpOwoJCXQudHJhbnNsYXRlKG9yaWdpblggKyBjZWxsLmNvbCwgb3JpZ2luWSArIGNlbGwucm93KTsKCQl0LmNoYXIoY2VsbC5jaGFyKTsKCQl0LnBvaW50KCk7CgkJdC5wb3AoKTsKCX0KfQoKdC5zZXR1cChhc3luYyAoKSA9PiB7Cglmb250ID0gYXdhaXQgdC5sb2FkRmlnRm9udCgnaHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL3hlcm8vZmlnbGV0LWZvbnRzQG1hc3Rlci9CdWxiaGVhZC5mbGYnKTsKCXBsYW4gPSBmb250LnBsYW5UZXh0KCdQTEFOIFRFWFQgV1JBUFMgV09SRFMnLCB7CgkJbWF4Q29sczogNTgsCgkJd3JhcDogJ3dvcmQnLAoJfSk7Cn0pOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg3LCAxMCwgMTgpOwoKCWlmICghZm9udCB8fCAhcGxhbikgewoJCXdyaXRlTGFiZWwoJ3BsYW5uaW5nIEZJR2xldCBsYXlvdXQgd2l0aCBwbGFuVGV4dCgpJywgMCwgWzI1NSwgMjE0LCAxMDJdKTsKCQlyZXR1cm47Cgl9CgoJd3JpdGVMYWJlbCgnVGV4dG1vZGVGaWdGb250LnBsYW5UZXh0JywgLTEyLCBbMjU1LCAyMTQsIDEwMl0pOwoJZHJhd1BsYW4ocGxhbiwgLU1hdGguZmxvb3IocGxhbi5jb2xzIC8gMiksIC02KTsKCXdyaXRlTGFiZWwoYGxpbmVzOiAke3BsYW4ubGluZXMubGVuZ3RofSB8IGRpcmVjdGlvbjogJHtwbGFuLmRpcmVjdGlvbn1gLCA4LCBbMjIwLCAyMzAsIDI1NV0pOwoJd3JpdGVMYWJlbChgYm91bmRzOiAke3BsYW4uY29sc30gY29scyB4ICR7cGxhbi5yb3dzfSByb3dzYCwgMTEsIFsxNjAsIDE4MCwgMjIwXSk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
 
 ***
 
@@ -1030,73 +275,7 @@ Render a string into a FIGlet sub-character grid.
 
 #### Example
 
-```javascript
-const t = textmode.create({
-	width: window.innerWidth,
-	height: window.innerHeight,
-	fontSize: 8,
-	frameRate: 60,
-	plugins: [FigletPlugin],
-});
-
-let font;
-let rendered;
-
-function writeLabel(text, y, color = [220, 220, 220]) {
-	const startX = -Math.floor(text.length / 2);
-	t.charColor(...color);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(startX + i, y);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-}
-
-function drawGrid(grid, originX, originY) {
-	for (let row = 0; row < grid.length; row++) {
-		const wave = Math.sin(t.frameCount * 0.07 + row * 0.45) * 0.5 + 0.5;
-		t.charColor(110 + wave * 145, 170 + row * 8, 255);
-
-		for (let col = 0; col < grid[row].length; col++) {
-			const cell = grid[row][col];
-			if (cell === ' ') {
-				continue;
-			}
-
-			t.push();
-			t.translate(originX + col, originY + row);
-			t.char(cell);
-			t.point();
-			t.pop();
-		}
-	}
-}
-
-t.setup(async () => {
-	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Isometric1.flf');
-	rendered = font.renderText('GRID\nAPI');
-});
-
-t.draw(() => {
-	t.background(8, 10, 20);
-
-	if (!font || !rendered) {
-		writeLabel('rendering a character grid with renderText()', 0, [255, 214, 102]);
-		return;
-	}
-
-	writeLabel('TextmodeFigFont.renderText', -12, [255, 214, 102]);
-	drawGrid(rendered.grid, -Math.floor(rendered.cols / 2), -7);
-	writeLabel(`rendered grid: ${rendered.cols} cols × ${rendered.rows} rows`, 8, [220, 230, 255]);
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
+<TextmodeApiSandbox profile="textmode.figlet.js" language="javascript" title="TextmodeFigFont" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJZnJhbWVSYXRlOiA2MCwKCXBsdWdpbnM6IFtGaWdsZXRQbHVnaW5dLAp9KTsKCmxldCBmb250OwpsZXQgcmVuZGVyZWQ7CgpmdW5jdGlvbiB3cml0ZUxhYmVsKHRleHQsIHksIGNvbG9yID0gWzIyMCwgMjIwLCAyMjBdKSB7Cgljb25zdCBzdGFydFggPSAtTWF0aC5mbG9vcih0ZXh0Lmxlbmd0aCAvIDIpOwoJdC5jaGFyQ29sb3IoLi4uY29sb3IpOwoKCWZvciAobGV0IGkgPSAwOyBpIDwgdGV4dC5sZW5ndGg7IGkrKykgewoJCXQucHVzaCgpOwoJCXQudHJhbnNsYXRlKHN0YXJ0WCArIGksIHkpOwoJCXQuY2hhcih0ZXh0W2ldKTsKCQl0LnBvaW50KCk7CgkJdC5wb3AoKTsKCX0KfQoKZnVuY3Rpb24gZHJhd0dyaWQoZ3JpZCwgb3JpZ2luWCwgb3JpZ2luWSkgewoJZm9yIChsZXQgcm93ID0gMDsgcm93IDwgZ3JpZC5sZW5ndGg7IHJvdysrKSB7CgkJY29uc3Qgd2F2ZSA9IE1hdGguc2luKHQuZnJhbWVDb3VudCAqIDAuMDcgKyByb3cgKiAwLjQ1KSAqIDAuNSArIDAuNTsKCQl0LmNoYXJDb2xvcigxMTAgKyB3YXZlICogMTQ1LCAxNzAgKyByb3cgKiA4LCAyNTUpOwoKCQlmb3IgKGxldCBjb2wgPSAwOyBjb2wgPCBncmlkW3Jvd10ubGVuZ3RoOyBjb2wrKykgewoJCQljb25zdCBjZWxsID0gZ3JpZFtyb3ddW2NvbF07CgkJCWlmIChjZWxsID09PSAnICcpIHsKCQkJCWNvbnRpbnVlOwoJCQl9CgoJCQl0LnB1c2goKTsKCQkJdC50cmFuc2xhdGUob3JpZ2luWCArIGNvbCwgb3JpZ2luWSArIHJvdyk7CgkJCXQuY2hhcihjZWxsKTsKCQkJdC5wb2ludCgpOwoJCQl0LnBvcCgpOwoJCX0KCX0KfQoKdC5zZXR1cChhc3luYyAoKSA9PiB7Cglmb250ID0gYXdhaXQgdC5sb2FkRmlnRm9udCgnaHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL3hlcm8vZmlnbGV0LWZvbnRzQG1hc3Rlci9Jc29tZXRyaWMxLmZsZicpOwoJcmVuZGVyZWQgPSBmb250LnJlbmRlclRleHQoJ0dSSURcbkFQSScpOwp9KTsKCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoOCwgMTAsIDIwKTsKCglpZiAoIWZvbnQgfHwgIXJlbmRlcmVkKSB7CgkJd3JpdGVMYWJlbCgncmVuZGVyaW5nIGEgY2hhcmFjdGVyIGdyaWQgd2l0aCByZW5kZXJUZXh0KCknLCAwLCBbMjU1LCAyMTQsIDEwMl0pOwoJCXJldHVybjsKCX0KCgl3cml0ZUxhYmVsKCdUZXh0bW9kZUZpZ0ZvbnQucmVuZGVyVGV4dCcsIC0xMiwgWzI1NSwgMjE0LCAxMDJdKTsKCWRyYXdHcmlkKHJlbmRlcmVkLmdyaWQsIC1NYXRoLmZsb29yKHJlbmRlcmVkLmNvbHMgLyAyKSwgLTcpOwoJd3JpdGVMYWJlbChgcmVuZGVyZWQgZ3JpZDogJHtyZW5kZXJlZC5jb2xzfSBjb2xzIMOXICR7cmVuZGVyZWQucm93c30gcm93c2AsIDgsIFsyMjAsIDIzMCwgMjU1XSk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
 
 ***
 
@@ -1126,107 +305,7 @@ Measure rendered FIGlet text without drawing it.
 
 #### Example
 
-```javascript
-const t = textmode.create({
-	width: window.innerWidth,
-	height: window.innerHeight,
-	fontSize: 8,
-	frameRate: 60,
-	plugins: [FigletPlugin],
-});
-
-let font;
-let measurement;
-let rendered;
-
-function writeLabel(text, y, color = [220, 220, 220]) {
-	const startX = -Math.floor(text.length / 2);
-	t.charColor(...color);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(startX + i, y);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-}
-
-function drawGrid(grid, originX, originY, color = [124, 214, 255]) {
-	t.charColor(...color);
-
-	for (let row = 0; row < grid.length; row++) {
-		for (let col = 0; col < grid[row].length; col++) {
-			const cell = grid[row][col];
-			if (cell === ' ') {
-				continue;
-			}
-
-			t.push();
-			t.translate(originX + col, originY + row);
-			t.char(cell);
-			t.point();
-			t.pop();
-		}
-	}
-}
-
-function drawBounds(cols, rows, originX, originY, color = [255, 120, 150]) {
-	t.charColor(...color);
-	t.char('+');
-
-	for (let col = 0; col < cols; col++) {
-		t.push();
-		t.translate(originX + col, originY);
-		t.point();
-		t.pop();
-
-		t.push();
-		t.translate(originX + col, originY + rows - 1);
-		t.point();
-		t.pop();
-	}
-
-	for (let row = 0; row < rows; row++) {
-		t.push();
-		t.translate(originX, originY + row);
-		t.point();
-		t.pop();
-
-		t.push();
-		t.translate(originX + cols - 1, originY + row);
-		t.point();
-		t.pop();
-	}
-}
-
-t.setup(async () => {
-	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Colossal.flf');
-	measurement = font.measureText('MEASURE');
-	rendered = font.renderText('MEASURE');
-});
-
-t.draw(() => {
-	t.background(8, 10, 18);
-
-	if (!font || !measurement || !rendered) {
-		writeLabel('measuring rendered bounds with measureText()', 0, [255, 214, 102]);
-		return;
-	}
-
-	const originX = -Math.floor(measurement.cols / 2);
-	const originY = -4;
-
-	writeLabel('TextmodeFigFont.measureText', -11, [255, 214, 102]);
-	drawBounds(measurement.cols, measurement.rows, originX, originY, [255, 120, 150]);
-	drawGrid(rendered.grid, originX, originY, [124, 214, 255]);
-	writeLabel(`bounds: ${measurement.cols} cols × ${measurement.rows} rows`, 9, [220, 230, 255]);
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
+<TextmodeApiSandbox profile="textmode.figlet.js" language="javascript" title="TextmodeFigFont" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJZnJhbWVSYXRlOiA2MCwKCXBsdWdpbnM6IFtGaWdsZXRQbHVnaW5dLAp9KTsKCmxldCBmb250OwpsZXQgbWVhc3VyZW1lbnQ7CmxldCByZW5kZXJlZDsKCmZ1bmN0aW9uIHdyaXRlTGFiZWwodGV4dCwgeSwgY29sb3IgPSBbMjIwLCAyMjAsIDIyMF0pIHsKCWNvbnN0IHN0YXJ0WCA9IC1NYXRoLmZsb29yKHRleHQubGVuZ3RoIC8gMik7Cgl0LmNoYXJDb2xvciguLi5jb2xvcik7CgoJZm9yIChsZXQgaSA9IDA7IGkgPCB0ZXh0Lmxlbmd0aDsgaSsrKSB7CgkJdC5wdXNoKCk7CgkJdC50cmFuc2xhdGUoc3RhcnRYICsgaSwgeSk7CgkJdC5jaGFyKHRleHRbaV0pOwoJCXQucG9pbnQoKTsKCQl0LnBvcCgpOwoJfQp9CgpmdW5jdGlvbiBkcmF3R3JpZChncmlkLCBvcmlnaW5YLCBvcmlnaW5ZLCBjb2xvciA9IFsxMjQsIDIxNCwgMjU1XSkgewoJdC5jaGFyQ29sb3IoLi4uY29sb3IpOwoKCWZvciAobGV0IHJvdyA9IDA7IHJvdyA8IGdyaWQubGVuZ3RoOyByb3crKykgewoJCWZvciAobGV0IGNvbCA9IDA7IGNvbCA8IGdyaWRbcm93XS5sZW5ndGg7IGNvbCsrKSB7CgkJCWNvbnN0IGNlbGwgPSBncmlkW3Jvd11bY29sXTsKCQkJaWYgKGNlbGwgPT09ICcgJykgewoJCQkJY29udGludWU7CgkJCX0KCgkJCXQucHVzaCgpOwoJCQl0LnRyYW5zbGF0ZShvcmlnaW5YICsgY29sLCBvcmlnaW5ZICsgcm93KTsKCQkJdC5jaGFyKGNlbGwpOwoJCQl0LnBvaW50KCk7CgkJCXQucG9wKCk7CgkJfQoJfQp9CgpmdW5jdGlvbiBkcmF3Qm91bmRzKGNvbHMsIHJvd3MsIG9yaWdpblgsIG9yaWdpblksIGNvbG9yID0gWzI1NSwgMTIwLCAxNTBdKSB7Cgl0LmNoYXJDb2xvciguLi5jb2xvcik7Cgl0LmNoYXIoJysnKTsKCglmb3IgKGxldCBjb2wgPSAwOyBjb2wgPCBjb2xzOyBjb2wrKykgewoJCXQucHVzaCgpOwoJCXQudHJhbnNsYXRlKG9yaWdpblggKyBjb2wsIG9yaWdpblkpOwoJCXQucG9pbnQoKTsKCQl0LnBvcCgpOwoKCQl0LnB1c2goKTsKCQl0LnRyYW5zbGF0ZShvcmlnaW5YICsgY29sLCBvcmlnaW5ZICsgcm93cyAtIDEpOwoJCXQucG9pbnQoKTsKCQl0LnBvcCgpOwoJfQoKCWZvciAobGV0IHJvdyA9IDA7IHJvdyA8IHJvd3M7IHJvdysrKSB7CgkJdC5wdXNoKCk7CgkJdC50cmFuc2xhdGUob3JpZ2luWCwgb3JpZ2luWSArIHJvdyk7CgkJdC5wb2ludCgpOwoJCXQucG9wKCk7CgoJCXQucHVzaCgpOwoJCXQudHJhbnNsYXRlKG9yaWdpblggKyBjb2xzIC0gMSwgb3JpZ2luWSArIHJvdyk7CgkJdC5wb2ludCgpOwoJCXQucG9wKCk7Cgl9Cn0KCnQuc2V0dXAoYXN5bmMgKCkgPT4gewoJZm9udCA9IGF3YWl0IHQubG9hZEZpZ0ZvbnQoJ2h0dHBzOi8vY2RuLmpzZGVsaXZyLm5ldC9naC94ZXJvL2ZpZ2xldC1mb250c0BtYXN0ZXIvQ29sb3NzYWwuZmxmJyk7CgltZWFzdXJlbWVudCA9IGZvbnQubWVhc3VyZVRleHQoJ01FQVNVUkUnKTsKCXJlbmRlcmVkID0gZm9udC5yZW5kZXJUZXh0KCdNRUFTVVJFJyk7Cn0pOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg4LCAxMCwgMTgpOwoKCWlmICghZm9udCB8fCAhbWVhc3VyZW1lbnQgfHwgIXJlbmRlcmVkKSB7CgkJd3JpdGVMYWJlbCgnbWVhc3VyaW5nIHJlbmRlcmVkIGJvdW5kcyB3aXRoIG1lYXN1cmVUZXh0KCknLCAwLCBbMjU1LCAyMTQsIDEwMl0pOwoJCXJldHVybjsKCX0KCgljb25zdCBvcmlnaW5YID0gLU1hdGguZmxvb3IobWVhc3VyZW1lbnQuY29scyAvIDIpOwoJY29uc3Qgb3JpZ2luWSA9IC00OwoKCXdyaXRlTGFiZWwoJ1RleHRtb2RlRmlnRm9udC5tZWFzdXJlVGV4dCcsIC0xMSwgWzI1NSwgMjE0LCAxMDJdKTsKCWRyYXdCb3VuZHMobWVhc3VyZW1lbnQuY29scywgbWVhc3VyZW1lbnQucm93cywgb3JpZ2luWCwgb3JpZ2luWSwgWzI1NSwgMTIwLCAxNTBdKTsKCWRyYXdHcmlkKHJlbmRlcmVkLmdyaWQsIG9yaWdpblgsIG9yaWdpblksIFsxMjQsIDIxNCwgMjU1XSk7Cgl3cml0ZUxhYmVsKGBib3VuZHM6ICR7bWVhc3VyZW1lbnQuY29sc30gY29scyDDlyAke21lYXN1cmVtZW50LnJvd3N9IHJvd3NgLCA5LCBbMjIwLCAyMzAsIDI1NV0pOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
 
 ***
 
