@@ -4,3 +4,5 @@ node_modules
 .vitepress/cache/
 .vitepress/dist/
 .vitepress/temp/
+.agents
+skills-lock.json
