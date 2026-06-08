@@ -7,7 +7,7 @@ category: Variables
 api: true
 kind: Variable
 ecosystem: textmode.js
-lastModified: 2026-05-15
+lastModified: 2026-06-08
 ---
 
 [textmode.filters.js](../index.md) / FiltersPlugin
@@ -25,4 +25,33 @@ visual effects that run entirely on the GPU via WebGL2 fragment shaders.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.filters.js" language="javascript" title="FiltersPlugin" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CiAgICBwbHVnaW5zOiBbRmlsdGVyc1BsdWdpbl0KfSk7CgpsZXQgZnJhbWUgPSAwOwp0LmRyYXcoKCkgPT4gewogICAgLy8gU2ltcGxlIGZpbHRlciB3aXRoIHNob3J0aGFuZCB2YWx1ZQogICAgdC5sYXllcnMuYmFzZS5maWx0ZXIoJ2JyaWdodG5lc3MnLCAxLjIpOwoKICAgIC8vIEZpbHRlciB3aXRoIG9wdGlvbnMgb2JqZWN0CiAgICB0LmxheWVycy5iYXNlLmZpbHRlcignYmxvb20nLCB7CiAgICAgICAgdGhyZXNob2xkOiAwLjUsCiAgICAgICAgaW50ZW5zaXR5OiAxLjUsCiAgICAgICAgcmFkaXVzOiA4CiAgICB9KTsKCiAgICAvLyBBbmltYXRlZCBmaWx0ZXIKICAgIHQubGF5ZXJzLmJhc2UuZmlsdGVyKCdmaWxtR3JhaW4nLCB7CiAgICAgICAgaW50ZW5zaXR5OiAwLjIsCiAgICAgICAgdGltZTogZnJhbWUgKiAwLjAxNgogICAgfSk7CgogICAgdC5iYWNrZ3JvdW5kKDApOwogICAgZnJhbWUrKzsKfSk7" />
+```javascript
+import { textmode } from 'textmode.js';
+import { FiltersPlugin } from 'textmode.filters.js';
+
+const t = textmode.create({
+    plugins: [FiltersPlugin]
+});
+
+let frame = 0;
+t.draw(() => {
+    // Simple filter with shorthand value
+    t.layers.base.filter('brightness', 1.2);
+
+    // Filter with options object
+    t.layers.base.filter('bloom', {
+        threshold: 0.5,
+        intensity: 1.5,
+        radius: 8
+    });
+
+    // Animated filter
+    t.layers.base.filter('filmGrain', {
+        intensity: 0.2,
+        time: frame * 0.016
+    });
+
+    t.background(0);
+    frame++;
+});
+```
