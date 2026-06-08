@@ -8,7 +8,7 @@ api: true
 owner: TextmodeFilterStrategy
 namespace: filters
 kind: Method
-lastModified: 2026-06-07
+lastModified: 2026-06-08
 ---
 
 [textmode.js](../../../../../index.md) / [filters](../../../index.md) / [TextmodeFilterStrategy](../../TextmodeFilterStrategy.md) / createUniforms

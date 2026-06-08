@@ -7,7 +7,7 @@ category: Constructors
 api: true
 owner: TextmodeGlyphRamp
 kind: Constructor
-lastModified: 2026-06-07
+lastModified: 2026-06-08
 ---
 
 [textmode.js](../../../index.md) / [TextmodeGlyphRamp](../../TextmodeGlyphRamp.md) / constructor

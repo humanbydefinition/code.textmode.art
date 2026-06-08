@@ -8,7 +8,7 @@ api: true
 owner: TextmodeGamepadSnapshot
 namespace: input.gamepad
 kind: Property
-lastModified: 2026-06-07
+lastModified: 2026-06-08
 ---
 
 [textmode.js](../../../../../../../index.md) / [input](../../../../../index.md) / [gamepad](../../../index.md) / [TextmodeGamepadSnapshot](../../TextmodeGamepadSnapshot.md) / timestamp

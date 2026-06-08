@@ -6,7 +6,7 @@ description: ~ travelling without arriving
 category: API Reference
 api: true
 kind: Project
-lastModified: 2026-06-07
+lastModified: 2026-06-08
 ---
 
 # textmode.js

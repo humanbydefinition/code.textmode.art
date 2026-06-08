@@ -8,7 +8,7 @@ api: true
 owner: TextmodeVideo
 namespace: media
 kind: Method
-lastModified: 2026-06-07
+lastModified: 2026-06-08
 ---
 
 [textmode.js](../../../../../index.md) / [media](../../../index.md) / [TextmodeVideo](../../TextmodeVideo.md) / cellColorMode

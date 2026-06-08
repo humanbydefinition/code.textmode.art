@@ -8,7 +8,7 @@ api: true
 owner: TextmodeFont
 namespace: fonts
 kind: Accessor
-lastModified: 2026-06-07
+lastModified: 2026-06-08
 ---
 
 [textmode.js](../../../../../index.md) / [fonts](../../../index.md) / [TextmodeFont](../../TextmodeFont.md) / framebuffer

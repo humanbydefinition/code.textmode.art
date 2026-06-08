@@ -7,7 +7,7 @@ category: API Reference
 api: true
 kind: Project
 ecosystem: textmode.js
-lastModified: 2026-06-07
+lastModified: 2026-06-08
 ---
 
 # textmode.synth.js
@@ -47,6 +47,7 @@ and visual effects through method chaining.
 | Variable | Description |
 | ------ | ------ |
 | [SynthPlugin](variables/SynthPlugin.md) | The `textmode.synth.js` plugin to install. |
+| [EASING\_FUNCTIONS](variables/EASING_FUNCTIONS.md) | Easing functions from https://gist.github.com/gre/1650294 |
 
 ## Functions
 

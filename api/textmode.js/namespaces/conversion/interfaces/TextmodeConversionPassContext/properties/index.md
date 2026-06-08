@@ -8,7 +8,7 @@ api: true
 owner: TextmodeConversionPassContext
 namespace: conversion
 kind: Property
-lastModified: 2026-06-07
+lastModified: 2026-06-08
 ---
 
 [textmode.js](../../../../../index.md) / [conversion](../../../index.md) / [TextmodeConversionPassContext](../../TextmodeConversionPassContext.md) / index

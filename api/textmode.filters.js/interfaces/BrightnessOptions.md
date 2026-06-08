@@ -21,41 +21,10 @@ Adjusts image brightness by multiplying pixel values.
 
 ## Example
 
-```javascript
-const t = textmode.create({
-  width: window.innerWidth,
-  height: window.innerHeight,
-  plugins: [FiltersPlugin],
-});
-
-let video;
-
-t.setup(async () => {
-  video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
-  video.play();
-  video.loop();
-  video.characters(' .:-=+*#%@');
-});
-
-t.draw(() => {
-  t.background(0);
-  if (video) {
-    t.image(video, t.grid.cols, t.grid.rows);
-  }
-
-  const wobble = Math.sin(t.secs * 2);
-  t.layers.base.filter('brightness', {
-    amount: 1 + wobble * 0.25,
-  });
-});
-
-t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
+<TextmodeApiSandbox profile="textmode.filters.js" language="javascript" title="BrightnessOptions" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW0ZpbHRlcnNQbHVnaW5dLAp9KTsKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKbGV0IHZpZGVvOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LnNldHVwKGFzeW5jICgpID0-IHsKCXZpZGVvID0gYXdhaXQgdC5sb2FkVmlkZW8oJ2h0dHBzOi8vaW50ZXJhY3RpdmUtZXhhbXBsZXMubWRuLm1vemlsbGEubmV0L21lZGlhL2NjMC12aWRlb3MvZmxvd2VyLm1wNCcpOwoJdmlkZW8ucGxheSgpOwoJdmlkZW8ubG9vcCgpOwoJdmlkZW8uY2hhcmFjdGVycygnIC46LT0rKiMlQCcpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKSwKCQl0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzLAoJCXggPSBsZWZ0ICsgMzsKCgljb25zdCB2YWwgPSAoMS41ICsgMS4wICogTWF0aC5zaW4odC5zZWNzICogMi4wKSkudG9GaXhlZCgyKTsKCglkcmF3VGV4dCgnRklMVEVSU1BMVUdJTi5CUklHSFRORVNTJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogTFVNSU5FU0NFTkNFIENPTlRST0wnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ0FkanVzdHMgYmFzZSBpbWFnZSBicmlnaHRuZXNzLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0Ftb3VudDogJyArIHZhbCwgeCwgeSsrLCAxNDAsIDI1NSwgMTgwKTsKfSk7Cgp0LmRyYXcoKCkgPT4gewoJaWYgKCF2aWRlbykgcmV0dXJuOwoJY29uc3QgdmFsID0gMS41ICsgMS4wICogTWF0aC5zaW4odC5zZWNzICogMi4wKTsKCgl0LmxheWVycy5iYXNlLmZpbHRlcignYnJpZ2h0bmVzcycsIHZhbCk7CgoJdC5iYWNrZ3JvdW5kKDApOwoJdC5pbWFnZSh2aWRlbyk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
 
 ## Properties
 
-| Property | Description |
-| ------ | ------ |
-| [amount](BrightnessOptions/properties/amount.md) | Brightness multiplier. |
+| Property | Type | Description |
+| ------ | ------ | ------ |
+| <a id="property-amount"></a> `amount` | `number` | Brightness multiplier. - `1.0` = normal brightness (no change) - `> 1.0` = brighter - `< 1.0` = darker - `0.0` = completely black **Default** `1.0` |

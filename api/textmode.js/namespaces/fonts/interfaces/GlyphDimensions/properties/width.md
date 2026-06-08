@@ -8,7 +8,7 @@ api: true
 owner: GlyphDimensions
 namespace: fonts
 kind: Property
-lastModified: 2026-06-07
+lastModified: 2026-06-08
 ---
 
 [textmode.js](../../../../../index.md) / [fonts](../../../index.md) / [GlyphDimensions](../../GlyphDimensions.md) / width

@@ -8,7 +8,7 @@ api: true
 owner: TextmodeError
 namespace: errors
 kind: Constructor
-lastModified: 2026-06-07
+lastModified: 2026-06-08
 ---
 
 [textmode.js](../../../../../index.md) / [errors](../../../index.md) / [TextmodeError](../../TextmodeError.md) / constructor

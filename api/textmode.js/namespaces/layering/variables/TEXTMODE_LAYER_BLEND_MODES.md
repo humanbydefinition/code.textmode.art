@@ -7,7 +7,7 @@ category: Variables
 api: true
 namespace: layering
 kind: Variable
-lastModified: 2026-06-07
+lastModified: 2026-06-08
 ---
 
 [textmode.js](../../../index.md) / [layering](../index.md) / TEXTMODE\_LAYER\_BLEND\_MODES

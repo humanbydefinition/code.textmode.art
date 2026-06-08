@@ -8,7 +8,7 @@ api: true
 owner: TextmodeLayer
 namespace: layering
 kind: Accessor
-lastModified: 2026-06-07
+lastModified: 2026-06-08
 ---
 
 [textmode.js](../../../../../index.md) / [layering](../../../index.md) / [TextmodeLayer](../../TextmodeLayer.md) / asciiFramebuffer

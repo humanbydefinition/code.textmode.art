@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-06-07
+lastModified: 2026-06-08
 ---
 
 [textmode.synth.js](../index.md) / DynamicErrorCallback

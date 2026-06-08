@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: fonts
 kind: Interface
-lastModified: 2026-06-07
+lastModified: 2026-06-08
 isInterface: true
 ---
 
@@ -29,10 +29,3 @@ Backend-neutral glyph atlas contract used by the shared rendering pipeline.
 | [columns](TextmodeGlyphAtlas/properties/columns.md) | - |
 | [framebuffer](TextmodeGlyphAtlas/properties/framebuffer.md) | - |
 | [rows](TextmodeGlyphAtlas/properties/rows.md) | - |
-
-## Methods
-
-| Method | Description |
-| ------ | ------ |
-| [\_getCharacterColor](TextmodeGlyphAtlas/methods/getCharacterColor.md) | - |
-| [\_getCharacterColors](TextmodeGlyphAtlas/methods/getCharacterColors.md) | - |

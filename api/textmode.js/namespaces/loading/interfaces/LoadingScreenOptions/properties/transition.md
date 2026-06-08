@@ -8,7 +8,7 @@ api: true
 owner: LoadingScreenOptions
 namespace: loading
 kind: Property
-lastModified: 2026-06-07
+lastModified: 2026-06-08
 ---
 
 [textmode.js](../../../../../index.md) / [loading](../../../index.md) / [LoadingScreenOptions](../../LoadingScreenOptions.md) / transition

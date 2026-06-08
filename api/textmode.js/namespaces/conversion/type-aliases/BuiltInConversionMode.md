@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 namespace: conversion
 kind: TypeAlias
-lastModified: 2026-06-07
+lastModified: 2026-06-08
 ---
 
 [textmode.js](../../../index.md) / [conversion](../index.md) / BuiltInConversionMode

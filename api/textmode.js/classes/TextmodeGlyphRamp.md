@@ -6,7 +6,7 @@ description: Immutable character sequence for mapping numbers to glyphs.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-06-07
+lastModified: 2026-06-08
 hasConstructor: true
 ---
 
