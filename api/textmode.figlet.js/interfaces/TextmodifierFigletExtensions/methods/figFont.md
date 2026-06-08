@@ -1,0 +1,52 @@
+---
+layout: doc
+editLink: true
+title: figFont
+description: Get the active FIGlet font used by figText().
+category: Methods
+api: true
+owner: TextmodifierFigletExtensions
+kind: Method
+ecosystem: textmode.js
+lastModified: 2026-06-08
+---
+
+[textmode.figlet.js](../../../index.md) / [TextmodifierFigletExtensions](../../TextmodifierFigletExtensions.md) / figFont
+
+# Method: figFont()
+
+## Call Signature
+
+```ts
+figFont(): TextmodeFigFont | undefined;
+```
+
+Get the active FIGlet font used by `figText()`.
+
+### Returns
+
+[`TextmodeFigFont`](../../../classes/TextmodeFigFont.md) \| `undefined`
+
+The currently active FIGlet font, if any.
+
+### Example
+
+<TextmodeApiSandbox profile="textmode.figlet.js" language="javascript" title="figFont" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW0ZpZ2xldFBsdWdpbl0sCn0pOwoKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKbGV0IGZvbnRBOwpsZXQgZm9udEI7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCnQuc2V0dXAoYXN5bmMgKCkgPT4gewoJZm9udEEgPSBhd2FpdCB0LmxvYWRGaWdGb250KCdodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvZ2gveGVyby9maWdsZXQtZm9udHNAbWFzdGVyL0J1bGJoZWFkLmZsZicpOwoJZm9udEIgPSBhd2FpdCB0LmxvYWRGaWdGb250KCdodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvZ2gveGVyby9maWdsZXQtZm9udHNAbWFzdGVyL1NsYW50LmZsZicpOwoJdC5maWdUZXh0QWxpZ24oJ2NlbnRlcicpOwoJdC5maWdUZXh0QmFzZWxpbmUoJ2NlbnRlcicpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CgoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5GSUdGT05UJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogR0VUL1NFVCBBQ1RJVkUgRklHRk9OVCcsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnU2V0cyBhY3RpdmUgZm9udCBmb3IgZmlnVGV4dCBjYWxscy4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJ1N3aXRjaGluZyBmb250cyB1cGRhdGVzIHJlbmRlciBncmlkLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJY29uc3QgYWN0aXZlID0gdC5maWdGb250KCk7CglpZiAoYWN0aXZlKSB7CgkJZHJhd1RleHQoYEFjdGl2ZSBmb250OiAke2FjdGl2ZS5uYW1lfWAsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7Cgl9IGVsc2UgewoJCWRyYXdUZXh0KCdMb2FkaW5nIGZvbnRzLi4uJywgeCwgeSsrLCAyNTUsIDE4MCwgMTAwKTsKCX0KfSk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDEwLCAxNSwgMTQpOwoKCWlmICghZm9udEEgfHwgIWZvbnRCKSByZXR1cm47CgoJLy8gQ3ljbGUgZm9udCBldmVyeSAzIHNlY29uZHMKCWNvbnN0IGN5Y2xlID0gTWF0aC5mbG9vcih0LnNlY3MgLyAzLjApICUgMjsKCWNvbnN0IGN1cnJlbnRGb250ID0gY3ljbGUgPT09IDAgPyBmb250QSA6IGZvbnRCOwoJdC5maWdGb250KGN1cnJlbnRGb250KTsKCgljb25zdCB0aW1lID0gdC5zZWNzICogMS41OwoKCXQuZmlnVGV4dCgnRk9OVCcsIDAsIDAsIHsKCQlob3Jpem9udGFsTGF5b3V0OiAnZml0dGVkJywKCQljaGFyQ29sb3I6IChjZWxsKSA9PiB7CgkJCWNvbnN0IHdhdmUgPSAwLjUgKyAwLjUgKiBNYXRoLnNpbih0aW1lICsgY2VsbC5jb2wgKiAwLjEpOwoJCQlyZXR1cm4gW01hdGgucm91bmQoMjAwICsgNTUgKiB3YXZlKSwgTWF0aC5yb3VuZCgxNTAgKyAxMDUgKiAoMS4wIC0gd2F2ZSkpLCBNYXRoLnJvdW5kKDEwMCArIDE1NSAqIHdhdmUpXTsKCQl9LAoJfSk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+
+## Call Signature
+
+```ts
+figFont(font): void;
+```
+
+Set the active FIGlet font used by `figText()`.
+
+### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `font` | [`TextmodeFigFont`](../../../classes/TextmodeFigFont.md) | The FIGlet font to use for subsequent text rendering. |
+
+### Returns
+
+`void`

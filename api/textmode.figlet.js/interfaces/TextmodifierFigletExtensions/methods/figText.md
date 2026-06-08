@@ -1,0 +1,43 @@
+---
+layout: doc
+editLink: true
+title: figText
+description: Render a FIGlet string onto the current textmode grid using the active FIGlet font.
+category: Methods
+api: true
+owner: TextmodifierFigletExtensions
+kind: Method
+ecosystem: textmode.js
+lastModified: 2026-06-08
+---
+
+[textmode.figlet.js](../../../index.md) / [TextmodifierFigletExtensions](../../TextmodifierFigletExtensions.md) / figText
+
+# Method: figText()
+
+```ts
+figText(
+   text, 
+   col, 
+   row, 
+   options?): void;
+```
+
+Render a FIGlet string onto the current textmode grid using the active FIGlet font.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `text` | `string` | The text to render. |
+| `col` | `number` | Target column in grid space. |
+| `row` | `number` | Target row in grid space. |
+| `options?` | [`FigTextOptions`](../../FigTextOptions.md) | Optional layout overrides. |
+
+## Returns
+
+`void`
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.figlet.js" language="javascript" title="figText" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW0ZpZ2xldFBsdWdpbl0sCn0pOwoKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKbGV0IGZvbnQ7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCnQuc2V0dXAoYXN5bmMgKCkgPT4gewoJZm9udCA9IGF3YWl0IHQubG9hZEZpZ0ZvbnQoJ2h0dHBzOi8vY2RuLmpzZGVsaXZyLm5ldC9naC94ZXJvL2ZpZ2xldC1mb250c0BtYXN0ZXIvQnVsYmhlYWQuZmxmJyk7Cgl0LmZpZ0ZvbnQoZm9udCk7Cgl0LmZpZ1RleHRBbGlnbignY2VudGVyJyk7Cgl0LmZpZ1RleHRCYXNlbGluZSgnY2VudGVyJyk7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLkZJR1RFWFQnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBSRU5ERVJJTkcgRklHTEVUIFRFWFQnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ0RyYXdzIHN0eWxpemVkIHRleHQgdXNpbmcgYWN0aXZlIGZvbnQuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdTdXBwb3J0cyBkeW5hbWljIGNvbG9ycyBwZXIgY2VsbC4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWlmIChmb250KSB7CgkJZHJhd1RleHQoJ09yYml0aW5nICJURVhUIiBsYXlvdXQgYW5pbWF0aW9uJywgeCwgeSsrLCAxNDAsIDI1NSwgMTgwKTsKCX0gZWxzZSB7CgkJZHJhd1RleHQoJ0xvYWRpbmcgZm9udC4uLicsIHgsIHkrKywgMjU1LCAxODAsIDEwMCk7Cgl9Cn0pOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCgxNCwgMTAsIDE2KTsKCglpZiAoIWZvbnQpIHJldHVybjsKCgljb25zdCB0aW1lID0gdC5zZWNzICogMS41OwoJY29uc3Qgb3ggPSBNYXRoLmZsb29yKE1hdGguY29zKHRpbWUpICogNik7Cgljb25zdCBveSA9IE1hdGguZmxvb3IoTWF0aC5zaW4odGltZSkgKiAzKTsKCgl0LmZpZ1RleHQoJ1RFWFQnLCBveCwgb3ksIHsKCQlob3Jpem9udGFsTGF5b3V0OiAnZml0dGVkJywKCQljaGFyQ29sb3I6IChjZWxsKSA9PiB7CgkJCWNvbnN0IHdhdmUgPSAwLjUgKyAwLjUgKiBNYXRoLnNpbih0aW1lICogMi4wICsgY2VsbC5jb2wgKiAwLjEpOwoJCQlyZXR1cm4gW01hdGgucm91bmQoMjU1ICogd2F2ZSksIE1hdGgucm91bmQoMTgwICogKDEuMCAtIHdhdmUpKSwgMjU1XTsKCQl9LAoJfSk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />

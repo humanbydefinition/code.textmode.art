@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-05-15
+lastModified: 2026-06-08
 isInterface: true
 ---
 
@@ -19,14 +19,14 @@ Public cell metadata exposed to FIGlet styling callbacks.
 
 ## Properties
 
-| Property | Type | Description |
-| ------ | ------ | ------ |
-| <a id="property-char"></a> `char` | `string` | Final drawable sub-character after layout normalization. |
-| <a id="property-col"></a> `col` | `number` | Absolute column within the rendered result. |
-| <a id="property-row"></a> `row` | `number` | Absolute row within the rendered result. |
-| <a id="property-inputindex"></a> `inputIndex` | `number` | Zero-based index into the original input string's character sequence. |
-| <a id="property-inputchar"></a> `inputChar` | `string` | Original input character that produced this cell. |
-| <a id="property-figcharcode"></a> `figCharCode` | `number` | FIGcharacter code used to produce this cell. |
-| <a id="property-subrow"></a> `subRow` | `number` | Row within the source FIGcharacter. |
-| <a id="property-subcol"></a> `subCol` | `number` | Column within the source FIGcharacter. |
-| <a id="property-lineindex"></a> `lineIndex` | `number` | Logical rendered line index after explicit newline splitting. |
+| Property | Description |
+| ------ | ------ |
+| [char](FigTextCellContext/properties/char.md) | Final drawable sub-character after layout normalization. |
+| [col](FigTextCellContext/properties/col.md) | Absolute column within the rendered result. |
+| [row](FigTextCellContext/properties/row.md) | Absolute row within the rendered result. |
+| [inputIndex](FigTextCellContext/properties/inputIndex.md) | Zero-based index into the original input string's character sequence. |
+| [inputChar](FigTextCellContext/properties/inputChar.md) | Original input character that produced this cell. |
+| [figCharCode](FigTextCellContext/properties/figCharCode.md) | FIGcharacter code used to produce this cell. |
+| [subRow](FigTextCellContext/properties/subRow.md) | Row within the source FIGcharacter. |
+| [subCol](FigTextCellContext/properties/subCol.md) | Column within the source FIGcharacter. |
+| [lineIndex](FigTextCellContext/properties/lineIndex.md) | Logical rendered line index after explicit newline splitting. |
