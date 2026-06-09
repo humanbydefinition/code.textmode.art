@@ -68,31 +68,31 @@ installSandpackSandboxAttributePatch()
 const API_SANDBOX_PROFILES: Record<string, { scripts: string[] }> = {
   'textmode.js': {
     scripts: [
-      'https://unpkg.com/textmode.js@0.16.0-beta.1/dist/textmode.umd.js',
+      'https://unpkg.com/textmode.js@latest/dist/textmode.umd.js',
     ],
   },
   'textmode.synth.js': {
     scripts: [
-      'https://unpkg.com/textmode.js@0.16.0-beta.1/dist/textmode.umd.js',
-      'https://unpkg.com/textmode.synth.js@1.6.0/dist/textmode.synth.umd.js',
+      'https://unpkg.com/textmode.js@latest/dist/textmode.umd.js',
+      'https://unpkg.com/textmode.synth.js@latest/dist/textmode.synth.umd.js',
     ],
   },
   'textmode.filters.js': {
     scripts: [
-      'https://unpkg.com/textmode.js@0.16.0-beta.1/dist/textmode.umd.js',
-      'https://unpkg.com/textmode.filters.js@1.1.1/dist/textmode.filters.umd.js',
+      'https://unpkg.com/textmode.js@latest/dist/textmode.umd.js',
+      'https://unpkg.com/textmode.filters.js@latest/dist/textmode.filters.umd.js',
     ],
   },
   'textmode.figlet.js': {
     scripts: [
-      'https://unpkg.com/textmode.js@0.16.0-beta.1/dist/textmode.umd.js',
-      'https://unpkg.com/textmode.figlet.js@1.0.0/dist/textmode.figlet.umd.js',
+      'https://unpkg.com/textmode.js@latest/dist/textmode.umd.js',
+      'https://unpkg.com/textmode.figlet.js@latest/dist/textmode.figlet.umd.js',
     ],
   },
   'textmode.export.js': {
     scripts: [
-      'https://unpkg.com/textmode.js@0.16.0-beta.1/dist/textmode.umd.js',
-      'https://unpkg.com/textmode.export.js@1.2.1/dist/textmode.export.umd.js',
+      'https://unpkg.com/textmode.js@latest/dist/textmode.umd.js',
+      'https://unpkg.com/textmode.export.js@latest/dist/textmode.export.umd.js',
     ],
   },
 }
