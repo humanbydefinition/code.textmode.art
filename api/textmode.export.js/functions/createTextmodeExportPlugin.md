@@ -6,12 +6,12 @@ deprecated: |-
    directly instead.
   This function is provided for backwards compatibility only.
 title: createTextmodeExportPlugin
-description: createTextmodeExportPlugin function API reference for textmode.export.js.
+description: Creates the textmode.export.js plugin for textmode.js.
 category: Functions
 api: true
 kind: Function
 ecosystem: textmode.js
-lastModified: 2026-05-16
+lastModified: 2026-06-09
 ---
 
 [textmode.export.js](../index.md) / createTextmodeExportPlugin

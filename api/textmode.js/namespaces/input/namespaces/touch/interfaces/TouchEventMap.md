@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: input.touch
 kind: Interface
-lastModified: 2026-06-08
+lastModified: 2026-06-09
 isInterface: true
 ---
 
@@ -19,15 +19,15 @@ Touch and gesture events emitted by the touch input manager.
 
 ## Properties
 
-| Property | Description |
-| ------ | ------ |
-| [doubleTap](TouchEventMap/properties/doubleTap.md) | Fires on a double tap gesture. |
-| [longPress](TouchEventMap/properties/longPress.md) | Fires on a long press gesture. |
-| [pinch](TouchEventMap/properties/pinch.md) | Fires on a pinch gesture update. |
-| [rotateGesture](TouchEventMap/properties/rotateGesture.md) | Fires on a rotation gesture update. |
-| [swipe](TouchEventMap/properties/swipe.md) | Fires on a swipe gesture. |
-| [tap](TouchEventMap/properties/tap.md) | Fires on a single tap gesture. |
-| [touchCancelled](TouchEventMap/properties/touchCancelled.md) | Fires when the browser cancels a touch. |
-| [touchEnded](TouchEventMap/properties/touchEnded.md) | Fires when a touch point is lifted from the canvas. |
-| [touchMoved](TouchEventMap/properties/touchMoved.md) | Fires when a touch point moves across the canvas. |
-| [touchStarted](TouchEventMap/properties/touchStarted.md) | Fires when a touch point begins on the canvas. |
+| Property | Type | Description |
+| ------ | ------ | ------ |
+| <a id="property-doubletap"></a> `doubleTap` | [`TouchTapHandler`](../type-aliases/TouchTapHandler.md) | Fires on a double tap gesture. |
+| <a id="property-longpress"></a> `longPress` | [`TouchLongPressHandler`](../type-aliases/TouchLongPressHandler.md) | Fires on a long press gesture. |
+| <a id="property-pinch"></a> `pinch` | [`TouchPinchHandler`](../type-aliases/TouchPinchHandler.md) | Fires on a pinch gesture update. |
+| <a id="property-rotategesture"></a> `rotateGesture` | [`TouchRotateHandler`](../type-aliases/TouchRotateHandler.md) | Fires on a rotation gesture update. |
+| <a id="property-swipe"></a> `swipe` | [`TouchSwipeHandler`](../type-aliases/TouchSwipeHandler.md) | Fires on a swipe gesture. |
+| <a id="property-tap"></a> `tap` | [`TouchTapHandler`](../type-aliases/TouchTapHandler.md) | Fires on a single tap gesture. |
+| <a id="property-touchcancelled"></a> `touchCancelled` | [`TouchEventHandler`](../type-aliases/TouchEventHandler.md) | Fires when the browser cancels a touch. |
+| <a id="property-touchended"></a> `touchEnded` | [`TouchEventHandler`](../type-aliases/TouchEventHandler.md) | Fires when a touch point is lifted from the canvas. |
+| <a id="property-touchmoved"></a> `touchMoved` | [`TouchEventHandler`](../type-aliases/TouchEventHandler.md) | Fires when a touch point moves across the canvas. |
+| <a id="property-touchstarted"></a> `touchStarted` | [`TouchEventHandler`](../type-aliases/TouchEventHandler.md) | Fires when a touch point begins on the canvas. |

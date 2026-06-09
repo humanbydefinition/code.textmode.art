@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 namespace: conversion
 kind: TypeAlias
-lastModified: 2026-06-08
+lastModified: 2026-06-09
 ---
 
 [textmode.js](../../../index.md) / [conversion](../index.md) / TextmodeColorInput

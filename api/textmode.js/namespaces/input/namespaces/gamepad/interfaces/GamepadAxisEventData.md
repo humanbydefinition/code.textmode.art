@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: input.gamepad
 kind: Interface
-lastModified: 2026-06-08
+lastModified: 2026-06-09
 isInterface: true
 ---
 
@@ -19,11 +19,11 @@ Axis change payload emitted when an axis crosses configured thresholds.
 
 ## Properties
 
-| Property | Description |
-| ------ | ------ |
-| [axisIndex](GamepadAxisEventData/properties/axisIndex.md) | Axis index in the raw `axes` array. |
-| [delta](GamepadAxisEventData/properties/delta.md) | Difference between current and previous values. |
-| [gamepad](GamepadAxisEventData/properties/gamepad.md) | The gamepad whose axis changed state. |
-| [previousValue](GamepadAxisEventData/properties/previousValue.md) | Previous-frame axis value. |
-| [standardAxisName](GamepadAxisEventData/properties/standardAxisName.md) | Semantic axis alias for standard-mapped controllers. |
-| [value](GamepadAxisEventData/properties/value.md) | Current axis value. |
+| Property | Type | Description |
+| ------ | ------ | ------ |
+| <a id="property-axisindex"></a> `axisIndex` | `number` | Axis index in the raw `axes` array. |
+| <a id="property-delta"></a> `delta` | `number` | Difference between current and previous values. |
+| <a id="property-gamepad"></a> `gamepad` | [`TextmodeGamepadSnapshot`](TextmodeGamepadSnapshot.md) | The gamepad whose axis changed state. |
+| <a id="property-previousvalue"></a> `previousValue` | `number` | Previous-frame axis value. |
+| <a id="property-standardaxisname"></a> `standardAxisName?` | [`TextmodeStandardAxisName`](../type-aliases/TextmodeStandardAxisName.md) | Semantic axis alias for standard-mapped controllers. |
+| <a id="property-value"></a> `value` | `number` | Current axis value. |

@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: filters
 kind: Interface
-lastModified: 2026-06-08
+lastModified: 2026-06-09
 isInterface: true
 ---
 
@@ -22,9 +22,9 @@ or an object with named properties.
 
 ## Properties
 
-| Property | Description |
-| ------ | ------ |
-| [grayscale](BuiltInFilterParams/properties/grayscale.md) | Converts to grayscale. Amount: 0-1, default 1 |
-| [invert](BuiltInFilterParams/properties/invert.md) | Inverts all colors (no params needed) |
-| [sepia](BuiltInFilterParams/properties/sepia.md) | Applies sepia tone. Amount: 0-1, default 1 |
-| [threshold](BuiltInFilterParams/properties/threshold.md) | Black/white threshold. Threshold: 0-1, default 0.5 |
+| Property | Type | Description |
+| ------ | ------ | ------ |
+| <a id="property-grayscale"></a> `grayscale` | \| `number` \| `void` \| \{ `amount?`: `number`; \} | Converts to grayscale. Amount: 0-1, default 1 |
+| <a id="property-invert"></a> `invert` | `void` | Inverts all colors (no params needed) |
+| <a id="property-sepia"></a> `sepia` | \| `number` \| `void` \| \{ `amount?`: `number`; \} | Applies sepia tone. Amount: 0-1, default 1 |
+| <a id="property-threshold"></a> `threshold` | \| `number` \| \{ `threshold?`: `number`; \} | Black/white threshold. Threshold: 0-1, default 0.5 |

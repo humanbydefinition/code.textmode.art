@@ -8,7 +8,7 @@ api: true
 owner: TextmodeTileset
 namespace: fonts
 kind: Accessor
-lastModified: 2026-06-08
+lastModified: 2026-06-09
 ---
 
 [textmode.js](../../../../../index.md) / [fonts](../../../index.md) / [TextmodeTileset](../../TextmodeTileset.md) / columns
@@ -33,4 +33,4 @@ Number of columns in the normalized glyph atlas.
 
 ## Implementation of
 
-[`TextmodeGlyphAtlas`](../../../interfaces/TextmodeGlyphAtlas.md).[`columns`](../../../interfaces/TextmodeGlyphAtlas/properties/columns.md)
+[`TextmodeGlyphAtlas`](../../../interfaces/TextmodeGlyphAtlas.md).[`columns`](../../../interfaces/TextmodeGlyphAtlas.md#property-columns)

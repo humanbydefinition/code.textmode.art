@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: loading
 kind: Interface
-lastModified: 2026-06-08
+lastModified: 2026-06-09
 isInterface: true
 ---
 
@@ -19,7 +19,7 @@ Options for configuring the loading screen.
 
 ## Properties
 
-| Property | Description |
-| ------ | ------ |
-| [transition](LoadingScreenOptions/properties/transition.md) | Transition mode for loading completion. Default is `'fade'`. Use `'none'` to skip the fade (treated as `transitionDuration: 0`). |
-| [transitionDuration](LoadingScreenOptions/properties/transitionDuration.md) | Fade duration in milliseconds. Default is `500`. |
+| Property | Type | Description |
+| ------ | ------ | ------ |
+| <a id="property-transition"></a> `transition?` | `"none"` \| `"fade"` | Transition mode for loading completion. Default is `'fade'`. Use `'none'` to skip the fade (treated as `transitionDuration: 0`). |
+| <a id="property-transitionduration"></a> `transitionDuration?` | `number` | Fade duration in milliseconds. Default is `500`. |

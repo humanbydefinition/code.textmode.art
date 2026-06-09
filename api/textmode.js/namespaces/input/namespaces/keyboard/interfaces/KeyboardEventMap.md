@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: input.keyboard
 kind: Interface
-lastModified: 2026-06-08
+lastModified: 2026-06-09
 isInterface: true
 ---
 
@@ -19,8 +19,8 @@ Keyboard events emitted by the keyboard input manager.
 
 ## Properties
 
-| Property | Description |
-| ------ | ------ |
-| [keyPressed](KeyboardEventMap/properties/keyPressed.md) | Fires when a key is pressed down (no repeat). |
-| [keyReleased](KeyboardEventMap/properties/keyReleased.md) | Fires when a key is released. |
-| [keyTyped](KeyboardEventMap/properties/keyTyped.md) | Fires when a printable character is typed. |
+| Property | Type | Description |
+| ------ | ------ | ------ |
+| <a id="property-keypressed"></a> `keyPressed` | [`KeyboardEventHandler`](../type-aliases/KeyboardEventHandler.md) | Fires when a key is pressed down (no repeat). |
+| <a id="property-keyreleased"></a> `keyReleased` | [`KeyboardEventHandler`](../type-aliases/KeyboardEventHandler.md) | Fires when a key is released. |
+| <a id="property-keytyped"></a> `keyTyped` | [`KeyboardEventHandler`](../type-aliases/KeyboardEventHandler.md) | Fires when a printable character is typed. |

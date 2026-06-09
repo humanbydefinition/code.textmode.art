@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: filters
 kind: Interface
-lastModified: 2026-06-08
+lastModified: 2026-06-09
 isInterface: true
 ---
 
@@ -19,8 +19,8 @@ Context provided to filter strategies for shader creation
 
 ## Properties
 
-| Property | Description |
-| ------ | ------ |
-| [gl](FilterContext/properties/gl.md) | The WebGL2 rendering context |
-| [height](FilterContext/properties/height.md) | Height of the framebuffer being filtered |
-| [width](FilterContext/properties/width.md) | Width of the framebuffer being filtered |
+| Property | Type | Description |
+| ------ | ------ | ------ |
+| <a id="property-gl"></a> `gl` | `WebGL2RenderingContext` | The WebGL2 rendering context |
+| <a id="property-height"></a> `height` | `number` | Height of the framebuffer being filtered |
+| <a id="property-width"></a> `width` | `number` | Width of the framebuffer being filtered |

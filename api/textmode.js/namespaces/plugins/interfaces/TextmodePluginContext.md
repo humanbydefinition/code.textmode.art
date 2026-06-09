@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: plugins
 kind: Interface
-lastModified: 2026-06-08
+lastModified: 2026-06-09
 isInterface: true
 ---
 
@@ -19,15 +19,15 @@ Host-provided context passed to plugins when they are installed on a [Textmodifi
 
 ## Properties
 
-| Property | Description |
-| ------ | ------ |
-| [asciiFramebuffer](TextmodePluginContext/properties/asciiFramebuffer.md) | The framebuffer containing the ASCII representation (from base layer).<br/> This framebuffer only has a single attachment. |
-| [canvas](TextmodePluginContext/properties/canvas.md) | A stable handle for the canvas used by the Textmodifier instance. |
-| [drawFramebuffer](TextmodePluginContext/properties/drawFramebuffer.md) | The framebuffer the user draws to with 3 attachments (from base layer). |
-| [font](TextmodePluginContext/properties/font.md) | The active glyph source used by the Textmodifier instance (from base layer). |
-| [glyphAtlas](TextmodePluginContext/properties/glyphAtlas.md) | Backend-neutral glyph atlas used by the Textmodifier instance (from base layer). |
-| [grid](TextmodePluginContext/properties/grid.md) | The grid used by the Textmodifier instance (from base layer). |
-| [layerManager](TextmodePluginContext/properties/layerManager.md) | The layer manager for accessing and managing all layers. |
+| Property | Type | Description |
+| ------ | ------ | ------ |
+| <a id="property-asciiframebuffer"></a> `asciiFramebuffer` | [`TextmodeFramebuffer`](../../../classes/TextmodeFramebuffer.md) | The framebuffer containing the ASCII representation (from base layer).<br/> This framebuffer only has a single attachment. |
+| <a id="property-canvas"></a> `canvas` | [`TextmodeCanvasHandle`](TextmodeCanvasHandle.md) | A stable handle for the canvas used by the Textmodifier instance. |
+| <a id="property-drawframebuffer"></a> `drawFramebuffer` | [`TextmodeFramebuffer`](../../../classes/TextmodeFramebuffer.md) | The framebuffer the user draws to with 3 attachments (from base layer). |
+| <a id="property-font"></a> `font` | \| [`TextmodeFont`](../../fonts/classes/TextmodeFont.md) \| [`TextmodeTileset`](../../fonts/classes/TextmodeTileset.md) | The active glyph source used by the Textmodifier instance (from base layer). |
+| <a id="property-glyphatlas"></a> `glyphAtlas` | [`TextmodeGlyphAtlas`](../../fonts/interfaces/TextmodeGlyphAtlas.md) | Backend-neutral glyph atlas used by the Textmodifier instance (from base layer). |
+| <a id="property-grid"></a> `grid` | [`TextmodeGrid`](../../../classes/TextmodeGrid.md) | The grid used by the Textmodifier instance (from base layer). |
+| <a id="property-layermanager"></a> `layerManager` | [`TextmodeLayerManager`](../../layering/classes/TextmodeLayerManager.md) | The layer manager for accessing and managing all layers. |
 
 ## Methods
 

@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: fonts
 kind: Interface
-lastModified: 2026-06-08
+lastModified: 2026-06-09
 isInterface: true
 ---
 
@@ -19,7 +19,7 @@ Glyph cell dimensions in pixels.
 
 ## Properties
 
-| Property | Description |
+| Property | Type |
 | ------ | ------ |
-| [height](GlyphDimensions/properties/height.md) | - |
-| [width](GlyphDimensions/properties/width.md) | - |
+| <a id="property-height"></a> `height` | `number` |
+| <a id="property-width"></a> `width` | `number` |

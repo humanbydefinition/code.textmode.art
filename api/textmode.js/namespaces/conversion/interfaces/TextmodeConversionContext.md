@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: conversion
 kind: Interface
-lastModified: 2026-06-08
+lastModified: 2026-06-09
 isInterface: true
 ---
 
@@ -22,10 +22,10 @@ necessary for implementing custom conversion logic.
 
 ## Properties
 
-| Property | Description |
-| ------ | ------ |
-| [font](TextmodeConversionContext/properties/font.md) | Legacy alias for the active glyph atlas. Kept for backward compatibility with existing conversion strategies. |
-| [gl](TextmodeConversionContext/properties/gl.md) | The native WebGL2 rendering context. Use this for creating textures, buffers, or other low-level WebGL resources. |
-| [glyphAtlas](TextmodeConversionContext/properties/glyphAtlas.md) | Backend-neutral glyph atlas currently being used for rendering. Prefer this in new code. |
-| [pass](TextmodeConversionContext/properties/pass.md) | Metadata for the active source-level conversion stack pass. |
-| [source](TextmodeConversionContext/properties/source.md) | The source asset (image, video, etc.) being converted. Provides access to the source texture and dimensions. |
+| Property | Type | Description |
+| ------ | ------ | ------ |
+| <a id="property-font"></a> `font` | [`TextmodeGlyphAtlas`](../../fonts/interfaces/TextmodeGlyphAtlas.md) | Legacy alias for the active glyph atlas. Kept for backward compatibility with existing conversion strategies. |
+| <a id="property-gl"></a> `gl` | `WebGL2RenderingContext` | The native WebGL2 rendering context. Use this for creating textures, buffers, or other low-level WebGL resources. |
+| <a id="property-glyphatlas"></a> `glyphAtlas` | [`TextmodeGlyphAtlas`](../../fonts/interfaces/TextmodeGlyphAtlas.md) | Backend-neutral glyph atlas currently being used for rendering. Prefer this in new code. |
+| <a id="property-pass"></a> `pass?` | [`TextmodeConversionPassContext`](TextmodeConversionPassContext.md) | Metadata for the active source-level conversion stack pass. Undefined for legacy single-conversion rendering. |
+| <a id="property-source"></a> `source` | [`TextmodeSource`](../../media/classes/TextmodeSource.md) | The source asset (image, video, etc.) being converted. Provides access to the source texture and dimensions. |

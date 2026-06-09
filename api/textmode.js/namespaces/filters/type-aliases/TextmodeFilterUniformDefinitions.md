@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 namespace: filters
 kind: TypeAlias
-lastModified: 2026-06-08
+lastModified: 2026-06-09
 ---
 
 [textmode.js](../../../index.md) / [filters](../index.md) / TextmodeFilterUniformDefinitions
@@ -18,7 +18,7 @@ lastModified: 2026-06-08
 type TextmodeFilterUniformDefinitions = Record<string, [string, unknown]>;
 ```
 
-Uniform definitions used when registering custom filters with [TextmodeFilterManager.register](../classes/TextmodeFilterManager/methods/register.md).
+Uniform definitions used when registering custom filters with [TextmodeFilterManager.register](../classes/TextmodeFilterManager.md#register).
 
 Each key is the shader uniform name. Each value maps that uniform to a filter
 parameter name and fallback value.

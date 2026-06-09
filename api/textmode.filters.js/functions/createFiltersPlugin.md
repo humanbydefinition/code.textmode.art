@@ -11,7 +11,7 @@ category: Functions
 api: true
 kind: Function
 ecosystem: textmode.js
-lastModified: 2026-06-08
+lastModified: 2026-06-09
 ---
 
 [textmode.filters.js](../index.md) / createFiltersPlugin

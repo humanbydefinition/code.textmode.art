@@ -7,7 +7,7 @@ category: Variables
 api: true
 kind: Variable
 ecosystem: textmode.js
-lastModified: 2026-06-08
+lastModified: 2026-06-09
 ---
 
 [textmode.synth.js](../index.md) / SynthPlugin

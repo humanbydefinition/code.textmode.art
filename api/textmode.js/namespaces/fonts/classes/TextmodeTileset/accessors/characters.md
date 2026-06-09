@@ -8,7 +8,7 @@ api: true
 owner: TextmodeTileset
 namespace: fonts
 kind: Accessor
-lastModified: 2026-06-08
+lastModified: 2026-06-09
 ---
 
 [textmode.js](../../../../../index.md) / [fonts](../../../index.md) / [TextmodeTileset](../../TextmodeTileset.md) / characters
@@ -33,4 +33,4 @@ readonly [`TextmodeGlyph`](../../../type-aliases/TextmodeGlyph.md)[]
 
 ## Implementation of
 
-[`TextmodeGlyphAtlas`](../../../interfaces/TextmodeGlyphAtlas.md).[`characters`](../../../interfaces/TextmodeGlyphAtlas/properties/characters.md)
+[`TextmodeGlyphAtlas`](../../../interfaces/TextmodeGlyphAtlas.md).[`characters`](../../../interfaces/TextmodeGlyphAtlas.md#property-characters)

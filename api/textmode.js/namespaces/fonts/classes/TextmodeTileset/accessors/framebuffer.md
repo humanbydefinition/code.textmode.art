@@ -8,7 +8,7 @@ api: true
 owner: TextmodeTileset
 namespace: fonts
 kind: Accessor
-lastModified: 2026-06-08
+lastModified: 2026-06-09
 ---
 
 [textmode.js](../../../../../index.md) / [fonts](../../../index.md) / [TextmodeTileset](../../TextmodeTileset.md) / framebuffer
@@ -33,4 +33,4 @@ Normalized glyph atlas framebuffer used by the ASCII shader.
 
 ## Implementation of
 
-[`TextmodeGlyphAtlas`](../../../interfaces/TextmodeGlyphAtlas.md).[`framebuffer`](../../../interfaces/TextmodeGlyphAtlas/properties/framebuffer.md)
+[`TextmodeGlyphAtlas`](../../../interfaces/TextmodeGlyphAtlas.md).[`framebuffer`](../../../interfaces/TextmodeGlyphAtlas.md#property-framebuffer)

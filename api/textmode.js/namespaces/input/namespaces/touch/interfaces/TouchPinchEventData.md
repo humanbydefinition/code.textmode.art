@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: input.touch
 kind: Interface
-lastModified: 2026-06-08
+lastModified: 2026-06-09
 isInterface: true
 ---
 
@@ -19,10 +19,12 @@ Pinch gesture event data describing the scaling factor between the initial and c
 
 ## Properties
 
-| Property | Description |
-| ------ | ------ |
-| [center](TouchPinchEventData/properties/center.md) | Centre of the gesture in grid coordinates. |
-| [deltaScale](TouchPinchEventData/properties/deltaScale.md) | Scale delta compared to the previous callback. |
-| [originalEvent](TouchPinchEventData/properties/originalEvent.md) | Original browser event. |
-| [scale](TouchPinchEventData/properties/scale.md) | Scale factor relative to the initial distance *(1 == unchanged)*. |
-| [touches](TouchPinchEventData/properties/touches.md) | Touch points participating in the pinch, always two entries. |
+| Property | Type | Description |
+| ------ | ------ | ------ |
+| <a id="property-center"></a> `center` | `object` | Centre of the gesture in grid coordinates. |
+| `center.x` | `number` | Grid X coordinate *(column)*. |
+| `center.y` | `number` | Grid Y coordinate *(row)*. |
+| <a id="property-deltascale"></a> `deltaScale` | `number` | Scale delta compared to the previous callback. |
+| <a id="property-originalevent"></a> `originalEvent` | `TouchEvent` | Original browser event. |
+| <a id="property-scale"></a> `scale` | `number` | Scale factor relative to the initial distance *(1 == unchanged)*. |
+| <a id="property-touches"></a> `touches` | \[[`TouchPosition`](TouchPosition.md), [`TouchPosition`](TouchPosition.md)\] | Touch points participating in the pinch, always two entries. |

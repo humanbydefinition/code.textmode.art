@@ -6,7 +6,7 @@ description: All filter related modules and types.
 category: Namespaces
 api: true
 kind: Namespace
-lastModified: 2026-06-08
+lastModified: 2026-06-09
 ---
 
 [textmode.js](../../index.md) / filters
@@ -43,4 +43,4 @@ which is accessible through [Textmodifier.filters](../../classes/Textmodifier/ac
 | ------ | ------ |
 | [BuiltInFilterName](type-aliases/BuiltInFilterName.md) | Built-in filter names provided by textmode.js |
 | [FilterName](type-aliases/FilterName.md) | Filter name type that allows both built-in and custom filter names |
-| [TextmodeFilterUniformDefinitions](type-aliases/TextmodeFilterUniformDefinitions.md) | Uniform definitions used when registering custom filters with [TextmodeFilterManager.register](classes/TextmodeFilterManager/methods/register.md). |
+| [TextmodeFilterUniformDefinitions](type-aliases/TextmodeFilterUniformDefinitions.md) | Uniform definitions used when registering custom filters with [TextmodeFilterManager.register](classes/TextmodeFilterManager.md#register). |

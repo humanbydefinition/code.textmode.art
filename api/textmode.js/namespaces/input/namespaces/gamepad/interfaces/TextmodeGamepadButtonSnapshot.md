@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: input.gamepad
 kind: Interface
-lastModified: 2026-06-08
+lastModified: 2026-06-09
 isInterface: true
 ---
 
@@ -19,8 +19,8 @@ Immutable snapshot of a single gamepad button for the current frame.
 
 ## Properties
 
-| Property | Description |
-| ------ | ------ |
-| [pressed](TextmodeGamepadButtonSnapshot/properties/pressed.md) | Whether the browser currently reports this button as pressed. |
-| [touched](TextmodeGamepadButtonSnapshot/properties/touched.md) | Whether the button is being touched, when the browser exposes that data. |
-| [value](TextmodeGamepadButtonSnapshot/properties/value.md) | Analog value in the range the browser reports, typically `0..1`. |
+| Property | Type | Description |
+| ------ | ------ | ------ |
+| <a id="property-pressed"></a> `pressed` | `boolean` | Whether the browser currently reports this button as pressed. |
+| <a id="property-touched"></a> `touched?` | `boolean` | Whether the button is being touched, when the browser exposes that data. |
+| <a id="property-value"></a> `value` | `number` | Analog value in the range the browser reports, typically `0..1`. |

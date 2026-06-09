@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-06-08
+lastModified: 2026-06-09
 isInterface: true
 ---
 
@@ -19,8 +19,8 @@ A single parsed FIGcharacter from a FIGfont.
 
 ## Properties
 
-| Property | Description |
-| ------ | ------ |
-| [code](FigCharacter/properties/code.md) | Unicode code point represented by the FIGcharacter. |
-| [lines](FigCharacter/properties/lines.md) | Raw FIGcharacter rows with endmarks removed. |
-| [width](FigCharacter/properties/width.md) | Maximum row width after endmark removal. |
+| Property | Type | Description |
+| ------ | ------ | ------ |
+| <a id="property-code"></a> `code` | `number` | Unicode code point represented by the FIGcharacter. |
+| <a id="property-lines"></a> `lines` | `string`[] | Raw FIGcharacter rows with endmarks removed. |
+| <a id="property-width"></a> `width` | `number` | Maximum row width after endmark removal. |

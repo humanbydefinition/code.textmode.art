@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-06-08
+lastModified: 2026-06-09
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / tap
@@ -21,7 +21,7 @@ tap(callback): void;
 Register a callback for tap gestures.
 
 A tap is fired when the user quickly touches and releases the canvas without travelling far.
-Use [input.touch.TouchTapEventData.taps](../../../namespaces/input/namespaces/touch/interfaces/TouchTapEventData/properties/taps.md) to determine whether the gesture is a single or multi tap.
+Use [input.touch.TouchTapEventData.taps](../../../namespaces/input/namespaces/touch/interfaces/TouchTapEventData.md#property-taps) to determine whether the gesture is a single or multi tap.
 
 ## Parameters
 

@@ -6,7 +6,7 @@ description: Mutable two- or three-dimensional vector for creative-coding math.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-06-08
+lastModified: 2026-06-09
 hasConstructor: true
 ---
 
@@ -27,17 +27,58 @@ Use [Textmodifier.createVector](Textmodifier/methods/createVector.md) to create 
 
 ## Constructors
 
-| Constructor | Description |
-| ------ | ------ |
-| [constructor](TextmodeVector/constructors/constructor.md) | Create a new vector with the given components. |
+### Constructor
+
+```ts
+new TextmodeVector(
+   x?, 
+   y?, 
+   z?): TextmodeVector;
+```
+
+Create a new vector with the given components.
+
+#### Parameters
+
+| Parameter | Type | Default value | Description |
+| ------ | ------ | ------ | ------ |
+| `x` | `number` | `0` | X component. |
+| `y` | `number` | `0` | Y component. |
+| `z` | `number` | `0` | Z component. |
+
+#### Returns
+
+`TextmodeVector`
 
 ## Properties
 
-| Property | Description |
-| ------ | ------ |
-| [x](TextmodeVector/properties/x.md) | X component. |
-| [y](TextmodeVector/properties/y.md) | Y component. |
-| [z](TextmodeVector/properties/z.md) | Z component. |
+### x
+
+```ts
+x: number;
+```
+
+X component.
+
+***
+
+### y
+
+```ts
+y: number;
+```
+
+Y component.
+
+***
+
+### z
+
+```ts
+z: number;
+```
+
+Z component.
 
 ## Methods
 

@@ -7,7 +7,7 @@ category: Properties
 api: true
 owner: Textmodifier
 kind: Property
-lastModified: 2026-06-08
+lastModified: 2026-06-09
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / lastKeyReleased

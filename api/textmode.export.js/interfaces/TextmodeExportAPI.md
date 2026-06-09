@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-05-16
+lastModified: 2026-06-09
 isInterface: true
 ---
 
@@ -17,6 +17,10 @@ isInterface: true
 
 Runtime export helpers that `createExportPlugin` attaches to the `Textmodifier` instance.
 
+## Example
+
+<TextmodeApiSandbox profile="textmode.export.js" language="javascript" title="TextmodeExportAPI" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CgljYW52YXM6IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCd0ZXh0bW9kZS1jYW52YXMnKSwKCXdpZHRoOiB3aW5kb3cuaW5uZXJXaWR0aCwKCWhlaWdodDogd2luZG93LmlubmVySGVpZ2h0LAoJZm9udFNpemU6IDI4LAoJcGx1Z2luczogW0V4cG9ydFBsdWdpbl0sCn0pOwoKY29uc3QgZm9yZWdyb3VuZExheWVyID0gdC5sYXllcnMuYWRkKHsKCW9wYWNpdHk6IDAuODUsCglibGVuZE1vZGU6ICdzY3JlZW4nLAp9KTsKCmNvbnN0IGFubm90YXRpb25MYXllciA9IHQubGF5ZXJzLmFkZCh7CglvcGFjaXR5OiAwLjk1LAoJYmxlbmRNb2RlOiAnbm9ybWFsJywKfSk7CgpmdW5jdGlvbiBkcmF3R3JpZEJhY2tncm91bmQoKSB7Cgl0LmJhY2tncm91bmQoJyMwODBhMGYnKTsKCXQudHJhbnNsYXRlKC10LmdyaWQuY29scyAvIDIsIC10LmdyaWQucm93cyAvIDIsIDApOwoKCWZvciAobGV0IHkgPSAwOyB5IDwgdC5ncmlkLnJvd3MgKyAxOyB5KyspIHsKCQlmb3IgKGxldCB4ID0gMDsgeCA8IHQuZ3JpZC5jb2xzICsgMTsgeCsrKSB7CgkJCWNvbnN0IGNoZWNrZXIgPSAoeCArIHkpICUgMiA9PT0gMDsKCQkJdC5jaGFyKGNoZWNrZXIgPyAnLicgOiAnICcpOwoJCQl0LmNoYXJDb2xvcihjaGVja2VyID8gJyMyNTMwNDQnIDogJyMxMzE4MjMnKTsKCQkJdC5jZWxsQ29sb3IoY2hlY2tlciA_ICcjMDcwYjEyJyA6ICcjMGIxMDE4Jyk7CgkJCXQudHJhbnNsYXRlKHgsIHksIDApOwoJCQl0LnBvaW50KCk7CgkJCXQudHJhbnNsYXRlKC14LCAteSwgMCk7CgkJfQoJfQp9CgpmdW5jdGlvbiBkcmF3T3JiaXRpbmdNYXJrcyhsYXllckdyaWQsIGNoYXIsIGNvbG9yLCBwaGFzZSkgewoJY29uc3QgdGltZSA9IHQuZnJhbWVDb3VudCAqIDAuMDI1ICsgcGhhc2U7Cgljb25zdCBjb3VudCA9IDE4OwoKCWZvciAobGV0IGkgPSAwOyBpIDwgY291bnQ7IGkrKykgewoJCWNvbnN0IGFuZ2xlID0gdGltZSArIChNYXRoLlBJICogMiAqIGkpIC8gY291bnQ7CgkJY29uc3QgcmFkaXVzWCA9IGxheWVyR3JpZC5jb2xzICogMC4yNTsKCQljb25zdCByYWRpdXNZID0gbGF5ZXJHcmlkLnJvd3MgKiAwLjI4OwoJCWNvbnN0IHggPSBNYXRoLmNvcyhhbmdsZSkgKiByYWRpdXNYOwoJCWNvbnN0IHkgPSBNYXRoLnNpbihhbmdsZSAqIDEuNykgKiByYWRpdXNZOwoKCQl0LnB1c2goKTsKCQl0LnRyYW5zbGF0ZSh4LCB5LCAwKTsKCQl0LmNoYXIoY2hhcik7CgkJdC5jaGFyQ29sb3IoY29sb3IpOwoJCXQuY2VsbENvbG9yKDAsIDAsIDAsIDApOwoJCXQucm90YXRlWihhbmdsZSAqIDQwKTsKCQl0LnJlY3QoMiwgMik7CgkJdC5wb3AoKTsKCX0KfQoKdC5kcmF3KCgpID0-IHsKCXQucHVzaCgpOwoJZHJhd0dyaWRCYWNrZ3JvdW5kKCk7Cgl0LnBvcCgpOwoKCXQucHVzaCgpOwoJdC50cmFuc2xhdGUoMCwgLXQuZ3JpZC5yb3dzICogMC4xOCwgMCk7Cgl0LmNoYXIoJ0InKTsKCXQuY2hhckNvbG9yKCcjZDdlN2ZmJyk7Cgl0LmNlbGxDb2xvcignIzE0MjAzNicpOwoJdC5yZWN0KDEwLCAzKTsKCXQucG9wKCk7Cn0pOwoKZm9yZWdyb3VuZExheWVyLmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDAsIDAsIDAsIDApOwoJZHJhd09yYml0aW5nTWFya3MoZm9yZWdyb3VuZExheWVyLmdyaWQsICcqJywgJyM2NmZmZDgnLCAwKTsKCWRyYXdPcmJpdGluZ01hcmtzKGZvcmVncm91bmRMYXllci5ncmlkLCAnKycsICcjZmY3M2M3JywgTWF0aC5QSSAqIDAuNSk7Cn0pOwoKYW5ub3RhdGlvbkxheWVyLmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDAsIDAsIDAsIDApOwoKCXQucHVzaCgpOwoJdC50cmFuc2xhdGUoLWFubm90YXRpb25MYXllci5ncmlkLmNvbHMgKiAwLjM0LCBhbm5vdGF0aW9uTGF5ZXIuZ3JpZC5yb3dzICogMC4zLCAwKTsKCXQuY2hhcignQScpOwoJdC5jaGFyQ29sb3IoJyMxMDE4MjAnKTsKCXQuY2VsbENvbG9yKCcjZjZlMjdhJyk7Cgl0LnJlY3QoNywgMik7Cgl0LnBvcCgpOwoKCXQucHVzaCgpOwoJdC50cmFuc2xhdGUoYW5ub3RhdGlvbkxheWVyLmdyaWQuY29scyAqIDAuMywgYW5ub3RhdGlvbkxheWVyLmdyaWQucm93cyAqIDAuMywgMCk7Cgl0LmNoYXIoJ0wnKTsKCXQuY2hhckNvbG9yKCcjZWVmNGZmJyk7Cgl0LmNlbGxDb2xvcignIzYyNDZlYScpOwoJdC5yZWN0KDcsIDIpOwoJdC5wb3AoKTsKfSk7Cgp3aW5kb3cuaW5zcGVjdEJhc2VKU09OID0gKCkgPT4gdC50b0pTT04oeyBsYXllcjogdC5sYXllcnMuYmFzZSB9KTsKd2luZG93Lmluc3BlY3RGb3JlZ3JvdW5kU1ZHID0gKCkgPT4gdC50b1NWRyh7IGxheWVyOiBmb3JlZ3JvdW5kTGF5ZXIgfSk7CndpbmRvdy5pbnNwZWN0QW5ub3RhdGlvblRleHQgPSAoKSA9PiB0LnRvU3RyaW5nKHsgbGF5ZXI6IGFubm90YXRpb25MYXllciB9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+
 ## Properties
 
 | Property | Type | Description |
@@ -25,297 +29,16 @@ Runtime export helpers that `createExportPlugin` attaches to the `Textmodifier` 
 
 ## Methods
 
-### saveCanvas()
-
-```ts
-saveCanvas(options?): Promise<void>;
-```
-
-Saves the current canvas content to an image file *(`'png'` by default)*.
-
-#### Parameters
-
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `options?` | [`ImageExportOptions`](../type-aliases/ImageExportOptions.md) | Export options. |
-
-#### Returns
-
-`Promise`\<`void`\>
-
-#### Example
-
-```ts
-await t.saveCanvas({ format: 'png', filename: 'frame-001' });
-```
-
-***
-
-### copyCanvas()
-
-```ts
-copyCanvas(options?): Promise<void>;
-```
-
-Copies the current canvas to the user's clipboard as an image.
-
-#### Parameters
-
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `options?` | [`ImageExportOptions`](../type-aliases/ImageExportOptions.md) | Export options. |
-
-#### Returns
-
-`Promise`\<`void`\>
-
-#### Example
-
-```ts
-await t.copyCanvas({ format: 'png' });
-```
-
-***
-
-### saveSVG()
-
-```ts
-saveSVG(options?): void;
-```
-
-Downloads the selected layer as an SVG file.
-
-#### Parameters
-
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `options?` | [`SVGExportOptions`](../type-aliases/SVGExportOptions.md) | Export options. |
-
-#### Returns
-
-`void`
-
-#### Example
-
-```ts
-t.saveSVG({ filename: 'poster', layer: t.layers.base, includeBackgroundRectangles: true });
-```
-
-***
-
-### saveStrings()
-
-```ts
-saveStrings(options?): void;
-```
-
-Downloads the selected layer's text content as a plain-text file.
-
-#### Parameters
-
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `options?` | [`TXTExportOptions`](../type-aliases/TXTExportOptions.md) | Export options. |
-
-#### Returns
-
-`void`
-
-#### Example
-
-```ts
-t.saveStrings({ filename: 'frame', layer: t.layers.base, preserveTrailingSpaces: true });
-```
-
-***
-
-### toSVG()
-
-```ts
-toSVG(options?): string;
-```
-
-Generates SVG markup for the selected layer.
-
-#### Parameters
-
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `options?` | [`SVGExportOptions`](../type-aliases/SVGExportOptions.md) | Export options. |
-
-#### Returns
-
-`string`
-
-The SVG content representing the artwork.
-
-#### Example
-
-```ts
-const svg = t.toSVG({ layer: t.layers.base, drawMode: 'stroke', strokeWidth: 1.5 });
-```
-
-***
-
-### toString()
-
-```ts
-toString(options?): string;
-```
-
-Produces the selected layer's text content as a string.
-
-#### Parameters
-
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `options?` | [`TXTExportOptions`](../type-aliases/TXTExportOptions.md) | Export options. |
-
-#### Returns
-
-`string`
-
-The textual representation of the artwork.
-
-#### Example
-
-```ts
-const text = t.toString({ layer: t.layers.base, preserveTrailingSpaces: false });
-```
-
-***
-
-### toJSON()
-
-```ts
-toJSON(options?): TextmodeDocumentJSON;
-```
-
-Produces the selected layer or layer stack as structured JSON data.
-
-#### Parameters
-
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `options?` | [`JSONExportOptions`](../type-aliases/JSONExportOptions.md) | Export options. |
-
-#### Returns
-
-[`TextmodeDocumentJSON`](../type-aliases/TextmodeDocumentJSON.md)
-
-The JSON document representing the selected layer or layer stack.
-
-#### Example
-
-```ts
-const layer = t.toJSON({ layer: t.layers.base, colorMode: 'hex', includeMetadata: true });
-const stack = t.toJSON({ target: 'all' });
-```
-
-***
-
-### toJSONString()
-
-```ts
-toJSONString(options?): string;
-```
-
-Produces the selected layer or layer stack as a JSON string.
-
-#### Parameters
-
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `options?` | [`JSONExportOptions`](../type-aliases/JSONExportOptions.md) | Export options. |
-
-#### Returns
-
-`string`
-
-Serialized JSON string for the selected layer or layer stack.
-
-#### Example
-
-```ts
-const json = t.toJSONString({ layer: t.layers.base, pretty: false, colorMode: 'hex' });
-const stackJson = t.toJSONString({ target: 'all' });
-```
-
-***
-
-### saveJSON()
-
-```ts
-saveJSON(options?): void;
-```
-
-Downloads the selected layer or layer stack as a JSON file.
-
-#### Parameters
-
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `options?` | [`JSONExportOptions`](../type-aliases/JSONExportOptions.md) | Export options. |
-
-#### Returns
-
-`void`
-
-#### Example
-
-```ts
-t.saveJSON({ filename: 'frame', layer: t.layers.base, pretty: true });
-t.saveJSON({ filename: 'stack', target: 'all' });
-```
-
-***
-
-### saveGIF()
-
-```ts
-saveGIF(options?): Promise<void>;
-```
-
-Records an animated GIF and saves it to disk.
-
-#### Parameters
-
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `options?` | [`GIFExportOptions`](../type-aliases/GIFExportOptions.md) | Export options. |
-
-#### Returns
-
-`Promise`\<`void`\>
-
-#### Example
-
-```ts
-await t.saveGIF({ frameCount: 120, frameRate: 30, filename: 'loop' });
-```
-
-***
-
-### saveWEBM()
-
-```ts
-saveWEBM(options?): Promise<void>;
-```
-
-Captures a WEBM video and saves it to disk.
-
-#### Parameters
-
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `options?` | [`VideoExportOptions`](../type-aliases/VideoExportOptions.md) | Export options. |
-
-#### Returns
-
-`Promise`\<`void`\>
-
-#### Example
-
-```ts
-await t.saveWEBM({ frameCount: 240, frameRate: 60, filename: 'capture' });
-```
+| Method | Description |
+| ------ | ------ |
+| [saveCanvas](TextmodeExportAPI/methods/saveCanvas.md) | Saves the current canvas content to an image file *(`'png'` by default)*. |
+| [copyCanvas](TextmodeExportAPI/methods/copyCanvas.md) | Copies the current canvas to the user's clipboard as an image. |
+| [saveSVG](TextmodeExportAPI/methods/saveSVG.md) | Downloads the selected layer as an SVG file. |
+| [saveStrings](TextmodeExportAPI/methods/saveStrings.md) | Downloads the selected layer's text content as a plain-text file. |
+| [toSVG](TextmodeExportAPI/methods/toSVG.md) | Generates SVG markup for the selected layer. |
+| [toString](TextmodeExportAPI/methods/toString.md) | Produces the selected layer's text content as a string. |
+| [toJSON](TextmodeExportAPI/methods/toJSON.md) | Produces the selected layer or layer stack as structured JSON data. |
+| [toJSONString](TextmodeExportAPI/methods/toJSONString.md) | Produces the selected layer or layer stack as a JSON string. |
+| [saveJSON](TextmodeExportAPI/methods/saveJSON.md) | Downloads the selected layer or layer stack as a JSON file. |
+| [saveGIF](TextmodeExportAPI/methods/saveGIF.md) | Records an animated GIF and saves it to disk. |
+| [saveVideo](TextmodeExportAPI/methods/saveVideo.md) | Captures a video and saves it to disk *(`'mp4'` by default)*. |

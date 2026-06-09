@@ -8,7 +8,7 @@ api: true
 owner: ModulatedArray
 kind: Method
 ecosystem: textmode.js
-lastModified: 2026-06-08
+lastModified: 2026-06-09
 ---
 
 [textmode.synth.js](../../../index.md) / [ModulatedArray](../../ModulatedArray.md) / fit

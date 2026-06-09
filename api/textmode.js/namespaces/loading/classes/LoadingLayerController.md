@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: loading
 kind: Class
-lastModified: 2026-06-08
+lastModified: 2026-06-09
 hasConstructor: false
 ---
 
@@ -23,7 +23,46 @@ Controls the internal loading layer lifecycle and rendering behavior.
 
 ## Methods
 
-| Method | Description |
-| ------ | ------ |
-| [\_dispose](LoadingLayerController/methods/dispose.md) | Dispose of the internal layer. |
-| [draw](LoadingLayerController/methods/draw.md) | Set a custom renderer for the internal layer. |
+### \_dispose()
+
+```ts
+_dispose(): void;
+```
+
+Dispose of the internal layer.
+
+#### Returns
+
+`void`
+
+#### Inherited from
+
+```ts
+InternalLayerController._dispose
+```
+
+***
+
+### draw()
+
+```ts
+draw(callback?): void;
+```
+
+Set a custom renderer for the internal layer.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `callback?` | (`context`) => `void` | Custom draw callback that receives the rendering context. |
+
+#### Returns
+
+`void`
+
+#### Inherited from
+
+```ts
+InternalLayerController.draw
+```

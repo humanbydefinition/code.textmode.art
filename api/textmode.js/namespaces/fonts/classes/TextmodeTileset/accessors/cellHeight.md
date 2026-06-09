@@ -8,7 +8,7 @@ api: true
 owner: TextmodeTileset
 namespace: fonts
 kind: Accessor
-lastModified: 2026-06-08
+lastModified: 2026-06-09
 ---
 
 [textmode.js](../../../../../index.md) / [fonts](../../../index.md) / [TextmodeTileset](../../TextmodeTileset.md) / cellHeight
@@ -33,4 +33,4 @@ Effective tile cell height used by the layer grid.
 
 ## Implementation of
 
-[`TextmodeGlyphAtlas`](../../../interfaces/TextmodeGlyphAtlas.md).[`cellHeight`](../../../interfaces/TextmodeGlyphAtlas/properties/cellHeight.md)
+[`TextmodeGlyphAtlas`](../../../interfaces/TextmodeGlyphAtlas.md).[`cellHeight`](../../../interfaces/TextmodeGlyphAtlas.md#property-cellheight)

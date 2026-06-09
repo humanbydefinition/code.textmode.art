@@ -6,7 +6,7 @@ description: Grid used by a textmode layer.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-06-08
+lastModified: 2026-06-09
 hasConstructor: false
 ---
 

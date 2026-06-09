@@ -6,7 +6,7 @@ description: The main textmode.js drawing context.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-06-08
+lastModified: 2026-06-09
 hasConstructor: false
 ---
 

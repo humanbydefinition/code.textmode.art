@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: input.gamepad
 kind: Interface
-lastModified: 2026-06-08
+lastModified: 2026-06-09
 isInterface: true
 ---
 
@@ -19,8 +19,8 @@ Normalized two-axis stick state for standard-mapped controllers.
 
 ## Properties
 
-| Property | Description |
-| ------ | ------ |
-| [magnitude](TextmodeGamepadStickSnapshot/properties/magnitude.md) | Euclidean magnitude derived from `x` and `y`. |
-| [x](TextmodeGamepadStickSnapshot/properties/x.md) | Horizontal stick displacement. |
-| [y](TextmodeGamepadStickSnapshot/properties/y.md) | Vertical stick displacement. |
+| Property | Type | Description |
+| ------ | ------ | ------ |
+| <a id="property-magnitude"></a> `magnitude` | `number` | Euclidean magnitude derived from `x` and `y`. |
+| <a id="property-x"></a> `x` | `number` | Horizontal stick displacement. |
+| <a id="property-y"></a> `y` | `number` | Vertical stick displacement. |

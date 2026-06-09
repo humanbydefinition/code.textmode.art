@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: errors
 kind: Class
-lastModified: 2026-06-08
+lastModified: 2026-06-09
 hasConstructor: true
 ---
 
@@ -23,6 +23,31 @@ Error type that formats optional context data alongside the main message.
 
 ## Constructors
 
-| Constructor | Description |
-| ------ | ------ |
-| [constructor](TextmodeError/constructors/constructor.md) | Create a textmode.js error. |
+### Constructor
+
+```ts
+new TextmodeError(
+   message, 
+   context?, 
+   options?): TextmodeError;
+```
+
+Create a textmode.js error.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `message` | `string` | The main error message |
+| `context?` | `Record`\<`string`, `unknown`\> | Optional context data to include in the error message |
+| `options?` | [`TextmodeErrorFormatOptions`](../interfaces/TextmodeErrorFormatOptions.md) | Optional message formatting options |
+
+#### Returns
+
+`TextmodeError`
+
+#### Overrides
+
+```ts
+Error.constructor
+```

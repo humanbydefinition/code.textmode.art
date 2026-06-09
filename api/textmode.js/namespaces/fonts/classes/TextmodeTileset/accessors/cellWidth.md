@@ -8,7 +8,7 @@ api: true
 owner: TextmodeTileset
 namespace: fonts
 kind: Accessor
-lastModified: 2026-06-08
+lastModified: 2026-06-09
 ---
 
 [textmode.js](../../../../../index.md) / [fonts](../../../index.md) / [TextmodeTileset](../../TextmodeTileset.md) / cellWidth
@@ -33,4 +33,4 @@ Effective tile cell width used by the layer grid.
 
 ## Implementation of
 
-[`TextmodeGlyphAtlas`](../../../interfaces/TextmodeGlyphAtlas.md).[`cellWidth`](../../../interfaces/TextmodeGlyphAtlas/properties/cellWidth.md)
+[`TextmodeGlyphAtlas`](../../../interfaces/TextmodeGlyphAtlas.md).[`cellWidth`](../../../interfaces/TextmodeGlyphAtlas.md#property-cellwidth)

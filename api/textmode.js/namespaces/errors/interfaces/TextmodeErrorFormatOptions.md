@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: errors
 kind: Interface
-lastModified: 2026-06-08
+lastModified: 2026-06-09
 isInterface: true
 ---
 
@@ -19,7 +19,7 @@ Formatting controls for textmode.js error messages.
 
 ## Properties
 
-| Property | Description |
-| ------ | ------ |
-| [includeContext](TextmodeErrorFormatOptions/properties/includeContext.md) | Include context block in the formatted output. |
-| [includeFooterArrows](TextmodeErrorFormatOptions/properties/includeFooterArrows.md) | Include the visual footer marker used before thrown stack output. |
+| Property | Type | Description |
+| ------ | ------ | ------ |
+| <a id="property-includecontext"></a> `includeContext?` | `boolean` | Include context block in the formatted output. **Default** `true` |
+| <a id="property-includefooterarrows"></a> `includeFooterArrows?` | `boolean` | Include the visual footer marker used before thrown stack output. **Default** `true` |

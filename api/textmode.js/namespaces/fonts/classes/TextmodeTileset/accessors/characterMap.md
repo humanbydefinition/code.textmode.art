@@ -8,7 +8,7 @@ api: true
 owner: TextmodeTileset
 namespace: fonts
 kind: Accessor
-lastModified: 2026-06-08
+lastModified: 2026-06-09
 ---
 
 [textmode.js](../../../../../index.md) / [fonts](../../../index.md) / [TextmodeTileset](../../TextmodeTileset.md) / characterMap
@@ -33,4 +33,4 @@ Character-to-glyph lookup map for the tileset.
 
 ## Implementation of
 
-[`TextmodeGlyphAtlas`](../../../interfaces/TextmodeGlyphAtlas.md).[`characterMap`](../../../interfaces/TextmodeGlyphAtlas/properties/characterMap.md)
+[`TextmodeGlyphAtlas`](../../../interfaces/TextmodeGlyphAtlas.md).[`characterMap`](../../../interfaces/TextmodeGlyphAtlas.md#property-charactermap)

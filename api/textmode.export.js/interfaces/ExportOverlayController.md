@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-05-16
+lastModified: 2026-06-09
 isInterface: true
 ---
 
@@ -19,80 +19,9 @@ Controller for managing the export overlay UI visibility at runtime.
 
 ## Methods
 
-### show()
-
-```ts
-show(): void;
-```
-
-Shows the export overlay UI.
-
-#### Returns
-
-`void`
-
-#### Example
-
-```ts
-t.exportOverlay.show();
-```
-
-***
-
-### hide()
-
-```ts
-hide(): void;
-```
-
-Hides the export overlay UI.
-
-#### Returns
-
-`void`
-
-#### Example
-
-```ts
-t.exportOverlay.hide();
-```
-
-***
-
-### toggle()
-
-```ts
-toggle(): void;
-```
-
-Toggles the export overlay UI visibility.
-
-#### Returns
-
-`void`
-
-#### Example
-
-```ts
-t.exportOverlay.toggle();
-```
-
-***
-
-### isVisible()
-
-```ts
-isVisible(): boolean;
-```
-
-Checks if the export overlay is currently visible.
-
-#### Returns
-
-`boolean`
-
-#### Example
-
-```ts
-const visible = t.exportOverlay.isVisible();
-```
+| Method | Description |
+| ------ | ------ |
+| [show](ExportOverlayController/methods/show.md) | Shows the export overlay UI. |
+| [hide](ExportOverlayController/methods/hide.md) | Hides the export overlay UI. |
+| [toggle](ExportOverlayController/methods/toggle.md) | Toggles the export overlay UI visibility. |
+| [isVisible](ExportOverlayController/methods/isVisible.md) | Checks if the export overlay is currently visible. |
