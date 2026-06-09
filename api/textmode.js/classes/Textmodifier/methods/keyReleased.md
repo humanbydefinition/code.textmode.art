@@ -1,0 +1,35 @@
+---
+layout: doc
+editLink: true
+title: keyReleased
+description: Register the single-callback handler for key release events.
+category: Methods
+api: true
+owner: Textmodifier
+kind: Method
+lastModified: 2026-06-09
+---
+
+[textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / keyReleased
+
+# Method: keyReleased()
+
+```ts
+keyReleased(callback): void;
+```
+
+Register the single-callback handler for key release events.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `callback` | [`KeyboardEventHandler`](../../../namespaces/input/namespaces/keyboard/type-aliases/KeyboardEventHandler.md) | Handler to run with keyboard event data when a key is released. |
+
+## Returns
+
+`void`
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="keyReleased" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CglwaXhlbERlbnNpdHk6IDEsCgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpsZXQgbGFzdCA9ICdOT05FJzsKbGV0IGNvdW50ID0gMDsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKdC5rZXlSZWxlYXNlZCgoZGF0YSkgPT4gewoJbGFzdCA9IGRhdGEua2V5IHx8ICdVTktOT1dOJzsKCWNvdW50Kys7Cn0pOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg2LCAxMCwgMjIpOwoJdC5jaGFyKGxhc3RbMF0gfHwgJz8nKTsKCXQuY2hhckNvbG9yKDE0MCwgMjIwLCAyNTUpOwoJdC5yZWN0KDgsIDQpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLktFWVJFTEVBU0VEJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogS0VZIFVQIEVWRU5UJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdGaXJlcyB3aGVuIGEga2V5IGlzIHJlbGVhc2VkLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnVXNlZnVsIGZvciBlZGdlIHRyYW5zaXRpb25zLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoYENPVU5UOiAke2NvdW50fWAsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7CglkcmF3VGV4dCgnTEFTVDogJyArIGxhc3Quc2xpY2UoMCwgMjApLCB4LCB5KyssIDE4MCwgMjAwLCAyMjApOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />

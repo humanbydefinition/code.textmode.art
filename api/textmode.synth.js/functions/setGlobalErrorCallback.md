@@ -2,12 +2,12 @@
 layout: doc
 editLink: true
 title: setGlobalErrorCallback
-description: setGlobalErrorCallback function API reference for textmode.synth.js.
+description: Set a global error callback for dynamic parameter evaluation errors.
 category: Functions
 api: true
 kind: Function
 ecosystem: textmode.js
-lastModified: 2026-05-15
+lastModified: 2026-06-09
 ---
 
 [textmode.synth.js](../index.md) / setGlobalErrorCallback
@@ -35,23 +35,4 @@ notifications whenever a dynamic parameter fails to evaluate.
 
 ## Example
 
-```javascript
-setGlobalErrorCallback((error, uniformName) => {
-  console.error(`[Synth] Parameter "${uniformName}" error:`, error);
-});
-
-const t = textmode.create({
-  width: window.innerWidth,
-  height: window.innerHeight,
-  plugins: [SynthPlugin]
-});
-
-t.layers.base.synth(
-  osc(8, 0.1, 1.2)
-    .modulate(noise((ctx) => 1 + Math.sin(ctx.time) * 0.5), 0.2)
-);
-
-t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
+<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="setGlobalErrorCallback" encoded-code="c2V0R2xvYmFsRXJyb3JDYWxsYmFjaygoZXJyb3IsIHVuaWZvcm1OYW1lKSA9PiB7CiAgY29uc29sZS5lcnJvcihgW1N5bnRoXSBQYXJhbWV0ZXIgIiR7dW5pZm9ybU5hbWV9IiBlcnJvcjpgLCBlcnJvcik7Cn0pOwoKY29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CiAgd2lkdGg6IHdpbmRvdy5pbm5lcldpZHRoLAogIGhlaWdodDogd2luZG93LmlubmVySGVpZ2h0LAogIHBsdWdpbnM6IFtTeW50aFBsdWdpbl0KfSk7Cgp0LmxheWVycy5iYXNlLnN5bnRoKAogIG9zYyg4LCAwLjEsIDEuMikKICAgIC5tb2R1bGF0ZShub2lzZSgoY3R4KSA9PiAxICsgTWF0aC5zaW4oY3R4LnRpbWUpICogMC41KSwgMC4yKQopOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKICB0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />

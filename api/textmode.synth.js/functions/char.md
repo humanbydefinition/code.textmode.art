@@ -2,12 +2,12 @@
 layout: doc
 editLink: true
 title: char
-description: char function API reference for textmode.synth.js.
+description: Create a character source from any color/pattern source.
 category: Functions
 api: true
 kind: Function
 ecosystem: textmode.js
-lastModified: 2026-05-15
+lastModified: 2026-06-09
 ---
 
 [textmode.synth.js](../index.md) / char
@@ -37,18 +37,4 @@ A new SynthSource configured for character generation
 
 ## Example
 
-```javascript
-const t = textmode.create({
-	width: window.innerWidth,
-	height: window.innerHeight,
-	plugins: [SynthPlugin],
-});
-
-t.layers.base.synth(
-	char(osc(6, 0.1, 1.2)).charMap('@#%*+=-:. ').charColor(osc(12, 0.05, 0.2))
-);
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
+<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="char" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW1N5bnRoUGx1Z2luXSwKfSk7Cgp0LmJwbSgxOCk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IGdseXBocyA9ICcgLjotPSsqIyVAJzsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnQ0hBUi5DSEFSJywgeCwgeSsrLCAxMTAsIDI1NSwgMTcwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDcwLCAxMTAsIDE0MCk7CglkcmF3VGV4dCgnVE9QIExFVkVMIEdMWVBIIFNPVVJDRScsIHgsIHkrKywgMTIwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnQ3JlYXRlcyBjaGFyYWN0ZXJzIGZpcnN0LicsIHgsIHkrKywgMTYwLCAxODAsIDIxMCk7CglkcmF3VGV4dCgnSW5rIGFuZCBwYXBlciBjb2xvciB0aGVtLicsIHgsIHkrKywgMTYwLCAxODAsIDIxMCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA3MCwgMTEwLCAxNDApOwoJZHJhd1RleHQoJ1NlcGFyYXRlIGFuaW1hdGVkIGluayBhbmQgcGFwZXIuJywgeCwgeSsrLCAxNTAsIDI1NSwgMTkwKTsKfSk7Cgpjb25zdCBpbmsgPSBtb2lyZSg4LCA5LCAwLjE1LCAxLjYsIDAuMDI1KS5jb2xvcigxLjAsIDAuNjIsIDAuMzQpLm1vZHVsYXRlKG5vaXNlKDIuMywgMC4wMTgpLCAwLjAyMik7CmNvbnN0IHBhcGVyID0gbm9pc2UoMy4wLCAwLjAyNSkuY29sb3IoMC4xNiwgMC4wNTUsIDAuMDI1KS5zb2Z0bGlnaHQob3NjKDQsIDAuMDE2KSwgMC4yMik7Cgp0LmxheWVycy5iYXNlLnN5bnRoKAoJY2hhcihub2lzZSg0LjYsIDAuMDMpLm1vZHVsYXRlUm90YXRlKG9zYygzLCAwLjAxKSwgMC4zNSwgMC4wNCkpCgkJLmNoYXJNYXAoZ2x5cGhzKQoJCS5jaGFyQ29sb3IoaW5rKQoJCS5jZWxsQ29sb3IocGFwZXIpCik7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />

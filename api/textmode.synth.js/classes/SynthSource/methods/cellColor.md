@@ -1,0 +1,93 @@
+---
+layout: doc
+editLink: true
+title: cellColor
+description: Set the cell background colors using a color source chain.
+category: Methods
+api: true
+owner: SynthSource
+kind: Method
+ecosystem: textmode.js
+lastModified: 2026-06-09
+---
+
+[textmode.synth.js](../../../index.md) / [SynthSource](../../SynthSource.md) / cellColor
+
+# Method: cellColor()
+
+## Call Signature
+
+```ts
+cellColor(source): this;
+```
+
+Set the cell background colors using a color source chain.
+
+### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `source` | [`SynthSource`](../../SynthSource.md) | A SynthSource producing color values, or RGBA values |
+
+### Returns
+
+`this`
+
+The SynthSource for chaining
+
+### Example
+
+<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="cellColor" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCXBsdWdpbnM6IFtTeW50aFBsdWdpbl0sCn0pOwoKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWRyYXdUZXh0KGBTWU5USFNPVVJDRS5DRUxMQ09MT1JgLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KGBDT05DRVBUOiBDRUxMIENPTE9SIFRJTlRgLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoYFNldHMgY2VsbCBiYWNrZ3JvdW5kIGNvbG9yLmAsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dChgTGVhdmVzIGdseXBoIGNvbG9yIG5ldXRyYWwuYCwgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dChgUkdCOiAwLjksIDAuMiwgMC41YCwgeCwgeSsrLCAxNDAsIDI1NSwgMTgwKTsKfSk7Cgp0LmxheWVycy5iYXNlLnN5bnRoKG9zYygxMCwgMC4xKS5jZWxsQ29sb3IoMC45LCAwLjIsIDAuNSkpOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+
+## Call Signature
+
+```ts
+cellColor(
+   r, 
+   g?, 
+   b?, 
+   a?): this;
+```
+
+Set the cell background color using RGBA values.
+
+### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `r` | [`SynthParameterValue`](../../../type-aliases/SynthParameterValue.md) | Red channel (0-1) or value |
+| `g?` | [`SynthParameterValue`](../../../type-aliases/SynthParameterValue.md) | Green channel (0-1) or value |
+| `b?` | [`SynthParameterValue`](../../../type-aliases/SynthParameterValue.md) | Blue channel (0-1) or value |
+| `a?` | [`SynthParameterValue`](../../../type-aliases/SynthParameterValue.md) | Alpha channel (0-1) or value |
+
+### Returns
+
+`this`
+
+The SynthSource for chaining
+
+### Example
+
+<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="cellColor" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW1N5bnRoUGx1Z2luXSwKfSk7Cgp0LmJwbSgxOCk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IGdseXBocyA9ICcgLjotPSsqIyVAJzsKY29uc3QgYnJlYXRoZSA9IFswLjIyLCAwLjc4XS5mYXN0KDAuMTgpLmVhc2UoJ2Vhc2VJbk91dFNpbmUnKTsKY29uc3QgdHVybiA9IFstMC40MiwgMC40Ml0uZmFzdCgwLjE0KS5lYXNlKCdlYXNlSW5PdXRTaW5lJyk7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CgoJZHJhd1RleHQoJ1NZTlRIU09VUkNFLkNFTExDT0xPUjInLCB4LCB5KyssIDExMCwgMjU1LCAxNzApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgNzAsIDExMCwgMTQwKTsKCWRyYXdUZXh0KCdDRUxMIFJHQkEnLCB4LCB5KyssIDEyMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ051bWJlcnMgYW5pbWF0ZSB0aGUgYmVkLicsIHgsIHkrKywgMTYwLCAxODAsIDIxMCk7CglkcmF3VGV4dCgnSW5rIHN0YXlzIHNvdXJjZSBkcml2ZW4uJywgeCwgeSsrLCAxNjAsIDE4MCwgMjEwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDcwLCAxMTAsIDE0MCk7CglkcmF3VGV4dCgnU2VwYXJhdGUgYW5pbWF0ZWQgaW5rIGFuZCBwYXBlci4nLCB4LCB5KyssIDE1MCwgMjU1LCAxOTApOwp9KTsKCmNvbnN0IGluayA9IG9zYyg2LCAwLjAxOCwgMS42KS5yb3RhdGUodHVybiwgMC4wMDIpLmNvbG9yKDAuOSwgMC41OCwgMS4wKS5tb2R1bGF0ZUthbGVpZChub2lzZSgyLjAsIDAuMDE0KSwgNSk7Cgp0LmxheWVycy5iYXNlLnN5bnRoKAoJb3NjKDEwLCAwLjAxOCwgMS4xKQoJCS5rYWxlaWQoNSkKCQkuY29sb3IoMC45LCAwLjUsIDAuMykKCQkuY2VsbENvbG9yKDAuMDMsIGJyZWF0aGUub2Zmc2V0KDAuMiksIGJyZWF0aGUub2Zmc2V0KDAuNTUpLCAxLjApCgkJLm1vZHVsYXRlU2NhbGUobm9pc2UoMi4xLCAwLjAxNCksIDAuMywgMC45MikKCQkuY2hhck1hcChnbHlwaHMpCgkJLmNoYXJDb2xvcihpbmspCgkJLmNvbnRyYXN0KDEuMTIpCik7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+
+## Call Signature
+
+```ts
+cellColor(gray): this;
+```
+
+Set the cell background color using a grayscale value.
+
+### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `gray` | [`SynthParameterValue`](../../../type-aliases/SynthParameterValue.md) | Grayscale value (0-1) |
+
+### Returns
+
+`this`
+
+### Example
+
+<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="cellColor" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW1N5bnRoUGx1Z2luXSwKfSk7Cgp0LmJwbSgxOCk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IGdseXBocyA9ICcgLjotPSsqIyVAJzsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnU1lOVEhTT1VSQ0UuQ0VMTENPTE9SMycsIHgsIHkrKywgMTEwLCAyNTUsIDE3MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA3MCwgMTEwLCAxNDApOwoJZHJhd1RleHQoJ0NFTEwgR1JBWVNDQUxFJywgeCwgeSsrLCAxMjAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdPbmUgdmFsdWUgZmlsbHMgY2VsbHMuJywgeCwgeSsrLCAxNjAsIDE4MCwgMjEwKTsKCWRyYXdUZXh0KCdJbmsgY2FycmllcyBjb2xvciBtb3Rpb24uJywgeCwgeSsrLCAxNjAsIDE4MCwgMjEwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDcwLCAxMTAsIDE0MCk7CglkcmF3VGV4dCgnU2VwYXJhdGUgYW5pbWF0ZWQgaW5rIGFuZCBwYXBlci4nLCB4LCB5KyssIDE1MCwgMjU1LCAxOTApOwp9KTsKCmNvbnN0IGluayA9IHBsYXNtYSg0LjIsIDAuMDI0LCAwLjAsIDEuMTIpLmNvbG9yKDAuNDIsIDEuMCwgMC41OCkubW9kdWxhdGVSb3RhdGUobm9pc2UoMi4wLCAwLjAxNSksIDAuMjgsIDAuMDQpOwoKdC5sYXllcnMuYmFzZS5zeW50aCgKCXBsYXNtYSg0LjIsIDAuMDIyLCAwLjIsIDEuMTIpCgkJLm1vZHVsYXRlKG5vaXNlKDIuMCwgMC4wMTQpLCAwLjAyKQoJCS5jZWxsQ29sb3IoWzAuMDUsIDAuMjJdLmZhc3QoMC4xMikuZWFzZSgnZWFzZUluT3V0U2luZScpKQoJCS5jaGFyTWFwKGdseXBocykKCQkuY2hhckNvbG9yKGluaykKCQkuY29udHJhc3QoMS4xNikKKTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />

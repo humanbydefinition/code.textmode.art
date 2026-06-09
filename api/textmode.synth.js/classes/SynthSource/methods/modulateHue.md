@@ -1,0 +1,37 @@
+---
+layout: doc
+editLink: true
+title: modulateHue
+description: Modulate coordinates based on hue differences.
+category: Methods
+api: true
+owner: SynthSource
+kind: Method
+ecosystem: textmode.js
+lastModified: 2026-06-09
+---
+
+[textmode.synth.js](../../../index.md) / [SynthSource](../../SynthSource.md) / modulateHue
+
+# Method: modulateHue()
+
+```ts
+modulateHue(source, amount?): this;
+```
+
+Modulate coordinates based on hue differences.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `source` | [`SynthParameterValue`](../../../type-aliases/SynthParameterValue.md) | Modulation source |
+| `amount?` | [`SynthParameterValue`](../../../type-aliases/SynthParameterValue.md) | Modulation amount (default: 1.0) |
+
+## Returns
+
+`this`
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="modulateHue" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW1N5bnRoUGx1Z2luXSwKfSk7Cgp0LmJwbSgxOCk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IGdseXBocyA9ICcgLjotPSsqIyVAJzsKY29uc3Qgc2xvdyA9IFswLjAsIDEuMF0uZmFzdCgwLjE2KS5lYXNlKCdlYXNlSW5PdXRTaW5lJyk7CmNvbnN0IHR1cm4gPSBbLTAuNDIsIDAuNDJdLmZhc3QoMC4xNCkuZWFzZSgnZWFzZUluT3V0U2luZScpOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWRyYXdUZXh0KCdTWU5USFNPVVJDRS5NT0RIVUUnLCB4LCB5KyssIDExMCwgMjU1LCAxNzApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgNzAsIDExMCwgMTQwKTsKCWRyYXdUZXh0KCdIVUUgQkFTRUQgRElTUExBQ0UnLCB4LCB5KyssIDEyMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ0NvbG9yIGRpZmZlcmVuY2VzIG1vdmUgVVZzLicsIHgsIHkrKywgMTYwLCAxODAsIDIxMCk7CglkcmF3VGV4dCgnQ2hyb21hdGljIGZsb3cgc3RheXMgc21vb3RoLicsIHgsIHkrKywgMTYwLCAxODAsIDIxMCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA3MCwgMTEwLCAxNDApOwoJZHJhd1RleHQoJ1NlcGFyYXRlIGFuaW1hdGVkIGluayBhbmQgcGFwZXIuJywgeCwgeSsrLCAxNTAsIDI1NSwgMTkwKTsKfSk7Cgpjb25zdCBpbmsgPSBvc2MoNiwgMC4wMTgsIDEuNikucm90YXRlKHR1cm4sIDAuMDAyKS5jb2xvcigwLjksIDAuNTgsIDEuMCkubW9kdWxhdGVLYWxlaWQobm9pc2UoMi4wLCAwLjAxNCksIDUpOwpjb25zdCBwYXBlciA9IHBsYXNtYSgzLjIsIDAuMDI0LCAwLjIsIDEuMDgpLmNvbG9yKDAuMDgsIDAuMDM1LCAwLjE2KS5odWUoc2xvdyk7Cgp0LmxheWVycy5iYXNlLnN5bnRoKAoJcGxhc21hKDQuNCwgMC4wMjYsIDAuMiwgMS4xNCkKCQkuY29sb3JhbWEoMC4xKQoJCS5tb2R1bGF0ZUh1ZShvc2MoNSwgMC4wMTQpLmthbGVpZCg1KS5odWUoc2xvdyksIDQuMCkKCQkub3ZlcmxheShub2lzZSgyLjQsIDAuMDE2KS5jb2xvcigwLjIsIDAuNDUsIDEuMCksIDAuMjIpCgkJLmNvbnRyYXN0KDEuMTQpCgkJLmNoYXJNYXAoZ2x5cGhzKQoJCS5jaGFyQ29sb3IoaW5rKQoJCS5jZWxsQ29sb3IocGFwZXIpCik7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />

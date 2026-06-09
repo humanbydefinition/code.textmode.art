@@ -1,0 +1,37 @@
+---
+layout: doc
+editLink: true
+title: b
+description: Extract the blue channel as a grayscale value.
+category: Methods
+api: true
+owner: SynthSource
+kind: Method
+ecosystem: textmode.js
+lastModified: 2026-06-09
+---
+
+[textmode.synth.js](../../../index.md) / [SynthSource](../../SynthSource.md) / b
+
+# Method: b()
+
+```ts
+b(scale?, offset?): this;
+```
+
+Extract the blue channel as a grayscale value.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `scale?` | [`SynthParameterValue`](../../../type-aliases/SynthParameterValue.md) | Scale multiplier (default: 1.0) |
+| `offset?` | [`SynthParameterValue`](../../../type-aliases/SynthParameterValue.md) | Offset amount (default: 0.0) |
+
+## Returns
+
+`this`
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="b" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW1N5bnRoUGx1Z2luXSwKfSk7Cgp0LmJwbSgxOCk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IGdseXBocyA9ICcgLjotPSsqIyVAJzsKY29uc3QgdHVybiA9IFstMC40MiwgMC40Ml0uZmFzdCgwLjE0KS5lYXNlKCdlYXNlSW5PdXRTaW5lJyk7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CgoJZHJhd1RleHQoJ1NZTlRIU09VUkNFLkInLCB4LCB5KyssIDExMCwgMjU1LCAxNzApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgNzAsIDExMCwgMTQwKTsKCWRyYXdUZXh0KCdCTFVFIENIQU5ORUwgRVhUUkFDVElPTicsIHgsIHkrKywgMTIwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnQmx1ZSBkcml2ZXMgZ2x5cGggbHVtaW5hbmNlLicsIHgsIHkrKywgMTYwLCAxODAsIDIxMCk7CglkcmF3VGV4dCgnSW5rIGFuZCBjZWxscyBrZWVwIG1vdmluZy4nLCB4LCB5KyssIDE2MCwgMTgwLCAyMTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgNzAsIDExMCwgMTQwKTsKCWRyYXdUZXh0KCdTZXBhcmF0ZSBhbmltYXRlZCBpbmsgYW5kIHBhcGVyLicsIHgsIHkrKywgMTUwLCAyNTUsIDE5MCk7Cn0pOwoKY29uc3QgaW5rID0gb3NjKDUsIDAuMDE4LCAxLjEpLmthbGVpZCg0KS5jb2xvcigwLjQ1LCAwLjcyLCAxLjApLm1vZHVsYXRlKG5vaXNlKDIuMiwgMC4wMTgpLCAwLjAyNSk7CmNvbnN0IHBhcGVyID0gcGxhc21hKDMuNiwgMC4wMjgsIDAuMSwgMS4wNSkuY29sb3IoMC4wMywgMC4wOCwgMC4xOCkubW9kdWxhdGVTY2FsZShub2lzZSgyLjAsIDAuMDE1KSwgMC4yMiwgMC45NSk7Cgp0LmxheWVycy5iYXNlLnN5bnRoKAoJb3NjKDE0LCAwLjAyNCwgMS41KQoJCS5yb3RhdGUodHVybiwgMC4wMDMpCgkJLmthbGVpZCg2KQoJCS5jb2xvcigwLjE2LCAwLjM0LCAxLjApCgkJLm11bHQobm9pc2UoMi44LCAwLjAyKSwgMC40MikKCQkuYigxLjYsIDAuMDMpCgkJLm1vZHVsYXRlS2FsZWlkKG5vaXNlKDIuMCwgMC4wMTYpLCA2KQoJCS5jb250cmFzdCgxLjI0KQoJCS5jaGFyTWFwKGdseXBocykKCQkuY2hhckNvbG9yKGluaykKCQkuY2VsbENvbG9yKHBhcGVyKQopOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />

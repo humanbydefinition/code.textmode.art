@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 namespace: input.mouse
 kind: TypeAlias
-lastModified: 2026-05-27
+lastModified: 2026-06-09
 ---
 
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [mouse](../index.md) / MousePosition
@@ -15,7 +15,7 @@ lastModified: 2026-05-27
 # Type Alias: MousePosition
 
 ```ts
-type MousePosition = GridPosition;
+type MousePosition = object;
 ```
 
 Mouse coordinates in grid space using center-based coordinates.
@@ -29,3 +29,19 @@ The coordinate system matches the main drawing/rendering space:
 
 When the mouse is outside the grid bounds, both `x` and `y` are set to
 `Number.NEGATIVE_INFINITY` to indicate an invalid/outside position.
+
+## Properties
+
+### x
+
+```ts
+x: number;
+```
+
+***
+
+### y
+
+```ts
+y: number;
+```

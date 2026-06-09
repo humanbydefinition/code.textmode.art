@@ -1,0 +1,38 @@
+---
+layout: doc
+editLink: true
+title: noiseSeed
+description: Reset the noise lookup table to a seed.
+category: Methods
+api: true
+owner: Textmodifier
+kind: Method
+lastModified: 2026-06-09
+---
+
+[textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / noiseSeed
+
+# Method: noiseSeed()
+
+```ts
+noiseSeed(seed): void;
+```
+
+Reset the noise lookup table to a seed.
+
+Use this when a sketch needs a repeatable noise field independent of the
+current random sequence.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `seed` | `string` \| `number` | Seed used to regenerate the noise table. |
+
+## Returns
+
+`void`
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="noiseSeed" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CglwaXhlbERlbnNpdHk6IDEsCgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IHJhbXAgPSAnIC46LT0rKiMlQCc7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCmZ1bmN0aW9uIGRyYXdCYW5kKG9mZnNldFgpIHsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMikgKyAxMDsKCXQubm9pc2VTZWVkKCdtYXRjaGVkLWJhbmQnKTsKCWZvciAobGV0IHkgPSAwOyB5IDwgTWF0aC5taW4oMTgsIHQuZ3JpZC5yb3dzIC0gMTIpOyB5ICs9IDEpIHsKCQlmb3IgKGxldCB4ID0gMDsgeCA8IDE4OyB4ICs9IDEpIHsKCQkJY29uc3QgdmFsdWUgPSB0Lm5vaXNlKHggKiAwLjEyLCB5ICogMC4xMiwgdC5mcmFtZUNvdW50ICogMC4wMSk7CgkJCWNvbnN0IGluZGV4ID0gTWF0aC5mbG9vcih2YWx1ZSAqIChyYW1wLmxlbmd0aCAtIDEpKTsKCQkJdC5wdXNoKCk7CgkJCXQudHJhbnNsYXRlKG9mZnNldFggKyB4LCB0b3AgKyB5KTsKCQkJdC5jaGFyKHJhbXBbaW5kZXhdKTsKCQkJdC5jaGFyQ29sb3IoODAgKyB2YWx1ZSAqIDE2MCwgMjU1LCAxMzAgKyB2YWx1ZSAqIDEwMCk7CgkJCXQucG9pbnQoKTsKCQkJdC5wb3AoKTsKCQl9Cgl9Cn0KCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNSwgMTAsIDE4KTsKCWRyYXdCYW5kKC0yMik7CglkcmF3QmFuZCg0KTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuTk9JU0VTRUVEJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogUkVQRUFUQUJMRSBGSUVMRFMnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ0JvdGggYmFuZHMgdXNlIHRoZSBzYW1lIHNlZWQuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdTYW1lIGNvb3JkaW5hdGVzIG1ha2Ugc2FtZSB2YWx1ZXMuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />

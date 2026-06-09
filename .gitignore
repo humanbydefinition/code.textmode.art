@@ -1,4 +1,8 @@
 node_modules
-.vitepress/dist
-.vitepress/cache
-.gemini
+.vitepress/.cache/
+.vitepress/.temp
+.vitepress/cache/
+.vitepress/dist/
+.vitepress/temp/
+.agents
+skills-lock.json

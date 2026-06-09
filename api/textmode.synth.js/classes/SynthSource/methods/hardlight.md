@@ -1,0 +1,37 @@
+---
+layout: doc
+editLink: true
+title: hardlight
+description: Hard light blend with another source.
+category: Methods
+api: true
+owner: SynthSource
+kind: Method
+ecosystem: textmode.js
+lastModified: 2026-06-09
+---
+
+[textmode.synth.js](../../../index.md) / [SynthSource](../../SynthSource.md) / hardlight
+
+# Method: hardlight()
+
+```ts
+hardlight(source, amount?): this;
+```
+
+Hard light blend with another source.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `source` | [`SynthParameterValue`](../../../type-aliases/SynthParameterValue.md) | Source to hardlight |
+| `amount?` | [`SynthParameterValue`](../../../type-aliases/SynthParameterValue.md) | Blend amount (default: 1.0) |
+
+## Returns
+
+`this`
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="hardlight" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW1N5bnRoUGx1Z2luXSwKfSk7Cgp0LmJwbSgxOCk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IGdseXBocyA9ICcgLjotPSsqIyVAJzsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnU1lOVEhTT1VSQ0UuSEFSRExJR0hUJywgeCwgeSsrLCAxMTAsIDI1NSwgMTcwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDcwLCAxMTAsIDE0MCk7CglkcmF3VGV4dCgnSEFSRCBMSUdIVCBCTEVORCcsIHgsIHkrKywgMTIwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnU291cmNlIGRyaXZlcyBjb250cmFzdC4nLCB4LCB5KyssIDE2MCwgMTgwLCAyMTApOwoJZHJhd1RleHQoJ0NyaXNwLCBidXQgbm90IGZsYXNoaW5nLicsIHgsIHkrKywgMTYwLCAxODAsIDIxMCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA3MCwgMTEwLCAxNDApOwoJZHJhd1RleHQoJ1NlcGFyYXRlIGFuaW1hdGVkIGluayBhbmQgcGFwZXIuJywgeCwgeSsrLCAxNTAsIDI1NSwgMTkwKTsKfSk7Cgpjb25zdCBpbmsgPSBtb2lyZSg4LCA5LCAwLjE1LCAxLjYsIDAuMDI1KS5jb2xvcigxLjAsIDAuNjIsIDAuMzQpLm1vZHVsYXRlKG5vaXNlKDIuMywgMC4wMTgpLCAwLjAyMik7CmNvbnN0IHBhcGVyID0gbm9pc2UoMy4wLCAwLjAyNSkuY29sb3IoMC4xNiwgMC4wNTUsIDAuMDI1KS5zb2Z0bGlnaHQob3NjKDQsIDAuMDE2KSwgMC4yMik7Cgp0LmxheWVycy5iYXNlLnN5bnRoKAoJbW9pcmUoOSwgMTAsIDAuMSwgMS42LCAwLjAyKQoJCS5jb2xvcigwLjk1LCAwLjUsIDAuMTgpCgkJLmhhcmRsaWdodChub2lzZSgzLjIsIDAuMDI1KS5jb2xvcigwLjE4LCAwLjUsIDEuMCksIDAuNDgpCgkJLm1vZHVsYXRlUm90YXRlKG9zYyg0LCAwLjAxMiksIDAuMjQsIDAuMDQpCgkJLmNvbnRyYXN0KDEuMikKCQkuY2hhck1hcChnbHlwaHMpCgkJLmNoYXJDb2xvcihpbmspCgkJLmNlbGxDb2xvcihwYXBlcikKKTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />

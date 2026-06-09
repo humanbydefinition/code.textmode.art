@@ -1,0 +1,46 @@
+---
+layout: doc
+editLink: true
+title: map
+description: Re-map a number from one range to another.
+category: Methods
+api: true
+owner: Textmodifier
+kind: Method
+lastModified: 2026-06-09
+---
+
+[textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / map
+
+# Method: map()
+
+```ts
+map(
+   value, 
+   start1, 
+   stop1, 
+   start2, 
+   stop2): number;
+```
+
+Re-map a number from one range to another.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `value` | `number` | The incoming value to be converted. |
+| `start1` | `number` | Lower bound of the value's current range. |
+| `stop1` | `number` | Upper bound of the value's current range. |
+| `start2` | `number` | Lower bound of the value's target range. |
+| `stop2` | `number` | Upper bound of the value's target range. |
+
+## Returns
+
+`number`
+
+The remapped value.
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="map" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CglwaXhlbERlbnNpdHk6IDEsCgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCBtYXBwZWRIZWlnaHQgPSAwOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDEwLCAxNyk7Cgljb25zdCBoYWxmQ29scyA9IE1hdGgubWF4KDEsIE1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKSk7Cgljb25zdCBoYWxmUm93cyA9IE1hdGgubWF4KDEsIE1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKSk7Cgljb25zdCBwb2ludGVyID0gdC5jb25zdHJhaW4odC5tb3VzZS54LCAtaGFsZkNvbHMsIGhhbGZDb2xzKTsKCW1hcHBlZEhlaWdodCA9IHQubWFwKHBvaW50ZXIsIC1oYWxmQ29scywgaGFsZkNvbHMsIDEsIDEzKTsKCglmb3IgKGxldCBpID0gMDsgaSA8IDE3OyBpKyspIHsKCQljb25zdCB4ID0gLTE2ICsgaSAqIDI7CgkJY29uc3Qgd2F2ZSA9IE1hdGguc2luKHQuZnJhbWVDb3VudCAqIDAuMDQgKyBpICogMC41NSk7CgkJY29uc3QgaGVpZ2h0ID0gTWF0aC5yb3VuZCh0Lm1hcCh3YXZlLCAtMSwgMSwgMSwgbWFwcGVkSGVpZ2h0KSk7CgkJY29uc3QgcmVkID0gTWF0aC5yb3VuZCh0Lm1hcChpLCAwLCAxNiwgODAsIDI1NSkpOwoJCWNvbnN0IGJsdWUgPSBNYXRoLnJvdW5kKHQubWFwKGhlaWdodCwgMSwgMTMsIDI1NSwgOTApKTsKCgkJdC5jaGFyKGkgJSAzID09PSAwID8gJyMnIDogJ3wnKTsKCQl0LmNoYXJDb2xvcihyZWQsIDE5MCwgYmx1ZSk7CgkJdC5wdXNoKCk7CgkJdC50cmFuc2xhdGUoeCwgNyAtIGhlaWdodCAvIDIpOwoJCXQucmVjdCgxLCBoZWlnaHQpOwoJCXQucG9wKCk7Cgl9CgoJY29uc3QgeSA9IHQubWFwKHQubW91c2UueSwgLWhhbGZSb3dzLCBoYWxmUm93cywgLTcsIDcpOwoJdC5jaGFyKCctJyk7Cgl0LmNoYXJDb2xvcigyNTUsIDIzMCwgMTIwKTsKCXQubGluZSgtMTgsIHksIDE4LCB5KTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5NQVAnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBSQU5HRSBSRU1BUFBJTkcnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ01vdXNlIGdyaWQgdmFsdWVzIGJlY29tZSBiYXIgcmFuZ2VzLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnbWFwKCkgYWxzbyBjb2xvcnMgZWFjaCBjb2x1bW4uJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dChgSEVJR0hUOiAke21hcHBlZEhlaWdodC50b0ZpeGVkKDEpfWAsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />

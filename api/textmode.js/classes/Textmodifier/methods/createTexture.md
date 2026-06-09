@@ -1,0 +1,42 @@
+---
+layout: doc
+editLink: true
+title: createTexture
+description: Create a dynamic texture from an external canvas or video element.
+category: Methods
+api: true
+owner: Textmodifier
+kind: Method
+lastModified: 2026-06-09
+---
+
+[textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / createTexture
+
+# Method: createTexture()
+
+```ts
+createTexture(source): TextmodeTexture;
+```
+
+Create a dynamic texture from an external canvas or video element.
+
+Use this to sample canvases or videos rendered by libraries such as three.js,
+p5.js, Babylon.js, or hydra-synth.
+
+The texture automatically updates each frame to capture the latest content from the source.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `source` | `HTMLCanvasElement` \| `HTMLVideoElement` | Canvas or video element to capture. |
+
+## Returns
+
+[`TextmodeTexture`](../../../namespaces/media/classes/TextmodeTexture.md)
+
+A TextmodeTexture that can be drawn with [image](image.md).
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="createTexture" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CglwaXhlbERlbnNpdHk6IDEsCgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7Cgpjb25zdCBzb3VyY2VDYW52YXMgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdjYW52YXMnKTsKc291cmNlQ2FudmFzLndpZHRoID0gNjQ7CnNvdXJjZUNhbnZhcy5oZWlnaHQgPSA2NDsKY29uc3QgY3R4ID0gc291cmNlQ2FudmFzLmdldENvbnRleHQoJzJkJyk7CmxldCB0ZXh0dXJlOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LnNldHVwKCgpID0-IHsKCXRleHR1cmUgPSB0LmNyZWF0ZVRleHR1cmUoc291cmNlQ2FudmFzKTsKfSk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDEwLCAyMik7CgljdHguZmlsbFN0eWxlID0gJyMxMDE4M2EnOwoJY3R4LmZpbGxSZWN0KDAsIDAsIDY0LCA2NCk7CgljdHguZmlsbFN0eWxlID0gJyNmYWNjMTUnOwoJY3R4LmZpbGxSZWN0KDggKyAodC5mcmFtZUNvdW50ICUgMzIpLCAyMCwgMTYsIDE2KTsKCWlmICh0ZXh0dXJlKSB0LmltYWdlKHRleHR1cmUsIDI0LCAxNCk7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuQ1JFQVRFVEVYVFVSRScsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IENBTlZBUyBURVhUVVJFJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdXcmFwcyBhIDJEIGNhbnZhcyBzb3VyY2UuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdTb3VyY2UgY2FudmFzIGlzIGFuaW1hdGVkLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQodGV4dHVyZSA_ICdURVhUVVJFOiBSRUFEWScgOiAnVEVYVFVSRTogV0FJVCcsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />

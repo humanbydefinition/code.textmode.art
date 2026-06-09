@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-05-15
+lastModified: 2026-06-09
 ---
 
 [textmode.figlet.js](../index.md) / FigTextColorValue
@@ -18,7 +18,7 @@ lastModified: 2026-05-15
 type FigTextColorValue = 
   | number
   | string
-  | TextmodeColor
+  | color.TextmodeColor
   | [number, number, number]
   | [number, number, number, number];
 ```

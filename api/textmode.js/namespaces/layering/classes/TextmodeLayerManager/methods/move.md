@@ -1,0 +1,37 @@
+---
+layout: doc
+editLink: true
+title: move
+description: Move a user-created layer to a new index in the stack.
+category: Methods
+api: true
+owner: TextmodeLayerManager
+namespace: layering
+kind: Method
+lastModified: 2026-06-09
+---
+
+[textmode.js](../../../../../index.md) / [layering](../../../index.md) / [TextmodeLayerManager](../../TextmodeLayerManager.md) / move
+
+# Method: move()
+
+```ts
+move(layer, newIndex): void;
+```
+
+Move a user-created layer to a new index in the stack.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `layer` | [`TextmodeLayer`](../../TextmodeLayer.md) | Layer to move. |
+| `newIndex` | `number` | Target index. |
+
+## Returns
+
+`void`
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="move" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CglwaXhlbERlbnNpdHk6IDEsCgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbHMgPSBbJ0xheWVyIDEnLCAnTGF5ZXIgMicsICdMYXllciAzJ107CmNvbnN0IGNvbG9ycyA9IFsKCVsyNTUsIDEyMCwgODBdLAoJWzEyMCwgMjU1LCAxODBdLAoJWzgwLCAxODAsIDI1NV0sCl07CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByZ2IgPSBbMjU1LCAyNTUsIDI1NV0pIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IocmdiWzBdLCByZ2JbMV0sIHJnYlsyXSk7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKZnVuY3Rpb24gZHJhd0NlbnRlcmVkVGV4dCh0ZXh0LCB5LCByZ2IgPSBbMjU1LCAyNTUsIDI1NV0pIHsKCWRyYXdUZXh0KHRleHQsIC1NYXRoLmZsb29yKHRleHQubGVuZ3RoIC8gMiksIHksIHJnYik7Cn0KCmNvbnN0IGxheWVycyA9IGxhYmVscy5tYXAoKGxhYmVsLCBpbmRleCkgPT4gewoJY29uc3QgbGF5ZXIgPSB0LmxheWVycy5hZGQoKTsKCglsYXllci5kcmF3KCgpID0-IHsKCQl0LmNsZWFyKCk7CgkJZHJhd0NlbnRlcmVkVGV4dChsYWJlbCwgMCwgY29sb3JzW2luZGV4XSk7Cgl9KTsKCglyZXR1cm4gbGF5ZXI7Cn0pOwpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDEwLCAyMik7CgoJZHJhd0NlbnRlcmVkVGV4dCgnQmFzZSBMYXllcicsIC04LCBbMjQwLCAyNDUsIDI1NV0pOwoKCWlmICh0LmZyYW1lQ291bnQgJSA3NSA9PT0gMCkgewoJCWNvbnN0IHN0ZXAgPSBNYXRoLmZsb29yKHQuZnJhbWVDb3VudCAvIDc1KTsKCQljb25zdCBsYXllciA9IGxheWVyc1tzdGVwICUgbGF5ZXJzLmxlbmd0aF07CgkJdC5sYXllcnMubW92ZShsYXllciwgbGF5ZXJzLmxlbmd0aCAtIDEpOwoJfQp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7Cgljb25zdCBzdGVwID0gTWF0aC5mbG9vcih0LmZyYW1lQ291bnQgLyA3NSkgJSBsYXllcnMubGVuZ3RoOwoKCWRyYXdUZXh0KCdMQVlFUk1BTkFHRVIuTU9WRScsIHgsIHkrKywgWzEwMCwgMjU1LCAxNDBdKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIFs4MCwgMTAwLCAxNTBdKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBNT1ZFIExBWUVSIElOREVYJywgeCwgeSsrLCBbMTAwLCAyMjAsIDI1NV0pOwoJZHJhd1RleHQoJ0N5Y2xlcyBvbmUgbGF5ZXIgdG8gdGhlIHRvcC4nLCB4LCB5KyssIFsxNDAsIDE2MCwgMTkwXSk7CglkcmF3VGV4dCgnTGFiZWwgbGF5ZXIgc3RheXMgYWJvdmUgZGVtby4nLCB4LCB5KyssIFsxNDAsIDE2MCwgMTkwXSk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCBbODAsIDEwMCwgMTUwXSk7CglkcmF3VGV4dChgTkVYVCBNT1ZFOiAke2xhYmVsc1tzdGVwXX1gLCB4LCB5KyssIFsxNDAsIDI1NSwgMTgwXSk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />

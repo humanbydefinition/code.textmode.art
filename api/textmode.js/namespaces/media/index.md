@@ -6,7 +6,7 @@ description: All media asset related modules and types.
 category: Namespaces
 api: true
 kind: Namespace
-lastModified: 2026-05-27
+lastModified: 2026-06-09
 ---
 
 [textmode.js](../../index.md) / media

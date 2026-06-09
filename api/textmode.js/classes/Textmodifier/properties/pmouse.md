@@ -1,0 +1,36 @@
+---
+layout: doc
+editLink: true
+title: pmouse
+description: Mouse position from the previous rendered frame.
+category: Properties
+api: true
+owner: Textmodifier
+kind: Property
+lastModified: 2026-06-09
+---
+
+[textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / pmouse
+
+# Property: pmouse
+
+```ts
+readonly pmouse: object;
+```
+
+Mouse position from the previous rendered frame.
+
+Unlike `previousPosition` in mouse event callbacks, this value is updated exactly once per
+rendered frame. Use it inside `draw()` to measure frame-to-frame mouse motion or draw trails.
+
+If no previous frame position is available yet, it returns
+`{ x: Number.NEGATIVE_INFINITY, y: Number.NEGATIVE_INFINITY }`.
+
+| Name | Type |
+| ------ | ------ |
+| `x` | `number` |
+| `y` | `number` |
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="pmouse" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CglwaXhlbERlbnNpdHk6IDEsCgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpsZXQgcHggPSAwOwpsZXQgcHkgPSAwOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDEwLCAyMik7CglweCA9IHQucG1vdXNlLng7CglweSA9IHQucG1vdXNlLnk7CglpZiAodC5tb3VzZS54ICE9PSBOdW1iZXIuTkVHQVRJVkVfSU5GSU5JVFkpIHsKCQl0LmNoYXJDb2xvcig2MCwgODAsIDEyMCk7CgkJdC5jaGFyKCcuJyk7CgkJdC5saW5lKHB4LCBweSwgdC5tb3VzZS54LCB0Lm1vdXNlLnkpOwoJCXQucHVzaCgpOwoJCXQudHJhbnNsYXRlKHQubW91c2UueCwgdC5tb3VzZS55KTsKCQl0LmNoYXIoJ0AnKTsKCQl0LmNoYXJDb2xvcigyNTUsIDIxMCwgMTIwKTsKCQl0LnBvaW50KCk7CgkJdC5wb3AoKTsKCX0KfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5QTU9VU0UnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBQUkVWSU9VUyBNT1VTRScsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnRHJhd3MgYSB0cmFpbCBmcm9tIGxhc3QgcG9pbnQuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdVcGRhdGVzIHdoZW5ldmVyIHBvaW50ZXIgbW92ZXMuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dChgUFg6ICR7cHh9YCwgeCwgeSsrLCAxODAsIDIwMCwgMjIwKTsKCWRyYXdUZXh0KGBQWTogJHtweX1gLCB4LCB5KyssIDE4MCwgMjAwLCAyMjApOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />

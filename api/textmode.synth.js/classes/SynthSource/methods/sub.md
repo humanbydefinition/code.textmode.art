@@ -1,0 +1,37 @@
+---
+layout: doc
+editLink: true
+title: sub
+description: Subtract another source.
+category: Methods
+api: true
+owner: SynthSource
+kind: Method
+ecosystem: textmode.js
+lastModified: 2026-06-09
+---
+
+[textmode.synth.js](../../../index.md) / [SynthSource](../../SynthSource.md) / sub
+
+# Method: sub()
+
+```ts
+sub(source, amount?): this;
+```
+
+Subtract another source.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `source` | [`SynthParameterValue`](../../../type-aliases/SynthParameterValue.md) | Source to subtract |
+| `amount?` | [`SynthParameterValue`](../../../type-aliases/SynthParameterValue.md) | Blend amount (default: 0.5) |
+
+## Returns
+
+`this`
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="sub" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW1N5bnRoUGx1Z2luXSwKfSk7Cgp0LmJwbSgxOCk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IGdseXBocyA9ICcgLjotPSsqIyVAJzsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnU1lOVEhTT1VSQ0UuU1VCJywgeCwgeSsrLCAxMTAsIDI1NSwgMTcwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDcwLCAxMTAsIDE0MCk7CglkcmF3VGV4dCgnU1VCVFJBQ1RJVkUgQ09NQklORScsIHgsIHkrKywgMTIwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnT25lIGZpZWxkIGNhcnZlcyBhbm90aGVyLicsIHgsIHkrKywgMTYwLCAxODAsIDIxMCk7CglkcmF3VGV4dCgnVGhlIGN1dCBtb3ZlcyBsaWtlIHNoYWRvdy4nLCB4LCB5KyssIDE2MCwgMTgwLCAyMTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgNzAsIDExMCwgMTQwKTsKCWRyYXdUZXh0KCdTZXBhcmF0ZSBhbmltYXRlZCBpbmsgYW5kIHBhcGVyLicsIHgsIHkrKywgMTUwLCAyNTUsIDE5MCk7Cn0pOwoKY29uc3QgaW5rID0gbW9pcmUoOCwgOSwgMC4xNSwgMS42LCAwLjAyNSkuY29sb3IoMS4wLCAwLjYyLCAwLjM0KS5tb2R1bGF0ZShub2lzZSgyLjMsIDAuMDE4KSwgMC4wMjIpOwpjb25zdCBwYXBlciA9IG5vaXNlKDMuMCwgMC4wMjUpLmNvbG9yKDAuMTYsIDAuMDU1LCAwLjAyNSkuc29mdGxpZ2h0KG9zYyg0LCAwLjAxNiksIDAuMjIpOwoKdC5sYXllcnMuYmFzZS5zeW50aCgKCW9zYygxMCwgMC4wMiwgMS4wKQoJCS5rYWxlaWQoNSkKCQkuY29sb3IoMC45LCAwLjcsIDAuMzUpCgkJLnN1Yihub2lzZSgyLjgsIDAuMDIpLmNvbG9yKDAuMjUsIDAuMzUsIDAuOSksIDAuMzQpCgkJLm1vZHVsYXRlKG5vaXNlKDIuMCwgMC4wMTQpLCAwLjAyNSkKCQkuY29udHJhc3QoMS4yMikKCQkuY2hhck1hcChnbHlwaHMpCgkJLmNoYXJDb2xvcihpbmspCgkJLmNlbGxDb2xvcihwYXBlcikKKTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />

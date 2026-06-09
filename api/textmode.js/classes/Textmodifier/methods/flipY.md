@@ -1,0 +1,37 @@
+---
+layout: doc
+editLink: true
+title: flipY
+description: Toggle vertical flipping for subsequent characters, or get the current state.
+category: Methods
+api: true
+owner: Textmodifier
+kind: Method
+lastModified: 2026-06-09
+---
+
+[textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / flipY
+
+# Method: flipY()
+
+```ts
+flipY(toggle?): boolean | void;
+```
+
+Toggle vertical flipping for subsequent characters, or get the current state.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `toggle?` | `boolean` | Whether to flip vertically. |
+
+## Returns
+
+`boolean` \| `void`
+
+Current flip state when called without arguments.
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="flipY" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CglwaXhlbERlbnNpdHk6IDEsCgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNiwgMTAsIDIyKTsKCWZvciAobGV0IGkgPSAwOyBpIDwgODsgaSsrKSB7CgkJY29uc3QgeFBvcyA9IChpIC0gMy41KSAqIDM7CgkJdC5wdXNoKCk7CgkJdC50cmFuc2xhdGUoeFBvcywgLTMpOwoJCXQuY2hhcignVicpOwoJCXQuY2hhckNvbG9yKDE0MCwgMjIwLCAyNTUpOwoJCXQucG9pbnQoKTsKCQl0LnBvcCgpOwoJCXQucHVzaCgpOwoJCXQudHJhbnNsYXRlKHhQb3MsIDUpOwoJCXQuZmxpcFkodHJ1ZSk7CgkJdC5jaGFyKCdWJyk7CgkJdC5jaGFyQ29sb3IoMjU1LCAyMTAsIDEyMCk7CgkJdC5wb2ludCgpOwoJCXQucG9wKCk7Cgl9Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuRkxJUFknLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBNSVJST1IgR0xZUEggWScsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnVG9wIHJvdyBpcyBub3JtYWwuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdCb3R0b20gcm93IGlzIGZsaXBwZWQuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dChgRkxJUCBZOiAke3QuZmxpcFkoKX1gLCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />

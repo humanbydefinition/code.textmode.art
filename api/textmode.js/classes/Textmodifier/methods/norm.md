@@ -1,0 +1,44 @@
+---
+layout: doc
+editLink: true
+title: norm
+description: Map a number from a range to a normalized 0 to 1 range.
+category: Methods
+api: true
+owner: Textmodifier
+kind: Method
+lastModified: 2026-06-09
+---
+
+[textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / norm
+
+# Method: norm()
+
+```ts
+norm(
+   value, 
+   start, 
+   stop): number;
+```
+
+Map a number from a range to a normalized 0 to 1 range.
+
+Values outside the input range are not clamped.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `value` | `number` | The incoming value to normalize. |
+| `start` | `number` | Lower bound of the value's current range. |
+| `stop` | `number` | Upper bound of the value's current range. |
+
+## Returns
+
+`number`
+
+The normalized value.
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="norm" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CglwaXhlbERlbnNpdHk6IDEsCgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCByYXcgPSAwOwpsZXQgbm9ybWFsaXplZCA9IDA7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNSwgNywgMTcpOwoJY29uc3QgbG93ID0gLTE4OwoJY29uc3QgaGlnaCA9IDE4OwoJcmF3ID0gdC5zaW4odC5mcmFtZUNvdW50ICogMC4wNCkgKiAyMCArIHQuY29zKHQuZnJhbWVDb3VudCAqIDAuMDE4KSAqIDQ7Cglub3JtYWxpemVkID0gdC5ub3JtKHJhdywgbG93LCBoaWdoKTsKCglmb3IgKGxldCBpID0gMDsgaSA8PSAzNjsgaSsrKSB7CgkJY29uc3QgdSA9IGkgLyAzNjsKCQljb25zdCB4ID0gLTE4ICsgaTsKCQl0LnB1c2goKTsKCQl0LnRyYW5zbGF0ZSh4LCA0KTsKCQl0LmNoYXIodSA8PSB0LmNvbnN0cmFpbihub3JtYWxpemVkLCAwLCAxKSA_ICcjJyA6ICcuJyk7CgkJdC5jaGFyQ29sb3IoODAgKyB1ICogMTYwLCAxNDAgKyB1ICogMTAwLCAyNTUgLSB1ICogMTAwKTsKCQl0LnBvaW50KCk7CgkJdC5wb3AoKTsKCX0KCgl0LmNoYXIoJ3wnKTsKCXQuY2hhckNvbG9yKDI1NSwgMjEwLCAxMDApOwoJY29uc3QgbWFya2VyID0gdC5tYXAodC5jb25zdHJhaW4obm9ybWFsaXplZCwgMCwgMSksIDAsIDEsIGxvdywgaGlnaCk7Cgl0LmxpbmUobWFya2VyLCAtNywgbWFya2VyLCA5KTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC10LmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtdC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5OT1JNJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogUkFOR0UgVE8gMC4uMScsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnbm9ybSh2YWx1ZSwgbG93LCBoaWdoKSBzY2FsZXMuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdUaGlzIGJhciBjbGFtcHMgb25seSBmb3IgZGlzcGxheS4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KGBSQVc6ICR7cmF3LnRvRml4ZWQoMil9YCwgeCwgeSsrLCAyMjAsIDIzMCwgMjU1KTsKCWRyYXdUZXh0KGBOT1JNOiAke25vcm1hbGl6ZWQudG9GaXhlZCgyKX1gLCB4LCB5KyssIDIyMCwgMjMwLCAyNTUpOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />

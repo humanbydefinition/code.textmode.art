@@ -1,0 +1,40 @@
+---
+layout: doc
+editLink: true
+title: fontSize
+description: Get or set this layer's font size.
+category: Methods
+api: true
+owner: TextmodeLayer
+namespace: layering
+kind: Method
+lastModified: 2026-06-09
+---
+
+[textmode.js](../../../../../index.md) / [layering](../../../index.md) / [TextmodeLayer](../../TextmodeLayer.md) / fontSize
+
+# Method: fontSize()
+
+```ts
+fontSize(size?): number | void;
+```
+
+Get or set this layer's font size.
+
+Changing the font size will re-initialize the layer's grid based on the new character dimensions.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `size?` | `number` | Font size to apply. |
+
+## Returns
+
+`number` \| `void`
+
+Current font size when called without arguments.
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="fontSize" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CglwaXhlbERlbnNpdHk6IDEsCgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBkZXRhaWxMYXllciA9IHQubGF5ZXJzLmFkZCh7IGZvbnRTaXplOiA4LCBibGVuZE1vZGU6ICdzY3JlZW4nIH0pOwpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByZ2IgPSBbMjU1LCAyNTUsIDI1NV0pIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IocmdiWzBdLCByZ2JbMV0sIHJnYlsyXSk7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg2LCAxMCwgMjIpOwoKCXQucHVzaCgpOwoJdC50cmFuc2xhdGUoMCwgMCk7Cgl0LmNoYXJDb2xvcig0MCwgNTAsIDgwKTsKCXQuY2hhcignIycpOwoJdC5yZWN0KDIwLCAxMCk7Cgl0LnBvcCgpOwp9KTsKCmRldGFpbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgdGltZSA9IHQuZnJhbWVDb3VudCAqIDAuMDM7CgoJdC5wdXNoKCk7Cgl0LnRyYW5zbGF0ZSgwLCAtMik7Cgl0LmNoYXJDb2xvcigyNTUsIDIyNSwgMTQwLCAxNTApOwoJdC5jaGFyKCcuJyk7CgoJZm9yIChsZXQgaSA9IDA7IGkgPCA0MDsgaSsrKSB7CgkJY29uc3QgYW5nbGUgPSB0aW1lICsgaSAqIDAuMjsKCQljb25zdCByID0gMTIgKyBNYXRoLnNpbih0aW1lICsgaSAqIDAuNSkgKiA0OwoJCXQucHVzaCgpOwoJCXQudHJhbnNsYXRlKE1hdGgucm91bmQoTWF0aC5jb3MoYW5nbGUpICogciAqIDEuNSksIE1hdGgucm91bmQoTWF0aC5zaW4oYW5nbGUpICogciAqIDAuNikpOwoJCXQucG9pbnQoKTsKCQl0LnBvcCgpOwoJfQoJdC5wb3AoKTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWRyYXdUZXh0KCdURVhUTU9ERUxBWUVSLkZPTlRTSVpFJywgeCwgeSsrLCBbMTAwLCAyNTUsIDE0MF0pOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgWzgwLCAxMDAsIDE1MF0pOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IFBFUi1MQVlFUiBSRVNPTFVUSU9OJywgeCwgeSsrLCBbMTAwLCAyMjAsIDI1NV0pOwoJZHJhd1RleHQoJ1NtYWxsZXIgZm9udCBnaXZlcyBkZW5zZXIgY2VsbHMuJywgeCwgeSsrLCBbMTQwLCAxNjAsIDE5MF0pOwoJZHJhd1RleHQoJ0xheWVyIGdyaWRzIHVwZGF0ZSBpbmRlcGVuZGVudGx5LicsIHgsIHkrKywgWzE0MCwgMTYwLCAxOTBdKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIFs4MCwgMTAwLCAxNTBdKTsKCWRyYXdUZXh0KGBCQVNFOiAke3QubGF5ZXJzLmJhc2UuZm9udFNpemUoKX0gUFhgLCB4LCB5KyssIFsxNDAsIDE4MCwgMjU1XSk7CglkcmF3VGV4dChgREVUQUlMOiAke2RldGFpbExheWVyLmZvbnRTaXplKCl9IFBYYCwgeCwgeSsrLCBbMjU1LCAyMjUsIDE0MF0pOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />

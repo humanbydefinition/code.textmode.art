@@ -6,7 +6,7 @@ description: ~ travelling without arriving
 category: API Reference
 api: true
 kind: Project
-lastModified: 2026-05-27
+lastModified: 2026-06-09
 ---
 
 # textmode.js
@@ -17,6 +17,7 @@ lastModified: 2026-05-27
 
 | Namespace | Description |
 | ------ | ------ |
+| [color](namespaces/color/index.md) | Color objects, color modes, and types. |
 | [conversion](namespaces/conversion/index.md) | All media conversion related modules and types. |
 | [errors](namespaces/errors/index.md) | All error handling related modules and types. |
 | [filters](namespaces/filters/index.md) | All filter related modules and types. |
@@ -33,15 +34,17 @@ lastModified: 2026-05-27
 | ------ | ------ |
 | [textmode](classes/textmode.md) | The main entry point for the `textmode.js` library. |
 | [TextmodeCamera](classes/TextmodeCamera.md) | Mutable camera object used for p5-style camera workflows. |
-| [TextmodeColor](classes/TextmodeColor.md) | Color value used by textmode drawing APIs. |
-| [TextmodeFramebuffer](classes/TextmodeFramebuffer.md) | Framebuffer class for managing offscreen rendering targets initialized via [Textmodifier.createFramebuffer](classes/Textmodifier.md#createframebuffer). |
+| [TextmodeFramebuffer](classes/TextmodeFramebuffer.md) | Framebuffer class for managing offscreen rendering targets initialized via [Textmodifier.createFramebuffer](classes/Textmodifier/methods/createFramebuffer.md). |
+| [TextmodeGlyphRamp](classes/TextmodeGlyphRamp.md) | Immutable character sequence for mapping numbers to glyphs. |
 | [TextmodeGrid](classes/TextmodeGrid.md) | Grid used by a textmode layer. |
-| [TextmodeShader](classes/TextmodeShader.md) | WebGL shader program created by [Textmodifier.createFilterShader](classes/Textmodifier.md#createfiltershader) or [Textmodifier.createShader](classes/Textmodifier.md#createshader). |
+| [TextmodeRandom](classes/TextmodeRandom.md) | A deterministic pseudo-random number generator for textmode sketches. |
+| [TextmodeShader](classes/TextmodeShader.md) | WebGL shader program created by [Textmodifier.createMaterialShader](classes/Textmodifier/methods/createMaterialShader.md), [Textmodifier.createFilterShader](classes/Textmodifier/methods/createFilterShader.md), or [Textmodifier.createShader](classes/Textmodifier/methods/createShader.md). |
+| [TextmodeVector](classes/TextmodeVector.md) | Mutable two- or three-dimensional vector for creative-coding math. |
 | [Textmodifier](classes/Textmodifier.md) | The main `textmode.js` drawing context. |
 
 ## Type Aliases
 
 | Type Alias | Description |
 | ------ | ------ |
-| [TextmodeFramebufferOptions](type-aliases/TextmodeFramebufferOptions.md) | Options for creating a framebuffer via [Textmodifier.createFramebuffer](classes/Textmodifier.md#createframebuffer). If not specified, width and height default to the current textmode grid size. |
-| [TextmodeOptions](type-aliases/TextmodeOptions.md) | Options when creating a [Textmodifier](classes/Textmodifier.md) instance via [textmode.create](classes/textmode.md#create). |
+| [TextmodeFramebufferOptions](type-aliases/TextmodeFramebufferOptions.md) | Options for creating a framebuffer via [Textmodifier.createFramebuffer](classes/Textmodifier/methods/createFramebuffer.md). If not specified, width and height default to the current textmode grid size. |
+| [TextmodeOptions](type-aliases/TextmodeOptions.md) | Options when creating a [Textmodifier](classes/Textmodifier.md) instance via [textmode.create](classes/textmode/methods/create.md). |

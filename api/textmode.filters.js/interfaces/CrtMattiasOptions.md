@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-05-15
+lastModified: 2026-06-09
 isInterface: true
 ---
 
@@ -23,40 +23,7 @@ classic CRT shader.
 
 ## Example
 
-```javascript
-const t = textmode.create({
-  width: window.innerWidth,
-  height: window.innerHeight,
-  plugins: [FiltersPlugin],
-});
-
-let video;
-
-t.setup(async () => {
-  video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
-  video.play();
-  video.loop();
-  video.characters(' .:-=+*#%@');
-});
-
-t.draw(() => {
-  t.background(0);
-  if (video) {
-    t.image(video, t.grid.cols, t.grid.rows);
-  }
-
-  const wobble = Math.sin(t.secs * 2);
-  t.layers.base.filter('crtMattias', {
-    curvature: 0.45 + wobble * 0.1,
-    scanSpeed: 1 + wobble * 0.25,
-    time: t.secs,
-  });
-});
-
-t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
+<TextmodeApiSandbox profile="textmode.filters.js" language="javascript" title="CrtMattiasOptions" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAzMiwKCXBsdWdpbnM6IFtGaWx0ZXJzUGx1Z2luXSwKfSk7CmNvbnN0IGxhYmVsTGF5ZXIgPSB0LmxheWVycy5hZGQoKTsKCmxldCB2aWRlbzsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKdC5zZXR1cChhc3luYyAoKSA9PiB7Cgl2aWRlbyA9IGF3YWl0IHQubG9hZFZpZGVvKCdodHRwczovL2ludGVyYWN0aXZlLWV4YW1wbGVzLm1kbi5tb3ppbGxhLm5ldC9tZWRpYS9jYzAtdmlkZW9zL2Zsb3dlci5tcDQnKTsKCXZpZGVvLnBsYXkoKTsKCXZpZGVvLmxvb3AoKTsKCXZpZGVvLmNoYXJhY3RlcnMoJyAuOi09KyojJUAnKTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMiksCgkJdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMywKCQl4ID0gbGVmdCArIDM7CgoJY29uc3QgY3VydiA9ICgwLjQgKyAwLjMgKiBNYXRoLnNpbih0LnNlY3MgKiAxLjApKS50b0ZpeGVkKDIpOwoKCWRyYXdUZXh0KCdGSUxURVJTUExVR0lOLkNSVE1BVFRJQVMnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBDQVRIT0RFIFJBWSBUVUJFIEVNVUxBVE9SJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdBcHBsaWVzIHNjcmVlbiBjdXJ2YXR1cmUgYW5kIHNjYW5saW5lcy4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDdXJ2YXR1cmU6ICcgKyBjdXJ2LCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwoJZHJhd1RleHQoJ1NjYW4gU3BlZWQ6IDEuNScsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7Cn0pOwoKdC5kcmF3KCgpID0-IHsKCWlmICghdmlkZW8pIHJldHVybjsKCWNvbnN0IGN1cnYgPSAwLjQgKyAwLjMgKiBNYXRoLnNpbih0LnNlY3MgKiAxLjApOwoKCXQubGF5ZXJzLmJhc2UuZmlsdGVyKCdjcnRNYXR0aWFzJywgewoJCWN1cnZhdHVyZTogY3VydiwKCQlzY2FuU3BlZWQ6IDEuNSwKCQl0aW1lOiB0LnNlY3MsCgl9KTsKCgl0LmJhY2tncm91bmQoMCk7Cgl0LmltYWdlKHZpZGVvKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
 
 ## See
 

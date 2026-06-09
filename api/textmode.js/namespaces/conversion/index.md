@@ -6,7 +6,7 @@ description: All media conversion related modules and types.
 category: Namespaces
 api: true
 kind: Namespace
-lastModified: 2026-05-27
+lastModified: 2026-06-09
 ---
 
 [textmode.js](../../index.md) / conversion
@@ -25,7 +25,7 @@ but custom strategies can be registered via [conversion.TextmodeConversionManage
 
 | Class | Description |
 | ------ | ------ |
-| [TextmodeConversionManager](classes/TextmodeConversionManager.md) | Registers image-to-textmode conversion strategies for a Textmodifier instance. |
+| [TextmodeConversionManager](classes/TextmodeConversionManager.md) | Registers conversion strategies for a Textmodifier instance. |
 
 ## Interfaces
 

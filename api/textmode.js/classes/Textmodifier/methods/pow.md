@@ -1,0 +1,38 @@
+---
+layout: doc
+editLink: true
+title: pow
+description: Raise a base value to an exponent.
+category: Methods
+api: true
+owner: Textmodifier
+kind: Method
+lastModified: 2026-06-09
+---
+
+[textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / pow
+
+# Method: pow()
+
+```ts
+pow(base, exponent): number;
+```
+
+Raise a base value to an exponent.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `base` | `number` | Base value. |
+| `exponent` | `number` | Exponent value. |
+
+## Returns
+
+`number`
+
+Base raised to the exponent.
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="pow" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CglwaXhlbERlbnNpdHk6IDEsCgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCBleHBvbmVudCA9IDE7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNiwgOCwgMTcpOwoJZXhwb25lbnQgPSAwLjUgKyB0Lm5vcm0odC5zaW4odC5mcmFtZUNvdW50ICogMC4wMykgKyB0LmNvcyh0LmZyYW1lQ291bnQgKiAwLjAxNykgKiAwLjQsIC0xLjQsIDEuNCkgKiAzOwoKCWZvciAobGV0IGkgPSAwOyBpIDw9IDQwOyBpKyspIHsKCQljb25zdCB1ID0gaSAvIDQwOwoJCWNvbnN0IHNoYXBlZCA9IHQucG93KHUsIGV4cG9uZW50KTsKCQljb25zdCB4ID0gLTIwICsgaTsKCQljb25zdCB5ID0gOCAtIHNoYXBlZCAqIDE2OwoJCWNvbnN0IGhlYXQgPSBzaGFwZWQ7CgkJdC5wdXNoKCk7CgkJdC50cmFuc2xhdGUoeCwgeSk7CgkJdC5jaGFyKGhlYXQgPiAwLjcgPyAnIycgOiBoZWF0ID4gMC4zID8gJysnIDogJy4nKTsKCQl0LmNoYXJDb2xvcig5MCArIGhlYXQgKiAxNTAsIDE1MCArIGhlYXQgKiA4MCwgMjU1IC0gaGVhdCAqIDkwKTsKCQl0LnBvaW50KCk7CgkJdC5wb3AoKTsKCX0KCgl0LmNoYXIoJy0nKTsKCXQuY2hhckNvbG9yKDY1LCA4NSwgMTI1KTsKCXQubGluZSgtMjAsIDgsIDIwLCA4KTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC10LmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtdC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5QT1cnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBDVVJWRSBTSEFQSU5HJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdwb3coYmFzZSwgZXhwKSBiZW5kcyAwLi4xLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnU21hbGwgZXhwb25lbnRzIGxpZnQgdGhlIGN1cnZlLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoYEVYUE9ORU5UOiAke2V4cG9uZW50LnRvRml4ZWQoMil9YCwgeCwgeSsrLCAyMjAsIDIzMCwgMjU1KTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />

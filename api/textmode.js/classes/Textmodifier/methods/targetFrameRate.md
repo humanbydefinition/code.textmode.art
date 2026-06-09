@@ -1,0 +1,39 @@
+---
+layout: doc
+editLink: true
+title: targetFrameRate
+description: Set or get the target frame rate limit.
+category: Methods
+api: true
+owner: Textmodifier
+kind: Method
+lastModified: 2026-06-09
+---
+
+[textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / targetFrameRate
+
+# Method: targetFrameRate()
+
+```ts
+targetFrameRate(fps?): number | void;
+```
+
+Set or get the target frame rate limit.
+
+Unlike [frameRate](frameRate.md), the getter returns the configured target instead of the measured rate.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `fps?` | `number` | New target frame rate. |
+
+## Returns
+
+`number` \| `void`
+
+Current target frame rate when called without arguments.
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="targetFrameRate" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CglwaXhlbERlbnNpdHk6IDEsCgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpsZXQgdGFyZ2V0ID0gNjA7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNiwgMTAsIDIyKTsKCXRhcmdldCA9IE1hdGguZmxvb3IodC5mcmFtZUNvdW50IC8gMTUwKSAlIDIgPT09IDAgPyAyNCA6IDYwOwoJdC50YXJnZXRGcmFtZVJhdGUodGFyZ2V0KTsKCWZvciAobGV0IGkgPSAwOyBpIDwgdGFyZ2V0IC8gNDsgaSsrKSB7CgkJdC5wdXNoKCk7CgkJdC50cmFuc2xhdGUoLTE4ICsgaSwgMyk7CgkJdC5jaGFyKCcrJyk7CgkJdC5jaGFyQ29sb3IoMTIwLCAyMjAsIDI1NSk7CgkJdC5wb2ludCgpOwoJCXQucG9wKCk7Cgl9Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuVEFSR0VURlJBTUVSQVRFJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogVEFSR0VUIEZQUycsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnU2V0cyBkZXNpcmVkIGRyYXcgY2FkZW5jZS4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJ1JlYWRvdXQgaXMga2VwdCBjb21wYWN0LicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoYFRBUkdFVDogJHt0LnRhcmdldEZyYW1lUmF0ZSgpfWAsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />

@@ -1,0 +1,44 @@
+---
+layout: doc
+editLink: true
+title: dist
+description: Calculate the Euclidean distance between two points.
+category: Methods
+api: true
+owner: Textmodifier
+kind: Method
+lastModified: 2026-06-09
+---
+
+[textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / dist
+
+# Method: dist()
+
+```ts
+dist(
+   x1, 
+   y1, 
+   x2, 
+   y2): number;
+```
+
+Calculate the Euclidean distance between two points.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `x1` | `number` | X coordinate of the first point in grid cells. |
+| `y1` | `number` | Y coordinate of the first point in grid cells. |
+| `x2` | `number` | X coordinate of the second point in grid cells. |
+| `y2` | `number` | Y coordinate of the second point in grid cells. |
+
+## Returns
+
+`number`
+
+The distance between the two points.
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="dist" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CglwaXhlbERlbnNpdHk6IDEsCgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCBkaXN0YW5jZSA9IDA7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCmZ1bmN0aW9uIGRyYXdQb2ludCh4LCB5KSB7Cgl0LnB1c2goKTsKCXQudHJhbnNsYXRlKHgsIHkpOwoJdC5wb2ludCgpOwoJdC5wb3AoKTsKfQoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg1LCAxMCwgMTgpOwoJY29uc3QgYmVhY29uWCA9IE1hdGguY29zKHQuZnJhbWVDb3VudCAqIDAuMDI1KSAqIDg7Cgljb25zdCBiZWFjb25ZID0gTWF0aC5zaW4odC5mcmFtZUNvdW50ICogMC4wMzUpICogNTsKCWRpc3RhbmNlID0gdC5kaXN0KGJlYWNvblgsIGJlYWNvblksIHQubW91c2UueCwgdC5tb3VzZS55KTsKCglmb3IgKGxldCB5ID0gLTEwOyB5IDw9IDEwOyB5ICs9IDIpIHsKCQlmb3IgKGxldCB4ID0gLTE4OyB4IDw9IDE4OyB4ICs9IDIpIHsKCQkJY29uc3QgZCA9IHQuZGlzdCh4LCB5LCBiZWFjb25YLCBiZWFjb25ZKTsKCQkJY29uc3Qgc2hhZGUgPSBNYXRoLnJvdW5kKHQuY29uc3RyYWluKHQubWFwKGQsIDAsIDIwLCAyMTAsIDM1KSwgMzUsIDIxMCkpOwoJCQl0LmNoYXIoZCA8IDQgPyAnKicgOiAnLicpOwoJCQl0LmNoYXJDb2xvcig2MCwgc2hhZGUsIDI1NSAtIHNoYWRlICogMC40KTsKCQkJZHJhd1BvaW50KHgsIHkpOwoJCX0KCX0KCgl0LmNoYXIoJ28nKTsKCXQuY2hhckNvbG9yKDI1NSwgMjIwLCAxMjApOwoJdC5wdXNoKCk7Cgl0LnRyYW5zbGF0ZShiZWFjb25YLCBiZWFjb25ZKTsKCXQuZWxsaXBzZSg4LCA4KTsKCXQucG9pbnQoKTsKCXQucG9wKCk7CgoJdC5jaGFyKCcrJyk7Cgl0LmNoYXJDb2xvcigxMjAsIDI1NSwgMTgwKTsKCWRyYXdQb2ludCh0Lm1vdXNlLngsIHQubW91c2UueSk7Cgl0LmxpbmUoYmVhY29uWCwgYmVhY29uWSwgdC5tb3VzZS54LCB0Lm1vdXNlLnkpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLkRJU1QnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBQT0lOVCBESVNUQU5DRScsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnZGlzdCgpIG1lYXN1cmVzIGJldHdlZW4gdHdvIHBvaW50cy4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJ0Rpc3RhbmNlIGRyaXZlcyB0aGUgZmllbGQgc2hhZGluZy4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KGBNT1VTRSBSQU5HRTogJHtkaXN0YW5jZS50b0ZpeGVkKDEpfWAsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />

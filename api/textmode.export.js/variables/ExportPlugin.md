@@ -7,7 +7,7 @@ category: Variables
 api: true
 kind: Variable
 ecosystem: textmode.js
-lastModified: 2026-05-16
+lastModified: 2026-06-09
 ---
 
 [textmode.export.js](../index.md) / ExportPlugin
@@ -26,28 +26,4 @@ access to all export options, which can be controlled at runtime.
 
 ## Example
 
-```js
-import { textmode } from 'textmode.js';
-import { ExportPlugin } from 'textmode.export.js';
-
-const t = textmode.create({
-    plugins: [ExportPlugin]
-});
-
-t.draw(() => {
-    t.background(0);
-    t.char('A');
-    t.rotateZ(t.frameCount);
-    t.rect(16, 16);
-});
-
-// Export methods are now available
-t.saveCanvas({ format: 'png', scale: 2.0 });
-t.saveSVG({ filename: 'my-artwork' });
-t.saveGIF({ duration: 3, fps: 30 });
-
-// Control overlay visibility at runtime
-t.exportOverlay.hide();  // Hide the overlay
-t.exportOverlay.show();  // Show the overlay
-t.exportOverlay.toggle(); // Toggle visibility
-```
+<TextmodeApiSandbox profile="textmode.export.js" language="javascript" title="ExportPlugin" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CgljYW52YXM6IGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCd0ZXh0bW9kZS1jYW52YXMnKSwKCXdpZHRoOiB3aW5kb3cuaW5uZXJXaWR0aCwKCWhlaWdodDogd2luZG93LmlubmVySGVpZ2h0LAoJZm9udFNpemU6IDMyLAoJcGx1Z2luczogW0V4cG9ydFBsdWdpbl0sCn0pOwoKY29uc29sZS5sb2codGV4dG1vZGUudmVyc2lvbik7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDApOwoKCWNvbnN0IHRpbWUgPSB0LmZyYW1lQ291bnQgKiAwLjAxOwoJY29uc3Qgc3RlcCA9IDM7CgoJdC50cmFuc2xhdGUoLXQuZ3JpZC5jb2xzIC8gMiwgLXQuZ3JpZC5yb3dzIC8gMiwgMCk7CgoJZm9yIChsZXQgeSA9IDA7IHkgPCB0LmdyaWQucm93czsgeSArPSBzdGVwKSB7CgkJZm9yIChsZXQgeCA9IDA7IHggPCB0LmdyaWQuY29sczsgeCArPSBzdGVwKSB7CgkJCXQucHVzaCgpOwoKCQkJLy8gQ2FsY3VsYXRlIGRpc3RhbmNlIGZyb20gY2VudGVyIChjZW50ZXIgaXMgbm93IGF0IDAsMCwwKQoJCQljb25zdCBkaXN0YW5jZSA9IE1hdGguc3FydCh4ICoqIDIgKyB5ICoqIDIpOwoKCQkJLy8gQ3JlYXRlIHJpcHBsZSBlZmZlY3QKCQkJY29uc3Qgd2F2ZSA9IE1hdGguc2luKGRpc3RhbmNlICogMC4zIC0gdGltZSAqIDgpICogMC41ICsgMC41OwoKCQkJLy8gQWRkIHNlY29uZGFyeSB3YXZlIGZvciBpbnRlcmZlcmVuY2UKCQkJY29uc3Qgd2F2ZTIgPSBNYXRoLnNpbih4ICogMC4yICsgdGltZSAqIDQpICogTWF0aC5zaW4oeSAqIDAuMTUgKyB0aW1lICogMyk7CgkJCWNvbnN0IGNvbWJpbmVkID0gKHdhdmUgKyB3YXZlMiAqIDAuMykgLyAxLjM7CgoJCQkvLyBNYXAgdG8gY2hhcmFjdGVycyBiYXNlZCBvbiB3YXZlIGludGVuc2l0eQoJCQlpZiAoY29tYmluZWQgPiAwLjcpIHsKCQkJCXQuY2hhcignIycpOwoJCQkJdC5jaGFyQ29sb3IoMjU1LCAyMDAsIDEwMCk7CgkJCX0gZWxzZSBpZiAoY29tYmluZWQgPiAwLjUpIHsKCQkJCXQuY2hhcignQCcpOwoJCQkJdC5jaGFyQ29sb3IoMjAwLCAxNTAsIDI1NSk7CgkJCX0gZWxzZSBpZiAoY29tYmluZWQgPiAwLjMpIHsKCQkJCXQuY2hhcignJScpOwoJCQkJdC5jaGFyQ29sb3IoMTAwLCAyNTUsIDIwMCk7CgkJCX0gZWxzZSBpZiAoY29tYmluZWQgPiAwLjEpIHsKCQkJCXQuY2hhcignLicpOwoJCQkJdC5jaGFyQ29sb3IoMTUwLCAxMDAsIDI1NSk7CgkJCX0gZWxzZSB7CgkJCQl0LmNoYXIoJyAnKTsKCQkJfQoKCQkJdC5jZWxsQ29sb3IoMCwgMCwgMCk7CgkJCXQudHJhbnNsYXRlKHgsIHksIDApOwoJCQl0LnJlY3Qoc3RlcCwgc3RlcCk7CgoJCQl0LnBvcCgpOwoJCX0KCX0KfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />

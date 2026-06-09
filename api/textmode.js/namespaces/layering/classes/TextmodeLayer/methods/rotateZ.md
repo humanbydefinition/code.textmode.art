@@ -1,0 +1,42 @@
+---
+layout: doc
+editLink: true
+title: rotateZ
+description: Set or get this layer's compositing rotation in degrees.
+category: Methods
+api: true
+owner: TextmodeLayer
+namespace: layering
+kind: Method
+lastModified: 2026-06-09
+---
+
+[textmode.js](../../../../../index.md) / [layering](../../../index.md) / [TextmodeLayer](../../TextmodeLayer.md) / rotateZ
+
+# Method: rotateZ()
+
+```ts
+rotateZ(z?): number | void;
+```
+
+Set or get this layer's compositing rotation in degrees.
+
+The rotation is applied during compositing around the center of the layer's
+rectangular bounds. The rotation origin remains at the center even when
+an offset is applied.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `z?` | `number` | Rotation angle in degrees. Positive values rotate clockwise. |
+
+## Returns
+
+`number` \| `void`
+
+Current rotation in degrees when called without arguments.
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="rotateZ" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CglwaXhlbERlbnNpdHk6IDEsCgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBzY2FubmVyTGF5ZXIgPSB0LmxheWVycy5hZGQoeyBibGVuZE1vZGU6ICdhZGRpdGl2ZScgfSk7CmNvbnN0IGxhYmVsTGF5ZXIgPSB0LmxheWVycy5hZGQoKTsKbGV0IGN1cnJlbnRBbmdsZSA9IDA7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByZ2IgPSBbMjU1LCAyNTUsIDI1NV0pIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IocmdiWzBdLCByZ2JbMV0sIHJnYlsyXSk7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg2LCAxMCwgMjIpOwoKCWNvbnN0IHRpbWUgPSB0LmZyYW1lQ291bnQgKiAxLjU7Cgljb25zdCBhbmdsZSA9IHRpbWUgJSAzNjA7CgoJY3VycmVudEFuZ2xlID0gYW5nbGU7CglzY2FubmVyTGF5ZXIucm90YXRlWihhbmdsZSk7CgoJdC5wdXNoKCk7Cgl0LmNoYXJDb2xvcig2MCwgNzAsIDEwMCk7Cgl0LmNoYXIoJy4nKTsKCXQubGluZSgtMTUsIDAsIDE1LCAwKTsKCXQubGluZSgwLCAtOCwgMCwgOCk7Cgl0LnBvcCgpOwp9KTsKCnNjYW5uZXJMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCgl0LnB1c2goKTsKCXQuY2hhckNvbG9yKDE0MCwgMTgwLCAyNTUsIDIwMCk7Cgl0LmNoYXIoJyMnKTsKCXQucmVjdCgyMCwgMSk7Cgl0LnBvcCgpOwoKCXQucHVzaCgpOwoJdC50cmFuc2xhdGUoMTAsIDApOwoJdC5jaGFyKCc-Jyk7Cgl0LmNoYXJDb2xvcigyNTUsIDIyNSwgMTQwKTsKCXQucG9pbnQoKTsKCXQucG9wKCk7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnVEVYVE1PREVMQVlFUi5ST1RBVEVaJywgeCwgeSsrLCBbMTAwLCAyNTUsIDE0MF0pOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgWzgwLCAxMDAsIDE1MF0pOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IENPTVBPU0lURSBST1RBVElPTicsIHgsIHkrKywgWzEwMCwgMjIwLCAyNTVdKTsKCWRyYXdUZXh0KCdMYXllciBvdXRwdXQgcm90YXRlcyBhcm91bmQgY2VudGVyLicsIHgsIHkrKywgWzE0MCwgMTYwLCAxOTBdKTsKCWRyYXdUZXh0KCdEcmF3IGNhbGxiYWNrIHJlbWFpbnMgdW5yb3RhdGVkLicsIHgsIHkrKywgWzE0MCwgMTYwLCAxOTBdKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIFs4MCwgMTAwLCAxNTBdKTsKCWRyYXdUZXh0KGBBTkdMRTogJHtjdXJyZW50QW5nbGUudG9GaXhlZCgxKX0gREVHYCwgeCwgeSsrLCBbMTQwLCAyNTUsIDE4MF0pOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />

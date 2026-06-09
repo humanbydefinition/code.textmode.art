@@ -10,8 +10,11 @@
   },
   "scripts": {
     "dev": "vitepress dev --host --port 4175",
+    "prebuild": "npm run check:api-sandpack",
     "build": "vitepress build",
     "preview": "vitepress preview",
+    "api:sandpack": "node scripts/api-sandpack-examples.mjs",
+    "check:api-sandpack": "node scripts/api-sandpack-examples.mjs --check",
     "contributors:add": "npx all-contributors-cli add",
     "contributors:generate": "npx all-contributors-cli generate"
   },

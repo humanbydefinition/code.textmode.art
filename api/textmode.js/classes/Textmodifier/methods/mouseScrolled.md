@@ -1,0 +1,35 @@
+---
+layout: doc
+editLink: true
+title: mouseScrolled
+description: Register the single-callback handler for mouse wheel scrolling.
+category: Methods
+api: true
+owner: Textmodifier
+kind: Method
+lastModified: 2026-06-09
+---
+
+[textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / mouseScrolled
+
+# Method: mouseScrolled()
+
+```ts
+mouseScrolled(callback): void;
+```
+
+Register the single-callback handler for mouse wheel scrolling.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `callback` | [`MouseEventHandler`](../../../namespaces/input/namespaces/mouse/type-aliases/MouseEventHandler.md) | Handler to run with mouse event data when the mouse wheel is scrolled. |
+
+## Returns
+
+`void`
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="mouseScrolled" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CglwaXhlbERlbnNpdHk6IDEsCgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpsZXQgc2NhbGUgPSA4OwpsZXQgZGVsdGEgPSAwOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0Lm1vdXNlU2Nyb2xsZWQoKGRhdGEpID0-IHsKCWRlbHRhID0gZGF0YS5kZWx0YS55OwoJc2NhbGUgPSBNYXRoLm1heCgzLCBNYXRoLm1pbigxOCwgc2NhbGUgLSBkZWx0YSAqIDAuMSkpOwp9KTsKCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNiwgMTAsIDIyKTsKCXQuY2hhcignIycpOwoJdC5jaGFyQ29sb3IoMTQwLCAyMjAsIDI1NSk7Cgl0LmVsbGlwc2Uoc2NhbGUsIHNjYWxlICogMC42KTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5NT1VTRVNDUk9MTEVEJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogU0NST0xMIERFTFRBJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdXaGVlbCBvciB0b3VjaHBhZCBjaGFuZ2VzIHNjYWxlLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnRGVsdGEgc2lnbiBpcyBrZXB0IHZpc2libGUuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dChgU0NBTEU6ICR7c2NhbGUudG9GaXhlZCgxKX1gLCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwoJZHJhd1RleHQoYERFTFRBOiAke2RlbHRhLnRvRml4ZWQoMSl9YCwgeCwgeSsrLCAxODAsIDIwMCwgMjIwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />

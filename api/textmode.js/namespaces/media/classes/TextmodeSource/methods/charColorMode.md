@@ -1,0 +1,38 @@
+---
+layout: doc
+editLink: true
+title: charColorMode
+description: Set whether character color is sampled from the source or fixed.
+category: Methods
+api: true
+owner: TextmodeSource
+namespace: media
+kind: Method
+lastModified: 2026-06-09
+---
+
+[textmode.js](../../../../../index.md) / [media](../../../index.md) / [TextmodeSource](../../TextmodeSource.md) / charColorMode
+
+# Method: charColorMode()
+
+```ts
+charColorMode(mode): this;
+```
+
+Set whether character color is sampled from the source or fixed.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `mode` | `"fixed"` \| `"sampled"` | Character color mode. |
+
+## Returns
+
+`this`
+
+This instance for chaining.
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="charColorMode" encoded-code="Y29uc3QgSU1BR0VfVVJMID0gJ2h0dHBzOi8vaW1hZ2VzLnVuc3BsYXNoLmNvbS9waG90by0xNTA2OTA1OTI1MzQ2LTIxYmRhNGQzMmRmND93PTkwMCZxPTgwJzsKY29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CglwaXhlbERlbnNpdHk6IDEsCgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAp9KTsKCmNvbnN0IGxhYmVsTGF5ZXIgPSB0LmxheWVycy5hZGQoKTsKbGV0IHNvdXJjZUEgPSBudWxsOwpsZXQgc291cmNlQiA9IG51bGw7Cgp0LnNldHVwKGFzeW5jICgpID0-IHsKCXNvdXJjZUEgPSBhd2FpdCB0LmxvYWRJbWFnZShJTUFHRV9VUkwpOwoJc291cmNlQS5jaGFyYWN0ZXJzKCcgLjotPSsqIyVAJyk7Cglzb3VyY2VBLmNoYXJDb2xvck1vZGUoJ3NhbXBsZWQnKTsKCglzb3VyY2VCID0gYXdhaXQgdC5sb2FkSW1hZ2UoSU1BR0VfVVJMKTsKCXNvdXJjZUIuY2hhcmFjdGVycygnIC46LT0rKiMlQCcpOwoJc291cmNlQi5jaGFyQ29sb3JNb2RlKCdmaXhlZCcpLmNoYXJDb2xvcigxNDAsIDI1NSwgMTgwKTsKfSk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDEwLCAyMik7CgoJaWYgKCFzb3VyY2VBIHx8ICFzb3VyY2VCKSByZXR1cm47CgoJY29uc3QgaW1nVyA9IDIwOwoJY29uc3QgaW1nSCA9IDEyOwoKCXQucHVzaCgpOwoJdC50cmFuc2xhdGUoLTEyLCAwKTsKCXQuaW1hZ2Uoc291cmNlQSwgaW1nVywgaW1nSCk7Cgl0LnBvcCgpOwoKCXQucHVzaCgpOwoJdC50cmFuc2xhdGUoMTIsIDApOwoJdC5pbWFnZShzb3VyY2VCLCBpbWdXLCBpbWdIKTsKCXQucG9wKCk7Cn0pOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWRyYXdUZXh0KCdURVhUTU9ERVNPVVJDRS5DSEFSQ09MT1JNT0RFJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogU0VUIENIQVJBQ1RFUiBDT0xPUklORyBNT0RFJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdTZXRzIG1vZGUgdXNlZCBmb3IgZ2x5cGggZm9yZWdyb3VuZHMuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ0hBUiBDT0xPUiBNT0RFOiBzYW1wbGVkICYgZml4ZWQnLCB4LCB5KyssIDE0MCwgMTkwLCAyNTUpOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />

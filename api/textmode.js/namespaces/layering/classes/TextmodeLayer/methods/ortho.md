@@ -1,0 +1,37 @@
+---
+layout: doc
+editLink: true
+title: ortho
+description: Enable orthographic projection for this layer.
+category: Methods
+api: true
+owner: TextmodeLayer
+namespace: layering
+kind: Method
+lastModified: 2026-06-09
+---
+
+[textmode.js](../../../../../index.md) / [layering](../../../index.md) / [TextmodeLayer](../../TextmodeLayer.md) / ortho
+
+# Method: ortho()
+
+```ts
+ortho(near?, far?): void;
+```
+
+Enable orthographic projection for this layer.
+
+## Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `near?` | `number` |
+| `far?` | `number` |
+
+## Returns
+
+`void`
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="ortho" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CglwaXhlbERlbnNpdHk6IDEsCgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBzY2VuZSA9IHQubGF5ZXJzLmFkZCgpOwpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDgsIDEwLCAxOCk7CglzY2VuZS5vcnRobygpOwoJc2NlbmUuY2FtZXJhKDAsIDAsIDQ0KTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgcmdiID0gWzIyMCwgMjMwLCAyNTVdKSB7Cgl0LnB1c2goKTsKCXQudHJhbnNsYXRlKHgsIHkpOwoJdC5jaGFyQ29sb3IocmdiWzBdLCByZ2JbMV0sIHJnYlsyXSk7Cglmb3IgKGxldCBpID0gMDsgaSA8IHRleHQubGVuZ3RoOyBpKyspIHsKCQl0LmNoYXIodGV4dFtpXSk7CgkJdC5wb2ludCgpOwoJCXQudHJhbnNsYXRlKDEsIDApOwoJfQoJdC5wb3AoKTsKfQoKc2NlbmUuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cglmb3IgKGxldCBpID0gMDsgaSA8IDM7IGkrKykgewoJCXQucHVzaCgpOwoJCXQudHJhbnNsYXRlKChpIC0gMSkgKiAxMCwgMCwgaSAqIC0xMik7CgkJdC5yb3RhdGVZKHQuZnJhbWVDb3VudCAqIDIgKyBpICogMjApOwoJCXQuY2hhcignKycpOwoJCXQuY2hhckNvbG9yKDEyMCArIGkgKiA0MCwgMjIwLCAyNTUpOwoJCXQuYm94KDgsIDgsIDgpOwoJCXQucG9wKCk7Cgl9Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnVEVYVE1PREVMQVlFUi5PUlRITycsIHgsIHkrKywgWzEwMCwgMjU1LCAxNDBdKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIFs4MCwgMTAwLCAxNTBdKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBPUlRIT0dSQVBISUMgQ0FNRVJBJywgeCwgeSsrLCBbMTAwLCAyMjAsIDI1NV0pOwoJZHJhd1RleHQoJ0RlcHRoIG5vIGxvbmdlciBjaGFuZ2VzIHNjYWxlLicsIHgsIHkrKywgWzE0MCwgMTYwLCAxOTBdKTsKCWRyYXdUZXh0KCdCb3hlcyBzdGF5IGV2ZW5seSBzaXplZC4nLCB4LCB5KyssIFsxNDAsIDE2MCwgMTkwXSk7Cn0pOw" />

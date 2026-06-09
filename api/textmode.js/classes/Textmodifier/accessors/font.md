@@ -1,0 +1,34 @@
+---
+layout: doc
+editLink: true
+title: font
+description: Font or tileset used by the current drawing layer.
+category: Accessors
+api: true
+owner: Textmodifier
+kind: Accessor
+lastModified: 2026-06-09
+---
+
+[textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / font
+
+# Accessor: font
+
+## Get Signature
+
+```ts
+get font(): 
+  | TextmodeFont
+  | TextmodeTileset;
+```
+
+Font or tileset used by the current drawing layer.
+
+### Returns
+
+  \| [`TextmodeFont`](../../../namespaces/fonts/classes/TextmodeFont.md)
+  \| [`TextmodeTileset`](../../../namespaces/fonts/classes/TextmodeTileset.md)
+
+### Example
+
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="font" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CglwaXhlbERlbnNpdHk6IDEsCgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpsZXQgaW5kZXggPSAwOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDEwLCAyMik7Cgljb25zdCBjaGFycyA9IHQuZm9udC5jaGFyYWN0ZXJzOwoJaW5kZXggPSBNYXRoLmZsb29yKHQuZnJhbWVDb3VudCAvIDYpICUgY2hhcnMubGVuZ3RoOwoJdC5jaGFyKGNoYXJzW2luZGV4XS5jaGFyYWN0ZXIpOwoJdC5jaGFyQ29sb3IoMjU1LCAyMTAsIDEyMCk7Cgl0LnJlY3QoOCwgNCk7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuRk9OVCcsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IEFDVElWRSBGT05UJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdSZWFkcyBnbHlwaCBtZXRhZGF0YS4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJ0N1cnJlbnQgZ2x5cGggY3ljbGVzLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoYEdMWVBIUzogJHt0LmZvbnQuY2hhcmFjdGVycy5sZW5ndGh9YCwgeCwgeSsrLCAxNDAsIDI1NSwgMTgwKTsKCWRyYXdUZXh0KGBJTkRFWDogJHtpbmRleH1gLCB4LCB5KyssIDE4MCwgMjAwLCAyMjApOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />

@@ -1,0 +1,39 @@
+---
+layout: doc
+editLink: true
+title: noiseDetail
+description: Adjust noise octaves and falloff.
+category: Methods
+api: true
+owner: Textmodifier
+kind: Method
+lastModified: 2026-06-09
+---
+
+[textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / noiseDetail
+
+# Method: noiseDetail()
+
+```ts
+noiseDetail(octaves, falloff?): void;
+```
+
+Adjust noise octaves and falloff.
+
+Higher octaves add fine detail. Falloff controls how much each octave
+contributes compared to the previous one.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `octaves` | `number` | Number of octaves to use. |
+| `falloff?` | `number` | Amplitude falloff between octaves. |
+
+## Returns
+
+`void`
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="noiseDetail" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CglwaXhlbERlbnNpdHk6IDEsCgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKCXNlZWQ6ICdub2lzZS1kZXRhaWwnLAp9KTsKCmNvbnN0IGxhYmVsTGF5ZXIgPSB0LmxheWVycy5hZGQoKTsKY29uc3QgcmFtcCA9ICcgLjotPSsqIyVAJzsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKZnVuY3Rpb24gZHJhd1BhbmVsKG9mZnNldFgsIG9jdGF2ZXMsIGZhbGxvZmYpIHsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMikgKyAxMTsKCXQubm9pc2VEZXRhaWwob2N0YXZlcywgZmFsbG9mZik7Cglmb3IgKGxldCB5ID0gMDsgeSA8IE1hdGgubWluKDE2LCB0LmdyaWQucm93cyAtIDEzKTsgeSArPSAxKSB7CgkJZm9yIChsZXQgeCA9IDA7IHggPCAyMDsgeCArPSAxKSB7CgkJCWNvbnN0IHZhbHVlID0gdC5ub2lzZSh4ICogMC4xNCwgeSAqIDAuMTQsIHQuZnJhbWVDb3VudCAqIDAuMDEyKTsKCQkJY29uc3QgaW5kZXggPSBNYXRoLmZsb29yKHZhbHVlICogKHJhbXAubGVuZ3RoIC0gMSkpOwoJCQl0LnB1c2goKTsKCQkJdC50cmFuc2xhdGUob2Zmc2V0WCArIHgsIHRvcCArIHkpOwoJCQl0LmNoYXIocmFtcFtpbmRleF0pOwoJCQl0LmNoYXJDb2xvcig5MCArIHZhbHVlICogMTUwLCAxNDAgKyB2YWx1ZSAqIDEwMCwgMjU1KTsKCQkJdC5wb2ludCgpOwoJCQl0LnBvcCgpOwoJCX0KCX0KfQoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg1LCA4LCAxOCk7CglkcmF3UGFuZWwoLTI0LCAyLCAwLjM1KTsKCWRyYXdQYW5lbCg0LCA3LCAwLjY1KTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuTk9JU0VERVRBSUwnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBPQ1RBVkVTICsgRkFMTE9GRicsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnTGVmdDogc29mdCwgbG93IGRldGFpbC4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJ1JpZ2h0OiByaWNoZXIgZmluZSB0ZXh0dXJlLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />

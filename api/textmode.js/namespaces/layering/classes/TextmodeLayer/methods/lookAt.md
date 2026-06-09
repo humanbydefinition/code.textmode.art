@@ -1,0 +1,47 @@
+---
+layout: doc
+editLink: true
+title: lookAt
+description: Update this layer camera's target and optional up vector.
+category: Methods
+api: true
+owner: TextmodeLayer
+namespace: layering
+kind: Method
+lastModified: 2026-06-09
+---
+
+[textmode.js](../../../../../index.md) / [layering](../../../index.md) / [TextmodeLayer](../../TextmodeLayer.md) / lookAt
+
+# Method: lookAt()
+
+```ts
+lookAt(
+   targetX, 
+   targetY, 
+   targetZ, 
+   upX?, 
+   upY?, 
+   upZ?): void;
+```
+
+Update this layer camera's target and optional up vector.
+
+## Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `targetX` | `number` |
+| `targetY` | `number` |
+| `targetZ` | `number` |
+| `upX?` | `number` |
+| `upY?` | `number` |
+| `upZ?` | `number` |
+
+## Returns
+
+`void`
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="lookAt" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CglwaXhlbERlbnNpdHk6IDEsCgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBzY2VuZSA9IHQubGF5ZXJzLmFkZCgpOwpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpsZXQgdGFyZ2V0WCA9IDA7CmxldCB0YXJnZXRZID0gMDsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIGNvbG9yID0gWzIwMCwgMjIwLCAyNTVdKSB7Cgl0LnB1c2goKTsKCXQudHJhbnNsYXRlKHgsIHkpOwoJdC5jaGFyQ29sb3IoY29sb3JbMF0sIGNvbG9yWzFdLCBjb2xvclsyXSk7Cglmb3IgKGxldCBpID0gMDsgaSA8IHRleHQubGVuZ3RoOyBpKyspIHsKCQl0LmNoYXIodGV4dFtpXSk7CgkJdC5wb2ludCgpOwoJCXQudHJhbnNsYXRlKDEsIDApOwoJfQoJdC5wb3AoKTsKfQoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg4LCAxMCwgMTgpOwoKCXRhcmdldFggPSBNYXRoLnNpbih0LmZyYW1lQ291bnQgKiAwLjA0KSAqIDEyOwoJdGFyZ2V0WSA9IE1hdGguY29zKHQuZnJhbWVDb3VudCAqIDAuMDMpICogNzsKCgkvLyBDYW1lcmEgc3RheXMgZml4ZWQg4oCUIG9ubHkgdGhlIGxvb2sgdGFyZ2V0IG1vdmVzCglzY2VuZS5jYW1lcmEoMCwgMCwgNDYpOwoJc2NlbmUubG9va0F0KHRhcmdldFgsIHRhcmdldFksIDApOwp9KTsKCnNjZW5lLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoKCS8vIFN0YXRpYyByZWZlcmVuY2UgcGlsbGFycyBzcHJlYWQgYXJvdW5kIHRoZSBzY2VuZQoJdC5wdXNoKCk7Cgl0LnRyYW5zbGF0ZSgtMTYsIDQsIC0xMCk7Cgl0LmNoYXIoJ0gnKTsKCXQuY2hhckNvbG9yKDEwMCwgMTMwLCAyMDApOwoJdC5ib3goNSwgMTQsIDUpOwoJdC5wb3AoKTsKCgl0LnB1c2goKTsKCXQudHJhbnNsYXRlKDE2LCA0LCAtMTApOwoJdC5jaGFyKCdIJyk7Cgl0LmNoYXJDb2xvcigxMDAsIDEzMCwgMjAwKTsKCXQuYm94KDUsIDE0LCA1KTsKCXQucG9wKCk7CgoJdC5wdXNoKCk7Cgl0LnRyYW5zbGF0ZSgwLCA4LCAtMTgpOwoJdC5jaGFyKCcrJyk7Cgl0LmNoYXJDb2xvcig4MCwgMTAwLCAxNjApOwoJdC5ib3goMzAsIDIsIDIpOwoJdC5wb3AoKTsKCgkvLyBNb3ZpbmcgZ2xvd2luZyB0YXJnZXQg4oCUIHRoZSBjYW1lcmEgdHJhY2tzIHRoaXMKCXQucHVzaCgpOwoJdC50cmFuc2xhdGUodGFyZ2V0WCwgdGFyZ2V0WSwgMCk7Cgl0LmNoYXIoJyonKTsKCXQuY2hhckNvbG9yKDI1NSwgMjMwLCA4MCk7Cgl0LmJveCg0LCA0LCA0KTsKCXQucG9wKCk7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCWNvbnN0IHRndFN0ciA9IGBDYW0gVGFyZ2V0OiBbJHt0YXJnZXRYLnRvRml4ZWQoMSl9LCAke3RhcmdldFkudG9GaXhlZCgxKX0sIDAuMF1gOwoKCWRyYXdUZXh0KCdURVhUTU9ERUxBWUVSLkxPT0tBVCcsIHgsIHkrKywgWzEwMCwgMjU1LCAxNDBdKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIFs4MCwgMTAwLCAxNTBdKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBDQU1FUkEgVEFSR0VUJywgeCwgeSsrLCBbMTAwLCAyMjAsIDI1NV0pOwoJZHJhd1RleHQoJ0NhbWVyYSBleWUgc3RheXMgZml4ZWQuJywgeCwgeSsrLCBbMTQwLCAxNjAsIDE5MF0pOwoJZHJhd1RleHQoJ2xvb2tBdCBmb2xsb3dzIGEgbW92aW5nIHRhcmdldC4nLCB4LCB5KyssIFsxNDAsIDE2MCwgMTkwXSk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCBbODAsIDEwMCwgMTUwXSk7CglkcmF3VGV4dCgnRXllOiBbMC4wLCAwLjAsIDQ2LjBdJywgeCwgeSsrLCBbMjAwLCAyMDAsIDIwMF0pOwoJZHJhd1RleHQodGd0U3RyLCB4LCB5KyssIFsxMjAsIDI1NSwgMTgwXSk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />

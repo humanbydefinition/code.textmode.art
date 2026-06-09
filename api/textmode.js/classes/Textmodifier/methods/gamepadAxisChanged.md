@@ -1,0 +1,39 @@
+---
+layout: doc
+editLink: true
+title: gamepadAxisChanged
+description: Register the single-callback handler for meaningful gamepad axis changes.
+category: Methods
+api: true
+owner: Textmodifier
+kind: Method
+lastModified: 2026-06-09
+---
+
+[textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / gamepadAxisChanged
+
+# Method: gamepadAxisChanged()
+
+```ts
+gamepadAxisChanged(callback): void;
+```
+
+Register the single-callback handler for meaningful gamepad axis changes.
+
+Axis callbacks are derived from per-frame polling, not native DOM events. For continuous
+stick or trigger state, polling [Textmodifier.gamepads](../properties/gamepads.md) inside `draw()` is often the
+simpler choice; use this callback when you specifically want change notifications.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `callback` | [`GamepadAxisEventHandler`](../../../namespaces/input/namespaces/gamepad/type-aliases/GamepadAxisEventHandler.md) | Handler to run with gamepad axis data when an axis changes. |
+
+## Returns
+
+`void`
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="gamepadAxisChanged" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CglwaXhlbERlbnNpdHk6IDEsCgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpsZXQgbGFzdEF4aXMgPSAnd2FpdGluZyc7Cgp0LmdhbWVwYWRBeGlzQ2hhbmdlZCgoZGF0YSkgPT4gewoJY29uc3QgbmFtZSA9IGRhdGEuc3RhbmRhcmRBeGlzTmFtZSB8fCAnYXhpcyAnICsgZGF0YS5heGlzSW5kZXg7CglsYXN0QXhpcyA9IG5hbWUgKyAnICcgKyBkYXRhLnZhbHVlLnRvRml4ZWQoMik7Cn0pOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDQsIDYsIDEyKTsKCWNvbnN0IGNvdW50ID0gTWF0aC5tYXgoMSwgdC5nYW1lcGFkcy5sZW5ndGgpOwoJZm9yIChsZXQgaSA9IDA7IGkgPCAxNjsgaSsrKSB7CgkJdC5wdXNoKCk7CgkJY29uc3QgYW5nbGUgPSAoaSAvIDE2KSAqIE1hdGguUEkgKiAyICsgdC5mcmFtZUNvdW50ICogMC4wMzsKCQl0LnRyYW5zbGF0ZShNYXRoLmNvcyhhbmdsZSkgKiAoNiArIGNvdW50KSwgTWF0aC5zaW4oYW5nbGUpICogNCk7CgkJdC5jaGFyKHQuZ2FtZXBhZHMubGVuZ3RoID8gJ0AnIDogJy4nKTsKCQl0LmNoYXJDb2xvcig4MCArIGkgKiA4LCAxODAsIDI1NSk7CgkJdC5wb2ludCgpOwoJCXQucG9wKCk7Cgl9Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLkdBTUVQQURBWElTQ0hBTkdFRCcsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IEdBTUVQQUQgSU5QVVQnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ1dvcmtzIHdpdGggYnJvd3NlciBwYWRzLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoYEFYSVM6ICR7bGFzdEF4aXN9YCwgeCwgeSsrLCAxNDAsIDI1NSwgMTgwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />

@@ -1,0 +1,37 @@
+---
+layout: doc
+editLink: true
+title: luma
+description: Apply threshold based on luminance.
+category: Methods
+api: true
+owner: SynthSource
+kind: Method
+ecosystem: textmode.js
+lastModified: 2026-06-09
+---
+
+[textmode.synth.js](../../../index.md) / [SynthSource](../../SynthSource.md) / luma
+
+# Method: luma()
+
+```ts
+luma(threshold?, tolerance?): this;
+```
+
+Apply threshold based on luminance.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `threshold?` | [`SynthParameterValue`](../../../type-aliases/SynthParameterValue.md) | Threshold value (default: 0.5) |
+| `tolerance?` | [`SynthParameterValue`](../../../type-aliases/SynthParameterValue.md) | Tolerance range (default: 0.1) |
+
+## Returns
+
+`this`
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="luma" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW1N5bnRoUGx1Z2luXSwKfSk7Cgp0LmJwbSgxOCk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IGdseXBocyA9ICcgLjotPSsqIyVAJzsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnU1lOVEhTT1VSQ0UuTFVNQScsIHgsIHkrKywgMTEwLCAyNTUsIDE3MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA3MCwgMTEwLCAxNDApOwoJZHJhd1RleHQoJ0xVTUlOQU5DRSBLRVknLCB4LCB5KyssIDEyMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ0JyaWdodG5lc3MgYmVjb21lcyBhbHBoYS4nLCB4LCB5KyssIDE2MCwgMTgwLCAyMTApOwoJZHJhd1RleHQoJ1R3byBmaWVsZHMgcmV2ZWFsIGVhY2ggb3RoZXIuJywgeCwgeSsrLCAxNjAsIDE4MCwgMjEwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDcwLCAxMTAsIDE0MCk7CglkcmF3VGV4dCgnU2VwYXJhdGUgYW5pbWF0ZWQgaW5rIGFuZCBwYXBlci4nLCB4LCB5KyssIDE1MCwgMjU1LCAxOTApOwp9KTsKCmNvbnN0IGluayA9IG1vaXJlKDgsIDksIDAuMTUsIDEuNiwgMC4wMjUpLmNvbG9yKDEuMCwgMC42MiwgMC4zNCkubW9kdWxhdGUobm9pc2UoMi4zLCAwLjAxOCksIDAuMDIyKTsKY29uc3QgcGFwZXIgPSBub2lzZSgzLjAsIDAuMDI1KS5jb2xvcigwLjE2LCAwLjA1NSwgMC4wMjUpLnNvZnRsaWdodChvc2MoNCwgMC4wMTYpLCAwLjIyKTsKCnQubGF5ZXJzLmJhc2Uuc3ludGgoCglvc2MoOSwgMC4wMiwgMS4zKQoJCS5rYWxlaWQoNSkKCQkubW9kdWxhdGVTY2FsZShub2lzZSgyLjEsIDAuMDE0KSwgMC4yNCwgMC45NSkKCQkuY29sb3IoMS4wLCAwLjU1LCAwLjI1KQoJCS5sdW1hKFswLjM4LCAwLjU4XS5mYXN0KDAuMTQpLmVhc2UoJ2Vhc2VJbk91dFNpbmUnKSwgMC4xNCkKCQkubGF5ZXIobm9pc2UoMy4yLCAwLjAyKS5jb2xvcigwLjEsIDAuMzIsIDAuOSkubHVtYSgwLjUyLCAwLjE4KSkKCQkuY2hhck1hcChnbHlwaHMpCgkJLmNoYXJDb2xvcihpbmspCgkJLmNlbGxDb2xvcihwYXBlcikKKTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />

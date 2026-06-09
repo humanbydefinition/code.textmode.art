@@ -1,0 +1,37 @@
+---
+layout: doc
+editLink: true
+title: softlight
+description: Soft light blend with another source.
+category: Methods
+api: true
+owner: SynthSource
+kind: Method
+ecosystem: textmode.js
+lastModified: 2026-06-09
+---
+
+[textmode.synth.js](../../../index.md) / [SynthSource](../../SynthSource.md) / softlight
+
+# Method: softlight()
+
+```ts
+softlight(source, amount?): this;
+```
+
+Soft light blend with another source.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `source` | [`SynthParameterValue`](../../../type-aliases/SynthParameterValue.md) | Source to softlight |
+| `amount?` | [`SynthParameterValue`](../../../type-aliases/SynthParameterValue.md) | Blend amount (default: 1.0) |
+
+## Returns
+
+`this`
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="softlight" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW1N5bnRoUGx1Z2luXSwKfSk7Cgp0LmJwbSgxOCk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IGdseXBocyA9ICcgLjotPSsqIyVAJzsKY29uc3QgdHVybiA9IFstMC40MiwgMC40Ml0uZmFzdCgwLjE0KS5lYXNlKCdlYXNlSW5PdXRTaW5lJyk7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CgoJZHJhd1RleHQoJ1NZTlRIU09VUkNFLlNPRlRMSUdIVCcsIHgsIHkrKywgMTEwLCAyNTUsIDE3MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA3MCwgMTEwLCAxNDApOwoJZHJhd1RleHQoJ1NPRlQgTElHSFQgQkxFTkQnLCB4LCB5KyssIDEyMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ0xpZ2h0IHBhaW50cyB0aHJvdWdoIHRleHR1cmUuJywgeCwgeSsrLCAxNjAsIDE4MCwgMjEwKTsKCWRyYXdUZXh0KCdMb3cgY29udHJhc3QsIHJpY2ggbW90aW9uLicsIHgsIHkrKywgMTYwLCAxODAsIDIxMCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA3MCwgMTEwLCAxNDApOwoJZHJhd1RleHQoJ1NlcGFyYXRlIGFuaW1hdGVkIGluayBhbmQgcGFwZXIuJywgeCwgeSsrLCAxNTAsIDI1NSwgMTkwKTsKfSk7Cgpjb25zdCBpbmsgPSBvc2MoNSwgMC4wMTgsIDEuMSkua2FsZWlkKDQpLmNvbG9yKDAuNDUsIDAuNzIsIDEuMCkubW9kdWxhdGUobm9pc2UoMi4yLCAwLjAxOCksIDAuMDI1KTsKY29uc3QgcGFwZXIgPSBwbGFzbWEoMy42LCAwLjAyOCwgMC4xLCAxLjA1KS5jb2xvcigwLjAzLCAwLjA4LCAwLjE4KS5tb2R1bGF0ZVNjYWxlKG5vaXNlKDIuMCwgMC4wMTUpLCAwLjIyLCAwLjk1KTsKCnQubGF5ZXJzLmJhc2Uuc3ludGgoCglub2lzZSgzLjAsIDAuMDE4KQoJCS5jb2xvcigwLjIsIDAuNSwgMC45NSkKCQkuc29mdGxpZ2h0KG9zYyg4LCAwLjAxNCkucm90YXRlKHR1cm4pLmNvbG9yKDEuMCwgMC41NSwgMC4yOCksIDAuNSkKCQkubW9kdWxhdGVLYWxlaWQocGxhc21hKDMuMCwgMC4wMTgpLCA1KQoJCS5zYXR1cmF0ZSgxLjE4KQoJCS5jb250cmFzdCgxLjEyKQoJCS5jaGFyTWFwKGdseXBocykKCQkuY2hhckNvbG9yKGluaykKCQkuY2VsbENvbG9yKHBhcGVyKQopOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />

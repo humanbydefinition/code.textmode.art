@@ -7,7 +7,7 @@ category: API Reference
 api: true
 kind: Project
 ecosystem: textmode.js
-lastModified: 2026-05-15
+lastModified: 2026-06-09
 ---
 
 # textmode.synth.js
@@ -19,26 +19,7 @@ and visual effects through method chaining.
 
 ## Example
 
-```javascript
-const t = textmode.create({
-  width: window.innerWidth,
-  height: window.innerHeight,
-  plugins: [SynthPlugin]
-});
-
-const synth = noise(8)
-  .rotate(0.2)
-  .kaleid(5)
-  .charColor(osc(6, 0.1, 1.2))
-  .cellColor(osc(6, 0.1, 1.2).invert())
-  .charMap('@#%*+=-:. ');
-
-t.layers.base.synth(synth);
-
-t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
+<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="textmode.synth.js" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CiAgd2lkdGg6IHdpbmRvdy5pbm5lcldpZHRoLAogIGhlaWdodDogd2luZG93LmlubmVySGVpZ2h0LAogIHBsdWdpbnM6IFtTeW50aFBsdWdpbl0KfSk7Cgpjb25zdCBzeW50aCA9IG5vaXNlKDgpCiAgLnJvdGF0ZSgwLjIpCiAgLmthbGVpZCg1KQogIC5jaGFyQ29sb3Iob3NjKDYsIDAuMSwgMS4yKSkKICAuY2VsbENvbG9yKG9zYyg2LCAwLjEsIDEuMikuaW52ZXJ0KCkpCiAgLmNoYXJNYXAoJ0AjJSorPS06LiAnKTsKCnQubGF5ZXJzLmJhc2Uuc3ludGgoc3ludGgpOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKICB0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
 
 ## Classes
 
@@ -66,6 +47,7 @@ t.windowResized(() => {
 | Variable | Description |
 | ------ | ------ |
 | [SynthPlugin](variables/SynthPlugin.md) | The `textmode.synth.js` plugin to install. |
+| [EASING\_FUNCTIONS](variables/EASING_FUNCTIONS.md) | Easing functions from https://gist.github.com/gre/1650294 |
 
 ## Functions
 

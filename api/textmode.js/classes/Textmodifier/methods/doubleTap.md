@@ -1,0 +1,38 @@
+---
+layout: doc
+editLink: true
+title: doubleTap
+description: Register a callback for double tap gestures.
+category: Methods
+api: true
+owner: Textmodifier
+kind: Method
+lastModified: 2026-06-09
+---
+
+[textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / doubleTap
+
+# Method: doubleTap()
+
+```ts
+doubleTap(callback): void;
+```
+
+Register a callback for double tap gestures.
+
+Double taps reuse the same [input.touch.TouchTapEventData](../../../namespaces/input/namespaces/touch/interfaces/TouchTapEventData.md) as taps with `taps` set to `2`. This
+helper lets you supply a dedicated handler when you want to treat double taps differently.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `callback` | [`TouchTapHandler`](../../../namespaces/input/namespaces/touch/type-aliases/TouchTapHandler.md) | Handler to run when a double tap is detected. |
+
+## Returns
+
+`void`
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="doubleTap" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CglwaXhlbERlbnNpdHk6IDEsCgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7Cgpjb25zdCBwdWxzZXMgPSBbXTsKbGV0IGNvdW50ID0gMDsKbGV0IGxhc3QgPSAnV0FJVElORyc7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCmZ1bmN0aW9uIGFkZFB1bHNlKGxhYmVsLCB4ID0gMCwgeSA9IDApIHsKCWNvdW50Kys7CglsYXN0ID0gbGFiZWw7CglwdWxzZXMudW5zaGlmdCh7IGxhYmVsLCB4LCB5LCBsaWZlOiAxIH0pOwoJaWYgKHB1bHNlcy5sZW5ndGggPiAxMikgcHVsc2VzLmxlbmd0aCA9IDEyOwp9Cgp0LmRvdWJsZVRhcCgoZGF0YSkgPT4gewoJY29uc3QgdG91Y2ggPSBkYXRhPy50b3VjaCB8fCB0Lm1vdXNlOwoJYWRkUHVsc2UoJ0RPVUJMRScsIHRvdWNoPy54IHx8IDAsIHRvdWNoPy55IHx8IDApOwp9KTsKCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNiwgMTAsIDIyKTsKCglmb3IgKGxldCBpID0gcHVsc2VzLmxlbmd0aCAtIDE7IGkgPj0gMDsgaS0tKSB7CgkJY29uc3QgcCA9IHB1bHNlc1tpXTsKCQlwLmxpZmUgLT0gMC4wMjsKCQlpZiAocC5saWZlIDw9IDApIHsKCQkJcHVsc2VzLnNwbGljZShpLCAxKTsKCQkJY29udGludWU7CgkJfQoJCXQucHVzaCgpOwoJCXQudHJhbnNsYXRlKHAueCwgcC55IC0gKDEgLSBwLmxpZmUpICogNCk7CgkJdC5jaGFyKCcqJyk7CgkJdC5jaGFyQ29sb3IoMjU1LCAyMTAsIDEyMCk7CgkJdC5wb2ludCgpOwoJCXQucG9wKCk7Cgl9Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuRE9VQkxFVEFQJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogRE9VQkxFIFRBUCcsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnRXZlbnQgdXBkYXRlcyBjb21wYWN0IHN0YXRlLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnUHVsc2VzIHNob3cgcmVjZW50IHRyaWdnZXJzLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0RPVUJMRTogJyArIGNvdW50LCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwoJZHJhd1RleHQoJ0xBU1Q6ICcgKyBsYXN0LnNsaWNlKDAsIDI4KSwgeCwgeSsrLCAxODAsIDIwMCwgMjIwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />

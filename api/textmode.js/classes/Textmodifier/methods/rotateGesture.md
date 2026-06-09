@@ -1,0 +1,38 @@
+---
+layout: doc
+editLink: true
+title: rotateGesture
+description: Register a callback for rotate gestures, receiving rotation deltas in degrees.
+category: Methods
+api: true
+owner: Textmodifier
+kind: Method
+lastModified: 2026-06-09
+---
+
+[textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / rotateGesture
+
+# Method: rotateGesture()
+
+```ts
+rotateGesture(callback): void;
+```
+
+Register a callback for rotate gestures, receiving rotation deltas in degrees.
+
+Rotation callbacks provide the cumulative rotation and delta rotation since the last update,
+along with the gesture centre in grid coordinates. Ideal for dial-like interactions.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `callback` | [`TouchRotateHandler`](../../../namespaces/input/namespaces/touch/type-aliases/TouchRotateHandler.md) | Handler to run when a rotation gesture is detected. |
+
+## Returns
+
+`void`
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="rotateGesture" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CglwaXhlbERlbnNpdHk6IDEsCgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpsZXQgcm90YXRpb24gPSAwOwpsZXQgZHJhZ1N0YXJ0ID0gMDsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKdC5yb3RhdGVHZXN0dXJlKChkYXRhKSA9PiB7Cglyb3RhdGlvbiArPSBkYXRhLmRlbHRhUm90YXRpb247Cn0pOwoKdC5tb3VzZVByZXNzZWQoKCkgPT4gewoJZHJhZ1N0YXJ0ID0gdC5tb3VzZS54Owp9KTsKCnQubW91c2VEcmFnZ2VkKCgpID0-IHsKCXJvdGF0aW9uICs9ICh0Lm1vdXNlLnggLSBkcmFnU3RhcnQpICogMC41OwoJZHJhZ1N0YXJ0ID0gdC5tb3VzZS54Owp9KTsKCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNiwgMTAsIDIyKTsKCXQucm90YXRlWihyb3RhdGlvbik7Cgl0LmNoYXIoJyMnKTsKCXQuY2hhckNvbG9yKDE0MCwgMjIwLCAyNTUpOwoJdC5yZWN0KDE0LCA0KTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5ST1RBVEVHRVNUVVJFJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogUk9UQVRFIEdFU1RVUkUnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ1RvdWNoIHR3aXN0IG9yIGRyYWcgcm90YXRlcy4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJ1JvdGF0aW9uIGFjY3VtdWxhdGVzIG92ZXIgdGltZS4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KGBERUc6ICR7cm90YXRpb24udG9GaXhlZCgxKX1gLCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />

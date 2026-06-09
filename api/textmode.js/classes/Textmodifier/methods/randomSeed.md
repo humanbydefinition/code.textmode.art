@@ -1,0 +1,38 @@
+---
+layout: doc
+editLink: true
+title: randomSeed
+description: Reset the main sketch random generator to a seed.
+category: Methods
+api: true
+owner: Textmodifier
+kind: Method
+lastModified: 2026-06-09
+---
+
+[textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / randomSeed
+
+# Method: randomSeed()
+
+```ts
+randomSeed(seed): void;
+```
+
+Reset the main sketch random generator to a seed.
+
+This also clears named streams created with [randomStream](randomStream.md), so future
+stream lookups are derived from the new root seed.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `seed` | `string` \| `number` | Seed used to restart the sequence. |
+
+## Returns
+
+`void`
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="randomSeed" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CglwaXhlbERlbnNpdHk6IDEsCgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IHBvaW50cyA9IFtdOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9CgpmdW5jdGlvbiByZWJ1aWxkUG9pbnRzKCkgewoJdC5yYW5kb21TZWVkKCdyZXBlYXRhYmxlLWdyaWQnKTsKCXBvaW50cy5sZW5ndGggPSAwOwoJZm9yIChsZXQgaSA9IDA7IGkgPCAyODsgaSsrKSB7CgkJcG9pbnRzLnB1c2goewoJCQl4OiBNYXRoLmZsb29yKHQucmFuZG9tKC0yMCwgMjApKSwKCQkJeTogTWF0aC5mbG9vcih0LnJhbmRvbSgtOSwgOSkpLAoJCQljaGFyOiB0LnJhbmRvbShbJy4nLCAnKycsICcqJywgJyMnXSkgPz8gJy4nLAoJCX0pOwoJfQp9CgpyZWJ1aWxkUG9pbnRzKCk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDgsIDcsIDE4KTsKCWlmICh0LmZyYW1lQ291bnQgJSAxMjAgPT09IDEpIHsKCQlyZWJ1aWxkUG9pbnRzKCk7Cgl9CgoJZm9yIChjb25zdCBwb2ludCBvZiBwb2ludHMpIHsKCQl0LnB1c2goKTsKCQl0LnRyYW5zbGF0ZShwb2ludC54LCBwb2ludC55KTsKCQl0LmNoYXIocG9pbnQuY2hhcik7CgkJdC5jaGFyQ29sb3IoMTIwLCAyNDAsIDI1NSk7CgkJdC5wb2ludCgpOwoJCXQucG9wKCk7Cgl9Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuUkFORE9NU0VFRCcsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IFJFU0VUIFNFUVVFTkNFJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdUaGUgc2FtZSBwb2ludHMgcmV0dXJuLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnVGhlIHNlZWQgaXMgc2V0IGV2ZXJ5IGxvb3AuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />

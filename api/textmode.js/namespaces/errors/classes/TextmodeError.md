@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: errors
 kind: Class
-lastModified: 2026-05-27
+lastModified: 2026-06-09
 hasConstructor: true
 ---
 
@@ -40,7 +40,7 @@ Create a textmode.js error.
 | ------ | ------ | ------ |
 | `message` | `string` | The main error message |
 | `context?` | `Record`\<`string`, `unknown`\> | Optional context data to include in the error message |
-| `options?` | `TextmodeErrorFormatOptions` | Optional message formatting options |
+| `options?` | [`TextmodeErrorFormatOptions`](../interfaces/TextmodeErrorFormatOptions.md) | Optional message formatting options |
 
 #### Returns
 

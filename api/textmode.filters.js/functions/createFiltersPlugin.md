@@ -6,12 +6,12 @@ deprecated: |-
    directly instead.
   This function is provided for backwards compatibility only.
 title: createFiltersPlugin
-description: createFiltersPlugin function API reference for textmode.filters.js.
+description: Creates the textmode.filters.js plugin for textmode.js.
 category: Functions
 api: true
 kind: Function
 ecosystem: textmode.js
-lastModified: 2026-05-15
+lastModified: 2026-06-09
 ---
 
 [textmode.filters.js](../index.md) / createFiltersPlugin

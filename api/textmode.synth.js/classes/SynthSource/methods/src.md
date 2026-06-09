@@ -1,0 +1,43 @@
+---
+layout: doc
+editLink: true
+title: src
+description: Sample the previous frame for feedback effects.
+category: Methods
+api: true
+owner: SynthSource
+kind: Method
+ecosystem: textmode.js
+lastModified: 2026-06-09
+---
+
+[textmode.synth.js](../../../index.md) / [SynthSource](../../SynthSource.md) / src
+
+# Method: src()
+
+```ts
+src(): this;
+```
+
+Sample the previous frame for feedback effects.
+
+`src()` samples the current layer's previous frame.
+The sampled texture is context-aware based on where it's used in the synth chain:
+
+- Inside `char(...)` → samples previous frame's character data
+- Inside `charColor(...)` → samples previous frame's primary color (character foreground)
+- Inside `cellColor(...)` → samples previous frame's cell color (character background)
+- Outside all three → samples previous frame's primary color
+
+This is the core of feedback loops - enabling effects like trails, motion blur,
+and recursive patterns. Equivalent to hydra's `src(o0)` (self-reference).
+
+To sample from another layer, use the top-level `src(layer)` function instead.
+
+## Returns
+
+`this`
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="src" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW1N5bnRoUGx1Z2luXSwKfSk7Cgp0LmJwbSgxOCk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IGdseXBocyA9ICcgLjotPSsqIyVAJzsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnU1lOVEhTT1VSQ0UuU1JDJywgeCwgeSsrLCAxMTAsIDI1NSwgMTcwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDcwLCAxMTAsIDE0MCk7CglkcmF3VGV4dCgnU0VMRiBGRUVEQkFDSyBMT09QJywgeCwgeSsrLCAxMjAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdTYW1wbGVzIHByZXZpb3VzIGZyYW1lLicsIHgsIHkrKywgMTYwLCAxODAsIDIxMCk7CglkcmF3VGV4dCgnRnJlc2ggaW5wdXQgaXMgdmVyeSBzdWJ0bGUuJywgeCwgeSsrLCAxNjAsIDE4MCwgMjEwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDcwLCAxMTAsIDE0MCk7CglkcmF3VGV4dCgnU2VwYXJhdGUgYW5pbWF0ZWQgaW5rIGFuZCBwYXBlci4nLCB4LCB5KyssIDE1MCwgMjU1LCAxOTApOwp9KTsKCmNvbnN0IGluayA9IG9zYyg1LCAwLjAxOCwgMS4xKS5rYWxlaWQoNCkuY29sb3IoMC40NSwgMC43MiwgMS4wKS5tb2R1bGF0ZShub2lzZSgyLjIsIDAuMDE4KSwgMC4wMjUpOwpjb25zdCBwYXBlciA9IHBsYXNtYSgzLjYsIDAuMDI4LCAwLjEsIDEuMDUpLmNvbG9yKDAuMDMsIDAuMDgsIDAuMTgpLm1vZHVsYXRlU2NhbGUobm9pc2UoMi4wLCAwLjAxNSksIDAuMjIsIDAuOTUpOwoKdC5sYXllcnMuYmFzZS5zeW50aCgKCXNyYygpCgkJLnNjYWxlKDEuMDA2KQoJCS5yb3RhdGUoMC4wMDYpCgkJLmJsZW5kKG9zYyg3LCAwLjAxOCkua2FsZWlkKDUpLmNvbG9yKDAuMiwgMC43LCAxLjApLCAwLjAyNikKCQkuYmxlbmQob3NjKDksIDAuMDE2KS5rYWxlaWQoNCkucm90YXRlKDAuNCkuY29sb3IoMS4wLCAwLjIsIDAuNSksIDAuMDE4KQoJCS5jb250cmFzdCgxLjA1KQoJCS5jaGFyTWFwKGdseXBocykKCQkuY2hhckNvbG9yKGluaykKCQkuY2VsbENvbG9yKHBhcGVyKQopOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />

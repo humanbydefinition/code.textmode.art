@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: plugins
 kind: Interface
-lastModified: 2026-05-27
+lastModified: 2026-06-09
 isInterface: true
 ---
 
@@ -49,63 +49,7 @@ Called when the plugin is installed on a [Textmodifier](../../../classes/Textmod
 
 #### Example
 
-```javascript
-let installed = false;
-let installTime = '';
-
-const myPlugin = {
-	name: 'install-plugin',
-	install(textmodifier, context) {
-		installed = true;
-		installTime = new Date().toLocaleTimeString();
-	},
-};
-
-const t = textmode.create({
-	width: window.innerWidth,
-	height: window.innerHeight,
-	fontSize: 16,
-	plugins: [myPlugin],
-});
-
-const labelLayer = t.layers.add();
-
-t.draw(() => {
-	t.background(6, 8, 20);
-});
-
-function drawText(text, x, y, r = 220, g = 230, b = 255) {
-	t.push();
-	t.translate(x, y);
-	t.charColor(r, g, b);
-	for (let i = 0; i < text.length; i++) {
-		t.char(text[i]);
-		t.point();
-		t.translate(1, 0);
-	}
-	t.pop();
-}
-
-labelLayer.draw(() => {
-	t.clear();
-	const left = -Math.floor(t.grid.cols / 2);
-	const top = -Math.floor(t.grid.rows / 2);
-	let y = top + 3;
-	const x = left + 3;
-
-	drawText('PLUGINS.INSTALL', x, y++, 100, 255, 140);
-	drawText('------------------------------------', x, y++, 80, 100, 150);
-	drawText('CONCEPT: PLUGIN INITIALIZATION HOOK', x, y++, 100, 220, 255);
-	drawText('Runs on textmode instance creation.', x, y++, 140, 160, 190);
-	drawText('------------------------------------', x, y++, 80, 100, 150);
-	drawText(`INSTALLED : ${installed}`, x, y++, 140, 190, 255);
-	drawText(`TRIGGERED : ${installTime}`, x, y++, 140, 190, 255);
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="TextmodePlugin" encoded-code="bGV0IGluc3RhbGxlZCA9IGZhbHNlOwpsZXQgaW5zdGFsbFRpbWUgPSAnJzsKCmNvbnN0IG15UGx1Z2luID0gewoJbmFtZTogJ2luc3RhbGwtcGx1Z2luJywKCWluc3RhbGwodGV4dG1vZGlmaWVyLCBjb250ZXh0KSB7CgkJaW5zdGFsbGVkID0gdHJ1ZTsKCQlpbnN0YWxsVGltZSA9IG5ldyBEYXRlKCkudG9Mb2NhbGVUaW1lU3RyaW5nKCk7Cgl9LAp9OwoKY29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CglwaXhlbERlbnNpdHk6IDEsCgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKCXBsdWdpbnM6IFtteVBsdWdpbl0sCn0pOwoKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg2LCA4LCAyMCk7Cn0pOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWRyYXdUZXh0KCdQTFVHSU5TLklOU1RBTEwnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBQTFVHSU4gSU5JVElBTElaQVRJT04gSE9PSycsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnUnVucyBvbiB0ZXh0bW9kZSBpbnN0YW5jZSBjcmVhdGlvbi4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KGBJTlNUQUxMRUQgOiAke2luc3RhbGxlZH1gLCB4LCB5KyssIDE0MCwgMTkwLCAyNTUpOwoJZHJhd1RleHQoYFRSSUdHRVJFRCA6ICR7aW5zdGFsbFRpbWV9YCwgeCwgeSsrLCAxNDAsIDE5MCwgMjU1KTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
 
 ***
 
@@ -130,65 +74,4 @@ Called when the plugin is uninstalled from a [Textmodifier](../../../classes/Tex
 
 #### Example
 
-```javascript
-let uninstalled = false;
-
-const myPlugin = {
-	name: 'uninstall-plugin',
-	install(textmodifier, context) {},
-	uninstall(textmodifier, context) {
-		uninstalled = true;
-	},
-};
-
-const t = textmode.create({
-	width: window.innerWidth,
-	height: window.innerHeight,
-	fontSize: 16,
-	plugins: [myPlugin],
-});
-
-const labelLayer = t.layers.add();
-
-t.draw(() => {
-	t.background(6, 8, 20);
-});
-
-t.mouseClicked(() => {
-	if (uninstalled) return;
-	t.destroy();
-	document.body.innerHTML =
-		'<div style="padding: 24px; color: #e4e4e7; background: #09090b; min-height: 100vh;">plugin.uninstall() executed successfully.</div>';
-});
-
-function drawText(text, x, y, r = 220, g = 230, b = 255) {
-	t.push();
-	t.translate(x, y);
-	t.charColor(r, g, b);
-	for (let i = 0; i < text.length; i++) {
-		t.char(text[i]);
-		t.point();
-		t.translate(1, 0);
-	}
-	t.pop();
-}
-
-labelLayer.draw(() => {
-	t.clear();
-	const left = -Math.floor(t.grid.cols / 2);
-	const top = -Math.floor(t.grid.rows / 2);
-	let y = top + 3;
-	const x = left + 3;
-
-	drawText('PLUGINS.UNINSTALL', x, y++, 100, 255, 140);
-	drawText('------------------------------------', x, y++, 80, 100, 150);
-	drawText('CONCEPT: PLUGIN CLEANUP HOOK', x, y++, 100, 220, 255);
-	drawText('Executes when the sketch is destroyed.', x, y++, 140, 160, 190);
-	drawText('------------------------------------', x, y++, 80, 100, 150);
-	drawText(uninstalled ? 'Status: Cleaned Up' : 'Status: Active (Click to uninstall)', x, y++, 140, 190, 255);
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="TextmodePlugin" encoded-code="bGV0IHVuaW5zdGFsbGVkID0gZmFsc2U7Cgpjb25zdCBteVBsdWdpbiA9IHsKCW5hbWU6ICd1bmluc3RhbGwtcGx1Z2luJywKCWluc3RhbGwodGV4dG1vZGlmaWVyLCBjb250ZXh0KSB7fSwKCXVuaW5zdGFsbCh0ZXh0bW9kaWZpZXIsIGNvbnRleHQpIHsKCQl1bmluc3RhbGxlZCA9IHRydWU7Cgl9LAp9OwoKY29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CglwaXhlbERlbnNpdHk6IDEsCgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKCXBsdWdpbnM6IFtteVBsdWdpbl0sCn0pOwoKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg2LCA4LCAyMCk7Cn0pOwoKdC5tb3VzZUNsaWNrZWQoKCkgPT4gewoJaWYgKHVuaW5zdGFsbGVkKSByZXR1cm47Cgl0LmRlc3Ryb3koKTsKCWRvY3VtZW50LmJvZHkuaW5uZXJIVE1MID0KCQknPGRpdiBzdHlsZT0icGFkZGluZzogMjRweDsgY29sb3I6ICNlNGU0ZTc7IGJhY2tncm91bmQ6ICMwOTA5MGI7IG1pbi1oZWlnaHQ6IDEwMHZoOyI-cGx1Z2luLnVuaW5zdGFsbCgpIGV4ZWN1dGVkIHN1Y2Nlc3NmdWxseS48L2Rpdj4nOwp9KTsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnUExVR0lOUy5VTklOU1RBTEwnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBQTFVHSU4gQ0xFQU5VUCBIT09LJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdFeGVjdXRlcyB3aGVuIHRoZSBza2V0Y2ggaXMgZGVzdHJveWVkLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQodW5pbnN0YWxsZWQgPyAnU3RhdHVzOiBDbGVhbmVkIFVwJyA6ICdTdGF0dXM6IEFjdGl2ZSAoQ2xpY2sgdG8gdW5pbnN0YWxsKScsIHgsIHkrKywgMTQwLCAxOTAsIDI1NSk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />

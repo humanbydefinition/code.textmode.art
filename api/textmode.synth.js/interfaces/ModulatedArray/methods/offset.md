@@ -1,0 +1,45 @@
+---
+layout: doc
+editLink: true
+title: offset
+description: Set time offset for array cycling.
+category: Methods
+api: true
+owner: ModulatedArray
+kind: Method
+ecosystem: textmode.js
+lastModified: 2026-06-09
+---
+
+[textmode.synth.js](../../../index.md) / [ModulatedArray](../../ModulatedArray.md) / offset
+
+# Method: offset()
+
+```ts
+offset(offset): this;
+```
+
+Set time offset for array cycling.
+
+Shifts when the array starts cycling through its values.
+Useful for creating phase-shifted animations where multiple arrays
+cycle with the same speed but at different times.
+
+The offset wraps around at 1.0, so offset(0.5) starts halfway through
+the cycle, and offset(1.5) is equivalent to offset(0.5).
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `offset` | `number` | Time offset 0-1, wraps at 1.0 (default: 0) |
+
+## Returns
+
+`this`
+
+The array for chaining
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="offset" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW1N5bnRoUGx1Z2luXSwKfSk7Cgp0LmJwbSgxOCk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IGdseXBocyA9ICcgLjotPSsqIyVAJzsKY29uc3Qgc2xvdyA9IFswLjAsIDEuMF0uZmFzdCgwLjE2KS5lYXNlKCdlYXNlSW5PdXRTaW5lJyk7CmNvbnN0IHR1cm4gPSBbLTAuNDIsIDAuNDJdLmZhc3QoMC4xNCkuZWFzZSgnZWFzZUluT3V0U2luZScpOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWRyYXdUZXh0KCdNT0RVTEFURURBUlJBWS5PRkZTRVQnLCB4LCB5KyssIDExMCwgMjU1LCAxNzApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgNzAsIDExMCwgMTQwKTsKCWRyYXdUZXh0KCdQSEFTRSBPRkZTRVQgQ1lDTElORycsIHgsIHkrKywgMTIwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnT2Zmc2V0cyBzdGFnZ2VyIHNoYXJlZCBtb3Rpb24uJywgeCwgeSsrLCAxNjAsIDE4MCwgMjEwKTsKCWRyYXdUZXh0KCdUaHJlZSBjb2xvciBmaWVsZHMgb3JiaXQgc2xvd2x5LicsIHgsIHkrKywgMTYwLCAxODAsIDIxMCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA3MCwgMTEwLCAxNDApOwoJZHJhd1RleHQoJ1NlcGFyYXRlIGFuaW1hdGVkIGluayBhbmQgcGFwZXIuJywgeCwgeSsrLCAxNTAsIDI1NSwgMTkwKTsKfSk7Cgpjb25zdCBpbmsgPSBvc2MoNiwgMC4wMTgsIDEuNikucm90YXRlKHR1cm4sIDAuMDAyKS5jb2xvcigwLjksIDAuNTgsIDEuMCkubW9kdWxhdGVLYWxlaWQobm9pc2UoMi4wLCAwLjAxNCksIDUpOwpjb25zdCBwYXBlciA9IHBsYXNtYSgzLjIsIDAuMDI0LCAwLjIsIDEuMDgpLmNvbG9yKDAuMDgsIDAuMDM1LCAwLjE2KS5odWUoc2xvdyk7CmNvbnN0IHR1cm5BID0gWy0wLjM1LCAwLjM1XS5mYXN0KDAuMTIpLmVhc2UoJ2Vhc2VJbk91dFNpbmUnKTsKCnQubGF5ZXJzLmJhc2Uuc3ludGgoCglvc2MoMTAsIDAuMDI0LCAxLjApCgkJLnJvdGF0ZSh0dXJuQSkKCQkua2FsZWlkKDUpCgkJLnNjcmVlbihvc2MoMTAsIDAuMDIsIDEuNykucm90YXRlKHR1cm5BLm9mZnNldCgwLjMzKSksIDAuMzgpCgkJLnNjcmVlbihvc2MoMTAsIDAuMDE4LCAyLjQpLnJvdGF0ZSh0dXJuQS5vZmZzZXQoMC42NikpLCAwLjMyKQoJCS5tb2R1bGF0ZShub2lzZSgyLjMsIDAuMDE4KSwgMC4wMzUpCgkJLmNvbnRyYXN0KDEuMikKCQkuY2hhck1hcChnbHlwaHMpCgkJLmNoYXJDb2xvcihpbmspCgkJLmNlbGxDb2xvcihwYXBlcikKKTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />

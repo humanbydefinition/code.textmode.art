@@ -15,7 +15,7 @@ Lighting affects rendered output in the current layer, including 2D primitives, 
 t.ambientLight(40);
 ```
 
-You can pass grayscale, RGB/RGBA components, CSS strings, arrays, or [`TextmodeColor`](/api/textmode.js/classes/TextmodeColor) values:
+You can pass grayscale, RGB/RGBA components, CSS strings, arrays, or [`TextmodeColor`](/api/textmode.js/namespaces/color/classes/TextmodeColor) values:
 
 ```js
 t.ambientLight(80, 90, 120);

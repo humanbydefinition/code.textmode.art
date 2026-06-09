@@ -2,12 +2,12 @@
 layout: doc
 editLink: true
 title: TextmodeConversionManager
-description: Registers image-to-textmode conversion strategies for a Textmodifier instance.
+description: Registers conversion strategies for a Textmodifier instance.
 category: Classes
 api: true
 namespace: conversion
 kind: Class
-lastModified: 2026-05-27
+lastModified: 2026-06-09
 hasConstructor: false
 ---
 
@@ -15,9 +15,9 @@ hasConstructor: false
 
 # Class: TextmodeConversionManager
 
-Registers image-to-textmode conversion strategies for a Textmodifier instance.
+Registers conversion strategies for a Textmodifier instance.
 
-Access via [Textmodifier.conversions](../../../classes/Textmodifier.md#conversions).
+Access via [Textmodifier.conversions](../../../classes/Textmodifier/accessors/conversions.md).
 
 ## Example
 
@@ -57,102 +57,7 @@ true if the strategy exists
 
 #### Example
 
-```javascript
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
-
-const labelLayer = t.layers.add();
-let hasCustom = false;
-let pulseShader = null;
-
-t.setup(async () => {
-	const vert = `#version 300 es
-		in vec4 a_position;
-		in vec2 a_uv;
-		out vec2 v_uv;
-		void main() {
-			gl_Position = a_position;
-			v_uv = a_uv;
-		}
-	`;
-
-	const frag = `#version 300 es
-		precision highp float;
-		in vec2 v_uv;
-		uniform sampler2D u_image;
-		layout(location = 0) out vec4 o_character;
-		layout(location = 1) out vec4 o_primaryColor;
-		layout(location = 2) out vec4 o_secondaryColor;
-		void main() {
-			vec4 col = texture(u_image, v_uv);
-			o_character = vec4(col.r, 0.0, 0.0, 0.0);
-			o_primaryColor = vec4(col.rgb, 1.0);
-			o_secondaryColor = vec4(0.0, 0.0, 0.0, 1.0);
-		}
-	`;
-
-	pulseShader = await t.createShader(vert, frag);
-});
-
-t.draw(() => {
-	t.background(6, 8, 20);
-	hasCustom = t.conversions.has('custom-mode');
-});
-
-t.mouseClicked(() => {
-	if (hasCustom) {
-		t.conversions.unregister('custom-mode');
-	} else {
-		t.conversions.register({
-			id: 'custom-mode',
-			createShader: () => pulseShader,
-			createUniforms: (ctx) => ({ u_image: ctx.source.texture }),
-		});
-	}
-});
-
-function drawText(text, x, y, r = 220, g = 230, b = 255) {
-	t.push();
-	t.translate(x, y);
-	t.charColor(r, g, b);
-	for (let i = 0; i < text.length; i++) {
-		t.char(text[i]);
-		t.point();
-		t.translate(1, 0);
-	}
-	t.pop();
-}
-
-labelLayer.draw(() => {
-	t.clear();
-	const left = -Math.floor(t.grid.cols / 2);
-	const top = -Math.floor(t.grid.rows / 2);
-	let y = top + 3;
-	const x = left + 3;
-
-	const isDefault = t.conversions.has('brightness');
-
-	drawText('CONVERSION.HAS', x, y++, 100, 255, 140);
-	drawText('------------------------------------', x, y++, 80, 100, 150);
-	drawText('CONCEPT: CHECK REGISTERED STRATEGY', x, y++, 100, 220, 255);
-	drawText('Performs a key lookup in conversions.', x, y++, 140, 160, 190);
-	drawText('------------------------------------', x, y++, 80, 100, 150);
-	drawText(`has('brightness') : ${isDefault}`, x, y++, 180, 255, 180);
-	drawText(
-		`has('custom-mode'): ${hasCustom}`,
-		x,
-		y++,
-		hasCustom ? 180 : 255,
-		hasCustom ? 255 : 120,
-		hasCustom ? 180 : 120
-	);
-	drawText('------------------------------------', x, y++, 80, 100, 150);
-	drawText(hasCustom ? 'Click to unregister.' : 'Click to register custom-mode.', x, y++, 120, 205, 255);
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="TextmodeConversionManager" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7IHBpeGVsRGVuc2l0eTogMSwgd2lkdGg6IHdpbmRvdy5pbm5lcldpZHRoLCBoZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCB9KTsKCmNvbnN0IGxhYmVsTGF5ZXIgPSB0LmxheWVycy5hZGQoKTsKbGV0IGhhc0N1c3RvbSA9IGZhbHNlOwpsZXQgcHVsc2VTaGFkZXIgPSBudWxsOwoKdC5zZXR1cChhc3luYyAoKSA9PiB7Cgljb25zdCB2ZXJ0ID0gYCN2ZXJzaW9uIDMwMCBlcwoJCWluIHZlYzQgYV9wb3NpdGlvbjsKCQlpbiB2ZWMyIGFfdXY7CgkJb3V0IHZlYzIgdl91djsKCQl2b2lkIG1haW4oKSB7CgkJCWdsX1Bvc2l0aW9uID0gYV9wb3NpdGlvbjsKCQkJdl91diA9IGFfdXY7CgkJfQoJYDsKCgljb25zdCBmcmFnID0gYCN2ZXJzaW9uIDMwMCBlcwoJCXByZWNpc2lvbiBoaWdocCBmbG9hdDsKCQlpbiB2ZWMyIHZfdXY7CgkJdW5pZm9ybSBzYW1wbGVyMkQgdV9pbWFnZTsKCQlsYXlvdXQobG9jYXRpb24gPSAwKSBvdXQgdmVjNCBvX2NoYXJhY3RlcjsKCQlsYXlvdXQobG9jYXRpb24gPSAxKSBvdXQgdmVjNCBvX3ByaW1hcnlDb2xvcjsKCQlsYXlvdXQobG9jYXRpb24gPSAyKSBvdXQgdmVjNCBvX3NlY29uZGFyeUNvbG9yOwoJCXZvaWQgbWFpbigpIHsKCQkJdmVjNCBjb2wgPSB0ZXh0dXJlKHVfaW1hZ2UsIHZfdXYpOwoJCQlvX2NoYXJhY3RlciA9IHZlYzQoY29sLnIsIDAuMCwgMC4wLCAwLjApOwoJCQlvX3ByaW1hcnlDb2xvciA9IHZlYzQoY29sLnJnYiwgMS4wKTsKCQkJb19zZWNvbmRhcnlDb2xvciA9IHZlYzQoMC4wLCAwLjAsIDAuMCwgMS4wKTsKCQl9CglgOwoKCXB1bHNlU2hhZGVyID0gYXdhaXQgdC5jcmVhdGVTaGFkZXIodmVydCwgZnJhZyk7Cn0pOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg2LCA4LCAyMCk7CgloYXNDdXN0b20gPSB0LmNvbnZlcnNpb25zLmhhcygnY3VzdG9tLW1vZGUnKTsKfSk7Cgp0Lm1vdXNlQ2xpY2tlZCgoKSA9PiB7CglpZiAoaGFzQ3VzdG9tKSB7CgkJdC5jb252ZXJzaW9ucy51bnJlZ2lzdGVyKCdjdXN0b20tbW9kZScpOwoJfSBlbHNlIHsKCQl0LmNvbnZlcnNpb25zLnJlZ2lzdGVyKHsKCQkJaWQ6ICdjdXN0b20tbW9kZScsCgkJCWNyZWF0ZVNoYWRlcjogKCkgPT4gcHVsc2VTaGFkZXIsCgkJCWNyZWF0ZVVuaWZvcm1zOiAoY3R4KSA9PiAoeyB1X2ltYWdlOiBjdHguc291cmNlLnRleHR1cmUgfSksCgkJfSk7Cgl9Cn0pOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWNvbnN0IGlzRGVmYXVsdCA9IHQuY29udmVyc2lvbnMuaGFzKCdicmlnaHRuZXNzJyk7CgoJZHJhd1RleHQoJ0NPTlZFUlNJT04uSEFTJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogQ0hFQ0sgUkVHSVNURVJFRCBTVFJBVEVHWScsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnUGVyZm9ybXMgYSBrZXkgbG9va3VwIGluIGNvbnZlcnNpb25zLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoYGhhcygnYnJpZ2h0bmVzcycpIDogJHtpc0RlZmF1bHR9YCwgeCwgeSsrLCAxODAsIDI1NSwgMTgwKTsKCWRyYXdUZXh0KAoJCWBoYXMoJ2N1c3RvbS1tb2RlJyk6ICR7aGFzQ3VzdG9tfWAsCgkJeCwKCQl5KyssCgkJaGFzQ3VzdG9tID8gMTgwIDogMjU1LAoJCWhhc0N1c3RvbSA_IDI1NSA6IDEyMCwKCQloYXNDdXN0b20gPyAxODAgOiAxMjAKCSk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoaGFzQ3VzdG9tID8gJ0NsaWNrIHRvIHVucmVnaXN0ZXIuJyA6ICdDbGljayB0byByZWdpc3RlciBjdXN0b20tbW9kZS4nLCB4LCB5KyssIDEyMCwgMjA1LCAyNTUpOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
 
 ***
 
@@ -208,85 +113,4 @@ true if the strategy was unregistered, false if it wasn't found
 
 #### Example
 
-```javascript
-const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80';
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
-
-const labelLayer = t.layers.add();
-let img = null;
-let registered = false;
-let customShader = null;
-
-t.setup(async () => {
-	const vert = `#version 300 es\nin vec4 a_position; in vec2 a_uv; out vec2 v_uv; void main() { gl_Position = a_position; v_uv = a_uv; }`;
-	const frag = `#version 300 es\nprecision highp float; in vec2 v_uv; uniform sampler2D u_image; layout(location = 0) out vec4 o_character; layout(location = 1) out vec4 o_primaryColor; layout(location = 2) out vec4 o_secondaryColor; void main() { vec4 col = texture(u_image, v_uv); float greenLuma = col.g; o_character = vec4(greenLuma * 0.8, 0.0, 0.0, 0.0); o_primaryColor = vec4(0.1, 0.9, 0.3, 1.0); o_secondaryColor = vec4(0.01, 0.05, 0.02, 1.0); }`;
-
-	customShader = await t.createShader(vert, frag);
-
-	t.conversions.register({
-		id: 'green-custom',
-		createShader: () => customShader,
-		createUniforms: (ctx) => ({ u_image: ctx.source.texture }),
-	});
-
-	img = await t.loadImage(IMAGE_URL);
-	img.characters(' .:-=+*#%@');
-	img.conversionMode('green-custom');
-	registered = true;
-});
-
-t.draw(() => {
-	t.background(6, 8, 20);
-	if (img) {
-		t.image(img, t.grid.cols - 8, t.grid.rows - 10);
-	}
-});
-
-t.mouseClicked(() => {
-	if (!registered || !img) return;
-	img.conversionMode('brightness');
-	t.conversions.unregister('green-custom');
-	registered = false;
-});
-
-function drawText(text, x, y, r = 220, g = 230, b = 255) {
-	t.push();
-	t.translate(x, y);
-	t.charColor(r, g, b);
-	for (let i = 0; i < text.length; i++) {
-		t.char(text[i]);
-		t.point();
-		t.translate(1, 0);
-	}
-	t.pop();
-}
-
-labelLayer.draw(() => {
-	t.clear();
-	const left = -Math.floor(t.grid.cols / 2);
-	const top = -Math.floor(t.grid.rows / 2);
-	let y = top + 3;
-	const x = left + 3;
-
-	const mode = registered ? 'green-custom' : 'brightness';
-
-	drawText('CONVERSION.UNREGISTER', x, y++, 100, 255, 140);
-	drawText('------------------------------------', x, y++, 80, 100, 150);
-	drawText('CONCEPT: DISPOSE CONVERSION STRATEGY', x, y++, 100, 220, 255);
-	drawText('Removes registered custom logic.', x, y++, 140, 160, 190);
-	drawText('------------------------------------', x, y++, 80, 100, 150);
-	drawText(`ACTIVE MODE: ${mode}`, x, y++, 140, 190, 255);
-	drawText(
-		registered ? 'Click to unregister green-custom.' : 'Strategy unregistered successfully.',
-		x,
-		y++,
-		180,
-		255,
-		180
-	);
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="TextmodeConversionManager" encoded-code="Y29uc3QgSU1BR0VfVVJMID0gJ2h0dHBzOi8vaW1hZ2VzLnVuc3BsYXNoLmNvbS9waG90by0xNTA2OTA1OTI1MzQ2LTIxYmRhNGQzMmRmND93PTkwMCZxPTgwJzsKY29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7IHBpeGVsRGVuc2l0eTogMSwgd2lkdGg6IHdpbmRvdy5pbm5lcldpZHRoLCBoZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCB9KTsKCmNvbnN0IGxhYmVsTGF5ZXIgPSB0LmxheWVycy5hZGQoKTsKbGV0IGltZyA9IG51bGw7CmxldCByZWdpc3RlcmVkID0gZmFsc2U7CmxldCBjdXN0b21TaGFkZXIgPSBudWxsOwoKdC5zZXR1cChhc3luYyAoKSA9PiB7Cgljb25zdCB2ZXJ0ID0gYCN2ZXJzaW9uIDMwMCBlc1xuaW4gdmVjNCBhX3Bvc2l0aW9uOyBpbiB2ZWMyIGFfdXY7IG91dCB2ZWMyIHZfdXY7IHZvaWQgbWFpbigpIHsgZ2xfUG9zaXRpb24gPSBhX3Bvc2l0aW9uOyB2X3V2ID0gYV91djsgfWA7Cgljb25zdCBmcmFnID0gYCN2ZXJzaW9uIDMwMCBlc1xucHJlY2lzaW9uIGhpZ2hwIGZsb2F0OyBpbiB2ZWMyIHZfdXY7IHVuaWZvcm0gc2FtcGxlcjJEIHVfaW1hZ2U7IGxheW91dChsb2NhdGlvbiA9IDApIG91dCB2ZWM0IG9fY2hhcmFjdGVyOyBsYXlvdXQobG9jYXRpb24gPSAxKSBvdXQgdmVjNCBvX3ByaW1hcnlDb2xvcjsgbGF5b3V0KGxvY2F0aW9uID0gMikgb3V0IHZlYzQgb19zZWNvbmRhcnlDb2xvcjsgdm9pZCBtYWluKCkgeyB2ZWM0IGNvbCA9IHRleHR1cmUodV9pbWFnZSwgdl91dik7IGZsb2F0IGdyZWVuTHVtYSA9IGNvbC5nOyBvX2NoYXJhY3RlciA9IHZlYzQoZ3JlZW5MdW1hICogMC44LCAwLjAsIDAuMCwgMC4wKTsgb19wcmltYXJ5Q29sb3IgPSB2ZWM0KDAuMSwgMC45LCAwLjMsIDEuMCk7IG9fc2Vjb25kYXJ5Q29sb3IgPSB2ZWM0KDAuMDEsIDAuMDUsIDAuMDIsIDEuMCk7IH1gOwoKCWN1c3RvbVNoYWRlciA9IGF3YWl0IHQuY3JlYXRlU2hhZGVyKHZlcnQsIGZyYWcpOwoKCXQuY29udmVyc2lvbnMucmVnaXN0ZXIoewoJCWlkOiAnZ3JlZW4tY3VzdG9tJywKCQljcmVhdGVTaGFkZXI6ICgpID0-IGN1c3RvbVNoYWRlciwKCQljcmVhdGVVbmlmb3JtczogKGN0eCkgPT4gKHsgdV9pbWFnZTogY3R4LnNvdXJjZS50ZXh0dXJlIH0pLAoJfSk7CgoJaW1nID0gYXdhaXQgdC5sb2FkSW1hZ2UoSU1BR0VfVVJMKTsKCWltZy5jaGFyYWN0ZXJzKCcgLjotPSsqIyVAJyk7CglpbWcuY29udmVyc2lvbk1vZGUoJ2dyZWVuLWN1c3RvbScpOwoJcmVnaXN0ZXJlZCA9IHRydWU7Cn0pOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg2LCA4LCAyMCk7CglpZiAoaW1nKSB7CgkJdC5pbWFnZShpbWcsIHQuZ3JpZC5jb2xzIC0gOCwgdC5ncmlkLnJvd3MgLSAxMCk7Cgl9Cn0pOwoKdC5tb3VzZUNsaWNrZWQoKCkgPT4gewoJaWYgKCFyZWdpc3RlcmVkIHx8ICFpbWcpIHJldHVybjsKCWltZy5jb252ZXJzaW9uTW9kZSgnYnJpZ2h0bmVzcycpOwoJdC5jb252ZXJzaW9ucy51bnJlZ2lzdGVyKCdncmVlbi1jdXN0b20nKTsKCXJlZ2lzdGVyZWQgPSBmYWxzZTsKfSk7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CgoJY29uc3QgbW9kZSA9IHJlZ2lzdGVyZWQgPyAnZ3JlZW4tY3VzdG9tJyA6ICdicmlnaHRuZXNzJzsKCglkcmF3VGV4dCgnQ09OVkVSU0lPTi5VTlJFR0lTVEVSJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogRElTUE9TRSBDT05WRVJTSU9OIFNUUkFURUdZJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdSZW1vdmVzIHJlZ2lzdGVyZWQgY3VzdG9tIGxvZ2ljLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoYEFDVElWRSBNT0RFOiAke21vZGV9YCwgeCwgeSsrLCAxNDAsIDE5MCwgMjU1KTsKCWRyYXdUZXh0KAoJCXJlZ2lzdGVyZWQgPyAnQ2xpY2sgdG8gdW5yZWdpc3RlciBncmVlbi1jdXN0b20uJyA6ICdTdHJhdGVneSB1bnJlZ2lzdGVyZWQgc3VjY2Vzc2Z1bGx5LicsCgkJeCwKCQl5KyssCgkJMTgwLAoJCTI1NSwKCQkxODAKCSk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />

@@ -1,0 +1,38 @@
+---
+layout: doc
+editLink: true
+title: registerLayerDisposedHook
+description: Register a callback to be invoked when a layer is about to be disposed.
+category: Methods
+api: true
+owner: TextmodePluginContext
+namespace: plugins
+kind: Method
+lastModified: 2026-06-09
+---
+
+[textmode.js](../../../../../index.md) / [plugins](../../../index.md) / [TextmodePluginContext](../../TextmodePluginContext.md) / registerLayerDisposedHook
+
+# Method: registerLayerDisposedHook()
+
+```ts
+registerLayerDisposedHook(callback): () => void;
+```
+
+Register a callback to be invoked when a layer is about to be disposed.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `callback` | [`LayerLifecycleHook`](../../../type-aliases/LayerLifecycleHook.md) | The callback to invoke with the layer being disposed. |
+
+## Returns
+
+A function to unregister the hook.
+
+() => `void`
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="registerLayerDisposedHook" encoded-code="bGV0IGRpc3Bvc2VkQ291bnQgPSAwOwpsZXQgbGF5ZXJUb0Rpc3Bvc2UgPSBudWxsOwoKY29uc3QgaG9va1BsdWdpbiA9IHsKCW5hbWU6ICdsYXllci1kaXNwb3NlZC1ob29rLXBsdWdpbicsCglpbnN0YWxsKHRleHRtb2RpZmllciwgY29udGV4dCkgewoJCWNvbnRleHQucmVnaXN0ZXJMYXllckRpc3Bvc2VkSG9vaygoKSA9PiB7CgkJCWRpc3Bvc2VkQ291bnQgKz0gMTsKCQl9KTsKCX0sCn07Cgpjb25zdCB0ID0gdGV4dG1vZGUuY3JlYXRlKHsKCXBpeGVsRGVuc2l0eTogMSwKCXdpZHRoOiB3aW5kb3cuaW5uZXJXaWR0aCwKCWhlaWdodDogd2luZG93LmlubmVySGVpZ2h0LAoJZm9udFNpemU6IDE2LAoJcGx1Z2luczogW2hvb2tQbHVnaW5dLAp9KTsKCmNvbnN0IGxhYmVsTGF5ZXIgPSB0LmxheWVycy5hZGQoKTsKCnQuc2V0dXAoKCkgPT4gewoJbGF5ZXJUb0Rpc3Bvc2UgPSB0LmxheWVycy5hZGQoeyBmb250U2l6ZTogMTYgfSk7Cn0pOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg2LCA4LCAyMCk7Cn0pOwoKdC5tb3VzZUNsaWNrZWQoKCkgPT4gewoJaWYgKCFsYXllclRvRGlzcG9zZSkgcmV0dXJuOwoJbGF5ZXJUb0Rpc3Bvc2UuZGlzcG9zZSgpOwoJbGF5ZXJUb0Rpc3Bvc2UgPSBudWxsOwp9KTsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnUExVR0lOUy5SRUdJU1RFUkxBWUVSRElTUE9TRURIT09LJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogTEFZRVIgRElTUE9TRUQgSE9PSycsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnUnVucyB3aGVuIGEgbGF5ZXIgaXMgZGlzcG9zZWQuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dChgRElTUE9TRUQgQ09VTlQgOiAke2Rpc3Bvc2VkQ291bnR9YCwgeCwgeSsrLCAxNDAsIDE5MCwgMjU1KTsKCWRyYXdUZXh0KAoJCWxheWVyVG9EaXNwb3NlID8gJ0NsaWNrIHRvIGRpc3Bvc2UgbGF5ZXIuJyA6ICdMYXllciBoYXMgYmVlbiBkaXNwb3NlZCBzdWNjZXNzZnVsbHkuJywKCQl4LAoJCXkrKywKCQkxODAsCgkJMjU1LAoJCTE4MAoJKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />

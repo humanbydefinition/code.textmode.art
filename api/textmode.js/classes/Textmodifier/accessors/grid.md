@@ -1,0 +1,35 @@
+---
+layout: doc
+editLink: true
+title: grid
+description: Grid for the layer currently being drawn.
+category: Accessors
+api: true
+owner: Textmodifier
+kind: Accessor
+lastModified: 2026-06-09
+---
+
+[textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / grid
+
+# Accessor: grid
+
+## Get Signature
+
+```ts
+get grid(): TextmodeGrid | undefined;
+```
+
+Grid for the layer currently being drawn.
+
+Outside a layer draw callback, this returns the base layer's grid.
+
+If no grid is set (e.g., before user setup()), returns `undefined`.
+
+### Returns
+
+[`TextmodeGrid`](../../TextmodeGrid.md) \| `undefined`
+
+### Example
+
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="grid" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CglwaXhlbERlbnNpdHk6IDEsCgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNiwgMTAsIDIyKTsKCXQuY2hhckNvbG9yKDUwLCA3MCwgMTAwKTsKCXQuY2hhcignLicpOwoJZm9yIChsZXQgeCA9IC0yMDsgeCA8PSAyMDsgeCArPSA0KSB0LmxpbmUoeCwgLTEwLCB4LCAxMCk7Cglmb3IgKGxldCB5ID0gLTEwOyB5IDw9IDEwOyB5ICs9IDIpIHQubGluZSgtMjAsIHksIDIwLCB5KTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5HUklEJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogR1JJRCBNRVRSSUNTJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdFeHBvc2VzIHJvd3MsIGNvbHMsIGFuZCBjZWxscy4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJ0dyaWQgY2hhbmdlcyB3aXRoIHdpbmRvdyBzaXplLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoYENPTFM6ICR7dC5ncmlkLmNvbHN9YCwgeCwgeSsrLCAxNDAsIDI1NSwgMTgwKTsKCWRyYXdUZXh0KGBST1dTOiAke3QuZ3JpZC5yb3dzfWAsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />

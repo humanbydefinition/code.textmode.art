@@ -1,0 +1,42 @@
+---
+layout: doc
+editLink: true
+title: charRotation
+description: Rotate generated characters.
+category: Methods
+api: true
+owner: TextmodeTexture
+namespace: media
+kind: Method
+lastModified: 2026-06-09
+---
+
+[textmode.js](../../../../../index.md) / [media](../../../index.md) / [TextmodeTexture](../../TextmodeTexture.md) / charRotation
+
+# Method: charRotation()
+
+```ts
+charRotation(degrees): this;
+```
+
+Rotate generated characters.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `degrees` | `number` | Rotation in degrees. |
+
+## Returns
+
+`this`
+
+This instance for chaining.
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="charRotation" encoded-code="Y29uc3QgSU1BR0VfVVJMID0gJ2h0dHBzOi8vaW1hZ2VzLnVuc3BsYXNoLmNvbS9waG90by0xNTA2OTA1OTI1MzQ2LTIxYmRhNGQzMmRmND93PTkwMCZxPTgwJzsKY29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CglwaXhlbERlbnNpdHk6IDEsCgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAp9KTsKCmNvbnN0IGxhYmVsTGF5ZXIgPSB0LmxheWVycy5hZGQoKTsKbGV0IHBvaW50ZXJTb3VyY2UgPSBudWxsOwoKdC5zZXR1cChhc3luYyAoKSA9PiB7Cglwb2ludGVyU291cmNlID0gYXdhaXQgdC5sb2FkSW1hZ2UoSU1BR0VfVVJMKTsKCXBvaW50ZXJTb3VyY2UuY2hhcmFjdGVycygnIC46LT0rKiMlQCcpOwp9KTsKCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNiwgMTAsIDIyKTsKCglpZiAoIXBvaW50ZXJTb3VyY2UpIHJldHVybjsKCgljb25zdCBpbWdXID0gMjA7Cgljb25zdCBpbWdIID0gMTI7CgoJdC5wdXNoKCk7Cgl0LnRyYW5zbGF0ZSgtMTIsIDApOwoJcG9pbnRlclNvdXJjZS5jaGFyUm90YXRpb24oMCk7Cgl0LmltYWdlKHBvaW50ZXJTb3VyY2UsIGltZ1csIGltZ0gpOwoJdC5wb3AoKTsKCgl0LnB1c2goKTsKCXQudHJhbnNsYXRlKDEyLCAwKTsKCXBvaW50ZXJTb3VyY2UuY2hhclJvdGF0aW9uKDkwKTsKCXQuaW1hZ2UocG9pbnRlclNvdXJjZSwgaW1nVywgaW1nSCk7Cgl0LnBvcCgpOwp9KTsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnVEVYVE1PREVTT1VSQ0UuQ0hBUlJPVEFUSU9OJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogR0xZUEggUk9UQVRJT04gQU5HTEUnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ1JvdGF0ZXMgbWFwcGVkIGNoYXJhY3RlcnMgaW4gZGVncmVlcy4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdST1RBVElPTiBBTkdMRTogMCAmIDkwIGRlZycsIHgsIHkrKywgMTQwLCAxOTAsIDI1NSk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+
+## Inherited from
+
+[`TextmodeSource`](../../TextmodeSource.md).[`charRotation`](../../TextmodeSource/methods/charRotation.md)

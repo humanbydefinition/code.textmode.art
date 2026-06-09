@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 namespace: loading
 kind: TypeAlias
-lastModified: 2026-05-27
+lastModified: 2026-06-09
 ---
 
 [textmode.js](../../../index.md) / [loading](../index.md) / LoadingScreenState

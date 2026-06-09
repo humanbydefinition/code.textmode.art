@@ -1,0 +1,39 @@
+---
+layout: doc
+editLink: true
+title: touchStarted
+description: Register the single-callback handler for touch start events.
+category: Methods
+api: true
+owner: Textmodifier
+kind: Method
+lastModified: 2026-06-09
+---
+
+[textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / touchStarted
+
+# Method: touchStarted()
+
+```ts
+touchStarted(callback): void;
+```
+
+Register the single-callback handler for touch start events.
+
+The callback receives [input.touch.TouchEventData](../../../namespaces/input/namespaces/touch/interfaces/TouchEventData.md) containing the touch that triggered the event,
+all active touches, and the original DOM event. Use this to react when the user places one or
+more fingers on the canvas.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `callback` | [`TouchEventHandler`](../../../namespaces/input/namespaces/touch/type-aliases/TouchEventHandler.md) | Handler to run when a touch starts. |
+
+## Returns
+
+`void`
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="touchStarted" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CglwaXhlbERlbnNpdHk6IDEsCgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7Cgpjb25zdCBwdWxzZXMgPSBbXTsKbGV0IGNvdW50ID0gMDsKbGV0IGxhc3QgPSAnV0FJVElORyc7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCmZ1bmN0aW9uIGFkZFB1bHNlKGxhYmVsLCB4ID0gMCwgeSA9IDApIHsKCWNvdW50Kys7CglsYXN0ID0gbGFiZWw7CglwdWxzZXMudW5zaGlmdCh7IGxhYmVsLCB4LCB5LCBsaWZlOiAxIH0pOwoJaWYgKHB1bHNlcy5sZW5ndGggPiAxMikgcHVsc2VzLmxlbmd0aCA9IDEyOwp9Cgp0LnRvdWNoU3RhcnRlZCgoZGF0YSkgPT4gewoJY29uc3QgdG91Y2ggPSBkYXRhPy50b3VjaCB8fCB0Lm1vdXNlOwoJYWRkUHVsc2UoJ1NUQVJUUycsIHRvdWNoPy54IHx8IDAsIHRvdWNoPy55IHx8IDApOwp9KTsKCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNiwgMTAsIDIyKTsKCglmb3IgKGxldCBpID0gcHVsc2VzLmxlbmd0aCAtIDE7IGkgPj0gMDsgaS0tKSB7CgkJY29uc3QgcCA9IHB1bHNlc1tpXTsKCQlwLmxpZmUgLT0gMC4wMjsKCQlpZiAocC5saWZlIDw9IDApIHsKCQkJcHVsc2VzLnNwbGljZShpLCAxKTsKCQkJY29udGludWU7CgkJfQoJCXQucHVzaCgpOwoJCXQudHJhbnNsYXRlKHAueCwgcC55IC0gKDEgLSBwLmxpZmUpICogNCk7CgkJdC5jaGFyKCcqJyk7CgkJdC5jaGFyQ29sb3IoMjU1LCAyMTAsIDEyMCk7CgkJdC5wb2ludCgpOwoJCXQucG9wKCk7Cgl9Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuVE9VQ0hTVEFSVEVEJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogVE9VQ0ggQkVHSU4nLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ0V2ZW50IHVwZGF0ZXMgY29tcGFjdCBzdGF0ZS4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJ1B1bHNlcyBzaG93IHJlY2VudCB0cmlnZ2Vycy4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdTVEFSVFM6ICcgKyBjb3VudCwgeCwgeSsrLCAxNDAsIDI1NSwgMTgwKTsKCWRyYXdUZXh0KCdMQVNUOiAnICsgbGFzdC5zbGljZSgwLCAyOCksIHgsIHkrKywgMTgwLCAyMDAsIDIyMCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />

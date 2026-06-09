@@ -1,0 +1,40 @@
+---
+layout: doc
+editLink: true
+title: char
+description: Set the character indices using a character source chain. The number of characters is determined by charMap() if defined, otherwise falls back to the total c...
+category: Methods
+api: true
+owner: SynthSource
+kind: Method
+ecosystem: textmode.js
+lastModified: 2026-06-09
+---
+
+[textmode.synth.js](../../../index.md) / [SynthSource](../../SynthSource.md) / char
+
+# Method: char()
+
+```ts
+char(source): this;
+```
+
+Set the character indices using a character source chain.
+The number of characters is determined by `charMap()` if defined,
+otherwise falls back to the total characters in the layer's font.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `source` | [`SynthSource`](../../SynthSource.md) | A synth source producing character indices |
+
+## Returns
+
+`this`
+
+The SynthSource for chaining
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="char" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW1N5bnRoUGx1Z2luXSwKfSk7Cgp0LmJwbSgxOCk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IGdseXBocyA9ICcgLjotPSsqIyVAJzsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnU1lOVEhTT1VSQ0UuQ0hBUicsIHgsIHkrKywgMTEwLCAyNTUsIDE3MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA3MCwgMTEwLCAxNDApOwoJZHJhd1RleHQoJ1NPVVJDRSBEUklWRU4gR0xZUEhTJywgeCwgeSsrLCAxMjAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdQYXR0ZXJuIHNlbGVjdHMgY2hhcmFjdGVycy4nLCB4LCB5KyssIDE2MCwgMTgwLCAyMTApOwoJZHJhd1RleHQoJ0NvbG9yIGNoYW5uZWxzIG1vdmUgYXBhcnQuJywgeCwgeSsrLCAxNjAsIDE4MCwgMjEwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDcwLCAxMTAsIDE0MCk7CglkcmF3VGV4dCgnU2VwYXJhdGUgYW5pbWF0ZWQgaW5rIGFuZCBwYXBlci4nLCB4LCB5KyssIDE1MCwgMjU1LCAxOTApOwp9KTsKCmNvbnN0IGluayA9IG9zYyg1LCAwLjAxOCwgMS4xKS5rYWxlaWQoNCkuY29sb3IoMC40NSwgMC43MiwgMS4wKS5tb2R1bGF0ZShub2lzZSgyLjIsIDAuMDE4KSwgMC4wMjUpOwpjb25zdCBwYXBlciA9IHBsYXNtYSgzLjYsIDAuMDI4LCAwLjEsIDEuMDUpLmNvbG9yKDAuMDMsIDAuMDgsIDAuMTgpLm1vZHVsYXRlU2NhbGUobm9pc2UoMi4wLCAwLjAxNSksIDAuMjIsIDAuOTUpOwoKdC5sYXllcnMuYmFzZS5zeW50aCgKCW9zYyg5LCAwLjAxOCwgMS4xKQoJCS5rYWxlaWQoNSkKCQkuY29sb3IoMC4yNSwgMC43NSwgMS4wKQoJCS5jaGFyKG5vaXNlKDQuNSwgMC4wMzUpLm1vZHVsYXRlUm90YXRlKG9zYygzLCAwLjAxKSwgMC4zNSwgMC4wNCkpCgkJLm1vZHVsYXRlKG5vaXNlKDIuMCwgMC4wMTQpLCAwLjAyKQoJCS5jaGFyTWFwKGdseXBocykKCQkuY2hhckNvbG9yKGluaykKCQkuY2VsbENvbG9yKHBhcGVyKQopOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />

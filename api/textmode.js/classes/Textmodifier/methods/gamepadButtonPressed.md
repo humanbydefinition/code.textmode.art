@@ -1,0 +1,37 @@
+---
+layout: doc
+editLink: true
+title: gamepadButtonPressed
+description: Register the single-callback handler for gamepad button press events.
+category: Methods
+api: true
+owner: Textmodifier
+kind: Method
+lastModified: 2026-06-09
+---
+
+[textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / gamepadButtonPressed
+
+# Method: gamepadButtonPressed()
+
+```ts
+gamepadButtonPressed(callback): void;
+```
+
+Register the single-callback handler for gamepad button press events.
+
+This is a legacy-style single-callback shortcut for the `'gamepadButtonPressed'` event.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `callback` | [`GamepadButtonEventHandler`](../../../namespaces/input/namespaces/gamepad/type-aliases/GamepadButtonEventHandler.md) | Handler to run with gamepad button data when a button is pressed. |
+
+## Returns
+
+`void`
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="gamepadButtonPressed" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CglwaXhlbERlbnNpdHk6IDEsCgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpsZXQgbGFzdFByZXNzID0gJ3dhaXRpbmcnOwoKdC5nYW1lcGFkQnV0dG9uUHJlc3NlZCgoZGF0YSkgPT4gewoJbGFzdFByZXNzID0gZGF0YS5zdGFuZGFyZEJ1dHRvbk5hbWUgfHwgJ2J1dHRvbiAnICsgZGF0YS5idXR0b25JbmRleDsKfSk7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNCwgNiwgMTIpOwoJY29uc3QgY291bnQgPSBNYXRoLm1heCgxLCB0LmdhbWVwYWRzLmxlbmd0aCk7Cglmb3IgKGxldCBpID0gMDsgaSA8IDE2OyBpKyspIHsKCQl0LnB1c2goKTsKCQljb25zdCBhbmdsZSA9IChpIC8gMTYpICogTWF0aC5QSSAqIDIgKyB0LmZyYW1lQ291bnQgKiAwLjAzOwoJCXQudHJhbnNsYXRlKE1hdGguY29zKGFuZ2xlKSAqICg2ICsgY291bnQpLCBNYXRoLnNpbihhbmdsZSkgKiA0KTsKCQl0LmNoYXIodC5nYW1lcGFkcy5sZW5ndGggPyAnQCcgOiAnLicpOwoJCXQuY2hhckNvbG9yKDgwICsgaSAqIDgsIDE4MCwgMjU1KTsKCQl0LnBvaW50KCk7CgkJdC5wb3AoKTsKCX0KfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuR0FNRVBBREJVVFRPTlBSRVNTRUQnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBHQU1FUEFEIElOUFVUJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdXb3JrcyB3aXRoIGJyb3dzZXIgcGFkcy4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KGBQUkVTUzogJHtsYXN0UHJlc3N9YCwgeCwgeSsrLCAxNDAsIDI1NSwgMTgwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />

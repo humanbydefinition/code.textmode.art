@@ -1,0 +1,38 @@
+---
+layout: doc
+editLink: true
+title: pinch
+description: Register a callback for pinch gestures, receiving scale deltas.
+category: Methods
+api: true
+owner: Textmodifier
+kind: Method
+lastModified: 2026-06-09
+---
+
+[textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / pinch
+
+# Method: pinch()
+
+```ts
+pinch(callback): void;
+```
+
+Register a callback for pinch gestures, receiving scale deltas.
+
+Pinch gestures involve two touch points. The callback receives the current scale relative to
+the initial distance and the change since the previous update, enabling zoom interactions.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `callback` | [`TouchPinchHandler`](../../../namespaces/input/namespaces/touch/type-aliases/TouchPinchHandler.md) | Handler to run when a pinch gesture is detected. |
+
+## Returns
+
+`void`
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="pinch" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CglwaXhlbERlbnNpdHk6IDEsCgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpsZXQgc2NhbGUgPSAxOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LnBpbmNoKChkYXRhKSA9PiB7CglzY2FsZSA9IE1hdGgubWF4KDAuMywgTWF0aC5taW4oNCwgZGF0YS5zY2FsZSkpOwp9KTsKCnQubW91c2VTY3JvbGxlZCgoZGF0YSkgPT4gewoJc2NhbGUgPSBNYXRoLm1heCgwLjMsIE1hdGgubWluKDQsIHNjYWxlIC0gZGF0YS5kZWx0YS55ICogMC4wMSkpOwp9KTsKCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNiwgMTAsIDIyKTsKCXQucHVzaCgpOwoJdC5yb3RhdGVaKHQuZnJhbWVDb3VudCAqIDAuNSk7Cgl0LmNoYXIoJyMnKTsKCXQuY2hhckNvbG9yKDE0MCwgMjIwLCAyNTUpOwoJdC5yZWN0KDggKiBzY2FsZSwgOCAqIHNjYWxlKTsKCXQucG9wKCk7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuUElOQ0gnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBQSU5DSCBTQ0FMRScsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnUGluY2ggb3Igc2Nyb2xsIGNoYW5nZXMgc2NhbGUuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdTaGFwZSBzaXplIGZvbGxvd3MgZ2VzdHVyZS4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KGBTQ0FMRTogJHtzY2FsZS50b0ZpeGVkKDIpfWAsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />

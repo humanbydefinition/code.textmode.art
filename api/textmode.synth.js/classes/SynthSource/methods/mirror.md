@@ -1,0 +1,37 @@
+---
+layout: doc
+editLink: true
+title: mirror
+description: Mirror coordinates across X and/or Y axes.
+category: Methods
+api: true
+owner: SynthSource
+kind: Method
+ecosystem: textmode.js
+lastModified: 2026-06-09
+---
+
+[textmode.synth.js](../../../index.md) / [SynthSource](../../SynthSource.md) / mirror
+
+# Method: mirror()
+
+```ts
+mirror(mirrorX?, mirrorY?): this;
+```
+
+Mirror coordinates across X and/or Y axes.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `mirrorX?` | [`SynthParameterValue`](../../../type-aliases/SynthParameterValue.md) | Mirror X (0-1, default: 1.0) |
+| `mirrorY?` | [`SynthParameterValue`](../../../type-aliases/SynthParameterValue.md) | Mirror Y (0-1, default: 1.0) |
+
+## Returns
+
+`this`
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="mirror" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW1N5bnRoUGx1Z2luXSwKfSk7Cgp0LmJwbSgxOCk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IGdseXBocyA9ICcgLjotPSsqIyVAJzsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnU1lOVEhTT1VSQ0UuTUlSUk9SJywgeCwgeSsrLCAxMTAsIDI1NSwgMTcwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDcwLCAxMTAsIDE0MCk7CglkcmF3VGV4dCgnU1lNTUVUUlkgRk9MRElORycsIHgsIHkrKywgMTIwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnVVYgc3BhY2UgcmVmbGVjdHMgc29mdGx5LicsIHgsIHkrKywgMTYwLCAxODAsIDIxMCk7CglkcmF3VGV4dCgnQmlsYXRlcmFsIG1vdGlvbiBpcyBjYWxtLicsIHgsIHkrKywgMTYwLCAxODAsIDIxMCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA3MCwgMTEwLCAxNDApOwoJZHJhd1RleHQoJ1NlcGFyYXRlIGFuaW1hdGVkIGluayBhbmQgcGFwZXIuJywgeCwgeSsrLCAxNTAsIDI1NSwgMTkwKTsKfSk7Cgpjb25zdCBpbmsgPSBwbGFzbWEoNC4yLCAwLjAyNCwgMC4wLCAxLjEyKS5jb2xvcigwLjQyLCAxLjAsIDAuNTgpLm1vZHVsYXRlUm90YXRlKG5vaXNlKDIuMCwgMC4wMTUpLCAwLjI4LCAwLjA0KTsKY29uc3QgcGFwZXIgPSBtb2lyZSg2LCA3LCAwLjAsIDEuNTcsIDAuMDE4KS5jb2xvcigwLjAyNSwgMC4xMywgMC4wNjUpLnNvZnRsaWdodChub2lzZSgyLjAsIDAuMDE0KSwgMC4xOCk7Cgp0LmxheWVycy5iYXNlLnN5bnRoKAoJdm9yb25vaSgzLjgsIDAuMDQ1LCAwLjI4KQoJCS5taXJyb3IoMS4wLCBbMC4wLCAxLjBdLmZhc3QoMC4xKS5lYXNlKCdlYXNlSW5PdXRTaW5lJykpCgkJLmthbGVpZCg0KQoJCS5jb2xvcmFtYSgwLjA4KQoJCS5tb2R1bGF0ZShub2lzZSgyLjAsIDAuMDE0KSwgMC4wMikKCQkuY29udHJhc3QoMS4xNikKCQkuY2hhck1hcChnbHlwaHMpCgkJLmNoYXJDb2xvcihpbmspCgkJLmNlbGxDb2xvcihwYXBlcikKKTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />

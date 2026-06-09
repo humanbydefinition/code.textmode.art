@@ -1,0 +1,37 @@
+---
+layout: doc
+editLink: true
+title: lineWeight
+description: Set or get line thickness for subsequent line and curve drawing.
+category: Methods
+api: true
+owner: Textmodifier
+kind: Method
+lastModified: 2026-06-09
+---
+
+[textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / lineWeight
+
+# Method: lineWeight()
+
+```ts
+lineWeight(weight?): number | void;
+```
+
+Set or get line thickness for subsequent line and curve drawing.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `weight?` | `number` | Line thickness in grid cells. |
+
+## Returns
+
+`number` \| `void`
+
+Current line weight when called without arguments.
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="lineWeight" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CglwaXhlbERlbnNpdHk6IDEsCgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpsZXQgd2VpZ2h0ID0gMTsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg2LCAxMCwgMjIpOwoJd2VpZ2h0ID0gMSArIE1hdGguZmxvb3IoKHQuZnJhbWVDb3VudCAvIDYwKSAlIDQpOwoJdC5jaGFyQ29sb3IoNzAsIDgwLCAxMTApOwoJdC5jaGFyKCcuJyk7Cgl0LmxpbmUoLTIwLCAtNiwgMjAsIC02KTsKCXQubGluZSgtMjAsIDYsIDIwLCA2KTsKCXQubGluZVdlaWdodCh3ZWlnaHQpOwoJdC5jaGFyQ29sb3IoMTIwLCAyNTUsIDE4MCk7Cgl0LmNoYXIoJyMnKTsKCXQubGluZSgtMjAsIDAsIDIwLCAwKTsKCXQubGluZVdlaWdodCgxKTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5MSU5FV0VJR0hUJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogTElORSBUSElDS05FU1MnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ0NvbnRyb2xzIGxpbmUgY2VsbCB0aGlja25lc3MuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdXZWlnaHQgcmVzZXRzIGFmdGVyIHRoZSBkZW1vIGxpbmUuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dChgV0VJR0hUOiAke3dlaWdodH1gLCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />

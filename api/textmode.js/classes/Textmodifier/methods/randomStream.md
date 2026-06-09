@@ -1,0 +1,40 @@
+---
+layout: doc
+editLink: true
+title: randomStream
+description: Get an independent deterministic random stream for a name.
+category: Methods
+api: true
+owner: Textmodifier
+kind: Method
+lastModified: 2026-06-09
+---
+
+[textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / randomStream
+
+# Method: randomStream()
+
+```ts
+randomStream(name): TextmodeRandom;
+```
+
+Get an independent deterministic random stream for a name.
+
+Named streams are derived from the current root seed and stream name. Consuming
+values from one stream does not affect the main generator or other named streams.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `name` | `string` | Stream name. |
+
+## Returns
+
+[`TextmodeRandom`](../../TextmodeRandom.md)
+
+A deterministic random generator for the given stream name.
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="randomStream" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CglwaXhlbERlbnNpdHk6IDEsCgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKCXNlZWQ6ICdzdHJlYW0tZGVtbycsCn0pOwoKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwpjb25zdCBsZWZ0U3RyZWFtID0gdC5yYW5kb21TdHJlYW0oJ2xlZnQnKTsKY29uc3QgcmlnaHRTdHJlYW0gPSB0LnJhbmRvbVN0cmVhbSgncmlnaHQnKTsKbGV0IGxlZnRZID0gMDsKbGV0IHJpZ2h0WSA9IDA7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNiwgMTAsIDE4KTsKCWlmICh0LmZyYW1lQ291bnQgJSAxNiA9PT0gMSkgewoJCWxlZnRZID0gTWF0aC5mbG9vcihsZWZ0U3RyZWFtLnJhbmRvbSgtOSwgOSkpOwoJCXJpZ2h0WSA9IE1hdGguZmxvb3IocmlnaHRTdHJlYW0ucmFuZG9tKC05LCA5KSk7Cgl9CgoJdC5wdXNoKCk7Cgl0LnRyYW5zbGF0ZSgtOCwgbGVmdFkpOwoJdC5jaGFyKCdMJyk7Cgl0LmNoYXJDb2xvcigxMzAsIDI1NSwgMTkwKTsKCXQucG9pbnQoKTsKCXQudHJhbnNsYXRlKDE2LCByaWdodFkgLSBsZWZ0WSk7Cgl0LmNoYXIoJ1InKTsKCXQuY2hhckNvbG9yKDI1NSwgMTkwLCAxMzApOwoJdC5wb2ludCgpOwoJdC5wb3AoKTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5SQU5ET01TVFJFQU0nLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBOQU1FRCBTVFJFQU1TJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdMZWZ0IGFuZCByaWdodCBhcmUgc2VwYXJhdGUuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdPbmUgc3RyZWFtIGNhbm5vdCBtb3ZlIGFub3RoZXIuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />

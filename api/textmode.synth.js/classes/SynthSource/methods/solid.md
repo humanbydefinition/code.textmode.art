@@ -1,0 +1,67 @@
+---
+layout: doc
+editLink: true
+title: solid
+description: Generate a solid grayscale color.
+category: Methods
+api: true
+owner: SynthSource
+kind: Method
+ecosystem: textmode.js
+lastModified: 2026-06-09
+---
+
+[textmode.synth.js](../../../index.md) / [SynthSource](../../SynthSource.md) / solid
+
+# Method: solid()
+
+## Call Signature
+
+```ts
+solid(gray): this;
+```
+
+Generate a solid grayscale color.
+
+### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `gray` | [`SynthParameterValue`](../../../type-aliases/SynthParameterValue.md) | Grayscale value (0-1) |
+
+### Returns
+
+`this`
+
+### Example
+
+<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="solid" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW1N5bnRoUGx1Z2luXSwKfSk7Cgp0LmJwbSgxOCk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IGdseXBocyA9ICcgLjotPSsqIyVAJzsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnU1lOVEhTT1VSQ0UuU09MSUQnLCB4LCB5KyssIDExMCwgMjU1LCAxNzApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgNzAsIDExMCwgMTQwKTsKCWRyYXdUZXh0KCdHUkFZU0NBTEUgU09VUkNFJywgeCwgeSsrLCAxMjAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdBIGNvbnN0YW50IGJlY29tZXMgY2FudmFzLicsIHgsIHkrKywgMTYwLCAxODAsIDIxMCk7CglkcmF3VGV4dCgnQ2hhbm5lbHMgYWRkIHZpc2libGUgbW90aW9uLicsIHgsIHkrKywgMTYwLCAxODAsIDIxMCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA3MCwgMTEwLCAxNDApOwoJZHJhd1RleHQoJ1NlcGFyYXRlIGFuaW1hdGVkIGluayBhbmQgcGFwZXIuJywgeCwgeSsrLCAxNTAsIDI1NSwgMTkwKTsKfSk7Cgpjb25zdCBpbmsgPSBwbGFzbWEoNC4yLCAwLjAyNCwgMC4wLCAxLjEyKS5jb2xvcigwLjQyLCAxLjAsIDAuNTgpLm1vZHVsYXRlUm90YXRlKG5vaXNlKDIuMCwgMC4wMTUpLCAwLjI4LCAwLjA0KTsKY29uc3QgcGFwZXIgPSBtb2lyZSg2LCA3LCAwLjAsIDEuNTcsIDAuMDE4KS5jb2xvcigwLjAyNSwgMC4xMywgMC4wNjUpLnNvZnRsaWdodChub2lzZSgyLjAsIDAuMDE0KSwgMC4xOCk7Cgp0LmxheWVycy5iYXNlLnN5bnRoKAoJc29saWQoWzAuMDYsIDAuMThdLmZhc3QoMC4xKS5lYXNlKCdlYXNlSW5PdXRTaW5lJykpCgkJLmJsZW5kKG9zYyg5LCAwLjAxNCkua2FsZWlkKDUpLCAwLjM0KQoJCS5tb2R1bGF0ZShub2lzZSgyLjAsIDAuMDE0KSwgMC4wMTgpCgkJLmNvbnRyYXN0KDEuMTIpCgkJLmNoYXJNYXAoZ2x5cGhzKQoJCS5jaGFyQ29sb3IoaW5rKQoJCS5jZWxsQ29sb3IocGFwZXIpCik7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+
+## Call Signature
+
+```ts
+solid(
+   r?, 
+   g?, 
+   b?, 
+   a?): this;
+```
+
+Generate a solid color.
+
+### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `r?` | [`SynthParameterValue`](../../../type-aliases/SynthParameterValue.md) | Red channel (0-1, default: 0.0) |
+| `g?` | [`SynthParameterValue`](../../../type-aliases/SynthParameterValue.md) | Green channel (0-1, default: 0.0) |
+| `b?` | [`SynthParameterValue`](../../../type-aliases/SynthParameterValue.md) | Blue channel (0-1, default: 0.0) |
+| `a?` | [`SynthParameterValue`](../../../type-aliases/SynthParameterValue.md) | Alpha channel (0-1, default: 1.0) |
+
+### Returns
+
+`this`
+
+### Example
+
+<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="solid" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW1N5bnRoUGx1Z2luXSwKfSk7Cgp0LmJwbSgxOCk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IGdseXBocyA9ICcgLjotPSsqIyVAJzsKY29uc3QgYnJlYXRoZSA9IFswLjIyLCAwLjc4XS5mYXN0KDAuMTgpLmVhc2UoJ2Vhc2VJbk91dFNpbmUnKTsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnU1lOVEhTT1VSQ0UuU09MSUQyJywgeCwgeSsrLCAxMTAsIDI1NSwgMTcwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDcwLCAxMTAsIDE0MCk7CglkcmF3VGV4dCgnUkdCQSBTT1VSQ0UnLCB4LCB5KyssIDEyMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ0ZvdXIgY29uc3RhbnRzIHNldCBjb2xvci4nLCB4LCB5KyssIDE2MCwgMTgwLCAyMTApOwoJZHJhd1RleHQoJ01vdGlvbiBjb21lcyBmcm9tIGNoYW5uZWxzLicsIHgsIHkrKywgMTYwLCAxODAsIDIxMCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA3MCwgMTEwLCAxNDApOwoJZHJhd1RleHQoJ1NlcGFyYXRlIGFuaW1hdGVkIGluayBhbmQgcGFwZXIuJywgeCwgeSsrLCAxNTAsIDI1NSwgMTkwKTsKfSk7Cgpjb25zdCBpbmsgPSBtb2lyZSg4LCA5LCAwLjE1LCAxLjYsIDAuMDI1KS5jb2xvcigxLjAsIDAuNjIsIDAuMzQpLm1vZHVsYXRlKG5vaXNlKDIuMywgMC4wMTgpLCAwLjAyMik7CmNvbnN0IHBhcGVyID0gbm9pc2UoMy4wLCAwLjAyNSkuY29sb3IoMC4xNiwgMC4wNTUsIDAuMDI1KS5zb2Z0bGlnaHQob3NjKDQsIDAuMDE2KSwgMC4yMik7Cgp0LmxheWVycy5iYXNlLnN5bnRoKAoJc29saWQoMC4wNCwgYnJlYXRoZS5vZmZzZXQoMC4yKSwgYnJlYXRoZS5vZmZzZXQoMC41NSksIDEuMCkKCQkub3ZlcmxheSh2b3Jvbm9pKDMuNCwgMC4wNCwgMC4yNCkuY29sb3IoMS4wLCAwLjQ1LCAwLjI1KSwgMC4yOCkKCQkubW9kdWxhdGVTY2FsZShub2lzZSgyLjAsIDAuMDE0KSwgMC4yLCAwLjk1KQoJCS5jb250cmFzdCgxLjEyKQoJCS5jaGFyTWFwKGdseXBocykKCQkuY2hhckNvbG9yKGluaykKCQkuY2VsbENvbG9yKHBhcGVyKQopOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />

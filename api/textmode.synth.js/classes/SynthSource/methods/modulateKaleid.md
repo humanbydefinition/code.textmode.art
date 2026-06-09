@@ -1,0 +1,37 @@
+---
+layout: doc
+editLink: true
+title: modulateKaleid
+description: Modulate kaleidoscope using another source.
+category: Methods
+api: true
+owner: SynthSource
+kind: Method
+ecosystem: textmode.js
+lastModified: 2026-06-09
+---
+
+[textmode.synth.js](../../../index.md) / [SynthSource](../../SynthSource.md) / modulateKaleid
+
+# Method: modulateKaleid()
+
+```ts
+modulateKaleid(source, nSides?): this;
+```
+
+Modulate kaleidoscope using another source.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `source` | [`SynthParameterValue`](../../../type-aliases/SynthParameterValue.md) | Modulation source |
+| `nSides?` | [`SynthParameterValue`](../../../type-aliases/SynthParameterValue.md) | Number of sides (default: 4.0) |
+
+## Returns
+
+`this`
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="modulateKaleid" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW1N5bnRoUGx1Z2luXSwKfSk7Cgp0LmJwbSgxOCk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IGdseXBocyA9ICcgLjotPSsqIyVAJzsKY29uc3Qgc2xvdyA9IFswLjAsIDEuMF0uZmFzdCgwLjE2KS5lYXNlKCdlYXNlSW5PdXRTaW5lJyk7CmNvbnN0IHR1cm4gPSBbLTAuNDIsIDAuNDJdLmZhc3QoMC4xNCkuZWFzZSgnZWFzZUluT3V0U2luZScpOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWRyYXdUZXh0KCdTWU5USFNPVVJDRS5NT0RLQUxFSUQnLCB4LCB5KyssIDExMCwgMjU1LCAxNzApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgNzAsIDExMCwgMTQwKTsKCWRyYXdUZXh0KCdNT0RVTEFURUQgU1lNTUVUUlknLCB4LCB5KyssIDEyMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ0Egc291cmNlIGJlbmRzIGZvbGRzLicsIHgsIHkrKywgMTYwLCAxODAsIDIxMCk7CglkcmF3VGV4dCgnUGV0YWxzIGZsZXggc2xvd2x5LicsIHgsIHkrKywgMTYwLCAxODAsIDIxMCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA3MCwgMTEwLCAxNDApOwoJZHJhd1RleHQoJ1NlcGFyYXRlIGFuaW1hdGVkIGluayBhbmQgcGFwZXIuJywgeCwgeSsrLCAxNTAsIDI1NSwgMTkwKTsKfSk7Cgpjb25zdCBpbmsgPSBvc2MoNiwgMC4wMTgsIDEuNikucm90YXRlKHR1cm4sIDAuMDAyKS5jb2xvcigwLjksIDAuNTgsIDEuMCkubW9kdWxhdGVLYWxlaWQobm9pc2UoMi4wLCAwLjAxNCksIDUpOwpjb25zdCBwYXBlciA9IHBsYXNtYSgzLjIsIDAuMDI0LCAwLjIsIDEuMDgpLmNvbG9yKDAuMDgsIDAuMDM1LCAwLjE2KS5odWUoc2xvdyk7Cgp0LmxheWVycy5iYXNlLnN5bnRoKAoJb3NjKDEwLCAwLjAyLCAxLjIpCgkJLm1vZHVsYXRlS2FsZWlkKG5vaXNlKDIuOCwgMC4wMiksIFs0LCA3XS5mYXN0KDAuMSkuZWFzZSgnZWFzZUluT3V0U2luZScpKQoJCS5jb2xvcigwLjg1LCAwLjM0LCAxLjApCgkJLnNjcmVlbihwbGFzbWEoMy4wLCAwLjAxOCkuY29sb3IoMC4xLCAwLjUsIDEuMCksIDAuMjQpCgkJLmNvbnRyYXN0KDEuMTgpCgkJLmNoYXJNYXAoZ2x5cGhzKQoJCS5jaGFyQ29sb3IoaW5rKQoJCS5jZWxsQ29sb3IocGFwZXIpCik7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />

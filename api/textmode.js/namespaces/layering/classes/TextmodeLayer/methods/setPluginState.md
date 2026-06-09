@@ -1,0 +1,44 @@
+---
+layout: doc
+editLink: true
+title: setPluginState
+description: Store plugin-specific state on this layer. Plugins can use this to attach their own data to layer instances.
+category: Methods
+api: true
+owner: TextmodeLayer
+namespace: layering
+kind: Method
+lastModified: 2026-06-09
+---
+
+[textmode.js](../../../../../index.md) / [layering](../../../index.md) / [TextmodeLayer](../../TextmodeLayer.md) / setPluginState
+
+# Method: setPluginState()
+
+```ts
+setPluginState<T>(pluginName, state): void;
+```
+
+Store plugin-specific state on this layer.
+Plugins can use this to attach their own data to layer instances.
+
+## Type Parameters
+
+| Type Parameter |
+| ------ |
+| `T` |
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `pluginName` | `string` | Plugin identifier. |
+| `state` | `T` | State object to store. |
+
+## Returns
+
+`void`
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="setPluginState" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CglwaXhlbERlbnNpdHk6IDEsCgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBtb2R1bGVMYXllciA9IHQubGF5ZXJzLmFkZCgpOwpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IFBMVUdJTl9OQU1FID0gJ2NvcmUtZGF0YSc7CmxldCBjdXJyZW50UG93ZXIgPSAwOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgcmdiID0gWzI1NSwgMjU1LCAyNTVdKSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHJnYlswXSwgcmdiWzFdLCByZ2JbMl0pOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCnQuc2V0dXAoKCkgPT4gewoJbW9kdWxlTGF5ZXIuc2V0UGx1Z2luU3RhdGUoUExVR0lOX05BTUUsIHsKCQlwb3dlcjogMCwKCQlzeW5jOiB0cnVlLAoJCWlkOiAnQ09SRS1BMScsCgl9KTsKfSk7Cgptb2R1bGVMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IHN0YXRlID0gbW9kdWxlTGF5ZXIuZ2V0UGx1Z2luU3RhdGUoUExVR0lOX05BTUUpOwoKCWlmIChzdGF0ZSkgewoJCXN0YXRlLnBvd2VyID0gMC41ICsgMC41ICogTWF0aC5zaW4odC5mcmFtZUNvdW50ICogMC4wNSk7CgkJY3VycmVudFBvd2VyID0gc3RhdGUucG93ZXI7CgoJCXQucHVzaCgpOwoJCXQuY2hhckNvbG9yKDE0MCwgMjIwLCAyNTUpOwoJCXQuY2hhcignIycpOwoJCWNvbnN0IHNpemUgPSA0ICsgTWF0aC5yb3VuZChzdGF0ZS5wb3dlciAqIDQpOwoJCXQucmVjdChzaXplICogMiwgc2l6ZSk7CgkJdC5wb3AoKTsKCX0KfSk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDEwLCAyMik7CgoJdC5wdXNoKCk7Cgl0LmNoYXJDb2xvcig0MCwgNTAsIDgwKTsKCXQuY2hhcignLicpOwoJdC5yZWN0KHQuZ3JpZC5jb2xzLCB0LmdyaWQucm93cyk7Cgl0LnBvcCgpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7Cgljb25zdCBzdGF0ZSA9IG1vZHVsZUxheWVyLmdldFBsdWdpblN0YXRlKFBMVUdJTl9OQU1FKTsKCWNvbnN0IGxvYWQgPSBNYXRoLnJvdW5kKGN1cnJlbnRQb3dlciAqIDEwMCk7CgoJZHJhd1RleHQoJ1RFWFRNT0RFTEFZRVIuU0VUUExVR0lOU1RBVEUnLCB4LCB5KyssIFsxMDAsIDI1NSwgMTQwXSk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCBbODAsIDEwMCwgMTUwXSk7CglkcmF3VGV4dCgnQ09OQ0VQVDogU1RPUkUgUExVR0lOIFNUQVRFJywgeCwgeSsrLCBbMTAwLCAyMjAsIDI1NV0pOwoJZHJhd1RleHQoJ0F0dGFjaGVzIGRhdGEgdG8gYSBsYXllci4nLCB4LCB5KyssIFsxNDAsIDE2MCwgMTkwXSk7CglkcmF3VGV4dCgnVGhlIG9iamVjdCBwZXJzaXN0cyBlYWNoIGZyYW1lLicsIHgsIHkrKywgWzE0MCwgMTYwLCAxOTBdKTsKCWlmICghc3RhdGUpIHJldHVybjsKCglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCBbODAsIDEwMCwgMTUwXSk7CglkcmF3VGV4dChgSUQ6ICR7c3RhdGUuaWR9YCwgeCwgeSsrLCBbMTgwLCAyMDAsIDIyMF0pOwoJZHJhd1RleHQoYFBXUiBMT0FEOiAke2xvYWR9JWAsIHgsIHkrKywgWzE0MCwgMjIwLCAyNTVdKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />

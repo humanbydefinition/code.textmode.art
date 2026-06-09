@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: conversion
 kind: Interface
-lastModified: 2026-05-27
+lastModified: 2026-06-09
 isInterface: true
 ---
 
@@ -18,7 +18,7 @@ isInterface: true
 Interface for defining a custom textmode conversion strategy.
 
 A conversion strategy defines how a source image is converted into textmode attributes
-(character index, primary color, secondary color) via a custom shader.
+(glyph index, charColor, cellColor) via a custom shader.
 
 To register a custom strategy, implement this interface and pass it to [TextmodeConversionManager.register](../classes/TextmodeConversionManager.md#register).
 
@@ -26,7 +26,7 @@ To register a custom strategy, implement this interface and pass it to [Textmode
 
 | Property | Modifier | Type | Description |
 | ------ | ------ | ------ | ------ |
-| <a id="property-id"></a> `id` | `readonly` | `string` | Unique identifier for this conversion strategy. This ID is used to select the strategy via [TextmodeSource.conversionMode](../../media/classes/TextmodeSource.md#conversionmode). |
+| <a id="property-id"></a> `id` | `readonly` | `string` | Unique identifier for this conversion strategy. This ID is used to select the strategy via [TextmodeSource.conversionMode](../../media/classes/TextmodeSource/methods/conversionMode.md). |
 
 ## Methods
 
@@ -39,10 +39,10 @@ createShader(context): TextmodeShader;
 Create the shader program for this conversion strategy.
 Called once when the strategy is first used for a given source.
 
-The shader must output to 3 render targets (MRT):
-- location 0: Character data (R=char index, G=unused, B=unused, A=unused)
-- location 1: Primary color (RGBA)
-- location 2: Secondary/Background color (RGBA)
+The shader must output to 3 MRT attachments:
+- location 0: Character data (R=glyph index, G=unused, B=unused, A=unused)
+- location 1: charColor (RGBA)
+- location 2: cellColor (RGBA)
 
 #### Parameters
 
@@ -58,98 +58,14 @@ The compiled GLShader instance.
 
 #### Example
 
-```javascript
-const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80';
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
-
-const labelLayer = t.layers.add();
-let img = null;
-let blueShader = null;
-
-t.setup(async () => {
-	const vert = `#version 300 es
-		in vec4 a_position;
-		in vec2 a_uv;
-		out vec2 v_uv;
-		void main() {
-			gl_Position = a_position;
-			v_uv = a_uv;
-		}
-	`;
-
-	const frag = `#version 300 es
-		precision highp float;
-		in vec2 v_uv;
-		uniform sampler2D u_image;
-		layout(location = 0) out vec4 o_character;
-		layout(location = 1) out vec4 o_primaryColor;
-		layout(location = 2) out vec4 o_secondaryColor;
-		void main() {
-			vec4 col = texture(u_image, v_uv);
-			float blueLuma = col.b;
-			o_character = vec4(blueLuma * 0.9, 0.0, 0.0, 0.0);
-			o_primaryColor = vec4(0.2, 0.6, 1.0, 1.0);
-			o_secondaryColor = vec4(0.01, 0.03, 0.08, 1.0);
-		}
-	`;
-
-	blueShader = await t.createShader(vert, frag);
-
-	t.conversions.register({
-		id: 'blue-mrt',
-		createShader: () => blueShader,
-		createUniforms: (ctx) => ({ u_image: ctx.source.texture }),
-	});
-
-	img = await t.loadImage(IMAGE_URL);
-	img.characters(' .:-=+*#%@');
-	img.conversionMode('blue-mrt');
-});
-
-t.draw(() => {
-	t.background(6, 8, 20);
-	if (img) {
-		t.image(img, t.grid.cols - 8, t.grid.rows - 10);
-	}
-});
-
-function drawText(text, x, y, r = 220, g = 230, b = 255) {
-	t.push();
-	t.translate(x, y);
-	t.charColor(r, g, b);
-	for (let i = 0; i < text.length; i++) {
-		t.char(text[i]);
-		t.point();
-		t.translate(1, 0);
-	}
-	t.pop();
-}
-
-labelLayer.draw(() => {
-	t.clear();
-	const left = -Math.floor(t.grid.cols / 2);
-	const top = -Math.floor(t.grid.rows / 2);
-	let y = top + 3;
-	const x = left + 3;
-
-	drawText('CONVERSION.CREATESHADER', x, y++, 100, 255, 140);
-	drawText('------------------------------------', x, y++, 80, 100, 150);
-	drawText('CONCEPT: DYNAMIC SHADER REGISTER', x, y++, 100, 220, 255);
-	drawText('Outputs custom MRT locations for', x, y++, 140, 160, 190);
-	drawText('character, primary & secondary.', x, y++, 140, 160, 190);
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="TextmodeConversionStrategy" encoded-code="Y29uc3QgSU1BR0VfVVJMID0gJ2h0dHBzOi8vaW1hZ2VzLnVuc3BsYXNoLmNvbS9waG90by0xNTA2OTA1OTI1MzQ2LTIxYmRhNGQzMmRmND93PTkwMCZxPTgwJzsKY29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7IHBpeGVsRGVuc2l0eTogMSwgd2lkdGg6IHdpbmRvdy5pbm5lcldpZHRoLCBoZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCB9KTsKCmNvbnN0IGxhYmVsTGF5ZXIgPSB0LmxheWVycy5hZGQoKTsKbGV0IGltZyA9IG51bGw7CmxldCBibHVlU2hhZGVyID0gbnVsbDsKCnQuc2V0dXAoYXN5bmMgKCkgPT4gewoJY29uc3QgdmVydCA9IGAjdmVyc2lvbiAzMDAgZXMKCQlpbiB2ZWM0IGFfcG9zaXRpb247CgkJaW4gdmVjMiBhX3V2OwoJCW91dCB2ZWMyIHZfdXY7CgkJdm9pZCBtYWluKCkgewoJCQlnbF9Qb3NpdGlvbiA9IGFfcG9zaXRpb247CgkJCXZfdXYgPSBhX3V2OwoJCX0KCWA7CgoJY29uc3QgZnJhZyA9IGAjdmVyc2lvbiAzMDAgZXMKCQlwcmVjaXNpb24gaGlnaHAgZmxvYXQ7CgkJaW4gdmVjMiB2X3V2OwoJCXVuaWZvcm0gc2FtcGxlcjJEIHVfaW1hZ2U7CgkJbGF5b3V0KGxvY2F0aW9uID0gMCkgb3V0IHZlYzQgb19jaGFyYWN0ZXI7CgkJbGF5b3V0KGxvY2F0aW9uID0gMSkgb3V0IHZlYzQgb19wcmltYXJ5Q29sb3I7CgkJbGF5b3V0KGxvY2F0aW9uID0gMikgb3V0IHZlYzQgb19zZWNvbmRhcnlDb2xvcjsKCQl2b2lkIG1haW4oKSB7CgkJCXZlYzQgY29sID0gdGV4dHVyZSh1X2ltYWdlLCB2X3V2KTsKCQkJZmxvYXQgYmx1ZUx1bWEgPSBjb2wuYjsKCQkJb19jaGFyYWN0ZXIgPSB2ZWM0KGJsdWVMdW1hICogMC45LCAwLjAsIDAuMCwgMC4wKTsKCQkJb19wcmltYXJ5Q29sb3IgPSB2ZWM0KDAuMiwgMC42LCAxLjAsIDEuMCk7CgkJCW9fc2Vjb25kYXJ5Q29sb3IgPSB2ZWM0KDAuMDEsIDAuMDMsIDAuMDgsIDEuMCk7CgkJfQoJYDsKCglibHVlU2hhZGVyID0gYXdhaXQgdC5jcmVhdGVTaGFkZXIodmVydCwgZnJhZyk7CgoJdC5jb252ZXJzaW9ucy5yZWdpc3Rlcih7CgkJaWQ6ICdibHVlLW1ydCcsCgkJY3JlYXRlU2hhZGVyOiAoKSA9PiBibHVlU2hhZGVyLAoJCWNyZWF0ZVVuaWZvcm1zOiAoY3R4KSA9PiAoeyB1X2ltYWdlOiBjdHguc291cmNlLnRleHR1cmUgfSksCgl9KTsKCglpbWcgPSBhd2FpdCB0LmxvYWRJbWFnZShJTUFHRV9VUkwpOwoJaW1nLmNoYXJhY3RlcnMoJyAuOi09KyojJUAnKTsKCWltZy5jb252ZXJzaW9uTW9kZSgnYmx1ZS1tcnQnKTsKfSk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDgsIDIwKTsKCWlmIChpbWcpIHsKCQl0LmltYWdlKGltZywgdC5ncmlkLmNvbHMgLSA4LCB0LmdyaWQucm93cyAtIDEwKTsKCX0KfSk7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CgoJZHJhd1RleHQoJ0NPTlZFUlNJT04uQ1JFQVRFU0hBREVSJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogRFlOQU1JQyBTSEFERVIgUkVHSVNURVInLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ091dHB1dHMgY3VzdG9tIE1SVCBsb2NhdGlvbnMgZm9yJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdjaGFyYWN0ZXIsIHByaW1hcnkgJiBzZWNvbmRhcnkuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
 
 ***
 
 ### createUniforms()
 
 ```ts
-createUniforms(context): Record<string, UniformValue>;
+createUniforms(context): Record<string, unknown>;
 ```
 
 Create uniform values for this conversion strategy.
@@ -165,102 +81,10 @@ Use this to pass dynamic values (like time or source texture) to your shader.
 
 #### Returns
 
-`Record`\<`string`, `UniformValue`\>
+`Record`\<`string`, `unknown`\>
 
 An object mapping uniform names to values.
 
 #### Example
 
-```javascript
-const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80';
-const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
-
-const labelLayer = t.layers.add();
-let img = null;
-let animatedShader = null;
-
-t.setup(async () => {
-	const vert = `#version 300 es
-		in vec4 a_position;
-		in vec2 a_uv;
-		out vec2 v_uv;
-		void main() {
-			gl_Position = a_position;
-			v_uv = a_uv;
-		}
-	`;
-
-	const frag = `#version 300 es
-		precision highp float;
-		in vec2 v_uv;
-		uniform sampler2D u_image;
-		uniform float u_time;
-		layout(location = 0) out vec4 o_character;
-		layout(location = 1) out vec4 o_primaryColor;
-		layout(location = 2) out vec4 o_secondaryColor;
-		void main() {
-			vec4 col = texture(u_image, v_uv);
-			float wave = 0.5 + 0.5 * sin(u_time + v_uv.x * 12.0);
-			float luma = dot(col.rgb, vec3(0.299, 0.587, 0.114));
-			o_character = vec4(luma * wave * 0.95, 0.0, 0.0, 0.0);
-			o_primaryColor = vec4(col.r, col.g * wave, col.b * 1.5, 1.0);
-			o_secondaryColor = vec4(0.02, 0.03, 0.06, 1.0);
-		}
-	`;
-
-	animatedShader = await t.createShader(vert, frag);
-
-	t.conversions.register({
-		id: 'time-wave',
-		createShader: () => animatedShader,
-		createUniforms: (ctx) => ({
-			u_image: ctx.source.texture,
-			u_time: t.frameCount * 0.04,
-		}),
-	});
-
-	img = await t.loadImage(IMAGE_URL);
-	img.characters(' .:-=+*#%@');
-	img.conversionMode('time-wave');
-});
-
-t.draw(() => {
-	t.background(6, 8, 20);
-	if (img) {
-		t.image(img, t.grid.cols - 8, t.grid.rows - 10);
-	}
-});
-
-function drawText(text, x, y, r = 220, g = 230, b = 255) {
-	t.push();
-	t.translate(x, y);
-	t.charColor(r, g, b);
-	for (let i = 0; i < text.length; i++) {
-		t.char(text[i]);
-		t.point();
-		t.translate(1, 0);
-	}
-	t.pop();
-}
-
-labelLayer.draw(() => {
-	t.clear();
-	const left = -Math.floor(t.grid.cols / 2);
-	const top = -Math.floor(t.grid.rows / 2);
-	let y = top + 3;
-	const x = left + 3;
-
-	const timeVal = t.frameCount * 0.04;
-
-	drawText('CONVERSION.CREATEUNIFORMS', x, y++, 100, 255, 140);
-	drawText('------------------------------------', x, y++, 80, 100, 150);
-	drawText('CONCEPT: RENDERING UNIFORMS BINDING', x, y++, 100, 220, 255);
-	drawText('Binds time-based animation values.', x, y++, 140, 160, 190);
-	drawText('------------------------------------', x, y++, 80, 100, 150);
-	drawText(`TIME UNIFORM: ${timeVal.toFixed(2)}`, x, y++, 120, 205, 255);
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="TextmodeConversionStrategy" encoded-code="Y29uc3QgSU1BR0VfVVJMID0gJ2h0dHBzOi8vaW1hZ2VzLnVuc3BsYXNoLmNvbS9waG90by0xNTA2OTA1OTI1MzQ2LTIxYmRhNGQzMmRmND93PTkwMCZxPTgwJzsKY29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7IHBpeGVsRGVuc2l0eTogMSwgd2lkdGg6IHdpbmRvdy5pbm5lcldpZHRoLCBoZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCB9KTsKCmNvbnN0IGxhYmVsTGF5ZXIgPSB0LmxheWVycy5hZGQoKTsKbGV0IGltZyA9IG51bGw7CmxldCBhbmltYXRlZFNoYWRlciA9IG51bGw7Cgp0LnNldHVwKGFzeW5jICgpID0-IHsKCWNvbnN0IHZlcnQgPSBgI3ZlcnNpb24gMzAwIGVzCgkJaW4gdmVjNCBhX3Bvc2l0aW9uOwoJCWluIHZlYzIgYV91djsKCQlvdXQgdmVjMiB2X3V2OwoJCXZvaWQgbWFpbigpIHsKCQkJZ2xfUG9zaXRpb24gPSBhX3Bvc2l0aW9uOwoJCQl2X3V2ID0gYV91djsKCQl9CglgOwoKCWNvbnN0IGZyYWcgPSBgI3ZlcnNpb24gMzAwIGVzCgkJcHJlY2lzaW9uIGhpZ2hwIGZsb2F0OwoJCWluIHZlYzIgdl91djsKCQl1bmlmb3JtIHNhbXBsZXIyRCB1X2ltYWdlOwoJCXVuaWZvcm0gZmxvYXQgdV90aW1lOwoJCWxheW91dChsb2NhdGlvbiA9IDApIG91dCB2ZWM0IG9fY2hhcmFjdGVyOwoJCWxheW91dChsb2NhdGlvbiA9IDEpIG91dCB2ZWM0IG9fcHJpbWFyeUNvbG9yOwoJCWxheW91dChsb2NhdGlvbiA9IDIpIG91dCB2ZWM0IG9fc2Vjb25kYXJ5Q29sb3I7CgkJdm9pZCBtYWluKCkgewoJCQl2ZWM0IGNvbCA9IHRleHR1cmUodV9pbWFnZSwgdl91dik7CgkJCWZsb2F0IHdhdmUgPSAwLjUgKyAwLjUgKiBzaW4odV90aW1lICsgdl91di54ICogMTIuMCk7CgkJCWZsb2F0IGx1bWEgPSBkb3QoY29sLnJnYiwgdmVjMygwLjI5OSwgMC41ODcsIDAuMTE0KSk7CgkJCW9fY2hhcmFjdGVyID0gdmVjNChsdW1hICogd2F2ZSAqIDAuOTUsIDAuMCwgMC4wLCAwLjApOwoJCQlvX3ByaW1hcnlDb2xvciA9IHZlYzQoY29sLnIsIGNvbC5nICogd2F2ZSwgY29sLmIgKiAxLjUsIDEuMCk7CgkJCW9fc2Vjb25kYXJ5Q29sb3IgPSB2ZWM0KDAuMDIsIDAuMDMsIDAuMDYsIDEuMCk7CgkJfQoJYDsKCglhbmltYXRlZFNoYWRlciA9IGF3YWl0IHQuY3JlYXRlU2hhZGVyKHZlcnQsIGZyYWcpOwoKCXQuY29udmVyc2lvbnMucmVnaXN0ZXIoewoJCWlkOiAndGltZS13YXZlJywKCQljcmVhdGVTaGFkZXI6ICgpID0-IGFuaW1hdGVkU2hhZGVyLAoJCWNyZWF0ZVVuaWZvcm1zOiAoY3R4KSA9PiAoewoJCQl1X2ltYWdlOiBjdHguc291cmNlLnRleHR1cmUsCgkJCXVfdGltZTogdC5mcmFtZUNvdW50ICogMC4wNCwKCQl9KSwKCX0pOwoKCWltZyA9IGF3YWl0IHQubG9hZEltYWdlKElNQUdFX1VSTCk7CglpbWcuY2hhcmFjdGVycygnIC46LT0rKiMlQCcpOwoJaW1nLmNvbnZlcnNpb25Nb2RlKCd0aW1lLXdhdmUnKTsKfSk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDgsIDIwKTsKCWlmIChpbWcpIHsKCQl0LmltYWdlKGltZywgdC5ncmlkLmNvbHMgLSA4LCB0LmdyaWQucm93cyAtIDEwKTsKCX0KfSk7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CgoJY29uc3QgdGltZVZhbCA9IHQuZnJhbWVDb3VudCAqIDAuMDQ7CgoJZHJhd1RleHQoJ0NPTlZFUlNJT04uQ1JFQVRFVU5JRk9STVMnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBSRU5ERVJJTkcgVU5JRk9STVMgQklORElORycsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnQmluZHMgdGltZS1iYXNlZCBhbmltYXRpb24gdmFsdWVzLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoYFRJTUUgVU5JRk9STTogJHt0aW1lVmFsLnRvRml4ZWQoMil9YCwgeCwgeSsrLCAxMjAsIDIwNSwgMjU1KTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />

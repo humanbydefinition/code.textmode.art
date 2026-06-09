@@ -7,7 +7,7 @@ category: Variables
 api: true
 kind: Variable
 ecosystem: textmode.js
-lastModified: 2026-05-15
+lastModified: 2026-06-09
 ---
 
 [textmode.figlet.js](../index.md) / FigletPlugin
@@ -22,96 +22,4 @@ Plugin entrypoint for the FIGlet add-on.
 
 ## Example
 
-```javascript
-const t = textmode.create({
-	width: window.innerWidth,
-	height: window.innerHeight,
-	fontSize: 8,
-	frameRate: 60,
-	plugins: [FigletPlugin],
-});
-
-const lines = {
-	primary: 'PLUGIN',
-	secondary: 'READY',
-};
-
-const primaryLayoutOptions = {
-	horizontalLayout: 'fitted',
-};
-
-const secondaryLayoutOptions = {
-	horizontalLayout: 'fitted',
-};
-
-let font;
-let primaryBounds;
-let secondaryBounds;
-
-function writeLabel(text, y, color = [220, 220, 220]) {
-	const startX = -Math.floor(text.length / 2);
-	t.charColor(...color);
-
-	for (let i = 0; i < text.length; i++) {
-		t.push();
-		t.translate(startX + i, y);
-		t.char(text[i]);
-		t.point();
-		t.pop();
-	}
-}
-
-function getWaveColor(phase, seed, from, to) {
-	const wave = 0.5 + 0.5 * Math.sin(phase + seed);
-	return from.map((start, index) => Math.round(start + (to[index] - start) * wave));
-}
-
-t.setup(async () => {
-	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Bulbhead.flf');
-	t.figFont(font);
-	t.figTextAlign('center');
-	t.figTextBaseline('center');
-
-	primaryBounds = t.figTextBounds(lines.primary, primaryLayoutOptions);
-	secondaryBounds = t.figTextBounds(lines.secondary, secondaryLayoutOptions);
-});
-
-t.draw(() => {
-	t.background(8, 10, 16);
-
-	if (!font || !primaryBounds || !secondaryBounds) {
-		writeLabel('installing FigletPlugin + loading a FIGfont...', 0, [255, 214, 102]);
-		return;
-	}
-
-	const phase = Date.now() * 0.0035;
-
-	writeLabel('FigletPlugin installs FIGlet helpers onto this sketch', -14, [255, 214, 102]);
-
-	t.figText(lines.primary, 0, -4, {
-		...primaryLayoutOptions,
-		charColor: (cell) => getWaveColor(phase, cell.col * 0.65 + cell.row * 0.4, [124, 214, 255], [255, 214, 102]),
-	});
-
-	t.figText(lines.secondary, 0, 6, {
-		...secondaryLayoutOptions,
-		charColor: (cell) =>
-			getWaveColor(phase, cell.inputIndex * 1.2 - cell.row * 0.5, [255, 120, 150], [255, 214, 102]),
-	});
-
-	writeLabel(
-		`font: ${font.name} | align: ${t.figTextAlign()} | baseline: ${t.figTextBaseline()}`,
-		12,
-		[220, 230, 255]
-	);
-	writeLabel(
-		`bounds: ${primaryBounds.cols}x${primaryBounds.rows} / ${secondaryBounds.cols}x${secondaryBounds.rows}`,
-		15,
-		[160, 180, 220]
-	);
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
+<TextmodeApiSandbox profile="textmode.figlet.js" language="javascript" title="FigletPlugin" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW0ZpZ2xldFBsdWdpbl0sCn0pOwoKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKbGV0IGZvbnQ7CmxldCBib3VuZHM7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCnQuc2V0dXAoYXN5bmMgKCkgPT4gewoJZm9udCA9IGF3YWl0IHQubG9hZEZpZ0ZvbnQoJ2h0dHBzOi8vY2RuLmpzZGVsaXZyLm5ldC9naC94ZXJvL2ZpZ2xldC1mb250c0BtYXN0ZXIvQnVsYmhlYWQuZmxmJyk7Cgl0LmZpZ0ZvbnQoZm9udCk7Cgl0LmZpZ1RleHRBbGlnbignY2VudGVyJyk7Cgl0LmZpZ1RleHRCYXNlbGluZSgnY2VudGVyJyk7Cglib3VuZHMgPSB0LmZpZ1RleHRCb3VuZHMoJ1JFQURZJywgeyBob3Jpem9udGFsTGF5b3V0OiAnZml0dGVkJyB9KTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWRyYXdUZXh0KCdGSUdMRVRQTFVHSU4uSU5JVCcsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IFBMVUdJTiBJTklUSUFMSVpBVElPTicsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnSW5zdGFsbHMgRklHbGV0IGRyYXdpbmcgZmVhdHVyZXMuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdFbmFibGVzIGxvYWRGaWdGb250IGFuZCBmaWdUZXh0LicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJaWYgKGZvbnQpIHsKCQlkcmF3VGV4dChgRm9udCBsb2FkZWQ6ICR7Zm9udC5uYW1lfWAsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7Cgl9IGVsc2UgewoJCWRyYXdUZXh0KCdMb2FkaW5nIGZvbnQuLi4nLCB4LCB5KyssIDI1NSwgMTgwLCAxMDApOwoJfQp9KTsKCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoMTAsIDEyLCAxOCk7CgoJaWYgKCFmb250IHx8ICFib3VuZHMpIHJldHVybjsKCgljb25zdCB0aW1lID0gdC5zZWNzICogMi4wOwoJY29uc3QgeU9mZnNldCA9IE1hdGguZmxvb3IoTWF0aC5zaW4odGltZSkgKiA0KTsKCgl0LmZpZ1RleHQoJ1JFQURZJywgMCwgeU9mZnNldCwgewoJCWhvcml6b250YWxMYXlvdXQ6ICdmaXR0ZWQnLAoJCWNoYXJDb2xvcjogKGNlbGwpID0-IHsKCQkJY29uc3Qgd2F2ZSA9IDAuNSArIDAuNSAqIE1hdGguc2luKHRpbWUgKyBjZWxsLmNvbCAqIDAuMTUgKyBjZWxsLnJvdyAqIDAuMyk7CgkJCXJldHVybiBbTWF0aC5yb3VuZCgxMDAgKyAxNTUgKiB3YXZlKSwgTWF0aC5yb3VuZCgxNTAgKyAxMDUgKiAoMS4wIC0gd2F2ZSkpLCAyNTVdOwoJCX0sCgl9KTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />

@@ -1,0 +1,47 @@
+---
+layout: doc
+editLink: true
+title: loadFont
+description: Load a font and optionally set it as the base layer's active font.
+category: Methods
+api: true
+owner: Textmodifier
+kind: Method
+lastModified: 2026-06-09
+---
+
+[textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / loadFont
+
+# Method: loadFont()
+
+```ts
+loadFont(fontSource, setActive?): Promise<TextmodeFont>;
+```
+
+Load a font and optionally set it as the base layer's active font.
+
+Accepts either a URL string to load a new font, or an existing [TextmodeFont](../../../namespaces/fonts/classes/TextmodeFont.md)
+instance to use as a reusable source.
+
+If `setActive` is true (default), the font is set as the base layer's font.
+If `setActive` is false, the font is loaded/initialized and returned without modifying the layer.
+
+The returned font can be reused on other layers via [TextmodeLayer.loadFont](../../../namespaces/layering/classes/TextmodeLayer/methods/loadFont.md),
+which creates a layer-local fork rather than sharing a mutable instance by reference.
+
+## Parameters
+
+| Parameter | Type | Default value | Description |
+| ------ | ------ | ------ | ------ |
+| `fontSource` | \| `string` \| [`TextmodeFont`](../../../namespaces/fonts/classes/TextmodeFont.md) | `undefined` | Font URL or reusable TextmodeFont instance. |
+| `setActive` | `boolean` | `true` | Whether to activate the font on the base layer. Defaults to `true`. |
+
+## Returns
+
+`Promise`\<[`TextmodeFont`](../../../namespaces/fonts/classes/TextmodeFont.md)\>
+
+The loaded TextmodeFont.
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="loadFont" encoded-code="Y29uc3QgQkVTQ0lJX1VSTCA9ICdodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvZ2gvZGFtaWFudmlsYS9mb250LWJlc2NpaUBtYWluL2ZvbnRzL3YyLjAvQmVzY2lpLU1vbm8udHRmJzsKCmNvbnN0IHQgPSB0ZXh0bW9kZS5jcmVhdGUoewoJcGl4ZWxEZW5zaXR5OiAxLAoJd2lkdGg6IHdpbmRvdy5pbm5lcldpZHRoLAoJaGVpZ2h0OiB3aW5kb3cuaW5uZXJIZWlnaHQsCglmb250U2l6ZTogMTYsCn0pOwoKY29uc3QgYWNjZW50TGF5ZXIgPSB0LmxheWVycy5hZGQoeyBmb250U2l6ZTogMTYsIGJsZW5kTW9kZTogJ2FkZGl0aXZlJyB9KTsKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKbGV0IGJhc2VGb250ID0gbnVsbDsKbGV0IHJldXNhYmxlRm9udCA9IG51bGw7CmxldCBsb2FkZWQgPSBmYWxzZTsKCnQuc2V0dXAoYXN5bmMgKCkgPT4gewoJYmFzZUZvbnQgPSBhd2FpdCB0LmxvYWRGb250KEJFU0NJSV9VUkwpOwoJcmV1c2FibGVGb250ID0gYXdhaXQgdC5sb2FkRm9udChCRVNDSUlfVVJMLCBmYWxzZSk7Cglhd2FpdCBhY2NlbnRMYXllci5sb2FkRm9udChyZXVzYWJsZUZvbnQpOwoJbG9hZGVkID0gdHJ1ZTsKfSk7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCmZ1bmN0aW9uIGRyYXdHbHlwaFN0cmlwKGZvbnQsIHksIHIsIGcsIGIpIHsKCWNvbnN0IGdseXBocyA9IGZvbnQuY2hhcmFjdGVyczsKCWNvbnN0IGNvdW50ID0gTWF0aC5taW4oZ2x5cGhzLmxlbmd0aCwgTWF0aC5tYXgoOCwgTWF0aC5mbG9vcih0LmdyaWQuY29scyAqIDAuNTUpKSk7Cgljb25zdCBzdGFydCA9IE1hdGguZmxvb3IoKHQuZnJhbWVDb3VudCAvIDgpICUgZ2x5cGhzLmxlbmd0aCk7Cgljb25zdCB4ID0gLU1hdGguZmxvb3IoY291bnQgLyAyKTsKCWZvciAobGV0IGkgPSAwOyBpIDwgY291bnQ7IGkrKykgewoJCWNvbnN0IGdseXBoID0gZ2x5cGhzWyhzdGFydCArIGkpICUgZ2x5cGhzLmxlbmd0aF07CgkJdC5wdXNoKCk7CgkJdC50cmFuc2xhdGUoeCArIGksIHkpOwoJCXQuY2hhcihnbHlwaC5jaGFyYWN0ZXIpOwoJCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJCXQucG9pbnQoKTsKCQl0LnBvcCgpOwoJfQp9Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDUsIDgsIDE4KTsKCWlmICghbG9hZGVkKSByZXR1cm47CgoJZHJhd0dseXBoU3RyaXAoYmFzZUZvbnQsIC0yLCAyNTUsIDIzNSwgMTIwKTsKCWRyYXdUZXh0KCdBQ1RJVkUgQkFTRSBGT05UJywgLTgsIC01LCAyNTUsIDIzNSwgMTIwKTsKfSk7CgphY2NlbnRMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWlmICghbG9hZGVkKSByZXR1cm47CgoJZHJhd0dseXBoU3RyaXAocmV1c2FibGVGb250LCA0LCAxMjAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdSRVVTRUQgT04gTEFZRVInLCAtNywgNywgMTIwLCAyMjAsIDI1NSk7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLkxPQURGT05UJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogTE9BRCBXRUIgRk9OVCcsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgndHJ1ZSBhY3RpdmF0ZXMgdGhlIGJhc2UgbGF5ZXIuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdmYWxzZSByZXR1cm5zIGEgcmV1c2FibGUgZm9udC4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWNvbnN0IHN0YXRlID0gbG9hZGVkID8gJ1JFQURZJyA6ICdMT0FESU5HJzsKCWRyYXdUZXh0KGBGT05UOiAke3N0YXRlfWAsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7CglpZiAobG9hZGVkKSBkcmF3VGV4dChgR0xZUEhTOiAke2Jhc2VGb250LmNoYXJhY3RlcnMubGVuZ3RofWAsIHgsIHkrKywgMjU1LCAyMjUsIDE0MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />

@@ -7,7 +7,7 @@ category: API Reference
 api: true
 kind: Project
 ecosystem: textmode.js
-lastModified: 2026-05-16
+lastModified: 2026-06-09
 ---
 
 # textmode.export.js
@@ -32,7 +32,7 @@ convenient overlay UI for quick access to all export options.
 
 ### Animation formats
 - [GIF](type-aliases/GIFExportOptions.md) - Save as animated GIF
-- [WEBM](type-aliases/VideoExportOptions.md) - Save as video file
+- [Video](type-aliases/VideoExportOptions.md) - Save as WebM or MP4 video
 
 ## Interfaces
 
@@ -70,6 +70,14 @@ convenient overlay UI for quick access to all export options.
 | [JSONExportOptions](type-aliases/JSONExportOptions.md) | Options for exporting the textmode content to JSON format. |
 | [SVGExportOptions](type-aliases/SVGExportOptions.md) | Options for exporting the textmode content to SVG format. |
 | [TXTExportOptions](type-aliases/TXTExportOptions.md) | Options for exporting the textmode content to TXT format. |
+| [VideoRecordingState](type-aliases/VideoRecordingState.md) | Lifecycle state reported while a video export is being prepared, recorded, encoded, or completed. |
+| [VideoExportPhase](type-aliases/VideoExportPhase.md) | More granular phase information for progress UIs that need to distinguish setup, rendering, and finalization. |
+| [VideoBitratePreset](type-aliases/VideoBitratePreset.md) | Subjective bitrate preset used when an exact bits-per-second value is not supplied. |
+| [VideoExportFormat](type-aliases/VideoExportFormat.md) | Video container format written by `saveVideo`. |
+| [VideoBitrateMode](type-aliases/VideoBitrateMode.md) | Bitrate allocation strategy for the native encoder. |
+| [VideoLatencyMode](type-aliases/VideoLatencyMode.md) | Encoder scheduling mode. |
+| [VideoHardwareAcceleration](type-aliases/VideoHardwareAcceleration.md) | WebCodecs hardware acceleration preference. |
+| [VideoExportErrorCode](type-aliases/VideoExportErrorCode.md) | - |
 | [VideoExportProgress](type-aliases/VideoExportProgress.md) | Progress information emitted during the video export process. |
 | [VideoExportOptions](type-aliases/VideoExportOptions.md) | Options for exporting the textmode content to video format. |
 

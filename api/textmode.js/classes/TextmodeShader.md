@@ -2,11 +2,11 @@
 layout: doc
 editLink: true
 title: TextmodeShader
-description: WebGL shader program created by Textmodifier.createFilterShader or Textmodifier.createShader.
+description: WebGL shader program created by Textmodifier.createMaterialShader, Textmodifier.createFilterShader, or Textmodifier.createShader.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-05-27
+lastModified: 2026-06-09
 hasConstructor: false
 ---
 
@@ -14,11 +14,12 @@ hasConstructor: false
 
 # Class: TextmodeShader
 
-WebGL shader program created by [Textmodifier.createFilterShader](Textmodifier.md#createfiltershader) or [Textmodifier.createShader](Textmodifier.md#createshader).
+WebGL shader program created by [Textmodifier.createMaterialShader](Textmodifier/methods/createMaterialShader.md),
+[Textmodifier.createFilterShader](Textmodifier/methods/createFilterShader.md), or [Textmodifier.createShader](Textmodifier/methods/createShader.md).
 
-Use shaders and set uniforms via [Textmodifier.shader](Textmodifier.md#shader), [Textmodifier.setUniform](Textmodifier.md#setuniform), and [Textmodifier.setUniforms](Textmodifier.md#setuniforms).
+Use shaders and set uniforms via [Textmodifier.shader](Textmodifier/methods/shader.md), [Textmodifier.setUniform](Textmodifier/methods/setUniform.md), and [Textmodifier.setUniforms](Textmodifier/methods/setUniforms.md).
 
-After using a custom shader, you can revert to the default textmode shader with [Textmodifier.resetShader](Textmodifier.md#resetshader).
+After using a custom shader, you can revert to the default textmode shader with [Textmodifier.resetShader](Textmodifier/methods/resetShader.md).
 
 ## Extends
 
@@ -42,82 +43,7 @@ Get the WebGL program
 
 ##### Example
 
-```javascript
-const t = textmode.create({
-	width: window.innerWidth,
-	height: window.innerHeight,
-	fontSize: 16,
-});
-
-const labelLayer = t.layers.add();
-let customShader = null;
-
-function drawText(text, x, y, r = 220, g = 230, b = 255) {
-	t.push();
-	t.translate(x, y);
-	t.charColor(r, g, b);
-	for (let i = 0; i < text.length; i++) {
-		t.char(text[i]);
-		t.point();
-		t.translate(1, 0);
-	}
-	t.pop();
-}
-
-t.setup(async () => {
-	customShader = await t.createFilterShader(`#version 300 es
-precision highp float;
-in vec2 v_uv;
-uniform float u_time;
-layout(location = 0) out vec4 o_character;
-layout(location = 1) out vec4 o_primaryColor;
-layout(location = 2) out vec4 o_secondaryColor;
-void main() {
-	vec2 centered = v_uv - 0.5;
-	float rings = sin(length(centered) * 42.0 - u_time * 3.0);
-	float scan = sin((v_uv.x + v_uv.y) * 26.0 + u_time * 2.0);
-	float glyph = step(0.0, rings + scan * 0.45);
-	o_character = vec4(glyph, 0.0, 0.0, 1.0);
-	o_primaryColor = vec4(0.28 + glyph * 0.6, 0.82, 1.0, 1.0);
-	o_secondaryColor = vec4(0.02, 0.04, 0.09, 1.0);
-}`);
-});
-
-t.draw(() => {
-	t.background(4, 7, 18);
-
-	if (!customShader) return;
-
-	t.shader(customShader);
-	t.setUniform('u_time', t.frameCount * 0.025);
-	t.rect(t.grid.cols, t.grid.rows);
-	t.resetShader();
-});
-
-labelLayer.draw(() => {
-	t.clear();
-	const left = -Math.floor(t.grid.cols / 2);
-	const top = -Math.floor(t.grid.rows / 2);
-	let y = top + 3;
-	const x = left + 3;
-
-	drawText('TEXTMODESHADER.PROGRAM', x, y++, 100, 255, 140);
-	drawText('------------------------------------', x, y++, 80, 100, 150);
-	drawText('CONCEPT: WEBGL PROGRAM HANDLE', x, y++, 100, 220, 255);
-	drawText('Filter shader draws the grid.', x, y++, 140, 160, 190);
-	drawText('program exposes the raw handle.', x, y++, 140, 160, 190);
-	drawText('------------------------------------', x, y++, 80, 100, 150);
-
-	const ready = customShader && customShader.program instanceof WebGLProgram;
-	const state = ready ? 'READY' : 'WAIT';
-	drawText(`PROGRAM: ${state}`, x, y++, 140, 255, 180);
-	drawText('TYPE: WEBGLPROGRAM', x, y++, 255, 225, 140);
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="TextmodeShader" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CglwaXhlbERlbnNpdHk6IDEsCgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCBjdXN0b21TaGFkZXIgPSBudWxsOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LnNldHVwKGFzeW5jICgpID0-IHsKCWN1c3RvbVNoYWRlciA9IGF3YWl0IHQuY3JlYXRlTWF0ZXJpYWxTaGFkZXIoYCN2ZXJzaW9uIDMwMCBlcwpwcmVjaXNpb24gaGlnaHAgZmxvYXQ7CmluIHZlYzIgdl91djsKdW5pZm9ybSBmbG9hdCB1X3RpbWU7CmxheW91dChsb2NhdGlvbiA9IDApIG91dCB2ZWM0IG9fY2hhcmFjdGVyOwpsYXlvdXQobG9jYXRpb24gPSAxKSBvdXQgdmVjNCBvX3ByaW1hcnlDb2xvcjsKbGF5b3V0KGxvY2F0aW9uID0gMikgb3V0IHZlYzQgb19zZWNvbmRhcnlDb2xvcjsKdm9pZCBtYWluKCkgewoJdmVjMiBjZW50ZXJlZCA9IHZfdXYgLSAwLjU7CglmbG9hdCByaW5ncyA9IHNpbihsZW5ndGgoY2VudGVyZWQpICogNDIuMCAtIHVfdGltZSAqIDMuMCk7CglmbG9hdCBzY2FuID0gc2luKCh2X3V2LnggKyB2X3V2LnkpICogMjYuMCArIHVfdGltZSAqIDIuMCk7CglmbG9hdCBnbHlwaCA9IHN0ZXAoMC4wLCByaW5ncyArIHNjYW4gKiAwLjQ1KTsKCW9fY2hhcmFjdGVyID0gdmVjNChnbHlwaCwgMC4wLCAwLjAsIDEuMCk7CglvX3ByaW1hcnlDb2xvciA9IHZlYzQoMC4yOCArIGdseXBoICogMC42LCAwLjgyLCAxLjAsIDEuMCk7CglvX3NlY29uZGFyeUNvbG9yID0gdmVjNCgwLjAyLCAwLjA0LCAwLjA5LCAxLjApOwp9YCk7Cn0pOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg0LCA3LCAxOCk7CgoJaWYgKCFjdXN0b21TaGFkZXIpIHJldHVybjsKCgl0LnNoYWRlcihjdXN0b21TaGFkZXIpOwoJdC5zZXRVbmlmb3JtKCd1X3RpbWUnLCB0LmZyYW1lQ291bnQgKiAwLjAyNSk7Cgl0LnJlY3QodC5ncmlkLmNvbHMsIHQuZ3JpZC5yb3dzKTsKCXQucmVzZXRTaGFkZXIoKTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWRyYXdUZXh0KCdURVhUTU9ERVNIQURFUi5QUk9HUkFNJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogV0VCR0wgUFJPR1JBTSBIQU5ETEUnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ0ZpbHRlciBzaGFkZXIgZHJhd3MgdGhlIGdyaWQuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdwcm9ncmFtIGV4cG9zZXMgdGhlIHJhdyBoYW5kbGUuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CgoJY29uc3QgcmVhZHkgPSBjdXN0b21TaGFkZXIgJiYgY3VzdG9tU2hhZGVyLnByb2dyYW0gaW5zdGFuY2VvZiBXZWJHTFByb2dyYW07Cgljb25zdCBzdGF0ZSA9IHJlYWR5ID8gJ1JFQURZJyA6ICdXQUlUJzsKCWRyYXdUZXh0KGBQUk9HUkFNOiAke3N0YXRlfWAsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7CglkcmF3VGV4dCgnVFlQRTogV0VCR0xQUk9HUkFNJywgeCwgeSsrLCAyNTUsIDIyNSwgMTQwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
 
 ## Methods
 
@@ -135,102 +61,7 @@ Dispose of WebGL resources used by this shader.
 
 #### Example
 
-```javascript
-const t = textmode.create({
-	width: window.innerWidth,
-	height: window.innerHeight,
-	fontSize: 16,
-});
-
-const labelLayer = t.layers.add();
-let customShader = null;
-let isDisposed = false;
-
-function drawText(text, x, y, r = 200, g = 220, b = 255) {
-	t.push();
-	t.translate(x, y);
-	t.charColor(r, g, b);
-	for (let i = 0; i < text.length; i++) {
-		t.char(text[i]);
-		t.point();
-		t.translate(1, 0);
-	}
-	t.pop();
-}
-
-async function createShader() {
-	const vert = `#version 300 es
-		in vec4 a_position; in vec2 a_uv; out vec2 v_uv;
-		void main() { gl_Position = a_position; v_uv = a_uv; }`;
-	const frag = `#version 300 es
-		precision highp float; in vec2 v_uv;
-		layout(location = 0) out vec4 o_char;
-		layout(location = 1) out vec4 o_fg;
-		layout(location = 2) out vec4 o_bg;
-		void main() {
-			float s = step(0.5, fract((v_uv.x + v_uv.y) * 10.0));
-			o_char = vec4(s, 0.0, 0.0, 0.0);
-			o_fg = vec4(1.0, 0.75 - s * 0.3, 0.25 + s * 0.4, 1.0);
-			o_bg = vec4(0.03, 0.05, 0.1, 1.0);
-		}`;
-	customShader = await t.createShader(vert, frag);
-	isDisposed = false;
-}
-
-t.setup(async () => {
-	await createShader();
-});
-
-t.draw(() => {
-	t.background(6, 10, 22);
-
-	if (customShader && !isDisposed) {
-		t.push();
-		t.shader(customShader);
-		t.charColor(255, 180, 100);
-		t.rect(14, 6);
-		t.resetShader();
-		t.pop();
-	} else {
-		t.push();
-		t.charColor(40, 50, 80);
-		t.char('.');
-		t.rect(14, 6);
-		t.pop();
-	}
-});
-
-t.mouseClicked(async () => {
-	if (customShader && !isDisposed) {
-		customShader.dispose();
-		isDisposed = true;
-	} else {
-		await createShader();
-	}
-});
-
-labelLayer.draw(() => {
-	t.clear();
-	const left = -Math.floor(t.grid.cols / 2);
-	const top = -Math.floor(t.grid.rows / 2);
-	let y = top + 3;
-	const x = left + 3;
-
-	drawText('DISPOSE', x, y++, 100, 255, 140);
-	drawText('--------------------------------', x, y++, 80, 100, 150);
-	drawText('Frees the GL program handle.', x, y++, 100, 220, 255);
-	drawText('Click to dispose / rebuild.', x, y++, 140, 160, 190);
-	drawText('--------------------------------', x, y++, 80, 100, 150);
-	const status = isDisposed ? 'OFFLINE' : 'ACTIVE';
-	const sr = isDisposed ? 255 : 140;
-	const sg = isDisposed ? 100 : 255;
-	drawText(`GPU STATUS: ${status}`, x, y++, sr, sg, 140);
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="TextmodeShader" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CglwaXhlbERlbnNpdHk6IDEsCgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCBjdXN0b21TaGFkZXIgPSBudWxsOwpsZXQgaXNEaXNwb3NlZCA9IGZhbHNlOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIwMCwgZyA9IDIyMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnRyYW5zbGF0ZSh4LCB5KTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJZm9yIChsZXQgaSA9IDA7IGkgPCB0ZXh0Lmxlbmd0aDsgaSsrKSB7CgkJdC5jaGFyKHRleHRbaV0pOwoJCXQucG9pbnQoKTsKCQl0LnRyYW5zbGF0ZSgxLCAwKTsKCX0KCXQucG9wKCk7Cn0KCmFzeW5jIGZ1bmN0aW9uIGNyZWF0ZVNoYWRlcigpIHsKCWNvbnN0IHZlcnQgPSBgI3ZlcnNpb24gMzAwIGVzCgkJaW4gdmVjNCBhX3Bvc2l0aW9uOyBpbiB2ZWMyIGFfdXY7IG91dCB2ZWMyIHZfdXY7CgkJdm9pZCBtYWluKCkgeyBnbF9Qb3NpdGlvbiA9IGFfcG9zaXRpb247IHZfdXYgPSBhX3V2OyB9YDsKCWNvbnN0IGZyYWcgPSBgI3ZlcnNpb24gMzAwIGVzCgkJcHJlY2lzaW9uIGhpZ2hwIGZsb2F0OyBpbiB2ZWMyIHZfdXY7CgkJbGF5b3V0KGxvY2F0aW9uID0gMCkgb3V0IHZlYzQgb19jaGFyOwoJCWxheW91dChsb2NhdGlvbiA9IDEpIG91dCB2ZWM0IG9fZmc7CgkJbGF5b3V0KGxvY2F0aW9uID0gMikgb3V0IHZlYzQgb19iZzsKCQl2b2lkIG1haW4oKSB7CgkJCWZsb2F0IHMgPSBzdGVwKDAuNSwgZnJhY3QoKHZfdXYueCArIHZfdXYueSkgKiAxMC4wKSk7CgkJCW9fY2hhciA9IHZlYzQocywgMC4wLCAwLjAsIDAuMCk7CgkJCW9fZmcgPSB2ZWM0KDEuMCwgMC43NSAtIHMgKiAwLjMsIDAuMjUgKyBzICogMC40LCAxLjApOwoJCQlvX2JnID0gdmVjNCgwLjAzLCAwLjA1LCAwLjEsIDEuMCk7CgkJfWA7CgljdXN0b21TaGFkZXIgPSBhd2FpdCB0LmNyZWF0ZVNoYWRlcih2ZXJ0LCBmcmFnKTsKCWlzRGlzcG9zZWQgPSBmYWxzZTsKfQoKdC5zZXR1cChhc3luYyAoKSA9PiB7Cglhd2FpdCBjcmVhdGVTaGFkZXIoKTsKfSk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDEwLCAyMik7CgoJaWYgKGN1c3RvbVNoYWRlciAmJiAhaXNEaXNwb3NlZCkgewoJCXQucHVzaCgpOwoJCXQuc2hhZGVyKGN1c3RvbVNoYWRlcik7CgkJdC5jaGFyQ29sb3IoMjU1LCAxODAsIDEwMCk7CgkJdC5yZWN0KDE0LCA2KTsKCQl0LnJlc2V0U2hhZGVyKCk7CgkJdC5wb3AoKTsKCX0gZWxzZSB7CgkJdC5wdXNoKCk7CgkJdC5jaGFyQ29sb3IoNDAsIDUwLCA4MCk7CgkJdC5jaGFyKCcuJyk7CgkJdC5yZWN0KDE0LCA2KTsKCQl0LnBvcCgpOwoJfQp9KTsKCnQubW91c2VDbGlja2VkKGFzeW5jICgpID0-IHsKCWlmIChjdXN0b21TaGFkZXIgJiYgIWlzRGlzcG9zZWQpIHsKCQljdXN0b21TaGFkZXIuZGlzcG9zZSgpOwoJCWlzRGlzcG9zZWQgPSB0cnVlOwoJfSBlbHNlIHsKCQlhd2FpdCBjcmVhdGVTaGFkZXIoKTsKCX0KfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWRyYXdUZXh0KCdESVNQT1NFJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdGcmVlcyB0aGUgR0wgcHJvZ3JhbSBoYW5kbGUuJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdDbGljayB0byBkaXNwb3NlIC8gcmVidWlsZC4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJY29uc3Qgc3RhdHVzID0gaXNEaXNwb3NlZCA_ICdPRkZMSU5FJyA6ICdBQ1RJVkUnOwoJY29uc3Qgc3IgPSBpc0Rpc3Bvc2VkID8gMjU1IDogMTQwOwoJY29uc3Qgc2cgPSBpc0Rpc3Bvc2VkID8gMTAwIDogMjU1OwoJZHJhd1RleHQoYEdQVSBTVEFUVVM6ICR7c3RhdHVzfWAsIHgsIHkrKywgc3IsIHNnLCAxNDApOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
 
 #### Overrides
 

@@ -1,0 +1,39 @@
+---
+layout: doc
+editLink: true
+title: fract
+description: Calculate the fractional part of a number.
+category: Methods
+api: true
+owner: Textmodifier
+kind: Method
+lastModified: 2026-06-09
+---
+
+[textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / fract
+
+# Method: fract()
+
+```ts
+fract(value): number;
+```
+
+Calculate the fractional part of a number.
+
+This follows GLSL-style `fract`, so negative inputs return a positive fractional part.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `value` | `number` | Value whose fractional part should be returned. |
+
+## Returns
+
+`number`
+
+Fractional part in the range 0 up to, but not including, 1.
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="fract" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CglwaXhlbERlbnNpdHk6IDEsCgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCByYXcgPSAwOwpsZXQgZnJhY3Rpb24gPSAwOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDQsIDcsIDE3KTsKCXJhdyA9IHQuZnJhbWVDb3VudCAqIDAuMDM1ICsgdC5zaW4odC5mcmFtZUNvdW50ICogMC4wMjEpICogMC41OwoJZnJhY3Rpb24gPSB0LmZyYWN0KHJhdyk7CgoJZm9yIChsZXQgeCA9IC0yNDsgeCA8PSAyNDsgeCsrKSB7CgkJY29uc3QgZiA9IHQuZnJhY3QocmF3ICsgeCAqIDAuMTgpOwoJCWNvbnN0IHkgPSA4IC0gZiAqIDE0OwoJCXQucHVzaCgpOwoJCXQudHJhbnNsYXRlKHgsIHkpOwoJCXQuY2hhcihmID4gMC43NSA_ICcjJyA6IGYgPiAwLjM1ID8gJysnIDogJy4nKTsKCQl0LmNoYXJDb2xvcig4MCArIGYgKiAxNjAsIDEzNSArIGYgKiAxMDAsIDI1NSk7CgkJdC5wb2ludCgpOwoJCXQucG9wKCk7Cgl9CgoJdC5jaGFyKCd8Jyk7Cgl0LmNoYXJDb2xvcigyNTUsIDIxMCwgMTAwKTsKCXQubGluZSgwLCA4LCAwLCA4IC0gZnJhY3Rpb24gKiAxNCk7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtdC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLXQuZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuRlJBQ1QnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBSRVBFQVRJTkcgREVDSU1BTFMnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ2ZyYWN0KHgpIGtlZXBzIHRoZSBwYXJ0IGFmdGVyIGRvdC4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJ1RoZSByYW1wIHJlc2V0cyBhdCBldmVyeSBpbnRlZ2VyLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoYFJBVzogJHtyYXcudG9GaXhlZCgyKX1gLCB4LCB5KyssIDIyMCwgMjMwLCAyNTUpOwoJZHJhd1RleHQoYEZSQUNUOiAke2ZyYWN0aW9uLnRvRml4ZWQoMil9YCwgeCwgeSsrLCAyMjAsIDIzMCwgMjU1KTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />

@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 namespace: input
 kind: TypeAlias
-lastModified: 2026-05-27
+lastModified: 2026-06-09
 ---
 
 [textmode.js](../../../index.md) / [input](../index.md) / InputEventName
@@ -18,4 +18,4 @@ lastModified: 2026-05-27
 type InputEventName = keyof InputEventMap;
 ```
 
-Every valid event name accepted by [Textmodifier.on](../../../classes/Textmodifier.md#on), [Textmodifier.off](../../../classes/Textmodifier.md#off), and [Textmodifier.once](../../../classes/Textmodifier.md#once).
+Every valid event name accepted by [Textmodifier.on](../../../classes/Textmodifier/methods/on.md), [Textmodifier.off](../../../classes/Textmodifier/methods/off.md), and [Textmodifier.once](../../../classes/Textmodifier/methods/once.md).

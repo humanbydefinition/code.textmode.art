@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: layering
 kind: Interface
-lastModified: 2026-05-27
+lastModified: 2026-06-09
 isInterface: true
 ---
 
@@ -15,7 +15,7 @@ isInterface: true
 
 # Interface: TextmodeLayerOptions
 
-Options for layers created with [TextmodeLayerManager.add](../classes/TextmodeLayerManager.md#add).
+Options for layers created with [TextmodeLayerManager.add](../classes/TextmodeLayerManager/methods/add.md).
 
 ## Properties
 

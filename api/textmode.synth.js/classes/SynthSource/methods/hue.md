@@ -1,0 +1,36 @@
+---
+layout: doc
+editLink: true
+title: hue
+description: Shift hue.
+category: Methods
+api: true
+owner: SynthSource
+kind: Method
+ecosystem: textmode.js
+lastModified: 2026-06-09
+---
+
+[textmode.synth.js](../../../index.md) / [SynthSource](../../SynthSource.md) / hue
+
+# Method: hue()
+
+```ts
+hue(hue?): this;
+```
+
+Shift hue.
+
+## Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `hue?` | [`SynthParameterValue`](../../../type-aliases/SynthParameterValue.md) | Hue shift amount (default: 0.4) |
+
+## Returns
+
+`this`
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="hue" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW1N5bnRoUGx1Z2luXSwKfSk7Cgp0LmJwbSgxOCk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IGdseXBocyA9ICcgLjotPSsqIyVAJzsKY29uc3Qgc2xvdyA9IFswLjAsIDEuMF0uZmFzdCgwLjE2KS5lYXNlKCdlYXNlSW5PdXRTaW5lJyk7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CgoJZHJhd1RleHQoJ1NZTlRIU09VUkNFLkhVRScsIHgsIHkrKywgMTEwLCAyNTUsIDE3MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA3MCwgMTEwLCAxNDApOwoJZHJhd1RleHQoJ0hVRSBST1RBVElPTicsIHgsIHkrKywgMTIwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnSHVlIGRyaWZ0cywgZm9ybSBzdGF5cyBjYWxtLicsIHgsIHkrKywgMTYwLCAxODAsIDIxMCk7CglkcmF3VGV4dCgnUGFsZXR0ZSB0cmF2ZWxzIHNsb3dseS4nLCB4LCB5KyssIDE2MCwgMTgwLCAyMTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgNzAsIDExMCwgMTQwKTsKCWRyYXdUZXh0KCdTZXBhcmF0ZSBhbmltYXRlZCBpbmsgYW5kIHBhcGVyLicsIHgsIHkrKywgMTUwLCAyNTUsIDE5MCk7Cn0pOwoKY29uc3QgaW5rID0gbW9pcmUoOCwgOSwgMC4xNSwgMS42LCAwLjAyNSkuY29sb3IoMS4wLCAwLjYyLCAwLjM0KS5tb2R1bGF0ZShub2lzZSgyLjMsIDAuMDE4KSwgMC4wMjIpOwpjb25zdCBwYXBlciA9IG5vaXNlKDMuMCwgMC4wMjUpLmNvbG9yKDAuMTYsIDAuMDU1LCAwLjAyNSkuc29mdGxpZ2h0KG9zYyg0LCAwLjAxNiksIDAuMjIpOwoKdC5sYXllcnMuYmFzZS5zeW50aCgKCW1vaXJlKDksIDEwLCAwLjAsIDEuNTcsIDAuMDI0KQoJCS5tb2R1bGF0ZShub2lzZSgyLjAsIDAuMDE2KSwgMC4wMjUpCgkJLmNvbG9yKDAuOSwgMC4zOCwgMC42NCkKCQkuaHVlKHNsb3cpCgkJLnNhdHVyYXRlKDEuMjgpCgkJLmNvbnRyYXN0KDEuMTQpCgkJLmNoYXJNYXAoZ2x5cGhzKQoJCS5jaGFyQ29sb3IoaW5rKQoJCS5jZWxsQ29sb3IocGFwZXIpCik7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />

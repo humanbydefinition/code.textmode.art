@@ -1,0 +1,36 @@
+---
+layout: doc
+editLink: true
+title: mouse
+description: Current mouse position in center-based grid coordinates.
+category: Properties
+api: true
+owner: Textmodifier
+kind: Property
+lastModified: 2026-06-09
+---
+
+[textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / mouse
+
+# Property: mouse
+
+```ts
+readonly mouse: object;
+```
+
+Current mouse position in center-based grid coordinates.
+
+Returns the mouse position in cell coordinates where `(0, 0)` is the center cell.
+This matches the drawing coordinate system, so coordinates can be used directly with `translate()`.
+
+If the mouse is outside the grid or the instance is not ready,
+it returns `{ x: Number.NEGATIVE_INFINITY, y: Number.NEGATIVE_INFINITY }`.
+
+| Name | Type |
+| ------ | ------ |
+| `x` | `number` |
+| `y` | `number` |
+
+## Example
+
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="mouse" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CglwaXhlbERlbnNpdHk6IDEsCgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpsZXQgbXggPSAwOwpsZXQgbXkgPSAwOwpsZXQgaW5zaWRlID0gZmFsc2U7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNiwgMTAsIDIyKTsKCW14ID0gdC5tb3VzZS54OwoJbXkgPSB0Lm1vdXNlLnk7CglpbnNpZGUgPSBteCAhPT0gTnVtYmVyLk5FR0FUSVZFX0lORklOSVRZOwoJdC5jaGFyQ29sb3IoNTAsIDYwLCA5MCk7Cgl0LmNoYXIoJy4nKTsKCXQubGluZSgtMTgsIDAsIDE4LCAwKTsKCXQubGluZSgwLCAtMTAsIDAsIDEwKTsKCWlmIChpbnNpZGUpIHsKCQl0LnB1c2goKTsKCQl0LnRyYW5zbGF0ZShteCwgbXkpOwoJCXQuY2hhcignKycpOwoJCXQuY2hhckNvbG9yKDI1NSwgMjEwLCAxMjApOwoJCXQucG9pbnQoKTsKCQl0LnBvcCgpOwoJfQp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLk1PVVNFJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogUE9JTlRFUiBQT1NJVElPTicsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnUmVhZHMgY3VycmVudCBtb3VzZSBjZWxsIHBvc2l0aW9uLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnT3V0c2lkZSBjYW52YXMgcmV0dXJucyBpbmZpbml0eS4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KGluc2lkZSA_ICdJTlNJREU6IFRSVUUnIDogJ0lOU0lERTogRkFMU0UnLCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwoJZHJhd1RleHQoYFg6ICR7bXh9YCwgeCwgeSsrLCAxODAsIDIwMCwgMjIwKTsKCWRyYXdUZXh0KGBZOiAke215fWAsIHgsIHkrKywgMTgwLCAyMDAsIDIyMCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
