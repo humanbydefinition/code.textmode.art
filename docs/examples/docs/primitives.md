@@ -3,7 +3,7 @@ title: Drawing Primitives
 description: Interactive examples of textmode.js drawing primitives including rect, line, ellipse, triangle, point, and text rendering.
 ---
 
-::: textmode-sandbox {template=static rtl :previewHeight="600" hideEditor}
+::: textmode-sandbox {template=static :previewHeight="600"}
 
 ```html index.html [readonly]
 <!DOCTYPE html>

@@ -3,7 +3,7 @@ title: Shader Noise
 description: Create procedural noise patterns and shader-based effects with GLSL ES 3.00 custom material shaders in textmode.js.
 ---
 
-::: textmode-sandbox {template=static rtl hideEditor}
+::: textmode-sandbox {template=static :previewHeight="600"}
 
 ```html index.html [readonly]
 <!DOCTYPE html>
