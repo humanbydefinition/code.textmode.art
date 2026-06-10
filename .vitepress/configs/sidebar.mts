@@ -35,7 +35,15 @@ const docsSidebar: DefaultTheme.SidebarItem[] = [
             text: "Characters and colors",
             link: "/docs/characters-and-colors",
           },
+          {
+            text: "Text and glyph ramps",
+            link: "/docs/text-and-glyph-ramps",
+          },
           { text: "Animation and timing", link: "/docs/animation-and-timing" },
+          {
+            text: "Randomness, math, vectors, and noise",
+            link: "/docs/randomness-math-vectors-and-noise",
+          },
           { text: "Transforms", link: "/docs/transforms" },
           { text: "Input events", link: "/docs/events" },
           { text: "Fonts and tilesets", link: "/docs/fonts" },
