@@ -9,22 +9,24 @@ Custom shaders let you generate or process cell data on the GPU. `textmode.js` u
 
 Use shaders when a visual is easier to express procedurally or when a CPU loop would be too slow. (｡◕‿◕｡)
 
-## Filter shaders
+## Material shaders
 
-[`createFilterShader()`](/api/textmode.js/classes/Textmodifier#createfiltershader) creates a shader from fragment source or a file path:
+[`createMaterialShader()`](/api/textmode.js/classes/Textmodifier/methods/createMaterialShader) is the primary way to apply a custom fragment shader to textmode geometry. It uses the standard instanced geometry vertex shader, so the shader can affect later shape and 3D drawing calls:
 
 ```js
-let waveShader;
+let materialShader;
 
 t.setup(async () => {
-  waveShader = await t.createFilterShader("./wave.frag");
+  materialShader = await t.createMaterialShader("./material.frag");
 });
 
 t.draw(() => {
-  t.shader(waveShader);
+  t.background(0);
+
+  t.shader(materialShader);
   t.setUniform("u_time", t.secs);
-  t.rect(t.grid.cols, t.grid.rows);
-  t.shader(null);
+  t.sphere(8);
+  t.resetShader();
 });
 ```
 
@@ -49,7 +51,7 @@ t.setUniforms({
 
 ## MRT outputs
 
-Custom filter shaders write three render targets:
+Custom material shaders write three render targets:
 
 ```glsl
 #version 300 es
@@ -128,7 +130,8 @@ See [Framebuffers](/docs/framebuffers) for offscreen rendering patterns.
 
 ## Related APIs
 
-- [`Textmodifier.createFilterShader()`](/api/textmode.js/classes/Textmodifier#createfiltershader)
+- [`Textmodifier.createFilterShader()`](/api/textmode.js/classes/Textmodifier/methods/createFilterShader)
+- [`Textmodifier.createMaterialShader()`](/api/textmode.js/classes/Textmodifier/methods/createMaterialShader)
 - [`Textmodifier.createShader()`](/api/textmode.js/classes/Textmodifier#createshader)
 - [`Textmodifier.shader()`](/api/textmode.js/classes/Textmodifier#shader)
 - [`Textmodifier.resetShader()`](/api/textmode.js/classes/Textmodifier#resetshader)
