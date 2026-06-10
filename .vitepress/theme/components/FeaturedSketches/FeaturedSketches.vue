@@ -438,6 +438,11 @@ onMounted(() => {
   transition: opacity 0.3s ease;
 }
 
+.featured-sketches__gallery :deep(.textmode-sandbox-wrapper),
+.featured-sketches__gallery :deep(.textmode-live-sandbox) {
+  margin: 0;
+}
+
 .featured-sketches__gallery--loading {
   opacity: 0;
   pointer-events: none;

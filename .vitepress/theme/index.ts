@@ -4,8 +4,6 @@ import type { EnhanceAppContext, Theme } from 'vitepress'
 import { useData, useRoute } from 'vitepress'
 import './custom.css'
 import { defineComponent, h } from 'vue'
-import 'vitepress-plugin-sandpack/dist/style.css'
-import { Sandbox } from 'vitepress-plugin-sandpack'
 import codeblocksFold from 'vitepress-plugin-codeblocks-fold'
 import 'vitepress-plugin-codeblocks-fold/style/index.css'
 import { useCodeSandbox } from 'vitepress-plugin-codesandbox'
@@ -37,6 +35,7 @@ import 'vitepress-plugin-blog/style.css'
 import { useComments, setupHeroSketchRouter } from './composables'
 import type { GiscusConfig } from './composables'
 import TextmodeApiSandbox from './components/TextmodeApiSandbox.vue'
+import TextmodeLiveSandbox from './components/TextmodeLiveSandbox.vue'
 
 const giscusConfig: GiscusConfig = {
   repo: 'humanbydefinition/textmode.js',
@@ -79,7 +78,7 @@ const baseTheme: Theme = {
     const { app, router } = ctx
 
     // Register components
-    app.component('Sandbox', Sandbox)
+    app.component('TextmodeLiveSandbox', TextmodeLiveSandbox)
     app.component('TextmodeSandbox', TextmodeSandbox)
     app.component('TextmodeApiSandbox', TextmodeApiSandbox)
     app.component('SupportGrid', SupportGrid)

@@ -72,31 +72,7 @@ t.windowResized(() => {
 
 ## Complete sketch
 
-```js
-import { textmode } from "textmode.js";
-
-const t = textmode.create({
-  width: window.innerWidth,
-  height: window.innerHeight,
-  fontSize: 16,
-  frameRate: 60,
-});
-
-t.draw(() => {
-  t.background(18, 20, 28);
-
-  t.char("@");
-  t.charColor(255, 180, 90);
-  t.cellColor(0, 0, 0);
-
-  t.rotateZ(t.frameCount * 2);
-  t.rect(12, 8);
-});
-
-t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
+<!--@include: ./examples/docs/first-sketch.md-->
 
 ## Next steps
 

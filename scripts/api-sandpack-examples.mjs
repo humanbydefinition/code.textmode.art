@@ -46,7 +46,7 @@ const KNOWN_ECOSYSTEM_IMPORTS = new Set([
 const API_MARKDOWN_PATTERN = /^api\/[^/]+\/.+\.md$/
 const EXAMPLE_HEADING_PATTERN = /^(#{2,6}) Examples?$/gm
 const RUNNABLE_FENCE_PATTERN = /```(javascript|js|typescript|ts)([^\n]*)\n([\s\S]*?)\n```/g
-const API_SANDBOX_COMPONENT_PATTERN = /<TextmodeApiSandbox\b[^>]*\/>/g
+const API_SANDBOX_COMPONENT_PATTERN = /<Textmode(?:Api|Live)Sandbox\b[^>]*\/>/g
 const SANDBOX_BLOCK_PATTERN = /:::\s*textmode-api-sandbox\b[^\n]*\n([\s\S]*?)\n:::/m
 const MALFORMED_API_SANDBOX_TAIL_PATTERN = /\/>[A-Za-z0-9_-]{20,}"\s*\/>/
 const LOCAL_ASSET_PATTERN = /\b(?:loadFont|loadImage|loadVideo|loadTileset)\(\s*['"](?:\.{1,2}\/|\/)|\bsource\s*:\s*['"](?:\.{1,2}\/|\/)/
@@ -323,8 +323,11 @@ function validateLiveSandboxBlocks(source) {
     const profile = getAttribute(component, 'profile')
     const language = getAttribute(component, 'language')
     const code = decodeBase64Url(getAttribute(component, 'encoded-code') || '')
+    const files = decodeFiles(getAttribute(component, 'encoded-files') || '')
 
-    return Boolean(getProfileById(profile)) && (language === 'javascript' || language === 'typescript') && Boolean(code)
+    return Boolean(getProfileById(profile))
+      && (language === 'javascript' || language === 'typescript')
+      && (Boolean(code) || Boolean(files && findActiveSketchFile(files)))
   })
 
   return { liveCount: matches.length, valid }
@@ -342,8 +345,8 @@ ${code.trimEnd()}
 
 function normalizeApiSandboxSpacing(source) {
   return source
-    .replace(/\n{3,}(<TextmodeApiSandbox\b)/g, '\n\n$1')
-    .replace(/(<TextmodeApiSandbox\b[^\n]*\/>)\n{3,}/g, '$1\n\n')
+    .replace(/\n{3,}(<Textmode(?:Api|Live)Sandbox\b)/g, '\n\n$1')
+    .replace(/(<Textmode(?:Api|Live)Sandbox\b[^\n]*\/>)\n{3,}/g, '$1\n\n')
 }
 
 function findSectionEnd(source, start, headingLevel) {

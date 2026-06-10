@@ -6,6 +6,6 @@ aside: false
 
 # Built with `#textmodejs`
 
-Explore interactive examples showcasing `textmode.js` capabilities - from generative patterns to classic effects. Hover over the demo and click **Open Sandbox** to open it in CodeSandbox, where you can view the source, adjust parameters, and make it your own. (✿◠‿◠)
+Explore interactive examples showcasing `textmode.js` capabilities - from generative patterns to classic effects. Use **Show Code** to inspect the current sketch source on this page, or **Open Sandbox** to open it in CodeSandbox and make it your own. (✿◠‿◠)
 
 <ExampleSketchBrowser />
