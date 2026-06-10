@@ -104,3 +104,4 @@ t.windowResized(() => {
 - [Grid and coordinates](/docs/grid-and-coordinates) explains how positions map to cells.
 - [Drawing shapes](/docs/drawing-shapes) covers the built-in primitives.
 - [Characters and colors](/docs/characters-and-colors) covers glyph and color state.
+- [Randomness, math, vectors, and noise](/docs/randomness-math-vectors-and-noise) covers deterministic generative patterns.

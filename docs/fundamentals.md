@@ -17,7 +17,9 @@ This page has been split into focused guides so each topic is easier to find, re
 
 - [Drawing shapes](/docs/drawing-shapes)
 - [Characters and colors](/docs/characters-and-colors)
+- [Text and glyph ramps](/docs/text-and-glyph-ramps)
 - [Animation and timing](/docs/animation-and-timing)
+- [Randomness, math, vectors, and noise](/docs/randomness-math-vectors-and-noise)
 - [Transforms](/docs/transforms)
 
 ## Nearby topics

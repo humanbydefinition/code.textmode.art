@@ -29,7 +29,9 @@ At its core, `textmode.js` gives you:
 - An **animation loop** (`t.draw(() => { ... })`) where you render each frame
 - A set of **drawing primitives** (`rect`, `line`, `ellipse`, `triangle`, etc.) that fill cells
 - **Cell properties** like `char`, `charColor`, and `cellColor` to control glyphs and colors
+- Native **text printing** with alignment, inline markup, and glyph ramps for value-to-character mapping
 - Familiar **state helpers** like `push`/`pop`, `translate`, and `rotate` for composing scenes
+- Deterministic **randomness, noise, vectors, easing, and math helpers** for generative systems
 
 You write straightforward JavaScript or TypeScript, and `textmode.js` handles batching, instancing, and GPU details behind the scenes.
 
@@ -42,9 +44,12 @@ Here’s a high‑level overview of what the library offers. Later pages dive in
 - Dynamic layering system with blend modes and opacity for multi‑layered textmode scenes
 - Filter system with built-in filters and support for custom filter shaders
 - Load images and videos as sources and render them as textmode with adjustable converters
-- Author custom filter shaders in [`GLSL ES 3.00`](https://registry.khronos.org/OpenGL/specs/es/3.0/GLSL_ES_Specification_3.00.pdf) for advanced effects
+- Author custom shaders in [`GLSL ES 3.00`](https://registry.khronos.org/OpenGL/specs/es/3.0/GLSL_ES_Specification_3.00.pdf) for advanced effects
 - Flexible exporting: TXT, SVG, raster images _(PNG/JPG/WebP)_, animated GIFs, and video _(MP4/WebM)_
 - Animation loop control: `frameRate`, `loop`/`noLoop`, `redraw`, `frameCount`, etc.
+- Deterministic sketch seeds, independent random streams, smooth noise fields, and vector math
+- HiDPI rendering with `pixelDensity`, plus `rgb`, `hsl`, and `hsb` numeric color modes
+- Native `print`/`printAlign` helpers and `TextmodeGlyphRamp` for typographic and data-driven glyph work
 - Framework-agnostic: Use `textmode.js` with any canvas-based framework or library
 - Zero dependencies, written in TypeScript, with comprehensive type definitions
 
