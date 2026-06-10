@@ -88,7 +88,7 @@ const libraries: ApiLibrary[] = [
     name: 'textmode.export.js',
     kicker: 'export utilities',
     badge: 'export',
-    description: 'Utilities for exporting textmode.js creations to common formats like PNG, GIF, and SVG.',
+    description: 'Utilities for exporting textmode.js creations to common formats like PNG, GIF, SVG, MP4, and WebM.',
     highlights: [],
     cta: '/api/textmode.export.js/',
     secondary: '/api/textmode.export.js/#example',

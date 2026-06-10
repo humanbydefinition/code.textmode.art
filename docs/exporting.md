@@ -1,6 +1,6 @@
 ---
 title: Exporting
-description: Export textmode.js sketches with textmode.export.js as TXT, JSON, SVG, raster images, animated GIFs, and WebM video.
+description: Export textmode.js sketches with textmode.export.js as TXT, JSON, SVG, raster images, animated GIFs, MP4 video, and WebM video.
 ---
 
 # Exporting
@@ -32,7 +32,7 @@ Once installed, the plugin adds runtime export helpers directly to your `Textmod
 - SVG via [`toSVG()`](#svg-export) and [`saveSVG()`](#svg-export)
 - raster images via [`saveCanvas()`](#image-export) and [`copyCanvas()`](#image-export)
 - animated GIF via [`saveGIF()`](#gif-export)
-- WebM video via [`saveWEBM()`](#video-export)
+- MP4 and WebM video via [`saveVideo()`](#video-export)
 
 ## Two export models
 
@@ -42,7 +42,7 @@ Once installed, the plugin adds runtime export helpers directly to your `Textmod
   - [`saveCanvas()`](#image-export)
   - [`copyCanvas()`](#image-export)
   - [`saveGIF()`](#gif-export)
-  - [`saveWEBM()`](#video-export)
+  - [`saveVideo()`](#video-export)
 
 - **Layer data export** reads layer draw framebuffer data and converts it into another representation. TXT and SVG export one selected layer. JSON exports one selected layer by default, or the full descriptive layer stack with `target: 'all'`. Use this for:
   - [`toString()`](#text-export) / [`saveStrings()`](#text-export)
@@ -195,7 +195,7 @@ Available [`SVGExportOptions`](/api/textmode.export.js/type-aliases/SVGExportOpt
 - `drawMode`
 - `strokeWidth`
 
-SVG export is path-based and uses glyph outline data from the selected layer font. In practice, this is the right export path for sketches using [`TextmodeFont`](/api/textmode.js/namespaces/fonts/classes/TextmodeFont.md). If you need exact bitmap tileset output, use image, GIF, or WebM export instead.
+SVG export is path-based and uses glyph outline data from the selected layer font. In practice, this is the right export path for sketches using [`TextmodeFont`](/api/textmode.js/namespaces/fonts/classes/TextmodeFont.md). If you need exact bitmap tileset output, use image, GIF, or video export instead.
 
 ## Image export
 
@@ -281,27 +281,48 @@ GIF export works by registering a post-draw hook and capturing the next rendered
 
 ## Video export
 
-Use [`saveWEBM()`](/api/textmode.export.js/interfaces/TextmodeExportAPI.md#savewebm) to record a WebM video of the final presented canvas.
+Use [`saveVideo()`](/api/textmode.export.js/interfaces/TextmodeExportAPI/methods/saveVideo.md) to record future frames from the final presented canvas and save them as video.
+
+MP4 is the default format:
 
 ```js
-await t.saveWEBM({
+await t.saveVideo({
   filename: "capture",
   frameCount: 240,
   frameRate: 60,
 });
 ```
 
-You can control encoder quality and optionally request transparent output:
+This saves `capture.mp4`. The exporter uses the browser's native WebCodecs encoder, so MP4 support depends on an available H.264 encoder in the current browser/device.
+
+To export WebM instead, pass `format: "webm"`:
 
 ```js
-await t.saveWEBM({
-  filename: "capture-alpha",
+await t.saveVideo({
+  filename: "capture-webm",
+  format: "webm",
   frameCount: 240,
   frameRate: 60,
-  quality: 0.85,
-  transparent: true,
+  bitrate: "high",
+});
+```
+
+You can control bitrate, encoder scheduling, key frames, export pixel density, hardware acceleration preference, and progress reporting:
+
+```js
+await t.saveVideo({
+  filename: "poster-loop",
+  format: "mp4",
+  frameCount: 360,
+  frameRate: 60,
+  bitrate: 8_000_000,
+  bitrateMode: "variable",
+  latencyMode: "quality",
+  hardwareAcceleration: "no-preference",
+  keyFrameInterval: 2,
+  pixelDensity: 2,
   onProgress(progress) {
-    console.log(progress.state, progress.frameIndex, progress.totalFrames);
+    console.log(progress.phase, progress.frame, progress.totalFrames);
   },
 });
 ```
@@ -309,14 +330,23 @@ await t.saveWEBM({
 Available [`VideoExportOptions`](/api/textmode.export.js/type-aliases/VideoExportOptions.md):
 
 - `filename`
+- `format`
 - `frameCount`
 - `frameRate`
-- `quality`
+- `bitrate`
+- `bitrateMode`
+- `latencyMode`
+- `hardwareAcceleration`
+- `keyFrameInterval`
+- `pixelDensity`
+- `signal`
 - `transparent`
 - `onProgress`
 - `debugLogging`
 
-Like GIF export, WebM recording captures upcoming frames through a post-draw hook, so the animation needs to keep rendering while the export runs.
+Video export captures upcoming frames through a post-draw hook, so the animation needs to keep rendering while the export runs. Defaults are `format: "mp4"`, `frameCount: 300`, `frameRate: 60`, `bitrate: "medium"`, `bitrateMode: "variable"`, `latencyMode: "quality"`, `hardwareAcceleration: "no-preference"`, `keyFrameInterval: 2`, and `pixelDensity: 1`.
+
+Use `transparent: true` only with WebM. MP4/H.264 does not provide portable alpha support, so transparent MP4 exports are rejected.
 
 ## Related APIs
 
@@ -336,4 +366,9 @@ Like GIF export, WebM recording captures upcoming frames through a post-draw hoo
 - [`GIFExportOptions`](/api/textmode.export.js/type-aliases/GIFExportOptions.md)
 - [`GIFExportProgress`](/api/textmode.export.js/type-aliases/GIFExportProgress.md)
 - [`VideoExportOptions`](/api/textmode.export.js/type-aliases/VideoExportOptions.md)
+- [`VideoExportFormat`](/api/textmode.export.js/type-aliases/VideoExportFormat.md)
+- [`VideoBitratePreset`](/api/textmode.export.js/type-aliases/VideoBitratePreset.md)
+- [`VideoBitrateMode`](/api/textmode.export.js/type-aliases/VideoBitrateMode.md)
+- [`VideoLatencyMode`](/api/textmode.export.js/type-aliases/VideoLatencyMode.md)
+- [`VideoHardwareAcceleration`](/api/textmode.export.js/type-aliases/VideoHardwareAcceleration.md)
 - [`VideoExportProgress`](/api/textmode.export.js/type-aliases/VideoExportProgress.md)

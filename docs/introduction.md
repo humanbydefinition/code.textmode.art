@@ -43,7 +43,7 @@ Here’s a high‑level overview of what the library offers. Later pages dive in
 - Filter system with built-in filters and support for custom filter shaders
 - Load images and videos as sources and render them as textmode with adjustable converters
 - Author custom filter shaders in [`GLSL ES 3.00`](https://registry.khronos.org/OpenGL/specs/es/3.0/GLSL_ES_Specification_3.00.pdf) for advanced effects
-- Flexible exporting: TXT, SVG, raster images _(PNG/JPG/WebP)_, animated GIFs, and video _(WebM)_
+- Flexible exporting: TXT, SVG, raster images _(PNG/JPG/WebP)_, animated GIFs, and video _(MP4/WebM)_
 - Animation loop control: `frameRate`, `loop`/`noLoop`, `redraw`, `frameCount`, etc.
 - Framework-agnostic: Use `textmode.js` with any canvas-based framework or library
 - Zero dependencies, written in TypeScript, with comprehensive type definitions
