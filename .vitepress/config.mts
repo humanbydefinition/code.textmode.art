@@ -5,13 +5,18 @@ import { renderSandbox } from 'vitepress-plugin-sandpack'
 import { withMermaid } from 'vitepress-plugin-mermaid'
 import { head, nav, sidebar, blog, transformHead } from './configs/index.mts'
 
+const LIVE_SANDBOX_CONTAINER_PATTERN = /:{3,}\s*textmode-(?:api-)?sandbox\b[^\n]*\n[\s\S]*?\n:{3,}/g
+const LIVE_SANDBOX_COMPONENT_PATTERN = /<Textmode(?:Api|Live)?Sandbox\b[^>]*\/>/g
+const RUNNABLE_API_FENCE_PATTERN = /```(?:javascript|js|typescript|ts)[^\n]*\n[\s\S]*?\n```/g
+
 function renderSearchContent(src: string, env: any, md: any) {
-  const isApiPage = env.relativePath?.startsWith('api/textmode.js/')
+  const isApiPage = env.relativePath?.startsWith('api/')
+  const sourceWithoutLiveSandboxes = src
+    .replace(LIVE_SANDBOX_CONTAINER_PATTERN, '')
+    .replace(LIVE_SANDBOX_COMPONENT_PATTERN, '')
   const searchableSource = isApiPage
-    ? src
-        .replace(/:::\s*textmode-api-sandbox\b[^\n]*\n[\s\S]*?\n:::/g, '')
-        .replace(/```(?:javascript|js)[^\n]*\n[\s\S]*?\n```/g, '')
-    : src
+    ? sourceWithoutLiveSandboxes.replace(RUNNABLE_API_FENCE_PATTERN, '')
+    : sourceWithoutLiveSandboxes
   const html = md.render(searchableSource, env)
 
   return env.frontmatter?.search === false ? '' : html

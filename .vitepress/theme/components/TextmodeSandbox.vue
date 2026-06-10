@@ -1,8 +1,13 @@
 <template>
   <div class="textmode-sandbox-wrapper">
-    <Sandbox v-bind="sandboxPropsPlain">
+    <TextmodeLiveSandbox
+      v-bind="sandboxPropsPlain"
+      profile="textmode.js"
+      :show-header="!metadata"
+      :title="sandboxTitle"
+    >
       <slot />
-    </Sandbox>
+    </TextmodeLiveSandbox>
 
     <div v-if="metadata" class="textmode-sketch-overlay">
       <div class="overlay-content">
@@ -103,9 +108,10 @@
 
 <script setup lang="ts">
 import { computed } from 'vue'
-import { Sandbox, sandboxProps } from 'vitepress-plugin-sandpack'
+import { sandboxProps } from 'vitepress-plugin-sandpack'
 import sketchMetadata from '../../data/sketches.json'
 import { findContributorByName } from '../composables/contributors'
+import TextmodeLiveSandbox from './TextmodeLiveSandbox.vue'
 
 type SketchMetadataMap = typeof sketchMetadata
 
@@ -113,7 +119,15 @@ defineOptions({ name: 'TextmodeSandbox' })
 
 const props = defineProps({
   ...sandboxProps,
+  template: {
+    type: String,
+    default: 'static'
+  },
   sketchId: {
+    type: String,
+    default: ''
+  },
+  title: {
     type: String,
     default: ''
   }
@@ -157,7 +171,14 @@ const socialLinks = computed(() => {
 })
 
 const sandboxPropsPlain = computed(() => {
-  const { sketchId, ...rest } = props as Record<string, unknown> & { sketchId?: string }
+  const { sketchId, title, ...rest } = props as Record<string, unknown> & {
+    sketchId?: string
+    title?: string
+  }
   return rest
+})
+
+const sandboxTitle = computed(() => {
+  return metadata.value?.title || props.title || 'textmode.js sketch'
 })
 </script>
