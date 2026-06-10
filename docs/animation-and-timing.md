@@ -39,6 +39,16 @@ t.draw(() => {
 
 Setting one updates the other, which is useful when seeking through time-based sketches.
 
+For shaped motion, use [`ease()`](/api/textmode.js/classes/Textmodifier/methods/ease) with interpolation helpers such as [`lerp()`](/api/textmode.js/classes/Textmodifier/methods/lerp):
+
+```js
+const amount = (t.frameCount % 120) / 120;
+const eased = t.ease("inOutCubic", amount);
+const x = t.lerp(-18, 18, eased);
+```
+
+See [Randomness, math, vectors, and noise](/docs/randomness-math-vectors-and-noise) for easing, deterministic animation patterns, vector motion, and noise-driven fields.
+
 ## Delta time
 
 Use [`deltaTime()`](/api/textmode.js/classes/Textmodifier#deltatime) for frame-rate-independent motion:
@@ -120,3 +130,5 @@ This is common when sampling another canvas with [`createTexture()`](/api/textmo
 - [`Textmodifier.targetFrameRate()`](/api/textmode.js/classes/Textmodifier#targetframerate)
 - [`Textmodifier.noLoop()`](/api/textmode.js/classes/Textmodifier#noloop)
 - [`Textmodifier.redraw()`](/api/textmode.js/classes/Textmodifier#redraw)
+- [`Textmodifier.ease()`](/api/textmode.js/classes/Textmodifier/methods/ease)
+- [`Textmodifier.lerp()`](/api/textmode.js/classes/Textmodifier/methods/lerp)

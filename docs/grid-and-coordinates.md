@@ -61,6 +61,41 @@ t.draw(() => {
 });
 ```
 
+## Pixel density
+
+The sketch has three related sizes:
+
+- The logical canvas size: the `width` and `height` you pass to `textmode.create()` or [`resizeCanvas()`](/api/textmode.js/classes/Textmodifier#resizecanvas).
+- The CSS display size: how large the canvas appears on the page.
+- The backing-store size: the internal pixel buffer used by WebGL.
+
+By default, these use a pixel density of `1`. With [`pixelDensity`](/api/textmode.js/type-aliases/TextmodeOptions#pixeldensity), an internally-created canvas can keep the same logical and CSS size while rendering to a denser backing store:
+
+```js
+const t = textmode.create({
+  width: 800,
+  height: 600,
+  fontSize: 16,
+  pixelDensity: window.devicePixelRatio,
+});
+```
+
+You can also read or update it at runtime with [`t.pixelDensity()`](/api/textmode.js/classes/Textmodifier/methods/pixelDensity):
+
+```js
+t.pixelDensity(2);
+```
+
+`t.width`, `t.height`, and `t.grid` remain based on the logical canvas size, not the multiplied backing-store size. That means drawing code stays stable when you move between standard and HiDPI displays.
+
+When you resize a HiDPI sketch, keep passing logical dimensions:
+
+```js
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 ## Responsive and fixed grids
 
 The grid is responsive by default. You can also set rows or columns directly:
@@ -118,3 +153,4 @@ t.inputGrid("topmost");
 - [`Textmodifier.inputGrid()`](/api/textmode.js/classes/Textmodifier#inputgrid)
 - [`Textmodifier.width`](/api/textmode.js/classes/Textmodifier#width)
 - [`Textmodifier.height`](/api/textmode.js/classes/Textmodifier#height)
+- [`Textmodifier.pixelDensity()`](/api/textmode.js/classes/Textmodifier/methods/pixelDensity)

@@ -71,6 +71,35 @@ Useful color properties include:
 - [`normalized`](/api/textmode.js/namespaces/color/classes/TextmodeColor#normalized)
 - [`withAlpha()`](/api/textmode.js/namespaces/color/classes/TextmodeColor#withalpha)
 
+## Color modes
+
+Numeric colors are interpreted as RGB by default. Use [`colorMode()`](/api/textmode.js/classes/Textmodifier/methods/colorMode) to switch numeric inputs to `rgb`, `hsl`, or `hsb`:
+
+```js
+t.colorMode("hsb", 360, 100, 100, 1);
+t.charColor(210, 80, 100);
+t.cellColor(210, 70, 12);
+t.rect(12, 8);
+
+t.colorMode("rgb");
+```
+
+Passing one max value applies the same range to every channel:
+
+```js
+t.colorMode("rgb", 1);
+t.charColor(1, 0.6, 0.2, 1);
+```
+
+Passing per-channel maxes is useful for hue-based color work:
+
+```js
+t.colorMode("hsl", 360, 100, 100, 1);
+t.charColor(30, 90, 65);
+```
+
+`colorMode()` affects numeric colors passed to `charColor()`, `cellColor()`, `fill()`, `stroke()`, `background()`, and `color()`. CSS color strings and existing `TextmodeColor` instances keep their own values.
+
 ## Glyph transforms
 
 These methods affect how future glyphs are rendered:
@@ -105,5 +134,6 @@ See [Fonts and tilesets](/docs/fonts) for the full tileset workflow.
 - [`Textmodifier.charColor()`](/api/textmode.js/classes/Textmodifier#charcolor)
 - [`Textmodifier.cellColor()`](/api/textmode.js/classes/Textmodifier#cellcolor)
 - [`Textmodifier.color()`](/api/textmode.js/classes/Textmodifier#color)
+- [`Textmodifier.colorMode()`](/api/textmode.js/classes/Textmodifier/methods/colorMode)
 - [`TextmodeColor`](/api/textmode.js/namespaces/color/classes/TextmodeColor)
 - [`Textmodifier.useTileColors()`](/api/textmode.js/classes/Textmodifier#usetilecolors)

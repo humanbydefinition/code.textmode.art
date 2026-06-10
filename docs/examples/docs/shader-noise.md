@@ -1,6 +1,6 @@
 ---
 title: Shader Noise
-description: Create procedural noise patterns and shader-based effects with GLSL ES 3.00 custom filter shaders in textmode.js.
+description: Create procedural noise patterns and shader-based effects with GLSL ES 3.00 custom material shaders in textmode.js.
 ---
 
 ::: textmode-sandbox {template=static rtl hideEditor}
@@ -38,7 +38,7 @@ description: Create procedural noise patterns and shader-based effects with GLSL
 ```js sketch.js [active]
 /**
  * @name [textmode.js] Shader Noise
- * @description Demonstration of custom filter shaders with animated Perlin noise traversing across the grid.
+ * @description Demonstration of custom material shaders with animated Perlin noise traversing across the grid.
  * @author humanbydefinition
  * @link https://github.com/humanbydefinition/textmode.js
  */
@@ -174,15 +174,17 @@ const tm = textmode.create({
 let noiseShader;
 
 tm.setup(async () => {
-    // Create the noise shader
-    noiseShader = await tm.createFilterShader(perlinNoiseShader);
+    // Create a material shader and apply it to a full-grid rectangle.
+    noiseShader = await tm.createMaterialShader(perlinNoiseShader);
 });
 
 tm.draw(() => {
     // Clear background
     tm.background(0, 0, 20, 255);
+
+    if (!noiseShader) return;
     
-    // Use the custom noise shader
+    // Use the custom material shader
     tm.shader(noiseShader);
     
     // Set uniforms
@@ -192,6 +194,7 @@ tm.draw(() => {
     });
     
     tm.rect(tm.grid.cols, tm.grid.rows);
+    tm.resetShader();
 });
 
 tm.windowResized(() => {

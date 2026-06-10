@@ -79,7 +79,9 @@ docs/
 ├── grid-and-coordinates.md      # Grid model and coordinate mapping
 ├── drawing-shapes.md            # 2D primitives
 ├── characters-and-colors.md     # Glyph and color state
+├── text-and-glyph-ramps.md      # Native text printing and glyph ramps
 ├── animation-and-timing.md      # Loop and time controls
+├── randomness-math-vectors-and-noise.md # Randomness, vectors, noise, math
 ├── transforms.md                # Matrix and transform state
 ├── events.md                    # Input events
 ├── fonts.md                     # Fonts and tilesets
