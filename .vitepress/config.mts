@@ -51,7 +51,7 @@ const themeConfig = {
 
   footer: {
     copyright: 'Copyright © 2025-2026 <a href="https://textmode.art" target="_blank">textmode.art</a>. Built with <a href="https://vitepress.dev" target="_blank">VitePress</a>. Created by <a href="https://github.com/humanbydefinition" target="_blank">humanbydefinition</a>.',
-    message: '<a href="https://legal.textmode.art/projects/code.textmode.art/en/imprint" target="_blank" rel="noreferrer noopener">Imprint</a> | <a href="https://legal.textmode.art/projects/code.textmode.art/en/privacy" target="_blank" rel="noreferrer noopener">Data Protection Policy</a> | <button type="button" class="textmode-privacy-settings-trigger" data-analytics-consent-open>Privacy Settings</button>'
+    message: '<a href="https://legal.textmode.art/projects/code.textmode.art/en/imprint" target="_blank" rel="noreferrer noopener">Imprint</a> | <a href="https://legal.textmode.art/projects/code.textmode.art/en/privacy" target="_blank" rel="noreferrer noopener">Data Protection Policy</a>'
   },
 
   socialLinks: [
