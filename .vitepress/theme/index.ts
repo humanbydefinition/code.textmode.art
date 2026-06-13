@@ -16,6 +16,7 @@ import TextmodeWhatIs from './components/TextmodeWhatIs.vue'
 import HomeCta from './components/HomeCta/HomeCta.vue'
 import AsideLinks from './components/AsideLinks/AsideLinks.vue'
 import NotificationToast from './components/NotificationToast/NotificationToast.vue'
+import TextmodeHero from './components/TextmodeHero.vue'
 import DocFooter from './components/DocFooter/DocFooter.vue'
 import FeaturedSketches from './components/FeaturedSketches/FeaturedSketches.vue'
 import CommunitySupport from './components/CommunitySupport/CommunitySupport.vue'
@@ -31,7 +32,7 @@ import { withBlogTheme } from 'vitepress-plugin-blog'
 import 'vitepress-plugin-blog/style.css'
 
 // Composables
-import { useComments, setupHeroSketchRouter } from './composables'
+import { useComments } from './composables'
 import type { GiscusConfig } from './composables'
 import TextmodeApiSandbox from './components/TextmodeApiSandbox.vue'
 import TextmodeLiveSandbox from './components/TextmodeLiveSandbox.vue'
@@ -52,14 +53,7 @@ const HeroLayout = defineComponent({
   setup(_, { slots }) {
     return () => h(DefaultTheme.Layout, null, {
       ...slots,
-      'home-hero-info-after': () => h('div', {
-        class: 'textmode-hero-wrapper',
-        innerHTML: `
-          <div class="textmode-hero-container">
-            <canvas class="textmode-hero-canvas"></canvas>
-          </div>
-        `
-      }),
+      'home-hero-info-after': () => h(TextmodeHero),
       'aside-bottom': () => h(AsideLinks),
       'doc-after': () => h(DocFooter),
       'layout-bottom': () => h(NotificationToast)
@@ -71,7 +65,7 @@ const baseTheme: Theme = {
   extends: DefaultTheme,
   Layout: HeroLayout,
   enhanceApp(ctx: EnhanceAppContext) {
-    const { app, router } = ctx
+    const { app } = ctx
 
     // Register components
     app.component('TextmodeLiveSandbox', TextmodeLiveSandbox)
@@ -88,9 +82,6 @@ const baseTheme: Theme = {
     app.component('GalleryGrid', GalleryGrid)
     app.component('ApiLanding', ApiLanding)
     app.component('ExampleSketchBrowser', ExampleSketchBrowser)
-
-    // Set up hero sketch router
-    setupHeroSketchRouter(router)
   },
   setup() {
     const { frontmatter } = useData()
