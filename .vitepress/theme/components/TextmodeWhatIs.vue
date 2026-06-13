@@ -5,9 +5,7 @@
                 <slot></slot>
             </div>
             <div class="textmode-what-is-sketch" ref="containerRef">
-                <canvas ref="canvasRef" class="textmode-sketch-canvas" v-show="isClient"></canvas>
-                <div class="textmode-sketch-fallback" v-show="!isClient">
-                </div>
+                <canvas ref="canvasRef" class="textmode-sketch-canvas" aria-hidden="true"></canvas>
             </div>
         </div>
     </div>
@@ -15,14 +13,43 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import type { SketchInstance } from '../sketches/hero-wave/types'
 
 const containerRef = ref<HTMLElement>()
 const canvasRef = ref<HTMLCanvasElement>()
 const contentRef = ref<HTMLElement>()
-let sketchInstance: any = null
+let sketchInstance: SketchInstance | null = null
 let resizeObserver: ResizeObserver | null = null
+let visibilityObserver: IntersectionObserver | null = null
 let resizeTimeout: number | null = null
-const isClient = ref(false)
+let isUnmounted = false
+
+const getSketchSize = () => {
+    const container = containerRef.value
+    const content = contentRef.value
+    if (!container) {
+        return { width: 500, height: 400 }
+    }
+
+    const containerRect = container.getBoundingClientRect()
+    const width = Math.max(1, Math.floor(containerRect.width || container.clientWidth || 500))
+    const isMobile = window.innerWidth <= 768
+
+    if (isMobile) {
+        return {
+            width,
+            height: Math.max(300, Math.min(400, Math.floor(containerRect.height || container.clientHeight || 360)))
+        }
+    }
+
+    const contentRect = content?.getBoundingClientRect()
+    const contentHeight = contentRect?.height || content?.clientHeight || containerRect.height || 400
+
+    return {
+        width,
+        height: Math.max(320, Math.floor(contentHeight))
+    }
+}
 
 const updateCanvasSize = () => {
     // Debounce resize calls to prevent rapid consecutive resizes
@@ -31,37 +58,21 @@ const updateCanvasSize = () => {
     }
 
     resizeTimeout = window.setTimeout(() => {
-        const canvas = canvasRef.value
-        const container = containerRef.value
-        const content = contentRef.value
-
-        if (!canvas || !container || !sketchInstance) return
-
-        const width = container.clientWidth || 500
-
-        // Check if we're in single-column mode (mobile)
-        const isMobile = window.innerWidth <= 768
-        let height: number
-
-        if (isMobile) {
-            // In single column mode, cap at 400px
-            height = Math.min(400, container.clientHeight || 400)
-        } else {
-            // In two-column mode, match content height
-            height = content ? content.clientHeight : container.clientHeight || 400
+        if (!sketchInstance) {
+            resizeTimeout = null
+            return
         }
 
-        // Use the sketch's resize method which handles grid reinitialization
-        if (sketchInstance?.resize) {
-            sketchInstance.resize(width, height)
-        }
+        const { width, height } = getSketchSize()
+        sketchInstance.resize?.(width, height)
 
         resizeTimeout = null
     }, 100) // 100ms debounce
 }
 
-onMounted(async () => {
-    isClient.value = true
+const initSketch = async () => {
+    if (sketchInstance || isUnmounted) return
+
     await nextTick()
 
     const canvas = canvasRef.value
@@ -74,15 +85,11 @@ onMounted(async () => {
     }
 
     try {
-        // Get initial dimensions
-        const width = container.clientWidth || 500
-        const isMobile = window.innerWidth <= 768
-        const height = isMobile
-            ? Math.min(400, container.clientHeight || 400)
-            : (content ? content.clientHeight : container.clientHeight || 400)
+        const { width, height } = getSketchSize()
 
         // Dynamically import the sketch module (only runs on client)
         const { createHeroWaveSketch } = await import('../sketches/hero-wave/')
+        if (isUnmounted || !canvas.isConnected) return
 
         canvas.width = width
         canvas.height = height
@@ -90,10 +97,11 @@ onMounted(async () => {
         sketchInstance = createHeroWaveSketch(canvas, width, height, { mode: 'background' })
 
         // Set up ResizeObserver to watch content height changes
+        resizeObserver = new ResizeObserver(() => {
+            updateCanvasSize()
+        })
+        resizeObserver.observe(container)
         if (content) {
-            resizeObserver = new ResizeObserver(() => {
-                updateCanvasSize()
-            })
             resizeObserver.observe(content)
         }
 
@@ -102,13 +110,40 @@ onMounted(async () => {
     } catch (error) {
         console.error('TextmodeWhatIs: Failed to initialize sketch', error)
     }
+}
+
+onMounted(async () => {
+    isUnmounted = false
+    await nextTick()
+
+    const container = containerRef.value
+    if (!container) return
+
+    visibilityObserver = new IntersectionObserver((entries) => {
+        if (!entries.some(entry => entry.isIntersecting)) return
+
+        visibilityObserver?.disconnect()
+        visibilityObserver = null
+        initSketch()
+    }, {
+        rootMargin: '240px 0px'
+    })
+
+    visibilityObserver.observe(container)
 })
 
 onBeforeUnmount(() => {
+  isUnmounted = true
   window.removeEventListener('resize', updateCanvasSize)
-  if (sketchInstance?.tm?.remove) {
-    sketchInstance.tm.remove()
+  if (resizeTimeout !== null) {
+    window.clearTimeout(resizeTimeout)
+    resizeTimeout = null
   }
+  visibilityObserver?.disconnect()
+  visibilityObserver = null
+  resizeObserver?.disconnect()
+  resizeObserver = null
+  sketchInstance?.destroy?.()
   sketchInstance = null
 })
 </script>
@@ -159,16 +194,11 @@ onBeforeUnmount(() => {
 }
 
 .textmode-sketch-canvas {
-    display: block;
-}
-
-.textmode-sketch-fallback {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--vp-c-text-2);
+    display: block;
 }
 
 /* Mobile responsive */

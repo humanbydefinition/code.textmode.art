@@ -1,6 +1,7 @@
 export interface SketchInstance {
   tm: any
   resize?: (width: number, height: number) => void
+  destroy?: () => void
 }
 
 export interface HeroWaveOptions {

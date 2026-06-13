@@ -41,11 +41,14 @@ export function renderBrandingOverlay(tm: any, time: number, subheaderLines: str
 }
 
 function computeLayout(tm: any, subheaderLines: string[]): LayoutConfig {
-  const maxLineLength = Math.max(1, ...subheaderLines.map(line => line.length))
   const logoTextWidth = LOGO_TEXT.length + 2
-  const totalWidth = Math.max(logoTextWidth, maxLineLength + 2)
-  const logoGridX = Math.min(2, tm.grid.cols - LOGO_TEXT.length - 2) + 1
-  const logoGridY = Math.min(0, tm.grid.rows - subheaderLines.length - 6)
+  const rawMaxLineLength = Math.max(1, ...subheaderLines.map(line => line.length))
+  const frameLeftInset = Math.min(2, Math.max(0, tm.grid.cols - logoTextWidth))
+  const availableWidth = Math.max(1, tm.grid.cols - frameLeftInset)
+  const totalWidth = Math.max(1, Math.min(availableWidth, Math.max(logoTextWidth, rawMaxLineLength + 2)))
+  const maxLineLength = Math.max(1, Math.min(rawMaxLineLength, totalWidth - 2))
+  const logoGridX = frameLeftInset + 1
+  const logoGridY = clamp(0, 0, Math.max(0, tm.grid.rows - subheaderLines.length - 5))
   const subheaderStartGridY = logoGridY + 4
 
   return {
@@ -138,6 +141,8 @@ function fillSubheaderLines(tm: any, layout: LayoutConfig, time: number, lines: 
 }
 
 function drawCell(tm: any, gridX: number, gridY: number, char: string, color: RgbaColor) {
+  if (gridX < 0 || gridY < 0 || gridX >= tm.grid.cols || gridY >= tm.grid.rows) return
+
   tm.push()
   tm.translate(gridX - tm.grid.cols / 2, gridY - tm.grid.rows / 2, 0)
   tm.char(char)
@@ -171,4 +176,8 @@ function animatedColor(
     b: Math.floor(base[2] + (highlight[2] - base[2]) * pulse),
     a: Math.floor(alphaMin + (alphaMax - alphaMin) * pulse)
   }
+}
+
+function clamp(value: number, min: number, max: number): number {
+  return Math.min(Math.max(value, min), max)
 }
