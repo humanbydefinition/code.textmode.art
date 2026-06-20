@@ -8,7 +8,7 @@ api: true
 owner: TextmodeImage
 namespace: media
 kind: Method
-lastModified: 2026-06-09
+lastModified: 2026-06-19
 ---
 
 [textmode.js](../../../../../index.md) / [media](../../../index.md) / [TextmodeImage](../../TextmodeImage.md) / conversions
@@ -20,9 +20,6 @@ conversions(steps): this;
 ```
 
 Set an ordered conversion stack for this source.
-
-Each step renders the same source with its own conversion mode and optional
-overrides. Later steps are drawn on top of earlier steps.
 
 ## Parameters
 

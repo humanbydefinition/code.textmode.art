@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: media
 kind: Class
-lastModified: 2026-06-09
+lastModified: 2026-06-19
 hasConstructor: false
 ---
 

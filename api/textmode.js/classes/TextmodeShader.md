@@ -6,7 +6,7 @@ description: WebGL shader program created by Textmodifier.createMaterialShader, 
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-06-09
+lastModified: 2026-06-19
 hasConstructor: false
 ---
 
@@ -20,6 +20,7 @@ WebGL shader program created by [Textmodifier.createMaterialShader](Textmodifier
 Use shaders and set uniforms via [Textmodifier.shader](Textmodifier/methods/shader.md), [Textmodifier.setUniform](Textmodifier/methods/setUniform.md), and [Textmodifier.setUniforms](Textmodifier/methods/setUniforms.md).
 
 After using a custom shader, you can revert to the default textmode shader with [Textmodifier.resetShader](Textmodifier/methods/resetShader.md).
+
 
 ## Extends
 

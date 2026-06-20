@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: plugins
 kind: Interface
-lastModified: 2026-06-09
+lastModified: 2026-06-19
 isInterface: true
 ---
 
@@ -16,6 +16,7 @@ isInterface: true
 # Interface: TextmodePluginContext
 
 Host-provided context passed to plugins when they are installed on a [Textmodifier](../../../classes/Textmodifier.md) instance.
+
 
 ## Properties
 

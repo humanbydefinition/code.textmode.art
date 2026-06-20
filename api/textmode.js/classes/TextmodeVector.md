@@ -6,7 +6,7 @@ description: Mutable two- or three-dimensional vector for creative-coding math.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-06-09
+lastModified: 2026-06-19
 hasConstructor: true
 ---
 
@@ -60,6 +60,7 @@ x: number;
 
 X component.
 
+
 ***
 
 ### y
@@ -70,6 +71,7 @@ y: number;
 
 Y component.
 
+
 ***
 
 ### z
@@ -79,6 +81,7 @@ z: number;
 ```
 
 Z component.
+
 
 ## Methods
 

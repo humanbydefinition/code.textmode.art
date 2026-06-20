@@ -7,7 +7,7 @@ category: Enumerations
 api: true
 namespace: errors
 kind: Enum
-lastModified: 2026-06-09
+lastModified: 2026-06-19
 ---
 
 [textmode.js](../../../index.md) / [errors](../index.md) / TextmodeErrorLevel
@@ -26,6 +26,7 @@ Controls how validation failures are reported.
 // Set to `WARNING` level to log errors without stopping execution
 textmode.setErrorLevel(TextmodeErrorLevel.WARNING);
 ```
+
 
 ## Enumeration Members
 

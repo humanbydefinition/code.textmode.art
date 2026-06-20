@@ -6,7 +6,7 @@ description: Mutable camera object used for p5-style camera workflows.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-06-09
+lastModified: 2026-06-19
 hasConstructor: false
 ---
 
@@ -19,6 +19,7 @@ Mutable camera object used for p5-style camera workflows.
 Instances can be created with [Textmodifier.createCamera](Textmodifier/methods/createCamera.md) and activated with
 [Textmodifier.setCamera](Textmodifier/methods/setCamera.md). Mutating the object does not affect rendering until
 it is applied again with `setCamera`.
+
 
 ## Accessors
 

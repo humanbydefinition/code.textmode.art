@@ -8,7 +8,7 @@ api: true
 owner: TextmodeImage
 namespace: media
 kind: Method
-lastModified: 2026-06-09
+lastModified: 2026-06-19
 ---
 
 [textmode.js](../../../../../index.md) / [media](../../../index.md) / [TextmodeImage](../../TextmodeImage.md) / background
@@ -30,9 +30,9 @@ Set the background color used for transparent pixels.
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
 | `colorOrGray` | \| `string` \| `number` \| [`TextmodeColor`](../../../../color/classes/TextmodeColor.md) | A grayscale value (0-255), hex string ('#RGB', '#RRGGBB', '#RRGGBBAA'), or TextmodeColor instance |
-| `g?` | `number` | Optional green component (0-255) if using RGB format, or alpha (0-255) when using grayscale form |
-| `b?` | `number` | Optional blue component (0-255) if using RGB format |
-| `a?` | `number` | Optional alpha component (0-255) if using RGBA format |
+| `g?` | `number` | Optional green component, or alpha when using grayscale form. |
+| `b?` | `number` | Optional blue component. |
+| `a?` | `number` | Optional alpha component. |
 
 ## Returns
 

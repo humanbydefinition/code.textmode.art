@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: layering
 kind: Class
-lastModified: 2026-06-09
+lastModified: 2026-06-19
 hasConstructor: false
 ---
 
@@ -21,6 +21,7 @@ The `base` layer is always present at the bottom of the stack. User-created laye
 above it and can render with independent grids, fonts, filters, offsets, opacity, and blend modes.
 
 Access this manager via `textmodifier.layers`.
+
 
 ## Accessors
 

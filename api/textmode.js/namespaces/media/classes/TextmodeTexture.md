@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: media
 kind: Class
-lastModified: 2026-06-09
+lastModified: 2026-06-19
 hasConstructor: false
 ---
 
@@ -20,6 +20,7 @@ Dynamic texture source for external canvas or video content.
 Create one with [Textmodifier.createTexture](../../../classes/Textmodifier/methods/createTexture.md) and draw it with
 [Textmodifier.image](../../../classes/Textmodifier/methods/image.md). The texture refreshes each frame so it can mirror
 renderers such as three.js, p5.js, Babylon.js, or hydra-synth.
+
 
 ## Extends
 

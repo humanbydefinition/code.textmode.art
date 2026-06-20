@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 namespace: input
 kind: TypeAlias
-lastModified: 2026-06-09
+lastModified: 2026-06-19
 ---
 
 [textmode.js](../../../index.md) / [input](../index.md) / InputEventOwner
@@ -19,3 +19,4 @@ type InputEventOwner = "keyboard" | "mouse" | "touch" | "gesture" | "gamepad";
 ```
 
 Input subsystem that owns a given event name.
+

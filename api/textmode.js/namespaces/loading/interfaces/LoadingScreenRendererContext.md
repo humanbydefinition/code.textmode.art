@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: loading
 kind: Interface
-lastModified: 2026-06-09
+lastModified: 2026-06-19
 isInterface: true
 ---
 
@@ -16,6 +16,7 @@ isInterface: true
 # Interface: LoadingScreenRendererContext
 
 Context object passed to loading renderer callbacks.
+
 
 ## Properties
 

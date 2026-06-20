@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: layering
 kind: Class
-lastModified: 2026-06-09
+lastModified: 2026-06-19
 hasConstructor: false
 ---
 
@@ -29,6 +29,7 @@ method for hydra-like procedural generation.
 
 The base layer, which is always present at the bottom of the layer stack,
 can be accessed via [Textmodifier.layers](../../../classes/Textmodifier/accessors/layers.md) as `t.layers.base`.
+
 
 ## Accessors
 

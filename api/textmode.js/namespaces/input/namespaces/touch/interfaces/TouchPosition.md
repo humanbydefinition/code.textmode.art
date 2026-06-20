@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: input.touch
 kind: Interface
-lastModified: 2026-06-09
+lastModified: 2026-06-19
 isInterface: true
 ---
 
@@ -26,6 +26,7 @@ The grid coordinate system uses center-based coordinates matching the rendering 
 
 When the touch is outside the grid bounds, `x` and `y` are set to
 `Number.NEGATIVE_INFINITY` to indicate an invalid/outside position.
+
 
 ## Extends
 

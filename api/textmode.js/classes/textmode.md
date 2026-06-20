@@ -6,7 +6,7 @@ description: The main entry point for the textmode.js library.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-06-09
+lastModified: 2026-06-19
 hasConstructor: false
 ---
 

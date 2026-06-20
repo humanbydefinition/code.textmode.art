@@ -8,7 +8,7 @@ api: true
 owner: TextmodeLayerManager
 namespace: layering
 kind: Method
-lastModified: 2026-06-09
+lastModified: 2026-06-19
 ---
 
 [textmode.js](../../../../../index.md) / [layering](../../../index.md) / [TextmodeLayerManager](../../TextmodeLayerManager.md) / \_renderAndPresentWithOverlay

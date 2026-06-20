@@ -7,7 +7,7 @@ category: Variables
 api: true
 namespace: input.mouse
 kind: Variable
-lastModified: 2026-06-09
+lastModified: 2026-06-19
 ---
 
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [mouse](../index.md) / MOUSE\_EVENT\_NAMES
@@ -19,3 +19,4 @@ const MOUSE_EVENT_NAMES: readonly ["mouseClicked", "doubleClicked", "mousePresse
 ```
 
 Mouse event names supported by the shared input event API.
+

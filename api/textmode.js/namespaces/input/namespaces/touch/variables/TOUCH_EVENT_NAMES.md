@@ -7,7 +7,7 @@ category: Variables
 api: true
 namespace: input.touch
 kind: Variable
-lastModified: 2026-06-09
+lastModified: 2026-06-19
 ---
 
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [touch](../index.md) / TOUCH\_EVENT\_NAMES
@@ -19,3 +19,4 @@ const TOUCH_EVENT_NAMES: readonly ["touchStarted", "touchMoved", "touchEnded", "
 ```
 
 Touch lifecycle event names supported by the shared input event API.
+

@@ -8,7 +8,7 @@ api: true
 owner: TextmodeSource
 namespace: media
 kind: Method
-lastModified: 2026-06-09
+lastModified: 2026-06-19
 ---
 
 [textmode.js](../../../../../index.md) / [media](../../../index.md) / [TextmodeSource](../../TextmodeSource.md) / dispose
@@ -20,11 +20,6 @@ dispose(): void;
 ```
 
 Dispose of the resource and free associated WebGL textures.
-
-This should be called when the resource is no longer needed to prevent memory leaks.
-Resources created via [Textmodifier.loadImage](../../../../../classes/Textmodifier/methods/loadImage.md), [Textmodifier.loadVideo](../../../../../classes/Textmodifier/methods/loadVideo.md),
-and [Textmodifier.createTexture](../../../../../classes/Textmodifier/methods/createTexture.md) are automatically disposed when the
-[Textmodifier](../../../../../classes/Textmodifier.md) instance is destroyed, but you can call this manually to free memory earlier.
 
 ## Returns
 

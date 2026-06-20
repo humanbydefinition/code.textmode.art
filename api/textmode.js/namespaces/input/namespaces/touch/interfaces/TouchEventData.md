@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: input.touch
 kind: Interface
-lastModified: 2026-06-09
+lastModified: 2026-06-19
 isInterface: true
 ---
 
@@ -20,6 +20,7 @@ Touch event payload passed to input callbacks.
 The coordinate system uses center-based coordinates matching the main rendering space:
 - `(0, 0)` is the center cell of the grid
 - Coordinates can be used directly with `translate()` and other drawing functions
+
 
 ## Properties
 

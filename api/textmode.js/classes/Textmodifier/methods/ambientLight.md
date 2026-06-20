@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-06-09
+lastModified: 2026-06-19
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / ambientLight
@@ -60,6 +60,7 @@ Add an ambient light using a grayscale value and alpha.
 
 `void`
 
+
 ## Call Signature
 
 ```ts
@@ -82,6 +83,7 @@ Add an ambient light using RGB components.
 ### Returns
 
 `void`
+
 
 ## Call Signature
 
@@ -108,6 +110,7 @@ Add an ambient light using RGB components and alpha.
 
 `void`
 
+
 ## Call Signature
 
 ```ts
@@ -125,3 +128,4 @@ Add an ambient light using a color value.
 ### Returns
 
 `void`
+

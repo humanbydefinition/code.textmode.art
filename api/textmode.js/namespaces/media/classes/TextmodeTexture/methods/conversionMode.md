@@ -8,7 +8,7 @@ api: true
 owner: TextmodeTexture
 namespace: media
 kind: Method
-lastModified: 2026-06-09
+lastModified: 2026-06-19
 ---
 
 [textmode.js](../../../../../index.md) / [media](../../../index.md) / [TextmodeTexture](../../TextmodeTexture.md) / conversionMode
@@ -20,10 +20,6 @@ conversionMode(mode): this;
 ```
 
 Select the conversion mode for this source.
-
-`textmode.js` includes only a single built-in conversion strategy `'brightness'`.
-
-Additional conversion strategies may be provided via add-on libraries.
 
 ## Parameters
 

@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: fonts
 kind: Interface
-lastModified: 2026-06-09
+lastModified: 2026-06-19
 isInterface: true
 ---
 
@@ -16,6 +16,7 @@ isInterface: true
 # Interface: GlyphData
 
 Glyph outline data for a character *([TextmodeFont](../classes/TextmodeFont.md) only)*.
+
 
 ## Extends
 

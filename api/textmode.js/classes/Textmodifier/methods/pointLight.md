@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-06-09
+lastModified: 2026-06-19
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / pointLight
@@ -78,6 +78,7 @@ Add a point light using RGB components and an object position.
 
 `void`
 
+
 ## Call Signature
 
 ```ts
@@ -105,6 +106,7 @@ Lighting uses RGB only, so any provided alpha value is ignored.
 
 `void`
 
+
 ## Call Signature
 
 ```ts
@@ -126,3 +128,4 @@ Add a point light using a color value and an object position.
 ### Returns
 
 `void`
+

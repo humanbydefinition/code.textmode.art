@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 namespace: input.gamepad
 kind: TypeAlias
-lastModified: 2026-06-09
+lastModified: 2026-06-19
 ---
 
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [gamepad](../index.md) / GamepadConnectionEventHandler
@@ -29,3 +29,4 @@ Gamepad connection event callback signature.
 ## Returns
 
 `void`
+

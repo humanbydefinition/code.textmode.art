@@ -8,7 +8,7 @@ api: true
 owner: TextmodeVideo
 namespace: media
 kind: Method
-lastModified: 2026-06-09
+lastModified: 2026-06-19
 ---
 
 [textmode.js](../../../../../index.md) / [media](../../../index.md) / [TextmodeVideo](../../TextmodeVideo.md) / brightnessRange
@@ -20,9 +20,6 @@ brightnessRange(start, end): this;
 ```
 
 Capture only source pixels whose brightness is inside the inclusive byte range.
-
-Pixels outside the range are discarded by the built-in brightness converter,
-leaving the corresponding textmode cells transparent.
 
 ## Parameters
 

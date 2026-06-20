@@ -8,7 +8,7 @@ api: true
 owner: TextmodePluginContext
 namespace: plugins
 kind: Method
-lastModified: 2026-06-09
+lastModified: 2026-06-19
 ---
 
 [textmode.js](../../../../../index.md) / [plugins](../../../index.md) / [TextmodePluginContext](../../TextmodePluginContext.md) / extendSource
@@ -48,3 +48,4 @@ api.extendSource('edgeDetection', function() {
   return this.conversionMode('edge');
 });
 ```
+

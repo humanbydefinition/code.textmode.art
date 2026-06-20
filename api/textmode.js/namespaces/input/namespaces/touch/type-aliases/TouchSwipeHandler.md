@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 namespace: input.touch
 kind: TypeAlias
-lastModified: 2026-06-09
+lastModified: 2026-06-19
 ---
 
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [touch](../index.md) / TouchSwipeHandler
@@ -29,3 +29,4 @@ Swipe event callback signature.
 ## Returns
 
 `void`
+

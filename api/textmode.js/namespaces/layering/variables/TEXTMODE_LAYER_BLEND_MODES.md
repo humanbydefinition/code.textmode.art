@@ -7,7 +7,7 @@ category: Variables
 api: true
 namespace: layering
 kind: Variable
-lastModified: 2026-06-09
+lastModified: 2026-06-19
 ---
 
 [textmode.js](../../../index.md) / [layering](../index.md) / TEXTMODE\_LAYER\_BLEND\_MODES
@@ -34,3 +34,4 @@ Blend modes available for [TextmodeLayer](../classes/TextmodeLayer.md) compositi
 - `'colorBurn'`: Darkens the base by the blend color. Creates deep shadows.
 - `'difference'`: `result = |base - blend|`. Creates inverted/solarized effects.
 - `'exclusion'`: Softer version of difference. `result = base + blend - 2 * base * blend`.
+

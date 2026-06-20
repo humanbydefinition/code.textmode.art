@@ -6,7 +6,7 @@ description: The main textmode.js drawing context.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-06-09
+lastModified: 2026-06-19
 hasConstructor: false
 ---
 
@@ -20,6 +20,7 @@ A Textmodifier manages a canvas, renderer, layers, fonts, media sources, input,
 animation, and the p5-style drawing API. When no canvas is supplied, it creates
 one; when a canvas is supplied, it renders into or over that element depending
 on the chosen options.
+
 
 ## Properties
 

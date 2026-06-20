@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: fonts
 kind: Class
-lastModified: 2026-06-09
+lastModified: 2026-06-19
 hasConstructor: false
 ---
 
@@ -39,18 +39,18 @@ The native atlas stays at the authored tile resolution.
 
 | Accessor | Description |
 | ------ | ------ |
-| [cellDimensions](TextmodeTileset/accessors/cellDimensions.md) | Effective tile cell dimensions used by the layer grid. |
-| [cellHeight](TextmodeTileset/accessors/cellHeight.md) | Effective tile cell height used by the layer grid. |
-| [cellWidth](TextmodeTileset/accessors/cellWidth.md) | Effective tile cell width used by the layer grid. |
-| [characterMap](TextmodeTileset/accessors/characterMap.md) | Character-to-glyph lookup map for the tileset. |
-| [characters](TextmodeTileset/accessors/characters.md) | Glyphs generated from the tileset mapping. |
-| [columns](TextmodeTileset/accessors/columns.md) | Number of columns in the normalized glyph atlas. |
+| [cellDimensions](TextmodeTileset/accessors/cellDimensions.md) | Combined glyph cell dimensions in pixels. |
+| [cellHeight](TextmodeTileset/accessors/cellHeight.md) | Height of each glyph cell in pixels. |
+| [cellWidth](TextmodeTileset/accessors/cellWidth.md) | Width of each glyph cell in pixels. |
+| [characterMap](TextmodeTileset/accessors/characterMap.md) | Lookup table from character string to glyph entry. |
+| [characters](TextmodeTileset/accessors/characters.md) | Ordered glyph entries available in this atlas. |
+| [columns](TextmodeTileset/accessors/columns.md) | Number of glyph columns in the atlas texture. |
 | [fontFramebuffer](TextmodeTileset/accessors/fontFramebuffer.md) | Tileset atlas framebuffer backing this glyph atlas. |
 | [fontSize](TextmodeTileset/accessors/fontSize.md) | Effective font size used to scale tileset cells. |
-| [framebuffer](TextmodeTileset/accessors/framebuffer.md) | Normalized glyph atlas framebuffer used by the ASCII shader. |
+| [framebuffer](TextmodeTileset/accessors/framebuffer.md) | Framebuffer containing the atlas texture data. |
 | [maxGlyphDimensions](TextmodeTileset/accessors/maxGlyphDimensions.md) | Effective tile dimensions used by the layer grid. |
 | [nativeCellDimensions](TextmodeTileset/accessors/nativeCellDimensions.md) | Authored tile dimensions from the source tileset in pixels. |
-| [rows](TextmodeTileset/accessors/rows.md) | Number of rows in the normalized glyph atlas. |
+| [rows](TextmodeTileset/accessors/rows.md) | Number of glyph rows in the atlas texture. |
 | [textureColumns](TextmodeTileset/accessors/textureColumns.md) | Number of columns in the repacked tileset atlas. |
 | [textureRows](TextmodeTileset/accessors/textureRows.md) | Number of rows in the repacked tileset atlas. |
 

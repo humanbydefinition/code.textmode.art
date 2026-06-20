@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: input.mouse
 kind: Interface
-lastModified: 2026-06-09
+lastModified: 2026-06-19
 isInterface: true
 ---
 
@@ -16,6 +16,7 @@ isInterface: true
 # Interface: MouseEventData
 
 Mouse event payload passed to input callbacks.
+
 
 ## Properties
 

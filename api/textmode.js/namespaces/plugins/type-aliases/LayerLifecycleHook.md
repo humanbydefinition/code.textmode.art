@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 namespace: plugins
 kind: TypeAlias
-lastModified: 2026-06-09
+lastModified: 2026-06-19
 ---
 
 [textmode.js](../../../index.md) / [plugins](../index.md) / LayerLifecycleHook
@@ -29,3 +29,4 @@ Callback type for layer lifecycle events.
 ## Returns
 
 `void`
+

@@ -7,7 +7,7 @@ category: Variables
 api: true
 namespace: input.gamepad
 kind: Variable
-lastModified: 2026-06-09
+lastModified: 2026-06-19
 ---
 
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [gamepad](../index.md) / GAMEPAD\_EVENT\_NAMES
@@ -19,3 +19,4 @@ const GAMEPAD_EVENT_NAMES: readonly ["gamepadConnected", "gamepadDisconnected", 
 ```
 
 Gamepad event names supported by the shared input event API.
+

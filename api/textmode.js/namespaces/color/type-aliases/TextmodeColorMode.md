@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 namespace: color
 kind: TypeAlias
-lastModified: 2026-06-09
+lastModified: 2026-06-19
 ---
 
 [textmode.js](../../../index.md) / [color](../index.md) / TextmodeColorMode
@@ -19,3 +19,4 @@ type TextmodeColorMode = "rgb" | "hsb" | "hsl";
 ```
 
 Color interpretation mode used by [Textmodifier.colorMode](../../../classes/Textmodifier/methods/colorMode.md).
+
