@@ -7,7 +7,7 @@ category: Properties
 api: true
 owner: Textmodifier
 kind: Property
-lastModified: 2026-06-19
+lastModified: 2026-06-24
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / touches

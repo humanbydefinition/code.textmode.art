@@ -8,7 +8,7 @@ api: true
 owner: TextmodeTileset
 namespace: fonts
 kind: Accessor
-lastModified: 2026-06-19
+lastModified: 2026-06-24
 ---
 
 [textmode.js](../../../../../index.md) / [fonts](../../../index.md) / [TextmodeTileset](../../TextmodeTileset.md) / textureColumns

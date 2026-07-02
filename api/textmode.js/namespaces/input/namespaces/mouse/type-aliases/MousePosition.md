@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 namespace: input.mouse
 kind: TypeAlias
-lastModified: 2026-06-19
+lastModified: 2026-06-24
 ---
 
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [mouse](../index.md) / MousePosition

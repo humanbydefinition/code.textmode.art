@@ -8,7 +8,7 @@ api: true
 owner: TextmodeVideo
 namespace: media
 kind: Accessor
-lastModified: 2026-06-19
+lastModified: 2026-06-24
 ---
 
 [textmode.js](../../../../../index.md) / [media](../../../index.md) / [TextmodeVideo](../../TextmodeVideo.md) / width

@@ -7,7 +7,7 @@ category: Accessors
 api: true
 owner: textmode
 kind: Accessor
-lastModified: 2026-06-19
+lastModified: 2026-06-24
 ---
 
 [textmode.js](../../../index.md) / [textmode](../../textmode.md) / version

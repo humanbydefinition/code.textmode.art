@@ -7,7 +7,7 @@ category: Variables
 api: true
 namespace: input.gamepad
 kind: Variable
-lastModified: 2026-06-19
+lastModified: 2026-06-24
 ---
 
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [gamepad](../index.md) / GAMEPAD\_EVENT\_NAMES

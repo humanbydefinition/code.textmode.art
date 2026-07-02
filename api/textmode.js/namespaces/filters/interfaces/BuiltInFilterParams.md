@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: filters
 kind: Interface
-lastModified: 2026-06-19
+lastModified: 2026-06-24
 isInterface: true
 ---
 

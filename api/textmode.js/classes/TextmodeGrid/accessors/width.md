@@ -7,7 +7,7 @@ category: Accessors
 api: true
 owner: TextmodeGrid
 kind: Accessor
-lastModified: 2026-06-19
+lastModified: 2026-06-24
 ---
 
 [textmode.js](../../../index.md) / [TextmodeGrid](../../TextmodeGrid.md) / width

@@ -1,0 +1,57 @@
+---
+layout: doc
+editLink: true
+title: texture
+description: Bind a media source or framebuffer as the texture for later geometry draws.
+category: Methods
+api: true
+owner: Textmodifier
+kind: Method
+lastModified: 2026-06-24
+---
+
+[textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / texture
+
+# Method: texture()
+
+## Call Signature
+
+```ts
+texture(source): void;
+```
+
+Bind a media source or framebuffer as the texture for later geometry draws.
+
+Textured geometry samples the source, converts brightness into glyphs, and
+uses source conversion settings such as `characters`, `brightnessRange`,
+`charColorMode`, and `cellColorMode`.
+
+### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `source` | [`TextmodeSource`](../../../namespaces/media/classes/TextmodeSource.md) | Image, video, dynamic texture source, or textmode framebuffer. |
+
+### Returns
+
+`void`
+
+### Example
+
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="texture" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CglwaXhlbERlbnNpdHk6IDEsCgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IHNvdXJjZUNhbnZhcyA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2NhbnZhcycpOwpzb3VyY2VDYW52YXMud2lkdGggPSA5NjsKc291cmNlQ2FudmFzLmhlaWdodCA9IDk2Owpjb25zdCBjdHggPSBzb3VyY2VDYW52YXMuZ2V0Q29udGV4dCgnMmQnKTsKbGV0IHNvdXJjZTsKbGV0IHNwaW4gPSAwOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LnNldHVwKCgpID0-IHsKCXNvdXJjZSA9IHQuY3JlYXRlVGV4dHVyZShzb3VyY2VDYW52YXMpOwoJc291cmNlLmNoYXJhY3RlcnMoJyAuOi09KyojJUAnKS5jZWxsQ29sb3JNb2RlKCdmaXhlZCcpLmNlbGxDb2xvcig0LCA4LCAxNik7Cn0pOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg0LCA3LCAxOCk7CglpZiAoIWN0eCB8fCAhc291cmNlKSByZXR1cm47CgoJY29uc3QgaHVlID0gKHQuZnJhbWVDb3VudCAqIDIpICUgMzYwOwoJY29uc3QgZ3JhZGllbnQgPSBjdHguY3JlYXRlTGluZWFyR3JhZGllbnQoMCwgMCwgOTYsIDk2KTsKCWdyYWRpZW50LmFkZENvbG9yU3RvcCgwLCBgaHNsKCR7aHVlfSwgOTUlLCA1OCUpYCk7CglncmFkaWVudC5hZGRDb2xvclN0b3AoMSwgYGhzbCgkeyhodWUgKyAxMzApICUgMzYwfSwgOTAlLCA0NSUpYCk7CgljdHguZmlsbFN0eWxlID0gZ3JhZGllbnQ7CgljdHguZmlsbFJlY3QoMCwgMCwgOTYsIDk2KTsKCWN0eC5maWxsU3R5bGUgPSAnI2ZmZmZmZic7CgljdHguZmlsbFJlY3QoMTgsIDE4LCA2MCwgNjApOwoJY3R4LmZpbGxTdHlsZSA9ICcjMTExODI3JzsKCWN0eC5maWxsUmVjdCgzMCwgMzAsIDM2LCAzNik7CgoJc3BpbiA9ICh0LmZyYW1lQ291bnQgKiAxLjIpICUgMzYwOwoJdC5wZXJzcGVjdGl2ZSg1OCwgMC4xLCA0MDk2KTsKCXQuY2FtZXJhKDAsIC04LCAzNCwgMCwgMCwgMCk7Cgl0LmFtYmllbnRMaWdodCgxOCwgMjAsIDI4KTsKCXQucG9pbnRMaWdodChbMjU1LCAyMzAsIDE4MF0sIHsgeDogMjAsIHk6IC0xOCwgejogMjYgfSk7Cgl0LnRleHR1cmUoc291cmNlKTsKCXQucm90YXRlWShzcGluKTsKCXQucm90YXRlWCgxOCk7Cgl0LnNwaGVyZSgxMSk7Cgl0Lm5vVGV4dHVyZSgpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLlRFWFRVUkUnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBURVhUVVJFRCBHRU9NRVRSWScsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnQ2FudmFzIHNvdXJjZSBzYW1wbGVzIHRoZSBzcGhlcmUuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdCcmlnaHRuZXNzIG1hcHMgdG8gZ2x5cGhzLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoYFNQSU46ICR7c3Bpbi50b0ZpeGVkKDEpfWAsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+
+## Call Signature
+
+```ts
+texture(source): void;
+```
+
+### Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `source` | [`TextmodeFramebuffer`](../../TextmodeFramebuffer.md) |
+
+### Returns
+
+`void`

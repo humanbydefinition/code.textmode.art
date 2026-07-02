@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: TextmodeCamera
 kind: Method
-lastModified: 2026-06-19
+lastModified: 2026-06-24
 ---
 
 [textmode.js](../../../index.md) / [TextmodeCamera](../../TextmodeCamera.md) / lookAt

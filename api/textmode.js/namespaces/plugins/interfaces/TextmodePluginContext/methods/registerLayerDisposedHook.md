@@ -8,7 +8,7 @@ api: true
 owner: TextmodePluginContext
 namespace: plugins
 kind: Method
-lastModified: 2026-06-19
+lastModified: 2026-06-24
 ---
 
 [textmode.js](../../../../../index.md) / [plugins](../../../index.md) / [TextmodePluginContext](../../TextmodePluginContext.md) / registerLayerDisposedHook
