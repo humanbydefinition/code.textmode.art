@@ -13,6 +13,15 @@ lastUpdated: false
 
 Explore the world of textmode art. From websites to music videos, installations to games - see what the community is building with `textmode.js`.
 
+<PromoCallout
+  title="Browse the live example explorer"
+  href="https://examples.textmode.art"
+  ctaLabel="Open the example explorer"
+  icon="ph:play-circle"
+>
+500+ live, editable sketches across every textmode.js library - search by API, run them in your browser, and jump straight to the docs.
+</PromoCallout>
+
 <GalleryGrid />
 
 ## Want to see more?

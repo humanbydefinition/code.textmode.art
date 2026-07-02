@@ -26,6 +26,7 @@ import WhatWillYouCreate from './components/WhatWillYouCreate/WhatWillYouCreate.
 import ApiLanding from './components/ApiLanding/ApiLanding.vue'
 import ExampleSketchBrowser from './components/ExampleSketchBrowser/ExampleSketchBrowser.vue'
 import { GalleryGrid } from './components/Gallery'
+import { PromoCallout } from './components/PromoCallout'
 
 // Blog
 import { withBlogTheme } from 'vitepress-plugin-blog'
@@ -82,6 +83,7 @@ const baseTheme: Theme = {
     app.component('GalleryGrid', GalleryGrid)
     app.component('ApiLanding', ApiLanding)
     app.component('ExampleSketchBrowser', ExampleSketchBrowser)
+    app.component('PromoCallout', PromoCallout)
   },
   setup() {
     const { frontmatter } = useData()
