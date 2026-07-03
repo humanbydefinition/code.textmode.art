@@ -8,7 +8,7 @@ api: true
 owner: TextmodeExportAPI
 kind: Method
 ecosystem: textmode.js
-lastModified: 2026-06-09
+lastModified: 2026-07-03
 ---
 
 [textmode.export.js](../../../index.md) / [TextmodeExportAPI](../../TextmodeExportAPI.md) / toJSONString
@@ -39,3 +39,4 @@ Serialized JSON string for the selected layer or layer stack.
 const json = t.toJSONString({ layer: t.layers.base, pretty: false, colorMode: 'hex' });
 const stackJson = t.toJSONString({ target: 'all' });
 ```
+

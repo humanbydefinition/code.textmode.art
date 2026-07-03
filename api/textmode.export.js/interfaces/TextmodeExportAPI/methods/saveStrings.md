@@ -8,7 +8,7 @@ api: true
 owner: TextmodeExportAPI
 kind: Method
 ecosystem: textmode.js
-lastModified: 2026-06-09
+lastModified: 2026-07-03
 ---
 
 [textmode.export.js](../../../index.md) / [TextmodeExportAPI](../../TextmodeExportAPI.md) / saveStrings
@@ -36,3 +36,4 @@ Downloads the selected layer's text content as a plain-text file.
 ```ts
 t.saveStrings({ filename: 'frame', layer: t.layers.base, preserveTrailingSpaces: true });
 ```
+

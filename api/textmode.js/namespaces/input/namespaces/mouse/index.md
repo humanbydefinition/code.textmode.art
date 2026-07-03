@@ -7,7 +7,7 @@ category: Namespaces
 api: true
 namespace: input
 kind: Namespace
-lastModified: 2026-06-24
+lastModified: 2026-07-03
 ---
 
 [textmode.js](../../../../index.md) / [input](../../index.md) / mouse

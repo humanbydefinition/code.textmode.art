@@ -7,7 +7,7 @@ category: Variables
 api: true
 kind: Variable
 ecosystem: textmode.js
-lastModified: 2026-06-09
+lastModified: 2026-07-03
 ---
 
 [textmode.synth.js](../index.md) / EASING\_FUNCTIONS
@@ -38,3 +38,4 @@ Easing functions from https://gist.github.com/gre/1650294
 | <a id="property-easeoutquint"></a> `easeOutQuint()` | (`t`) => `number` |
 | <a id="property-easeinoutquint"></a> `easeInOutQuint()` | (`t`) => `number` |
 | <a id="property-sin"></a> `sin()` | (`t`) => `number` |
+

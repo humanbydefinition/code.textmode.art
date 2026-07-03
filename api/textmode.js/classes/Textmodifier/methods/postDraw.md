@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-06-24
+lastModified: 2026-07-03
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / postDraw

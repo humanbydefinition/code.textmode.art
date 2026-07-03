@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-06-09
+lastModified: 2026-07-03
 ---
 
 [textmode.export.js](../index.md) / VideoExportPhase
@@ -15,7 +15,16 @@ lastModified: 2026-06-09
 # Type Alias: VideoExportPhase
 
 ```ts
-type VideoExportPhase = "probing" | "rendering" | "encoding" | "finalizing";
+type VideoExportPhase = 
+  | "probing"
+  | "rendering"
+  | "capturing"
+  | "encoding"
+  | "draining"
+  | "finalizing";
 ```
 
 More granular phase information for progress UIs that need to distinguish setup, rendering, and finalization.
+
+`rendering` is retained for 1.5.x compatibility. Current deterministic video capture emits `capturing`.
+

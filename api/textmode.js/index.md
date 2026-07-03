@@ -6,7 +6,7 @@ description: ~ travelling without arriving
 category: API Reference
 api: true
 kind: Project
-lastModified: 2026-06-24
+lastModified: 2026-07-03
 ---
 
 # textmode.js
@@ -32,7 +32,7 @@ lastModified: 2026-06-24
 
 | Enumeration | Description |
 | ------ | ------ |
-| [BeginShapeMode](enumerations/BeginShapeMode.md) | Shape interpretation modes for [Textmodifier.beginShape](classes/Textmodifier/methods/beginShape.md). |
+| [ShapeAssemblyMode](enumerations/ShapeAssemblyMode.md) | Shape assembly modes for [Textmodifier.beginShape](classes/Textmodifier/methods/beginShape.md). |
 
 ## Classes
 

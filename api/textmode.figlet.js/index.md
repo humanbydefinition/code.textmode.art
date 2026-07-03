@@ -2,12 +2,12 @@
 layout: doc
 editLink: true
 title: textmode.figlet.js
-description: FIGlet font support for textmode.js
+description: API reference for textmode.figlet.js
 category: API Reference
 api: true
 kind: Project
 ecosystem: textmode.js
-lastModified: 2026-06-09
+lastModified: 2026-07-03
 ---
 
 # textmode.figlet.js

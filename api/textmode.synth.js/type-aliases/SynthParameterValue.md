@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-06-09
+lastModified: 2026-07-03
 ---
 
 [textmode.synth.js](../index.md) / SynthParameterValue
@@ -33,3 +33,4 @@ Dynamic parameter value types supported by the synth system.
 - `function`: Evaluated each frame with context
 - `SynthSource`: Nested synth chain for combine/modulate operations
 - `null`: Use default value
+

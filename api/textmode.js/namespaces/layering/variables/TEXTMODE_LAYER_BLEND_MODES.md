@@ -1,13 +1,14 @@
 ---
 layout: doc
 editLink: true
+deprecated: 0
 title: TEXTMODE_LAYER_BLEND_MODES
-description: Blend modes available for TextmodeLayer compositing in 2D mode.
+description: Use the LayerBlendMode enum and the t.BLEND_* constants (e.g. t.BLEND_ADDITIVE). String blend modes are accepted for backwards compatibility and emit a depre...
 category: Variables
 api: true
 namespace: layering
 kind: Variable
-lastModified: 2026-06-24
+lastModified: 2026-07-03
 ---
 
 [textmode.js](../../../index.md) / [layering](../index.md) / TEXTMODE\_LAYER\_BLEND\_MODES
@@ -18,20 +19,12 @@ lastModified: 2026-06-24
 const TEXTMODE_LAYER_BLEND_MODES: readonly ["normal", "additive", "multiply", "screen", "subtract", "darken", "lighten", "overlay", "softLight", "hardLight", "colorDodge", "colorBurn", "difference", "exclusion"];
 ```
 
-Blend modes available for [TextmodeLayer](../classes/TextmodeLayer.md) compositing in 2D mode.
+Use the [LayerBlendMode](../enumerations/LayerBlendMode.md) enum and the `t.BLEND_*` constants
+(e.g. `t.BLEND_ADDITIVE`). String blend modes are accepted for backwards
+compatibility and emit a deprecation warning; they will be removed in a
+future version.
 
-- `'normal'`: Standard alpha compositing. Opaque layer pixels fully replace the base; translucent pixels fade in.
-- `'additive'`: Layer color is added on top of the base. Great for glow/energy effects but will clip as values approach white.
-- `'multiply'`: `result = layer * base`. Darkens wherever both layers have color; any channel multiplied by 0 becomes 0.
-- `'screen'`: Inverse of multiply. `result = 1 - (1 - layer) * (1 - base)`. Preserves highlights while lightening midtones.
-- `'subtract'`: `result = base - layer`. Useful for cutting out or darkening effects.
-- `'darken'`: Takes the minimum of layer and base per channel. Only darkens; never lightens.
-- `'lighten'`: Takes the maximum of layer and base per channel. Only lightens; never darkens.
-- `'overlay'`: Combines multiply and screen. Darkens darks and lightens lights, increasing contrast.
-- `'softLight'`: Softer version of overlay. Subtle contrast enhancement.
-- `'hardLight'`: Like overlay but more intense. Uses blend color to determine multiply/screen.
-- `'colorDodge'`: Brightens the base by the blend color. Creates intense highlights.
-- `'colorBurn'`: Darkens the base by the blend color. Creates deep shadows.
-- `'difference'`: `result = |base - blend|`. Creates inverted/solarized effects.
-- `'exclusion'`: Softer version of difference. `result = base + blend - 2 * base * blend`.
+## See
 
+ - [LayerBlendMode](../enumerations/LayerBlendMode.md)
+ - [layering.TEXTMODE\_LAYER\_BLEND\_MODES API reference](https://code.textmode.art/api/textmode.js/namespaces/layering/variables/TEXTMODE_LAYER_BLEND_MODES)

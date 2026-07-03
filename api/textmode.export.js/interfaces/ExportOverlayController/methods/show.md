@@ -8,7 +8,7 @@ api: true
 owner: ExportOverlayController
 kind: Method
 ecosystem: textmode.js
-lastModified: 2026-06-09
+lastModified: 2026-07-03
 ---
 
 [textmode.export.js](../../../index.md) / [ExportOverlayController](../../ExportOverlayController.md) / show
@@ -30,3 +30,4 @@ Shows the export overlay UI.
 ```ts
 t.exportOverlay.show();
 ```
+

@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-06-09
+lastModified: 2026-07-03
 isInterface: true
 ---
 
@@ -16,6 +16,7 @@ isInterface: true
 # Interface: TextmodeSelectedDocumentLayer
 
 Selected-layer entry in a JSON document export.
+
 
 ## Properties
 

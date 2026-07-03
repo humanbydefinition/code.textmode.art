@@ -11,7 +11,7 @@ category: Functions
 api: true
 kind: Function
 ecosystem: textmode.js
-lastModified: 2026-06-09
+lastModified: 2026-07-03
 ---
 
 [textmode.export.js](../index.md) / createTextmodeExportPlugin
@@ -47,3 +47,4 @@ const t = textmode.create({ plugins: [createTextmodeExportPlugin()] });
 import { ExportPlugin } from 'textmode.export.js';
 const t = textmode.create({ plugins: [ExportPlugin] });
 ```
+

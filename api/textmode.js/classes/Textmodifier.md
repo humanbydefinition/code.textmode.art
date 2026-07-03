@@ -6,7 +6,7 @@ description: The main textmode.js drawing context.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-06-24
+lastModified: 2026-07-03
 hasConstructor: false
 ---
 
@@ -24,102 +24,46 @@ on the chosen options.
 
 ## Properties
 
-### LINE\_LOOP
-
-```ts
-readonly LINE_LOOP: LINE_LOOP;
-```
-
-Draw consecutive recorded vertices as a closed line loop.
-
-
-***
-
-### LINE\_STRIP
-
-```ts
-readonly LINE_STRIP: LINE_STRIP;
-```
-
-Draw consecutive recorded vertices as a connected line strip.
-
-
-***
-
-### LINES
-
-```ts
-readonly LINES: LINES;
-```
-
-Draw each pair of recorded vertices as an independent line segment.
-
-
-***
-
-### POINTS
-
-```ts
-readonly POINTS: POINTS;
-```
-
-Draw each recorded vertex as one point when passed to [beginShape](Textmodifier/methods/beginShape.md).
-
-
-***
-
-### QUAD\_STRIP
-
-```ts
-readonly QUAD_STRIP: QUAD_STRIP;
-```
-
-Draw recorded vertices as a quad strip split into triangle pairs.
-
-
-***
-
-### QUADS
-
-```ts
-readonly QUADS: QUADS;
-```
-
-Draw each group of four recorded vertices as a quad split into two triangles.
-
-
-***
-
-### TRIANGLE\_FAN
-
-```ts
-readonly TRIANGLE_FAN: TRIANGLE_FAN;
-```
-
-Draw recorded vertices as a triangle fan from the first vertex.
-
-
-***
-
-### TRIANGLE\_STRIP
-
-```ts
-readonly TRIANGLE_STRIP: TRIANGLE_STRIP;
-```
-
-Draw sliding triplets of recorded vertices as a triangle strip.
-
-
-***
-
-### TRIANGLES
-
-```ts
-readonly TRIANGLES: TRIANGLES;
-```
-
-Draw each triplet of recorded vertices as an independent triangle.
-
+| Property | Description |
+| ------ | ------ |
+| [BLEND\_ADDITIVE](Textmodifier/properties/BLEND_ADDITIVE.md) | Add the layer's color channels to the layers below it. |
+| [BLEND\_COLOR\_BURN](Textmodifier/properties/BLEND_COLOR_BURN.md) | Darken the layers below by inverting the color dodge relationship. |
+| [BLEND\_COLOR\_DODGE](Textmodifier/properties/BLEND_COLOR_DODGE.md) | Brighten the layers below by dividing around the layer color. |
+| [BLEND\_DARKEN](Textmodifier/properties/BLEND_DARKEN.md) | Keep the darker channel from either the layer or the layers below it. |
+| [BLEND\_DIFFERENCE](Textmodifier/properties/BLEND_DIFFERENCE.md) | Use the absolute channel difference between the layer and the layers below. |
+| [BLEND\_EXCLUSION](Textmodifier/properties/BLEND_EXCLUSION.md) | Use a lower-contrast difference blend between the layer and the layers below. |
+| [BLEND\_HARD\_LIGHT](Textmodifier/properties/BLEND_HARD_LIGHT.md) | Apply an intense contrast blend driven by the layer's brightness. |
+| [BLEND\_LIGHTEN](Textmodifier/properties/BLEND_LIGHTEN.md) | Keep the lighter channel from either the layer or the layers below it. |
+| [BLEND\_MULTIPLY](Textmodifier/properties/BLEND_MULTIPLY.md) | Multiply the layer's colors with the layers below it. |
+| [BLEND\_NORMAL](Textmodifier/properties/BLEND_NORMAL.md) | Draw the layer with standard source-over alpha compositing. |
+| [BLEND\_OVERLAY](Textmodifier/properties/BLEND_OVERLAY.md) | Combine multiply and screen based on the brightness below the layer. |
+| [BLEND\_SCREEN](Textmodifier/properties/BLEND_SCREEN.md) | Screen the layer against the layers below it. |
+| [BLEND\_SOFT\_LIGHT](Textmodifier/properties/BLEND_SOFT_LIGHT.md) | Apply a softer contrast blend based on the layer's brightness. |
+| [BLEND\_SUBTRACT](Textmodifier/properties/BLEND_SUBTRACT.md) | Subtract the layer's colors from the layers below it. |
+| [displayHeight](Textmodifier/properties/displayHeight.md) | Physical screen height in pixels. |
+| [displayWidth](Textmodifier/properties/displayWidth.md) | Physical screen width in pixels. |
+| [gamepads](Textmodifier/properties/gamepads.md) | Currently connected gamepads as a compact readonly list. |
+| [lastKeyPressed](Textmodifier/properties/lastKeyPressed.md) | Last key pressed, or `null` before any key press. |
+| [lastKeyReleased](Textmodifier/properties/lastKeyReleased.md) | Last key released, or `null` before any key release. |
+| [LINE\_LOOP](Textmodifier/properties/LINE_LOOP.md) | Draw consecutive vertices as one connected closed loop. |
+| [LINE\_STRIP](Textmodifier/properties/LINE_STRIP.md) | Draw consecutive vertices as one connected open path. |
+| [LINES](Textmodifier/properties/LINES.md) | Draw each pair of recorded vertices as an independent line segment. |
+| [modifierState](Textmodifier/properties/modifierState.md) | Current modifier key state. |
+| [mouse](Textmodifier/properties/mouse.md) | Current mouse position in center-based grid coordinates. |
+| [mouseIsPressed](Textmodifier/properties/mouseIsPressed.md) | Whether a mouse button is currently held down. |
+| [movedX](Textmodifier/properties/movedX.md) | Horizontal mouse movement accumulated since the previous rendered frame. |
+| [movedY](Textmodifier/properties/movedY.md) | Vertical mouse movement accumulated since the previous rendered frame. |
+| [pmouse](Textmodifier/properties/pmouse.md) | Mouse position from the previous rendered frame. |
+| [POINTS](Textmodifier/properties/POINTS.md) | Draw each recorded vertex as a separate point. |
+| [pressedKeys](Textmodifier/properties/pressedKeys.md) | Keys currently being held down. |
+| [QUAD\_STRIP](Textmodifier/properties/QUAD_STRIP.md) | Draw paired vertices as a connected strip of quads. |
+| [QUADS](Textmodifier/properties/QUADS.md) | Draw each group of four vertices as a quad split into two triangles. |
+| [touches](Textmodifier/properties/touches.md) | Currently active touches in grid coordinates. |
+| [TRIANGLE\_FAN](Textmodifier/properties/TRIANGLE_FAN.md) | Draw triangles that all share the first recorded vertex. |
+| [TRIANGLE\_STRIP](Textmodifier/properties/TRIANGLE_STRIP.md) | Draw overlapping triplets of vertices as a connected triangle strip. |
+| [TRIANGLES](Textmodifier/properties/TRIANGLES.md) | Draw each group of three vertices as an independent triangle. |
+| [windowHeight](Textmodifier/properties/windowHeight.md) | Current browser window height in pixels. |
+| [windowWidth](Textmodifier/properties/windowWidth.md) | Current browser window width in pixels. |
 
 ## Accessors
 

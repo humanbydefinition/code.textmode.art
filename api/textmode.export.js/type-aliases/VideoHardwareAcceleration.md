@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-06-09
+lastModified: 2026-07-03
 ---
 
 [textmode.export.js](../index.md) / VideoHardwareAcceleration
@@ -25,3 +25,4 @@ This is a browser hint rather than a guarantee:
 - `'prefer-hardware'`: prefer GPU/ASIC encoding when available, often faster and more power-efficient, but codec
   availability and output characteristics vary by device.
 - `'prefer-software'`: prefer CPU encoding, often more consistent across machines, but usually slower.
+

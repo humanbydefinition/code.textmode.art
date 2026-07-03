@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: loading
 kind: Interface
-lastModified: 2026-06-24
+lastModified: 2026-07-03
 isInterface: true
 ---
 

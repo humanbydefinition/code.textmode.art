@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-06-09
+lastModified: 2026-07-03
 ---
 
 [textmode.figlet.js](../index.md) / FigHorizontalLayout
@@ -19,3 +19,4 @@ type FigHorizontalLayout = "full" | "fitted" | "smushed";
 ```
 
 Supported horizontal layout modes for FIGlet rendering.
+

@@ -11,7 +11,7 @@ category: Functions
 api: true
 kind: Function
 ecosystem: textmode.js
-lastModified: 2026-06-09
+lastModified: 2026-07-03
 ---
 
 [textmode.filters.js](../index.md) / createFiltersPlugin
@@ -41,3 +41,4 @@ const t = textmode.create({ plugins: [createFiltersPlugin()] });
 import { FiltersPlugin } from 'textmode.filters.js';
 const t = textmode.create({ plugins: [FiltersPlugin] });
 ```
+

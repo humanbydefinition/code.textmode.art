@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-06-09
+lastModified: 2026-07-03
 ---
 
 [textmode.figlet.js](../index.md) / FigTextColorValue
@@ -24,3 +24,4 @@ type FigTextColorValue =
 ```
 
 Accepted color input for per-cell FIGlet styling.
+

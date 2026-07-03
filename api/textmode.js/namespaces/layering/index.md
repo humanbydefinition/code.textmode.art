@@ -6,7 +6,7 @@ description: All modules and types related to multi-layered textmode rendering.
 category: Namespaces
 api: true
 kind: Namespace
-lastModified: 2026-06-24
+lastModified: 2026-07-03
 ---
 
 [textmode.js](../../index.md) / layering
@@ -14,6 +14,12 @@ lastModified: 2026-06-24
 # layering
 
 All modules and types related to multi-layered textmode rendering.
+
+## Enumerations
+
+| Enumeration | Description |
+| ------ | ------ |
+| [LayerBlendMode](enumerations/LayerBlendMode.md) | Numeric blend mode constants for layer compositing. |
 
 ## Classes
 
@@ -32,4 +38,4 @@ All modules and types related to multi-layered textmode rendering.
 
 | Variable | Description |
 | ------ | ------ |
-| [TEXTMODE\_LAYER\_BLEND\_MODES](variables/TEXTMODE_LAYER_BLEND_MODES.md) | Blend modes available for [TextmodeLayer](classes/TextmodeLayer.md) compositing in 2D mode. |
+| [~~TEXTMODE\_LAYER\_BLEND\_MODES~~](variables/TEXTMODE_LAYER_BLEND_MODES.md) | Use the [LayerBlendMode](enumerations/LayerBlendMode.md) enum and the `t.BLEND_*` constants (e.g. `t.BLEND_ADDITIVE`). String blend modes are accepted for backwards compatibility and emit a deprecation warning; they will be removed in a future version. |

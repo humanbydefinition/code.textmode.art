@@ -8,7 +8,7 @@ api: true
 owner: TextmodeExportAPI
 kind: Method
 ecosystem: textmode.js
-lastModified: 2026-06-09
+lastModified: 2026-07-03
 ---
 
 [textmode.export.js](../../../index.md) / [TextmodeExportAPI](../../TextmodeExportAPI.md) / saveGIF
@@ -36,3 +36,4 @@ Records an animated GIF and saves it to disk.
 ```ts
 await t.saveGIF({ frameCount: 120, frameRate: 30, filename: 'loop' });
 ```
+

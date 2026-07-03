@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-06-09
+lastModified: 2026-07-03
 ---
 
 [textmode.export.js](../index.md) / VideoExportProgress
@@ -20,6 +20,7 @@ type VideoExportProgress = object;
 
 Progress information emitted during the video export process.
 
+
 ## Properties
 
 ### state
@@ -29,6 +30,7 @@ state: VideoRecordingState;
 ```
 
 Current state of the recording process.
+
 
 ***
 
@@ -40,6 +42,7 @@ optional phase?: VideoExportPhase;
 
 Current export phase for newer progress UIs.
 
+
 ***
 
 ### frameIndex?
@@ -49,6 +52,7 @@ optional frameIndex?: number;
 ```
 
 Number of frames that have been recorded so far.
+
 
 ***
 
@@ -60,6 +64,7 @@ optional frame?: number;
 
 Alias for [frameIndex](#frameindex). Prefer this field in new code.
 
+
 ***
 
 ### totalFrames?
@@ -69,6 +74,7 @@ optional totalFrames?: number;
 ```
 
 Total number of frames planned for the recording.
+
 
 ***
 
@@ -80,6 +86,7 @@ optional progress?: number;
 
 Export completion ratio between `0` and `1`.
 
+
 ***
 
 ### message?
@@ -89,3 +96,4 @@ optional message?: string;
 ```
 
 Optional status message for UI consumption.
+

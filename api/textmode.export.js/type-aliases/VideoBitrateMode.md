@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-06-09
+lastModified: 2026-07-03
 ---
 
 [textmode.export.js](../index.md) / VideoBitrateMode
@@ -24,3 +24,4 @@ Bitrate allocation strategy for the native encoder.
   This is usually the best default for generative animations.
 - `'constant'`: asks the encoder to keep the bitrate steadier throughout the export. This can make file size
   more predictable, but may waste bits on simple frames or reduce detail on complex frames.
+

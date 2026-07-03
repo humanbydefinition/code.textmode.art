@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-06-09
+lastModified: 2026-07-03
 ---
 
 [textmode.figlet.js](../index.md) / FigTextColorResolver
@@ -21,3 +21,4 @@ type FigTextColorResolver =
 ```
 
 Resolver for per-cell FIGlet colors.
+

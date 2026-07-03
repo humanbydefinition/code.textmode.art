@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-06-09
+lastModified: 2026-07-03
 isInterface: true
 ---
 
@@ -27,7 +27,7 @@ classic CRT shader.
 
 ## See
 
-[Original shader by Mattias Gustavsson](https://github.com/libretro/glsl-shaders/blob/master/crt/shaders/crt-mattias.glsl)
+ - [Original shader by Mattias Gustavsson](https://github.com/libretro/glsl-shaders/blob/master/crt/shaders/crt-mattias.glsl)
 
 ## Properties
 

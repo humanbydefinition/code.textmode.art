@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-06-09
+lastModified: 2026-07-03
 ---
 
 [textmode.export.js](../index.md) / TextmodeDocumentJSON
@@ -21,3 +21,4 @@ type TextmodeDocumentJSON =
 ```
 
 JSON document exported by the JSON exporter.
+
