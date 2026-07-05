@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: layering
 kind: Class
-lastModified: 2026-07-03
+lastModified: 2026-07-05
 hasConstructor: false
 ---
 
@@ -36,7 +36,6 @@ Access this manager via `textmodifier.layers`.
 
 | Method | Description |
 | ------ | ------ |
-| [\_renderAndPresentWithOverlay](TextmodeLayerManager/methods/renderAndPresentWithOverlay.md) | - |
 | [add](TextmodeLayerManager/methods/add.md) | Create a layer at the top of the stack. |
 | [clear](TextmodeLayerManager/methods/clear.md) | Remove and dispose all user-created layers. |
 | [move](TextmodeLayerManager/methods/move.md) | Move a user-created layer to a new index in the stack. |

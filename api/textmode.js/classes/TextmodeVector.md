@@ -6,7 +6,7 @@ description: Mutable two- or three-dimensional vector for creative-coding math.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-07-03
+lastModified: 2026-07-05
 hasConstructor: true
 ---
 

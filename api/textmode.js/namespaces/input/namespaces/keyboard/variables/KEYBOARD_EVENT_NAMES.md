@@ -7,7 +7,7 @@ category: Variables
 api: true
 namespace: input.keyboard
 kind: Variable
-lastModified: 2026-07-03
+lastModified: 2026-07-05
 ---
 
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [keyboard](../index.md) / KEYBOARD\_EVENT\_NAMES

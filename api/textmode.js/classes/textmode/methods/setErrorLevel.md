@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: textmode
 kind: Method
-lastModified: 2026-07-03
+lastModified: 2026-07-05
 ---
 
 [textmode.js](../../../index.md) / [textmode](../../textmode.md) / setErrorLevel

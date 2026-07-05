@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-07-03
+lastModified: 2026-07-05
 ---
 
 [textmode.export.js](../index.md) / GIFExportProgress

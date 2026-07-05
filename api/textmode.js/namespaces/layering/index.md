@@ -6,7 +6,7 @@ description: All modules and types related to multi-layered textmode rendering.
 category: Namespaces
 api: true
 kind: Namespace
-lastModified: 2026-07-03
+lastModified: 2026-07-05
 ---
 
 [textmode.js](../../index.md) / layering

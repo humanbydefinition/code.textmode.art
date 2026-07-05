@@ -7,7 +7,7 @@ category: Properties
 api: true
 owner: Textmodifier
 kind: Property
-lastModified: 2026-07-03
+lastModified: 2026-07-05
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / TRIANGLE\_STRIP

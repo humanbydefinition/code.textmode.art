@@ -8,7 +8,7 @@ api: true
 owner: TextmodeColor
 namespace: color
 kind: Accessor
-lastModified: 2026-07-03
+lastModified: 2026-07-05
 ---
 
 [textmode.js](../../../../../index.md) / [color](../../../index.md) / [TextmodeColor](../../TextmodeColor.md) / rgb

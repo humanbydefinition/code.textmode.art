@@ -8,7 +8,7 @@ api: true
 owner: TextmodeSource
 namespace: media
 kind: Method
-lastModified: 2026-07-03
+lastModified: 2026-07-05
 ---
 
 [textmode.js](../../../../../index.md) / [media](../../../index.md) / [TextmodeSource](../../TextmodeSource.md) / flipX
