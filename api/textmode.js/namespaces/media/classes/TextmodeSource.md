@@ -2,12 +2,12 @@
 layout: doc
 editLink: true
 title: TextmodeSource
-description: Shared base for textmode image, video, and dynamic texture sources.
+description: Shared base for image, video, and dynamic texture sources drawn with Textmodifier.image.
 category: Classes
 api: true
 namespace: media
 kind: Class
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 hasConstructor: false
 ---
 
@@ -15,10 +15,8 @@ hasConstructor: false
 
 # Abstract Class: TextmodeSource
 
-Shared base for textmode image, video, and dynamic texture sources.
+Shared base for image, video, and dynamic texture sources drawn with [Textmodifier.image](../../../classes/Textmodifier/methods/image.md).
 
-Source instances expose chainable conversion controls used before drawing with
-[Textmodifier.image](../../../classes/Textmodifier/methods/image.md).
 
 ## Extends
 

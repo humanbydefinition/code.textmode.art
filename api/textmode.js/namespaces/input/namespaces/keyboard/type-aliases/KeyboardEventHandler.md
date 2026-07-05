@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 namespace: input.keyboard
 kind: TypeAlias
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 ---
 
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [keyboard](../index.md) / KeyboardEventHandler
@@ -29,3 +29,4 @@ Keyboard event callback signature.
 ## Returns
 
 `void`
+

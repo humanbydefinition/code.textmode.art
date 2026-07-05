@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 namespace: loading
 kind: TypeAlias
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 ---
 
 [textmode.js](../../../index.md) / [loading](../index.md) / LoadingScreenState
@@ -19,3 +19,4 @@ type LoadingScreenState = "disabled" | "active" | "done" | "transitioning";
 ```
 
 Internal state of the loading screen.
+

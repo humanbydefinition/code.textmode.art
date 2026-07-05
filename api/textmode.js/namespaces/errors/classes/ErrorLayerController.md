@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: errors
 kind: Class
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 hasConstructor: true
 ---
 
@@ -16,6 +16,7 @@ hasConstructor: true
 # Class: ErrorLayerController
 
 Controls the dedicated internal error layer lifecycle and rendering behavior.
+
 
 ## Extends
 

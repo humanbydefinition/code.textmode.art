@@ -6,7 +6,7 @@ description: Options when creating a Textmodifier instance via textmode.create.
 category: Type Aliases
 api: true
 kind: TypeAlias
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 ---
 
 [textmode.js](../index.md) / TextmodeOptions
@@ -18,6 +18,7 @@ type TextmodeOptions = object;
 ```
 
 Options when creating a [Textmodifier](../classes/Textmodifier.md) instance via [textmode.create](../classes/textmode/methods/create.md).
+
 
 ## Properties
 
@@ -34,6 +35,7 @@ or HTMLVideoElement to use instead of letting `textmode.js` create a canvas.
 If using `overlay` mode, this should be the target canvas or video element to overlay on.
 `textmode.js` will create its own canvas applied on top of the target element, always matching its size and position.
 
+
 ***
 
 ### fontSize?
@@ -43,6 +45,7 @@ optional fontSize?: number;
 ```
 
 The font size to use for text rendering. Defaults to 16.
+
 
 ***
 
@@ -54,6 +57,7 @@ optional fontSource?: string;
 
 URL or path to a custom font file *(.otf, .ttf, or .woff)*.
 
+
 ***
 
 ### frameRate?
@@ -63,6 +67,7 @@ optional frameRate?: number;
 ```
 
 Maximum frames per second for auto rendering. Defaults to 60.
+
 
 ***
 
@@ -76,6 +81,7 @@ Use an external WebGL2 context instead of creating a new one.
 Useful for integrating with three.js, Babylon.js, hydra-synth, or other WebGL libraries
 that share the same canvas.
 
+
 ***
 
 ### height?
@@ -86,6 +92,7 @@ optional height?: number;
 
 The height of the canvas when creating a new canvas. Defaults to 600.
 
+
 ***
 
 ### loadingScreen?
@@ -95,6 +102,7 @@ optional loadingScreen?: LoadingScreenOptions;
 ```
 
 Configure the built-in loading screen experience.
+
 
 ***
 
@@ -115,6 +123,7 @@ This is useful for applying textmode conversion to p5.js sketches, videos,
 and other canvas-based renderers. Manual textmode canvas resizing is not
 recommended in overlay mode because the target element controls the size.
 
+
 ***
 
 ### pixelDensity?
@@ -131,6 +140,7 @@ size stays at `width × height`.
 
 Has no effect when using an externally-supplied `gl` or `canvas`.
 
+
 ***
 
 ### plugins?
@@ -140,6 +150,7 @@ optional plugins?: TextmodePlugin[];
 ```
 
 List of plugins to install when the Textmodifier instance is created.
+
 
 ***
 
@@ -153,6 +164,7 @@ Seed used by the instance-scoped random generator.
 
 Set this when a sketch should produce the same random sequence each time it runs.
 
+
 ***
 
 ### width?
@@ -162,3 +174,4 @@ optional width?: number;
 ```
 
 The width of the canvas when creating a new canvas. Defaults to 800.
+

@@ -8,7 +8,7 @@ api: true
 owner: TextmodeExportAPI
 kind: Method
 ecosystem: textmode.js
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 ---
 
 [textmode.export.js](../../../index.md) / [TextmodeExportAPI](../../TextmodeExportAPI.md) / copyCanvas
@@ -36,3 +36,4 @@ Copies the current canvas to the user's clipboard as an image.
 ```ts
 await t.copyCanvas({ format: 'png' });
 ```
+

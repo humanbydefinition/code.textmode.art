@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: filters
 kind: Interface
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 isInterface: true
 ---
 
@@ -19,6 +19,7 @@ Filter parameter types for built-in filters.
 
 Most filters accept either a single number (for the primary parameter)
 or an object with named properties.
+
 
 ## Properties
 

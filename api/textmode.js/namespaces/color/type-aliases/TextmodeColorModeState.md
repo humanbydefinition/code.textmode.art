@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 namespace: color
 kind: TypeAlias
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 ---
 
 [textmode.js](../../../index.md) / [color](../index.md) / TextmodeColorModeState
@@ -20,6 +20,7 @@ type TextmodeColorModeState = object;
 
 Current color mode and channel maximums used by color parsing APIs.
 
+
 ## Properties
 
 ### maxes
@@ -30,6 +31,7 @@ maxes: [number, number, number, number];
 
 Maximum values for channels 1, 2, 3, and alpha.
 
+
 ***
 
 ### mode
@@ -39,3 +41,4 @@ mode: TextmodeColorMode;
 ```
 
 Active color interpretation mode.
+

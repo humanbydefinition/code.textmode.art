@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 namespace: conversion
 kind: TypeAlias
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 ---
 
 [textmode.js](../../../index.md) / [conversion](../index.md) / BuiltInConversionMode
@@ -19,3 +19,4 @@ type BuiltInConversionMode = "brightness";
 ```
 
 Built-in conversion mode names provided by textmode.js
+

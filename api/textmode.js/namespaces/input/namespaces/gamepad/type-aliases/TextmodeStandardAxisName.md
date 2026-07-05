@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 namespace: input.gamepad
 kind: TypeAlias
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 ---
 
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [gamepad](../index.md) / TextmodeStandardAxisName
@@ -19,3 +19,4 @@ type TextmodeStandardAxisName = "leftStickX" | "leftStickY" | "rightStickX" | "r
 ```
 
 Semantic axis names exposed for standard-mapped controllers.
+

@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 ---
 
 [textmode.export.js](../index.md) / VideoBitratePreset
@@ -22,3 +22,4 @@ Subjective bitrate preset used when an exact bits-per-second value is not suppli
 
 Higher presets produce larger files with more detail. For exact control, pass a numeric
 `bitrate` value in bits per second instead.
+

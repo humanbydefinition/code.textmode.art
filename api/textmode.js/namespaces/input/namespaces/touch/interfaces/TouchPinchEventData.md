@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: input.touch
 kind: Interface
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 isInterface: true
 ---
 
@@ -16,6 +16,7 @@ isInterface: true
 # Interface: TouchPinchEventData
 
 Pinch gesture event data describing the scaling factor between the initial and current distance.
+
 
 ## Properties
 

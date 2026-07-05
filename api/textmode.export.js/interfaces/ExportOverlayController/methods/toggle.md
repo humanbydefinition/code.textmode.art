@@ -8,7 +8,7 @@ api: true
 owner: ExportOverlayController
 kind: Method
 ecosystem: textmode.js
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 ---
 
 [textmode.export.js](../../../index.md) / [ExportOverlayController](../../ExportOverlayController.md) / toggle
@@ -30,3 +30,4 @@ Toggles the export overlay UI visibility.
 ```ts
 t.exportOverlay.toggle();
 ```
+

@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 ---
 
 [textmode.synth.js](../index.md) / DynamicErrorCallback
@@ -31,3 +31,4 @@ Live coding environments can use this to display errors without interrupting ren
 ## Returns
 
 `void`
+

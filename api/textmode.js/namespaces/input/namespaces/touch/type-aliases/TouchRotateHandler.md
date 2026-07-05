@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 namespace: input.touch
 kind: TypeAlias
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 ---
 
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [touch](../index.md) / TouchRotateHandler
@@ -29,3 +29,4 @@ Rotate-gesture event callback signature.
 ## Returns
 
 `void`
+

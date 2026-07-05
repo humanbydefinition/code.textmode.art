@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 namespace: plugins
 kind: TypeAlias
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 ---
 
 [textmode.js](../../../index.md) / [plugins](../index.md) / TextmodePluginHook
@@ -23,3 +23,4 @@ Callback type for simple plugin hooks without parameters.
 ## Returns
 
 `void`
+

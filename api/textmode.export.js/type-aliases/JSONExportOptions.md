@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 ---
 
 [textmode.export.js](../index.md) / JSONExportOptions
@@ -29,3 +29,4 @@ Options for exporting the textmode content to JSON format.
 | `pretty?` | `boolean` \| `number` | Pretty-print the generated JSON. When set to `true`, output uses two-space indentation. When set to a number, that value is used as indentation width. When `false`, the output is minified. Defaults to `true`. |
 | `colorMode?` | [`JSONExportColorMode`](JSONExportColorMode.md) | Color representation used for foreground and background values. Defaults to `'hex'`. |
 | `includeMetadata?` | `boolean` | Whether to include export metadata such as timestamp and generator details. Defaults to `true`. |
+

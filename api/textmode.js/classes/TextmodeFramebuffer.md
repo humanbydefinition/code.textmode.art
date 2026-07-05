@@ -6,7 +6,7 @@ description: Framebuffer class for managing offscreen rendering targets initiali
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 hasConstructor: false
 ---
 
@@ -20,6 +20,7 @@ Framebuffer class for managing offscreen rendering targets initialized via [Text
 - Attachment 0: Character and transform data *(RGBA)*
 - Attachment 1: charColor *(RGBA)*
 - Attachment 2: cellColor *(RGBA)*
+
 
 ## Extends
 

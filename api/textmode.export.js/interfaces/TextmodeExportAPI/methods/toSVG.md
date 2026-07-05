@@ -8,7 +8,7 @@ api: true
 owner: TextmodeExportAPI
 kind: Method
 ecosystem: textmode.js
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 ---
 
 [textmode.export.js](../../../index.md) / [TextmodeExportAPI](../../TextmodeExportAPI.md) / toSVG
@@ -38,3 +38,4 @@ The SVG content representing the artwork.
 ```ts
 const svg = t.toSVG({ layer: t.layers.base, drawMode: 'stroke', strokeWidth: 1.5 });
 ```
+

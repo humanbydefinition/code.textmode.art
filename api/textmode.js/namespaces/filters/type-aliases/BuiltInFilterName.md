@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 namespace: filters
 kind: TypeAlias
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 ---
 
 [textmode.js](../../../index.md) / [filters](../index.md) / BuiltInFilterName
@@ -19,3 +19,4 @@ type BuiltInFilterName = "invert" | "grayscale" | "sepia" | "threshold";
 ```
 
 Built-in filter names provided by textmode.js
+

@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 ---
 
 [textmode.export.js](../index.md) / GIFExportProgress
@@ -20,6 +20,7 @@ type GIFExportProgress = object;
 
 Progress information emitted during the GIF export process.
 
+
 ## Properties
 
 ### state
@@ -29,6 +30,7 @@ state: "idle" | "recording" | "encoding" | "completed" | "error";
 ```
 
 Current state of the recording process.
+
 
 ***
 
@@ -40,6 +42,7 @@ optional frameIndex?: number;
 
 Number of frames that have been recorded so far.
 
+
 ***
 
 ### totalFrames?
@@ -50,6 +53,7 @@ optional totalFrames?: number;
 
 Total number of frames planned for the recording.
 
+
 ***
 
 ### message?
@@ -59,3 +63,4 @@ optional message?: string;
 ```
 
 Optional status message for UI consumption.
+

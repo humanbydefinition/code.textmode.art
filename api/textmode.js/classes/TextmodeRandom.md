@@ -6,7 +6,7 @@ description: A deterministic pseudo-random number generator for textmode sketche
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 hasConstructor: true
 ---
 
@@ -18,6 +18,7 @@ A deterministic pseudo-random number generator for textmode sketches.
 
 `TextmodeRandom` uses the stable `textmode-v1` generator. It is designed for
 reproducible creative-coding output, not for cryptography or security-sensitive values.
+
 
 ## Constructors
 
@@ -64,6 +65,7 @@ const rng = new TextmodeRandom('glyphs');
 const value = rng.random();
 ```
 
+
 #### Call Signature
 
 ```ts
@@ -90,6 +92,7 @@ Random number in the range [0, max).
 const rng = new TextmodeRandom('columns');
 const column = rng.random(80);
 ```
+
 
 #### Call Signature
 
@@ -118,6 +121,7 @@ Random number in the range [min, max).
 const rng = new TextmodeRandom('offsets');
 const offset = rng.random(-4, 4);
 ```
+
 
 #### Call Signature
 
@@ -152,6 +156,7 @@ const rng = new TextmodeRandom('characters');
 const character = rng.random(['A', 'B', 'C']);
 ```
 
+
 ***
 
 ### randomGaussian()
@@ -185,6 +190,7 @@ const rng = new TextmodeRandom('stars');
 const offset = rng.randomGaussian(0, 2);
 ```
 
+
 ***
 
 ### randomSeed()
@@ -211,3 +217,4 @@ Reset this generator to a seed.
 const rng = new TextmodeRandom('first');
 rng.randomSeed('second');
 ```
+

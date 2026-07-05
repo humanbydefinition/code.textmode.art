@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 namespace: filters
 kind: TypeAlias
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 ---
 
 [textmode.js](../../../index.md) / [filters](../index.md) / FilterName
@@ -19,3 +19,4 @@ type FilterName = BuiltInFilterName | string;
 ```
 
 Filter name type that allows both built-in and custom filter names
+

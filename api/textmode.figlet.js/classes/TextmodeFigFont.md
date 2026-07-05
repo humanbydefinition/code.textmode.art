@@ -7,7 +7,7 @@ category: Classes
 api: true
 kind: Class
 ecosystem: textmode.js
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 hasConstructor: false
 ---
 
@@ -16,6 +16,7 @@ hasConstructor: false
 # Class: TextmodeFigFont
 
 Parsed FIGfont resource used by `figText()` rendering.
+
 
 ## Extends
 

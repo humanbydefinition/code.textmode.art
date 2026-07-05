@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 ---
 
 [textmode.export.js](../index.md) / VideoExportOptions
@@ -20,6 +20,7 @@ type VideoExportOptions = object;
 
 Options for exporting the textmode content to video format.
 
+
 ## Properties
 
 ### filename?
@@ -29,6 +30,7 @@ optional filename?: string;
 ```
 
 Target filename without extension. Defaults to an auto-generated value.
+
 
 ***
 
@@ -40,6 +42,7 @@ optional format?: VideoExportFormat;
 
 Video container format. Defaults to `'mp4'`.
 
+
 ***
 
 ### frameCount?
@@ -50,6 +53,7 @@ optional frameCount?: number;
 
 Desired total number of frames to capture. Defaults to `300`.
 
+
 ***
 
 ### frameRate?
@@ -59,6 +63,7 @@ optional frameRate?: number;
 ```
 
 Target frame rate for the export, in frames per second. Defaults to `60`.
+
 
 ***
 
@@ -74,6 +79,7 @@ Bitrate controls how much encoded data is available per second of video. Higher 
 in noisy or fast-changing sketches, but create larger files. Presets are resolved from the export dimensions and
 frame rate; numeric values are passed directly to the encoder.
 
+
 ***
 
 ### bitrateMode?
@@ -86,6 +92,7 @@ Encoder bitrate allocation mode. Defaults to `'variable'`.
 
 Use `'variable'` for most exports so simple frames can compress efficiently and complex frames can receive more
 bits. Use `'constant'` only when a steadier data rate is more important than compression efficiency.
+
 
 ***
 
@@ -100,6 +107,7 @@ Encoder latency mode. Defaults to `'quality'`.
 Use `'quality'` for deterministic exports; it prioritizes completed output and avoids dropped frames. Use
 `'realtime'` only for low-latency use cases where dropped frames are acceptable.
 
+
 ***
 
 ### hardwareAcceleration?
@@ -112,6 +120,7 @@ WebCodecs hardware acceleration hint. Defaults to `'no-preference'`.
 
 Browsers may ignore this hint. `'prefer-hardware'` can be faster on supported devices; `'prefer-software'` can be
 more predictable but slower. `'no-preference'` lets the browser choose.
+
 
 ***
 
@@ -127,6 +136,7 @@ Key frames are independently decodable frames used for seeking and recovery. Sho
 responsiveness but increase file size. Longer intervals can shrink files but make seeking less precise.
 Use `0` to request every frame as a key frame.
 
+
 ***
 
 ### pixelDensity?
@@ -136,6 +146,7 @@ optional pixelDensity?: number;
 ```
 
 Pixel density used during export. Defaults to `1` so video dimensions match the live canvas.
+
 
 ***
 
@@ -147,6 +158,7 @@ optional signal?: AbortSignal;
 
 Abort signal for cancelling an in-progress export.
 
+
 ***
 
 ### transparent?
@@ -156,6 +168,7 @@ optional transparent?: boolean;
 ```
 
 When true, attempts to preserve alpha data in WebM recordings. MP4 exports reject this option.
+
 
 ***
 
@@ -177,6 +190,7 @@ Progress callback invoked throughout the recording lifecycle.
 
 `void`
 
+
 ***
 
 ### debugLogging?
@@ -186,3 +200,4 @@ optional debugLogging?: boolean;
 ```
 
 Enables verbose logging. Defaults to `false`.
+

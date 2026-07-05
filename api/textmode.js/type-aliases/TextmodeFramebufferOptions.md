@@ -6,7 +6,7 @@ description: Options for creating a framebuffer via Textmodifier.createFramebuff
 category: Type Aliases
 api: true
 kind: TypeAlias
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 ---
 
 [textmode.js](../index.md) / TextmodeFramebufferOptions
@@ -18,6 +18,7 @@ type TextmodeFramebufferOptions = object;
 ```
 
 Options for creating a framebuffer via [Textmodifier.createFramebuffer](../classes/Textmodifier/methods/createFramebuffer.md). If not specified, width and height default to the current textmode grid size.
+
 
 ## Properties
 
@@ -34,6 +35,7 @@ You probably do not want to go below 3 for textmode rendering, otherwise renderi
 
 Going above 3 is only recommended for advanced use cases involving custom shaders that utilize additional attachments.
 
+
 ***
 
 ### height?
@@ -44,6 +46,7 @@ optional height?: number;
 
 Height of the framebuffer in grid cells
 
+
 ***
 
 ### width?
@@ -53,3 +56,4 @@ optional width?: number;
 ```
 
 Width of the framebuffer in grid cells
+

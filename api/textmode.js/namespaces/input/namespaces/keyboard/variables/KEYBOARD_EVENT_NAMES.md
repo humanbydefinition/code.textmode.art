@@ -7,7 +7,7 @@ category: Variables
 api: true
 namespace: input.keyboard
 kind: Variable
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 ---
 
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [keyboard](../index.md) / KEYBOARD\_EVENT\_NAMES
@@ -19,3 +19,4 @@ const KEYBOARD_EVENT_NAMES: readonly ["keyPressed", "keyTyped", "keyReleased"];
 ```
 
 Keyboard event names supported by the shared input event API.
+

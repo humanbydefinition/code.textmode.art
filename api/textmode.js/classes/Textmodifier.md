@@ -6,7 +6,7 @@ description: The main textmode.js drawing context.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 hasConstructor: false
 ---
 
@@ -21,23 +21,47 @@ animation, and the p5-style drawing API. When no canvas is supplied, it creates
 one; when a canvas is supplied, it renders into or over that element depending
 on the chosen options.
 
+
 ## Properties
 
 | Property | Description |
 | ------ | ------ |
+| [BLEND\_ADDITIVE](Textmodifier/properties/BLEND_ADDITIVE.md) | Add the layer's color channels to the layers below it. |
+| [BLEND\_COLOR\_BURN](Textmodifier/properties/BLEND_COLOR_BURN.md) | Darken the layers below by inverting the color dodge relationship. |
+| [BLEND\_COLOR\_DODGE](Textmodifier/properties/BLEND_COLOR_DODGE.md) | Brighten the layers below by dividing around the layer color. |
+| [BLEND\_DARKEN](Textmodifier/properties/BLEND_DARKEN.md) | Keep the darker channel from either the layer or the layers below it. |
+| [BLEND\_DIFFERENCE](Textmodifier/properties/BLEND_DIFFERENCE.md) | Use the absolute channel difference between the layer and the layers below. |
+| [BLEND\_EXCLUSION](Textmodifier/properties/BLEND_EXCLUSION.md) | Use a lower-contrast difference blend between the layer and the layers below. |
+| [BLEND\_HARD\_LIGHT](Textmodifier/properties/BLEND_HARD_LIGHT.md) | Apply an intense contrast blend driven by the layer's brightness. |
+| [BLEND\_LIGHTEN](Textmodifier/properties/BLEND_LIGHTEN.md) | Keep the lighter channel from either the layer or the layers below it. |
+| [BLEND\_MULTIPLY](Textmodifier/properties/BLEND_MULTIPLY.md) | Multiply the layer's colors with the layers below it. |
+| [BLEND\_NORMAL](Textmodifier/properties/BLEND_NORMAL.md) | Draw the layer with standard source-over alpha compositing. |
+| [BLEND\_OVERLAY](Textmodifier/properties/BLEND_OVERLAY.md) | Combine multiply and screen based on the brightness below the layer. |
+| [BLEND\_SCREEN](Textmodifier/properties/BLEND_SCREEN.md) | Screen the layer against the layers below it. |
+| [BLEND\_SOFT\_LIGHT](Textmodifier/properties/BLEND_SOFT_LIGHT.md) | Apply a softer contrast blend based on the layer's brightness. |
+| [BLEND\_SUBTRACT](Textmodifier/properties/BLEND_SUBTRACT.md) | Subtract the layer's colors from the layers below it. |
 | [displayHeight](Textmodifier/properties/displayHeight.md) | Physical screen height in pixels. |
 | [displayWidth](Textmodifier/properties/displayWidth.md) | Physical screen width in pixels. |
 | [gamepads](Textmodifier/properties/gamepads.md) | Currently connected gamepads as a compact readonly list. |
 | [lastKeyPressed](Textmodifier/properties/lastKeyPressed.md) | Last key pressed, or `null` before any key press. |
 | [lastKeyReleased](Textmodifier/properties/lastKeyReleased.md) | Last key released, or `null` before any key release. |
+| [LINE\_LOOP](Textmodifier/properties/LINE_LOOP.md) | Draw consecutive vertices as one connected closed loop. |
+| [LINE\_STRIP](Textmodifier/properties/LINE_STRIP.md) | Draw consecutive vertices as one connected open path. |
+| [LINES](Textmodifier/properties/LINES.md) | Draw each pair of recorded vertices as an independent line segment. |
 | [modifierState](Textmodifier/properties/modifierState.md) | Current modifier key state. |
 | [mouse](Textmodifier/properties/mouse.md) | Current mouse position in center-based grid coordinates. |
 | [mouseIsPressed](Textmodifier/properties/mouseIsPressed.md) | Whether a mouse button is currently held down. |
 | [movedX](Textmodifier/properties/movedX.md) | Horizontal mouse movement accumulated since the previous rendered frame. |
 | [movedY](Textmodifier/properties/movedY.md) | Vertical mouse movement accumulated since the previous rendered frame. |
 | [pmouse](Textmodifier/properties/pmouse.md) | Mouse position from the previous rendered frame. |
+| [POINTS](Textmodifier/properties/POINTS.md) | Draw each recorded vertex as a separate point. |
 | [pressedKeys](Textmodifier/properties/pressedKeys.md) | Keys currently being held down. |
+| [QUAD\_STRIP](Textmodifier/properties/QUAD_STRIP.md) | Draw paired vertices as a connected strip of quads. |
+| [QUADS](Textmodifier/properties/QUADS.md) | Draw each group of four vertices as a quad split into two triangles. |
 | [touches](Textmodifier/properties/touches.md) | Currently active touches in grid coordinates. |
+| [TRIANGLE\_FAN](Textmodifier/properties/TRIANGLE_FAN.md) | Draw triangles that all share the first recorded vertex. |
+| [TRIANGLE\_STRIP](Textmodifier/properties/TRIANGLE_STRIP.md) | Draw overlapping triplets of vertices as a connected triangle strip. |
+| [TRIANGLES](Textmodifier/properties/TRIANGLES.md) | Draw each group of three vertices as an independent triangle. |
 | [windowHeight](Textmodifier/properties/windowHeight.md) | Current browser window height in pixels. |
 | [windowWidth](Textmodifier/properties/windowWidth.md) | Current browser window width in pixels. |
 
@@ -75,6 +99,7 @@ on the chosen options.
 | [atan](Textmodifier/methods/atan.md) | Calculate the arc tangent of a value. |
 | [atan2](Textmodifier/methods/atan2.md) | Calculate the angle from a vector's y and x components. |
 | [background](Textmodifier/methods/background.md) | Current background color. |
+| [beginShape](Textmodifier/methods/beginShape.md) | Start recording vertices for a custom 2D or 3D shape. Call [vertex](Textmodifier/methods/vertex.md) one or more times, then call [endShape](Textmodifier/methods/endShape.md) to draw the recorded shape. |
 | [bezierCurve](Textmodifier/methods/bezierCurve.md) | Draw a smooth cubic Bezier curve between two points. The curve thickness is controlled by the current [lineWeight](Textmodifier/methods/lineWeight.md) setting. |
 | [box](Textmodifier/methods/box.md) | Draw a box mesh primitive. |
 | [camera](Textmodifier/methods/camera.md) | Set an explicit camera transform for subsequent draw calls. |
@@ -110,6 +135,7 @@ on the chosen options.
 | [ease](Textmodifier/methods/ease.md) | Apply an easing curve to a normalized amount. |
 | [ellipse](Textmodifier/methods/ellipse.md) | Draw an ellipse with the current settings. Position is controlled via [translate](Textmodifier/methods/translate.md), [push](Textmodifier/methods/push.md), and [pop](Textmodifier/methods/pop.md). |
 | [ellipsoid](Textmodifier/methods/ellipsoid.md) | Draw an ellipsoid mesh primitive. |
+| [endShape](Textmodifier/methods/endShape.md) | Finish the active custom shape and enqueue its geometry. |
 | [exitPointerLock](Textmodifier/methods/exitPointerLock.md) | Exit pointer lock if the textmode canvas currently owns it. |
 | [exp](Textmodifier/methods/exp.md) | Calculate Euler's number raised to a value. |
 | [fill](Textmodifier/methods/fill.md) | Alias for [cellColor](Textmodifier/methods/cellColor.md). Current fill (cell background) color. |
@@ -162,6 +188,7 @@ on the chosen options.
 | [noLights](Textmodifier/methods/noLights.md) | Remove all active lights (ambient and point) and reset light falloff to `(1, 0, 0)`. |
 | [noLoop](Textmodifier/methods/noLoop.md) | Stop the automatic rendering loop. |
 | [norm](Textmodifier/methods/norm.md) | Map a number from a range to a normalized 0 to 1 range. |
+| [noTexture](Textmodifier/methods/noTexture.md) | Clear the active texture for later geometry draws. |
 | [off](Textmodifier/methods/off.md) | Remove a previously registered input event listener. |
 | [on](Textmodifier/methods/on.md) | Register an input event listener. |
 | [once](Textmodifier/methods/once.md) | Register an input event listener that removes itself after the first invocation. |
@@ -210,6 +237,7 @@ on the chosen options.
 | [tan](Textmodifier/methods/tan.md) | Calculate the tangent of an angle. |
 | [tap](Textmodifier/methods/tap.md) | Register a callback for tap gestures. |
 | [targetFrameRate](Textmodifier/methods/targetFrameRate.md) | Set or get the target frame rate limit. |
+| [texture](Textmodifier/methods/texture.md) | Bind a media source or framebuffer as the texture for later geometry draws. |
 | [torus](Textmodifier/methods/torus.md) | Draw a torus mesh primitive. |
 | [touchCancelled](Textmodifier/methods/touchCancelled.md) | Register the single-callback handler for browser-cancelled touches. |
 | [touchEnded](Textmodifier/methods/touchEnded.md) | Register the single-callback handler for touch end events. |
@@ -221,4 +249,5 @@ on the chosen options.
 | [translateZ](Textmodifier/methods/translateZ.md) | Current accumulated Z-axis translation. |
 | [triangle](Textmodifier/methods/triangle.md) | Draw a triangle with the current settings. |
 | [useTileColors](Textmodifier/methods/useTileColors.md) | Configure authored tileset color preservation on the base layer. |
+| [vertex](Textmodifier/methods/vertex.md) | Add a vertex to the active custom shape. The current transform, character, color, and line state are captured for this vertex. |
 | [windowResized](Textmodifier/methods/windowResized.md) | Set the callback that runs after a window resize. |

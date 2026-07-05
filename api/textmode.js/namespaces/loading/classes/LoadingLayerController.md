@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: loading
 kind: Class
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 hasConstructor: false
 ---
 
@@ -16,6 +16,7 @@ hasConstructor: false
 # Class: LoadingLayerController
 
 Controls the internal loading layer lifecycle and rendering behavior.
+
 
 ## Extends
 

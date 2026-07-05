@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 ---
 
 [textmode.export.js](../index.md) / SVGExportOptions
@@ -28,3 +28,4 @@ Options for exporting the textmode content to SVG format.
 | `includeBackgroundRectangles?` | `boolean` | Whether to include cell background rectangles in the SVG output. When `false`, only the character paths are included. Defaults to `true`. |
 | `drawMode?` | `"fill"` \| `"stroke"` | The drawing mode for ASCII characters. When set to `'fill'`, characters are rendered as filled shapes. When set to `'stroke'`, characters are rendered as outlines. Defaults to `'fill'`. |
 | `strokeWidth?` | `number` | The stroke width to use when drawMode is set to `'stroke'`. Defaults to `1.0`. |
+

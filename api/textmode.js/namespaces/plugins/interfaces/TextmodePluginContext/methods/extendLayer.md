@@ -8,7 +8,7 @@ api: true
 owner: TextmodePluginContext
 namespace: plugins
 kind: Method
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 ---
 
 [textmode.js](../../../../../index.md) / [plugins](../../../index.md) / [TextmodePluginContext](../../TextmodePluginContext.md) / extendLayer
@@ -48,3 +48,4 @@ api.extendLayer('synth', function(source: SynthSource) {
   this.setPluginState('synth', { source, compiled: compile(source) });
 });
 ```
+

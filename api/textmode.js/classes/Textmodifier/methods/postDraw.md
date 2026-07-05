@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / postDraw
@@ -54,3 +54,4 @@ t.postDraw(() => {
 	t.layers.base.filter('invert');
 });
 ```
+

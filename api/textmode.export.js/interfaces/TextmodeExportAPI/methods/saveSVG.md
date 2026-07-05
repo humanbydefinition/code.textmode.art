@@ -8,7 +8,7 @@ api: true
 owner: TextmodeExportAPI
 kind: Method
 ecosystem: textmode.js
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 ---
 
 [textmode.export.js](../../../index.md) / [TextmodeExportAPI](../../TextmodeExportAPI.md) / saveSVG
@@ -36,3 +36,4 @@ Downloads the selected layer as an SVG file.
 ```ts
 t.saveSVG({ filename: 'poster', layer: t.layers.base, includeBackgroundRectangles: true });
 ```
+

@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: fonts
 kind: Interface
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 isInterface: true
 ---
 
@@ -16,6 +16,7 @@ isInterface: true
 # Interface: TextmodeTilesetOptions
 
 Configuration used to load a tileset image into a normalized glyph atlas.
+
 
 ## Properties
 

@@ -8,7 +8,7 @@ api: true
 owner: TextmodeExportAPI
 kind: Method
 ecosystem: textmode.js
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 ---
 
 [textmode.export.js](../../../index.md) / [TextmodeExportAPI](../../TextmodeExportAPI.md) / toString
@@ -38,3 +38,4 @@ The textual representation of the artwork.
 ```ts
 const text = t.toString({ layer: t.layers.base, preserveTrailingSpaces: false });
 ```
+

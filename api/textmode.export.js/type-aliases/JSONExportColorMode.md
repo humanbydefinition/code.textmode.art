@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 ---
 
 [textmode.export.js](../index.md) / JSONExportColorMode
@@ -19,3 +19,4 @@ type JSONExportColorMode = "hex" | "rgba";
 ```
 
 Supported JSON color output modes.
+

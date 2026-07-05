@@ -7,7 +7,7 @@ category: Variables
 api: true
 namespace: input.touch
 kind: Variable
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 ---
 
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [touch](../index.md) / GESTURE\_EVENT\_NAMES
@@ -19,3 +19,4 @@ const GESTURE_EVENT_NAMES: readonly ["tap", "doubleTap", "longPress", "swipe", "
 ```
 
 Touch gesture event names supported by the shared input event API.
+

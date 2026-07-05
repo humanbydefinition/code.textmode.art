@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 namespace: color
 kind: TypeAlias
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 ---
 
 [textmode.js](../../../index.md) / [color](../index.md) / TextmodeColorTuple
@@ -21,3 +21,4 @@ type TextmodeColorTuple =
 ```
 
 A union type for either an RGB or RGBA color tuple.
+

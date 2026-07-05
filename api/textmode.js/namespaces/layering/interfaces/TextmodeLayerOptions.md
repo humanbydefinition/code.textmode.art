@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: layering
 kind: Interface
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 isInterface: true
 ---
 
@@ -17,11 +17,12 @@ isInterface: true
 
 Options for layers created with [TextmodeLayerManager.add](../classes/TextmodeLayerManager/methods/add.md).
 
+
 ## Properties
 
 | Property | Type | Description |
 | ------ | ------ | ------ |
-| <a id="property-blendmode"></a> `blendMode?` | \| `"normal"` \| `"darken"` \| `"difference"` \| `"exclusion"` \| `"lighten"` \| `"multiply"` \| `"overlay"` \| `"screen"` \| `"additive"` \| `"subtract"` \| `"softLight"` \| `"hardLight"` \| `"colorDodge"` \| `"colorBurn"` | Blend mode used when compositing this layer. Defaults to `'normal'`. |
+| <a id="property-blendmode"></a> `blendMode?` | \| `"normal"` \| `"darken"` \| `"difference"` \| `"exclusion"` \| `"lighten"` \| `"multiply"` \| `"overlay"` \| `"screen"` \| `"additive"` \| `"subtract"` \| `"softLight"` \| `"hardLight"` \| `"colorDodge"` \| `"colorBurn"` \| [`LayerBlendMode`](../enumerations/LayerBlendMode.md) | Blend mode used when compositing this layer. Defaults to `LayerBlendMode.NORMAL`. Pass a [LayerBlendMode](../enumerations/LayerBlendMode.md) constant (e.g. `t.BLEND_ADDITIVE`) or a legacy string (e.g. `'additive'` — deprecated, emits a warning). |
 | <a id="property-fontsize"></a> `fontSize?` | `number` | Font size for the layer's glyph source. Defaults to `16`. |
 | <a id="property-fontsource"></a> `fontSource?` | `string` \| [`TextmodeFont`](../../fonts/classes/TextmodeFont.md) | Source for the font to use in this layer. Can be a URL/path to a font file, or an existing TextmodeFont instance. Existing TextmodeFont inputs are forked per layer to keep resources independent. |
 | <a id="property-offsetx"></a> `offsetX?` | `number` | Horizontal layer offset in pixels. Defaults to `0`. |

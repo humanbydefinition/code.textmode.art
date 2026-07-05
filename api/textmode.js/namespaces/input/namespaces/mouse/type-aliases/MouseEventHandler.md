@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 namespace: input.mouse
 kind: TypeAlias
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 ---
 
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [mouse](../index.md) / MouseEventHandler
@@ -29,3 +29,4 @@ Mouse event callback signature.
 ## Returns
 
 `void`
+

@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: filters
 kind: Interface
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 isInterface: true
 ---
 
@@ -16,6 +16,7 @@ isInterface: true
 # Interface: TextmodeFilterStrategy\<TParams\>
 
 Interface for implementing custom filter strategies.
+
 
 ## Type Parameters
 
@@ -58,6 +59,7 @@ The compiled shader program
 createShader: () => shader
 ```
 
+
 ***
 
 ### createUniforms()
@@ -87,3 +89,4 @@ An object mapping uniform names to values
 ```ts
 createUniforms: (params) => ({ u_amount: params?.amount ?? 1 })
 ```
+

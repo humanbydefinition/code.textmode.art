@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 namespace: plugins
 kind: TypeAlias
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 ---
 
 [textmode.js](../../../index.md) / [plugins](../index.md) / LayerExtensionImplementation
@@ -32,3 +32,4 @@ The `this` context is bound to the `TextmodeLayer` instance.
 ## Returns
 
 `unknown`
+

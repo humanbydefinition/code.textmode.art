@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 isInterface: true
 ---
 
@@ -17,6 +17,7 @@ isInterface: true
 
 FIGlet methods added to the `textmode.js` `Textmodifier` API when
 [FigletPlugin](../variables/FigletPlugin.md) is installed.
+
 
 ## Methods
 

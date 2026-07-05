@@ -8,7 +8,7 @@ api: true
 owner: TextmodeExportAPI
 kind: Method
 ecosystem: textmode.js
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 ---
 
 [textmode.export.js](../../../index.md) / [TextmodeExportAPI](../../TextmodeExportAPI.md) / toJSON
@@ -39,3 +39,4 @@ The JSON document representing the selected layer or layer stack.
 const layer = t.toJSON({ layer: t.layers.base, colorMode: 'hex', includeMetadata: true });
 const stack = t.toJSON({ target: 'all' });
 ```
+

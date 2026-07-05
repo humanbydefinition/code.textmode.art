@@ -8,7 +8,7 @@ api: true
 owner: TextmodeLayer
 namespace: layering
 kind: Method
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 ---
 
 [textmode.js](../../../../../index.md) / [layering](../../../index.md) / [TextmodeLayer](../../TextmodeLayer.md) / loadFont
@@ -37,7 +37,6 @@ The loaded TextmodeFont.
 
 ```javascript
 const t = textmode.create({
-	pixelDensity: 1,
 	width: window.innerWidth,
 	height: window.innerHeight,
 	fontSize: 16,
@@ -101,3 +100,4 @@ t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
+

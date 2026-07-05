@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 ---
 
 [textmode.figlet.js](../index.md) / FigVerticalLayout
@@ -19,3 +19,4 @@ type FigVerticalLayout = "full" | "fitted" | "smushed";
 ```
 
 Supported vertical layout modes for multi-line FIGlet rendering.
+

@@ -8,7 +8,7 @@ api: true
 owner: TextmodeExportAPI
 kind: Method
 ecosystem: textmode.js
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 ---
 
 [textmode.export.js](../../../index.md) / [TextmodeExportAPI](../../TextmodeExportAPI.md) / saveJSON
@@ -37,3 +37,4 @@ Downloads the selected layer or layer stack as a JSON file.
 t.saveJSON({ filename: 'frame', layer: t.layers.base, pretty: true });
 t.saveJSON({ filename: 'stack', target: 'all' });
 ```
+

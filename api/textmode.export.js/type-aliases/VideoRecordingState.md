@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 ---
 
 [textmode.export.js](../index.md) / VideoRecordingState
@@ -19,3 +19,4 @@ type VideoRecordingState = "idle" | "recording" | "encoding" | "completed" | "er
 ```
 
 Lifecycle state reported while a video export is being prepared, recorded, encoded, or completed.
+

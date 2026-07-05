@@ -8,7 +8,7 @@ api: true
 owner: ExportOverlayController
 kind: Method
 ecosystem: textmode.js
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 ---
 
 [textmode.export.js](../../../index.md) / [ExportOverlayController](../../ExportOverlayController.md) / isVisible
@@ -30,3 +30,4 @@ Checks if the export overlay is currently visible.
 ```ts
 const visible = t.exportOverlay.isVisible();
 ```
+

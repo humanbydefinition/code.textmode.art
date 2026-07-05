@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 namespace: fonts
 kind: TypeAlias
-lastModified: 2026-06-09
+lastModified: 2026-07-05
 ---
 
 [textmode.js](../../../index.md) / [fonts](../index.md) / TextmodeGlyph
@@ -20,6 +20,7 @@ type TextmodeGlyph = object;
 
 Represents a single glyph entry in a textmode glyph atlas.
 
+
 ## Properties
 
 ### character
@@ -30,6 +31,7 @@ character: string;
 
 The Unicode character used to address this glyph.
 
+
 ***
 
 ### color
@@ -39,6 +41,7 @@ color: [number, number, number];
 ```
 
 RGB-encoded glyph identity used by the render pipeline and exposed through character color lookups.
+
 
 ***
 
@@ -53,6 +56,7 @@ Glyph outline data including advance width and path information.
 Only available for [TextmodeFont](../classes/TextmodeFont.md) glyphs, not [TextmodeTileset](../classes/TextmodeTileset.md) glyphs,
 since tilesets use pre-rendered bitmap data instead of vector outlines.
 
+
 ***
 
 ### unicode
@@ -62,3 +66,4 @@ unicode: number;
 ```
 
 The Unicode code point of the character.
+
