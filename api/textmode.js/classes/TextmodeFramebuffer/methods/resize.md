@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: TextmodeFramebuffer
 kind: Method
-lastModified: 2026-07-05
+lastModified: 2026-07-25
 ---
 
 [textmode.js](../../../index.md) / [TextmodeFramebuffer](../../TextmodeFramebuffer.md) / resize

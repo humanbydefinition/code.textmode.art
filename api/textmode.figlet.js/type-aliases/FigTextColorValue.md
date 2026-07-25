@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-07-05
+lastModified: 2026-07-25
 ---
 
 [textmode.figlet.js](../index.md) / FigTextColorValue

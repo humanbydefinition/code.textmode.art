@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-07-05
+lastModified: 2026-07-25
 isInterface: true
 ---
 
@@ -19,7 +19,7 @@ Context passed to dynamic parameter functions during rendering.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="SynthContext" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CiAgd2lkdGg6IHdpbmRvdy5pbm5lcldpZHRoLAogIGhlaWdodDogd2luZG93LmlubmVySGVpZ2h0LAogIHBsdWdpbnM6IFtTeW50aFBsdWdpbl0KfSk7Cgp0LmxheWVycy5iYXNlLnN5bnRoKAogIG5vaXNlKChjdHgpID0-IDYgKyBNYXRoLnNpbihjdHgudGltZSkgKiA0KQogICAgLmthbGVpZCg1KQopOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKICB0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="SynthContext" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CiAgd2lkdGg6IHdpbmRvdy5pbm5lcldpZHRoLAogIGhlaWdodDogd2luZG93LmlubmVySGVpZ2h0LAogIHBsdWdpbnM6IFtTeW50aFBsdWdpbl0KfSk7Cgp0LnN5bnRoKAogIG5vaXNlKChjdHgpID0-IDYgKyBNYXRoLnNpbihjdHgudGltZSkgKiA0KQogICAgLmthbGVpZCg1KQopOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKICB0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
 
 ## Properties
 

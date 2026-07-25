@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-07-05
+lastModified: 2026-07-25
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / createTexture
@@ -29,7 +29,7 @@ The texture automatically updates each frame to capture the latest content from 
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `source` | `HTMLCanvasElement` \| `HTMLVideoElement` | Canvas or video element to capture. |
+| `source` | `HTMLVideoElement` \| `HTMLCanvasElement` | Canvas or video element to capture. |
 
 ## Returns
 

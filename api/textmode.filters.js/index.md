@@ -7,7 +7,7 @@ category: API Reference
 api: true
 kind: Project
 ecosystem: textmode.js
-lastModified: 2026-07-05
+lastModified: 2026-07-25
 ---
 
 # textmode.filters.js

@@ -8,7 +8,7 @@ api: true
 owner: TextmodeTexture
 namespace: media
 kind: Accessor
-lastModified: 2026-07-05
+lastModified: 2026-07-25
 ---
 
 [textmode.js](../../../../../index.md) / [media](../../../index.md) / [TextmodeTexture](../../TextmodeTexture.md) / source
@@ -18,14 +18,14 @@ lastModified: 2026-07-05
 ## Get Signature
 
 ```ts
-get source(): HTMLCanvasElement | HTMLVideoElement;
+get source(): HTMLVideoElement | HTMLCanvasElement;
 ```
 
 Source element this texture captures.
 
 ### Returns
 
-`HTMLCanvasElement` \| `HTMLVideoElement`
+`HTMLVideoElement` \| `HTMLCanvasElement`
 
 ### Example
 

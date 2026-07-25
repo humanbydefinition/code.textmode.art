@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: fonts
 kind: Class
-lastModified: 2026-07-05
+lastModified: 2026-07-25
 hasConstructor: false
 ---
 

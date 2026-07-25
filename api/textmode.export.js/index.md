@@ -7,7 +7,7 @@ category: API Reference
 api: true
 kind: Project
 ecosystem: textmode.js
-lastModified: 2026-07-05
+lastModified: 2026-07-25
 ---
 
 # textmode.export.js
@@ -49,9 +49,10 @@ convenient overlay UI for quick access to all export options.
 | [TextmodeSelectedDocumentJSON](interfaces/TextmodeSelectedDocumentJSON.md) | Selected-layer document exported by the JSON exporter. |
 | [TextmodeDocumentLayer](interfaces/TextmodeDocumentLayer.md) | Single layer entry in an all-layers JSON export. |
 | [TextmodeAllDocumentJSON](interfaces/TextmodeAllDocumentJSON.md) | Layer stack document exported by the JSON exporter. |
+| [ExportOverlayPosition](interfaces/ExportOverlayPosition.md) | Current canvas-relative placement state for the export overlay UI. |
+| [ExportOverlayPositionInput](interfaces/ExportOverlayPositionInput.md) | Canvas-relative placement coordinates for the export overlay UI. |
 | [ExportOverlayController](interfaces/ExportOverlayController.md) | Controller for managing the export overlay UI visibility at runtime. |
-| [TextmodeExportAPI](interfaces/TextmodeExportAPI.md) | Runtime export helpers that `createExportPlugin` attaches to the `Textmodifier` instance. |
-| [~~TextmodeExportPluginOptions~~](interfaces/TextmodeExportPluginOptions.md) | Options for configuring the export plugin. |
+| [TextmodeExportAPI](interfaces/TextmodeExportAPI.md) | Runtime export helpers that `ExportPlugin` attaches to the `Textmodifier` instance. |
 
 ## Type Aliases
 
@@ -80,15 +81,17 @@ convenient overlay UI for quick access to all export options.
 | [VideoExportErrorCode](type-aliases/VideoExportErrorCode.md) | - |
 | [VideoExportProgress](type-aliases/VideoExportProgress.md) | Progress information emitted during the video export process. |
 | [VideoExportOptions](type-aliases/VideoExportOptions.md) | Options for exporting the textmode content to video format. |
+| [TXTOverlayDefaults](type-aliases/TXTOverlayDefaults.md) | Default TXT export fields controlled by the export overlay. |
+| [JSONOverlayDefaults](type-aliases/JSONOverlayDefaults.md) | Default JSON export fields controlled by the export overlay. |
+| [ImageOverlayDefaults](type-aliases/ImageOverlayDefaults.md) | Default image export fields controlled by the export overlay. |
+| [SVGOverlayDefaults](type-aliases/SVGOverlayDefaults.md) | Default SVG export fields controlled by the export overlay. |
+| [GIFOverlayDefaults](type-aliases/GIFOverlayDefaults.md) | Default GIF export fields controlled by the export overlay. |
+| [VideoOverlayDefaults](type-aliases/VideoOverlayDefaults.md) | Default video export fields controlled by the export overlay. |
+| [ExportDefaults](type-aliases/ExportDefaults.md) | Per-format default options used to seed the overlay UI inputs at mount time and after a [ExportOverlayController.resetDefaults](interfaces/ExportOverlayController/methods/resetDefaults.md) call. |
+| [ExportDefaultsPatch](type-aliases/ExportDefaultsPatch.md) | Partial patch accepted by [ExportOverlayController.setDefaults](interfaces/ExportOverlayController/methods/setDefaults.md). |
 
 ## Variables
 
 | Variable | Description |
 | ------ | ------ |
 | [ExportPlugin](variables/ExportPlugin.md) | Export plugin for textmode.js. |
-
-## Functions
-
-| Function | Description |
-| ------ | ------ |
-| [~~createTextmodeExportPlugin~~](functions/createTextmodeExportPlugin.md) | Creates the `textmode.export.js` plugin for textmode.js. |

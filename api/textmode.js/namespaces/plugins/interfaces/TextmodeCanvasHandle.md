@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: plugins
 kind: Interface
-lastModified: 2026-07-05
+lastModified: 2026-07-25
 isInterface: true
 ---
 
@@ -25,5 +25,5 @@ Stable read-only canvas handle exposed to plugins.
 | <a id="property-canvas"></a> `canvas` | `readonly` | `HTMLCanvasElement` | The DOM canvas used for textmode rendering. |
 | <a id="property-height"></a> `height` | `readonly` | `number` | Current canvas height in device pixels. |
 | <a id="property-ownscontext"></a> `ownsContext` | `readonly` | `boolean` | Whether textmode owns the WebGL context lifecycle. |
-| <a id="property-targetcanvas"></a> `targetCanvas` | `readonly` | `HTMLCanvasElement` \| `HTMLVideoElement` \| `null` | The overlay target, when textmode is running in overlay mode. |
+| <a id="property-targetcanvas"></a> `targetCanvas` | `readonly` | `HTMLVideoElement` \| `HTMLCanvasElement` \| `null` | The overlay target, when textmode is running in overlay mode. |
 | <a id="property-width"></a> `width` | `readonly` | `number` | Current canvas width in device pixels. |
