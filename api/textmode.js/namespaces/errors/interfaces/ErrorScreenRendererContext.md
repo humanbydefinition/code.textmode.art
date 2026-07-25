@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: errors
 kind: Interface
-lastModified: 2026-07-05
+lastModified: 2026-07-25
 isInterface: true
 ---
 

@@ -6,7 +6,7 @@ description: WebGL shader program created by Textmodifier.createMaterialShader, 
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-07-05
+lastModified: 2026-07-25
 hasConstructor: false
 ---
 

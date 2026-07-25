@@ -8,7 +8,7 @@ api: true
 owner: TextmodeLayer
 namespace: layering
 kind: Method
-lastModified: 2026-07-05
+lastModified: 2026-07-25
 ---
 
 [textmode.js](../../../../../index.md) / [layering](../../../index.md) / [TextmodeLayer](../../TextmodeLayer.md) / blendMode

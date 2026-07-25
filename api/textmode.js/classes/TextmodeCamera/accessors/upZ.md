@@ -7,7 +7,7 @@ category: Accessors
 api: true
 owner: TextmodeCamera
 kind: Accessor
-lastModified: 2026-07-05
+lastModified: 2026-07-25
 ---
 
 [textmode.js](../../../index.md) / [TextmodeCamera](../../TextmodeCamera.md) / upZ

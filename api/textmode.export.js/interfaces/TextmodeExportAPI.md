@@ -2,12 +2,12 @@
 layout: doc
 editLink: true
 title: TextmodeExportAPI
-description: Runtime export helpers that createExportPlugin attaches to the Textmodifier instance.
+description: Runtime export helpers that ExportPlugin attaches to the Textmodifier instance.
 category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-07-05
+lastModified: 2026-07-25
 isInterface: true
 ---
 
@@ -15,7 +15,7 @@ isInterface: true
 
 # Interface: TextmodeExportAPI
 
-Runtime export helpers that `createExportPlugin` attaches to the `Textmodifier` instance.
+Runtime export helpers that `ExportPlugin` attaches to the `Textmodifier` instance.
 
 ## Example
 

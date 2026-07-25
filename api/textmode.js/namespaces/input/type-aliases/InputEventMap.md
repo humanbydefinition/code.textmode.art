@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 namespace: input
 kind: TypeAlias
-lastModified: 2026-07-05
+lastModified: 2026-07-25
 ---
 
 [textmode.js](../../../index.md) / [input](../index.md) / InputEventMap

@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: TextmodeVector
 kind: Method
-lastModified: 2026-07-05
+lastModified: 2026-07-25
 ---
 
 [textmode.js](../../../index.md) / [TextmodeVector](../../TextmodeVector.md) / magSq

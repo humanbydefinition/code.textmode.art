@@ -8,7 +8,7 @@ api: true
 owner: ExportOverlayController
 kind: Method
 ecosystem: textmode.js
-lastModified: 2026-07-05
+lastModified: 2026-07-25
 ---
 
 [textmode.export.js](../../../index.md) / [ExportOverlayController](../../ExportOverlayController.md) / hide
