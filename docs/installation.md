@@ -10,12 +10,18 @@ in the browser. Official add-ons use the same plugin setup in either environment
 
 ## Try it online first
 
-Want to experiment before setting up a project? Open
-[editor.textmode.art](https://editor.textmode.art) to write, preview, save, and share `textmode.js` sketches
-directly in your browser.
+Open [editor.textmode.art](https://editor.textmode.art/), a browser-based live-coding environment for the
+complete official `textmode.js` ecosystem. Sketches run as you edit, with no local toolchain required.
 
-The editor includes examples and the official add-ons, so it is a quick way to learn the API or prototype an
-idea without installing anything.
+The editor includes `textmode.js` and all four official add-ons: `textmode.export.js`, `textmode.filters.js`,
+`textmode.figlet.js`, and `textmode.synth.js`.
+
+- Write with Monaco-powered completions, hover documentation, and diagnostics.
+- Start with a blank sketch, an included example, or a community gallery sketch.
+- Keep code and preferences saved in the browser, then share sketches through URL-based links.
+- Use microphone or line-input analysis for audio-reactive work, and create on desktop or mobile.
+
+Use it to learn the ecosystem, prototype an idea, or decide which packages your local project needs.
 
 ## Requirements
 
