@@ -39,59 +39,7 @@ Lighting uses RGB only, so any provided alpha value is ignored.
 
 ### Example
 
-```javascript
-const t = textmode.create({
-	width: window.innerWidth,
-	height: window.innerHeight,
-	fontSize: 16,
-});
-
-const labelLayer = t.layers.add();
-
-let channel = 0;
-
-function drawText(text, x, y, r = 220, g = 230, b = 255) {
-	t.push();
-	t.printAlign('left', 'top');
-	t.charColor(r, g, b);
-	t.print(text, x, y);
-	t.pop();
-}
-
-t.draw(() => {
-	t.background(6, 8, 18);
-	const time = t.frameCount * 0.025;
-	channel = 127.5 + 127.5 * Math.sin(time);
-	t.perspective(58, 0.1, 4096);
-	t.camera(16, -10, 42, 0, 0, 0);
-	t.ambientLight(channel, channel, channel, channel);
-	t.rotateY(time * 40);
-	t.char('#');
-	t.charColor(255, 255, 255);
-	t.sphere(7);
-});
-
-labelLayer.draw(() => {
-	t.clear();
-	const left = -Math.floor(t.grid.cols / 2);
-	const top = -Math.floor(t.grid.rows / 2);
-	let y = top + 3;
-	const x = left + 3;
-	drawText('TEXTMODIFIER.AMBIENTLIGHT', x, y++, 100, 255, 140);
-	drawText('------------------------------------', x, y++, 80, 100, 150);
-	drawText('CONCEPT: AMBIENT LIGHT', x, y++, 100, 220, 255);
-	drawText('Lighting changes surface shade.', x, y++, 140, 160, 190);
-	drawText('Scene keeps focus on one sphere.', x, y++, 140, 160, 190);
-	drawText('------------------------------------', x, y++, 80, 100, 150);
-	const level = Math.round(channel);
-	drawText(`RGBA:${level},${level},${level},${level}`, x, y++, 140, 255, 180);
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
-
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="ambientLight" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpsZXQgY2hhbm5lbCA9IDA7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNiwgOCwgMTgpOwoJY29uc3QgdGltZSA9IHQuZnJhbWVDb3VudCAqIDAuMDI1OwoJY2hhbm5lbCA9IDEyNy41ICsgMTI3LjUgKiBNYXRoLnNpbih0aW1lKTsKCXQucGVyc3BlY3RpdmUoNTgsIDAuMSwgNDA5Nik7Cgl0LmNhbWVyYSgxNiwgLTEwLCA0MiwgMCwgMCwgMCk7Cgl0LmFtYmllbnRMaWdodChjaGFubmVsLCBjaGFubmVsLCBjaGFubmVsLCBjaGFubmVsKTsKCXQucm90YXRlWSh0aW1lICogNDApOwoJdC5jaGFyKCcjJyk7Cgl0LmNoYXJDb2xvcigyNTUsIDI1NSwgMjU1KTsKCXQuc3BoZXJlKDcpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLkFNQklFTlRMSUdIVCcsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IEFNQklFTlQgTElHSFQnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ0xpZ2h0aW5nIGNoYW5nZXMgc3VyZmFjZSBzaGFkZS4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJ1NjZW5lIGtlZXBzIGZvY3VzIG9uIG9uZSBzcGhlcmUuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7Cgljb25zdCBsZXZlbCA9IE1hdGgucm91bmQoY2hhbm5lbCk7CglkcmF3VGV4dChgUkdCQToke2xldmVsfSwke2xldmVsfSwke2xldmVsfSwke2xldmVsfWAsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
 
 ## Call Signature
 

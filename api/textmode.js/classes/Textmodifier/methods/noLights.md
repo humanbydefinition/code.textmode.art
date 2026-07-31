@@ -28,56 +28,5 @@ Useful when you want later draw calls in the same frame to render unlit.
 
 ## Example
 
-```javascript
-const t = textmode.create({
-	width: window.innerWidth,
-	height: window.innerHeight,
-	fontSize: 16,
-});
-
-const labelLayer = t.layers.add();
-
-let value = 0;
-
-function drawText(text, x, y, r = 220, g = 230, b = 255) {
-	t.push();
-	t.printAlign('left', 'top');
-	t.charColor(r, g, b);
-	t.print(text, x, y);
-	t.pop();
-}
-
-t.draw(() => {
-	t.background(6, 8, 18);
-	const time = t.frameCount * 0.025;
-	value = 0.5 + 0.5 * Math.sin(time);
-	t.perspective(58, 0.1, 4096);
-	t.camera(16, -10, 42, 0, 0, 0);
-	if (value > 0.5) t.noLights();
-	else t.pointLight([255, 210, 120], { x: 18, y: -18, z: 28 });
-	t.rotateY(time * 40);
-	t.char('#');
-	t.charColor(140, 220, 255);
-	t.sphere(7);
-});
-
-labelLayer.draw(() => {
-	t.clear();
-	const left = -Math.floor(t.grid.cols / 2);
-	const top = -Math.floor(t.grid.rows / 2);
-	let y = top + 3;
-	const x = left + 3;
-	drawText('TEXTMODIFIER.NOLIGHTS', x, y++, 100, 255, 140);
-	drawText('------------------------------------', x, y++, 80, 100, 150);
-	drawText('CONCEPT: DISABLE LIGHTS', x, y++, 100, 220, 255);
-	drawText('Lighting changes surface shade.', x, y++, 140, 160, 190);
-	drawText('Scene keeps focus on one sphere.', x, y++, 140, 160, 190);
-	drawText('------------------------------------', x, y++, 80, 100, 150);
-	drawText(value > 0.5 ? 'LIGHTS: OFF' : 'LIGHTS: ON', x, y++, 140, 255, 180);
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="noLights" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpsZXQgdmFsdWUgPSAwOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDgsIDE4KTsKCWNvbnN0IHRpbWUgPSB0LmZyYW1lQ291bnQgKiAwLjAyNTsKCXZhbHVlID0gMC41ICsgMC41ICogTWF0aC5zaW4odGltZSk7Cgl0LnBlcnNwZWN0aXZlKDU4LCAwLjEsIDQwOTYpOwoJdC5jYW1lcmEoMTYsIC0xMCwgNDIsIDAsIDAsIDApOwoJaWYgKHZhbHVlID4gMC41KSB0Lm5vTGlnaHRzKCk7CgllbHNlIHQucG9pbnRMaWdodChbMjU1LCAyMTAsIDEyMF0sIHsgeDogMTgsIHk6IC0xOCwgejogMjggfSk7Cgl0LnJvdGF0ZVkodGltZSAqIDQwKTsKCXQuY2hhcignIycpOwoJdC5jaGFyQ29sb3IoMTQwLCAyMjAsIDI1NSk7Cgl0LnNwaGVyZSg3KTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5OT0xJR0hUUycsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IERJU0FCTEUgTElHSFRTJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdMaWdodGluZyBjaGFuZ2VzIHN1cmZhY2Ugc2hhZGUuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdTY2VuZSBrZWVwcyBmb2N1cyBvbiBvbmUgc3BoZXJlLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQodmFsdWUgPiAwLjUgPyAnTElHSFRTOiBPRkYnIDogJ0xJR0hUUzogT04nLCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
 

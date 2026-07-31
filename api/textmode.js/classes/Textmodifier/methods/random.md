@@ -34,65 +34,7 @@ Random number in the range [0, 1).
 
 ### Example
 
-```javascript
-const t = textmode.create({
-	width: window.innerWidth,
-	height: window.innerHeight,
-	fontSize: 16,
-	seed: 'random-demo',
-});
-
-const labelLayer = t.layers.add();
-const characters = Array.from('░▒▓█+*#');
-let mark = { x: 0, y: 0, char: '*', r: 255, g: 255, b: 255 };
-
-function drawText(text, x, y, r = 220, g = 230, b = 255) {
-	t.push();
-	t.printAlign('left', 'top');
-	t.charColor(r, g, b);
-	t.print(text, x, y);
-	t.pop();
-}
-
-t.draw(() => {
-	t.background(5, 8, 18);
-	if (t.frameCount % 12 === 1) {
-		mark = {
-			x: Math.floor(t.random(-18, 18)),
-			y: Math.floor(t.random(-9, 9)),
-			char: t.random(characters) ?? '*',
-			r: Math.floor(t.random(120, 256)),
-			g: Math.floor(t.random(120, 256)),
-			b: Math.floor(t.random(120, 256)),
-		};
-	}
-
-	t.push();
-	t.translate(mark.x, mark.y);
-	t.char(mark.char);
-	t.charColor(mark.r, mark.g, mark.b);
-	t.point();
-	t.pop();
-});
-
-labelLayer.draw(() => {
-	t.clear();
-	const left = -Math.floor(t.grid.cols / 2);
-	const top = -Math.floor(t.grid.rows / 2);
-	let y = top + 3;
-	const x = left + 3;
-	drawText('TEXTMODIFIER.RANDOM', x, y++, 100, 255, 140);
-	drawText('------------------------------------', x, y++, 80, 100, 150);
-	drawText('CONCEPT: SEEDED CHOICES', x, y++, 100, 220, 255);
-	drawText('The mark uses random ranges.', x, y++, 140, 160, 190);
-	drawText('The seed repeats this sequence.', x, y++, 140, 160, 190);
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
-
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="random" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKCXNlZWQ6ICdyYW5kb20tZGVtbycsCn0pOwoKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwpjb25zdCBjaGFyYWN0ZXJzID0gQXJyYXkuZnJvbSgn4paR4paS4paT4paIKyojJyk7CmxldCBtYXJrID0geyB4OiAwLCB5OiAwLCBjaGFyOiAnKicsIHI6IDI1NSwgZzogMjU1LCBiOiAyNTUgfTsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg1LCA4LCAxOCk7CglpZiAodC5mcmFtZUNvdW50ICUgMTIgPT09IDEpIHsKCQltYXJrID0gewoJCQl4OiBNYXRoLmZsb29yKHQucmFuZG9tKC0xOCwgMTgpKSwKCQkJeTogTWF0aC5mbG9vcih0LnJhbmRvbSgtOSwgOSkpLAoJCQljaGFyOiB0LnJhbmRvbShjaGFyYWN0ZXJzKSA_PyAnKicsCgkJCXI6IE1hdGguZmxvb3IodC5yYW5kb20oMTIwLCAyNTYpKSwKCQkJZzogTWF0aC5mbG9vcih0LnJhbmRvbSgxMjAsIDI1NikpLAoJCQliOiBNYXRoLmZsb29yKHQucmFuZG9tKDEyMCwgMjU2KSksCgkJfTsKCX0KCgl0LnB1c2goKTsKCXQudHJhbnNsYXRlKG1hcmsueCwgbWFyay55KTsKCXQuY2hhcihtYXJrLmNoYXIpOwoJdC5jaGFyQ29sb3IobWFyay5yLCBtYXJrLmcsIG1hcmsuYik7Cgl0LnBvaW50KCk7Cgl0LnBvcCgpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLlJBTkRPTScsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IFNFRURFRCBDSE9JQ0VTJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdUaGUgbWFyayB1c2VzIHJhbmRvbSByYW5nZXMuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdUaGUgc2VlZCByZXBlYXRzIHRoaXMgc2VxdWVuY2UuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
 
 ## Call Signature
 
@@ -116,65 +58,7 @@ Random number in the range [0, max).
 
 ### Example
 
-```javascript
-const t = textmode.create({
-	width: window.innerWidth,
-	height: window.innerHeight,
-	fontSize: 16,
-	seed: 'random-demo',
-});
-
-const labelLayer = t.layers.add();
-const characters = Array.from('░▒▓█+*#');
-let mark = { x: 0, y: 0, char: '*', r: 255, g: 255, b: 255 };
-
-function drawText(text, x, y, r = 220, g = 230, b = 255) {
-	t.push();
-	t.printAlign('left', 'top');
-	t.charColor(r, g, b);
-	t.print(text, x, y);
-	t.pop();
-}
-
-t.draw(() => {
-	t.background(5, 8, 18);
-	if (t.frameCount % 12 === 1) {
-		mark = {
-			x: Math.floor(t.random(-18, 18)),
-			y: Math.floor(t.random(-9, 9)),
-			char: t.random(characters) ?? '*',
-			r: Math.floor(t.random(120, 256)),
-			g: Math.floor(t.random(120, 256)),
-			b: Math.floor(t.random(120, 256)),
-		};
-	}
-
-	t.push();
-	t.translate(mark.x, mark.y);
-	t.char(mark.char);
-	t.charColor(mark.r, mark.g, mark.b);
-	t.point();
-	t.pop();
-});
-
-labelLayer.draw(() => {
-	t.clear();
-	const left = -Math.floor(t.grid.cols / 2);
-	const top = -Math.floor(t.grid.rows / 2);
-	let y = top + 3;
-	const x = left + 3;
-	drawText('TEXTMODIFIER.RANDOM', x, y++, 100, 255, 140);
-	drawText('------------------------------------', x, y++, 80, 100, 150);
-	drawText('CONCEPT: SEEDED CHOICES', x, y++, 100, 220, 255);
-	drawText('The mark uses random ranges.', x, y++, 140, 160, 190);
-	drawText('The seed repeats this sequence.', x, y++, 140, 160, 190);
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
-
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="random" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKCXNlZWQ6ICdyYW5kb20tZGVtbycsCn0pOwoKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwpjb25zdCBjaGFyYWN0ZXJzID0gQXJyYXkuZnJvbSgn4paR4paS4paT4paIKyojJyk7CmxldCBtYXJrID0geyB4OiAwLCB5OiAwLCBjaGFyOiAnKicsIHI6IDI1NSwgZzogMjU1LCBiOiAyNTUgfTsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg1LCA4LCAxOCk7CglpZiAodC5mcmFtZUNvdW50ICUgMTIgPT09IDEpIHsKCQltYXJrID0gewoJCQl4OiBNYXRoLmZsb29yKHQucmFuZG9tKC0xOCwgMTgpKSwKCQkJeTogTWF0aC5mbG9vcih0LnJhbmRvbSgtOSwgOSkpLAoJCQljaGFyOiB0LnJhbmRvbShjaGFyYWN0ZXJzKSA_PyAnKicsCgkJCXI6IE1hdGguZmxvb3IodC5yYW5kb20oMTIwLCAyNTYpKSwKCQkJZzogTWF0aC5mbG9vcih0LnJhbmRvbSgxMjAsIDI1NikpLAoJCQliOiBNYXRoLmZsb29yKHQucmFuZG9tKDEyMCwgMjU2KSksCgkJfTsKCX0KCgl0LnB1c2goKTsKCXQudHJhbnNsYXRlKG1hcmsueCwgbWFyay55KTsKCXQuY2hhcihtYXJrLmNoYXIpOwoJdC5jaGFyQ29sb3IobWFyay5yLCBtYXJrLmcsIG1hcmsuYik7Cgl0LnBvaW50KCk7Cgl0LnBvcCgpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLlJBTkRPTScsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IFNFRURFRCBDSE9JQ0VTJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdUaGUgbWFyayB1c2VzIHJhbmRvbSByYW5nZXMuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdUaGUgc2VlZCByZXBlYXRzIHRoaXMgc2VxdWVuY2UuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
 
 ## Call Signature
 
@@ -199,65 +83,7 @@ Random number in the range [min, max).
 
 ### Example
 
-```javascript
-const t = textmode.create({
-	width: window.innerWidth,
-	height: window.innerHeight,
-	fontSize: 16,
-	seed: 'random-demo',
-});
-
-const labelLayer = t.layers.add();
-const characters = Array.from('░▒▓█+*#');
-let mark = { x: 0, y: 0, char: '*', r: 255, g: 255, b: 255 };
-
-function drawText(text, x, y, r = 220, g = 230, b = 255) {
-	t.push();
-	t.printAlign('left', 'top');
-	t.charColor(r, g, b);
-	t.print(text, x, y);
-	t.pop();
-}
-
-t.draw(() => {
-	t.background(5, 8, 18);
-	if (t.frameCount % 12 === 1) {
-		mark = {
-			x: Math.floor(t.random(-18, 18)),
-			y: Math.floor(t.random(-9, 9)),
-			char: t.random(characters) ?? '*',
-			r: Math.floor(t.random(120, 256)),
-			g: Math.floor(t.random(120, 256)),
-			b: Math.floor(t.random(120, 256)),
-		};
-	}
-
-	t.push();
-	t.translate(mark.x, mark.y);
-	t.char(mark.char);
-	t.charColor(mark.r, mark.g, mark.b);
-	t.point();
-	t.pop();
-});
-
-labelLayer.draw(() => {
-	t.clear();
-	const left = -Math.floor(t.grid.cols / 2);
-	const top = -Math.floor(t.grid.rows / 2);
-	let y = top + 3;
-	const x = left + 3;
-	drawText('TEXTMODIFIER.RANDOM', x, y++, 100, 255, 140);
-	drawText('------------------------------------', x, y++, 80, 100, 150);
-	drawText('CONCEPT: SEEDED CHOICES', x, y++, 100, 220, 255);
-	drawText('The mark uses random ranges.', x, y++, 140, 160, 190);
-	drawText('The seed repeats this sequence.', x, y++, 140, 160, 190);
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
-
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="random" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKCXNlZWQ6ICdyYW5kb20tZGVtbycsCn0pOwoKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwpjb25zdCBjaGFyYWN0ZXJzID0gQXJyYXkuZnJvbSgn4paR4paS4paT4paIKyojJyk7CmxldCBtYXJrID0geyB4OiAwLCB5OiAwLCBjaGFyOiAnKicsIHI6IDI1NSwgZzogMjU1LCBiOiAyNTUgfTsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg1LCA4LCAxOCk7CglpZiAodC5mcmFtZUNvdW50ICUgMTIgPT09IDEpIHsKCQltYXJrID0gewoJCQl4OiBNYXRoLmZsb29yKHQucmFuZG9tKC0xOCwgMTgpKSwKCQkJeTogTWF0aC5mbG9vcih0LnJhbmRvbSgtOSwgOSkpLAoJCQljaGFyOiB0LnJhbmRvbShjaGFyYWN0ZXJzKSA_PyAnKicsCgkJCXI6IE1hdGguZmxvb3IodC5yYW5kb20oMTIwLCAyNTYpKSwKCQkJZzogTWF0aC5mbG9vcih0LnJhbmRvbSgxMjAsIDI1NikpLAoJCQliOiBNYXRoLmZsb29yKHQucmFuZG9tKDEyMCwgMjU2KSksCgkJfTsKCX0KCgl0LnB1c2goKTsKCXQudHJhbnNsYXRlKG1hcmsueCwgbWFyay55KTsKCXQuY2hhcihtYXJrLmNoYXIpOwoJdC5jaGFyQ29sb3IobWFyay5yLCBtYXJrLmcsIG1hcmsuYik7Cgl0LnBvaW50KCk7Cgl0LnBvcCgpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLlJBTkRPTScsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IFNFRURFRCBDSE9JQ0VTJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdUaGUgbWFyayB1c2VzIHJhbmRvbSByYW5nZXMuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdUaGUgc2VlZCByZXBlYXRzIHRoaXMgc2VxdWVuY2UuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
 
 ## Call Signature
 
@@ -287,62 +113,5 @@ A random array element, or `undefined` when the array is empty.
 
 ### Example
 
-```javascript
-const t = textmode.create({
-	width: window.innerWidth,
-	height: window.innerHeight,
-	fontSize: 16,
-	seed: 'random-demo',
-});
-
-const labelLayer = t.layers.add();
-const characters = Array.from('░▒▓█+*#');
-let mark = { x: 0, y: 0, char: '*', r: 255, g: 255, b: 255 };
-
-function drawText(text, x, y, r = 220, g = 230, b = 255) {
-	t.push();
-	t.printAlign('left', 'top');
-	t.charColor(r, g, b);
-	t.print(text, x, y);
-	t.pop();
-}
-
-t.draw(() => {
-	t.background(5, 8, 18);
-	if (t.frameCount % 12 === 1) {
-		mark = {
-			x: Math.floor(t.random(-18, 18)),
-			y: Math.floor(t.random(-9, 9)),
-			char: t.random(characters) ?? '*',
-			r: Math.floor(t.random(120, 256)),
-			g: Math.floor(t.random(120, 256)),
-			b: Math.floor(t.random(120, 256)),
-		};
-	}
-
-	t.push();
-	t.translate(mark.x, mark.y);
-	t.char(mark.char);
-	t.charColor(mark.r, mark.g, mark.b);
-	t.point();
-	t.pop();
-});
-
-labelLayer.draw(() => {
-	t.clear();
-	const left = -Math.floor(t.grid.cols / 2);
-	const top = -Math.floor(t.grid.rows / 2);
-	let y = top + 3;
-	const x = left + 3;
-	drawText('TEXTMODIFIER.RANDOM', x, y++, 100, 255, 140);
-	drawText('------------------------------------', x, y++, 80, 100, 150);
-	drawText('CONCEPT: SEEDED CHOICES', x, y++, 100, 220, 255);
-	drawText('The mark uses random ranges.', x, y++, 140, 160, 190);
-	drawText('The seed repeats this sequence.', x, y++, 140, 160, 190);
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="random" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKCXNlZWQ6ICdyYW5kb20tZGVtbycsCn0pOwoKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwpjb25zdCBjaGFyYWN0ZXJzID0gQXJyYXkuZnJvbSgn4paR4paS4paT4paIKyojJyk7CmxldCBtYXJrID0geyB4OiAwLCB5OiAwLCBjaGFyOiAnKicsIHI6IDI1NSwgZzogMjU1LCBiOiAyNTUgfTsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg1LCA4LCAxOCk7CglpZiAodC5mcmFtZUNvdW50ICUgMTIgPT09IDEpIHsKCQltYXJrID0gewoJCQl4OiBNYXRoLmZsb29yKHQucmFuZG9tKC0xOCwgMTgpKSwKCQkJeTogTWF0aC5mbG9vcih0LnJhbmRvbSgtOSwgOSkpLAoJCQljaGFyOiB0LnJhbmRvbShjaGFyYWN0ZXJzKSA_PyAnKicsCgkJCXI6IE1hdGguZmxvb3IodC5yYW5kb20oMTIwLCAyNTYpKSwKCQkJZzogTWF0aC5mbG9vcih0LnJhbmRvbSgxMjAsIDI1NikpLAoJCQliOiBNYXRoLmZsb29yKHQucmFuZG9tKDEyMCwgMjU2KSksCgkJfTsKCX0KCgl0LnB1c2goKTsKCXQudHJhbnNsYXRlKG1hcmsueCwgbWFyay55KTsKCXQuY2hhcihtYXJrLmNoYXIpOwoJdC5jaGFyQ29sb3IobWFyay5yLCBtYXJrLmcsIG1hcmsuYik7Cgl0LnBvaW50KCk7Cgl0LnBvcCgpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLlJBTkRPTScsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IFNFRURFRCBDSE9JQ0VTJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdUaGUgbWFyayB1c2VzIHJhbmRvbSByYW5nZXMuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdUaGUgc2VlZCByZXBlYXRzIHRoaXMgc2VxdWVuY2UuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
 

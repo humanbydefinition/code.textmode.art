@@ -30,76 +30,7 @@ Current Z-axis translation in grid cells.
 
 ### Example
 
-```javascript
-const t = textmode.create({
-	width: window.innerWidth,
-	height: window.innerHeight,
-	fontSize: 16,
-});
-
-const labelLayer = t.layers.add();
-const RAMP = ' .:-=+*#%@';
-
-t.draw(() => {
-	t.background(6, 10, 24);
-	const cols = t.grid.cols,
-		rows = t.grid.rows;
-	const left = -Math.floor((cols - 1) / 2),
-		right = left + cols - 1;
-	const top = -Math.floor(rows / 2),
-		bottom = top + rows - 1;
-	const tm = t.frameCount * 0.04;
-
-	for (let y = top; y <= bottom; y++) {
-		for (let x = left; x <= right; x++) {
-			const dist = Math.hypot(x, y);
-			const z = Math.sin(dist * 0.25 - tm * 3) * 16;
-			const norm = (z + 16) / 32;
-
-			const charKey = RAMP[Math.floor(norm * (RAMP.length - 1))];
-
-			t.push();
-			t.translateZ(z);
-			t.translate(x, y);
-			t.charColor(Math.floor(100 + norm * 155), Math.floor(220 - norm * 80), Math.floor(255 - norm * 120));
-			t.cellColor(Math.floor(8 + norm * 16), Math.floor(20 + norm * 18), Math.floor(40 + norm * 20));
-			t.char(charKey);
-			t.point();
-			t.pop();
-		}
-	}
-});
-
-labelLayer.draw(() => {
-	t.clear();
-	const left = -Math.floor(t.grid.cols / 2),
-		top = -Math.floor(t.grid.rows / 2);
-	let y = top + 3,
-		x = left + 3;
-
-	t.push();
-	t.printAlign('left', 'top');
-	t.charColor(120, 240, 180);
-	t.print('TEXTMODIFIER.TRANSLATEZ', x, y++);
-	t.charColor(70, 100, 140);
-	t.print('------------------------------------', x, y++);
-	t.charColor(140, 210, 255);
-	t.print('CONCEPT: 3D HYPER-TUNNEL TRAVEL', x, y++);
-	t.charColor(140, 160, 190);
-	t.print('Translates origin along Z-axis (depth)', x, y++);
-	t.print('demonstrating 3D perspective projection.', x, y++);
-	t.charColor(70, 100, 140);
-	t.print('------------------------------------', x, y++);
-	t.charColor(140, 255, 200);
-	t.print('DISPLACEMENT: FULL-GRID Z-AXIS WARP', x, y++);
-	t.pop();
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
-
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="translateZ" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IFJBTVAgPSAnIC46LT0rKiMlQCc7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDEwLCAyNCk7Cgljb25zdCBjb2xzID0gdC5ncmlkLmNvbHMsCgkJcm93cyA9IHQuZ3JpZC5yb3dzOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKChjb2xzIC0gMSkgLyAyKSwKCQlyaWdodCA9IGxlZnQgKyBjb2xzIC0gMTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHJvd3MgLyAyKSwKCQlib3R0b20gPSB0b3AgKyByb3dzIC0gMTsKCWNvbnN0IHRtID0gdC5mcmFtZUNvdW50ICogMC4wNDsKCglmb3IgKGxldCB5ID0gdG9wOyB5IDw9IGJvdHRvbTsgeSsrKSB7CgkJZm9yIChsZXQgeCA9IGxlZnQ7IHggPD0gcmlnaHQ7IHgrKykgewoJCQljb25zdCBkaXN0ID0gTWF0aC5oeXBvdCh4LCB5KTsKCQkJY29uc3QgeiA9IE1hdGguc2luKGRpc3QgKiAwLjI1IC0gdG0gKiAzKSAqIDE2OwoJCQljb25zdCBub3JtID0gKHogKyAxNikgLyAzMjsKCgkJCWNvbnN0IGNoYXJLZXkgPSBSQU1QW01hdGguZmxvb3Iobm9ybSAqIChSQU1QLmxlbmd0aCAtIDEpKV07CgoJCQl0LnB1c2goKTsKCQkJdC50cmFuc2xhdGVaKHopOwoJCQl0LnRyYW5zbGF0ZSh4LCB5KTsKCQkJdC5jaGFyQ29sb3IoTWF0aC5mbG9vcigxMDAgKyBub3JtICogMTU1KSwgTWF0aC5mbG9vcigyMjAgLSBub3JtICogODApLCBNYXRoLmZsb29yKDI1NSAtIG5vcm0gKiAxMjApKTsKCQkJdC5jZWxsQ29sb3IoTWF0aC5mbG9vcig4ICsgbm9ybSAqIDE2KSwgTWF0aC5mbG9vcigyMCArIG5vcm0gKiAxOCksIE1hdGguZmxvb3IoNDAgKyBub3JtICogMjApKTsKCQkJdC5jaGFyKGNoYXJLZXkpOwoJCQl0LnBvaW50KCk7CgkJCXQucG9wKCk7CgkJfQoJfQp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKSwKCQl0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzLAoJCXggPSBsZWZ0ICsgMzsKCgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKDEyMCwgMjQwLCAxODApOwoJdC5wcmludCgnVEVYVE1PRElGSUVSLlRSQU5TTEFURVonLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoNzAsIDEwMCwgMTQwKTsKCXQucHJpbnQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDIxMCwgMjU1KTsKCXQucHJpbnQoJ0NPTkNFUFQ6IDNEIEhZUEVSLVRVTk5FTCBUUkFWRUwnLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAxNjAsIDE5MCk7Cgl0LnByaW50KCdUcmFuc2xhdGVzIG9yaWdpbiBhbG9uZyBaLWF4aXMgKGRlcHRoKScsIHgsIHkrKyk7Cgl0LnByaW50KCdkZW1vbnN0cmF0aW5nIDNEIHBlcnNwZWN0aXZlIHByb2plY3Rpb24uJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDcwLCAxMDAsIDE0MCk7Cgl0LnByaW50KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAyNTUsIDIwMCk7Cgl0LnByaW50KCdESVNQTEFDRU1FTlQ6IEZVTEwtR1JJRCBaLUFYSVMgV0FSUCcsIHgsIHkrKyk7Cgl0LnBvcCgpOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
 
 ## Call Signature
 
@@ -121,56 +52,5 @@ Translate subsequent shapes along the Z axis.
 
 ### Example
 
-```javascript
-const t = textmode.create({
-	width: window.innerWidth,
-	height: window.innerHeight,
-	fontSize: 16,
-});
-
-const labelLayer = t.layers.add();
-
-function drawText(text, x, y, r = 220, g = 230, b = 255) {
-	t.push();
-	t.printAlign('left', 'top');
-	t.charColor(r, g, b);
-	t.print(text, x, y);
-	t.pop();
-}
-
-t.draw(() => {
-	t.background(6, 10, 22);
-	t.perspective(58, 0.1, 4096);
-	t.camera(0, 0, 48, 0, 0, 0);
-	const time = t.frameCount * 0.03;
-	for (let i = 0; i < 4; i++) {
-		t.push();
-		t.translate((i - 1.5) * 7, 0, 0);
-		t.translateZ(Math.sin(time + i) * 18);
-		t.char('#');
-		t.charColor(120 + i * 30, 220, 255 - i * 20);
-		t.box(4, 4, 4);
-		t.pop();
-	}
-});
-
-labelLayer.draw(() => {
-	t.clear();
-	const left = -Math.floor(t.grid.cols / 2);
-	const top = -Math.floor(t.grid.rows / 2);
-	let y = top + 3;
-	const x = left + 3;
-	drawText('TEXTMODIFIER.TRANSLATEZ2', x, y++, 100, 255, 140);
-	drawText('------------------------------------', x, y++, 80, 100, 150);
-	drawText('CONCEPT: DEPTH MOTION', x, y++, 100, 220, 255);
-	drawText('Boxes move toward camera.', x, y++, 140, 160, 190);
-	drawText('Z changes perspective scale.', x, y++, 140, 160, 190);
-	drawText('------------------------------------', x, y++, 80, 100, 150);
-	drawText('API: t.translateZ(z)', x, y++, 140, 255, 180);
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="translateZ" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNiwgMTAsIDIyKTsKCXQucGVyc3BlY3RpdmUoNTgsIDAuMSwgNDA5Nik7Cgl0LmNhbWVyYSgwLCAwLCA0OCwgMCwgMCwgMCk7Cgljb25zdCB0aW1lID0gdC5mcmFtZUNvdW50ICogMC4wMzsKCWZvciAobGV0IGkgPSAwOyBpIDwgNDsgaSsrKSB7CgkJdC5wdXNoKCk7CgkJdC50cmFuc2xhdGUoKGkgLSAxLjUpICogNywgMCwgMCk7CgkJdC50cmFuc2xhdGVaKE1hdGguc2luKHRpbWUgKyBpKSAqIDE4KTsKCQl0LmNoYXIoJyMnKTsKCQl0LmNoYXJDb2xvcigxMjAgKyBpICogMzAsIDIyMCwgMjU1IC0gaSAqIDIwKTsKCQl0LmJveCg0LCA0LCA0KTsKCQl0LnBvcCgpOwoJfQp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLlRSQU5TTEFURVoyJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogREVQVEggTU9USU9OJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdCb3hlcyBtb3ZlIHRvd2FyZCBjYW1lcmEuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdaIGNoYW5nZXMgcGVyc3BlY3RpdmUgc2NhbGUuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQVBJOiB0LnRyYW5zbGF0ZVooeiknLCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
 
