@@ -4,23 +4,23 @@ on:
   pull_request:
     branches: [dev, main]
   push:
-    branches: [dev, main]
-  repository_dispatch:
-    types: [contributors-source-updated]
+    branches: [main]
+    paths:
+      - .vitepress/data/contribution-types.json
+      - .vitepress/data/contribution-types.schema.json
+      - .vitepress/data/contributors.json
+      - .vitepress/data/contributors.schema.json
+      - scripts/contributors.mjs
+      - scripts/contributors.test.mjs
+      - README.md
+      - .github/workflows/contributors.yml
+      - .github/workflows/reconcile-contributors.yml
   schedule:
-    - cron: "23 3 * * *"
+    - cron: "41 3 * * *"
   workflow_dispatch:
     inputs:
-      target-branch:
-        description: Branch to reconcile
-        required: true
-        default: dev
-        type: choice
-        options:
-          - dev
-          - main
-      dry-run:
-        description: Render and report without creating a pull request
+      dry_run:
+        description: Render and report without creating pull requests
         required: true
         default: true
         type: boolean
@@ -29,58 +29,48 @@ permissions:
   contents: read
 
 jobs:
-  check:
-    if: github.event_name == 'pull_request'
+  check-source:
+    name: Check canonical contributor data
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout pull request
+      - name: Reject unsafe manual reconciliation
+        if: >-
+          github.event_name == 'workflow_dispatch' &&
+          !inputs.dry_run &&
+          (github.ref != 'refs/heads/main' || vars.CONTRIBUTOR_SYNC_ENABLED != 'true')
+        run: |
+          echo "::error::Write mode requires main and CONTRIBUTOR_SYNC_ENABLED=true"
+          exit 1
+
+      - name: Checkout canonical source
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
-          ref: ${{ github.event.pull_request.head.sha }}
           persist-credentials: false
 
-      - name: Verify canonical contributor output
+      - name: Validate registry, tests, and generated README
         run: npm run check:contributors
 
-  reconcile-push:
-    if: github.event_name == 'push' && vars.CONTRIBUTOR_SYNC_ENABLED == 'true'
-    uses: ./.github/workflows/reconcile-contributors.yml
-    with:
-      mode: reconcile
-      target-branch: ${{ github.ref_name }}
-      source-ref: ${{ github.ref_name }}
-      app-client-id: ${{ vars.CONTRIBUTOR_SYNC_APP_CLIENT_ID }}
-    secrets:
-      app-private-key: ${{ secrets.CONTRIBUTOR_SYNC_APP_PRIVATE_KEY }}
-
-  reconcile-dev:
+  reconcile-targets:
+    name: ${{ matrix.repository }}
+    needs: check-source
     if: >-
-      (github.event_name == 'workflow_dispatch' &&
-      inputs.target-branch == 'dev' &&
-      (inputs.dry-run || vars.CONTRIBUTOR_SYNC_ENABLED == 'true')) ||
-      (vars.CONTRIBUTOR_SYNC_ENABLED == 'true' &&
-      (github.event_name == 'schedule' || github.event_name == 'repository_dispatch'))
+      github.event_name != 'pull_request' &&
+      (inputs.dry_run ||
+      (github.ref == 'refs/heads/main' && vars.CONTRIBUTOR_SYNC_ENABLED == 'true'))
+    strategy:
+      fail-fast: false
+      matrix:
+        repository:
+          - textmode.js-dev
+          - textmode.synth.js
+          - textmode.export.js
+          - textmode.figlet.js
+          - textmode.filters.js
     uses: ./.github/workflows/reconcile-contributors.yml
     with:
-      mode: ${{ github.event_name == 'workflow_dispatch' && inputs.dry-run && 'dry-run' || 'reconcile' }}
-      target-branch: dev
-      source-ref: ${{ github.event.client_payload.source_sha || 'main' }}
       app-client-id: ${{ vars.CONTRIBUTOR_SYNC_APP_CLIENT_ID }}
-    secrets:
-      app-private-key: ${{ secrets.CONTRIBUTOR_SYNC_APP_PRIVATE_KEY }}
-
-  reconcile-main:
-    if: >-
-      (github.event_name == 'workflow_dispatch' &&
-      inputs.target-branch == 'main' &&
-      (inputs.dry-run || vars.CONTRIBUTOR_SYNC_ENABLED == 'true')) ||
-      (vars.CONTRIBUTOR_SYNC_ENABLED == 'true' &&
-      (github.event_name == 'schedule' || github.event_name == 'repository_dispatch'))
-    uses: ./.github/workflows/reconcile-contributors.yml
-    with:
-      mode: ${{ github.event_name == 'workflow_dispatch' && inputs.dry-run && 'dry-run' || 'reconcile' }}
-      target-branch: main
-      source-ref: ${{ github.event.client_payload.source_sha || 'main' }}
-      app-client-id: ${{ vars.CONTRIBUTOR_SYNC_APP_CLIENT_ID }}
+      mode: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run && 'dry-run' || 'reconcile' }}
+      source-ref: ${{ github.sha }}
+      target-repository: ${{ matrix.repository }}
     secrets:
       app-private-key: ${{ secrets.CONTRIBUTOR_SYNC_APP_PRIVATE_KEY }}
