@@ -34,5 +34,69 @@ Angle in radians.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="acos" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCBpbnB1dCA9IDA7CmxldCBhbmdsZSA9IDA7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoOCwgNywgMTYpOwoJaW5wdXQgPSB0LmNvbnN0cmFpbih0LmNvcyh0LmZyYW1lQ291bnQgKiAwLjAzNSkgKyB0LnNpbih0LmZyYW1lQ291bnQgKiAwLjAxOSkgKiAwLjI1LCAtMSwgMSk7CglhbmdsZSA9IHQuYWNvcyhpbnB1dCk7Cgljb25zdCByYWRpdXMgPSAxNTsKCWNvbnN0IHggPSB0LnJvdW5kKGlucHV0ICogcmFkaXVzKTsKCWNvbnN0IHkgPSB0LnJvdW5kKHQuc2luKGFuZ2xlKSAqIHJhZGl1cyk7CgoJdC5jaGFyKCcuJyk7Cgl0LmNoYXJDb2xvcig0NSwgNjUsIDEwMCk7Cglmb3IgKGxldCBpID0gMDsgaSA8PSAzNjsgaSsrKSB7CgkJY29uc3QgYSA9IHQucmFkaWFucyhpICogNSk7CgkJdC5wdXNoKCk7CgkJdC50cmFuc2xhdGUodC5yb3VuZCh0LmNvcyhhKSAqIHJhZGl1cyksIHQucm91bmQodC5zaW4oYSkgKiByYWRpdXMpKTsKCQl0LnBvaW50KCk7CgkJdC5wb3AoKTsKCX0KCgl0LmNoYXIoJ3wnKTsKCXQuY2hhckNvbG9yKDk1LCAxNDUsIDIxMCk7Cgl0LmxpbmUoeCwgMCwgeCwgeSk7Cgl0LmNoYXIoJyonKTsKCXQuY2hhckNvbG9yKDI1NSwgMjA1LCAxMDApOwoJdC5saW5lKDAsIDAsIHgsIHkpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLXQuZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC10LmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLkFDT1MnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBYIFZBTFVFIFRPIEFOR0xFJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdhY29zKHZhbHVlKSByZXZlcnNlcyBjb3NpbmUuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdUaGUgdmVydGljYWwgY2hvcmQgcmV2ZWFscyBhcmMuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dChgVkFMVUU6ICR7aW5wdXQudG9GaXhlZCgyKX1gLCB4LCB5KyssIDIyMCwgMjMwLCAyNTUpOwoJZHJhd1RleHQoYEFOR0xFOiAke2FuZ2xlLnRvRml4ZWQoMil9YCwgeCwgeSsrLCAyMjAsIDIzMCwgMjU1KTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let input = 0;
+let angle = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(8, 7, 16);
+	input = t.constrain(t.cos(t.frameCount * 0.035) + t.sin(t.frameCount * 0.019) * 0.25, -1, 1);
+	angle = t.acos(input);
+	const radius = 15;
+	const x = t.round(input * radius);
+	const y = t.round(t.sin(angle) * radius);
+
+	t.char('.');
+	t.charColor(45, 65, 100);
+	for (let i = 0; i <= 36; i++) {
+		const a = t.radians(i * 5);
+		t.push();
+		t.translate(t.round(t.cos(a) * radius), t.round(t.sin(a) * radius));
+		t.point();
+		t.pop();
+	}
+
+	t.char('|');
+	t.charColor(95, 145, 210);
+	t.line(x, 0, x, y);
+	t.char('*');
+	t.charColor(255, 205, 100);
+	t.line(0, 0, x, y);
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -t.floor(t.grid.cols / 2);
+	const top = -t.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.ACOS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: X VALUE TO ANGLE', x, y++, 100, 220, 255);
+	drawText('acos(value) reverses cosine.', x, y++, 140, 160, 190);
+	drawText('The vertical chord reveals arc.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`VALUE: ${input.toFixed(2)}`, x, y++, 220, 230, 255);
+	drawText(`ANGLE: ${angle.toFixed(2)}`, x, y++, 220, 230, 255);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

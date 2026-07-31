@@ -32,5 +32,60 @@ Set the target frame rate, or get the current measured frame rate when called wi
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="frameRate" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpsZXQgbWVhc3VyZWQgPSAwOwpsZXQgdGFyZ2V0ID0gNjA7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNiwgMTAsIDIyKTsKCXRhcmdldCA9IE1hdGguZmxvb3IodC5mcmFtZUNvdW50IC8gMTgwKSAlIDIgPT09IDAgPyA2MCA6IDMwOwoJdC5mcmFtZVJhdGUodGFyZ2V0KTsKCW1lYXN1cmVkID0gdC5mcmFtZVJhdGUoKTsKCWNvbnN0IGJhcnMgPSBNYXRoLnJvdW5kKG1lYXN1cmVkIC8gNSk7Cglmb3IgKGxldCBpID0gMDsgaSA8IGJhcnM7IGkrKykgewoJCXQucHVzaCgpOwoJCXQudHJhbnNsYXRlKC0xOCArIGksIDMpOwoJCXQuY2hhcignfCcpOwoJCXQuY2hhckNvbG9yKDEyMCwgMjIwLCAyNTUpOwoJCXQucG9pbnQoKTsKCQl0LnBvcCgpOwoJfQp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLkZSQU1FUkFURScsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IEZQUyBDT05UUk9MJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdUYXJnZXQgYWx0ZXJuYXRlcyA2MCBhbmQgMzAuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdCYXJzIHNob3cgbWVhc3VyZWQgcmF0ZS4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KGBUQVJHRVQ6ICR7dGFyZ2V0fWAsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7CglkcmF3VGV4dChgRlBTOiAke21lYXN1cmVkLnRvRml4ZWQoMSl9YCwgeCwgeSsrLCAxNDAsIDI1NSwgMTgwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+let measured = 0;
+let target = 60;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(6, 10, 22);
+	target = Math.floor(t.frameCount / 180) % 2 === 0 ? 60 : 30;
+	t.frameRate(target);
+	measured = t.frameRate();
+	const bars = Math.round(measured / 5);
+	for (let i = 0; i < bars; i++) {
+		t.push();
+		t.translate(-18 + i, 3);
+		t.char('|');
+		t.charColor(120, 220, 255);
+		t.point();
+		t.pop();
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.FRAMERATE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: FPS CONTROL', x, y++, 100, 220, 255);
+	drawText('Target alternates 60 and 30.', x, y++, 140, 160, 190);
+	drawText('Bars show measured rate.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`TARGET: ${target}`, x, y++, 140, 255, 180);
+	drawText(`FPS: ${measured.toFixed(1)}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

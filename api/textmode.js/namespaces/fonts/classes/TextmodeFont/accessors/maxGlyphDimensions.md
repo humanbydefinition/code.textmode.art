@@ -34,5 +34,73 @@ Maximum glyph cell dimensions in pixels.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="maxGlyphDimensions" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBSQU1QID0gJyAuOi09KyojJUAnOwpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDgsIDgsIDE4KTsKCWNvbnN0IGh3ID0gTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgaGggPSBNYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7Cgljb25zdCB0bSA9IHQuZnJhbWVDb3VudCAqIDAuMDQ7Cgljb25zdCBkaW1zID0gdC5mb250Lm1heEdseXBoRGltZW5zaW9uczsKCgljb25zdCBib3hXID0gTWF0aC5tYXgoMywgTWF0aC5mbG9vcihkaW1zLndpZHRoIC8gNCkpOwoJY29uc3QgYm94SCA9IE1hdGgubWF4KDMsIE1hdGguZmxvb3IoZGltcy5oZWlnaHQgLyA0KSk7CgoJZm9yIChsZXQgeSA9IC1oaDsgeSA8PSBoaDsgeSsrKSB7CgkJZm9yIChsZXQgeCA9IC1odzsgeCA8PSBodzsgeCsrKSB7CgkJCWNvbnN0IGJ4ID0gTWF0aC5mbG9vcigoeCArIGh3KSAvIGJveFcpOwoJCQljb25zdCBieSA9IE1hdGguZmxvb3IoKHkgKyBoaCkgLyBib3hIKTsKCQkJY29uc3Qgbm9ybSA9IChNYXRoLnNpbihieCAqIDAuNSArIGJ5ICogMC41ICsgdG0pICsgMSkgKiAwLjU7CgoJCQljb25zdCBpZHggPSBNYXRoLmZsb29yKG5vcm0gKiAoUkFNUC5sZW5ndGggLSAxKSk7CgkJCXQucHVzaCgpOwoJCQl0LnRyYW5zbGF0ZSh4LCB5KTsKCQkJdC5jaGFyQ29sb3IoTWF0aC5mbG9vcigyNDAgLSBub3JtICogMTQwKSwgTWF0aC5mbG9vcigxNDAgKyBub3JtICogMTEwKSwgTWF0aC5mbG9vcig0MCArIG5vcm0gKiAyMDApKTsKCQkJdC5jZWxsQ29sb3IoTWF0aC5mbG9vcigyNSAtIG5vcm0gKiAxNSksIE1hdGguZmxvb3IoMTAgKyBub3JtICogMTUpLCBNYXRoLmZsb29yKDggKyBub3JtICogMjApKTsKCQkJdC5jaGFyKFJBTVBbaWR4XSk7CgkJCXQucG9pbnQoKTsKCQkJdC5wb3AoKTsKCQl9Cgl9Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCgljb25zdCBkaW1zID0gdC5mb250Lm1heEdseXBoRGltZW5zaW9uczsKCgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKDEyMCwgMjQwLCAxODApOwoJdC5wcmludCgnVEVYVE1PREVGT05ULk1BWEdMWVBIRElNRU5TSU9OUycsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcig3MCwgMTAwLCAxNDApOwoJdC5wcmludCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMjEwLCAyNTUpOwoJdC5wcmludCgnQ09OQ0VQVDogTUFYIEdMWVBIIENFTEwgQk9VTkRTJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMTYwLCAxOTApOwoJdC5wcmludCgnTWF4aW11bSBjZWxsIGJvdW5kaW5nIGRpbWVuc2lvbnMuJywgeCwgeSsrKTsKCXQucHJpbnQoJ0RldGVybWluZXMgYXRsYXMgY2VsbCBzbG90IHNpemUuJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDcwLCAxMDAsIDE0MCk7Cgl0LnByaW50KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAyNTUsIDIwMCk7Cgl0LnByaW50KGBNQVggRElNUzogJHtkaW1zLndpZHRofSB4ICR7ZGltcy5oZWlnaHR9IFBYYCwgeCwgeSsrKTsKCXQucG9wKCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const RAMP = ' .:-=+*#%@';
+const labelLayer = t.layers.add();
+
+t.draw(() => {
+	t.background(8, 8, 18);
+	const hw = Math.floor(t.grid.cols / 2);
+	const hh = Math.floor(t.grid.rows / 2);
+	const tm = t.frameCount * 0.04;
+	const dims = t.font.maxGlyphDimensions;
+
+	const boxW = Math.max(3, Math.floor(dims.width / 4));
+	const boxH = Math.max(3, Math.floor(dims.height / 4));
+
+	for (let y = -hh; y <= hh; y++) {
+		for (let x = -hw; x <= hw; x++) {
+			const bx = Math.floor((x + hw) / boxW);
+			const by = Math.floor((y + hh) / boxH);
+			const norm = (Math.sin(bx * 0.5 + by * 0.5 + tm) + 1) * 0.5;
+
+			const idx = Math.floor(norm * (RAMP.length - 1));
+			t.push();
+			t.translate(x, y);
+			t.charColor(Math.floor(240 - norm * 140), Math.floor(140 + norm * 110), Math.floor(40 + norm * 200));
+			t.cellColor(Math.floor(25 - norm * 15), Math.floor(10 + norm * 15), Math.floor(8 + norm * 20));
+			t.char(RAMP[idx]);
+			t.point();
+			t.pop();
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const dims = t.font.maxGlyphDimensions;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODEFONT.MAXGLYPHDIMENSIONS', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: MAX GLYPH CELL BOUNDS', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Maximum cell bounding dimensions.', x, y++);
+	t.print('Determines atlas cell slot size.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 200);
+	t.print(`MAX DIMS: ${dims.width} x ${dims.height} PX`, x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

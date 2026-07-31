@@ -29,7 +29,94 @@ Number of rows in the normalized glyph atlas.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="rows" encoded-code="Y29uc3QgVDY0X1VSTCA9ICdodHRwczovL2xpdHRsZWJpdHNwYWNlLmNvbS9yZXNvdXJjZXMvZm9udHMvVDY0LnBuZyc7CmNvbnN0IHQgPSB0ZXh0bW9kZS5jcmVhdGUoewoJd2lkdGg6IHdpbmRvdy5pbm5lcldpZHRoLAoJaGVpZ2h0OiB3aW5kb3cuaW5uZXJIZWlnaHQsCglmb250U2l6ZTogMTYsCn0pOwoKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwpsZXQgdGlsZXNldCA9IG51bGw7Cgp0LnNldHVwKGFzeW5jICgpID0-IHsKCXRpbGVzZXQgPSBhd2FpdCB0LmxvYWRUaWxlc2V0KHsgc291cmNlOiBUNjRfVVJMLCBjb2x1bW5zOiAxNiwgcm93czogMTYsIGNvdW50OiAyNTYsIGZvbnRTaXplOiAxNiB9KTsKfSk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDI0LCAxMCwgMTYpOwoJaWYgKCF0aWxlc2V0KSByZXR1cm47CgoJY29uc3QgaHcgPSBNYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCBoaCA9IE1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWNvbnN0IHRtID0gdC5mcmFtZUNvdW50ICogMC4wNTsKCWNvbnN0IGNoYXJzID0gdGlsZXNldC5jaGFyYWN0ZXJzOwoJY29uc3QgbnVtUm93cyA9IHRpbGVzZXQucm93czsKCglmb3IgKGxldCB5ID0gLWhoOyB5IDw9IGhoOyB5KyspIHsKCQljb25zdCByb3dJbmRleCA9IE1hdGguYWJzKHkpICUgbnVtUm93czsKCgkJZm9yIChsZXQgeCA9IC1odzsgeCA8PSBodzsgeCsrKSB7CgkJCWNvbnN0IHdhdmUgPSBNYXRoLnNpbihyb3dJbmRleCAqIDAuNCArIHggKiAwLjEyIC0gdG0gKiAyKTsKCQkJY29uc3Qgbm9ybSA9ICh3YXZlICsgMSkgKiAwLjU7CgoJCQljb25zdCBpc0NyZXN0ID0gTWF0aC5hYnMod2F2ZSkgPiAwLjgyOwoJCQljb25zdCBjaGFySWR4ID0gTWF0aC5mbG9vcihNYXRoLmFicyhyb3dJbmRleCAqIDE2ICsgeCArIHRtICogOCkgJSAoY2hhcnMubGVuZ3RoIHx8IDEpKTsKCQkJY29uc3QgY2hhcktleSA9IGlzQ3Jlc3QgPyAnKicgOiBjaGFyc1tjaGFySWR4XSA_IGNoYXJzW2NoYXJJZHhdLmNoYXJhY3RlciA6ICcuJzsKCgkJCXQucHVzaCgpOwoJCQl0LnRyYW5zbGF0ZSh4LCB5KTsKCQkJdC5jaGFyQ29sb3IoCgkJCQlpc0NyZXN0ID8gMjU1IDogTWF0aC5mbG9vcigxODAgKyBub3JtICogNjApLAoJCQkJaXNDcmVzdCA_IDIxMCA6IE1hdGguZmxvb3IoOTAgKyBub3JtICogOTApLAoJCQkJaXNDcmVzdCA_IDkwIDogTWF0aC5mbG9vcig0MCArIG5vcm0gKiA2MCkKCQkJKTsKCQkJdC5jZWxsQ29sb3IoCgkJCQlpc0NyZXN0ID8gNDUgOiBNYXRoLmZsb29yKDEyICsgbm9ybSAqIDE1KSwKCQkJCWlzQ3Jlc3QgPyAyMCA6IE1hdGguZmxvb3IoNCArIG5vcm0gKiAxMCksCgkJCQlpc0NyZXN0ID8gMTAgOiBNYXRoLmZsb29yKDggKyBub3JtICogMTApCgkJCSk7CgkJCXQuY2hhcihjaGFyS2V5KTsKCQkJdC5wb2ludCgpOwoJCQl0LnBvcCgpOwoJCX0KCX0KfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWlmICghdGlsZXNldCkgcmV0dXJuOwoJY29uc3QgbnVtUm93cyA9IHRpbGVzZXQucm93czsKCgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKDEyMCwgMjQwLCAxODApOwoJdC5wcmludCgnVEVYVE1PREVUSUxFU0VULlJPV1MnLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoNzAsIDEwMCwgMTQwKTsKCXQucHJpbnQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDIxMCwgMjU1KTsKCXQucHJpbnQoJ0NPTkNFUFQ6IFNFSVNNSUMgR0VPTE9HSUNBTCBTVFJBVEEnLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAxNjAsIDE5MCk7Cgl0LnByaW50KCdNYXBzIHRpbGVzZXQgYXRsYXMgcm93IGNvdW50LicsIHgsIHkrKyk7Cgl0LnByaW50KCdTdHJ1Y3R1cmVzIGhvcml6b250YWwgZ3JpZCBzdHJhdGEuJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDcwLCAxMDAsIDE0MCk7Cgl0LnByaW50KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMjU1LCAyMTAsIDkwKTsKCXQucHJpbnQoYEFUTEFTIFJPV1M6ICR7bnVtUm93c31gLCB4LCB5KyspOwoJdC5wb3AoKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const T64_URL = 'https://littlebitspace.com/resources/fonts/T64.png';
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let tileset = null;
+
+t.setup(async () => {
+	tileset = await t.loadTileset({ source: T64_URL, columns: 16, rows: 16, count: 256, fontSize: 16 });
+});
+
+t.draw(() => {
+	t.background(24, 10, 16);
+	if (!tileset) return;
+
+	const hw = Math.floor(t.grid.cols / 2);
+	const hh = Math.floor(t.grid.rows / 2);
+	const tm = t.frameCount * 0.05;
+	const chars = tileset.characters;
+	const numRows = tileset.rows;
+
+	for (let y = -hh; y <= hh; y++) {
+		const rowIndex = Math.abs(y) % numRows;
+
+		for (let x = -hw; x <= hw; x++) {
+			const wave = Math.sin(rowIndex * 0.4 + x * 0.12 - tm * 2);
+			const norm = (wave + 1) * 0.5;
+
+			const isCrest = Math.abs(wave) > 0.82;
+			const charIdx = Math.floor(Math.abs(rowIndex * 16 + x + tm * 8) % (chars.length || 1));
+			const charKey = isCrest ? '*' : chars[charIdx] ? chars[charIdx].character : '.';
+
+			t.push();
+			t.translate(x, y);
+			t.charColor(
+				isCrest ? 255 : Math.floor(180 + norm * 60),
+				isCrest ? 210 : Math.floor(90 + norm * 90),
+				isCrest ? 90 : Math.floor(40 + norm * 60)
+			);
+			t.cellColor(
+				isCrest ? 45 : Math.floor(12 + norm * 15),
+				isCrest ? 20 : Math.floor(4 + norm * 10),
+				isCrest ? 10 : Math.floor(8 + norm * 10)
+			);
+			t.char(charKey);
+			t.point();
+			t.pop();
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	if (!tileset) return;
+	const numRows = tileset.rows;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODETILESET.ROWS', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: SEISMIC GEOLOGICAL STRATA', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Maps tileset atlas row count.', x, y++);
+	t.print('Structures horizontal grid strata.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(255, 210, 90);
+	t.print(`ATLAS ROWS: ${numRows}`, x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 
 Number of glyph rows in the atlas texture.
 

@@ -32,5 +32,87 @@ You typically do not need to call this method directly.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="reset" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCByZXNldFB1bHNlID0gMDsKCnQuc2V0dXAoKCkgPT4ge30pOwoKdC5tb3VzZVByZXNzZWQoKCkgPT4gewoJdC5ncmlkLnJlc2V0KCk7CglyZXNldFB1bHNlID0gMS4wOwp9KTsKCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNiwgMTIsIDI0KTsKCWNvbnN0IGNvbHMgPSB0LmdyaWQuY29sczsKCWNvbnN0IHJvd3MgPSB0LmdyaWQucm93czsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcigoY29scyAtIDEpIC8gMik7Cgljb25zdCByaWdodCA9IGxlZnQgKyBjb2xzIC0gMTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHJvd3MgLyAyKTsKCWNvbnN0IGJvdHRvbSA9IHRvcCArIHJvd3MgLSAxOwoJY29uc3QgdG0gPSB0LmZyYW1lQ291bnQgKiAwLjA1OwoKCWlmIChyZXNldFB1bHNlID4gMCkgcmVzZXRQdWxzZSAtPSAwLjAzOwoKCWZvciAobGV0IHkgPSB0b3A7IHkgPD0gYm90dG9tOyB5KyspIHsKCQlmb3IgKGxldCB4ID0gbGVmdDsgeCA8PSByaWdodDsgeCsrKSB7CgkJCWNvbnN0IGRpc3QgPSBNYXRoLmh5cG90KHgsIHkpOwoJCQljb25zdCB3YXZlID0gTWF0aC5zaW4oZGlzdCAqIDAuNCAtIHRtICogMyArIHJlc2V0UHVsc2UgKiA2KTsKCQkJY29uc3Qgbm9ybSA9ICh3YXZlICsgMSkgKiAwLjU7CgoJCQljb25zdCBjaGFyS2V5ID0gcmVzZXRQdWxzZSA-IDAuNSA_ICcjJyA6IG5vcm0gPiAwLjYgPyAnKycgOiBub3JtID4gMC4zID8gJzonIDogJy4nOwoKCQkJdC5wdXNoKCk7CgkJCXQudHJhbnNsYXRlKHgsIHkpOwoJCQl0LmNoYXJDb2xvcigKCQkJCXJlc2V0UHVsc2UgPiAwID8gMjU1IDogTWF0aC5mbG9vcig2MCArIG5vcm0gKiAxODApLAoJCQkJcmVzZXRQdWxzZSA-IDAgPyBNYXRoLmZsb29yKDE4MCArIHJlc2V0UHVsc2UgKiA3NSkgOiBNYXRoLmZsb29yKDE0MCArIG5vcm0gKiAxMTApLAoJCQkJcmVzZXRQdWxzZSA-IDAgPyBNYXRoLmZsb29yKDEwMCArIHJlc2V0UHVsc2UgKiAxNTUpIDogTWF0aC5mbG9vcigyMjAgLSBub3JtICogODApCgkJCSk7CgkJCXQuY2VsbENvbG9yKE1hdGguZmxvb3IoOCArIG5vcm0gKiAxMiksIE1hdGguZmxvb3IoMTIgKyBub3JtICogMTQpLCBNYXRoLmZsb29yKDI0ICsgbm9ybSAqIDE2KSk7CgkJCXQuY2hhcihjaGFyS2V5KTsKCQkJdC5wb2ludCgpOwoJCQl0LnBvcCgpOwoJCX0KCX0KfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IoMTIwLCAyNDAsIDE4MCk7Cgl0LnByaW50KCdURVhUTU9ERUdSSUQuUkVTRVQnLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoNzAsIDEwMCwgMTQwKTsKCXQucHJpbnQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDIxMCwgMjU1KTsKCXQucHJpbnQoJ0NPTkNFUFQ6IElOVEVSQUNUSVZFIEdSSUQgUkVDQUxDVUxBVElPTicsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDE2MCwgMTkwKTsKCXQucHJpbnQoJ1JlY2FsY3VsYXRlcyBjb2x1bW5zIGFuZCByb3dzIGZyb20nLCB4LCB5KyspOwoJdC5wcmludCgnY3VycmVudCBjYW52YXMgJiBjZWxsIGRpbWVuc2lvbnMuJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDcwLCAxMDAsIDE0MCk7Cgl0LnByaW50KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAyNTUsIDIwMCk7Cgl0LnByaW50KGBHUklEOiAke3QuZ3JpZC5jb2xzfSBYICR7dC5ncmlkLnJvd3N9YCwgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDI1NSwgMjAwLCAxMDApOwoJdC5wcmludCgnQ0xJQ0sgQ0FOVkFTIFRPIFRSSUdHRVIgUkVTRVQoKScsIHgsIHkrKyk7Cgl0LnBvcCgpOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let resetPulse = 0;
+
+t.setup(() => {});
+
+t.mousePressed(() => {
+	t.grid.reset();
+	resetPulse = 1.0;
+});
+
+t.draw(() => {
+	t.background(6, 12, 24);
+	const cols = t.grid.cols;
+	const rows = t.grid.rows;
+	const left = -Math.floor((cols - 1) / 2);
+	const right = left + cols - 1;
+	const top = -Math.floor(rows / 2);
+	const bottom = top + rows - 1;
+	const tm = t.frameCount * 0.05;
+
+	if (resetPulse > 0) resetPulse -= 0.03;
+
+	for (let y = top; y <= bottom; y++) {
+		for (let x = left; x <= right; x++) {
+			const dist = Math.hypot(x, y);
+			const wave = Math.sin(dist * 0.4 - tm * 3 + resetPulse * 6);
+			const norm = (wave + 1) * 0.5;
+
+			const charKey = resetPulse > 0.5 ? '#' : norm > 0.6 ? '+' : norm > 0.3 ? ':' : '.';
+
+			t.push();
+			t.translate(x, y);
+			t.charColor(
+				resetPulse > 0 ? 255 : Math.floor(60 + norm * 180),
+				resetPulse > 0 ? Math.floor(180 + resetPulse * 75) : Math.floor(140 + norm * 110),
+				resetPulse > 0 ? Math.floor(100 + resetPulse * 155) : Math.floor(220 - norm * 80)
+			);
+			t.cellColor(Math.floor(8 + norm * 12), Math.floor(12 + norm * 14), Math.floor(24 + norm * 16));
+			t.char(charKey);
+			t.point();
+			t.pop();
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODEGRID.RESET', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: INTERACTIVE GRID RECALCULATION', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Recalculates columns and rows from', x, y++);
+	t.print('current canvas & cell dimensions.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 200);
+	t.print(`GRID: ${t.grid.cols} X ${t.grid.rows}`, x, y++);
+	t.charColor(255, 200, 100);
+	t.print('CLICK CANVAS TO TRIGGER RESET()', x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

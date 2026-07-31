@@ -36,7 +36,68 @@ Largest value.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="max" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCBoaWdoID0gMDsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg2LCA2LCAxNyk7Cgljb25zdCB2YWx1ZXMgPSBbXTsKCWZvciAobGV0IGkgPSAwOyBpIDwgMTU7IGkrKykgewoJCXZhbHVlcy5wdXNoKHQucm91bmQodC5jb3ModC5mcmFtZUNvdW50ICogMC4wMzIgKyBpICogMC42MikgKiA3ICsgdC5zaW4oaSAqIDAuOCkgKiAzKSk7Cgl9CgloaWdoID0gdC5tYXgodmFsdWVzKTsKCglmb3IgKGxldCBpID0gMDsgaSA8IHZhbHVlcy5sZW5ndGg7IGkrKykgewoJCWNvbnN0IHggPSAtMjEgKyBpICogMzsKCQljb25zdCBpc0hpZ2ggPSB2YWx1ZXNbaV0gPT09IGhpZ2g7CgkJdC5wdXNoKCk7CgkJdC50cmFuc2xhdGUoeCwgNiAtIHZhbHVlc1tpXSAvIDIpOwoJCXQuY2hhcihpc0hpZ2ggPyAnQCcgOiAnIycpOwoJCXQuY2hhckNvbG9yKGlzSGlnaCA_IDEyMCA6IDgwLCBpc0hpZ2ggPyAyNTUgOiAxNDAsIGlzSGlnaCA_IDE3MCA6IDIzMCk7CgkJdC5yZWN0KDEsIHQuYWJzKHZhbHVlc1tpXSkgKyAxKTsKCQl0LnBvcCgpOwoJfQoKCXQuY2hhcignLScpOwoJdC5jaGFyQ29sb3IoMTIwLCAyNDUsIDE4MCk7Cgl0LmxpbmUoLTIzLCA2IC0gaGlnaCwgMjMsIDYgLSBoaWdoKTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC10LmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtdC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5NQVgnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBVUFBFUiBFTlZFTE9QRScsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnbWF4KHZhbHVlcy4uLikgZmluZHMgdGhlIHBlYWsuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdUaGUgZ3JlZW4gbGluZSByaWRlcyB0aGUgY3Jlc3QuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dChgTUFYOiAke2hpZ2h9YCwgeCwgeSsrLCAyMjAsIDIzMCwgMjU1KTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let high = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(6, 6, 17);
+	const values = [];
+	for (let i = 0; i < 15; i++) {
+		values.push(t.round(t.cos(t.frameCount * 0.032 + i * 0.62) * 7 + t.sin(i * 0.8) * 3));
+	}
+	high = t.max(values);
+
+	for (let i = 0; i < values.length; i++) {
+		const x = -21 + i * 3;
+		const isHigh = values[i] === high;
+		t.push();
+		t.translate(x, 6 - values[i] / 2);
+		t.char(isHigh ? '@' : '#');
+		t.charColor(isHigh ? 120 : 80, isHigh ? 255 : 140, isHigh ? 170 : 230);
+		t.rect(1, t.abs(values[i]) + 1);
+		t.pop();
+	}
+
+	t.char('-');
+	t.charColor(120, 245, 180);
+	t.line(-23, 6 - high, 23, 6 - high);
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -t.floor(t.grid.cols / 2);
+	const top = -t.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.MAX', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: UPPER ENVELOPE', x, y++, 100, 220, 255);
+	drawText('max(values...) finds the peak.', x, y++, 140, 160, 190);
+	drawText('The green line rides the crest.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`MAX: ${high}`, x, y++, 220, 230, 255);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 
 ## Call Signature
 
@@ -60,5 +121,65 @@ Largest value.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="max" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCBoaWdoID0gMDsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg2LCA2LCAxNyk7Cgljb25zdCB2YWx1ZXMgPSBbXTsKCWZvciAobGV0IGkgPSAwOyBpIDwgMTU7IGkrKykgewoJCXZhbHVlcy5wdXNoKHQucm91bmQodC5jb3ModC5mcmFtZUNvdW50ICogMC4wMzIgKyBpICogMC42MikgKiA3ICsgdC5zaW4oaSAqIDAuOCkgKiAzKSk7Cgl9CgloaWdoID0gdC5tYXgodmFsdWVzKTsKCglmb3IgKGxldCBpID0gMDsgaSA8IHZhbHVlcy5sZW5ndGg7IGkrKykgewoJCWNvbnN0IHggPSAtMjEgKyBpICogMzsKCQljb25zdCBpc0hpZ2ggPSB2YWx1ZXNbaV0gPT09IGhpZ2g7CgkJdC5wdXNoKCk7CgkJdC50cmFuc2xhdGUoeCwgNiAtIHZhbHVlc1tpXSAvIDIpOwoJCXQuY2hhcihpc0hpZ2ggPyAnQCcgOiAnIycpOwoJCXQuY2hhckNvbG9yKGlzSGlnaCA_IDEyMCA6IDgwLCBpc0hpZ2ggPyAyNTUgOiAxNDAsIGlzSGlnaCA_IDE3MCA6IDIzMCk7CgkJdC5yZWN0KDEsIHQuYWJzKHZhbHVlc1tpXSkgKyAxKTsKCQl0LnBvcCgpOwoJfQoKCXQuY2hhcignLScpOwoJdC5jaGFyQ29sb3IoMTIwLCAyNDUsIDE4MCk7Cgl0LmxpbmUoLTIzLCA2IC0gaGlnaCwgMjMsIDYgLSBoaWdoKTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC10LmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtdC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5NQVgnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBVUFBFUiBFTlZFTE9QRScsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnbWF4KHZhbHVlcy4uLikgZmluZHMgdGhlIHBlYWsuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdUaGUgZ3JlZW4gbGluZSByaWRlcyB0aGUgY3Jlc3QuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dChgTUFYOiAke2hpZ2h9YCwgeCwgeSsrLCAyMjAsIDIzMCwgMjU1KTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let high = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(6, 6, 17);
+	const values = [];
+	for (let i = 0; i < 15; i++) {
+		values.push(t.round(t.cos(t.frameCount * 0.032 + i * 0.62) * 7 + t.sin(i * 0.8) * 3));
+	}
+	high = t.max(values);
+
+	for (let i = 0; i < values.length; i++) {
+		const x = -21 + i * 3;
+		const isHigh = values[i] === high;
+		t.push();
+		t.translate(x, 6 - values[i] / 2);
+		t.char(isHigh ? '@' : '#');
+		t.charColor(isHigh ? 120 : 80, isHigh ? 255 : 140, isHigh ? 170 : 230);
+		t.rect(1, t.abs(values[i]) + 1);
+		t.pop();
+	}
+
+	t.char('-');
+	t.charColor(120, 245, 180);
+	t.line(-23, 6 - high, 23, 6 - high);
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -t.floor(t.grid.cols / 2);
+	const top = -t.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.MAX', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: UPPER ENVELOPE', x, y++, 100, 220, 255);
+	drawText('max(values...) finds the peak.', x, y++, 140, 160, 190);
+	drawText('The green line rides the crest.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`MAX: ${high}`, x, y++, 220, 230, 255);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

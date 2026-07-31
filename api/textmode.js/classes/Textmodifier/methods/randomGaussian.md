@@ -39,5 +39,83 @@ Gaussian random number.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="randomGaussian" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKCXNlZWQ6ICdnYXVzc2lhbi1jbG91ZCcsCn0pOwoKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwpjb25zdCBzYW1wbGVzID0gW107CmxldCBsYXRlc3QgPSAwOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9CgpmdW5jdGlvbiBhZGRTYW1wbGUoKSB7CglsYXRlc3QgPSB0LnJhbmRvbUdhdXNzaWFuKDAsIDYpOwoJc2FtcGxlcy5wdXNoKGxhdGVzdCk7CglpZiAoc2FtcGxlcy5sZW5ndGggPiAxODApIHsKCQlzYW1wbGVzLnNoaWZ0KCk7Cgl9Cn0KCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNCwgNywgMTYpOwoJZm9yIChsZXQgaSA9IDA7IGkgPCA0OyBpKyspIHsKCQlhZGRTYW1wbGUoKTsKCX0KCgl0LmNoYXIoJy4nKTsKCXQuY2hhckNvbG9yKDQ1LCA2MCwgOTUpOwoJZm9yIChsZXQgeCA9IC0yNDsgeCA8PSAyNDsgeCArPSAyKSB7CgkJdC5saW5lKHgsIDksIHgsIDEwKTsKCX0KCglmb3IgKGxldCBpID0gMDsgaSA8IHNhbXBsZXMubGVuZ3RoOyBpKyspIHsKCQljb25zdCBhZ2UgPSBpIC8gc2FtcGxlcy5sZW5ndGg7CgkJY29uc3QgeCA9IHQuY29uc3RyYWluKHQucm91bmQoc2FtcGxlc1tpXSksIC0yNCwgMjQpOwoJCWNvbnN0IHkgPSA4IC0gdC5mbG9vcihhZ2UgKiAxNik7CgkJdC5wdXNoKCk7CgkJdC50cmFuc2xhdGUoeCwgeSk7CgkJdC5jaGFyKGFnZSA-IDAuNyA_ICcqJyA6IGFnZSA-IDAuMzUgPyAnKycgOiAnLicpOwoJCXQuY2hhckNvbG9yKDkwICsgYWdlICogMTQwLCAxNTAgKyBhZ2UgKiA5MCwgMjU1KTsKCQl0LnBvaW50KCk7CgkJdC5wb3AoKTsKCX0KCgl0LmNoYXIoJ3wnKTsKCXQuY2hhckNvbG9yKDI1NSwgMjA1LCA5MCk7Cgl0LmxpbmUoMCwgLTEwLCAwLCAxMCk7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtdC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLXQuZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLlJBTkRPTUdBVVNTSUFOJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogU0VFREVEIEJFTEwgQ1VSVkUnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ01vc3Qgc2FtcGxlcyBnYXRoZXIgbmVhciBtZWFuIDAuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdTdGFuZGFyZCBkZXZpYXRpb24gc2V0cyBzcHJlYWQuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdUaGUgc2VxdWVuY2UgaXMgcmVwcm9kdWNpYmxlLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoYExBVEVTVDogJHtsYXRlc3QudG9GaXhlZCgyKX1gLCB4LCB5KyssIDIyMCwgMjMwLCAyNTUpOwoJZHJhd1RleHQoYFNBTVBMRVM6ICR7c2FtcGxlcy5sZW5ndGh9YCwgeCwgeSsrLCAyMjAsIDIzMCwgMjU1KTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+	seed: 'gaussian-cloud',
+});
+
+const labelLayer = t.layers.add();
+const samples = [];
+let latest = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+function addSample() {
+	latest = t.randomGaussian(0, 6);
+	samples.push(latest);
+	if (samples.length > 180) {
+		samples.shift();
+	}
+}
+
+t.draw(() => {
+	t.background(4, 7, 16);
+	for (let i = 0; i < 4; i++) {
+		addSample();
+	}
+
+	t.char('.');
+	t.charColor(45, 60, 95);
+	for (let x = -24; x <= 24; x += 2) {
+		t.line(x, 9, x, 10);
+	}
+
+	for (let i = 0; i < samples.length; i++) {
+		const age = i / samples.length;
+		const x = t.constrain(t.round(samples[i]), -24, 24);
+		const y = 8 - t.floor(age * 16);
+		t.push();
+		t.translate(x, y);
+		t.char(age > 0.7 ? '*' : age > 0.35 ? '+' : '.');
+		t.charColor(90 + age * 140, 150 + age * 90, 255);
+		t.point();
+		t.pop();
+	}
+
+	t.char('|');
+	t.charColor(255, 205, 90);
+	t.line(0, -10, 0, 10);
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -t.floor(t.grid.cols / 2);
+	const top = -t.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODIFIER.RANDOMGAUSSIAN', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SEEDED BELL CURVE', x, y++, 100, 220, 255);
+	drawText('Most samples gather near mean 0.', x, y++, 140, 160, 190);
+	drawText('Standard deviation sets spread.', x, y++, 140, 160, 190);
+	drawText('The sequence is reproducible.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`LATEST: ${latest.toFixed(2)}`, x, y++, 220, 230, 255);
+	drawText(`SAMPLES: ${samples.length}`, x, y++, 220, 230, 255);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

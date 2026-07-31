@@ -23,5 +23,76 @@ Green component (0-255).
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="g" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBSQU1QID0gJyAuOi09KyojJUAnOwpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDE0LCAxMik7Cgljb25zdCBodyA9IE1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IGhoID0gTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJY29uc3QgdG0gPSB0LmZyYW1lQ291bnQgKiAwLjAyNTsKCglmb3IgKGxldCB5ID0gLWhoOyB5IDw9IGhoOyB5KyspIHsKCQlmb3IgKGxldCB4ID0gLWh3OyB4IDw9IGh3OyB4KyspIHsKCQkJY29uc3QgbGF0dGljZSA9IE1hdGguc2luKCh4ICsgeSkgKiAwLjIgKyB0bSkgKiBNYXRoLmNvcygoeCAtIHkpICogMC4yIC0gdG0gKiAwLjcpOwoJCQljb25zdCBncmVlblZhbCA9IE1hdGguZmxvb3IoTWF0aC5tYXgoMCwgTWF0aC5taW4oMjU1LCAobGF0dGljZSAqIDAuNSArIDAuNSkgKiAyMjAgKyAzNSkpKTsKCgkJCWNvbnN0IGNvbCA9IHQuY29sb3IoMjAsIGdyZWVuVmFsLCBNYXRoLmZsb29yKGdyZWVuVmFsICogMC4zNSkpOwoJCQljb25zdCBncmVlbiA9IGNvbC5nOwoKCQkJaWYgKGdyZWVuID4gNTApIHsKCQkJCWNvbnN0IG5vcm0gPSAoZ3JlZW4gLSA1MCkgLyAyMDU7CgkJCQljb25zdCBpZHggPSBNYXRoLm1pbihSQU1QLmxlbmd0aCAtIDEsIE1hdGguZmxvb3Iobm9ybSAqIFJBTVAubGVuZ3RoKSk7CgoJCQkJdC5wdXNoKCk7CgkJCQl0LnRyYW5zbGF0ZSh4LCB5KTsKCQkJCXQuY2hhckNvbG9yKGNvbC5yLCBncmVlbiwgY29sLmIpOwoJCQkJdC5jZWxsQ29sb3IoNCwgTWF0aC5mbG9vcihncmVlbiAqIDAuMjQpLCA4KTsKCQkJCXQuY2hhcihSQU1QW2lkeF0pOwoJCQkJdC5wb2ludCgpOwoJCQkJdC5wb3AoKTsKCQkJfQoJCX0KCX0KfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWNvbnN0IHNhbXBsZUNvbCA9IHQuY29sb3IoMjAsIDIyMCwgODApOwoJY29uc3QgZ3JlZW4gPSBzYW1wbGVDb2wuZzsKCgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKDEyMCwgMjQwLCAxODApOwoJdC5wcmludCgnVEVYVE1PREVDT0xPUi5HJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDcwLCAxMDAsIDE0MCk7Cgl0LnByaW50KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAyMTAsIDI1NSk7Cgl0LnByaW50KCdDT05DRVBUOiBSRUFEIEdSRUVOIENPTE9SIENIQU5ORUwnLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAxNjAsIDE5MCk7Cgl0LnByaW50KCdSZWFkcyA4LWJpdCBncmVlbiBwcm9wZXJ0eSAoMC0yNTUpLicsIHgsIHkrKyk7Cgl0LnByaW50KCdEcml2ZXMgYmlvbHVtaW5lc2NlbnQgZ3JpZCBkZW5zaXR5LicsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcig3MCwgMTAwLCAxNDApOwoJdC5wcmludCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMjU1LCAyMDApOwoJdC5wcmludChgU0FNUExFIEdSRUVOOiAke2dyZWVufSAvIDI1NWAsIHgsIHkrKyk7Cgl0LnBvcCgpOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const RAMP = ' .:-=+*#%@';
+const labelLayer = t.layers.add();
+
+t.draw(() => {
+	t.background(6, 14, 12);
+	const hw = Math.floor(t.grid.cols / 2);
+	const hh = Math.floor(t.grid.rows / 2);
+	const tm = t.frameCount * 0.025;
+
+	for (let y = -hh; y <= hh; y++) {
+		for (let x = -hw; x <= hw; x++) {
+			const lattice = Math.sin((x + y) * 0.2 + tm) * Math.cos((x - y) * 0.2 - tm * 0.7);
+			const greenVal = Math.floor(Math.max(0, Math.min(255, (lattice * 0.5 + 0.5) * 220 + 35)));
+
+			const col = t.color(20, greenVal, Math.floor(greenVal * 0.35));
+			const green = col.g;
+
+			if (green > 50) {
+				const norm = (green - 50) / 205;
+				const idx = Math.min(RAMP.length - 1, Math.floor(norm * RAMP.length));
+
+				t.push();
+				t.translate(x, y);
+				t.charColor(col.r, green, col.b);
+				t.cellColor(4, Math.floor(green * 0.24), 8);
+				t.char(RAMP[idx]);
+				t.point();
+				t.pop();
+			}
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const sampleCol = t.color(20, 220, 80);
+	const green = sampleCol.g;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODECOLOR.G', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: READ GREEN COLOR CHANNEL', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Reads 8-bit green property (0-255).', x, y++);
+	t.print('Drives bioluminescent grid density.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 200);
+	t.print(`SAMPLE GREEN: ${green} / 255`, x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

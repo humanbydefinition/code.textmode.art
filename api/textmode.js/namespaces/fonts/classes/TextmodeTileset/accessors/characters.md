@@ -29,7 +29,98 @@ readonly [`TextmodeGlyph`](../../../type-aliases/TextmodeGlyph.md)[]
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="characters" encoded-code="Y29uc3QgVDY0X1VSTCA9ICdodHRwczovL2xpdHRsZWJpdHNwYWNlLmNvbS9yZXNvdXJjZXMvZm9udHMvVDY0LnBuZyc7CmNvbnN0IHQgPSB0ZXh0bW9kZS5jcmVhdGUoewoJd2lkdGg6IHdpbmRvdy5pbm5lcldpZHRoLAoJaGVpZ2h0OiB3aW5kb3cuaW5uZXJIZWlnaHQsCglmb250U2l6ZTogMTYsCn0pOwoKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwpsZXQgdGlsZXNldCA9IG51bGw7Cgp0LnNldHVwKGFzeW5jICgpID0-IHsKCXRpbGVzZXQgPSBhd2FpdCB0LmxvYWRUaWxlc2V0KHsgc291cmNlOiBUNjRfVVJMLCBjb2x1bW5zOiAxNiwgcm93czogMTYsIGNvdW50OiAyNTYsIGZvbnRTaXplOiAxNiB9KTsKfSk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDEwLCAxMCwgMTgpOwoJaWYgKCF0aWxlc2V0KSByZXR1cm47CgoJY29uc3QgaHcgPSBNYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCBoaCA9IE1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWNvbnN0IGNoYXJzID0gdGlsZXNldC5jaGFyYWN0ZXJzOwoJY29uc3QgY3Vyc29ySWR4ID0gTWF0aC5mbG9vcih0LmZyYW1lQ291bnQgKiAwLjEpICUgKGNoYXJzLmxlbmd0aCB8fCAxKTsKCgljb25zdCBncmlkQ29scyA9IDE2OwoJY29uc3QgZ3JpZFJvd3MgPSAxNjsKCWNvbnN0IHN0YXJ0WCA9IC1NYXRoLmZsb29yKGdyaWRDb2xzIC8gMik7Cgljb25zdCBzdGFydFkgPSAtTWF0aC5mbG9vcihncmlkUm93cyAvIDIpOwoKCWZvciAobGV0IHkgPSAtaGg7IHkgPD0gaGg7IHkrKykgewoJCWZvciAobGV0IHggPSAtaHc7IHggPD0gaHc7IHgrKykgewoJCQljb25zdCBjb2wgPSB4IC0gc3RhcnRYOwoJCQljb25zdCByb3cgPSB5IC0gc3RhcnRZOwoKCQkJbGV0IGNoYXJLZXkgPSAnICc7CgkJCWxldCBpc0FjdGl2ZSA9IGZhbHNlOwoKCQkJaWYgKGNvbCA-PSAwICYmIGNvbCA8IGdyaWRDb2xzICYmIHJvdyA-PSAwICYmIHJvdyA8IGdyaWRSb3dzKSB7CgkJCQljb25zdCB0aWxlSW5kZXggPSByb3cgKiBncmlkQ29scyArIGNvbDsKCQkJCWNvbnN0IGdseXBoT2JqID0gY2hhcnNbdGlsZUluZGV4XTsKCQkJCWNoYXJLZXkgPSBnbHlwaE9iaiA_IGdseXBoT2JqLmNoYXJhY3RlciA6ICcgJzsKCQkJCWlzQWN0aXZlID0gdGlsZUluZGV4ID09PSBjdXJzb3JJZHg7CgkJCX0KCgkJCXQucHVzaCgpOwoJCQl0LnRyYW5zbGF0ZSh4LCB5KTsKCQkJdC5jaGFyQ29sb3IoaXNBY3RpdmUgPyAyNTUgOiAxMjAsIGlzQWN0aXZlID8gMjIwIDogMTgwLCBpc0FjdGl2ZSA_IDEwMCA6IDI0MCk7CgkJCXQuY2VsbENvbG9yKGlzQWN0aXZlID8gNDAgOiAxMiwgaXNBY3RpdmUgPyAzMCA6IDEyLCBpc0FjdGl2ZSA_IDEwIDogMjQpOwoJCQl0LmNoYXIoY2hhcktleSk7CgkJCXQucG9pbnQoKTsKCQkJdC5wb3AoKTsKCQl9Cgl9Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglpZiAoIXRpbGVzZXQpIHJldHVybjsKCWNvbnN0IGNoYXJzID0gdGlsZXNldC5jaGFyYWN0ZXJzOwoJY29uc3QgY3Vyc29ySWR4ID0gTWF0aC5mbG9vcih0LmZyYW1lQ291bnQgKiAwLjEpICUgKGNoYXJzLmxlbmd0aCB8fCAxKTsKCWNvbnN0IHNhbXBsZU9iaiA9IGNoYXJzW2N1cnNvcklkeF0gfHwgeyBjaGFyYWN0ZXI6ICcgJywgdW5pY29kZTogMzIgfTsKCWNvbnN0IGhleENvZGUgPSBgVSske3NhbXBsZU9iai51bmljb2RlLnRvU3RyaW5nKDE2KS50b1VwcGVyQ2FzZSgpLnBhZFN0YXJ0KDQsICcwJyl9YDsKCgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKDEyMCwgMjQwLCAxODApOwoJdC5wcmludCgnVEVYVE1PREVUSUxFU0VULkNIQVJBQ1RFUlMnLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoNzAsIDEwMCwgMTQwKTsKCXQucHJpbnQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDIxMCwgMjU1KTsKCXQucHJpbnQoJ0NPTkNFUFQ6IEZVTEwgVElMRVNFVCBHTFlQSCBDQVRBTE9HJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMTYwLCAxOTApOwoJdC5wcmludCgnQXJyYXkgb2YgYWxsIHRpbGVzZXQgVGV4dG1vZGVHbHlwaCBpdGVtcy4nLCB4LCB5KyspOwoJdC5wcmludCgnVHJhdmVyc2VzIGZ1bGwgMjU2LXRpbGUgY2F0YWxvZy4nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoNzAsIDEwMCwgMTQwKTsKCXQucHJpbnQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDI1NSwgMjAwKTsKCXQucHJpbnQoYFRPVEFMIFRJTEVTOiAke2NoYXJzLmxlbmd0aH1gLCB4LCB5KyspOwoJdC5wcmludChgQUNUSVZFIFRJTEU6ICR7aGV4Q29kZX1gLCB4LCB5KyspOwoJdC5wb3AoKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const T64_URL = 'https://littlebitspace.com/resources/fonts/T64.png';
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let tileset = null;
+
+t.setup(async () => {
+	tileset = await t.loadTileset({ source: T64_URL, columns: 16, rows: 16, count: 256, fontSize: 16 });
+});
+
+t.draw(() => {
+	t.background(10, 10, 18);
+	if (!tileset) return;
+
+	const hw = Math.floor(t.grid.cols / 2);
+	const hh = Math.floor(t.grid.rows / 2);
+	const chars = tileset.characters;
+	const cursorIdx = Math.floor(t.frameCount * 0.1) % (chars.length || 1);
+
+	const gridCols = 16;
+	const gridRows = 16;
+	const startX = -Math.floor(gridCols / 2);
+	const startY = -Math.floor(gridRows / 2);
+
+	for (let y = -hh; y <= hh; y++) {
+		for (let x = -hw; x <= hw; x++) {
+			const col = x - startX;
+			const row = y - startY;
+
+			let charKey = ' ';
+			let isActive = false;
+
+			if (col >= 0 && col < gridCols && row >= 0 && row < gridRows) {
+				const tileIndex = row * gridCols + col;
+				const glyphObj = chars[tileIndex];
+				charKey = glyphObj ? glyphObj.character : ' ';
+				isActive = tileIndex === cursorIdx;
+			}
+
+			t.push();
+			t.translate(x, y);
+			t.charColor(isActive ? 255 : 120, isActive ? 220 : 180, isActive ? 100 : 240);
+			t.cellColor(isActive ? 40 : 12, isActive ? 30 : 12, isActive ? 10 : 24);
+			t.char(charKey);
+			t.point();
+			t.pop();
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	if (!tileset) return;
+	const chars = tileset.characters;
+	const cursorIdx = Math.floor(t.frameCount * 0.1) % (chars.length || 1);
+	const sampleObj = chars[cursorIdx] || { character: ' ', unicode: 32 };
+	const hexCode = `U+${sampleObj.unicode.toString(16).toUpperCase().padStart(4, '0')}`;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODETILESET.CHARACTERS', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: FULL TILESET GLYPH CATALOG', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Array of all tileset TextmodeGlyph items.', x, y++);
+	t.print('Traverses full 256-tile catalog.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 200);
+	t.print(`TOTAL TILES: ${chars.length}`, x, y++);
+	t.print(`ACTIVE TILE: ${hexCode}`, x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 
 Ordered glyph entries available in this atlas.
 

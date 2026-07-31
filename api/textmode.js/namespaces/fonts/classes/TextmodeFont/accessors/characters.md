@@ -29,5 +29,82 @@ readonly [`TextmodeGlyph`](../../../type-aliases/TextmodeGlyph.md)[]
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="characters" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDgsIDYsIDE2KTsKCWNvbnN0IGh3ID0gTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgaGggPSBNYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7Cgljb25zdCB0bSA9IHQuZnJhbWVDb3VudCAqIDAuMDQ7Cgljb25zdCBnbHlwaHMgPSB0LmZvbnQuY2hhcmFjdGVyczsKCglmb3IgKGxldCB5ID0gLWhoOyB5IDw9IGhoOyB5KyspIHsKCQlmb3IgKGxldCB4ID0gLWh3OyB4IDw9IGh3OyB4KyspIHsKCQkJY29uc3QgYW5nbGUgPSBNYXRoLmF0YW4yKHksIHgpICsgdG07CgkJCWNvbnN0IHJhZGl1cyA9IE1hdGguaHlwb3QoeCwgeSk7CgkJCWNvbnN0IHNwaXJhbCA9IChhbmdsZSAqIDMgKyByYWRpdXMgKiAwLjQpICUgKE1hdGguUEkgKiAyKTsKCQkJY29uc3QgdmFsID0gKE1hdGguc2luKHNwaXJhbCkgKyAxKSAqIDAuNTsKCgkJCWNvbnN0IGdJZHggPSBNYXRoLmZsb29yKChyYWRpdXMgKiAyICsgYW5nbGUgKiA0ICsgdG0gKiA1KSAlIChnbHlwaHMubGVuZ3RoIHx8IDEpKTsKCQkJY29uc3QgZ2x5cGhPYmogPSBnbHlwaHNbZ0lkeF0gfHwgZ2x5cGhzWzBdOwoJCQljb25zdCBjaGFyID0gZ2x5cGhPYmogPyBnbHlwaE9iai5jaGFyYWN0ZXIgOiAnLic7CgkJCWNvbnN0IHVuaWNvZGUgPSBnbHlwaE9iaiA_IGdseXBoT2JqLnVuaWNvZGUgOiAzMjsKCgkJCXQucHVzaCgpOwoJCQl0LnRyYW5zbGF0ZSh4LCB5KTsKCQkJdC5jaGFyQ29sb3IoCgkJCQlNYXRoLmZsb29yKDgwICsgKHVuaWNvZGUgJSAxNjApKSwKCQkJCU1hdGguZmxvb3IoMTQwICsgdmFsICogMTAwKSwKCQkJCU1hdGguZmxvb3IoMjQwIC0gKHVuaWNvZGUgJSAxMjApKQoJCQkpOwoJCQl0LmNlbGxDb2xvcihNYXRoLmZsb29yKDEwICsgdmFsICogMjApLCBNYXRoLmZsb29yKDEyICsgdmFsICogMjApLCBNYXRoLmZsb29yKDMwICsgdmFsICogMzApKTsKCQkJdC5jaGFyKGNoYXIpOwoJCQl0LnBvaW50KCk7CgkJCXQucG9wKCk7CgkJfQoJfQp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CgoJY29uc3QgZ2x5cGhzID0gdC5mb250LmNoYXJhY3RlcnM7Cgljb25zdCBzYW1wbGVJZHggPSBNYXRoLmZsb29yKHQuZnJhbWVDb3VudCAqIDAuMDUpICUgKGdseXBocy5sZW5ndGggfHwgMSk7Cgljb25zdCBzYW1wbGVHbHlwaCA9IGdseXBoc1tzYW1wbGVJZHhdIHx8IHsgY2hhcmFjdGVyOiAnICcsIHVuaWNvZGU6IDMyIH07Cgljb25zdCBoZXhDb2RlID0gYFUrJHtzYW1wbGVHbHlwaC51bmljb2RlLnRvU3RyaW5nKDE2KS50b1VwcGVyQ2FzZSgpLnBhZFN0YXJ0KDQsICcwJyl9YDsKCgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKDEyMCwgMjQwLCAxODApOwoJdC5wcmludCgnVEVYVE1PREVGT05ULkNIQVJBQ1RFUlMnLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoNzAsIDEwMCwgMTQwKTsKCXQucHJpbnQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDIxMCwgMjU1KTsKCXQucHJpbnQoJ0NPTkNFUFQ6IFVOSUNPREUgR0xZUEggQVJSQVknLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAxNjAsIDE5MCk7Cgl0LnByaW50KCdBcnJheSBvZiBhbGwgZm9udCBUZXh0bW9kZUdseXBoIG9iamVjdHMuJywgeCwgeSsrKTsKCXQucHJpbnQoJ0FjY2Vzc2VzIGNoYXJhY3RlciAmIHVuaWNvZGUgYXR0cmlidXRlcy4nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoNzAsIDEwMCwgMTQwKTsKCXQucHJpbnQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDI1NSwgMjAwKTsKCXQucHJpbnQoYFRPVEFMIEdMWVBIUzogJHtnbHlwaHMubGVuZ3RofWAsIHgsIHkrKyk7Cgl0LnByaW50KGBTQU1QTEUgIiR7c2FtcGxlR2x5cGguY2hhcmFjdGVyfSI6ICR7aGV4Q29kZX1gLCB4LCB5KyspOwoJdC5wb3AoKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+t.draw(() => {
+	t.background(8, 6, 16);
+	const hw = Math.floor(t.grid.cols / 2);
+	const hh = Math.floor(t.grid.rows / 2);
+	const tm = t.frameCount * 0.04;
+	const glyphs = t.font.characters;
+
+	for (let y = -hh; y <= hh; y++) {
+		for (let x = -hw; x <= hw; x++) {
+			const angle = Math.atan2(y, x) + tm;
+			const radius = Math.hypot(x, y);
+			const spiral = (angle * 3 + radius * 0.4) % (Math.PI * 2);
+			const val = (Math.sin(spiral) + 1) * 0.5;
+
+			const gIdx = Math.floor((radius * 2 + angle * 4 + tm * 5) % (glyphs.length || 1));
+			const glyphObj = glyphs[gIdx] || glyphs[0];
+			const char = glyphObj ? glyphObj.character : '.';
+			const unicode = glyphObj ? glyphObj.unicode : 32;
+
+			t.push();
+			t.translate(x, y);
+			t.charColor(
+				Math.floor(80 + (unicode % 160)),
+				Math.floor(140 + val * 100),
+				Math.floor(240 - (unicode % 120))
+			);
+			t.cellColor(Math.floor(10 + val * 20), Math.floor(12 + val * 20), Math.floor(30 + val * 30));
+			t.char(char);
+			t.point();
+			t.pop();
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const glyphs = t.font.characters;
+	const sampleIdx = Math.floor(t.frameCount * 0.05) % (glyphs.length || 1);
+	const sampleGlyph = glyphs[sampleIdx] || { character: ' ', unicode: 32 };
+	const hexCode = `U+${sampleGlyph.unicode.toString(16).toUpperCase().padStart(4, '0')}`;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODEFONT.CHARACTERS', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: UNICODE GLYPH ARRAY', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Array of all font TextmodeGlyph objects.', x, y++);
+	t.print('Accesses character & unicode attributes.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 200);
+	t.print(`TOTAL GLYPHS: ${glyphs.length}`, x, y++);
+	t.print(`SAMPLE "${sampleGlyph.character}": ${hexCode}`, x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

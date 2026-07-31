@@ -26,5 +26,91 @@ Clear the active texture for later geometry draws.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="noTexture" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IHNvdXJjZUNhbnZhcyA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2NhbnZhcycpOwpzb3VyY2VDYW52YXMud2lkdGggPSA5NjsKc291cmNlQ2FudmFzLmhlaWdodCA9IDk2Owpjb25zdCBjdHggPSBzb3VyY2VDYW52YXMuZ2V0Q29udGV4dCgnMmQnKTsKbGV0IHNvdXJjZTsKbGV0IHNwaW4gPSAwOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LnNldHVwKCgpID0-IHsKCXNvdXJjZSA9IHQuY3JlYXRlVGV4dHVyZShzb3VyY2VDYW52YXMpOwoJc291cmNlLmNoYXJhY3RlcnMoJyAuOi09KyojJUAnKS5jZWxsQ29sb3JNb2RlKCdmaXhlZCcpLmNlbGxDb2xvcig1LCA5LCAxOCk7Cn0pOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg1LCA5LCAyMCk7CglpZiAoIWN0eCB8fCAhc291cmNlKSByZXR1cm47CgoJY29uc3QgaHVlID0gKHQuZnJhbWVDb3VudCAqIDIuNSkgJSAzNjA7Cgljb25zdCBncmFkaWVudCA9IGN0eC5jcmVhdGVSYWRpYWxHcmFkaWVudCg0OCwgNDgsIDEwLCA0OCwgNDgsIDQ4KTsKCWdyYWRpZW50LmFkZENvbG9yU3RvcCgwLCAnI2Y4ZmFmYycpOwoJZ3JhZGllbnQuYWRkQ29sb3JTdG9wKDAuNDUsIGBoc2woJHtodWV9LCA5MiUsIDU4JSlgKTsKCWdyYWRpZW50LmFkZENvbG9yU3RvcCgxLCBgaHNsKCR7KGh1ZSArIDE3MCkgJSAzNjB9LCA4OCUsIDM0JSlgKTsKCWN0eC5maWxsU3R5bGUgPSBncmFkaWVudDsKCWN0eC5maWxsUmVjdCgwLCAwLCA5NiwgOTYpOwoJY3R4LmZpbGxTdHlsZSA9ICcjMTExODI3JzsKCWN0eC5maWxsUmVjdCgyOCwgMjgsIDQwLCA0MCk7CgljdHguZmlsbFN0eWxlID0gJyNmOGZhZmMnOwoJY3R4LmZpbGxSZWN0KDM4LCAzOCwgMjAsIDIwKTsKCglzcGluID0gKHQuZnJhbWVDb3VudCAqIDEuNCkgJSAzNjA7Cgl0LnBlcnNwZWN0aXZlKDU4LCAwLjEsIDQwOTYpOwoJdC5jYW1lcmEoMCwgLTgsIDM4LCAwLCAwLCAwKTsKCXQuYW1iaWVudExpZ2h0KDIwLCAyMiwgMzApOwoJdC5wb2ludExpZ2h0KFsyNTUsIDIzNSwgMTgwXSwgeyB4OiAxOCwgeTogLTE4LCB6OiAzMCB9KTsKCXQucHVzaCgpOwoJdC50cmFuc2xhdGUoLTEwLCAwLCAwKTsKCXQucm90YXRlWShzcGluKTsKCXQucm90YXRlWCgxNCk7Cgl0LnRleHR1cmUoc291cmNlKTsKCXQuc3BoZXJlKDgpOwoJdC5wb3AoKTsKCXQubm9UZXh0dXJlKCk7Cgl0LnB1c2goKTsKCXQudHJhbnNsYXRlKDEwLCAwLCAwKTsKCXQucm90YXRlWShzcGluKTsKCXQucm90YXRlWCgxNCk7Cgl0LmNoYXIoJ0AnKTsKCXQuY2hhckNvbG9yKDI0NSwgMjQ1LCAyMTApOwoJdC5jZWxsQ29sb3IoMjAsIDI4LCA0OCk7Cgl0LnNwaGVyZSg4KTsKCXQucG9wKCk7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuTk9URVhUVVJFJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogQ0xFQVIgVEVYVFVSRScsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnTGVmdCBzcGhlcmUgc2FtcGxlcyB0aGUgc291cmNlLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnUmlnaHQgc3BoZXJlIGlnbm9yZXMgaXQgYWZ0ZXIgY2xlYXIuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dChgU1BJTjogJHtzcGluLnRvRml4ZWQoMSl9YCwgeCwgeSsrLCAxNDAsIDI1NSwgMTgwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+const sourceCanvas = document.createElement('canvas');
+sourceCanvas.width = 96;
+sourceCanvas.height = 96;
+const ctx = sourceCanvas.getContext('2d');
+let source;
+let spin = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.setup(() => {
+	source = t.createTexture(sourceCanvas);
+	source.characters(' .:-=+*#%@').cellColorMode('fixed').cellColor(5, 9, 18);
+});
+
+t.draw(() => {
+	t.background(5, 9, 20);
+	if (!ctx || !source) return;
+
+	const hue = (t.frameCount * 2.5) % 360;
+	const gradient = ctx.createRadialGradient(48, 48, 10, 48, 48, 48);
+	gradient.addColorStop(0, '#f8fafc');
+	gradient.addColorStop(0.45, `hsl(${hue}, 92%, 58%)`);
+	gradient.addColorStop(1, `hsl(${(hue + 170) % 360}, 88%, 34%)`);
+	ctx.fillStyle = gradient;
+	ctx.fillRect(0, 0, 96, 96);
+	ctx.fillStyle = '#111827';
+	ctx.fillRect(28, 28, 40, 40);
+	ctx.fillStyle = '#f8fafc';
+	ctx.fillRect(38, 38, 20, 20);
+
+	spin = (t.frameCount * 1.4) % 360;
+	t.perspective(58, 0.1, 4096);
+	t.camera(0, -8, 38, 0, 0, 0);
+	t.ambientLight(20, 22, 30);
+	t.pointLight([255, 235, 180], { x: 18, y: -18, z: 30 });
+	t.push();
+	t.translate(-10, 0, 0);
+	t.rotateY(spin);
+	t.rotateX(14);
+	t.texture(source);
+	t.sphere(8);
+	t.pop();
+	t.noTexture();
+	t.push();
+	t.translate(10, 0, 0);
+	t.rotateY(spin);
+	t.rotateX(14);
+	t.char('@');
+	t.charColor(245, 245, 210);
+	t.cellColor(20, 28, 48);
+	t.sphere(8);
+	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.NOTEXTURE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: CLEAR TEXTURE', x, y++, 100, 220, 255);
+	drawText('Left sphere samples the source.', x, y++, 140, 160, 190);
+	drawText('Right sphere ignores it after clear.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`SPIN: ${spin.toFixed(1)}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

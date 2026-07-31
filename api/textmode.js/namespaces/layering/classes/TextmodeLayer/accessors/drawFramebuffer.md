@@ -34,5 +34,77 @@ Returns `undefined` before the layer is initialized.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="drawFramebuffer" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBzb3VyY2VMYXllciA9IHQubGF5ZXJzLmFkZCgpOwpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByZ2IgPSBbMjU1LCAyNTUsIDI1NV0pIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IocmdiWzBdLCByZ2JbMV0sIHJnYlsyXSk7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKZnVuY3Rpb24gZHJhd0NlbnRlcmVkVGV4dCh0ZXh0LCB5LCByZ2IgPSBbMjU1LCAyNTUsIDI1NV0pIHsKCWRyYXdUZXh0KHRleHQsIC1NYXRoLmZsb29yKHRleHQubGVuZ3RoIC8gMiksIHksIHJnYik7Cn0KCnNvdXJjZUxheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgdGltZSA9IHQuZnJhbWVDb3VudCAqIDAuMDM7CgoJdC5wdXNoKCk7Cgl0LnJvdGF0ZVooKHRpbWUgKiAxODApIC8gTWF0aC5QSSk7Cgl0LmNoYXJDb2xvcigyNTUsIDE4MCwgMTAwKTsKCXQuY2hhcignIycpOwoJdC5yZWN0KDE0LCAxKTsKCXQucmVjdCgxLCAxNCk7Cgl0LnBvcCgpOwp9KTsKCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNiwgMTAsIDIyKTsKCgljb25zdCBmYiA9IHNvdXJjZUxheWVyLmRyYXdGcmFtZWJ1ZmZlcjsKCglpZiAoZmIpIHsKCQl0LnB1c2goKTsKCQl0LnRyYW5zbGF0ZSgwLCAwKTsKCQl0LmltYWdlKGZiLCAyNCwgMTQpOwoJCXQucG9wKCk7CgoJCWRyYXdDZW50ZXJlZFRleHQoJ0lOVEVSTkFMIERBVEEgQlVGRkVSJywgMTAsIFsxNDAsIDIyMCwgMjU1XSk7Cgl9Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCWNvbnN0IGZiID0gc291cmNlTGF5ZXIuZHJhd0ZyYW1lYnVmZmVyOwoKCWRyYXdUZXh0KCdURVhUTU9ERUxBWUVSLkRSQVdGUkFNRUJVRkZFUicsIHgsIHkrKywgWzEwMCwgMjU1LCAxNDBdKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIFs4MCwgMTAwLCAxNTBdKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBSQVcgRFJBVyBCVUZGRVInLCB4LCB5KyssIFsxMDAsIDIyMCwgMjU1XSk7CglkcmF3VGV4dCgnQ2FwdHVyZXMgcHJlLUFTQ0lJIGRyYXdpbmcuJywgeCwgeSsrLCBbMTQwLCAxNjAsIDE5MF0pOwoJZHJhd1RleHQoJ0ltYWdlIHByZXZpZXcgcmVhZHMgdGhlIGJ1ZmZlci4nLCB4LCB5KyssIFsxNDAsIDE2MCwgMTkwXSk7CglpZiAoIWZiKSByZXR1cm47CgoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgWzgwLCAxMDAsIDE1MF0pOwoJZHJhd1RleHQoYFNJWkU6ICR7ZmIud2lkdGh9IHggJHtmYi5oZWlnaHR9YCwgeCwgeSsrLCBbMTQwLCAyNTUsIDE4MF0pOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const sourceLayer = t.layers.add();
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, rgb = [255, 255, 255]) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.print(text, x, y);
+	t.pop();
+}
+
+function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+	drawText(text, -Math.floor(text.length / 2), y, rgb);
+}
+
+sourceLayer.draw(() => {
+	t.clear();
+	const time = t.frameCount * 0.03;
+
+	t.push();
+	t.rotateZ((time * 180) / Math.PI);
+	t.charColor(255, 180, 100);
+	t.char('#');
+	t.rect(14, 1);
+	t.rect(1, 14);
+	t.pop();
+});
+
+t.draw(() => {
+	t.background(6, 10, 22);
+
+	const fb = sourceLayer.drawFramebuffer;
+
+	if (fb) {
+		t.push();
+		t.translate(0, 0);
+		t.image(fb, 24, 14);
+		t.pop();
+
+		drawCenteredText('INTERNAL DATA BUFFER', 10, [140, 220, 255]);
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	const fb = sourceLayer.drawFramebuffer;
+
+	drawText('TEXTMODELAYER.DRAWFRAMEBUFFER', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: RAW DRAW BUFFER', x, y++, [100, 220, 255]);
+	drawText('Captures pre-ASCII drawing.', x, y++, [140, 160, 190]);
+	drawText('Image preview reads the buffer.', x, y++, [140, 160, 190]);
+	if (!fb) return;
+
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText(`SIZE: ${fb.width} x ${fb.height}`, x, y++, [140, 255, 180]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

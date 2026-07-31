@@ -32,5 +32,87 @@ Register the single-callback handler for mouse clicks.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="mouseClicked" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7IHdpZHRoOiB3aW5kb3cuaW5uZXJXaWR0aCwgaGVpZ2h0OiB3aW5kb3cuaW5uZXJIZWlnaHQsIGZvbnRTaXplOiAxNiB9KTsKY29uc3QgUkFNUCA9ICcgLjo9KyojJUAnOwpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IHJpcHBsZXMgPSBbXTsKbGV0IGNsaWNrQ291bnQgPSAwOwpsZXQgbGFzdFBvcyA9ICdOT05FJzsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKdC5tb3VzZUNsaWNrZWQoKCkgPT4gewoJaWYgKHQubW91c2UueCAhPT0gTnVtYmVyLk5FR0FUSVZFX0lORklOSVRZKSB7CgkJY2xpY2tDb3VudCsrOwoJCWxhc3RQb3MgPSBgKCR7dC5tb3VzZS54fSwgJHt0Lm1vdXNlLnl9KWA7CgkJcmlwcGxlcy51bnNoaWZ0KHsgeDogdC5tb3VzZS54LCB5OiB0Lm1vdXNlLnksIGFnZTogMCwgbWF4QWdlOiA2MCB9KTsKCQlpZiAocmlwcGxlcy5sZW5ndGggPiAxMikgcmlwcGxlcy5sZW5ndGggPSAxMjsKCX0KfSk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDEwLCA4LCAyNCk7Cglmb3IgKGxldCBpID0gcmlwcGxlcy5sZW5ndGggLSAxOyBpID49IDA7IGktLSkgewoJCWlmICgrK3JpcHBsZXNbaV0uYWdlID49IHJpcHBsZXNbaV0ubWF4QWdlKSByaXBwbGVzLnNwbGljZShpLCAxKTsKCX0KCWNvbnN0IGh3ID0gTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpLAoJCWhoID0gTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpLAoJCXRtID0gdC5mcmFtZUNvdW50ICogMC4wNDsKCWZvciAobGV0IHkgPSAtaGg7IHkgPD0gaGg7IHkgKz0gMSkgewoJCWZvciAobGV0IHggPSAtaHc7IHggPD0gaHc7IHggKz0gMSkgewoJCQljb25zdCBhbWJpZW50ID0gKE1hdGguc2luKHggKiAwLjE1ICsgdG0pICogTWF0aC5jb3MoeSAqIDAuMTUgLSB0bSAqIDAuOCkgKyAxKSAqIDAuMjsKCQkJbGV0IHJpcHBsZVZhbCA9IDA7CgkJCWZvciAobGV0IGkgPSAwOyBpIDwgcmlwcGxlcy5sZW5ndGg7IGkrKykgewoJCQkJY29uc3QgcmlwID0gcmlwcGxlc1tpXSwKCQkJCQlkID0gTWF0aC5oeXBvdCh4IC0gcmlwLngsIHkgLSByaXAueSksCgkJCQkJcmFkID0gcmlwLmFnZSAqIDAuNzU7CgkJCQljb25zdCBkaXN0ID0gTWF0aC5hYnMoZCAtIHJhZCk7CgkJCQlpZiAoZGlzdCA8IDMuNSkgcmlwcGxlVmFsICs9IE1hdGguY29zKChkaXN0IC8gMy41KSAqIE1hdGguUEkgKiAwLjUpICogKDEgLSByaXAuYWdlIC8gcmlwLm1heEFnZSk7CgkJCX0KCQkJY29uc3QgdmFsID0gTWF0aC5taW4oMSwgYW1iaWVudCArIHJpcHBsZVZhbCk7CgkJCWlmICh2YWwgPiAwLjA4KSB7CgkJCQljb25zdCBjaGFySWR4ID0gTWF0aC5taW4oUkFNUC5sZW5ndGggLSAxLCBNYXRoLmZsb29yKHZhbCAqIFJBTVAubGVuZ3RoKSk7CgkJCQl0LnB1c2goKTsKCQkJCXQudHJhbnNsYXRlKHgsIHkpOwoJCQkJaWYgKHJpcHBsZVZhbCA-IDAuMykgewoJCQkJCWNvbnN0IGcgPSBNYXRoLm1pbigxLCAocmlwcGxlVmFsIC0gMC4zKSAvIDAuNyk7CgkJCQkJdC5jaGFyQ29sb3IoTWF0aC5mbG9vcigyMjAgKyBnICogMzUpLCBNYXRoLmZsb29yKDE3MCArIGcgKiA4NSksIE1hdGguZmxvb3IoNTEgKyBnICogMjA0KSk7CgkJCQkJdC5jZWxsQ29sb3IoTWF0aC5mbG9vcig0MCAqIGcpLCBNYXRoLmZsb29yKDIwICogZyksIE1hdGguZmxvb3IoNjAgKiBnKSk7CgkJCQl9IGVsc2UgewoJCQkJCWNvbnN0IGIgPSB2YWwgLyAwLjU7CgkJCQkJdC5jaGFyQ29sb3IoTWF0aC5mbG9vcigyNiArIGIgKiAyMCksIE1hdGguZmxvb3IoNTggKyBiICogNTApLCBNYXRoLmZsb29yKDc1ICsgYiAqIDYwKSk7CgkJCQl9CgkJCQl0LmNoYXIoUkFNUFtjaGFySWR4XSk7CgkJCQl0LnBvaW50KCk7CgkJCQl0LnBvcCgpOwoJCQl9CgkJfQoJfQp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKSwKCQl0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5NT1VTRUNMSUNLRUQnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBESVNDUkVURSBDTElDSyBFVkVOVCcsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnRmlyZXMgb25jZSBwZXIgcHJlc3MgJiByZWxlYXNlLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnQ2xpY2tpbmcgaW5qZWN0cyB3YXZlIGRpc2NoYXJnZS4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdUT1RBTCBDTElDS1M6ICcgKyBjbGlja0NvdW50LCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwoJZHJhd1RleHQoJ0xBU1QgQ0xJQ0s6ICAgJyArIGxhc3RQb3MsIHgsIHkrKywgMTgwLCAyMDAsIDIyMCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpKTs" />
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const RAMP = ' .:=+*#%@';
+const labelLayer = t.layers.add();
+const ripples = [];
+let clickCount = 0;
+let lastPos = 'NONE';
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.mouseClicked(() => {
+	if (t.mouse.x !== Number.NEGATIVE_INFINITY) {
+		clickCount++;
+		lastPos = `(${t.mouse.x}, ${t.mouse.y})`;
+		ripples.unshift({ x: t.mouse.x, y: t.mouse.y, age: 0, maxAge: 60 });
+		if (ripples.length > 12) ripples.length = 12;
+	}
+});
+
+t.draw(() => {
+	t.background(10, 8, 24);
+	for (let i = ripples.length - 1; i >= 0; i--) {
+		if (++ripples[i].age >= ripples[i].maxAge) ripples.splice(i, 1);
+	}
+	const hw = Math.floor(t.grid.cols / 2),
+		hh = Math.floor(t.grid.rows / 2),
+		tm = t.frameCount * 0.04;
+	for (let y = -hh; y <= hh; y += 1) {
+		for (let x = -hw; x <= hw; x += 1) {
+			const ambient = (Math.sin(x * 0.15 + tm) * Math.cos(y * 0.15 - tm * 0.8) + 1) * 0.2;
+			let rippleVal = 0;
+			for (let i = 0; i < ripples.length; i++) {
+				const rip = ripples[i],
+					d = Math.hypot(x - rip.x, y - rip.y),
+					rad = rip.age * 0.75;
+				const dist = Math.abs(d - rad);
+				if (dist < 3.5) rippleVal += Math.cos((dist / 3.5) * Math.PI * 0.5) * (1 - rip.age / rip.maxAge);
+			}
+			const val = Math.min(1, ambient + rippleVal);
+			if (val > 0.08) {
+				const charIdx = Math.min(RAMP.length - 1, Math.floor(val * RAMP.length));
+				t.push();
+				t.translate(x, y);
+				if (rippleVal > 0.3) {
+					const g = Math.min(1, (rippleVal - 0.3) / 0.7);
+					t.charColor(Math.floor(220 + g * 35), Math.floor(170 + g * 85), Math.floor(51 + g * 204));
+					t.cellColor(Math.floor(40 * g), Math.floor(20 * g), Math.floor(60 * g));
+				} else {
+					const b = val / 0.5;
+					t.charColor(Math.floor(26 + b * 20), Math.floor(58 + b * 50), Math.floor(75 + b * 60));
+				}
+				t.char(RAMP[charIdx]);
+				t.point();
+				t.pop();
+			}
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2),
+		top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.MOUSECLICKED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: DISCRETE CLICK EVENT', x, y++, 100, 220, 255);
+	drawText('Fires once per press & release.', x, y++, 140, 160, 190);
+	drawText('Clicking injects wave discharge.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('TOTAL CLICKS: ' + clickCount, x, y++, 140, 255, 180);
+	drawText('LAST CLICK:   ' + lastPos, x, y++, 180, 200, 220);
+});
+
+t.windowResized(() => t.resizeCanvas(window.innerWidth, window.innerHeight));
+```
 

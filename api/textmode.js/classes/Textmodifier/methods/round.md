@@ -35,5 +35,69 @@ Rounded value.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="round" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCByYXcgPSAwOwpsZXQgY29hcnNlID0gMDsKbGV0IGRlY2ltYWwgPSAwOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDUsIDgsIDE2KTsKCXJhdyA9IHQuc2luKHQuZnJhbWVDb3VudCAqIDAuMDM3KSAqIDEyICsgdC5jb3ModC5mcmFtZUNvdW50ICogMC4wMTkpICogMzsKCWNvYXJzZSA9IHQucm91bmQocmF3KTsKCWRlY2ltYWwgPSB0LnJvdW5kKHJhdywgMSk7CgoJZm9yIChsZXQgeCA9IC0yMjsgeCA8PSAyMjsgeCsrKSB7CgkJY29uc3QgaXNDb2Fyc2UgPSB4ID09PSBjb2Fyc2U7CgkJdC5wdXNoKCk7CgkJdC50cmFuc2xhdGUoeCwgMiArIHQuc2luKHggKiAwLjQgKyB0LmZyYW1lQ291bnQgKiAwLjA0KSAqIDQpOwoJCXQuY2hhcihpc0NvYXJzZSA_ICcjJyA6ICcuJyk7CgkJdC5jaGFyQ29sb3IoaXNDb2Fyc2UgPyAyNTUgOiA1NSwgaXNDb2Fyc2UgPyAyMTUgOiA4MCwgaXNDb2Fyc2UgPyAxMDAgOiAxMjApOwoJCXQucG9pbnQoKTsKCQl0LnBvcCgpOwoJfQoKCXQuY2hhcignQCcpOwoJdC5jaGFyQ29sb3IoMTIwLCAyNDUsIDI1NSk7Cgl0LnB1c2goKTsKCXQudHJhbnNsYXRlKGRlY2ltYWwsIC02KTsKCXQucG9pbnQoKTsKCXQucG9wKCk7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtdC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLXQuZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuUk9VTkQnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBORUFSRVNUIFZBTFVFJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdyb3VuZCgpIHNuYXBzIHRvIHRoZSBjbG9zZXN0IGNlbGwuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdyb3VuZCh2YWx1ZSwgMSkga2VlcHMgb25lIGRlY2ltYWwuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dChgUkFXOiAke3Jhdy50b0ZpeGVkKDIpfWAsIHgsIHkrKywgMjIwLCAyMzAsIDI1NSk7CglkcmF3VGV4dChgUk9VTkQ6ICR7Y29hcnNlfWAsIHgsIHkrKywgMjIwLCAyMzAsIDI1NSk7CglkcmF3VGV4dChgUk9VTkQuMTogJHtkZWNpbWFsLnRvRml4ZWQoMSl9YCwgeCwgeSsrLCAyMjAsIDIzMCwgMjU1KTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let raw = 0;
+let coarse = 0;
+let decimal = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(5, 8, 16);
+	raw = t.sin(t.frameCount * 0.037) * 12 + t.cos(t.frameCount * 0.019) * 3;
+	coarse = t.round(raw);
+	decimal = t.round(raw, 1);
+
+	for (let x = -22; x <= 22; x++) {
+		const isCoarse = x === coarse;
+		t.push();
+		t.translate(x, 2 + t.sin(x * 0.4 + t.frameCount * 0.04) * 4);
+		t.char(isCoarse ? '#' : '.');
+		t.charColor(isCoarse ? 255 : 55, isCoarse ? 215 : 80, isCoarse ? 100 : 120);
+		t.point();
+		t.pop();
+	}
+
+	t.char('@');
+	t.charColor(120, 245, 255);
+	t.push();
+	t.translate(decimal, -6);
+	t.point();
+	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -t.floor(t.grid.cols / 2);
+	const top = -t.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.ROUND', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: NEAREST VALUE', x, y++, 100, 220, 255);
+	drawText('round() snaps to the closest cell.', x, y++, 140, 160, 190);
+	drawText('round(value, 1) keeps one decimal.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`RAW: ${raw.toFixed(2)}`, x, y++, 220, 230, 255);
+	drawText(`ROUND: ${coarse}`, x, y++, 220, 230, 255);
+	drawText(`ROUND.1: ${decimal.toFixed(1)}`, x, y++, 220, 230, 255);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

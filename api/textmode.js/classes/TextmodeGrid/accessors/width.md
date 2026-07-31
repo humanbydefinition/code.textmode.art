@@ -30,5 +30,85 @@ This is equal to `cols * cellWidth`.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="width" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDEwLCAxNCwgMjQpOwoJY29uc3QgY29scyA9IHQuZ3JpZC5jb2xzOwoJY29uc3Qgcm93cyA9IHQuZ3JpZC5yb3dzOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKChjb2xzIC0gMSkgLyAyKTsKCWNvbnN0IHJpZ2h0ID0gbGVmdCArIGNvbHMgLSAxOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3Iocm93cyAvIDIpOwoJY29uc3QgYm90dG9tID0gdG9wICsgcm93cyAtIDE7Cgljb25zdCB0bSA9IHQuZnJhbWVDb3VudCAqIDAuMDU7CgoJZm9yIChsZXQgeCA9IGxlZnQ7IHggPD0gcmlnaHQ7IHgrKykgewoJCWNvbnN0IG5vcm1YID0gKHggLSBsZWZ0KSAvIE1hdGgubWF4KDEsIGNvbHMgLSAxKTsKCQljb25zdCBwdWxzZSA9IE1hdGguY29zKG5vcm1YICogTWF0aC5QSSAqIDQgLSB0bSAqIDIpICogMC41ICsgMC41OwoKCQlmb3IgKGxldCB5ID0gdG9wOyB5IDw9IGJvdHRvbTsgeSsrKSB7CgkJCWNvbnN0IGlzQm9yZGVyID0geCA9PT0gbGVmdCB8fCB4ID09PSByaWdodCB8fCB5ID09PSB0b3AgfHwgeSA9PT0gYm90dG9tOwoJCQljb25zdCBpc1J1bGVyID0geSA9PT0gdG9wICsgMSB8fCB5ID09PSBib3R0b20gLSAxOwoKCQkJbGV0IGNoYXJLZXkgPSAnLic7CgkJCWlmIChpc0JvcmRlcikgY2hhcktleSA9ICcjJzsKCQkJZWxzZSBpZiAoaXNSdWxlcikgY2hhcktleSA9ICh4IC0gbGVmdCkgJSA1ID09PSAwID8gJysnIDogJy0nOwoJCQllbHNlIGNoYXJLZXkgPSBwdWxzZSA-IDAuNiA_ICcqJyA6ICc6JzsKCgkJCXQucHVzaCgpOwoJCQl0LnRyYW5zbGF0ZSh4LCB5KTsKCQkJdC5jaGFyQ29sb3IoCgkJCQlpc0JvcmRlciA_IDI1NSA6IGlzUnVsZXIgPyAxMDAgOiBNYXRoLmZsb29yKDYwICsgcHVsc2UgKiAxNDApLAoJCQkJaXNCb3JkZXIgPyAyMDAgOiBpc1J1bGVyID8gMjIwIDogTWF0aC5mbG9vcigxNDAgKyBwdWxzZSAqIDEwMCksCgkJCQlpc0JvcmRlciA_IDEwMCA6IGlzUnVsZXIgPyAyNTUgOiBNYXRoLmZsb29yKDEyMCArIHB1bHNlICogODApCgkJCSk7CgkJCXQuY2VsbENvbG9yKAoJCQkJaXNCb3JkZXIgPyAyNCA6IE1hdGguZmxvb3IoOCArIHB1bHNlICogMTApLAoJCQkJaXNCb3JkZXIgPyAxOCA6IE1hdGguZmxvb3IoMTQgKyBwdWxzZSAqIDEyKSwKCQkJCWlzQm9yZGVyID8gMTAgOiBNYXRoLmZsb29yKDI0ICsgcHVsc2UgKiAxNCkKCQkJKTsKCQkJdC5jaGFyKGNoYXJLZXkpOwoJCQl0LnBvaW50KCk7CgkJCXQucG9wKCk7CgkJfQoJfQp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CgoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcigxMjAsIDI0MCwgMTgwKTsKCXQucHJpbnQoJ1RFWFRNT0RFR1JJRC5XSURUSCcsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcig3MCwgMTAwLCAxNDApOwoJdC5wcmludCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMjEwLCAyNTUpOwoJdC5wcmludCgnQ09OQ0VQVDogSE9SSVpPTlRBTCBWSUVXUE9SVCBCT1VORFMgUlVMRVInLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAxNjAsIDE5MCk7Cgl0LnByaW50KCdUb3RhbCBncmlkIHdpZHRoIGluIHNjcmVlbiBwaXhlbHMuJywgeCwgeSsrKTsKCXQucHJpbnQoJ0VxdWFsIHRvIGNvbHMgKiBjZWxsV2lkdGguJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDcwLCAxMDAsIDE0MCk7Cgl0LnByaW50KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAyNTUsIDIwMCk7Cgl0LnByaW50KGBUT1RBTCBXSURUSDogJHt0LmdyaWQud2lkdGh9IFBYYCwgeCwgeSsrKTsKCXQucHJpbnQoYENBTEM6ICR7dC5ncmlkLmNvbHN9ICogJHt0LmdyaWQuY2VsbFdpZHRofSBQWGAsIHgsIHkrKyk7Cgl0LnBvcCgpOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+t.draw(() => {
+	t.background(10, 14, 24);
+	const cols = t.grid.cols;
+	const rows = t.grid.rows;
+	const left = -Math.floor((cols - 1) / 2);
+	const right = left + cols - 1;
+	const top = -Math.floor(rows / 2);
+	const bottom = top + rows - 1;
+	const tm = t.frameCount * 0.05;
+
+	for (let x = left; x <= right; x++) {
+		const normX = (x - left) / Math.max(1, cols - 1);
+		const pulse = Math.cos(normX * Math.PI * 4 - tm * 2) * 0.5 + 0.5;
+
+		for (let y = top; y <= bottom; y++) {
+			const isBorder = x === left || x === right || y === top || y === bottom;
+			const isRuler = y === top + 1 || y === bottom - 1;
+
+			let charKey = '.';
+			if (isBorder) charKey = '#';
+			else if (isRuler) charKey = (x - left) % 5 === 0 ? '+' : '-';
+			else charKey = pulse > 0.6 ? '*' : ':';
+
+			t.push();
+			t.translate(x, y);
+			t.charColor(
+				isBorder ? 255 : isRuler ? 100 : Math.floor(60 + pulse * 140),
+				isBorder ? 200 : isRuler ? 220 : Math.floor(140 + pulse * 100),
+				isBorder ? 100 : isRuler ? 255 : Math.floor(120 + pulse * 80)
+			);
+			t.cellColor(
+				isBorder ? 24 : Math.floor(8 + pulse * 10),
+				isBorder ? 18 : Math.floor(14 + pulse * 12),
+				isBorder ? 10 : Math.floor(24 + pulse * 14)
+			);
+			t.char(charKey);
+			t.point();
+			t.pop();
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODEGRID.WIDTH', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: HORIZONTAL VIEWPORT BOUNDS RULER', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Total grid width in screen pixels.', x, y++);
+	t.print('Equal to cols * cellWidth.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 200);
+	t.print(`TOTAL WIDTH: ${t.grid.width} PX`, x, y++);
+	t.print(`CALC: ${t.grid.cols} * ${t.grid.cellWidth} PX`, x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

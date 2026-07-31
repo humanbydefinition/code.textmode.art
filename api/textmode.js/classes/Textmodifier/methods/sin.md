@@ -36,5 +36,72 @@ Sine of the angle.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="sin" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCBwaGFzZSA9IDA7CmxldCBzYW1wbGUgPSAwOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDMsIDcsIDE4KTsKCXBoYXNlID0gdC5mcmFtZUNvdW50ICogMC4wNjsKCWNvbnN0IHdpZHRoID0gdC5taW4oNTQsIHQuZ3JpZC5jb2xzIC0gOCk7Cgljb25zdCBhbXAgPSB0Lm1heCg0LCB0LmdyaWQucm93cyAqIDAuMTgpOwoJc2FtcGxlID0gdC5zaW4ocGhhc2UpOwoKCWZvciAobGV0IHggPSAtdC5mbG9vcih3aWR0aCAvIDIpOyB4IDw9IHQuZmxvb3Iod2lkdGggLyAyKTsgeCsrKSB7CgkJY29uc3QgYSA9IHBoYXNlICsgeCAqIDAuMjg7CgkJY29uc3QgeSA9IHQucm91bmQodC5zaW4oYSkgKiBhbXApOwoJCWNvbnN0IHB1bHNlID0gdC5ub3JtKHQuc2luKGEpLCAtMSwgMSk7CgkJdC5wdXNoKCk7CgkJdC50cmFuc2xhdGUoeCwgeSk7CgkJdC5jaGFyKHB1bHNlID4gMC43ID8gJyonIDogcHVsc2UgPiAwLjM1ID8gJysnIDogJy4nKTsKCQl0LmNoYXJDb2xvcig3MCArIHB1bHNlICogMTcwLCAxMzAgKyBwdWxzZSAqIDEwMCwgMjU1KTsKCQl0LnBvaW50KCk7CgkJdC5wb3AoKTsKCX0KCgl0LmNoYXIoJy0nKTsKCXQuY2hhckNvbG9yKDU1LCA3NSwgMTE1KTsKCXQubGluZSgtdC5mbG9vcih3aWR0aCAvIDIpLCAwLCB0LmZsb29yKHdpZHRoIC8gMiksIDApOwoJdC5jaGFyKCdAJyk7Cgl0LmNoYXJDb2xvcigyNTUsIDIyMCwgMTAwKTsKCXQucHVzaCgpOwoJdC50cmFuc2xhdGUoMCwgdC5yb3VuZChzYW1wbGUgKiBhbXApKTsKCXQucG9pbnQoKTsKCXQucG9wKCk7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtdC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLXQuZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuU0lOJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogU01PT1RIIE9TQ0lMTEFUSU9OJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdzaW4oYW5nbGUpIGZsb3dzIGZyb20gLTEgdG8gMS4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJ1RoZSB5ZWxsb3cgcG9pbnQgc2FtcGxlcyBwaGFzZS4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KGBTSU46ICR7c2FtcGxlLnRvRml4ZWQoMil9YCwgeCwgeSsrLCAyMjAsIDIzMCwgMjU1KTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let phase = 0;
+let sample = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(3, 7, 18);
+	phase = t.frameCount * 0.06;
+	const width = t.min(54, t.grid.cols - 8);
+	const amp = t.max(4, t.grid.rows * 0.18);
+	sample = t.sin(phase);
+
+	for (let x = -t.floor(width / 2); x <= t.floor(width / 2); x++) {
+		const a = phase + x * 0.28;
+		const y = t.round(t.sin(a) * amp);
+		const pulse = t.norm(t.sin(a), -1, 1);
+		t.push();
+		t.translate(x, y);
+		t.char(pulse > 0.7 ? '*' : pulse > 0.35 ? '+' : '.');
+		t.charColor(70 + pulse * 170, 130 + pulse * 100, 255);
+		t.point();
+		t.pop();
+	}
+
+	t.char('-');
+	t.charColor(55, 75, 115);
+	t.line(-t.floor(width / 2), 0, t.floor(width / 2), 0);
+	t.char('@');
+	t.charColor(255, 220, 100);
+	t.push();
+	t.translate(0, t.round(sample * amp));
+	t.point();
+	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -t.floor(t.grid.cols / 2);
+	const top = -t.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.SIN', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SMOOTH OSCILLATION', x, y++, 100, 220, 255);
+	drawText('sin(angle) flows from -1 to 1.', x, y++, 140, 160, 190);
+	drawText('The yellow point samples phase.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`SIN: ${sample.toFixed(2)}`, x, y++, 220, 230, 255);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

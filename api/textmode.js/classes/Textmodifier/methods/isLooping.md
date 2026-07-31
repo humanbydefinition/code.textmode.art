@@ -28,5 +28,59 @@ Whether the automatic render loop is currently running.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="isLooping" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7Cgp0Lm1vdXNlUHJlc3NlZCgoKSA9PiB7CglpZiAodC5pc0xvb3BpbmcoKSkgewoJCXQubm9Mb29wKCk7CgkJdC5yZWRyYXcoKTsKCX0gZWxzZSB7CgkJdC5sb29wKCk7Cgl9Cn0pOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg2LCAxMCwgMjIpOwoJdC5jaGFyKHQuaXNMb29waW5nKCkgPyAnPicgOiAnfCcpOwoJdC5jaGFyQ29sb3IodC5pc0xvb3BpbmcoKSA_IDEwMCA6IDI1NSwgMjU1LCAxNDApOwoJdC5yb3RhdGVaKHQuZnJhbWVDb3VudCAqIDUpOwoJdC5yZWN0KDEwLCAxMCk7Cn0pOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuSVNMT09QSU5HJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogTE9PUCBTVEFURScsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnQ29tcGFjdCBBUEkgZGVtb25zdHJhdGlvbi4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWNvbnN0IHN0YXRlID0gdC5pc0xvb3BpbmcoKSA_ICdUUlVFJyA6ICdGQUxTRSc7CglkcmF3VGV4dChgTE9PUElORzogJHtzdGF0ZX1gLCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwoJZHJhd1RleHQoJ0NMSUNLIFRPIFRPR0dMRScsIHgsIHkrKywgMjU1LCAyMjUsIDE0MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+t.mousePressed(() => {
+	if (t.isLooping()) {
+		t.noLoop();
+		t.redraw();
+	} else {
+		t.loop();
+	}
+});
+
+t.draw(() => {
+	t.background(6, 10, 22);
+	t.char(t.isLooping() ? '>' : '|');
+	t.charColor(t.isLooping() ? 100 : 255, 255, 140);
+	t.rotateZ(t.frameCount * 5);
+	t.rect(10, 10);
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODIFIER.ISLOOPING', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: LOOP STATE', x, y++, 100, 220, 255);
+	drawText('Compact API demonstration.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	const state = t.isLooping() ? 'TRUE' : 'FALSE';
+	drawText(`LOOPING: ${state}`, x, y++, 140, 255, 180);
+	drawText('CLICK TO TOGGLE', x, y++, 255, 225, 140);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

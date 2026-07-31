@@ -32,5 +32,99 @@ Register the single-callback handler for key press events.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="keyPressed" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7IHdpZHRoOiB3aW5kb3cuaW5uZXJXaWR0aCwgaGVpZ2h0OiB3aW5kb3cuaW5uZXJIZWlnaHQsIGZvbnRTaXplOiAxNiB9KTsKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpLAoJcmluZ3MgPSBbXSwKCWJhcnMgPSBuZXcgQXJyYXkoMTApLmZpbGwoMCk7CmxldCBrZXlDb3VudCA9IDAsCglsYXN0S2V5ID0gJ05PTkUnOwoKZnVuY3Rpb24gZHJhd1RleHQodHh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0eHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKdC5rZXlQcmVzc2VkKChkYXRhKSA9PiB7CglrZXlDb3VudCsrOwoJY29uc3QgayA9IGRhdGEua2V5IHx8ICdLRVknOwoJbGFzdEtleSA9IGs7CglyaW5ncy51bnNoaWZ0KHsgYWdlOiAwLCBtYXhBZ2U6IDQ1LCBjaGFyOiBrLmxlbmd0aCA9PT0gMSA_IGsgOiAnKycgfSk7CgliYXJzWyhrLmxlbmd0aCA-IDAgPyBrLmNoYXJDb2RlQXQoMCkgOiAwKSAlIDEwXSA9IDEuMDsKCWlmIChyaW5ncy5sZW5ndGggPiAxMCkgcmluZ3MubGVuZ3RoID0gMTA7Cn0pOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCgxMCwgNSwgMjQpOwoJY29uc3QgaHcgPSBNYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMiksCgkJaGggPSBNYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CgoJZm9yIChsZXQgaSA9IHJpbmdzLmxlbmd0aCAtIDE7IGkgPj0gMDsgaS0tKSB7CgkJaWYgKCsrcmluZ3NbaV0uYWdlID49IHJpbmdzW2ldLm1heEFnZSkgcmluZ3Muc3BsaWNlKGksIDEpOwoJfQoKCWZvciAobGV0IGkgPSAwOyBpIDwgMTA7IGkrKykgewoJCWJhcnNbaV0gKj0gMC45NDsKCQljb25zdCBoID0gTWF0aC5mbG9vcihiYXJzW2ldICogMTIpLAoJCQlieCA9IChpIC0gNC41KSAqIDQ7CgkJZm9yIChsZXQgZHkgPSAwOyBkeSA8IGg7IGR5KyspIHsKCQkJdC5wdXNoKCk7CgkJCXQudHJhbnNsYXRlKE1hdGgucm91bmQoYngpLCBoaCAtIDQgLSBkeSk7CgkJCXQuY2hhckNvbG9yKDI1NSwgTWF0aC5mbG9vcigxMDAgKyBkeSAqIDEyKSwgTWF0aC5mbG9vcihkeSAqIDIwKSk7CgkJCWlmIChkeSA-IDgpIHQuY2VsbENvbG9yKDkwLCAwLCA1MCk7CgkJCXQuY2hhcihkeSA9PT0gaCAtIDEgPyAnPScgOiAnIycpOwoJCQl0LnBvaW50KCk7CgkJCXQucG9wKCk7CgkJfQoJfQoKCWZvciAobGV0IHkgPSAtaGg7IHkgPD0gaGg7IHkgKz0gMSkgewoJCWZvciAobGV0IHggPSAtaHc7IHggPD0gaHc7IHggKz0gMSkgewoJCQljb25zdCBkID0gTWF0aC5oeXBvdCh4LCB5KTsKCQkJbGV0IHJpbmdJbnRlbnNpdHkgPSAwLAoJCQkJcmluZ0NoYXIgPSAnKyc7CgkJCWZvciAobGV0IGkgPSAwOyBpIDwgcmluZ3MubGVuZ3RoOyBpKyspIHsKCQkJCWNvbnN0IHIgPSByaW5nc1tpXSwKCQkJCQlyYWQgPSByLmFnZSAqIDAuOSwKCQkJCQlkaXN0ID0gTWF0aC5hYnMoZCAtIHJhZCk7CgkJCQlpZiAoZGlzdCA8IDIuMCkgewoJCQkJCXJpbmdJbnRlbnNpdHkgKz0gKDEgLSBkaXN0IC8gMi4wKSAqICgxIC0gci5hZ2UgLyByLm1heEFnZSk7CgkJCQkJaWYgKHIuY2hhci5sZW5ndGggPT09IDEpIHJpbmdDaGFyID0gci5jaGFyOwoJCQkJfQoJCQl9CgkJCWlmIChyaW5nSW50ZW5zaXR5ID4gMC4xNSkgewoJCQkJdC5wdXNoKCk7CgkJCQl0LnRyYW5zbGF0ZSh4LCB5KTsKCQkJCXQuY2hhckNvbG9yKDAsIDI0MCwgMjU1KTsKCQkJCWlmIChyaW5nSW50ZW5zaXR5ID4gMC40KSB0LmNlbGxDb2xvcigwLCA2MCwgOTApOwoJCQkJdC5jaGFyKHJpbmdDaGFyKTsKCQkJCXQucG9pbnQoKTsKCQkJCXQucG9wKCk7CgkJCX0KCQl9Cgl9Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpLAoJCXRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CgoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5LRVlQUkVTU0VEJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogSU5JVElBTCBLRVkgRE9XTiBFVkVOVCcsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnRmlyZXMgb24gaW5pdGlhbCBrZXkgZG93bi1zdHJva2UuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdLZXlwcmVzcyBlamVjdHMgZnJlcXVlbmN5IHNob2Nrd2F2ZS4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdLRVkgUFJFU1NFUzogICAnICsga2V5Q291bnQsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7CglkcmF3VGV4dCgnTEFTVCBLRVkgRE9XTjogJyArIGxhc3RLZXksIHgsIHkrKywgMTgwLCAyMDAsIDIyMCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpKTs" />
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const labelLayer = t.layers.add(),
+	rings = [],
+	bars = new Array(10).fill(0);
+let keyCount = 0,
+	lastKey = 'NONE';
+
+function drawText(txt, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(txt, x, y);
+	t.pop();
+}
+
+t.keyPressed((data) => {
+	keyCount++;
+	const k = data.key || 'KEY';
+	lastKey = k;
+	rings.unshift({ age: 0, maxAge: 45, char: k.length === 1 ? k : '+' });
+	bars[(k.length > 0 ? k.charCodeAt(0) : 0) % 10] = 1.0;
+	if (rings.length > 10) rings.length = 10;
+});
+
+t.draw(() => {
+	t.background(10, 5, 24);
+	const hw = Math.floor(t.grid.cols / 2),
+		hh = Math.floor(t.grid.rows / 2);
+
+	for (let i = rings.length - 1; i >= 0; i--) {
+		if (++rings[i].age >= rings[i].maxAge) rings.splice(i, 1);
+	}
+
+	for (let i = 0; i < 10; i++) {
+		bars[i] *= 0.94;
+		const h = Math.floor(bars[i] * 12),
+			bx = (i - 4.5) * 4;
+		for (let dy = 0; dy < h; dy++) {
+			t.push();
+			t.translate(Math.round(bx), hh - 4 - dy);
+			t.charColor(255, Math.floor(100 + dy * 12), Math.floor(dy * 20));
+			if (dy > 8) t.cellColor(90, 0, 50);
+			t.char(dy === h - 1 ? '=' : '#');
+			t.point();
+			t.pop();
+		}
+	}
+
+	for (let y = -hh; y <= hh; y += 1) {
+		for (let x = -hw; x <= hw; x += 1) {
+			const d = Math.hypot(x, y);
+			let ringIntensity = 0,
+				ringChar = '+';
+			for (let i = 0; i < rings.length; i++) {
+				const r = rings[i],
+					rad = r.age * 0.9,
+					dist = Math.abs(d - rad);
+				if (dist < 2.0) {
+					ringIntensity += (1 - dist / 2.0) * (1 - r.age / r.maxAge);
+					if (r.char.length === 1) ringChar = r.char;
+				}
+			}
+			if (ringIntensity > 0.15) {
+				t.push();
+				t.translate(x, y);
+				t.charColor(0, 240, 255);
+				if (ringIntensity > 0.4) t.cellColor(0, 60, 90);
+				t.char(ringChar);
+				t.point();
+				t.pop();
+			}
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2),
+		top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODIFIER.KEYPRESSED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: INITIAL KEY DOWN EVENT', x, y++, 100, 220, 255);
+	drawText('Fires on initial key down-stroke.', x, y++, 140, 160, 190);
+	drawText('Keypress ejects frequency shockwave.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('KEY PRESSES:   ' + keyCount, x, y++, 140, 255, 180);
+	drawText('LAST KEY DOWN: ' + lastKey, x, y++, 180, 200, 220);
+});
+
+t.windowResized(() => t.resizeCanvas(window.innerWidth, window.innerHeight));
+```
 

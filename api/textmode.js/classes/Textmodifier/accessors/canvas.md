@@ -28,5 +28,83 @@ Canvas containing the rendered output.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="canvas" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAp9KTsKCmNvbnN0IGxhYmVsTGF5ZXIgPSB0LmxheWVycy5hZGQoKTsKCnQuY2FudmFzLnRpdGxlID0gJ1RleHRtb2RpZmllci5jYW52YXMnOwp0LmNhbnZhcy5kYXRhc2V0LmV4YW1wbGUgPSAnY2FudmFzJzsKdC5jYW52YXMuc3R5bGUuYmFja2dyb3VuZCA9ICcjMDYwNzEzJzsKdC5jYW52YXMuc3R5bGUub3V0bGluZU9mZnNldCA9ICctNHB4JzsKCmZ1bmN0aW9uIHVwZGF0ZUNhbnZhc0VsZW1lbnQoKSB7Cgljb25zdCBodWUgPSBNYXRoLmZsb29yKCh0LmZyYW1lQ291bnQgKiAyKSAlIDM2MCk7Cgl0LmNhbnZhcy5zdHlsZS5vdXRsaW5lID0gYDNweCBzb2xpZCBoc2woJHtodWV9LCA5MCUsIDYyJSlgOwoJdC5jYW52YXMuc3R5bGUuYm94U2hhZG93ID0gYDAgMCAyNHB4IGhzbGEoJHtodWV9LCA5MCUsIDYyJSwgMC4yOClgOwp9CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCnQuZHJhdygoKSA9PiB7Cgl1cGRhdGVDYW52YXNFbGVtZW50KCk7Cgl0LmJhY2tncm91bmQoNiwgOCwgMjApOwoKCWNvbnN0IGNvbHMgPSBNYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCByb3dzID0gTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJdC5jaGFyQ29sb3IoMjU1LCAxOTAsIDgwKTsKCWZvciAobGV0IHggPSAtY29sczsgeCA8PSBjb2xzOyB4ICs9IDQpIHsKCQl0LnB1c2goKTsKCQl0LnRyYW5zbGF0ZSh4LCAtcm93cyArIDEpOwoJCXQuY2hhcignPScpOwoJCXQucG9pbnQoKTsKCQl0LnRyYW5zbGF0ZSgwLCByb3dzICogMiAtIDIpOwoJCXQucG9pbnQoKTsKCQl0LnBvcCgpOwoJfQoJZm9yIChsZXQgeSA9IC1yb3dzICsgMTsgeSA8IHJvd3M7IHkgKz0gMikgewoJCXQucHVzaCgpOwoJCXQudHJhbnNsYXRlKC1jb2xzICsgMSwgeSk7CgkJdC5jaGFyKCd8Jyk7CgkJdC5wb2ludCgpOwoJCXQudHJhbnNsYXRlKGNvbHMgKiAyIC0gMiwgMCk7CgkJdC5wb2ludCgpOwoJCXQucG9wKCk7Cgl9Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCWNvbnN0IHNpemUgPSBgJHt0LmNhbnZhcy53aWR0aH14JHt0LmNhbnZhcy5oZWlnaHR9YDsKCWNvbnN0IHRpdGxlID0gdC5jYW52YXMudGl0bGU7CgoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5DQU5WQVMnLCB4LCB5KyssIDI1NSwgMTkwLCA4MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IERPTSBDQU5WQVMgQUNDRVNTJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdUaGUgZ2V0dGVyIHJldHVybnMgdGhlIGVsZW1lbnQuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdDU1MgYW5kIG1ldGFkYXRhIHVwZGF0ZSBsaXZlLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoYFNJWkU6ICR7c2l6ZX1gLCB4LCB5KyssIDE0MCwgMTkwLCAyNTUpOwoJZHJhd1RleHQoYFRJVExFOiAke3RpdGxlfWAsIHgsIHkrKywgMTUwLCAyNDAsIDE3MCk7CglkcmF3VGV4dCgnREFUQVNFVDogY2FudmFzJywgeCwgeSsrLCAxNTAsIDI0MCwgMTcwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 8,
+});
+
+const labelLayer = t.layers.add();
+
+t.canvas.title = 'Textmodifier.canvas';
+t.canvas.dataset.example = 'canvas';
+t.canvas.style.background = '#060713';
+t.canvas.style.outlineOffset = '-4px';
+
+function updateCanvasElement() {
+	const hue = Math.floor((t.frameCount * 2) % 360);
+	t.canvas.style.outline = `3px solid hsl(${hue}, 90%, 62%)`;
+	t.canvas.style.boxShadow = `0 0 24px hsla(${hue}, 90%, 62%, 0.28)`;
+}
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	updateCanvasElement();
+	t.background(6, 8, 20);
+
+	const cols = Math.floor(t.grid.cols / 2);
+	const rows = Math.floor(t.grid.rows / 2);
+	t.charColor(255, 190, 80);
+	for (let x = -cols; x <= cols; x += 4) {
+		t.push();
+		t.translate(x, -rows + 1);
+		t.char('=');
+		t.point();
+		t.translate(0, rows * 2 - 2);
+		t.point();
+		t.pop();
+	}
+	for (let y = -rows + 1; y < rows; y += 2) {
+		t.push();
+		t.translate(-cols + 1, y);
+		t.char('|');
+		t.point();
+		t.translate(cols * 2 - 2, 0);
+		t.point();
+		t.pop();
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	const size = `${t.canvas.width}x${t.canvas.height}`;
+	const title = t.canvas.title;
+
+	drawText('TEXTMODIFIER.CANVAS', x, y++, 255, 190, 80);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: DOM CANVAS ACCESS', x, y++, 100, 220, 255);
+	drawText('The getter returns the element.', x, y++, 140, 160, 190);
+	drawText('CSS and metadata update live.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`SIZE: ${size}`, x, y++, 140, 190, 255);
+	drawText(`TITLE: ${title}`, x, y++, 150, 240, 170);
+	drawText('DATASET: canvas', x, y++, 150, 240, 170);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

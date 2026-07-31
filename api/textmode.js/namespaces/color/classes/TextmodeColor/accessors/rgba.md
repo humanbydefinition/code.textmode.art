@@ -31,5 +31,101 @@ A [r, g, b, a] tuple with values between 0 and 255.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="rgba" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBSQU1QID0gJyAuOi09KyojJUAnOwpjb25zdCB0b3BMYXllciA9IHQubGF5ZXJzLmFkZCh7IGJsZW5kTW9kZTogJ25vcm1hbCcgfSk7CmNvbnN0IGxhYmVsTGF5ZXIgPSB0LmxheWVycy5hZGQoKTsKCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoMTAsIDEwLCAxOCk7Cgljb25zdCBodyA9IE1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IGhoID0gTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJZm9yIChsZXQgeSA9IC1oaDsgeSA8PSBoaDsgeSsrKSB7CgkJZm9yIChsZXQgeCA9IC1odzsgeCA8PSBodzsgeCsrKSB7CgkJCWlmICgoeCArIHkpICUgMyA9PT0gMCkgewoJCQkJdC5wdXNoKCk7CgkJCQl0LnRyYW5zbGF0ZSh4LCB5KTsKCQkJCXQuY2hhckNvbG9yKDUwLCA2MCwgODApOwoJCQkJdC5jaGFyKCcuJyk7CgkJCQl0LnBvaW50KCk7CgkJCQl0LnBvcCgpOwoJCQl9CgkJfQoJfQp9KTsKCnRvcExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgaHcgPSBNYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCBoaCA9IE1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWNvbnN0IHRtID0gdC5mcmFtZUNvdW50ICogMC4wMzsKCWNvbnN0IGQxeCA9IE1hdGguY29zKHRtKSAqIChodyAqIDAuMyk7Cgljb25zdCBkMXkgPSBNYXRoLnNpbih0bSkgKiAoaGggKiAwLjMpOwoJY29uc3QgZDJ4ID0gTWF0aC5jb3ModG0gKyAyLjEpICogKGh3ICogMC4zKTsKCWNvbnN0IGQyeSA9IE1hdGguc2luKHRtICsgMi4xKSAqIChoaCAqIDAuMyk7Cgljb25zdCByYWQgPSBNYXRoLm1pbihodywgaGgpICogMC40NTsKCglmb3IgKGxldCB5ID0gLWhoOyB5IDw9IGhoOyB5KyspIHsKCQlmb3IgKGxldCB4ID0gLWh3OyB4IDw9IGh3OyB4KyspIHsKCQkJY29uc3QgaW4xID0gTWF0aC5oeXBvdCh4IC0gZDF4LCB5IC0gZDF5KSA8IHJhZDsKCQkJY29uc3QgaW4yID0gTWF0aC5oeXBvdCh4IC0gZDJ4LCB5IC0gZDJ5KSA8IHJhZDsKCQkJaWYgKGluMSB8fCBpbjIpIHsKCQkJCWNvbnN0IGNvbCA9IHQuY29sb3IoCgkJCQkJaW4yID8gMjQwIDogNDAsCgkJCQkJaW4xICYmIGluMiA_IDIyMCA6IGluMSA_IDIwMCA6IDE4MCwKCQkJCQlpbjEgPyAyNDAgOiA0MCwKCQkJCQlpbjEgJiYgaW4yID8gMjIwIDogMTQwCgkJCQkpOwoJCQkJY29uc3QgW2NyLCBjZywgY2IsIGNhXSA9IGNvbC5yZ2JhOwoJCQkJY29uc3QgaWR4ID0gTWF0aC5taW4oUkFNUC5sZW5ndGggLSAxLCBNYXRoLmZsb29yKChjYSAvIDI1NSkgKiBSQU1QLmxlbmd0aCkpOwoJCQkJdC5wdXNoKCk7CgkJCQl0LnRyYW5zbGF0ZSh4LCB5KTsKCQkJCXQuY2hhckNvbG9yKGNyLCBjZywgY2IsIGNhKTsKCQkJCXQuY2VsbENvbG9yKE1hdGguZmxvb3IoY3IgKiAwLjIpLCBNYXRoLmZsb29yKGNnICogMC4yKSwgTWF0aC5mbG9vcihjYiAqIDAuMiksIGNhKTsKCQkJCXQuY2hhcihSQU1QW2lkeF0pOwoJCQkJdC5wb2ludCgpOwoJCQkJdC5wb3AoKTsKCQkJfQoJCX0KCX0KfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWNvbnN0IHNhbXBsZUNvbCA9IHQuY29sb3IoNDAsIDIwMCwgMjQwLCAxNDApOwoJY29uc3QgW3IsIGcsIGIsIGFdID0gc2FtcGxlQ29sLnJnYmE7CgoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcigxMjAsIDI0MCwgMTgwKTsKCXQucHJpbnQoJ1RFWFRNT0RFQ09MT1IuUkdCQScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcig3MCwgMTAwLCAxNDApOwoJdC5wcmludCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMjEwLCAyNTUpOwoJdC5wcmludCgnQ09OQ0VQVDogT1ZFUkxBUFBJTkcgUkdCQSBESVNLUycsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDE2MCwgMTkwKTsKCXQucHJpbnQoJ1VucGFja3MgW3IsIGcsIGIsIGFdIHR1cGxlIGFycmF5LicsIHgsIHkrKyk7Cgl0LnByaW50KCdDb21wb3NpdGVzIHRyYW5zbHVjZW50IG9yYml0YWwgbGVuc2VzLicsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcig3MCwgMTAwLCAxNDApOwoJdC5wcmludCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMjU1LCAyMDApOwoJdC5wcmludChgU0FNUExFIFJHQkE6IFske3J9LCAke2d9LCAke2J9LCAke2F9XWAsIHgsIHkrKyk7Cgl0LnBvcCgpOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const RAMP = ' .:-=+*#%@';
+const topLayer = t.layers.add({ blendMode: 'normal' });
+const labelLayer = t.layers.add();
+
+t.draw(() => {
+	t.background(10, 10, 18);
+	const hw = Math.floor(t.grid.cols / 2);
+	const hh = Math.floor(t.grid.rows / 2);
+	for (let y = -hh; y <= hh; y++) {
+		for (let x = -hw; x <= hw; x++) {
+			if ((x + y) % 3 === 0) {
+				t.push();
+				t.translate(x, y);
+				t.charColor(50, 60, 80);
+				t.char('.');
+				t.point();
+				t.pop();
+			}
+		}
+	}
+});
+
+topLayer.draw(() => {
+	t.clear();
+	const hw = Math.floor(t.grid.cols / 2);
+	const hh = Math.floor(t.grid.rows / 2);
+	const tm = t.frameCount * 0.03;
+	const d1x = Math.cos(tm) * (hw * 0.3);
+	const d1y = Math.sin(tm) * (hh * 0.3);
+	const d2x = Math.cos(tm + 2.1) * (hw * 0.3);
+	const d2y = Math.sin(tm + 2.1) * (hh * 0.3);
+	const rad = Math.min(hw, hh) * 0.45;
+
+	for (let y = -hh; y <= hh; y++) {
+		for (let x = -hw; x <= hw; x++) {
+			const in1 = Math.hypot(x - d1x, y - d1y) < rad;
+			const in2 = Math.hypot(x - d2x, y - d2y) < rad;
+			if (in1 || in2) {
+				const col = t.color(
+					in2 ? 240 : 40,
+					in1 && in2 ? 220 : in1 ? 200 : 180,
+					in1 ? 240 : 40,
+					in1 && in2 ? 220 : 140
+				);
+				const [cr, cg, cb, ca] = col.rgba;
+				const idx = Math.min(RAMP.length - 1, Math.floor((ca / 255) * RAMP.length));
+				t.push();
+				t.translate(x, y);
+				t.charColor(cr, cg, cb, ca);
+				t.cellColor(Math.floor(cr * 0.2), Math.floor(cg * 0.2), Math.floor(cb * 0.2), ca);
+				t.char(RAMP[idx]);
+				t.point();
+				t.pop();
+			}
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const sampleCol = t.color(40, 200, 240, 140);
+	const [r, g, b, a] = sampleCol.rgba;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODECOLOR.RGBA', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: OVERLAPPING RGBA DISKS', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Unpacks [r, g, b, a] tuple array.', x, y++);
+	t.print('Composites translucent orbital lenses.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 200);
+	t.print(`SAMPLE RGBA: [${r}, ${g}, ${b}, ${a}]`, x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

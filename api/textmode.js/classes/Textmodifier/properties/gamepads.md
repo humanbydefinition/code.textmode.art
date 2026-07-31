@@ -26,5 +26,54 @@ it does not contain sparse `null` holes for disconnected slots. Use
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="gamepads" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNCwgNiwgMTIpOwoJY29uc3QgY291bnQgPSBNYXRoLm1heCgxLCB0LmdhbWVwYWRzLmxlbmd0aCk7Cglmb3IgKGxldCBpID0gMDsgaSA8IDE2OyBpKyspIHsKCQl0LnB1c2goKTsKCQljb25zdCBhbmdsZSA9IChpIC8gMTYpICogTWF0aC5QSSAqIDIgKyB0LmZyYW1lQ291bnQgKiAwLjAzOwoJCXQudHJhbnNsYXRlKE1hdGguY29zKGFuZ2xlKSAqICg2ICsgY291bnQpLCBNYXRoLnNpbihhbmdsZSkgKiA0KTsKCQl0LmNoYXIodC5nYW1lcGFkcy5sZW5ndGggPyAnQCcgOiAnLicpOwoJCXQuY2hhckNvbG9yKDgwICsgaSAqIDgsIDE4MCwgMjU1KTsKCQl0LnBvaW50KCk7CgkJdC5wb3AoKTsKCX0KfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuR0FNRVBBRFMnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBHQU1FUEFEIElOUFVUJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdXb3JrcyB3aXRoIGJyb3dzZXIgcGFkcy4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KGBQQURTOiAke3QuZ2FtZXBhZHMubGVuZ3RofWAsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(4, 6, 12);
+	const count = Math.max(1, t.gamepads.length);
+	for (let i = 0; i < 16; i++) {
+		t.push();
+		const angle = (i / 16) * Math.PI * 2 + t.frameCount * 0.03;
+		t.translate(Math.cos(angle) * (6 + count), Math.sin(angle) * 4);
+		t.char(t.gamepads.length ? '@' : '.');
+		t.charColor(80 + i * 8, 180, 255);
+		t.point();
+		t.pop();
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODIFIER.GAMEPADS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: GAMEPAD INPUT', x, y++, 100, 220, 255);
+	drawText('Works with browser pads.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`PADS: ${t.gamepads.length}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

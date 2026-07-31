@@ -22,5 +22,77 @@ Physical screen height in pixels.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="displayHeight" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCBkaXNwbGF5SCA9IDA7CmxldCByYXRpbyA9IDA7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCmZ1bmN0aW9uIGRyYXdCYW5kKHgsIHksIHdpZHRoLCBoZWlnaHQsIHIsIGcsIGIpIHsKCXQucHVzaCgpOwoJdC50cmFuc2xhdGUoeCwgeSk7Cgl0LmNoYXIoJ-KWiCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnJlY3Qod2lkdGgsIGhlaWdodCk7Cgl0LnBvcCgpOwp9Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDgsIDksIDIwKTsKCWRpc3BsYXlIID0gdC5kaXNwbGF5SGVpZ2h0OwoJcmF0aW8gPSB0LndpbmRvd0hlaWdodCAvIE1hdGgubWF4KDEsIGRpc3BsYXlIKTsKCWNvbnN0IGZ1bGwgPSAxODsKCWNvbnN0IHZpc2libGUgPSBNYXRoLnJvdW5kKHQuY29uc3RyYWluKHQubWFwKHJhdGlvLCAwLCAxLCAzLCBmdWxsKSwgMywgZnVsbCkpOwoKCWRyYXdCYW5kKC04LCAwLCAxLCBmdWxsICsgMiwgNzAsIDEzNSwgMTg1KTsKCWRyYXdCYW5kKDgsIDAsIDEsIGZ1bGwgKyAyLCA3MCwgMTM1LCAxODUpOwoJZHJhd0JhbmQoMCwgLWZ1bGwgLyAyIC0gMSwgMTcsIDEsIDQyLCA1OCwgODgpOwoJZHJhd0JhbmQoMCwgZnVsbCAvIDIgKyAxLCAxNywgMSwgNDIsIDU4LCA4OCk7CglkcmF3QmFuZCgwLCBmdWxsIC8gMiAtIHZpc2libGUgLyAyLCAxMSwgdmlzaWJsZSwgNjIsIDEyMCwgMTY1KTsKCglmb3IgKGxldCBpID0gMDsgaSA8PSBmdWxsOyBpICs9IDIpIHsKCQljb25zdCB5ID0gZnVsbCAvIDIgLSBpOwoJCWNvbnN0IGdsb3cgPSBpIDw9IHZpc2libGU7CgkJdC5wdXNoKCk7CgkJdC50cmFuc2xhdGUoTWF0aC5jb3ModC5mcmFtZUNvdW50ICogMC4wNCArIGkpICogNCwgeSk7CgkJdC5jaGFyKGdsb3cgPyAnKicgOiAnLicpOwoJCXQuY2hhckNvbG9yKGdsb3cgPyAyNTUgOiA3NSwgZ2xvdyA_IDIxMCA6IDk1LCBnbG93ID8gMTI1IDogMTMwKTsKCQl0LnBvaW50KCk7CgkJdC5wb3AoKTsKCX0KfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5ESVNQTEFZSEVJR0hUJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogU0NSRUVOIEhFSUdIVCcsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnZGlzcGxheUhlaWdodCByZWFkcyBzY3JlZW4uaGVpZ2h0LicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnV2luZG93IGhlaWdodCBpcyBzaG93biBpbnNpZGUgaXQuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dChgRElTUExBWTogJHtkaXNwbGF5SH0gUFhgLCB4LCB5KyssIDI1NSwgMjAwLCAxMDApOwoJZHJhd1RleHQoYFdJTkRPVzogJHsocmF0aW8gKiAxMDApLnRvRml4ZWQoMCl9JWAsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let displayH = 0;
+let ratio = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+function drawBand(x, y, width, height, r, g, b) {
+	t.push();
+	t.translate(x, y);
+	t.char('█');
+	t.charColor(r, g, b);
+	t.rect(width, height);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(8, 9, 20);
+	displayH = t.displayHeight;
+	ratio = t.windowHeight / Math.max(1, displayH);
+	const full = 18;
+	const visible = Math.round(t.constrain(t.map(ratio, 0, 1, 3, full), 3, full));
+
+	drawBand(-8, 0, 1, full + 2, 70, 135, 185);
+	drawBand(8, 0, 1, full + 2, 70, 135, 185);
+	drawBand(0, -full / 2 - 1, 17, 1, 42, 58, 88);
+	drawBand(0, full / 2 + 1, 17, 1, 42, 58, 88);
+	drawBand(0, full / 2 - visible / 2, 11, visible, 62, 120, 165);
+
+	for (let i = 0; i <= full; i += 2) {
+		const y = full / 2 - i;
+		const glow = i <= visible;
+		t.push();
+		t.translate(Math.cos(t.frameCount * 0.04 + i) * 4, y);
+		t.char(glow ? '*' : '.');
+		t.charColor(glow ? 255 : 75, glow ? 210 : 95, glow ? 125 : 130);
+		t.point();
+		t.pop();
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.DISPLAYHEIGHT', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SCREEN HEIGHT', x, y++, 100, 220, 255);
+	drawText('displayHeight reads screen.height.', x, y++, 140, 160, 190);
+	drawText('Window height is shown inside it.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`DISPLAY: ${displayH} PX`, x, y++, 255, 200, 100);
+	drawText(`WINDOW: ${(ratio * 100).toFixed(0)}%`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

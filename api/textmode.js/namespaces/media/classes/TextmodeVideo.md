@@ -23,7 +23,60 @@ chainable methods.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="TextmodeVideo" encoded-code="Y29uc3QgVklERU9fVVJMID0gJ2h0dHBzOi8vaW50ZXJhY3RpdmUtZXhhbXBsZXMubWRuLm1vemlsbGEubmV0L21lZGlhL2NjMC12aWRlb3MvZmxvd2VyLm1wNCc7CmNvbnN0IHQgPSB0ZXh0bW9kZS5jcmVhdGUoewoJd2lkdGg6IHdpbmRvdy5pbm5lcldpZHRoLAoJaGVpZ2h0OiB3aW5kb3cuaW5uZXJIZWlnaHQsCglmb250U2l6ZTogMTYsCn0pOwoKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwpsZXQgdmlkZW8gPSBudWxsOwoKdC5zZXR1cChhc3luYyAoKSA9PiB7Cgl2aWRlbyA9IGF3YWl0IHQubG9hZFZpZGVvKFZJREVPX1VSTCk7Cgl2aWRlby5jaGFyYWN0ZXJzKCcgLjotPSsqIyVAJyk7Cgl2aWRlby52b2x1bWUoMCk7Cglhd2FpdCB2aWRlby5wbGF5KCk7Cgl2aWRlby5sb29wKCk7Cn0pOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg2LCAxMiwgMTApOwoJaWYgKHZpZGVvKSB7CgkJdC5pbWFnZSh2aWRlbyk7Cgl9Cn0pOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWRyYXdUZXh0KCdURVhUTU9ERVZJREVPLkNSRUFUSU9OJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogVklERU8gTE9BRElORyAmIFBMQVlCQUNLJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdEZW1vbnN0cmF0ZXMgbG9hZFZpZGVvIEFQSS4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KHZpZGVvID8gJ1NUQVRVUzogVklERU8gTE9BREVEIEFORCBQTEFZSU5HJyA6ICdTVEFUVVM6IExPQURJTkcgVklERU8uLi4nLCB4LCB5KyssIDI1NSwgMjEwLCA5MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const VIDEO_URL = 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4';
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let video = null;
+
+t.setup(async () => {
+	video = await t.loadVideo(VIDEO_URL);
+	video.characters(' .:-=+*#%@');
+	video.volume(0);
+	await video.play();
+	video.loop();
+});
+
+t.draw(() => {
+	t.background(6, 12, 10);
+	if (video) {
+		t.image(video);
+	}
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODEVIDEO.CREATION', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: VIDEO LOADING & PLAYBACK', x, y++, 100, 220, 255);
+	drawText('Demonstrates loadVideo API.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(video ? 'STATUS: VIDEO LOADED AND PLAYING' : 'STATUS: LOADING VIDEO...', x, y++, 255, 210, 90);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 
 ## Extends
 

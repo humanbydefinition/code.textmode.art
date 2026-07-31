@@ -32,5 +32,101 @@ Register the single-callback handler for mouse release events.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="mouseReleased" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7IHdpZHRoOiB3aW5kb3cuaW5uZXJXaWR0aCwgaGVpZ2h0OiB3aW5kb3cuaW5uZXJIZWlnaHQsIGZvbnRTaXplOiAxNiB9KTsKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwpjb25zdCBzcGFya3MgPSBbXTsKbGV0IHRlbnNpb24gPSAwLAoJcmVsZWFzZUNvdW50ID0gMCwKCWxhc3RQb3MgPSAnTk9ORSc7CgpmdW5jdGlvbiBkcmF3VGV4dCh0eHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHR4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0Lm1vdXNlUmVsZWFzZWQoKCkgPT4gewoJaWYgKHQubW91c2UueCA9PT0gTnVtYmVyLk5FR0FUSVZFX0lORklOSVRZKSByZXR1cm47CglyZWxlYXNlQ291bnQrKzsKCWxhc3RQb3MgPSBgKCR7dC5tb3VzZS54fSwgJHt0Lm1vdXNlLnl9KWA7Cglmb3IgKGxldCBpID0gMDsgaSA8IDE0OyBpKyspIHsKCQljb25zdCBhID0gKGkgLyAxNCkgKiBNYXRoLlBJICogMiwKCQkJcyA9ICgwLjggKyBNYXRoLnJhbmRvbSgpKSAqICgwLjQgKyB0ZW5zaW9uICogMC44KTsKCQlzcGFya3MudW5zaGlmdCh7IHg6IHQubW91c2UueCwgeTogdC5tb3VzZS55LCB2eDogTWF0aC5jb3MoYSkgKiBzLCB2eTogTWF0aC5zaW4oYSkgKiBzLCBsaWZlOiAxIH0pOwoJfQoJdGVuc2lvbiA9IDA7CglpZiAoc3BhcmtzLmxlbmd0aCA-IDcwKSBzcGFya3MubGVuZ3RoID0gNzA7Cn0pOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg4LCA4LCAxNik7Cgljb25zdCBpc0hlbGQgPSB0Lm1vdXNlSXNQcmVzc2VkICYmIHQubW91c2UueCAhPT0gTnVtYmVyLk5FR0FUSVZFX0lORklOSVRZOwoJdGVuc2lvbiA9IGlzSGVsZCA_IE1hdGgubWluKDEsIHRlbnNpb24gKyAwLjA0KSA6IE1hdGgubWF4KDAsIHRlbnNpb24gLSAwLjA4KTsKCWNvbnN0IGh3ID0gTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpLAoJCWhoID0gTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoKCWZvciAobGV0IHkgPSAtaGg7IHkgPD0gaGg7IHkgKz0gMikgewoJCWZvciAobGV0IHggPSAtaHc7IHggPD0gaHc7IHggKz0gMikgewoJCQljb25zdCBkID0gaXNIZWxkID8gTWF0aC5oeXBvdCh4IC0gdC5tb3VzZS54LCB5IC0gdC5tb3VzZS55KSA6IDk5OTsKCQkJY29uc3QgcHVsbCA9IGQgPCAyMCA_ICgxIC0gZCAvIDIwKSAqIHRlbnNpb24gKiAzIDogMDsKCQkJY29uc3QgcnggPSBNYXRoLnJvdW5kKHggKyAoaXNIZWxkID8gKHQubW91c2UueCAtIHgpICogKHB1bGwgLyAoZCArIDEpKSA6IDApKTsKCQkJY29uc3QgcnkgPSBNYXRoLnJvdW5kKHkgKyAoaXNIZWxkID8gKHQubW91c2UueSAtIHkpICogKHB1bGwgLyAoZCArIDEpKSA6IDApKTsKCQkJaWYgKHJ4ID49IC1odyAmJiByeCA8PSBodyAmJiByeSA-PSAtaGggJiYgcnkgPD0gaGgpIHsKCQkJCXQucHVzaCgpOwoJCQkJdC50cmFuc2xhdGUocngsIHJ5KTsKCQkJCXQuY2hhckNvbG9yKHB1bGwgPiAwLjQgPyAyNTUgOiAzMCwgcHVsbCA-IDAuNCA_IE1hdGguZmxvb3IoMTAwICsgcHVsbCAqIDE1NSkgOiA0MCwgcHVsbCA-IDAuNCA_IDAgOiA3MCk7CgkJCQlpZiAocHVsbCA-IDAuNCkgdC5jZWxsQ29sb3IoODAsIDIwLCAwKTsKCQkJCXQuY2hhcihwdWxsID4gMC40ID8gJyMnIDogJysnKTsKCQkJCXQucG9pbnQoKTsKCQkJCXQucG9wKCk7CgkJCX0KCQl9Cgl9CgoJZm9yIChsZXQgaSA9IHNwYXJrcy5sZW5ndGggLSAxOyBpID49IDA7IGktLSkgewoJCWNvbnN0IHMgPSBzcGFya3NbaV07CgkJcy54ICs9IHMudng7CgkJcy55ICs9IHMudnk7CgkJcy52eCAqPSAwLjkzOwoJCXMudnkgKj0gMC45MzsKCQlpZiAoKHMubGlmZSAtPSAwLjAyNSkgPD0gMCkgewoJCQlzcGFya3Muc3BsaWNlKGksIDEpOwoJCQljb250aW51ZTsKCQl9CgkJY29uc3Qgc3ggPSBNYXRoLnJvdW5kKHMueCksCgkJCXN5ID0gTWF0aC5yb3VuZChzLnkpOwoJCWlmIChzeCA-PSAtaHcgJiYgc3ggPD0gaHcgJiYgc3kgPj0gLWhoICYmIHN5IDw9IGhoKSB7CgkJCXQucHVzaCgpOwoJCQl0LnRyYW5zbGF0ZShzeCwgc3kpOwoJCQl0LmNoYXJDb2xvcihzLmxpZmUgPiAwLjYgPyAyNTUgOiAwLCBzLmxpZmUgPiAwLjYgPyAyNTUgOiAyMzUsIDI1NSk7CgkJCWlmIChzLmxpZmUgPiAwLjUpIHQuY2VsbENvbG9yKDAsIDcwLCA5MCk7CgkJCXQuY2hhcihzLmxpZmUgPiAwLjcgPyAnQCcgOiBzLmxpZmUgPiAwLjQgPyAnTycgOiAnKicpOwoJCQl0LnBvaW50KCk7CgkJCXQucG9wKCk7CgkJfQoJfQp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKSwKCQl0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5NT1VTRVJFTEVBU0VEJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogVVAtU1RST0tFIFJFTEVBU0UgRVZFTlQnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ0ZpcmVzIG9uIG1vdXNlIGJ1dHRvbiByZWxlYXNlLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnUmVsZWFzaW5nIGxhdW5jaGVzIGtpbmV0aWMgc3BhcmsgYnVyc3QuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnVE9UQUwgUkVMRUFTRVM6ICcgKyByZWxlYXNlQ291bnQsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7CglkcmF3VGV4dCgnTEFTVCBSRUxFQVNFOiAgICcgKyBsYXN0UG9zLCB4LCB5KyssIDE4MCwgMjAwLCAyMjApOwoJZHJhd1RleHQoJ1RFTlNJT04gQ0hBUkdFOiAnICsgTWF0aC5mbG9vcih0ZW5zaW9uICogMTAwKSArICclJywgeCwgeSsrLCAxODAsIDIwMCwgMjIwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCkpOw" />
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const labelLayer = t.layers.add();
+const sparks = [];
+let tension = 0,
+	releaseCount = 0,
+	lastPos = 'NONE';
+
+function drawText(txt, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(txt, x, y);
+	t.pop();
+}
+
+t.mouseReleased(() => {
+	if (t.mouse.x === Number.NEGATIVE_INFINITY) return;
+	releaseCount++;
+	lastPos = `(${t.mouse.x}, ${t.mouse.y})`;
+	for (let i = 0; i < 14; i++) {
+		const a = (i / 14) * Math.PI * 2,
+			s = (0.8 + Math.random()) * (0.4 + tension * 0.8);
+		sparks.unshift({ x: t.mouse.x, y: t.mouse.y, vx: Math.cos(a) * s, vy: Math.sin(a) * s, life: 1 });
+	}
+	tension = 0;
+	if (sparks.length > 70) sparks.length = 70;
+});
+
+t.draw(() => {
+	t.background(8, 8, 16);
+	const isHeld = t.mouseIsPressed && t.mouse.x !== Number.NEGATIVE_INFINITY;
+	tension = isHeld ? Math.min(1, tension + 0.04) : Math.max(0, tension - 0.08);
+	const hw = Math.floor(t.grid.cols / 2),
+		hh = Math.floor(t.grid.rows / 2);
+
+	for (let y = -hh; y <= hh; y += 2) {
+		for (let x = -hw; x <= hw; x += 2) {
+			const d = isHeld ? Math.hypot(x - t.mouse.x, y - t.mouse.y) : 999;
+			const pull = d < 20 ? (1 - d / 20) * tension * 3 : 0;
+			const rx = Math.round(x + (isHeld ? (t.mouse.x - x) * (pull / (d + 1)) : 0));
+			const ry = Math.round(y + (isHeld ? (t.mouse.y - y) * (pull / (d + 1)) : 0));
+			if (rx >= -hw && rx <= hw && ry >= -hh && ry <= hh) {
+				t.push();
+				t.translate(rx, ry);
+				t.charColor(pull > 0.4 ? 255 : 30, pull > 0.4 ? Math.floor(100 + pull * 155) : 40, pull > 0.4 ? 0 : 70);
+				if (pull > 0.4) t.cellColor(80, 20, 0);
+				t.char(pull > 0.4 ? '#' : '+');
+				t.point();
+				t.pop();
+			}
+		}
+	}
+
+	for (let i = sparks.length - 1; i >= 0; i--) {
+		const s = sparks[i];
+		s.x += s.vx;
+		s.y += s.vy;
+		s.vx *= 0.93;
+		s.vy *= 0.93;
+		if ((s.life -= 0.025) <= 0) {
+			sparks.splice(i, 1);
+			continue;
+		}
+		const sx = Math.round(s.x),
+			sy = Math.round(s.y);
+		if (sx >= -hw && sx <= hw && sy >= -hh && sy <= hh) {
+			t.push();
+			t.translate(sx, sy);
+			t.charColor(s.life > 0.6 ? 255 : 0, s.life > 0.6 ? 255 : 235, 255);
+			if (s.life > 0.5) t.cellColor(0, 70, 90);
+			t.char(s.life > 0.7 ? '@' : s.life > 0.4 ? 'O' : '*');
+			t.point();
+			t.pop();
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2),
+		top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.MOUSERELEASED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: UP-STROKE RELEASE EVENT', x, y++, 100, 220, 255);
+	drawText('Fires on mouse button release.', x, y++, 140, 160, 190);
+	drawText('Releasing launches kinetic spark burst.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('TOTAL RELEASES: ' + releaseCount, x, y++, 140, 255, 180);
+	drawText('LAST RELEASE:   ' + lastPos, x, y++, 180, 200, 220);
+	drawText('TENSION CHARGE: ' + Math.floor(tension * 100) + '%', x, y++, 180, 200, 220);
+});
+
+t.windowResized(() => t.resizeCanvas(window.innerWidth, window.innerHeight));
+```
 

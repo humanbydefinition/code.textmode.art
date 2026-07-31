@@ -42,5 +42,67 @@ This instance for chaining.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="charColor" encoded-code="Y29uc3QgSU1BR0VfVVJMID0gJ2h0dHBzOi8vaW1hZ2VzLnVuc3BsYXNoLmNvbS9waG90by0xNTA2OTA1OTI1MzQ2LTIxYmRhNGQzMmRmND93PTkwMCZxPTgwJzsKY29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAp9KTsKCmNvbnN0IGxhYmVsTGF5ZXIgPSB0LmxheWVycy5hZGQoKTsKbGV0IHRlY2hTb3VyY2UgPSBudWxsOwpsZXQgciA9IDE1MDsKbGV0IGcgPSAxNTA7Cgp0LnNldHVwKGFzeW5jICgpID0-IHsKCXRlY2hTb3VyY2UgPSBhd2FpdCB0LmxvYWRJbWFnZShJTUFHRV9VUkwpOwoJdGVjaFNvdXJjZS5jaGFyYWN0ZXJzKCcgLjotPSsqIyVAJyk7Cgl0ZWNoU291cmNlLmNoYXJDb2xvck1vZGUoJ2ZpeGVkJyk7Cn0pOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg2LCAxMCwgMjIpOwoKCWlmICghdGVjaFNvdXJjZSkgcmV0dXJuOwoKCWNvbnN0IHRpbWUgPSB0LmZyYW1lQ291bnQgKiAwLjA0OwoJciA9IE1hdGgucm91bmQoMTUwICsgMTA1ICogTWF0aC5zaW4odGltZSkpOwoJZyA9IE1hdGgucm91bmQoMTUwICsgMTA1ICogTWF0aC5jb3ModGltZSAqIDAuNykpOwoKCXRlY2hTb3VyY2UuY2hhckNvbG9yKHIsIGcsIDEwMCk7CgoJdC5wdXNoKCk7Cgl0LnRyYW5zbGF0ZSgwLCAwKTsKCXQuaW1hZ2UodGVjaFNvdXJjZSwgMjQsIDE0KTsKCXQucG9wKCk7Cn0pOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWRyYXdUZXh0KCdURVhUTU9ERVNPVVJDRS5DSEFSQ09MT1InLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBTRVQgQ09OU1RBTlQgQ0hBUkFDVEVSIENPTE9SJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdTZXRzIGNvbG9yIHVzZWQgaW4gZml4ZWQgY29sb3JpbmcgbW9kZS4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KGBDSEFSIENPTE9SOiBSR0IoJHtyfSwke2d9LDEwMClgLCB4LCB5KyssIDE0MCwgMTkwLCAyNTUpOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80';
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 8,
+});
+
+const labelLayer = t.layers.add();
+let techSource = null;
+let r = 150;
+let g = 150;
+
+t.setup(async () => {
+	techSource = await t.loadImage(IMAGE_URL);
+	techSource.characters(' .:-=+*#%@');
+	techSource.charColorMode('fixed');
+});
+
+t.draw(() => {
+	t.background(6, 10, 22);
+
+	if (!techSource) return;
+
+	const time = t.frameCount * 0.04;
+	r = Math.round(150 + 105 * Math.sin(time));
+	g = Math.round(150 + 105 * Math.cos(time * 0.7));
+
+	techSource.charColor(r, g, 100);
+
+	t.push();
+	t.translate(0, 0);
+	t.image(techSource, 24, 14);
+	t.pop();
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODESOURCE.CHARCOLOR', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SET CONSTANT CHARACTER COLOR', x, y++, 100, 220, 255);
+	drawText('Sets color used in fixed coloring mode.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`CHAR COLOR: RGB(${r},${g},100)`, x, y++, 140, 190, 255);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

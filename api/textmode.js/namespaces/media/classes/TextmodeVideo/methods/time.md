@@ -33,5 +33,73 @@ Seek to a playback time.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="time" encoded-code="Y29uc3QgVklERU9fVVJMID0gJ2h0dHBzOi8vaW50ZXJhY3RpdmUtZXhhbXBsZXMubWRuLm1vemlsbGEubmV0L21lZGlhL2NjMC12aWRlb3MvZmxvd2VyLm1wNCc7CmNvbnN0IHQgPSB0ZXh0bW9kZS5jcmVhdGUoewoJd2lkdGg6IHdpbmRvdy5pbm5lcldpZHRoLAoJaGVpZ2h0OiB3aW5kb3cuaW5uZXJIZWlnaHQsCglmb250U2l6ZTogMTYsCn0pOwoKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwpsZXQgdmlkZW8gPSBudWxsOwpsZXQgY3VycmVudFRpbWUgPSAwOwpsZXQgZHVyYXRpb24gPSAwOwoKdC5zZXR1cChhc3luYyAoKSA9PiB7Cgl2aWRlbyA9IGF3YWl0IHQubG9hZFZpZGVvKFZJREVPX1VSTCk7Cgl2aWRlby5jaGFyYWN0ZXJzKCcgLjotPSsqIyVAJyk7Cgl2aWRlby5sb29wKCk7Cgl2aWRlby52b2x1bWUoMCk7Cglhd2FpdCB2aWRlby5wbGF5KCk7Cn0pOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg2LCA4LCAyMCk7CglpZiAoIXZpZGVvKSByZXR1cm47CgoJdC5pbWFnZSh2aWRlbyk7CgljdXJyZW50VGltZSA9IHZpZGVvLmN1cnJlbnRUaW1lOwoJZHVyYXRpb24gPSB2aWRlby5kdXJhdGlvbiB8fCAxOwp9KTsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnVEVYVE1PREVWSURFTy5USU1FJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogSlVNUElORyBUTyBQTEFZQkFDSyBUSU1FJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdTZXRzIGEgbmV3IHBsYXliYWNrIHBvc2l0aW9uLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoKCWlmICh2aWRlbykgewoJCWRyYXdUZXh0KGBDVVJSRU5UIFRJTUU6ICR7Y3VycmVudFRpbWUudG9GaXhlZCgxKX1zYCwgeCwgeSsrLCAyNTUsIDIxMCwgOTApOwoJCWRyYXdUZXh0KGBEVVJBVElPTiAgICA6ICR7ZHVyYXRpb24udG9GaXhlZCgxKX1zYCwgeCwgeSsrLCAyNTUsIDIxMCwgOTApOwoJCWRyYXdUZXh0KCdDTElDSyBBTllXSEVSRSBUTyBKVU1QIFJBTkRPTSBUSU1FJywgeCwgeSsrLCAxMjAsIDIwNSwgMjU1KTsKCX0gZWxzZSB7CgkJZHJhd1RleHQoJ0xPQURJTkcgVklERU8uLi4nLCB4LCB5KyssIDI1NSwgMTgwLCAxMjApOwoJfQp9KTsKCnQubW91c2VDbGlja2VkKCgpID0-IHsKCWlmICghdmlkZW8pIHJldHVybjsKCXZpZGVvLnRpbWUoTWF0aC5yYW5kb20oKSAqIHZpZGVvLmR1cmF0aW9uKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const VIDEO_URL = 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4';
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let video = null;
+let currentTime = 0;
+let duration = 0;
+
+t.setup(async () => {
+	video = await t.loadVideo(VIDEO_URL);
+	video.characters(' .:-=+*#%@');
+	video.loop();
+	video.volume(0);
+	await video.play();
+});
+
+t.draw(() => {
+	t.background(6, 8, 20);
+	if (!video) return;
+
+	t.image(video);
+	currentTime = video.currentTime;
+	duration = video.duration || 1;
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODEVIDEO.TIME', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: JUMPING TO PLAYBACK TIME', x, y++, 100, 220, 255);
+	drawText('Sets a new playback position.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+
+	if (video) {
+		drawText(`CURRENT TIME: ${currentTime.toFixed(1)}s`, x, y++, 255, 210, 90);
+		drawText(`DURATION    : ${duration.toFixed(1)}s`, x, y++, 255, 210, 90);
+		drawText('CLICK ANYWHERE TO JUMP RANDOM TIME', x, y++, 120, 205, 255);
+	} else {
+		drawText('LOADING VIDEO...', x, y++, 255, 180, 120);
+	}
+});
+
+t.mouseClicked(() => {
+	if (!video) return;
+	video.time(Math.random() * video.duration);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

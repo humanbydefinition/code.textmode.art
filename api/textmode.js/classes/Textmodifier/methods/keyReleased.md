@@ -32,5 +32,98 @@ Register the single-callback handler for key release events.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="keyReleased" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7IHdpZHRoOiB3aW5kb3cuaW5uZXJXaWR0aCwgaGVpZ2h0OiB3aW5kb3cuaW5uZXJIZWlnaHQsIGZvbnRTaXplOiAxNiB9KTsKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpLAoJY2FzY2FkZXMgPSBbXTsKbGV0IHJlbGVhc2VDb3VudCA9IDAsCglsYXN0UmVsZWFzZWQgPSAnTk9ORSc7CgpmdW5jdGlvbiBkcmF3VGV4dCh0eHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHR4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LmtleVJlbGVhc2VkKChkYXRhKSA9PiB7CglyZWxlYXNlQ291bnQrKzsKCWNvbnN0IGsgPSBkYXRhLmtleSB8fCAnS0VZJzsKCWxhc3RSZWxlYXNlZCA9IGs7Cgljb25zdCBjaCA9IGsubGVuZ3RoID09PSAxID8gayA6ICfimaYnOwoKCWZvciAobGV0IGkgPSAwOyBpIDwgMTg7IGkrKykgewoJCWNvbnN0IGEgPSAoaSAvIDE4KSAqIE1hdGguUEkgKiAyICsgKE1hdGgucmFuZG9tKCkgLSAwLjUpICogMC4yOwoJCWNvbnN0IHMgPSAwLjUgKyBNYXRoLnJhbmRvbSgpICogMS4xOwoJCWNhc2NhZGVzLnVuc2hpZnQoeyB4OiAwLCB5OiAwLCB2eDogTWF0aC5jb3MoYSkgKiBzLCB2eTogTWF0aC5zaW4oYSkgKiBzLCBsaWZlOiAxLjAsIGNoYXI6IGNoIH0pOwoJfQoJaWYgKGNhc2NhZGVzLmxlbmd0aCA-IDkwKSBjYXNjYWRlcy5sZW5ndGggPSA5MDsKfSk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDgsIDE2KTsKCWNvbnN0IGh3ID0gTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpLAoJCWhoID0gTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoKCS8vIENlbnRyYWwgZW5lcmd5IGNyeXN0YWwKCWNvbnN0IHRtID0gdC5mcmFtZUNvdW50ICogMC4wNDsKCWNvbnN0IHB1bHNlID0gKE1hdGguc2luKHRtKSArIDEpICogMC41OwoJdC5wdXNoKCk7Cgl0LnRyYW5zbGF0ZSgwLCAwKTsKCXQuY2hhckNvbG9yKDAsIE1hdGguZmxvb3IoMTgwICsgcHVsc2UgKiA3NSksIDI1NSk7Cgl0LmNlbGxDb2xvcigwLCA0MCwgODApOwoJdC5jaGFyKCfimaYnKTsKCXQucG9pbnQoKTsKCXQucG9wKCk7CgoJLy8gRGlzc2lwYXRpb24gcGFydGljbGUgY2FzY2FkZXMKCWZvciAobGV0IGkgPSBjYXNjYWRlcy5sZW5ndGggLSAxOyBpID49IDA7IGktLSkgewoJCWNvbnN0IGMgPSBjYXNjYWRlc1tpXTsKCQljLnggKz0gYy52eDsKCQljLnkgKz0gYy52eTsKCQljLnZ4ICo9IDAuOTQ7CgkJYy52eSAqPSAwLjk0OwoJCWlmICgoYy5saWZlIC09IDAuMDIpIDw9IDApIHsKCQkJY2FzY2FkZXMuc3BsaWNlKGksIDEpOwoJCQljb250aW51ZTsKCQl9CgoJCWNvbnN0IGN4ID0gTWF0aC5yb3VuZChjLngpLAoJCQljeSA9IE1hdGgucm91bmQoYy55KTsKCQlpZiAoY3ggPj0gLWh3ICYmIGN4IDw9IGh3ICYmIGN5ID49IC1oaCAmJiBjeSA8PSBoaCkgewoJCQl0LnB1c2goKTsKCQkJdC50cmFuc2xhdGUoY3gsIGN5KTsKCQkJaWYgKGMubGlmZSA-IDAuNikgewoJCQkJdC5jaGFyQ29sb3IoMjU1LCAyMDQsIDApOwoJCQkJdC5jZWxsQ29sb3IoNzAsIDUwLCAwKTsKCQkJfSBlbHNlIHsKCQkJCXQuY2hhckNvbG9yKDAsIE1hdGguZmxvb3IoMTAwICsgYy5saWZlICogMTU1KSwgMjAwKTsKCQkJfQoJCQl0LmNoYXIoYy5saWZlID4gMC43ID8gYy5jaGFyIDogYy5saWZlID4gMC40ID8gJ-KImScgOiAnwrcnKTsKCQkJdC5wb2ludCgpOwoJCQl0LnBvcCgpOwoJCX0KCX0KfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMiksCgkJdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLktFWVJFTEVBU0VEJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogVVAtU1RST0tFIFJFTEVBU0UgQ0FTQ0FERScsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnRmlyZXMgb24ga2V5IHJlbGVhc2UgdXAtc3Ryb2tlLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnS2V5IHJlbGVhc2UgZGlzc2lwYXRlcyBlbmVyZ3kgY2FzY2FkZXMuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnS0VZIFJFTEVBU0VTOiAgJyArIHJlbGVhc2VDb3VudCwgeCwgeSsrLCAxNDAsIDI1NSwgMTgwKTsKCWRyYXdUZXh0KCdMQVNUIFJFTEVBU0VEOiAnICsgbGFzdFJlbGVhc2VkLCB4LCB5KyssIDE4MCwgMjAwLCAyMjApOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KSk7" />
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const labelLayer = t.layers.add(),
+	cascades = [];
+let releaseCount = 0,
+	lastReleased = 'NONE';
+
+function drawText(txt, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(txt, x, y);
+	t.pop();
+}
+
+t.keyReleased((data) => {
+	releaseCount++;
+	const k = data.key || 'KEY';
+	lastReleased = k;
+	const ch = k.length === 1 ? k : '♦';
+
+	for (let i = 0; i < 18; i++) {
+		const a = (i / 18) * Math.PI * 2 + (Math.random() - 0.5) * 0.2;
+		const s = 0.5 + Math.random() * 1.1;
+		cascades.unshift({ x: 0, y: 0, vx: Math.cos(a) * s, vy: Math.sin(a) * s, life: 1.0, char: ch });
+	}
+	if (cascades.length > 90) cascades.length = 90;
+});
+
+t.draw(() => {
+	t.background(6, 8, 16);
+	const hw = Math.floor(t.grid.cols / 2),
+		hh = Math.floor(t.grid.rows / 2);
+
+	// Central energy crystal
+	const tm = t.frameCount * 0.04;
+	const pulse = (Math.sin(tm) + 1) * 0.5;
+	t.push();
+	t.translate(0, 0);
+	t.charColor(0, Math.floor(180 + pulse * 75), 255);
+	t.cellColor(0, 40, 80);
+	t.char('♦');
+	t.point();
+	t.pop();
+
+	// Dissipation particle cascades
+	for (let i = cascades.length - 1; i >= 0; i--) {
+		const c = cascades[i];
+		c.x += c.vx;
+		c.y += c.vy;
+		c.vx *= 0.94;
+		c.vy *= 0.94;
+		if ((c.life -= 0.02) <= 0) {
+			cascades.splice(i, 1);
+			continue;
+		}
+
+		const cx = Math.round(c.x),
+			cy = Math.round(c.y);
+		if (cx >= -hw && cx <= hw && cy >= -hh && cy <= hh) {
+			t.push();
+			t.translate(cx, cy);
+			if (c.life > 0.6) {
+				t.charColor(255, 204, 0);
+				t.cellColor(70, 50, 0);
+			} else {
+				t.charColor(0, Math.floor(100 + c.life * 155), 200);
+			}
+			t.char(c.life > 0.7 ? c.char : c.life > 0.4 ? '∙' : '·');
+			t.point();
+			t.pop();
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2),
+		top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODIFIER.KEYRELEASED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: UP-STROKE RELEASE CASCADE', x, y++, 100, 220, 255);
+	drawText('Fires on key release up-stroke.', x, y++, 140, 160, 190);
+	drawText('Key release dissipates energy cascades.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('KEY RELEASES:  ' + releaseCount, x, y++, 140, 255, 180);
+	drawText('LAST RELEASED: ' + lastReleased, x, y++, 180, 200, 220);
+});
+
+t.windowResized(() => t.resizeCanvas(window.innerWidth, window.innerHeight));
+```
 

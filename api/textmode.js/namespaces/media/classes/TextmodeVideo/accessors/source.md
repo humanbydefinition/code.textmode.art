@@ -29,7 +29,68 @@ Source element this texture captures.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="source" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpsZXQgdGV4dHVyZSA9IG51bGw7CmxldCBzb3VyY2VDYW52YXMgPSBudWxsOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LnNldHVwKCgpID0-IHsKCXNvdXJjZUNhbnZhcyA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2NhbnZhcycpOwoJc291cmNlQ2FudmFzLndpZHRoID0gMTIwOwoJc291cmNlQ2FudmFzLmhlaWdodCA9IDgwOwoJdGV4dHVyZSA9IHQuY3JlYXRlVGV4dHVyZShzb3VyY2VDYW52YXMpOwoJdGV4dHVyZS5jaGFyYWN0ZXJzKCcgLjotPSsqIyVAJyk7Cn0pOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg4LCAxMCwgMTgpOwoJaWYgKCF0ZXh0dXJlKSByZXR1cm47Cgljb25zdCBjdHggPSBzb3VyY2VDYW52YXMuZ2V0Q29udGV4dCgnMmQnKTsKCWN0eC5maWxsU3R5bGUgPSAnIzBhMGQxYSc7CgljdHguZmlsbFJlY3QoMCwgMCwgc291cmNlQ2FudmFzLndpZHRoLCBzb3VyY2VDYW52YXMuaGVpZ2h0KTsKCWN0eC5maWxsU3R5bGUgPSAnIzM4YmRmOCc7CgljdHguYmVnaW5QYXRoKCk7CgljdHguYXJjKDYwICsgTWF0aC5zaW4odC5mcmFtZUNvdW50ICogMC4wNSkgKiAzMCwgNDAsIDE4LCAwLCBNYXRoLlBJICogMik7CgljdHguZmlsbCgpOwoJdC5pbWFnZSh0ZXh0dXJlLCBNYXRoLmZsb29yKHQuZ3JpZC5jb2xzICogMC41KSwgTWF0aC5mbG9vcih0LmdyaWQucm93cyAqIDAuNSkpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CgoJZHJhd1RleHQoJ1RFWFRNT0RFVEVYVFVSRS5TT1VSQ0UnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBCQUNLSU5HIEVMRU1FTlQnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ1RleHR1cmUga2VlcHMgaXRzIHNvdXJjZS4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWNvbnN0IHNpemUgPSBzb3VyY2VDYW52YXMgPyBzb3VyY2VDYW52YXMud2lkdGggKyAneCcgKyBzb3VyY2VDYW52YXMuaGVpZ2h0IDogJzB4MCc7CglkcmF3VGV4dChgU0laRTogJHtzaXplfWAsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+let texture = null;
+let sourceCanvas = null;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.setup(() => {
+	sourceCanvas = document.createElement('canvas');
+	sourceCanvas.width = 120;
+	sourceCanvas.height = 80;
+	texture = t.createTexture(sourceCanvas);
+	texture.characters(' .:-=+*#%@');
+});
+
+t.draw(() => {
+	t.background(8, 10, 18);
+	if (!texture) return;
+	const ctx = sourceCanvas.getContext('2d');
+	ctx.fillStyle = '#0a0d1a';
+	ctx.fillRect(0, 0, sourceCanvas.width, sourceCanvas.height);
+	ctx.fillStyle = '#38bdf8';
+	ctx.beginPath();
+	ctx.arc(60 + Math.sin(t.frameCount * 0.05) * 30, 40, 18, 0, Math.PI * 2);
+	ctx.fill();
+	t.image(texture, Math.floor(t.grid.cols * 0.5), Math.floor(t.grid.rows * 0.5));
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODETEXTURE.SOURCE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: BACKING ELEMENT', x, y++, 100, 220, 255);
+	drawText('Texture keeps its source.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	const size = sourceCanvas ? sourceCanvas.width + 'x' + sourceCanvas.height : '0x0';
+	drawText(`SIZE: ${size}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 
 ## Inherited from
 

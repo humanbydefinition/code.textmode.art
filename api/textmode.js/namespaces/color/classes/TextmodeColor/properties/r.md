@@ -23,5 +23,81 @@ Red component (0-255).
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="r" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBSQU1QID0gJyAuOi09KyojJUAnOwpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDgsIDYsIDEyKTsKCWNvbnN0IGh3ID0gTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgaGggPSBNYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7Cgljb25zdCB0bSA9IHQuZnJhbWVDb3VudCAqIDAuMDM7CgoJY29uc3QgZnggPSBNYXRoLmNvcyh0bSAqIDAuOCkgKiAoaHcgKiAwLjM1KTsKCWNvbnN0IGZ5ID0gTWF0aC5zaW4odG0gKiAwLjYpICogKGhoICogMC4zNSk7CgoJZm9yIChsZXQgeSA9IC1oaDsgeSA8PSBoaDsgeSsrKSB7CgkJZm9yIChsZXQgeCA9IC1odzsgeCA8PSBodzsgeCsrKSB7CgkJCWNvbnN0IGQgPSBNYXRoLmh5cG90KHggLSBmeCwgeSAtIGZ5KTsKCQkJY29uc3QgYW5nbGUgPSBNYXRoLmF0YW4yKHkgLSBmeSwgeCAtIGZ4KTsKCQkJY29uc3Qgd2F2ZSA9IE1hdGguc2luKGQgKiAwLjM1IC0gYW5nbGUgKiAyIC0gdG0gKiAyKTsKCQkJY29uc3QgcmVkVmFsID0gTWF0aC5mbG9vcihNYXRoLm1heCgwLCBNYXRoLm1pbigyNTUsICh3YXZlICogMC41ICsgMC41KSAqIDIzMCArIDI1KSkpOwoKCQkJY29uc3QgY29sID0gdC5jb2xvcihyZWRWYWwsIE1hdGguZmxvb3IocmVkVmFsICogMC4yNSksIDMwKTsKCQkJY29uc3QgcmVkID0gY29sLnI7CgoJCQlpZiAocmVkID4gNDUpIHsKCQkJCWNvbnN0IG5vcm0gPSAocmVkIC0gNDUpIC8gMjEwOwoJCQkJY29uc3QgaWR4ID0gTWF0aC5taW4oUkFNUC5sZW5ndGggLSAxLCBNYXRoLmZsb29yKG5vcm0gKiBSQU1QLmxlbmd0aCkpOwoKCQkJCXQucHVzaCgpOwoJCQkJdC50cmFuc2xhdGUoeCwgeSk7CgkJCQl0LmNoYXJDb2xvcihyZWQsIGNvbC5nLCBjb2wuYik7CgkJCQl0LmNlbGxDb2xvcihNYXRoLmZsb29yKHJlZCAqIDAuMjIpLCA2LCAxMCk7CgkJCQl0LmNoYXIoUkFNUFtpZHhdKTsKCQkJCXQucG9pbnQoKTsKCQkJCXQucG9wKCk7CgkJCX0KCQl9Cgl9Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCgljb25zdCBzYW1wbGVDb2wgPSB0LmNvbG9yKDI0MCwgNjAsIDMwKTsKCWNvbnN0IHJlZCA9IHNhbXBsZUNvbC5yOwoKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IoMTIwLCAyNDAsIDE4MCk7Cgl0LnByaW50KCdURVhUTU9ERUNPTE9SLlInLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoNzAsIDEwMCwgMTQwKTsKCXQucHJpbnQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDIxMCwgMjU1KTsKCXQucHJpbnQoJ0NPTkNFUFQ6IFJFQUQgUkVEIENPTE9SIENIQU5ORUwnLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAxNjAsIDE5MCk7Cgl0LnByaW50KCdSZWFkcyA4LWJpdCByZWQgcHJvcGVydHkgKDAtMjU1KS4nLCB4LCB5KyspOwoJdC5wcmludCgnRHJpdmVzIHN0ZWxsYXIgZmxhcmUgZGVuc2l0eS4nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoNzAsIDEwMCwgMTQwKTsKCXQucHJpbnQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDI1NSwgMjAwKTsKCXQucHJpbnQoYFNBTVBMRSBSRUQ6ICR7cmVkfSAvIDI1NWAsIHgsIHkrKyk7Cgl0LnBvcCgpOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const RAMP = ' .:-=+*#%@';
+const labelLayer = t.layers.add();
+
+t.draw(() => {
+	t.background(8, 6, 12);
+	const hw = Math.floor(t.grid.cols / 2);
+	const hh = Math.floor(t.grid.rows / 2);
+	const tm = t.frameCount * 0.03;
+
+	const fx = Math.cos(tm * 0.8) * (hw * 0.35);
+	const fy = Math.sin(tm * 0.6) * (hh * 0.35);
+
+	for (let y = -hh; y <= hh; y++) {
+		for (let x = -hw; x <= hw; x++) {
+			const d = Math.hypot(x - fx, y - fy);
+			const angle = Math.atan2(y - fy, x - fx);
+			const wave = Math.sin(d * 0.35 - angle * 2 - tm * 2);
+			const redVal = Math.floor(Math.max(0, Math.min(255, (wave * 0.5 + 0.5) * 230 + 25)));
+
+			const col = t.color(redVal, Math.floor(redVal * 0.25), 30);
+			const red = col.r;
+
+			if (red > 45) {
+				const norm = (red - 45) / 210;
+				const idx = Math.min(RAMP.length - 1, Math.floor(norm * RAMP.length));
+
+				t.push();
+				t.translate(x, y);
+				t.charColor(red, col.g, col.b);
+				t.cellColor(Math.floor(red * 0.22), 6, 10);
+				t.char(RAMP[idx]);
+				t.point();
+				t.pop();
+			}
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const sampleCol = t.color(240, 60, 30);
+	const red = sampleCol.r;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODECOLOR.R', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: READ RED COLOR CHANNEL', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Reads 8-bit red property (0-255).', x, y++);
+	t.print('Drives stellar flare density.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 200);
+	t.print(`SAMPLE RED: ${red} / 255`, x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

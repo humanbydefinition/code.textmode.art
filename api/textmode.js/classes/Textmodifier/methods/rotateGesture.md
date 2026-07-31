@@ -35,5 +35,64 @@ along with the gesture centre in grid coordinates. Ideal for dial-like interacti
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="rotateGesture" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpsZXQgcm90YXRpb24gPSAwOwpsZXQgZHJhZ1N0YXJ0ID0gMDsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKdC5yb3RhdGVHZXN0dXJlKChkYXRhKSA9PiB7Cglyb3RhdGlvbiArPSBkYXRhLmRlbHRhUm90YXRpb247Cn0pOwoKdC5tb3VzZVByZXNzZWQoKCkgPT4gewoJZHJhZ1N0YXJ0ID0gdC5tb3VzZS54Owp9KTsKCnQubW91c2VEcmFnZ2VkKCgpID0-IHsKCXJvdGF0aW9uICs9ICh0Lm1vdXNlLnggLSBkcmFnU3RhcnQpICogMC41OwoJZHJhZ1N0YXJ0ID0gdC5tb3VzZS54Owp9KTsKCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNiwgMTAsIDIyKTsKCXQucm90YXRlWihyb3RhdGlvbik7Cgl0LmNoYXIoJyMnKTsKCXQuY2hhckNvbG9yKDE0MCwgMjIwLCAyNTUpOwoJdC5yZWN0KDE0LCA0KTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5ST1RBVEVHRVNUVVJFJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogUk9UQVRFIEdFU1RVUkUnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ1RvdWNoIHR3aXN0IG9yIGRyYWcgcm90YXRlcy4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJ1JvdGF0aW9uIGFjY3VtdWxhdGVzIG92ZXIgdGltZS4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KGBERUc6ICR7cm90YXRpb24udG9GaXhlZCgxKX1gLCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+let rotation = 0;
+let dragStart = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.rotateGesture((data) => {
+	rotation += data.deltaRotation;
+});
+
+t.mousePressed(() => {
+	dragStart = t.mouse.x;
+});
+
+t.mouseDragged(() => {
+	rotation += (t.mouse.x - dragStart) * 0.5;
+	dragStart = t.mouse.x;
+});
+
+t.draw(() => {
+	t.background(6, 10, 22);
+	t.rotateZ(rotation);
+	t.char('#');
+	t.charColor(140, 220, 255);
+	t.rect(14, 4);
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.ROTATEGESTURE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: ROTATE GESTURE', x, y++, 100, 220, 255);
+	drawText('Touch twist or drag rotates.', x, y++, 140, 160, 190);
+	drawText('Rotation accumulates over time.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`DEG: ${rotation.toFixed(1)}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

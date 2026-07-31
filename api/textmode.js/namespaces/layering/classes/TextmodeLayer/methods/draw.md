@@ -35,5 +35,88 @@ The callback runs each frame and should contain this layer's drawing commands.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="draw" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBiYWNrTGF5ZXIgPSB0LmxheWVycy5hZGQoeyBvcGFjaXR5OiAwLjYgfSk7CmNvbnN0IGVmZmVjdExheWVyID0gdC5sYXllcnMuYWRkKHsgYmxlbmRNb2RlOiAnYWRkaXRpdmUnIH0pOwpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByZ2IgPSBbMjU1LCAyNTUsIDI1NV0pIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IocmdiWzBdLCByZ2JbMV0sIHJnYlsyXSk7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg2LCAxMCwgMjIpOwoKCXQucHVzaCgpOwoJdC5jaGFyQ29sb3IoNDAsIDUwLCA4MCk7Cgl0LmNoYXIoJy4nKTsKCWZvciAobGV0IHkgPSAtNDsgeSA8PSA0OyB5ICs9IDIpIHsKCQl0LnB1c2goKTsKCQl0LnRyYW5zbGF0ZSgwLCB5KTsKCQl0LnJlY3QodC5ncmlkLmNvbHMsIDEpOwoJCXQucG9wKCk7Cgl9Cgl0LnBvcCgpOwp9KTsKCmJhY2tMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IHRpbWUgPSB0LmZyYW1lQ291bnQgKiAwLjAzOwoKCS8vIEZsb2F0aW5nIGRhdGEgbm9kZXMgY2lyY2xpbmcgdGhlIGNlbnRlcgoJZm9yIChsZXQgaSA9IDA7IGkgPCA2OyBpKyspIHsKCQljb25zdCBhbmdsZSA9IHRpbWUgKyAoaSAvIDYpICogTWF0aC5QSSAqIDI7CgkJY29uc3QgciA9IDEwOwoJCXQucHVzaCgpOwoJCXQudHJhbnNsYXRlKE1hdGgucm91bmQoTWF0aC5jb3MoYW5nbGUpICogciAqIDEuNSksIE1hdGgucm91bmQoTWF0aC5zaW4oYW5nbGUpICogciAqIDAuNikpOwoJCXQuY2hhckNvbG9yKDEwMCwgMTUwLCAyNTUpOwoJCXQuY2hhcignbycpOwoJCXQucG9pbnQoKTsKCQl0LnBvcCgpOwoJfQp9KTsKCmVmZmVjdExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgdGltZSA9IHQuZnJhbWVDb3VudCAqIDAuMDU7Cgljb25zdCBwdWxzZSA9IDAuNSArIDAuNSAqIE1hdGguc2luKHRpbWUpOwoKCS8vIENlbnRyYWwgY29yZSBwdWxzaW5nIHNoYXBlCgl0LnB1c2goKTsKCXQuY2hhckNvbG9yKDI1NSwgMTAwICsgcHVsc2UgKiAxNTUsIDEwMCk7Cgl0LmNoYXIoJyMnKTsKCXQucmVjdCg4LCA0KTsKCXQucG9wKCk7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnVEVYVE1PREVMQVlFUi5EUkFXJywgeCwgeSsrLCBbMTAwLCAyNTUsIDE0MF0pOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgWzgwLCAxMDAsIDE1MF0pOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IExBWUVSIERSQVcgQ0FMTEJBQ0snLCB4LCB5KyssIFsxMDAsIDIyMCwgMjU1XSk7CglkcmF3VGV4dCgnQmFzZSwgYmFjaywgYW5kIGVmZmVjdCBkcmF3IGFwYXJ0LicsIHgsIHkrKywgWzE0MCwgMTYwLCAxOTBdKTsKCWRyYXdUZXh0KCdFYWNoIGNhbGxiYWNrIG93bnMgaXRzIGJ1ZmZlci4nLCB4LCB5KyssIFsxNDAsIDE2MCwgMTkwXSk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCBbODAsIDEwMCwgMTUwXSk7CglkcmF3VGV4dCgnTEFZRVJTOiBCQVNFICsgMicsIHgsIHkrKywgWzE0MCwgMjU1LCAxODBdKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const backLayer = t.layers.add({ opacity: 0.6 });
+const effectLayer = t.layers.add({ blendMode: 'additive' });
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, rgb = [255, 255, 255]) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(6, 10, 22);
+
+	t.push();
+	t.charColor(40, 50, 80);
+	t.char('.');
+	for (let y = -4; y <= 4; y += 2) {
+		t.push();
+		t.translate(0, y);
+		t.rect(t.grid.cols, 1);
+		t.pop();
+	}
+	t.pop();
+});
+
+backLayer.draw(() => {
+	t.clear();
+	const time = t.frameCount * 0.03;
+
+	// Floating data nodes circling the center
+	for (let i = 0; i < 6; i++) {
+		const angle = time + (i / 6) * Math.PI * 2;
+		const r = 10;
+		t.push();
+		t.translate(Math.round(Math.cos(angle) * r * 1.5), Math.round(Math.sin(angle) * r * 0.6));
+		t.charColor(100, 150, 255);
+		t.char('o');
+		t.point();
+		t.pop();
+	}
+});
+
+effectLayer.draw(() => {
+	t.clear();
+	const time = t.frameCount * 0.05;
+	const pulse = 0.5 + 0.5 * Math.sin(time);
+
+	// Central core pulsing shape
+	t.push();
+	t.charColor(255, 100 + pulse * 155, 100);
+	t.char('#');
+	t.rect(8, 4);
+	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODELAYER.DRAW', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: LAYER DRAW CALLBACK', x, y++, [100, 220, 255]);
+	drawText('Base, back, and effect draw apart.', x, y++, [140, 160, 190]);
+	drawText('Each callback owns its buffer.', x, y++, [140, 160, 190]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('LAYERS: BASE + 2', x, y++, [140, 255, 180]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

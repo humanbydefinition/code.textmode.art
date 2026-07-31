@@ -28,5 +28,72 @@ Built-in fatal error layer controller.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="errors" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAp9KTsKCmxldCB0cmlnZ2VyRXJyb3IgPSBmYWxzZTsKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKd2luZG93LmFkZEV2ZW50TGlzdGVuZXIoCgknY2xpY2snLAoJKCkgPT4gewoJCXRyaWdnZXJFcnJvciA9IHRydWU7Cgl9LAoJeyBvbmNlOiB0cnVlIH0KKTsKCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoMTAsIDEyLCAyNCk7CgoJLy8gUmVuZGVyIGEgc3Bpbm5pbmcgbmVvbiBjeWFuIGdlYXIgdG8gZGVtb25zdHJhdGUgYWN0aXZlIGRyYXcgbG9vcAoJY29uc3QgdGltZSA9IHQuZnJhbWVDb3VudCAqIDAuMDU7Cglmb3IgKGxldCBpID0gMDsgaSA8IDg7IGkrKykgewoJCWNvbnN0IGFuZ2xlID0gdGltZSArIChpIC8gOCkgKiBNYXRoLlBJICogMjsKCQl0LnB1c2goKTsKCQl0LnRyYW5zbGF0ZShNYXRoLmNvcyhhbmdsZSkgKiA4LCBNYXRoLnNpbihhbmdsZSkgKiA0KTsKCQl0LmNoYXJDb2xvcigwLCAxODAsIDI1NSk7CgkJdC5jaGFyKCcqJyk7CgkJdC5wb2ludCgpOwoJCXQucG9wKCk7Cgl9CgoJaWYgKHRyaWdnZXJFcnJvcikgewoJCXRocm93IG5ldyBFcnJvcignVGhpcyBleGFtcGxlIGludGVudGlvbmFsbHkgdHJpZ2dlcnMgdGhlIGVycm9yIGxheWVyLicpOwoJfQp9KTsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLkVSUk9SUycsIHgsIHkrKywgMjU1LCAxMDAsIDEwMCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IEFVVE9NQVRFRCBSVU5USU1FIEVSUk9SIENBUFRVUkUnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ1Nob3dzIGZhbGxiYWNrIGVycm9yIG92ZXJsYXkuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7Cgljb25zdCBzdGF0ZSA9IEJvb2xlYW4odC5lcnJvcnMpID8gJ1RSVUUnIDogJ0ZBTFNFJzsKCWRyYXdUZXh0KGBFUlJPUlM6ICR7c3RhdGV9YCwgeCwgeSsrLCAxNDAsIDE5MCwgMjU1KTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ0xJQ0sgVE8gVFJJR0dFUiBFUlJPUicsIHgsIHkrKywgMjU1LCAyMDAsIDEwMCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 8,
+});
+
+let triggerError = false;
+const labelLayer = t.layers.add();
+
+window.addEventListener(
+	'click',
+	() => {
+		triggerError = true;
+	},
+	{ once: true }
+);
+
+t.draw(() => {
+	t.background(10, 12, 24);
+
+	// Render a spinning neon cyan gear to demonstrate active draw loop
+	const time = t.frameCount * 0.05;
+	for (let i = 0; i < 8; i++) {
+		const angle = time + (i / 8) * Math.PI * 2;
+		t.push();
+		t.translate(Math.cos(angle) * 8, Math.sin(angle) * 4);
+		t.charColor(0, 180, 255);
+		t.char('*');
+		t.point();
+		t.pop();
+	}
+
+	if (triggerError) {
+		throw new Error('This example intentionally triggers the error layer.');
+	}
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODIFIER.ERRORS', x, y++, 255, 100, 100);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: AUTOMATED RUNTIME ERROR CAPTURE', x, y++, 100, 220, 255);
+	drawText('Shows fallback error overlay.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	const state = Boolean(t.errors) ? 'TRUE' : 'FALSE';
+	drawText(`ERRORS: ${state}`, x, y++, 140, 190, 255);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CLICK TO TRIGGER ERROR', x, y++, 255, 200, 100);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

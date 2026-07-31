@@ -36,5 +36,64 @@ contributes compared to the previous one.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="noiseDetail" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKCXNlZWQ6ICdub2lzZS1kZXRhaWwnLAp9KTsKCmNvbnN0IGxhYmVsTGF5ZXIgPSB0LmxheWVycy5hZGQoKTsKY29uc3QgcmFtcCA9ICcgLjotPSsqIyVAJzsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKZnVuY3Rpb24gZHJhd1BhbmVsKG9mZnNldFgsIG9jdGF2ZXMsIGZhbGxvZmYpIHsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMikgKyAxMTsKCXQubm9pc2VEZXRhaWwob2N0YXZlcywgZmFsbG9mZik7Cglmb3IgKGxldCB5ID0gMDsgeSA8IE1hdGgubWluKDE2LCB0LmdyaWQucm93cyAtIDEzKTsgeSArPSAxKSB7CgkJZm9yIChsZXQgeCA9IDA7IHggPCAyMDsgeCArPSAxKSB7CgkJCWNvbnN0IHZhbHVlID0gdC5ub2lzZSh4ICogMC4xNCwgeSAqIDAuMTQsIHQuZnJhbWVDb3VudCAqIDAuMDEyKTsKCQkJY29uc3QgaW5kZXggPSBNYXRoLmZsb29yKHZhbHVlICogKHJhbXAubGVuZ3RoIC0gMSkpOwoJCQl0LnB1c2goKTsKCQkJdC50cmFuc2xhdGUob2Zmc2V0WCArIHgsIHRvcCArIHkpOwoJCQl0LmNoYXIocmFtcFtpbmRleF0pOwoJCQl0LmNoYXJDb2xvcig5MCArIHZhbHVlICogMTUwLCAxNDAgKyB2YWx1ZSAqIDEwMCwgMjU1KTsKCQkJdC5wb2ludCgpOwoJCQl0LnBvcCgpOwoJCX0KCX0KfQoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg1LCA4LCAxOCk7CglkcmF3UGFuZWwoLTI0LCAyLCAwLjM1KTsKCWRyYXdQYW5lbCg0LCA3LCAwLjY1KTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuTk9JU0VERVRBSUwnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBPQ1RBVkVTICsgRkFMTE9GRicsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnTGVmdDogc29mdCwgbG93IGRldGFpbC4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJ1JpZ2h0OiByaWNoZXIgZmluZSB0ZXh0dXJlLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+	seed: 'noise-detail',
+});
+
+const labelLayer = t.layers.add();
+const ramp = ' .:-=+*#%@';
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+function drawPanel(offsetX, octaves, falloff) {
+	const top = -Math.floor(t.grid.rows / 2) + 11;
+	t.noiseDetail(octaves, falloff);
+	for (let y = 0; y < Math.min(16, t.grid.rows - 13); y += 1) {
+		for (let x = 0; x < 20; x += 1) {
+			const value = t.noise(x * 0.14, y * 0.14, t.frameCount * 0.012);
+			const index = Math.floor(value * (ramp.length - 1));
+			t.push();
+			t.translate(offsetX + x, top + y);
+			t.char(ramp[index]);
+			t.charColor(90 + value * 150, 140 + value * 100, 255);
+			t.point();
+			t.pop();
+		}
+	}
+}
+
+t.draw(() => {
+	t.background(5, 8, 18);
+	drawPanel(-24, 2, 0.35);
+	drawPanel(4, 7, 0.65);
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODIFIER.NOISEDETAIL', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: OCTAVES + FALLOFF', x, y++, 100, 220, 255);
+	drawText('Left: soft, low detail.', x, y++, 140, 160, 190);
+	drawText('Right: richer fine texture.', x, y++, 140, 160, 190);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

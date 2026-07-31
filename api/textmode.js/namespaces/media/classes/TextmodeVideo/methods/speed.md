@@ -33,5 +33,70 @@ Set playback speed.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="speed" encoded-code="Y29uc3QgVklERU9fVVJMID0gJ2h0dHBzOi8vaW50ZXJhY3RpdmUtZXhhbXBsZXMubWRuLm1vemlsbGEubmV0L21lZGlhL2NjMC12aWRlb3MvZmxvd2VyLm1wNCc7CmNvbnN0IHQgPSB0ZXh0bW9kZS5jcmVhdGUoewoJd2lkdGg6IHdpbmRvdy5pbm5lcldpZHRoLAoJaGVpZ2h0OiB3aW5kb3cuaW5uZXJIZWlnaHQsCglmb250U2l6ZTogMTYsCn0pOwoKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwpsZXQgdmlkZW8gPSBudWxsOwpsZXQgcmF0ZSA9IDEuMDsKCnQuc2V0dXAoYXN5bmMgKCkgPT4gewoJdmlkZW8gPSBhd2FpdCB0LmxvYWRWaWRlbyhWSURFT19VUkwpOwoJdmlkZW8uY2hhcmFjdGVycygnIC46LT0rKiMlQCcpOwoJdmlkZW8ubG9vcCgpOwoJdmlkZW8udm9sdW1lKDApOwoJYXdhaXQgdmlkZW8ucGxheSgpOwp9KTsKCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNiwgOCwgMjApOwoJaWYgKCF2aWRlbykgcmV0dXJuOwoKCWNvbnN0IGhhbGZXaWR0aCA9IHQuZ3JpZC5jb2xzIC8gMjsKCWNvbnN0IG5vcm1hbGl6ZWRYID0gKHQubW91c2UueCArIGhhbGZXaWR0aCkgLyB0LmdyaWQuY29sczsKCWNvbnN0IGNsYW1wZWRYID0gTWF0aC5tYXgoMCwgTWF0aC5taW4oMSwgbm9ybWFsaXplZFgpKTsKCXJhdGUgPSAwLjEgKyBjbGFtcGVkWCAqIDMuOTsKCgl2aWRlby5zcGVlZChyYXRlKTsKCXQuaW1hZ2UodmlkZW8pOwp9KTsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnVEVYVE1PREVWSURFTy5TUEVFRCcsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IFBMQVlCQUNLIFJBVEUgQ09OVFJPTCcsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnQWx0ZXJzIHBsYXliYWNrIHNwZWVkIGR5bmFtaWNhbGx5LicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoKCWlmICh2aWRlbykgewoJCWRyYXdUZXh0KGBDVVJSRU5UIFNQRUVEOiAke3JhdGUudG9GaXhlZCgxKX14YCwgeCwgeSsrLCAyNTUsIDIxMCwgOTApOwoJCWRyYXdUZXh0KCdNT1ZFIE1PVVNFIEhPUklaT05UQUxMWSBUTyBDSEFOR0UnLCB4LCB5KyssIDEyMCwgMjA1LCAyNTUpOwoJfSBlbHNlIHsKCQlkcmF3VGV4dCgnTE9BRElORyBWSURFTy4uLicsIHgsIHkrKywgMjU1LCAxODAsIDEyMCk7Cgl9Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const VIDEO_URL = 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4';
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let video = null;
+let rate = 1.0;
+
+t.setup(async () => {
+	video = await t.loadVideo(VIDEO_URL);
+	video.characters(' .:-=+*#%@');
+	video.loop();
+	video.volume(0);
+	await video.play();
+});
+
+t.draw(() => {
+	t.background(6, 8, 20);
+	if (!video) return;
+
+	const halfWidth = t.grid.cols / 2;
+	const normalizedX = (t.mouse.x + halfWidth) / t.grid.cols;
+	const clampedX = Math.max(0, Math.min(1, normalizedX));
+	rate = 0.1 + clampedX * 3.9;
+
+	video.speed(rate);
+	t.image(video);
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODEVIDEO.SPEED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: PLAYBACK RATE CONTROL', x, y++, 100, 220, 255);
+	drawText('Alters playback speed dynamically.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+
+	if (video) {
+		drawText(`CURRENT SPEED: ${rate.toFixed(1)}x`, x, y++, 255, 210, 90);
+		drawText('MOVE MOUSE HORIZONTALLY TO CHANGE', x, y++, 120, 205, 255);
+	} else {
+		drawText('LOADING VIDEO...', x, y++, 255, 180, 120);
+	}
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

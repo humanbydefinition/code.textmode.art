@@ -25,5 +25,57 @@ where every vertex is an independent mark.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="POINTS" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBtb2RlID0gdC5QT0lOVFM7CmNvbnN0IG1vZGVOYW1lID0gJ1BPSU5UUyc7CmNvbnN0IGxhYmVsTGF5ZXIgPSB0LmxheWVycy5hZGQoKTsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKdC5kcmF3KCgpID0-IHsKCWNvbnN0IHRpbWUgPSB0LmZyYW1lQ291bnQgKiAwLjAzNTsKCXQuYmFja2dyb3VuZCg2LCAxMCwgMjQpOwoJdC5iZWdpblNoYXBlKG1vZGUpOwoJZm9yIChsZXQgaSA9IDA7IGkgPCA5NjsgaSsrKSB7CgkJY29uc3QgYSA9IGkgKiAxMy43ICsgdC5mcmFtZUNvdW50ICogMS40OwoJCWNvbnN0IHIgPSAyICsgaSAqIDAuMTIgKyBNYXRoLnNpbih0aW1lICogMiArIGkpICogMS4yOwoJCXQuY2hhcihpICUgMyA9PT0gMCA_ICcqJyA6ICcuJyk7CgkJdC5jaGFyQ29sb3IoOTAgKyBpLCAxODAgKyBNYXRoLnNpbihpKSAqIDUwLCAyNTUpOwoJCXQuY2VsbENvbG9yKDQsIDEyICsgKGkgJSA2KSAqIDUsIDMwKTsKCQl0LnZlcnRleChNYXRoLmNvcyhhKSAqIHIsIE1hdGguc2luKGEpICogcik7Cgl9Cgl0LmVuZFNoYXBlKCk7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuUE9JTlRTJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogVkVSVEVYIFBBUlRJQ0xFUycsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnRWFjaCB2ZXJ0ZXggYmVjb21lcyBhIHBvaW50LicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnTm8gZWRnZXMgY29ubmVjdCB0aGUgbWFya3MuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dChgTU9ERTogJHttb2RlTmFtZX1gLCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const mode = t.POINTS;
+const modeName = 'POINTS';
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	const time = t.frameCount * 0.035;
+	t.background(6, 10, 24);
+	t.beginShape(mode);
+	for (let i = 0; i < 96; i++) {
+		const a = i * 13.7 + t.frameCount * 1.4;
+		const r = 2 + i * 0.12 + Math.sin(time * 2 + i) * 1.2;
+		t.char(i % 3 === 0 ? '*' : '.');
+		t.charColor(90 + i, 180 + Math.sin(i) * 50, 255);
+		t.cellColor(4, 12 + (i % 6) * 5, 30);
+		t.vertex(Math.cos(a) * r, Math.sin(a) * r);
+	}
+	t.endShape();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.POINTS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: VERTEX PARTICLES', x, y++, 100, 220, 255);
+	drawText('Each vertex becomes a point.', x, y++, 140, 160, 190);
+	drawText('No edges connect the marks.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`MODE: ${modeName}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

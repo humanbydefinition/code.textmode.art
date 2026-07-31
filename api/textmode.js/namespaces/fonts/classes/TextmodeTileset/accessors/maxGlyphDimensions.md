@@ -34,5 +34,90 @@ Effective tile dimensions used by the layer grid.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="maxGlyphDimensions" encoded-code="Y29uc3QgVDY0X1VSTCA9ICdodHRwczovL2xpdHRsZWJpdHNwYWNlLmNvbS9yZXNvdXJjZXMvZm9udHMvVDY0LnBuZyc7CmNvbnN0IHQgPSB0ZXh0bW9kZS5jcmVhdGUoewoJd2lkdGg6IHdpbmRvdy5pbm5lcldpZHRoLAoJaGVpZ2h0OiB3aW5kb3cuaW5uZXJIZWlnaHQsCglmb250U2l6ZTogMTYsCn0pOwoKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwpsZXQgdGlsZXNldCA9IG51bGw7Cgp0LnNldHVwKGFzeW5jICgpID0-IHsKCXRpbGVzZXQgPSBhd2FpdCB0LmxvYWRUaWxlc2V0KHsgc291cmNlOiBUNjRfVVJMLCBjb2x1bW5zOiAxNiwgcm93czogMTYsIGNvdW50OiAyNTYsIGZvbnRTaXplOiAxNiB9KTsKfSk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDgsIDI0LCA0OCk7CglpZiAoIXRpbGVzZXQpIHJldHVybjsKCgljb25zdCBodyA9IE1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IGhoID0gTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJY29uc3QgdG0gPSB0LmZyYW1lQ291bnQgKiAwLjA1OwoJY29uc3QgY2hhcnMgPSB0aWxlc2V0LmNoYXJhY3RlcnM7Cgljb25zdCBtYXhEaW1zID0gdGlsZXNldC5tYXhHbHlwaERpbWVuc2lvbnM7CgoJY29uc3QgYm91bmRXID0gTWF0aC5tYXgoMywgTWF0aC5mbG9vcihtYXhEaW1zLndpZHRoICogMC42KSk7Cgljb25zdCBib3VuZEggPSBNYXRoLm1heCgzLCBNYXRoLmZsb29yKG1heERpbXMuaGVpZ2h0ICogMC42KSk7CgoJZm9yIChsZXQgeSA9IC1oaDsgeSA8PSBoaDsgeSsrKSB7CgkJZm9yIChsZXQgeCA9IC1odzsgeCA8PSBodzsgeCsrKSB7CgkJCWNvbnN0IHJlbFggPSBNYXRoLmFicyh4KSAlIChib3VuZFcgKyA0KTsKCQkJY29uc3QgcmVsWSA9IE1hdGguYWJzKHkpICUgKGJvdW5kSCArIDQpOwoKCQkJY29uc3QgaXNFZGdlWCA9IHJlbFggPT09IGJvdW5kVzsKCQkJY29uc3QgaXNFZGdlWSA9IHJlbFkgPT09IGJvdW5kSDsKCQkJY29uc3QgaXNWZXJ0ZXggPSBpc0VkZ2VYICYmIGlzRWRnZVk7CgkJCWNvbnN0IGlzV2lyZSA9IGlzRWRnZVggfHwgaXNFZGdlWTsKCgkJCWNvbnN0IGNoYXJJZHggPSBNYXRoLmZsb29yKE1hdGguYWJzKHggKiAyICsgeSAqIDIgKyB0bSAqIDYpICUgKGNoYXJzLmxlbmd0aCB8fCAxKSk7CgkJCWNvbnN0IGNoYXJLZXkgPSBpc1ZlcnRleCA_ICcrJyA6IGlzV2lyZSA_IChjaGFyc1tjaGFySWR4XSA_IGNoYXJzW2NoYXJJZHhdLmNoYXJhY3RlciA6ICcjJykgOiAnICc7CgoJCQlpZiAoaXNXaXJlKSB7CgkJCQl0LnB1c2goKTsKCQkJCXQudHJhbnNsYXRlKHgsIHkpOwoJCQkJdC5jaGFyQ29sb3IoaXNWZXJ0ZXggPyAyNTUgOiA0MCwgaXNWZXJ0ZXggPyAyNTUgOiAyNDAsIGlzVmVydGV4ID8gMjU1IDogMTQwKTsKCQkJCXQuY2VsbENvbG9yKGlzVmVydGV4ID8gNDAgOiAxMiwgaXNWZXJ0ZXggPyA1MCA6IDI4LCBpc1ZlcnRleCA_IDMwIDogMjApOwoJCQkJdC5jaGFyKGNoYXJLZXkpOwoJCQkJdC5wb2ludCgpOwoJCQkJdC5wb3AoKTsKCQkJfQoJCX0KCX0KfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWlmICghdGlsZXNldCkgcmV0dXJuOwoJY29uc3QgbWF4RGltcyA9IHRpbGVzZXQubWF4R2x5cGhEaW1lbnNpb25zOwoKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IoMTIwLCAyNDAsIDE4MCk7Cgl0LnByaW50KCdURVhUTU9ERVRJTEVTRVQuTUFYR0xZUEhESU1FTlNJT05TJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDcwLCAxMDAsIDE0MCk7Cgl0LnByaW50KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAyMTAsIDI1NSk7Cgl0LnByaW50KCdDT05DRVBUOiBDQUQgQ0FMSVBFUiBHUklEIFNUQUdJTkcnLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAxNjAsIDE5MCk7Cgl0LnByaW50KCdCb3VuZGluZyBib3ggb2YgbGFyZ2VzdCBhdGxhcyB0aWxlLicsIHgsIHkrKyk7Cgl0LnByaW50KCdFc3RhYmxpc2hlcyBtYXggdGlsZSBjZWxsIGJvdW5kcy4nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoNzAsIDEwMCwgMTQwKTsKCXQucHJpbnQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcig0MCwgMjQwLCAxNDApOwoJdC5wcmludChgTUFYIEJPVU5EUzogJHttYXhEaW1zLndpZHRofSB4ICR7bWF4RGltcy5oZWlnaHR9IFBYYCwgeCwgeSsrKTsKCXQucG9wKCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const T64_URL = 'https://littlebitspace.com/resources/fonts/T64.png';
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let tileset = null;
+
+t.setup(async () => {
+	tileset = await t.loadTileset({ source: T64_URL, columns: 16, rows: 16, count: 256, fontSize: 16 });
+});
+
+t.draw(() => {
+	t.background(8, 24, 48);
+	if (!tileset) return;
+
+	const hw = Math.floor(t.grid.cols / 2);
+	const hh = Math.floor(t.grid.rows / 2);
+	const tm = t.frameCount * 0.05;
+	const chars = tileset.characters;
+	const maxDims = tileset.maxGlyphDimensions;
+
+	const boundW = Math.max(3, Math.floor(maxDims.width * 0.6));
+	const boundH = Math.max(3, Math.floor(maxDims.height * 0.6));
+
+	for (let y = -hh; y <= hh; y++) {
+		for (let x = -hw; x <= hw; x++) {
+			const relX = Math.abs(x) % (boundW + 4);
+			const relY = Math.abs(y) % (boundH + 4);
+
+			const isEdgeX = relX === boundW;
+			const isEdgeY = relY === boundH;
+			const isVertex = isEdgeX && isEdgeY;
+			const isWire = isEdgeX || isEdgeY;
+
+			const charIdx = Math.floor(Math.abs(x * 2 + y * 2 + tm * 6) % (chars.length || 1));
+			const charKey = isVertex ? '+' : isWire ? (chars[charIdx] ? chars[charIdx].character : '#') : ' ';
+
+			if (isWire) {
+				t.push();
+				t.translate(x, y);
+				t.charColor(isVertex ? 255 : 40, isVertex ? 255 : 240, isVertex ? 255 : 140);
+				t.cellColor(isVertex ? 40 : 12, isVertex ? 50 : 28, isVertex ? 30 : 20);
+				t.char(charKey);
+				t.point();
+				t.pop();
+			}
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	if (!tileset) return;
+	const maxDims = tileset.maxGlyphDimensions;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODETILESET.MAXGLYPHDIMENSIONS', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: CAD CALIPER GRID STAGING', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Bounding box of largest atlas tile.', x, y++);
+	t.print('Establishes max tile cell bounds.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(40, 240, 140);
+	t.print(`MAX BOUNDS: ${maxDims.width} x ${maxDims.height} PX`, x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

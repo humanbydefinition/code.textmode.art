@@ -28,5 +28,85 @@ Current Y component of the camera up vector.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="upY" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBSQU1QID0gWycuJywgJzonLCAnPScsICcjJywgJyUnXTsKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwpsZXQgdXBWYWwgPSAwOwoKdC5zZXR1cCgoKSA9PiB7Cgl0LnBlcnNwZWN0aXZlKDU4LCAwLjEsIDQwOTYpOwp9KTsKCmZ1bmN0aW9uIGRyYXdTY2VuZSh0bSkgewoJdC5wdXNoKCk7Cgl0LmFtYmllbnRMaWdodCgyNSwgMzUsIDYwKTsKCXQucG9pbnRMaWdodCgyNTUsIDIwMCwgMTQwLCBNYXRoLnNpbih0bSkgKiAyMCwgMTgsIDI1KTsKCglmb3IgKGxldCB4ID0gLTI0OyB4IDw9IDI0OyB4ICs9IDgpIHsKCQlmb3IgKGxldCB6ID0gLTI0OyB6IDw9IDI0OyB6ICs9IDgpIHsKCQkJY29uc3Qgbm9ybSA9IE1hdGguc2luKHggKiAwLjE1ICsgeiAqIDAuMTUgKyB0bSkgKiAwLjUgKyAwLjU7CgkJCWNvbnN0IGggPSBNYXRoLmZsb29yKG5vcm0gKiAxMiArIDQpOwoJCQljb25zdCBySWR4ID0gTWF0aC5taW4oUkFNUC5sZW5ndGggLSAxLCBNYXRoLmZsb29yKG5vcm0gKiBSQU1QLmxlbmd0aCkpOwoKCQkJdC5wdXNoKCk7CgkJCXQudHJhbnNsYXRlKHgsIGggKiAwLjUsIHopOwoJCQl0LmNoYXJDb2xvcihNYXRoLmZsb29yKDQwICsgbm9ybSAqIDE0MCksIE1hdGguZmxvb3IoMTYwICsgbm9ybSAqIDgwKSwgTWF0aC5mbG9vcigyMjAgLSBub3JtICogNjApKTsKCQkJdC5jZWxsQ29sb3IoMTAsIDE4LCAzNik7CgkJCXQuY2hhcihSQU1QW3JJZHhdKTsKCQkJdC5ib3goNCwgaCwgNCk7CgkJCXQucG9wKCk7CgkJfQoJfQoJdC5wb3AoKTsKfQoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg2LCAxMCwgMjQpOwoJY29uc3QgdG0gPSB0LmZyYW1lQ291bnQgKiAwLjAzOwoJY29uc3Qgcm9sbFkgPSBNYXRoLnNpbih0bSAqIDAuOCkgKiAxLjU7CgoJY29uc3QgY2FtID0gdC5jcmVhdGVDYW1lcmEoKS5zZXRQb3NpdGlvbigzNiwgMTIsIDM2KS5sb29rQXQoMCwgMiwgMCk7CgljYW0uc2V0VXAoMCwgcm9sbFksIDEpOwoKCXVwVmFsID0gY2FtLnVwWTsKCXQuc2V0Q2FtZXJhKGNhbSk7CglkcmF3U2NlbmUodG0pOwoJdC5yZXNldENhbWVyYSgpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CgoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcigxMjAsIDI0MCwgMTgwKTsKCXQucHJpbnQoJ1RFWFRNT0RFQ0FNRVJBLlVQWScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcig3MCwgMTAwLCAxNDApOwoJdC5wcmludCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMjEwLCAyNTUpOwoJdC5wcmludCgnQ09OQ0VQVDogR1lST1NDT1BJQyBIT1JJWk9OIFNXRUVQJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMTYwLCAxOTApOwoJdC5wcmludCgnUmVhZHMgY2FtZXJhIHVwIHZlY3RvciBZIGNvbXBvbmVudC4nLCB4LCB5KyspOwoJdC5wcmludCgnT3NjaWxsYXRpbmcgdXBZIGJhbmtzIHdvcmxkIGhvcml6b24uJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDcwLCAxMDAsIDE0MCk7Cgl0LnByaW50KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAyNTUsIDIwMCk7Cgl0LnByaW50KGBVUCBZIFZBTFVFOiAke3VwVmFsLnRvRml4ZWQoMyl9YCwgeCwgeSsrKTsKCXQucG9wKCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const RAMP = ['.', ':', '=', '#', '%'];
+const labelLayer = t.layers.add();
+let upVal = 0;
+
+t.setup(() => {
+	t.perspective(58, 0.1, 4096);
+});
+
+function drawScene(tm) {
+	t.push();
+	t.ambientLight(25, 35, 60);
+	t.pointLight(255, 200, 140, Math.sin(tm) * 20, 18, 25);
+
+	for (let x = -24; x <= 24; x += 8) {
+		for (let z = -24; z <= 24; z += 8) {
+			const norm = Math.sin(x * 0.15 + z * 0.15 + tm) * 0.5 + 0.5;
+			const h = Math.floor(norm * 12 + 4);
+			const rIdx = Math.min(RAMP.length - 1, Math.floor(norm * RAMP.length));
+
+			t.push();
+			t.translate(x, h * 0.5, z);
+			t.charColor(Math.floor(40 + norm * 140), Math.floor(160 + norm * 80), Math.floor(220 - norm * 60));
+			t.cellColor(10, 18, 36);
+			t.char(RAMP[rIdx]);
+			t.box(4, h, 4);
+			t.pop();
+		}
+	}
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(6, 10, 24);
+	const tm = t.frameCount * 0.03;
+	const rollY = Math.sin(tm * 0.8) * 1.5;
+
+	const cam = t.createCamera().setPosition(36, 12, 36).lookAt(0, 2, 0);
+	cam.setUp(0, rollY, 1);
+
+	upVal = cam.upY;
+	t.setCamera(cam);
+	drawScene(tm);
+	t.resetCamera();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODECAMERA.UPY', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: GYROSCOPIC HORIZON SWEEP', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Reads camera up vector Y component.', x, y++);
+	t.print('Oscillating upY banks world horizon.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 200);
+	t.print(`UP Y VALUE: ${upVal.toFixed(3)}`, x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

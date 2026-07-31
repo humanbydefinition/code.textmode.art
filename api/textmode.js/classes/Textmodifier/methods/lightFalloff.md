@@ -40,5 +40,56 @@ Negative inputs are clamped to `0`. If all inputs resolve to `0`, the falloff re
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="lightFalloff" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpsZXQgdmFsdWUgPSAwOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDgsIDE4KTsKCWNvbnN0IHRpbWUgPSB0LmZyYW1lQ291bnQgKiAwLjAyNTsKCXZhbHVlID0gMC41ICsgMC41ICogTWF0aC5zaW4odGltZSk7Cgl0LnBlcnNwZWN0aXZlKDU4LCAwLjEsIDQwOTYpOwoJdC5jYW1lcmEoMTYsIC0xMCwgNDIsIDAsIDAsIDApOwoJdC5saWdodEZhbGxvZmYoMSwgdmFsdWUgKiAwLjA4LCB2YWx1ZSAqIDAuMDEpOwoJdC5wb2ludExpZ2h0KFsyNTUsIDIxMCwgMTIwXSwgeyB4OiAxOCwgeTogLTE4LCB6OiAyOCB9KTsKCXQucm90YXRlWSh0aW1lICogNDApOwoJdC5jaGFyKCcjJyk7Cgl0LmNoYXJDb2xvcigxNDAsIDIyMCwgMjU1KTsKCXQuc3BoZXJlKDcpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLkxJR0hURkFMTE9GRicsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IExJR0hUIEZBTExPRkYnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ0xpZ2h0aW5nIGNoYW5nZXMgc3VyZmFjZSBzaGFkZS4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJ1NjZW5lIGtlZXBzIGZvY3VzIG9uIG9uZSBzcGhlcmUuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dChgRkFMTE9GRjogJHt2YWx1ZS50b0ZpeGVkKDIpfWAsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+let value = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(6, 8, 18);
+	const time = t.frameCount * 0.025;
+	value = 0.5 + 0.5 * Math.sin(time);
+	t.perspective(58, 0.1, 4096);
+	t.camera(16, -10, 42, 0, 0, 0);
+	t.lightFalloff(1, value * 0.08, value * 0.01);
+	t.pointLight([255, 210, 120], { x: 18, y: -18, z: 28 });
+	t.rotateY(time * 40);
+	t.char('#');
+	t.charColor(140, 220, 255);
+	t.sphere(7);
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.LIGHTFALLOFF', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: LIGHT FALLOFF', x, y++, 100, 220, 255);
+	drawText('Lighting changes surface shade.', x, y++, 140, 160, 190);
+	drawText('Scene keeps focus on one sphere.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`FALLOFF: ${value.toFixed(2)}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

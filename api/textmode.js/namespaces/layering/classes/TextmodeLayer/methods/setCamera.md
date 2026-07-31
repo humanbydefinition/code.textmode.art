@@ -33,5 +33,100 @@ Activate a camera for this layer.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="setCamera" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBzY2VuZSA9IHQubGF5ZXJzLmFkZCgpOwpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpsZXQgY2FtQTsKbGV0IGNhbUI7CmxldCBhY3RpdmVDYW0gPSAnQSc7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCBjb2xvciA9IFsyMDAsIDIyMCwgMjU1XSkgewoJdC5wdXNoKCk7Cgl0LnRyYW5zbGF0ZSh4LCB5KTsKCXQuY2hhckNvbG9yKGNvbG9yWzBdLCBjb2xvclsxXSwgY29sb3JbMl0pOwoJZm9yIChsZXQgaSA9IDA7IGkgPCB0ZXh0Lmxlbmd0aDsgaSsrKSB7CgkJdC5jaGFyKHRleHRbaV0pOwoJCXQucG9pbnQoKTsKCQl0LnRyYW5zbGF0ZSgxLCAwKTsKCX0KCXQucG9wKCk7Cn0KCnQuc2V0dXAoKCkgPT4gewoJY2FtQSA9IHNjZW5lLmNyZWF0ZUNhbWVyYSgpOwoJY2FtQS5zZXRQb3NpdGlvbigtMjIsIC04LCA0MCkubG9va0F0KDAsIDAsIDApOwoJY2FtQiA9IHNjZW5lLmNyZWF0ZUNhbWVyYSgpOwoJY2FtQi5zZXRQb3NpdGlvbigyMiwgMTIsIDM2KS5sb29rQXQoMCwgMCwgMCk7CglzY2VuZS5zZXRDYW1lcmEoY2FtQSk7Cn0pOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg4LCAxMCwgMTgpOwoJY29uc3Qgc2xvdCA9IE1hdGguZmxvb3IodC5mcmFtZUNvdW50IC8gMTUwKSAlIDI7CglpZiAoc2xvdCA9PT0gMCAmJiBhY3RpdmVDYW0gIT09ICdBJykgewoJCXNjZW5lLnNldENhbWVyYShjYW1BKTsKCQlhY3RpdmVDYW0gPSAnQSc7Cgl9IGVsc2UgaWYgKHNsb3QgPT09IDEgJiYgYWN0aXZlQ2FtICE9PSAnQicpIHsKCQlzY2VuZS5zZXRDYW1lcmEoY2FtQik7CgkJYWN0aXZlQ2FtID0gJ0InOwoJfQp9KTsKCnNjZW5lLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJdC5wb2ludExpZ2h0KFsyNTUsIDIxMCwgMTMwXSwgeyB4OiAtMjAsIHk6IC0yNSwgejogMzAgfSk7Cgljb25zdCBwb3NpdGlvbnMgPSBbCgkJWy0xMiwgMCwgMF0sCgkJWzAsIDAsIC0xMl0sCgkJWzEyLCAwLCAwXSwKCV07Cgljb25zdCBjb2xvcnMgPSBbCgkJWzEyMCwgMjAwLCAyNTVdLAoJCVsyMDAsIDE2MCwgMjU1XSwKCQlbMjU1LCAxODAsIDEyMF0sCgldOwoJZm9yIChsZXQgaSA9IDA7IGkgPCAzOyBpKyspIHsKCQl0LnB1c2goKTsKCQl0LnRyYW5zbGF0ZShwb3NpdGlvbnNbaV1bMF0sIHBvc2l0aW9uc1tpXVsxXSwgcG9zaXRpb25zW2ldWzJdKTsKCQl0LmNoYXIoJyMnKTsKCQl0LmNoYXJDb2xvcihjb2xvcnNbaV1bMF0sIGNvbG9yc1tpXVsxXSwgY29sb3JzW2ldWzJdKTsKCQl0LmJveCg3LCA3LCA3KTsKCQl0LnBvcCgpOwoJfQp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7Cgljb25zdCBpc0EgPSBhY3RpdmVDYW0gPT09ICdBJzsKCWRyYXdUZXh0KCdURVhUTU9ERUxBWUVSLlNFVENBTUVSQScsIHgsIHkrKywgWzEwMCwgMjU1LCAxNDBdKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIFs4MCwgMTAwLCAxNTBdKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBTV0FQIEFDVElWRSBDQU1FUkEnLCB4LCB5KyssIFsxMDAsIDIyMCwgMjU1XSk7CglkcmF3VGV4dCgnVHdvIG93bmVkIGNhbWVyYXMgYWx0ZXJuYXRlLicsIHgsIHkrKywgWzE0MCwgMTYwLCAxOTBdKTsKCWRyYXdUZXh0KCdzZXRDYW1lcmEgc2VsZWN0cyB0aGUgdmlldy4nLCB4LCB5KyssIFsxNDAsIDE2MCwgMTkwXSk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCBbODAsIDEwMCwgMTUwXSk7CglkcmF3VGV4dChgQUNUSVZFOiBDQU1FUkEgJHthY3RpdmVDYW19YCwgeCwgeSsrLCBpc0EgPyBbMTIwLCAyMDAsIDI1NV0gOiBbMjU1LCAxODAsIDEyMF0pOwoJaWYgKGlzQSkgewoJCWRyYXdUZXh0KCdFWUU6IFstMjIsIC04LCA0MF0nLCB4LCB5KyssIFsyMDAsIDIwMCwgMjAwXSk7Cgl9IGVsc2UgewoJCWRyYXdUZXh0KCdFWUU6IFsyMiwgMTIsIDM2XScsIHgsIHkrKywgWzIwMCwgMjAwLCAyMDBdKTsKCX0KCWNvbnN0IHJlbWFpbmluZyA9IDE1MCAtICh0LmZyYW1lQ291bnQgJSAxNTApOwoJZHJhd1RleHQoYFNXSVRDSCBJTjogJHtyZW1haW5pbmd9IEZSQU1FU2AsIHgsIHkrKywgWzE2MCwgMTYwLCAxNjBdKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const scene = t.layers.add();
+const labelLayer = t.layers.add();
+
+let camA;
+let camB;
+let activeCam = 'A';
+
+function drawText(text, x, y, color = [200, 220, 255]) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(color[0], color[1], color[2]);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+t.setup(() => {
+	camA = scene.createCamera();
+	camA.setPosition(-22, -8, 40).lookAt(0, 0, 0);
+	camB = scene.createCamera();
+	camB.setPosition(22, 12, 36).lookAt(0, 0, 0);
+	scene.setCamera(camA);
+});
+
+t.draw(() => {
+	t.background(8, 10, 18);
+	const slot = Math.floor(t.frameCount / 150) % 2;
+	if (slot === 0 && activeCam !== 'A') {
+		scene.setCamera(camA);
+		activeCam = 'A';
+	} else if (slot === 1 && activeCam !== 'B') {
+		scene.setCamera(camB);
+		activeCam = 'B';
+	}
+});
+
+scene.draw(() => {
+	t.clear();
+	t.pointLight([255, 210, 130], { x: -20, y: -25, z: 30 });
+	const positions = [
+		[-12, 0, 0],
+		[0, 0, -12],
+		[12, 0, 0],
+	];
+	const colors = [
+		[120, 200, 255],
+		[200, 160, 255],
+		[255, 180, 120],
+	];
+	for (let i = 0; i < 3; i++) {
+		t.push();
+		t.translate(positions[i][0], positions[i][1], positions[i][2]);
+		t.char('#');
+		t.charColor(colors[i][0], colors[i][1], colors[i][2]);
+		t.box(7, 7, 7);
+		t.pop();
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	const isA = activeCam === 'A';
+	drawText('TEXTMODELAYER.SETCAMERA', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: SWAP ACTIVE CAMERA', x, y++, [100, 220, 255]);
+	drawText('Two owned cameras alternate.', x, y++, [140, 160, 190]);
+	drawText('setCamera selects the view.', x, y++, [140, 160, 190]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText(`ACTIVE: CAMERA ${activeCam}`, x, y++, isA ? [120, 200, 255] : [255, 180, 120]);
+	if (isA) {
+		drawText('EYE: [-22, -8, 40]', x, y++, [200, 200, 200]);
+	} else {
+		drawText('EYE: [22, 12, 36]', x, y++, [200, 200, 200]);
+	}
+	const remaining = 150 - (t.frameCount % 150);
+	drawText(`SWITCH IN: ${remaining} FRAMES`, x, y++, [160, 160, 160]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

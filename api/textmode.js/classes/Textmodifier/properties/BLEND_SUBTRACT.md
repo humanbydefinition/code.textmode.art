@@ -26,4 +26,79 @@ that remove brightness from the composite.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="BLEND_SUBTRACT" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBtb2RlID0gdC5CTEVORF9TVUJUUkFDVDsKY29uc3QgbW9kZU5hbWUgPSAnQkxFTkRfU1VCVFJBQ1QnOwpjb25zdCBhY2NlbnQgPSBbMTgwLCAyMzAsIDI1NV07CmNvbnN0IGJhc2UgPSBbMjEwLCAxMjAsIDcwXTsKY29uc3QgYmxlbmRMYXllciA9IHQubGF5ZXJzLmFkZCh7IGJsZW5kTW9kZTogbW9kZSwgb3BhY2l0eTogMC44NiB9KTsKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LmRyYXcoKCkgPT4gewoJY29uc3QgdGltZSA9IHQuZnJhbWVDb3VudCAqIDAuMDMzOwoJdC5iYWNrZ3JvdW5kKDQ4LCAyOCwgMTgpOwoJY29uc3QgeyBjb2xzLCByb3dzIH0gPSB0LmdyaWQ7Cglmb3IgKGxldCB5ID0gLU1hdGguZmxvb3Iocm93cyAvIDIpOyB5IDwgcm93cyAvIDI7IHkgKz0gMykgewoJCWZvciAobGV0IHggPSAtTWF0aC5mbG9vcihjb2xzIC8gMik7IHggPCBjb2xzIC8gMjsgeCArPSAzKSB7CgkJCWNvbnN0IHdhdmUgPSBNYXRoLnNpbih4ICogMC4xMSArIHkgKiAwLjE5ICsgdGltZSk7CgkJCXQucHVzaCgpOwoJCQl0LnRyYW5zbGF0ZSh4LCB5KTsKCQkJdC5jaGFyKHdhdmUgPiAwID8gJz0nIDogJysnKTsKCQkJdC5jaGFyQ29sb3IoYmFzZVswXSwgYmFzZVsxXSArIHdhdmUgKiAzMCwgYmFzZVsyXSk7CgkJCXQuY2VsbENvbG9yKDU1LCAyNCwgMTApOwoJCQl0LnJlY3QoMiwgMik7CgkJCXQucG9wKCk7CgkJfQoJfQoJYmxlbmRMYXllci5kcmF3KCgpID0-IHsKCQl0LmNsZWFyKCk7CgkJZm9yIChsZXQgcmluZyA9IDA7IHJpbmcgPCA0OyByaW5nKyspIHsKCQkJZm9yIChsZXQgaSA9IDA7IGkgPCAxODsgaSsrKSB7CgkJCQljb25zdCBhbmdsZSA9IGkgKiAyMCArIHJpbmcgKiAxNSAtIHQuZnJhbWVDb3VudCAqIDEuNDsKCQkJCWNvbnN0IHJhZGl1cyA9IDUgKyByaW5nICogNCArIE1hdGguc2luKHRpbWUgKiAyICsgaSkgKiAxLjg7CgkJCQl0LnB1c2goKTsKCQkJCXQucm90YXRlWihhbmdsZSk7CgkJCQl0LnRyYW5zbGF0ZShyYWRpdXMsIE1hdGguY29zKHRpbWUgKyBpKSAqIDIpOwoJCQkJdC5jaGFyKHJpbmcgJSAyID8gJy8nIDogJ1xcJyk7CgkJCQl0LmNoYXJDb2xvciguLi5hY2NlbnQpOwoJCQkJdC5jZWxsQ29sb3IoMzUgKyByaW5nICogMTgsIDQ1ICsgcmluZyAqIDEyLCA1OCk7CgkJCQl0LnJlY3QoNCwgMik7CgkJCQl0LnBvcCgpOwoJCQl9CgkJfQoJfSk7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuQkxFTkRfU1VCVFJBQ1QnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBTVUJUUkFDVCBDVVRTJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdUaGUgdG9wIGxheWVyIHJlbW92ZXMgbGlnaHQuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdCcmlnaHQgbWFya3MgY2FydmUgcGF0aHMuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dChgTU9ERTogJHttb2RlTmFtZX1gLCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const mode = t.BLEND_SUBTRACT;
+const modeName = 'BLEND_SUBTRACT';
+const accent = [180, 230, 255];
+const base = [210, 120, 70];
+const blendLayer = t.layers.add({ blendMode: mode, opacity: 0.86 });
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	const time = t.frameCount * 0.033;
+	t.background(48, 28, 18);
+	const { cols, rows } = t.grid;
+	for (let y = -Math.floor(rows / 2); y < rows / 2; y += 3) {
+		for (let x = -Math.floor(cols / 2); x < cols / 2; x += 3) {
+			const wave = Math.sin(x * 0.11 + y * 0.19 + time);
+			t.push();
+			t.translate(x, y);
+			t.char(wave > 0 ? '=' : '+');
+			t.charColor(base[0], base[1] + wave * 30, base[2]);
+			t.cellColor(55, 24, 10);
+			t.rect(2, 2);
+			t.pop();
+		}
+	}
+	blendLayer.draw(() => {
+		t.clear();
+		for (let ring = 0; ring < 4; ring++) {
+			for (let i = 0; i < 18; i++) {
+				const angle = i * 20 + ring * 15 - t.frameCount * 1.4;
+				const radius = 5 + ring * 4 + Math.sin(time * 2 + i) * 1.8;
+				t.push();
+				t.rotateZ(angle);
+				t.translate(radius, Math.cos(time + i) * 2);
+				t.char(ring % 2 ? '/' : '\\');
+				t.charColor(...accent);
+				t.cellColor(35 + ring * 18, 45 + ring * 12, 58);
+				t.rect(4, 2);
+				t.pop();
+			}
+		}
+	});
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.BLEND_SUBTRACT', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SUBTRACT CUTS', x, y++, 100, 220, 255);
+	drawText('The top layer removes light.', x, y++, 140, 160, 190);
+	drawText('Bright marks carve paths.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`MODE: ${modeName}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```

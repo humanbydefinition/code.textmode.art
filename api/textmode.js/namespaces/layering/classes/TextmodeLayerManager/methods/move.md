@@ -34,5 +34,100 @@ Move a user-created layer to a new index in the stack.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="move" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByZ2IgPSBbMjU1LCAyNTUsIDI1NV0pIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IocmdiWzBdLCByZ2JbMV0sIHJnYlsyXSk7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKY29uc3QgbGF5ZXIxID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IGxheWVyMiA9IHQubGF5ZXJzLmFkZCh7IGJsZW5kTW9kZTogJ3NjcmVlbicsIG9wYWNpdHk6IDAuNTUgfSk7CmNvbnN0IGxheWVyMyA9IHQubGF5ZXJzLmFkZCh7IGJsZW5kTW9kZTogJ2FkZGl0aXZlJywgb3BhY2l0eTogMC40IH0pOwpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpsYXllcjEuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7CgoJZm9yIChsZXQgeSA9IC0odC5ncmlkLnJvd3MgPj4gMSk7IHkgPD0gdC5ncmlkLnJvd3MgPj4gMTsgeSsrKSB7CgkJZm9yIChsZXQgeCA9IC0odC5ncmlkLmNvbHMgPj4gMSk7IHggPD0gdC5ncmlkLmNvbHMgPj4gMTsgeCsrKSB7CgkJCWNvbnN0IHYgPSBNYXRoLnNpbih4ICogMC4xMiArIHQuZnJhbWVDb3VudCAqIDAuMDIpICogTWF0aC5jb3MoeSAqIDAuMTQgKyB0LmZyYW1lQ291bnQgKiAwLjAxNCk7CgkJCWlmIChNYXRoLmFicyh2KSA8IDAuMTIpIGNvbnRpbnVlOwoKCQkJdC5wdXNoKCk7CgkJCXQudHJhbnNsYXRlKHgsIHkpOwoJCQl0LmNoYXJDb2xvcigxODAgKyB2ICogNzUsIDgwICsgdiAqIDgwLCAyMCArIHYgKiA0MCk7CgkJCXQuY2hhcih2ID4gMC41ID8gJ0AnIDogdiA-IDAuMjUgPyAnKycgOiAnLicpOwoJCQl0LnBvaW50KCk7CgkJCXQucG9wKCk7CgkJfQoJfQp9KTsKCmxheWVyMi5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCglmb3IgKGxldCB5ID0gLSh0LmdyaWQucm93cyA-PiAxKTsgeSA8PSB0LmdyaWQucm93cyA-PiAxOyB5KyspIHsKCQlmb3IgKGxldCB4ID0gLSh0LmdyaWQuY29scyA-PiAxKTsgeCA8PSB0LmdyaWQuY29scyA-PiAxOyB4KyspIHsKCQkJY29uc3QgdiA9IE1hdGguc2luKCh4ICsgeSkgKiAwLjExICsgdC5mcmFtZUNvdW50ICogMC4wMjIpICogTWF0aC5zaW4oKHggLSB5KSAqIDAuMTEgKyB0LmZyYW1lQ291bnQgKiAwLjAxNik7CgkJCWlmIChNYXRoLmFicyh2KSA8IDAuMSkgY29udGludWU7CgoJCQl0LnB1c2goKTsKCQkJdC50cmFuc2xhdGUoeCwgeSk7CgkJCXQuY2hhckNvbG9yKDQwICsgdiAqIDYwLCAxNjAgKyB2ICogOTUsIDEyMCArIHYgKiA1NSk7CgkJCXQuY2hhcih2ID4gMC41ID8gJ0AnIDogdiA-IDAuMjUgPyAnKycgOiAnLicpOwoJCQl0LnBvaW50KCk7CgkJCXQucG9wKCk7CgkJfQoJfQp9KTsKCmxheWVyMy5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCglmb3IgKGxldCB5ID0gLSh0LmdyaWQucm93cyA-PiAxKTsgeSA8PSB0LmdyaWQucm93cyA-PiAxOyB5KyspIHsKCQlmb3IgKGxldCB4ID0gLSh0LmdyaWQuY29scyA-PiAxKTsgeCA8PSB0LmdyaWQuY29scyA-PiAxOyB4KyspIHsKCQkJY29uc3QgZCA9IE1hdGguc3FydCh4ICogeCAqIDAuOSArIHkgKiB5KSAqIDAuMTY7CgkJCWNvbnN0IHYgPSBNYXRoLnNpbihkIC0gdC5mcmFtZUNvdW50ICogMC4wMjUpIC8gKGQgKiAwLjIgKyAxKTsKCQkJaWYgKHYgPCAwLjA4KSBjb250aW51ZTsKCgkJCXQucHVzaCgpOwoJCQl0LnRyYW5zbGF0ZSh4LCB5KTsKCQkJdC5jaGFyQ29sb3IoMTIwICsgdiAqIDEwMCwgNTAgKyB2ICogNjAsIDIwMCArIHYgKiA1NSk7CgkJCXQuY2hhcih2ID4gMC40ID8gJ0AnIDogdiA-IDAuMiA_ICcrJyA6ICcuJyk7CgkJCXQucG9pbnQoKTsKCQkJdC5wb3AoKTsKCQl9Cgl9Cn0pOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg2LCAxMCwgMjIpOwoJaWYgKHQuZnJhbWVDb3VudCAlIDc1ID09PSAwICYmIHQubGF5ZXJzLmFsbC5sZW5ndGggPiAyKSB0LmxheWVycy5tb3ZlKHQubGF5ZXJzLmFsbFswXSwgdC5sYXllcnMuYWxsLmxlbmd0aCAtIDIpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKSwKCQl0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoKCWRyYXdUZXh0KCdMQVlFUk1BTkFHRVIuTU9WRScsIGxlZnQgKyAzLCB5KyssIFsxMDAsIDI1NSwgMTQwXSk7CglkcmF3VGV4dCgnQ09OQ0VQVDogTU9WRSBMQVlFUiBJTkRFWCcsIGxlZnQgKyAzLCB5KyssIFsxMDAsIDIyMCwgMjU1XSk7CglkcmF3VGV4dCgnbnJtbCAvIHNjcmVlbiAwLjU1IC8gYWRkIDAuNCcsIGxlZnQgKyAzLCB5KyssIFsxNDAsIDE5MCwgMjU1XSk7CglkcmF3VGV4dCgnQm90dG9tIGxheWVyIHJvdGF0ZXMgdG8gdGhlIHRvcC4nLCBsZWZ0ICsgMywgeSsrLCBbMTQwLCAxNjAsIDE5MF0pOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+function drawText(text, x, y, rgb = [255, 255, 255]) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.print(text, x, y);
+	t.pop();
+}
+
+const layer1 = t.layers.add();
+const layer2 = t.layers.add({ blendMode: 'screen', opacity: 0.55 });
+const layer3 = t.layers.add({ blendMode: 'additive', opacity: 0.4 });
+const labelLayer = t.layers.add();
+
+layer1.draw(() => {
+	t.clear();
+
+	for (let y = -(t.grid.rows >> 1); y <= t.grid.rows >> 1; y++) {
+		for (let x = -(t.grid.cols >> 1); x <= t.grid.cols >> 1; x++) {
+			const v = Math.sin(x * 0.12 + t.frameCount * 0.02) * Math.cos(y * 0.14 + t.frameCount * 0.014);
+			if (Math.abs(v) < 0.12) continue;
+
+			t.push();
+			t.translate(x, y);
+			t.charColor(180 + v * 75, 80 + v * 80, 20 + v * 40);
+			t.char(v > 0.5 ? '@' : v > 0.25 ? '+' : '.');
+			t.point();
+			t.pop();
+		}
+	}
+});
+
+layer2.draw(() => {
+	t.clear();
+
+	for (let y = -(t.grid.rows >> 1); y <= t.grid.rows >> 1; y++) {
+		for (let x = -(t.grid.cols >> 1); x <= t.grid.cols >> 1; x++) {
+			const v = Math.sin((x + y) * 0.11 + t.frameCount * 0.022) * Math.sin((x - y) * 0.11 + t.frameCount * 0.016);
+			if (Math.abs(v) < 0.1) continue;
+
+			t.push();
+			t.translate(x, y);
+			t.charColor(40 + v * 60, 160 + v * 95, 120 + v * 55);
+			t.char(v > 0.5 ? '@' : v > 0.25 ? '+' : '.');
+			t.point();
+			t.pop();
+		}
+	}
+});
+
+layer3.draw(() => {
+	t.clear();
+
+	for (let y = -(t.grid.rows >> 1); y <= t.grid.rows >> 1; y++) {
+		for (let x = -(t.grid.cols >> 1); x <= t.grid.cols >> 1; x++) {
+			const d = Math.sqrt(x * x * 0.9 + y * y) * 0.16;
+			const v = Math.sin(d - t.frameCount * 0.025) / (d * 0.2 + 1);
+			if (v < 0.08) continue;
+
+			t.push();
+			t.translate(x, y);
+			t.charColor(120 + v * 100, 50 + v * 60, 200 + v * 55);
+			t.char(v > 0.4 ? '@' : v > 0.2 ? '+' : '.');
+			t.point();
+			t.pop();
+		}
+	}
+});
+
+t.draw(() => {
+	t.background(6, 10, 22);
+	if (t.frameCount % 75 === 0 && t.layers.all.length > 2) t.layers.move(t.layers.all[0], t.layers.all.length - 2);
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2),
+		top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+
+	drawText('LAYERMANAGER.MOVE', left + 3, y++, [100, 255, 140]);
+	drawText('CONCEPT: MOVE LAYER INDEX', left + 3, y++, [100, 220, 255]);
+	drawText('nrml / screen 0.55 / add 0.4', left + 3, y++, [140, 190, 255]);
+	drawText('Bottom layer rotates to the top.', left + 3, y++, [140, 160, 190]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

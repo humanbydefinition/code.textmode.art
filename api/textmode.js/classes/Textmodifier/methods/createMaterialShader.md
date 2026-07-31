@@ -39,5 +39,80 @@ A compiled shader ready for use with [shader](shader.md).
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="createMaterialShader" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpsZXQgbWF0ZXJpYWxTaGFkZXIgPSBudWxsOwpsZXQgZ2x5cGhBID0gWzAsIDAsIDBdOwpsZXQgZ2x5cGhCID0gWzAsIDAsIDBdOwoKdC5zZXR1cChhc3luYyAoKSA9PiB7CglnbHlwaEEgPSB0LmZvbnQuY2hhcmFjdGVyTWFwLmdldCgnIycpPy5jb2xvciA_PyB0LmZvbnQuY2hhcmFjdGVyc1sxXS5jb2xvcjsKCWdseXBoQiA9IHQuZm9udC5jaGFyYWN0ZXJNYXAuZ2V0KCdAJyk_LmNvbG9yID8_IHQuZm9udC5jaGFyYWN0ZXJzWzJdLmNvbG9yOwoJbWF0ZXJpYWxTaGFkZXIgPSBhd2FpdCB0LmNyZWF0ZU1hdGVyaWFsU2hhZGVyKGAjdmVyc2lvbiAzMDAgZXMKcHJlY2lzaW9uIGhpZ2hwIGZsb2F0OwppbiB2ZWMyIHZfdXY7CnVuaWZvcm0gZmxvYXQgdV90aW1lOwp1bmlmb3JtIHZlYzMgdV9nbHlwaEE7CnVuaWZvcm0gdmVjMyB1X2dseXBoQjsKbGF5b3V0KGxvY2F0aW9uID0gMCkgb3V0IHZlYzQgb19jaGFyYWN0ZXI7CmxheW91dChsb2NhdGlvbiA9IDEpIG91dCB2ZWM0IG9fcHJpbWFyeUNvbG9yOwpsYXlvdXQobG9jYXRpb24gPSAyKSBvdXQgdmVjNCBvX3NlY29uZGFyeUNvbG9yOwp2b2lkIG1haW4oKSB7CglmbG9hdCByaW5ncyA9IHNpbigoZGlzdGFuY2Uodl91diwgdmVjMigwLjUpKSAtIHVfdGltZSkgKiAzMi4wKTsKCWZsb2F0IGdseXBoID0gc3RlcCgwLjAsIHJpbmdzKTsKCXZlYzMgZ2x5cGhJZCA9IG1peCh1X2dseXBoQSwgdV9nbHlwaEIsIGdseXBoKTsKCXZlYzMgcHJpbWFyeSA9IG1peCh2ZWMzKDAuMiwgMC44LCAxLjApLCB2ZWMzKDEuMCwgMC40NSwgMC4yNSksIGdseXBoKTsKCW9fY2hhcmFjdGVyID0gdmVjNChnbHlwaElkLnh5LCAwLjAsIDAuMCk7CglvX3ByaW1hcnlDb2xvciA9IHZlYzQocHJpbWFyeSwgMS4wKTsKCW9fc2Vjb25kYXJ5Q29sb3IgPSB2ZWM0KDAuMDEsIDAuMDIsIDAuMDUsIDEuMCk7Cn1gKTsKfSk7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoMCk7CglpZiAoIW1hdGVyaWFsU2hhZGVyKSByZXR1cm47Cgljb25zdCB0aW1lID0gdC5mcmFtZUNvdW50ICogMC4wMDM7Cgl0LnBlcnNwZWN0aXZlKDU4LCAwLjEsIDQwOTYpOwoJdC5jYW1lcmEoMTYsIC0xMCwgNDIsIDAsIDAsIDApOwoJdC5zaGFkZXIobWF0ZXJpYWxTaGFkZXIpOwoJdC5zZXRVbmlmb3Jtcyh7IHVfdGltZTogdGltZSwgdV9nbHlwaEE6IGdseXBoQSwgdV9nbHlwaEI6IGdseXBoQiB9KTsKCXQucm90YXRlWSh0LmZyYW1lQ291bnQpOwoJdC5zcGhlcmUoOCk7Cgl0LnJlc2V0U2hhZGVyKCk7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLkNSRUFURU1BVEVSSUFMU0hBREVSJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogR0VPTUVUUlkgU0hBREVSJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdGcmFnbWVudCBzaGFkZXIgYWZmZWN0cyBzaGFwZXMuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dChtYXRlcmlhbFNoYWRlciA_ICdTSEFERVI6IFJFQURZJyA6ICdTSEFERVI6IFdBSVQnLCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+let materialShader = null;
+let glyphA = [0, 0, 0];
+let glyphB = [0, 0, 0];
+
+t.setup(async () => {
+	glyphA = t.font.characterMap.get('#')?.color ?? t.font.characters[1].color;
+	glyphB = t.font.characterMap.get('@')?.color ?? t.font.characters[2].color;
+	materialShader = await t.createMaterialShader(`#version 300 es
+precision highp float;
+in vec2 v_uv;
+uniform float u_time;
+uniform vec3 u_glyphA;
+uniform vec3 u_glyphB;
+layout(location = 0) out vec4 o_character;
+layout(location = 1) out vec4 o_primaryColor;
+layout(location = 2) out vec4 o_secondaryColor;
+void main() {
+	float rings = sin((distance(v_uv, vec2(0.5)) - u_time) * 32.0);
+	float glyph = step(0.0, rings);
+	vec3 glyphId = mix(u_glyphA, u_glyphB, glyph);
+	vec3 primary = mix(vec3(0.2, 0.8, 1.0), vec3(1.0, 0.45, 0.25), glyph);
+	o_character = vec4(glyphId.xy, 0.0, 0.0);
+	o_primaryColor = vec4(primary, 1.0);
+	o_secondaryColor = vec4(0.01, 0.02, 0.05, 1.0);
+}`);
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(0);
+	if (!materialShader) return;
+	const time = t.frameCount * 0.003;
+	t.perspective(58, 0.1, 4096);
+	t.camera(16, -10, 42, 0, 0, 0);
+	t.shader(materialShader);
+	t.setUniforms({ u_time: time, u_glyphA: glyphA, u_glyphB: glyphB });
+	t.rotateY(t.frameCount);
+	t.sphere(8);
+	t.resetShader();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODIFIER.CREATEMATERIALSHADER', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: GEOMETRY SHADER', x, y++, 100, 220, 255);
+	drawText('Fragment shader affects shapes.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(materialShader ? 'SHADER: READY' : 'SHADER: WAIT', x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

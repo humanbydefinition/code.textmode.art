@@ -31,5 +31,59 @@ Returns `0` before the layer is initialized.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="height" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBkZXRhaWxMYXllciA9IHQubGF5ZXJzLmFkZCh7IGZvbnRTaXplOiA4IH0pOwpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByZ2IgPSBbMjU1LCAyNTUsIDI1NV0pIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IocmdiWzBdLCByZ2JbMV0sIHJnYlsyXSk7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg2LCAxMCwgMjIpOwoKCXQucHVzaCgpOwoJdC50cmFuc2xhdGUoMCwgMCk7Cgl0LmNoYXIoJ3wnKTsKCXQuY2hhckNvbG9yKDEyMCwgMTgwLCAyNTUsIDEwMCk7Cgl0LnJlY3QoMSwgdC5ncmlkLnJvd3MpOwoJdC5wb3AoKTsKfSk7CgpkZXRhaWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoJY29uc3QgZyA9IGRldGFpbExheWVyLmdyaWQ7CgoJZHJhd1RleHQoJ1RFWFRNT0RFTEFZRVIuSEVJR0hUJywgeCwgeSsrLCBbMTAwLCAyNTUsIDE0MF0pOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgWzgwLCAxMDAsIDE1MF0pOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IExBWUVSIFBJWEVMIEhFSUdIVCcsIHgsIHkrKywgWzEwMCwgMjIwLCAyNTVdKTsKCWRyYXdUZXh0KCdSZXBvcnRzIEFTQ0lJIGZyYW1lYnVmZmVyIGhlaWdodC4nLCB4LCB5KyssIFsxNDAsIDE2MCwgMTkwXSk7CglkcmF3VGV4dCgnRmluZXIgZm9udCBzaXplIGdpdmVzIG1vcmUgcm93cy4nLCB4LCB5KyssIFsxNDAsIDE2MCwgMTkwXSk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCBbODAsIDEwMCwgMTUwXSk7CglkcmF3VGV4dChgJHtkZXRhaWxMYXllci5oZWlnaHR9IFBJWEVMU2AsIHgsIHkrKywgWzE0MCwgMjU1LCAxODBdKTsKCWRyYXdUZXh0KGAke2cucm93c30gUk9XUyB4ICR7Zy5jZWxsSGVpZ2h0fVBYYCwgeCwgeSsrLCBbMTIwLCAyMDAsIDI1NV0pOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const detailLayer = t.layers.add({ fontSize: 8 });
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, rgb = [255, 255, 255]) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(6, 10, 22);
+
+	t.push();
+	t.translate(0, 0);
+	t.char('|');
+	t.charColor(120, 180, 255, 100);
+	t.rect(1, t.grid.rows);
+	t.pop();
+});
+
+detailLayer.draw(() => {
+	t.clear();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	const g = detailLayer.grid;
+
+	drawText('TEXTMODELAYER.HEIGHT', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: LAYER PIXEL HEIGHT', x, y++, [100, 220, 255]);
+	drawText('Reports ASCII framebuffer height.', x, y++, [140, 160, 190]);
+	drawText('Finer font size gives more rows.', x, y++, [140, 160, 190]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText(`${detailLayer.height} PIXELS`, x, y++, [140, 255, 180]);
+	drawText(`${g.rows} ROWS x ${g.cellHeight}PX`, x, y++, [120, 200, 255]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

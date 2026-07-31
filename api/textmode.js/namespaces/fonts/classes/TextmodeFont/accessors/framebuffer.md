@@ -29,5 +29,77 @@ Normalized glyph atlas framebuffer used by the ASCII shader.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="framebuffer" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBSQU1QID0gJyAuOi09KyojJUAnOwpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDEwLCA4LCAxNik7Cgljb25zdCBodyA9IE1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IGhoID0gTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJY29uc3QgdG0gPSB0LmZyYW1lQ291bnQgKiAwLjA1OwoKCWNvbnN0IHNjYW5YID0gTWF0aC5zaW4odG0pICogaHc7Cgljb25zdCBzY2FuWSA9IE1hdGguY29zKHRtICogMC43KSAqIGhoOwoKCWZvciAobGV0IHkgPSAtaGg7IHkgPD0gaGg7IHkrKykgewoJCWZvciAobGV0IHggPSAtaHc7IHggPD0gaHc7IHgrKykgewoJCQljb25zdCBkQmVhbTEgPSBNYXRoLmFicyh4IC0gc2NhblgpOwoJCQljb25zdCBkQmVhbTIgPSBNYXRoLmFicyh5IC0gc2NhblkpOwoJCQljb25zdCBmaWVsZCA9IE1hdGguZXhwKC1kQmVhbTEgKiAwLjIpICsgTWF0aC5leHAoLWRCZWFtMiAqIDAuMik7CgkJCWNvbnN0IG5vcm0gPSBNYXRoLm1pbigxLCBmaWVsZCAqIDAuNSk7CgoJCQljb25zdCBpZHggPSBNYXRoLmZsb29yKG5vcm0gKiAoUkFNUC5sZW5ndGggLSAxKSk7CgkJCXQucHVzaCgpOwoJCQl0LnRyYW5zbGF0ZSh4LCB5KTsKCQkJdC5jaGFyQ29sb3IoTWF0aC5mbG9vcig0MCArIG5vcm0gKiAyMDApLCBNYXRoLmZsb29yKDE2MCArIG5vcm0gKiA5NSksIE1hdGguZmxvb3IoMjQwIC0gbm9ybSAqIDgwKSk7CgkJCXQuY2VsbENvbG9yKE1hdGguZmxvb3IoMTAgKyBub3JtICogMTUpLCBNYXRoLmZsb29yKDEyICsgbm9ybSAqIDIwKSwgTWF0aC5mbG9vcigyOCArIG5vcm0gKiAyNSkpOwoJCQl0LmNoYXIoUkFNUFtpZHhdKTsKCQkJdC5wb2ludCgpOwoJCQl0LnBvcCgpOwoJCX0KCX0KfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWNvbnN0IGZiID0gdC5mb250LmZyYW1lYnVmZmVyOwoKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IoMTIwLCAyNDAsIDE4MCk7Cgl0LnByaW50KCdURVhUTU9ERUZPTlQuRlJBTUVCVUZGRVInLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoNzAsIDEwMCwgMTQwKTsKCXQucHJpbnQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDIxMCwgMjU1KTsKCXQucHJpbnQoJ0NPTkNFUFQ6IEFUTEFTIFRFWFRVUkUgRlJBTUVCVUZGRVInLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAxNjAsIDE5MCk7Cgl0LnByaW50KCdHTEZyYW1lYnVmZmVyIHN0b3JpbmcgZ2x5cGggYXRsYXMuJywgeCwgeSsrKTsKCXQucHJpbnQoJ1NhbXBsZWQgYnkgV2ViR0wgQVNDSUkgcmVzb2x2ZSBwYXNzLicsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcig3MCwgMTAwLCAxNDApOwoJdC5wcmludCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMjU1LCAyMDApOwoJaWYgKGZiKSB7CgkJdC5wcmludChgQVRMQVMgRElNUzogJHtmYi53aWR0aH14JHtmYi5oZWlnaHR9IFBYYCwgeCwgeSsrKTsKCX0gZWxzZSB7CgkJdC5wcmludCgnQVRMQVMgSU5JVElBTElaSU5HLi4uJywgeCwgeSsrKTsKCX0KCXQucG9wKCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const RAMP = ' .:-=+*#%@';
+const labelLayer = t.layers.add();
+
+t.draw(() => {
+	t.background(10, 8, 16);
+	const hw = Math.floor(t.grid.cols / 2);
+	const hh = Math.floor(t.grid.rows / 2);
+	const tm = t.frameCount * 0.05;
+
+	const scanX = Math.sin(tm) * hw;
+	const scanY = Math.cos(tm * 0.7) * hh;
+
+	for (let y = -hh; y <= hh; y++) {
+		for (let x = -hw; x <= hw; x++) {
+			const dBeam1 = Math.abs(x - scanX);
+			const dBeam2 = Math.abs(y - scanY);
+			const field = Math.exp(-dBeam1 * 0.2) + Math.exp(-dBeam2 * 0.2);
+			const norm = Math.min(1, field * 0.5);
+
+			const idx = Math.floor(norm * (RAMP.length - 1));
+			t.push();
+			t.translate(x, y);
+			t.charColor(Math.floor(40 + norm * 200), Math.floor(160 + norm * 95), Math.floor(240 - norm * 80));
+			t.cellColor(Math.floor(10 + norm * 15), Math.floor(12 + norm * 20), Math.floor(28 + norm * 25));
+			t.char(RAMP[idx]);
+			t.point();
+			t.pop();
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const fb = t.font.framebuffer;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODEFONT.FRAMEBUFFER', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: ATLAS TEXTURE FRAMEBUFFER', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('GLFramebuffer storing glyph atlas.', x, y++);
+	t.print('Sampled by WebGL ASCII resolve pass.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 200);
+	if (fb) {
+		t.print(`ATLAS DIMS: ${fb.width}x${fb.height} PX`, x, y++);
+	} else {
+		t.print('ATLAS INITIALIZING...', x, y++);
+	}
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

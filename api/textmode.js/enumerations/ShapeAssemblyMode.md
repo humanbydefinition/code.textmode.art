@@ -31,7 +31,60 @@ the last vertex should connect back to the first.
 
 #### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="ShapeAssemblyMode" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBtb2RlID0gdC5MSU5FX0xPT1A7CmNvbnN0IG1vZGVOYW1lID0gJ0xJTkVfTE9PUCc7CmNvbnN0IGxhYmVsTGF5ZXIgPSB0LmxheWVycy5hZGQoKTsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKdC5kcmF3KCgpID0-IHsKCWNvbnN0IHRpbWUgPSB0LmZyYW1lQ291bnQgKiAwLjAzNTsKCXQuYmFja2dyb3VuZCg3LCAxMCwgMjQpOwoJdC5saW5lV2VpZ2h0KDAuNyk7Cgl0LmJlZ2luU2hhcGUobW9kZSk7Cglmb3IgKGxldCBpID0gMDsgaSA8IDY0OyBpKyspIHsKCQljb25zdCBwID0gaSAvIDY0OwoJCWNvbnN0IGEgPSBwICogTWF0aC5QSSAqIDI7CgkJY29uc3QgciA9IDEwICsgTWF0aC5zaW4oYSAqIDUgKyB0aW1lICogMikgKiAyICsgTWF0aC5jb3MoYSAqIDMgLSB0aW1lKSAqIDEuNTsKCQl0LmNoYXIoaSAlIDUgPT09IDAgPyAnIycgOiAnKycpOwoJCXQuY2hhckNvbG9yKDEyMCArIE1hdGguc2luKGEpICogODAsIDIxMCwgMTgwICsgTWF0aC5jb3MoYSkgKiA2MCk7CgkJdC52ZXJ0ZXgoTWF0aC5jb3MoYSkgKiByLCBNYXRoLnNpbihhKSAqIHIpOwoJfQoJdC5lbmRTaGFwZSgpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLkxJTkVfTE9PUCcsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IENMT1NFRCBPVVRMSU5FJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdMYXN0IHZlcnRleCByZXR1cm5zIHRvIGZpcnN0LicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnR29vZCBmb3Igb3JiaXRpbmcgY29udG91cnMuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dChgTU9ERTogJHttb2RlTmFtZX1gLCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const mode = t.LINE_LOOP;
+const modeName = 'LINE_LOOP';
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	const time = t.frameCount * 0.035;
+	t.background(7, 10, 24);
+	t.lineWeight(0.7);
+	t.beginShape(mode);
+	for (let i = 0; i < 64; i++) {
+		const p = i / 64;
+		const a = p * Math.PI * 2;
+		const r = 10 + Math.sin(a * 5 + time * 2) * 2 + Math.cos(a * 3 - time) * 1.5;
+		t.char(i % 5 === 0 ? '#' : '+');
+		t.charColor(120 + Math.sin(a) * 80, 210, 180 + Math.cos(a) * 60);
+		t.vertex(Math.cos(a) * r, Math.sin(a) * r);
+	}
+	t.endShape();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.LINE_LOOP', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: CLOSED OUTLINE', x, y++, 100, 220, 255);
+	drawText('Last vertex returns to first.', x, y++, 140, 160, 190);
+	drawText('Good for orbiting contours.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`MODE: ${modeName}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 
 ***
 
@@ -48,7 +101,60 @@ paths that should not automatically close.
 
 #### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="ShapeAssemblyMode" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBtb2RlID0gdC5MSU5FX1NUUklQOwpjb25zdCBtb2RlTmFtZSA9ICdMSU5FX1NUUklQJzsKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LmRyYXcoKCkgPT4gewoJY29uc3QgdGltZSA9IHQuZnJhbWVDb3VudCAqIDAuMDQ7Cgl0LmJhY2tncm91bmQoNSwgMTIsIDI1KTsKCXQubGluZVdlaWdodCgwLjgpOwoJdC5iZWdpblNoYXBlKG1vZGUpOwoJZm9yIChsZXQgaSA9IDA7IGkgPCA3MDsgaSsrKSB7CgkJY29uc3QgcCA9IGkgLyA2OTsKCQljb25zdCB4ID0gLTIyICsgcCAqIDQ0OwoJCWNvbnN0IHkgPSBNYXRoLnNpbihwICogTWF0aC5QSSAqIDYgKyB0aW1lICogMikgKiA1ICsgTWF0aC5zaW4ocCAqIDE5IC0gdGltZSkgKiAyOwoJCXQuY2hhcihpICUgNCA9PT0gMCA_ICdAJyA6ICd-Jyk7CgkJdC5jaGFyQ29sb3IoODAgKyBwICogMTYwLCAxNzAgKyBNYXRoLnNpbihwICogNykgKiA3MCwgMjU1KTsKCQl0LnZlcnRleCh4LCB5KTsKCX0KCXQuZW5kU2hhcGUoKTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5MSU5FX1NUUklQJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogT1BFTiBDT05USU5VT1VTIFBBVEgnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ0NvbnNlY3V0aXZlIHZlcnRpY2VzIGNvbm5lY3QuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdUaGUgZW5kcyByZW1haW4gb3Blbi4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KGBNT0RFOiAke21vZGVOYW1lfWAsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const mode = t.LINE_STRIP;
+const modeName = 'LINE_STRIP';
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	const time = t.frameCount * 0.04;
+	t.background(5, 12, 25);
+	t.lineWeight(0.8);
+	t.beginShape(mode);
+	for (let i = 0; i < 70; i++) {
+		const p = i / 69;
+		const x = -22 + p * 44;
+		const y = Math.sin(p * Math.PI * 6 + time * 2) * 5 + Math.sin(p * 19 - time) * 2;
+		t.char(i % 4 === 0 ? '@' : '~');
+		t.charColor(80 + p * 160, 170 + Math.sin(p * 7) * 70, 255);
+		t.vertex(x, y);
+	}
+	t.endShape();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.LINE_STRIP', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: OPEN CONTINUOUS PATH', x, y++, 100, 220, 255);
+	drawText('Consecutive vertices connect.', x, y++, 140, 160, 190);
+	drawText('The ends remain open.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`MODE: ${modeName}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 
 ***
 
@@ -65,7 +171,61 @@ geometry where every two vertices form a separate edge.
 
 #### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="ShapeAssemblyMode" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBtb2RlID0gdC5MSU5FUzsKY29uc3QgbW9kZU5hbWUgPSAnTElORVMnOwpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCnQuZHJhdygoKSA9PiB7Cgljb25zdCB0aW1lID0gdC5mcmFtZUNvdW50ICogMC4wMzU7Cgl0LmJhY2tncm91bmQoOCwgOCwgMjIpOwoJdC5saW5lV2VpZ2h0KDAuNyk7Cgl0LmJlZ2luU2hhcGUobW9kZSk7Cglmb3IgKGxldCBpID0gMDsgaSA8IDMwOyBpKyspIHsKCQljb25zdCBhID0gaSAqIDEyICsgdC5mcmFtZUNvdW50ICogMC45OwoJCWNvbnN0IHIxID0gNCArIE1hdGguc2luKHRpbWUgKyBpKSAqIDI7CgkJY29uc3QgcjIgPSAxMyArIE1hdGguY29zKHRpbWUgKiAxLjcgKyBpKSAqIDM7CgkJdC5jaGFyKGkgJSAyID8gJy8nIDogJ1xcJyk7CgkJdC5jaGFyQ29sb3IoMTIwICsgaSAqIDQsIDI0MCAtIGkgKiAzLCAyMTApOwoJCXQudmVydGV4KE1hdGguY29zKGEpICogcjEsIE1hdGguc2luKGEpICogcjEpOwoJCXQudmVydGV4KE1hdGguY29zKGEgKyAzMCkgKiByMiwgTWF0aC5zaW4oYSArIDMwKSAqIHIyKTsKCX0KCXQuZW5kU2hhcGUoKTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5MSU5FUycsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IFBBSVJFRCBTRUdNRU5UUycsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnRXZlcnkgdHdvIHZlcnRpY2VzIGNvbm5lY3QuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdFYWNoIHBhaXIgc3RheXMgc2VwYXJhdGUuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dChgTU9ERTogJHttb2RlTmFtZX1gLCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const mode = t.LINES;
+const modeName = 'LINES';
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	const time = t.frameCount * 0.035;
+	t.background(8, 8, 22);
+	t.lineWeight(0.7);
+	t.beginShape(mode);
+	for (let i = 0; i < 30; i++) {
+		const a = i * 12 + t.frameCount * 0.9;
+		const r1 = 4 + Math.sin(time + i) * 2;
+		const r2 = 13 + Math.cos(time * 1.7 + i) * 3;
+		t.char(i % 2 ? '/' : '\\');
+		t.charColor(120 + i * 4, 240 - i * 3, 210);
+		t.vertex(Math.cos(a) * r1, Math.sin(a) * r1);
+		t.vertex(Math.cos(a + 30) * r2, Math.sin(a + 30) * r2);
+	}
+	t.endShape();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.LINES', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: PAIRED SEGMENTS', x, y++, 100, 220, 255);
+	drawText('Every two vertices connect.', x, y++, 140, 160, 190);
+	drawText('Each pair stays separate.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`MODE: ${modeName}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 
 ***
 
@@ -82,7 +242,59 @@ where every vertex is an independent mark.
 
 #### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="ShapeAssemblyMode" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBtb2RlID0gdC5QT0lOVFM7CmNvbnN0IG1vZGVOYW1lID0gJ1BPSU5UUyc7CmNvbnN0IGxhYmVsTGF5ZXIgPSB0LmxheWVycy5hZGQoKTsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKdC5kcmF3KCgpID0-IHsKCWNvbnN0IHRpbWUgPSB0LmZyYW1lQ291bnQgKiAwLjAzNTsKCXQuYmFja2dyb3VuZCg2LCAxMCwgMjQpOwoJdC5iZWdpblNoYXBlKG1vZGUpOwoJZm9yIChsZXQgaSA9IDA7IGkgPCA5NjsgaSsrKSB7CgkJY29uc3QgYSA9IGkgKiAxMy43ICsgdC5mcmFtZUNvdW50ICogMS40OwoJCWNvbnN0IHIgPSAyICsgaSAqIDAuMTIgKyBNYXRoLnNpbih0aW1lICogMiArIGkpICogMS4yOwoJCXQuY2hhcihpICUgMyA9PT0gMCA_ICcqJyA6ICcuJyk7CgkJdC5jaGFyQ29sb3IoOTAgKyBpLCAxODAgKyBNYXRoLnNpbihpKSAqIDUwLCAyNTUpOwoJCXQuY2VsbENvbG9yKDQsIDEyICsgKGkgJSA2KSAqIDUsIDMwKTsKCQl0LnZlcnRleChNYXRoLmNvcyhhKSAqIHIsIE1hdGguc2luKGEpICogcik7Cgl9Cgl0LmVuZFNoYXBlKCk7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuUE9JTlRTJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogVkVSVEVYIFBBUlRJQ0xFUycsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnRWFjaCB2ZXJ0ZXggYmVjb21lcyBhIHBvaW50LicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnTm8gZWRnZXMgY29ubmVjdCB0aGUgbWFya3MuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dChgTU9ERTogJHttb2RlTmFtZX1gLCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const mode = t.POINTS;
+const modeName = 'POINTS';
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	const time = t.frameCount * 0.035;
+	t.background(6, 10, 24);
+	t.beginShape(mode);
+	for (let i = 0; i < 96; i++) {
+		const a = i * 13.7 + t.frameCount * 1.4;
+		const r = 2 + i * 0.12 + Math.sin(time * 2 + i) * 1.2;
+		t.char(i % 3 === 0 ? '*' : '.');
+		t.charColor(90 + i, 180 + Math.sin(i) * 50, 255);
+		t.cellColor(4, 12 + (i % 6) * 5, 30);
+		t.vertex(Math.cos(a) * r, Math.sin(a) * r);
+	}
+	t.endShape();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.POINTS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: VERTEX PARTICLES', x, y++, 100, 220, 255);
+	drawText('Each vertex becomes a point.', x, y++, 140, 160, 190);
+	drawText('No edges connect the marks.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`MODE: ${modeName}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 
 ***
 
@@ -99,7 +311,62 @@ pair of vertices extends the next four-sided segment.
 
 #### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="ShapeAssemblyMode" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBtb2RlID0gdC5RVUFEX1NUUklQOwpjb25zdCBtb2RlTmFtZSA9ICdRVUFEX1NUUklQJzsKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LmRyYXcoKCkgPT4gewoJY29uc3QgdGltZSA9IHQuZnJhbWVDb3VudCAqIDAuMDQ7Cgl0LmJhY2tncm91bmQoOCwgOCwgMjQpOwoJdC5iZWdpblNoYXBlKG1vZGUpOwoJZm9yIChsZXQgaSA9IDA7IGkgPCAyODsgaSsrKSB7CgkJY29uc3QgcCA9IGkgLyAyNzsKCQljb25zdCB4ID0gLTIwICsgcCAqIDQwOwoJCWNvbnN0IHkgPSBNYXRoLnNpbihwICogTWF0aC5QSSAqIDQgKyB0aW1lICogMikgKiA1OwoJCWNvbnN0IHdpZHRoID0gMiArIE1hdGguY29zKHRpbWUgKyBpKSAqIDAuODsKCQl0LmNoYXIoaSAlIDIgPyAnPScgOiAnIycpOwoJCXQuY2hhckNvbG9yKDI1NSAtIHAgKiA4MCwgMTQwICsgcCAqIDkwLCAyMTApOwoJCXQuY2VsbENvbG9yKDQwICsgcCAqIDMwLCAxNiwgNDUgKyBwICogNDApOwoJCXQudmVydGV4KHgsIHkgLSB3aWR0aCk7CgkJdC52ZXJ0ZXgoeCwgeSArIHdpZHRoKTsKCX0KCXQuZW5kU2hhcGUoKTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5RVUFEX1NUUklQJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogQ09OTkVDVEVEIFFVQUQgQkFORCcsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnRWFjaCBwYWlyIGV4dGVuZHMgdGhlIHN0cmlwLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnR29vZCBmb3IgdGhpY2sgZmxvd2luZyBwYXRocy4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KGBNT0RFOiAke21vZGVOYW1lfWAsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const mode = t.QUAD_STRIP;
+const modeName = 'QUAD_STRIP';
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	const time = t.frameCount * 0.04;
+	t.background(8, 8, 24);
+	t.beginShape(mode);
+	for (let i = 0; i < 28; i++) {
+		const p = i / 27;
+		const x = -20 + p * 40;
+		const y = Math.sin(p * Math.PI * 4 + time * 2) * 5;
+		const width = 2 + Math.cos(time + i) * 0.8;
+		t.char(i % 2 ? '=' : '#');
+		t.charColor(255 - p * 80, 140 + p * 90, 210);
+		t.cellColor(40 + p * 30, 16, 45 + p * 40);
+		t.vertex(x, y - width);
+		t.vertex(x, y + width);
+	}
+	t.endShape();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.QUAD_STRIP', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: CONNECTED QUAD BAND', x, y++, 100, 220, 255);
+	drawText('Each pair extends the strip.', x, y++, 140, 160, 190);
+	drawText('Good for thick flowing paths.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`MODE: ${modeName}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 
 ***
 
@@ -116,7 +383,65 @@ every four vertices define a separate four-sided patch.
 
 #### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="ShapeAssemblyMode" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBtb2RlID0gdC5RVUFEUzsKY29uc3QgbW9kZU5hbWUgPSAnUVVBRFMnOwpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCnQuZHJhdygoKSA9PiB7Cgljb25zdCB0aW1lID0gdC5mcmFtZUNvdW50ICogMC4wNDsKCXQuYmFja2dyb3VuZCg2LCAxMCwgMjApOwoJdC5iZWdpblNoYXBlKG1vZGUpOwoJZm9yIChsZXQgZ3kgPSAtMjsgZ3kgPD0gMjsgZ3krKykgewoJCWZvciAobGV0IGd4ID0gLTQ7IGd4IDw9IDQ7IGd4KyspIHsKCQkJY29uc3QgY3ggPSBneCAqIDQgKyBNYXRoLnNpbih0aW1lICsgZ3kpICogMS41OwoJCQljb25zdCBjeSA9IGd5ICogNCArIE1hdGguY29zKHRpbWUgKyBneCkgKiAxLjU7CgkJCWNvbnN0IHMgPSAxLjQgKyBNYXRoLnNpbih0aW1lICogMiArIGd4ICsgZ3kpICogMC41OwoJCQl0LmNoYXIoKGd4ICsgZ3kpICUgMiA_ICcjJyA6ICcrJyk7CgkJCXQuY2hhckNvbG9yKDEyMCArIGd4ICogMTQsIDE5MCArIGd5ICogMTIsIDI1MCk7CgkJCXQuY2VsbENvbG9yKDEyICsgZ3ggKiAzLCAyMiArIGd5ICogNiwgNDUpOwoJCQl0LnZlcnRleChjeCAtIHMsIGN5IC0gcyk7CgkJCXQudmVydGV4KGN4ICsgcywgY3kgLSBzKTsKCQkJdC52ZXJ0ZXgoY3ggKyBzLCBjeSArIHMpOwoJCQl0LnZlcnRleChjeCAtIHMsIGN5ICsgcyk7CgkJfQoJfQoJdC5lbmRTaGFwZSgpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLlFVQURTJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogRk9VUiBWRVJURVggUEFUQ0hFUycsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnRXZlcnkgZm91ciB2ZXJ0aWNlcyBmaWxsLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnRWFjaCBjZWxsIGlzIGluZGVwZW5kZW50LicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoYE1PREU6ICR7bW9kZU5hbWV9YCwgeCwgeSsrLCAxNDAsIDI1NSwgMTgwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const mode = t.QUADS;
+const modeName = 'QUADS';
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	const time = t.frameCount * 0.04;
+	t.background(6, 10, 20);
+	t.beginShape(mode);
+	for (let gy = -2; gy <= 2; gy++) {
+		for (let gx = -4; gx <= 4; gx++) {
+			const cx = gx * 4 + Math.sin(time + gy) * 1.5;
+			const cy = gy * 4 + Math.cos(time + gx) * 1.5;
+			const s = 1.4 + Math.sin(time * 2 + gx + gy) * 0.5;
+			t.char((gx + gy) % 2 ? '#' : '+');
+			t.charColor(120 + gx * 14, 190 + gy * 12, 250);
+			t.cellColor(12 + gx * 3, 22 + gy * 6, 45);
+			t.vertex(cx - s, cy - s);
+			t.vertex(cx + s, cy - s);
+			t.vertex(cx + s, cy + s);
+			t.vertex(cx - s, cy + s);
+		}
+	}
+	t.endShape();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.QUADS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: FOUR VERTEX PATCHES', x, y++, 100, 220, 255);
+	drawText('Every four vertices fill.', x, y++, 140, 160, 190);
+	drawText('Each cell is independent.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`MODE: ${modeName}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 
 ***
 
@@ -133,7 +458,64 @@ expanding from a shared center.
 
 #### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="ShapeAssemblyMode" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBtb2RlID0gdC5UUklBTkdMRV9GQU47CmNvbnN0IG1vZGVOYW1lID0gJ1RSSUFOR0xFX0ZBTic7CmNvbnN0IGxhYmVsTGF5ZXIgPSB0LmxheWVycy5hZGQoKTsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKdC5kcmF3KCgpID0-IHsKCWNvbnN0IHRpbWUgPSB0LmZyYW1lQ291bnQgKiAwLjAzNTsKCXQuYmFja2dyb3VuZCgxMCwgOCwgMjQpOwoJdC5iZWdpblNoYXBlKG1vZGUpOwoJdC5jaGFyKCdAJyk7Cgl0LmNoYXJDb2xvcigyNTUsIDI0NSwgMTgwKTsKCXQuY2VsbENvbG9yKDY1LCA0MCwgMjApOwoJdC52ZXJ0ZXgoMCwgMCk7Cglmb3IgKGxldCBpID0gMDsgaSA8PSA0ODsgaSsrKSB7CgkJY29uc3QgcCA9IGkgLyA0ODsKCQljb25zdCBhID0gcCAqIE1hdGguUEkgKiAyICsgdGltZTsKCQljb25zdCByID0gMTIgKyBNYXRoLnNpbihhICogNiAtIHRpbWUgKiAzKSAqIDI7CgkJdC5jaGFyKGkgJSAzID8gJyonIDogJyMnKTsKCQl0LmNoYXJDb2xvcigyNTUsIDEzMCArIE1hdGguc2luKGEpICogNzAsIDkwICsgTWF0aC5jb3MoYSkgKiA2MCk7CgkJdC5jZWxsQ29sb3IoNTUgKyBNYXRoLnNpbihhKSAqIDIwLCAxOCwgMTIpOwoJCXQudmVydGV4KE1hdGguY29zKGEpICogciwgTWF0aC5zaW4oYSkgKiByKTsKCX0KCXQuZW5kU2hhcGUoKTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5UUklBTkdMRV9GQU4nLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBTSEFSRUQgQ0VOVEVSJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdFdmVyeSB0cmlhbmdsZSB1c2VzIHZlcnRleCAxLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnR3JlYXQgZm9yIHJhZGlhbCBidXJzdHMuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dChgTU9ERTogJHttb2RlTmFtZX1gLCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const mode = t.TRIANGLE_FAN;
+const modeName = 'TRIANGLE_FAN';
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	const time = t.frameCount * 0.035;
+	t.background(10, 8, 24);
+	t.beginShape(mode);
+	t.char('@');
+	t.charColor(255, 245, 180);
+	t.cellColor(65, 40, 20);
+	t.vertex(0, 0);
+	for (let i = 0; i <= 48; i++) {
+		const p = i / 48;
+		const a = p * Math.PI * 2 + time;
+		const r = 12 + Math.sin(a * 6 - time * 3) * 2;
+		t.char(i % 3 ? '*' : '#');
+		t.charColor(255, 130 + Math.sin(a) * 70, 90 + Math.cos(a) * 60);
+		t.cellColor(55 + Math.sin(a) * 20, 18, 12);
+		t.vertex(Math.cos(a) * r, Math.sin(a) * r);
+	}
+	t.endShape();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.TRIANGLE_FAN', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SHARED CENTER', x, y++, 100, 220, 255);
+	drawText('Every triangle uses vertex 1.', x, y++, 140, 160, 190);
+	drawText('Great for radial bursts.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`MODE: ${modeName}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 
 ***
 
@@ -150,7 +532,61 @@ built from a single alternating vertex sequence.
 
 #### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="ShapeAssemblyMode" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBtb2RlID0gdC5UUklBTkdMRV9TVFJJUDsKY29uc3QgbW9kZU5hbWUgPSAnVFJJQU5HTEVfU1RSSVAnOwpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCnQuZHJhdygoKSA9PiB7Cgljb25zdCB0aW1lID0gdC5mcmFtZUNvdW50ICogMC4wNDsKCXQuYmFja2dyb3VuZCg1LCAxMiwgMjYpOwoJdC5iZWdpblNoYXBlKG1vZGUpOwoJZm9yIChsZXQgaSA9IDA7IGkgPCA0MjsgaSsrKSB7CgkJY29uc3QgcCA9IGkgLyA0MTsKCQljb25zdCB4ID0gLTIwICsgcCAqIDQwOwoJCWNvbnN0IHdhdmUgPSBNYXRoLnNpbihwICogTWF0aC5QSSAqIDUgKyB0aW1lICogMikgKiA0OwoJCWNvbnN0IHNpZGUgPSBpICUgMiA9PT0gMCA_IC0yLjUgOiAyLjU7CgkJdC5jaGFyKGkgJSAyID09PSAwID8gJy8nIDogJ1xcJyk7CgkJdC5jaGFyQ29sb3IoMTAwICsgcCAqIDEyMCwgMjQwIC0gcCAqIDcwLCAyNTUpOwoJCXQuY2VsbENvbG9yKDgsIDI4ICsgcCAqIDQwLCA0NSArIHAgKiA3MCk7CgkJdC52ZXJ0ZXgoeCwgd2F2ZSArIHNpZGUpOwoJfQoJdC5lbmRTaGFwZSgpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLlRSSUFOR0xFX1NUUklQJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogQ09OTkVDVEVEIFJJQkJPTicsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnRWFjaCBuZXcgdmVydGV4IGFkZHMgYSBmYWNlLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnQWx0ZXJuYXRpbmcgc2lkZXMgbWFrZSB3aWR0aC4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KGBNT0RFOiAke21vZGVOYW1lfWAsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const mode = t.TRIANGLE_STRIP;
+const modeName = 'TRIANGLE_STRIP';
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	const time = t.frameCount * 0.04;
+	t.background(5, 12, 26);
+	t.beginShape(mode);
+	for (let i = 0; i < 42; i++) {
+		const p = i / 41;
+		const x = -20 + p * 40;
+		const wave = Math.sin(p * Math.PI * 5 + time * 2) * 4;
+		const side = i % 2 === 0 ? -2.5 : 2.5;
+		t.char(i % 2 === 0 ? '/' : '\\');
+		t.charColor(100 + p * 120, 240 - p * 70, 255);
+		t.cellColor(8, 28 + p * 40, 45 + p * 70);
+		t.vertex(x, wave + side);
+	}
+	t.endShape();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.TRIANGLE_STRIP', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: CONNECTED RIBBON', x, y++, 100, 220, 255);
+	drawText('Each new vertex adds a face.', x, y++, 140, 160, 190);
+	drawText('Alternating sides make width.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`MODE: ${modeName}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 
 ***
 
@@ -167,4 +603,60 @@ each triangle controls its own three corners.
 
 #### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="ShapeAssemblyMode" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBtb2RlID0gdC5UUklBTkdMRVM7CmNvbnN0IG1vZGVOYW1lID0gJ1RSSUFOR0xFUyc7CmNvbnN0IGxhYmVsTGF5ZXIgPSB0LmxheWVycy5hZGQoKTsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKdC5kcmF3KCgpID0-IHsKCWNvbnN0IHRpbWUgPSB0LmZyYW1lQ291bnQgKiAwLjAzNTsKCXQuYmFja2dyb3VuZCg4LCA4LCAyMCk7Cgl0LmJlZ2luU2hhcGUobW9kZSk7Cglmb3IgKGxldCBpID0gMDsgaSA8IDE4OyBpKyspIHsKCQljb25zdCBhID0gaSAqIDIwICsgdC5mcmFtZUNvdW50OwoJCWNvbnN0IGN4ID0gTWF0aC5jb3MoYSkgKiAoNSArIChpICUgMykgKiA0KTsKCQljb25zdCBjeSA9IE1hdGguc2luKGEpICogKDUgKyAoaSAlIDQpICogMik7CgkJY29uc3Qgc2l6ZSA9IDIgKyBNYXRoLnNpbih0aW1lICsgaSkgKiAwLjg7CgkJdC5jaGFyKGkgJSAyID8gJ14nIDogJyMnKTsKCQl0LmNoYXJDb2xvcigyNTAsIDExMCArIGkgKiA2LCAxNTAgKyBpICogMyk7CgkJdC5jZWxsQ29sb3IoNDAgKyBpICogNCwgMTAsIDI1KTsKCQl0LnZlcnRleChjeCArIE1hdGguY29zKGEpICogc2l6ZSwgY3kgKyBNYXRoLnNpbihhKSAqIHNpemUpOwoJCXQudmVydGV4KGN4ICsgTWF0aC5jb3MoYSArIDEyMCkgKiBzaXplLCBjeSArIE1hdGguc2luKGEgKyAxMjApICogc2l6ZSk7CgkJdC52ZXJ0ZXgoY3ggKyBNYXRoLmNvcyhhICsgMjQwKSAqIHNpemUsIGN5ICsgTWF0aC5zaW4oYSArIDI0MCkgKiBzaXplKTsKCX0KCXQuZW5kU2hhcGUoKTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5UUklBTkdMRVMnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBJTkRFUEVOREVOVCBGQUNFVFMnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ0V2ZXJ5IHRocmVlIHZlcnRpY2VzIGZpbGwuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdFYWNoIHRyaWFuZ2xlIHN0YW5kcyBhbG9uZS4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KGBNT0RFOiAke21vZGVOYW1lfWAsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const mode = t.TRIANGLES;
+const modeName = 'TRIANGLES';
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	const time = t.frameCount * 0.035;
+	t.background(8, 8, 20);
+	t.beginShape(mode);
+	for (let i = 0; i < 18; i++) {
+		const a = i * 20 + t.frameCount;
+		const cx = Math.cos(a) * (5 + (i % 3) * 4);
+		const cy = Math.sin(a) * (5 + (i % 4) * 2);
+		const size = 2 + Math.sin(time + i) * 0.8;
+		t.char(i % 2 ? '^' : '#');
+		t.charColor(250, 110 + i * 6, 150 + i * 3);
+		t.cellColor(40 + i * 4, 10, 25);
+		t.vertex(cx + Math.cos(a) * size, cy + Math.sin(a) * size);
+		t.vertex(cx + Math.cos(a + 120) * size, cy + Math.sin(a + 120) * size);
+		t.vertex(cx + Math.cos(a + 240) * size, cy + Math.sin(a + 240) * size);
+	}
+	t.endShape();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.TRIANGLES', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: INDEPENDENT FACETS', x, y++, 100, 220, 255);
+	drawText('Every three vertices fill.', x, y++, 140, 160, 190);
+	drawText('Each triangle stands alone.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`MODE: ${modeName}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```

@@ -37,5 +37,56 @@ A function to unregister the hook.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="registerLayerPreRenderHook" encoded-code="bGV0IHByZVJlbmRlckNvdW50ID0gMDsKCmNvbnN0IGhvb2tQbHVnaW4gPSB7CgluYW1lOiAnbGF5ZXItcHJlLXJlbmRlci1ob29rLXBsdWdpbicsCglpbnN0YWxsKHRleHRtb2RpZmllciwgY29udGV4dCkgewoJCWNvbnRleHQucmVnaXN0ZXJMYXllclByZVJlbmRlckhvb2soKCkgPT4gewoJCQlwcmVSZW5kZXJDb3VudCArPSAxOwoJCX0pOwoJfSwKfTsKCmNvbnN0IHQgPSB0ZXh0bW9kZS5jcmVhdGUoewoJd2lkdGg6IHdpbmRvdy5pbm5lcldpZHRoLAoJaGVpZ2h0OiB3aW5kb3cuaW5uZXJIZWlnaHQsCglmb250U2l6ZTogMTYsCglwbHVnaW5zOiBbaG9va1BsdWdpbl0sCn0pOwoKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg2LCA4LCAyMCk7Cn0pOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWRyYXdUZXh0KCdQTFVHSU5TLlJFR0lTVEVSTEFZRVJQUkVSRU5ERVJIT09LJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogTEFZRVIgUFJFLVJFTkRFUiBIT09LJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdSdW5zIGJlZm9yZSBkcmF3aW5nIGZyYW1lYnVmZmVycy4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KGBJTlZPQ0FUSU9OUyA6ICR7cHJlUmVuZGVyQ291bnR9YCwgeCwgeSsrLCAxNDAsIDE5MCwgMjU1KTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+let preRenderCount = 0;
+
+const hookPlugin = {
+	name: 'layer-pre-render-hook-plugin',
+	install(textmodifier, context) {
+		context.registerLayerPreRenderHook(() => {
+			preRenderCount += 1;
+		});
+	},
+};
+
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+	plugins: [hookPlugin],
+});
+
+const labelLayer = t.layers.add();
+
+t.draw(() => {
+	t.background(6, 8, 20);
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('PLUGINS.REGISTERLAYERPRERENDERHOOK', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: LAYER PRE-RENDER HOOK', x, y++, 100, 220, 255);
+	drawText('Runs before drawing framebuffers.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`INVOCATIONS : ${preRenderCount}`, x, y++, 140, 190, 255);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

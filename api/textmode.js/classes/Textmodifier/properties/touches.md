@@ -25,5 +25,61 @@ available. Use this inside a draw loop to react to active multi-touch scenarios.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="touches" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpsZXQgcG9pbnRzID0gW107CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNiwgMTAsIDIyKTsKCXBvaW50cyA9IEFycmF5LmZyb20odC50b3VjaGVzKTsKCWlmIChwb2ludHMubGVuZ3RoID09PSAwICYmIHQubW91c2VJc1ByZXNzZWQpIHBvaW50cyA9IFt0Lm1vdXNlXTsKCWZvciAobGV0IGkgPSAwOyBpIDwgcG9pbnRzLmxlbmd0aDsgaSsrKSB7CgkJY29uc3QgcCA9IHBvaW50c1tpXTsKCQl0LnB1c2goKTsKCQl0LnRyYW5zbGF0ZShwLngsIHAueSk7CgkJdC5jaGFyKFN0cmluZyhpKSk7CgkJdC5jaGFyQ29sb3IoMjU1LCAyMTAsIDEyMCk7CgkJdC5wb2ludCgpOwoJCXQucG9wKCk7CgkJaWYgKGkgPiAwKSB7CgkJCXQuY2hhckNvbG9yKDgwLCAxMjAsIDE4MCk7CgkJCXQubGluZShwb2ludHNbaSAtIDFdLngsIHBvaW50c1tpIC0gMV0ueSwgcC54LCBwLnkpOwoJCX0KCX0KfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5UT1VDSEVTJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogQUNUSVZFIFRPVUNIIExJU1QnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ1Nob3dzIGxpdmUgdG91Y2ggcG9pbnRzLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnTW91c2UgZHJhZyBhY3RzIGFzIGZhbGxiYWNrLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoYFRPVUNIRVM6ICR7cG9pbnRzLmxlbmd0aH1gLCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+let points = [];
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(6, 10, 22);
+	points = Array.from(t.touches);
+	if (points.length === 0 && t.mouseIsPressed) points = [t.mouse];
+	for (let i = 0; i < points.length; i++) {
+		const p = points[i];
+		t.push();
+		t.translate(p.x, p.y);
+		t.char(String(i));
+		t.charColor(255, 210, 120);
+		t.point();
+		t.pop();
+		if (i > 0) {
+			t.charColor(80, 120, 180);
+			t.line(points[i - 1].x, points[i - 1].y, p.x, p.y);
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.TOUCHES', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: ACTIVE TOUCH LIST', x, y++, 100, 220, 255);
+	drawText('Shows live touch points.', x, y++, 140, 160, 190);
+	drawText('Mouse drag acts as fallback.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`TOUCHES: ${points.length}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

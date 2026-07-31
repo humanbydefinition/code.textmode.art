@@ -29,5 +29,57 @@ Current modifier key state.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="modifierState" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpsZXQgYWN0aXZlID0gMDsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg2LCAxMCwgMjIpOwoJY29uc3QgbSA9IHQubW9kaWZpZXJTdGF0ZTsKCWFjdGl2ZSA9IFttLnNoaWZ0LCBtLmN0cmwsIG0uYWx0LCBtLm1ldGFdLmZpbHRlcihCb29sZWFuKS5sZW5ndGg7CglbJ1NISUZUJywgJ0NUUkwnLCAnQUxUJywgJ01FVEEnXS5mb3JFYWNoKChuYW1lLCBpKSA9PiB7CgkJY29uc3Qgb24gPSBbbS5zaGlmdCwgbS5jdHJsLCBtLmFsdCwgbS5tZXRhXVtpXTsKCQl0LnB1c2goKTsKCQl0LnRyYW5zbGF0ZSgoaSAtIDEuNSkgKiA3LCAwKTsKCQl0LmNoYXIob24gPyAnIycgOiAnLicpOwoJCXQuY2hhckNvbG9yKG9uID8gMTQwIDogODAsIG9uID8gMjU1IDogOTAsIDE4MCk7CgkJdC5yZWN0KDUsIDMpOwoJCXQucG9wKCk7Cgl9KTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5NT0RJRklFUlNUQVRFJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogTU9ESUZJRVIgS0VZUycsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnVHJhY2tzIFNoaWZ0L0N0cmwvQWx0L01ldGEuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdIb2xkIGtleXMgdG8gbGlnaHQgcGFuZWxzLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoYEFDVElWRTogJHthY3RpdmV9YCwgeCwgeSsrLCAxNDAsIDI1NSwgMTgwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+let active = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(6, 10, 22);
+	const m = t.modifierState;
+	active = [m.shift, m.ctrl, m.alt, m.meta].filter(Boolean).length;
+	['SHIFT', 'CTRL', 'ALT', 'META'].forEach((name, i) => {
+		const on = [m.shift, m.ctrl, m.alt, m.meta][i];
+		t.push();
+		t.translate((i - 1.5) * 7, 0);
+		t.char(on ? '#' : '.');
+		t.charColor(on ? 140 : 80, on ? 255 : 90, 180);
+		t.rect(5, 3);
+		t.pop();
+	});
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.MODIFIERSTATE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: MODIFIER KEYS', x, y++, 100, 220, 255);
+	drawText('Tracks Shift/Ctrl/Alt/Meta.', x, y++, 140, 160, 190);
+	drawText('Hold keys to light panels.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`ACTIVE: ${active}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

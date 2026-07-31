@@ -43,5 +43,69 @@ The remapped value.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="map" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCBtYXBwZWRIZWlnaHQgPSAwOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDEwLCAxNyk7Cgljb25zdCBoYWxmQ29scyA9IE1hdGgubWF4KDEsIE1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKSk7Cgljb25zdCBoYWxmUm93cyA9IE1hdGgubWF4KDEsIE1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKSk7Cgljb25zdCBwb2ludGVyID0gdC5jb25zdHJhaW4odC5tb3VzZS54LCAtaGFsZkNvbHMsIGhhbGZDb2xzKTsKCW1hcHBlZEhlaWdodCA9IHQubWFwKHBvaW50ZXIsIC1oYWxmQ29scywgaGFsZkNvbHMsIDEsIDEzKTsKCglmb3IgKGxldCBpID0gMDsgaSA8IDE3OyBpKyspIHsKCQljb25zdCB4ID0gLTE2ICsgaSAqIDI7CgkJY29uc3Qgd2F2ZSA9IE1hdGguc2luKHQuZnJhbWVDb3VudCAqIDAuMDQgKyBpICogMC41NSk7CgkJY29uc3QgaGVpZ2h0ID0gTWF0aC5yb3VuZCh0Lm1hcCh3YXZlLCAtMSwgMSwgMSwgbWFwcGVkSGVpZ2h0KSk7CgkJY29uc3QgcmVkID0gTWF0aC5yb3VuZCh0Lm1hcChpLCAwLCAxNiwgODAsIDI1NSkpOwoJCWNvbnN0IGJsdWUgPSBNYXRoLnJvdW5kKHQubWFwKGhlaWdodCwgMSwgMTMsIDI1NSwgOTApKTsKCgkJdC5jaGFyKGkgJSAzID09PSAwID8gJyMnIDogJ3wnKTsKCQl0LmNoYXJDb2xvcihyZWQsIDE5MCwgYmx1ZSk7CgkJdC5wdXNoKCk7CgkJdC50cmFuc2xhdGUoeCwgNyAtIGhlaWdodCAvIDIpOwoJCXQucmVjdCgxLCBoZWlnaHQpOwoJCXQucG9wKCk7Cgl9CgoJY29uc3QgeSA9IHQubWFwKHQubW91c2UueSwgLWhhbGZSb3dzLCBoYWxmUm93cywgLTcsIDcpOwoJdC5jaGFyKCctJyk7Cgl0LmNoYXJDb2xvcigyNTUsIDIzMCwgMTIwKTsKCXQubGluZSgtMTgsIHksIDE4LCB5KTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5NQVAnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBSQU5HRSBSRU1BUFBJTkcnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ01vdXNlIGdyaWQgdmFsdWVzIGJlY29tZSBiYXIgcmFuZ2VzLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnbWFwKCkgYWxzbyBjb2xvcnMgZWFjaCBjb2x1bW4uJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dChgSEVJR0hUOiAke21hcHBlZEhlaWdodC50b0ZpeGVkKDEpfWAsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let mappedHeight = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(6, 10, 17);
+	const halfCols = Math.max(1, Math.floor(t.grid.cols / 2));
+	const halfRows = Math.max(1, Math.floor(t.grid.rows / 2));
+	const pointer = t.constrain(t.mouse.x, -halfCols, halfCols);
+	mappedHeight = t.map(pointer, -halfCols, halfCols, 1, 13);
+
+	for (let i = 0; i < 17; i++) {
+		const x = -16 + i * 2;
+		const wave = Math.sin(t.frameCount * 0.04 + i * 0.55);
+		const height = Math.round(t.map(wave, -1, 1, 1, mappedHeight));
+		const red = Math.round(t.map(i, 0, 16, 80, 255));
+		const blue = Math.round(t.map(height, 1, 13, 255, 90));
+
+		t.char(i % 3 === 0 ? '#' : '|');
+		t.charColor(red, 190, blue);
+		t.push();
+		t.translate(x, 7 - height / 2);
+		t.rect(1, height);
+		t.pop();
+	}
+
+	const y = t.map(t.mouse.y, -halfRows, halfRows, -7, 7);
+	t.char('-');
+	t.charColor(255, 230, 120);
+	t.line(-18, y, 18, y);
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.MAP', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: RANGE REMAPPING', x, y++, 100, 220, 255);
+	drawText('Mouse grid values become bar ranges.', x, y++, 140, 160, 190);
+	drawText('map() also colors each column.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`HEIGHT: ${mappedHeight.toFixed(1)}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

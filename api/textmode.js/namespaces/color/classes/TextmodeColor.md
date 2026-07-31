@@ -24,7 +24,92 @@ Use [Textmodifier.color](../../../classes/Textmodifier/methods/color.md) to crea
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="TextmodeColor" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBSQU1QID0gJyAuOi09KyojJUAnOwpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDYsIDE0KTsKCWNvbnN0IGh3ID0gTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgaGggPSBNYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7Cgljb25zdCB0bSA9IHQuZnJhbWVDb3VudCAqIDAuMDU7CgoJY29uc3QgY1JnYiA9IHQuY29sb3IoMjQwLCA4MCwgNTApOwoJY29uc3QgY0hleCA9IHQuY29sb3IoJyMzMEUwQTAnKTsKCWNvbnN0IGNHcmF5ID0gdC5jb2xvcigxODApOwoJY29uc3QgY1JnYmEgPSB0LmNvbG9yKDkwLCAxNDAsIDI1NSwgMjAwKTsKCglmb3IgKGxldCB5ID0gLWhoOyB5IDw9IGhoOyB5KyspIHsKCQlmb3IgKGxldCB4ID0gLWh3OyB4IDw9IGh3OyB4KyspIHsKCQkJY29uc3QgbWFuaGF0dGFuID0gTWF0aC5hYnMoeCkgKyBNYXRoLmFicyh5KTsKCQkJY29uc3QgY2hlYnlzaGV2ID0gTWF0aC5tYXgoTWF0aC5hYnMoeCksIE1hdGguYWJzKHkpKTsKCQkJY29uc3QgcmluZyA9IE1hdGguZmxvb3IobWFuaGF0dGFuICogMC40ICsgY2hlYnlzaGV2ICogMC4zIC0gdG0pICUgNDsKCgkJCWxldCBjb2w7CgkJCWlmIChyaW5nID09PSAwKSBjb2wgPSBjUmdiOwoJCQllbHNlIGlmIChyaW5nID09PSAxKSBjb2wgPSBjSGV4OwoJCQllbHNlIGlmIChyaW5nID09PSAyKSBjb2wgPSBjR3JheTsKCQkJZWxzZSBjb2wgPSBjUmdiYTsKCgkJCWNvbnN0IHZhbCA9IChNYXRoLnNpbihtYW5oYXR0YW4gKiAwLjMgLSB0bSkgKyAxKSAqIDAuNTsKCQkJaWYgKHZhbCA-IDAuMTUpIHsKCQkJCWNvbnN0IGlkeCA9IE1hdGgubWluKFJBTVAubGVuZ3RoIC0gMSwgTWF0aC5mbG9vcih2YWwgKiBSQU1QLmxlbmd0aCkpOwoJCQkJdC5wdXNoKCk7CgkJCQl0LnRyYW5zbGF0ZSh4LCB5KTsKCQkJCXQuY2hhckNvbG9yKGNvbC5yLCBjb2wuZywgY29sLmIpOwoJCQkJdC5jZWxsQ29sb3IoTWF0aC5mbG9vcihjb2wuciAqIDAuMTIpLCBNYXRoLmZsb29yKGNvbC5nICogMC4xMiksIE1hdGguZmxvb3IoY29sLmIgKiAwLjEyKSk7CgkJCQl0LmNoYXIoUkFNUFtpZHhdKTsKCQkJCXQucG9pbnQoKTsKCQkJCXQucG9wKCk7CgkJCX0KCQl9Cgl9Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCgljb25zdCBjUmdiID0gdC5jb2xvcigyNDAsIDgwLCA1MCk7Cgljb25zdCBjSGV4ID0gdC5jb2xvcignIzMwRTBBMCcpOwoJY29uc3QgY0dyYXkgPSB0LmNvbG9yKDE4MCk7CgoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcigxMjAsIDI0MCwgMTgwKTsKCXQucHJpbnQoJ1RFWFRNT0RFQ09MT1IuQ1JFQVRJT04nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoNzAsIDEwMCwgMTQwKTsKCXQucHJpbnQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDIxMCwgMjU1KTsKCXQucHJpbnQoJ0NPTkNFUFQ6IENPTE9SIENPTlNUUlVDVE9SIEZPUk1BVFMnLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAxNjAsIDE5MCk7Cgl0LnByaW50KCdDcmVhdGVzIGluc3RhbmNlcyBmcm9tIFJHQiwgSGV4LCcsIHgsIHkrKyk7Cgl0LnByaW50KCdncmF5c2NhbGUsIGFuZCBSR0JBIGFyZ3VtZW50cy4nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoNzAsIDEwMCwgMTQwKTsKCXQucHJpbnQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcihjUmdiLnIsIGNSZ2IuZywgY1JnYi5iKTsKCXQucHJpbnQoYFJHQiA6IHQuY29sb3IoJHtjUmdiLnJ9LCAke2NSZ2IuZ30sICR7Y1JnYi5ifSlgLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoY0hleC5yLCBjSGV4LmcsIGNIZXguYik7Cgl0LnByaW50KCJIRVggOiB0LmNvbG9yKCcjMzBFMEEwJykiLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoY0dyYXkuciwgY0dyYXkuZywgY0dyYXkuYik7Cgl0LnByaW50KGBHUkFZOiB0LmNvbG9yKCR7Y0dyYXkucn0pYCwgeCwgeSsrKTsKCXQucG9wKCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const RAMP = ' .:-=+*#%@';
+const labelLayer = t.layers.add();
+
+t.draw(() => {
+	t.background(6, 6, 14);
+	const hw = Math.floor(t.grid.cols / 2);
+	const hh = Math.floor(t.grid.rows / 2);
+	const tm = t.frameCount * 0.05;
+
+	const cRgb = t.color(240, 80, 50);
+	const cHex = t.color('#30E0A0');
+	const cGray = t.color(180);
+	const cRgba = t.color(90, 140, 255, 200);
+
+	for (let y = -hh; y <= hh; y++) {
+		for (let x = -hw; x <= hw; x++) {
+			const manhattan = Math.abs(x) + Math.abs(y);
+			const chebyshev = Math.max(Math.abs(x), Math.abs(y));
+			const ring = Math.floor(manhattan * 0.4 + chebyshev * 0.3 - tm) % 4;
+
+			let col;
+			if (ring === 0) col = cRgb;
+			else if (ring === 1) col = cHex;
+			else if (ring === 2) col = cGray;
+			else col = cRgba;
+
+			const val = (Math.sin(manhattan * 0.3 - tm) + 1) * 0.5;
+			if (val > 0.15) {
+				const idx = Math.min(RAMP.length - 1, Math.floor(val * RAMP.length));
+				t.push();
+				t.translate(x, y);
+				t.charColor(col.r, col.g, col.b);
+				t.cellColor(Math.floor(col.r * 0.12), Math.floor(col.g * 0.12), Math.floor(col.b * 0.12));
+				t.char(RAMP[idx]);
+				t.point();
+				t.pop();
+			}
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const cRgb = t.color(240, 80, 50);
+	const cHex = t.color('#30E0A0');
+	const cGray = t.color(180);
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODECOLOR.CREATION', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: COLOR CONSTRUCTOR FORMATS', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Creates instances from RGB, Hex,', x, y++);
+	t.print('grayscale, and RGBA arguments.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(cRgb.r, cRgb.g, cRgb.b);
+	t.print(`RGB : t.color(${cRgb.r}, ${cRgb.g}, ${cRgb.b})`, x, y++);
+	t.charColor(cHex.r, cHex.g, cHex.b);
+	t.print("HEX : t.color('#30E0A0')", x, y++);
+	t.charColor(cGray.r, cGray.g, cGray.b);
+	t.print(`GRAY: t.color(${cGray.r})`, x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 
 ## Properties
 

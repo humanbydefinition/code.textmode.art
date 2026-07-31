@@ -28,5 +28,77 @@ Vertical offset in pixels from the canvas edge to the grid.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="offsetY" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDQsIDIwKTsKCWNvbnN0IGNvbHMgPSB0LmdyaWQuY29sczsKCWNvbnN0IHJvd3MgPSB0LmdyaWQucm93czsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcigoY29scyAtIDEpIC8gMik7Cgljb25zdCByaWdodCA9IGxlZnQgKyBjb2xzIC0gMTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHJvd3MgLyAyKTsKCWNvbnN0IGJvdHRvbSA9IHRvcCArIHJvd3MgLSAxOwoJY29uc3QgdG0gPSB0LmZyYW1lQ291bnQgKiAwLjA0OwoKCWZvciAobGV0IHkgPSB0b3A7IHkgPD0gYm90dG9tOyB5KyspIHsKCQlmb3IgKGxldCB4ID0gbGVmdDsgeCA8PSByaWdodDsgeCsrKSB7CgkJCWNvbnN0IGlzQm9yZGVyID0geCA9PT0gbGVmdCB8fCB4ID09PSByaWdodCB8fCB5ID09PSB0b3AgfHwgeSA9PT0gYm90dG9tOwoJCQljb25zdCBpc0NlbnRlciA9IHggPT09IDAgfHwgeSA9PT0gMDsKCgkJCWxldCBjaGFyS2V5ID0gJy4nOwoJCQlpZiAoaXNCb3JkZXIpIGNoYXJLZXkgPSAnIyc7CgkJCWVsc2UgaWYgKGlzQ2VudGVyKSBjaGFyS2V5ID0gJysnOwoJCQllbHNlIGNoYXJLZXkgPSBNYXRoLmNvcyh4ICogMC4yICsgeSAqIDAuMiArIHRtKSA-IDAgPyAnfCcgOiAnOic7CgoJCQl0LnB1c2goKTsKCQkJdC50cmFuc2xhdGUoeCwgeSk7CgkJCXQuY2hhckNvbG9yKAoJCQkJaXNCb3JkZXIgPyAyNTUgOiBpc0NlbnRlciA_IDI0MCA6IDEwMCwKCQkJCWlzQm9yZGVyID8gMTgwIDogaXNDZW50ZXIgPyAxMjAgOiAxNDAsCgkJCQlpc0JvcmRlciA_IDEyMCA6IGlzQ2VudGVyID8gMjU1IDogMjQwCgkJCSk7CgkJCXQuY2VsbENvbG9yKGlzQm9yZGVyID8gMjggOiAxMiwgaXNCb3JkZXIgPyAxNCA6IDgsIGlzQm9yZGVyID8gMTIgOiAzMCk7CgkJCXQuY2hhcihjaGFyS2V5KTsKCQkJdC5wb2ludCgpOwoJCQl0LnBvcCgpOwoJCX0KCX0KfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IoMTIwLCAyNDAsIDE4MCk7Cgl0LnByaW50KCdURVhUTU9ERUdSSUQuT0ZGU0VUWScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcig3MCwgMTAwLCAxNDApOwoJdC5wcmludCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMjEwLCAyNTUpOwoJdC5wcmludCgnQ09OQ0VQVDogVkVSVElDQUwgQ0VOVEVSSU5HIEFMSUdOTUVOVCcsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDE2MCwgMTkwKTsKCXQucHJpbnQoJ1ZlcnRpY2FsIG9mZnNldCBpbiBwaXhlbHMgZnJvbSBjYW52YXMnLCB4LCB5KyspOwoJdC5wcmludCgnZWRnZSB0byBncmlkIHRvIGNlbnRlciBncmlkIGNvbnRlbnQuJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDcwLCAxMDAsIDE0MCk7Cgl0LnByaW50KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAyNTUsIDIwMCk7Cgl0LnByaW50KGBPRkZTRVQgWTogJHt0LmdyaWQub2Zmc2V0WX0gUFhgLCB4LCB5KyspOwoJdC5wb3AoKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+t.draw(() => {
+	t.background(6, 4, 20);
+	const cols = t.grid.cols;
+	const rows = t.grid.rows;
+	const left = -Math.floor((cols - 1) / 2);
+	const right = left + cols - 1;
+	const top = -Math.floor(rows / 2);
+	const bottom = top + rows - 1;
+	const tm = t.frameCount * 0.04;
+
+	for (let y = top; y <= bottom; y++) {
+		for (let x = left; x <= right; x++) {
+			const isBorder = x === left || x === right || y === top || y === bottom;
+			const isCenter = x === 0 || y === 0;
+
+			let charKey = '.';
+			if (isBorder) charKey = '#';
+			else if (isCenter) charKey = '+';
+			else charKey = Math.cos(x * 0.2 + y * 0.2 + tm) > 0 ? '|' : ':';
+
+			t.push();
+			t.translate(x, y);
+			t.charColor(
+				isBorder ? 255 : isCenter ? 240 : 100,
+				isBorder ? 180 : isCenter ? 120 : 140,
+				isBorder ? 120 : isCenter ? 255 : 240
+			);
+			t.cellColor(isBorder ? 28 : 12, isBorder ? 14 : 8, isBorder ? 12 : 30);
+			t.char(charKey);
+			t.point();
+			t.pop();
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODEGRID.OFFSETY', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: VERTICAL CENTERING ALIGNMENT', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Vertical offset in pixels from canvas', x, y++);
+	t.print('edge to grid to center grid content.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 200);
+	t.print(`OFFSET Y: ${t.grid.offsetY} PX`, x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

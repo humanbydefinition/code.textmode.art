@@ -37,5 +37,61 @@ Draw an ellipsoid mesh primitive.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="ellipsoid" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpsZXQgc3BpbiA9IDA7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNiwgOCwgMTgpOwoJY29uc3QgdGltZSA9IHQuZnJhbWVDb3VudCAqIDAuMDI1OwoJc3BpbiA9ICh0aW1lICogNDApICUgMzYwOwoJdC5wZXJzcGVjdGl2ZSg1OCwgMC4xLCA0MDk2KTsKCXQuY2FtZXJhKDE4LCAtMTAsIDQyLCAwLCAwLCAwKTsKCXQuYW1iaWVudExpZ2h0KDI0LCAyOCwgMzgpOwoJdC5wb2ludExpZ2h0KFsyNTUsIDIxMCwgMTQwXSwgeyB4OiAxOCwgeTogLTE4LCB6OiAyOCB9KTsKCXQucHVzaCgpOwoJdC50cmFuc2xhdGUoNSwgMSwgMCk7Cgl0LnJvdGF0ZVkoc3Bpbik7Cgl0LnJvdGF0ZVgoMTgpOwoJdC5jaGFyKCcjJyk7Cgl0LmNoYXJDb2xvcigxNDAsIDIyMCwgMjU1KTsKCXQuY2VsbENvbG9yKDE2LCAyNCwgNDIpOwoJdC5lbGxpcHNvaWQoOCwgNSwgNik7Cgl0LnBvcCgpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLkVMTElQU09JRCcsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IDNEIEVMTElQU09JRCcsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnSW5kZXBlbmRlbnQgWCwgWSwgWiByYWRpaS4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJ0NhbWVyYSBhbmQgbGlnaHQgcmV2ZWFsIGRlcHRoLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoYFNQSU46ICR7c3Bpbi50b0ZpeGVkKDEpfWAsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+let spin = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(6, 8, 18);
+	const time = t.frameCount * 0.025;
+	spin = (time * 40) % 360;
+	t.perspective(58, 0.1, 4096);
+	t.camera(18, -10, 42, 0, 0, 0);
+	t.ambientLight(24, 28, 38);
+	t.pointLight([255, 210, 140], { x: 18, y: -18, z: 28 });
+	t.push();
+	t.translate(5, 1, 0);
+	t.rotateY(spin);
+	t.rotateX(18);
+	t.char('#');
+	t.charColor(140, 220, 255);
+	t.cellColor(16, 24, 42);
+	t.ellipsoid(8, 5, 6);
+	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.ELLIPSOID', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: 3D ELLIPSOID', x, y++, 100, 220, 255);
+	drawText('Independent X, Y, Z radii.', x, y++, 140, 160, 190);
+	drawText('Camera and light reveal depth.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`SPIN: ${spin.toFixed(1)}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

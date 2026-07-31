@@ -29,5 +29,74 @@ Promise that resolves when playback starts.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="play" encoded-code="Y29uc3QgVklERU9fVVJMID0gJ2h0dHBzOi8vaW50ZXJhY3RpdmUtZXhhbXBsZXMubWRuLm1vemlsbGEubmV0L21lZGlhL2NjMC12aWRlb3MvZmxvd2VyLm1wNCc7CmNvbnN0IHQgPSB0ZXh0bW9kZS5jcmVhdGUoewoJd2lkdGg6IHdpbmRvdy5pbm5lcldpZHRoLAoJaGVpZ2h0OiB3aW5kb3cuaW5uZXJIZWlnaHQsCglmb250U2l6ZTogMTYsCn0pOwoKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwpsZXQgdmlkZW8gPSBudWxsOwpsZXQgcGxheWluZyA9IGZhbHNlOwoKdC5zZXR1cChhc3luYyAoKSA9PiB7Cgl2aWRlbyA9IGF3YWl0IHQubG9hZFZpZGVvKFZJREVPX1VSTCk7Cgl2aWRlby5jaGFyYWN0ZXJzKCcgLjotPSsqIyVAJyk7Cgl2aWRlby52b2x1bWUoMCk7Cglhd2FpdCB2aWRlby5wbGF5KCk7Cgl2aWRlby5wYXVzZSgpOwoJdmlkZW8udGltZSgwKTsKfSk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDgsIDIwKTsKCWlmICghdmlkZW8pIHJldHVybjsKCgl0LmltYWdlKHZpZGVvKTsKCXBsYXlpbmcgPSB2aWRlby5pc1BsYXlpbmc7Cn0pOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWRyYXdUZXh0KCdURVhUTU9ERVZJREVPLlBMQVknLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBJTklUSUFUSU5HIFZJREVPIFBMQVlCQUNLJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdQbGF5cyBvciByZXN0YXJ0cyBhIGxvYWRlZCB2aWRlby4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCglpZiAodmlkZW8pIHsKCQljb25zdCBhY3Rpb25TdHIgPSBwbGF5aW5nID8gJ0NMSUNLIFRPIFJFU1RBUlQgUExBWUJBQ0snIDogJ0NMSUNLIFRPIENBTEwgUExBWSgpJzsKCQlkcmF3VGV4dChhY3Rpb25TdHIsIHgsIHkrKywgMjU1LCAyMTAsIDkwKTsKCQljb25zdCBzdGF0ZSA9IHBsYXlpbmcgPyAnUExBWUlORycgOiAnUEFVU0VEJzsKCQlkcmF3VGV4dChgUExBWTogJHtzdGF0ZX1gLCB4LCB5KyssIDEyMCwgMjA1LCAyNTUpOwoJfSBlbHNlIHsKCQlkcmF3VGV4dCgnTE9BRElORyBWSURFTy4uLicsIHgsIHkrKywgMjU1LCAxODAsIDEyMCk7Cgl9Cn0pOwoKdC5tb3VzZUNsaWNrZWQoYXN5bmMgKCkgPT4gewoJaWYgKCF2aWRlbykgcmV0dXJuOwoJdmlkZW8udGltZSgwKTsKCWF3YWl0IHZpZGVvLnBsYXkoKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const VIDEO_URL = 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4';
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let video = null;
+let playing = false;
+
+t.setup(async () => {
+	video = await t.loadVideo(VIDEO_URL);
+	video.characters(' .:-=+*#%@');
+	video.volume(0);
+	await video.play();
+	video.pause();
+	video.time(0);
+});
+
+t.draw(() => {
+	t.background(6, 8, 20);
+	if (!video) return;
+
+	t.image(video);
+	playing = video.isPlaying;
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODEVIDEO.PLAY', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: INITIATING VIDEO PLAYBACK', x, y++, 100, 220, 255);
+	drawText('Plays or restarts a loaded video.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+
+	if (video) {
+		const actionStr = playing ? 'CLICK TO RESTART PLAYBACK' : 'CLICK TO CALL PLAY()';
+		drawText(actionStr, x, y++, 255, 210, 90);
+		const state = playing ? 'PLAYING' : 'PAUSED';
+		drawText(`PLAY: ${state}`, x, y++, 120, 205, 255);
+	} else {
+		drawText('LOADING VIDEO...', x, y++, 255, 180, 120);
+	}
+});
+
+t.mouseClicked(async () => {
+	if (!video) return;
+	video.time(0);
+	await video.play();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

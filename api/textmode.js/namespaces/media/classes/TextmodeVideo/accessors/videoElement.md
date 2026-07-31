@@ -29,5 +29,75 @@ Underlying HTML video element.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="videoElement" encoded-code="Y29uc3QgVklERU9fVVJMID0gJ2h0dHBzOi8vaW50ZXJhY3RpdmUtZXhhbXBsZXMubWRuLm1vemlsbGEubmV0L21lZGlhL2NjMC12aWRlb3MvZmxvd2VyLm1wNCc7CmNvbnN0IHQgPSB0ZXh0bW9kZS5jcmVhdGUoewoJd2lkdGg6IHdpbmRvdy5pbm5lcldpZHRoLAoJaGVpZ2h0OiB3aW5kb3cuaW5uZXJIZWlnaHQsCglmb250U2l6ZTogMTYsCn0pOwoKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwpsZXQgdmlkZW8gPSBudWxsOwpsZXQgcmVhZHlTdGF0ZSA9IDA7CmxldCB2aWRlb1dpZHRoID0gMDsKbGV0IHZpZGVvSGVpZ2h0ID0gMDsKbGV0IHRhZ05hbWUgPSAnbnVsbCc7Cgp0LnNldHVwKGFzeW5jICgpID0-IHsKCXZpZGVvID0gYXdhaXQgdC5sb2FkVmlkZW8oVklERU9fVVJMKTsKCXZpZGVvLmNoYXJhY3RlcnMoJyAuOi09KyojJUAnKTsKCXZpZGVvLnZvbHVtZSgwKTsKCWF3YWl0IHZpZGVvLnBsYXkoKTsKCXZpZGVvLmxvb3AoKTsKfSk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDgsIDIwKTsKCWlmICghdmlkZW8pIHJldHVybjsKCgl0LmltYWdlKHZpZGVvLCB0LmdyaWQuY29scyAtIDgsIHQuZ3JpZC5yb3dzIC0gMTApOwoKCWNvbnN0IGVsID0gdmlkZW8udmlkZW9FbGVtZW50OwoJcmVhZHlTdGF0ZSA9IGVsID8gZWwucmVhZHlTdGF0ZSA6IDA7Cgl2aWRlb1dpZHRoID0gZWwgPyBlbC52aWRlb1dpZHRoIDogMDsKCXZpZGVvSGVpZ2h0ID0gZWwgPyBlbC52aWRlb0hlaWdodCA6IDA7Cgl0YWdOYW1lID0gZWwgPyBlbC50YWdOYW1lLnRvTG93ZXJDYXNlKCkgOiAnbnVsbCc7Cn0pOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWRyYXdUZXh0KCdURVhUTU9ERVZJREVPLlZJREVPRUxFTUVOVCcsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IEFDQ0VTUyBOQVRJVkUgVklERU8gRUxFTUVOVCcsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnUXVlcmllcyBET00gZWxlbWVudCBwcm9wZXJ0aWVzLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoKCWlmICh2aWRlbykgewoJCWRyYXdUZXh0KGBSRUFEWSBTVEFURSA6ICR7cmVhZHlTdGF0ZX1gLCB4LCB5KyssIDEyMCwgMjA1LCAyNTUpOwoJCWRyYXdUZXh0KGBTT1VSQ0UgV0lEVEg6ICR7dmlkZW9XaWR0aH1weGAsIHgsIHkrKywgMjIwLCAyMjAsIDIyMCk7CgkJZHJhd1RleHQoYFNSQyBIRUlHSFQgIDogJHt2aWRlb0hlaWdodH1weGAsIHgsIHkrKywgMjIwLCAyMjAsIDIyMCk7CgkJZHJhd1RleHQoYFRBRyBOQU1FICAgIDogPCR7dGFnTmFtZX0-YCwgeCwgeSsrLCAxODAsIDI1NSwgMTgwKTsKCX0gZWxzZSB7CgkJZHJhd1RleHQoJ0xPQURJTkcgVklERU8uLi4nLCB4LCB5KyssIDI1NSwgMTgwLCAxMjApOwoJfQp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const VIDEO_URL = 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4';
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let video = null;
+let readyState = 0;
+let videoWidth = 0;
+let videoHeight = 0;
+let tagName = 'null';
+
+t.setup(async () => {
+	video = await t.loadVideo(VIDEO_URL);
+	video.characters(' .:-=+*#%@');
+	video.volume(0);
+	await video.play();
+	video.loop();
+});
+
+t.draw(() => {
+	t.background(6, 8, 20);
+	if (!video) return;
+
+	t.image(video, t.grid.cols - 8, t.grid.rows - 10);
+
+	const el = video.videoElement;
+	readyState = el ? el.readyState : 0;
+	videoWidth = el ? el.videoWidth : 0;
+	videoHeight = el ? el.videoHeight : 0;
+	tagName = el ? el.tagName.toLowerCase() : 'null';
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODEVIDEO.VIDEOELEMENT', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: ACCESS NATIVE VIDEO ELEMENT', x, y++, 100, 220, 255);
+	drawText('Queries DOM element properties.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+
+	if (video) {
+		drawText(`READY STATE : ${readyState}`, x, y++, 120, 205, 255);
+		drawText(`SOURCE WIDTH: ${videoWidth}px`, x, y++, 220, 220, 220);
+		drawText(`SRC HEIGHT  : ${videoHeight}px`, x, y++, 220, 220, 220);
+		drawText(`TAG NAME    : <${tagName}>`, x, y++, 180, 255, 180);
+	} else {
+		drawText('LOADING VIDEO...', x, y++, 255, 180, 120);
+	}
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

@@ -34,5 +34,74 @@ Absolute value.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="abs" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCByYXcgPSAwOwpsZXQgbWFnbml0dWRlID0gMDsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg2LCA3LCAxNik7CglyYXcgPSB0LnNpbih0LmZyYW1lQ291bnQgKiAwLjA0NSkgKiAxMiArIHQuY29zKHQuZnJhbWVDb3VudCAqIDAuMDIxKSAqIDM7CgltYWduaXR1ZGUgPSB0LmFicyhyYXcpOwoKCXQuY2hhcignLScpOwoJdC5jaGFyQ29sb3IoNjAsIDg1LCAxMjUpOwoJdC5saW5lKC0yNCwgMCwgMjQsIDApOwoJdC5jaGFyKCd8Jyk7Cgl0LmxpbmUoMCwgLTEwLCAwLCAxMCk7CgoJZm9yIChsZXQgaSA9IDA7IGkgPD0gdC5yb3VuZChtYWduaXR1ZGUpOyBpKyspIHsKCQljb25zdCBmYWRlID0gdC5ub3JtKGksIDAsIDEyKTsKCQl0LnB1c2goKTsKCQl0LnRyYW5zbGF0ZShpLCAtNSk7CgkJdC5jaGFyKCcjJyk7CgkJdC5jaGFyQ29sb3IoOTAgKyBmYWRlICogMTUwLCAxOTAsIDI1NSAtIGZhZGUgKiA5MCk7CgkJdC5wb2ludCgpOwoJCXQudHJhbnNsYXRlKC1pICogMiwgMTApOwoJCXQucG9pbnQoKTsKCQl0LnBvcCgpOwoJfQoKCXQuY2hhcignQCcpOwoJdC5jaGFyQ29sb3IoMjU1LCAxNTAsIDExMCk7Cgl0LnB1c2goKTsKCXQudHJhbnNsYXRlKHQucm91bmQocmF3KSwgMCk7Cgl0LnBvaW50KCk7Cgl0LnBvcCgpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLXQuZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC10LmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLkFCUycsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IERJU1RBTkNFIEZST00gWkVSTycsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnYWJzKCkgcmVtb3ZlcyB0aGUgc2lnbi4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJ0JvdGggc2lkZXMgZHJhdyBlcXVhbCBtYWduaXR1ZGUuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dChgUkFXOiAke3Jhdy50b0ZpeGVkKDIpfWAsIHgsIHkrKywgMjIwLCAyMzAsIDI1NSk7CglkcmF3VGV4dChgQUJTOiAke21hZ25pdHVkZS50b0ZpeGVkKDIpfWAsIHgsIHkrKywgMjIwLCAyMzAsIDI1NSk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let raw = 0;
+let magnitude = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(6, 7, 16);
+	raw = t.sin(t.frameCount * 0.045) * 12 + t.cos(t.frameCount * 0.021) * 3;
+	magnitude = t.abs(raw);
+
+	t.char('-');
+	t.charColor(60, 85, 125);
+	t.line(-24, 0, 24, 0);
+	t.char('|');
+	t.line(0, -10, 0, 10);
+
+	for (let i = 0; i <= t.round(magnitude); i++) {
+		const fade = t.norm(i, 0, 12);
+		t.push();
+		t.translate(i, -5);
+		t.char('#');
+		t.charColor(90 + fade * 150, 190, 255 - fade * 90);
+		t.point();
+		t.translate(-i * 2, 10);
+		t.point();
+		t.pop();
+	}
+
+	t.char('@');
+	t.charColor(255, 150, 110);
+	t.push();
+	t.translate(t.round(raw), 0);
+	t.point();
+	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -t.floor(t.grid.cols / 2);
+	const top = -t.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.ABS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: DISTANCE FROM ZERO', x, y++, 100, 220, 255);
+	drawText('abs() removes the sign.', x, y++, 140, 160, 190);
+	drawText('Both sides draw equal magnitude.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`RAW: ${raw.toFixed(2)}`, x, y++, 220, 230, 255);
+	drawText(`ABS: ${magnitude.toFixed(2)}`, x, y++, 220, 230, 255);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

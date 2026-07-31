@@ -27,5 +27,102 @@ Hide this layer from rendering.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="hide" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBzaWduYWxMYXllciA9IHQubGF5ZXJzLmFkZCh7IGJsZW5kTW9kZTogJ2FkZGl0aXZlJyB9KTsKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwpsZXQgaXNWaXNpYmxlID0gdHJ1ZTsKCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNiwgMTAsIDIyKTsKCglpZiAodC5mcmFtZUNvdW50ICUgMTIwID09PSAwKSB7CgkJaWYgKGlzVmlzaWJsZSkgewoJCQlzaWduYWxMYXllci5oaWRlKCk7CgkJfSBlbHNlIHsKCQkJc2lnbmFsTGF5ZXIuc2hvdygpOwoJCX0KCQlpc1Zpc2libGUgPSAhaXNWaXNpYmxlOwoJfQoKCWNvbnN0IGh3ID0gTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgaGggPSBNYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CgoJdC5wdXNoKCk7Cgl0LmNoYXJDb2xvcigzMCwgNDUsIDc1KTsKCXQuY2hhcignKycpOwoJZm9yIChsZXQgeSA9IC1oaDsgeSA8PSBoaDsgeSArPSA2KSB7CgkJZm9yIChsZXQgeCA9IC1odzsgeCA8PSBodzsgeCArPSAxMCkgewoJCQl0LnB1c2goKTsKCQkJdC50cmFuc2xhdGUoeCwgeSk7CgkJCXQucG9pbnQoKTsKCQkJdC5wb3AoKTsKCQl9Cgl9Cgl0LnBvcCgpOwp9KTsKCnNpZ25hbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgdG0gPSB0LmZyYW1lQ291bnQgKiAwLjA0OwoJY29uc3QgaHcgPSBNYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCBoaCA9IE1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCgljb25zdCB0cmFpbCA9IFsnKicsICdvJywgJy4nLCAnOiddOwoJZm9yIChsZXQgaSA9IDA7IGkgPCAxNjsgaSsrKSB7CgkJY29uc3QgYW5nbGUgPSB0bSAtIGkgKiAwLjA4OwoJCWNvbnN0IHIgPSBNYXRoLm1pbihodywgaGgpICogMC41OwoJCWNvbnN0IHB4ID0gTWF0aC5mbG9vcihNYXRoLmNvcyhhbmdsZSkgKiByKTsKCQljb25zdCBweSA9IE1hdGguZmxvb3IoTWF0aC5zaW4oYW5nbGUpICogKHIgKiAwLjYpKTsKCQljb25zdCBpZHggPSBNYXRoLm1pbih0cmFpbC5sZW5ndGggLSAxLCBNYXRoLmZsb29yKChpIC8gMTYpICogdHJhaWwubGVuZ3RoKSk7CgoJCXQucHVzaCgpOwoJCXQudHJhbnNsYXRlKHB4LCBweSk7CgkJdC5jaGFyQ29sb3IoTWF0aC5mbG9vcigyNTUgLSBpICogMTIpLCBNYXRoLmZsb29yKDIwMCAtIGkgKiAxMCksIE1hdGguZmxvb3IoNjAgKyBpICogMTApKTsKCQl0LmNlbGxDb2xvcigzMCwgMjAsIDUpOwoJCXQuY2hhcih0cmFpbFtpZHhdKTsKCQl0LnBvaW50KCk7CgkJdC5wb3AoKTsKCX0KfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IoMTIwLCAyNDAsIDE4MCk7Cgl0LnByaW50KCdURVhUTU9ERUxBWUVSLkhJREUnLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoNzAsIDEwMCwgMTQwKTsKCXQucHJpbnQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDIxMCwgMjU1KTsKCXQucHJpbnQoJ0NPTkNFUFQ6IENPTlRJTlVPVVMgUkFEQVIgU1RBVEUgTUFTS0lORycsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDE2MCwgMTkwKTsKCXQucHJpbnQoJ2hpZGUoKSBwYXVzZXMgbGF5ZXIgY29tcG9zaXRpb24uJywgeCwgeSsrKTsKCXQucHJpbnQoJ0JhY2tncm91bmQgcGFydGljbGUgc3RhdGUgYWR2YW5jZXMuJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDcwLCAxMDAsIDE0MCk7Cgl0LnByaW50KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyspOwoJaWYgKGlzVmlzaWJsZSkgewoJCXQuY2hhckNvbG9yKDE0MCwgMjU1LCAxODApOwoJCXQucHJpbnQoJ1NUQVRVUzogVklTSUJMRSAoU0lHTkFMIE9OKScsIHgsIHkrKyk7Cgl9IGVsc2UgewoJCXQuY2hhckNvbG9yKDI1NSwgMTIwLCAxMjApOwoJCXQucHJpbnQoJ1NUQVRVUzogSElEREVOIChTVEFURSBDT05USU5VRVMpJywgeCwgeSsrKTsKCX0KCXQucG9wKCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const signalLayer = t.layers.add({ blendMode: 'additive' });
+const labelLayer = t.layers.add();
+let isVisible = true;
+
+t.draw(() => {
+	t.background(6, 10, 22);
+
+	if (t.frameCount % 120 === 0) {
+		if (isVisible) {
+			signalLayer.hide();
+		} else {
+			signalLayer.show();
+		}
+		isVisible = !isVisible;
+	}
+
+	const hw = Math.floor(t.grid.cols / 2);
+	const hh = Math.floor(t.grid.rows / 2);
+
+	t.push();
+	t.charColor(30, 45, 75);
+	t.char('+');
+	for (let y = -hh; y <= hh; y += 6) {
+		for (let x = -hw; x <= hw; x += 10) {
+			t.push();
+			t.translate(x, y);
+			t.point();
+			t.pop();
+		}
+	}
+	t.pop();
+});
+
+signalLayer.draw(() => {
+	t.clear();
+	const tm = t.frameCount * 0.04;
+	const hw = Math.floor(t.grid.cols / 2);
+	const hh = Math.floor(t.grid.rows / 2);
+
+	const trail = ['*', 'o', '.', ':'];
+	for (let i = 0; i < 16; i++) {
+		const angle = tm - i * 0.08;
+		const r = Math.min(hw, hh) * 0.5;
+		const px = Math.floor(Math.cos(angle) * r);
+		const py = Math.floor(Math.sin(angle) * (r * 0.6));
+		const idx = Math.min(trail.length - 1, Math.floor((i / 16) * trail.length));
+
+		t.push();
+		t.translate(px, py);
+		t.charColor(Math.floor(255 - i * 12), Math.floor(200 - i * 10), Math.floor(60 + i * 10));
+		t.cellColor(30, 20, 5);
+		t.char(trail[idx]);
+		t.point();
+		t.pop();
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODELAYER.HIDE', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: CONTINUOUS RADAR STATE MASKING', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('hide() pauses layer composition.', x, y++);
+	t.print('Background particle state advances.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	if (isVisible) {
+		t.charColor(140, 255, 180);
+		t.print('STATUS: VISIBLE (SIGNAL ON)', x, y++);
+	} else {
+		t.charColor(255, 120, 120);
+		t.print('STATUS: HIDDEN (STATE CONTINUES)', x, y++);
+	}
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

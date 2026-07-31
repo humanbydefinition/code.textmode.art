@@ -26,4 +26,79 @@ overlays that should shift color without the full edge of difference.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="BLEND_EXCLUSION" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBtb2RlID0gdC5CTEVORF9FWENMVVNJT047CmNvbnN0IG1vZGVOYW1lID0gJ0JMRU5EX0VYQ0xVU0lPTic7CmNvbnN0IGFjY2VudCA9IFsyMzAsIDIzMCwgMjU1XTsKY29uc3QgYmFzZSA9IFsxMjAsIDEwMCwgMTkwXTsKY29uc3QgYmxlbmRMYXllciA9IHQubGF5ZXJzLmFkZCh7IGJsZW5kTW9kZTogbW9kZSwgb3BhY2l0eTogMC44OCB9KTsKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LmRyYXcoKCkgPT4gewoJY29uc3QgdGltZSA9IHQuZnJhbWVDb3VudCAqIDAuMDMzOwoJdC5iYWNrZ3JvdW5kKDE2LCAxNCwgMzApOwoJY29uc3QgeyBjb2xzLCByb3dzIH0gPSB0LmdyaWQ7Cglmb3IgKGxldCB5ID0gLU1hdGguZmxvb3Iocm93cyAvIDIpOyB5IDwgcm93cyAvIDI7IHkgKz0gMykgewoJCWZvciAobGV0IHggPSAtTWF0aC5mbG9vcihjb2xzIC8gMik7IHggPCBjb2xzIC8gMjsgeCArPSAzKSB7CgkJCWNvbnN0IHdhdmUgPSBNYXRoLnNpbih4ICogMC4xNiAtIHkgKiAwLjEzICsgdGltZSk7CgkJCXQucHVzaCgpOwoJCQl0LnRyYW5zbGF0ZSh4LCB5KTsKCQkJdC5jaGFyKHdhdmUgPiAwID8gJ34nIDogJy4nKTsKCQkJdC5jaGFyQ29sb3IoYmFzZVswXSwgYmFzZVsxXSArIHdhdmUgKiAzMiwgYmFzZVsyXSk7CgkJCXQuY2VsbENvbG9yKDEwLCA4LCAyNCk7CgkJCXQucmVjdCgyLCAyKTsKCQkJdC5wb3AoKTsKCQl9Cgl9CglibGVuZExheWVyLmRyYXcoKCkgPT4gewoJCXQuY2xlYXIoKTsKCQlmb3IgKGxldCByaW5nID0gMDsgcmluZyA8IDQ7IHJpbmcrKykgewoJCQlmb3IgKGxldCBpID0gMDsgaSA8IDE4OyBpKyspIHsKCQkJCWNvbnN0IGFuZ2xlID0gaSAqIDIwICsgcmluZyAqIDI1IC0gdC5mcmFtZUNvdW50ICogMS4yNTsKCQkJCWNvbnN0IHJhZGl1cyA9IDUgKyByaW5nICogNCArIE1hdGguY29zKHRpbWUgKiAyICsgaSkgKiAyOwoJCQkJdC5wdXNoKCk7CgkJCQl0LnJvdGF0ZVooYW5nbGUpOwoJCQkJdC50cmFuc2xhdGUocmFkaXVzLCBNYXRoLnNpbih0aW1lICsgaSkgKiAyKTsKCQkJCXQuY2hhcihyaW5nICUgMiA_ICcqJyA6ICcrJyk7CgkJCQl0LmNoYXJDb2xvciguLi5hY2NlbnQpOwoJCQkJdC5jZWxsQ29sb3IoNDUgKyByaW5nICogMTIsIDQ1ICsgcmluZyAqIDEyLCA2OCk7CgkJCQl0LnJlY3QoMywgMyk7CgkJCQl0LnBvcCgpOwoJCQl9CgkJfQoJfSk7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuQkxFTkRfRVhDTFVTSU9OJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogU09GVCBJTlZFUlNJT04nLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ0RpZmZlcmVuY2Ugd2l0aCBsZXNzIGJpdGUuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdDb2xvciBzaGlmdHMgc3RheSBtdXRlZC4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KGBNT0RFOiAke21vZGVOYW1lfWAsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const mode = t.BLEND_EXCLUSION;
+const modeName = 'BLEND_EXCLUSION';
+const accent = [230, 230, 255];
+const base = [120, 100, 190];
+const blendLayer = t.layers.add({ blendMode: mode, opacity: 0.88 });
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	const time = t.frameCount * 0.033;
+	t.background(16, 14, 30);
+	const { cols, rows } = t.grid;
+	for (let y = -Math.floor(rows / 2); y < rows / 2; y += 3) {
+		for (let x = -Math.floor(cols / 2); x < cols / 2; x += 3) {
+			const wave = Math.sin(x * 0.16 - y * 0.13 + time);
+			t.push();
+			t.translate(x, y);
+			t.char(wave > 0 ? '~' : '.');
+			t.charColor(base[0], base[1] + wave * 32, base[2]);
+			t.cellColor(10, 8, 24);
+			t.rect(2, 2);
+			t.pop();
+		}
+	}
+	blendLayer.draw(() => {
+		t.clear();
+		for (let ring = 0; ring < 4; ring++) {
+			for (let i = 0; i < 18; i++) {
+				const angle = i * 20 + ring * 25 - t.frameCount * 1.25;
+				const radius = 5 + ring * 4 + Math.cos(time * 2 + i) * 2;
+				t.push();
+				t.rotateZ(angle);
+				t.translate(radius, Math.sin(time + i) * 2);
+				t.char(ring % 2 ? '*' : '+');
+				t.charColor(...accent);
+				t.cellColor(45 + ring * 12, 45 + ring * 12, 68);
+				t.rect(3, 3);
+				t.pop();
+			}
+		}
+	});
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.BLEND_EXCLUSION', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SOFT INVERSION', x, y++, 100, 220, 255);
+	drawText('Difference with less bite.', x, y++, 140, 160, 190);
+	drawText('Color shifts stay muted.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`MODE: ${modeName}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```

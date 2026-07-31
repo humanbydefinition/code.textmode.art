@@ -35,5 +35,63 @@ current random sequence.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="noiseSeed" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IHJhbXAgPSAnIC46LT0rKiMlQCc7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCmZ1bmN0aW9uIGRyYXdCYW5kKG9mZnNldFgpIHsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMikgKyAxMDsKCXQubm9pc2VTZWVkKCdtYXRjaGVkLWJhbmQnKTsKCWZvciAobGV0IHkgPSAwOyB5IDwgTWF0aC5taW4oMTgsIHQuZ3JpZC5yb3dzIC0gMTIpOyB5ICs9IDEpIHsKCQlmb3IgKGxldCB4ID0gMDsgeCA8IDE4OyB4ICs9IDEpIHsKCQkJY29uc3QgdmFsdWUgPSB0Lm5vaXNlKHggKiAwLjEyLCB5ICogMC4xMiwgdC5mcmFtZUNvdW50ICogMC4wMSk7CgkJCWNvbnN0IGluZGV4ID0gTWF0aC5mbG9vcih2YWx1ZSAqIChyYW1wLmxlbmd0aCAtIDEpKTsKCQkJdC5wdXNoKCk7CgkJCXQudHJhbnNsYXRlKG9mZnNldFggKyB4LCB0b3AgKyB5KTsKCQkJdC5jaGFyKHJhbXBbaW5kZXhdKTsKCQkJdC5jaGFyQ29sb3IoODAgKyB2YWx1ZSAqIDE2MCwgMjU1LCAxMzAgKyB2YWx1ZSAqIDEwMCk7CgkJCXQucG9pbnQoKTsKCQkJdC5wb3AoKTsKCQl9Cgl9Cn0KCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNSwgMTAsIDE4KTsKCWRyYXdCYW5kKC0yMik7CglkcmF3QmFuZCg0KTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuTk9JU0VTRUVEJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogUkVQRUFUQUJMRSBGSUVMRFMnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ0JvdGggYmFuZHMgdXNlIHRoZSBzYW1lIHNlZWQuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdTYW1lIGNvb3JkaW5hdGVzIG1ha2Ugc2FtZSB2YWx1ZXMuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+const ramp = ' .:-=+*#%@';
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+function drawBand(offsetX) {
+	const top = -Math.floor(t.grid.rows / 2) + 10;
+	t.noiseSeed('matched-band');
+	for (let y = 0; y < Math.min(18, t.grid.rows - 12); y += 1) {
+		for (let x = 0; x < 18; x += 1) {
+			const value = t.noise(x * 0.12, y * 0.12, t.frameCount * 0.01);
+			const index = Math.floor(value * (ramp.length - 1));
+			t.push();
+			t.translate(offsetX + x, top + y);
+			t.char(ramp[index]);
+			t.charColor(80 + value * 160, 255, 130 + value * 100);
+			t.point();
+			t.pop();
+		}
+	}
+}
+
+t.draw(() => {
+	t.background(5, 10, 18);
+	drawBand(-22);
+	drawBand(4);
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODIFIER.NOISESEED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: REPEATABLE FIELDS', x, y++, 100, 220, 255);
+	drawText('Both bands use the same seed.', x, y++, 140, 160, 190);
+	drawText('Same coordinates make same values.', x, y++, 140, 160, 190);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

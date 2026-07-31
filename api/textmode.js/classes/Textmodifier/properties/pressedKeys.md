@@ -22,5 +22,96 @@ Keys currently being held down.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="pressedKeys" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7IHdpZHRoOiB3aW5kb3cuaW5uZXJXaWR0aCwgaGVpZ2h0OiB3aW5kb3cuaW5uZXJIZWlnaHQsIGZvbnRTaXplOiAxNiB9KTsKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKZnVuY3Rpb24gZHJhd1RleHQodHh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0eHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCgxMCwgMTUsIDIwKTsKCgljb25zdCBhY3RpdmVMaXN0ID0gdC5wcmVzc2VkS2V5cyB8fCBbXTsKCWNvbnN0IGNvdW50ID0gYWN0aXZlTGlzdC5sZW5ndGg7Cgljb25zdCBodyA9IE1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IGhoID0gTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJY29uc3QgdG0gPSB0LmZyYW1lQ291bnQgKiAwLjAzOwoKCWZvciAobGV0IHkgPSAtaGggKyAyOyB5IDw9IGhoIC0gMjsgeSArPSAzKSB7CgkJZm9yIChsZXQgeCA9IC1odyArIDI7IHggPD0gaHcgLSAyOyB4ICs9IDMpIHsKCQkJY29uc3QgaXNDcm9zcyA9ICh4ICsgeSkgJSA2ID09PSAwOwoJCQl0LnB1c2goKTsKCQkJdC50cmFuc2xhdGUoeCwgeSk7CgkJCXQuY2hhckNvbG9yKDIyLCA0NSwgMzUpOwoJCQl0LmNoYXIoaXNDcm9zcyA_ICcrJyA6ICctJyk7CgkJCXQucG9pbnQoKTsKCQkJdC5wb3AoKTsKCQl9Cgl9CgoJY29uc3QgbnVtTm9kZXMgPSAxMjsKCWNvbnN0IHJpbmdSYWQgPSAxMjsKCWNvbnN0IGFjdGl2ZU5vZGVzID0gbmV3IFNldCgpOwoKCWZvciAobGV0IGkgPSAwOyBpIDwgY291bnQ7IGkrKykgewoJCWNvbnN0IGtleSA9IGFjdGl2ZUxpc3RbaV07CgkJY29uc3QgY29kZSA9IHR5cGVvZiBrZXkgPT09ICdzdHJpbmcnICYmIGtleS5sZW5ndGggPiAwID8ga2V5LmNoYXJDb2RlQXQoMCkgOiBpOwoJCWFjdGl2ZU5vZGVzLmFkZChjb2RlICUgbnVtTm9kZXMpOwoJfQoKCWZvciAobGV0IGkgPSAwOyBpIDwgbnVtTm9kZXM7IGkrKykgewoJCWNvbnN0IGFuZyA9IChpIC8gbnVtTm9kZXMpICogTWF0aC5QSSAqIDIgKyB0bTsKCQljb25zdCBueCA9IE1hdGgucm91bmQoTWF0aC5jb3MoYW5nKSAqIHJpbmdSYWQpOwoJCWNvbnN0IG55ID0gTWF0aC5yb3VuZChNYXRoLnNpbihhbmcpICogKHJpbmdSYWQgKiAwLjYpKTsKCQljb25zdCBpc0FjdGl2ZSA9IGFjdGl2ZU5vZGVzLmhhcyhpKTsKCgkJdC5wdXNoKCk7CgkJdC50cmFuc2xhdGUobngsIG55KTsKCQlpZiAoaXNBY3RpdmUpIHsKCQkJdC5jaGFyQ29sb3IoMjU1LCA0MiwgOTUpOwoJCQl0LmNlbGxDb2xvcig5MCwgMCwgMzApOwoJCQl0LmNoYXIoJyMnKTsKCQl9IGVsc2UgewoJCQl0LmNoYXJDb2xvcig0MCwgOTAsIDYwKTsKCQkJdC5jaGFyKCcuJyk7CgkJfQoJCXQucG9pbnQoKTsKCQl0LnBvcCgpOwoJfQoKCWlmIChjb3VudCA-IDApIHsKCQl0LnB1c2goKTsKCQl0LnByaW50QWxpZ24oJ2NlbnRlcicsICdtaWRkbGUnKTsKCQl0LmNoYXJDb2xvcigyNTUsIDIzOCwgMCk7CgkJdC5wcmludCgnQ0hPUkQ6ICcgKyBhY3RpdmVMaXN0LnNsaWNlKDAsIDUpLmpvaW4oJyArICcpLnRvVXBwZXJDYXNlKCksIDAsIDApOwoJCXQucG9wKCk7Cgl9Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCWNvbnN0IGFjdGl2ZUxpc3QgPSB0LnByZXNzZWRLZXlzIHx8IFtdOwoKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuUFJFU1NFREtFWVMnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBNVUxUSS1LRVkgQ0hPUkQgUE9MWVBIT05ZJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdBcnJheSBsaXN0cyBhbGwgY3VycmVudGx5IGhlbGQga2V5cy4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJ0hvbGQgbXVsdGlwbGUga2V5cyB0byBmb3JtIGNob3Jkcy4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdIRUxEIEtFWSBDT1VOVDogJyArIGFjdGl2ZUxpc3QubGVuZ3RoLCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwoJZHJhd1RleHQoJ0hFTEQgS0VZUzogICAgICAnICsgYWN0aXZlTGlzdC5zbGljZSgwLCA0KS5qb2luKCcsICcpLCB4LCB5KyssIDE4MCwgMjAwLCAyMjApOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KSk7" />
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const labelLayer = t.layers.add();
+
+function drawText(txt, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(txt, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(10, 15, 20);
+
+	const activeList = t.pressedKeys || [];
+	const count = activeList.length;
+	const hw = Math.floor(t.grid.cols / 2);
+	const hh = Math.floor(t.grid.rows / 2);
+	const tm = t.frameCount * 0.03;
+
+	for (let y = -hh + 2; y <= hh - 2; y += 3) {
+		for (let x = -hw + 2; x <= hw - 2; x += 3) {
+			const isCross = (x + y) % 6 === 0;
+			t.push();
+			t.translate(x, y);
+			t.charColor(22, 45, 35);
+			t.char(isCross ? '+' : '-');
+			t.point();
+			t.pop();
+		}
+	}
+
+	const numNodes = 12;
+	const ringRad = 12;
+	const activeNodes = new Set();
+
+	for (let i = 0; i < count; i++) {
+		const key = activeList[i];
+		const code = typeof key === 'string' && key.length > 0 ? key.charCodeAt(0) : i;
+		activeNodes.add(code % numNodes);
+	}
+
+	for (let i = 0; i < numNodes; i++) {
+		const ang = (i / numNodes) * Math.PI * 2 + tm;
+		const nx = Math.round(Math.cos(ang) * ringRad);
+		const ny = Math.round(Math.sin(ang) * (ringRad * 0.6));
+		const isActive = activeNodes.has(i);
+
+		t.push();
+		t.translate(nx, ny);
+		if (isActive) {
+			t.charColor(255, 42, 95);
+			t.cellColor(90, 0, 30);
+			t.char('#');
+		} else {
+			t.charColor(40, 90, 60);
+			t.char('.');
+		}
+		t.point();
+		t.pop();
+	}
+
+	if (count > 0) {
+		t.push();
+		t.printAlign('center', 'middle');
+		t.charColor(255, 238, 0);
+		t.print('CHORD: ' + activeList.slice(0, 5).join(' + ').toUpperCase(), 0, 0);
+		t.pop();
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	const activeList = t.pressedKeys || [];
+
+	drawText('TEXTMODIFIER.PRESSEDKEYS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: MULTI-KEY CHORD POLYPHONY', x, y++, 100, 220, 255);
+	drawText('Array lists all currently held keys.', x, y++, 140, 160, 190);
+	drawText('Hold multiple keys to form chords.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('HELD KEY COUNT: ' + activeList.length, x, y++, 140, 255, 180);
+	drawText('HELD KEYS:      ' + activeList.slice(0, 4).join(', '), x, y++, 180, 200, 220);
+});
+
+t.windowResized(() => t.resizeCanvas(window.innerWidth, window.innerHeight));
+```
 

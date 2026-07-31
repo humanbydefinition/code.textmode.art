@@ -33,5 +33,97 @@ otherwise `false`.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="requestPointerLock" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7IHdpZHRoOiB3aW5kb3cuaW5uZXJXaWR0aCwgaGVpZ2h0OiB3aW5kb3cuaW5uZXJIZWlnaHQsIGZvbnRTaXplOiAxNiB9KTsKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwpsZXQgcm90WCA9IDAsCglyb3RZID0gMDsKCmZ1bmN0aW9uIGRyYXdUZXh0KHR4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodHh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCnQubW91c2VDbGlja2VkKCgpID0-IHsKCWlmIChkb2N1bWVudC5wb2ludGVyTG9ja0VsZW1lbnQgPT09IHQuY2FudmFzKSB0LmV4aXRQb2ludGVyTG9jaygpOwoJZWxzZSB0LnJlcXVlc3RQb2ludGVyTG9jaygpOwp9KTsKCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNSwgOCwgMTApOwoJY29uc3QgaXNMb2NrZWQgPSBkb2N1bWVudC5wb2ludGVyTG9ja0VsZW1lbnQgPT09IHQuY2FudmFzOwoKCWlmIChpc0xvY2tlZCkgewoJCXJvdFggKz0gdC5tb3ZlZFggKiAwLjM1OwoJCXJvdFkgKz0gdC5tb3ZlZFkgKiAwLjM1OwoJfSBlbHNlIHsKCQlyb3RYICs9IDAuMjU7Cgl9CgoJY29uc3QgaHcgPSBNYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMiksCgkJaGggPSBNYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7Cgljb25zdCByYWQgPSBNYXRoLmZsb29yKE1hdGgubWluKGh3LCBoaCkgKiAwLjY1KTsKCWNvbnN0IGFuZ2xlT2Zmc2V0ID0gKHJvdFggKiAwLjA1KSAlIChNYXRoLlBJICogMik7CgoJZm9yIChsZXQgeSA9IC1oaDsgeSA8PSBoaDsgeSArPSAxKSB7CgkJZm9yIChsZXQgeCA9IC1odzsgeCA8PSBodzsgeCArPSAxKSB7CgkJCWNvbnN0IGQgPSBNYXRoLmh5cG90KHgsIHkgKiAxLjQpOwoJCQljb25zdCBjZWxsQW5nbGUgPSBNYXRoLmF0YW4yKHkgKiAxLjQsIHgpICsgTWF0aC5QSTsKCgkJCWxldCBpc1JpbmcgPSBNYXRoLmFicyhkIC0gcmFkKSA8IDAuOCB8fCBNYXRoLmFicyhkIC0gcmFkICogMC41KSA8IDAuODsKCQkJbGV0IGlzQXhpcyA9ICh4ID09PSAwICYmIE1hdGguYWJzKHkpIDw9IHJhZCArIDIpIHx8ICh5ID09PSAwICYmIE1hdGguYWJzKHgpIDw9IHJhZCArIDIpOwoJCQlsZXQgaXNUaWNrID0gaXNSaW5nICYmIE1hdGguYWJzKChjZWxsQW5nbGUgKyBhbmdsZU9mZnNldCkgJSAoTWF0aC5QSSAvIDQpKSA8IDAuMDg7CgoJCQlpZiAoaXNSaW5nIHx8IGlzQXhpcyB8fCBpc1RpY2spIHsKCQkJCXQucHVzaCgpOwoJCQkJdC50cmFuc2xhdGUoeCwgeSk7CgoJCQkJaWYgKGlzTG9ja2VkKSB7CgkJCQkJaWYgKGQgPCAzKSB7CgkJCQkJCXQuY2hhckNvbG9yKDI1NSwgNTEsIDUxKTsKCQkJCQkJdC5jZWxsQ29sb3IoOTAsIDAsIDApOwoJCQkJCQl0LmNoYXIoJysnKTsKCQkJCQl9IGVsc2UgaWYgKGlzVGljaykgewoJCQkJCQl0LmNoYXJDb2xvcigyNTUsIDIwMCwgMCk7CgkJCQkJCXQuY2hhcignIycpOwoJCQkJCX0gZWxzZSB7CgkJCQkJCXQuY2hhckNvbG9yKDI1NSwgMTUzLCAwKTsKCQkJCQkJdC5jaGFyKGlzQXhpcyA_ICh4ID09PSAwID8gJ3wnIDogJy0nKSA6ICcqJyk7CgkJCQkJfQoJCQkJfSBlbHNlIHsKCQkJCQl0LmNoYXJDb2xvcig2OCwgODUsIDEwMik7CgkJCQkJdC5jaGFyKGlzQXhpcyA_ICcrJyA6ICcuJyk7CgkJCQl9CgoJCQkJdC5wb2ludCgpOwoJCQkJdC5wb3AoKTsKCQkJfQoJCX0KCX0KfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMiksCgkJdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCWNvbnN0IGlzTG9ja2VkID0gZG9jdW1lbnQucG9pbnRlckxvY2tFbGVtZW50ID09PSB0LmNhbnZhczsKCglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLlJFUVVFU1RQT0lOVEVSTE9DSycsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IDM2MCBERUdSRUUgUE9JTlRFUiBMT0NLJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdDbGljayBjYW52YXMgdG8gdG9nZ2xlIHBvaW50ZXIgbG9jay4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJ0NhcHR1cmVzIHVuY29uc3RyYWluZWQgbW92ZWRYL21vdmVkWS4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdQT0lOVEVSIExPQ0s6ICcgKyAoaXNMb2NrZWQgPyAnTE9DS0VEJyA6ICdVTkxPQ0tFRCcpLCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwoJZHJhd1RleHQoJ0FDQ1VNVUxBVEVEIFJPVEFUSU9OIFg6ICcgKyByb3RYLnRvRml4ZWQoMSksIHgsIHkrKywgMTgwLCAyMDAsIDIyMCk7CglkcmF3VGV4dCgnQUNDVU1VTEFURUQgUk9UQVRJT04gWTogJyArIHJvdFkudG9GaXhlZCgxKSwgeCwgeSsrLCAxODAsIDIwMCwgMjIwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCkpOw" />
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const labelLayer = t.layers.add();
+let rotX = 0,
+	rotY = 0;
+
+function drawText(txt, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(txt, x, y);
+	t.pop();
+}
+
+t.mouseClicked(() => {
+	if (document.pointerLockElement === t.canvas) t.exitPointerLock();
+	else t.requestPointerLock();
+});
+
+t.draw(() => {
+	t.background(5, 8, 10);
+	const isLocked = document.pointerLockElement === t.canvas;
+
+	if (isLocked) {
+		rotX += t.movedX * 0.35;
+		rotY += t.movedY * 0.35;
+	} else {
+		rotX += 0.25;
+	}
+
+	const hw = Math.floor(t.grid.cols / 2),
+		hh = Math.floor(t.grid.rows / 2);
+	const rad = Math.floor(Math.min(hw, hh) * 0.65);
+	const angleOffset = (rotX * 0.05) % (Math.PI * 2);
+
+	for (let y = -hh; y <= hh; y += 1) {
+		for (let x = -hw; x <= hw; x += 1) {
+			const d = Math.hypot(x, y * 1.4);
+			const cellAngle = Math.atan2(y * 1.4, x) + Math.PI;
+
+			let isRing = Math.abs(d - rad) < 0.8 || Math.abs(d - rad * 0.5) < 0.8;
+			let isAxis = (x === 0 && Math.abs(y) <= rad + 2) || (y === 0 && Math.abs(x) <= rad + 2);
+			let isTick = isRing && Math.abs((cellAngle + angleOffset) % (Math.PI / 4)) < 0.08;
+
+			if (isRing || isAxis || isTick) {
+				t.push();
+				t.translate(x, y);
+
+				if (isLocked) {
+					if (d < 3) {
+						t.charColor(255, 51, 51);
+						t.cellColor(90, 0, 0);
+						t.char('+');
+					} else if (isTick) {
+						t.charColor(255, 200, 0);
+						t.char('#');
+					} else {
+						t.charColor(255, 153, 0);
+						t.char(isAxis ? (x === 0 ? '|' : '-') : '*');
+					}
+				} else {
+					t.charColor(68, 85, 102);
+					t.char(isAxis ? '+' : '.');
+				}
+
+				t.point();
+				t.pop();
+			}
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2),
+		top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	const isLocked = document.pointerLockElement === t.canvas;
+
+	drawText('TEXTMODIFIER.REQUESTPOINTERLOCK', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: 360 DEGREE POINTER LOCK', x, y++, 100, 220, 255);
+	drawText('Click canvas to toggle pointer lock.', x, y++, 140, 160, 190);
+	drawText('Captures unconstrained movedX/movedY.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('POINTER LOCK: ' + (isLocked ? 'LOCKED' : 'UNLOCKED'), x, y++, 140, 255, 180);
+	drawText('ACCUMULATED ROTATION X: ' + rotX.toFixed(1), x, y++, 180, 200, 220);
+	drawText('ACCUMULATED ROTATION Y: ' + rotY.toFixed(1), x, y++, 180, 200, 220);
+});
+
+t.windowResized(() => t.resizeCanvas(window.innerWidth, window.innerHeight));
+```
 

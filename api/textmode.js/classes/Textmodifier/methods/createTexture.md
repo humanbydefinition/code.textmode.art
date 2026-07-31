@@ -39,5 +39,59 @@ A TextmodeTexture that can be drawn with [image](image.md).
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="createTexture" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7Cgpjb25zdCBzb3VyY2VDYW52YXMgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdjYW52YXMnKTsKc291cmNlQ2FudmFzLndpZHRoID0gNjQ7CnNvdXJjZUNhbnZhcy5oZWlnaHQgPSA2NDsKY29uc3QgY3R4ID0gc291cmNlQ2FudmFzLmdldENvbnRleHQoJzJkJyk7CmxldCB0ZXh0dXJlOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LnNldHVwKCgpID0-IHsKCXRleHR1cmUgPSB0LmNyZWF0ZVRleHR1cmUoc291cmNlQ2FudmFzKTsKfSk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDEwLCAyMik7CgljdHguZmlsbFN0eWxlID0gJyMxMDE4M2EnOwoJY3R4LmZpbGxSZWN0KDAsIDAsIDY0LCA2NCk7CgljdHguZmlsbFN0eWxlID0gJyNmYWNjMTUnOwoJY3R4LmZpbGxSZWN0KDggKyAodC5mcmFtZUNvdW50ICUgMzIpLCAyMCwgMTYsIDE2KTsKCWlmICh0ZXh0dXJlKSB0LmltYWdlKHRleHR1cmUsIDI0LCAxNCk7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuQ1JFQVRFVEVYVFVSRScsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IENBTlZBUyBURVhUVVJFJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdXcmFwcyBhIDJEIGNhbnZhcyBzb3VyY2UuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdTb3VyY2UgY2FudmFzIGlzIGFuaW1hdGVkLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQodGV4dHVyZSA_ICdURVhUVVJFOiBSRUFEWScgOiAnVEVYVFVSRTogV0FJVCcsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+const sourceCanvas = document.createElement('canvas');
+sourceCanvas.width = 64;
+sourceCanvas.height = 64;
+const ctx = sourceCanvas.getContext('2d');
+let texture;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.setup(() => {
+	texture = t.createTexture(sourceCanvas);
+});
+
+t.draw(() => {
+	t.background(6, 10, 22);
+	ctx.fillStyle = '#10183a';
+	ctx.fillRect(0, 0, 64, 64);
+	ctx.fillStyle = '#facc15';
+	ctx.fillRect(8 + (t.frameCount % 32), 20, 16, 16);
+	if (texture) t.image(texture, 24, 14);
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.CREATETEXTURE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: CANVAS TEXTURE', x, y++, 100, 220, 255);
+	drawText('Wraps a 2D canvas source.', x, y++, 140, 160, 190);
+	drawText('Source canvas is animated.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(texture ? 'TEXTURE: READY' : 'TEXTURE: WAIT', x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

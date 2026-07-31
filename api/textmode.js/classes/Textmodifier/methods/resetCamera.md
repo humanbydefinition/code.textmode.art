@@ -28,5 +28,56 @@ This clears any active explicit camera and returns view calculation to renderer-
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="resetCamera" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpsZXQgY3VzdG9tID0gdHJ1ZTsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg2LCA4LCAxOCk7CgljdXN0b20gPSBNYXRoLmZsb29yKHQuZnJhbWVDb3VudCAvIDEyMCkgJSAyID09PSAwOwoJaWYgKGN1c3RvbSkgewoJCXQuY2FtZXJhKE1hdGguc2luKHQuZnJhbWVDb3VudCAqIDAuMDMpICogMjAsIDEwLCAzOCwgMCwgMCwgMCk7Cgl9IGVsc2UgewoJCXQucmVzZXRDYW1lcmEoKTsKCX0KCXQuY2hhcignIycpOwoJdC5jaGFyQ29sb3IoMTQwLCAyMjAsIDI1NSk7Cgl0LnJvdGF0ZVkodC5mcmFtZUNvdW50KTsKCXQuYm94KDgsIDgsIDgpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLlJFU0VUQ0FNRVJBJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogUkVTVE9SRSBDQU1FUkEnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ0FsdGVybmF0ZXMgY3VzdG9tIGFuZCByZXNldC4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJ3Jlc2V0Q2FtZXJhIHJldHVybnMgYXV0byB2aWV3LicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoY3VzdG9tID8gJ01PREU6IENVU1RPTScgOiAnTU9ERTogUkVTRVQnLCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+let custom = true;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(6, 8, 18);
+	custom = Math.floor(t.frameCount / 120) % 2 === 0;
+	if (custom) {
+		t.camera(Math.sin(t.frameCount * 0.03) * 20, 10, 38, 0, 0, 0);
+	} else {
+		t.resetCamera();
+	}
+	t.char('#');
+	t.charColor(140, 220, 255);
+	t.rotateY(t.frameCount);
+	t.box(8, 8, 8);
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.RESETCAMERA', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: RESTORE CAMERA', x, y++, 100, 220, 255);
+	drawText('Alternates custom and reset.', x, y++, 140, 160, 190);
+	drawText('resetCamera returns auto view.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(custom ? 'MODE: CUSTOM' : 'MODE: RESET', x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

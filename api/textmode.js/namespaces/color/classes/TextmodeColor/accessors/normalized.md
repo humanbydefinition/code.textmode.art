@@ -33,5 +33,78 @@ A [r, g, b, a] tuple where each component is between 0.0 and 1.0.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="normalized" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBSQU1QID0gJyAuOi09KyojJUAnOwpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDgsIDE2KTsKCWNvbnN0IGh3ID0gTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgaGggPSBNYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7Cgljb25zdCB0aW1lID0gdC5mcmFtZUNvdW50ICogMC4wMjU7CgoJZm9yIChsZXQgeSA9IC1oaDsgeSA8PSBoaDsgeSsrKSB7CgkJZm9yIChsZXQgeCA9IC1odzsgeCA8PSBodzsgeCsrKSB7CgkJCWNvbnN0IHIgPSBNYXRoLmZsb29yKChNYXRoLnNpbih4ICogMC4xMiArIHRpbWUpICogMC41ICsgMC41KSAqIDI1NSk7CgkJCWNvbnN0IGcgPSBNYXRoLmZsb29yKChNYXRoLmNvcyh5ICogMC4xNCAtIHRpbWUgKiAwLjgpICogMC41ICsgMC41KSAqIDI1NSk7CgkJCWNvbnN0IGIgPSBNYXRoLmZsb29yKChNYXRoLnNpbih4ICogMC4wOCArIHkgKiAwLjA4ICsgdGltZSAqIDEuNCkgKiAwLjUgKyAwLjUpICogMjU1KTsKCgkJCWNvbnN0IGNvbCA9IHQuY29sb3IociwgZywgYik7CgkJCWNvbnN0IFtuciwgbmcsIG5iXSA9IGNvbC5ub3JtYWxpemVkOwoKCQkJY29uc3QgbHVtID0gbnIgKiAwLjMgKyBuZyAqIDAuNTkgKyBuYiAqIDAuMTE7CgkJCWlmIChsdW0gPiAwLjI1KSB7CgkJCQljb25zdCBub3JtTHVtID0gKGx1bSAtIDAuMjUpIC8gMC43NTsKCQkJCWNvbnN0IGlkeCA9IE1hdGgubWluKFJBTVAubGVuZ3RoIC0gMSwgTWF0aC5mbG9vcihub3JtTHVtICogUkFNUC5sZW5ndGgpKTsKCgkJCQl0LnB1c2goKTsKCQkJCXQudHJhbnNsYXRlKHgsIHkpOwoJCQkJdC5jaGFyQ29sb3IobnIgKiAyNTUsIG5nICogMjU1LCBuYiAqIDI1NSk7CgkJCQl0LmNlbGxDb2xvcihuciAqIDM1LCBuZyAqIDM1LCBuYiAqIDM1KTsKCQkJCXQuY2hhcihSQU1QW2lkeF0pOwoJCQkJdC5wb2ludCgpOwoJCQkJdC5wb3AoKTsKCQkJfQoJCX0KCX0KfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWNvbnN0IHNhbXBsZUNvbCA9IHQuY29sb3IoMjU1LCAxMjgsIDY0KTsKCWNvbnN0IFtuciwgbmcsIG5iXSA9IHNhbXBsZUNvbC5ub3JtYWxpemVkOwoKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IoMTIwLCAyNDAsIDE4MCk7Cgl0LnByaW50KCdURVhUTU9ERUNPTE9SLk5PUk1BTElaRUQnLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoNzAsIDEwMCwgMTQwKTsKCXQucHJpbnQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDIxMCwgMjU1KTsKCXQucHJpbnQoJ0NPTkNFUFQ6IE5PUk1BTElaRUQgUkdCQSBDSEFOTkVMUycsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDE2MCwgMTkwKTsKCXQucHJpbnQoJ1JldHVybnMgWzAuLjFdIGZsb2F0IGFycmF5IGZvciBSR0JBLicsIHgsIHkrKyk7Cgl0LnByaW50KCdEcml2ZXMgbHVtaW5hbmNlICYgY2VsbCB0aW50aW5nLicsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcig3MCwgMTAwLCAxNDApOwoJdC5wcmludCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMjU1LCAyMDApOwoJdC5wcmludChgU0FNUExFIE5PUk06IFske25yLnRvRml4ZWQoMil9LCAke25nLnRvRml4ZWQoMil9LCAke25iLnRvRml4ZWQoMil9XWAsIHgsIHkrKyk7Cgl0LnBvcCgpOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const RAMP = ' .:-=+*#%@';
+const labelLayer = t.layers.add();
+
+t.draw(() => {
+	t.background(6, 8, 16);
+	const hw = Math.floor(t.grid.cols / 2);
+	const hh = Math.floor(t.grid.rows / 2);
+	const time = t.frameCount * 0.025;
+
+	for (let y = -hh; y <= hh; y++) {
+		for (let x = -hw; x <= hw; x++) {
+			const r = Math.floor((Math.sin(x * 0.12 + time) * 0.5 + 0.5) * 255);
+			const g = Math.floor((Math.cos(y * 0.14 - time * 0.8) * 0.5 + 0.5) * 255);
+			const b = Math.floor((Math.sin(x * 0.08 + y * 0.08 + time * 1.4) * 0.5 + 0.5) * 255);
+
+			const col = t.color(r, g, b);
+			const [nr, ng, nb] = col.normalized;
+
+			const lum = nr * 0.3 + ng * 0.59 + nb * 0.11;
+			if (lum > 0.25) {
+				const normLum = (lum - 0.25) / 0.75;
+				const idx = Math.min(RAMP.length - 1, Math.floor(normLum * RAMP.length));
+
+				t.push();
+				t.translate(x, y);
+				t.charColor(nr * 255, ng * 255, nb * 255);
+				t.cellColor(nr * 35, ng * 35, nb * 35);
+				t.char(RAMP[idx]);
+				t.point();
+				t.pop();
+			}
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const sampleCol = t.color(255, 128, 64);
+	const [nr, ng, nb] = sampleCol.normalized;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODECOLOR.NORMALIZED', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: NORMALIZED RGBA CHANNELS', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Returns [0..1] float array for RGBA.', x, y++);
+	t.print('Drives luminance & cell tinting.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 200);
+	t.print(`SAMPLE NORM: [${nr.toFixed(2)}, ${ng.toFixed(2)}, ${nb.toFixed(2)}]`, x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

@@ -40,5 +40,70 @@ When called without arguments, returns the current input grid mode:<br/>
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="inputGrid" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7Cgpjb25zdCBpbnB1dExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCBsb2NrZWQgPSBmYWxzZTsKbGV0IG1vZGUgPSAndG9wbW9zdCc7Cgp0LnNldHVwKCgpID0-IHsKCWlucHV0TGF5ZXIuZ3JpZC5jb2xzID0gMjQ7CglpbnB1dExheWVyLmdyaWQucm93cyA9IDEyOwp9KTsKCnQubW91c2VDbGlja2VkKCgpID0-IHsKCWxvY2tlZCA9ICFsb2NrZWQ7Cgl0LmlucHV0R3JpZChsb2NrZWQgPyBpbnB1dExheWVyLmdyaWQgOiAndG9wbW9zdCcpOwoJbW9kZSA9IGxvY2tlZCA_ICdsb2NrZWQnIDogJ3RvcG1vc3QnOwp9KTsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg2LCAxMCwgMjIpOwoJdC5jaGFyQ29sb3IoNjAsIDgwLCAxMjApOwoJdC5jaGFyKCcuJyk7Cgl0LnJlY3QodC5ncmlkLmNvbHMsIHQuZ3JpZC5yb3dzKTsKfSk7CgppbnB1dExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJdC5jaGFyQ29sb3IoMTAwLCAyMjAsIDI1NSk7Cgl0LmNoYXIoJysnKTsKCXQucmVjdChpbnB1dExheWVyLmdyaWQuY29scywgaW5wdXRMYXllci5ncmlkLnJvd3MpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CgoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5JTlBVVEdSSUQnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBJTlBVVCBHUklEIExPQ0snLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ01vdXNlIG1hcHBpbmcgY2FuIGxvY2suJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dChgTU9ERTogJHttb2RlfWAsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7CglkcmF3VGV4dCgnQ0xJQ0sgVE8gVE9HR0xFJywgeCwgeSsrLCAyNTUsIDIyNSwgMTQwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+const inputLayer = t.layers.add();
+let locked = false;
+let mode = 'topmost';
+
+t.setup(() => {
+	inputLayer.grid.cols = 24;
+	inputLayer.grid.rows = 12;
+});
+
+t.mouseClicked(() => {
+	locked = !locked;
+	t.inputGrid(locked ? inputLayer.grid : 'topmost');
+	mode = locked ? 'locked' : 'topmost';
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(6, 10, 22);
+	t.charColor(60, 80, 120);
+	t.char('.');
+	t.rect(t.grid.cols, t.grid.rows);
+});
+
+inputLayer.draw(() => {
+	t.clear();
+	t.charColor(100, 220, 255);
+	t.char('+');
+	t.rect(inputLayer.grid.cols, inputLayer.grid.rows);
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODIFIER.INPUTGRID', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: INPUT GRID LOCK', x, y++, 100, 220, 255);
+	drawText('Mouse mapping can lock.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`MODE: ${mode}`, x, y++, 140, 255, 180);
+	drawText('CLICK TO TOGGLE', x, y++, 255, 225, 140);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

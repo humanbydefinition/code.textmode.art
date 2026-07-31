@@ -39,5 +39,94 @@ The constrained value.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="constrain" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCBmcmVlWCA9IDA7CmxldCBib3VuZGVkWCA9IDA7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCmZ1bmN0aW9uIGRyYXdQb2ludCh4LCB5KSB7Cgl0LnB1c2goKTsKCXQudHJhbnNsYXRlKHgsIHkpOwoJdC5wb2ludCgpOwoJdC5wb3AoKTsKfQoKZnVuY3Rpb24gZHJhd0JhbmQoeCwgeSwgd2lkdGgsIGhlaWdodCwgciwgZywgYikgewoJdC5wdXNoKCk7Cgl0LnRyYW5zbGF0ZSh4LCB5KTsKCXQuY2hhcign4paIJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucmVjdCh3aWR0aCwgaGVpZ2h0KTsKCXQucG9wKCk7Cn0KCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNywgMTEsIDE4KTsKCWNvbnN0IGxlZnRSYWlsID0gLTE0OwoJY29uc3QgcmlnaHRSYWlsID0gMTQ7Cgljb25zdCByYWlsV2lkdGggPSByaWdodFJhaWwgLSBsZWZ0UmFpbCArIDE7CglmcmVlWCA9IE1hdGguY29zKHQuZnJhbWVDb3VudCAqIDAuMDM1KSAqIDIwICsgdC5tb3VzZS54ICogMC4xODsKCWJvdW5kZWRYID0gdC5jb25zdHJhaW4oZnJlZVgsIGxlZnRSYWlsLCByaWdodFJhaWwpOwoKCWRyYXdCYW5kKChsZWZ0UmFpbCArIHJpZ2h0UmFpbCkgLyAyLCAtNywgcmFpbFdpZHRoLCAxLCA1NCwgNzAsIDEwMCk7CglkcmF3QmFuZCgobGVmdFJhaWwgKyByaWdodFJhaWwpIC8gMiwgNywgcmFpbFdpZHRoLCAxLCA1NCwgNzAsIDEwMCk7CglkcmF3QmFuZChsZWZ0UmFpbCwgMCwgMSwgMTUsIDkwLCAxNjUsIDIxNSk7CglkcmF3QmFuZChyaWdodFJhaWwsIDAsIDEsIDE1LCA5MCwgMTY1LCAyMTUpOwoKCWZvciAobGV0IGkgPSAwOyBpIDwgOTsgaSsrKSB7CgkJY29uc3QgeSA9IC02ICsgaSAqIDEuNTsKCQljb25zdCBvZmZzZXQgPSBNYXRoLnNpbih0LmZyYW1lQ291bnQgKiAwLjA0ICsgaSkgKiAyOwoJCWNvbnN0IHggPSB0LmNvbnN0cmFpbihib3VuZGVkWCArIG9mZnNldCwgbGVmdFJhaWwsIHJpZ2h0UmFpbCk7CgkJY29uc3QgaGVhdCA9IE1hdGgucm91bmQodC5jb25zdHJhaW4oTWF0aC5hYnMoZnJlZVggLSBib3VuZGVkWCkgKiAyMCwgMCwgMjU1KSk7CgkJdC5jaGFyKGkgJSAyID09PSAwID8gJyonIDogJysnKTsKCQl0LmNoYXJDb2xvcigyNTUgLSBoZWF0ICogMC40LCAxNzAgKyBoZWF0ICogMC4yLCAxMjAgKyBoZWF0ICogMC41KTsKCQlkcmF3UG9pbnQoeCwgeSk7Cgl9CgoJdC5wdXNoKCk7Cgl0LnRyYW5zbGF0ZShmcmVlWCwgLTkpOwoJdC5jaGFyKCd4Jyk7Cgl0LmNoYXJDb2xvcigyNTUsIDk1LCA5NSk7Cgl0LnBvaW50KCk7Cgl0LnBvcCgpOwoKCXQuY2hhcignLicpOwoJdC5jaGFyQ29sb3IoMjU1LCAyMjAsIDEyMCk7Cgl0LmxpbmUoZnJlZVgsIC05LCBib3VuZGVkWCwgLTcpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLkNPTlNUUkFJTicsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IFJBTkdFIFNBRkVUWScsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnY29uc3RyYWluKCkga2VlcHMgbW90aW9uIGluIGJvdW5kcy4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJ1RoZSByZWQgdGFyZ2V0IG1heSBkcmlmdCBvdXRzaWRlLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoYEZSRUUgWDogJHtmcmVlWC50b0ZpeGVkKDEpfWAsIHgsIHkrKywgMjU1LCAxNTAsIDEyMCk7CglkcmF3VGV4dChgU0FGRSBYOiAke2JvdW5kZWRYLnRvRml4ZWQoMSl9YCwgeCwgeSsrLCAxNDAsIDI1NSwgMTgwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let freeX = 0;
+let boundedX = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+function drawPoint(x, y) {
+	t.push();
+	t.translate(x, y);
+	t.point();
+	t.pop();
+}
+
+function drawBand(x, y, width, height, r, g, b) {
+	t.push();
+	t.translate(x, y);
+	t.char('█');
+	t.charColor(r, g, b);
+	t.rect(width, height);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(7, 11, 18);
+	const leftRail = -14;
+	const rightRail = 14;
+	const railWidth = rightRail - leftRail + 1;
+	freeX = Math.cos(t.frameCount * 0.035) * 20 + t.mouse.x * 0.18;
+	boundedX = t.constrain(freeX, leftRail, rightRail);
+
+	drawBand((leftRail + rightRail) / 2, -7, railWidth, 1, 54, 70, 100);
+	drawBand((leftRail + rightRail) / 2, 7, railWidth, 1, 54, 70, 100);
+	drawBand(leftRail, 0, 1, 15, 90, 165, 215);
+	drawBand(rightRail, 0, 1, 15, 90, 165, 215);
+
+	for (let i = 0; i < 9; i++) {
+		const y = -6 + i * 1.5;
+		const offset = Math.sin(t.frameCount * 0.04 + i) * 2;
+		const x = t.constrain(boundedX + offset, leftRail, rightRail);
+		const heat = Math.round(t.constrain(Math.abs(freeX - boundedX) * 20, 0, 255));
+		t.char(i % 2 === 0 ? '*' : '+');
+		t.charColor(255 - heat * 0.4, 170 + heat * 0.2, 120 + heat * 0.5);
+		drawPoint(x, y);
+	}
+
+	t.push();
+	t.translate(freeX, -9);
+	t.char('x');
+	t.charColor(255, 95, 95);
+	t.point();
+	t.pop();
+
+	t.char('.');
+	t.charColor(255, 220, 120);
+	t.line(freeX, -9, boundedX, -7);
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.CONSTRAIN', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: RANGE SAFETY', x, y++, 100, 220, 255);
+	drawText('constrain() keeps motion in bounds.', x, y++, 140, 160, 190);
+	drawText('The red target may drift outside.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`FREE X: ${freeX.toFixed(1)}`, x, y++, 255, 150, 120);
+	drawText(`SAFE X: ${boundedX.toFixed(1)}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

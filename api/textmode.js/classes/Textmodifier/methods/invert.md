@@ -34,5 +34,64 @@ Current inversion state when called without arguments.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="invert" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDEwLCAxMiwgMjQpOwoKCWNvbnN0IGNvdW50ID0gMTU7Cglmb3IgKGxldCBpID0gMDsgaSA8IGNvdW50OyBpKyspIHsKCQl0LnB1c2goKTsKCQl0LnRyYW5zbGF0ZSgoaSAtIChjb3VudCAtIDEpIC8gMikgKiA1LCAwKTsKCgkJY29uc3Qgc2hvdWxkSW52ZXJ0ID0gKGkgKyBNYXRoLmZsb29yKHQuZnJhbWVDb3VudCAvIDI1KSkgJSAyID09PSAwOwoJCXQuaW52ZXJ0KHNob3VsZEludmVydCk7CgoJCXQuY2hhckNvbG9yKDI1NSwgMTAwLCAxMDApOwoJCXQuY2VsbENvbG9yKDAsIDUwLCAxMDApOwoJCXQuY2hhcign4paIJyk7CgkJdC5yZWN0KDQsIDE4KTsKCQl0LnBvcCgpOwoJfQp9KTsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCgljb25zdCBpbnZlcnRBY3RpdmUgPSBNYXRoLmZsb29yKHQuZnJhbWVDb3VudCAvIDI1KSAlIDIgPT09IDA7CgoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5JTlZFUlQnLCB4LCB5KyssIDI1NSwgMTAwLCAxMDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBDSFJPTUEgQ0hBTk5FTCBJTlZFUlNJT04nLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ1N3YXBzIGNoYXIgYW5kIGNlbGwgY29sb3JzLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJY29uc3Qgc3RhdGUgPSBpbnZlcnRBY3RpdmUgPyAnSU5WRVJURUQnIDogJ1NUQU5EQVJEJzsKCWRyYXdUZXh0KGBJTlZFUlQ6ICR7c3RhdGV9YCwgeCwgeSsrLCAxMjAsIDIwNSwgMjU1KTsKCWRyYXdUZXh0KCdSRUNUUzogMTUnLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCd0LmludmVydChzaG91bGRJbnZlcnQpJywgeCwgeSsrLCAxMDAsIDIyMCwgMTQwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+});
+
+const labelLayer = t.layers.add();
+
+t.draw(() => {
+	t.background(10, 12, 24);
+
+	const count = 15;
+	for (let i = 0; i < count; i++) {
+		t.push();
+		t.translate((i - (count - 1) / 2) * 5, 0);
+
+		const shouldInvert = (i + Math.floor(t.frameCount / 25)) % 2 === 0;
+		t.invert(shouldInvert);
+
+		t.charColor(255, 100, 100);
+		t.cellColor(0, 50, 100);
+		t.char('█');
+		t.rect(4, 18);
+		t.pop();
+	}
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const invertActive = Math.floor(t.frameCount / 25) % 2 === 0;
+
+	drawText('TEXTMODIFIER.INVERT', x, y++, 255, 100, 100);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: CHROMA CHANNEL INVERSION', x, y++, 100, 220, 255);
+	drawText('Swaps char and cell colors.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	const state = invertActive ? 'INVERTED' : 'STANDARD';
+	drawText(`INVERT: ${state}`, x, y++, 120, 205, 255);
+	drawText('RECTS: 15', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('t.invert(shouldInvert)', x, y++, 100, 220, 140);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

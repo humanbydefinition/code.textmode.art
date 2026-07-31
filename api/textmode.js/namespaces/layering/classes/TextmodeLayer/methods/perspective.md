@@ -38,5 +38,95 @@ Enable perspective projection for this layer.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="perspective" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBzY2VuZSA9IHQubGF5ZXJzLmFkZCgpOwpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpsZXQgZm92ID0gNjA7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCBjb2xvciA9IFsyMDAsIDIyMCwgMjU1XSkgewoJdC5wdXNoKCk7Cgl0LnRyYW5zbGF0ZSh4LCB5KTsKCXQuY2hhckNvbG9yKGNvbG9yWzBdLCBjb2xvclsxXSwgY29sb3JbMl0pOwoJZm9yIChsZXQgaSA9IDA7IGkgPCB0ZXh0Lmxlbmd0aDsgaSsrKSB7CgkJdC5jaGFyKHRleHRbaV0pOwoJCXQucG9pbnQoKTsKCQl0LnRyYW5zbGF0ZSgxLCAwKTsKCX0KCXQucG9wKCk7Cn0KCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoOCwgMTAsIDE4KTsKCgkvLyBGT1Ygb3NjaWxsYXRlcyBiZXR3ZWVuIDIwwrAgKHRlbGVwaG90bykgYW5kIDEwMMKwICh3aWRlKQoJZm92ID0gNjAgKyBNYXRoLnNpbih0LmZyYW1lQ291bnQgKiAwLjAyNSkgKiA0MDsKCglzY2VuZS5wZXJzcGVjdGl2ZShmb3YsIDAuMSwgMjU2KTsKCXNjZW5lLmNhbWVyYSgwLCAwLCA0NCk7CglzY2VuZS5sb29rQXQoMCwgMCwgMCk7Cn0pOwoKc2NlbmUuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgl0LnBvaW50TGlnaHQoWzI1NSwgMjEwLCAxMzBdLCB7IHg6IC0yMCwgeTogLTI1LCB6OiAzMCB9KTsKCgkvLyBUaHJlZSBjb2x1bW5zIGF0IGluY3JlYXNpbmcgZGVwdGggdG8gc2hvdyBwZXJzcGVjdGl2ZSBjb21wcmVzc2lvbgoJY29uc3QgZGVwdGhzID0gWzAsIC0xMiwgLTI0XTsKCWNvbnN0IGNvbG9ycyA9IFsKCQlbMTIwLCAyMDAsIDI1NV0sCgkJWzE2MCwgMjIwLCAxODBdLAoJCVsyNTUsIDE4MCwgMTIwXSwKCV07CgoJZm9yIChsZXQgaSA9IDA7IGkgPCAzOyBpKyspIHsKCQl0LnB1c2goKTsKCQl0LnRyYW5zbGF0ZSgwLCAwLCBkZXB0aHNbaV0pOwoJCXQuY2hhcignIycpOwoJCXQuY2hhckNvbG9yKGNvbG9yc1tpXVswXSwgY29sb3JzW2ldWzFdLCBjb2xvcnNbaV1bMl0pOwoJCXQuYm94KDgsIDgsIDgpOwoJCXQucG9wKCk7Cgl9CgoJLy8gRmxvb3IgZ3JpZCBmb3IgZGVwdGggcmVmZXJlbmNlCgl0LnB1c2goKTsKCXQuY2hhcignLicpOwoJdC5jaGFyQ29sb3IoNDAsIDU1LCA4MCk7Cglmb3IgKGxldCB4ID0gLTI0OyB4IDw9IDI0OyB4ICs9IDgpIHsKCQl0LmxpbmUoeCwgNiwgNCwgeCwgNiwgLTMyKTsKCX0KCWZvciAobGV0IHogPSA0OyB6ID49IC0zMjsgeiAtPSA4KSB7CgkJdC5saW5lKC0yNCwgNiwgeiwgMjQsIDYsIHopOwoJfQoJdC5wb3AoKTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWNvbnN0IGZvdlN0ciA9IGBGT1Y6ICR7Zm92LnRvRml4ZWQoMSl9IGRlZ2A7CglkcmF3VGV4dCgnVEVYVE1PREVMQVlFUi5QRVJTUEVDVElWRScsIHgsIHkrKywgWzEwMCwgMjU1LCAxNDBdKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIFs4MCwgMTAwLCAxNTBdKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBQRVJTUEVDVElWRSBGT1YnLCB4LCB5KyssIFsxMDAsIDIyMCwgMjU1XSk7CglkcmF3VGV4dCgnRk9WIGNoYW5nZXMgZGVwdGggY29tcHJlc3Npb24uJywgeCwgeSsrLCBbMTQwLCAxNjAsIDE5MF0pOwoJZHJhd1RleHQoJ05lYXIvZmFyIGNsaXAgdGhlIGxheWVyIGNhbWVyYS4nLCB4LCB5KyssIFsxNDAsIDE2MCwgMTkwXSk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCBbODAsIDEwMCwgMTUwXSk7CglkcmF3VGV4dChmb3ZTdHIsIHgsIHkrKywgWzEyMCwgMjU1LCAxODBdKTsKCWRyYXdUZXh0KCdORUFSOiAwLjEgIEZBUjogMjU2LjAnLCB4LCB5KyssIFsyMDAsIDIwMCwgMjAwXSk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const scene = t.layers.add();
+const labelLayer = t.layers.add();
+
+let fov = 60;
+
+function drawText(text, x, y, color = [200, 220, 255]) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(color[0], color[1], color[2]);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(8, 10, 18);
+
+	// FOV oscillates between 20° (telephoto) and 100° (wide)
+	fov = 60 + Math.sin(t.frameCount * 0.025) * 40;
+
+	scene.perspective(fov, 0.1, 256);
+	scene.camera(0, 0, 44);
+	scene.lookAt(0, 0, 0);
+});
+
+scene.draw(() => {
+	t.clear();
+	t.pointLight([255, 210, 130], { x: -20, y: -25, z: 30 });
+
+	// Three columns at increasing depth to show perspective compression
+	const depths = [0, -12, -24];
+	const colors = [
+		[120, 200, 255],
+		[160, 220, 180],
+		[255, 180, 120],
+	];
+
+	for (let i = 0; i < 3; i++) {
+		t.push();
+		t.translate(0, 0, depths[i]);
+		t.char('#');
+		t.charColor(colors[i][0], colors[i][1], colors[i][2]);
+		t.box(8, 8, 8);
+		t.pop();
+	}
+
+	// Floor grid for depth reference
+	t.push();
+	t.char('.');
+	t.charColor(40, 55, 80);
+	for (let x = -24; x <= 24; x += 8) {
+		t.line(x, 6, 4, x, 6, -32);
+	}
+	for (let z = 4; z >= -32; z -= 8) {
+		t.line(-24, 6, z, 24, 6, z);
+	}
+	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const fovStr = `FOV: ${fov.toFixed(1)} deg`;
+	drawText('TEXTMODELAYER.PERSPECTIVE', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: PERSPECTIVE FOV', x, y++, [100, 220, 255]);
+	drawText('FOV changes depth compression.', x, y++, [140, 160, 190]);
+	drawText('Near/far clip the layer camera.', x, y++, [140, 160, 190]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText(fovStr, x, y++, [120, 255, 180]);
+	drawText('NEAR: 0.1  FAR: 256.0', x, y++, [200, 200, 200]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

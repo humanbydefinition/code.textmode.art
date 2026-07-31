@@ -29,7 +29,98 @@ Normalized glyph atlas framebuffer used by the ASCII shader.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="framebuffer" encoded-code="Y29uc3QgVDY0X1VSTCA9ICdodHRwczovL2xpdHRsZWJpdHNwYWNlLmNvbS9yZXNvdXJjZXMvZm9udHMvVDY0LnBuZyc7CmNvbnN0IHQgPSB0ZXh0bW9kZS5jcmVhdGUoewoJd2lkdGg6IHdpbmRvdy5pbm5lcldpZHRoLAoJaGVpZ2h0OiB3aW5kb3cuaW5uZXJIZWlnaHQsCglmb250U2l6ZTogMTYsCn0pOwoKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwpsZXQgdGlsZXNldCA9IG51bGw7Cgp0LnNldHVwKGFzeW5jICgpID0-IHsKCXRpbGVzZXQgPSBhd2FpdCB0LmxvYWRUaWxlc2V0KHsgc291cmNlOiBUNjRfVVJMLCBjb2x1bW5zOiAxNiwgcm93czogMTYsIGNvdW50OiAyNTYsIGZvbnRTaXplOiAxNiB9KTsKfSk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDQsIDE2LCAxMCk7CglpZiAoIXRpbGVzZXQpIHJldHVybjsKCgljb25zdCBodyA9IE1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IGhoID0gTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJY29uc3QgdG0gPSB0LmZyYW1lQ291bnQgKiAwLjA1OwoJY29uc3QgY2hhcnMgPSB0aWxlc2V0LmNoYXJhY3RlcnM7Cgljb25zdCBzd2VlcEFuZ2xlID0gKHRtICogMikgJSAoTWF0aC5QSSAqIDIpOwoKCWZvciAobGV0IHkgPSAtaGg7IHkgPD0gaGg7IHkrKykgewoJCWZvciAobGV0IHggPSAtaHc7IHggPD0gaHc7IHgrKykgewoJCQljb25zdCBkaXN0ID0gTWF0aC5oeXBvdCh4LCB5KTsKCQkJY29uc3QgYW5nbGUgPSAoTWF0aC5hdGFuMih5LCB4KSArIE1hdGguUEkgKiAyKSAlIChNYXRoLlBJICogMik7CgkJCWNvbnN0IGRpZmYgPSAoc3dlZXBBbmdsZSAtIGFuZ2xlICsgTWF0aC5QSSAqIDIpICUgKE1hdGguUEkgKiAyKTsKCgkJCWNvbnN0IGlzUmFkYXJMaW5lID0gZGlmZiA8IDAuMTU7CgkJCWNvbnN0IGlzVHJhaWwgPSBkaWZmIDwgMS4yOwoJCQljb25zdCBub3JtID0gaXNUcmFpbCA_IDEgLSBkaWZmIC8gMS4yIDogMDsKCgkJCWNvbnN0IGNoYXJJZHggPSBNYXRoLmZsb29yKE1hdGguYWJzKGRpc3QgKiAwLjggKyB0bSAqIDYpICUgKGNoYXJzLmxlbmd0aCB8fCAxKSk7CgkJCWNvbnN0IGNoYXJLZXkgPSBpc1JhZGFyTGluZSA_ICdAJyA6IGlzVHJhaWwgPyAoY2hhcnNbY2hhcklkeF0gPyBjaGFyc1tjaGFySWR4XS5jaGFyYWN0ZXIgOiAnIycpIDogJy4nOwoKCQkJdC5wdXNoKCk7CgkJCXQudHJhbnNsYXRlKHgsIHkpOwoJCQl0LmNoYXJDb2xvcigKCQkJCWlzUmFkYXJMaW5lID8gMjU1IDogTWF0aC5mbG9vcig0MCArIG5vcm0gKiAxODApLAoJCQkJaXNSYWRhckxpbmUgPyAyNTUgOiBNYXRoLmZsb29yKDEwMCArIG5vcm0gKiAxNTUpLAoJCQkJaXNSYWRhckxpbmUgPyAxNTAgOiBNYXRoLmZsb29yKDQwICsgbm9ybSAqIDgwKQoJCQkpOwoJCQl0LmNlbGxDb2xvcigKCQkJCWlzUmFkYXJMaW5lID8gMzUgOiBNYXRoLmZsb29yKDQgKyBub3JtICogMjApLAoJCQkJaXNSYWRhckxpbmUgPyA0NSA6IE1hdGguZmxvb3IoMTYgKyBub3JtICogMjQpLAoJCQkJaXNSYWRhckxpbmUgPyAyMCA6IE1hdGguZmxvb3IoMTAgKyBub3JtICogMTUpCgkJCSk7CgkJCXQuY2hhcihjaGFyS2V5KTsKCQkJdC5wb2ludCgpOwoJCQl0LnBvcCgpOwoJCX0KCX0KfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWlmICghdGlsZXNldCkgcmV0dXJuOwoJY29uc3QgZmIgPSB0aWxlc2V0LmZyYW1lYnVmZmVyOwoKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IoMTIwLCAyNDAsIDE4MCk7Cgl0LnByaW50KCdURVhUTU9ERVRJTEVTRVQuRlJBTUVCVUZGRVInLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoNzAsIDEwMCwgMTQwKTsKCXQucHJpbnQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDIxMCwgMjU1KTsKCXQucHJpbnQoJ0NPTkNFUFQ6IFJFUEFDS0VEIEdQVSBBVExBUyBSQURBUicsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDE2MCwgMTkwKTsKCXQucHJpbnQoJ0dMRnJhbWVidWZmZXIgY29udGFpbmluZyBHUFUgdGV4dHVyZS4nLCB4LCB5KyspOwoJdC5wcmludCgnQ29udGFpbnMgcmVwYWNrZWQgdGlsZXNldCBhdGxhcyBkYXRhLicsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcig3MCwgMTAwLCAxNDApOwoJdC5wcmludCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMjU1LCAyMDApOwoJaWYgKGZiKSB7CgkJdC5wcmludChgVEVYVFVSRSBESU1TOiAke2ZiLndpZHRofSB4ICR7ZmIuaGVpZ2h0fSBQWGAsIHgsIHkrKyk7Cgl9Cgl0LnBvcCgpOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const T64_URL = 'https://littlebitspace.com/resources/fonts/T64.png';
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let tileset = null;
+
+t.setup(async () => {
+	tileset = await t.loadTileset({ source: T64_URL, columns: 16, rows: 16, count: 256, fontSize: 16 });
+});
+
+t.draw(() => {
+	t.background(4, 16, 10);
+	if (!tileset) return;
+
+	const hw = Math.floor(t.grid.cols / 2);
+	const hh = Math.floor(t.grid.rows / 2);
+	const tm = t.frameCount * 0.05;
+	const chars = tileset.characters;
+	const sweepAngle = (tm * 2) % (Math.PI * 2);
+
+	for (let y = -hh; y <= hh; y++) {
+		for (let x = -hw; x <= hw; x++) {
+			const dist = Math.hypot(x, y);
+			const angle = (Math.atan2(y, x) + Math.PI * 2) % (Math.PI * 2);
+			const diff = (sweepAngle - angle + Math.PI * 2) % (Math.PI * 2);
+
+			const isRadarLine = diff < 0.15;
+			const isTrail = diff < 1.2;
+			const norm = isTrail ? 1 - diff / 1.2 : 0;
+
+			const charIdx = Math.floor(Math.abs(dist * 0.8 + tm * 6) % (chars.length || 1));
+			const charKey = isRadarLine ? '@' : isTrail ? (chars[charIdx] ? chars[charIdx].character : '#') : '.';
+
+			t.push();
+			t.translate(x, y);
+			t.charColor(
+				isRadarLine ? 255 : Math.floor(40 + norm * 180),
+				isRadarLine ? 255 : Math.floor(100 + norm * 155),
+				isRadarLine ? 150 : Math.floor(40 + norm * 80)
+			);
+			t.cellColor(
+				isRadarLine ? 35 : Math.floor(4 + norm * 20),
+				isRadarLine ? 45 : Math.floor(16 + norm * 24),
+				isRadarLine ? 20 : Math.floor(10 + norm * 15)
+			);
+			t.char(charKey);
+			t.point();
+			t.pop();
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	if (!tileset) return;
+	const fb = tileset.framebuffer;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODETILESET.FRAMEBUFFER', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: REPACKED GPU ATLAS RADAR', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('GLFramebuffer containing GPU texture.', x, y++);
+	t.print('Contains repacked tileset atlas data.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 200);
+	if (fb) {
+		t.print(`TEXTURE DIMS: ${fb.width} x ${fb.height} PX`, x, y++);
+	}
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 
 Framebuffer containing the atlas texture data.
 

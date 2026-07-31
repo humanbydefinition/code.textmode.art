@@ -29,5 +29,71 @@ Number of rows in the glyph atlas.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="textureRows" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBSQU1QID0gJyAuOi09KyojJUAnOwpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDE2LCA2LCAxMik7Cgljb25zdCBodyA9IE1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IGhoID0gTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJY29uc3QgdG0gPSB0LmZyYW1lQ291bnQgKiAwLjA0OwoJY29uc3QgdGV4Um93cyA9IHQuZm9udC50ZXh0dXJlUm93cyB8fCAxNjsKCglmb3IgKGxldCB5ID0gLWhoOyB5IDw9IGhoOyB5KyspIHsKCQlmb3IgKGxldCB4ID0gLWh3OyB4IDw9IGh3OyB4KyspIHsKCQkJY29uc3Qgcm93SW5kZXggPSBNYXRoLmFicyh5KSAlIHRleFJvd3M7CgkJCWNvbnN0IG5vcm1Sb3cgPSByb3dJbmRleCAvIHRleFJvd3M7CgkJCWNvbnN0IHdhdmUgPSBNYXRoLmNvcyhyb3dJbmRleCAqIDAuNSArIHggKiAwLjE1ICsgdG0pOwoJCQljb25zdCBub3JtID0gKHdhdmUgKyAxKSAqIDAuNTsKCgkJCWNvbnN0IGlkeCA9IE1hdGguZmxvb3Iobm9ybSAqIChSQU1QLmxlbmd0aCAtIDEpKTsKCQkJdC5wdXNoKCk7CgkJCXQudHJhbnNsYXRlKHgsIHkpOwoJCQl0LmNoYXJDb2xvcihNYXRoLmZsb29yKDI0MCAtIG5vcm1Sb3cgKiAxMDApLCBNYXRoLmZsb29yKDYwICsgbm9ybVJvdyAqIDE4MCksIE1hdGguZmxvb3IoMTYwICsgbm9ybSAqIDgwKSk7CgkJCXQuY2VsbENvbG9yKE1hdGguZmxvb3IoMjQgKyBub3JtUm93ICogMjApLCBNYXRoLmZsb29yKDYgKyBub3JtICogMTUpLCBNYXRoLmZsb29yKDE1ICsgbm9ybVJvdyAqIDE1KSk7CgkJCXQuY2hhcihSQU1QW2lkeF0pOwoJCQl0LnBvaW50KCk7CgkJCXQucG9wKCk7CgkJfQoJfQp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CgoJY29uc3QgdGV4Um93cyA9IHQuZm9udC50ZXh0dXJlUm93czsKCgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKDEyMCwgMjQwLCAxODApOwoJdC5wcmludCgnVEVYVE1PREVGT05ULlRFWFRVUkVST1dTJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDcwLCAxMDAsIDE0MCk7Cgl0LnByaW50KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAyMTAsIDI1NSk7Cgl0LnByaW50KCdDT05DRVBUOiBBVExBUyBURVhUVVJFIFJPV1MnLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAxNjAsIDE5MCk7Cgl0LnByaW50KCdOdW1iZXIgb2YgdmVydGljYWwgYXRsYXMgc2xvdHMuJywgeCwgeSsrKTsKCXQucHJpbnQoJ0RldGVybWluZXMgYXRsYXMgVVYgcm93IGxheW91dC4nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoNzAsIDEwMCwgMTQwKTsKCXQucHJpbnQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDI1NSwgMjAwKTsKCXQucHJpbnQoYFRFWFRVUkUgUk9XUzogJHt0ZXhSb3dzfWAsIHgsIHkrKyk7Cgl0LnBvcCgpOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const RAMP = ' .:-=+*#%@';
+const labelLayer = t.layers.add();
+
+t.draw(() => {
+	t.background(16, 6, 12);
+	const hw = Math.floor(t.grid.cols / 2);
+	const hh = Math.floor(t.grid.rows / 2);
+	const tm = t.frameCount * 0.04;
+	const texRows = t.font.textureRows || 16;
+
+	for (let y = -hh; y <= hh; y++) {
+		for (let x = -hw; x <= hw; x++) {
+			const rowIndex = Math.abs(y) % texRows;
+			const normRow = rowIndex / texRows;
+			const wave = Math.cos(rowIndex * 0.5 + x * 0.15 + tm);
+			const norm = (wave + 1) * 0.5;
+
+			const idx = Math.floor(norm * (RAMP.length - 1));
+			t.push();
+			t.translate(x, y);
+			t.charColor(Math.floor(240 - normRow * 100), Math.floor(60 + normRow * 180), Math.floor(160 + norm * 80));
+			t.cellColor(Math.floor(24 + normRow * 20), Math.floor(6 + norm * 15), Math.floor(15 + normRow * 15));
+			t.char(RAMP[idx]);
+			t.point();
+			t.pop();
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const texRows = t.font.textureRows;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODEFONT.TEXTUREROWS', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: ATLAS TEXTURE ROWS', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Number of vertical atlas slots.', x, y++);
+	t.print('Determines atlas UV row layout.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 200);
+	t.print(`TEXTURE ROWS: ${texRows}`, x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

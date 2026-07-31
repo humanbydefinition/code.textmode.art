@@ -32,5 +32,94 @@ Register the single-callback handler for mouse dragging.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="mouseDragged" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7IHdpZHRoOiB3aW5kb3cuaW5uZXJXaWR0aCwgaGVpZ2h0OiB3aW5kb3cuaW5uZXJIZWlnaHQsIGZvbnRTaXplOiAxNiB9KTsKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwpjb25zdCBwYXJ0aWNsZXMgPSBbXTsKbGV0IGRyYWdDb3VudCA9IDA7CmxldCBpc0RyYWdnaW5nID0gZmFsc2U7CgpmdW5jdGlvbiBkcmF3VGV4dCh0eHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHR4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0Lm1vdXNlRHJhZ2dlZCgoKSA9PiB7CglpZiAodC5tb3VzZS54ID09PSBOdW1iZXIuTkVHQVRJVkVfSU5GSU5JVFkpIHJldHVybjsKCWlzRHJhZ2dpbmcgPSB0cnVlOwoJZHJhZ0NvdW50Kys7Cgljb25zdCB2eCA9ICh0Lm1vdXNlLnggLSB0LnBtb3VzZS54KSAqIDAuMzsKCWNvbnN0IHZ5ID0gKHQubW91c2UueSAtIHQucG1vdXNlLnkpICogMC4zOwoJcGFydGljbGVzLnVuc2hpZnQoeyB4OiB0Lm1vdXNlLngsIHk6IHQubW91c2UueSwgdngsIHZ5LCBsaWZlOiAxIH0pOwoJaWYgKHBhcnRpY2xlcy5sZW5ndGggPiA4MCkgcGFydGljbGVzLmxlbmd0aCA9IDgwOwp9KTsKCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoOCwgMTIsIDIwKTsKCWNvbnN0IGh3ID0gTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgaGggPSBNYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7Cgljb25zdCB0bSA9IHQuZnJhbWVDb3VudCAqIDAuMDI7CgoJZm9yIChsZXQgeSA9IC1oaDsgeSA8PSBoaDsgeSArPSAzKSB7CgkJZm9yIChsZXQgeCA9IC1odzsgeCA8PSBodzsgeCArPSAzKSB7CgkJCWNvbnN0IGEgPSBNYXRoLnNpbih4ICogMC4wOCArIHRtKSArIE1hdGguY29zKHkgKiAwLjA4IC0gdG0gKiAwLjgpOwoJCQl0LnB1c2goKTsKCQkJdC50cmFuc2xhdGUoeCwgeSk7CgkJCXQuY2hhckNvbG9yKDE0LCA1NiwgNDMpOwoJCQl0LmNoYXIoYSA-IDEuMCA_ICcvJyA6IGEgPiAwLjIgPyAnfCcgOiBhID4gLTAuOCA_ICdcXCcgOiAnLScpOwoJCQl0LnBvaW50KCk7CgkJCXQucG9wKCk7CgkJfQoJfQoKCWZvciAobGV0IGkgPSBwYXJ0aWNsZXMubGVuZ3RoIC0gMTsgaSA-PSAwOyBpLS0pIHsKCQljb25zdCBwID0gcGFydGljbGVzW2ldOwoJCXAueCArPSBwLnZ4OwoJCXAueSArPSBwLnZ5OwoJCXAudnggKj0gMC45NDsKCQlwLnZ5ICo9IDAuOTQ7CgkJY29uc3QgYSA9IE1hdGguc2luKHAueCAqIDAuMDggKyB0bSkgKyBNYXRoLmNvcyhwLnkgKiAwLjA4IC0gdG0gKiAwLjgpOwoJCXAudnggKz0gTWF0aC5jb3MoYSkgKiAwLjA1OwoJCXAudnkgKz0gTWF0aC5zaW4oYSkgKiAwLjA1OwoJCWlmICgocC5saWZlIC09IDAuMDIpIDw9IDApIHsKCQkJcGFydGljbGVzLnNwbGljZShpLCAxKTsKCQkJY29udGludWU7CgkJfQoJCWNvbnN0IHB4ID0gTWF0aC5yb3VuZChwLngpOwoJCWNvbnN0IHB5ID0gTWF0aC5yb3VuZChwLnkpOwoJCWlmIChweCA-PSAtaHcgJiYgcHggPD0gaHcgJiYgcHkgPj0gLWhoICYmIHB5IDw9IGhoKSB7CgkJCXQucHVzaCgpOwoJCQl0LnRyYW5zbGF0ZShweCwgcHkpOwoJCQl0LmNoYXJDb2xvcihwLmxpZmUgPiAwLjYgPyAxNjMgOiA1NywgcC5saWZlID4gMC42ID8gMjU1IDogcC5saWZlID4gMC4zID8gMjU1IDogOTAsIHAubGlmZSA-IDAuNiA_IDIwNiA6IDIwKTsKCQkJaWYgKHAubGlmZSA-IDAuMykgdC5jZWxsQ29sb3IocC5saWZlID4gMC42ID8gMjAgOiAxMCwgcC5saWZlID4gMC42ID8gODAgOiA0MCwgcC5saWZlID4gMC42ID8gNTAgOiAyNSk7CgkJCXQuY2hhcihwLmxpZmUgPiAwLjYgPyAn4paIJyA6IHAubGlmZSA-IDAuMyA_ICfilpMnIDogJ-KWkScpOwoJCQl0LnBvaW50KCk7CgkJCXQucG9wKCk7CgkJfQoJfQoJaWYgKCF0Lm1vdXNlSXNQcmVzc2VkKSBpc0RyYWdnaW5nID0gZmFsc2U7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuTU9VU0VEUkFHR0VEJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogQ09OVElOVU9VUyBEUkFHIEVWRU5UJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdGaXJlcyBjb250aW51b3VzbHkgd2hpbGUgZHJhZ2dpbmcuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdJbmplY3RzIGZsdWlkIHBhcnRpY2xlIHN0cmVhbWxpbmVzLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0RSQUcgRVZFTlRTOiAnICsgZHJhZ0NvdW50LCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwoJZHJhd1RleHQoJ0RSQUdHSU5HOiAgICAnICsgKGlzRHJhZ2dpbmcgPyAnVFJVRScgOiAnRkFMU0UnKSwgeCwgeSsrLCAxODAsIDIwMCwgMjIwKTsKCWRyYXdUZXh0KCdQQVJUSUNMRVM6ICAgJyArIHBhcnRpY2xlcy5sZW5ndGgsIHgsIHkrKywgMTgwLCAyMDAsIDIyMCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpKTs" />
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const labelLayer = t.layers.add();
+const particles = [];
+let dragCount = 0;
+let isDragging = false;
+
+function drawText(txt, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(txt, x, y);
+	t.pop();
+}
+
+t.mouseDragged(() => {
+	if (t.mouse.x === Number.NEGATIVE_INFINITY) return;
+	isDragging = true;
+	dragCount++;
+	const vx = (t.mouse.x - t.pmouse.x) * 0.3;
+	const vy = (t.mouse.y - t.pmouse.y) * 0.3;
+	particles.unshift({ x: t.mouse.x, y: t.mouse.y, vx, vy, life: 1 });
+	if (particles.length > 80) particles.length = 80;
+});
+
+t.draw(() => {
+	t.background(8, 12, 20);
+	const hw = Math.floor(t.grid.cols / 2);
+	const hh = Math.floor(t.grid.rows / 2);
+	const tm = t.frameCount * 0.02;
+
+	for (let y = -hh; y <= hh; y += 3) {
+		for (let x = -hw; x <= hw; x += 3) {
+			const a = Math.sin(x * 0.08 + tm) + Math.cos(y * 0.08 - tm * 0.8);
+			t.push();
+			t.translate(x, y);
+			t.charColor(14, 56, 43);
+			t.char(a > 1.0 ? '/' : a > 0.2 ? '|' : a > -0.8 ? '\\' : '-');
+			t.point();
+			t.pop();
+		}
+	}
+
+	for (let i = particles.length - 1; i >= 0; i--) {
+		const p = particles[i];
+		p.x += p.vx;
+		p.y += p.vy;
+		p.vx *= 0.94;
+		p.vy *= 0.94;
+		const a = Math.sin(p.x * 0.08 + tm) + Math.cos(p.y * 0.08 - tm * 0.8);
+		p.vx += Math.cos(a) * 0.05;
+		p.vy += Math.sin(a) * 0.05;
+		if ((p.life -= 0.02) <= 0) {
+			particles.splice(i, 1);
+			continue;
+		}
+		const px = Math.round(p.x);
+		const py = Math.round(p.y);
+		if (px >= -hw && px <= hw && py >= -hh && py <= hh) {
+			t.push();
+			t.translate(px, py);
+			t.charColor(p.life > 0.6 ? 163 : 57, p.life > 0.6 ? 255 : p.life > 0.3 ? 255 : 90, p.life > 0.6 ? 206 : 20);
+			if (p.life > 0.3) t.cellColor(p.life > 0.6 ? 20 : 10, p.life > 0.6 ? 80 : 40, p.life > 0.6 ? 50 : 25);
+			t.char(p.life > 0.6 ? '█' : p.life > 0.3 ? '▓' : '░');
+			t.point();
+			t.pop();
+		}
+	}
+	if (!t.mouseIsPressed) isDragging = false;
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.MOUSEDRAGGED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: CONTINUOUS DRAG EVENT', x, y++, 100, 220, 255);
+	drawText('Fires continuously while dragging.', x, y++, 140, 160, 190);
+	drawText('Injects fluid particle streamlines.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('DRAG EVENTS: ' + dragCount, x, y++, 140, 255, 180);
+	drawText('DRAGGING:    ' + (isDragging ? 'TRUE' : 'FALSE'), x, y++, 180, 200, 220);
+	drawText('PARTICLES:   ' + particles.length, x, y++, 180, 200, 220);
+});
+
+t.windowResized(() => t.resizeCanvas(window.innerWidth, window.innerHeight));
+```
 

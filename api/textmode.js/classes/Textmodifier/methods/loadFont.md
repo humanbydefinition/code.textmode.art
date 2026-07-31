@@ -44,5 +44,89 @@ The loaded TextmodeFont.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="loadFont" encoded-code="Y29uc3QgQkVTQ0lJX1VSTCA9ICdodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvZ2gvZGFtaWFudmlsYS9mb250LWJlc2NpaUBtYWluL2ZvbnRzL3YyLjAvQmVzY2lpLU1vbm8udHRmJzsKCmNvbnN0IHQgPSB0ZXh0bW9kZS5jcmVhdGUoewoJd2lkdGg6IHdpbmRvdy5pbm5lcldpZHRoLAoJaGVpZ2h0OiB3aW5kb3cuaW5uZXJIZWlnaHQsCglmb250U2l6ZTogMTYsCn0pOwoKY29uc3QgYWNjZW50TGF5ZXIgPSB0LmxheWVycy5hZGQoeyBmb250U2l6ZTogMTYsIGJsZW5kTW9kZTogJ2FkZGl0aXZlJyB9KTsKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKbGV0IGJhc2VGb250ID0gbnVsbDsKbGV0IHJldXNhYmxlRm9udCA9IG51bGw7CmxldCBsb2FkZWQgPSBmYWxzZTsKCnQuc2V0dXAoYXN5bmMgKCkgPT4gewoJYmFzZUZvbnQgPSBhd2FpdCB0LmxvYWRGb250KEJFU0NJSV9VUkwpOwoJcmV1c2FibGVGb250ID0gYXdhaXQgdC5sb2FkRm9udChCRVNDSUlfVVJMLCBmYWxzZSk7Cglhd2FpdCBhY2NlbnRMYXllci5sb2FkRm9udChyZXVzYWJsZUZvbnQpOwoJbG9hZGVkID0gdHJ1ZTsKfSk7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCmZ1bmN0aW9uIGRyYXdHbHlwaFN0cmlwKGZvbnQsIHksIHIsIGcsIGIpIHsKCWNvbnN0IGdseXBocyA9IGZvbnQuY2hhcmFjdGVyczsKCWNvbnN0IGNvdW50ID0gTWF0aC5taW4oZ2x5cGhzLmxlbmd0aCwgTWF0aC5tYXgoOCwgTWF0aC5mbG9vcih0LmdyaWQuY29scyAqIDAuNTUpKSk7Cgljb25zdCBzdGFydCA9IE1hdGguZmxvb3IoKHQuZnJhbWVDb3VudCAvIDgpICUgZ2x5cGhzLmxlbmd0aCk7Cgljb25zdCB4ID0gLU1hdGguZmxvb3IoY291bnQgLyAyKTsKCWZvciAobGV0IGkgPSAwOyBpIDwgY291bnQ7IGkrKykgewoJCWNvbnN0IGdseXBoID0gZ2x5cGhzWyhzdGFydCArIGkpICUgZ2x5cGhzLmxlbmd0aF07CgkJdC5wdXNoKCk7CgkJdC50cmFuc2xhdGUoeCArIGksIHkpOwoJCXQuY2hhcihnbHlwaC5jaGFyYWN0ZXIpOwoJCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJCXQucG9pbnQoKTsKCQl0LnBvcCgpOwoJfQp9Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDUsIDgsIDE4KTsKCWlmICghbG9hZGVkKSByZXR1cm47CgoJZHJhd0dseXBoU3RyaXAoYmFzZUZvbnQsIC0yLCAyNTUsIDIzNSwgMTIwKTsKCWRyYXdUZXh0KCdBQ1RJVkUgQkFTRSBGT05UJywgLTgsIC01LCAyNTUsIDIzNSwgMTIwKTsKfSk7CgphY2NlbnRMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWlmICghbG9hZGVkKSByZXR1cm47CgoJZHJhd0dseXBoU3RyaXAocmV1c2FibGVGb250LCA0LCAxMjAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdSRVVTRUQgT04gTEFZRVInLCAtNywgNywgMTIwLCAyMjAsIDI1NSk7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLkxPQURGT05UJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogTE9BRCBXRUIgRk9OVCcsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgndHJ1ZSBhY3RpdmF0ZXMgdGhlIGJhc2UgbGF5ZXIuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdmYWxzZSByZXR1cm5zIGEgcmV1c2FibGUgZm9udC4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWNvbnN0IHN0YXRlID0gbG9hZGVkID8gJ1JFQURZJyA6ICdMT0FESU5HJzsKCWRyYXdUZXh0KGBGT05UOiAke3N0YXRlfWAsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7CglpZiAobG9hZGVkKSBkcmF3VGV4dChgR0xZUEhTOiAke2Jhc2VGb250LmNoYXJhY3RlcnMubGVuZ3RofWAsIHgsIHkrKywgMjU1LCAyMjUsIDE0MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const BESCII_URL = 'https://cdn.jsdelivr.net/gh/damianvila/font-bescii@main/fonts/v2.0/Bescii-Mono.ttf';
+
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const accentLayer = t.layers.add({ fontSize: 16, blendMode: 'additive' });
+const labelLayer = t.layers.add();
+
+let baseFont = null;
+let reusableFont = null;
+let loaded = false;
+
+t.setup(async () => {
+	baseFont = await t.loadFont(BESCII_URL);
+	reusableFont = await t.loadFont(BESCII_URL, false);
+	await accentLayer.loadFont(reusableFont);
+	loaded = true;
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+function drawGlyphStrip(font, y, r, g, b) {
+	const glyphs = font.characters;
+	const count = Math.min(glyphs.length, Math.max(8, Math.floor(t.grid.cols * 0.55)));
+	const start = Math.floor((t.frameCount / 8) % glyphs.length);
+	const x = -Math.floor(count / 2);
+	for (let i = 0; i < count; i++) {
+		const glyph = glyphs[(start + i) % glyphs.length];
+		t.push();
+		t.translate(x + i, y);
+		t.char(glyph.character);
+		t.charColor(r, g, b);
+		t.point();
+		t.pop();
+	}
+}
+
+t.draw(() => {
+	t.background(5, 8, 18);
+	if (!loaded) return;
+
+	drawGlyphStrip(baseFont, -2, 255, 235, 120);
+	drawText('ACTIVE BASE FONT', -8, -5, 255, 235, 120);
+});
+
+accentLayer.draw(() => {
+	t.clear();
+	if (!loaded) return;
+
+	drawGlyphStrip(reusableFont, 4, 120, 220, 255);
+	drawText('REUSED ON LAYER', -7, 7, 120, 220, 255);
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODIFIER.LOADFONT', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: LOAD WEB FONT', x, y++, 100, 220, 255);
+	drawText('true activates the base layer.', x, y++, 140, 160, 190);
+	drawText('false returns a reusable font.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	const state = loaded ? 'READY' : 'LOADING';
+	drawText(`FONT: ${state}`, x, y++, 140, 255, 180);
+	if (loaded) drawText(`GLYPHS: ${baseFont.characters.length}`, x, y++, 255, 225, 140);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

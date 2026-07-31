@@ -30,7 +30,103 @@ Current color mode and channel maxes.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="colorMode" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAp9KTsKCmNvbnN0IGxhYmVsTGF5ZXIgPSB0LmxheWVycy5hZGQoKTsKY29uc3QgZ2x5cGhzID0gJyAuOi09KyojJUAnOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LmNvbG9yTW9kZSgncmdiJyk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9CgpmdW5jdGlvbiBwYWludENlbGwobW9kZSwgdSwgdiwgd2F2ZSwgY3VybCwgaHVlKSB7Cgljb25zdCBzaGltbWVyID0gKHdhdmUgKyBjdXJsKSAqIDAuNTsKCWlmIChtb2RlID09PSAncmdiJykgewoJCXQuY29sb3JNb2RlKCdyZ2InLCAyNTUpOwoJCXQuY2VsbENvbG9yKDQgKyAzNCAqIHdhdmUsIDggKyAzMCAqIHUsIDE4ICsgNTIgKiB2KTsKCQl0LmNoYXJDb2xvcig3MCArIDE4NSAqIHUsIDcwICsgMTg1ICogd2F2ZSwgMjUwIC0gMTMwICogdik7CgkJcmV0dXJuOwoJfQoJaWYgKG1vZGUgPT09ICdoc2InKSB7CgkJdC5jb2xvck1vZGUoJ2hzYicsIDM2MCwgMTAwLCAxMDAsIDEpOwoJCXQuY2VsbENvbG9yKGh1ZSwgOTIsIDIgKyAyNCAqIHdhdmUpOwoJCXQuY2hhckNvbG9yKGh1ZSArIHNoaW1tZXIgKiA3MCwgOTUsIDEwICsgOTAgKiB3YXZlKTsKCQlyZXR1cm47Cgl9Cgl0LmNvbG9yTW9kZSgnaHNsJywgMzYwLCAxMDAsIDEwMCwgMSk7Cgl0LmNlbGxDb2xvcihodWUsIDY1LCA4ICsgNDUgKiBjdXJsKTsKCXQuY2hhckNvbG9yKGh1ZSArIHNoaW1tZXIgKiAxMjAsIDk1LCA4ICsgODQgKiB3YXZlKTsKfQoKZnVuY3Rpb24gcGFpbnRQYW5lbChtb2RlLCBpbmRleCwgbGVmdCwgdG9wLCBwYW5lbFdpZHRoLCBoZWlnaHQsIHRpbWUpIHsKCWNvbnN0IHgwID0gbGVmdCArIGluZGV4ICogcGFuZWxXaWR0aDsKCWNvbnN0IHgxID0gaW5kZXggPT09IDIgPyBsZWZ0ICsgdC5ncmlkLmNvbHMgOiB4MCArIHBhbmVsV2lkdGg7Cgljb25zdCB5MCA9IHRvcCArIDExOwoJZm9yIChsZXQgeSA9IHkwOyB5IDwgdG9wICsgaGVpZ2h0IC0gMjsgeSsrKSB7CgkJdC5wdXNoKCk7CgkJdC50cmFuc2xhdGUoeDAsIHkpOwoJCWZvciAobGV0IHggPSB4MDsgeCA8IHgxOyB4KyspIHsKCQkJY29uc3QgdSA9ICh4IC0geDApIC8gTWF0aC5tYXgoMSwgeDEgLSB4MCAtIDEpOwoJCQljb25zdCB2ID0gKHkgLSB5MCkgLyBNYXRoLm1heCgxLCBoZWlnaHQgLSAxMyk7CgkJCWNvbnN0IGR4ID0gdSAqIDIgLSAxOwoJCQljb25zdCBkeSA9IHYgKiAyIC0gMTsKCQkJY29uc3QgcmFkaXVzID0gTWF0aC5zcXJ0KGR4ICogZHggKyBkeSAqIGR5KTsKCQkJY29uc3QgYW5nbGUgPSBNYXRoLmF0YW4yKGR5LCBkeCk7CgkJCWNvbnN0IHdhdmUgPSAoTWF0aC5zaW4ocmFkaXVzICogMTIgLSB0aW1lICogMi40ICsgYW5nbGUgKiA1KSArIDEpICogMC41OwoJCQljb25zdCBjdXJsID0gKE1hdGguc2luKCh1IC0gdikgKiAxMCArIHRpbWUgKyBpbmRleCAqIDEuNykgKyAxKSAqIDAuNTsKCQkJY29uc3QgaHVlID0gKGFuZ2xlICogMTgwKSAvIE1hdGguUEkgKyAxODAgKyB0aW1lICogNDIgKyBpbmRleCAqIDM2OwoJCQljb25zdCBnbHlwaCA9IGdseXBoc1tNYXRoLmZsb29yKCh3YXZlICogMC42NSArIGN1cmwgKiAwLjM1KSAqIChnbHlwaHMubGVuZ3RoIC0gMSkpXTsKCQkJdC5jaGFyKGdseXBoKTsKCQkJcGFpbnRDZWxsKG1vZGUsIHUsIHYsIHdhdmUsIGN1cmwsIGh1ZSk7CgkJCXQucG9pbnQoKTsKCQkJdC50cmFuc2xhdGUoMSwgMCk7CgkJfQoJCXQucG9wKCk7Cgl9Cn0KCnQuZHJhdygoKSA9PiB7Cgl0LmNvbG9yTW9kZSgncmdiJyk7Cgl0LmJhY2tncm91bmQoNCwgNiwgMTQpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJY29uc3QgcGFuZWxXaWR0aCA9IE1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAzKTsKCWNvbnN0IHRpbWUgPSB0LmZyYW1lQ291bnQgKiAwLjAzNTsKCXBhaW50UGFuZWwoJ3JnYicsIDAsIGxlZnQsIHRvcCwgcGFuZWxXaWR0aCwgdC5ncmlkLnJvd3MsIHRpbWUpOwoJcGFpbnRQYW5lbCgnaHNiJywgMSwgbGVmdCwgdG9wLCBwYW5lbFdpZHRoLCB0LmdyaWQucm93cywgdGltZSk7CglwYWludFBhbmVsKCdoc2wnLCAyLCBsZWZ0LCB0b3AsIHBhbmVsV2lkdGgsIHQuZ3JpZC5yb3dzLCB0aW1lKTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5DT0xPUk1PREUnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdSR0I6IENIQU5ORUwgTUlYSU5HJywgeCwgeSsrLCAyNTUsIDE1MCwgMTIwKTsKCWRyYXdUZXh0KCdIU0I6IEJSSUdIVE5FU1MgVE8gQkxBQ0snLCB4LCB5KyssIDEyMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ0hTTDogTElHSFRORVNTIFRPIFdISVRFJywgeCwgeSsrLCAyMTAsIDE3MCwgMjU1KTsKCWRyYXdUZXh0KCdTYW1lIGh1ZSwgZGlmZmVyZW50IHRoaXJkIHZhbHVlLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnR2x5cGhzIGFuZCBjZWxscyBib3RoIHJlc3BvbmQuJywgeCwgeSsrLCAxNDAsIDI1NSwgMTgwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 8,
+});
+
+const labelLayer = t.layers.add();
+const glyphs = ' .:-=+*#%@';
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.colorMode('rgb');
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+function paintCell(mode, u, v, wave, curl, hue) {
+	const shimmer = (wave + curl) * 0.5;
+	if (mode === 'rgb') {
+		t.colorMode('rgb', 255);
+		t.cellColor(4 + 34 * wave, 8 + 30 * u, 18 + 52 * v);
+		t.charColor(70 + 185 * u, 70 + 185 * wave, 250 - 130 * v);
+		return;
+	}
+	if (mode === 'hsb') {
+		t.colorMode('hsb', 360, 100, 100, 1);
+		t.cellColor(hue, 92, 2 + 24 * wave);
+		t.charColor(hue + shimmer * 70, 95, 10 + 90 * wave);
+		return;
+	}
+	t.colorMode('hsl', 360, 100, 100, 1);
+	t.cellColor(hue, 65, 8 + 45 * curl);
+	t.charColor(hue + shimmer * 120, 95, 8 + 84 * wave);
+}
+
+function paintPanel(mode, index, left, top, panelWidth, height, time) {
+	const x0 = left + index * panelWidth;
+	const x1 = index === 2 ? left + t.grid.cols : x0 + panelWidth;
+	const y0 = top + 11;
+	for (let y = y0; y < top + height - 2; y++) {
+		t.push();
+		t.translate(x0, y);
+		for (let x = x0; x < x1; x++) {
+			const u = (x - x0) / Math.max(1, x1 - x0 - 1);
+			const v = (y - y0) / Math.max(1, height - 13);
+			const dx = u * 2 - 1;
+			const dy = v * 2 - 1;
+			const radius = Math.sqrt(dx * dx + dy * dy);
+			const angle = Math.atan2(dy, dx);
+			const wave = (Math.sin(radius * 12 - time * 2.4 + angle * 5) + 1) * 0.5;
+			const curl = (Math.sin((u - v) * 10 + time + index * 1.7) + 1) * 0.5;
+			const hue = (angle * 180) / Math.PI + 180 + time * 42 + index * 36;
+			const glyph = glyphs[Math.floor((wave * 0.65 + curl * 0.35) * (glyphs.length - 1))];
+			t.char(glyph);
+			paintCell(mode, u, v, wave, curl, hue);
+			t.point();
+			t.translate(1, 0);
+		}
+		t.pop();
+	}
+}
+
+t.draw(() => {
+	t.colorMode('rgb');
+	t.background(4, 6, 14);
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	const panelWidth = Math.floor(t.grid.cols / 3);
+	const time = t.frameCount * 0.035;
+	paintPanel('rgb', 0, left, top, panelWidth, t.grid.rows, time);
+	paintPanel('hsb', 1, left, top, panelWidth, t.grid.rows, time);
+	paintPanel('hsl', 2, left, top, panelWidth, t.grid.rows, time);
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.COLORMODE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('RGB: CHANNEL MIXING', x, y++, 255, 150, 120);
+	drawText('HSB: BRIGHTNESS TO BLACK', x, y++, 120, 220, 255);
+	drawText('HSL: LIGHTNESS TO WHITE', x, y++, 210, 170, 255);
+	drawText('Same hue, different third value.', x, y++, 140, 160, 190);
+	drawText('Glyphs and cells both respond.', x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 
 ## Call Signature
 
@@ -57,7 +153,103 @@ alpha, defaulting to the selected mode's alpha max.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="colorMode" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAp9KTsKCmNvbnN0IGxhYmVsTGF5ZXIgPSB0LmxheWVycy5hZGQoKTsKY29uc3QgZ2x5cGhzID0gJyAuOi09KyojJUAnOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LmNvbG9yTW9kZSgncmdiJyk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9CgpmdW5jdGlvbiBwYWludENlbGwobW9kZSwgdSwgdiwgd2F2ZSwgY3VybCwgaHVlKSB7Cgljb25zdCBzaGltbWVyID0gKHdhdmUgKyBjdXJsKSAqIDAuNTsKCWlmIChtb2RlID09PSAncmdiJykgewoJCXQuY29sb3JNb2RlKCdyZ2InLCAyNTUpOwoJCXQuY2VsbENvbG9yKDQgKyAzNCAqIHdhdmUsIDggKyAzMCAqIHUsIDE4ICsgNTIgKiB2KTsKCQl0LmNoYXJDb2xvcig3MCArIDE4NSAqIHUsIDcwICsgMTg1ICogd2F2ZSwgMjUwIC0gMTMwICogdik7CgkJcmV0dXJuOwoJfQoJaWYgKG1vZGUgPT09ICdoc2InKSB7CgkJdC5jb2xvck1vZGUoJ2hzYicsIDM2MCwgMTAwLCAxMDAsIDEpOwoJCXQuY2VsbENvbG9yKGh1ZSwgOTIsIDIgKyAyNCAqIHdhdmUpOwoJCXQuY2hhckNvbG9yKGh1ZSArIHNoaW1tZXIgKiA3MCwgOTUsIDEwICsgOTAgKiB3YXZlKTsKCQlyZXR1cm47Cgl9Cgl0LmNvbG9yTW9kZSgnaHNsJywgMzYwLCAxMDAsIDEwMCwgMSk7Cgl0LmNlbGxDb2xvcihodWUsIDY1LCA4ICsgNDUgKiBjdXJsKTsKCXQuY2hhckNvbG9yKGh1ZSArIHNoaW1tZXIgKiAxMjAsIDk1LCA4ICsgODQgKiB3YXZlKTsKfQoKZnVuY3Rpb24gcGFpbnRQYW5lbChtb2RlLCBpbmRleCwgbGVmdCwgdG9wLCBwYW5lbFdpZHRoLCBoZWlnaHQsIHRpbWUpIHsKCWNvbnN0IHgwID0gbGVmdCArIGluZGV4ICogcGFuZWxXaWR0aDsKCWNvbnN0IHgxID0gaW5kZXggPT09IDIgPyBsZWZ0ICsgdC5ncmlkLmNvbHMgOiB4MCArIHBhbmVsV2lkdGg7Cgljb25zdCB5MCA9IHRvcCArIDExOwoJZm9yIChsZXQgeSA9IHkwOyB5IDwgdG9wICsgaGVpZ2h0IC0gMjsgeSsrKSB7CgkJdC5wdXNoKCk7CgkJdC50cmFuc2xhdGUoeDAsIHkpOwoJCWZvciAobGV0IHggPSB4MDsgeCA8IHgxOyB4KyspIHsKCQkJY29uc3QgdSA9ICh4IC0geDApIC8gTWF0aC5tYXgoMSwgeDEgLSB4MCAtIDEpOwoJCQljb25zdCB2ID0gKHkgLSB5MCkgLyBNYXRoLm1heCgxLCBoZWlnaHQgLSAxMyk7CgkJCWNvbnN0IGR4ID0gdSAqIDIgLSAxOwoJCQljb25zdCBkeSA9IHYgKiAyIC0gMTsKCQkJY29uc3QgcmFkaXVzID0gTWF0aC5zcXJ0KGR4ICogZHggKyBkeSAqIGR5KTsKCQkJY29uc3QgYW5nbGUgPSBNYXRoLmF0YW4yKGR5LCBkeCk7CgkJCWNvbnN0IHdhdmUgPSAoTWF0aC5zaW4ocmFkaXVzICogMTIgLSB0aW1lICogMi40ICsgYW5nbGUgKiA1KSArIDEpICogMC41OwoJCQljb25zdCBjdXJsID0gKE1hdGguc2luKCh1IC0gdikgKiAxMCArIHRpbWUgKyBpbmRleCAqIDEuNykgKyAxKSAqIDAuNTsKCQkJY29uc3QgaHVlID0gKGFuZ2xlICogMTgwKSAvIE1hdGguUEkgKyAxODAgKyB0aW1lICogNDIgKyBpbmRleCAqIDM2OwoJCQljb25zdCBnbHlwaCA9IGdseXBoc1tNYXRoLmZsb29yKCh3YXZlICogMC42NSArIGN1cmwgKiAwLjM1KSAqIChnbHlwaHMubGVuZ3RoIC0gMSkpXTsKCQkJdC5jaGFyKGdseXBoKTsKCQkJcGFpbnRDZWxsKG1vZGUsIHUsIHYsIHdhdmUsIGN1cmwsIGh1ZSk7CgkJCXQucG9pbnQoKTsKCQkJdC50cmFuc2xhdGUoMSwgMCk7CgkJfQoJCXQucG9wKCk7Cgl9Cn0KCnQuZHJhdygoKSA9PiB7Cgl0LmNvbG9yTW9kZSgncmdiJyk7Cgl0LmJhY2tncm91bmQoNCwgNiwgMTQpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJY29uc3QgcGFuZWxXaWR0aCA9IE1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAzKTsKCWNvbnN0IHRpbWUgPSB0LmZyYW1lQ291bnQgKiAwLjAzNTsKCXBhaW50UGFuZWwoJ3JnYicsIDAsIGxlZnQsIHRvcCwgcGFuZWxXaWR0aCwgdC5ncmlkLnJvd3MsIHRpbWUpOwoJcGFpbnRQYW5lbCgnaHNiJywgMSwgbGVmdCwgdG9wLCBwYW5lbFdpZHRoLCB0LmdyaWQucm93cywgdGltZSk7CglwYWludFBhbmVsKCdoc2wnLCAyLCBsZWZ0LCB0b3AsIHBhbmVsV2lkdGgsIHQuZ3JpZC5yb3dzLCB0aW1lKTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5DT0xPUk1PREUnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdSR0I6IENIQU5ORUwgTUlYSU5HJywgeCwgeSsrLCAyNTUsIDE1MCwgMTIwKTsKCWRyYXdUZXh0KCdIU0I6IEJSSUdIVE5FU1MgVE8gQkxBQ0snLCB4LCB5KyssIDEyMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ0hTTDogTElHSFRORVNTIFRPIFdISVRFJywgeCwgeSsrLCAyMTAsIDE3MCwgMjU1KTsKCWRyYXdUZXh0KCdTYW1lIGh1ZSwgZGlmZmVyZW50IHRoaXJkIHZhbHVlLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnR2x5cGhzIGFuZCBjZWxscyBib3RoIHJlc3BvbmQuJywgeCwgeSsrLCAxNDAsIDI1NSwgMTgwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 8,
+});
+
+const labelLayer = t.layers.add();
+const glyphs = ' .:-=+*#%@';
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.colorMode('rgb');
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+function paintCell(mode, u, v, wave, curl, hue) {
+	const shimmer = (wave + curl) * 0.5;
+	if (mode === 'rgb') {
+		t.colorMode('rgb', 255);
+		t.cellColor(4 + 34 * wave, 8 + 30 * u, 18 + 52 * v);
+		t.charColor(70 + 185 * u, 70 + 185 * wave, 250 - 130 * v);
+		return;
+	}
+	if (mode === 'hsb') {
+		t.colorMode('hsb', 360, 100, 100, 1);
+		t.cellColor(hue, 92, 2 + 24 * wave);
+		t.charColor(hue + shimmer * 70, 95, 10 + 90 * wave);
+		return;
+	}
+	t.colorMode('hsl', 360, 100, 100, 1);
+	t.cellColor(hue, 65, 8 + 45 * curl);
+	t.charColor(hue + shimmer * 120, 95, 8 + 84 * wave);
+}
+
+function paintPanel(mode, index, left, top, panelWidth, height, time) {
+	const x0 = left + index * panelWidth;
+	const x1 = index === 2 ? left + t.grid.cols : x0 + panelWidth;
+	const y0 = top + 11;
+	for (let y = y0; y < top + height - 2; y++) {
+		t.push();
+		t.translate(x0, y);
+		for (let x = x0; x < x1; x++) {
+			const u = (x - x0) / Math.max(1, x1 - x0 - 1);
+			const v = (y - y0) / Math.max(1, height - 13);
+			const dx = u * 2 - 1;
+			const dy = v * 2 - 1;
+			const radius = Math.sqrt(dx * dx + dy * dy);
+			const angle = Math.atan2(dy, dx);
+			const wave = (Math.sin(radius * 12 - time * 2.4 + angle * 5) + 1) * 0.5;
+			const curl = (Math.sin((u - v) * 10 + time + index * 1.7) + 1) * 0.5;
+			const hue = (angle * 180) / Math.PI + 180 + time * 42 + index * 36;
+			const glyph = glyphs[Math.floor((wave * 0.65 + curl * 0.35) * (glyphs.length - 1))];
+			t.char(glyph);
+			paintCell(mode, u, v, wave, curl, hue);
+			t.point();
+			t.translate(1, 0);
+		}
+		t.pop();
+	}
+}
+
+t.draw(() => {
+	t.colorMode('rgb');
+	t.background(4, 6, 14);
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	const panelWidth = Math.floor(t.grid.cols / 3);
+	const time = t.frameCount * 0.035;
+	paintPanel('rgb', 0, left, top, panelWidth, t.grid.rows, time);
+	paintPanel('hsb', 1, left, top, panelWidth, t.grid.rows, time);
+	paintPanel('hsl', 2, left, top, panelWidth, t.grid.rows, time);
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.COLORMODE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('RGB: CHANNEL MIXING', x, y++, 255, 150, 120);
+	drawText('HSB: BRIGHTNESS TO BLACK', x, y++, 120, 220, 255);
+	drawText('HSL: LIGHTNESS TO WHITE', x, y++, 210, 170, 255);
+	drawText('Same hue, different third value.', x, y++, 140, 160, 190);
+	drawText('Glyphs and cells both respond.', x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 
 ## Call Signature
 
@@ -88,5 +280,100 @@ Set how numeric color inputs are interpreted with per-channel ranges.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="colorMode" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAp9KTsKCmNvbnN0IGxhYmVsTGF5ZXIgPSB0LmxheWVycy5hZGQoKTsKY29uc3QgZ2x5cGhzID0gJyAuOi09KyojJUAnOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LmNvbG9yTW9kZSgncmdiJyk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9CgpmdW5jdGlvbiBwYWludENlbGwobW9kZSwgdSwgdiwgd2F2ZSwgY3VybCwgaHVlKSB7Cgljb25zdCBzaGltbWVyID0gKHdhdmUgKyBjdXJsKSAqIDAuNTsKCWlmIChtb2RlID09PSAncmdiJykgewoJCXQuY29sb3JNb2RlKCdyZ2InLCAyNTUpOwoJCXQuY2VsbENvbG9yKDQgKyAzNCAqIHdhdmUsIDggKyAzMCAqIHUsIDE4ICsgNTIgKiB2KTsKCQl0LmNoYXJDb2xvcig3MCArIDE4NSAqIHUsIDcwICsgMTg1ICogd2F2ZSwgMjUwIC0gMTMwICogdik7CgkJcmV0dXJuOwoJfQoJaWYgKG1vZGUgPT09ICdoc2InKSB7CgkJdC5jb2xvck1vZGUoJ2hzYicsIDM2MCwgMTAwLCAxMDAsIDEpOwoJCXQuY2VsbENvbG9yKGh1ZSwgOTIsIDIgKyAyNCAqIHdhdmUpOwoJCXQuY2hhckNvbG9yKGh1ZSArIHNoaW1tZXIgKiA3MCwgOTUsIDEwICsgOTAgKiB3YXZlKTsKCQlyZXR1cm47Cgl9Cgl0LmNvbG9yTW9kZSgnaHNsJywgMzYwLCAxMDAsIDEwMCwgMSk7Cgl0LmNlbGxDb2xvcihodWUsIDY1LCA4ICsgNDUgKiBjdXJsKTsKCXQuY2hhckNvbG9yKGh1ZSArIHNoaW1tZXIgKiAxMjAsIDk1LCA4ICsgODQgKiB3YXZlKTsKfQoKZnVuY3Rpb24gcGFpbnRQYW5lbChtb2RlLCBpbmRleCwgbGVmdCwgdG9wLCBwYW5lbFdpZHRoLCBoZWlnaHQsIHRpbWUpIHsKCWNvbnN0IHgwID0gbGVmdCArIGluZGV4ICogcGFuZWxXaWR0aDsKCWNvbnN0IHgxID0gaW5kZXggPT09IDIgPyBsZWZ0ICsgdC5ncmlkLmNvbHMgOiB4MCArIHBhbmVsV2lkdGg7Cgljb25zdCB5MCA9IHRvcCArIDExOwoJZm9yIChsZXQgeSA9IHkwOyB5IDwgdG9wICsgaGVpZ2h0IC0gMjsgeSsrKSB7CgkJdC5wdXNoKCk7CgkJdC50cmFuc2xhdGUoeDAsIHkpOwoJCWZvciAobGV0IHggPSB4MDsgeCA8IHgxOyB4KyspIHsKCQkJY29uc3QgdSA9ICh4IC0geDApIC8gTWF0aC5tYXgoMSwgeDEgLSB4MCAtIDEpOwoJCQljb25zdCB2ID0gKHkgLSB5MCkgLyBNYXRoLm1heCgxLCBoZWlnaHQgLSAxMyk7CgkJCWNvbnN0IGR4ID0gdSAqIDIgLSAxOwoJCQljb25zdCBkeSA9IHYgKiAyIC0gMTsKCQkJY29uc3QgcmFkaXVzID0gTWF0aC5zcXJ0KGR4ICogZHggKyBkeSAqIGR5KTsKCQkJY29uc3QgYW5nbGUgPSBNYXRoLmF0YW4yKGR5LCBkeCk7CgkJCWNvbnN0IHdhdmUgPSAoTWF0aC5zaW4ocmFkaXVzICogMTIgLSB0aW1lICogMi40ICsgYW5nbGUgKiA1KSArIDEpICogMC41OwoJCQljb25zdCBjdXJsID0gKE1hdGguc2luKCh1IC0gdikgKiAxMCArIHRpbWUgKyBpbmRleCAqIDEuNykgKyAxKSAqIDAuNTsKCQkJY29uc3QgaHVlID0gKGFuZ2xlICogMTgwKSAvIE1hdGguUEkgKyAxODAgKyB0aW1lICogNDIgKyBpbmRleCAqIDM2OwoJCQljb25zdCBnbHlwaCA9IGdseXBoc1tNYXRoLmZsb29yKCh3YXZlICogMC42NSArIGN1cmwgKiAwLjM1KSAqIChnbHlwaHMubGVuZ3RoIC0gMSkpXTsKCQkJdC5jaGFyKGdseXBoKTsKCQkJcGFpbnRDZWxsKG1vZGUsIHUsIHYsIHdhdmUsIGN1cmwsIGh1ZSk7CgkJCXQucG9pbnQoKTsKCQkJdC50cmFuc2xhdGUoMSwgMCk7CgkJfQoJCXQucG9wKCk7Cgl9Cn0KCnQuZHJhdygoKSA9PiB7Cgl0LmNvbG9yTW9kZSgncmdiJyk7Cgl0LmJhY2tncm91bmQoNCwgNiwgMTQpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJY29uc3QgcGFuZWxXaWR0aCA9IE1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAzKTsKCWNvbnN0IHRpbWUgPSB0LmZyYW1lQ291bnQgKiAwLjAzNTsKCXBhaW50UGFuZWwoJ3JnYicsIDAsIGxlZnQsIHRvcCwgcGFuZWxXaWR0aCwgdC5ncmlkLnJvd3MsIHRpbWUpOwoJcGFpbnRQYW5lbCgnaHNiJywgMSwgbGVmdCwgdG9wLCBwYW5lbFdpZHRoLCB0LmdyaWQucm93cywgdGltZSk7CglwYWludFBhbmVsKCdoc2wnLCAyLCBsZWZ0LCB0b3AsIHBhbmVsV2lkdGgsIHQuZ3JpZC5yb3dzLCB0aW1lKTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5DT0xPUk1PREUnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdSR0I6IENIQU5ORUwgTUlYSU5HJywgeCwgeSsrLCAyNTUsIDE1MCwgMTIwKTsKCWRyYXdUZXh0KCdIU0I6IEJSSUdIVE5FU1MgVE8gQkxBQ0snLCB4LCB5KyssIDEyMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ0hTTDogTElHSFRORVNTIFRPIFdISVRFJywgeCwgeSsrLCAyMTAsIDE3MCwgMjU1KTsKCWRyYXdUZXh0KCdTYW1lIGh1ZSwgZGlmZmVyZW50IHRoaXJkIHZhbHVlLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnR2x5cGhzIGFuZCBjZWxscyBib3RoIHJlc3BvbmQuJywgeCwgeSsrLCAxNDAsIDI1NSwgMTgwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 8,
+});
+
+const labelLayer = t.layers.add();
+const glyphs = ' .:-=+*#%@';
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.colorMode('rgb');
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+function paintCell(mode, u, v, wave, curl, hue) {
+	const shimmer = (wave + curl) * 0.5;
+	if (mode === 'rgb') {
+		t.colorMode('rgb', 255);
+		t.cellColor(4 + 34 * wave, 8 + 30 * u, 18 + 52 * v);
+		t.charColor(70 + 185 * u, 70 + 185 * wave, 250 - 130 * v);
+		return;
+	}
+	if (mode === 'hsb') {
+		t.colorMode('hsb', 360, 100, 100, 1);
+		t.cellColor(hue, 92, 2 + 24 * wave);
+		t.charColor(hue + shimmer * 70, 95, 10 + 90 * wave);
+		return;
+	}
+	t.colorMode('hsl', 360, 100, 100, 1);
+	t.cellColor(hue, 65, 8 + 45 * curl);
+	t.charColor(hue + shimmer * 120, 95, 8 + 84 * wave);
+}
+
+function paintPanel(mode, index, left, top, panelWidth, height, time) {
+	const x0 = left + index * panelWidth;
+	const x1 = index === 2 ? left + t.grid.cols : x0 + panelWidth;
+	const y0 = top + 11;
+	for (let y = y0; y < top + height - 2; y++) {
+		t.push();
+		t.translate(x0, y);
+		for (let x = x0; x < x1; x++) {
+			const u = (x - x0) / Math.max(1, x1 - x0 - 1);
+			const v = (y - y0) / Math.max(1, height - 13);
+			const dx = u * 2 - 1;
+			const dy = v * 2 - 1;
+			const radius = Math.sqrt(dx * dx + dy * dy);
+			const angle = Math.atan2(dy, dx);
+			const wave = (Math.sin(radius * 12 - time * 2.4 + angle * 5) + 1) * 0.5;
+			const curl = (Math.sin((u - v) * 10 + time + index * 1.7) + 1) * 0.5;
+			const hue = (angle * 180) / Math.PI + 180 + time * 42 + index * 36;
+			const glyph = glyphs[Math.floor((wave * 0.65 + curl * 0.35) * (glyphs.length - 1))];
+			t.char(glyph);
+			paintCell(mode, u, v, wave, curl, hue);
+			t.point();
+			t.translate(1, 0);
+		}
+		t.pop();
+	}
+}
+
+t.draw(() => {
+	t.colorMode('rgb');
+	t.background(4, 6, 14);
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	const panelWidth = Math.floor(t.grid.cols / 3);
+	const time = t.frameCount * 0.035;
+	paintPanel('rgb', 0, left, top, panelWidth, t.grid.rows, time);
+	paintPanel('hsb', 1, left, top, panelWidth, t.grid.rows, time);
+	paintPanel('hsl', 2, left, top, panelWidth, t.grid.rows, time);
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.COLORMODE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('RGB: CHANNEL MIXING', x, y++, 255, 150, 120);
+	drawText('HSB: BRIGHTNESS TO BLACK', x, y++, 120, 220, 255);
+	drawText('HSL: LIGHTNESS TO WHITE', x, y++, 210, 170, 255);
+	drawText('Same hue, different third value.', x, y++, 140, 160, 190);
+	drawText('Glyphs and cells both respond.', x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

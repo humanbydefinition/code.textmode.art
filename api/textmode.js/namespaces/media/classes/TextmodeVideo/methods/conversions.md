@@ -35,7 +35,101 @@ This instance for chaining.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="conversions" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpsZXQgc291cmNlID0gbnVsbDsKCmZ1bmN0aW9uIGNyZWF0ZUltYWdlVXJsKCkgewoJY29uc3QgY2FudmFzID0gZG9jdW1lbnQuY3JlYXRlRWxlbWVudCgnY2FudmFzJyk7CglPYmplY3QuYXNzaWduKGNhbnZhcywgeyB3aWR0aDogMTI4LCBoZWlnaHQ6IDgwIH0pOwoJY29uc3QgY3R4ID0gY2FudmFzLmdldENvbnRleHQoJzJkJyk7Cgljb25zdCBncmFkaWVudCA9IGN0eC5jcmVhdGVMaW5lYXJHcmFkaWVudCgwLCAwLCAxMjgsIDgwKTsKCWdyYWRpZW50LmFkZENvbG9yU3RvcCgwLCAnIzAyMDYxNycpOwoJZ3JhZGllbnQuYWRkQ29sb3JTdG9wKDAuNDUsICcjMGVhNWU5Jyk7CglncmFkaWVudC5hZGRDb2xvclN0b3AoMSwgJyNmOGZhZmMnKTsKCWN0eC5maWxsU3R5bGUgPSBncmFkaWVudDsKCWN0eC5maWxsUmVjdCgwLCAwLCAxMjgsIDgwKTsKCWN0eC5maWxsU3R5bGUgPSAnI2Y5NzMxNic7CgljdHguZmlsbFJlY3QoMTUsIDE2LCAzNCwgNDQpOwoJY3R4LmZpbGxTdHlsZSA9ICcjZmRlNjhhJzsKCWN0eC5maWxsUmVjdCg3OCwgMjIsIDM0LCAzNCk7CglyZXR1cm4gY2FudmFzLnRvRGF0YVVSTCgpOwp9CgpmdW5jdGlvbiBjb25maWd1cmVTb3VyY2Uoc291cmNlKSB7Cglzb3VyY2UuY2hhcmFjdGVycygnIC46LT0rKiMlQCcpLmNoYXJDb2xvck1vZGUoJ3NhbXBsZWQnKS5jZWxsQ29sb3JNb2RlKCdmaXhlZCcpLmNlbGxDb2xvcignIzAyMDYxNycpOwp9CgpmdW5jdGlvbiBicmlnaHRuZXNzUGFzcyhzdGFydCwgZW5kLCBjaGFyYWN0ZXJzLCBjaGFyQ29sb3IpIHsKCXJldHVybiB7CgkJbW9kZTogJ2JyaWdodG5lc3MnLAoJCWJyaWdodG5lc3NTdGFydDogc3RhcnQsCgkJYnJpZ2h0bmVzc0VuZDogZW5kLAoJCWNoYXJhY3RlcnMsCgkJY2hhckNvbG9yTW9kZTogJ2ZpeGVkJywKCQljaGFyQ29sb3IsCgl9Owp9Cgp0LnNldHVwKGFzeW5jICgpID0-IHsKCXNvdXJjZSA9IGF3YWl0IHQubG9hZEltYWdlKGNyZWF0ZUltYWdlVXJsKCkpOwoJY29uZmlndXJlU291cmNlKHNvdXJjZSk7Cglzb3VyY2UuY29udmVyc2lvbnMoWwoJCWJyaWdodG5lc3NQYXNzKDAsIDg0LCAnIC46JywgJyMzOGJkZjgnKSwKCQlicmlnaHRuZXNzUGFzcyg4NSwgMTY5LCAnLT0rJywgJyNmYWNjMTUnKSwKCQlicmlnaHRuZXNzUGFzcygxNzAsIDI1NSwgJyojQCcsICcjZjhmYWZjJyksCgldKTsKfSk7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNCwgNywgMTYpOwoJaWYgKCFzb3VyY2UpIHJldHVybjsKCgljb25zdCB3aWR0aCA9IE1hdGgubWF4KDEyLCBNYXRoLmZsb29yKHQuZ3JpZC5jb2xzICogMC40MikpOwoJY29uc3QgaGVpZ2h0ID0gTWF0aC5tYXgoOCwgTWF0aC5mbG9vcih0LmdyaWQucm93cyAqIDAuNCkpOwoJY29uc3QgeSA9IE1hdGguZmxvb3IodC5ncmlkLnJvd3MgKiAwLjEyKTsKCXQucHVzaCgpOwoJdC50cmFuc2xhdGUoMCwgeSk7Cgl0LmltYWdlKHNvdXJjZSwgd2lkdGgsIGhlaWdodCk7Cgl0LnBvcCgpOwoJZHJhd1RleHQoJ1NUQUNLRUQgU09VUkNFJywgLTcsIHkgLSBNYXRoLmZsb29yKGhlaWdodCAvIDIpIC0gMiwgMjU1LCAyMjUsIDE0MCk7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnVEVYVE1PREVTT1VSQ0UuQ09OVkVSU0lPTlMnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBPUkRFUkVEIFNPVVJDRSBQQVNTRVMnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ1RocmVlIGJyaWdodG5lc3MgcmFuZ2VzIHN0YWNrLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ1BBU1NFUzogMycsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+let source = null;
+
+function createImageUrl() {
+	const canvas = document.createElement('canvas');
+	Object.assign(canvas, { width: 128, height: 80 });
+	const ctx = canvas.getContext('2d');
+	const gradient = ctx.createLinearGradient(0, 0, 128, 80);
+	gradient.addColorStop(0, '#020617');
+	gradient.addColorStop(0.45, '#0ea5e9');
+	gradient.addColorStop(1, '#f8fafc');
+	ctx.fillStyle = gradient;
+	ctx.fillRect(0, 0, 128, 80);
+	ctx.fillStyle = '#f97316';
+	ctx.fillRect(15, 16, 34, 44);
+	ctx.fillStyle = '#fde68a';
+	ctx.fillRect(78, 22, 34, 34);
+	return canvas.toDataURL();
+}
+
+function configureSource(source) {
+	source.characters(' .:-=+*#%@').charColorMode('sampled').cellColorMode('fixed').cellColor('#020617');
+}
+
+function brightnessPass(start, end, characters, charColor) {
+	return {
+		mode: 'brightness',
+		brightnessStart: start,
+		brightnessEnd: end,
+		characters,
+		charColorMode: 'fixed',
+		charColor,
+	};
+}
+
+t.setup(async () => {
+	source = await t.loadImage(createImageUrl());
+	configureSource(source);
+	source.conversions([
+		brightnessPass(0, 84, ' .:', '#38bdf8'),
+		brightnessPass(85, 169, '-=+', '#facc15'),
+		brightnessPass(170, 255, '*#@', '#f8fafc'),
+	]);
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(4, 7, 16);
+	if (!source) return;
+
+	const width = Math.max(12, Math.floor(t.grid.cols * 0.42));
+	const height = Math.max(8, Math.floor(t.grid.rows * 0.4));
+	const y = Math.floor(t.grid.rows * 0.12);
+	t.push();
+	t.translate(0, y);
+	t.image(source, width, height);
+	t.pop();
+	drawText('STACKED SOURCE', -7, y - Math.floor(height / 2) - 2, 255, 225, 140);
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODESOURCE.CONVERSIONS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: ORDERED SOURCE PASSES', x, y++, 100, 220, 255);
+	drawText('Three brightness ranges stack.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('PASSES: 3', x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 
 ## Inherited from
 

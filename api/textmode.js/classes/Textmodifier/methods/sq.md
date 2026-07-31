@@ -34,5 +34,67 @@ Value multiplied by itself.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="sq" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCBpbnB1dCA9IDA7CmxldCBzcXVhcmVkID0gMDsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg1LCA4LCAxOCk7CglpbnB1dCA9IHQuc2luKHQuZnJhbWVDb3VudCAqIDAuMDM1KSAqIDggKyB0LmNvcyh0LmZyYW1lQ291bnQgKiAwLjAyKSAqIDI7CglzcXVhcmVkID0gdC5zcShpbnB1dCk7CgoJZm9yIChsZXQgeCA9IC0xMjsgeCA8PSAxMjsgeCsrKSB7CgkJY29uc3QgeSA9IHQucm91bmQodC5zcSh4IC8gNCkgLSA4KTsKCQljb25zdCBob3QgPSB0Lm5vcm0odC5hYnMoeCksIDAsIDEyKTsKCQl0LnB1c2goKTsKCQl0LnRyYW5zbGF0ZSh4ICogMiwgeSk7CgkJdC5jaGFyKGhvdCA-IDAuNyA_ICcjJyA6ICcrJyk7CgkJdC5jaGFyQ29sb3IoODAgKyBob3QgKiAxNjAsIDE1MCwgMjU1IC0gaG90ICogOTApOwoJCXQucG9pbnQoKTsKCQl0LnBvcCgpOwoJfQoKCXQuY2hhcignQCcpOwoJdC5jaGFyQ29sb3IoMjU1LCAyMjAsIDEwMCk7Cgl0LnB1c2goKTsKCXQudHJhbnNsYXRlKHQucm91bmQoaW5wdXQgKiAyKSwgdC5yb3VuZChzcXVhcmVkIC8gOCAtIDgpKTsKCXQucG9pbnQoKTsKCXQucG9wKCk7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtdC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLXQuZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuU1EnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBQQVJBQk9MSUMgR1JPV1RIJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdzcSh4KSBtdWx0aXBsaWVzIHggYnkgaXRzZWxmLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnTmVnYXRpdmUgYW5kIHBvc2l0aXZlIGJvdGggcmlzZS4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KGBYOiAke2lucHV0LnRvRml4ZWQoMil9YCwgeCwgeSsrLCAyMjAsIDIzMCwgMjU1KTsKCWRyYXdUZXh0KGBTUTogJHtzcXVhcmVkLnRvRml4ZWQoMil9YCwgeCwgeSsrLCAyMjAsIDIzMCwgMjU1KTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let input = 0;
+let squared = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(5, 8, 18);
+	input = t.sin(t.frameCount * 0.035) * 8 + t.cos(t.frameCount * 0.02) * 2;
+	squared = t.sq(input);
+
+	for (let x = -12; x <= 12; x++) {
+		const y = t.round(t.sq(x / 4) - 8);
+		const hot = t.norm(t.abs(x), 0, 12);
+		t.push();
+		t.translate(x * 2, y);
+		t.char(hot > 0.7 ? '#' : '+');
+		t.charColor(80 + hot * 160, 150, 255 - hot * 90);
+		t.point();
+		t.pop();
+	}
+
+	t.char('@');
+	t.charColor(255, 220, 100);
+	t.push();
+	t.translate(t.round(input * 2), t.round(squared / 8 - 8));
+	t.point();
+	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -t.floor(t.grid.cols / 2);
+	const top = -t.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.SQ', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: PARABOLIC GROWTH', x, y++, 100, 220, 255);
+	drawText('sq(x) multiplies x by itself.', x, y++, 140, 160, 190);
+	drawText('Negative and positive both rise.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`X: ${input.toFixed(2)}`, x, y++, 220, 230, 255);
+	drawText(`SQ: ${squared.toFixed(2)}`, x, y++, 220, 230, 255);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

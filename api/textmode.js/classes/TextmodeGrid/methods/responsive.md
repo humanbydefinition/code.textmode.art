@@ -28,5 +28,90 @@ A grid becomes non-responsive when either `cols` or `rows` is manually set.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="responsive" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCBpc01hbnVhbCA9IGZhbHNlOwoKdC5zZXR1cCgoKSA9PiB7fSk7Cgp0Lm1vdXNlUHJlc3NlZCgoKSA9PiB7Cglpc01hbnVhbCA9ICFpc01hbnVhbDsKCWlmIChpc01hbnVhbCkgewoJCXQuZ3JpZC5jb2xzID0gMzI7CgkJdC5ncmlkLnJvd3MgPSAxNjsKCX0gZWxzZSB7CgkJdC5ncmlkLnJlc3BvbnNpdmUoKTsKCQl0LmdyaWQucmVzZXQoKTsKCX0KfSk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDgsIDEyLCAyNik7Cgljb25zdCBjb2xzID0gdC5ncmlkLmNvbHM7Cgljb25zdCByb3dzID0gdC5ncmlkLnJvd3M7Cgljb25zdCBodyA9IE1hdGguZmxvb3IoY29scyAvIDIpOwoJY29uc3QgaGggPSBNYXRoLmZsb29yKHJvd3MgLyAyKTsKCWNvbnN0IHRtID0gdC5mcmFtZUNvdW50ICogMC4wNDsKCglmb3IgKGxldCB5ID0gLWhoOyB5IDw9IGhoOyB5KyspIHsKCQlmb3IgKGxldCB4ID0gLWh3OyB4IDw9IGh3OyB4KyspIHsKCQkJY29uc3Qgd2F2ZSA9IE1hdGguc2luKHggKiAwLjIgKyB0bSkgKiBNYXRoLmNvcyh5ICogMC4yIC0gdG0pOwoJCQljb25zdCBub3JtID0gKHdhdmUgKyAxKSAqIDAuNTsKCgkJCWNvbnN0IGNoYXJLZXkgPSBpc01hbnVhbCA_IChub3JtID4gMC41ID8gJyMnIDogJz0nKSA6IG5vcm0gPiAwLjYgPyAnKicgOiBub3JtID4gMC4zID8gJysnIDogJy4nOwoKCQkJdC5wdXNoKCk7CgkJCXQudHJhbnNsYXRlKHgsIHkpOwoJCQl0LmNoYXJDb2xvcigKCQkJCWlzTWFudWFsID8gMjU1IDogTWF0aC5mbG9vcig4MCArIG5vcm0gKiAxNjApLAoJCQkJaXNNYW51YWwgPyBNYXRoLmZsb29yKDE0MCArIG5vcm0gKiAxMDApIDogTWF0aC5mbG9vcigyMDAgKyBub3JtICogNTUpLAoJCQkJaXNNYW51YWwgPyAxMDAgOiBNYXRoLmZsb29yKDE0MCAtIG5vcm0gKiA2MCkKCQkJKTsKCQkJdC5jZWxsQ29sb3IoaXNNYW51YWwgPyAyNCA6IDgsIGlzTWFudWFsID8gMTIgOiAxNiwgaXNNYW51YWwgPyA4IDogMjgpOwoJCQl0LmNoYXIoY2hhcktleSk7CgkJCXQucG9pbnQoKTsKCQkJdC5wb3AoKTsKCQl9Cgl9Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCgljb25zdCBtb2RlVGV4dCA9IGlzTWFudWFsID8gJ01BTlVBTCBMT0NLRUQgKDMyeDE2KScgOiAnQVVUTyBSRVNQT05TSVZFJzsKCgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKDEyMCwgMjQwLCAxODApOwoJdC5wcmludCgnVEVYVE1PREVHUklELlJFU1BPTlNJVkUnLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoNzAsIDEwMCwgMTQwKTsKCXQucHJpbnQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDIxMCwgMjU1KTsKCXQucHJpbnQoJ0NPTkNFUFQ6IFJFU1BPTlNJVkUgQVVUTy1TSVpJTkcgVE9HR0xFJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMTYwLCAxOTApOwoJdC5wcmludCgnUmVzdG9yZXMgcmVzcG9uc2l2ZSBzaXppbmcgc28gcmVzaXplcycsIHgsIHkrKyk7Cgl0LnByaW50KCdyZWNhbGN1bGF0ZSBjb2x1bW5zIGFuZCByb3dzLicsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcig3MCwgMTAwLCAxNDApOwoJdC5wcmludCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMjU1LCAyMDApOwoJdC5wcmludChgR1JJRCBTSVpJTkc6ICR7bW9kZVRleHR9YCwgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDI1NSwgMjAwLCAxMDApOwoJdC5wcmludCgnQ0xJQ0sgQ0FOVkFTIFRPIFRPR0dMRSBSRVNQT05TSVZFJywgeCwgeSsrKTsKCXQucG9wKCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let isManual = false;
+
+t.setup(() => {});
+
+t.mousePressed(() => {
+	isManual = !isManual;
+	if (isManual) {
+		t.grid.cols = 32;
+		t.grid.rows = 16;
+	} else {
+		t.grid.responsive();
+		t.grid.reset();
+	}
+});
+
+t.draw(() => {
+	t.background(8, 12, 26);
+	const cols = t.grid.cols;
+	const rows = t.grid.rows;
+	const hw = Math.floor(cols / 2);
+	const hh = Math.floor(rows / 2);
+	const tm = t.frameCount * 0.04;
+
+	for (let y = -hh; y <= hh; y++) {
+		for (let x = -hw; x <= hw; x++) {
+			const wave = Math.sin(x * 0.2 + tm) * Math.cos(y * 0.2 - tm);
+			const norm = (wave + 1) * 0.5;
+
+			const charKey = isManual ? (norm > 0.5 ? '#' : '=') : norm > 0.6 ? '*' : norm > 0.3 ? '+' : '.';
+
+			t.push();
+			t.translate(x, y);
+			t.charColor(
+				isManual ? 255 : Math.floor(80 + norm * 160),
+				isManual ? Math.floor(140 + norm * 100) : Math.floor(200 + norm * 55),
+				isManual ? 100 : Math.floor(140 - norm * 60)
+			);
+			t.cellColor(isManual ? 24 : 8, isManual ? 12 : 16, isManual ? 8 : 28);
+			t.char(charKey);
+			t.point();
+			t.pop();
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const modeText = isManual ? 'MANUAL LOCKED (32x16)' : 'AUTO RESPONSIVE';
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODEGRID.RESPONSIVE', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: RESPONSIVE AUTO-SIZING TOGGLE', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Restores responsive sizing so resizes', x, y++);
+	t.print('recalculate columns and rows.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 200);
+	t.print(`GRID SIZING: ${modeText}`, x, y++);
+	t.charColor(255, 200, 100);
+	t.print('CLICK CANVAS TO TOGGLE RESPONSIVE', x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

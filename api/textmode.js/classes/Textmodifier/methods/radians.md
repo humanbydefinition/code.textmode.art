@@ -34,5 +34,76 @@ Angle in radians.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="radians" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCBhbmdsZSA9IDA7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCmZ1bmN0aW9uIGRyYXdQb2ludCh4LCB5KSB7Cgl0LnB1c2goKTsKCXQudHJhbnNsYXRlKHgsIHkpOwoJdC5wb2ludCgpOwoJdC5wb3AoKTsKfQoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg3LCA5LCAxOCk7CglhbmdsZSA9ICh0LmZyYW1lQ291bnQgKiAyICsgdC5tb3VzZS54ICogMikgJSAzNjA7Cgljb25zdCByYWRpYW5zID0gdC5yYWRpYW5zKGFuZ2xlKTsKCgl0LmNoYXIoJy4nKTsKCXQuY2hhckNvbG9yKDQ1LCA1NSwgODYpOwoJZm9yIChsZXQgciA9IDM7IHIgPD0gOTsgciArPSAzKSB0LmVsbGlwc2UociAqIDIsIHIgKiAyKTsKCglmb3IgKGxldCBpID0gMDsgaSA8IDEwOyBpKyspIHsKCQljb25zdCBhID0gcmFkaWFucyArIGkgKiAwLjQ1OwoJCWNvbnN0IHJhZGl1cyA9IDMgKyBpICogMC42NTsKCQljb25zdCB4ID0gTWF0aC5jb3MoYSkgKiByYWRpdXM7CgkJY29uc3QgeSA9IE1hdGguc2luKGEpICogcmFkaXVzOwoJCWNvbnN0IGZhZGUgPSB0Lm1hcChpLCAwLCA5LCAyNTUsIDgwKTsKCQl0LmNoYXIoaSA9PT0gMCA_ICdAJyA6ICcrJyk7CgkJdC5jaGFyQ29sb3IoMTIwLCBmYWRlLCAyNTUgLSBpICogMTApOwoJCWRyYXdQb2ludCh4LCB5KTsKCX0KCgl0LnB1c2goKTsKCXQucm90YXRlKGFuZ2xlKTsKCXQuY2hhcignPicpOwoJdC5jaGFyQ29sb3IoMjU1LCAyMjAsIDEyMCk7Cgl0LmxpbmUoMCwgMCwgMTAsIDApOwoJdC5wb3AoKTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5SQURJQU5TJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogREVHUkVFIFRPIFJBRElBTicsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgncmFkaWFucygpIGZlZWRzIHNpbiBhbmQgY29zLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnVGhlIHNwaXJhbCB1c2VzIGNpcmN1bGFyIG1hdGguJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dChgQU5HTEU6ICR7YW5nbGUudG9GaXhlZCgxKX0gREVHYCwgeCwgeSsrLCAxNDAsIDI1NSwgMTgwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let angle = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+function drawPoint(x, y) {
+	t.push();
+	t.translate(x, y);
+	t.point();
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(7, 9, 18);
+	angle = (t.frameCount * 2 + t.mouse.x * 2) % 360;
+	const radians = t.radians(angle);
+
+	t.char('.');
+	t.charColor(45, 55, 86);
+	for (let r = 3; r <= 9; r += 3) t.ellipse(r * 2, r * 2);
+
+	for (let i = 0; i < 10; i++) {
+		const a = radians + i * 0.45;
+		const radius = 3 + i * 0.65;
+		const x = Math.cos(a) * radius;
+		const y = Math.sin(a) * radius;
+		const fade = t.map(i, 0, 9, 255, 80);
+		t.char(i === 0 ? '@' : '+');
+		t.charColor(120, fade, 255 - i * 10);
+		drawPoint(x, y);
+	}
+
+	t.push();
+	t.rotate(angle);
+	t.char('>');
+	t.charColor(255, 220, 120);
+	t.line(0, 0, 10, 0);
+	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.RADIANS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: DEGREE TO RADIAN', x, y++, 100, 220, 255);
+	drawText('radians() feeds sin and cos.', x, y++, 140, 160, 190);
+	drawText('The spiral uses circular math.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`ANGLE: ${angle.toFixed(1)} DEG`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

@@ -34,5 +34,88 @@ Enable orthographic projection for this layer.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="ortho" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBSQU1QID0gWycuJywgJzonLCAnPScsICcjJywgJyUnXTsKY29uc3Qgc2NlbmUgPSB0LmxheWVycy5hZGQoKTsKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg2LCAxMCwgMjIpOwoJY29uc3QgaHcgPSBNYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCBoaCA9IE1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWZvciAobGV0IHkgPSAtaGg7IHkgPD0gaGg7IHkgKz0gMSkgewoJCWZvciAobGV0IHggPSAtaHc7IHggPD0gaHc7IHggKz0gMSkgewoJCQl0LnB1c2goKTsKCQkJdC50cmFuc2xhdGUoeCwgeSk7CgkJCXQuY2hhckNvbG9yKDIwLCAzMCwgNTUpOwoJCQl0LmNlbGxDb2xvcig2LCAxMCwgMjIpOwoJCQl0LmNoYXIoJy4nKTsKCQkJdC5wb2ludCgpOwoJCQl0LnBvcCgpOwoJCX0KCX0KCXNjZW5lLm9ydGhvKCk7CglzY2VuZS5jYW1lcmEoMzAsIDI0LCAzMCk7Cn0pOwoKc2NlbmUuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCB0bSA9IHQuZnJhbWVDb3VudCAqIDAuMDM7Cgl0LnB1c2goKTsKCXQuYW1iaWVudExpZ2h0KDI1LCAzNSwgNjApOwoJdC5wb2ludExpZ2h0KDI1NSwgMjAwLCAxNDAsIE1hdGguc2luKHRtKSAqIDE1LCAyMCwgMjApOwoKCWZvciAobGV0IHggPSAtMTY7IHggPD0gMTY7IHggKz0gOCkgewoJCWZvciAobGV0IHogPSAtMTY7IHogPD0gMTY7IHogKz0gOCkgewoJCQljb25zdCBub3JtID0gTWF0aC5zaW4oeCAqIDAuMiArIHogKiAwLjIgKyB0bSkgKiAwLjUgKyAwLjU7CgkJCWNvbnN0IGggPSBNYXRoLmZsb29yKG5vcm0gKiAxMCArIDQpOwoJCQljb25zdCBpZHggPSBNYXRoLm1pbihSQU1QLmxlbmd0aCAtIDEsIE1hdGguZmxvb3Iobm9ybSAqIFJBTVAubGVuZ3RoKSk7CgoJCQl0LnB1c2goKTsKCQkJdC50cmFuc2xhdGUoeCwgaCAqIDAuNSwgeik7CgkJCXQuY2hhckNvbG9yKE1hdGguZmxvb3IoNDAgKyBub3JtICogMTQwKSwgTWF0aC5mbG9vcigxODAgKyBub3JtICogNjApLCBNYXRoLmZsb29yKDIyMCAtIG5vcm0gKiA4MCkpOwoJCQl0LmNlbGxDb2xvcigxMCwgMjAsIDM4KTsKCQkJdC5jaGFyKFJBTVBbaWR4XSk7CgkJCXQuYm94KDQsIGgsIDQpOwoJCQl0LnBvcCgpOwoJCX0KCX0KCXQucG9wKCk7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKDEyMCwgMjQwLCAxODApOwoJdC5wcmludCgnVEVYVE1PREVMQVlFUi5PUlRITycsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcig3MCwgMTAwLCAxNDApOwoJdC5wcmludCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMjEwLCAyNTUpOwoJdC5wcmludCgnQ09OQ0VQVDogSVNPTUVUUklDIEFSQ0hJVEVDVFVSQUwgTUFUUklYJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMTYwLCAxOTApOwoJdC5wcmludCgnRW5hYmxlcyBvcnRob2dyYXBoaWMgbGF5ZXIgcHJvamVjdGlvbi4nLCB4LCB5KyspOwoJdC5wcmludCgnT2JqZWN0cyByZXRhaW4gc2NhbGUgcmVnYXJkbGVzcyBvZiBkZXB0aC4nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoNzAsIDEwMCwgMTQwKTsKCXQucHJpbnQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDI1NSwgMjAwKTsKCXQucHJpbnQoJ1BST0pFQ1RJT046IFBBUkFMTEVMIE9SVEhPR1JBUEhJQycsIHgsIHkrKyk7Cgl0LnBvcCgpOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const RAMP = ['.', ':', '=', '#', '%'];
+const scene = t.layers.add();
+const labelLayer = t.layers.add();
+
+t.draw(() => {
+	t.background(6, 10, 22);
+	const hw = Math.floor(t.grid.cols / 2);
+	const hh = Math.floor(t.grid.rows / 2);
+	for (let y = -hh; y <= hh; y += 1) {
+		for (let x = -hw; x <= hw; x += 1) {
+			t.push();
+			t.translate(x, y);
+			t.charColor(20, 30, 55);
+			t.cellColor(6, 10, 22);
+			t.char('.');
+			t.point();
+			t.pop();
+		}
+	}
+	scene.ortho();
+	scene.camera(30, 24, 30);
+});
+
+scene.draw(() => {
+	t.clear();
+	const tm = t.frameCount * 0.03;
+	t.push();
+	t.ambientLight(25, 35, 60);
+	t.pointLight(255, 200, 140, Math.sin(tm) * 15, 20, 20);
+
+	for (let x = -16; x <= 16; x += 8) {
+		for (let z = -16; z <= 16; z += 8) {
+			const norm = Math.sin(x * 0.2 + z * 0.2 + tm) * 0.5 + 0.5;
+			const h = Math.floor(norm * 10 + 4);
+			const idx = Math.min(RAMP.length - 1, Math.floor(norm * RAMP.length));
+
+			t.push();
+			t.translate(x, h * 0.5, z);
+			t.charColor(Math.floor(40 + norm * 140), Math.floor(180 + norm * 60), Math.floor(220 - norm * 80));
+			t.cellColor(10, 20, 38);
+			t.char(RAMP[idx]);
+			t.box(4, h, 4);
+			t.pop();
+		}
+	}
+	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODELAYER.ORTHO', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: ISOMETRIC ARCHITECTURAL MATRIX', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Enables orthographic layer projection.', x, y++);
+	t.print('Objects retain scale regardless of depth.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 200);
+	t.print('PROJECTION: PARALLEL ORTHOGRAPHIC', x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

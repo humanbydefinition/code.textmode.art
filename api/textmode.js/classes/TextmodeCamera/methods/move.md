@@ -37,5 +37,89 @@ Move eye and target together in world space.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="move" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCB0b3RhbERpc3RhbmNlID0gMDsKCnQuc2V0dXAoKCkgPT4gewoJdC5wZXJzcGVjdGl2ZSg1OCwgMC4xLCA0MDk2KTsKfSk7CgpmdW5jdGlvbiBkcmF3SGlnaHdheShjYW1aKSB7Cgl0LnB1c2goKTsKCXQuYW1iaWVudExpZ2h0KDIwLCAxMCwgMzApOwoJdC5wb2ludExpZ2h0KDI1NSwgMTAwLCAyMDAsIDAsIDEwLCBjYW1aIC0gMTUpOwoKCWZvciAobGV0IGkgPSAwOyBpIDwgMTY7IGkrKykgewoJCWNvbnN0IG9iZWxpc2taID0gTWF0aC5mbG9vcihjYW1aIC8gMTIpICogMTIgLSBpICogMTI7CgkJdC5wdXNoKCk7CgkJdC50cmFuc2xhdGUoLTE0LCA0LCBvYmVsaXNrWik7CgkJdC5jaGFyQ29sb3IoMjU1LCAxMjAsIDE4MCk7CgkJdC5jZWxsQ29sb3IoMjgsIDgsIDE4KTsKCQl0LmNoYXIoJyMnKTsKCQl0LmJveCgzLCA4LCAzKTsKCQl0LnBvcCgpOwoKCQl0LnB1c2goKTsKCQl0LnRyYW5zbGF0ZSgxNCwgNCwgb2JlbGlza1opOwoJCXQuY2hhckNvbG9yKDEwMCwgMjIwLCAyNTUpOwoJCXQuY2VsbENvbG9yKDgsIDIwLCAzMik7CgkJdC5jaGFyKCcjJyk7CgkJdC5ib3goMywgOCwgMyk7CgkJdC5wb3AoKTsKCX0KCXQucG9wKCk7Cn0KCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoMTQsIDQsIDE4KTsKCgljb25zdCBjYW0gPSB0CgkJLmNyZWF0ZUNhbWVyYSgpCgkJLnNldFBvc2l0aW9uKDAsIDYsIHRvdGFsRGlzdGFuY2UpCgkJLmxvb2tBdCgwLCA0LCB0b3RhbERpc3RhbmNlIC0gNDApOwoKCWNhbS5tb3ZlKDAsIDAsIC0wLjYpOwoJdG90YWxEaXN0YW5jZSA9IGNhbS5leWVaOwoKCXQuc2V0Q2FtZXJhKGNhbSk7CglkcmF3SGlnaHdheSh0b3RhbERpc3RhbmNlKTsKCXQucmVzZXRDYW1lcmEoKTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IoMTIwLCAyNDAsIDE4MCk7Cgl0LnByaW50KCdURVhUTU9ERUNBTUVSQS5NT1ZFJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDcwLCAxMDAsIDE0MCk7Cgl0LnByaW50KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAyMTAsIDI1NSk7Cgl0LnByaW50KCdDT05DRVBUOiBMSVQgSElHSFdBWSBPQkVMSVNLIEZMWUJZJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMTYwLCAxOTApOwoJdC5wcmludCgnY2FtLm1vdmUoZHgsIGR5LCBkeikgdHJhbnNsYXRlcyBleWUnLCB4LCB5KyspOwoJdC5wcmludCgnJiB0YXJnZXQgdG9nZXRoZXIgaW4gd29ybGQgc3BhY2UuJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDcwLCAxMDAsIDE0MCk7Cgl0LnByaW50KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAyNTUsIDIwMCk7Cgl0LnByaW50KGBUT1RBTCBaIERJU1RBTkNFOiAke3RvdGFsRGlzdGFuY2UudG9GaXhlZCgxKX1gLCB4LCB5KyspOwoJdC5wb3AoKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let totalDistance = 0;
+
+t.setup(() => {
+	t.perspective(58, 0.1, 4096);
+});
+
+function drawHighway(camZ) {
+	t.push();
+	t.ambientLight(20, 10, 30);
+	t.pointLight(255, 100, 200, 0, 10, camZ - 15);
+
+	for (let i = 0; i < 16; i++) {
+		const obeliskZ = Math.floor(camZ / 12) * 12 - i * 12;
+		t.push();
+		t.translate(-14, 4, obeliskZ);
+		t.charColor(255, 120, 180);
+		t.cellColor(28, 8, 18);
+		t.char('#');
+		t.box(3, 8, 3);
+		t.pop();
+
+		t.push();
+		t.translate(14, 4, obeliskZ);
+		t.charColor(100, 220, 255);
+		t.cellColor(8, 20, 32);
+		t.char('#');
+		t.box(3, 8, 3);
+		t.pop();
+	}
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(14, 4, 18);
+
+	const cam = t
+		.createCamera()
+		.setPosition(0, 6, totalDistance)
+		.lookAt(0, 4, totalDistance - 40);
+
+	cam.move(0, 0, -0.6);
+	totalDistance = cam.eyeZ;
+
+	t.setCamera(cam);
+	drawHighway(totalDistance);
+	t.resetCamera();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODECAMERA.MOVE', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: LIT HIGHWAY OBELISK FLYBY', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('cam.move(dx, dy, dz) translates eye', x, y++);
+	t.print('& target together in world space.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 200);
+	t.print(`TOTAL Z DISTANCE: ${totalDistance.toFixed(1)}`, x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

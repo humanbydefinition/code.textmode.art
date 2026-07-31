@@ -26,5 +26,100 @@ Create a copy of this camera.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="copy" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCBzbmFwc2hvdENhbSA9IG51bGw7CmxldCB1c2VTbmFwc2hvdCA9IGZhbHNlOwoKdC5zZXR1cCgoKSA9PiB7Cgl0LnBlcnNwZWN0aXZlKDU4LCAwLjEsIDQwOTYpOwp9KTsKCnQubW91c2VQcmVzc2VkKCgpID0-IHsKCWlmIChzbmFwc2hvdENhbSkgewoJCXVzZVNuYXBzaG90ID0gIXVzZVNuYXBzaG90OwoJfQp9KTsKCmZ1bmN0aW9uIGRyYXdGb3J0cmVzcyh0bSkgewoJdC5wdXNoKCk7Cgl0LmFtYmllbnRMaWdodCgzMCwgMjAsIDQwKTsKCXQucG9pbnRMaWdodCgyNTUsIDE4MCwgMTAwLCBNYXRoLnNpbih0bSkgKiAxNiwgMTQsIE1hdGguY29zKHRtKSAqIDE2KTsKCgl0LnB1c2goKTsKCXQudHJhbnNsYXRlKDAsIDQsIDApOwoJdC5jaGFyKCcjJyk7Cgl0LmNoYXJDb2xvcigyNDAsIDE4MCwgMTAwKTsKCXQuY2VsbENvbG9yKDI0LCAxNCwgOCk7Cgl0LmJveCgxMCwgOCwgMTApOwoJdC5wb3AoKTsKCglmb3IgKGxldCBpID0gMDsgaSA8IDQ7IGkrKykgewoJCWNvbnN0IGEgPSAoaSAqIE1hdGguUEkpIC8gMjsKCQl0LnB1c2goKTsKCQl0LnRyYW5zbGF0ZShNYXRoLmNvcyhhKSAqIDcsIDcsIE1hdGguc2luKGEpICogNyk7CgkJdC5jaGFyQ29sb3IoMTAwLCAyMjAsIDI1NSk7CgkJdC5jZWxsQ29sb3IoMTAsIDIwLCAzNSk7CgkJdC5jaGFyKCcrJyk7CgkJdC5ib3goMywgMTQsIDMpOwoJCXQucG9wKCk7Cgl9Cgl0LnBvcCgpOwp9Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDE0LCA4LCAyMCk7Cgljb25zdCB0bSA9IHQuZnJhbWVDb3VudCAqIDAuMDM7CgoJY29uc3QgbGl2ZUNhbSA9IHQKCQkuY3JlYXRlQ2FtZXJhKCkKCQkuc2V0UG9zaXRpb24oTWF0aC5zaW4odG0pICogMzIsIDE2LCBNYXRoLmNvcyh0bSkgKiAzMikKCQkubG9va0F0KDAsIDQsIDApOwoJaWYgKCFzbmFwc2hvdENhbSkgc25hcHNob3RDYW0gPSBsaXZlQ2FtLmNvcHkoKTsKCgljb25zdCBhY3RpdmVDYW0gPSB1c2VTbmFwc2hvdCA_IHNuYXBzaG90Q2FtIDogbGl2ZUNhbTsKCXQuc2V0Q2FtZXJhKGFjdGl2ZUNhbSk7CglkcmF3Rm9ydHJlc3ModG0pOwoJdC5yZXNldENhbWVyYSgpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CgoJY29uc3QgbW9kZVRleHQgPSB1c2VTbmFwc2hvdCA_ICdGUkVFWkUgU05BUFNIT1QgKENMT05FRCknIDogJ0xJVkUgT1JCSVQgQ0FNRVJBJzsKCgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKDEyMCwgMjQwLCAxODApOwoJdC5wcmludCgnVEVYVE1PREVDQU1FUkEuQ09QWScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcig3MCwgMTAwLCAxNDApOwoJdC5wcmludCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMjEwLCAyNTUpOwoJdC5wcmludCgnQ09OQ0VQVDogRFVBTC1DQU1FUkEgRlJFRVpFLUZSQU1FJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMTYwLCAxOTApOwoJdC5wcmludCgnY2FtLmNvcHkoKSBjcmVhdGVzIGFuIGluZGVwZW5kZW50JywgeCwgeSsrKTsKCXQucHJpbnQoJ2RlZXAgY2xvbmUgb2YgY2FtZXJhIHRyYW5zZm9ybWF0aW9uLicsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcig3MCwgMTAwLCAxNDApOwoJdC5wcmludCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMjU1LCAyMDApOwoJdC5wcmludChgTU9ERTogJHttb2RlVGV4dH1gLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMjU1LCAyMDAsIDEwMCk7Cgl0LnByaW50KCdDTElDSyBDQU5WQVMgVE8gVE9HR0xFIFZJRVdTJywgeCwgeSsrKTsKCXQucG9wKCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let snapshotCam = null;
+let useSnapshot = false;
+
+t.setup(() => {
+	t.perspective(58, 0.1, 4096);
+});
+
+t.mousePressed(() => {
+	if (snapshotCam) {
+		useSnapshot = !useSnapshot;
+	}
+});
+
+function drawFortress(tm) {
+	t.push();
+	t.ambientLight(30, 20, 40);
+	t.pointLight(255, 180, 100, Math.sin(tm) * 16, 14, Math.cos(tm) * 16);
+
+	t.push();
+	t.translate(0, 4, 0);
+	t.char('#');
+	t.charColor(240, 180, 100);
+	t.cellColor(24, 14, 8);
+	t.box(10, 8, 10);
+	t.pop();
+
+	for (let i = 0; i < 4; i++) {
+		const a = (i * Math.PI) / 2;
+		t.push();
+		t.translate(Math.cos(a) * 7, 7, Math.sin(a) * 7);
+		t.charColor(100, 220, 255);
+		t.cellColor(10, 20, 35);
+		t.char('+');
+		t.box(3, 14, 3);
+		t.pop();
+	}
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(14, 8, 20);
+	const tm = t.frameCount * 0.03;
+
+	const liveCam = t
+		.createCamera()
+		.setPosition(Math.sin(tm) * 32, 16, Math.cos(tm) * 32)
+		.lookAt(0, 4, 0);
+	if (!snapshotCam) snapshotCam = liveCam.copy();
+
+	const activeCam = useSnapshot ? snapshotCam : liveCam;
+	t.setCamera(activeCam);
+	drawFortress(tm);
+	t.resetCamera();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const modeText = useSnapshot ? 'FREEZE SNAPSHOT (CLONED)' : 'LIVE ORBIT CAMERA';
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODECAMERA.COPY', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: DUAL-CAMERA FREEZE-FRAME', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('cam.copy() creates an independent', x, y++);
+	t.print('deep clone of camera transformation.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 200);
+	t.print(`MODE: ${modeText}`, x, y++);
+	t.charColor(255, 200, 100);
+	t.print('CLICK CANVAS TO TOGGLE VIEWS', x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

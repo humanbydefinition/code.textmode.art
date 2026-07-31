@@ -22,5 +22,87 @@ Last key pressed, or `null` before any key press.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="lastKeyPressed" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7IHdpZHRoOiB3aW5kb3cuaW5uZXJXaWR0aCwgaGVpZ2h0OiB3aW5kb3cuaW5uZXJIZWlnaHQsIGZvbnRTaXplOiAxNiB9KTsKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKZnVuY3Rpb24gZHJhd1RleHQodHh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0eHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg0LCAxOCwgMjIpOwoKCWNvbnN0IGtleVN0ciA9IFN0cmluZyh0Lmxhc3RLZXlQcmVzc2VkIHx8ICdOT05FJykudG9VcHBlckNhc2UoKTsKCWNvbnN0IGh3ID0gTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpLAoJCWhoID0gTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJY29uc3QgdG0gPSB0LmZyYW1lQ291bnQgKiAwLjA0OwoKCWZvciAobGV0IHkgPSAtaGg7IHkgPD0gaGg7IHkgKz0gMykgewoJCWZvciAobGV0IHggPSAtaHc7IHggPD0gaHc7IHggKz0gMykgewoJCQljb25zdCB3YXZlID0gKE1hdGguc2luKHggKiAwLjEgKyB0bSkgKyBNYXRoLmNvcyh5ICogMC4xIC0gdG0pKSAqIDAuNTsKCQkJaWYgKHdhdmUgPiAwLjUpIHsKCQkJCXQucHVzaCgpOwoJCQkJdC50cmFuc2xhdGUoeCwgeSk7CgkJCQl0LmNoYXJDb2xvcigxMCwgMzYsIDQyKTsKCQkJCXQuY2hhcih3YXZlID4gMC44ID8gJyMnIDogJyonKTsKCQkJCXQucG9pbnQoKTsKCQkJCXQucG9wKCk7CgkJCX0KCQl9Cgl9CgoJY29uc3QgcGVkVyA9IDE2LAoJCXBlZEggPSA3OwoJY29uc3QgcHggPSAtTWF0aC5mbG9vcihwZWRXIC8gMiksCgkJcHkgPSAtTWF0aC5mbG9vcihwZWRIIC8gMik7CgoJZm9yIChsZXQgY3kgPSAwOyBjeSA8IHBlZEg7IGN5KyspIHsKCQlmb3IgKGxldCBjeCA9IDA7IGN4IDwgcGVkVzsgY3grKykgewoJCQljb25zdCBpc0JvcmRlciA9IGN4ID09PSAwIHx8IGN4ID09PSBwZWRXIC0gMSB8fCBjeSA9PT0gMCB8fCBjeSA9PT0gcGVkSCAtIDE7CgkJCXQucHVzaCgpOwoJCQl0LnRyYW5zbGF0ZShweCArIGN4LCBweSArIGN5KTsKCQkJdC5jZWxsQ29sb3IoMTAsIDM2LCA0NSk7CgkJCWlmIChpc0JvcmRlcikgewoJCQkJdC5jaGFyQ29sb3IoMCwgMjI5LCAyNTUpOwoJCQkJY29uc3QgaXNDb3JuZXIgPSAoY3kgPT09IDAgfHwgY3kgPT09IHBlZEggLSAxKSAmJiAoY3ggPT09IDAgfHwgY3ggPT09IHBlZFcgLSAxKTsKCQkJCXQuY2hhcihpc0Nvcm5lciA_ICcrJyA6IGN5ID09PSAwIHx8IGN5ID09PSBwZWRIIC0gMSA_ICc9JyA6ICd8Jyk7CgkJCX0gZWxzZSB7CgkJCQl0LmNoYXIoJyAnKTsKCQkJfQoJCQl0LnBvaW50KCk7CgkJCXQucG9wKCk7CgkJfQoJfQoKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdjZW50ZXInLCAnbWlkZGxlJyk7Cgl0LmNoYXJDb2xvcigyNTUsIDE4MywgMCk7Cgl0LnByaW50KGtleVN0ci5zbGljZSgwLCAxMiksIDAsIDApOwoJdC5wb3AoKTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMiksCgkJdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCWNvbnN0IGtleVN0ciA9IFN0cmluZyh0Lmxhc3RLZXlQcmVzc2VkIHx8ICdOT05FJyk7CgoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5MQVNUS0VZUFJFU1NFRCcsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IFBFUlNJU1RFTlQgTEFTVCBLRVkgU1RBVEUnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ1JlYWRzIGxhc3QgcHJlc3NlZCBrZXkgcHJvcGVydHkuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdQZXJzaXN0cyB1bnRpbCBuZXh0IGtleSBpcyBwcmVzc2VkLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ01FTU9SWSBWQVVMVCBLRVk6ICcgKyBrZXlTdHIsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpKTs" />
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const labelLayer = t.layers.add();
+
+function drawText(txt, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(txt, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(4, 18, 22);
+
+	const keyStr = String(t.lastKeyPressed || 'NONE').toUpperCase();
+	const hw = Math.floor(t.grid.cols / 2),
+		hh = Math.floor(t.grid.rows / 2);
+	const tm = t.frameCount * 0.04;
+
+	for (let y = -hh; y <= hh; y += 3) {
+		for (let x = -hw; x <= hw; x += 3) {
+			const wave = (Math.sin(x * 0.1 + tm) + Math.cos(y * 0.1 - tm)) * 0.5;
+			if (wave > 0.5) {
+				t.push();
+				t.translate(x, y);
+				t.charColor(10, 36, 42);
+				t.char(wave > 0.8 ? '#' : '*');
+				t.point();
+				t.pop();
+			}
+		}
+	}
+
+	const pedW = 16,
+		pedH = 7;
+	const px = -Math.floor(pedW / 2),
+		py = -Math.floor(pedH / 2);
+
+	for (let cy = 0; cy < pedH; cy++) {
+		for (let cx = 0; cx < pedW; cx++) {
+			const isBorder = cx === 0 || cx === pedW - 1 || cy === 0 || cy === pedH - 1;
+			t.push();
+			t.translate(px + cx, py + cy);
+			t.cellColor(10, 36, 45);
+			if (isBorder) {
+				t.charColor(0, 229, 255);
+				const isCorner = (cy === 0 || cy === pedH - 1) && (cx === 0 || cx === pedW - 1);
+				t.char(isCorner ? '+' : cy === 0 || cy === pedH - 1 ? '=' : '|');
+			} else {
+				t.char(' ');
+			}
+			t.point();
+			t.pop();
+		}
+	}
+
+	t.push();
+	t.printAlign('center', 'middle');
+	t.charColor(255, 183, 0);
+	t.print(keyStr.slice(0, 12), 0, 0);
+	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2),
+		top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	const keyStr = String(t.lastKeyPressed || 'NONE');
+
+	drawText('TEXTMODIFIER.LASTKEYPRESSED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: PERSISTENT LAST KEY STATE', x, y++, 100, 220, 255);
+	drawText('Reads last pressed key property.', x, y++, 140, 160, 190);
+	drawText('Persists until next key is pressed.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('MEMORY VAULT KEY: ' + keyStr, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => t.resizeCanvas(window.innerWidth, window.innerHeight));
+```
 

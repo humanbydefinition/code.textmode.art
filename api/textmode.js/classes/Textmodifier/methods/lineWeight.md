@@ -34,5 +34,56 @@ Current line weight when called without arguments.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="lineWeight" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpsZXQgd2VpZ2h0ID0gMTsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg2LCAxMCwgMjIpOwoJd2VpZ2h0ID0gMSArIE1hdGguZmxvb3IoKHQuZnJhbWVDb3VudCAvIDYwKSAlIDQpOwoJdC5jaGFyQ29sb3IoNzAsIDgwLCAxMTApOwoJdC5jaGFyKCcuJyk7Cgl0LmxpbmUoLTIwLCAtNiwgMjAsIC02KTsKCXQubGluZSgtMjAsIDYsIDIwLCA2KTsKCXQubGluZVdlaWdodCh3ZWlnaHQpOwoJdC5jaGFyQ29sb3IoMTIwLCAyNTUsIDE4MCk7Cgl0LmNoYXIoJyMnKTsKCXQubGluZSgtMjAsIDAsIDIwLCAwKTsKCXQubGluZVdlaWdodCgxKTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5MSU5FV0VJR0hUJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogTElORSBUSElDS05FU1MnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ0NvbnRyb2xzIGxpbmUgY2VsbCB0aGlja25lc3MuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdXZWlnaHQgcmVzZXRzIGFmdGVyIHRoZSBkZW1vIGxpbmUuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dChgV0VJR0hUOiAke3dlaWdodH1gLCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+let weight = 1;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(6, 10, 22);
+	weight = 1 + Math.floor((t.frameCount / 60) % 4);
+	t.charColor(70, 80, 110);
+	t.char('.');
+	t.line(-20, -6, 20, -6);
+	t.line(-20, 6, 20, 6);
+	t.lineWeight(weight);
+	t.charColor(120, 255, 180);
+	t.char('#');
+	t.line(-20, 0, 20, 0);
+	t.lineWeight(1);
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.LINEWEIGHT', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: LINE THICKNESS', x, y++, 100, 220, 255);
+	drawText('Controls line cell thickness.', x, y++, 140, 160, 190);
+	drawText('Weight resets after the demo line.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`WEIGHT: ${weight}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

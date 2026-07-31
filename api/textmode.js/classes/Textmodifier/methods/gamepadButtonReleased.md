@@ -34,5 +34,60 @@ This is a legacy-style single-callback shortcut for the `'gamepadButtonReleased'
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="gamepadButtonReleased" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpsZXQgbGFzdFJlbGVhc2UgPSAnd2FpdGluZyc7Cgp0LmdhbWVwYWRCdXR0b25SZWxlYXNlZCgoZGF0YSkgPT4gewoJbGFzdFJlbGVhc2UgPSBkYXRhLnN0YW5kYXJkQnV0dG9uTmFtZSB8fCAnYnV0dG9uICcgKyBkYXRhLmJ1dHRvbkluZGV4Owp9KTsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg0LCA2LCAxMik7Cgljb25zdCBjb3VudCA9IE1hdGgubWF4KDEsIHQuZ2FtZXBhZHMubGVuZ3RoKTsKCWZvciAobGV0IGkgPSAwOyBpIDwgMTY7IGkrKykgewoJCXQucHVzaCgpOwoJCWNvbnN0IGFuZ2xlID0gKGkgLyAxNikgKiBNYXRoLlBJICogMiArIHQuZnJhbWVDb3VudCAqIDAuMDM7CgkJdC50cmFuc2xhdGUoTWF0aC5jb3MoYW5nbGUpICogKDYgKyBjb3VudCksIE1hdGguc2luKGFuZ2xlKSAqIDQpOwoJCXQuY2hhcih0LmdhbWVwYWRzLmxlbmd0aCA_ICdAJyA6ICcuJyk7CgkJdC5jaGFyQ29sb3IoODAgKyBpICogOCwgMTgwLCAyNTUpOwoJCXQucG9pbnQoKTsKCQl0LnBvcCgpOwoJfQp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CgoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5HQU1FUEFEQlVUVE9OUkVMRUFTRUQnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBHQU1FUEFEIElOUFVUJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdXb3JrcyB3aXRoIGJyb3dzZXIgcGFkcy4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KGBSRUxFQVNFOiAke2xhc3RSZWxlYXNlfWAsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+let lastRelease = 'waiting';
+
+t.gamepadButtonReleased((data) => {
+	lastRelease = data.standardButtonName || 'button ' + data.buttonIndex;
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(4, 6, 12);
+	const count = Math.max(1, t.gamepads.length);
+	for (let i = 0; i < 16; i++) {
+		t.push();
+		const angle = (i / 16) * Math.PI * 2 + t.frameCount * 0.03;
+		t.translate(Math.cos(angle) * (6 + count), Math.sin(angle) * 4);
+		t.char(t.gamepads.length ? '@' : '.');
+		t.charColor(80 + i * 8, 180, 255);
+		t.point();
+		t.pop();
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODIFIER.GAMEPADBUTTONRELEASED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: GAMEPAD INPUT', x, y++, 100, 220, 255);
+	drawText('Works with browser pads.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`RELEASE: ${lastRelease}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

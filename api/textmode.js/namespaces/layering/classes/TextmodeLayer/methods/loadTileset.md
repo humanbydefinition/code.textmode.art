@@ -35,5 +35,96 @@ The loaded TextmodeTileset.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="loadTileset" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCB0aWxlc0xheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IGxhYmVsTGF5ZXIgPSB0LmxheWVycy5hZGQoKTsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIGNvbG9yID0gWzIwMCwgMjIwLCAyNTVdKSB7Cgl0LnB1c2goKTsKCXQudHJhbnNsYXRlKHgsIHkpOwoJdC5jaGFyQ29sb3IoY29sb3JbMF0sIGNvbG9yWzFdLCBjb2xvclsyXSk7Cglmb3IgKGxldCBpID0gMDsgaSA8IHRleHQubGVuZ3RoOyBpKyspIHsKCQl0LmNoYXIodGV4dFtpXSk7CgkJdC5wb2ludCgpOwoJCXQudHJhbnNsYXRlKDEsIDApOwoJfQoJdC5wb3AoKTsKfQoKdC5zZXR1cChhc3luYyAoKSA9PiB7Cglhd2FpdCB0aWxlc0xheWVyLmxvYWRUaWxlc2V0KHsKCQlzb3VyY2U6ICdodHRwczovL2xpdHRsZWJpdHNwYWNlLmNvbS9yZXNvdXJjZXMvZm9udHMvVDY0LnBuZycsCgkJY29sdW1uczogMTYsCgkJcm93czogMTYsCgkJY291bnQ6IDI1NiwKCX0pOwoKCS8vIFVzZSBhdXRob3JlZCBjb2xvcnMgZnJvbSB0aGUgdGlsZXNldCBQTkcKCXRpbGVzTGF5ZXIudXNlVGlsZUNvbG9ycyh0cnVlKTsKfSk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDEwLCAyMik7Cn0pOwoKdGlsZXNMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCgljb25zdCBmb250ID0gdGlsZXNMYXllci5mb250OwoJaWYgKCFmb250IHx8IGZvbnQuY2hhcmFjdGVycy5sZW5ndGggPT09IDApIHJldHVybjsKCgljb25zdCB0aW1lID0gdC5mcmFtZUNvdW50ICogMC4wNDsKCWNvbnN0IGFjdGl2ZVRpbGUgPSBNYXRoLmZsb29yKHRpbWUpICUgZm9udC5jaGFyYWN0ZXJzLmxlbmd0aDsKCgljb25zdCBjb2xzID0gMTY7Cgljb25zdCBzdGFydFggPSAtTWF0aC5mbG9vcihjb2xzIC8gMik7Cgljb25zdCBzdGFydFkgPSAtNDsKCgkvLyBEcmF3IGFsbCB0aWxlcyBpbiBhIGdyaWQKCWZvciAobGV0IGkgPSAwOyBpIDwgZm9udC5jaGFyYWN0ZXJzLmxlbmd0aDsgaSsrKSB7CgkJY29uc3QgY29sID0gaSAlIGNvbHM7CgkJY29uc3Qgcm93ID0gTWF0aC5mbG9vcihpIC8gY29scyk7CgkJdC5wdXNoKCk7CgkJdC50cmFuc2xhdGUoc3RhcnRYICsgY29sLCBzdGFydFkgKyByb3cpOwoJCXQuY2hhcihpKTsKCgkJLy8gSGlnaGxpZ2h0IHRoZSBjdXJyZW50bHkgY3ljbGVkIHRpbGUKCQlpZiAoaSA9PT0gYWN0aXZlVGlsZSkgewoJCQl0LmNoYXJDb2xvcigyNTUsIDI1NSwgMTAwKTsKCQl9CgoJCXQucG9pbnQoKTsKCQl0LnBvcCgpOwoJfQp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7Cgljb25zdCBmb250ID0gdGlsZXNMYXllci5mb250OwoJY29uc3QgY291bnQgPSBmb250ID8gZm9udC5jaGFyYWN0ZXJzLmxlbmd0aCA6IDA7CgoJZHJhd1RleHQoJ1RFWFRNT0RFTEFZRVIuTE9BRFRJTEVTRVQnLCB4LCB5KyssIFsxMDAsIDI1NSwgMTQwXSk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCBbODAsIDEwMCwgMTUwXSk7CglkcmF3VGV4dCgnQ09OQ0VQVDogTE9BRCBUSUxFU0VUJywgeCwgeSsrLCBbMTAwLCAyMjAsIDI1NV0pOwoJZHJhd1RleHQoJ0xvYWRzIGJpdG1hcCBnbHlwaHMgaW50byBhIGxheWVyLicsIHgsIHkrKywgWzE0MCwgMTYwLCAxOTBdKTsKCWRyYXdUZXh0KCdUaWxlIGNvbG9ycyBhcmUgYXV0aG9yZWQgaW4gUE5HLicsIHgsIHkrKywgWzE0MCwgMTYwLCAxOTBdKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIFs4MCwgMTAwLCAxNTBdKTsKCWRyYXdUZXh0KGBUSUxFUyBMT0FERUQ6ICR7Y291bnR9YCwgeCwgeSsrLCBbMTIwLCAyNTUsIDE4MF0pOwoJZHJhd1RleHQoJ1NPVVJDRTogVDY0IFBORywgMTYgeCAxNicsIHgsIHkrKywgWzE2MCwgMTYwLCAxNjBdKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const tilesLayer = t.layers.add();
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, color = [200, 220, 255]) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(color[0], color[1], color[2]);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+t.setup(async () => {
+	await tilesLayer.loadTileset({
+		source: 'https://littlebitspace.com/resources/fonts/T64.png',
+		columns: 16,
+		rows: 16,
+		count: 256,
+	});
+
+	// Use authored colors from the tileset PNG
+	tilesLayer.useTileColors(true);
+});
+
+t.draw(() => {
+	t.background(6, 10, 22);
+});
+
+tilesLayer.draw(() => {
+	t.clear();
+
+	const font = tilesLayer.font;
+	if (!font || font.characters.length === 0) return;
+
+	const time = t.frameCount * 0.04;
+	const activeTile = Math.floor(time) % font.characters.length;
+
+	const cols = 16;
+	const startX = -Math.floor(cols / 2);
+	const startY = -4;
+
+	// Draw all tiles in a grid
+	for (let i = 0; i < font.characters.length; i++) {
+		const col = i % cols;
+		const row = Math.floor(i / cols);
+		t.push();
+		t.translate(startX + col, startY + row);
+		t.char(i);
+
+		// Highlight the currently cycled tile
+		if (i === activeTile) {
+			t.charColor(255, 255, 100);
+		}
+
+		t.point();
+		t.pop();
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	const font = tilesLayer.font;
+	const count = font ? font.characters.length : 0;
+
+	drawText('TEXTMODELAYER.LOADTILESET', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: LOAD TILESET', x, y++, [100, 220, 255]);
+	drawText('Loads bitmap glyphs into a layer.', x, y++, [140, 160, 190]);
+	drawText('Tile colors are authored in PNG.', x, y++, [140, 160, 190]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText(`TILES LOADED: ${count}`, x, y++, [120, 255, 180]);
+	drawText('SOURCE: T64 PNG, 16 x 16', x, y++, [160, 160, 160]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

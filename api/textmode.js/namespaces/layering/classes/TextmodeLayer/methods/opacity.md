@@ -35,5 +35,89 @@ Current opacity when called without arguments.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="opacity" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBwdWxzZUxheWVyID0gdC5sYXllcnMuYWRkKHsgYmxlbmRNb2RlOiAnYWRkaXRpdmUnIH0pOwpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCBjdXJyZW50T3BhY2l0eSA9IDE7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByZ2IgPSBbMjU1LCAyNTUsIDI1NV0pIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IocmdiWzBdLCByZ2JbMV0sIHJnYlsyXSk7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKZnVuY3Rpb24gZHJhd01ldGVyKHZhbHVlLCB4LCB5LCByZ2IpIHsKCWNvbnN0IHdpZHRoID0gMjA7Cgljb25zdCBhY3RpdmVCbG9ja3MgPSBNYXRoLnJvdW5kKHZhbHVlICogd2lkdGgpOwoKCXQucHVzaCgpOwoJdC50cmFuc2xhdGUoeCwgeSk7Cglmb3IgKGxldCBpID0gMDsgaSA8IHdpZHRoOyBpKyspIHsKCQljb25zdCBhY3RpdmUgPSBpIDwgYWN0aXZlQmxvY2tzOwoJCWNvbnN0IGNvbG9yID0gYWN0aXZlID8gcmdiIDogWzYwLCA3MCwgMTAwXTsKCQl0LnB1c2goKTsKCQl0LnRyYW5zbGF0ZShpLCAwKTsKCQl0LmNoYXIoYWN0aXZlID8gJ3wnIDogJy4nKTsKCQl0LmNoYXJDb2xvcihjb2xvclswXSwgY29sb3JbMV0sIGNvbG9yWzJdKTsKCQl0LnBvaW50KCk7CgkJdC5wb3AoKTsKCX0KCXQucG9wKCk7Cn0KCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNiwgMTAsIDIyKTsKCgljb25zdCB0aW1lID0gdC5mcmFtZUNvdW50ICogMC4wNDsKCWNvbnN0IG9wYWNpdHkgPSAwLjUgKyAwLjUgKiBNYXRoLnNpbih0aW1lKTsKCgljdXJyZW50T3BhY2l0eSA9IG9wYWNpdHk7CglwdWxzZUxheWVyLm9wYWNpdHkob3BhY2l0eSk7CgoJdC5wdXNoKCk7Cgl0LmNoYXJDb2xvcig0MCwgNTAsIDgwKTsKCXQuY2hhcignLicpOwoJdC5yZWN0KHQuZ3JpZC5jb2xzLCB0LmdyaWQucm93cyk7Cgl0LnBvcCgpOwp9KTsKCnB1bHNlTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7CgoJdC5wdXNoKCk7Cgl0LmNoYXJDb2xvcigyNTUsIDE0MCwgMTgwKTsKCXQuY2hhcignIycpOwoJdC5yZWN0KDEyLCA2KTsKCXQucG9wKCk7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnVEVYVE1PREVMQVlFUi5PUEFDSVRZJywgeCwgeSsrLCBbMTAwLCAyNTUsIDE0MF0pOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgWzgwLCAxMDAsIDE1MF0pOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IExBWUVSIEFMUEhBJywgeCwgeSsrLCBbMTAwLCAyMjAsIDI1NV0pOwoJZHJhd1RleHQoJ1B1bHNlIGxheWVyIGZhZGVzIGluIGFuZCBvdXQuJywgeCwgeSsrLCBbMTQwLCAxNjAsIDE5MF0pOwoJZHJhd1RleHQoJ09wYWNpdHkgaXMgY2xhbXBlZCBmcm9tIDAgdG8gMS4nLCB4LCB5KyssIFsxNDAsIDE2MCwgMTkwXSk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCBbODAsIDEwMCwgMTUwXSk7CglkcmF3TWV0ZXIoY3VycmVudE9wYWNpdHksIHgsIHkrKywgWzI1NSwgMjI1LCAxNDBdKTsKCWRyYXdUZXh0KGBPUEFDSVRZOiAke2N1cnJlbnRPcGFjaXR5LnRvRml4ZWQoMil9YCwgeCwgeSsrLCBbMjU1LCAyMjUsIDE0MF0pOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const pulseLayer = t.layers.add({ blendMode: 'additive' });
+const labelLayer = t.layers.add();
+let currentOpacity = 1;
+
+function drawText(text, x, y, rgb = [255, 255, 255]) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.print(text, x, y);
+	t.pop();
+}
+
+function drawMeter(value, x, y, rgb) {
+	const width = 20;
+	const activeBlocks = Math.round(value * width);
+
+	t.push();
+	t.translate(x, y);
+	for (let i = 0; i < width; i++) {
+		const active = i < activeBlocks;
+		const color = active ? rgb : [60, 70, 100];
+		t.push();
+		t.translate(i, 0);
+		t.char(active ? '|' : '.');
+		t.charColor(color[0], color[1], color[2]);
+		t.point();
+		t.pop();
+	}
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(6, 10, 22);
+
+	const time = t.frameCount * 0.04;
+	const opacity = 0.5 + 0.5 * Math.sin(time);
+
+	currentOpacity = opacity;
+	pulseLayer.opacity(opacity);
+
+	t.push();
+	t.charColor(40, 50, 80);
+	t.char('.');
+	t.rect(t.grid.cols, t.grid.rows);
+	t.pop();
+});
+
+pulseLayer.draw(() => {
+	t.clear();
+
+	t.push();
+	t.charColor(255, 140, 180);
+	t.char('#');
+	t.rect(12, 6);
+	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODELAYER.OPACITY', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: LAYER ALPHA', x, y++, [100, 220, 255]);
+	drawText('Pulse layer fades in and out.', x, y++, [140, 160, 190]);
+	drawText('Opacity is clamped from 0 to 1.', x, y++, [140, 160, 190]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawMeter(currentOpacity, x, y++, [255, 225, 140]);
+	drawText(`OPACITY: ${currentOpacity.toFixed(2)}`, x, y++, [255, 225, 140]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

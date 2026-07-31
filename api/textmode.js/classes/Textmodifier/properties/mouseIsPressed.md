@@ -26,5 +26,90 @@ starts. Use it inside `draw()` for polling-style interactions.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="mouseIsPressed" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7IHdpZHRoOiB3aW5kb3cuaW5uZXJXaWR0aCwgaGVpZ2h0OiB3aW5kb3cuaW5uZXJIZWlnaHQsIGZvbnRTaXplOiAxNiB9KTsKY29uc3QgUkFNUCA9ICcreFgj4paR4paS4paT4paIJzsKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwpsZXQgcHJlc3N1cmUgPSAwOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDUsIDUsIDEwKTsKCWNvbnN0IGlzSGVsZCA9IHQubW91c2VJc1ByZXNzZWQgJiYgdC5tb3VzZS54ICE9PSBOdW1iZXIuTkVHQVRJVkVfSU5GSU5JVFk7CglwcmVzc3VyZSArPSAoKGlzSGVsZCA_IDEuMCA6IDAuMCkgLSBwcmVzc3VyZSkgKiAwLjEyOwoKCWNvbnN0IGh3ID0gTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpLAoJCWhoID0gTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJY29uc3QgdG0gPSB0LmZyYW1lQ291bnQgKiAwLjAzLAoJCW14ID0gdC5tb3VzZS54LAoJCW15ID0gdC5tb3VzZS55OwoKCWZvciAobGV0IHkgPSAtaGg7IHkgPD0gaGg7IHkgKz0gMSkgewoJCWZvciAobGV0IHggPSAtaHc7IHggPD0gaHc7IHggKz0gMSkgewoJCQljb25zdCB3YXZlID0gKE1hdGguc2luKHggKiAwLjEyICsgdG0pICsgTWF0aC5jb3MoeSAqIDAuMTIgLSB0bSkpICogMC41ICsgMC41OwoJCQlsZXQgZGlzcFggPSB4LAoJCQkJZGlzcFkgPSB5LAoJCQkJcHVsbEZhY3RvciA9IDA7CgkJCWlmICh0Lm1vdXNlLnggIT09IE51bWJlci5ORUdBVElWRV9JTkZJTklUWSkgewoJCQkJY29uc3QgZGlzdCA9IE1hdGguaHlwb3QoeCAtIG14LCB5IC0gbXkpOwoJCQkJaWYgKGRpc3QgPCAyMikgewoJCQkJCXB1bGxGYWN0b3IgPSBNYXRoLnBvdygxIC0gZGlzdCAvIDIyLCAyKSAqIHByZXNzdXJlOwoJCQkJCWRpc3BYID0geCAtICh4IC0gbXgpICogcHVsbEZhY3RvciAqIDAuNDU7CgkJCQkJZGlzcFkgPSB5IC0gKHkgLSBteSkgKiBwdWxsRmFjdG9yICogMC40NTsKCQkJCX0KCQkJfQoJCQljb25zdCBpbnRlbnNpdHkgPSBNYXRoLm1pbigxLCB3YXZlICogMC40ICsgcHVsbEZhY3RvciAqIDAuODUpOwoJCQlpZiAoaW50ZW5zaXR5ID4gMC4wOCkgewoJCQkJY29uc3QgY2hhcklkeCA9IE1hdGgubWluKFJBTVAubGVuZ3RoIC0gMSwgTWF0aC5mbG9vcihpbnRlbnNpdHkgKiBSQU1QLmxlbmd0aCkpOwoJCQkJY29uc3QgcnggPSBNYXRoLnJvdW5kKGRpc3BYKSwKCQkJCQlyeSA9IE1hdGgucm91bmQoZGlzcFkpOwoJCQkJaWYgKHJ4ID49IC1odyAmJiByeCA8PSBodyAmJiByeSA-PSAtaGggJiYgcnkgPD0gaGgpIHsKCQkJCQl0LnB1c2goKTsKCQkJCQl0LnRyYW5zbGF0ZShyeCwgcnkpOwoJCQkJCWlmIChwdWxsRmFjdG9yID4gMC41KSB7CgkJCQkJCWNvbnN0IGggPSAocHVsbEZhY3RvciAtIDAuNSkgLyAwLjU7CgkJCQkJCXQuY2hhckNvbG9yKDI1NSwgTWF0aC5mbG9vcigxNDAgKyBoICogMTA1KSwgTWF0aC5mbG9vcihoICogMjMwKSk7CgkJCQkJCXQuY2VsbENvbG9yKE1hdGguZmxvb3IoMTIwICogaCksIE1hdGguZmxvb3IoMzAgKiBoKSwgMCk7CgkJCQkJfSBlbHNlIGlmIChwdWxsRmFjdG9yID4gMC4xNSkgewoJCQkJCQljb25zdCBoID0gKHB1bGxGYWN0b3IgLSAwLjE1KSAvIDAuMzU7CgkJCQkJCXQuY2hhckNvbG9yKE1hdGguZmxvb3IoMTYwICsgaCAqIDk1KSwgTWF0aC5mbG9vcig3MCArIGggKiA3MCksIE1hdGguZmxvb3IoMzAgLSBoICogMzApKTsKCQkJCQl9IGVsc2UgewoJCQkJCQljb25zdCBiID0gaW50ZW5zaXR5OwoJCQkJCQl0LmNoYXJDb2xvcihNYXRoLmZsb29yKDI4ICsgYiAqIDIyKSwgTWF0aC5mbG9vcig0NSArIGIgKiAzNyksIE1hdGguZmxvb3IoOTAgKyBiICogNzgpKTsKCQkJCQl9CgkJCQkJdC5jaGFyKFJBTVBbY2hhcklkeF0pOwoJCQkJCXQucG9pbnQoKTsKCQkJCQl0LnBvcCgpOwoJCQkJfQoJCQl9CgkJfQoJfQp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKSwKCQl0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoJY29uc3QgaXNIZWxkID0gdC5tb3VzZUlzUHJlc3NlZCAmJiB0Lm1vdXNlLnggIT09IE51bWJlci5ORUdBVElWRV9JTkZJTklUWTsKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuTU9VU0VJU1BSRVNTRUQnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBTWU5DSFJPTk9VUyBIT0xEIFNUQVRFJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdFdmFsdWF0ZXMgYm9vbGVhbiBzdGF0ZSBldmVyeSBmcmFtZS4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJ0hvbGRpbmcgbW91c2UgaW1wbG9kZXMgbGF0dGljZSBjb3JlLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ01PVVNFIElTIFBSRVNTRUQ6ICcgKyAoaXNIZWxkID8gJ1RSVUUnIDogJ0ZBTFNFJyksIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7CglkcmF3VGV4dCgnUFJFU1NVUkUgSU5URU5TSVRZOiAnICsgTWF0aC5mbG9vcihwcmVzc3VyZSAqIDEwMCkgKyAnJScsIHgsIHkrKywgMTgwLCAyMDAsIDIyMCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpKTs" />
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const RAMP = '+xX#░▒▓█';
+const labelLayer = t.layers.add();
+let pressure = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(5, 5, 10);
+	const isHeld = t.mouseIsPressed && t.mouse.x !== Number.NEGATIVE_INFINITY;
+	pressure += ((isHeld ? 1.0 : 0.0) - pressure) * 0.12;
+
+	const hw = Math.floor(t.grid.cols / 2),
+		hh = Math.floor(t.grid.rows / 2);
+	const tm = t.frameCount * 0.03,
+		mx = t.mouse.x,
+		my = t.mouse.y;
+
+	for (let y = -hh; y <= hh; y += 1) {
+		for (let x = -hw; x <= hw; x += 1) {
+			const wave = (Math.sin(x * 0.12 + tm) + Math.cos(y * 0.12 - tm)) * 0.5 + 0.5;
+			let dispX = x,
+				dispY = y,
+				pullFactor = 0;
+			if (t.mouse.x !== Number.NEGATIVE_INFINITY) {
+				const dist = Math.hypot(x - mx, y - my);
+				if (dist < 22) {
+					pullFactor = Math.pow(1 - dist / 22, 2) * pressure;
+					dispX = x - (x - mx) * pullFactor * 0.45;
+					dispY = y - (y - my) * pullFactor * 0.45;
+				}
+			}
+			const intensity = Math.min(1, wave * 0.4 + pullFactor * 0.85);
+			if (intensity > 0.08) {
+				const charIdx = Math.min(RAMP.length - 1, Math.floor(intensity * RAMP.length));
+				const rx = Math.round(dispX),
+					ry = Math.round(dispY);
+				if (rx >= -hw && rx <= hw && ry >= -hh && ry <= hh) {
+					t.push();
+					t.translate(rx, ry);
+					if (pullFactor > 0.5) {
+						const h = (pullFactor - 0.5) / 0.5;
+						t.charColor(255, Math.floor(140 + h * 105), Math.floor(h * 230));
+						t.cellColor(Math.floor(120 * h), Math.floor(30 * h), 0);
+					} else if (pullFactor > 0.15) {
+						const h = (pullFactor - 0.15) / 0.35;
+						t.charColor(Math.floor(160 + h * 95), Math.floor(70 + h * 70), Math.floor(30 - h * 30));
+					} else {
+						const b = intensity;
+						t.charColor(Math.floor(28 + b * 22), Math.floor(45 + b * 37), Math.floor(90 + b * 78));
+					}
+					t.char(RAMP[charIdx]);
+					t.point();
+					t.pop();
+				}
+			}
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2),
+		top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	const isHeld = t.mouseIsPressed && t.mouse.x !== Number.NEGATIVE_INFINITY;
+	drawText('TEXTMODIFIER.MOUSEISPRESSED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SYNCHRONOUS HOLD STATE', x, y++, 100, 220, 255);
+	drawText('Evaluates boolean state every frame.', x, y++, 140, 160, 190);
+	drawText('Holding mouse implodes lattice core.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('MOUSE IS PRESSED: ' + (isHeld ? 'TRUE' : 'FALSE'), x, y++, 140, 255, 180);
+	drawText('PRESSURE INTENSITY: ' + Math.floor(pressure * 100) + '%', x, y++, 180, 200, 220);
+});
+
+t.windowResized(() => t.resizeCanvas(window.innerWidth, window.innerHeight));
+```
 
