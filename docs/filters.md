@@ -48,7 +48,7 @@ The core library includes:
 Call [`layer.filter()`](/api/textmode.js/namespaces/layering/classes/TextmodeLayer.md#filter) inside a layer draw callback to process that layer before it is composited:
 
 ```js
-const glow = t.layers.add({ blendMode: "screen" });
+const glow = t.layers.add({ blendMode: t.BLEND_SCREEN });
 
 glow.draw(() => {
   t.clear();

@@ -67,7 +67,7 @@ Each layer can load its own font through [`TextmodeLayer.loadFont()`](/api/textm
 
 ```js
 const t = textmode.create({ width: 800, height: 600 });
-const accentLayer = t.layers.add({ fontSize: 16, blendMode: "additive" });
+const accentLayer = t.layers.add({ fontSize: 16, blendMode: t.BLEND_ADDITIVE });
 
 t.setup(async () => {
   await t.loadFont("./fonts/FROGBLOCK-V2.1.ttf");
@@ -118,7 +118,7 @@ Use [`TextmodeLayer.loadTileset()`](/api/textmode.js/namespaces/layering/classes
 
 ```js
 const tilesLayer = t.layers.add({ fontSize: 8 });
-const previewLayer = t.layers.add({ fontSize: 32, blendMode: "additive" });
+const previewLayer = t.layers.add({ fontSize: 32, blendMode: t.BLEND_ADDITIVE });
 
 t.setup(async () => {
   const tileset = await t.loadTileset(

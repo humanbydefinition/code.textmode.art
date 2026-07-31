@@ -88,7 +88,7 @@ t.layers.base.synth(
     .charMap("░▒▓█"),
 );
 
-const layer2 = t.layers.add({ blendMode: "screen", opacity: 0.7 });
+const layer2 = t.layers.add({ blendMode: t.BLEND_SCREEN, opacity: 0.7 });
 
 layer2.synth(
   char(voronoi(12, 0.2))
