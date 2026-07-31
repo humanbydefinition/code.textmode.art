@@ -23,71 +23,7 @@ Perfect for creating neon, glowing text, or dreamy effects.
 
 ## Example
 
-```javascript
-const t = textmode.create({
-	width: window.innerWidth,
-	height: window.innerHeight,
-	fontSize: 8,
-	plugins: [FiltersPlugin],
-});
-const labelLayer = t.layers.add();
-
-let video;
-
-function drawText(text, x, y, r = 220, g = 230, b = 255) {
-	t.push();
-	t.printAlign('left', 'top');
-	t.charColor(r, g, b);
-	t.print(text, x, y);
-	t.pop();
-}
-
-t.setup(async () => {
-	video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
-	video.play();
-	video.loop();
-	video.characters(' .:-=+*#%@');
-});
-
-labelLayer.draw(() => {
-	t.clear();
-	const left = -Math.floor(t.grid.cols / 2),
-		top = -Math.floor(t.grid.rows / 2);
-	let y = top + 3,
-		x = left + 3;
-
-	const th = (0.4 + 0.3 * Math.sin(t.secs * 1.5)).toFixed(2);
-	const val = (1.5 + 1.0 * Math.cos(t.secs * 1.0)).toFixed(2);
-
-	drawText('FILTERSPLUGIN.BLOOM', x, y++, 100, 255, 140);
-	drawText('------------------------------------', x, y++, 80, 100, 150);
-	drawText('CONCEPT: GLOW HIGHLIGHTS', x, y++, 100, 220, 255);
-	drawText('Glows bright regions in the scene.', x, y++, 140, 160, 190);
-	drawText('------------------------------------', x, y++, 80, 100, 150);
-	drawText('Threshold: ' + th, x, y++, 140, 255, 180);
-	drawText('Intensity: ' + val, x, y++, 140, 255, 180);
-});
-
-t.draw(() => {
-	if (!video) return;
-	const th = 0.4 + 0.3 * Math.sin(t.secs * 1.5);
-	const val = 1.5 + 1.0 * Math.cos(t.secs * 1.0);
-
-	t.layers.base.filter('bloom', {
-		threshold: th,
-		intensity: val,
-		radius: 4.0,
-	});
-
-	t.background(0);
-	t.image(video);
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
-
+<TextmodeApiSandbox profile="textmode.filters.js" language="javascript" title="BloomOptions" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW0ZpbHRlcnNQbHVnaW5dLAp9KTsKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKbGV0IHZpZGVvOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LnNldHVwKGFzeW5jICgpID0-IHsKCXZpZGVvID0gYXdhaXQgdC5sb2FkVmlkZW8oJ2h0dHBzOi8vaW50ZXJhY3RpdmUtZXhhbXBsZXMubWRuLm1vemlsbGEubmV0L21lZGlhL2NjMC12aWRlb3MvZmxvd2VyLm1wNCcpOwoJdmlkZW8ucGxheSgpOwoJdmlkZW8ubG9vcCgpOwoJdmlkZW8uY2hhcmFjdGVycygnIC46LT0rKiMlQCcpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKSwKCQl0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzLAoJCXggPSBsZWZ0ICsgMzsKCgljb25zdCB0aCA9ICgwLjQgKyAwLjMgKiBNYXRoLnNpbih0LnNlY3MgKiAxLjUpKS50b0ZpeGVkKDIpOwoJY29uc3QgdmFsID0gKDEuNSArIDEuMCAqIE1hdGguY29zKHQuc2VjcyAqIDEuMCkpLnRvRml4ZWQoMik7CgoJZHJhd1RleHQoJ0ZJTFRFUlNQTFVHSU4uQkxPT00nLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBHTE9XIEhJR0hMSUdIVFMnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ0dsb3dzIGJyaWdodCByZWdpb25zIGluIHRoZSBzY2VuZS4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdUaHJlc2hvbGQ6ICcgKyB0aCwgeCwgeSsrLCAxNDAsIDI1NSwgMTgwKTsKCWRyYXdUZXh0KCdJbnRlbnNpdHk6ICcgKyB2YWwsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7Cn0pOwoKdC5kcmF3KCgpID0-IHsKCWlmICghdmlkZW8pIHJldHVybjsKCWNvbnN0IHRoID0gMC40ICsgMC4zICogTWF0aC5zaW4odC5zZWNzICogMS41KTsKCWNvbnN0IHZhbCA9IDEuNSArIDEuMCAqIE1hdGguY29zKHQuc2VjcyAqIDEuMCk7CgoJdC5sYXllcnMuYmFzZS5maWx0ZXIoJ2Jsb29tJywgewoJCXRocmVzaG9sZDogdGgsCgkJaW50ZW5zaXR5OiB2YWwsCgkJcmFkaXVzOiA0LjAsCgl9KTsKCgl0LmJhY2tncm91bmQoMCk7Cgl0LmltYWdlKHZpZGVvKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
 
 ## Properties
 

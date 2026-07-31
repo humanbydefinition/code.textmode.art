@@ -41,46 +41,7 @@ A new SynthSource configured with both color sources
 
 ### Example
 
-```javascript
-const t = textmode.create({
-	width: window.innerWidth,
-	height: window.innerHeight,
-	plugins: [SynthPlugin],
-});
-
-const labelLayer = t.layers.add();
-
-function drawText(text, x, y, r = 220, g = 230, b = 255) {
-	t.push();
-	t.printAlign('left', 'top');
-	t.charColor(r, g, b);
-	t.print(text, x, y);
-	t.pop();
-}
-
-labelLayer.draw(() => {
-	t.clear();
-	const left = -Math.floor(t.grid.cols / 2);
-	const top = -Math.floor(t.grid.rows / 2);
-	let y = top + 3;
-	const x = left + 3;
-
-	drawText('PAINT.PAINT', x, y++, 100, 255, 140);
-	drawText('------------------------------------', x, y++, 80, 100, 150);
-	drawText('CONCEPT: COMPOSITE PAINT SOURCE', x, y++, 100, 220, 255);
-	drawText('Paints cells and glyphs from source.', x, y++, 140, 160, 190);
-	drawText('Feeds single pattern to all channels.', x, y++, 140, 160, 190);
-	drawText('------------------------------------', x, y++, 80, 100, 150);
-	drawText('Source: osc color | Char: noise', x, y++, 140, 255, 180);
-});
-
-t.synth(paint(osc(10, 0.1).color(0.2, 0.8, 0.9)).char(noise(8, 0.15)));
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
-
+<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="paint" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCXBsdWdpbnM6IFtTeW50aFBsdWdpbl0sCn0pOwoKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWRyYXdUZXh0KCdQQUlOVC5QQUlOVCcsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IENPTVBPU0lURSBQQUlOVCBTT1VSQ0UnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ1BhaW50cyBjZWxscyBhbmQgZ2x5cGhzIGZyb20gc291cmNlLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnRmVlZHMgc2luZ2xlIHBhdHRlcm4gdG8gYWxsIGNoYW5uZWxzLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ1NvdXJjZTogb3NjIGNvbG9yIHwgQ2hhcjogbm9pc2UnLCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwp9KTsKCnQuc3ludGgocGFpbnQob3NjKDEwLCAwLjEpLmNvbG9yKDAuMiwgMC44LCAwLjkpKS5jaGFyKG5vaXNlKDgsIDAuMTUpKSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
 
 ## Call Signature
 
@@ -111,56 +72,7 @@ A new SynthSource configured with both color sources
 
 ### Example
 
-```javascript
-const t = textmode.create({
-	width: window.innerWidth,
-	height: window.innerHeight,
-	fontSize: 8,
-	plugins: [SynthPlugin],
-});
-
-t.bpm(18);
-
-const labelLayer = t.layers.add();
-const glyphs = ' .:-=+*#%@';
-
-function drawText(text, x, y, r = 220, g = 230, b = 255) {
-	t.push();
-	t.printAlign('left', 'top');
-	t.charColor(r, g, b);
-	t.print(text, x, y);
-	t.pop();
-}
-
-labelLayer.draw(() => {
-	t.clear();
-	const left = -Math.floor(t.grid.cols / 2);
-	const top = -Math.floor(t.grid.rows / 2);
-	let y = top + 3;
-	const x = left + 3;
-
-	drawText('PAINT.PAINT2', x, y++, 110, 255, 170);
-	drawText('------------------------------------', x, y++, 70, 110, 140);
-	drawText('TOP LEVEL PAINT SOURCE', x, y++, 120, 220, 255);
-	drawText('paint(source) owns colors.', x, y++, 160, 180, 210);
-	drawText('char(source) chooses glyphs.', x, y++, 160, 180, 210);
-	drawText('------------------------------------', x, y++, 70, 110, 140);
-	drawText('No separate color-channel methods.', x, y++, 150, 255, 190);
-});
-
-const paintField = osc(7, 0.016, 1.4)
-	.kaleid(6)
-	.color(0.28, 0.76, 1.0)
-	.modulate(plasma(2.6, 0.014, 0.1, 1.1), 0.025);
-const glyphField = osc(9, 0.018, 1.2).kaleid(5).modulate(noise(2.2, 0.012), 0.018).levels(0.18, 0.88, 0.04, 1.0, 0.9);
-
-t.synth(paint(paintField).char(glyphField).charMap(glyphs));
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
-
+<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="paint" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW1N5bnRoUGx1Z2luXSwKfSk7Cgp0LmJwbSgxOCk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IGdseXBocyA9ICcgLjotPSsqIyVAJzsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnUEFJTlQuUEFJTlQyJywgeCwgeSsrLCAxMTAsIDI1NSwgMTcwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDcwLCAxMTAsIDE0MCk7CglkcmF3VGV4dCgnVE9QIExFVkVMIFBBSU5UIFNPVVJDRScsIHgsIHkrKywgMTIwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgncGFpbnQoc291cmNlKSBvd25zIGNvbG9ycy4nLCB4LCB5KyssIDE2MCwgMTgwLCAyMTApOwoJZHJhd1RleHQoJ2NoYXIoc291cmNlKSBjaG9vc2VzIGdseXBocy4nLCB4LCB5KyssIDE2MCwgMTgwLCAyMTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgNzAsIDExMCwgMTQwKTsKCWRyYXdUZXh0KCdObyBzZXBhcmF0ZSBjb2xvci1jaGFubmVsIG1ldGhvZHMuJywgeCwgeSsrLCAxNTAsIDI1NSwgMTkwKTsKfSk7Cgpjb25zdCBwYWludEZpZWxkID0gb3NjKDcsIDAuMDE2LCAxLjQpCgkua2FsZWlkKDYpCgkuY29sb3IoMC4yOCwgMC43NiwgMS4wKQoJLm1vZHVsYXRlKHBsYXNtYSgyLjYsIDAuMDE0LCAwLjEsIDEuMSksIDAuMDI1KTsKY29uc3QgZ2x5cGhGaWVsZCA9IG9zYyg5LCAwLjAxOCwgMS4yKS5rYWxlaWQoNSkubW9kdWxhdGUobm9pc2UoMi4yLCAwLjAxMiksIDAuMDE4KS5sZXZlbHMoMC4xOCwgMC44OCwgMC4wNCwgMS4wLCAwLjkpOwoKdC5zeW50aChwYWludChwYWludEZpZWxkKS5jaGFyKGdseXBoRmllbGQpLmNoYXJNYXAoZ2x5cGhzKSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
 
 ## Call Signature
 
@@ -182,55 +94,5 @@ Create a synth source with both character and cell colors defined using a graysc
 
 ### Example
 
-```javascript
-const t = textmode.create({
-	width: window.innerWidth,
-	height: window.innerHeight,
-	fontSize: 8,
-	plugins: [SynthPlugin],
-});
-
-t.bpm(18);
-
-const labelLayer = t.layers.add();
-const glyphs = ' .:-=+*#%@';
-
-function drawText(text, x, y, r = 220, g = 230, b = 255) {
-	t.push();
-	t.printAlign('left', 'top');
-	t.charColor(r, g, b);
-	t.print(text, x, y);
-	t.pop();
-}
-
-labelLayer.draw(() => {
-	t.clear();
-	const left = -Math.floor(t.grid.cols / 2);
-	const top = -Math.floor(t.grid.rows / 2);
-	let y = top + 3;
-	const x = left + 3;
-
-	drawText('PAINT.PAINT3', x, y++, 110, 255, 170);
-	drawText('------------------------------------', x, y++, 70, 110, 140);
-	drawText('TOP LEVEL PAINT TEXTURE', x, y++, 120, 220, 255);
-	drawText('paint(source) fills both layers.', x, y++, 160, 180, 210);
-	drawText('char(source) sculpts glyphs.', x, y++, 160, 180, 210);
-	drawText('------------------------------------', x, y++, 70, 110, 140);
-	drawText('No separate color-channel methods.', x, y++, 150, 255, 190);
-});
-
-const paintField = plasma(3.8, 0.02, 0.3, 1.14)
-	.colorama(0.12)
-	.softlight(osc(10, 0.012, 0.7).color(1.0, 0.55, 0.32), 0.28);
-const glyphField = noise(4.5, 0.018)
-	.modulateKaleid(osc(2.6, 0.008), 5)
-	.levels(0.18, 0.86, 0.05, 1.0, 0.82)
-	.contrast(1.12);
-
-t.synth(paint(paintField).char(glyphField).charMap(glyphs));
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
+<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="paint" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW1N5bnRoUGx1Z2luXSwKfSk7Cgp0LmJwbSgxOCk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IGdseXBocyA9ICcgLjotPSsqIyVAJzsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnUEFJTlQuUEFJTlQzJywgeCwgeSsrLCAxMTAsIDI1NSwgMTcwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDcwLCAxMTAsIDE0MCk7CglkcmF3VGV4dCgnVE9QIExFVkVMIFBBSU5UIFRFWFRVUkUnLCB4LCB5KyssIDEyMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ3BhaW50KHNvdXJjZSkgZmlsbHMgYm90aCBsYXllcnMuJywgeCwgeSsrLCAxNjAsIDE4MCwgMjEwKTsKCWRyYXdUZXh0KCdjaGFyKHNvdXJjZSkgc2N1bHB0cyBnbHlwaHMuJywgeCwgeSsrLCAxNjAsIDE4MCwgMjEwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDcwLCAxMTAsIDE0MCk7CglkcmF3VGV4dCgnTm8gc2VwYXJhdGUgY29sb3ItY2hhbm5lbCBtZXRob2RzLicsIHgsIHkrKywgMTUwLCAyNTUsIDE5MCk7Cn0pOwoKY29uc3QgcGFpbnRGaWVsZCA9IHBsYXNtYSgzLjgsIDAuMDIsIDAuMywgMS4xNCkKCS5jb2xvcmFtYSgwLjEyKQoJLnNvZnRsaWdodChvc2MoMTAsIDAuMDEyLCAwLjcpLmNvbG9yKDEuMCwgMC41NSwgMC4zMiksIDAuMjgpOwpjb25zdCBnbHlwaEZpZWxkID0gbm9pc2UoNC41LCAwLjAxOCkKCS5tb2R1bGF0ZUthbGVpZChvc2MoMi42LCAwLjAwOCksIDUpCgkubGV2ZWxzKDAuMTgsIDAuODYsIDAuMDUsIDEuMCwgMC44MikKCS5jb250cmFzdCgxLjEyKTsKCnQuc3ludGgocGFpbnQocGFpbnRGaWVsZCkuY2hhcihnbHlwaEZpZWxkKS5jaGFyTWFwKGdseXBocykpOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
 

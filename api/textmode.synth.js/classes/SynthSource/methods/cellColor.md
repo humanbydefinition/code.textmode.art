@@ -37,46 +37,7 @@ The SynthSource for chaining
 
 ### Example
 
-```javascript
-const t = textmode.create({
-	width: window.innerWidth,
-	height: window.innerHeight,
-	plugins: [SynthPlugin],
-});
-
-const labelLayer = t.layers.add();
-
-function drawText(text, x, y, r = 220, g = 230, b = 255) {
-	t.push();
-	t.printAlign('left', 'top');
-	t.charColor(r, g, b);
-	t.print(text, x, y);
-	t.pop();
-}
-
-labelLayer.draw(() => {
-	t.clear();
-	const left = -Math.floor(t.grid.cols / 2);
-	const top = -Math.floor(t.grid.rows / 2);
-	let y = top + 3;
-	const x = left + 3;
-
-	drawText(`SYNTHSOURCE.CELLCOLOR`, x, y++, 100, 255, 140);
-	drawText('------------------------------------', x, y++, 80, 100, 150);
-	drawText(`CONCEPT: CELL COLOR TINT`, x, y++, 100, 220, 255);
-	drawText(`Sets cell background color.`, x, y++, 140, 160, 190);
-	drawText(`Leaves glyph color neutral.`, x, y++, 140, 160, 190);
-	drawText('------------------------------------', x, y++, 80, 100, 150);
-	drawText(`RGB: 0.9, 0.2, 0.5`, x, y++, 140, 255, 180);
-});
-
-t.synth(osc(10, 0.1).cellColor(0.9, 0.2, 0.5));
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
-
+<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="cellColor" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCXBsdWdpbnM6IFtTeW50aFBsdWdpbl0sCn0pOwoKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWRyYXdUZXh0KGBTWU5USFNPVVJDRS5DRUxMQ09MT1JgLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KGBDT05DRVBUOiBDRUxMIENPTE9SIFRJTlRgLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoYFNldHMgY2VsbCBiYWNrZ3JvdW5kIGNvbG9yLmAsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dChgTGVhdmVzIGdseXBoIGNvbG9yIG5ldXRyYWwuYCwgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dChgUkdCOiAwLjksIDAuMiwgMC41YCwgeCwgeSsrLCAxNDAsIDI1NSwgMTgwKTsKfSk7Cgp0LnN5bnRoKG9zYygxMCwgMC4xKS5jZWxsQ29sb3IoMC45LCAwLjIsIDAuNSkpOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
 
 ## Call Signature
 
@@ -107,63 +68,7 @@ The SynthSource for chaining
 
 ### Example
 
-```javascript
-const t = textmode.create({
-	width: window.innerWidth,
-	height: window.innerHeight,
-	fontSize: 8,
-	plugins: [SynthPlugin],
-});
-
-t.bpm(18);
-
-const labelLayer = t.layers.add();
-const glyphs = ' .:-=+*#%@';
-const breathe = [0.22, 0.78].fast(0.18).ease('easeInOutSine');
-const turn = [-0.42, 0.42].fast(0.14).ease('easeInOutSine');
-
-function drawText(text, x, y, r = 220, g = 230, b = 255) {
-	t.push();
-	t.printAlign('left', 'top');
-	t.charColor(r, g, b);
-	t.print(text, x, y);
-	t.pop();
-}
-
-labelLayer.draw(() => {
-	t.clear();
-	const left = -Math.floor(t.grid.cols / 2);
-	const top = -Math.floor(t.grid.rows / 2);
-	let y = top + 3;
-	const x = left + 3;
-
-	drawText('SYNTHSOURCE.CELLCOLOR2', x, y++, 110, 255, 170);
-	drawText('------------------------------------', x, y++, 70, 110, 140);
-	drawText('CELL RGBA', x, y++, 120, 220, 255);
-	drawText('Numbers animate the bed.', x, y++, 160, 180, 210);
-	drawText('Ink stays source driven.', x, y++, 160, 180, 210);
-	drawText('------------------------------------', x, y++, 70, 110, 140);
-	drawText('Separate animated ink and paper.', x, y++, 150, 255, 190);
-});
-
-const ink = osc(6, 0.018, 1.6).rotate(turn, 0.002).color(0.9, 0.58, 1.0).modulateKaleid(noise(2.0, 0.014), 5);
-
-t.synth(
-	osc(10, 0.018, 1.1)
-		.kaleid(5)
-		.color(0.9, 0.5, 0.3)
-		.cellColor(0.03, breathe.offset(0.2), breathe.offset(0.55), 1.0)
-		.modulateScale(noise(2.1, 0.014), 0.3, 0.92)
-		.charMap(glyphs)
-		.charColor(ink)
-		.contrast(1.12)
-);
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
-
+<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="cellColor" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW1N5bnRoUGx1Z2luXSwKfSk7Cgp0LmJwbSgxOCk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IGdseXBocyA9ICcgLjotPSsqIyVAJzsKY29uc3QgYnJlYXRoZSA9IFswLjIyLCAwLjc4XS5mYXN0KDAuMTgpLmVhc2UoJ2Vhc2VJbk91dFNpbmUnKTsKY29uc3QgdHVybiA9IFstMC40MiwgMC40Ml0uZmFzdCgwLjE0KS5lYXNlKCdlYXNlSW5PdXRTaW5lJyk7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CgoJZHJhd1RleHQoJ1NZTlRIU09VUkNFLkNFTExDT0xPUjInLCB4LCB5KyssIDExMCwgMjU1LCAxNzApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgNzAsIDExMCwgMTQwKTsKCWRyYXdUZXh0KCdDRUxMIFJHQkEnLCB4LCB5KyssIDEyMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ051bWJlcnMgYW5pbWF0ZSB0aGUgYmVkLicsIHgsIHkrKywgMTYwLCAxODAsIDIxMCk7CglkcmF3VGV4dCgnSW5rIHN0YXlzIHNvdXJjZSBkcml2ZW4uJywgeCwgeSsrLCAxNjAsIDE4MCwgMjEwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDcwLCAxMTAsIDE0MCk7CglkcmF3VGV4dCgnU2VwYXJhdGUgYW5pbWF0ZWQgaW5rIGFuZCBwYXBlci4nLCB4LCB5KyssIDE1MCwgMjU1LCAxOTApOwp9KTsKCmNvbnN0IGluayA9IG9zYyg2LCAwLjAxOCwgMS42KS5yb3RhdGUodHVybiwgMC4wMDIpLmNvbG9yKDAuOSwgMC41OCwgMS4wKS5tb2R1bGF0ZUthbGVpZChub2lzZSgyLjAsIDAuMDE0KSwgNSk7Cgp0LnN5bnRoKAoJb3NjKDEwLCAwLjAxOCwgMS4xKQoJCS5rYWxlaWQoNSkKCQkuY29sb3IoMC45LCAwLjUsIDAuMykKCQkuY2VsbENvbG9yKDAuMDMsIGJyZWF0aGUub2Zmc2V0KDAuMiksIGJyZWF0aGUub2Zmc2V0KDAuNTUpLCAxLjApCgkJLm1vZHVsYXRlU2NhbGUobm9pc2UoMi4xLCAwLjAxNCksIDAuMywgMC45MikKCQkuY2hhck1hcChnbHlwaHMpCgkJLmNoYXJDb2xvcihpbmspCgkJLmNvbnRyYXN0KDEuMTIpCik7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
 
 ## Call Signature
 
@@ -185,56 +90,5 @@ Set the cell background color using a grayscale value.
 
 ### Example
 
-```javascript
-const t = textmode.create({
-	width: window.innerWidth,
-	height: window.innerHeight,
-	fontSize: 8,
-	plugins: [SynthPlugin],
-});
-
-t.bpm(18);
-
-const labelLayer = t.layers.add();
-const glyphs = ' .:-=+*#%@';
-
-function drawText(text, x, y, r = 220, g = 230, b = 255) {
-	t.push();
-	t.printAlign('left', 'top');
-	t.charColor(r, g, b);
-	t.print(text, x, y);
-	t.pop();
-}
-
-labelLayer.draw(() => {
-	t.clear();
-	const left = -Math.floor(t.grid.cols / 2);
-	const top = -Math.floor(t.grid.rows / 2);
-	let y = top + 3;
-	const x = left + 3;
-
-	drawText('SYNTHSOURCE.CELLCOLOR3', x, y++, 110, 255, 170);
-	drawText('------------------------------------', x, y++, 70, 110, 140);
-	drawText('CELL GRAYSCALE', x, y++, 120, 220, 255);
-	drawText('One value fills cells.', x, y++, 160, 180, 210);
-	drawText('Ink carries color motion.', x, y++, 160, 180, 210);
-	drawText('------------------------------------', x, y++, 70, 110, 140);
-	drawText('Separate animated ink and paper.', x, y++, 150, 255, 190);
-});
-
-const ink = plasma(4.2, 0.024, 0.0, 1.12).color(0.42, 1.0, 0.58).modulateRotate(noise(2.0, 0.015), 0.28, 0.04);
-
-t.synth(
-	plasma(4.2, 0.022, 0.2, 1.12)
-		.modulate(noise(2.0, 0.014), 0.02)
-		.cellColor([0.05, 0.22].fast(0.12).ease('easeInOutSine'))
-		.charMap(glyphs)
-		.charColor(ink)
-		.contrast(1.16)
-);
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
+<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="cellColor" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW1N5bnRoUGx1Z2luXSwKfSk7Cgp0LmJwbSgxOCk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IGdseXBocyA9ICcgLjotPSsqIyVAJzsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnU1lOVEhTT1VSQ0UuQ0VMTENPTE9SMycsIHgsIHkrKywgMTEwLCAyNTUsIDE3MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA3MCwgMTEwLCAxNDApOwoJZHJhd1RleHQoJ0NFTEwgR1JBWVNDQUxFJywgeCwgeSsrLCAxMjAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdPbmUgdmFsdWUgZmlsbHMgY2VsbHMuJywgeCwgeSsrLCAxNjAsIDE4MCwgMjEwKTsKCWRyYXdUZXh0KCdJbmsgY2FycmllcyBjb2xvciBtb3Rpb24uJywgeCwgeSsrLCAxNjAsIDE4MCwgMjEwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDcwLCAxMTAsIDE0MCk7CglkcmF3VGV4dCgnU2VwYXJhdGUgYW5pbWF0ZWQgaW5rIGFuZCBwYXBlci4nLCB4LCB5KyssIDE1MCwgMjU1LCAxOTApOwp9KTsKCmNvbnN0IGluayA9IHBsYXNtYSg0LjIsIDAuMDI0LCAwLjAsIDEuMTIpLmNvbG9yKDAuNDIsIDEuMCwgMC41OCkubW9kdWxhdGVSb3RhdGUobm9pc2UoMi4wLCAwLjAxNSksIDAuMjgsIDAuMDQpOwoKdC5zeW50aCgKCXBsYXNtYSg0LjIsIDAuMDIyLCAwLjIsIDEuMTIpCgkJLm1vZHVsYXRlKG5vaXNlKDIuMCwgMC4wMTQpLCAwLjAyKQoJCS5jZWxsQ29sb3IoWzAuMDUsIDAuMjJdLmZhc3QoMC4xMikuZWFzZSgnZWFzZUluT3V0U2luZScpKQoJCS5jaGFyTWFwKGdseXBocykKCQkuY2hhckNvbG9yKGluaykKCQkuY29udHJhc3QoMS4xNikKKTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
 

@@ -24,21 +24,5 @@ Install this plugin to enable `.synth()` on TextmodeLayer instances.
 
 ## Example
 
-```javascript
-const t = textmode.create({
-  width: window.innerWidth,
-  height: window.innerHeight,
-  plugins: [SynthPlugin]
-});
-
-t.synth(
-  noise(10)
-    .charMap('@#%*+=-:. ')
-    .charColor(osc(5, 0.1, 1.2).kaleid(4))
-);
-
-t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
+<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="SynthPlugin" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CiAgd2lkdGg6IHdpbmRvdy5pbm5lcldpZHRoLAogIGhlaWdodDogd2luZG93LmlubmVySGVpZ2h0LAogIHBsdWdpbnM6IFtTeW50aFBsdWdpbl0KfSk7Cgp0LnN5bnRoKAogIG5vaXNlKDEwKQogICAgLmNoYXJNYXAoJ0AjJSorPS06LiAnKQogICAgLmNoYXJDb2xvcihvc2MoNSwgMC4xLCAxLjIpLmthbGVpZCg0KSkKKTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7CiAgdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
 

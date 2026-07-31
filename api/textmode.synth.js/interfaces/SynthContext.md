@@ -19,23 +19,7 @@ Context passed to dynamic parameter functions during rendering.
 
 ## Example
 
-```javascript
-const t = textmode.create({
-  width: window.innerWidth,
-  height: window.innerHeight,
-  plugins: [SynthPlugin]
-});
-
-t.synth(
-  noise((ctx) => 6 + Math.sin(ctx.time) * 4)
-    .kaleid(5)
-);
-
-t.windowResized(() => {
-  t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
-
+<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="SynthContext" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CiAgd2lkdGg6IHdpbmRvdy5pbm5lcldpZHRoLAogIGhlaWdodDogd2luZG93LmlubmVySGVpZ2h0LAogIHBsdWdpbnM6IFtTeW50aFBsdWdpbl0KfSk7Cgp0LnN5bnRoKAogIG5vaXNlKChjdHgpID0-IDYgKyBNYXRoLnNpbihjdHgudGltZSkgKiA0KQogICAgLmthbGVpZCg1KQopOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKICB0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
 
 ## Properties
 

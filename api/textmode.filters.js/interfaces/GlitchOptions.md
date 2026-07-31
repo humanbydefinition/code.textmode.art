@@ -22,64 +22,7 @@ Creates a corrupted/broken digital signal aesthetic.
 
 ## Example
 
-```javascript
-const t = textmode.create({
-	width: window.innerWidth,
-	height: window.innerHeight,
-	fontSize: 8,
-	plugins: [FiltersPlugin],
-});
-const labelLayer = t.layers.add();
-
-let video;
-
-function drawText(text, x, y, r = 220, g = 230, b = 255) {
-	t.push();
-	t.printAlign('left', 'top');
-	t.charColor(r, g, b);
-	t.print(text, x, y);
-	t.pop();
-}
-
-t.setup(async () => {
-	video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
-	video.play();
-	video.loop();
-	video.characters(' .:-=+*#%@');
-});
-
-labelLayer.draw(() => {
-	t.clear();
-	const left = -Math.floor(t.grid.cols / 2),
-		top = -Math.floor(t.grid.rows / 2);
-	let y = top + 3,
-		x = left + 3;
-
-	const val = (2.5 + 2.5 * Math.sin(t.secs * 3.0)).toFixed(2);
-
-	drawText('FILTERSPLUGIN.GLITCH', x, y++, 100, 255, 140);
-	drawText('------------------------------------', x, y++, 80, 100, 150);
-	drawText('CONCEPT: DIGITAL SIGNAL BREAKUP', x, y++, 100, 220, 255);
-	drawText('Simulates data corruption artifacts.', x, y++, 140, 160, 190);
-	drawText('------------------------------------', x, y++, 80, 100, 150);
-	drawText('Glitch Amt: ' + val, x, y++, 140, 255, 180);
-});
-
-t.draw(() => {
-	if (!video) return;
-	const val = 2.5 + 2.5 * Math.sin(t.secs * 3.0);
-
-	t.layers.base.filter('glitch', val);
-
-	t.background(0);
-	t.image(video);
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
-
+<TextmodeApiSandbox profile="textmode.filters.js" language="javascript" title="GlitchOptions" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW0ZpbHRlcnNQbHVnaW5dLAp9KTsKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKbGV0IHZpZGVvOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LnNldHVwKGFzeW5jICgpID0-IHsKCXZpZGVvID0gYXdhaXQgdC5sb2FkVmlkZW8oJ2h0dHBzOi8vaW50ZXJhY3RpdmUtZXhhbXBsZXMubWRuLm1vemlsbGEubmV0L21lZGlhL2NjMC12aWRlb3MvZmxvd2VyLm1wNCcpOwoJdmlkZW8ucGxheSgpOwoJdmlkZW8ubG9vcCgpOwoJdmlkZW8uY2hhcmFjdGVycygnIC46LT0rKiMlQCcpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKSwKCQl0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzLAoJCXggPSBsZWZ0ICsgMzsKCgljb25zdCB2YWwgPSAoMi41ICsgMi41ICogTWF0aC5zaW4odC5zZWNzICogMy4wKSkudG9GaXhlZCgyKTsKCglkcmF3VGV4dCgnRklMVEVSU1BMVUdJTi5HTElUQ0gnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBESUdJVEFMIFNJR05BTCBCUkVBS1VQJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdTaW11bGF0ZXMgZGF0YSBjb3JydXB0aW9uIGFydGlmYWN0cy4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdHbGl0Y2ggQW10OiAnICsgdmFsLCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwp9KTsKCnQuZHJhdygoKSA9PiB7CglpZiAoIXZpZGVvKSByZXR1cm47Cgljb25zdCB2YWwgPSAyLjUgKyAyLjUgKiBNYXRoLnNpbih0LnNlY3MgKiAzLjApOwoKCXQubGF5ZXJzLmJhc2UuZmlsdGVyKCdnbGl0Y2gnLCB2YWwpOwoKCXQuYmFja2dyb3VuZCgwKTsKCXQuaW1hZ2UodmlkZW8pOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
 
 ## Properties
 

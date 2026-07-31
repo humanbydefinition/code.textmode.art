@@ -35,66 +35,7 @@ Multiply all channels by a scalar value (grayscale).
 
 ### Example
 
-```javascript
-const t = textmode.create({
-	width: window.innerWidth,
-	height: window.innerHeight,
-	fontSize: 8,
-	plugins: [SynthPlugin],
-});
-
-t.bpm(18);
-
-const labelLayer = t.layers.add();
-const glyphs = ' .:-=+*#%@';
-const slow = [0.0, 1.0].fast(0.16).ease('easeInOutSine');
-const breathe = [0.22, 0.78].fast(0.18).ease('easeInOutSine');
-const turn = [-0.42, 0.42].fast(0.14).ease('easeInOutSine');
-
-function drawText(text, x, y, r = 220, g = 230, b = 255) {
-	t.push();
-	t.printAlign('left', 'top');
-	t.charColor(r, g, b);
-	t.print(text, x, y);
-	t.pop();
-}
-
-labelLayer.draw(() => {
-	t.clear();
-	const left = -Math.floor(t.grid.cols / 2);
-	const top = -Math.floor(t.grid.rows / 2);
-	let y = top + 3;
-	const x = left + 3;
-
-	drawText('SYNTHSOURCE.COLOR', x, y++, 110, 255, 170);
-	drawText('------------------------------------', x, y++, 70, 110, 140);
-	drawText('MULTIPLY BY GRAYSCALE', x, y++, 120, 220, 255);
-	drawText('Gray gain breathes slowly.', x, y++, 160, 180, 210);
-	drawText('Color channels stay separate.', x, y++, 160, 180, 210);
-	drawText('------------------------------------', x, y++, 70, 110, 140);
-	drawText('Separate animated ink and paper.', x, y++, 150, 255, 190);
-});
-
-const ink = osc(6, 0.018, 1.6).rotate(turn, 0.002).color(0.9, 0.58, 1.0).modulateKaleid(noise(2.0, 0.014), 5);
-const paper = plasma(3.2, 0.024, 0.2, 1.08).color(0.08, 0.035, 0.16).hue(slow);
-
-t.synth(
-	osc(11, 0.02, 1.2)
-		.rotate(turn, 0.002)
-		.kaleid(5)
-		.color(breathe)
-		.mult(noise(2.5, 0.018), 0.36)
-		.contrast(1.18)
-		.charMap(glyphs)
-		.charColor(ink)
-		.cellColor(paper)
-);
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
-
+<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="color" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW1N5bnRoUGx1Z2luXSwKfSk7Cgp0LmJwbSgxOCk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IGdseXBocyA9ICcgLjotPSsqIyVAJzsKY29uc3Qgc2xvdyA9IFswLjAsIDEuMF0uZmFzdCgwLjE2KS5lYXNlKCdlYXNlSW5PdXRTaW5lJyk7CmNvbnN0IGJyZWF0aGUgPSBbMC4yMiwgMC43OF0uZmFzdCgwLjE4KS5lYXNlKCdlYXNlSW5PdXRTaW5lJyk7CmNvbnN0IHR1cm4gPSBbLTAuNDIsIDAuNDJdLmZhc3QoMC4xNCkuZWFzZSgnZWFzZUluT3V0U2luZScpOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWRyYXdUZXh0KCdTWU5USFNPVVJDRS5DT0xPUicsIHgsIHkrKywgMTEwLCAyNTUsIDE3MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA3MCwgMTEwLCAxNDApOwoJZHJhd1RleHQoJ01VTFRJUExZIEJZIEdSQVlTQ0FMRScsIHgsIHkrKywgMTIwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnR3JheSBnYWluIGJyZWF0aGVzIHNsb3dseS4nLCB4LCB5KyssIDE2MCwgMTgwLCAyMTApOwoJZHJhd1RleHQoJ0NvbG9yIGNoYW5uZWxzIHN0YXkgc2VwYXJhdGUuJywgeCwgeSsrLCAxNjAsIDE4MCwgMjEwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDcwLCAxMTAsIDE0MCk7CglkcmF3VGV4dCgnU2VwYXJhdGUgYW5pbWF0ZWQgaW5rIGFuZCBwYXBlci4nLCB4LCB5KyssIDE1MCwgMjU1LCAxOTApOwp9KTsKCmNvbnN0IGluayA9IG9zYyg2LCAwLjAxOCwgMS42KS5yb3RhdGUodHVybiwgMC4wMDIpLmNvbG9yKDAuOSwgMC41OCwgMS4wKS5tb2R1bGF0ZUthbGVpZChub2lzZSgyLjAsIDAuMDE0KSwgNSk7CmNvbnN0IHBhcGVyID0gcGxhc21hKDMuMiwgMC4wMjQsIDAuMiwgMS4wOCkuY29sb3IoMC4wOCwgMC4wMzUsIDAuMTYpLmh1ZShzbG93KTsKCnQuc3ludGgoCglvc2MoMTEsIDAuMDIsIDEuMikKCQkucm90YXRlKHR1cm4sIDAuMDAyKQoJCS5rYWxlaWQoNSkKCQkuY29sb3IoYnJlYXRoZSkKCQkubXVsdChub2lzZSgyLjUsIDAuMDE4KSwgMC4zNikKCQkuY29udHJhc3QoMS4xOCkKCQkuY2hhck1hcChnbHlwaHMpCgkJLmNoYXJDb2xvcihpbmspCgkJLmNlbGxDb2xvcihwYXBlcikKKTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
 
 ## Call Signature
 
@@ -126,60 +67,5 @@ This is the recommended way to add color to grayscale sources like `osc()`,
 
 ### Example
 
-```javascript
-const t = textmode.create({
-	width: window.innerWidth,
-	height: window.innerHeight,
-	fontSize: 8,
-	plugins: [SynthPlugin],
-});
-
-t.bpm(18);
-
-const labelLayer = t.layers.add();
-const glyphs = ' .:-=+*#%@';
-const breathe = [0.22, 0.78].fast(0.18).ease('easeInOutSine');
-
-function drawText(text, x, y, r = 220, g = 230, b = 255) {
-	t.push();
-	t.printAlign('left', 'top');
-	t.charColor(r, g, b);
-	t.print(text, x, y);
-	t.pop();
-}
-
-labelLayer.draw(() => {
-	t.clear();
-	const left = -Math.floor(t.grid.cols / 2);
-	const top = -Math.floor(t.grid.rows / 2);
-	let y = top + 3;
-	const x = left + 3;
-
-	drawText('SYNTHSOURCE.COLOR2', x, y++, 110, 255, 170);
-	drawText('------------------------------------', x, y++, 70, 110, 140);
-	drawText('MULTIPLY BY RGBA', x, y++, 120, 220, 255);
-	drawText('Each color channel eases.', x, y++, 160, 180, 210);
-	drawText('Phase offsets avoid flashing.', x, y++, 160, 180, 210);
-	drawText('------------------------------------', x, y++, 70, 110, 140);
-	drawText('Separate animated ink and paper.', x, y++, 150, 255, 190);
-});
-
-const ink = osc(5, 0.018, 1.1).kaleid(4).color(0.45, 0.72, 1.0).modulate(noise(2.2, 0.018), 0.025);
-const paper = plasma(3.6, 0.028, 0.1, 1.05).color(0.03, 0.08, 0.18).modulateScale(noise(2.0, 0.015), 0.22, 0.95);
-
-t.synth(
-	plasma(4.4, 0.024, 0.0, 1.14)
-		.modulate(noise(2.4, 0.016), 0.03)
-		.color(breathe, breathe.offset(0.33), breathe.offset(0.66), 1.0)
-		.overlay(osc(7, 0.016).kaleid(4), 0.24)
-		.contrast(1.16)
-		.charMap(glyphs)
-		.charColor(ink)
-		.cellColor(paper)
-);
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
+<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="color" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW1N5bnRoUGx1Z2luXSwKfSk7Cgp0LmJwbSgxOCk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IGdseXBocyA9ICcgLjotPSsqIyVAJzsKY29uc3QgYnJlYXRoZSA9IFswLjIyLCAwLjc4XS5mYXN0KDAuMTgpLmVhc2UoJ2Vhc2VJbk91dFNpbmUnKTsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnU1lOVEhTT1VSQ0UuQ09MT1IyJywgeCwgeSsrLCAxMTAsIDI1NSwgMTcwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDcwLCAxMTAsIDE0MCk7CglkcmF3VGV4dCgnTVVMVElQTFkgQlkgUkdCQScsIHgsIHkrKywgMTIwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnRWFjaCBjb2xvciBjaGFubmVsIGVhc2VzLicsIHgsIHkrKywgMTYwLCAxODAsIDIxMCk7CglkcmF3VGV4dCgnUGhhc2Ugb2Zmc2V0cyBhdm9pZCBmbGFzaGluZy4nLCB4LCB5KyssIDE2MCwgMTgwLCAyMTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgNzAsIDExMCwgMTQwKTsKCWRyYXdUZXh0KCdTZXBhcmF0ZSBhbmltYXRlZCBpbmsgYW5kIHBhcGVyLicsIHgsIHkrKywgMTUwLCAyNTUsIDE5MCk7Cn0pOwoKY29uc3QgaW5rID0gb3NjKDUsIDAuMDE4LCAxLjEpLmthbGVpZCg0KS5jb2xvcigwLjQ1LCAwLjcyLCAxLjApLm1vZHVsYXRlKG5vaXNlKDIuMiwgMC4wMTgpLCAwLjAyNSk7CmNvbnN0IHBhcGVyID0gcGxhc21hKDMuNiwgMC4wMjgsIDAuMSwgMS4wNSkuY29sb3IoMC4wMywgMC4wOCwgMC4xOCkubW9kdWxhdGVTY2FsZShub2lzZSgyLjAsIDAuMDE1KSwgMC4yMiwgMC45NSk7Cgp0LnN5bnRoKAoJcGxhc21hKDQuNCwgMC4wMjQsIDAuMCwgMS4xNCkKCQkubW9kdWxhdGUobm9pc2UoMi40LCAwLjAxNiksIDAuMDMpCgkJLmNvbG9yKGJyZWF0aGUsIGJyZWF0aGUub2Zmc2V0KDAuMzMpLCBicmVhdGhlLm9mZnNldCgwLjY2KSwgMS4wKQoJCS5vdmVybGF5KG9zYyg3LCAwLjAxNikua2FsZWlkKDQpLCAwLjI0KQoJCS5jb250cmFzdCgxLjE2KQoJCS5jaGFyTWFwKGdseXBocykKCQkuY2hhckNvbG9yKGluaykKCQkuY2VsbENvbG9yKHBhcGVyKQopOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
 

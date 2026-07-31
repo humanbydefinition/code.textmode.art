@@ -26,55 +26,5 @@ Draw one cell with the current settings.
 
 ## Example
 
-```javascript
-const t = textmode.create({
-	width: window.innerWidth,
-	height: window.innerHeight,
-	fontSize: 16,
-});
-
-const labelLayer = t.layers.add();
-
-function drawText(text, x, y, r = 220, g = 230, b = 255) {
-	t.push();
-	t.printAlign('left', 'top');
-	t.charColor(r, g, b);
-	t.print(text, x, y);
-	t.pop();
-}
-
-t.draw(() => {
-	t.background(6, 10, 22);
-	const count = 24;
-	for (let i = 0; i < count; i++) {
-		const angle = t.frameCount * 0.03 + (i / count) * Math.PI * 2;
-		const radius = 5 + (i % 4) * 2;
-		t.push();
-		t.translate(Math.cos(angle) * radius * 1.6, Math.sin(angle) * radius);
-		t.char(i % 2 === 0 ? '+' : '.');
-		t.charColor(120 + i * 4, 180, 255 - i * 3);
-		t.point();
-		t.pop();
-	}
-});
-
-labelLayer.draw(() => {
-	t.clear();
-	const left = -Math.floor(t.grid.cols / 2);
-	const top = -Math.floor(t.grid.rows / 2);
-	let y = top + 3;
-	const x = left + 3;
-	drawText('TEXTMODIFIER.POINT', x, y++, 100, 255, 140);
-	drawText('------------------------------------', x, y++, 80, 100, 150);
-	drawText('CONCEPT: DRAW ONE CELL', x, y++, 100, 220, 255);
-	drawText('point() stamps the active glyph.', x, y++, 140, 160, 190);
-	drawText('Each dot uses its own transform.', x, y++, 140, 160, 190);
-	drawText('------------------------------------', x, y++, 80, 100, 150);
-	drawText('API: t.point()', x, y++, 140, 255, 180);
-});
-
-t.windowResized(() => {
-	t.resizeCanvas(window.innerWidth, window.innerHeight);
-});
-```
+<TextmodeApiSandbox profile="textmode.js" language="javascript" title="point" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNiwgMTAsIDIyKTsKCWNvbnN0IGNvdW50ID0gMjQ7Cglmb3IgKGxldCBpID0gMDsgaSA8IGNvdW50OyBpKyspIHsKCQljb25zdCBhbmdsZSA9IHQuZnJhbWVDb3VudCAqIDAuMDMgKyAoaSAvIGNvdW50KSAqIE1hdGguUEkgKiAyOwoJCWNvbnN0IHJhZGl1cyA9IDUgKyAoaSAlIDQpICogMjsKCQl0LnB1c2goKTsKCQl0LnRyYW5zbGF0ZShNYXRoLmNvcyhhbmdsZSkgKiByYWRpdXMgKiAxLjYsIE1hdGguc2luKGFuZ2xlKSAqIHJhZGl1cyk7CgkJdC5jaGFyKGkgJSAyID09PSAwID8gJysnIDogJy4nKTsKCQl0LmNoYXJDb2xvcigxMjAgKyBpICogNCwgMTgwLCAyNTUgLSBpICogMyk7CgkJdC5wb2ludCgpOwoJCXQucG9wKCk7Cgl9Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuUE9JTlQnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBEUkFXIE9ORSBDRUxMJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdwb2ludCgpIHN0YW1wcyB0aGUgYWN0aXZlIGdseXBoLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnRWFjaCBkb3QgdXNlcyBpdHMgb3duIHRyYW5zZm9ybS4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdBUEk6IHQucG9pbnQoKScsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
 
