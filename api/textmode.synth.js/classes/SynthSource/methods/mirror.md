@@ -8,7 +8,7 @@ api: true
 owner: SynthSource
 kind: Method
 ecosystem: textmode.js
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.synth.js](../../../index.md) / [SynthSource](../../SynthSource.md) / mirror
@@ -34,5 +34,60 @@ Mirror coordinates across X and/or Y axes.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="mirror" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW1N5bnRoUGx1Z2luXSwKfSk7Cgp0LmJwbSgxOCk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IGdseXBocyA9ICcgLjotPSsqIyVAJzsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnU1lOVEhTT1VSQ0UuTUlSUk9SJywgeCwgeSsrLCAxMTAsIDI1NSwgMTcwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDcwLCAxMTAsIDE0MCk7CglkcmF3VGV4dCgnU1lNTUVUUlkgRk9MRElORycsIHgsIHkrKywgMTIwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnVVYgc3BhY2UgcmVmbGVjdHMgc29mdGx5LicsIHgsIHkrKywgMTYwLCAxODAsIDIxMCk7CglkcmF3VGV4dCgnQmlsYXRlcmFsIG1vdGlvbiBpcyBjYWxtLicsIHgsIHkrKywgMTYwLCAxODAsIDIxMCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA3MCwgMTEwLCAxNDApOwoJZHJhd1RleHQoJ1NlcGFyYXRlIGFuaW1hdGVkIGluayBhbmQgcGFwZXIuJywgeCwgeSsrLCAxNTAsIDI1NSwgMTkwKTsKfSk7Cgpjb25zdCBpbmsgPSBwbGFzbWEoNC4yLCAwLjAyNCwgMC4wLCAxLjEyKS5jb2xvcigwLjQyLCAxLjAsIDAuNTgpLm1vZHVsYXRlUm90YXRlKG5vaXNlKDIuMCwgMC4wMTUpLCAwLjI4LCAwLjA0KTsKY29uc3QgcGFwZXIgPSBtb2lyZSg2LCA3LCAwLjAsIDEuNTcsIDAuMDE4KS5jb2xvcigwLjAyNSwgMC4xMywgMC4wNjUpLnNvZnRsaWdodChub2lzZSgyLjAsIDAuMDE0KSwgMC4xOCk7Cgp0LnN5bnRoKAoJdm9yb25vaSgzLjgsIDAuMDQ1LCAwLjI4KQoJCS5taXJyb3IoMS4wLCBbMC4wLCAxLjBdLmZhc3QoMC4xKS5lYXNlKCdlYXNlSW5PdXRTaW5lJykpCgkJLmthbGVpZCg0KQoJCS5jb2xvcmFtYSgwLjA4KQoJCS5tb2R1bGF0ZShub2lzZSgyLjAsIDAuMDE0KSwgMC4wMikKCQkuY29udHJhc3QoMS4xNikKCQkuY2hhck1hcChnbHlwaHMpCgkJLmNoYXJDb2xvcihpbmspCgkJLmNlbGxDb2xvcihwYXBlcikKKTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 8,
+	plugins: [SynthPlugin],
+});
+
+t.bpm(18);
+
+const labelLayer = t.layers.add();
+const glyphs = ' .:-=+*#%@';
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('SYNTHSOURCE.MIRROR', x, y++, 110, 255, 170);
+	drawText('------------------------------------', x, y++, 70, 110, 140);
+	drawText('SYMMETRY FOLDING', x, y++, 120, 220, 255);
+	drawText('UV space reflects softly.', x, y++, 160, 180, 210);
+	drawText('Bilateral motion is calm.', x, y++, 160, 180, 210);
+	drawText('------------------------------------', x, y++, 70, 110, 140);
+	drawText('Separate animated ink and paper.', x, y++, 150, 255, 190);
+});
+
+const ink = plasma(4.2, 0.024, 0.0, 1.12).color(0.42, 1.0, 0.58).modulateRotate(noise(2.0, 0.015), 0.28, 0.04);
+const paper = moire(6, 7, 0.0, 1.57, 0.018).color(0.025, 0.13, 0.065).softlight(noise(2.0, 0.014), 0.18);
+
+t.synth(
+	voronoi(3.8, 0.045, 0.28)
+		.mirror(1.0, [0.0, 1.0].fast(0.1).ease('easeInOutSine'))
+		.kaleid(4)
+		.colorama(0.08)
+		.modulate(noise(2.0, 0.014), 0.02)
+		.contrast(1.16)
+		.charMap(glyphs)
+		.charColor(ink)
+		.cellColor(paper)
+);
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

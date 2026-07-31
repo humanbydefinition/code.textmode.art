@@ -7,7 +7,7 @@ category: Properties
 api: true
 owner: Textmodifier
 kind: Property
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / movedY
@@ -25,5 +25,97 @@ stop being meaningful and relative movement becomes the primary input signal.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="movedY" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpsZXQgY3ggPSAwOwpsZXQgY3kgPSAwOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0Lm1vdXNlQ2xpY2tlZCgoKSA9PiB7CglpZiAoZG9jdW1lbnQucG9pbnRlckxvY2tFbGVtZW50ID09PSB0LmNhbnZhcykgdC5leGl0UG9pbnRlckxvY2soKTsKCWVsc2UgdC5yZXF1ZXN0UG9pbnRlckxvY2soKTsKfSk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDEwLCAyMik7Cgljb25zdCBsb2NrZWQgPSBkb2N1bWVudC5wb2ludGVyTG9ja0VsZW1lbnQgPT09IHQuY2FudmFzOwoJaWYgKGxvY2tlZCkgewoJCWN4ICs9IHQubW92ZWRYICogMC4wODsKCQljeSArPSB0Lm1vdmVkWSAqIDAuMDg7Cgl9CgljeCA9IE1hdGgubWF4KC0yMCwgTWF0aC5taW4oMjAsIGN4KSk7CgljeSA9IE1hdGgubWF4KC0xMCwgTWF0aC5taW4oMTAsIGN5KSk7Cgl0LnB1c2goKTsKCXQudHJhbnNsYXRlKGN4LCBjeSk7Cgl0LmNoYXIobG9ja2VkID8gJ0AnIDogJysnKTsKCXQuY2hhckNvbG9yKGxvY2tlZCA_IDE0MCA6IDI1NSwgbG9ja2VkID8gMjU1IDogMjEwLCAxODApOwoJdC5wb2ludCgpOwoJdC5wb3AoKTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5SRVFVRVNUUE9JTlRFUkxPQ0snLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBMT0NLIFBPSU5URVInLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ0NsaWNrIHRvZ2dsZXMgcG9pbnRlciBsb2NrLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnTW92ZW1lbnQgdXNlcyBtb3ZlZFgvbW92ZWRZLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoZG9jdW1lbnQucG9pbnRlckxvY2tFbGVtZW50ID09PSB0LmNhbnZhcyA_ICdMT0NLRUQ6IFRSVUUnIDogJ0xPQ0tFRDogRkFMU0UnLCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const labelLayer = t.layers.add();
+let rotX = 0,
+	rotY = 0;
+
+function drawText(txt, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(txt, x, y);
+	t.pop();
+}
+
+t.mouseClicked(() => {
+	if (document.pointerLockElement === t.canvas) t.exitPointerLock();
+	else t.requestPointerLock();
+});
+
+t.draw(() => {
+	t.background(5, 8, 10);
+	const isLocked = document.pointerLockElement === t.canvas;
+
+	if (isLocked) {
+		rotX += t.movedX * 0.35;
+		rotY += t.movedY * 0.35;
+	} else {
+		rotX += 0.25;
+	}
+
+	const hw = Math.floor(t.grid.cols / 2),
+		hh = Math.floor(t.grid.rows / 2);
+	const rad = Math.floor(Math.min(hw, hh) * 0.65);
+	const angleOffset = (rotX * 0.05) % (Math.PI * 2);
+
+	for (let y = -hh; y <= hh; y += 1) {
+		for (let x = -hw; x <= hw; x += 1) {
+			const d = Math.hypot(x, y * 1.4);
+			const cellAngle = Math.atan2(y * 1.4, x) + Math.PI;
+
+			let isRing = Math.abs(d - rad) < 0.8 || Math.abs(d - rad * 0.5) < 0.8;
+			let isAxis = (x === 0 && Math.abs(y) <= rad + 2) || (y === 0 && Math.abs(x) <= rad + 2);
+			let isTick = isRing && Math.abs((cellAngle + angleOffset) % (Math.PI / 4)) < 0.08;
+
+			if (isRing || isAxis || isTick) {
+				t.push();
+				t.translate(x, y);
+
+				if (isLocked) {
+					if (d < 3) {
+						t.charColor(255, 51, 51);
+						t.cellColor(90, 0, 0);
+						t.char('+');
+					} else if (isTick) {
+						t.charColor(255, 200, 0);
+						t.char('#');
+					} else {
+						t.charColor(255, 153, 0);
+						t.char(isAxis ? (x === 0 ? '|' : '-') : '*');
+					}
+				} else {
+					t.charColor(68, 85, 102);
+					t.char(isAxis ? '+' : '.');
+				}
+
+				t.point();
+				t.pop();
+			}
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2),
+		top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	const isLocked = document.pointerLockElement === t.canvas;
+
+	drawText('TEXTMODIFIER.REQUESTPOINTERLOCK', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: 360 DEGREE POINTER LOCK', x, y++, 100, 220, 255);
+	drawText('Click canvas to toggle pointer lock.', x, y++, 140, 160, 190);
+	drawText('Captures unconstrained movedX/movedY.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('POINTER LOCK: ' + (isLocked ? 'LOCKED' : 'UNLOCKED'), x, y++, 140, 255, 180);
+	drawText('ACCUMULATED ROTATION X: ' + rotX.toFixed(1), x, y++, 180, 200, 220);
+	drawText('ACCUMULATED ROTATION Y: ' + rotY.toFixed(1), x, y++, 180, 200, 220);
+});
+
+t.windowResized(() => t.resizeCanvas(window.innerWidth, window.innerHeight));
+```
 

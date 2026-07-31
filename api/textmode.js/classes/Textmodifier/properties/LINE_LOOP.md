@@ -7,7 +7,7 @@ category: Properties
 api: true
 owner: Textmodifier
 kind: Property
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / LINE\_LOOP
@@ -25,5 +25,58 @@ the last vertex should connect back to the first.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="LINE_LOOP" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBtb2RlID0gdC5MSU5FX0xPT1A7CmNvbnN0IG1vZGVOYW1lID0gJ0xJTkVfTE9PUCc7CmNvbnN0IGxhYmVsTGF5ZXIgPSB0LmxheWVycy5hZGQoKTsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKdC5kcmF3KCgpID0-IHsKCWNvbnN0IHRpbWUgPSB0LmZyYW1lQ291bnQgKiAwLjAzNTsKCXQuYmFja2dyb3VuZCg3LCAxMCwgMjQpOwoJdC5saW5lV2VpZ2h0KDAuNyk7Cgl0LmJlZ2luU2hhcGUobW9kZSk7Cglmb3IgKGxldCBpID0gMDsgaSA8IDY0OyBpKyspIHsKCQljb25zdCBwID0gaSAvIDY0OwoJCWNvbnN0IGEgPSBwICogTWF0aC5QSSAqIDI7CgkJY29uc3QgciA9IDEwICsgTWF0aC5zaW4oYSAqIDUgKyB0aW1lICogMikgKiAyICsgTWF0aC5jb3MoYSAqIDMgLSB0aW1lKSAqIDEuNTsKCQl0LmNoYXIoaSAlIDUgPT09IDAgPyAnIycgOiAnKycpOwoJCXQuY2hhckNvbG9yKDEyMCArIE1hdGguc2luKGEpICogODAsIDIxMCwgMTgwICsgTWF0aC5jb3MoYSkgKiA2MCk7CgkJdC52ZXJ0ZXgoTWF0aC5jb3MoYSkgKiByLCBNYXRoLnNpbihhKSAqIHIpOwoJfQoJdC5lbmRTaGFwZSgpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLkxJTkVfTE9PUCcsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IENMT1NFRCBPVVRMSU5FJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdMYXN0IHZlcnRleCByZXR1cm5zIHRvIGZpcnN0LicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnR29vZCBmb3Igb3JiaXRpbmcgY29udG91cnMuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dChgTU9ERTogJHttb2RlTmFtZX1gLCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const mode = t.LINE_LOOP;
+const modeName = 'LINE_LOOP';
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	const time = t.frameCount * 0.035;
+	t.background(7, 10, 24);
+	t.lineWeight(0.7);
+	t.beginShape(mode);
+	for (let i = 0; i < 64; i++) {
+		const p = i / 64;
+		const a = p * Math.PI * 2;
+		const r = 10 + Math.sin(a * 5 + time * 2) * 2 + Math.cos(a * 3 - time) * 1.5;
+		t.char(i % 5 === 0 ? '#' : '+');
+		t.charColor(120 + Math.sin(a) * 80, 210, 180 + Math.cos(a) * 60);
+		t.vertex(Math.cos(a) * r, Math.sin(a) * r);
+	}
+	t.endShape();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.LINE_LOOP', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: CLOSED OUTLINE', x, y++, 100, 220, 255);
+	drawText('Last vertex returns to first.', x, y++, 140, 160, 190);
+	drawText('Good for orbiting contours.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`MODE: ${modeName}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

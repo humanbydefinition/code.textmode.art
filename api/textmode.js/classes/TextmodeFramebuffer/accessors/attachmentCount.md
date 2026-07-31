@@ -7,7 +7,7 @@ category: Accessors
 api: true
 owner: TextmodeFramebuffer
 kind: Accessor
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [TextmodeFramebuffer](../../TextmodeFramebuffer.md) / attachmentCount
@@ -28,5 +28,74 @@ Number of color attachments available on this framebuffer.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="attachmentCount" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCBmYjsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMDAsIGcgPSAyMjAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC50cmFuc2xhdGUoeCwgeSk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCWZvciAobGV0IGkgPSAwOyBpIDwgdGV4dC5sZW5ndGg7IGkrKykgewoJCXQuY2hhcih0ZXh0W2ldKTsKCQl0LnBvaW50KCk7CgkJdC50cmFuc2xhdGUoMSwgMCk7Cgl9Cgl0LnBvcCgpOwp9Cgp0LnNldHVwKCgpID0-IHsKCS8vIFJlcXVlc3RpbmcgZXhhY3RseSA0IGNvbG9yIGF0dGFjaG1lbnRzCglmYiA9IHQuY3JlYXRlRnJhbWVidWZmZXIoeyB3aWR0aDogMTQsIGhlaWdodDogMTAsIGF0dGFjaG1lbnRzOiA0IH0pOwp9KTsKCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoOCwgMTAsIDE4KTsKCglmYi5iZWdpbigpOwoJdC5jbGVhcigpOwoJdC5iYWNrZ3JvdW5kKDE1LCAxMiwgMzApOwoJdC5jaGFyQ29sb3IoMjU1LCAxODAsIDEyMCk7Cgl0LmNoYXIoJ0EnKTsKCXQucHVzaCgpOwoJdC5yb3RhdGVaKHQuZnJhbWVDb3VudCAqIDIuMCk7Cgl0LnJlY3QoOCwgNik7Cgl0LnBvcCgpOwoJZmIuZW5kKCk7CgoJdC5wdXNoKCk7Cgl0LnRyYW5zbGF0ZSgwLCAzKTsKCXQuaW1hZ2UoZmIpOwoJdC5wb3AoKTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWRyYXdUZXh0KCdBVFRBQ0hNRU5UQ09VTlQnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ051bWJlciBvZiBjb2xvciBhdHRhY2htZW50cy4nLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoKCWNvbnN0IGNvdW50ID0gZmIgPyBmYi5hdHRhY2htZW50Q291bnQgOiAwOwoJZHJhd1RleHQoYEF0dGFjaG1lbnRzOiAke2NvdW50fSBjb2xvciB0YXJnZXRzYCwgeCwgeSsrLCAxMjAsIDI1NSwgMTgwKTsKCWRyYXdUZXh0KCcwOiBDaGFyYWN0ZXIvdHJhbnNmb3JtIGRhdGEnLCB4LCB5KyssIDE2MCwgMTYwLCAxNjApOwoJZHJhd1RleHQoJzE6IFByaW1hcnkgY2hhcmFjdGVyIGNvbG9yJywgeCwgeSsrLCAxNjAsIDE2MCwgMTYwKTsKCWRyYXdUZXh0KCcyOiBTZWNvbmRhcnkgYmFja2dyb3VuZCBjb2xvcicsIHgsIHkrKywgMTYwLCAxNjAsIDE2MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let fb;
+
+function drawText(text, x, y, r = 200, g = 220, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+t.setup(() => {
+	// Requesting exactly 4 color attachments
+	fb = t.createFramebuffer({ width: 14, height: 10, attachments: 4 });
+});
+
+t.draw(() => {
+	t.background(8, 10, 18);
+
+	fb.begin();
+	t.clear();
+	t.background(15, 12, 30);
+	t.charColor(255, 180, 120);
+	t.char('A');
+	t.push();
+	t.rotateZ(t.frameCount * 2.0);
+	t.rect(8, 6);
+	t.pop();
+	fb.end();
+
+	t.push();
+	t.translate(0, 3);
+	t.image(fb);
+	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('ATTACHMENTCOUNT', x, y++, 100, 255, 140);
+	drawText('--------------------------------', x, y++, 80, 100, 150);
+	drawText('Number of color attachments.', x, y++, 100, 220, 255);
+	drawText('--------------------------------', x, y++, 80, 100, 150);
+
+	const count = fb ? fb.attachmentCount : 0;
+	drawText(`Attachments: ${count} color targets`, x, y++, 120, 255, 180);
+	drawText('0: Character/transform data', x, y++, 160, 160, 160);
+	drawText('1: Primary character color', x, y++, 160, 160, 160);
+	drawText('2: Secondary background color', x, y++, 160, 160, 160);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

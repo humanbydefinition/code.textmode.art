@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / dist
@@ -41,5 +41,78 @@ The distance between the two points.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="dist" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCBkaXN0YW5jZSA9IDA7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCmZ1bmN0aW9uIGRyYXdQb2ludCh4LCB5KSB7Cgl0LnB1c2goKTsKCXQudHJhbnNsYXRlKHgsIHkpOwoJdC5wb2ludCgpOwoJdC5wb3AoKTsKfQoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg1LCAxMCwgMTgpOwoJY29uc3QgYmVhY29uWCA9IE1hdGguY29zKHQuZnJhbWVDb3VudCAqIDAuMDI1KSAqIDg7Cgljb25zdCBiZWFjb25ZID0gTWF0aC5zaW4odC5mcmFtZUNvdW50ICogMC4wMzUpICogNTsKCWRpc3RhbmNlID0gdC5kaXN0KGJlYWNvblgsIGJlYWNvblksIHQubW91c2UueCwgdC5tb3VzZS55KTsKCglmb3IgKGxldCB5ID0gLTEwOyB5IDw9IDEwOyB5ICs9IDIpIHsKCQlmb3IgKGxldCB4ID0gLTE4OyB4IDw9IDE4OyB4ICs9IDIpIHsKCQkJY29uc3QgZCA9IHQuZGlzdCh4LCB5LCBiZWFjb25YLCBiZWFjb25ZKTsKCQkJY29uc3Qgc2hhZGUgPSBNYXRoLnJvdW5kKHQuY29uc3RyYWluKHQubWFwKGQsIDAsIDIwLCAyMTAsIDM1KSwgMzUsIDIxMCkpOwoJCQl0LmNoYXIoZCA8IDQgPyAnKicgOiAnLicpOwoJCQl0LmNoYXJDb2xvcig2MCwgc2hhZGUsIDI1NSAtIHNoYWRlICogMC40KTsKCQkJZHJhd1BvaW50KHgsIHkpOwoJCX0KCX0KCgl0LmNoYXIoJ28nKTsKCXQuY2hhckNvbG9yKDI1NSwgMjIwLCAxMjApOwoJdC5wdXNoKCk7Cgl0LnRyYW5zbGF0ZShiZWFjb25YLCBiZWFjb25ZKTsKCXQuZWxsaXBzZSg4LCA4KTsKCXQucG9pbnQoKTsKCXQucG9wKCk7CgoJdC5jaGFyKCcrJyk7Cgl0LmNoYXJDb2xvcigxMjAsIDI1NSwgMTgwKTsKCWRyYXdQb2ludCh0Lm1vdXNlLngsIHQubW91c2UueSk7Cgl0LmxpbmUoYmVhY29uWCwgYmVhY29uWSwgdC5tb3VzZS54LCB0Lm1vdXNlLnkpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLkRJU1QnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBQT0lOVCBESVNUQU5DRScsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnZGlzdCgpIG1lYXN1cmVzIGJldHdlZW4gdHdvIHBvaW50cy4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJ0Rpc3RhbmNlIGRyaXZlcyB0aGUgZmllbGQgc2hhZGluZy4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KGBNT1VTRSBSQU5HRTogJHtkaXN0YW5jZS50b0ZpeGVkKDEpfWAsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let distance = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+function drawPoint(x, y) {
+	t.push();
+	t.translate(x, y);
+	t.point();
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(5, 10, 18);
+	const beaconX = Math.cos(t.frameCount * 0.025) * 8;
+	const beaconY = Math.sin(t.frameCount * 0.035) * 5;
+	distance = t.dist(beaconX, beaconY, t.mouse.x, t.mouse.y);
+
+	for (let y = -10; y <= 10; y += 2) {
+		for (let x = -18; x <= 18; x += 2) {
+			const d = t.dist(x, y, beaconX, beaconY);
+			const shade = Math.round(t.constrain(t.map(d, 0, 20, 210, 35), 35, 210));
+			t.char(d < 4 ? '*' : '.');
+			t.charColor(60, shade, 255 - shade * 0.4);
+			drawPoint(x, y);
+		}
+	}
+
+	t.char('o');
+	t.charColor(255, 220, 120);
+	t.push();
+	t.translate(beaconX, beaconY);
+	t.ellipse(8, 8);
+	t.point();
+	t.pop();
+
+	t.char('+');
+	t.charColor(120, 255, 180);
+	drawPoint(t.mouse.x, t.mouse.y);
+	t.line(beaconX, beaconY, t.mouse.x, t.mouse.y);
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.DIST', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: POINT DISTANCE', x, y++, 100, 220, 255);
+	drawText('dist() measures between two points.', x, y++, 140, 160, 190);
+	drawText('Distance drives the field shading.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`MOUSE RANGE: ${distance.toFixed(1)}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

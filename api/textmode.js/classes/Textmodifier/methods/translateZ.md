@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / translateZ
@@ -30,7 +30,76 @@ Current Z-axis translation in grid cells.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="translateZ" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IFJBTVAgPSAnIC46LT0rKiMlQCc7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDEwLCAyNCk7Cgljb25zdCBjb2xzID0gdC5ncmlkLmNvbHMsCgkJcm93cyA9IHQuZ3JpZC5yb3dzOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKChjb2xzIC0gMSkgLyAyKSwKCQlyaWdodCA9IGxlZnQgKyBjb2xzIC0gMTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHJvd3MgLyAyKSwKCQlib3R0b20gPSB0b3AgKyByb3dzIC0gMTsKCWNvbnN0IHRtID0gdC5mcmFtZUNvdW50ICogMC4wNDsKCglmb3IgKGxldCB5ID0gdG9wOyB5IDw9IGJvdHRvbTsgeSsrKSB7CgkJZm9yIChsZXQgeCA9IGxlZnQ7IHggPD0gcmlnaHQ7IHgrKykgewoJCQljb25zdCBkaXN0ID0gTWF0aC5oeXBvdCh4LCB5KTsKCQkJY29uc3QgeiA9IE1hdGguc2luKGRpc3QgKiAwLjI1IC0gdG0gKiAzKSAqIDE2OwoJCQljb25zdCBub3JtID0gKHogKyAxNikgLyAzMjsKCgkJCWNvbnN0IGNoYXJLZXkgPSBSQU1QW01hdGguZmxvb3Iobm9ybSAqIChSQU1QLmxlbmd0aCAtIDEpKV07CgoJCQl0LnB1c2goKTsKCQkJdC50cmFuc2xhdGVaKHopOwoJCQl0LnRyYW5zbGF0ZSh4LCB5KTsKCQkJdC5jaGFyQ29sb3IoTWF0aC5mbG9vcigxMDAgKyBub3JtICogMTU1KSwgTWF0aC5mbG9vcigyMjAgLSBub3JtICogODApLCBNYXRoLmZsb29yKDI1NSAtIG5vcm0gKiAxMjApKTsKCQkJdC5jZWxsQ29sb3IoTWF0aC5mbG9vcig4ICsgbm9ybSAqIDE2KSwgTWF0aC5mbG9vcigyMCArIG5vcm0gKiAxOCksIE1hdGguZmxvb3IoNDAgKyBub3JtICogMjApKTsKCQkJdC5jaGFyKGNoYXJLZXkpOwoJCQl0LnBvaW50KCk7CgkJCXQucG9wKCk7CgkJfQoJfQp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKSwKCQl0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzLAoJCXggPSBsZWZ0ICsgMzsKCgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKDEyMCwgMjQwLCAxODApOwoJdC5wcmludCgnVEVYVE1PRElGSUVSLlRSQU5TTEFURVonLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoNzAsIDEwMCwgMTQwKTsKCXQucHJpbnQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDIxMCwgMjU1KTsKCXQucHJpbnQoJ0NPTkNFUFQ6IDNEIEhZUEVSLVRVTk5FTCBUUkFWRUwnLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAxNjAsIDE5MCk7Cgl0LnByaW50KCdUcmFuc2xhdGVzIG9yaWdpbiBhbG9uZyBaLWF4aXMgKGRlcHRoKScsIHgsIHkrKyk7Cgl0LnByaW50KCdkZW1vbnN0cmF0aW5nIDNEIHBlcnNwZWN0aXZlIHByb2plY3Rpb24uJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDcwLCAxMDAsIDE0MCk7Cgl0LnByaW50KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAyNTUsIDIwMCk7Cgl0LnByaW50KCdESVNQTEFDRU1FTlQ6IEZVTEwtR1JJRCBaLUFYSVMgV0FSUCcsIHgsIHkrKyk7Cgl0LnBvcCgpOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+const RAMP = ' .:-=+*#%@';
+
+t.draw(() => {
+	t.background(6, 10, 24);
+	const cols = t.grid.cols,
+		rows = t.grid.rows;
+	const left = -Math.floor((cols - 1) / 2),
+		right = left + cols - 1;
+	const top = -Math.floor(rows / 2),
+		bottom = top + rows - 1;
+	const tm = t.frameCount * 0.04;
+
+	for (let y = top; y <= bottom; y++) {
+		for (let x = left; x <= right; x++) {
+			const dist = Math.hypot(x, y);
+			const z = Math.sin(dist * 0.25 - tm * 3) * 16;
+			const norm = (z + 16) / 32;
+
+			const charKey = RAMP[Math.floor(norm * (RAMP.length - 1))];
+
+			t.push();
+			t.translateZ(z);
+			t.translate(x, y);
+			t.charColor(Math.floor(100 + norm * 155), Math.floor(220 - norm * 80), Math.floor(255 - norm * 120));
+			t.cellColor(Math.floor(8 + norm * 16), Math.floor(20 + norm * 18), Math.floor(40 + norm * 20));
+			t.char(charKey);
+			t.point();
+			t.pop();
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2),
+		top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3,
+		x = left + 3;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODIFIER.TRANSLATEZ', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: 3D HYPER-TUNNEL TRAVEL', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Translates origin along Z-axis (depth)', x, y++);
+	t.print('demonstrating 3D perspective projection.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 200);
+	t.print('DISPLACEMENT: FULL-GRID Z-AXIS WARP', x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 
 ## Call Signature
 
@@ -52,5 +121,56 @@ Translate subsequent shapes along the Z axis.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="translateZ" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IFJBTVAgPSAnIC46LT0rKiMlQCc7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDEwLCAyNCk7Cgljb25zdCBjb2xzID0gdC5ncmlkLmNvbHMsIHJvd3MgPSB0LmdyaWQucm93czsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcigoY29scyAtIDEpIC8gMiksIHJpZ2h0ID0gbGVmdCArIGNvbHMgLSAxOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3Iocm93cyAvIDIpLCBib3R0b20gPSB0b3AgKyByb3dzIC0gMTsKCWNvbnN0IHRtID0gdC5mcmFtZUNvdW50ICogMC4wNDsKCglmb3IgKGxldCB5ID0gdG9wOyB5IDw9IGJvdHRvbTsgeSsrKSB7CgkJZm9yIChsZXQgeCA9IGxlZnQ7IHggPD0gcmlnaHQ7IHgrKykgewoJCQljb25zdCBsYXllclogPSAoKHRtICogMTUgKyAoeCArIHkpICogMikgJSA0MCkgLSAyMDsKCQkJY29uc3Qgbm9ybSA9IChsYXllclogKyAyMCkgLyA0MDsKCgkJCWNvbnN0IGNoYXJLZXkgPSBSQU1QW01hdGguZmxvb3Iobm9ybSAqIChSQU1QLmxlbmd0aCAtIDEpKV07CgoJCQl0LnB1c2goKTsKCQkJdC50cmFuc2xhdGVaKGxheWVyWik7CgkJCXQudHJhbnNsYXRlKHgsIHkpOwoJCQl0LmNoYXJDb2xvcihNYXRoLmZsb29yKDYwICsgbm9ybSAqIDE5NSksIE1hdGguZmxvb3IoMTIwICsgbm9ybSAqIDEyMCksIDI1NSk7CgkJCXQuY2VsbENvbG9yKE1hdGguZmxvb3IoNCArIG5vcm0gKiAxNCksIE1hdGguZmxvb3IoMTAgKyBub3JtICogMTgpLCBNYXRoLmZsb29yKDIwICsgbm9ybSAqIDI0KSk7CgkJCXQuY2hhcihjaGFyS2V5KTsKCQkJdC5wb2ludCgpOwoJCQl0LnBvcCgpOwoJCX0KCX0KfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMiksIHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDMsIHggPSBsZWZ0ICsgMzsKCgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKDEyMCwgMjQwLCAxODApOwoJdC5wcmludCgnVEVYVE1PRElGSUVSLlRSQU5TTEFURVoyJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDcwLCAxMDAsIDE0MCk7Cgl0LnByaW50KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAyMTAsIDI1NSk7Cgl0LnByaW50KCdDT05DRVBUOiBWT0xVTUVUUklDIFNUQVJHQVRFIFNMSUNFUycsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDE2MCwgMTkwKTsKCXQucHJpbnQoJ0Zsb2F0aW5nIHBsYW5lIG1hdHJpY2VzIG1vdmluZyBhbG9uZyBaJywgeCwgeSsrKTsKCXQucHJpbnQoJ3dpdGggZGlzdGFuY2UgbHVtaW5hbmNlIHBlcnNwZWN0aXZlLicsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcig3MCwgMTAwLCAxNDApOwoJdC5wcmludCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMjU1LCAyMDApOwoJdC5wcmludCgnRElTUExBQ0VNRU5UOiBDT05USU5VT1VTIEZVTEwtR1JJRCBaJywgeCwgeSsrKTsKCXQucG9wKCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(6, 10, 22);
+	t.perspective(58, 0.1, 4096);
+	t.camera(0, 0, 48, 0, 0, 0);
+	const time = t.frameCount * 0.03;
+	for (let i = 0; i < 4; i++) {
+		t.push();
+		t.translate((i - 1.5) * 7, 0, 0);
+		t.translateZ(Math.sin(time + i) * 18);
+		t.char('#');
+		t.charColor(120 + i * 30, 220, 255 - i * 20);
+		t.box(4, 4, 4);
+		t.pop();
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.TRANSLATEZ2', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: DEPTH MOTION', x, y++, 100, 220, 255);
+	drawText('Boxes move toward camera.', x, y++, 140, 160, 190);
+	drawText('Z changes perspective scale.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('API: t.translateZ(z)', x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

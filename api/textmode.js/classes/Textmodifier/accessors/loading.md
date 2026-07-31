@@ -7,7 +7,7 @@ category: Accessors
 api: true
 owner: Textmodifier
 kind: Accessor
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / loading
@@ -28,5 +28,59 @@ Built-in loading layer controller.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="loading" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKCWxvYWRpbmdTY3JlZW46IHsgdHJhbnNpdGlvbkR1cmF0aW9uOiAzMDAgfSwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCnQuc2V0dXAoYXN5bmMgKCkgPT4gewoJdC5sb2FkaW5nLmRyYXcoKGN0eCkgPT4gewoJCWNvbnN0IHRtID0gY3R4LnRleHRtb2RpZmllcjsKCQl0bS5iYWNrZ3JvdW5kKDgsIDEwLCAxOCk7CgkJdG0uY2hhcignIycpOwoJCXRtLmNoYXJDb2xvcigxMDAsIDIyMCwgMjU1KTsKCQl0bS5yZWN0KDE2LCA0KTsKCX0pOwoJYXdhaXQgbmV3IFByb21pc2UoKHJlc29sdmUpID0-IHNldFRpbWVvdXQocmVzb2x2ZSwgNDAwKSk7Cn0pOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg2LCAxMCwgMjIpOwoJdC5jaGFyKCdAJyk7Cgl0LmNoYXJDb2xvcigxNDAsIDI1NSwgMTgwKTsKCXQucmVjdCgxMiwgNSk7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuTE9BRElORycsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IExPQURJTkcgU0NSRUVOJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdDdXN0b20gbG9hZGluZyBkcmF3IGNhbGxiYWNrLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnU2V0dXAgd2FpdHMgYnJpZWZseS4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdTVEFUVVM6IFJFQURZJywgeCwgeSsrLCAxNDAsIDI1NSwgMTgwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+	loadingScreen: { transitionDuration: 300 },
+});
+
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.setup(async () => {
+	t.loading.draw((ctx) => {
+		const tm = ctx.textmodifier;
+		tm.background(8, 10, 18);
+		tm.char('#');
+		tm.charColor(100, 220, 255);
+		tm.rect(16, 4);
+	});
+	await new Promise((resolve) => setTimeout(resolve, 400));
+});
+
+t.draw(() => {
+	t.background(6, 10, 22);
+	t.char('@');
+	t.charColor(140, 255, 180);
+	t.rect(12, 5);
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.LOADING', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: LOADING SCREEN', x, y++, 100, 220, 255);
+	drawText('Custom loading draw callback.', x, y++, 140, 160, 190);
+	drawText('Setup waits briefly.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('STATUS: READY', x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

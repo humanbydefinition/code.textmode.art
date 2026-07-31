@@ -7,7 +7,7 @@ category: Properties
 api: true
 owner: Textmodifier
 kind: Property
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / QUAD\_STRIP
@@ -25,5 +25,60 @@ pair of vertices extends the next four-sided segment.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="QUAD_STRIP" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBtb2RlID0gdC5RVUFEX1NUUklQOwpjb25zdCBtb2RlTmFtZSA9ICdRVUFEX1NUUklQJzsKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LmRyYXcoKCkgPT4gewoJY29uc3QgdGltZSA9IHQuZnJhbWVDb3VudCAqIDAuMDQ7Cgl0LmJhY2tncm91bmQoOCwgOCwgMjQpOwoJdC5iZWdpblNoYXBlKG1vZGUpOwoJZm9yIChsZXQgaSA9IDA7IGkgPCAyODsgaSsrKSB7CgkJY29uc3QgcCA9IGkgLyAyNzsKCQljb25zdCB4ID0gLTIwICsgcCAqIDQwOwoJCWNvbnN0IHkgPSBNYXRoLnNpbihwICogTWF0aC5QSSAqIDQgKyB0aW1lICogMikgKiA1OwoJCWNvbnN0IHdpZHRoID0gMiArIE1hdGguY29zKHRpbWUgKyBpKSAqIDAuODsKCQl0LmNoYXIoaSAlIDIgPyAnPScgOiAnIycpOwoJCXQuY2hhckNvbG9yKDI1NSAtIHAgKiA4MCwgMTQwICsgcCAqIDkwLCAyMTApOwoJCXQuY2VsbENvbG9yKDQwICsgcCAqIDMwLCAxNiwgNDUgKyBwICogNDApOwoJCXQudmVydGV4KHgsIHkgLSB3aWR0aCk7CgkJdC52ZXJ0ZXgoeCwgeSArIHdpZHRoKTsKCX0KCXQuZW5kU2hhcGUoKTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5RVUFEX1NUUklQJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogQ09OTkVDVEVEIFFVQUQgQkFORCcsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnRWFjaCBwYWlyIGV4dGVuZHMgdGhlIHN0cmlwLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnR29vZCBmb3IgdGhpY2sgZmxvd2luZyBwYXRocy4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KGBNT0RFOiAke21vZGVOYW1lfWAsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const mode = t.QUAD_STRIP;
+const modeName = 'QUAD_STRIP';
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	const time = t.frameCount * 0.04;
+	t.background(8, 8, 24);
+	t.beginShape(mode);
+	for (let i = 0; i < 28; i++) {
+		const p = i / 27;
+		const x = -20 + p * 40;
+		const y = Math.sin(p * Math.PI * 4 + time * 2) * 5;
+		const width = 2 + Math.cos(time + i) * 0.8;
+		t.char(i % 2 ? '=' : '#');
+		t.charColor(255 - p * 80, 140 + p * 90, 210);
+		t.cellColor(40 + p * 30, 16, 45 + p * 40);
+		t.vertex(x, y - width);
+		t.vertex(x, y + width);
+	}
+	t.endShape();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.QUAD_STRIP', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: CONNECTED QUAD BAND', x, y++, 100, 220, 255);
+	drawText('Each pair extends the strip.', x, y++, 140, 160, 190);
+	drawText('Good for thick flowing paths.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`MODE: ${modeName}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

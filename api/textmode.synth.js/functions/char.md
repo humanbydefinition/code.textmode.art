@@ -7,7 +7,7 @@ category: Functions
 api: true
 kind: Function
 ecosystem: textmode.js
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.synth.js](../index.md) / char
@@ -37,5 +37,55 @@ A new SynthSource configured for character generation
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="char" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW1N5bnRoUGx1Z2luXSwKfSk7Cgp0LmJwbSgxOCk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IGdseXBocyA9ICcgLjotPSsqIyVAJzsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnQ0hBUi5DSEFSJywgeCwgeSsrLCAxMTAsIDI1NSwgMTcwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDcwLCAxMTAsIDE0MCk7CglkcmF3VGV4dCgnVE9QIExFVkVMIEdMWVBIIFNPVVJDRScsIHgsIHkrKywgMTIwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnQ3JlYXRlcyBjaGFyYWN0ZXJzIGZpcnN0LicsIHgsIHkrKywgMTYwLCAxODAsIDIxMCk7CglkcmF3VGV4dCgnSW5rIGFuZCBwYXBlciBjb2xvciB0aGVtLicsIHgsIHkrKywgMTYwLCAxODAsIDIxMCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA3MCwgMTEwLCAxNDApOwoJZHJhd1RleHQoJ1NlcGFyYXRlIGFuaW1hdGVkIGluayBhbmQgcGFwZXIuJywgeCwgeSsrLCAxNTAsIDI1NSwgMTkwKTsKfSk7Cgpjb25zdCBpbmsgPSBtb2lyZSg4LCA5LCAwLjE1LCAxLjYsIDAuMDI1KS5jb2xvcigxLjAsIDAuNjIsIDAuMzQpLm1vZHVsYXRlKG5vaXNlKDIuMywgMC4wMTgpLCAwLjAyMik7CmNvbnN0IHBhcGVyID0gbm9pc2UoMy4wLCAwLjAyNSkuY29sb3IoMC4xNiwgMC4wNTUsIDAuMDI1KS5zb2Z0bGlnaHQob3NjKDQsIDAuMDE2KSwgMC4yMik7Cgp0LnN5bnRoKAoJY2hhcihub2lzZSg0LjYsIDAuMDMpLm1vZHVsYXRlUm90YXRlKG9zYygzLCAwLjAxKSwgMC4zNSwgMC4wNCkpCgkJLmNoYXJNYXAoZ2x5cGhzKQoJCS5jaGFyQ29sb3IoaW5rKQoJCS5jZWxsQ29sb3IocGFwZXIpCik7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 8,
+	plugins: [SynthPlugin],
+});
+
+t.bpm(18);
+
+const labelLayer = t.layers.add();
+const glyphs = ' .:-=+*#%@';
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('CHAR.CHAR', x, y++, 110, 255, 170);
+	drawText('------------------------------------', x, y++, 70, 110, 140);
+	drawText('TOP LEVEL GLYPH SOURCE', x, y++, 120, 220, 255);
+	drawText('Creates characters first.', x, y++, 160, 180, 210);
+	drawText('Ink and paper color them.', x, y++, 160, 180, 210);
+	drawText('------------------------------------', x, y++, 70, 110, 140);
+	drawText('Separate animated ink and paper.', x, y++, 150, 255, 190);
+});
+
+const ink = moire(8, 9, 0.15, 1.6, 0.025).color(1.0, 0.62, 0.34).modulate(noise(2.3, 0.018), 0.022);
+const paper = noise(3.0, 0.025).color(0.16, 0.055, 0.025).softlight(osc(4, 0.016), 0.22);
+
+t.synth(
+	char(noise(4.6, 0.03).modulateRotate(osc(3, 0.01), 0.35, 0.04))
+		.charMap(glyphs)
+		.charColor(ink)
+		.cellColor(paper)
+);
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

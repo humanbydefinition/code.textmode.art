@@ -8,7 +8,7 @@ api: true
 owner: SynthSource
 kind: Method
 ecosystem: textmode.js
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.synth.js](../../../index.md) / [SynthSource](../../SynthSource.md) / overlay
@@ -34,5 +34,61 @@ Overlay blend with another source.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="overlay" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW1N5bnRoUGx1Z2luXSwKfSk7Cgp0LmJwbSgxOCk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IGdseXBocyA9ICcgLjotPSsqIyVAJzsKY29uc3Qgc2xvdyA9IFswLjAsIDEuMF0uZmFzdCgwLjE2KS5lYXNlKCdlYXNlSW5PdXRTaW5lJyk7CmNvbnN0IHR1cm4gPSBbLTAuNDIsIDAuNDJdLmZhc3QoMC4xNCkuZWFzZSgnZWFzZUluT3V0U2luZScpOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWRyYXdUZXh0KCdTWU5USFNPVVJDRS5PVkVSTEFZJywgeCwgeSsrLCAxMTAsIDI1NSwgMTcwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDcwLCAxMTAsIDE0MCk7CglkcmF3VGV4dCgnQ09OVFJBU1QgQkxFTkQnLCB4LCB5KyssIDEyMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ0RhcmsgYW5kIGxpZ2h0IHNwbGl0IHBhdGhzLicsIHgsIHkrKywgMTYwLCAxODAsIDIxMCk7CglkcmF3VGV4dCgnVGV4dHVyZSBzdGF5cyBkZXRhaWxlZC4nLCB4LCB5KyssIDE2MCwgMTgwLCAyMTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgNzAsIDExMCwgMTQwKTsKCWRyYXdUZXh0KCdTZXBhcmF0ZSBhbmltYXRlZCBpbmsgYW5kIHBhcGVyLicsIHgsIHkrKywgMTUwLCAyNTUsIDE5MCk7Cn0pOwoKY29uc3QgaW5rID0gb3NjKDYsIDAuMDE4LCAxLjYpLnJvdGF0ZSh0dXJuLCAwLjAwMikuY29sb3IoMC45LCAwLjU4LCAxLjApLm1vZHVsYXRlS2FsZWlkKG5vaXNlKDIuMCwgMC4wMTQpLCA1KTsKY29uc3QgcGFwZXIgPSBwbGFzbWEoMy4yLCAwLjAyNCwgMC4yLCAxLjA4KS5jb2xvcigwLjA4LCAwLjAzNSwgMC4xNikuaHVlKHNsb3cpOwoKdC5zeW50aCgKCXBsYXNtYSg0LjIsIDAuMDI0LCAwLjIsIDEuMTYpCgkJLmNvbG9yKDAuMywgMC43NSwgMS4wKQoJCS5vdmVybGF5KG9zYygxMSwgMC4wMTgpLmthbGVpZCg2KS5jb2xvcigxLjAsIDAuMzYsIDAuNjIpLCAwLjQ4KQoJCS5tb2R1bGF0ZShub2lzZSgyLjIsIDAuMDE0KSwgMC4wMjUpCgkJLmNvbnRyYXN0KDEuMTYpCgkJLmNoYXJNYXAoZ2x5cGhzKQoJCS5jaGFyQ29sb3IoaW5rKQoJCS5jZWxsQ29sb3IocGFwZXIpCik7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 8,
+	plugins: [SynthPlugin],
+});
+
+t.bpm(18);
+
+const labelLayer = t.layers.add();
+const glyphs = ' .:-=+*#%@';
+const slow = [0.0, 1.0].fast(0.16).ease('easeInOutSine');
+const turn = [-0.42, 0.42].fast(0.14).ease('easeInOutSine');
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('SYNTHSOURCE.OVERLAY', x, y++, 110, 255, 170);
+	drawText('------------------------------------', x, y++, 70, 110, 140);
+	drawText('CONTRAST BLEND', x, y++, 120, 220, 255);
+	drawText('Dark and light split paths.', x, y++, 160, 180, 210);
+	drawText('Texture stays detailed.', x, y++, 160, 180, 210);
+	drawText('------------------------------------', x, y++, 70, 110, 140);
+	drawText('Separate animated ink and paper.', x, y++, 150, 255, 190);
+});
+
+const ink = osc(6, 0.018, 1.6).rotate(turn, 0.002).color(0.9, 0.58, 1.0).modulateKaleid(noise(2.0, 0.014), 5);
+const paper = plasma(3.2, 0.024, 0.2, 1.08).color(0.08, 0.035, 0.16).hue(slow);
+
+t.synth(
+	plasma(4.2, 0.024, 0.2, 1.16)
+		.color(0.3, 0.75, 1.0)
+		.overlay(osc(11, 0.018).kaleid(6).color(1.0, 0.36, 0.62), 0.48)
+		.modulate(noise(2.2, 0.014), 0.025)
+		.contrast(1.16)
+		.charMap(glyphs)
+		.charColor(ink)
+		.cellColor(paper)
+);
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

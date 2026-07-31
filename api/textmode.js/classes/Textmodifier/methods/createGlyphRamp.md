@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / createGlyphRamp
@@ -34,5 +34,61 @@ A TextmodeGlyphRamp instance.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="createGlyphRamp" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IGJhc2VSYW1wID0gdC5jcmVhdGVHbHlwaFJhbXAoJyDilpHilpLilpPilognKTsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg1LCA4LCAxOCk7CgoJY29uc3QgcmFtcCA9IGJhc2VSYW1wLnNoaWZ0KHQuZnJhbWVDb3VudCAqIDAuMDgpOwoJZm9yIChsZXQgeCA9IDA7IHggPCB0LmdyaWQuY29sczsgeCsrKSB7CgkJZm9yIChsZXQgeSA9IDA7IHkgPCB0LmdyaWQucm93czsgeSsrKSB7CgkJCWNvbnN0IGd4ID0geCAtIE1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCQkJY29uc3QgZ3kgPSB5IC0gTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJCQljb25zdCB2YWx1ZSA9IHQubm9pc2UoeCAqIDAuMDgsIHkgKiAwLjEyLCB0LnNlY3MgKiAwLjMpOwoKCQkJdC5wdXNoKCk7CgkJCXQudHJhbnNsYXRlKGd4LCBneSk7CgkJCXQuY2hhckNvbG9yKDgwICsgdmFsdWUgKiAxNDAsIDE2MCArIHZhbHVlICogODAsIDIzMCk7CgkJCXQuY2hhcihyYW1wLmF0KHZhbHVlKSk7CgkJCXQucG9pbnQoKTsKCQkJdC5wb3AoKTsKCQl9Cgl9Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLkNSRUFURUdMWVBIUkFNUCcsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IEdMWVBIIERFTlNJVFkgUkFNUCcsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnR2x5cGggc3RyaW5ncyBjcmVhdGUgcmFtcHMuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdzaGlmdCgpIGN5Y2xlcyB3aXRob3V0IG11dGF0aW5nLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dChgcmFtcDogJHtiYXNlUmFtcC5jaGFyYWN0ZXJzfWAsIHgsIHkrKywgMjIwLCAyMzAsIDI1NSk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+const baseRamp = t.createGlyphRamp(' ░▒▓█');
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(5, 8, 18);
+
+	const ramp = baseRamp.shift(t.frameCount * 0.08);
+	for (let x = 0; x < t.grid.cols; x++) {
+		for (let y = 0; y < t.grid.rows; y++) {
+			const gx = x - Math.floor(t.grid.cols / 2);
+			const gy = y - Math.floor(t.grid.rows / 2);
+			const value = t.noise(x * 0.08, y * 0.12, t.secs * 0.3);
+
+			t.push();
+			t.translate(gx, gy);
+			t.charColor(80 + value * 140, 160 + value * 80, 230);
+			t.char(ramp.at(value));
+			t.point();
+			t.pop();
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODIFIER.CREATEGLYPHRAMP', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: GLYPH DENSITY RAMP', x, y++, 100, 220, 255);
+	drawText('Glyph strings create ramps.', x, y++, 140, 160, 190);
+	drawText('shift() cycles without mutating.', x, y++, 140, 160, 190);
+	drawText(`ramp: ${baseRamp.characters}`, x, y++, 220, 230, 255);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

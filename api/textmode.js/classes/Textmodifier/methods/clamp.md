@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / clamp
@@ -41,5 +41,96 @@ The clamped value.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="clamp" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCByYXcgPSAwOwpsZXQgY2xhbXBlZCA9IDA7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCmZ1bmN0aW9uIGRyYXdQb2ludCh4LCB5KSB7Cgl0LnB1c2goKTsKCXQudHJhbnNsYXRlKHgsIHkpOwoJdC5wb2ludCgpOwoJdC5wb3AoKTsKfQoKZnVuY3Rpb24gZHJhd0JhbmQoeCwgeSwgd2lkdGgsIGhlaWdodCwgciwgZywgYikgewoJdC5wdXNoKCk7Cgl0LnRyYW5zbGF0ZSh4LCB5KTsKCXQuY2hhcign4paIJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucmVjdCh3aWR0aCwgaGVpZ2h0KTsKCXQucG9wKCk7Cn0KCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoOCwgOSwgMTcpOwoJY29uc3QgbG93ID0gLTEwOwoJY29uc3QgaGlnaCA9IDEwOwoJY29uc3QgcmFpbFdpZHRoID0gaGlnaCAtIGxvdyArIDE7CglyYXcgPSBNYXRoLnNpbih0LmZyYW1lQ291bnQgKiAwLjA0NSkgKiAxOCArIHQubW91c2UueCAqIDAuMjg7CgljbGFtcGVkID0gdC5jbGFtcChyYXcsIGxvdywgaGlnaCk7CgoJdC5jaGFyKCcuJyk7Cgl0LmNoYXJDb2xvcigzOCwgNTAsIDgwKTsKCWZvciAobGV0IHggPSAtMjI7IHggPD0gMjI7IHggKz0gMikgZHJhd1BvaW50KHgsIDApOwoKCWRyYXdCYW5kKChsb3cgKyBoaWdoKSAvIDIsIC01LCByYWlsV2lkdGgsIDEsIDgwLCAxMzAsIDE5MCk7CglkcmF3QmFuZCgobG93ICsgaGlnaCkgLyAyLCA1LCByYWlsV2lkdGgsIDEsIDgwLCAxMzAsIDE5MCk7CglkcmF3QmFuZChsb3csIDAsIDEsIDExLCA1NSwgMTIwLCAxNTUpOwoJZHJhd0JhbmQoaGlnaCwgMCwgMSwgMTEsIDU1LCAxMjAsIDE1NSk7CgoJdC5wdXNoKCk7Cgl0LnRyYW5zbGF0ZShyYXcsIC01KTsKCXQuY2hhcignbycpOwoJdC5jaGFyQ29sb3IoMjMwLCA5MCwgOTApOwoJdC5wb2ludCgpOwoJdC5wb3AoKTsKCgl0LnB1c2goKTsKCXQudHJhbnNsYXRlKGNsYW1wZWQsIDApOwoJdC5jaGFyKCcjJyk7Cgl0LmNoYXJDb2xvcigxMTAsIDI0NSwgMTcwKTsKCXQucmVjdCgyLCAxMSk7Cgl0LnBvcCgpOwoKCXQuY2hhcignKicpOwoJdC5jaGFyQ29sb3IoMjU1LCAyMDUsIDkwKTsKCXQubGluZShyYXcsIC01LCBjbGFtcGVkLCAwKTsKCXQubGluZShyYXcsIDUsIGNsYW1wZWQsIDApOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLkNMQU1QJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogSEFSRCBMSU1JVFMnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ1JhdyByZWQgaW5wdXQgY2FuIGxlYXZlIHRoZSBnYXRlLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnY2xhbXAoKSBwaW5zIG91dHB1dCB0byB0aGUgcmFpbHMuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dChgUkFXOiAke3Jhdy50b0ZpeGVkKDEpfWAsIHgsIHkrKywgMjU1LCAxNTAsIDEyMCk7CglkcmF3VGV4dChgQ0xBTVBFRDogJHtjbGFtcGVkLnRvRml4ZWQoMSl9YCwgeCwgeSsrLCAxNDAsIDI1NSwgMTgwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let raw = 0;
+let clamped = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+function drawPoint(x, y) {
+	t.push();
+	t.translate(x, y);
+	t.point();
+	t.pop();
+}
+
+function drawBand(x, y, width, height, r, g, b) {
+	t.push();
+	t.translate(x, y);
+	t.char('█');
+	t.charColor(r, g, b);
+	t.rect(width, height);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(8, 9, 17);
+	const low = -10;
+	const high = 10;
+	const railWidth = high - low + 1;
+	raw = Math.sin(t.frameCount * 0.045) * 18 + t.mouse.x * 0.28;
+	clamped = t.clamp(raw, low, high);
+
+	t.char('.');
+	t.charColor(38, 50, 80);
+	for (let x = -22; x <= 22; x += 2) drawPoint(x, 0);
+
+	drawBand((low + high) / 2, -5, railWidth, 1, 80, 130, 190);
+	drawBand((low + high) / 2, 5, railWidth, 1, 80, 130, 190);
+	drawBand(low, 0, 1, 11, 55, 120, 155);
+	drawBand(high, 0, 1, 11, 55, 120, 155);
+
+	t.push();
+	t.translate(raw, -5);
+	t.char('o');
+	t.charColor(230, 90, 90);
+	t.point();
+	t.pop();
+
+	t.push();
+	t.translate(clamped, 0);
+	t.char('#');
+	t.charColor(110, 245, 170);
+	t.rect(2, 11);
+	t.pop();
+
+	t.char('*');
+	t.charColor(255, 205, 90);
+	t.line(raw, -5, clamped, 0);
+	t.line(raw, 5, clamped, 0);
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.CLAMP', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: HARD LIMITS', x, y++, 100, 220, 255);
+	drawText('Raw red input can leave the gate.', x, y++, 140, 160, 190);
+	drawText('clamp() pins output to the rails.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`RAW: ${raw.toFixed(1)}`, x, y++, 255, 150, 120);
+	drawText(`CLAMPED: ${clamped.toFixed(1)}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

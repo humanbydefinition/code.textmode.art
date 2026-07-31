@@ -7,7 +7,7 @@ category: Accessors
 api: true
 owner: TextmodeGrid
 kind: Accessor
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [TextmodeGrid](../../TextmodeGrid.md) / cellHeight
@@ -28,5 +28,81 @@ Height of each cell in screen pixels.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="cellHeight" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDEyLCAyMCk7Cgljb25zdCBjb2xzID0gdC5ncmlkLmNvbHM7Cgljb25zdCByb3dzID0gdC5ncmlkLnJvd3M7Cgljb25zdCBodyA9IE1hdGguZmxvb3IoY29scyAvIDIpOwoJY29uc3QgaGggPSBNYXRoLmZsb29yKHJvd3MgLyAyKTsKCWNvbnN0IHRtID0gdC5mcmFtZUNvdW50ICogMC4wNTsKCWNvbnN0IGNIID0gdC5ncmlkLmNlbGxIZWlnaHQ7CgoJZm9yIChsZXQgeSA9IC1oaDsgeSA8PSBoaDsgeSsrKSB7CgkJY29uc3QgaXNTdHJpZGUgPSBNYXRoLmFicyh5KSAlIE1hdGguZmxvb3IoY0ggLyA0IHx8IDEpID09PSAwOwoJCWZvciAobGV0IHggPSAtaHc7IHggPD0gaHc7IHgrKykgewoJCQljb25zdCB3YXZlID0gTWF0aC5zaW4oeCAqIDAuMTUgKyB5ICogKGNIICogMC4wMikgKyB0bSk7CgkJCWNvbnN0IG5vcm0gPSAod2F2ZSArIDEpICogMC41OwoKCQkJY29uc3QgY2hhcktleSA9IGlzU3RyaWRlID8gJz0nIDogbm9ybSA-IDAuNiA_ICcjJyA6IG5vcm0gPiAwLjMgPyAnKycgOiAnLic7CgoJCQl0LnB1c2goKTsKCQkJdC50cmFuc2xhdGUoeCwgeSk7CgkJCXQuY2hhckNvbG9yKAoJCQkJaXNTdHJpZGUgPyAyNTUgOiBNYXRoLmZsb29yKDQwICsgbm9ybSAqIDE4MCksCgkJCQlpc1N0cmlkZSA_IDIyMCA6IE1hdGguZmxvb3IoMTQwICsgbm9ybSAqIDExMCksCgkJCQlpc1N0cmlkZSA_IDEwMCA6IE1hdGguZmxvb3IoMjQwIC0gbm9ybSAqIDgwKQoJCQkpOwoJCQl0LmNlbGxDb2xvcigKCQkJCWlzU3RyaWRlID8gMjQgOiBNYXRoLmZsb29yKDYgKyBub3JtICogMTIpLAoJCQkJaXNTdHJpZGUgPyAxNiA6IE1hdGguZmxvb3IoMTAgKyBub3JtICogMTQpLAoJCQkJaXNTdHJpZGUgPyA4IDogTWF0aC5mbG9vcigyMCArIG5vcm0gKiAxOCkKCQkJKTsKCQkJdC5jaGFyKGNoYXJLZXkpOwoJCQl0LnBvaW50KCk7CgkJCXQucG9wKCk7CgkJfQoJfQp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CgoJY29uc3QgYXNwZWN0ID0gKHQuZ3JpZC5jZWxsV2lkdGggLyAodC5ncmlkLmNlbGxIZWlnaHQgfHwgMSkpLnRvRml4ZWQoMik7CgoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcigxMjAsIDI0MCwgMTgwKTsKCXQucHJpbnQoJ1RFWFRNT0RFR1JJRC5DRUxMSEVJR0hUJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDcwLCAxMDAsIDE0MCk7Cgl0LnByaW50KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAyMTAsIDI1NSk7Cgl0LnByaW50KCdDT05DRVBUOiBWRVJUSUNBTCBBU1BFQ1QgU1RSSURFIFNDQU5ORVInLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAxNjAsIDE5MCk7Cgl0LnByaW50KCdIZWlnaHQgb2YgZWFjaCBjZWxsIGluIHNjcmVlbiBwaXhlbHMuJywgeCwgeSsrKTsKCXQucHJpbnQoJ0RpY3RhdGVzIHZlcnRpY2FsIHN0ZXAgc3RyaWRlLicsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcig3MCwgMTAwLCAxNDApOwoJdC5wcmludCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMjU1LCAyMDApOwoJdC5wcmludChgQ0VMTCBIRUlHSFQ6ICR7dC5ncmlkLmNlbGxIZWlnaHR9IFBYYCwgeCwgeSsrKTsKCXQucHJpbnQoYENFTEwgQVNQRUNUOiAke2FzcGVjdH1gLCB4LCB5KyspOwoJdC5wb3AoKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+t.draw(() => {
+	t.background(6, 12, 20);
+	const cols = t.grid.cols;
+	const rows = t.grid.rows;
+	const hw = Math.floor(cols / 2);
+	const hh = Math.floor(rows / 2);
+	const tm = t.frameCount * 0.05;
+	const cH = t.grid.cellHeight;
+
+	for (let y = -hh; y <= hh; y++) {
+		const isStride = Math.abs(y) % Math.floor(cH / 4 || 1) === 0;
+		for (let x = -hw; x <= hw; x++) {
+			const wave = Math.sin(x * 0.15 + y * (cH * 0.02) + tm);
+			const norm = (wave + 1) * 0.5;
+
+			const charKey = isStride ? '=' : norm > 0.6 ? '#' : norm > 0.3 ? '+' : '.';
+
+			t.push();
+			t.translate(x, y);
+			t.charColor(
+				isStride ? 255 : Math.floor(40 + norm * 180),
+				isStride ? 220 : Math.floor(140 + norm * 110),
+				isStride ? 100 : Math.floor(240 - norm * 80)
+			);
+			t.cellColor(
+				isStride ? 24 : Math.floor(6 + norm * 12),
+				isStride ? 16 : Math.floor(10 + norm * 14),
+				isStride ? 8 : Math.floor(20 + norm * 18)
+			);
+			t.char(charKey);
+			t.point();
+			t.pop();
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const aspect = (t.grid.cellWidth / (t.grid.cellHeight || 1)).toFixed(2);
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODEGRID.CELLHEIGHT', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: VERTICAL ASPECT STRIDE SCANNER', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Height of each cell in screen pixels.', x, y++);
+	t.print('Dictates vertical step stride.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 200);
+	t.print(`CELL HEIGHT: ${t.grid.cellHeight} PX`, x, y++);
+	t.print(`CELL ASPECT: ${aspect}`, x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

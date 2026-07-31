@@ -8,7 +8,7 @@ api: true
 owner: SynthSource
 kind: Method
 ecosystem: textmode.js
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.synth.js](../../../index.md) / [SynthSource](../../SynthSource.md) / luma
@@ -34,5 +34,60 @@ Apply threshold based on luminance.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="luma" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW1N5bnRoUGx1Z2luXSwKfSk7Cgp0LmJwbSgxOCk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IGdseXBocyA9ICcgLjotPSsqIyVAJzsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnU1lOVEhTT1VSQ0UuTFVNQScsIHgsIHkrKywgMTEwLCAyNTUsIDE3MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA3MCwgMTEwLCAxNDApOwoJZHJhd1RleHQoJ0xVTUlOQU5DRSBLRVknLCB4LCB5KyssIDEyMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ0JyaWdodG5lc3MgYmVjb21lcyBhbHBoYS4nLCB4LCB5KyssIDE2MCwgMTgwLCAyMTApOwoJZHJhd1RleHQoJ1R3byBmaWVsZHMgcmV2ZWFsIGVhY2ggb3RoZXIuJywgeCwgeSsrLCAxNjAsIDE4MCwgMjEwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDcwLCAxMTAsIDE0MCk7CglkcmF3VGV4dCgnU2VwYXJhdGUgYW5pbWF0ZWQgaW5rIGFuZCBwYXBlci4nLCB4LCB5KyssIDE1MCwgMjU1LCAxOTApOwp9KTsKCmNvbnN0IGluayA9IG1vaXJlKDgsIDksIDAuMTUsIDEuNiwgMC4wMjUpLmNvbG9yKDEuMCwgMC42MiwgMC4zNCkubW9kdWxhdGUobm9pc2UoMi4zLCAwLjAxOCksIDAuMDIyKTsKY29uc3QgcGFwZXIgPSBub2lzZSgzLjAsIDAuMDI1KS5jb2xvcigwLjE2LCAwLjA1NSwgMC4wMjUpLnNvZnRsaWdodChvc2MoNCwgMC4wMTYpLCAwLjIyKTsKCnQuc3ludGgoCglvc2MoOSwgMC4wMiwgMS4zKQoJCS5rYWxlaWQoNSkKCQkubW9kdWxhdGVTY2FsZShub2lzZSgyLjEsIDAuMDE0KSwgMC4yNCwgMC45NSkKCQkuY29sb3IoMS4wLCAwLjU1LCAwLjI1KQoJCS5sdW1hKFswLjM4LCAwLjU4XS5mYXN0KDAuMTQpLmVhc2UoJ2Vhc2VJbk91dFNpbmUnKSwgMC4xNCkKCQkubGF5ZXIobm9pc2UoMy4yLCAwLjAyKS5jb2xvcigwLjEsIDAuMzIsIDAuOSkubHVtYSgwLjUyLCAwLjE4KSkKCQkuY2hhck1hcChnbHlwaHMpCgkJLmNoYXJDb2xvcihpbmspCgkJLmNlbGxDb2xvcihwYXBlcikKKTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 8,
+	plugins: [SynthPlugin],
+});
+
+t.bpm(18);
+
+const labelLayer = t.layers.add();
+const glyphs = ' .:-=+*#%@';
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('SYNTHSOURCE.LUMA', x, y++, 110, 255, 170);
+	drawText('------------------------------------', x, y++, 70, 110, 140);
+	drawText('LUMINANCE KEY', x, y++, 120, 220, 255);
+	drawText('Brightness becomes alpha.', x, y++, 160, 180, 210);
+	drawText('Two fields reveal each other.', x, y++, 160, 180, 210);
+	drawText('------------------------------------', x, y++, 70, 110, 140);
+	drawText('Separate animated ink and paper.', x, y++, 150, 255, 190);
+});
+
+const ink = moire(8, 9, 0.15, 1.6, 0.025).color(1.0, 0.62, 0.34).modulate(noise(2.3, 0.018), 0.022);
+const paper = noise(3.0, 0.025).color(0.16, 0.055, 0.025).softlight(osc(4, 0.016), 0.22);
+
+t.synth(
+	osc(9, 0.02, 1.3)
+		.kaleid(5)
+		.modulateScale(noise(2.1, 0.014), 0.24, 0.95)
+		.color(1.0, 0.55, 0.25)
+		.luma([0.38, 0.58].fast(0.14).ease('easeInOutSine'), 0.14)
+		.layer(noise(3.2, 0.02).color(0.1, 0.32, 0.9).luma(0.52, 0.18))
+		.charMap(glyphs)
+		.charColor(ink)
+		.cellColor(paper)
+);
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

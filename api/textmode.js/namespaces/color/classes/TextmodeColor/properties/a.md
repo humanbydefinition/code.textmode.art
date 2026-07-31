@@ -8,7 +8,7 @@ api: true
 owner: TextmodeColor
 namespace: color
 kind: Property
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../../../index.md) / [color](../../../index.md) / [TextmodeColor](../../TextmodeColor.md) / a
@@ -23,5 +23,97 @@ Alpha component (0-255).
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="a" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBSQU1QID0gJyAuOi09KyojJUAnOwpjb25zdCB0b3BMYXllciA9IHQubGF5ZXJzLmFkZCh7IGJsZW5kTW9kZTogJ25vcm1hbCcgfSk7CmNvbnN0IGxhYmVsTGF5ZXIgPSB0LmxheWVycy5hZGQoKTsKCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoMTAsIDgsIDE2KTsKCWNvbnN0IGh3ID0gTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgaGggPSBNYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7Cgljb25zdCB0bSA9IHQuZnJhbWVDb3VudCAqIDAuMDI7CgoJZm9yIChsZXQgeSA9IC1oaDsgeSA8PSBoaDsgeSsrKSB7CgkJZm9yIChsZXQgeCA9IC1odzsgeCA8PSBodzsgeCsrKSB7CgkJCWNvbnN0IHYgPSAoTWF0aC5zaW4oeCAqIDAuMTUgKyB0bSkgKyBNYXRoLmNvcyh5ICogMC4xNSAtIHRtKSkgKiAwLjUgKyAwLjU7CgkJCWNvbnN0IGlkeCA9IE1hdGguZmxvb3IodiAqIChSQU1QLmxlbmd0aCAtIDEpKTsKCQkJdC5wdXNoKCk7CgkJCXQudHJhbnNsYXRlKHgsIHkpOwoJCQl0LmNoYXJDb2xvcigyNDAsIDE0MCwgNDApOwoJCQl0LmNlbGxDb2xvcigzMCwgMTUsIDgpOwoJCQl0LmNoYXIoUkFNUFtpZHhdKTsKCQkJdC5wb2ludCgpOwoJCQl0LnBvcCgpOwoJCX0KCX0KfSk7Cgp0b3BMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGh3ID0gTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgaGggPSBNYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7Cgljb25zdCB0bSA9IHQuZnJhbWVDb3VudCAqIDAuMDM1OwoKCWZvciAobGV0IHkgPSAtaGg7IHkgPD0gaGg7IHkrKykgewoJCWZvciAobGV0IHggPSAtaHc7IHggPD0gaHc7IHgrKykgewoJCQljb25zdCBkaXN0ID0gTWF0aC5oeXBvdCh4LCB5KTsKCQkJY29uc3Qgd2F2ZSA9IE1hdGguc2luKGRpc3QgKiAwLjIgLSB0bSAqIDEuNSk7CgkJCWNvbnN0IGFscGhhVmFsID0gTWF0aC5mbG9vcihNYXRoLm1heCgwLCBNYXRoLm1pbigyNTUsIHdhdmUgKiAxMjcgKyA2NCkpKTsKCgkJCWNvbnN0IGNvbCA9IHQuY29sb3IoNDAsIDIyMCwgMjQwLCBhbHBoYVZhbCk7CgkJCWNvbnN0IGFscGhhID0gY29sLmE7CgoJCQlpZiAoYWxwaGEgPiAyMCkgewoJCQkJY29uc3QgaWR4ID0gTWF0aC5mbG9vcigoYWxwaGEgLyAyNTUpICogKFJBTVAubGVuZ3RoIC0gMSkpOwoJCQkJdC5wdXNoKCk7CgkJCQl0LnRyYW5zbGF0ZSh4LCB5KTsKCQkJCXQuY2hhckNvbG9yKGNvbC5yLCBjb2wuZywgY29sLmIsIGFscGhhKTsKCQkJCXQuY2VsbENvbG9yKDgsIDQwLCA1MCwgYWxwaGEpOwoJCQkJdC5jaGFyKFJBTVBbaWR4XSk7CgkJCQl0LnBvaW50KCk7CgkJCQl0LnBvcCgpOwoJCQl9CgkJfQoJfQp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CgoJY29uc3Qgc2FtcGxlQ29sID0gdC5jb2xvcig0MCwgMjIwLCAyNDAsIDE4MCk7Cgljb25zdCBhbHBoYSA9IHNhbXBsZUNvbC5hOwoKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IoMTIwLCAyNDAsIDE4MCk7Cgl0LnByaW50KCdURVhUTU9ERUNPTE9SLkEnLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoNzAsIDEwMCwgMTQwKTsKCXQucHJpbnQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDIxMCwgMjU1KTsKCXQucHJpbnQoJ0NPTkNFUFQ6IFRXTy1MQVlFUiBBTFBIQSBESVNTT0xWRScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDE2MCwgMTkwKTsKCXQucHJpbnQoJ1RvcCBsYXllciBjb2wuYSBtb2R1bGF0ZXMgb3BhY2l0eS4nLCB4LCB5KyspOwoJdC5wcmludCgnTG93ZXIgYmFzZSBsYXllciBzaGluZXMgdGhyb3VnaC4nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoNzAsIDEwMCwgMTQwKTsKCXQucHJpbnQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDI1NSwgMjAwKTsKCXQucHJpbnQoYFNBTVBMRSBBTFBIQTogJHthbHBoYX0gLyAyNTVgLCB4LCB5KyspOwoJdC5wb3AoKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const RAMP = ' .:-=+*#%@';
+const fogLayer = t.layers.add({ blendMode: 'normal' });
+const labelLayer = t.layers.add();
+
+t.draw(() => {
+	t.background(14, 14, 18);
+	const hw = Math.floor(t.grid.cols / 2);
+	const hh = Math.floor(t.grid.rows / 2);
+	const tm = t.frameCount * 0.03;
+
+	for (let y = -hh; y <= hh; y++) {
+		for (let x = -hw; x <= hw; x++) {
+			const gridPattern = Math.abs(x % 4 === 0 || y % 4 === 0 ? 1 : 0);
+			if (gridPattern) {
+				t.push();
+				t.translate(x, y);
+				t.charColor(240, 80, 40);
+				t.cellColor(40, 16, 10);
+				t.char('+');
+				t.point();
+				t.pop();
+			}
+		}
+	}
+});
+
+fogLayer.draw(() => {
+	t.clear();
+	const hw = Math.floor(t.grid.cols / 2);
+	const hh = Math.floor(t.grid.rows / 2);
+	const tm = t.frameCount * 0.04;
+
+	for (let y = -hh; y <= hh; y++) {
+		for (let x = -hw; x <= hw; x++) {
+			const wave = Math.sin(x * 0.15 + tm) * Math.cos(y * 0.15 - tm * 0.8);
+			const alphaVal = Math.floor(Math.max(0, Math.min(255, (wave + 1) * 0.5 * 255)));
+
+			const col = t.color(60, 200, 230, alphaVal);
+			const a = col.a;
+
+			if (a > 30) {
+				const idx = Math.floor((a / 255) * (RAMP.length - 1));
+				t.push();
+				t.translate(x, y);
+				t.charColor(col.r, col.g, col.b, a);
+				t.cellColor(10, 40, 50, a);
+				t.char(RAMP[idx]);
+				t.point();
+				t.pop();
+			}
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const sampleCol = t.color(60, 200, 230, 180);
+	const a = sampleCol.a;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODECOLOR.A', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: DISSOLVE FOG MATRIX', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Top layer col.a modulates opacity.', x, y++);
+	t.print('Reveals crimson geometric backdrop.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 200);
+	t.print(`SAMPLE ALPHA: ${a} / 255`, x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

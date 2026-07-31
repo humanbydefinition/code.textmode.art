@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / longPress
@@ -35,5 +35,76 @@ configured tolerance. The event includes the press duration in milliseconds.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="longPress" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7Cgpjb25zdCBwdWxzZXMgPSBbXTsKbGV0IGNvdW50ID0gMDsKbGV0IGxhc3QgPSAnV0FJVElORyc7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCmZ1bmN0aW9uIGFkZFB1bHNlKGxhYmVsLCB4ID0gMCwgeSA9IDApIHsKCWNvdW50Kys7CglsYXN0ID0gbGFiZWw7CglwdWxzZXMudW5zaGlmdCh7IGxhYmVsLCB4LCB5LCBsaWZlOiAxIH0pOwoJaWYgKHB1bHNlcy5sZW5ndGggPiAxMikgcHVsc2VzLmxlbmd0aCA9IDEyOwp9Cgp0LmxvbmdQcmVzcygoZGF0YSkgPT4gewoJY29uc3QgdG91Y2ggPSBkYXRhPy50b3VjaCB8fCB0Lm1vdXNlOwoJYWRkUHVsc2UoJ0xPTkcnLCB0b3VjaD8ueCB8fCAwLCB0b3VjaD8ueSB8fCAwKTsKfSk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDEwLCAyMik7CgoJZm9yIChsZXQgaSA9IHB1bHNlcy5sZW5ndGggLSAxOyBpID49IDA7IGktLSkgewoJCWNvbnN0IHAgPSBwdWxzZXNbaV07CgkJcC5saWZlIC09IDAuMDI7CgkJaWYgKHAubGlmZSA8PSAwKSB7CgkJCXB1bHNlcy5zcGxpY2UoaSwgMSk7CgkJCWNvbnRpbnVlOwoJCX0KCQl0LnB1c2goKTsKCQl0LnRyYW5zbGF0ZShwLngsIHAueSAtICgxIC0gcC5saWZlKSAqIDQpOwoJCXQuY2hhcignKicpOwoJCXQuY2hhckNvbG9yKDI1NSwgMjEwLCAxMjApOwoJCXQucG9pbnQoKTsKCQl0LnBvcCgpOwoJfQp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLkxPTkdQUkVTUycsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IExPTkcgUFJFU1MnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ0V2ZW50IHVwZGF0ZXMgY29tcGFjdCBzdGF0ZS4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJ1B1bHNlcyBzaG93IHJlY2VudCB0cmlnZ2Vycy4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdMT05HOiAnICsgY291bnQsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7CglkcmF3VGV4dCgnTEFTVDogJyArIGxhc3Quc2xpY2UoMCwgMjgpLCB4LCB5KyssIDE4MCwgMjAwLCAyMjApOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+const pulses = [];
+let count = 0;
+let last = 'WAITING';
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+function addPulse(label, x = 0, y = 0) {
+	count++;
+	last = label;
+	pulses.unshift({ label, x, y, life: 1 });
+	if (pulses.length > 12) pulses.length = 12;
+}
+
+t.longPress((data) => {
+	const touch = data?.touch || t.mouse;
+	addPulse('LONG', touch?.x || 0, touch?.y || 0);
+});
+
+t.draw(() => {
+	t.background(6, 10, 22);
+
+	for (let i = pulses.length - 1; i >= 0; i--) {
+		const p = pulses[i];
+		p.life -= 0.02;
+		if (p.life <= 0) {
+			pulses.splice(i, 1);
+			continue;
+		}
+		t.push();
+		t.translate(p.x, p.y - (1 - p.life) * 4);
+		t.char('*');
+		t.charColor(255, 210, 120);
+		t.point();
+		t.pop();
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.LONGPRESS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: LONG PRESS', x, y++, 100, 220, 255);
+	drawText('Event updates compact state.', x, y++, 140, 160, 190);
+	drawText('Pulses show recent triggers.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('LONG: ' + count, x, y++, 140, 255, 180);
+	drawText('LAST: ' + last.slice(0, 28), x, y++, 180, 200, 220);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

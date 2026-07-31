@@ -8,7 +8,7 @@ api: true
 owner: TextmodeLayer
 namespace: layering
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../../../index.md) / [layering](../../../index.md) / [TextmodeLayer](../../TextmodeLayer.md) / blendMode
@@ -38,5 +38,91 @@ Current blend mode as a numeric [LayerBlendMode](../../../enumerations/LayerBlen
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="blendMode" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBibGVuZE1vZGVzID0gW3QuQkxFTkRfQURESVRJVkUsIHQuQkxFTkRfU0NSRUVOLCB0LkJMRU5EX09WRVJMQVksIHQuQkxFTkRfRElGRkVSRU5DRSwgdC5CTEVORF9NVUxUSVBMWV07CmNvbnN0IGNvbG9ycyA9IFsKCVsyNTUsIDgwLCAxNTBdLAoJWzgwLCAxODAsIDI1NV0sCglbMjU1LCAyMDAsIDgwXSwKCVsxNTAsIDI1NSwgMTIwXSwKCVsyMDAsIDEyMCwgMjU1XSwKXTsKCmNvbnN0IGxheWVycyA9IGJsZW5kTW9kZXMubWFwKChtb2RlKSA9PiB0LmxheWVycy5hZGQoeyBibGVuZE1vZGU6IG1vZGUsIG9wYWNpdHk6IDAuOSB9KSk7CmNvbnN0IGxhYmVsTGF5ZXIgPSB0LmxheWVycy5hZGQoKTsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHJnYiA9IFsyNTUsIDI1NSwgMjU1XSkgewoJdC5wdXNoKCk7Cgl0LnRyYW5zbGF0ZSh4LCB5KTsKCXQuY2hhckNvbG9yKHJnYlswXSwgcmdiWzFdLCByZ2JbMl0pOwoJZm9yIChsZXQgaSA9IDA7IGkgPCB0ZXh0Lmxlbmd0aDsgaSsrKSB7CgkJdC5jaGFyKHRleHRbaV0pOwoJCXQucG9pbnQoKTsKCQl0LnRyYW5zbGF0ZSgxLCAwKTsKCX0KCXQucG9wKCk7Cn0KCmZ1bmN0aW9uIGRyYXdDZW50ZXJlZFRleHQodGV4dCwgeSwgcmdiID0gWzI1NSwgMjU1LCAyNTVdKSB7CglkcmF3VGV4dCh0ZXh0LCAtTWF0aC5mbG9vcih0ZXh0Lmxlbmd0aCAvIDIpLCB5LCByZ2IpOwp9Cgp0LmRyYXcoKCkgPT4gewoJY29uc3QgdGltZSA9IHQuZnJhbWVDb3VudCAqIDAuMDI7Cgl0LmJhY2tncm91bmQoMTAsIDE1LCAyNSk7CgoJY29uc3QgeyBjb2xzLCByb3dzIH0gPSB0LmdyaWQ7CgoJdC5jaGFyKCcrJyk7Cgl0LmNoYXJDb2xvcig0MCwgNTAsIDgwKTsKCXQucmVjdChjb2xzLCByb3dzKTsKCglsYXllcnMuZm9yRWFjaCgobGF5ZXIsIGkpID0-IHsKCQlsYXllci5kcmF3KCgpID0-IHsKCQkJdC5jbGVhcigpOwoJCQl0LnB1c2goKTsKCgkJCWNvbnN0IGFuZ2xlID0gKGkgLyBsYXllcnMubGVuZ3RoKSAqIE1hdGguUEkgKiAyICsgdGltZTsKCQkJY29uc3QgcmFkaXVzID0gOCArIE1hdGguc2luKHRpbWUgKiAyKSAqIDI7CgkJCXQudHJhbnNsYXRlKE1hdGguY29zKGFuZ2xlKSAqIHJhZGl1cywgTWF0aC5zaW4oYW5nbGUpICogcmFkaXVzKTsKCgkJCXQuY2hhckNvbG9yKC4uLmNvbG9yc1tpXSk7CgkJCXQuY2hhcignQCcpOwoJCQl0LnJlY3QoMTQsIDgpOwoKCQkJZHJhd0NlbnRlcmVkVGV4dChibGVuZE1vZGVzW2ldLCAwLCBbMjU1LCAyNTUsIDI1NV0pOwoKCQkJdC5wb3AoKTsKCQl9KTsKCX0pOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7Cgljb25zdCBhY3RpdmUgPSBibGVuZE1vZGVzW01hdGguZmxvb3IodC5mcmFtZUNvdW50IC8gODApICUgYmxlbmRNb2Rlcy5sZW5ndGhdOwoKCWRyYXdUZXh0KCdURVhUTU9ERUxBWUVSLkJMRU5ETU9ERScsIHgsIHkrKywgWzEwMCwgMjU1LCAxNDBdKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIFs4MCwgMTAwLCAxNTBdKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBQRVItTEFZRVIgQkxFTkRJTkcnLCB4LCB5KyssIFsxMDAsIDIyMCwgMjU1XSk7CglkcmF3VGV4dCgnRWFjaCBsYXllciBjb21wb3NpdGVzIGRpZmZlcmVudGx5LicsIHgsIHkrKywgWzE0MCwgMTYwLCAxOTBdKTsKCWRyYXdUZXh0KCdPcGFjaXR5IGlzIHNldCBwZXIgbGF5ZXIgdG9vLicsIHgsIHkrKywgWzE0MCwgMTYwLCAxOTBdKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIFs4MCwgMTAwLCAxNTBdKTsKCWRyYXdUZXh0KGBNT0RFUzogJHtibGVuZE1vZGVzLmxlbmd0aH1gLCB4LCB5KyssIFsxNDAsIDI1NSwgMTgwXSk7CglkcmF3VGV4dChgV0FUQ0g6ICR7YWN0aXZlfWAsIHgsIHkrKywgWzEyMCwgMjAwLCAyNTVdKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const blendModes = [t.BLEND_ADDITIVE, t.BLEND_SCREEN, t.BLEND_OVERLAY, t.BLEND_DIFFERENCE, t.BLEND_MULTIPLY];
+const colors = [
+	[255, 80, 150],
+	[80, 180, 255],
+	[255, 200, 80],
+	[150, 255, 120],
+	[200, 120, 255],
+];
+
+const layers = blendModes.map((mode) => t.layers.add({ blendMode: mode, opacity: 0.9 }));
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, rgb = [255, 255, 255]) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(rgb[0], rgb[1], rgb[2]);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+function drawCenteredText(text, y, rgb = [255, 255, 255]) {
+	drawText(text, -Math.floor(text.length / 2), y, rgb);
+}
+
+t.draw(() => {
+	const time = t.frameCount * 0.02;
+	t.background(10, 15, 25);
+
+	const { cols, rows } = t.grid;
+
+	t.char('+');
+	t.charColor(40, 50, 80);
+	t.rect(cols, rows);
+
+	layers.forEach((layer, i) => {
+		layer.draw(() => {
+			t.clear();
+			t.push();
+
+			const angle = (i / layers.length) * Math.PI * 2 + time;
+			const radius = 8 + Math.sin(time * 2) * 2;
+			t.translate(Math.cos(angle) * radius, Math.sin(angle) * radius);
+
+			t.charColor(...colors[i]);
+			t.char('@');
+			t.rect(14, 8);
+
+			drawCenteredText(blendModes[i], 0, [255, 255, 255]);
+
+			t.pop();
+		});
+	});
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	const active = blendModes[Math.floor(t.frameCount / 80) % blendModes.length];
+
+	drawText('TEXTMODELAYER.BLENDMODE', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: PER-LAYER BLENDING', x, y++, [100, 220, 255]);
+	drawText('Each layer composites differently.', x, y++, [140, 160, 190]);
+	drawText('Opacity is set per layer too.', x, y++, [140, 160, 190]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText(`MODES: ${blendModes.length}`, x, y++, [140, 255, 180]);
+	drawText(`WATCH: ${active}`, x, y++, [120, 200, 255]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

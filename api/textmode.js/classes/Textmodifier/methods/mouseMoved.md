@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / mouseMoved
@@ -32,5 +32,90 @@ Register the single-callback handler for mouse movement.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="mouseMoved" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7Cgpjb25zdCBwdWxzZXMgPSBbXTsKbGV0IGNvdW50ID0gMDsKbGV0IGxhc3QgPSAnV0FJVElORyc7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCmZ1bmN0aW9uIGFkZFB1bHNlKGxhYmVsLCB4ID0gMCwgeSA9IDApIHsKCWNvdW50Kys7CglsYXN0ID0gbGFiZWw7CglwdWxzZXMudW5zaGlmdCh7IGxhYmVsLCB4LCB5LCBsaWZlOiAxIH0pOwoJaWYgKHB1bHNlcy5sZW5ndGggPiAxMikgcHVsc2VzLmxlbmd0aCA9IDEyOwp9Cgp0Lm1vdXNlTW92ZWQoKCkgPT4gewoJYWRkUHVsc2UoJ01PVkUnLCB0Lm1vdXNlLngsIHQubW91c2UueSk7Cn0pOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg2LCAxMCwgMjIpOwoKCWZvciAobGV0IGkgPSBwdWxzZXMubGVuZ3RoIC0gMTsgaSA-PSAwOyBpLS0pIHsKCQljb25zdCBwID0gcHVsc2VzW2ldOwoJCXAubGlmZSAtPSAwLjAyOwoJCWlmIChwLmxpZmUgPD0gMCkgewoJCQlwdWxzZXMuc3BsaWNlKGksIDEpOwoJCQljb250aW51ZTsKCQl9CgkJdC5wdXNoKCk7CgkJdC50cmFuc2xhdGUocC54LCBwLnkgLSAoMSAtIHAubGlmZSkgKiA0KTsKCQl0LmNoYXIoJyonKTsKCQl0LmNoYXJDb2xvcigyNTUsIDIxMCwgMTIwKTsKCQl0LnBvaW50KCk7CgkJdC5wb3AoKTsKCX0KfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5NT1VTRU1PVkVEJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogTU9WRSBFVkVOVCcsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnRXZlbnQgdXBkYXRlcyBjb21wYWN0IHN0YXRlLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnUHVsc2VzIHNob3cgcmVjZW50IHRyaWdnZXJzLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ01PVkVTOiAnICsgY291bnQsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7CglkcmF3VGV4dCgnTEFTVDogJyArIGxhc3Quc2xpY2UoMCwgMjgpLCB4LCB5KyssIDE4MCwgMjAwLCAyMjApOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const RAMP = ' .:;ilwW@';
+const labelLayer = t.layers.add();
+const moveHistory = [];
+let moveCount = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.mouseMoved(() => {
+	if (t.mouse.x !== Number.NEGATIVE_INFINITY) {
+		moveCount++;
+		moveHistory.unshift({ x: t.mouse.x, y: t.mouse.y, life: 1.0 });
+		if (moveHistory.length > 20) moveHistory.length = 20;
+	}
+});
+
+t.draw(() => {
+	t.background(2, 11, 8);
+	for (let i = moveHistory.length - 1; i >= 0; i--) {
+		if ((moveHistory[i].life -= 0.025) <= 0) moveHistory.splice(i, 1);
+	}
+	const hw = Math.floor(t.grid.cols / 2),
+		hh = Math.floor(t.grid.rows / 2);
+	const sweepAngle = (t.frameCount * 0.04) % (Math.PI * 2);
+
+	for (let y = -hh; y <= hh; y += 1) {
+		for (let x = -hw; x <= hw; x += 1) {
+			const elevation = (Math.sin(x * 0.1 + y * 0.05) + Math.cos(x * 0.05 - y * 0.1) + 2) * 0.25;
+			let angleDiff = Math.abs(Math.atan2(y, x) + Math.PI - sweepAngle);
+			if (angleDiff > Math.PI) angleDiff = Math.PI * 2 - angleDiff;
+			const sweepVal = angleDiff < 0.15 ? (1 - angleDiff / 0.15) * 0.6 : 0;
+
+			let maxHeat = 0;
+			for (let i = 0; i < moveHistory.length; i++) {
+				const n = moveHistory[i],
+					d = Math.hypot(x - n.x, y - n.y);
+				if (d < 12) maxHeat = Math.max(maxHeat, (1 - d / 12) * n.life);
+			}
+
+			const val = Math.min(1, elevation * 0.35 + sweepVal + maxHeat * 0.85);
+			if (val > 0.08) {
+				const charIdx = Math.min(RAMP.length - 1, Math.floor(val * RAMP.length));
+				t.push();
+				t.translate(x, y);
+				if (maxHeat > 0.4) {
+					t.charColor(204, 255, 0);
+					t.cellColor(20, 45, 10);
+				} else if (sweepVal > 0.2) {
+					t.charColor(0, 229, 255);
+				} else {
+					const b = val;
+					t.charColor(Math.floor(8 + b * 20), Math.floor(36 + b * 90), Math.floor(27 + b * 70));
+				}
+				t.char(RAMP[charIdx]);
+				t.point();
+				t.pop();
+			}
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2),
+		top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.MOUSEMOVED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: PASSIVE MOVEMENT EVENT', x, y++, 100, 220, 255);
+	drawText('Fires on hover without clicking.', x, y++, 140, 160, 190);
+	drawText('Hovering leaves phosphor sonar trails.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('MOVE EVENTS: ' + moveCount, x, y++, 140, 255, 180);
+	drawText('TRAIL NODES: ' + moveHistory.length, x, y++, 180, 200, 220);
+});
+
+t.windowResized(() => t.resizeCanvas(window.innerWidth, window.innerHeight));
+```
 

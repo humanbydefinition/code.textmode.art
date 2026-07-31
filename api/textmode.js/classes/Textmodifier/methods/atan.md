@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / atan
@@ -34,5 +34,67 @@ Angle in radians.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="atan" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCBzbG9wZSA9IDA7CmxldCBhbmdsZSA9IDA7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNSwgOCwgMTgpOwoJc2xvcGUgPSB0LnNpbih0LmZyYW1lQ291bnQgKiAwLjAzNSkgKiAzICsgdC5jb3ModC5mcmFtZUNvdW50ICogMC4wMjEpICogMS4yOwoJYW5nbGUgPSB0LmF0YW4oc2xvcGUpOwoKCWZvciAobGV0IGkgPSAtNDsgaSA8PSA0OyBpKyspIHsKCQljb25zdCBzID0gaSAqIDAuNjsKCQljb25zdCBhID0gdC5hdGFuKHMpOwoJCXQuY2hhcignLicpOwoJCXQuY2hhckNvbG9yKDQ1LCA2NSwgMTAwKTsKCQl0LmxpbmUoMCwgMCwgdC5yb3VuZCh0LmNvcyhhKSAqIDE4KSwgdC5yb3VuZCh0LnNpbihhKSAqIDE4KSk7Cgl9CgoJdC5jaGFyKCcqJyk7Cgl0LmNoYXJDb2xvcigyNTUsIDIxNSwgMTAwKTsKCXQubGluZSgwLCAwLCB0LnJvdW5kKHQuY29zKGFuZ2xlKSAqIDIwKSwgdC5yb3VuZCh0LnNpbihhbmdsZSkgKiAyMCkpOwoJdC5jaGFyKCdAJyk7Cgl0LnB1c2goKTsKCXQudHJhbnNsYXRlKHQucm91bmQodC5jb3MoYW5nbGUpICogMjApLCB0LnJvdW5kKHQuc2luKGFuZ2xlKSAqIDIwKSk7Cgl0LmNoYXJDb2xvcigxMjAsIDI1NSwgMTcwKTsKCXQucG9pbnQoKTsKCXQucG9wKCk7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtdC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLXQuZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuQVRBTicsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IFNMT1BFIFRPIEFOR0xFJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdhdGFuKHNsb3BlKSBjb21wcmVzc2VzIGV4dHJlbWVzLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnU3RlZXAgdmFsdWVzIHN0aWxsIGZpdCBhIHJheS4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KGBTTE9QRTogJHtzbG9wZS50b0ZpeGVkKDIpfWAsIHgsIHkrKywgMjIwLCAyMzAsIDI1NSk7CglkcmF3VGV4dChgQU5HTEU6ICR7YW5nbGUudG9GaXhlZCgyKX1gLCB4LCB5KyssIDIyMCwgMjMwLCAyNTUpOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let slope = 0;
+let angle = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(5, 8, 18);
+	slope = t.sin(t.frameCount * 0.035) * 3 + t.cos(t.frameCount * 0.021) * 1.2;
+	angle = t.atan(slope);
+
+	for (let i = -4; i <= 4; i++) {
+		const s = i * 0.6;
+		const a = t.atan(s);
+		t.char('.');
+		t.charColor(45, 65, 100);
+		t.line(0, 0, t.round(t.cos(a) * 18), t.round(t.sin(a) * 18));
+	}
+
+	t.char('*');
+	t.charColor(255, 215, 100);
+	t.line(0, 0, t.round(t.cos(angle) * 20), t.round(t.sin(angle) * 20));
+	t.char('@');
+	t.push();
+	t.translate(t.round(t.cos(angle) * 20), t.round(t.sin(angle) * 20));
+	t.charColor(120, 255, 170);
+	t.point();
+	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -t.floor(t.grid.cols / 2);
+	const top = -t.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.ATAN', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SLOPE TO ANGLE', x, y++, 100, 220, 255);
+	drawText('atan(slope) compresses extremes.', x, y++, 140, 160, 190);
+	drawText('Steep values still fit a ray.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`SLOPE: ${slope.toFixed(2)}`, x, y++, 220, 230, 255);
+	drawText(`ANGLE: ${angle.toFixed(2)}`, x, y++, 220, 230, 255);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

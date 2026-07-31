@@ -8,7 +8,7 @@ api: true
 owner: TextmodeColor
 namespace: color
 kind: Property
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../../../index.md) / [color](../../../index.md) / [TextmodeColor](../../TextmodeColor.md) / b
@@ -23,5 +23,78 @@ Blue component (0-255).
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="b" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBSQU1QID0gJyAuOi09KyojJUAnOwpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDEwLCAyMik7Cgljb25zdCBodyA9IE1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IGhoID0gTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJY29uc3QgdG0gPSB0LmZyYW1lQ291bnQgKiAwLjAzOwoKCWZvciAobGV0IHkgPSAtaGg7IHkgPD0gaGg7IHkrKykgewoJCWZvciAobGV0IHggPSAtaHc7IHggPD0gaHc7IHgrKykgewoJCQljb25zdCBkMSA9IE1hdGguaHlwb3QoeCAtIE1hdGguY29zKHRtKSAqIDgsIHkgLSBNYXRoLnNpbih0bSkgKiA2KTsKCQkJY29uc3QgZDIgPSBNYXRoLmh5cG90KHggKyBNYXRoLnNpbih0bSAqIDAuNykgKiA4LCB5ICsgTWF0aC5jb3ModG0gKiAwLjcpICogNik7CgkJCWNvbnN0IHdhdmUgPSAoTWF0aC5zaW4oZDEgKiAwLjMgLSB0bSAqIDEuNSkgKyBNYXRoLmNvcyhkMiAqIDAuMyAtIHRtICogMS4yKSkgKiAwLjU7CgkJCWNvbnN0IGJsdWVWYWwgPSBNYXRoLmZsb29yKE1hdGgubWF4KDAsIE1hdGgubWluKDI1NSwgKHdhdmUgKiAwLjUgKyAwLjUpICogMjIwICsgMzUpKSk7CgoJCQljb25zdCBjb2wgPSB0LmNvbG9yKDE1LCBNYXRoLmZsb29yKGJsdWVWYWwgKiAwLjUpLCBibHVlVmFsKTsKCQkJY29uc3QgYmx1ZSA9IGNvbC5iOwoKCQkJaWYgKGJsdWUgPiA0NSkgewoJCQkJY29uc3Qgbm9ybSA9IChibHVlIC0gNDUpIC8gMjEwOwoJCQkJY29uc3QgaWR4ID0gTWF0aC5taW4oUkFNUC5sZW5ndGggLSAxLCBNYXRoLmZsb29yKG5vcm0gKiBSQU1QLmxlbmd0aCkpOwoKCQkJCXQucHVzaCgpOwoJCQkJdC50cmFuc2xhdGUoeCwgeSk7CgkJCQl0LmNoYXJDb2xvcihjb2wuciwgY29sLmcsIGJsdWUpOwoJCQkJdC5jZWxsQ29sb3IoNCwgMTIsIE1hdGguZmxvb3IoYmx1ZSAqIDAuMjUpKTsKCQkJCXQuY2hhcihSQU1QW2lkeF0pOwoJCQkJdC5wb2ludCgpOwoJCQkJdC5wb3AoKTsKCQkJfQoJCX0KCX0KfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWNvbnN0IHNhbXBsZUNvbCA9IHQuY29sb3IoMTUsIDEyMCwgMjQwKTsKCWNvbnN0IGJsdWUgPSBzYW1wbGVDb2wuYjsKCgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKDEyMCwgMjQwLCAxODApOwoJdC5wcmludCgnVEVYVE1PREVDT0xPUi5CJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDcwLCAxMDAsIDE0MCk7Cgl0LnByaW50KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAyMTAsIDI1NSk7Cgl0LnByaW50KCdDT05DRVBUOiBSRUFEIEJMVUUgQ09MT1IgQ0hBTk5FTCcsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDE2MCwgMTkwKTsKCXQucHJpbnQoJ1JlYWRzIDgtYml0IGJsdWUgcHJvcGVydHkgKDAtMjU1KS4nLCB4LCB5KyspOwoJdC5wcmludCgnRHJpdmVzIG9jZWFuaWMgY2F1c3RpYyByaXBwbGVzLicsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcig3MCwgMTAwLCAxNDApOwoJdC5wcmludCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMjU1LCAyMDApOwoJdC5wcmludChgU0FNUExFIEJMVUU6ICR7Ymx1ZX0gLyAyNTVgLCB4LCB5KyspOwoJdC5wb3AoKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const RAMP = ' .:-=+*#%@';
+const labelLayer = t.layers.add();
+
+t.draw(() => {
+	t.background(6, 10, 22);
+	const hw = Math.floor(t.grid.cols / 2);
+	const hh = Math.floor(t.grid.rows / 2);
+	const tm = t.frameCount * 0.03;
+
+	for (let y = -hh; y <= hh; y++) {
+		for (let x = -hw; x <= hw; x++) {
+			const d1 = Math.hypot(x - Math.cos(tm) * 8, y - Math.sin(tm) * 6);
+			const d2 = Math.hypot(x + Math.sin(tm * 0.7) * 8, y + Math.cos(tm * 0.7) * 6);
+			const wave = (Math.sin(d1 * 0.3 - tm * 1.5) + Math.cos(d2 * 0.3 - tm * 1.2)) * 0.5;
+			const blueVal = Math.floor(Math.max(0, Math.min(255, (wave * 0.5 + 0.5) * 220 + 35)));
+
+			const col = t.color(15, Math.floor(blueVal * 0.5), blueVal);
+			const blue = col.b;
+
+			if (blue > 45) {
+				const norm = (blue - 45) / 210;
+				const idx = Math.min(RAMP.length - 1, Math.floor(norm * RAMP.length));
+
+				t.push();
+				t.translate(x, y);
+				t.charColor(col.r, col.g, blue);
+				t.cellColor(4, 12, Math.floor(blue * 0.25));
+				t.char(RAMP[idx]);
+				t.point();
+				t.pop();
+			}
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const sampleCol = t.color(15, 120, 240);
+	const blue = sampleCol.b;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODECOLOR.B', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: READ BLUE COLOR CHANNEL', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Reads 8-bit blue property (0-255).', x, y++);
+	t.print('Drives oceanic caustic ripples.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 200);
+	t.print(`SAMPLE BLUE: ${blue} / 255`, x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

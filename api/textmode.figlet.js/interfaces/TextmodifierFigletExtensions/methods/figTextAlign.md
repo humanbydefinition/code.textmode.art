@@ -8,7 +8,7 @@ api: true
 owner: TextmodifierFigletExtensions
 kind: Method
 ecosystem: textmode.js
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.figlet.js](../../../index.md) / [TextmodifierFigletExtensions](../../TextmodifierFigletExtensions.md) / figTextAlign
@@ -31,7 +31,102 @@ The current alignment mode.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.figlet.js" language="javascript" title="figTextAlign" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW0ZpZ2xldFBsdWdpbl0sCn0pOwpjb25zdCBndWlkZUxheWVyID0gdC5sYXllcnMuYWRkKCksCgl0ZXh0TGF5ZXIgPSB0LmxheWVycy5hZGQoKSwKCWxhYmVsTGF5ZXIgPSB0LmxheWVycy5hZGQoKTsKCmxldCBmb250Owpjb25zdCBhbGlnbm1lbnRzID0gWydsZWZ0JywgJ2NlbnRlcicsICdyaWdodCddOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LnNldHVwKGFzeW5jICgpID0-IHsKCWZvbnQgPSBhd2FpdCB0LmxvYWRGaWdGb250KCdodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvZ2gveGVyby9maWdsZXQtZm9udHNAbWFzdGVyL0J1bGJoZWFkLmZsZicpOwoJdC5maWdGb250KGZvbnQpOwoJdC5maWdUZXh0QmFzZWxpbmUoJ2NlbnRlcicpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKSwKCQl0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzLAoJCXggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLkZJR1RFWFRBTElHTicsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IEhPUklaT05UQUwgQUxJR05NRU5UJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdBbGlnbnMgdGV4dCByZWxhdGl2ZSB0byBYIG9yaWdpbi4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJ0N5Y2xlOiBsZWZ0IC0-IGNlbnRlciAtPiByaWdodC4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWlmIChmb250KSBkcmF3VGV4dChgQWN0aXZlIGFsaWduOiAke3QuZmlnVGV4dEFsaWduKCl9YCwgeCwgeSsrLCAxNDAsIDI1NSwgMTgwKTsKCWVsc2UgZHJhd1RleHQoJ0xvYWRpbmcuLi4nLCB4LCB5KyssIDI1NSwgMTgwLCAxMDApOwp9KTsKCmd1aWRlTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7CglpZiAoIWZvbnQpIHJldHVybjsKCgkvLyBDeWNsZSBhbGlnbm1lbnQgZXZlcnkgMi41IHNlY29uZHMKCWNvbnN0IGluZGV4ID0gTWF0aC5mbG9vcih0LnNlY3MgLyAyLjUpICUgYWxpZ25tZW50cy5sZW5ndGg7Cgl0LmZpZ1RleHRBbGlnbihhbGlnbm1lbnRzW2luZGV4XSk7CgoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKSwKCQlib3R0b20gPSBNYXRoLmNlaWwodC5ncmlkLnJvd3MgLyAyKSwKCQlhbGlnbiA9IHQuZmlnVGV4dEFsaWduKCk7CgoJLy8gRHJhdyBvcmlnaW4gYXhpcwoJdC5wdXNoKCk7Cgl0LmNoYXJDb2xvcig1MCwgMTAwLCAxNTApOwoJZm9yIChsZXQgeSA9IHRvcDsgeSA8IGJvdHRvbTsgeSsrKSB7CgkJdC5wcmludCgnfCcsIDAsIHkpOwoJfQoJdC5jaGFyQ29sb3IoMTAwLCAxODAsIDI1NSk7Cgl0LnByaW50KCdYID0gMCAoT3JpZ2luKScsIDIsIDgpOwoJdC5wb3AoKTsKCgkvLyBEcmF3IGFsaWdubWVudCBpbmRpY2F0b3IgYXJyb3cKCXQucHVzaCgpOwoJdC5jaGFyQ29sb3IoMjU1LCAxODAsIDEwMCk7Cgl0LnByaW50KAoJCWFsaWduID09PSAnbGVmdCcgPyAnT3JpZ2luIC0tPicgOiBhbGlnbiA9PT0gJ3JpZ2h0JyA_ICc8LS0gT3JpZ2luJyA6ICc8LS0gT3JpZ2luIC0tPicsCgkJYWxpZ24gPT09ICdsZWZ0JyA_IDAgOiBhbGlnbiA9PT0gJ3JpZ2h0JyA_IC0xMCA6IC02LAoJCTUKCSk7Cgl0LnBvcCgpOwp9KTsKCnRleHRMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWlmICghZm9udCkgcmV0dXJuOwoKCWNvbnN0IHRpbWUgPSB0LnNlY3MgKiAxLjU7Cgl0LmZpZ1RleHQoJ0FMSUdOJywgMCwgMCwgewoJCWNoYXJDb2xvcjogKGNlbGwpID0-IHsKCQkJY29uc3Qgd2F2ZSA9IDAuNSArIDAuNSAqIE1hdGguc2luKHRpbWUgKyBjZWxsLmNvbCAqIDAuMSk7CgkJCXJldHVybiBbTWF0aC5yb3VuZCgxMDAgKyAxNTUgKiB3YXZlKSwgMjU1LCBNYXRoLnJvdW5kKDIwMCArIDU1ICogKDEuMCAtIHdhdmUpKV07CgkJfSwKCX0pOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 8,
+	plugins: [FigletPlugin],
+});
+const guideLayer = t.layers.add(),
+	textLayer = t.layers.add(),
+	labelLayer = t.layers.add();
+
+let font;
+const alignments = ['left', 'center', 'right'];
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.setup(async () => {
+	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Bulbhead.flf');
+	t.figFont(font);
+	t.figTextBaseline('center');
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2),
+		top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3,
+		x = left + 3;
+
+	drawText('TEXTMODIFIER.FIGTEXTALIGN', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: HORIZONTAL ALIGNMENT', x, y++, 100, 220, 255);
+	drawText('Aligns text relative to X origin.', x, y++, 140, 160, 190);
+	drawText('Cycle: left -> center -> right.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	if (font) drawText(`Active align: ${t.figTextAlign()}`, x, y++, 140, 255, 180);
+	else drawText('Loading...', x, y++, 255, 180, 100);
+});
+
+guideLayer.draw(() => {
+	t.clear();
+	if (!font) return;
+
+	// Cycle alignment every 2.5 seconds
+	const index = Math.floor(t.secs / 2.5) % alignments.length;
+	t.figTextAlign(alignments[index]);
+
+	const top = -Math.floor(t.grid.rows / 2),
+		bottom = Math.ceil(t.grid.rows / 2),
+		align = t.figTextAlign();
+
+	// Draw origin axis
+	t.push();
+	t.charColor(50, 100, 150);
+	for (let y = top; y < bottom; y++) {
+		t.print('|', 0, y);
+	}
+	t.charColor(100, 180, 255);
+	t.print('X = 0 (Origin)', 2, 8);
+	t.pop();
+
+	// Draw alignment indicator arrow
+	t.push();
+	t.charColor(255, 180, 100);
+	t.print(
+		align === 'left' ? 'Origin -->' : align === 'right' ? '<-- Origin' : '<-- Origin -->',
+		align === 'left' ? 0 : align === 'right' ? -10 : -6,
+		5
+	);
+	t.pop();
+});
+
+textLayer.draw(() => {
+	t.clear();
+	if (!font) return;
+
+	const time = t.secs * 1.5;
+	t.figText('ALIGN', 0, 0, {
+		charColor: (cell) => {
+			const wave = 0.5 + 0.5 * Math.sin(time + cell.col * 0.1);
+			return [Math.round(100 + 155 * wave), 255, Math.round(200 + 55 * (1.0 - wave))];
+		},
+	});
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 
 ## Call Signature
 

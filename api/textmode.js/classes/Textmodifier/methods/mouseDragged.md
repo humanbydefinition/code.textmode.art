@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / mouseDragged
@@ -32,5 +32,94 @@ Register the single-callback handler for mouse dragging.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="mouseDragged" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7Cgpjb25zdCBwdWxzZXMgPSBbXTsKbGV0IGNvdW50ID0gMDsKbGV0IGxhc3QgPSAnV0FJVElORyc7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCmZ1bmN0aW9uIGFkZFB1bHNlKGxhYmVsLCB4ID0gMCwgeSA9IDApIHsKCWNvdW50Kys7CglsYXN0ID0gbGFiZWw7CglwdWxzZXMudW5zaGlmdCh7IGxhYmVsLCB4LCB5LCBsaWZlOiAxIH0pOwoJaWYgKHB1bHNlcy5sZW5ndGggPiAxMikgcHVsc2VzLmxlbmd0aCA9IDEyOwp9Cgp0Lm1vdXNlRHJhZ2dlZCgoKSA9PiB7CglhZGRQdWxzZSgnRFJBRycsIHQubW91c2UueCwgdC5tb3VzZS55KTsKfSk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDEwLCAyMik7CglpZiAodC5tb3VzZUlzUHJlc3NlZCAmJiB0Lm1vdXNlLnggIT09IE51bWJlci5ORUdBVElWRV9JTkZJTklUWSkgewoJCXQuY2hhckNvbG9yKDEyMCwgMjIwLCAyNTUpOwoJCXQubGluZSh0LnBtb3VzZS54LCB0LnBtb3VzZS55LCB0Lm1vdXNlLngsIHQubW91c2UueSk7Cgl9CgoJZm9yIChsZXQgaSA9IHB1bHNlcy5sZW5ndGggLSAxOyBpID49IDA7IGktLSkgewoJCWNvbnN0IHAgPSBwdWxzZXNbaV07CgkJcC5saWZlIC09IDAuMDI7CgkJaWYgKHAubGlmZSA8PSAwKSB7CgkJCXB1bHNlcy5zcGxpY2UoaSwgMSk7CgkJCWNvbnRpbnVlOwoJCX0KCQl0LnB1c2goKTsKCQl0LnRyYW5zbGF0ZShwLngsIHAueSAtICgxIC0gcC5saWZlKSAqIDQpOwoJCXQuY2hhcignKicpOwoJCXQuY2hhckNvbG9yKDI1NSwgMjEwLCAxMjApOwoJCXQucG9pbnQoKTsKCQl0LnBvcCgpOwoJfQp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLk1PVVNFRFJBR0dFRCcsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IERSQUcgRVZFTlQnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ0V2ZW50IHVwZGF0ZXMgY29tcGFjdCBzdGF0ZS4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJ1B1bHNlcyBzaG93IHJlY2VudCB0cmlnZ2Vycy4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdEUkFHUzogJyArIGNvdW50LCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwoJZHJhd1RleHQoJ0xBU1Q6ICcgKyBsYXN0LnNsaWNlKDAsIDI4KSwgeCwgeSsrLCAxODAsIDIwMCwgMjIwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const labelLayer = t.layers.add();
+const particles = [];
+let dragCount = 0;
+let isDragging = false;
+
+function drawText(txt, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(txt, x, y);
+	t.pop();
+}
+
+t.mouseDragged(() => {
+	if (t.mouse.x === Number.NEGATIVE_INFINITY) return;
+	isDragging = true;
+	dragCount++;
+	const vx = (t.mouse.x - t.pmouse.x) * 0.3;
+	const vy = (t.mouse.y - t.pmouse.y) * 0.3;
+	particles.unshift({ x: t.mouse.x, y: t.mouse.y, vx, vy, life: 1 });
+	if (particles.length > 80) particles.length = 80;
+});
+
+t.draw(() => {
+	t.background(8, 12, 20);
+	const hw = Math.floor(t.grid.cols / 2);
+	const hh = Math.floor(t.grid.rows / 2);
+	const tm = t.frameCount * 0.02;
+
+	for (let y = -hh; y <= hh; y += 3) {
+		for (let x = -hw; x <= hw; x += 3) {
+			const a = Math.sin(x * 0.08 + tm) + Math.cos(y * 0.08 - tm * 0.8);
+			t.push();
+			t.translate(x, y);
+			t.charColor(14, 56, 43);
+			t.char(a > 1.0 ? '/' : a > 0.2 ? '|' : a > -0.8 ? '\\' : '-');
+			t.point();
+			t.pop();
+		}
+	}
+
+	for (let i = particles.length - 1; i >= 0; i--) {
+		const p = particles[i];
+		p.x += p.vx;
+		p.y += p.vy;
+		p.vx *= 0.94;
+		p.vy *= 0.94;
+		const a = Math.sin(p.x * 0.08 + tm) + Math.cos(p.y * 0.08 - tm * 0.8);
+		p.vx += Math.cos(a) * 0.05;
+		p.vy += Math.sin(a) * 0.05;
+		if ((p.life -= 0.02) <= 0) {
+			particles.splice(i, 1);
+			continue;
+		}
+		const px = Math.round(p.x);
+		const py = Math.round(p.y);
+		if (px >= -hw && px <= hw && py >= -hh && py <= hh) {
+			t.push();
+			t.translate(px, py);
+			t.charColor(p.life > 0.6 ? 163 : 57, p.life > 0.6 ? 255 : p.life > 0.3 ? 255 : 90, p.life > 0.6 ? 206 : 20);
+			if (p.life > 0.3) t.cellColor(p.life > 0.6 ? 20 : 10, p.life > 0.6 ? 80 : 40, p.life > 0.6 ? 50 : 25);
+			t.char(p.life > 0.6 ? '█' : p.life > 0.3 ? '▓' : '░');
+			t.point();
+			t.pop();
+		}
+	}
+	if (!t.mouseIsPressed) isDragging = false;
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.MOUSEDRAGGED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: CONTINUOUS DRAG EVENT', x, y++, 100, 220, 255);
+	drawText('Fires continuously while dragging.', x, y++, 140, 160, 190);
+	drawText('Injects fluid particle streamlines.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('DRAG EVENTS: ' + dragCount, x, y++, 140, 255, 180);
+	drawText('DRAGGING:    ' + (isDragging ? 'TRUE' : 'FALSE'), x, y++, 180, 200, 220);
+	drawText('PARTICLES:   ' + particles.length, x, y++, 180, 200, 220);
+});
+
+t.windowResized(() => t.resizeCanvas(window.innerWidth, window.innerHeight));
+```
 

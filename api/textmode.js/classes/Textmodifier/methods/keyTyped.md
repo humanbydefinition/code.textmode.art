@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / keyTyped
@@ -35,5 +35,93 @@ punctuation, and space. It does not fire for modifier keys or control-key chords
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="keyTyped" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpsZXQgdHlwZWQgPSAnJzsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKdC5rZXlUeXBlZCgoZGF0YSkgPT4gewoJdHlwZWQgPSAodHlwZWQgKyAoZGF0YS5rZXkgfHwgJycpKS5zbGljZSgtMTYpOwp9KTsKCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNiwgMTAsIDIyKTsKCWZvciAobGV0IGkgPSAwOyBpIDwgdHlwZWQubGVuZ3RoOyBpKyspIHsKCQl0LnB1c2goKTsKCQl0LnRyYW5zbGF0ZShpIC0gdHlwZWQubGVuZ3RoIC8gMiwgMCk7CgkJdC5jaGFyKHR5cGVkW2ldKTsKCQl0LmNoYXJDb2xvcigyNTUsIDIxMCwgMTIwKTsKCQl0LnBvaW50KCk7CgkJdC5wb3AoKTsKCX0KfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5LRVlUWVBFRCcsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IFBSSU5UQUJMRSBJTlBVVCcsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnQ29sbGVjdHMgdHlwZWQgY2hhcmFjdGVycy4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJ0J1ZmZlciBrZWVwcyB0aGUgbGFzdCAxNi4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdURVhUOiAnICsgdHlwZWQuc2xpY2UoLTIwKSwgeCwgeSsrLCAxNDAsIDI1NSwgMTgwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const labelLayer = t.layers.add();
+let buffer = 'TEXTMODE.JS',
+	typedCount = 0;
+
+function drawText(txt, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(txt, x, y);
+	t.pop();
+}
+
+function getCardChar(cx, cy, w, h) {
+	if ((cy === 0 || cy === h - 1) && (cx === 0 || cx === w - 1)) return '+';
+	return cy === 0 || cy === h - 1 ? '-' : '|';
+}
+
+t.keyTyped((data) => {
+	if (data.key && data.key.length === 1) {
+		typedCount++;
+		buffer = (buffer + data.key).slice(-28);
+	}
+});
+
+t.draw(() => {
+	t.background(4, 16, 8);
+	const hw = Math.floor(t.grid.cols / 2),
+		hh = Math.floor(t.grid.rows / 2),
+		tm = t.frameCount * 0.05;
+
+	for (let y = -hh; y <= hh; y += 2) {
+		for (let x = -hw; x <= hw; x += 2) {
+			const rain = (Math.sin(x * 0.2 + tm + y * 0.1) + 1) * 0.5;
+			if (rain > 0.65) {
+				t.push();
+				t.translate(x, y);
+				t.charColor(10, Math.floor(40 + rain * 60), 20);
+				t.char(String.fromCharCode(65 + ((x + y + Math.floor(tm)) % 26)));
+				t.point();
+				t.pop();
+			}
+		}
+	}
+
+	const cardW = 32,
+		cardH = 5,
+		startX = -16,
+		startY = -2;
+	for (let cy = 0; cy < cardH; cy++) {
+		for (let cx = 0; cx < cardW; cx++) {
+			const isEdge = cx === 0 || cx === cardW - 1 || cy === 0 || cy === cardH - 1;
+			t.push();
+			t.translate(startX + cx, startY + cy);
+			t.cellColor(2, 24, 12);
+			t.charColor(0, 180, 80);
+			t.char(isEdge ? getCardChar(cx, cy, cardW, cardH) : ' ');
+			t.point();
+			t.pop();
+		}
+	}
+
+	t.push();
+	t.printAlign('center', 'middle');
+	t.charColor(0, 255, 102);
+	t.print(buffer + (Math.floor(t.frameCount / 20) % 2 === 0 ? '_' : ' '), 0, 0);
+	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2),
+		top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODIFIER.KEYTYPED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: PRINTABLE INPUT BUFFER', x, y++, 100, 220, 255);
+	drawText('Captures printable typed characters.', x, y++, 140, 160, 190);
+	drawText('Type any key to append to stream.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('TYPED CHARACTERS: ' + typedCount, x, y++, 140, 255, 180);
+	drawText('BUFFER LENGTH:    ' + buffer.length, x, y++, 180, 200, 220);
+});
+
+t.windowResized(() => t.resizeCanvas(window.innerWidth, window.innerHeight));
+```
 

@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 isInterface: true
 ---
 
@@ -26,7 +26,103 @@ you to create dynamic text distortion effects.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.filters.js" language="javascript" title="GridDistortionOptions" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW0ZpbHRlcnNQbHVnaW5dLAp9KTsKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKbGV0IHZpZGVvOwoKLy8gU2luZSB3YXZlIHBhcmFtZXRlcnMKY29uc3QgY29uZmlnID0gewoJd2lkdGhGcmVxdWVuY3k6IDAuMDUsCgl3aWR0aFNwZWVkOiAwLjA1LAoJd2lkdGhBbXBsaXR1ZGU6IDEuMCwKCWhlaWdodEZyZXF1ZW5jeTogMC4xLAoJaGVpZ2h0U3BlZWQ6IDAuMDMsCgloZWlnaHRBbXBsaXR1ZGU6IDEuMCwKfTsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKdC5zZXR1cChhc3luYyAoKSA9PiB7Cgl2aWRlbyA9IGF3YWl0IHQubG9hZFZpZGVvKCdodHRwczovL2ludGVyYWN0aXZlLWV4YW1wbGVzLm1kbi5tb3ppbGxhLm5ldC9tZWRpYS9jYzAtdmlkZW9zL2Zsb3dlci5tcDQnKTsKCXZpZGVvLnBsYXkoKTsKCXZpZGVvLmxvb3AoKTsKCXZpZGVvLmNoYXJhY3RlcnMoJyAuOi09KyojJUAnKTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMiksCgkJdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMywKCQl4ID0gbGVmdCArIDM7CgoJY29uc3Qgd1ZhciA9ICgwLjUgKyAwLjMgKiBNYXRoLnNpbih0LnNlY3MgKiAxLjApKS50b0ZpeGVkKDIpOwoJY29uc3QgaFZhciA9ICgwLjUgKyAwLjMgKiBNYXRoLmNvcyh0LnNlY3MgKiAxLjUpKS50b0ZpeGVkKDIpOwoKCWRyYXdUZXh0KCdGSUxURVJTUExVR0lOLkdSSURESVNUT1JUSU9OJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogQ09PUkRJTkFURSBTUEFDRSBXQVJQSU5HJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdXYXJwIGdyaWQgY29sdW1ucyBhbmQgcm93cy4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdXaWR0aCBWYXI6ICcgKyB3VmFyLCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwoJZHJhd1RleHQoJ0hlaWdodCBWYXI6ICcgKyBoVmFyLCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwp9KTsKCnQuZHJhdygoKSA9PiB7CglpZiAoIXZpZGVvKSByZXR1cm47CgoJY29uc3QgY29scyA9IHQuZ3JpZC5jb2xzOwoJY29uc3Qgcm93cyA9IHQuZ3JpZC5yb3dzOwoJY29uc3Qgd1ZhciA9IDAuNSArIDAuMyAqIE1hdGguc2luKHQuc2VjcyAqIDEuMCk7Cgljb25zdCBoVmFyID0gMC41ICsgMC4zICogTWF0aC5jb3ModC5zZWNzICogMS41KTsKCgkvLyBHZW5lcmF0ZSBzaW5lIHdhdmUgcGF0dGVybiBmb3Igd2lkdGggZmFjdG9ycwoJY29uc3Qgd2lkdGhGYWN0b3JzID0gW107Cglmb3IgKGxldCBpID0gMDsgaSA8IGNvbHM7IGkrKykgewoJCWNvbnN0IHNpbmVWYWx1ZSA9IE1hdGguc2luKGkgKiBjb25maWcud2lkdGhGcmVxdWVuY3kgKyB0LnNlY3MgKiA2MCAqIGNvbmZpZy53aWR0aFNwZWVkKSAqIGNvbmZpZy53aWR0aEFtcGxpdHVkZTsKCQl3aWR0aEZhY3RvcnMucHVzaCgoc2luZVZhbHVlICsgY29uZmlnLndpZHRoQW1wbGl0dWRlKSAvICgyICogY29uZmlnLndpZHRoQW1wbGl0dWRlKSk7Cgl9CgoJLy8gR2VuZXJhdGUgc2luZSB3YXZlIHBhdHRlcm4gZm9yIGhlaWdodCBmYWN0b3JzCgljb25zdCBoZWlnaHRGYWN0b3JzID0gW107Cglmb3IgKGxldCBqID0gMDsgaiA8IHJvd3M7IGorKykgewoJCWNvbnN0IHNpbmVWYWx1ZSA9CgkJCU1hdGguc2luKGogKiBjb25maWcuaGVpZ2h0RnJlcXVlbmN5ICsgdC5zZWNzICogNjAgKiBjb25maWcuaGVpZ2h0U3BlZWQpICogY29uZmlnLmhlaWdodEFtcGxpdHVkZTsKCQloZWlnaHRGYWN0b3JzLnB1c2goKHNpbmVWYWx1ZSArIGNvbmZpZy5oZWlnaHRBbXBsaXR1ZGUpIC8gKDIgKiBjb25maWcuaGVpZ2h0QW1wbGl0dWRlKSk7Cgl9CgoJLy8gQXBwbHkgZ3JpZCBkaXN0b3J0aW9uIGZpbHRlcgoJdC5sYXllcnMuYmFzZS5maWx0ZXIoJ2dyaWREaXN0b3J0aW9uJywgewoJCWdyaWRDZWxsRGltZW5zaW9uczogW2NvbHMsIHJvd3NdLAoJCWdyaWRQaXhlbERpbWVuc2lvbnM6IFt0LmdyaWQud2lkdGgsIHQuZ3JpZC5oZWlnaHRdLAoJCWdyaWRPZmZzZXREaW1lbnNpb25zOiBbdC5ncmlkLm9mZnNldFgsIHQuZ3JpZC5vZmZzZXRZXSwKCQl3aWR0aEZhY3RvcnM6IHdpZHRoRmFjdG9ycywKCQloZWlnaHRGYWN0b3JzOiBoZWlnaHRGYWN0b3JzLAoJCXdpZHRoVmFyaWF0aW9uU2NhbGU6IHdWYXIsCgkJaGVpZ2h0VmFyaWF0aW9uU2NhbGU6IGhWYXIsCgl9KTsKCgl0LmltYWdlKHZpZGVvLCB0LmdyaWQuY29scywgdC5ncmlkLnJvd3MpOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 8,
+	plugins: [FiltersPlugin],
+});
+const labelLayer = t.layers.add();
+
+let video;
+
+// Sine wave parameters
+const config = {
+	widthFrequency: 0.05,
+	widthSpeed: 0.05,
+	widthAmplitude: 1.0,
+	heightFrequency: 0.1,
+	heightSpeed: 0.03,
+	heightAmplitude: 1.0,
+};
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.setup(async () => {
+	video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
+	video.play();
+	video.loop();
+	video.characters(' .:-=+*#%@');
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2),
+		top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3,
+		x = left + 3;
+
+	const wVar = (0.5 + 0.3 * Math.sin(t.secs * 1.0)).toFixed(2);
+	const hVar = (0.5 + 0.3 * Math.cos(t.secs * 1.5)).toFixed(2);
+
+	drawText('FILTERSPLUGIN.GRIDDISTORTION', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: COORDINATE SPACE WARPING', x, y++, 100, 220, 255);
+	drawText('Warp grid columns and rows.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('Width Var: ' + wVar, x, y++, 140, 255, 180);
+	drawText('Height Var: ' + hVar, x, y++, 140, 255, 180);
+});
+
+t.draw(() => {
+	if (!video) return;
+
+	const cols = t.grid.cols;
+	const rows = t.grid.rows;
+	const wVar = 0.5 + 0.3 * Math.sin(t.secs * 1.0);
+	const hVar = 0.5 + 0.3 * Math.cos(t.secs * 1.5);
+
+	// Generate sine wave pattern for width factors
+	const widthFactors = [];
+	for (let i = 0; i < cols; i++) {
+		const sineValue = Math.sin(i * config.widthFrequency + t.secs * 60 * config.widthSpeed) * config.widthAmplitude;
+		widthFactors.push((sineValue + config.widthAmplitude) / (2 * config.widthAmplitude));
+	}
+
+	// Generate sine wave pattern for height factors
+	const heightFactors = [];
+	for (let j = 0; j < rows; j++) {
+		const sineValue =
+			Math.sin(j * config.heightFrequency + t.secs * 60 * config.heightSpeed) * config.heightAmplitude;
+		heightFactors.push((sineValue + config.heightAmplitude) / (2 * config.heightAmplitude));
+	}
+
+	// Apply grid distortion filter
+	t.layers.base.filter('gridDistortion', {
+		gridCellDimensions: [cols, rows],
+		gridPixelDimensions: [t.grid.width, t.grid.height],
+		gridOffsetDimensions: [t.grid.offsetX, t.grid.offsetY],
+		widthFactors: widthFactors,
+		heightFactors: heightFactors,
+		widthVariationScale: wVar,
+		heightVariationScale: hVar,
+	});
+
+	t.image(video, t.grid.cols, t.grid.rows);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 
 ## Properties
 

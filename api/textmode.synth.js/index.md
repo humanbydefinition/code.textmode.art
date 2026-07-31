@@ -2,12 +2,12 @@
 layout: doc
 editLink: true
 title: textmode.synth.js
-description: A derivative work of hydra-synth by Olivia Jack, adapted for the textmode.js ecosystem, providing a visual synthesis system for procedural generation of char...
+description: Synth engine for textmode.js
 category: API Reference
 api: true
 kind: Project
 ecosystem: textmode.js
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 # textmode.synth.js
@@ -19,7 +19,26 @@ and visual effects through method chaining.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="textmode.synth.js" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CiAgd2lkdGg6IHdpbmRvdy5pbm5lcldpZHRoLAogIGhlaWdodDogd2luZG93LmlubmVySGVpZ2h0LAogIHBsdWdpbnM6IFtTeW50aFBsdWdpbl0KfSk7Cgpjb25zdCBzeW50aCA9IG5vaXNlKDgpCiAgLnJvdGF0ZSgwLjIpCiAgLmthbGVpZCg1KQogIC5jaGFyQ29sb3Iob3NjKDYsIDAuMSwgMS4yKSkKICAuY2VsbENvbG9yKG9zYyg2LCAwLjEsIDEuMikuaW52ZXJ0KCkpCiAgLmNoYXJNYXAoJ0AjJSorPS06LiAnKTsKCnQuc3ludGgoc3ludGgpOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKICB0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+  width: window.innerWidth,
+  height: window.innerHeight,
+  plugins: [SynthPlugin]
+});
+
+const synth = noise(8)
+  .rotate(0.2)
+  .kaleid(5)
+  .charColor(osc(6, 0.1, 1.2))
+  .cellColor(osc(6, 0.1, 1.2).invert())
+  .charMap('@#%*+=-:. ');
+
+t.synth(synth);
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 
 ## Classes
 

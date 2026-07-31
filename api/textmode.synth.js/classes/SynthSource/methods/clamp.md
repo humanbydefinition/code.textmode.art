@@ -8,7 +8,7 @@ api: true
 owner: SynthSource
 kind: Method
 ecosystem: textmode.js
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.synth.js](../../../index.md) / [SynthSource](../../SynthSource.md) / clamp
@@ -34,5 +34,57 @@ Clamp color values to a specified range for stability.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="clamp" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW1N5bnRoUGx1Z2luXSwKfSk7Cgp0LmJwbSgxOCk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IGdseXBocyA9ICcgLjotPSsqIyVAJzsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnU1lOVEhTT1VSQ0UuQ0xBTVAnLCB4LCB5KyssIDExMCwgMjU1LCAxNzApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgNzAsIDExMCwgMTQwKTsKCWRyYXdUZXh0KCdWQUxVRSBXSU5ET1dJTkcnLCB4LCB5KyssIDEyMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ0NsYW1wIGNhcHMgdGhlIGNvbG9yIHJhbmdlLicsIHgsIHkrKywgMTYwLCAxODAsIDIxMCk7CglkcmF3VGV4dCgnTGV2ZWxzIHJldmVhbCB0aGUgY2xpcHBlZCBiYW5kLicsIHgsIHkrKywgMTYwLCAxODAsIDIxMCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA3MCwgMTEwLCAxNDApOwoJZHJhd1RleHQoJ1NpbmdsZSBjaGFpbjogc291cmNlIC0-IGNsYW1wLicsIHgsIHkrKywgMTUwLCAyNTUsIDE5MCk7Cn0pOwoKdC5zeW50aCgKCXBsYXNtYSg2LjAsIDAuMTIsIDAuMiwgMS40NSkKCQkuYWRkKG9zYygxMiwgMC4wNiwgMS4xKS5rYWxlaWQoNSksIDAuMjgpCgkJLmNvbG9yYW1hKDAuMTIpCgkJLmNsYW1wKDAuMTgsIDAuNzQpCgkJLmxldmVscygwLjE4LCAwLjc0LCAwLjA0LCAxLjAsIDAuODgpCgkJLmNvbnRyYXN0KDEuMjgpCgkJLmNvbG9yKDAuMywgMC43OCwgMS4wKQoJCS5jaGFyTWFwKGdseXBocykKCQkuY2VsbENvbG9yKDAuMDE1LCAwLjAyLCAwLjAzNSkKKTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 8,
+	plugins: [SynthPlugin],
+});
+
+t.bpm(18);
+
+const labelLayer = t.layers.add();
+const glyphs = ' .:-=+*#%@';
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('SYNTHSOURCE.CLAMP', x, y++, 110, 255, 170);
+	drawText('------------------------------------', x, y++, 70, 110, 140);
+	drawText('VALUE WINDOWING', x, y++, 120, 220, 255);
+	drawText('Clamp caps the color range.', x, y++, 160, 180, 210);
+	drawText('Levels reveal the clipped band.', x, y++, 160, 180, 210);
+	drawText('------------------------------------', x, y++, 70, 110, 140);
+	drawText('Single chain: source -> clamp.', x, y++, 150, 255, 190);
+});
+
+t.synth(
+	plasma(6.0, 0.12, 0.2, 1.45)
+		.add(osc(12, 0.06, 1.1).kaleid(5), 0.28)
+		.colorama(0.12)
+		.clamp(0.18, 0.74)
+		.levels(0.18, 0.74, 0.04, 1.0, 0.88)
+		.contrast(1.28)
+		.color(0.3, 0.78, 1.0)
+		.charMap(glyphs)
+		.cellColor(0.015, 0.02, 0.035)
+);
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

@@ -8,7 +8,7 @@ api: true
 owner: TextmodeTileset
 namespace: fonts
 kind: Accessor
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../../../index.md) / [fonts](../../../index.md) / [TextmodeTileset](../../TextmodeTileset.md) / fontSize
@@ -29,5 +29,93 @@ Effective font size used to scale tileset cells.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="fontSize" encoded-code="Y29uc3QgVDY0X1VSTCA9ICdodHRwczovL2xpdHRsZWJpdHNwYWNlLmNvbS9yZXNvdXJjZXMvZm9udHMvVDY0LnBuZyc7CmNvbnN0IHQgPSB0ZXh0bW9kZS5jcmVhdGUoewoJd2lkdGg6IHdpbmRvdy5pbm5lcldpZHRoLAoJaGVpZ2h0OiB3aW5kb3cuaW5uZXJIZWlnaHQsCglmb250U2l6ZTogOCwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCB0aWxlc2V0ID0gbnVsbDsKCnQuc2V0dXAoYXN5bmMgKCkgPT4gewoJdGlsZXNldCA9IGF3YWl0IHQubG9hZFRpbGVzZXQoeyBzb3VyY2U6IFQ2NF9VUkwsIGNvbHVtbnM6IDE2LCByb3dzOiAxNiwgY291bnQ6IDI1NiwgZm9udFNpemU6IDE2IH0pOwp9KTsKCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNiwgNiwgMTYpOwoJaWYgKCF0aWxlc2V0KSByZXR1cm47CgoJY29uc3QgaHcgPSBNYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCBoaCA9IE1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWNvbnN0IHRtID0gdC5mcmFtZUNvdW50ICogMC4wMzsKCWNvbnN0IGNoYXJzID0gdGlsZXNldC5jaGFyYWN0ZXJzOwoKCWNvbnN0IGN4ID0gLTAuNyArIE1hdGguc2luKHRtKSAqIDAuMTsKCWNvbnN0IGN5ID0gMC4yNzAxNSArIE1hdGguY29zKHRtICogMC43KSAqIDAuMDU7CgoJZm9yIChsZXQgeSA9IC1oaDsgeSA8PSBoaDsgeSsrKSB7CgkJZm9yIChsZXQgeCA9IC1odzsgeCA8PSBodzsgeCsrKSB7CgkJCWxldCB6eCA9ICh4IC8gaHcpICogMS41OwoJCQlsZXQgenkgPSAoeSAvIGhoKSAqIDEuNTsKCQkJbGV0IGl0ZXIgPSAwOwoJCQlmb3IgKGxldCBpID0gMDsgaSA8IDE2OyBpKyspIHsKCQkJCWlmICh6eCAqIHp4ICsgenkgKiB6eSA-IDQpIGJyZWFrOwoJCQkJY29uc3QgeHRlbXAgPSB6eCAqIHp4IC0genkgKiB6eSArIGN4OwoJCQkJenkgPSAyICogenggKiB6eSArIGN5OwoJCQkJenggPSB4dGVtcDsKCQkJCWl0ZXIrKzsKCQkJfQoJCQljb25zdCBub3JtID0gaXRlciAvIDE2OwoKCQkJY29uc3QgY2hhcklkeCA9IE1hdGguZmxvb3IoTWF0aC5hYnMobm9ybSAqIGNoYXJzLmxlbmd0aCArIHRtICogOCkgJSAoY2hhcnMubGVuZ3RoIHx8IDEpKTsKCQkJY29uc3QgY2hhcktleSA9IGNoYXJzW2NoYXJJZHhdID8gY2hhcnNbY2hhcklkeF0uY2hhcmFjdGVyIDogJyAnOwoKCQkJdC5wdXNoKCk7CgkJCXQudHJhbnNsYXRlKHgsIHkpOwoJCQl0LmNoYXJDb2xvcihNYXRoLmZsb29yKDI1NSAtIG5vcm0gKiAxODApLCBNYXRoLmZsb29yKDEwMCArIG5vcm0gKiAxNTUpLCBNYXRoLmZsb29yKDYwICsgbm9ybSAqIDE5NSkpOwoJCQl0LmNlbGxDb2xvcihNYXRoLmZsb29yKDggKyBub3JtICogMjApLCBNYXRoLmZsb29yKDYgKyBub3JtICogMTUpLCBNYXRoLmZsb29yKDIwICsgbm9ybSAqIDIwKSk7CgkJCXQuY2hhcihjaGFyS2V5KTsKCQkJdC5wb2ludCgpOwoJCQl0LnBvcCgpOwoJCX0KCX0KfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWlmICghdGlsZXNldCkgcmV0dXJuOwoJY29uc3Qgc3ogPSB0aWxlc2V0LmZvbnRTaXplOwoJY29uc3QgZGltcyA9IHRpbGVzZXQuY2VsbERpbWVuc2lvbnM7CgoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcigxMjAsIDI0MCwgMTgwKTsKCXQucHJpbnQoJ1RFWFRNT0RFVElMRVNFVC5GT05UU0laRScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcig3MCwgMTAwLCAxNDApOwoJdC5wcmludCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMjEwLCAyNTUpOwoJdC5wcmludCgnQ09OQ0VQVDogSlVMSUEgRlJBQ1RBTCBTQU1QTElORycsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDE2MCwgMTkwKTsKCXQucHJpbnQoJ0NvbmZpZ3VyZXMgb3V0cHV0IGNlbGwgcmVuZGVyIHNjYWxlLicsIHgsIHkrKyk7Cgl0LnByaW50KCdEb2VzIG5vdCBhbHRlciBuYXRpdmUgc291cmNlIHRpbGUgc2l6ZS4nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoNzAsIDEwMCwgMTQwKTsKCXQucHJpbnQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDI1NSwgMjAwKTsKCXQucHJpbnQoYEZPTlQgU0laRTogJHtzen0gUFhgLCB4LCB5KyspOwoJdC5wcmludChgQ0VMTCBESU1TOiAke2RpbXMud2lkdGh9IHggJHtkaW1zLmhlaWdodH0gUFhgLCB4LCB5KyspOwoJdC5wb3AoKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const T64_URL = 'https://littlebitspace.com/resources/fonts/T64.png';
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 8,
+});
+
+const labelLayer = t.layers.add();
+let tileset = null;
+
+t.setup(async () => {
+	tileset = await t.loadTileset({ source: T64_URL, columns: 16, rows: 16, count: 256, fontSize: 16 });
+});
+
+t.draw(() => {
+	t.background(6, 6, 16);
+	if (!tileset) return;
+
+	const hw = Math.floor(t.grid.cols / 2);
+	const hh = Math.floor(t.grid.rows / 2);
+	const tm = t.frameCount * 0.03;
+	const chars = tileset.characters;
+
+	const cx = -0.7 + Math.sin(tm) * 0.1;
+	const cy = 0.27015 + Math.cos(tm * 0.7) * 0.05;
+
+	for (let y = -hh; y <= hh; y++) {
+		for (let x = -hw; x <= hw; x++) {
+			let zx = (x / hw) * 1.5;
+			let zy = (y / hh) * 1.5;
+			let iter = 0;
+			for (let i = 0; i < 16; i++) {
+				if (zx * zx + zy * zy > 4) break;
+				const xtemp = zx * zx - zy * zy + cx;
+				zy = 2 * zx * zy + cy;
+				zx = xtemp;
+				iter++;
+			}
+			const norm = iter / 16;
+
+			const charIdx = Math.floor(Math.abs(norm * chars.length + tm * 8) % (chars.length || 1));
+			const charKey = chars[charIdx] ? chars[charIdx].character : ' ';
+
+			t.push();
+			t.translate(x, y);
+			t.charColor(Math.floor(255 - norm * 180), Math.floor(100 + norm * 155), Math.floor(60 + norm * 195));
+			t.cellColor(Math.floor(8 + norm * 20), Math.floor(6 + norm * 15), Math.floor(20 + norm * 20));
+			t.char(charKey);
+			t.point();
+			t.pop();
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	if (!tileset) return;
+	const sz = tileset.fontSize;
+	const dims = tileset.cellDimensions;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODETILESET.FONTSIZE', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: JULIA FRACTAL SAMPLING', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Configures output cell render scale.', x, y++);
+	t.print('Does not alter native source tile size.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 200);
+	t.print(`FONT SIZE: ${sz} PX`, x, y++);
+	t.print(`CELL DIMS: ${dims.width} x ${dims.height} PX`, x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

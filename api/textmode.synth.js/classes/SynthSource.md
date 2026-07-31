@@ -7,7 +7,7 @@ category: Classes
 api: true
 kind: Class
 ecosystem: textmode.js
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 hasConstructor: false
 ---
 
@@ -23,7 +23,27 @@ transform to the chain, which is later compiled into a GLSL shader.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="SynthSource" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CiAgd2lkdGg6IHdpbmRvdy5pbm5lcldpZHRoLAogIGhlaWdodDogd2luZG93LmlubmVySGVpZ2h0LAogIHBsdWdpbnM6IFtTeW50aFBsdWdpbl0KfSk7Cgpjb25zdCBzeW50aCA9IG5vaXNlKDEwKQogIC5yb3RhdGUoMC4yKQogIC5zY3JvbGwoMC4xLCAwKQogIC5jaGFyQ29sb3Iob3NjKDUsIDAuMSwgMS4yKS5rYWxlaWQoNCkpCiAgLmNlbGxDb2xvcihvc2MoNSwgMC4xLCAxLjIpLmthbGVpZCg0KS5pbnZlcnQoKSkKICAuY2hhck1hcCgnQCMlKis9LTouICcpOwoKdC5zeW50aChzeW50aCk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewogIHQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+  width: window.innerWidth,
+  height: window.innerHeight,
+  plugins: [SynthPlugin]
+});
+
+const synth = noise(10)
+  .rotate(0.2)
+  .scroll(0.1, 0)
+  .charColor(osc(5, 0.1, 1.2).kaleid(4))
+  .cellColor(osc(5, 0.1, 1.2).kaleid(4).invert())
+  .charMap('@#%*+=-:. ');
+
+t.synth(synth);
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 
 ## Methods
 

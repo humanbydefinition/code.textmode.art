@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / createCamera
@@ -29,5 +29,62 @@ reapplied via [setCamera](setCamera.md).
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="createCamera" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpsZXQgY2FtZXJhOwpsZXQgZXllWCA9IDA7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCnQuc2V0dXAoKCkgPT4gewoJdC5wZXJzcGVjdGl2ZSg1OCwgMC4xLCA0MDk2KTsKCWNhbWVyYSA9IHQuY3JlYXRlQ2FtZXJhKCk7Cn0pOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg2LCA4LCAxOCk7Cgljb25zdCB0aW1lID0gdC5mcmFtZUNvdW50ICogMC4wMjU7CglleWVYID0gTWF0aC5jb3ModGltZSkgKiAyODsKCWNhbWVyYS5zZXRQb3NpdGlvbihleWVYLCAxMCwgMzgpLmxvb2tBdCgwLCAwLCAwKTsKCXQuc2V0Q2FtZXJhKGNhbWVyYSk7Cgl0LmFtYmllbnRMaWdodCgyNSwgMjgsIDM2KTsKCXQucG9pbnRMaWdodChbMjU1LCAyMTAsIDE0MF0sIHsgeDogMTgsIHk6IC0xNiwgejogMjggfSk7Cgl0LnJvdGF0ZVkodGltZSAqIDI1KTsKCXQuY2hhcignQCcpOwoJdC5jaGFyQ29sb3IoMTQwLCAyMjAsIDI1NSk7Cgl0LnNwaGVyZSg2KTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5DUkVBVEVDQU1FUkEnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBNVVRBQkxFIENBTUVSQScsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnY3JlYXRlQ2FtZXJhIHJldHVybnMgYW4gb2JqZWN0LicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnc2V0Q2FtZXJhIGFwcGxpZXMgaXRzIHN0YXRlLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoYEVZRSBYOiAke2V5ZVgudG9GaXhlZCgxKX1gLCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+let camera;
+let eyeX = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.setup(() => {
+	t.perspective(58, 0.1, 4096);
+	camera = t.createCamera();
+});
+
+t.draw(() => {
+	t.background(6, 8, 18);
+	const time = t.frameCount * 0.025;
+	eyeX = Math.cos(time) * 28;
+	camera.setPosition(eyeX, 10, 38).lookAt(0, 0, 0);
+	t.setCamera(camera);
+	t.ambientLight(25, 28, 36);
+	t.pointLight([255, 210, 140], { x: 18, y: -16, z: 28 });
+	t.rotateY(time * 25);
+	t.char('@');
+	t.charColor(140, 220, 255);
+	t.sphere(6);
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.CREATECAMERA', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: MUTABLE CAMERA', x, y++, 100, 220, 255);
+	drawText('createCamera returns an object.', x, y++, 140, 160, 190);
+	drawText('setCamera applies its state.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`EYE X: ${eyeX.toFixed(1)}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

@@ -8,7 +8,7 @@ api: true
 owner: TextmodeFigFont
 kind: Accessor
 ecosystem: textmode.js
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.figlet.js](../../../index.md) / [TextmodeFigFont](../../TextmodeFigFont.md) / defaultLayout
@@ -29,5 +29,93 @@ Default horizontal layout implied by the header metadata.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.figlet.js" language="javascript" title="defaultLayout" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW0ZpZ2xldFBsdWdpbl0sCn0pOwoKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwpsZXQgZm9udDsKbGV0IGN1cnJlbnRNb2RlID0gJ2RlZmF1bHQnOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LnNldHVwKGFzeW5jICgpID0-IHsKCWZvbnQgPSBhd2FpdCB0LmxvYWRGaWdGb250KCdodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvZ2gveGVyby9maWdsZXQtZm9udHNAbWFzdGVyL0J1bGJoZWFkLmZsZicpOwoJdC5maWdGb250KGZvbnQpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CgoJZHJhd1RleHQoJ1RFWFRNT0RFRklHRk9OVC5ERUZBVUxUTEFZT1VUJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogREVGQVVMVCBMQVlPVVQgUlVMRVMnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ0NvbnRyb2xzIGhvcml6b250YWwga2VybmluZy9zbXVzaC4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJ0NvbWJpbmVzIGdseXBoIGVkZ2VzIGludG8gY29tcGFjdCBmb3Jtcy4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWlmIChmb250KSB7CgkJY29uc3QgbSA9IGN1cnJlbnRNb2RlOwoJCWRyYXdUZXh0KGBEZWZhdWx0IGxheW91dDogJHtmb250LmRlZmF1bHRMYXlvdXR9YCwgeCwgeSsrLCAxNDAsIDI1NSwgMTgwKTsKCQlkcmF3VGV4dChgQ3VycmVudCBsYXlvdXQ6ICR7bX1gLCB4LCB5KyssIDEwMCwgMjI1LCAyNTUpOwoJfSBlbHNlIHsKCQlkcmF3VGV4dCgnTG9hZGluZy4uLicsIHgsIHkrKywgMjU1LCAxODAsIDEwMCk7Cgl9Cn0pOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCgxMCwgMTIsIDE4KTsKCglpZiAoIWZvbnQpIHJldHVybjsKCgljb25zdCBtb2RlcyA9IFsnZnVsbCcsICdmaXR0ZWQnLCAnc211c2hlZCddOwoJY29uc3QgaWR4ID0gTWF0aC5mbG9vcih0LnNlY3MgLyAzLjApICUgbW9kZXMubGVuZ3RoOwoJY3VycmVudE1vZGUgPSBtb2Rlc1tpZHhdOwoKCWNvbnN0IHBsYW4gPSBmb250LnBsYW5UZXh0KCdMQVlPVVQnLCB7IGhvcml6b250YWxMYXlvdXQ6IGN1cnJlbnRNb2RlIH0pOwoJaWYgKCFwbGFuKSByZXR1cm47CgoJY29uc3Qgc3RhcnRYID0gLU1hdGguZmxvb3IocGxhbi5jb2xzIC8gMik7Cgljb25zdCBzdGFydFkgPSAtTWF0aC5mbG9vcihwbGFuLnJvd3MgLyAyKTsKCWNvbnN0IHRpbWUgPSB0LnNlY3MgKiAxLjU7CgoJLy8gRHJhdyBjaGFyYWN0ZXJzCglmb3IgKGNvbnN0IGNlbGwgb2YgcGxhbi5jZWxscykgewoJCXQucHVzaCgpOwoJCXQudHJhbnNsYXRlKHN0YXJ0WCArIGNlbGwuY29sLCBzdGFydFkgKyBjZWxsLnJvdyk7CgkJY29uc3Qgd2F2ZSA9IDAuNSArIDAuNSAqIE1hdGguc2luKHRpbWUgKyBjZWxsLmNvbCAqIDAuMSk7CgkJdC5jaGFyQ29sb3IoTWF0aC5yb3VuZCgxMzAgKyAxMjUgKiB3YXZlKSwgMjU1LCBNYXRoLnJvdW5kKDIwMCArIDU1ICogKDEuMCAtIHdhdmUpKSk7CgkJdC5jaGFyKGNlbGwuY2hhcik7CgkJdC5wb2ludCgpOwoJCXQucG9wKCk7Cgl9CgoJLy8gRHJhdyBib3VuZHMKCXQucHVzaCgpOwoJdC5jaGFyQ29sb3IoMjU1LCAxODAsIDEwMCk7Cgl0LnByaW50KCdbJywgc3RhcnRYIC0gMiwgMCk7Cgl0LnByaW50KCddJywgc3RhcnRYICsgcGxhbi5jb2xzICsgMSwgMCk7Cgl0LnByaW50QWxpZ24oJ2NlbnRlcicsICd0b3AnKTsKCWNvbnN0IGxhYmVsID0gYCR7cGxhbi5jb2xzfSBjb2x1bW5zYDsKCXQucHJpbnQobGFiZWwsIDAsIHN0YXJ0WSArIHBsYW4ucm93cyArIDIpOwoJdC5wb3AoKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 8,
+	plugins: [FigletPlugin],
+});
+
+const labelLayer = t.layers.add();
+let font;
+let currentMode = 'default';
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.setup(async () => {
+	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Bulbhead.flf');
+	t.figFont(font);
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODEFIGFONT.DEFAULTLAYOUT', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: DEFAULT LAYOUT RULES', x, y++, 100, 220, 255);
+	drawText('Controls horizontal kerning/smush.', x, y++, 140, 160, 190);
+	drawText('Combines glyph edges into compact forms.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	if (font) {
+		const m = currentMode;
+		drawText(`Default layout: ${font.defaultLayout}`, x, y++, 140, 255, 180);
+		drawText(`Current layout: ${m}`, x, y++, 100, 225, 255);
+	} else {
+		drawText('Loading...', x, y++, 255, 180, 100);
+	}
+});
+
+t.draw(() => {
+	t.background(10, 12, 18);
+
+	if (!font) return;
+
+	const modes = ['full', 'fitted', 'smushed'];
+	const idx = Math.floor(t.secs / 3.0) % modes.length;
+	currentMode = modes[idx];
+
+	const plan = font.planText('LAYOUT', { horizontalLayout: currentMode });
+	if (!plan) return;
+
+	const startX = -Math.floor(plan.cols / 2);
+	const startY = -Math.floor(plan.rows / 2);
+	const time = t.secs * 1.5;
+
+	// Draw characters
+	for (const cell of plan.cells) {
+		t.push();
+		t.translate(startX + cell.col, startY + cell.row);
+		const wave = 0.5 + 0.5 * Math.sin(time + cell.col * 0.1);
+		t.charColor(Math.round(130 + 125 * wave), 255, Math.round(200 + 55 * (1.0 - wave)));
+		t.char(cell.char);
+		t.point();
+		t.pop();
+	}
+
+	// Draw bounds
+	t.push();
+	t.charColor(255, 180, 100);
+	t.print('[', startX - 2, 0);
+	t.print(']', startX + plan.cols + 1, 0);
+	t.printAlign('center', 'top');
+	const label = `${plan.cols} columns`;
+	t.print(label, 0, startY + plan.rows + 2);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

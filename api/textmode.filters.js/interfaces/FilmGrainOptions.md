@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 isInterface: true
 ---
 
@@ -24,7 +24,70 @@ real film characteristics.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.filters.js" language="javascript" title="FilmGrainOptions" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW0ZpbHRlcnNQbHVnaW5dLAp9KTsKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKbGV0IHZpZGVvOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LnNldHVwKGFzeW5jICgpID0-IHsKCXZpZGVvID0gYXdhaXQgdC5sb2FkVmlkZW8oJ2h0dHBzOi8vaW50ZXJhY3RpdmUtZXhhbXBsZXMubWRuLm1vemlsbGEubmV0L21lZGlhL2NjMC12aWRlb3MvZmxvd2VyLm1wNCcpOwoJdmlkZW8ucGxheSgpOwoJdmlkZW8ubG9vcCgpOwoJdmlkZW8uY2hhcmFjdGVycygnIC46LT0rKiMlQCcpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKSwKCQl0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzLAoJCXggPSBsZWZ0ICsgMzsKCgljb25zdCBpbnRlbnNpdHkgPSAoMC4zICsgMC4yICogTWF0aC5zaW4odC5zZWNzICogMi4wKSkudG9GaXhlZCgyKTsKCglkcmF3VGV4dCgnRklMVEVSU1BMVUdJTi5GSUxNR1JBSU4nLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBBTkFMT0cgTk9JU0UgT1ZFUkxBWScsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnU2ltdWxhdGVzIG9yZ2FuaWMgZmlsbSBncmFpbi4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdJbnRlbnNpdHk6ICcgKyBpbnRlbnNpdHksIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7CglkcmF3VGV4dCgnU2l6ZTogMi4wJywgeCwgeSsrLCAxNDAsIDI1NSwgMTgwKTsKfSk7Cgp0LmRyYXcoKCkgPT4gewoJaWYgKCF2aWRlbykgcmV0dXJuOwoJY29uc3QgaW50ZW5zaXR5ID0gMC4zICsgMC4yICogTWF0aC5zaW4odC5zZWNzICogMi4wKTsKCgl0LmxheWVycy5iYXNlLmZpbHRlcignZmlsbUdyYWluJywgewoJCWludGVuc2l0eTogaW50ZW5zaXR5LAoJCXNpemU6IDIuMCwKCQlzcGVlZDogMS4wLAoJCXRpbWU6IHQuc2VjcywKCX0pOwoKCXQuYmFja2dyb3VuZCgwKTsKCXQuaW1hZ2UodmlkZW8pOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 8,
+	plugins: [FiltersPlugin],
+});
+const labelLayer = t.layers.add();
+
+let video;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.setup(async () => {
+	video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
+	video.play();
+	video.loop();
+	video.characters(' .:-=+*#%@');
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2),
+		top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3,
+		x = left + 3;
+
+	const intensity = (0.3 + 0.2 * Math.sin(t.secs * 2.0)).toFixed(2);
+
+	drawText('FILTERSPLUGIN.FILMGRAIN', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: ANALOG NOISE OVERLAY', x, y++, 100, 220, 255);
+	drawText('Simulates organic film grain.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('Intensity: ' + intensity, x, y++, 140, 255, 180);
+	drawText('Size: 2.0', x, y++, 140, 255, 180);
+});
+
+t.draw(() => {
+	if (!video) return;
+	const intensity = 0.3 + 0.2 * Math.sin(t.secs * 2.0);
+
+	t.layers.base.filter('filmGrain', {
+		intensity: intensity,
+		size: 2.0,
+		speed: 1.0,
+		time: t.secs,
+	});
+
+	t.background(0);
+	t.image(video);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 
 ## Properties
 

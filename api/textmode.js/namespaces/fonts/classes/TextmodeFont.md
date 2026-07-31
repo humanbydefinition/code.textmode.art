@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: fonts
 kind: Class
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 hasConstructor: false
 ---
 
@@ -22,7 +22,92 @@ glyph atlas, and used by [layering.TextmodeLayer](../../layering/classes/Textmod
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="TextmodeFont" encoded-code="Y29uc3QgQkVTQ0lJX1VSTCA9ICdodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvZ2gvZGFtaWFudmlsYS9mb250LWJlc2NpaUBtYWluL2ZvbnRzL3YyLjAvQmVzY2lpLU1vbm8udHRmJzsKCmNvbnN0IHQgPSB0ZXh0bW9kZS5jcmVhdGUoewoJd2lkdGg6IHdpbmRvdy5pbm5lcldpZHRoLAoJaGVpZ2h0OiB3aW5kb3cuaW5uZXJIZWlnaHQsCglmb250U2l6ZTogMTYsCn0pOwoKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwpsZXQgY3VzdG9tRm9udCA9IG51bGw7CmxldCBmb250UmVhZHkgPSBmYWxzZTsKCnQuc2V0dXAoYXN5bmMgKCkgPT4gewoJY3VzdG9tRm9udCA9IGF3YWl0IHQubG9hZEZvbnQoQkVTQ0lJX1VSTCk7Cglmb250UmVhZHkgPSB0cnVlOwp9KTsKCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNiwgMTQsIDE4KTsKCWNvbnN0IGh3ID0gTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgaGggPSBNYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7Cgljb25zdCB0bSA9IHQuZnJhbWVDb3VudCAqIDAuMDQ7Cgljb25zdCBhY3RpdmUgPSBmb250UmVhZHkgJiYgY3VzdG9tRm9udCA_IGN1c3RvbUZvbnQgOiB0LmZvbnQ7Cgljb25zdCBnbHlwaHMgPSBhY3RpdmUuY2hhcmFjdGVyczsKCglmb3IgKGxldCB5ID0gLWhoOyB5IDw9IGhoOyB5KyspIHsKCQlmb3IgKGxldCB4ID0gLWh3OyB4IDw9IGh3OyB4KyspIHsKCQkJY29uc3QgZ3JpZFggPSBNYXRoLmFicyh4KSAlIDYgPT09IDA7CgkJCWNvbnN0IGdyaWRZID0gTWF0aC5hYnMoeSkgJSA2ID09PSAwOwoJCQljb25zdCB3YXZlID0gTWF0aC5zaW4oeCAqIDAuMiArIHkgKiAwLjIgKyB0bSk7CgkJCWNvbnN0IG5vcm0gPSAod2F2ZSArIDEpICogMC41OwoKCQkJY29uc3QgZ0lkeCA9IE1hdGguZmxvb3IoKE1hdGguYWJzKHggKiB5KSArIHRtICogMTApICUgKGdseXBocy5sZW5ndGggfHwgMSkpOwoJCQljb25zdCBnbHlwaE9iaiA9IGdseXBoc1tnSWR4XSB8fCBnbHlwaHNbMF07CgkJCWNvbnN0IGNoYXIgPSBncmlkWCB8fCBncmlkWSA_ICcrJyA6IGdseXBoT2JqID8gZ2x5cGhPYmouY2hhcmFjdGVyIDogJy4nOwoKCQkJdC5wdXNoKCk7CgkJCXQudHJhbnNsYXRlKHgsIHkpOwoJCQl0LmNoYXJDb2xvcigKCQkJCWdyaWRYIHx8IGdyaWRZID8gMjU1IDogTWF0aC5mbG9vcig0MCArIG5vcm0gKiAxODApLAoJCQkJTWF0aC5mbG9vcigxODAgKyBub3JtICogNzUpLAoJCQkJZ3JpZFggfHwgZ3JpZFkgPyAxODAgOiBNYXRoLmZsb29yKDIyMCAtIG5vcm0gKiAxMDApCgkJCSk7CgkJCXQuY2VsbENvbG9yKE1hdGguZmxvb3IoNiArIG5vcm0gKiAxMiksIE1hdGguZmxvb3IoMTggKyBub3JtICogMjApLCBNYXRoLmZsb29yKDI1ICsgbm9ybSAqIDI1KSk7CgkJCXQuY2hhcihjaGFyKTsKCQkJdC5wb2ludCgpOwoJCQl0LnBvcCgpOwoJCX0KCX0KfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWNvbnN0IHN0YXR1cyA9IGZvbnRSZWFkeSA_ICdGT05UIExPQURFRCAoQkVTQ0lJKScgOiAnTE9BRElORyBGT05ULi4uJzsKCWNvbnN0IGdseXBoQ291bnQgPSBmb250UmVhZHkgJiYgY3VzdG9tRm9udCA_IGN1c3RvbUZvbnQuY2hhcmFjdGVycy5sZW5ndGggOiB0LmZvbnQuY2hhcmFjdGVycy5sZW5ndGg7CgoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcigxMjAsIDI0MCwgMTgwKTsKCXQucHJpbnQoJ1RFWFRNT0RFRk9OVC5DUkVBVElPTicsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcig3MCwgMTAwLCAxNDApOwoJdC5wcmludCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMjEwLCAyNTUpOwoJdC5wcmludCgnQ09OQ0VQVDogQVNZTkMgRk9OVCBMT0FESU5HJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMTYwLCAxOTApOwoJdC5wcmludCgnbG9hZEZvbnQodXJsKSBwYXJzZXMgVHJ1ZVR5cGUvV09GRicsIHgsIHkrKyk7Cgl0LnByaW50KCdhbmQgY29uc3RydWN0cyBXZWJHTCBnbHlwaCBhdGxhcy4nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoNzAsIDEwMCwgMTQwKTsKCXQucHJpbnQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDI1NSwgMjAwKTsKCXQucHJpbnQoYFNUQVRVUzogJHtzdGF0dXN9YCwgeCwgeSsrKTsKCXQucHJpbnQoYEdMWVBIUyBMT0FERUQ6ICR7Z2x5cGhDb3VudH1gLCB4LCB5KyspOwoJdC5wb3AoKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const BESCII_URL = 'https://cdn.jsdelivr.net/gh/damianvila/font-bescii@main/fonts/v2.0/Bescii-Mono.ttf';
+
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let customFont = null;
+let fontReady = false;
+
+t.setup(async () => {
+	customFont = await t.loadFont(BESCII_URL);
+	fontReady = true;
+});
+
+t.draw(() => {
+	t.background(6, 14, 18);
+	const hw = Math.floor(t.grid.cols / 2);
+	const hh = Math.floor(t.grid.rows / 2);
+	const tm = t.frameCount * 0.04;
+	const active = fontReady && customFont ? customFont : t.font;
+	const glyphs = active.characters;
+
+	for (let y = -hh; y <= hh; y++) {
+		for (let x = -hw; x <= hw; x++) {
+			const gridX = Math.abs(x) % 6 === 0;
+			const gridY = Math.abs(y) % 6 === 0;
+			const wave = Math.sin(x * 0.2 + y * 0.2 + tm);
+			const norm = (wave + 1) * 0.5;
+
+			const gIdx = Math.floor((Math.abs(x * y) + tm * 10) % (glyphs.length || 1));
+			const glyphObj = glyphs[gIdx] || glyphs[0];
+			const char = gridX || gridY ? '+' : glyphObj ? glyphObj.character : '.';
+
+			t.push();
+			t.translate(x, y);
+			t.charColor(
+				gridX || gridY ? 255 : Math.floor(40 + norm * 180),
+				Math.floor(180 + norm * 75),
+				gridX || gridY ? 180 : Math.floor(220 - norm * 100)
+			);
+			t.cellColor(Math.floor(6 + norm * 12), Math.floor(18 + norm * 20), Math.floor(25 + norm * 25));
+			t.char(char);
+			t.point();
+			t.pop();
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const status = fontReady ? 'FONT LOADED (BESCII)' : 'LOADING FONT...';
+	const glyphCount = fontReady && customFont ? customFont.characters.length : t.font.characters.length;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODEFONT.CREATION', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: ASYNC FONT LOADING', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('loadFont(url) parses TrueType/WOFF', x, y++);
+	t.print('and constructs WebGL glyph atlas.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 200);
+	t.print(`STATUS: ${status}`, x, y++);
+	t.print(`GLYPHS LOADED: ${glyphCount}`, x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 
 ## Extends
 

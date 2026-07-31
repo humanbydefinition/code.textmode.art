@@ -7,7 +7,7 @@ category: Properties
 api: true
 owner: Textmodifier
 kind: Property
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / BLEND\_NORMAL
@@ -26,4 +26,80 @@ controlling how much of the layer covers the layers below it.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="BLEND_NORMAL" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBtb2RlID0gdC5CTEVORF9OT1JNQUw7CmNvbnN0IG1vZGVOYW1lID0gJ0JMRU5EX05PUk1BTCc7CmNvbnN0IGFjY2VudCA9IFsyNTAsIDE4MCwgOTBdOwpjb25zdCBiYXNlID0gWzM1LCA3MCwgMTIwXTsKY29uc3QgYmxlbmRMYXllciA9IHQubGF5ZXJzLmFkZCh7IGJsZW5kTW9kZTogbW9kZSwgb3BhY2l0eTogMC44MiB9KTsKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LmRyYXcoKCkgPT4gewoJY29uc3QgdGltZSA9IHQuZnJhbWVDb3VudCAqIDAuMDM1OwoJdC5iYWNrZ3JvdW5kKDgsIDEwLCAyMik7Cgljb25zdCB7IGNvbHMsIHJvd3MgfSA9IHQuZ3JpZDsKCWZvciAobGV0IHkgPSAtTWF0aC5mbG9vcihyb3dzIC8gMik7IHkgPCByb3dzIC8gMjsgeSArPSAzKSB7CgkJZm9yIChsZXQgeCA9IC1NYXRoLmZsb29yKGNvbHMgLyAyKTsgeCA8IGNvbHMgLyAyOyB4ICs9IDMpIHsKCQkJY29uc3Qgd2F2ZSA9IE1hdGguc2luKHggKiAwLjE4ICsgeSAqIDAuMTMgKyB0aW1lKTsKCQkJdC5wdXNoKCk7CgkJCXQudHJhbnNsYXRlKHgsIHkpOwoJCQl0LmNoYXIod2F2ZSA-IDAgPyAnKycgOiAnLicpOwoJCQl0LmNoYXJDb2xvcihiYXNlWzBdICsgd2F2ZSAqIDMwLCBiYXNlWzFdICsgMjAsIGJhc2VbMl0pOwoJCQl0LmNlbGxDb2xvcig0LCA4LCAxOCk7CgkJCXQucmVjdCgyLCAyKTsKCQkJdC5wb3AoKTsKCQl9Cgl9CglibGVuZExheWVyLmRyYXcoKCkgPT4gewoJCXQuY2xlYXIoKTsKCQlmb3IgKGxldCByaW5nID0gMDsgcmluZyA8IDQ7IHJpbmcrKykgewoJCQlmb3IgKGxldCBpID0gMDsgaSA8IDE4OyBpKyspIHsKCQkJCWNvbnN0IGFuZ2xlID0gaSAqIDIwICsgcmluZyAqIDE3ICsgdC5mcmFtZUNvdW50ICogKDEuMiArIHJpbmcgKiAwLjIpOwoJCQkJY29uc3QgcmFkaXVzID0gNSArIHJpbmcgKiA0ICsgTWF0aC5zaW4odGltZSAqIDIgKyBpKSAqIDEuNTsKCQkJCXQucHVzaCgpOwoJCQkJdC5yb3RhdGVaKGFuZ2xlKTsKCQkJCXQudHJhbnNsYXRlKHJhZGl1cywgTWF0aC5zaW4odGltZSArIGkpICogMik7CgkJCQl0LnJvdGF0ZVooLWFuZ2xlICogMC41KTsKCQkJCXQuY2hhcihyaW5nICUgMiA_ICdAJyA6ICcjJyk7CgkJCQl0LmNoYXJDb2xvciguLi5hY2NlbnQpOwoJCQkJdC5jZWxsQ29sb3IoMjAgKyByaW5nICogMTgsIDE2LCAzMiArIHJpbmcgKiAxMik7CgkJCQl0LnJlY3QoMyArIChpICUgMiksIDIpOwoJCQkJdC5wb3AoKTsKCQkJfQoJCX0KCX0pOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLkJMRU5EX05PUk1BTCcsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IE5PUk1BTCBCTEVORCcsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnQW5pbWF0ZWQgbGF5ZXIgY292ZXJzIGJlbG93LicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnT3BhY2l0eSBjb250cm9scyB0aGUgbWl4LicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoYE1PREU6ICR7bW9kZU5hbWV9YCwgeCwgeSsrLCAxNDAsIDI1NSwgMTgwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const mode = t.BLEND_NORMAL;
+const modeName = 'BLEND_NORMAL';
+const accent = [250, 180, 90];
+const base = [35, 70, 120];
+const blendLayer = t.layers.add({ blendMode: mode, opacity: 0.82 });
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	const time = t.frameCount * 0.035;
+	t.background(8, 10, 22);
+	const { cols, rows } = t.grid;
+	for (let y = -Math.floor(rows / 2); y < rows / 2; y += 3) {
+		for (let x = -Math.floor(cols / 2); x < cols / 2; x += 3) {
+			const wave = Math.sin(x * 0.18 + y * 0.13 + time);
+			t.push();
+			t.translate(x, y);
+			t.char(wave > 0 ? '+' : '.');
+			t.charColor(base[0] + wave * 30, base[1] + 20, base[2]);
+			t.cellColor(4, 8, 18);
+			t.rect(2, 2);
+			t.pop();
+		}
+	}
+	blendLayer.draw(() => {
+		t.clear();
+		for (let ring = 0; ring < 4; ring++) {
+			for (let i = 0; i < 18; i++) {
+				const angle = i * 20 + ring * 17 + t.frameCount * (1.2 + ring * 0.2);
+				const radius = 5 + ring * 4 + Math.sin(time * 2 + i) * 1.5;
+				t.push();
+				t.rotateZ(angle);
+				t.translate(radius, Math.sin(time + i) * 2);
+				t.rotateZ(-angle * 0.5);
+				t.char(ring % 2 ? '@' : '#');
+				t.charColor(...accent);
+				t.cellColor(20 + ring * 18, 16, 32 + ring * 12);
+				t.rect(3 + (i % 2), 2);
+				t.pop();
+			}
+		}
+	});
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.BLEND_NORMAL', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: NORMAL BLEND', x, y++, 100, 220, 255);
+	drawText('Animated layer covers below.', x, y++, 140, 160, 190);
+	drawText('Opacity controls the mix.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`MODE: ${modeName}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```

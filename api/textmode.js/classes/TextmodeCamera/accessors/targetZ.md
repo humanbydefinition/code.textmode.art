@@ -7,7 +7,7 @@ category: Accessors
 api: true
 owner: TextmodeCamera
 kind: Accessor
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [TextmodeCamera](../../TextmodeCamera.md) / targetZ
@@ -28,5 +28,87 @@ Current Z position of the camera target.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="targetZ" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCB0YXJnZXRWYWx1ZSA9IDA7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjAwLCBnID0gMjIwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQudHJhbnNsYXRlKHgsIHkpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cglmb3IgKGxldCBpID0gMDsgaSA8IHRleHQubGVuZ3RoOyBpKyspIHsKCQl0LmNoYXIodGV4dFtpXSk7CgkJdC5wb2ludCgpOwoJCXQudHJhbnNsYXRlKDEsIDApOwoJfQoJdC5wb3AoKTsKfQoKZnVuY3Rpb24gZHJhd1NjZW5lKHR6KSB7Cgl0LnB1c2goKTsKCXQuY2hhcignLicpOwoJdC5jaGFyQ29sb3IoNTAsIDcwLCAxMTApOwoJZm9yIChsZXQgeCA9IC0yMDsgeCA8PSAyMDsgeCArPSA0KSB0LmxpbmUoeCwgMCwgLTIwLCB4LCAwLCAyMCk7Cglmb3IgKGxldCB6ID0gLTIwOyB6IDw9IDIwOyB6ICs9IDQpIHQubGluZSgtMjAsIDAsIHosIDIwLCAwLCB6KTsKCXQucG9wKCk7CgkvLyBUYXJnZXQgbW92aW5nIGFsb25nIHRoZSBaIChkZXB0aCkgYXhpcwoJdC5wdXNoKCk7Cgl0LnRyYW5zbGF0ZSgwLCAzLCB0eik7Cgl0LmNoYXIoJyonKTsKCXQuY2hhckNvbG9yKDgwLCAyNTUsIDIwMCk7Cgl0LmVsbGlwc2UoMywgMyk7Cgl0LnBvcCgpOwoJLy8gUm93IG9mIGRlcHRoIG1hcmtlcnMgYWxvbmcgWgoJZm9yIChsZXQgaSA9IC0yOyBpIDw9IDI7IGkrKykgewoJCXQucHVzaCgpOwoJCXQudHJhbnNsYXRlKDAsIDIsIGkgKiA3KTsKCQl0LmNoYXIoJyMnKTsKCQl0LmNoYXJDb2xvcig4MCwgMTEwLCAxNjApOwoJCXQuYm94KDIsIDQsIDIpOwoJCXQucG9wKCk7Cgl9Cn0KCnQuc2V0dXAoKCkgPT4gewoJdC5wZXJzcGVjdGl2ZSg1OCwgMC4xLCA0MDk2KTsKfSk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDEwLCAyMik7CgoJY29uc3QgdGltZSA9IHQuZnJhbWVDb3VudCAqIDAuMDI7Cgljb25zdCB0eiA9IE1hdGguc2luKHRpbWUpICogMTI7Cgljb25zdCBjYW0gPSB0LmNyZWF0ZUNhbWVyYSgpLnNldFBvc2l0aW9uKDE2LCAxMiwgMzApLmxvb2tBdCgwLCAwLCB0eik7Cgl0YXJnZXRWYWx1ZSA9IGNhbS50YXJnZXRaOwoKCXQuc2V0Q2FtZXJhKGNhbSk7CglkcmF3U2NlbmUodHopOwoJdC5yZXNldENhbWVyYSgpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CgoJZHJhd1RleHQoJ1RBUkdFVFonLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NhbWVyYSBsb29rLWF0IFogY29vcmRpbmF0ZS4nLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJyogdGFyZ2V0IG1vdmVzIGluIGRlcHRoIG9uIFouJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KGB0YXJnZXRaID0gJHt0YXJnZXRWYWx1ZS50b0ZpeGVkKDIpfWAsIHgsIHkrKywgMTIwLCAyNTUsIDE4MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let targetDepth = 0;
+
+t.setup(() => {
+	t.perspective(58, 0.1, 4096);
+});
+
+function drawSubaquaticTunnel(tz) {
+	t.push();
+	t.ambientLight(15, 30, 45);
+	t.pointLight(0, 220, 240, 0, 0, tz);
+
+	for (let z = -28; z <= 28; z += 7) {
+		t.push();
+		t.translate(0, 0, z);
+		const dist = Math.abs(z - tz);
+		const bright = Math.max(0, 1 - dist / 20);
+		t.charColor(Math.floor(20 + bright * 80), Math.floor(140 + bright * 115), Math.floor(180 + bright * 75));
+		t.cellColor(4, 16, 28);
+		t.char(dist < 5 ? 'O' : 'o');
+		t.ellipse(14, 10);
+		t.pop();
+	}
+
+	t.push();
+	t.translate(0, 0, tz);
+	t.charColor(140, 255, 240);
+	t.cellColor(10, 40, 60);
+	t.char('*');
+	t.box(4, 4, 1);
+	t.pop();
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(4, 12, 22);
+	const tm = t.frameCount * 0.03;
+	const tz = Math.sin(tm) * 20;
+
+	const cam = t.createCamera().setPosition(18, 12, 38).lookAt(0, 0, tz);
+	targetDepth = cam.targetZ;
+
+	t.setCamera(cam);
+	drawSubaquaticTunnel(tz);
+	t.resetCamera();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 220);
+	t.print('TEXTMODECAMERA.TARGETZ', x, y++);
+	t.charColor(60, 90, 130);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: SUBAQUATIC DEPTH SCANNER', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Reads camera look-at Z target.', x, y++);
+	t.print('Point light tracks focal depth ring.', x, y++);
+	t.charColor(60, 90, 130);
+	t.print('------------------------------------', x, y++);
+	t.charColor(120, 255, 220);
+	t.print(`TARGET Z: ${targetDepth.toFixed(2)}`, x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

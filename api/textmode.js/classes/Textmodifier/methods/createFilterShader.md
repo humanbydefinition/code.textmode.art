@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / createFilterShader
@@ -42,5 +42,80 @@ This compatibility alias creates a fragment-only geometry shader for use with
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="createFilterShader" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpsZXQgc2hhZGVyT2JqOwpsZXQgZ2x5cGhBID0gWzAsIDAsIDBdOwpsZXQgZ2x5cGhCID0gWzAsIDAsIDBdOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9CnQuc2V0dXAoYXN5bmMgKCkgPT4gewoJZ2x5cGhBID0gdC5mb250LmNoYXJhY3Rlck1hcC5nZXQoJyMnKT8uY29sb3IgPz8gdC5mb250LmNoYXJhY3RlcnNbMV0uY29sb3I7CglnbHlwaEIgPSB0LmZvbnQuY2hhcmFjdGVyTWFwLmdldCgnQCcpPy5jb2xvciA_PyB0LmZvbnQuY2hhcmFjdGVyc1syXS5jb2xvcjsKCXNoYWRlck9iaiA9IGF3YWl0IHQuY3JlYXRlRmlsdGVyU2hhZGVyKGAjdmVyc2lvbiAzMDAgZXMKcHJlY2lzaW9uIGhpZ2hwIGZsb2F0OwppbiB2ZWMyIHZfdXY7CnVuaWZvcm0gZmxvYXQgdV90aW1lOwp1bmlmb3JtIHZlYzMgdV9nbHlwaEE7CnVuaWZvcm0gdmVjMyB1X2dseXBoQjsKbGF5b3V0KGxvY2F0aW9uID0gMCkgb3V0IHZlYzQgb19jaGFyYWN0ZXI7CmxheW91dChsb2NhdGlvbiA9IDEpIG91dCB2ZWM0IG9fcHJpbWFyeUNvbG9yOwpsYXlvdXQobG9jYXRpb24gPSAyKSBvdXQgdmVjNCBvX3NlY29uZGFyeUNvbG9yOwp2b2lkIG1haW4oKSB7CglmbG9hdCBzdHJpcGUgPSBzdGVwKDAuNSwgZnJhY3QoKHZfdXYueCArIHVfdGltZSkgKiAxMC4wKSk7Cgl2ZWMzIGdseXBoSWQgPSBtaXgodV9nbHlwaEEsIHVfZ2x5cGhCLCBzdHJpcGUpOwoJdmVjMyBwcmltYXJ5ID0gbWl4KHZlYzMoMC4zLCAwLjgsIDEuMCksIHZlYzMoMS4wLCAwLjQyLCAwLjIyKSwgc3RyaXBlKTsKCW9fY2hhcmFjdGVyID0gdmVjNChnbHlwaElkLnh5LCAwLjAsIDAuMCk7CglvX3ByaW1hcnlDb2xvciA9IHZlYzQocHJpbWFyeSwgMS4wKTsKCW9fc2Vjb25kYXJ5Q29sb3IgPSB2ZWM0KDAuMDIsIDAuMDMsIDAuMDggKyBzdHJpcGUgKiAwLjEyLCAxLjApOwp9YCk7Cn0pOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg2LCAxMCwgMjIpOwoJaWYgKHNoYWRlck9iaikgewoJCWNvbnN0IHRpbWUgPSB0LmZyYW1lQ291bnQgKiAwLjAyOwoJCXQucGVyc3BlY3RpdmUoNTgsIDAuMSwgNDA5Nik7CgkJdC5jYW1lcmEoMTYsIC0xMCwgNDIsIDAsIDAsIDApOwoJCXQuc2hhZGVyKHNoYWRlck9iaik7CgkJdC5zZXRVbmlmb3Jtcyh7IHVfdGltZTogdGltZSAqIDAuMSwgdV9nbHlwaEE6IGdseXBoQSwgdV9nbHlwaEI6IGdseXBoQiB9KTsKCQl0LnB1c2goKTsKCQl0LnJvdGF0ZVoodGltZSAqIDQwKTsKCQl0LnJlY3QoMTYsIDgpOwoJCXQucG9wKCk7CgkJdC5yZXNldFNoYWRlcigpOwoJfQp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLkNSRUFURUZJTFRFUlNIQURFUicsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IENPTVBBVCBBTElBUycsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnVXNlIGNyZWF0ZU1hdGVyaWFsU2hhZGVyIG5vdy4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KHNoYWRlck9iaiA_ICdTSEFERVI6IFJFQURZJyA6ICdTSEFERVI6IFdBSVQnLCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+let shaderObj;
+let glyphA = [0, 0, 0];
+let glyphB = [0, 0, 0];
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+t.setup(async () => {
+	glyphA = t.font.characterMap.get('#')?.color ?? t.font.characters[1].color;
+	glyphB = t.font.characterMap.get('@')?.color ?? t.font.characters[2].color;
+	shaderObj = await t.createFilterShader(`#version 300 es
+precision highp float;
+in vec2 v_uv;
+uniform float u_time;
+uniform vec3 u_glyphA;
+uniform vec3 u_glyphB;
+layout(location = 0) out vec4 o_character;
+layout(location = 1) out vec4 o_primaryColor;
+layout(location = 2) out vec4 o_secondaryColor;
+void main() {
+	float stripe = step(0.5, fract((v_uv.x + u_time) * 10.0));
+	vec3 glyphId = mix(u_glyphA, u_glyphB, stripe);
+	vec3 primary = mix(vec3(0.3, 0.8, 1.0), vec3(1.0, 0.42, 0.22), stripe);
+	o_character = vec4(glyphId.xy, 0.0, 0.0);
+	o_primaryColor = vec4(primary, 1.0);
+	o_secondaryColor = vec4(0.02, 0.03, 0.08 + stripe * 0.12, 1.0);
+}`);
+});
+
+t.draw(() => {
+	t.background(6, 10, 22);
+	if (shaderObj) {
+		const time = t.frameCount * 0.02;
+		t.perspective(58, 0.1, 4096);
+		t.camera(16, -10, 42, 0, 0, 0);
+		t.shader(shaderObj);
+		t.setUniforms({ u_time: time * 0.1, u_glyphA: glyphA, u_glyphB: glyphB });
+		t.push();
+		t.rotateZ(time * 40);
+		t.rect(16, 8);
+		t.pop();
+		t.resetShader();
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.CREATEFILTERSHADER', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: COMPAT ALIAS', x, y++, 100, 220, 255);
+	drawText('Use createMaterialShader now.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(shaderObj ? 'SHADER: READY' : 'SHADER: WAIT', x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

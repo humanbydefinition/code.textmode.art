@@ -8,7 +8,7 @@ api: true
 owner: TextmodeVideo
 namespace: media
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../../../index.md) / [media](../../../index.md) / [TextmodeVideo](../../TextmodeVideo.md) / dispose
@@ -27,7 +27,74 @@ Dispose the video source and release the backing media element.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="dispose" encoded-code="Y29uc3QgVklERU9fVVJMID0gJ2h0dHBzOi8vaW50ZXJhY3RpdmUtZXhhbXBsZXMubWRuLm1vemlsbGEubmV0L21lZGlhL2NjMC12aWRlb3MvZmxvd2VyLm1wNCc7CmNvbnN0IHQgPSB0ZXh0bW9kZS5jcmVhdGUoewoJd2lkdGg6IHdpbmRvdy5pbm5lcldpZHRoLAoJaGVpZ2h0OiB3aW5kb3cuaW5uZXJIZWlnaHQsCglmb250U2l6ZTogMTYsCn0pOwoKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwpsZXQgdmlkZW8gPSBudWxsOwpsZXQgZGlzcG9zZWQgPSBmYWxzZTsKCnQuc2V0dXAoYXN5bmMgKCkgPT4gewoJdmlkZW8gPSBhd2FpdCB0LmxvYWRWaWRlbyhWSURFT19VUkwpOwoJdmlkZW8uY2hhcmFjdGVycygnIC46LT0rKiMlQCcpOwoJdmlkZW8udm9sdW1lKDApOwoJYXdhaXQgdmlkZW8ucGxheSgpOwp9KTsKCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNSwgNywgMTgpOwoJaWYgKHZpZGVvICYmICFkaXNwb3NlZCkgewoJCXQuaW1hZ2UodmlkZW8sIHQuZ3JpZC5jb2xzIC0gOCwgdC5ncmlkLnJvd3MgLSAxMCk7Cgl9Cn0pOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWRyYXdUZXh0KCdURVhUTU9ERVZJREVPLkRJU1BPU0UnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBDTEVBTlVQIEFORCBESVNQT1NBTCcsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnUmVsZWFzZXMgdmlkZW8gcmVzb3VyY2VzLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoKCWlmIChkaXNwb3NlZCkgewoJCWRyYXdUZXh0KCdTVEFUVVM6IERJU1BPU0VEJywgeCwgeSsrLCAyNTUsIDEyMCwgMTIwKTsKCX0gZWxzZSBpZiAodmlkZW8pIHsKCQlkcmF3VGV4dCgnU1RBVFVTOiBBQ1RJVkUnLCB4LCB5KyssIDEyMCwgMjU1LCAxMjApOwoJCWRyYXdUZXh0KCdDTElDSyBBTllXSEVSRSBUTyBESVNQT1NFIFZJREVPJywgeCwgeSsrLCAyNTUsIDIxMCwgOTApOwoJfSBlbHNlIHsKCQlkcmF3VGV4dCgnTE9BRElORyBWSURFTy4uLicsIHgsIHkrKywgMjU1LCAxODAsIDEyMCk7Cgl9Cn0pOwoKdC5tb3VzZUNsaWNrZWQoKCkgPT4gewoJaWYgKCF2aWRlbyB8fCBkaXNwb3NlZCkgcmV0dXJuOwoJdmlkZW8uZGlzcG9zZSgpOwoJZGlzcG9zZWQgPSB0cnVlOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const VIDEO_URL = 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4';
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let video = null;
+let disposed = false;
+
+t.setup(async () => {
+	video = await t.loadVideo(VIDEO_URL);
+	video.characters(' .:-=+*#%@');
+	video.volume(0);
+	await video.play();
+});
+
+t.draw(() => {
+	t.background(5, 7, 18);
+	if (video && !disposed) {
+		t.image(video, t.grid.cols - 8, t.grid.rows - 10);
+	}
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODEVIDEO.DISPOSE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: CLEANUP AND DISPOSAL', x, y++, 100, 220, 255);
+	drawText('Releases video resources.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+
+	if (disposed) {
+		drawText('STATUS: DISPOSED', x, y++, 255, 120, 120);
+	} else if (video) {
+		drawText('STATUS: ACTIVE', x, y++, 120, 255, 120);
+		drawText('CLICK ANYWHERE TO DISPOSE VIDEO', x, y++, 255, 210, 90);
+	} else {
+		drawText('LOADING VIDEO...', x, y++, 255, 180, 120);
+	}
+});
+
+t.mouseClicked(() => {
+	if (!video || disposed) return;
+	video.dispose();
+	disposed = true;
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 
 ## Overrides
 

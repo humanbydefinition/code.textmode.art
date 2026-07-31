@@ -2,11 +2,11 @@
 layout: doc
 editLink: true
 title: textmode.js
-description: ~ travelling without arriving
+description: textmode.js is a lightweight creative coding library for creating real-time ASCII art on the web.
 category: API Reference
 api: true
 kind: Project
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 # textmode.js

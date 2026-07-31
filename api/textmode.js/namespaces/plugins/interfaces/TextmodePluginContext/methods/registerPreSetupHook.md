@@ -8,7 +8,7 @@ api: true
 owner: TextmodePluginContext
 namespace: plugins
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../../../index.md) / [plugins](../../../index.md) / [TextmodePluginContext](../../TextmodePluginContext.md) / registerPreSetupHook
@@ -38,5 +38,89 @@ A function to unregister the hook.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="registerPreSetupHook" encoded-code="bGV0IHByZVNldHVwVHJpZ2dlcmVkID0gZmFsc2U7CmxldCBtYXRyaXhTZWVkID0gMDsKCmNvbnN0IG1hdHJpeFBsdWdpbiA9IHsKCW5hbWU6ICdtYXRyaXgtcHJlc2V0dXAnLAoJaW5zdGFsbCh0ZXh0bW9kaWZpZXIsIGNvbnRleHQpIHsKCQljb250ZXh0LnJlZ2lzdGVyUHJlU2V0dXBIb29rKCgpID0-IHsKCQkJcHJlU2V0dXBUcmlnZ2VyZWQgPSB0cnVlOwoJCQltYXRyaXhTZWVkID0gMTMzNzsKCQl9KTsKCX0sCn07Cgpjb25zdCB0ID0gdGV4dG1vZGUuY3JlYXRlKHsKCXdpZHRoOiB3aW5kb3cuaW5uZXJXaWR0aCwKCWhlaWdodDogd2luZG93LmlubmVySGVpZ2h0LAoJZm9udFNpemU6IDE2LAoJcGx1Z2luczogW21hdHJpeFBsdWdpbl0sCn0pOwoKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg0LCAxNiwgOCk7Cgljb25zdCBjb2xzID0gdC5ncmlkLmNvbHM7Cgljb25zdCByb3dzID0gdC5ncmlkLnJvd3M7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IoKGNvbHMgLSAxKSAvIDIpOwoJY29uc3QgcmlnaHQgPSBsZWZ0ICsgY29scyAtIDE7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcihyb3dzIC8gMik7Cgljb25zdCBib3R0b20gPSB0b3AgKyByb3dzIC0gMTsKCWNvbnN0IHRtID0gdC5mcmFtZUNvdW50ICogMC4wNTsKCglmb3IgKGxldCB4ID0gbGVmdDsgeCA8PSByaWdodDsgeCsrKSB7CgkJY29uc3QgZHJvcFkgPSBNYXRoLmZsb29yKCh4ICogMTcuMyArIHRtICogMTUgKyBtYXRyaXhTZWVkICogMC4xKSAlIHJvd3MpICsgdG9wOwoJCWZvciAobGV0IHkgPSB0b3A7IHkgPD0gYm90dG9tOyB5KyspIHsKCQkJY29uc3QgZGlzdCA9IE1hdGguYWJzKHkgLSBkcm9wWSk7CgkJCWNvbnN0IG5vcm0gPSBNYXRoLm1heCgwLCAxIC0gZGlzdCAvIDEyKTsKCQkJY29uc3QgY2hhcktleSA9IGRpc3QgPT09IDAgPyAnQCcgOiBub3JtID4gMC42ID8gJyMnIDogbm9ybSA-IDAuMyA_ICd8JyA6ICcuJzsKCgkJCXQucHVzaCgpOwoJCQl0LnRyYW5zbGF0ZSh4LCB5KTsKCQkJdC5jaGFyQ29sb3IoCgkJCQlkaXN0ID09PSAwID8gMjU1IDogTWF0aC5mbG9vcig0MCArIG5vcm0gKiAxNDApLAoJCQkJZGlzdCA9PT0gMCA_IDI1NSA6IE1hdGguZmxvb3IoMTgwICsgbm9ybSAqIDc1KSwKCQkJCWRpc3QgPT09IDAgPyAyMDAgOiBNYXRoLmZsb29yKDYwICsgbm9ybSAqIDgwKQoJCQkpOwoJCQl0LmNlbGxDb2xvcihNYXRoLmZsb29yKDQgKyBub3JtICogOCksIE1hdGguZmxvb3IoMTIgKyBub3JtICogMjApLCBNYXRoLmZsb29yKDYgKyBub3JtICogMTApKTsKCQkJdC5jaGFyKGNoYXJLZXkpOwoJCQl0LnBvaW50KCk7CgkJCXQucG9wKCk7CgkJfQoJfQp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CgoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcigxMjAsIDI0MCwgMTgwKTsKCXQucHJpbnQoJ1BMVUdJTlMuUkVHSVNURVJQUkVTRVRVUEhPT0snLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoNzAsIDEwMCwgMTQwKTsKCXQucHJpbnQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDIxMCwgMjU1KTsKCXQucHJpbnQoJ0NPTkNFUFQ6IFBSRS1TRVRVUCBNQVRSSVggUEFMRVRURScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDE2MCwgMTkwKTsKCXQucHJpbnQoJ1J1bnMgaW1tZWRpYXRlbHkgYmVmb3JlIHQuc2V0dXAoKScsIHgsIHkrKyk7Cgl0LnByaW50KCdleGVjdXRlcyB0byBzZWVkIGluaXRpYWwgc3RhdGUuJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDcwLCAxMDAsIDE0MCk7Cgl0LnByaW50KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAyNTUsIDIwMCk7Cgl0LnByaW50KGBQUkUtU0VUVVAgUkFOOiAke3ByZVNldHVwVHJpZ2dlcmVkfWAsIHgsIHkrKyk7Cgl0LnByaW50KGBNQVRSSVggU0VFRDogJHttYXRyaXhTZWVkfWAsIHgsIHkrKyk7Cgl0LnBvcCgpOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+let preSetupTriggered = false;
+let matrixSeed = 0;
+
+const matrixPlugin = {
+	name: 'matrix-presetup',
+	install(textmodifier, context) {
+		context.registerPreSetupHook(() => {
+			preSetupTriggered = true;
+			matrixSeed = 1337;
+		});
+	},
+};
+
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+	plugins: [matrixPlugin],
+});
+
+const labelLayer = t.layers.add();
+
+t.draw(() => {
+	t.background(4, 16, 8);
+	const cols = t.grid.cols;
+	const rows = t.grid.rows;
+	const left = -Math.floor((cols - 1) / 2);
+	const right = left + cols - 1;
+	const top = -Math.floor(rows / 2);
+	const bottom = top + rows - 1;
+	const tm = t.frameCount * 0.05;
+
+	for (let x = left; x <= right; x++) {
+		const dropY = Math.floor((x * 17.3 + tm * 15 + matrixSeed * 0.1) % rows) + top;
+		for (let y = top; y <= bottom; y++) {
+			const dist = Math.abs(y - dropY);
+			const norm = Math.max(0, 1 - dist / 12);
+			const charKey = dist === 0 ? '@' : norm > 0.6 ? '#' : norm > 0.3 ? '|' : '.';
+
+			t.push();
+			t.translate(x, y);
+			t.charColor(
+				dist === 0 ? 255 : Math.floor(40 + norm * 140),
+				dist === 0 ? 255 : Math.floor(180 + norm * 75),
+				dist === 0 ? 200 : Math.floor(60 + norm * 80)
+			);
+			t.cellColor(Math.floor(4 + norm * 8), Math.floor(12 + norm * 20), Math.floor(6 + norm * 10));
+			t.char(charKey);
+			t.point();
+			t.pop();
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('PLUGINS.REGISTERPRESETUPHOOK', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: PRE-SETUP MATRIX PALETTE', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Runs immediately before t.setup()', x, y++);
+	t.print('executes to seed initial state.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 200);
+	t.print(`PRE-SETUP RAN: ${preSetupTriggered}`, x, y++);
+	t.print(`MATRIX SEED: ${matrixSeed}`, x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

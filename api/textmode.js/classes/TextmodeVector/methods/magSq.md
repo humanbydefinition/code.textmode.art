@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: TextmodeVector
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [TextmodeVector](../../TextmodeVector.md) / magSq
@@ -30,5 +30,97 @@ The squared vector length.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="magSq" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IHBvcyA9IHQuY3JlYXRlVmVjdG9yKC0xOCwgLTYpOwpjb25zdCB2ZWwgPSB0LmNyZWF0ZVZlY3RvcigwLjUsIDAuMTIpOwpjb25zdCBhY2MgPSB0LmNyZWF0ZVZlY3RvcigpOwpjb25zdCB0YXJnZXQgPSB0LmNyZWF0ZVZlY3RvcigpOwpjb25zdCB0cmFpbCA9IFtdOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9CgpmdW5jdGlvbiBwbG90KHBvaW50LCBjaGFyLCByLCBnLCBiKSB7Cgl0LnB1c2goKTsKCXQudHJhbnNsYXRlKE1hdGgucm91bmQocG9pbnQueCksIE1hdGgucm91bmQocG9pbnQueSkpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LmNoYXIoY2hhcik7Cgl0LnBvaW50KCk7Cgl0LnBvcCgpOwp9Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDQsIDcsIDE2KTsKCgljb25zdCB0aW1lID0gdC5mcmFtZUNvdW50ICogMC4wNDU7Cgljb25zdCByYWRpdXNYID0gTWF0aC5tYXgoOCwgdC5ncmlkLmNvbHMgLyA0KTsKCWNvbnN0IHJhZGl1c1kgPSBNYXRoLm1heCg0LCB0LmdyaWQucm93cyAvIDQpOwoJdGFyZ2V0LnNldChNYXRoLmNvcyh0aW1lKSAqIHJhZGl1c1gsIE1hdGguc2luKHRpbWUgKiAwLjgpICogcmFkaXVzWSk7CgoJY29uc3QgZGVzaXJlZCA9IHRhcmdldC5jb3B5KCkuc3ViKHBvcyk7Cgljb25zdCBkaXN0YW5jZSA9IGRlc2lyZWQubWFnKCk7Cgljb25zdCBzcGVlZCA9IHQubWFwKE1hdGgubWluKGRpc3RhbmNlLCAyMCksIDAsIDIwLCAwLjA4LCAwLjc0KTsKCWNvbnN0IHN0ZWVyID0gZGVzaXJlZC5zZXRNYWcoc3BlZWQpLnN1Yih2ZWwpLmxpbWl0KDAuMDQ1KTsKCglhY2Muc2V0KHN0ZWVyKTsKCXZlbC5hZGQoYWNjKS5saW1pdCgwLjgyKTsKCXBvcy5hZGQodmVsKTsKCgl0cmFpbC5wdXNoKHBvcy5jb3B5KCkpOwoJaWYgKHRyYWlsLmxlbmd0aCA-IDI4KSB7CgkJdHJhaWwuc2hpZnQoKTsKCX0KCglmb3IgKGxldCBpID0gMDsgaSA8IHRyYWlsLmxlbmd0aDsgaSsrKSB7CgkJY29uc3QgZmFkZSA9IGkgLyB0cmFpbC5sZW5ndGg7CgkJY29uc3QgZ2x5cGggPSBmYWRlID4gMC43MiA_ICcqJyA6IGZhZGUgPiAwLjQyID8gJysnIDogJy4nOwoJCXBsb3QodHJhaWxbaV0sIGdseXBoLCA3MCArIGZhZGUgKiAxMjAsIDEyMCArIGZhZGUgKiAxMjAsIDI1NSk7Cgl9CgoJY29uc3QgcmF5ID0gdmVsLmNvcHkoKS5zZXRNYWcoNSk7Cglmb3IgKGxldCBpID0gMTsgaSA8PSA1OyBpKyspIHsKCQlwbG90KHBvcy5jb3B5KCkuYWRkKHJheS5jb3B5KCkuc2V0TWFnKGkpKSwgJy0nLCAxMjAsIDI1NSwgMTgwKTsKCX0KCglwbG90KHRhcmdldCwgJ3gnLCAyNTUsIDEyMCwgMTUwKTsKCXBsb3QodGFyZ2V0LmNvcHkoKS5hZGQoMCwgLTEpLCAnfCcsIDI1NSwgODAsIDEyMCk7CglwbG90KHRhcmdldC5jb3B5KCkuYWRkKC0xLCAwKSwgJy0nLCAyNTUsIDgwLCAxMjApOwoJcGxvdCh0YXJnZXQuY29weSgpLmFkZCgxLCAwKSwgJy0nLCAyNTUsIDgwLCAxMjApOwoJcGxvdChwb3MsICdAJywgMTEwLCAyNTUsIDE3MCk7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLkNSRUFURVZFQ1RPUicsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IFNFRUtJTkcgTU9USU9OJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCd0YXJnZXQgLSBwb3NpdGlvbiBtYWtlcyBkZXNpcmVkLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnc2V0TWFnICsgbGltaXQgc2hhcGVzIHN0ZWVyaW5nLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgndmVsb2NpdHkgYW5kIHBvc2l0aW9uIHVzZSBhZGQoKS4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoYGRpc3Q6ICR7cG9zLmRpc3QodGFyZ2V0KS50b0ZpeGVkKDEpfWAsIHgsIHkrKywgMjIwLCAyMzAsIDI1NSk7CglkcmF3VGV4dChgc3BlZWQ6ICR7dmVsLm1hZygpLnRvRml4ZWQoMil9YCwgeCwgeSsrLCAyMjAsIDIzMCwgMjU1KTsKCWRyYXdUZXh0KGBoZWFkOiAke3ZlbC5oZWFkaW5nKCkudG9GaXhlZCgwKX1gLCB4LCB5KyssIDIyMCwgMjMwLCAyNTUpOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+const pos = t.createVector(-18, -6);
+const vel = t.createVector(0.5, 0.12);
+const acc = t.createVector();
+const target = t.createVector();
+const trail = [];
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+function plot(point, char, r, g, b) {
+	t.push();
+	t.translate(Math.round(point.x), Math.round(point.y));
+	t.charColor(r, g, b);
+	t.char(char);
+	t.point();
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(4, 7, 16);
+
+	const time = t.frameCount * 0.045;
+	const radiusX = Math.max(8, t.grid.cols / 4);
+	const radiusY = Math.max(4, t.grid.rows / 4);
+	target.set(Math.cos(time) * radiusX, Math.sin(time * 0.8) * radiusY);
+
+	const desired = target.copy().sub(pos);
+	const distance = desired.mag();
+	const speed = t.map(Math.min(distance, 20), 0, 20, 0.08, 0.74);
+	const steer = desired.setMag(speed).sub(vel).limit(0.045);
+
+	acc.set(steer);
+	vel.add(acc).limit(0.82);
+	pos.add(vel);
+
+	trail.push(pos.copy());
+	if (trail.length > 28) {
+		trail.shift();
+	}
+
+	for (let i = 0; i < trail.length; i++) {
+		const fade = i / trail.length;
+		const glyph = fade > 0.72 ? '*' : fade > 0.42 ? '+' : '.';
+		plot(trail[i], glyph, 70 + fade * 120, 120 + fade * 120, 255);
+	}
+
+	const ray = vel.copy().setMag(5);
+	for (let i = 1; i <= 5; i++) {
+		plot(pos.copy().add(ray.copy().setMag(i)), '-', 120, 255, 180);
+	}
+
+	plot(target, 'x', 255, 120, 150);
+	plot(target.copy().add(0, -1), '|', 255, 80, 120);
+	plot(target.copy().add(-1, 0), '-', 255, 80, 120);
+	plot(target.copy().add(1, 0), '-', 255, 80, 120);
+	plot(pos, '@', 110, 255, 170);
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODIFIER.CREATEVECTOR', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SEEKING MOTION', x, y++, 100, 220, 255);
+	drawText('target - position makes desired.', x, y++, 140, 160, 190);
+	drawText('setMag + limit shapes steering.', x, y++, 140, 160, 190);
+	drawText('velocity and position use add().', x, y++, 140, 160, 190);
+	drawText(`dist: ${pos.dist(target).toFixed(1)}`, x, y++, 220, 230, 255);
+	drawText(`speed: ${vel.mag().toFixed(2)}`, x, y++, 220, 230, 255);
+	drawText(`head: ${vel.heading().toFixed(0)}`, x, y++, 220, 230, 255);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

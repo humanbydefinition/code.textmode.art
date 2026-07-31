@@ -8,7 +8,7 @@ api: true
 owner: TextmodeLayer
 namespace: layering
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../../../index.md) / [layering](../../../index.md) / [TextmodeLayer](../../TextmodeLayer.md) / show
@@ -27,5 +27,81 @@ Show this layer for rendering.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="show" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBkaXNwbGF5TGF5ZXIgPSB0LmxheWVycy5hZGQoeyB2aXNpYmxlOiBmYWxzZSwgYmxlbmRNb2RlOiAnYWRkaXRpdmUnIH0pOwpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCBpc1Zpc2libGUgPSBmYWxzZTsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHJnYiA9IFsyNTUsIDI1NSwgMjU1XSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyZ2JbMF0sIHJnYlsxXSwgcmdiWzJdKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDEwLCAyMik7CgoJaWYgKHQuZnJhbWVDb3VudCAlIDEyMCA9PT0gMCkgewoJCWlmIChpc1Zpc2libGUpIHsKCQkJZGlzcGxheUxheWVyLmhpZGUoKTsKCQl9IGVsc2UgewoJCQlkaXNwbGF5TGF5ZXIuc2hvdygpOwoJCX0KCQlpc1Zpc2libGUgPSAhaXNWaXNpYmxlOwoJfQoKCXQucHVzaCgpOwoJdC5jaGFyQ29sb3IoNDAsIDUwLCA4MCk7Cgl0LmNoYXIoJy4nKTsKCXQucmVjdCh0LmdyaWQuY29scywgdC5ncmlkLnJvd3MpOwoJdC5wb3AoKTsKfSk7CgpkaXNwbGF5TGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCB0aW1lID0gdC5mcmFtZUNvdW50ICogMC4wMzsKCgl0LnB1c2goKTsKCXQuY2hhckNvbG9yKDI1NSwgMTgwLCAxMDApOwoJdC5jaGFyKCcjJyk7Cgl0LnJvdGF0ZVooKHRpbWUgKiAxODApIC8gTWF0aC5QSSk7Cgl0LnJlY3QoMTIsIDEyKTsKCXQucG9wKCk7CgoJdC5wdXNoKCk7Cgl0LmNoYXJDb2xvcigyNTUsIDIyNSwgMTQwKTsKCXQuY2hhcignKycpOwoJdC5wb2ludCgpOwoJdC5wb3AoKTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoJY29uc3Qgc3RhdHVzQ29sb3IgPSBpc1Zpc2libGUgPyBbMTQwLCAyNTUsIDE4MF0gOiBbMjU1LCAxMDAsIDEwMF07CgoJZHJhd1RleHQoJ1RFWFRNT0RFTEFZRVIuU0hPVycsIHgsIHkrKywgWzEwMCwgMjU1LCAxNDBdKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIFs4MCwgMTAwLCAxNTBdKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBTSE9XIEhJRERFTiBMQVlFUicsIHgsIHkrKywgWzEwMCwgMjIwLCAyNTVdKTsKCWRyYXdUZXh0KCdzaG93KCkgcmVzdG9yZXMgY29tcG9zaXRpbmcuJywgeCwgeSsrLCBbMTQwLCAxNjAsIDE5MF0pOwoJZHJhd1RleHQoJ2hpZGUoKSBwYXVzZXMgdmlzaWJsZSBvdXRwdXQuJywgeCwgeSsrLCBbMTQwLCAxNjAsIDE5MF0pOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgWzgwLCAxMDAsIDE1MF0pOwoJZHJhd1RleHQoaXNWaXNpYmxlID8gJ0xBWUVSOiBWSVNJQkxFJyA6ICdMQVlFUjogSElEREVOJywgeCwgeSsrLCBzdGF0dXNDb2xvcik7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const displayLayer = t.layers.add({ visible: false, blendMode: 'additive' });
+const labelLayer = t.layers.add();
+let isVisible = false;
+
+function drawText(text, x, y, rgb = [255, 255, 255]) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(6, 10, 22);
+
+	if (t.frameCount % 120 === 0) {
+		if (isVisible) {
+			displayLayer.hide();
+		} else {
+			displayLayer.show();
+		}
+		isVisible = !isVisible;
+	}
+
+	t.push();
+	t.charColor(40, 50, 80);
+	t.char('.');
+	t.rect(t.grid.cols, t.grid.rows);
+	t.pop();
+});
+
+displayLayer.draw(() => {
+	t.clear();
+	const time = t.frameCount * 0.03;
+
+	t.push();
+	t.charColor(255, 180, 100);
+	t.char('#');
+	t.rotateZ((time * 180) / Math.PI);
+	t.rect(12, 12);
+	t.pop();
+
+	t.push();
+	t.charColor(255, 225, 140);
+	t.char('+');
+	t.point();
+	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	const statusColor = isVisible ? [140, 255, 180] : [255, 100, 100];
+
+	drawText('TEXTMODELAYER.SHOW', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: SHOW HIDDEN LAYER', x, y++, [100, 220, 255]);
+	drawText('show() restores compositing.', x, y++, [140, 160, 190]);
+	drawText('hide() pauses visible output.', x, y++, [140, 160, 190]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText(isVisible ? 'LAYER: VISIBLE' : 'LAYER: HIDDEN', x, y++, statusColor);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

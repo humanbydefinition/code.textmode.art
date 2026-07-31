@@ -7,7 +7,7 @@ category: Accessors
 api: true
 owner: TextmodeCamera
 kind: Accessor
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [TextmodeCamera](../../TextmodeCamera.md) / targetY
@@ -28,5 +28,81 @@ Current Y position of the camera target.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="targetY" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCB0YXJnZXRWYWx1ZSA9IDA7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjAwLCBnID0gMjIwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQudHJhbnNsYXRlKHgsIHkpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cglmb3IgKGxldCBpID0gMDsgaSA8IHRleHQubGVuZ3RoOyBpKyspIHsKCQl0LmNoYXIodGV4dFtpXSk7CgkJdC5wb2ludCgpOwoJCXQudHJhbnNsYXRlKDEsIDApOwoJfQoJdC5wb3AoKTsKfQoKZnVuY3Rpb24gZHJhd1NjZW5lKHR5KSB7Cgl0LnB1c2goKTsKCXQuY2hhcignLicpOwoJdC5jaGFyQ29sb3IoNTAsIDcwLCAxMTApOwoJZm9yIChsZXQgeCA9IC0yMDsgeCA8PSAyMDsgeCArPSA0KSB0LmxpbmUoeCwgMCwgLTIwLCB4LCAwLCAyMCk7Cglmb3IgKGxldCB6ID0gLTIwOyB6IDw9IDIwOyB6ICs9IDQpIHQubGluZSgtMjAsIDAsIHosIDIwLCAwLCB6KTsKCXQucG9wKCk7CgkvLyBUYXJnZXQgcmlzaW5nIGFuZCBmYWxsaW5nIG9uIFkgYXhpcwoJdC5wdXNoKCk7Cgl0LnRyYW5zbGF0ZSgwLCB0eSwgMCk7Cgl0LmNoYXIoJyonKTsKCXQuY2hhckNvbG9yKDI1NSwgMTgwLCAyNTUpOwoJdC5lbGxpcHNlKDMsIDMpOwoJdC5wb3AoKTsKCS8vIFRhbGwgcGlsbGFyIGFzIHZlcnRpY2FsIHJlZmVyZW5jZQoJdC5wdXNoKCk7Cgl0LnRyYW5zbGF0ZSgwLCA4LCAtNik7Cgl0LmNoYXIoJ3wnKTsKCXQuY2hhckNvbG9yKDgwLCAxMTAsIDE4MCk7Cgl0LmJveCgyLCAxNiwgMik7Cgl0LnBvcCgpOwp9Cgp0LnNldHVwKCgpID0-IHsKCXQucGVyc3BlY3RpdmUoNTgsIDAuMSwgNDA5Nik7Cn0pOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg2LCAxMCwgMjIpOwoKCWNvbnN0IHRpbWUgPSB0LmZyYW1lQ291bnQgKiAwLjAyOwoJY29uc3QgdHkgPSBNYXRoLnNpbih0aW1lKSAqIDEwOwoJY29uc3QgY2FtID0gdC5jcmVhdGVDYW1lcmEoKS5zZXRQb3NpdGlvbigwLCAxMCwgMzApLmxvb2tBdCgwLCB0eSwgMCk7Cgl0YXJnZXRWYWx1ZSA9IGNhbS50YXJnZXRZOwoKCXQuc2V0Q2FtZXJhKGNhbSk7CglkcmF3U2NlbmUodHkpOwoJdC5yZXNldENhbWVyYSgpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CgoJZHJhd1RleHQoJ1RBUkdFVFknLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NhbWVyYSBsb29rLWF0IFkgY29vcmRpbmF0ZS4nLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJyogdGFyZ2V0IHJpc2VzIGFuZCBmYWxscyBvbiBZLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dChgdGFyZ2V0WSA9ICR7dGFyZ2V0VmFsdWUudG9GaXhlZCgyKX1gLCB4LCB5KyssIDEyMCwgMjU1LCAxODApOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let targetYVal = 0;
+
+t.setup(() => {
+	t.perspective(58, 0.1, 4096);
+});
+
+function drawAttractorAltars(panY) {
+	t.push();
+	t.ambientLight(25, 30, 45);
+	t.pointLight(255, 210, 60, 0, panY, 12);
+
+	for (let i = -6; i <= 6; i++) {
+		const y = i * 4;
+		const x = Math.sin(i * 0.5) * 12;
+		const z = Math.cos(i * 0.5) * 8;
+
+		t.push();
+		t.translate(x, y, z);
+		t.charColor(Math.floor(80 + (i + 6) * 14), 255, 160);
+		t.cellColor(25, 10, 35);
+		t.char('#');
+		t.box(6, 3, 6);
+		t.pop();
+	}
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(12, 6, 24);
+	const tm = t.frameCount * 0.04;
+	const panY = Math.sin(tm) * 18;
+
+	const cam = t.createCamera().setPosition(28, 4, 32).lookAt(0, panY, 0);
+
+	targetYVal = cam.targetY;
+	t.setCamera(cam);
+	drawAttractorAltars(panY);
+	t.resetCamera();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODECAMERA.TARGETY', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: AIZAWA 3D ALTAR PAN SCAN', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Reads camera lookAt target Y coord.', x, y++);
+	t.print('Point light tracks vertical Y target.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(255, 210, 60);
+	t.print(`TARGET Y: ${targetYVal.toFixed(2)}`, x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

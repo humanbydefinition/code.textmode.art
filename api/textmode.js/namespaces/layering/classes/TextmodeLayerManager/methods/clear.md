@@ -8,7 +8,7 @@ api: true
 owner: TextmodeLayerManager
 namespace: layering
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../../../index.md) / [layering](../../../index.md) / [TextmodeLayerManager](../../TextmodeLayerManager.md) / clear
@@ -29,5 +29,102 @@ The base layer is not affected by this operation.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="clear" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBSRUdJTUVTID0gWwoJeyBuYW1lOiAnUkFJTicsIGdseXBoOiAnfCcsIHJpc2U6IGZhbHNlLCB2ZWw6IDAuOSwgc3dheTogMCwgdGludDogWzE1MCwgMTkwLCAyNTVdIH0sCgl7IG5hbWU6ICdFTUJFUlMnLCBnbHlwaDogJyonLCByaXNlOiB0cnVlLCB2ZWw6IDAuMywgc3dheTogMiwgdGludDogWzI1NSwgMTcwLCA2MF0gfSwKCXsgbmFtZTogJ1NOT1cnLCBnbHlwaDogJyonLCByaXNlOiBmYWxzZSwgdmVsOiAwLjE0LCBzd2F5OiAyLCB0aW50OiBbMjI1LCAyMzUsIDI1NV0gfSwKXTsKbGV0IG1vZGUgPSAwOwpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByZ2IgPSBbMjU1LCAyNTUsIDI1NV0pIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IocmdiWzBdLCByZ2JbMV0sIHJnYlsyXSk7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQpmdW5jdGlvbiBwdXQoeCwgeSwgZ2x5cGgsIHJnYikgewoJdC5wdXNoKCk7Cgl0LnRyYW5zbGF0ZSh4LCB5KTsKCXQuY2hhckNvbG9yKHJnYlswXSwgcmdiWzFdLCByZ2JbMl0pOwoJdC5jaGFyKGdseXBoKTsKCXQucG9pbnQoKTsKCXQucG9wKCk7Cn0KY29uc3QgaGFzaCA9ICh4LCB5KSA9PiBNYXRoLmFicyhNYXRoLnNpbih4ICogMTI3LjEgKyB5ICogMzExLjcpICogNDM3NTguNTQ1MykgJSAxOwoKZnVuY3Rpb24gZHJhd0h1ZCgpIHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnTEFZRVJNQU5BR0VSLkNMRUFSJywgeCwgeSsrLCBbMTAwLCAyNTUsIDE0MF0pOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgWzgwLCAxMDAsIDE1MF0pOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IFdJUEUgVVNFUiBMQVlFUlMnLCB4LCB5KyssIFsxMDAsIDIyMCwgMjU1XSk7CglkcmF3VGV4dCgnY2xlYXIoKSByZWJ1aWxkcyB0aGUgc3RhY2suJywgeCwgeSsrLCBbMTQwLCAxNjAsIDE5MF0pOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgWzgwLCAxMDAsIDE1MF0pOwoJZHJhd1RleHQoYFJFR0lNRTogJHtSRUdJTUVTW21vZGUgJSAzXS5uYW1lfWAsIHgsIHkrKywgWzE0MCwgMjU1LCAxODBdKTsKfQoKZnVuY3Rpb24gd2VhdGhlckxheWVyKG5lYXIpIHsKCWNvbnN0IGxheWVyID0gdC5sYXllcnMuYWRkKHsgYmxlbmRNb2RlOiB0LkJMRU5EX0FERElUSVZFLCBvcGFjaXR5OiBuZWFyID8gMC45IDogMC41IH0pOwoKCWxheWVyLmRyYXcoKCkgPT4gewoJCXQuY2xlYXIoKTsKCQljb25zdCBDID0gTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpLAoJCQlSID0gTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJCWNvbnN0IHJnID0gUkVHSU1FU1ttb2RlICUgUkVHSU1FUy5sZW5ndGhdOwoJCWNvbnN0IHJnYiA9IG5lYXIgPyByZy50aW50IDogcmcudGludC5tYXAoKGMpID0-IE1hdGguZmxvb3IoYyAqIDAuNSkpOwoJCWNvbnN0IGYgPSB0LmZyYW1lQ291bnQ7CgoJCWZvciAobGV0IGkgPSAwOyBpIDwgKG5lYXIgPyAzNCA6IDYwKTsgaSsrKSB7CgkJCWNvbnN0IGggPSBoYXNoKGksIG5lYXIgPyAzIDogNyk7CgkJCWNvbnN0IHRyYXZlbCA9IChoICogdC5ncmlkLnJvd3MgKyBmICogcmcudmVsICogKDAuNiArIGgpICogKG5lYXIgPyAxIDogMC42KSkgJSB0LmdyaWQucm93czsKCQkJY29uc3QgeCA9IE1hdGguZmxvb3IoaGFzaChpLCAxMSkgKiB0LmdyaWQuY29scykgLSBDICsgTWF0aC5yb3VuZChNYXRoLnNpbihmICogMC4wMyArIGkpICogcmcuc3dheSk7CgkJCWNvbnN0IGdyb3VuZCA9IFIgKiAwLjQ1ICsgTWF0aC5zaW4oeCAqIDAuMDUgKyAxKSAqIDMgKyBNYXRoLnNpbih4ICogMC4xMykgKiAyOwoJCQljb25zdCB5ID0gTWF0aC5mbG9vcihyZy5yaXNlID8gZ3JvdW5kIC0gdHJhdmVsIDogTWF0aC5taW4odHJhdmVsIC0gUiwgZ3JvdW5kKSk7CgkJCXB1dCh4LCB5LCBuZWFyID8gcmcuZ2x5cGggOiAnLicsIHJnYik7CgkJfQoJfSk7Cn0KCmZ1bmN0aW9uIHJlYnVpbGQoKSB7Cgl0LmxheWVycy5jbGVhcigpOwoJbW9kZSsrOwoJd2VhdGhlckxheWVyKGZhbHNlKTsKCXdlYXRoZXJMYXllcih0cnVlKTsKCXQubGF5ZXJzLmFkZCgpLmRyYXcoZHJhd0h1ZCk7Cn0KCnQuc2V0dXAoKCkgPT4gcmVidWlsZCgpKTsKCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNCwgOCwgMTIpOwoJY29uc3QgQyA9IE1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKSwKCQlSID0gTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoKCWZvciAobGV0IHggPSAtQzsgeCA8IEM7IHgrKykgewoJCWNvbnN0IHJpZGdlID0gUiAqIDAuNDUgKyBNYXRoLnNpbih4ICogMC4wNSArIDEpICogMyArIE1hdGguc2luKHggKiAwLjEzKSAqIDI7CgkJZm9yIChsZXQgeSA9IC1SOyB5IDwgUjsgeSsrKSB7CgkJCWNvbnN0IGggPSBoYXNoKHgsIHkpOwoJCQlpZiAoaCA-IDAuOTg2ICYmIHkgPCByaWRnZSkgcHV0KHgsIHksIGggPiAwLjk5NCA_ICcrJyA6ICcuJywgWzcwLCA5MCwgMTEwXSk7CgkJCWlmICh5ID4gcmlkZ2UpIHB1dCh4LCB5LCB5IC0gcmlkZ2UgPiA0ID8gJyMnIDogJzonLCBbMTYsIDM0LCAzMF0pOwoJCX0KCX0KCglpZiAodC5mcmFtZUNvdW50ICUgMjQwID09PSAwKSByZWJ1aWxkKCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const REGIMES = [
+	{ name: 'RAIN', glyph: '|', rise: false, vel: 0.9, sway: 0, tint: [150, 190, 255] },
+	{ name: 'EMBERS', glyph: '*', rise: true, vel: 0.3, sway: 2, tint: [255, 170, 60] },
+	{ name: 'SNOW', glyph: '*', rise: false, vel: 0.14, sway: 2, tint: [225, 235, 255] },
+];
+let mode = 0;
+function drawText(text, x, y, rgb = [255, 255, 255]) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.print(text, x, y);
+	t.pop();
+}
+function put(x, y, glyph, rgb) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.char(glyph);
+	t.point();
+	t.pop();
+}
+const hash = (x, y) => Math.abs(Math.sin(x * 127.1 + y * 311.7) * 43758.5453) % 1;
+
+function drawHud() {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('LAYERMANAGER.CLEAR', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: WIPE USER LAYERS', x, y++, [100, 220, 255]);
+	drawText('clear() rebuilds the stack.', x, y++, [140, 160, 190]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText(`REGIME: ${REGIMES[mode % 3].name}`, x, y++, [140, 255, 180]);
+}
+
+function weatherLayer(near) {
+	const layer = t.layers.add({ blendMode: t.BLEND_ADDITIVE, opacity: near ? 0.9 : 0.5 });
+
+	layer.draw(() => {
+		t.clear();
+		const C = Math.floor(t.grid.cols / 2),
+			R = Math.floor(t.grid.rows / 2);
+		const rg = REGIMES[mode % REGIMES.length];
+		const rgb = near ? rg.tint : rg.tint.map((c) => Math.floor(c * 0.5));
+		const f = t.frameCount;
+
+		for (let i = 0; i < (near ? 34 : 60); i++) {
+			const h = hash(i, near ? 3 : 7);
+			const travel = (h * t.grid.rows + f * rg.vel * (0.6 + h) * (near ? 1 : 0.6)) % t.grid.rows;
+			const x = Math.floor(hash(i, 11) * t.grid.cols) - C + Math.round(Math.sin(f * 0.03 + i) * rg.sway);
+			const ground = R * 0.45 + Math.sin(x * 0.05 + 1) * 3 + Math.sin(x * 0.13) * 2;
+			const y = Math.floor(rg.rise ? ground - travel : Math.min(travel - R, ground));
+			put(x, y, near ? rg.glyph : '.', rgb);
+		}
+	});
+}
+
+function rebuild() {
+	t.layers.clear();
+	mode++;
+	weatherLayer(false);
+	weatherLayer(true);
+	t.layers.add().draw(drawHud);
+}
+
+t.setup(() => rebuild());
+
+t.draw(() => {
+	t.background(4, 8, 12);
+	const C = Math.floor(t.grid.cols / 2),
+		R = Math.floor(t.grid.rows / 2);
+
+	for (let x = -C; x < C; x++) {
+		const ridge = R * 0.45 + Math.sin(x * 0.05 + 1) * 3 + Math.sin(x * 0.13) * 2;
+		for (let y = -R; y < R; y++) {
+			const h = hash(x, y);
+			if (h > 0.986 && y < ridge) put(x, y, h > 0.994 ? '+' : '.', [70, 90, 110]);
+			if (y > ridge) put(x, y, y - ridge > 4 ? '#' : ':', [16, 34, 30]);
+		}
+	}
+
+	if (t.frameCount % 240 === 0) rebuild();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / scale
@@ -37,5 +37,76 @@ Scale subsequent geometry in model space.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="scale" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IFJBTVAgPSAnIC46LT0rKiMlQCc7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDEwLCAyNCk7Cgljb25zdCBjb2xzID0gdC5ncmlkLmNvbHMsCgkJcm93cyA9IHQuZ3JpZC5yb3dzOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKChjb2xzIC0gMSkgLyAyKSwKCQlyaWdodCA9IGxlZnQgKyBjb2xzIC0gMTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHJvd3MgLyAyKSwKCQlib3R0b20gPSB0b3AgKyByb3dzIC0gMTsKCWNvbnN0IHRtID0gdC5mcmFtZUNvdW50ICogMC4wNDsKCgljb25zdCBzeCA9IDEgKyBNYXRoLnNpbih0bSAqIDEuNSkgKiAwLjQ7Cgljb25zdCBzeSA9IDEgKyBNYXRoLmNvcyh0bSAqIDEuMikgKiAwLjQ7CgoJZm9yIChsZXQgeSA9IHRvcDsgeSA8PSBib3R0b207IHkrKykgewoJCWZvciAobGV0IHggPSBsZWZ0OyB4IDw9IHJpZ2h0OyB4KyspIHsKCQkJY29uc3QgZGlzdCA9IE1hdGguaHlwb3QoeCwgeSk7CgkJCWNvbnN0IHdhdmUgPSBNYXRoLnNpbihkaXN0ICogMC4yNSAtIHRtICogMikgKiBNYXRoLmNvcyh4ICogMC4xNSArIHkgKiAwLjE1KTsKCQkJY29uc3Qgbm9ybSA9ICh3YXZlICsgMSkgKiAwLjU7CgoJCQljb25zdCBjaGFyS2V5ID0gUkFNUFtNYXRoLmZsb29yKG5vcm0gKiAoUkFNUC5sZW5ndGggLSAxKSldOwoKCQkJdC5wdXNoKCk7CgkJCXQuc2NhbGUoc3gsIHN5LCAxLjApOwoJCQl0LnRyYW5zbGF0ZSh4LCB5KTsKCQkJdC5jaGFyQ29sb3IoMjU1LCBNYXRoLmZsb29yKDE0MCArIHN4ICogNjApLCBNYXRoLmZsb29yKDEwMCArIHN5ICogODApKTsKCQkJdC5jZWxsQ29sb3IoTWF0aC5mbG9vcig4ICsgbm9ybSAqIDE0KSwgTWF0aC5mbG9vcigxMiArIG5vcm0gKiAxNiksIE1hdGguZmxvb3IoMjggKyBub3JtICogMjApKTsKCQkJdC5jaGFyKGNoYXJLZXkpOwoJCQl0LnBvaW50KCk7CgkJCXQucG9wKCk7CgkJfQoJfQp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKSwKCQl0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzLAoJCXggPSBsZWZ0ICsgMzsKCgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKDEyMCwgMjQwLCAxODApOwoJdC5wcmludCgnVEVYVE1PRElGSUVSLlNDQUxFJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDcwLCAxMDAsIDE0MCk7Cgl0LnByaW50KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAyMTAsIDI1NSk7Cgl0LnByaW50KCdDT05DRVBUOiBCUkVBVEhJTkcgQ0FUSEVEUkFMIExBVFRJQ0UnLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAxNjAsIDE5MCk7Cgl0LnByaW50KCdTY2FsZXMgY3VycmVudCBtYXRyaXggYnkgc2NhbGUgZmFjdG9ycycsIHgsIHkrKyk7Cgl0LnByaW50KCdhbG9uZyBYLCBZLCBhbmQgWiBjb29yZGluYXRlIGF4ZXMuJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDcwLCAxMDAsIDE0MCk7Cgl0LnByaW50KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAyNTUsIDIwMCk7Cgl0LnByaW50KCdUUkFOU0ZPUk06IE5PTi1VTklGT1JNIEtJTkVUSUMgU0NBTEUnLCB4LCB5KyspOwoJdC5wb3AoKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+const RAMP = ' .:-=+*#%@';
+
+t.draw(() => {
+	t.background(6, 10, 24);
+	const cols = t.grid.cols,
+		rows = t.grid.rows;
+	const left = -Math.floor((cols - 1) / 2),
+		right = left + cols - 1;
+	const top = -Math.floor(rows / 2),
+		bottom = top + rows - 1;
+	const tm = t.frameCount * 0.04;
+
+	const sx = 1 + Math.sin(tm * 1.5) * 0.4;
+	const sy = 1 + Math.cos(tm * 1.2) * 0.4;
+
+	for (let y = top; y <= bottom; y++) {
+		for (let x = left; x <= right; x++) {
+			const dist = Math.hypot(x, y);
+			const wave = Math.sin(dist * 0.25 - tm * 2) * Math.cos(x * 0.15 + y * 0.15);
+			const norm = (wave + 1) * 0.5;
+
+			const charKey = RAMP[Math.floor(norm * (RAMP.length - 1))];
+
+			t.push();
+			t.scale(sx, sy, 1.0);
+			t.translate(x, y);
+			t.charColor(255, Math.floor(140 + sx * 60), Math.floor(100 + sy * 80));
+			t.cellColor(Math.floor(8 + norm * 14), Math.floor(12 + norm * 16), Math.floor(28 + norm * 20));
+			t.char(charKey);
+			t.point();
+			t.pop();
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2),
+		top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3,
+		x = left + 3;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODIFIER.SCALE', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: BREATHING CATHEDRAL LATTICE', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Scales current matrix by scale factors', x, y++);
+	t.print('along X, Y, and Z coordinate axes.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 200);
+	t.print('TRANSFORM: NON-UNIFORM KINETIC SCALE', x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

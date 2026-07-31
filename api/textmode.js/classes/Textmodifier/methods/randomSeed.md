@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / randomSeed
@@ -35,5 +35,69 @@ stream lookups are derived from the new root seed.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="randomSeed" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IHBvaW50cyA9IFtdOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9CgpmdW5jdGlvbiByZWJ1aWxkUG9pbnRzKCkgewoJdC5yYW5kb21TZWVkKCdyZXBlYXRhYmxlLWdyaWQnKTsKCXBvaW50cy5sZW5ndGggPSAwOwoJZm9yIChsZXQgaSA9IDA7IGkgPCAyODsgaSsrKSB7CgkJcG9pbnRzLnB1c2goewoJCQl4OiBNYXRoLmZsb29yKHQucmFuZG9tKC0yMCwgMjApKSwKCQkJeTogTWF0aC5mbG9vcih0LnJhbmRvbSgtOSwgOSkpLAoJCQljaGFyOiB0LnJhbmRvbShbJy4nLCAnKycsICcqJywgJyMnXSkgPz8gJy4nLAoJCX0pOwoJfQp9CgpyZWJ1aWxkUG9pbnRzKCk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDgsIDcsIDE4KTsKCWlmICh0LmZyYW1lQ291bnQgJSAxMjAgPT09IDEpIHsKCQlyZWJ1aWxkUG9pbnRzKCk7Cgl9CgoJZm9yIChjb25zdCBwb2ludCBvZiBwb2ludHMpIHsKCQl0LnB1c2goKTsKCQl0LnRyYW5zbGF0ZShwb2ludC54LCBwb2ludC55KTsKCQl0LmNoYXIocG9pbnQuY2hhcik7CgkJdC5jaGFyQ29sb3IoMTIwLCAyNDAsIDI1NSk7CgkJdC5wb2ludCgpOwoJCXQucG9wKCk7Cgl9Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuUkFORE9NU0VFRCcsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IFJFU0VUIFNFUVVFTkNFJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdUaGUgc2FtZSBwb2ludHMgcmV0dXJuLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnVGhlIHNlZWQgaXMgc2V0IGV2ZXJ5IGxvb3AuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+const points = [];
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+function rebuildPoints() {
+	t.randomSeed('repeatable-grid');
+	points.length = 0;
+	for (let i = 0; i < 28; i++) {
+		points.push({
+			x: Math.floor(t.random(-20, 20)),
+			y: Math.floor(t.random(-9, 9)),
+			char: t.random(['.', '+', '*', '#']) ?? '.',
+		});
+	}
+}
+
+rebuildPoints();
+
+t.draw(() => {
+	t.background(8, 7, 18);
+	if (t.frameCount % 120 === 1) {
+		rebuildPoints();
+	}
+
+	for (const point of points) {
+		t.push();
+		t.translate(point.x, point.y);
+		t.char(point.char);
+		t.charColor(120, 240, 255);
+		t.point();
+		t.pop();
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.RANDOMSEED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: RESET SEQUENCE', x, y++, 100, 220, 255);
+	drawText('The same points return.', x, y++, 140, 160, 190);
+	drawText('The seed is set every loop.', x, y++, 140, 160, 190);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

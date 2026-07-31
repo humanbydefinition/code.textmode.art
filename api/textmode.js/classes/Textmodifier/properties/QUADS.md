@@ -7,7 +7,7 @@ category: Properties
 api: true
 owner: Textmodifier
 kind: Property
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / QUADS
@@ -25,5 +25,63 @@ every four vertices define a separate four-sided patch.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="QUADS" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBtb2RlID0gdC5RVUFEUzsKY29uc3QgbW9kZU5hbWUgPSAnUVVBRFMnOwpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCnQuZHJhdygoKSA9PiB7Cgljb25zdCB0aW1lID0gdC5mcmFtZUNvdW50ICogMC4wNDsKCXQuYmFja2dyb3VuZCg2LCAxMCwgMjApOwoJdC5iZWdpblNoYXBlKG1vZGUpOwoJZm9yIChsZXQgZ3kgPSAtMjsgZ3kgPD0gMjsgZ3krKykgewoJCWZvciAobGV0IGd4ID0gLTQ7IGd4IDw9IDQ7IGd4KyspIHsKCQkJY29uc3QgY3ggPSBneCAqIDQgKyBNYXRoLnNpbih0aW1lICsgZ3kpICogMS41OwoJCQljb25zdCBjeSA9IGd5ICogNCArIE1hdGguY29zKHRpbWUgKyBneCkgKiAxLjU7CgkJCWNvbnN0IHMgPSAxLjQgKyBNYXRoLnNpbih0aW1lICogMiArIGd4ICsgZ3kpICogMC41OwoJCQl0LmNoYXIoKGd4ICsgZ3kpICUgMiA_ICcjJyA6ICcrJyk7CgkJCXQuY2hhckNvbG9yKDEyMCArIGd4ICogMTQsIDE5MCArIGd5ICogMTIsIDI1MCk7CgkJCXQuY2VsbENvbG9yKDEyICsgZ3ggKiAzLCAyMiArIGd5ICogNiwgNDUpOwoJCQl0LnZlcnRleChjeCAtIHMsIGN5IC0gcyk7CgkJCXQudmVydGV4KGN4ICsgcywgY3kgLSBzKTsKCQkJdC52ZXJ0ZXgoY3ggKyBzLCBjeSArIHMpOwoJCQl0LnZlcnRleChjeCAtIHMsIGN5ICsgcyk7CgkJfQoJfQoJdC5lbmRTaGFwZSgpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLlFVQURTJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogRk9VUiBWRVJURVggUEFUQ0hFUycsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnRXZlcnkgZm91ciB2ZXJ0aWNlcyBmaWxsLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnRWFjaCBjZWxsIGlzIGluZGVwZW5kZW50LicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoYE1PREU6ICR7bW9kZU5hbWV9YCwgeCwgeSsrLCAxNDAsIDI1NSwgMTgwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const mode = t.QUADS;
+const modeName = 'QUADS';
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	const time = t.frameCount * 0.04;
+	t.background(6, 10, 20);
+	t.beginShape(mode);
+	for (let gy = -2; gy <= 2; gy++) {
+		for (let gx = -4; gx <= 4; gx++) {
+			const cx = gx * 4 + Math.sin(time + gy) * 1.5;
+			const cy = gy * 4 + Math.cos(time + gx) * 1.5;
+			const s = 1.4 + Math.sin(time * 2 + gx + gy) * 0.5;
+			t.char((gx + gy) % 2 ? '#' : '+');
+			t.charColor(120 + gx * 14, 190 + gy * 12, 250);
+			t.cellColor(12 + gx * 3, 22 + gy * 6, 45);
+			t.vertex(cx - s, cy - s);
+			t.vertex(cx + s, cy - s);
+			t.vertex(cx + s, cy + s);
+			t.vertex(cx - s, cy + s);
+		}
+	}
+	t.endShape();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.QUADS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: FOUR VERTEX PATCHES', x, y++, 100, 220, 255);
+	drawText('Every four vertices fill.', x, y++, 140, 160, 190);
+	drawText('Each cell is independent.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`MODE: ${modeName}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

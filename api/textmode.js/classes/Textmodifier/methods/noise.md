@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / noise
@@ -42,5 +42,61 @@ Noise value in the range `[0, 1]`.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="noise" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKCXNlZWQ6ICdub2lzZS1maWVsZCcsCn0pOwoKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwpjb25zdCByYW1wID0gJyAuOi09KyojJUAnOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDMsIDgsIDE4KTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWNvbnN0IHRpbWUgPSB0LmZyYW1lQ291bnQgKiAwLjAxODsKCglmb3IgKGxldCB5ID0gMDsgeSA8IHQuZ3JpZC5yb3dzOyB5ICs9IDEpIHsKCQlmb3IgKGxldCB4ID0gMDsgeCA8IHQuZ3JpZC5jb2xzOyB4ICs9IDEpIHsKCQkJY29uc3QgdmFsdWUgPSB0Lm5vaXNlKHggKiAwLjA4LCB5ICogMC4wOCwgdGltZSk7CgkJCWNvbnN0IGluZGV4ID0gTWF0aC5mbG9vcih2YWx1ZSAqIChyYW1wLmxlbmd0aCAtIDEpKTsKCQkJdC5wdXNoKCk7CgkJCXQudHJhbnNsYXRlKGxlZnQgKyB4LCB0b3AgKyB5KTsKCQkJdC5jaGFyKHJhbXBbaW5kZXhdKTsKCQkJdC5jaGFyQ29sb3IoNjAgKyB2YWx1ZSAqIDE4MCwgMTUwICsgdmFsdWUgKiA5MCwgMjU1KTsKCQkJdC5wb2ludCgpOwoJCQl0LnBvcCgpOwoJCX0KCX0KfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuTk9JU0UnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBPUkdBTklDIEZJRUxEJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdOZWFyYnkgaW5wdXRzIHJldHVybiBjbG9zZSB2YWx1ZXMuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdaIGFjdHMgbGlrZSBhIHNtb290aCB0aW1lIGF4aXMuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+	seed: 'noise-field',
+});
+
+const labelLayer = t.layers.add();
+const ramp = ' .:-=+*#%@';
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(3, 8, 18);
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	const time = t.frameCount * 0.018;
+
+	for (let y = 0; y < t.grid.rows; y += 1) {
+		for (let x = 0; x < t.grid.cols; x += 1) {
+			const value = t.noise(x * 0.08, y * 0.08, time);
+			const index = Math.floor(value * (ramp.length - 1));
+			t.push();
+			t.translate(left + x, top + y);
+			t.char(ramp[index]);
+			t.charColor(60 + value * 180, 150 + value * 90, 255);
+			t.point();
+			t.pop();
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODIFIER.NOISE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: ORGANIC FIELD', x, y++, 100, 220, 255);
+	drawText('Nearby inputs return close values.', x, y++, 140, 160, 190);
+	drawText('Z acts like a smooth time axis.', x, y++, 140, 160, 190);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

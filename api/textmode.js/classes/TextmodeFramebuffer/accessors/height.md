@@ -7,7 +7,7 @@ category: Accessors
 api: true
 owner: TextmodeFramebuffer
 kind: Accessor
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [TextmodeFramebuffer](../../TextmodeFramebuffer.md) / height
@@ -28,5 +28,74 @@ Height of the framebuffer in pixels.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="height" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCBmYjsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMDAsIGcgPSAyMjAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC50cmFuc2xhdGUoeCwgeSk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCWZvciAobGV0IGkgPSAwOyBpIDwgdGV4dC5sZW5ndGg7IGkrKykgewoJCXQuY2hhcih0ZXh0W2ldKTsKCQl0LnBvaW50KCk7CgkJdC50cmFuc2xhdGUoMSwgMCk7Cgl9Cgl0LnBvcCgpOwp9Cgp0LnNldHVwKCgpID0-IHsKCWZiID0gdC5jcmVhdGVGcmFtZWJ1ZmZlcih7IHdpZHRoOiAxNCwgaGVpZ2h0OiAxMiB9KTsKfSk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDgsIDEwLCAxOCk7CgoJLy8gRHJhdyB2ZXJ0aWNhbCBydWxlciB0aWNrcyBpbnNpZGUgdGhlIGZyYW1lYnVmZmVyIHNob3dpbmcgaGVpZ2h0IGluIGNlbGxzCglmYi5iZWdpbigpOwoJdC5jbGVhcigpOwoJdC5iYWNrZ3JvdW5kKDI0LCAxMiwgMTgpOwoJdC5jaGFyQ29sb3IoMjU1LCAxMDAsIDE1MCk7Cgl0LmNoYXIoJy0nKTsKCXQucmVjdChmYi53aWR0aCwgZmIuaGVpZ2h0KTsKCWZvciAobGV0IHJvdyA9IDA7IHJvdyA8IGZiLmhlaWdodDsgcm93KyspIHsKCQljb25zdCBjeCA9IC1NYXRoLmZsb29yKGZiLndpZHRoIC8gMik7CgkJY29uc3QgY3kgPSAtTWF0aC5mbG9vcihmYi5oZWlnaHQgLyAyKSArIHJvdzsKCQlkcmF3VGV4dChgJHtyb3d9YCwgY3ggKyAxLCBjeSwgMjU1LCAyMjAsIDE0MCk7Cgl9CglmYi5lbmQoKTsKCgl0LnB1c2goKTsKCXQudHJhbnNsYXRlKDAsIDMpOwoJdC5pbWFnZShmYik7Cgl0LnBvcCgpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CgoJZHJhd1RleHQoJ0hFSUdIVCcsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnRnJhbWVidWZmZXIgaGVpZ2h0IGluIGNlbGxzIChyb3dzKS4nLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoKCWNvbnN0IHZhbCA9IGZiID8gZmIuaGVpZ2h0IDogMDsKCWRyYXdUZXh0KGBGcmFtZWJ1ZmZlciBIZWlnaHQ6ICR7dmFsfSBjZWxsc2AsIHgsIHkrKywgMTIwLCAyNTUsIDE4MCk7CglkcmF3VGV4dChgQ2FudmFzICAgOiAke3QuaGVpZ2h0fSBweGAsIHgsIHkrKywgMTYwLCAxNjAsIDE2MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let fb;
+
+function drawText(text, x, y, r = 200, g = 220, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+t.setup(() => {
+	fb = t.createFramebuffer({ width: 14, height: 12 });
+});
+
+t.draw(() => {
+	t.background(8, 10, 18);
+
+	// Draw vertical ruler ticks inside the framebuffer showing height in cells
+	fb.begin();
+	t.clear();
+	t.background(24, 12, 18);
+	t.charColor(255, 100, 150);
+	t.char('-');
+	t.rect(fb.width, fb.height);
+	for (let row = 0; row < fb.height; row++) {
+		const cx = -Math.floor(fb.width / 2);
+		const cy = -Math.floor(fb.height / 2) + row;
+		drawText(`${row}`, cx + 1, cy, 255, 220, 140);
+	}
+	fb.end();
+
+	t.push();
+	t.translate(0, 3);
+	t.image(fb);
+	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('HEIGHT', x, y++, 100, 255, 140);
+	drawText('--------------------------------', x, y++, 80, 100, 150);
+	drawText('Framebuffer height in cells (rows).', x, y++, 100, 220, 255);
+	drawText('--------------------------------', x, y++, 80, 100, 150);
+
+	const val = fb ? fb.height : 0;
+	drawText(`Framebuffer Height: ${val} cells`, x, y++, 120, 255, 180);
+	drawText(`Canvas   : ${t.height} px`, x, y++, 160, 160, 160);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

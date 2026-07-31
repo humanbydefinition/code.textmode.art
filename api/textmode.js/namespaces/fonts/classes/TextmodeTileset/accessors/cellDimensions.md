@@ -8,7 +8,7 @@ api: true
 owner: TextmodeTileset
 namespace: fonts
 kind: Accessor
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../../../index.md) / [fonts](../../../index.md) / [TextmodeTileset](../../TextmodeTileset.md) / cellDimensions
@@ -34,7 +34,93 @@ Effective tile cell dimensions used by the layer grid.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="cellDimensions" encoded-code="Y29uc3QgVDY0X1VSTCA9ICdodHRwczovL2xpdHRsZWJpdHNwYWNlLmNvbS9yZXNvdXJjZXMvZm9udHMvVDY0LnBuZyc7CmNvbnN0IFRJTEVfQ09MVU1OUyA9IDE2Owpjb25zdCBUSUxFX1JPV1MgPSAxNjsKY29uc3QgVElMRV9DT1VOVCA9IFRJTEVfQ09MVU1OUyAqIFRJTEVfUk9XUzsKCmNvbnN0IHQgPSB0ZXh0bW9kZS5jcmVhdGUoewoJd2lkdGg6IHdpbmRvdy5pbm5lcldpZHRoLAoJaGVpZ2h0OiB3aW5kb3cuaW5uZXJIZWlnaHQsCglmb250U2l6ZTogMTYsCn0pOwoKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKbGV0IHRpbGVzZXQgPSBudWxsOwoKZnVuY3Rpb24gdGlsZXNldE9wdGlvbnMoKSB7CglyZXR1cm4gewoJCXNvdXJjZTogVDY0X1VSTCwKCQljb2x1bW5zOiBUSUxFX0NPTFVNTlMsCgkJcm93czogVElMRV9ST1dTLAoJCWNvdW50OiBUSUxFX0NPVU5ULAoJCWZvbnRTaXplOiAxNiwKCX07Cn0KCnQuc2V0dXAoYXN5bmMgKCkgPT4gewoJdGlsZXNldCA9IGF3YWl0IHQubG9hZFRpbGVzZXQodGlsZXNldE9wdGlvbnMoKSk7Cn0pOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDUsIDcsIDE4KTsKCWlmICghdGlsZXNldCkgcmV0dXJuOwoJY29uc3Qgc3RhcnRYID0gLU1hdGguZmxvb3IoVElMRV9DT0xVTU5TIC8gMik7Cgljb25zdCBzdGFydFkgPSAtTWF0aC5mbG9vcihUSUxFX1JPV1MgLyAyKTsKCWZvciAobGV0IGkgPSAwOyBpIDwgVElMRV9DT1VOVDsgaSsrKSB7CgkJdC5wdXNoKCk7CgkJdC50cmFuc2xhdGUoc3RhcnRYICsgKGkgJSBUSUxFX0NPTFVNTlMpLCBzdGFydFkgKyBNYXRoLmZsb29yKGkgLyBUSUxFX0NPTFVNTlMpKTsKCQl0LmNoYXIoaSk7CgkJdC5jaGFyQ29sb3IoMTIwICsgaSAqIDYsIDIyMCwgMjU1IC0gaSAqIDcpOwoJCXQucG9pbnQoKTsKCQl0LnBvcCgpOwoJfQp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CgoJZHJhd1RleHQoJ1RFWFRNT0RFVElMRVNFVC5DRUxMRElNRU5TSU9OUycsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IEdMWVBIIEFUTEFTIERBVEEnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ1Q2NCB3ZWIgdGlsZXNldCBmZWVkcyBnbHlwaHMuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7Cgljb25zdCBkID0gdGlsZXNldC5jZWxsRGltZW5zaW9uczsKCWRyYXdUZXh0KGBDRUxMOiAke2Qud2lkdGh9eCR7ZC5oZWlnaHR9YCwgeCwgeSsrLCAxNDAsIDI1NSwgMTgwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const T64_URL = 'https://littlebitspace.com/resources/fonts/T64.png';
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+const RAMP = ' .:-+*#@';
+let tileset = null;
+
+t.setup(async () => {
+	tileset = await t.loadTileset({ source: T64_URL, columns: 16, rows: 16, count: 256, fontSize: 16 });
+});
+
+t.draw(() => {
+	t.background(8, 18, 38);
+	if (!tileset) return;
+
+	const dims = tileset.cellDimensions;
+	const hw = Math.floor(t.grid.cols / 2);
+	const hh = Math.floor(t.grid.rows / 2);
+	const tm = t.frameCount * 0.05;
+
+	const ratio = dims.width / (dims.height || 1);
+
+	for (let y = -hh; y <= hh; y++) {
+		for (let x = -hw; x <= hw; x++) {
+			const dist = Math.abs(x * ratio) + Math.abs(y);
+			const ring = (Math.sin(dist * 0.4 - tm) + 1) * 0.5;
+
+			const isCross = x === 0 || y === 0;
+
+			if (ring > 0.45 || isCross) {
+				const val = isCross ? 1 : (ring - 0.45) / 0.55;
+				const idx = Math.floor(val * (RAMP.length - 1));
+
+				t.push();
+				t.translate(x, y);
+				t.charColor(
+					isCross ? 0 : Math.floor(100 + val * 40),
+					isCross ? 230 : Math.floor(200 + val * 55),
+					isCross ? 255 : Math.floor(60 + val * 20)
+				);
+				t.cellColor(4, Math.floor(14 + val * 20), Math.floor(30 + val * 20));
+				t.char(RAMP[idx]);
+				t.point();
+				t.pop();
+			}
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	if (!tileset) return;
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const d = tileset.cellDimensions;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODETILESET.CELLDIMENSIONS', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: OPTICAL CALIBRATION RETICLE', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Measures tile width & height in px.', x, y++);
+	t.print('Scales reticle aspect ratio.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 80);
+	t.print(`TILE DIMS: ${d.width}x${d.height} PX`, x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 
 Combined glyph cell dimensions in pixels.
 

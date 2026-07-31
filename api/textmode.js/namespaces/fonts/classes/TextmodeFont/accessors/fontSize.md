@@ -8,7 +8,7 @@ api: true
 owner: TextmodeFont
 namespace: fonts
 kind: Accessor
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../../../index.md) / [fonts](../../../index.md) / [TextmodeFont](../../TextmodeFont.md) / fontSize
@@ -29,5 +29,74 @@ Font size used for the glyph atlas.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="fontSize" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDEyLCAxOCk7Cgljb25zdCBodyA9IE1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IGhoID0gTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJY29uc3QgdG0gPSB0LmZyYW1lQ291bnQgKiAwLjAyOwoJY29uc3QgZ2x5cGhzID0gdC5mb250LmNoYXJhY3RlcnM7CgoJZm9yIChsZXQgeSA9IC1oaDsgeSA8PSBoaDsgeSsrKSB7CgkJZm9yIChsZXQgeCA9IC1odzsgeCA8PSBodzsgeCsrKSB7CgkJCWNvbnN0IGRpc3QgPSBNYXRoLmh5cG90KHgsIHkpOwoJCQljb25zdCBzY2FsZVJpbmcgPSBNYXRoLmZsb29yKGRpc3QgKiAwLjM1IC0gdG0gKiAyKSAlIDU7CgkJCWNvbnN0IG5vcm0gPSBNYXRoLmFicyhzY2FsZVJpbmcpIC8gNTsKCgkJCWNvbnN0IGdJZHggPSBNYXRoLmZsb29yKE1hdGguYWJzKGRpc3QgKiAwLjcgLSB0bSAqIDEwICsgTWF0aC5zaW4oeCAqIDAuMykgKiA0KSAlIChnbHlwaHMubGVuZ3RoIHx8IDEpKTsKCQkJY29uc3QgZ2x5cGhPYmogPSBnbHlwaHNbZ0lkeF0gfHwgZ2x5cGhzWzBdOwoJCQljb25zdCBjaGFyID0gZ2x5cGhPYmogPyBnbHlwaE9iai5jaGFyYWN0ZXIgOiAnLic7CgoJCQl0LnB1c2goKTsKCQkJdC50cmFuc2xhdGUoeCwgeSk7CgkJCXQuY2hhckNvbG9yKE1hdGguZmxvb3IoMjQwIC0gbm9ybSAqIDE1MCksIE1hdGguZmxvb3IoMTYwICsgbm9ybSAqIDg1KSwgTWF0aC5mbG9vcig2MCArIG5vcm0gKiAxODApKTsKCQkJdC5jZWxsQ29sb3IoTWF0aC5mbG9vcigxMCArIG5vcm0gKiAyMCksIE1hdGguZmxvb3IoMTggKyBub3JtICogMTUpLCBNYXRoLmZsb29yKDMwICsgbm9ybSAqIDI1KSk7CgkJCXQuY2hhcihjaGFyKTsKCQkJdC5wb2ludCgpOwoJCQl0LnBvcCgpOwoJCX0KCX0KfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWNvbnN0IHN6ID0gdC5mb250LmZvbnRTaXplOwoJY29uc3QgZGltcyA9IHQuZm9udC5tYXhHbHlwaERpbWVuc2lvbnM7CgoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcigxMjAsIDI0MCwgMTgwKTsKCXQucHJpbnQoJ1RFWFRNT0RFRk9OVC5GT05UU0laRScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcig3MCwgMTAwLCAxNDApOwoJdC5wcmludCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMjEwLCAyNTUpOwoJdC5wcmludCgnQ09OQ0VQVDogRk9OVCBTSVpFIE1FVFJJQyBBQ0NFU1NPUicsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDE2MCwgMTkwKTsKCXQucHJpbnQoJ0NvbmZpZ3VyZXMgZm9udCBhdGxhcyByYXN0ZXIgc2l6ZS4nLCB4LCB5KyspOwoJdC5wcmludCgnRGV0ZXJtaW5lcyBwaXhlbCBnbHlwaCByZXNvbHV0aW9uLicsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcig3MCwgMTAwLCAxNDApOwoJdC5wcmludCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMjU1LCAyMDApOwoJdC5wcmludChgRk9OVCBTSVpFOiAke3N6fSBQWGAsIHgsIHkrKyk7Cgl0LnByaW50KGBDRUxMIERJTVM6ICR7ZGltcy53aWR0aH0geCAke2RpbXMuaGVpZ2h0fSBQWGAsIHgsIHkrKyk7Cgl0LnBvcCgpOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+t.draw(() => {
+	t.background(6, 12, 18);
+	const hw = Math.floor(t.grid.cols / 2);
+	const hh = Math.floor(t.grid.rows / 2);
+	const tm = t.frameCount * 0.02;
+	const glyphs = t.font.characters;
+
+	for (let y = -hh; y <= hh; y++) {
+		for (let x = -hw; x <= hw; x++) {
+			const dist = Math.hypot(x, y);
+			const scaleRing = Math.floor(dist * 0.35 - tm * 2) % 5;
+			const norm = Math.abs(scaleRing) / 5;
+
+			const gIdx = Math.floor(Math.abs(dist * 0.7 - tm * 10 + Math.sin(x * 0.3) * 4) % (glyphs.length || 1));
+			const glyphObj = glyphs[gIdx] || glyphs[0];
+			const char = glyphObj ? glyphObj.character : '.';
+
+			t.push();
+			t.translate(x, y);
+			t.charColor(Math.floor(240 - norm * 150), Math.floor(160 + norm * 85), Math.floor(60 + norm * 180));
+			t.cellColor(Math.floor(10 + norm * 20), Math.floor(18 + norm * 15), Math.floor(30 + norm * 25));
+			t.char(char);
+			t.point();
+			t.pop();
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const sz = t.font.fontSize;
+	const dims = t.font.maxGlyphDimensions;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODEFONT.FONTSIZE', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: FONT SIZE METRIC ACCESSOR', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Configures font atlas raster size.', x, y++);
+	t.print('Determines pixel glyph resolution.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 200);
+	t.print(`FONT SIZE: ${sz} PX`, x, y++);
+	t.print(`CELL DIMS: ${dims.width} x ${dims.height} PX`, x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

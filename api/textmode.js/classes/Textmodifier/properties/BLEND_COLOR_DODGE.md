@@ -7,7 +7,7 @@ category: Properties
 api: true
 owner: Textmodifier
 kind: Property
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / BLEND\_COLOR\_DODGE
@@ -26,4 +26,79 @@ should push quickly toward white.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="BLEND_COLOR_DODGE" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBtb2RlID0gdC5CTEVORF9DT0xPUl9ET0RHRTsKY29uc3QgbW9kZU5hbWUgPSAnQkxFTkRfQ09MT1JfRE9ER0UnOwpjb25zdCBhY2NlbnQgPSBbMjU1LCAyNDUsIDE3MF07CmNvbnN0IGJhc2UgPSBbNDIsIDgwLCAxMzBdOwpjb25zdCBibGVuZExheWVyID0gdC5sYXllcnMuYWRkKHsgYmxlbmRNb2RlOiBtb2RlLCBvcGFjaXR5OiAwLjcyIH0pOwpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCnQuZHJhdygoKSA9PiB7Cgljb25zdCB0aW1lID0gdC5mcmFtZUNvdW50ICogMC4wMzg7Cgl0LmJhY2tncm91bmQoNCwgMTAsIDI0KTsKCWNvbnN0IHsgY29scywgcm93cyB9ID0gdC5ncmlkOwoJZm9yIChsZXQgeSA9IC1NYXRoLmZsb29yKHJvd3MgLyAyKTsgeSA8IHJvd3MgLyAyOyB5ICs9IDMpIHsKCQlmb3IgKGxldCB4ID0gLU1hdGguZmxvb3IoY29scyAvIDIpOyB4IDwgY29scyAvIDI7IHggKz0gMykgewoJCQljb25zdCB3YXZlID0gTWF0aC5zaW4oeCAqIDAuMTUgKyB5ICogMC4xNCArIHRpbWUpOwoJCQl0LnB1c2goKTsKCQkJdC50cmFuc2xhdGUoeCwgeSk7CgkJCXQuY2hhcih3YXZlID4gMCA_ICcrJyA6ICcuJyk7CgkJCXQuY2hhckNvbG9yKGJhc2VbMF0sIGJhc2VbMV0gKyB3YXZlICogMzAsIGJhc2VbMl0pOwoJCQl0LmNlbGxDb2xvcigzLCA4LCAyMCk7CgkJCXQucmVjdCgyLCAyKTsKCQkJdC5wb3AoKTsKCQl9Cgl9CglibGVuZExheWVyLmRyYXcoKCkgPT4gewoJCXQuY2xlYXIoKTsKCQlmb3IgKGxldCByaW5nID0gMDsgcmluZyA8IDQ7IHJpbmcrKykgewoJCQlmb3IgKGxldCBpID0gMDsgaSA8IDE4OyBpKyspIHsKCQkJCWNvbnN0IGFuZ2xlID0gaSAqIDIwICsgcmluZyAqIDE5ICsgdC5mcmFtZUNvdW50ICogMS44OwoJCQkJY29uc3QgcmFkaXVzID0gNCArIHJpbmcgKiA0ICsgTWF0aC5jb3ModGltZSAqIDIgKyBpKSAqIDI7CgkJCQl0LnB1c2goKTsKCQkJCXQucm90YXRlWihhbmdsZSk7CgkJCQl0LnRyYW5zbGF0ZShyYWRpdXMsIE1hdGguc2luKHRpbWUgKyBpKSAqIDIpOwoJCQkJdC5jaGFyKHJpbmcgJSAyID8gJyonIDogJ0AnKTsKCQkJCXQuY2hhckNvbG9yKC4uLmFjY2VudCk7CgkJCQl0LmNlbGxDb2xvcig0NSArIHJpbmcgKiAyMiwgNDIgKyByaW5nICogMTYsIDE2KTsKCQkJCXQucmVjdCgzLCAzKTsKCQkJCXQucG9wKCk7CgkJCX0KCQl9Cgl9KTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5CTEVORF9DT0xPUl9ET0RHRScsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IERPREdFIEZMQVJFUycsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnU21hbGwgbWFya3MgYmxvb20gZmFzdC4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJ0hpZ2hsaWdodHMgcHVzaCB0byB3aGl0ZS4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KGBNT0RFOiAke21vZGVOYW1lfWAsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const mode = t.BLEND_COLOR_DODGE;
+const modeName = 'BLEND_COLOR_DODGE';
+const accent = [255, 245, 170];
+const base = [42, 80, 130];
+const blendLayer = t.layers.add({ blendMode: mode, opacity: 0.72 });
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	const time = t.frameCount * 0.038;
+	t.background(4, 10, 24);
+	const { cols, rows } = t.grid;
+	for (let y = -Math.floor(rows / 2); y < rows / 2; y += 3) {
+		for (let x = -Math.floor(cols / 2); x < cols / 2; x += 3) {
+			const wave = Math.sin(x * 0.15 + y * 0.14 + time);
+			t.push();
+			t.translate(x, y);
+			t.char(wave > 0 ? '+' : '.');
+			t.charColor(base[0], base[1] + wave * 30, base[2]);
+			t.cellColor(3, 8, 20);
+			t.rect(2, 2);
+			t.pop();
+		}
+	}
+	blendLayer.draw(() => {
+		t.clear();
+		for (let ring = 0; ring < 4; ring++) {
+			for (let i = 0; i < 18; i++) {
+				const angle = i * 20 + ring * 19 + t.frameCount * 1.8;
+				const radius = 4 + ring * 4 + Math.cos(time * 2 + i) * 2;
+				t.push();
+				t.rotateZ(angle);
+				t.translate(radius, Math.sin(time + i) * 2);
+				t.char(ring % 2 ? '*' : '@');
+				t.charColor(...accent);
+				t.cellColor(45 + ring * 22, 42 + ring * 16, 16);
+				t.rect(3, 3);
+				t.pop();
+			}
+		}
+	});
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.BLEND_COLOR_DODGE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: DODGE FLARES', x, y++, 100, 220, 255);
+	drawText('Small marks bloom fast.', x, y++, 140, 160, 190);
+	drawText('Highlights push to white.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`MODE: ${modeName}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```

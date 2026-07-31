@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / resetMatrix
@@ -28,5 +28,57 @@ This clears translation, rotation, and scale state for subsequent draw calls.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="resetMatrix" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IFJBTVAgPSAnIC46LT0rKiMlQCc7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDEwLCAyNCk7Cgljb25zdCBjb2xzID0gdC5ncmlkLmNvbHMsIHJvd3MgPSB0LmdyaWQucm93czsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcigoY29scyAtIDEpIC8gMiksIHJpZ2h0ID0gbGVmdCArIGNvbHMgLSAxOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3Iocm93cyAvIDIpLCBib3R0b20gPSB0b3AgKyByb3dzIC0gMTsKCWNvbnN0IHRtID0gdC5mcmFtZUNvdW50ICogMC4wNTsKCgl0LnB1c2goKTsKCXQucm90YXRlWih0bSAqIDAuNik7Cgl0LnJvdGF0ZVgodG0gKiAwLjQpOwoJdC5zY2FsZSgxLjIsIDEuMiwgMS4yKTsKCglmb3IgKGxldCB5ID0gdG9wOyB5IDw9IGJvdHRvbTsgeSArPSAzKSB7CgkJZm9yIChsZXQgeCA9IGxlZnQ7IHggPD0gcmlnaHQ7IHggKz0gMykgewoJCQljb25zdCB3YXZlID0gTWF0aC5zaW4oeCAqIDAuMiArIHkgKiAwLjIgKyB0bSk7CgkJCWNvbnN0IG5vcm0gPSAod2F2ZSArIDEpICogMC41OwoJCQljb25zdCBjaGFyS2V5ID0gUkFNUFtNYXRoLmZsb29yKG5vcm0gKiAoUkFNUC5sZW5ndGggLSAxKSldOwoKCQkJdC5wdXNoKCk7CgkJCXQudHJhbnNsYXRlKHgsIHkpOwoJCQl0LmNoYXJDb2xvcihNYXRoLmZsb29yKDYwICsgbm9ybSAqIDE4MCksIE1hdGguZmxvb3IoMTAwICsgbm9ybSAqIDE0MCksIE1hdGguZmxvb3IoMjU1IC0gbm9ybSAqIDEwMCkpOwoJCQl0LmNlbGxDb2xvcihNYXRoLmZsb29yKDYgKyBub3JtICogMTIpLCBNYXRoLmZsb29yKDEwICsgbm9ybSAqIDE0KSwgTWF0aC5mbG9vcigyNCArIG5vcm0gKiAxOCkpOwoJCQl0LmNoYXIoY2hhcktleSk7CgkJCXQucG9pbnQoKTsKCQkJdC5wb3AoKTsKCQl9Cgl9Cgl0LnBvcCgpOwoKCXQucmVzZXRNYXRyaXgoKTsKCglmb3IgKGxldCB4ID0gbGVmdDsgeCA8PSByaWdodDsgeCsrKSB7CgkJaWYgKHggJSAyID09PSAwKSB7CgkJCXQucHVzaCgpOwoJCQl0LnRyYW5zbGF0ZSh4LCAwKTsKCQkJdC5jaGFyQ29sb3IoMjU1LCAyMDAsIDEwMCk7CgkJCXQuY2VsbENvbG9yKDQwLCAyNCwgOCk7CgkJCXQuY2hhcignLScpOwoJCQl0LnBvaW50KCk7CgkJCXQucG9wKCk7CgkJfQoJfQoKCWZvciAobGV0IHkgPSB0b3A7IHkgPD0gYm90dG9tOyB5KyspIHsKCQlpZiAoeSAlIDIgPT09IDApIHsKCQkJdC5wdXNoKCk7CgkJCXQudHJhbnNsYXRlKDAsIHkpOwoJCQl0LmNoYXJDb2xvcigyNTUsIDIwMCwgMTAwKTsKCQkJdC5jZWxsQ29sb3IoNDAsIDI0LCA4KTsKCQkJdC5jaGFyKCd8Jyk7CgkJCXQucG9pbnQoKTsKCQkJdC5wb3AoKTsKCQl9Cgl9Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpLCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzLCB4ID0gbGVmdCArIDM7CgoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcigxMjAsIDI0MCwgMTgwKTsKCXQucHJpbnQoJ1RFWFRNT0RJRklFUi5SRVNFVE1BVFJJWCcsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcig3MCwgMTAwLCAxNDApOwoJdC5wcmludCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMjEwLCAyNTUpOwoJdC5wcmludCgnQ09OQ0VQVDogSFlQRVItU1BBQ0UgUExBU01BIFJFVElDTEUnLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAxNjAsIDE5MCk7Cgl0LnByaW50KCdyZXNldE1hdHJpeCgpIGNsZWFycyBjdXJyZW50IG1hdHJpeCBzdGFjaycsIHgsIHkrKyk7Cgl0LnByaW50KCdhbmQgcmVzZXRzIG9yaWdpbiB0byBpZGVudGl0eSBtYXRyaXguJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDcwLCAxMDAsIDE0MCk7Cgl0LnByaW50KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAyNTUsIDIwMCk7Cgl0LnByaW50KCdNQVRSSVg6IFJFU0VUIFRPIElERU5USVRZIFJFVElDTEUnLCB4LCB5KyspOwoJdC5wb3AoKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(6, 10, 22);
+	const time = t.frameCount * 0.04;
+	t.push();
+	t.rotateZ(time * 40);
+	t.translate(12, 0);
+	t.charColor(120, 220, 255);
+	t.char('#');
+	t.rect(6, 3);
+	t.resetMatrix();
+	t.charColor(255, 210, 120);
+	t.translate(8, 3);
+	t.char('+');
+	t.rect(5, 1);
+	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.RESETMATRIX', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: CLEAR TRANSFORM', x, y++, 100, 220, 255);
+	drawText('resetMatrix drops transforms.', x, y++, 140, 160, 190);
+	drawText('Yellow bar uses fresh matrix.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('API: t.resetMatrix()', x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

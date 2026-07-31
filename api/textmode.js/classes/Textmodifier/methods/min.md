@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / min
@@ -36,7 +36,68 @@ Smallest value.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="min" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCBsb3cgPSAwOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDQsIDgsIDE3KTsKCWNvbnN0IHZhbHVlcyA9IFtdOwoJZm9yIChsZXQgaSA9IDA7IGkgPCAxNTsgaSsrKSB7CgkJdmFsdWVzLnB1c2godC5yb3VuZCh0LnNpbih0LmZyYW1lQ291bnQgKiAwLjAzNSArIGkgKiAwLjcpICogNyArIHQuY29zKGkpICogMykpOwoJfQoJbG93ID0gdC5taW4odmFsdWVzKTsKCglmb3IgKGxldCBpID0gMDsgaSA8IHZhbHVlcy5sZW5ndGg7IGkrKykgewoJCWNvbnN0IHggPSAtMjEgKyBpICogMzsKCQljb25zdCBpc0xvdyA9IHZhbHVlc1tpXSA9PT0gbG93OwoJCXQucHVzaCgpOwoJCXQudHJhbnNsYXRlKHgsIDYgLSB2YWx1ZXNbaV0gLyAyKTsKCQl0LmNoYXIoaXNMb3cgPyAnQCcgOiAnIycpOwoJCXQuY2hhckNvbG9yKGlzTG93ID8gMjU1IDogODAsIGlzTG93ID8gMjE1IDogMTQwLCBpc0xvdyA_IDExMCA6IDIzMCk7CgkJdC5yZWN0KDEsIHQuYWJzKHZhbHVlc1tpXSkgKyAxKTsKCQl0LnBvcCgpOwoJfQoKCXQuY2hhcignLScpOwoJdC5jaGFyQ29sb3IoMjU1LCAxNjAsIDExMCk7Cgl0LmxpbmUoLTIzLCA2IC0gbG93LCAyMywgNiAtIGxvdyk7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtdC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLXQuZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuTUlOJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogTE9XRVIgRU5WRUxPUEUnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ21pbihhcnJheSkgZmluZHMgdGhlIGxvd2VzdCBiYXIuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdUaGUgb3JhbmdlIGxpbmUgZm9sbG93cyBpdC4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KGBNSU46ICR7bG93fWAsIHgsIHkrKywgMjIwLCAyMzAsIDI1NSk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let low = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(4, 8, 17);
+	const values = [];
+	for (let i = 0; i < 15; i++) {
+		values.push(t.round(t.sin(t.frameCount * 0.035 + i * 0.7) * 7 + t.cos(i) * 3));
+	}
+	low = t.min(values);
+
+	for (let i = 0; i < values.length; i++) {
+		const x = -21 + i * 3;
+		const isLow = values[i] === low;
+		t.push();
+		t.translate(x, 6 - values[i] / 2);
+		t.char(isLow ? '@' : '#');
+		t.charColor(isLow ? 255 : 80, isLow ? 215 : 140, isLow ? 110 : 230);
+		t.rect(1, t.abs(values[i]) + 1);
+		t.pop();
+	}
+
+	t.char('-');
+	t.charColor(255, 160, 110);
+	t.line(-23, 6 - low, 23, 6 - low);
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -t.floor(t.grid.cols / 2);
+	const top = -t.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.MIN', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: LOWER ENVELOPE', x, y++, 100, 220, 255);
+	drawText('min(array) finds the lowest bar.', x, y++, 140, 160, 190);
+	drawText('The orange line follows it.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`MIN: ${low}`, x, y++, 220, 230, 255);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 
 ## Call Signature
 
@@ -60,5 +121,65 @@ Smallest value.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="min" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCBsb3cgPSAwOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDQsIDgsIDE3KTsKCWNvbnN0IHZhbHVlcyA9IFtdOwoJZm9yIChsZXQgaSA9IDA7IGkgPCAxNTsgaSsrKSB7CgkJdmFsdWVzLnB1c2godC5yb3VuZCh0LnNpbih0LmZyYW1lQ291bnQgKiAwLjAzNSArIGkgKiAwLjcpICogNyArIHQuY29zKGkpICogMykpOwoJfQoJbG93ID0gdC5taW4odmFsdWVzKTsKCglmb3IgKGxldCBpID0gMDsgaSA8IHZhbHVlcy5sZW5ndGg7IGkrKykgewoJCWNvbnN0IHggPSAtMjEgKyBpICogMzsKCQljb25zdCBpc0xvdyA9IHZhbHVlc1tpXSA9PT0gbG93OwoJCXQucHVzaCgpOwoJCXQudHJhbnNsYXRlKHgsIDYgLSB2YWx1ZXNbaV0gLyAyKTsKCQl0LmNoYXIoaXNMb3cgPyAnQCcgOiAnIycpOwoJCXQuY2hhckNvbG9yKGlzTG93ID8gMjU1IDogODAsIGlzTG93ID8gMjE1IDogMTQwLCBpc0xvdyA_IDExMCA6IDIzMCk7CgkJdC5yZWN0KDEsIHQuYWJzKHZhbHVlc1tpXSkgKyAxKTsKCQl0LnBvcCgpOwoJfQoKCXQuY2hhcignLScpOwoJdC5jaGFyQ29sb3IoMjU1LCAxNjAsIDExMCk7Cgl0LmxpbmUoLTIzLCA2IC0gbG93LCAyMywgNiAtIGxvdyk7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtdC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLXQuZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuTUlOJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogTE9XRVIgRU5WRUxPUEUnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ21pbihhcnJheSkgZmluZHMgdGhlIGxvd2VzdCBiYXIuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdUaGUgb3JhbmdlIGxpbmUgZm9sbG93cyBpdC4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KGBNSU46ICR7bG93fWAsIHgsIHkrKywgMjIwLCAyMzAsIDI1NSk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let low = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(4, 8, 17);
+	const values = [];
+	for (let i = 0; i < 15; i++) {
+		values.push(t.round(t.sin(t.frameCount * 0.035 + i * 0.7) * 7 + t.cos(i) * 3));
+	}
+	low = t.min(values);
+
+	for (let i = 0; i < values.length; i++) {
+		const x = -21 + i * 3;
+		const isLow = values[i] === low;
+		t.push();
+		t.translate(x, 6 - values[i] / 2);
+		t.char(isLow ? '@' : '#');
+		t.charColor(isLow ? 255 : 80, isLow ? 215 : 140, isLow ? 110 : 230);
+		t.rect(1, t.abs(values[i]) + 1);
+		t.pop();
+	}
+
+	t.char('-');
+	t.charColor(255, 160, 110);
+	t.line(-23, 6 - low, 23, 6 - low);
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -t.floor(t.grid.cols / 2);
+	const top = -t.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.MIN', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: LOWER ENVELOPE', x, y++, 100, 220, 255);
+	drawText('min(array) finds the lowest bar.', x, y++, 140, 160, 190);
+	drawText('The orange line follows it.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`MIN: ${low}`, x, y++, 220, 230, 255);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / rotateX
@@ -36,5 +36,58 @@ Current X-axis rotation in degrees when called without arguments.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="rotateX" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IFJBTVAgPSAnIC46LT0rKiMlQCc7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDEwLCAyNCk7Cgljb25zdCBjb2xzID0gdC5ncmlkLmNvbHMsIHJvd3MgPSB0LmdyaWQucm93czsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcigoY29scyAtIDEpIC8gMiksIHJpZ2h0ID0gbGVmdCArIGNvbHMgLSAxOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3Iocm93cyAvIDIpLCBib3R0b20gPSB0b3AgKyByb3dzIC0gMTsKCWNvbnN0IHRtID0gdC5mcmFtZUNvdW50ICogMC4wNDsKCglmb3IgKGxldCB5ID0gdG9wOyB5IDw9IGJvdHRvbTsgeSsrKSB7CgkJZm9yIChsZXQgeCA9IGxlZnQ7IHggPD0gcmlnaHQ7IHgrKykgewoJCQljb25zdCBlbGV2YXRpb24gPSBNYXRoLnNpbih4ICogMC4yICsgdG0pICogTWF0aC5jb3MoeSAqIDAuMiAtIHRtICogMS41KTsKCQkJY29uc3Qgbm9ybSA9IChlbGV2YXRpb24gKyAxKSAqIDAuNTsKCQkJY29uc3QgY2hhcktleSA9IFJBTVBbTWF0aC5mbG9vcihub3JtICogKFJBTVAubGVuZ3RoIC0gMSkpXTsKCgkJCXQucHVzaCgpOwoJCQl0LnJvdGF0ZVgoTWF0aC5zaW4odG0gKiAwLjYpICogMC42KTsKCQkJdC50cmFuc2xhdGUoeCwgeSwgZWxldmF0aW9uICogNCk7CgkJCXQuY2hhckNvbG9yKE1hdGguZmxvb3IoNjAgKyBub3JtICogMTgwKSwgTWF0aC5mbG9vcigxNjAgKyBub3JtICogOTUpLCBNYXRoLmZsb29yKDI1NSAtIG5vcm0gKiAxMjApKTsKCQkJdC5jZWxsQ29sb3IoTWF0aC5mbG9vcig2ICsgbm9ybSAqIDE0KSwgTWF0aC5mbG9vcigxMiArIG5vcm0gKiAxNiksIE1hdGguZmxvb3IoMjggKyBub3JtICogMjApKTsKCQkJdC5jaGFyKGNoYXJLZXkpOwoJCQl0LnBvaW50KCk7CgkJCXQucG9wKCk7CgkJfQoJfQp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKSwgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMywgeCA9IGxlZnQgKyAzOwoKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IoMTIwLCAyNDAsIDE4MCk7Cgl0LnByaW50KCdURVhUTU9ESUZJRVIuUk9UQVRFWCcsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcig3MCwgMTAwLCAxNDApOwoJdC5wcmludCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMjEwLCAyNTUpOwoJdC5wcmludCgnQ09OQ0VQVDogQ1lCRVItVEVSUkFJTiBHUklEIEhPUklaT04nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAxNjAsIDE5MCk7Cgl0LnByaW50KCdSb3RhdGVzIGNvb3JkaW5hdGUgbWF0cml4IGFyb3VuZCBYLWF4aXMnLCB4LCB5KyspOwoJdC5wcmludCgndG8gcHJvZHVjZSBwaXRjaCBwZXJzcGVjdGl2ZSBmb3Jlc2hvcnRlbmluZy4nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoNzAsIDEwMCwgMTQwKTsKCXQucHJpbnQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDI1NSwgMjAwKTsKCXQucHJpbnQoJ0FYSVM6IFJPVEFURSBYIChQSVRDSCBIT1JJWk9OKScsIHgsIHkrKyk7Cgl0LnBvcCgpOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+let value = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(6, 10, 22);
+	const time = t.frameCount * 0.04;
+	value = (time * 70) % 360;
+	t.charColor(50, 60, 90);
+	t.char('.');
+	t.line(-18, 0, 18, 0);
+	t.line(0, -10, 0, 10);
+	t.push();
+	t.rotateX(value);
+	t.char('#');
+	t.charColor(140, 255, 180);
+	t.rect(6, 4);
+	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.ROTATEX', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: X AXIS ROTATION', x, y++, 100, 220, 255);
+	drawText('Pitch changes vertical plane.', x, y++, 140, 160, 190);
+	drawText('Grid cross shows original axes.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`DEG: ${value.toFixed(1)}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

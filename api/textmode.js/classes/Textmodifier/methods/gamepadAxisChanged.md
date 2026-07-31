@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / gamepadAxisChanged
@@ -36,5 +36,61 @@ simpler choice; use this callback when you specifically want change notification
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="gamepadAxisChanged" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpsZXQgbGFzdEF4aXMgPSAnd2FpdGluZyc7Cgp0LmdhbWVwYWRBeGlzQ2hhbmdlZCgoZGF0YSkgPT4gewoJY29uc3QgbmFtZSA9IGRhdGEuc3RhbmRhcmRBeGlzTmFtZSB8fCAnYXhpcyAnICsgZGF0YS5heGlzSW5kZXg7CglsYXN0QXhpcyA9IG5hbWUgKyAnICcgKyBkYXRhLnZhbHVlLnRvRml4ZWQoMik7Cn0pOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDQsIDYsIDEyKTsKCWNvbnN0IGNvdW50ID0gTWF0aC5tYXgoMSwgdC5nYW1lcGFkcy5sZW5ndGgpOwoJZm9yIChsZXQgaSA9IDA7IGkgPCAxNjsgaSsrKSB7CgkJdC5wdXNoKCk7CgkJY29uc3QgYW5nbGUgPSAoaSAvIDE2KSAqIE1hdGguUEkgKiAyICsgdC5mcmFtZUNvdW50ICogMC4wMzsKCQl0LnRyYW5zbGF0ZShNYXRoLmNvcyhhbmdsZSkgKiAoNiArIGNvdW50KSwgTWF0aC5zaW4oYW5nbGUpICogNCk7CgkJdC5jaGFyKHQuZ2FtZXBhZHMubGVuZ3RoID8gJ0AnIDogJy4nKTsKCQl0LmNoYXJDb2xvcig4MCArIGkgKiA4LCAxODAsIDI1NSk7CgkJdC5wb2ludCgpOwoJCXQucG9wKCk7Cgl9Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLkdBTUVQQURBWElTQ0hBTkdFRCcsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IEdBTUVQQUQgSU5QVVQnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ1dvcmtzIHdpdGggYnJvd3NlciBwYWRzLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoYEFYSVM6ICR7bGFzdEF4aXN9YCwgeCwgeSsrLCAxNDAsIDI1NSwgMTgwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+let lastAxis = 'waiting';
+
+t.gamepadAxisChanged((data) => {
+	const name = data.standardAxisName || 'axis ' + data.axisIndex;
+	lastAxis = name + ' ' + data.value.toFixed(2);
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(4, 6, 12);
+	const count = Math.max(1, t.gamepads.length);
+	for (let i = 0; i < 16; i++) {
+		t.push();
+		const angle = (i / 16) * Math.PI * 2 + t.frameCount * 0.03;
+		t.translate(Math.cos(angle) * (6 + count), Math.sin(angle) * 4);
+		t.char(t.gamepads.length ? '@' : '.');
+		t.charColor(80 + i * 8, 180, 255);
+		t.point();
+		t.pop();
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODIFIER.GAMEPADAXISCHANGED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: GAMEPAD INPUT', x, y++, 100, 220, 255);
+	drawText('Works with browser pads.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`AXIS: ${lastAxis}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

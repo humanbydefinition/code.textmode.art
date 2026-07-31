@@ -8,7 +8,7 @@ api: true
 owner: TextmodeImage
 namespace: media
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../../../index.md) / [media](../../../index.md) / [TextmodeImage](../../TextmodeImage.md) / background
@@ -42,7 +42,97 @@ This instance for chaining.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="background" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCBzb3VyY2VBLCBzb3VyY2VCOwoKZnVuY3Rpb24gY3JlYXRlVHJhbnNwYXJlbnRDYW52YXMoKSB7Cgljb25zdCBjYW52YXMgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdjYW52YXMnKTsKCWNhbnZhcy53aWR0aCA9IDEyODsKCWNhbnZhcy5oZWlnaHQgPSAxMjg7Cgljb25zdCBjdHggPSBjYW52YXMuZ2V0Q29udGV4dCgnMmQnKTsKCWlmICghY3R4KSByZXR1cm4gY2FudmFzOwoKCWN0eC5jbGVhclJlY3QoMCwgMCwgMTI4LCAxMjgpOwoJY3R4LmxpbmVXaWR0aCA9IDEwOwoJY3R4LnN0cm9rZVN0eWxlID0gJyNmZmZmZmYnOwoJY3R4LnN0cm9rZVJlY3QoMjAsIDIwLCA4OCwgODgpOwoKCWN0eC5maWxsU3R5bGUgPSAnI2ZmZmZmZic7CgljdHguYmVnaW5QYXRoKCk7CgljdHguYXJjKDY0LCA2NCwgMzAsIDAsIE1hdGguUEkgKiAyKTsKCWN0eC5maWxsKCk7CgoJcmV0dXJuIGNhbnZhczsKfQoKdC5zZXR1cCgoKSA9PiB7Cgljb25zdCBjYW52YXMgPSBjcmVhdGVUcmFuc3BhcmVudENhbnZhcygpOwoKCXNvdXJjZUEgPSB0LmNyZWF0ZVRleHR1cmUoY2FudmFzKTsKCXNvdXJjZUEuY2hhcmFjdGVycygnIC46LT0rKiMlQCcpOwoKCXNvdXJjZUIgPSB0LmNyZWF0ZVRleHR1cmUoY2FudmFzKTsKCXNvdXJjZUIuY2hhcmFjdGVycygnIC46LT0rKiMlQCcpOwp9KTsKCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNiwgMTAsIDIyKTsKCWlmICghc291cmNlQSB8fCAhc291cmNlQikgcmV0dXJuOwoKCWNvbnN0IHRpbWUgPSB0LmZyYW1lQ291bnQgKiAwLjA1OwoJY29uc3QgcHVsc2UgPSAwLjUgKyAwLjUgKiBNYXRoLnNpbih0aW1lKTsKCXNvdXJjZUIuYmFja2dyb3VuZChwdWxzZSAqIDI1NSwgMTAwLCAyNTUgLSBwdWxzZSAqIDE1NSk7CgoJY29uc3QgaW1nVyA9IDIwOwoJY29uc3QgaW1nSCA9IDEyOwoKCXQucHVzaCgpOwoJdC50cmFuc2xhdGUoLTEyLCAwKTsKCXQuaW1hZ2Uoc291cmNlQSwgaW1nVywgaW1nSCk7Cgl0LnBvcCgpOwoKCXQucHVzaCgpOwoJdC50cmFuc2xhdGUoMTIsIDApOwoJdC5pbWFnZShzb3VyY2VCLCBpbWdXLCBpbWdIKTsKCXQucG9wKCk7Cn0pOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWRyYXdUZXh0KCdURVhUTU9ERVNPVVJDRS5CQUNLR1JPVU5EJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogVFJBTlNQQVJFTlQgUElYRUwgRklMTCcsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnRmlsbHMgdHJhbnNwYXJlbnQgcGl4ZWxzIGJlZm9yZSBtYXBwaW5nLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0xlZnQgIDogREVGQVVMVCBCTEFDSyBGQUxMQkFDSycsIHgsIHkrKywgMTQwLCAxODAsIDI1NSk7CglkcmF3VGV4dCgnUmlnaHQgOiBDVVNUT00gQkcgUFVMU0UgRklMTCcsIHgsIHkrKywgMjU1LCAxODAsIDEwMCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let sourceA, sourceB;
+
+function createTransparentCanvas() {
+	const canvas = document.createElement('canvas');
+	canvas.width = 128;
+	canvas.height = 128;
+	const ctx = canvas.getContext('2d');
+	if (!ctx) return canvas;
+
+	ctx.clearRect(0, 0, 128, 128);
+	ctx.lineWidth = 10;
+	ctx.strokeStyle = '#ffffff';
+	ctx.strokeRect(20, 20, 88, 88);
+
+	ctx.fillStyle = '#ffffff';
+	ctx.beginPath();
+	ctx.arc(64, 64, 30, 0, Math.PI * 2);
+	ctx.fill();
+
+	return canvas;
+}
+
+t.setup(() => {
+	const canvas = createTransparentCanvas();
+
+	sourceA = t.createTexture(canvas);
+	sourceA.characters(' .:-=+*#%@');
+
+	sourceB = t.createTexture(canvas);
+	sourceB.characters(' .:-=+*#%@');
+});
+
+t.draw(() => {
+	t.background(6, 10, 22);
+	if (!sourceA || !sourceB) return;
+
+	const time = t.frameCount * 0.05;
+	const pulse = 0.5 + 0.5 * Math.sin(time);
+	sourceB.background(pulse * 255, 100, 255 - pulse * 155);
+
+	const imgW = 20;
+	const imgH = 12;
+
+	t.push();
+	t.translate(-12, 0);
+	t.image(sourceA, imgW, imgH);
+	t.pop();
+
+	t.push();
+	t.translate(12, 0);
+	t.image(sourceB, imgW, imgH);
+	t.pop();
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODESOURCE.BACKGROUND', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: TRANSPARENT PIXEL FILL', x, y++, 100, 220, 255);
+	drawText('Fills transparent pixels before mapping.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('Left  : DEFAULT BLACK FALLBACK', x, y++, 140, 180, 255);
+	drawText('Right : CUSTOM BG PULSE FILL', x, y++, 255, 180, 100);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 
 ## Inherited from
 

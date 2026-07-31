@@ -7,7 +7,7 @@ category: Accessors
 api: true
 owner: TextmodeCamera
 kind: Accessor
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [TextmodeCamera](../../TextmodeCamera.md) / eyeZ
@@ -28,5 +28,76 @@ Current Z position of the camera eye.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="eyeZ" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCBleWVaVmFsID0gMDsKCnQuc2V0dXAoKCkgPT4gewoJdC5wZXJzcGVjdGl2ZSg1OCwgMC4xLCA0MDk2KTsKfSk7CgpmdW5jdGlvbiBkcmF3VHVubmVsKHRtKSB7Cgl0LnB1c2goKTsKCWZvciAobGV0IGkgPSAwOyBpIDwgMTA7IGkrKykgewoJCWNvbnN0IHpQb3MgPSBpICogLTEyOwoJCWNvbnN0IHMgPSAxMiArIGkgKiAyOwoJCXQucHVzaCgpOwoJCXQudHJhbnNsYXRlKDAsIDAsIHpQb3MpOwoJCXQuY2hhckNvbG9yKE1hdGguZmxvb3IoODAgKyBpICogMTUpLCBNYXRoLmZsb29yKDEyMCArIGkgKiAxMiksIE1hdGguZmxvb3IoMjU1IC0gaSAqIDE4KSk7CgkJdC5jZWxsQ29sb3IoMTIsIDgsIDI0KTsKCQl0LmNoYXIoJyMnKTsKCQl0LmJveChzLCBzLCAyKTsKCQl0LnBvcCgpOwoJfQoJdC5wb3AoKTsKfQoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCgxMCwgNiwgMjApOwoJY29uc3QgdG0gPSB0LmZyYW1lQ291bnQgKiAwLjA0OwoJY29uc3Qgem9vbVogPSBNYXRoLmNvcyh0bSkgKiA0MCArIDUwOwoKCWNvbnN0IGNhbSA9IHQuY3JlYXRlQ2FtZXJhKCkuc2V0UG9zaXRpb24oMCwgMCwgem9vbVopLmxvb2tBdCgwLCAwLCAtNDApOwoKCWV5ZVpWYWwgPSBjYW0uZXllWjsKCXQuc2V0Q2FtZXJhKGNhbSk7CglkcmF3VHVubmVsKHRtKTsKCXQucmVzZXRDYW1lcmEoKTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IoMTIwLCAyNDAsIDE4MCk7Cgl0LnByaW50KCdURVhUTU9ERUNBTUVSQS5FWUVaJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDcwLCAxMDAsIDE0MCk7Cgl0LnByaW50KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAyMTAsIDI1NSk7Cgl0LnByaW50KCdDT05DRVBUOiBERVBUSCBaT09NIFRVTk5FTCBDT1JSSURPUicsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDE2MCwgMTkwKTsKCXQucHJpbnQoJ1JlYWRzIGNhbWVyYSBleWUgWiB3b3JsZCBjb29yZGluYXRlLicsIHgsIHkrKyk7Cgl0LnByaW50KCdFeWUgem9vbXMgZm9yd2FyZC9iYWNrd2FyZCBvbiBaIGF4aXMuJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDcwLCAxMDAsIDE0MCk7Cgl0LnByaW50KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAyNTUsIDIwMCk7Cgl0LnByaW50KGBFWUUgWjogJHtleWVaVmFsLnRvRml4ZWQoMil9YCwgeCwgeSsrKTsKCXQucG9wKCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let eyeZVal = 0;
+
+t.setup(() => {
+	t.perspective(58, 0.1, 4096);
+});
+
+function drawTunnel(tm) {
+	t.push();
+	for (let i = 0; i < 10; i++) {
+		const zPos = i * -12;
+		const s = 12 + i * 2;
+		t.push();
+		t.translate(0, 0, zPos);
+		t.charColor(Math.floor(80 + i * 15), Math.floor(120 + i * 12), Math.floor(255 - i * 18));
+		t.cellColor(12, 8, 24);
+		t.char('#');
+		t.box(s, s, 2);
+		t.pop();
+	}
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(10, 6, 20);
+	const tm = t.frameCount * 0.04;
+	const zoomZ = Math.cos(tm) * 40 + 50;
+
+	const cam = t.createCamera().setPosition(0, 0, zoomZ).lookAt(0, 0, -40);
+
+	eyeZVal = cam.eyeZ;
+	t.setCamera(cam);
+	drawTunnel(tm);
+	t.resetCamera();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODECAMERA.EYEZ', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: DEPTH ZOOM TUNNEL CORRIDOR', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Reads camera eye Z world coordinate.', x, y++);
+	t.print('Eye zooms forward/backward on Z axis.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 200);
+	t.print(`EYE Z: ${eyeZVal.toFixed(2)}`, x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

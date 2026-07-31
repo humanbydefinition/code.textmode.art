@@ -8,7 +8,7 @@ api: true
 owner: TextmodeTileset
 namespace: fonts
 kind: Accessor
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../../../index.md) / [fonts](../../../index.md) / [TextmodeTileset](../../TextmodeTileset.md) / cellHeight
@@ -29,7 +29,92 @@ Effective tile cell height used by the layer grid.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="cellHeight" encoded-code="Y29uc3QgVDY0X1VSTCA9ICdodHRwczovL2xpdHRsZWJpdHNwYWNlLmNvbS9yZXNvdXJjZXMvZm9udHMvVDY0LnBuZyc7CmNvbnN0IFRJTEVfQ09MVU1OUyA9IDE2Owpjb25zdCBUSUxFX1JPV1MgPSAxNjsKY29uc3QgVElMRV9DT1VOVCA9IFRJTEVfQ09MVU1OUyAqIFRJTEVfUk9XUzsKCmNvbnN0IHQgPSB0ZXh0bW9kZS5jcmVhdGUoewoJd2lkdGg6IHdpbmRvdy5pbm5lcldpZHRoLAoJaGVpZ2h0OiB3aW5kb3cuaW5uZXJIZWlnaHQsCglmb250U2l6ZTogMTYsCn0pOwoKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKbGV0IHRpbGVzZXQgPSBudWxsOwoKZnVuY3Rpb24gdGlsZXNldE9wdGlvbnMoKSB7CglyZXR1cm4gewoJCXNvdXJjZTogVDY0X1VSTCwKCQljb2x1bW5zOiBUSUxFX0NPTFVNTlMsCgkJcm93czogVElMRV9ST1dTLAoJCWNvdW50OiBUSUxFX0NPVU5ULAoJCWZvbnRTaXplOiAxNiwKCX07Cn0KCnQuc2V0dXAoYXN5bmMgKCkgPT4gewoJdGlsZXNldCA9IGF3YWl0IHQubG9hZFRpbGVzZXQodGlsZXNldE9wdGlvbnMoKSk7Cn0pOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDUsIDcsIDE4KTsKCWlmICghdGlsZXNldCkgcmV0dXJuOwoJY29uc3Qgc3RhcnRYID0gLU1hdGguZmxvb3IoVElMRV9DT0xVTU5TIC8gMik7Cgljb25zdCBzdGFydFkgPSAtTWF0aC5mbG9vcihUSUxFX1JPV1MgLyAyKTsKCWZvciAobGV0IGkgPSAwOyBpIDwgVElMRV9DT1VOVDsgaSsrKSB7CgkJdC5wdXNoKCk7CgkJdC50cmFuc2xhdGUoc3RhcnRYICsgKGkgJSBUSUxFX0NPTFVNTlMpLCBzdGFydFkgKyBNYXRoLmZsb29yKGkgLyBUSUxFX0NPTFVNTlMpKTsKCQl0LmNoYXIoaSk7CgkJdC5jaGFyQ29sb3IoMTIwICsgaSAqIDYsIDIyMCwgMjU1IC0gaSAqIDcpOwoJCXQucG9pbnQoKTsKCQl0LnBvcCgpOwoJfQp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CgoJZHJhd1RleHQoJ1RFWFRNT0RFVElMRVNFVC5DRUxMSEVJR0hUJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogR0xZUEggQVRMQVMgREFUQScsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnVDY0IHdlYiB0aWxlc2V0IGZlZWRzIGdseXBocy4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KGBIRUlHSFQ6ICR7dGlsZXNldC5jZWxsSGVpZ2h0fWAsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const T64_URL = 'https://littlebitspace.com/resources/fonts/T64.png';
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let tileset = null;
+
+t.setup(async () => {
+	tileset = await t.loadTileset({ source: T64_URL, columns: 16, rows: 16, count: 256, fontSize: 16 });
+});
+
+t.draw(() => {
+	t.background(14, 4, 24);
+	if (!tileset) return;
+
+	const hw = Math.floor(t.grid.cols / 2);
+	const hh = Math.floor(t.grid.rows / 2);
+	const tm = t.frameCount * 0.05;
+	const chars = tileset.characters;
+	const cH = tileset.cellHeight;
+
+	for (let y = -hh; y <= hh; y++) {
+		for (let x = -hw; x <= hw; x++) {
+			const wave = Math.sin(y * (cH * 0.02) - tm * 2 + Math.sin(x * 0.25) * 2);
+			const norm = (wave + 1) * 0.5;
+
+			const isCrest = Math.abs(wave) > 0.82;
+			const charIdx = Math.floor(Math.abs(y * 2 + Math.cos(x * 0.2 + tm * 2) * 6) % (chars.length || 1));
+			const charKey = isCrest ? '=' : chars[charIdx] ? chars[charIdx].character : '-';
+
+			t.push();
+			t.translate(x, y);
+			t.charColor(
+				isCrest ? 255 : Math.floor(180 + norm * 75),
+				isCrest ? 200 : Math.floor(40 + norm * 80),
+				isCrest ? 60 : Math.floor(140 + norm * 80)
+			);
+			t.cellColor(
+				isCrest ? 35 : Math.floor(8 + norm * 12),
+				isCrest ? 10 : Math.floor(4 + norm * 10),
+				isCrest ? 40 : Math.floor(16 + norm * 20)
+			);
+			t.char(charKey);
+			t.point();
+			t.pop();
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	if (!tileset) return;
+	const height = tileset.cellHeight;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODETILESET.CELLHEIGHT', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: VERTICAL RASTER OSCILLOGRAM', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Effective render cell height in px.', x, y++);
+	t.print('Controls vertical wave stride.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(255, 200, 60);
+	t.print(`CELL HEIGHT: ${height} PX`, x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 
 Height of each glyph cell in pixels.
 

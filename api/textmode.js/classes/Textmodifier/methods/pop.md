@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / pop
@@ -27,5 +27,55 @@ Use with [push](push.md) to isolate style changes within a block.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="pop" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IFJBTVAgPSAnIC46LT0rKiMlQCc7CgpmdW5jdGlvbiBkcmF3QnJhbmNoKGRlcHRoLCBtYXhEZXB0aCwgdG0pIHsKCWlmIChkZXB0aCA-PSBtYXhEZXB0aCkgcmV0dXJuOwoKCXQucHVzaCgpOwoJdC5yb3RhdGVaKE1hdGguc2luKHRtICogMS41ICsgZGVwdGgpICogMC4zNSk7Cgljb25zdCBub3JtID0gZGVwdGggLyBtYXhEZXB0aDsKCWNvbnN0IGNoYXJLZXkgPSBSQU1QW01hdGguZmxvb3IoKDEgLSBub3JtKSAqIChSQU1QLmxlbmd0aCAtIDEpKV07CgoJdC5jaGFyQ29sb3IoTWF0aC5mbG9vcigxMDAgKyBub3JtICogMTU1KSwgTWF0aC5mbG9vcigyNDAgLSBub3JtICogMTAwKSwgTWF0aC5mbG9vcigyNTUgLSBkZXB0aCAqIDMwKSk7Cgl0LmNlbGxDb2xvcihNYXRoLmZsb29yKDggKyBub3JtICogMTYpLCBNYXRoLmZsb29yKDE0ICsgbm9ybSAqIDIwKSwgTWF0aC5mbG9vcigzMiArIG5vcm0gKiAyNCkpOwoJdC5jaGFyKGNoYXJLZXkpOwoJdC5wb2ludCgpOwoKCXQudHJhbnNsYXRlKDAsIC00KTsKCWRyYXdCcmFuY2goZGVwdGggKyAxLCBtYXhEZXB0aCwgdG0pOwoKCXQucHVzaCgpOwoJdC5yb3RhdGVaKDAuNSk7Cgl0LnRyYW5zbGF0ZSgzLCAtMik7CglkcmF3QnJhbmNoKGRlcHRoICsgMSwgbWF4RGVwdGgsIHRtKTsKCXQucG9wKCk7CgoJdC5wdXNoKCk7Cgl0LnJvdGF0ZVooLTAuNSk7Cgl0LnRyYW5zbGF0ZSgtMywgLTIpOwoJZHJhd0JyYW5jaChkZXB0aCArIDEsIG1heERlcHRoLCB0bSk7Cgl0LnBvcCgpOwoKCXQucG9wKCk7Cn0KCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNiwgMTAsIDI0KTsKCWNvbnN0IGNvbHMgPSB0LmdyaWQuY29scywgcm93cyA9IHQuZ3JpZC5yb3dzOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKChjb2xzIC0gMSkgLyAyKSwgcmlnaHQgPSBsZWZ0ICsgY29scyAtIDE7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcihyb3dzIC8gMiksIGJvdHRvbSA9IHRvcCArIHJvd3MgLSAxOwoJY29uc3QgdG0gPSB0LmZyYW1lQ291bnQgKiAwLjA0OwoKCWZvciAobGV0IHkgPSB0b3A7IHkgPD0gYm90dG9tOyB5KyspIHsKCQlmb3IgKGxldCB4ID0gbGVmdDsgeCA8PSByaWdodDsgeCsrKSB7CgkJCWNvbnN0IHNwb3JlID0gKHggKiAxMyArIHkgKiAxOSArIE1hdGguZmxvb3IodG0gKiA4KSkgJSAyOSA9PT0gMDsKCQkJaWYgKHNwb3JlKSB7CgkJCQl0LnB1c2goKTsKCQkJCXQudHJhbnNsYXRlKHgsIHkpOwoJCQkJdC5jaGFyQ29sb3IoNjAsIDEwMCwgMTYwKTsKCQkJCXQuY2VsbENvbG9yKDQsIDgsIDE2KTsKCQkJCXQuY2hhcignLicpOwoJCQkJdC5wb2ludCgpOwoJCQkJdC5wb3AoKTsKCQkJfQoJCX0KCX0KCgl0LnB1c2goKTsKCXQudHJhbnNsYXRlKDAsIE1hdGguZmxvb3Iocm93cyAvIDQpKTsKCWRyYXdCcmFuY2goMCwgNSwgdG0pOwoJdC5wb3AoKTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMiksIHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDMsIHggPSBsZWZ0ICsgMzsKCgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKDEyMCwgMjQwLCAxODApOwoJdC5wcmludCgnVEVYVE1PRElGSUVSLlBPUCcsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcig3MCwgMTAwLCAxNDApOwoJdC5wcmludCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMjEwLCAyNTUpOwoJdC5wcmludCgnQ09OQ0VQVDogRlJBQ1RBTCBMQVRUSUNFIEZPUkVTVCcsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDE2MCwgMTkwKTsKCXQucHJpbnQoJ1BvcHMgbWF0cml4IHN0YWNrIHN0YXRlIHRvIHJlc3RvcmUnLCB4LCB5KyspOwoJdC5wcmludCgncHJldmlvdXMgb3JpZ2luIGFjcm9zcyByZWN1cnNpdmUgZm9ya3MuJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDcwLCAxMDAsIDE0MCk7Cgl0LnByaW50KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAyNTUsIDIwMCk7Cgl0LnByaW50KCdTVEFDSyBTVEFURTogUkVTVE9SRUQgVklBIFBPUCgpJywgeCwgeSsrKTsKCXQucG9wKCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(6, 10, 22);
+	const time = t.frameCount * 0.03;
+	t.push();
+	t.rotateZ(time * 30);
+	t.translate(10, 0);
+	t.char('#');
+	t.charColor(140, 255, 180);
+	t.rect(4, 3);
+	t.pop();
+	t.charColor(255, 210, 120);
+	t.char('+');
+	t.rect(5, 1);
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.POP', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: RESTORE STATE', x, y++, 100, 220, 255);
+	drawText('pop() returns to prior state.', x, y++, 140, 160, 190);
+	drawText('Center mark is not rotated.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('API: t.pop()', x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: conversion
 kind: Interface
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 isInterface: true
 ---
 
@@ -59,7 +59,88 @@ The compiled GLShader instance.
 
 #### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="TextmodeConversionStrategy" encoded-code="Y29uc3QgSU1BR0VfVVJMID0gJ2h0dHBzOi8vaW1hZ2VzLnVuc3BsYXNoLmNvbS9waG90by0xNTA2OTA1OTI1MzQ2LTIxYmRhNGQzMmRmND93PTkwMCZxPTgwJzsKY29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7IHdpZHRoOiB3aW5kb3cuaW5uZXJXaWR0aCwgaGVpZ2h0OiB3aW5kb3cuaW5uZXJIZWlnaHQgfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCBpbWcgPSBudWxsOwpsZXQgYmx1ZVNoYWRlciA9IG51bGw7Cgp0LnNldHVwKGFzeW5jICgpID0-IHsKCWNvbnN0IHZlcnQgPSBgI3ZlcnNpb24gMzAwIGVzCgkJaW4gdmVjNCBhX3Bvc2l0aW9uOwoJCWluIHZlYzIgYV91djsKCQlvdXQgdmVjMiB2X3V2OwoJCXZvaWQgbWFpbigpIHsKCQkJZ2xfUG9zaXRpb24gPSBhX3Bvc2l0aW9uOwoJCQl2X3V2ID0gYV91djsKCQl9CglgOwoKCWNvbnN0IGZyYWcgPSBgI3ZlcnNpb24gMzAwIGVzCgkJcHJlY2lzaW9uIGhpZ2hwIGZsb2F0OwoJCWluIHZlYzIgdl91djsKCQl1bmlmb3JtIHNhbXBsZXIyRCB1X2ltYWdlOwoJCWxheW91dChsb2NhdGlvbiA9IDApIG91dCB2ZWM0IG9fY2hhcmFjdGVyOwoJCWxheW91dChsb2NhdGlvbiA9IDEpIG91dCB2ZWM0IG9fcHJpbWFyeUNvbG9yOwoJCWxheW91dChsb2NhdGlvbiA9IDIpIG91dCB2ZWM0IG9fc2Vjb25kYXJ5Q29sb3I7CgkJdm9pZCBtYWluKCkgewoJCQl2ZWM0IGNvbCA9IHRleHR1cmUodV9pbWFnZSwgdl91dik7CgkJCWZsb2F0IGJsdWVMdW1hID0gY29sLmI7CgkJCW9fY2hhcmFjdGVyID0gdmVjNChibHVlTHVtYSAqIDAuOSwgMC4wLCAwLjAsIDAuMCk7CgkJCW9fcHJpbWFyeUNvbG9yID0gdmVjNCgwLjIsIDAuNiwgMS4wLCAxLjApOwoJCQlvX3NlY29uZGFyeUNvbG9yID0gdmVjNCgwLjAxLCAwLjAzLCAwLjA4LCAxLjApOwoJCX0KCWA7CgoJYmx1ZVNoYWRlciA9IGF3YWl0IHQuY3JlYXRlU2hhZGVyKHZlcnQsIGZyYWcpOwoKCXQuY29udmVyc2lvbnMucmVnaXN0ZXIoewoJCWlkOiAnYmx1ZS1tcnQnLAoJCWNyZWF0ZVNoYWRlcjogKCkgPT4gYmx1ZVNoYWRlciwKCQljcmVhdGVVbmlmb3JtczogKGN0eCkgPT4gKHsgdV9pbWFnZTogY3R4LnNvdXJjZS50ZXh0dXJlIH0pLAoJfSk7CgoJaW1nID0gYXdhaXQgdC5sb2FkSW1hZ2UoSU1BR0VfVVJMKTsKCWltZy5jaGFyYWN0ZXJzKCcgLjotPSsqIyVAJyk7CglpbWcuY29udmVyc2lvbk1vZGUoJ2JsdWUtbXJ0Jyk7Cn0pOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg2LCA4LCAyMCk7CglpZiAoaW1nKSB7CgkJdC5pbWFnZShpbWcsIHQuZ3JpZC5jb2xzIC0gOCwgdC5ncmlkLnJvd3MgLSAxMCk7Cgl9Cn0pOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWRyYXdUZXh0KCdDT05WRVJTSU9OLkNSRUFURVNIQURFUicsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IERZTkFNSUMgU0hBREVSIFJFR0lTVEVSJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdPdXRwdXRzIGN1c3RvbSBNUlQgbG9jYXRpb25zIGZvcicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnY2hhcmFjdGVyLCBwcmltYXJ5ICYgc2Vjb25kYXJ5LicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80';
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+const labelLayer = t.layers.add();
+let img = null;
+let blueShader = null;
+
+t.setup(async () => {
+	const vert = `#version 300 es
+		in vec4 a_position;
+		in vec2 a_uv;
+		out vec2 v_uv;
+		void main() {
+			gl_Position = a_position;
+			v_uv = a_uv;
+		}
+	`;
+
+	const frag = `#version 300 es
+		precision highp float;
+		in vec2 v_uv;
+		uniform sampler2D u_image;
+		layout(location = 0) out vec4 o_character;
+		layout(location = 1) out vec4 o_primaryColor;
+		layout(location = 2) out vec4 o_secondaryColor;
+		void main() {
+			vec4 col = texture(u_image, v_uv);
+			float blueLuma = col.b;
+			o_character = vec4(blueLuma * 0.9, 0.0, 0.0, 0.0);
+			o_primaryColor = vec4(0.2, 0.6, 1.0, 1.0);
+			o_secondaryColor = vec4(0.01, 0.03, 0.08, 1.0);
+		}
+	`;
+
+	blueShader = await t.createShader(vert, frag);
+
+	t.conversions.register({
+		id: 'blue-mrt',
+		createShader: () => blueShader,
+		createUniforms: (ctx) => ({ u_image: ctx.source.texture }),
+	});
+
+	img = await t.loadImage(IMAGE_URL);
+	img.characters(' .:-=+*#%@');
+	img.conversionMode('blue-mrt');
+});
+
+t.draw(() => {
+	t.background(6, 8, 20);
+	if (img) {
+		t.image(img, t.grid.cols - 8, t.grid.rows - 10);
+	}
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('CONVERSION.CREATESHADER', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: DYNAMIC SHADER REGISTER', x, y++, 100, 220, 255);
+	drawText('Outputs custom MRT locations for', x, y++, 140, 160, 190);
+	drawText('character, primary & secondary.', x, y++, 140, 160, 190);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 
 ***
 
@@ -88,5 +169,93 @@ An object mapping uniform names to values.
 
 #### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="TextmodeConversionStrategy" encoded-code="Y29uc3QgSU1BR0VfVVJMID0gJ2h0dHBzOi8vaW1hZ2VzLnVuc3BsYXNoLmNvbS9waG90by0xNTA2OTA1OTI1MzQ2LTIxYmRhNGQzMmRmND93PTkwMCZxPTgwJzsKY29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7IHdpZHRoOiB3aW5kb3cuaW5uZXJXaWR0aCwgaGVpZ2h0OiB3aW5kb3cuaW5uZXJIZWlnaHQgfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCBpbWcgPSBudWxsOwpsZXQgYW5pbWF0ZWRTaGFkZXIgPSBudWxsOwoKdC5zZXR1cChhc3luYyAoKSA9PiB7Cgljb25zdCB2ZXJ0ID0gYCN2ZXJzaW9uIDMwMCBlcwoJCWluIHZlYzQgYV9wb3NpdGlvbjsKCQlpbiB2ZWMyIGFfdXY7CgkJb3V0IHZlYzIgdl91djsKCQl2b2lkIG1haW4oKSB7CgkJCWdsX1Bvc2l0aW9uID0gYV9wb3NpdGlvbjsKCQkJdl91diA9IGFfdXY7CgkJfQoJYDsKCgljb25zdCBmcmFnID0gYCN2ZXJzaW9uIDMwMCBlcwoJCXByZWNpc2lvbiBoaWdocCBmbG9hdDsKCQlpbiB2ZWMyIHZfdXY7CgkJdW5pZm9ybSBzYW1wbGVyMkQgdV9pbWFnZTsKCQl1bmlmb3JtIGZsb2F0IHVfdGltZTsKCQlsYXlvdXQobG9jYXRpb24gPSAwKSBvdXQgdmVjNCBvX2NoYXJhY3RlcjsKCQlsYXlvdXQobG9jYXRpb24gPSAxKSBvdXQgdmVjNCBvX3ByaW1hcnlDb2xvcjsKCQlsYXlvdXQobG9jYXRpb24gPSAyKSBvdXQgdmVjNCBvX3NlY29uZGFyeUNvbG9yOwoJCXZvaWQgbWFpbigpIHsKCQkJdmVjNCBjb2wgPSB0ZXh0dXJlKHVfaW1hZ2UsIHZfdXYpOwoJCQlmbG9hdCB3YXZlID0gMC41ICsgMC41ICogc2luKHVfdGltZSArIHZfdXYueCAqIDEyLjApOwoJCQlmbG9hdCBsdW1hID0gZG90KGNvbC5yZ2IsIHZlYzMoMC4yOTksIDAuNTg3LCAwLjExNCkpOwoJCQlvX2NoYXJhY3RlciA9IHZlYzQobHVtYSAqIHdhdmUgKiAwLjk1LCAwLjAsIDAuMCwgMC4wKTsKCQkJb19wcmltYXJ5Q29sb3IgPSB2ZWM0KGNvbC5yLCBjb2wuZyAqIHdhdmUsIGNvbC5iICogMS41LCAxLjApOwoJCQlvX3NlY29uZGFyeUNvbG9yID0gdmVjNCgwLjAyLCAwLjAzLCAwLjA2LCAxLjApOwoJCX0KCWA7CgoJYW5pbWF0ZWRTaGFkZXIgPSBhd2FpdCB0LmNyZWF0ZVNoYWRlcih2ZXJ0LCBmcmFnKTsKCgl0LmNvbnZlcnNpb25zLnJlZ2lzdGVyKHsKCQlpZDogJ3RpbWUtd2F2ZScsCgkJY3JlYXRlU2hhZGVyOiAoKSA9PiBhbmltYXRlZFNoYWRlciwKCQljcmVhdGVVbmlmb3JtczogKGN0eCkgPT4gKHsKCQkJLi4uY3R4LmNyZWF0ZUJhc2VVbmlmb3JtcygpLAoJCQl1X3RpbWU6IHQuZnJhbWVDb3VudCAqIDAuMDQsCgkJfSksCgl9KTsKCglpbWcgPSBhd2FpdCB0LmxvYWRJbWFnZShJTUFHRV9VUkwpOwoJaW1nLmNoYXJhY3RlcnMoJyAuOi09KyojJUAnKTsKCWltZy5jb252ZXJzaW9uTW9kZSgndGltZS13YXZlJyk7Cn0pOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg2LCA4LCAyMCk7CglpZiAoaW1nKSB7CgkJdC5pbWFnZShpbWcsIHQuZ3JpZC5jb2xzIC0gOCwgdC5ncmlkLnJvd3MgLSAxMCk7Cgl9Cn0pOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWNvbnN0IHRpbWVWYWwgPSB0LmZyYW1lQ291bnQgKiAwLjA0OwoKCWRyYXdUZXh0KCdDT05WRVJTSU9OLkNSRUFURVVOSUZPUk1TJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogUkVOREVSSU5HIFVOSUZPUk1TIEJJTkRJTkcnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ0JpbmRzIHRpbWUtYmFzZWQgYW5pbWF0aW9uIHZhbHVlcy4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KGBUSU1FIFVOSUZPUk06ICR7dGltZVZhbC50b0ZpeGVkKDIpfWAsIHgsIHkrKywgMTIwLCAyMDUsIDI1NSk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80';
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+const labelLayer = t.layers.add();
+let img = null;
+let animatedShader = null;
+
+t.setup(async () => {
+	const vert = `#version 300 es
+		in vec4 a_position;
+		in vec2 a_uv;
+		out vec2 v_uv;
+		void main() {
+			gl_Position = a_position;
+			v_uv = a_uv;
+		}
+	`;
+
+	const frag = `#version 300 es
+		precision highp float;
+		in vec2 v_uv;
+		uniform sampler2D u_image;
+		uniform float u_time;
+		layout(location = 0) out vec4 o_character;
+		layout(location = 1) out vec4 o_primaryColor;
+		layout(location = 2) out vec4 o_secondaryColor;
+		void main() {
+			vec4 col = texture(u_image, v_uv);
+			float wave = 0.5 + 0.5 * sin(u_time + v_uv.x * 12.0);
+			float luma = dot(col.rgb, vec3(0.299, 0.587, 0.114));
+			o_character = vec4(luma * wave * 0.95, 0.0, 0.0, 0.0);
+			o_primaryColor = vec4(col.r, col.g * wave, col.b * 1.5, 1.0);
+			o_secondaryColor = vec4(0.02, 0.03, 0.06, 1.0);
+		}
+	`;
+
+	animatedShader = await t.createShader(vert, frag);
+
+	t.conversions.register({
+		id: 'time-wave',
+		createShader: () => animatedShader,
+		createUniforms: (ctx) => ({
+			...ctx.createBaseUniforms(),
+			u_time: t.frameCount * 0.04,
+		}),
+	});
+
+	img = await t.loadImage(IMAGE_URL);
+	img.characters(' .:-=+*#%@');
+	img.conversionMode('time-wave');
+});
+
+t.draw(() => {
+	t.background(6, 8, 20);
+	if (img) {
+		t.image(img, t.grid.cols - 8, t.grid.rows - 10);
+	}
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const timeVal = t.frameCount * 0.04;
+
+	drawText('CONVERSION.CREATEUNIFORMS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: RENDERING UNIFORMS BINDING', x, y++, 100, 220, 255);
+	drawText('Binds time-based animation values.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`TIME UNIFORM: ${timeVal.toFixed(2)}`, x, y++, 120, 205, 255);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

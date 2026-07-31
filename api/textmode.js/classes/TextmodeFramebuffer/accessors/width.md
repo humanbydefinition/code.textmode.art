@@ -7,7 +7,7 @@ category: Accessors
 api: true
 owner: TextmodeFramebuffer
 kind: Accessor
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [TextmodeFramebuffer](../../TextmodeFramebuffer.md) / width
@@ -28,5 +28,71 @@ Width of the framebuffer in pixels.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="width" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCBmYjsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMDAsIGcgPSAyMjAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC50cmFuc2xhdGUoeCwgeSk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCWZvciAobGV0IGkgPSAwOyBpIDwgdGV4dC5sZW5ndGg7IGkrKykgewoJCXQuY2hhcih0ZXh0W2ldKTsKCQl0LnBvaW50KCk7CgkJdC50cmFuc2xhdGUoMSwgMCk7Cgl9Cgl0LnBvcCgpOwp9Cgp0LnNldHVwKCgpID0-IHsKCWZiID0gdC5jcmVhdGVGcmFtZWJ1ZmZlcih7IHdpZHRoOiAyMiwgaGVpZ2h0OiAxMCB9KTsKfSk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDgsIDEwLCAxOCk7CgoJZmIuYmVnaW4oKTsKCXQuY2xlYXIoKTsKCXQuYmFja2dyb3VuZCgxMiwgMjQsIDE4KTsKCgkvLyBCb3JkZXIKCXQuY2hhckNvbG9yKDEwMCwgMjU1LCAxNTApOwoJdC5jaGFyKCd8Jyk7Cgl0LnJlY3QoZmIud2lkdGgsIGZiLmhlaWdodCk7CgoJZmIuZW5kKCk7CgoJdC5wdXNoKCk7Cgl0LnRyYW5zbGF0ZSgwLCAzKTsKCXQuaW1hZ2UoZmIpOwoJdC5wb3AoKTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWRyYXdUZXh0KCdXSURUSCcsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnRnJhbWVidWZmZXIgd2lkdGggaW4gY2VsbHMgKGNvbHMpLicsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CgoJY29uc3QgdmFsID0gZmIgPyBmYi53aWR0aCA6IDA7CglkcmF3VGV4dChgRnJhbWVidWZmZXIgV2lkdGg6ICR7dmFsfSBjZWxsc2AsIHgsIHkrKywgMTIwLCAyNTUsIDE4MCk7CglkcmF3VGV4dChgQ2FudmFzICA6ICR7dC53aWR0aH0gcHhgLCB4LCB5KyssIDE2MCwgMTYwLCAxNjApOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let fb;
+
+function drawText(text, x, y, r = 200, g = 220, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+t.setup(() => {
+	fb = t.createFramebuffer({ width: 22, height: 10 });
+});
+
+t.draw(() => {
+	t.background(8, 10, 18);
+
+	fb.begin();
+	t.clear();
+	t.background(12, 24, 18);
+
+	// Border
+	t.charColor(100, 255, 150);
+	t.char('|');
+	t.rect(fb.width, fb.height);
+
+	fb.end();
+
+	t.push();
+	t.translate(0, 3);
+	t.image(fb);
+	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('WIDTH', x, y++, 100, 255, 140);
+	drawText('--------------------------------', x, y++, 80, 100, 150);
+	drawText('Framebuffer width in cells (cols).', x, y++, 100, 220, 255);
+	drawText('--------------------------------', x, y++, 80, 100, 150);
+
+	const val = fb ? fb.width : 0;
+	drawText(`Framebuffer Width: ${val} cells`, x, y++, 120, 255, 180);
+	drawText(`Canvas  : ${t.width} px`, x, y++, 160, 160, 160);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

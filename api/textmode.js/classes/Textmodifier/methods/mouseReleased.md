@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / mouseReleased
@@ -32,5 +32,101 @@ Register the single-callback handler for mouse release events.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="mouseReleased" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7Cgpjb25zdCBwdWxzZXMgPSBbXTsKbGV0IGNvdW50ID0gMDsKbGV0IGxhc3QgPSAnV0FJVElORyc7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCmZ1bmN0aW9uIGFkZFB1bHNlKGxhYmVsLCB4ID0gMCwgeSA9IDApIHsKCWNvdW50Kys7CglsYXN0ID0gbGFiZWw7CglwdWxzZXMudW5zaGlmdCh7IGxhYmVsLCB4LCB5LCBsaWZlOiAxIH0pOwoJaWYgKHB1bHNlcy5sZW5ndGggPiAxMikgcHVsc2VzLmxlbmd0aCA9IDEyOwp9Cgp0Lm1vdXNlUmVsZWFzZWQoKCkgPT4gewoJYWRkUHVsc2UoJ01PVVNFIFVQJywgdC5tb3VzZS54LCB0Lm1vdXNlLnkpOwp9KTsKCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNiwgMTAsIDIyKTsKCglmb3IgKGxldCBpID0gcHVsc2VzLmxlbmd0aCAtIDE7IGkgPj0gMDsgaS0tKSB7CgkJY29uc3QgcCA9IHB1bHNlc1tpXTsKCQlwLmxpZmUgLT0gMC4wMjsKCQlpZiAocC5saWZlIDw9IDApIHsKCQkJcHVsc2VzLnNwbGljZShpLCAxKTsKCQkJY29udGludWU7CgkJfQoJCXQucHVzaCgpOwoJCXQudHJhbnNsYXRlKHAueCwgcC55IC0gKDEgLSBwLmxpZmUpICogNCk7CgkJdC5jaGFyKCcqJyk7CgkJdC5jaGFyQ29sb3IoMjU1LCAyMTAsIDEyMCk7CgkJdC5wb2ludCgpOwoJCXQucG9wKCk7Cgl9Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuTU9VU0VSRUxFQVNFRCcsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IFJFTEVBU0UgRVZFTlQnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ0V2ZW50IHVwZGF0ZXMgY29tcGFjdCBzdGF0ZS4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJ1B1bHNlcyBzaG93IHJlY2VudCB0cmlnZ2Vycy4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdSRUxFQVNFUzogJyArIGNvdW50LCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwoJZHJhd1RleHQoJ0xBU1Q6ICcgKyBsYXN0LnNsaWNlKDAsIDI4KSwgeCwgeSsrLCAxODAsIDIwMCwgMjIwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const labelLayer = t.layers.add();
+const sparks = [];
+let tension = 0,
+	releaseCount = 0,
+	lastPos = 'NONE';
+
+function drawText(txt, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(txt, x, y);
+	t.pop();
+}
+
+t.mouseReleased(() => {
+	if (t.mouse.x === Number.NEGATIVE_INFINITY) return;
+	releaseCount++;
+	lastPos = `(${t.mouse.x}, ${t.mouse.y})`;
+	for (let i = 0; i < 14; i++) {
+		const a = (i / 14) * Math.PI * 2,
+			s = (0.8 + Math.random()) * (0.4 + tension * 0.8);
+		sparks.unshift({ x: t.mouse.x, y: t.mouse.y, vx: Math.cos(a) * s, vy: Math.sin(a) * s, life: 1 });
+	}
+	tension = 0;
+	if (sparks.length > 70) sparks.length = 70;
+});
+
+t.draw(() => {
+	t.background(8, 8, 16);
+	const isHeld = t.mouseIsPressed && t.mouse.x !== Number.NEGATIVE_INFINITY;
+	tension = isHeld ? Math.min(1, tension + 0.04) : Math.max(0, tension - 0.08);
+	const hw = Math.floor(t.grid.cols / 2),
+		hh = Math.floor(t.grid.rows / 2);
+
+	for (let y = -hh; y <= hh; y += 2) {
+		for (let x = -hw; x <= hw; x += 2) {
+			const d = isHeld ? Math.hypot(x - t.mouse.x, y - t.mouse.y) : 999;
+			const pull = d < 20 ? (1 - d / 20) * tension * 3 : 0;
+			const rx = Math.round(x + (isHeld ? (t.mouse.x - x) * (pull / (d + 1)) : 0));
+			const ry = Math.round(y + (isHeld ? (t.mouse.y - y) * (pull / (d + 1)) : 0));
+			if (rx >= -hw && rx <= hw && ry >= -hh && ry <= hh) {
+				t.push();
+				t.translate(rx, ry);
+				t.charColor(pull > 0.4 ? 255 : 30, pull > 0.4 ? Math.floor(100 + pull * 155) : 40, pull > 0.4 ? 0 : 70);
+				if (pull > 0.4) t.cellColor(80, 20, 0);
+				t.char(pull > 0.4 ? '#' : '+');
+				t.point();
+				t.pop();
+			}
+		}
+	}
+
+	for (let i = sparks.length - 1; i >= 0; i--) {
+		const s = sparks[i];
+		s.x += s.vx;
+		s.y += s.vy;
+		s.vx *= 0.93;
+		s.vy *= 0.93;
+		if ((s.life -= 0.025) <= 0) {
+			sparks.splice(i, 1);
+			continue;
+		}
+		const sx = Math.round(s.x),
+			sy = Math.round(s.y);
+		if (sx >= -hw && sx <= hw && sy >= -hh && sy <= hh) {
+			t.push();
+			t.translate(sx, sy);
+			t.charColor(s.life > 0.6 ? 255 : 0, s.life > 0.6 ? 255 : 235, 255);
+			if (s.life > 0.5) t.cellColor(0, 70, 90);
+			t.char(s.life > 0.7 ? '@' : s.life > 0.4 ? 'O' : '*');
+			t.point();
+			t.pop();
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2),
+		top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.MOUSERELEASED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: UP-STROKE RELEASE EVENT', x, y++, 100, 220, 255);
+	drawText('Fires on mouse button release.', x, y++, 140, 160, 190);
+	drawText('Releasing launches kinetic spark burst.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('TOTAL RELEASES: ' + releaseCount, x, y++, 140, 255, 180);
+	drawText('LAST RELEASE:   ' + lastPos, x, y++, 180, 200, 220);
+	drawText('TENSION CHARGE: ' + Math.floor(tension * 100) + '%', x, y++, 180, 200, 220);
+});
+
+t.windowResized(() => t.resizeCanvas(window.innerWidth, window.innerHeight));
+```
 

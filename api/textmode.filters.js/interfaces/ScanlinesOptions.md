@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 isInterface: true
 ---
 
@@ -23,7 +23,70 @@ the scanlines in crtMattias.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.filters.js" language="javascript" title="ScanlinesOptions" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKCXBsdWdpbnM6IFtGaWx0ZXJzUGx1Z2luXSwKfSk7CmNvbnN0IGxhYmVsTGF5ZXIgPSB0LmxheWVycy5hZGQoKTsKCmxldCB2aWRlbzsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKdC5zZXR1cChhc3luYyAoKSA9PiB7Cgl2aWRlbyA9IGF3YWl0IHQubG9hZFZpZGVvKCdodHRwczovL2ludGVyYWN0aXZlLWV4YW1wbGVzLm1kbi5tb3ppbGxhLm5ldC9tZWRpYS9jYzAtdmlkZW9zL2Zsb3dlci5tcDQnKTsKCXZpZGVvLnBsYXkoKTsKCXZpZGVvLmxvb3AoKTsKCXZpZGVvLmNoYXJhY3RlcnMoJyAuOi09KyojJUAnKTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMiksCgkJdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMywKCQl4ID0gbGVmdCArIDM7CgoJY29uc3QgaW50ZW5zaXR5ID0gKDAuNSArIDAuMyAqIE1hdGguc2luKHQuc2VjcyAqIDEuNSkpLnRvRml4ZWQoMik7CgoJZHJhd1RleHQoJ0ZJTFRFUlNQTFVHSU4uU0NBTkxJTkVTJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogRElTUExBWSBTQ0FOIEdSSUQnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ092ZXJsYXlzIGRyaWZ0aW5nIHJhc3RlciBsaW5lcy4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdMaW5lIENvdW50OiAzMDAnLCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwoJZHJhd1RleHQoJ0ludGVuc2l0eTogJyArIGludGVuc2l0eSwgeCwgeSsrLCAxNDAsIDI1NSwgMTgwKTsKfSk7Cgp0LmRyYXcoKCkgPT4gewoJaWYgKCF2aWRlbykgcmV0dXJuOwoJY29uc3QgaW50ZW5zaXR5ID0gMC41ICsgMC4zICogTWF0aC5zaW4odC5zZWNzICogMS41KTsKCgl0LmxheWVycy5iYXNlLmZpbHRlcignc2NhbmxpbmVzJywgewoJCWNvdW50OiAzMDAsCgkJaW50ZW5zaXR5OiBpbnRlbnNpdHksCgkJc3BlZWQ6IDEuMCwKCQl0aW1lOiB0LnNlY3MsCgl9KTsKCgl0LmJhY2tncm91bmQoMCk7Cgl0LmltYWdlKHZpZGVvKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+	plugins: [FiltersPlugin],
+});
+const labelLayer = t.layers.add();
+
+let video;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.setup(async () => {
+	video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
+	video.play();
+	video.loop();
+	video.characters(' .:-=+*#%@');
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2),
+		top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3,
+		x = left + 3;
+
+	const intensity = (0.5 + 0.3 * Math.sin(t.secs * 1.5)).toFixed(2);
+
+	drawText('FILTERSPLUGIN.SCANLINES', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: DISPLAY SCAN GRID', x, y++, 100, 220, 255);
+	drawText('Overlays drifting raster lines.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('Line Count: 300', x, y++, 140, 255, 180);
+	drawText('Intensity: ' + intensity, x, y++, 140, 255, 180);
+});
+
+t.draw(() => {
+	if (!video) return;
+	const intensity = 0.5 + 0.3 * Math.sin(t.secs * 1.5);
+
+	t.layers.base.filter('scanlines', {
+		count: 300,
+		intensity: intensity,
+		speed: 1.0,
+		time: t.secs,
+	});
+
+	t.background(0);
+	t.image(video);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 
 ## Properties
 

@@ -6,7 +6,7 @@ description: Grid used by a textmode layer.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 hasConstructor: false
 ---
 
@@ -23,7 +23,87 @@ You can manually set `cols` and `rows` to lock the grid to a specific size.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="TextmodeGrid" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDEyLCAyNik7Cgljb25zdCBjb2xzID0gdC5ncmlkLmNvbHM7Cgljb25zdCByb3dzID0gdC5ncmlkLnJvd3M7Cgljb25zdCBodyA9IE1hdGguZmxvb3IoY29scyAvIDIpOwoJY29uc3QgaGggPSBNYXRoLmZsb29yKHJvd3MgLyAyKTsKCWNvbnN0IHRtID0gdC5mcmFtZUNvdW50ICogMC4wNDsKCglmb3IgKGxldCB5ID0gLWhoOyB5IDw9IGhoOyB5KyspIHsKCQlmb3IgKGxldCB4ID0gLWh3OyB4IDw9IGh3OyB4KyspIHsKCQkJY29uc3QgaXNPcmlnaW4gPSB4ID09PSAwICYmIHkgPT09IDA7CgkJCWNvbnN0IGlzQXhpcyA9IHggPT09IDAgfHwgeSA9PT0gMDsKCQkJY29uc3QgZGlzdCA9IE1hdGguaHlwb3QoeCwgeSk7CgkJCWNvbnN0IHdhdmUgPSBNYXRoLnNpbihkaXN0ICogMC4zIC0gdG0gKiAyKSAqIDAuNSArIDAuNTsKCgkJCWxldCBjaGFyS2V5ID0gJy4nOwoJCQlpZiAoaXNPcmlnaW4pIGNoYXJLZXkgPSAnQCc7CgkJCWVsc2UgaWYgKGlzQXhpcykgY2hhcktleSA9IHggPT09IDAgPyAnfCcgOiAnLSc7CgkJCWVsc2UgY2hhcktleSA9IHdhdmUgPiAwLjYgPyAnKycgOiAnOic7CgoJCQl0LnB1c2goKTsKCQkJdC50cmFuc2xhdGUoeCwgeSk7CgkJCXQuY2hhckNvbG9yKAoJCQkJaXNPcmlnaW4gPyAyNTUgOiBpc0F4aXMgPyAxMDAgOiBNYXRoLmZsb29yKDUwICsgd2F2ZSAqIDE1MCksCgkJCQlpc09yaWdpbiA_IDIyMCA6IGlzQXhpcyA_IDI0MCA6IE1hdGguZmxvb3IoMTIwICsgd2F2ZSAqIDEwMCksCgkJCQlpc09yaWdpbiA_IDgwIDogaXNBeGlzID8gMjU1IDogTWF0aC5mbG9vcigxODAgKyB3YXZlICogNzUpCgkJCSk7CgkJCXQuY2VsbENvbG9yKAoJCQkJaXNPcmlnaW4gPyA0MCA6IGlzQXhpcyA_IDE0IDogTWF0aC5mbG9vcig2ICsgd2F2ZSAqIDgpLAoJCQkJaXNPcmlnaW4gPyAyOCA6IGlzQXhpcyA_IDIwIDogTWF0aC5mbG9vcigxMCArIHdhdmUgKiAxMiksCgkJCQlpc09yaWdpbiA_IDEyIDogaXNBeGlzID8gMzIgOiBNYXRoLmZsb29yKDIwICsgd2F2ZSAqIDE0KQoJCQkpOwoJCQl0LmNoYXIoY2hhcktleSk7CgkJCXQucG9pbnQoKTsKCQkJdC5wb3AoKTsKCQl9Cgl9Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCgljb25zdCB0b3RhbENlbGxzID0gdC5ncmlkLmNvbHMgKiB0LmdyaWQucm93czsKCgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKDEyMCwgMjQwLCAxODApOwoJdC5wcmludCgnVEVYVE1PREVHUklELkNSRUFUSU9OJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDcwLCAxMDAsIDE0MCk7Cgl0LnByaW50KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAyMTAsIDI1NSk7Cgl0LnByaW50KCdDT05DRVBUOiBBUkNISVRFQ1RVUkUgTUFUUklYIEJMVUVQUklOVCcsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDE2MCwgMTkwKTsKCXQucHJpbnQoJ0dyaWQgbGF5b3V0IGRldGVybWluZXMgY2hhcmFjdGVyIHBvc2l0aW9uaW5nJywgeCwgeSsrKTsKCXQucHJpbnQoJ2FuZCBjZW50ZXItYmFzZWQgb3JpZ2luIGNvb3JkaW5hdGVzLicsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcig3MCwgMTAwLCAxNDApOwoJdC5wcmludCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMjU1LCAyMDApOwoJdC5wcmludChgR1JJRCBESU1FTlNJT05TOiAke3QuZ3JpZC5jb2xzfSBYICR7dC5ncmlkLnJvd3N9YCwgeCwgeSsrKTsKCXQucHJpbnQoYFRPVEFMIENFTEwgQ09VTlQ6ICR7dG90YWxDZWxsc30gQ0VMTFNgLCB4LCB5KyspOwoJdC5wb3AoKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+t.draw(() => {
+	t.background(6, 12, 26);
+	const cols = t.grid.cols;
+	const rows = t.grid.rows;
+	const hw = Math.floor(cols / 2);
+	const hh = Math.floor(rows / 2);
+	const tm = t.frameCount * 0.04;
+
+	for (let y = -hh; y <= hh; y++) {
+		for (let x = -hw; x <= hw; x++) {
+			const isOrigin = x === 0 && y === 0;
+			const isAxis = x === 0 || y === 0;
+			const dist = Math.hypot(x, y);
+			const wave = Math.sin(dist * 0.3 - tm * 2) * 0.5 + 0.5;
+
+			let charKey = '.';
+			if (isOrigin) charKey = '@';
+			else if (isAxis) charKey = x === 0 ? '|' : '-';
+			else charKey = wave > 0.6 ? '+' : ':';
+
+			t.push();
+			t.translate(x, y);
+			t.charColor(
+				isOrigin ? 255 : isAxis ? 100 : Math.floor(50 + wave * 150),
+				isOrigin ? 220 : isAxis ? 240 : Math.floor(120 + wave * 100),
+				isOrigin ? 80 : isAxis ? 255 : Math.floor(180 + wave * 75)
+			);
+			t.cellColor(
+				isOrigin ? 40 : isAxis ? 14 : Math.floor(6 + wave * 8),
+				isOrigin ? 28 : isAxis ? 20 : Math.floor(10 + wave * 12),
+				isOrigin ? 12 : isAxis ? 32 : Math.floor(20 + wave * 14)
+			);
+			t.char(charKey);
+			t.point();
+			t.pop();
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const totalCells = t.grid.cols * t.grid.rows;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODEGRID.CREATION', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: ARCHITECTURE MATRIX BLUEPRINT', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Grid layout determines character positioning', x, y++);
+	t.print('and center-based origin coordinates.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 200);
+	t.print(`GRID DIMENSIONS: ${t.grid.cols} X ${t.grid.rows}`, x, y++);
+	t.print(`TOTAL CELL COUNT: ${totalCells} CELLS`, x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 
 ## Accessors
 

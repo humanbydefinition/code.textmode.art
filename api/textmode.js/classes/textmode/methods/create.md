@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: textmode
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [textmode](../../textmode.md) / create
@@ -34,5 +34,70 @@ The created Textmodifier instance.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="create" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IGNoYXJzID0gWycuJywgJysnLCAnKicsICdvJ107Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDE0LCAyMik7CgoJZm9yIChsZXQgcmF5ID0gMDsgcmF5IDwgMTI7IHJheSsrKSB7CgkJY29uc3QgYW5nbGUgPSB0LmZyYW1lQ291bnQgKiAwLjAzICsgKE1hdGguUEkgKiAyICogcmF5KSAvIDEyOwoKCQlmb3IgKGxldCBzdGVwID0gMzsgc3RlcCA8PSAxMDsgc3RlcCsrKSB7CgkJCWNvbnN0IHB1bHNlID0gMC41ICsgMC41ICogTWF0aC5zaW4odC5mcmFtZUNvdW50ICogMC4wOCAtIHN0ZXAgKyByYXkgKiAwLjQpOwoJCQljb25zdCByYWRpdXMgPSBzdGVwICogKDEuNiArIHB1bHNlICogMC42KTsKCQkJY29uc3QgeCA9IE1hdGgucm91bmQoTWF0aC5jb3MoYW5nbGUpICogcmFkaXVzICogMS43KTsKCQkJY29uc3QgeSA9IE1hdGgucm91bmQoTWF0aC5zaW4oYW5nbGUpICogcmFkaXVzKTsKCQkJY29uc3QgY2hhciA9IGNoYXJzWyhyYXkgKyBzdGVwKSAlIGNoYXJzLmxlbmd0aF07CgoJCQl0LnB1c2goKTsKCQkJdC50cmFuc2xhdGUoeCwgeSk7CgkJCXQuY2hhckNvbG9yKDcwICsgc3RlcCAqIDE4LCAxNjAgKyBNYXRoLnJvdW5kKHB1bHNlICogNzApLCAyNTUpOwoJCQl0LmNoYXIoY2hhcik7CgkJCXQucG9pbnQoKTsKCQkJdC5wb3AoKTsKCQl9Cgl9Cn0pOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWRyYXdUZXh0KCdURVhUTU9ERS5DUkVBVEUnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBTVEFUSUMgQ09OVEVYVCBCVUlMREVSJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdJbnN0YW50aWF0ZXMgYSBza2V0Y2ggaW5zdGFuY2UuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnUmV0dXJucyBmdWxseSBjb25maWd1cmVkIHQgY29udGV4dC4nLCB4LCB5KyssIDE0MCwgMTkwLCAyNTUpOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+const RAMP = '.+*#%@';
+
+t.draw(() => {
+	t.background(6, 20, 14);
+	const hw = Math.floor(t.grid.cols / 2);
+	const hh = Math.floor(t.grid.rows / 2);
+	const tm = t.frameCount * 0.05;
+
+	for (let y = -hh; y <= hh; y++) {
+		for (let x = -hw; x <= hw; x++) {
+			const dist = Math.hypot(x * 0.8, y);
+			const ring = (Math.sin(dist * 0.4 - tm) + 1) * 0.5;
+			const hexPattern = Math.abs(Math.sin(x * 0.3) * Math.cos(y * 0.3));
+
+			const val = ring * 0.7 + hexPattern * 0.3;
+			if (val > 0.4) {
+				const idx = Math.floor(((val - 0.4) / 0.6) * (RAMP.length - 1));
+				t.push();
+				t.translate(x, y);
+				t.charColor(Math.floor(40 + val * 180), Math.floor(180 + val * 75), Math.floor(120 + val * 100));
+				t.cellColor(4, Math.floor(16 + val * 30), 10);
+				t.char(RAMP[idx]);
+				t.point();
+				t.pop();
+			}
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODE.CREATE', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: GENESIS MATRIX WAVEFRONT', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Instantiates a Textmodifier instance.', x, y++);
+	t.print('Initializes grid resolution & context.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 200);
+	t.print(`GRID SIZE: ${t.grid.cols}x${t.grid.rows} CELLS`, x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

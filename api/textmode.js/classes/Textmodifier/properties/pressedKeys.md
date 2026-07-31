@@ -7,7 +7,7 @@ category: Properties
 api: true
 owner: Textmodifier
 kind: Property
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / pressedKeys
@@ -22,5 +22,96 @@ Keys currently being held down.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="pressedKeys" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNiwgMTAsIDIyKTsKCWNvbnN0IGtleXMgPSBBcnJheS5mcm9tKHQucHJlc3NlZEtleXMpOwoJa2V5cy5mb3JFYWNoKChrZXksIGluZGV4KSA9PiB7CgkJdC5wdXNoKCk7CgkJdC50cmFuc2xhdGUoaW5kZXggKiAyIC0ga2V5cy5sZW5ndGgsIDApOwoJCXQuY2hhcihTdHJpbmcoa2V5KVswXSB8fCAnPycpOwoJCXQuY2hhckNvbG9yKDI1NSwgMjEwLCAxMjApOwoJCXQucG9pbnQoKTsKCQl0LnBvcCgpOwoJfSk7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuUFJFU1NFREtFWVMnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBBTEwgSEVMRCBLRVlTJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdTZXQgbGlzdHMgY3VycmVudGx5IGhlbGQga2V5cy4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJ0VhY2gga2V5IHJlbmRlcnMgaW4gY2VudGVyLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoYENPVU5UOiAke3QucHJlc3NlZEtleXMuc2l6ZX1gLCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const labelLayer = t.layers.add();
+
+function drawText(txt, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(txt, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(10, 15, 20);
+
+	const activeList = t.pressedKeys || [];
+	const count = activeList.length;
+	const hw = Math.floor(t.grid.cols / 2);
+	const hh = Math.floor(t.grid.rows / 2);
+	const tm = t.frameCount * 0.03;
+
+	for (let y = -hh + 2; y <= hh - 2; y += 3) {
+		for (let x = -hw + 2; x <= hw - 2; x += 3) {
+			const isCross = (x + y) % 6 === 0;
+			t.push();
+			t.translate(x, y);
+			t.charColor(22, 45, 35);
+			t.char(isCross ? '+' : '-');
+			t.point();
+			t.pop();
+		}
+	}
+
+	const numNodes = 12;
+	const ringRad = 12;
+	const activeNodes = new Set();
+
+	for (let i = 0; i < count; i++) {
+		const key = activeList[i];
+		const code = typeof key === 'string' && key.length > 0 ? key.charCodeAt(0) : i;
+		activeNodes.add(code % numNodes);
+	}
+
+	for (let i = 0; i < numNodes; i++) {
+		const ang = (i / numNodes) * Math.PI * 2 + tm;
+		const nx = Math.round(Math.cos(ang) * ringRad);
+		const ny = Math.round(Math.sin(ang) * (ringRad * 0.6));
+		const isActive = activeNodes.has(i);
+
+		t.push();
+		t.translate(nx, ny);
+		if (isActive) {
+			t.charColor(255, 42, 95);
+			t.cellColor(90, 0, 30);
+			t.char('#');
+		} else {
+			t.charColor(40, 90, 60);
+			t.char('.');
+		}
+		t.point();
+		t.pop();
+	}
+
+	if (count > 0) {
+		t.push();
+		t.printAlign('center', 'middle');
+		t.charColor(255, 238, 0);
+		t.print('CHORD: ' + activeList.slice(0, 5).join(' + ').toUpperCase(), 0, 0);
+		t.pop();
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	const activeList = t.pressedKeys || [];
+
+	drawText('TEXTMODIFIER.PRESSEDKEYS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: MULTI-KEY CHORD POLYPHONY', x, y++, 100, 220, 255);
+	drawText('Array lists all currently held keys.', x, y++, 140, 160, 190);
+	drawText('Hold multiple keys to form chords.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('HELD KEY COUNT: ' + activeList.length, x, y++, 140, 255, 180);
+	drawText('HELD KEYS:      ' + activeList.slice(0, 4).join(', '), x, y++, 180, 200, 220);
+});
+
+t.windowResized(() => t.resizeCanvas(window.innerWidth, window.innerHeight));
+```
 

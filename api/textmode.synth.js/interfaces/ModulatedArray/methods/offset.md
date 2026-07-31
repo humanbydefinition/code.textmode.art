@@ -8,7 +8,7 @@ api: true
 owner: ModulatedArray
 kind: Method
 ecosystem: textmode.js
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.synth.js](../../../index.md) / [ModulatedArray](../../ModulatedArray.md) / offset
@@ -42,5 +42,64 @@ The array for chaining
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="offset" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW1N5bnRoUGx1Z2luXSwKfSk7Cgp0LmJwbSgxOCk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IGdseXBocyA9ICcgLjotPSsqIyVAJzsKY29uc3Qgc2xvdyA9IFswLjAsIDEuMF0uZmFzdCgwLjE2KS5lYXNlKCdlYXNlSW5PdXRTaW5lJyk7CmNvbnN0IHR1cm4gPSBbLTAuNDIsIDAuNDJdLmZhc3QoMC4xNCkuZWFzZSgnZWFzZUluT3V0U2luZScpOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWRyYXdUZXh0KCdNT0RVTEFURURBUlJBWS5PRkZTRVQnLCB4LCB5KyssIDExMCwgMjU1LCAxNzApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgNzAsIDExMCwgMTQwKTsKCWRyYXdUZXh0KCdQSEFTRSBPRkZTRVQgQ1lDTElORycsIHgsIHkrKywgMTIwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnT2Zmc2V0cyBzdGFnZ2VyIHNoYXJlZCBtb3Rpb24uJywgeCwgeSsrLCAxNjAsIDE4MCwgMjEwKTsKCWRyYXdUZXh0KCdUaHJlZSBjb2xvciBmaWVsZHMgb3JiaXQgc2xvd2x5LicsIHgsIHkrKywgMTYwLCAxODAsIDIxMCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA3MCwgMTEwLCAxNDApOwoJZHJhd1RleHQoJ1NlcGFyYXRlIGFuaW1hdGVkIGluayBhbmQgcGFwZXIuJywgeCwgeSsrLCAxNTAsIDI1NSwgMTkwKTsKfSk7Cgpjb25zdCBpbmsgPSBvc2MoNiwgMC4wMTgsIDEuNikucm90YXRlKHR1cm4sIDAuMDAyKS5jb2xvcigwLjksIDAuNTgsIDEuMCkubW9kdWxhdGVLYWxlaWQobm9pc2UoMi4wLCAwLjAxNCksIDUpOwpjb25zdCBwYXBlciA9IHBsYXNtYSgzLjIsIDAuMDI0LCAwLjIsIDEuMDgpLmNvbG9yKDAuMDgsIDAuMDM1LCAwLjE2KS5odWUoc2xvdyk7CmNvbnN0IHR1cm5BID0gWy0wLjM1LCAwLjM1XS5mYXN0KDAuMTIpLmVhc2UoJ2Vhc2VJbk91dFNpbmUnKTsKCnQuc3ludGgoCglvc2MoMTAsIDAuMDI0LCAxLjApCgkJLnJvdGF0ZSh0dXJuQSkKCQkua2FsZWlkKDUpCgkJLnNjcmVlbihvc2MoMTAsIDAuMDIsIDEuNykucm90YXRlKHR1cm5BLm9mZnNldCgwLjMzKSksIDAuMzgpCgkJLnNjcmVlbihvc2MoMTAsIDAuMDE4LCAyLjQpLnJvdGF0ZSh0dXJuQS5vZmZzZXQoMC42NikpLCAwLjMyKQoJCS5tb2R1bGF0ZShub2lzZSgyLjMsIDAuMDE4KSwgMC4wMzUpCgkJLmNvbnRyYXN0KDEuMikKCQkuY2hhck1hcChnbHlwaHMpCgkJLmNoYXJDb2xvcihpbmspCgkJLmNlbGxDb2xvcihwYXBlcikKKTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 8,
+	plugins: [SynthPlugin],
+});
+
+t.bpm(18);
+
+const labelLayer = t.layers.add();
+const glyphs = ' .:-=+*#%@';
+const slow = [0.0, 1.0].fast(0.16).ease('easeInOutSine');
+const turn = [-0.42, 0.42].fast(0.14).ease('easeInOutSine');
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('MODULATEDARRAY.OFFSET', x, y++, 110, 255, 170);
+	drawText('------------------------------------', x, y++, 70, 110, 140);
+	drawText('PHASE OFFSET CYCLING', x, y++, 120, 220, 255);
+	drawText('Offsets stagger shared motion.', x, y++, 160, 180, 210);
+	drawText('Three color fields orbit slowly.', x, y++, 160, 180, 210);
+	drawText('------------------------------------', x, y++, 70, 110, 140);
+	drawText('Separate animated ink and paper.', x, y++, 150, 255, 190);
+});
+
+const ink = osc(6, 0.018, 1.6).rotate(turn, 0.002).color(0.9, 0.58, 1.0).modulateKaleid(noise(2.0, 0.014), 5);
+const paper = plasma(3.2, 0.024, 0.2, 1.08).color(0.08, 0.035, 0.16).hue(slow);
+const turnA = [-0.35, 0.35].fast(0.12).ease('easeInOutSine');
+
+t.synth(
+	osc(10, 0.024, 1.0)
+		.rotate(turnA)
+		.kaleid(5)
+		.screen(osc(10, 0.02, 1.7).rotate(turnA.offset(0.33)), 0.38)
+		.screen(osc(10, 0.018, 2.4).rotate(turnA.offset(0.66)), 0.32)
+		.modulate(noise(2.3, 0.018), 0.035)
+		.contrast(1.2)
+		.charMap(glyphs)
+		.charColor(ink)
+		.cellColor(paper)
+);
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

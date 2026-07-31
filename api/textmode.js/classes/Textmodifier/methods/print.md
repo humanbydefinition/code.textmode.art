@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / print
@@ -46,5 +46,72 @@ like `[fg=red]`, `[bg=color]`, `[inv]`, `[rot=90]`, `[fx]`, `[fy]`, and their cl
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="print" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDEwLCAyMik7CgoJLy8gU3VidGxlIGR5bmFtaWMgYmFja2dyb3VuZCBwYXJ0aWNsZXMKCWZvciAobGV0IGkgPSAwOyBpIDwgMTU7IGkrKykgewoJCWNvbnN0IGFuZ2xlID0gdC5mcmFtZUNvdW50ICogMC4wMiArIGk7CgkJY29uc3QgcmFkaXVzID0gOCArIChpICUgMykgKiAyLjU7CgkJdC5wdXNoKCk7CgkJdC50cmFuc2xhdGUoTWF0aC5jb3MoYW5nbGUpICogcmFkaXVzICogMS42LCBNYXRoLnNpbihhbmdsZSkgKiByYWRpdXMpOwoJCXQuY2hhckNvbG9yKDMwLCA0NSwgODApOwoJCXQuY2hhcihpICUgMiA9PT0gMCA_ICcuJyA6ICcrJyk7CgkJdC5wb2ludCgpOwoJCXQucG9wKCk7Cgl9Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCgl0LnB1c2goKTsKCXQuY2hhckNvbG9yKDEwMCwgMjU1LCAxNDApOwoJdC5wcmludCgnVEVYVE1PRElGSUVSLlBSSU5UJywgeCwgeSsrKTsKCXQucG9wKCk7CgoJdC5wdXNoKCk7Cgl0LmNoYXJDb2xvcig4MCwgMTAwLCAxNTApOwoJdC5wcmludCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrKTsKCXQucG9wKCk7CgoJdC5wdXNoKCk7Cgl0LmNoYXJDb2xvcigxMDAsIDIyMCwgMjU1KTsKCXQucHJpbnQoJ0NPTkNFUFQ6IE5BVElWRSBSSUNIIFRZUE9HUkFQSFknLCB4LCB5KyspOwoJdC5wb3AoKTsKCgl0LnB1c2goKTsKCXQuY2hhckNvbG9yKDE0MCwgMTYwLCAxOTApOwoJdC5wcmludCgnUHJpbnRzIHN0cmluZ3Mgd2l0aCBpbmxpbmUgQkJDb2RlLXN0eWxlIHRhZ3M6JywgeCwgeSsrKTsKCXQucHJpbnQoJyAgLSBbZmc9Z3JlZW5dRm9yZWdyb3VuZCBDb2xvclsvZmddJywgeCwgeSsrKTsKCXQucHJpbnQoJyAgLSBbYmc9Ymx1ZV1CYWNrZ3JvdW5kIENvbG9yWy9iZ10nLCB4LCB5KyspOwoJdC5wcmludCgnICAtIFtpbnZdSW52ZXJ0ZWQgY29sb3JzWy9pbnZdJywgeCwgeSsrKTsKCXQucHJpbnQoJyAgLSBbcm90PTkwXVJvdGF0ZWRbL3JvdF0gW2Z4XUZsaXAgWFsvZnhdIFtmeV1GbGlwIFlbL2Z5XScsIHgsIHkrKyk7Cgl0LnBvcCgpOwoKCXQucHVzaCgpOwoJdC5jaGFyQ29sb3IoODAsIDEwMCwgMTUwKTsKCXQucHJpbnQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKyk7Cgl0LnBvcCgpOwoKCXQucHJpbnQoJ05FU1RFRDogW2ZnPXllbGxvd11baW52XVtyb3Q9MTgwXSBMRVZFTCAwNSBbL3JvdF1bL2ludl1bL2ZnXSB8IFNUQVRVUzogW2ZnPXJlZF1DUklUSUNBTFsvZmddJywgeCwgeSsrKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+t.draw(() => {
+	t.background(6, 10, 22);
+
+	// Subtle dynamic background particles
+	for (let i = 0; i < 15; i++) {
+		const angle = t.frameCount * 0.02 + i;
+		const radius = 8 + (i % 3) * 2.5;
+		t.push();
+		t.translate(Math.cos(angle) * radius * 1.6, Math.sin(angle) * radius);
+		t.charColor(30, 45, 80);
+		t.char(i % 2 === 0 ? '.' : '+');
+		t.point();
+		t.pop();
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	t.push();
+	t.charColor(100, 255, 140);
+	t.print('TEXTMODIFIER.PRINT', x, y++);
+	t.pop();
+
+	t.push();
+	t.charColor(80, 100, 150);
+	t.print('------------------------------------', x, y++);
+	t.pop();
+
+	t.push();
+	t.charColor(100, 220, 255);
+	t.print('CONCEPT: NATIVE RICH TYPOGRAPHY', x, y++);
+	t.pop();
+
+	t.push();
+	t.charColor(140, 160, 190);
+	t.print('Prints strings with inline BBCode-style tags:', x, y++);
+	t.print('  - [fg=green]Foreground Color[/fg]', x, y++);
+	t.print('  - [bg=blue]Background Color[/bg]', x, y++);
+	t.print('  - [inv]Inverted colors[/inv]', x, y++);
+	t.print('  - [rot=90]Rotated[/rot] [fx]Flip X[/fx] [fy]Flip Y[/fy]', x, y++);
+	t.pop();
+
+	t.push();
+	t.charColor(80, 100, 150);
+	t.print('------------------------------------', x, y++);
+	t.pop();
+
+	t.print('NESTED: [fg=yellow][inv][rot=180] LEVEL 05 [/rot][/inv][/fg] | STATUS: [fg=red]CRITICAL[/fg]', x, y++);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

@@ -8,7 +8,7 @@ api: true
 owner: SynthSource
 kind: Method
 ecosystem: textmode.js
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.synth.js](../../../index.md) / [SynthSource](../../SynthSource.md) / modulateRepeat
@@ -42,5 +42,65 @@ Modulate repeat pattern with another source.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="modulateRepeat" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW1N5bnRoUGx1Z2luXSwKfSk7Cgp0LmJwbSgxOCk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IGdseXBocyA9ICcgLjotPSsqIyVAJzsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnU1lOVEhTT1VSQ0UuTU9EUkVQRUFUJywgeCwgeSsrLCAxMTAsIDI1NSwgMTcwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDcwLCAxMTAsIDE0MCk7CglkcmF3VGV4dCgnV0FSUEVEIFRJTElORycsIHgsIHkrKywgMTIwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnQSBzb3VyY2Ugb2Zmc2V0cyByZXBlYXRzLicsIHgsIHkrKywgMTYwLCAxODAsIDIxMCk7CglkcmF3VGV4dCgnVGlsZXMgc3dpbSBpbiBmb3JtYXRpb24uJywgeCwgeSsrLCAxNjAsIDE4MCwgMjEwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDcwLCAxMTAsIDE0MCk7CglkcmF3VGV4dCgnU2VwYXJhdGUgYW5pbWF0ZWQgaW5rIGFuZCBwYXBlci4nLCB4LCB5KyssIDE1MCwgMjU1LCAxOTApOwp9KTsKCmNvbnN0IGluayA9IHBsYXNtYSg0LjIsIDAuMDI0LCAwLjAsIDEuMTIpLmNvbG9yKDAuNDIsIDEuMCwgMC41OCkubW9kdWxhdGVSb3RhdGUobm9pc2UoMi4wLCAwLjAxNSksIDAuMjgsIDAuMDQpOwpjb25zdCBwYXBlciA9IG1vaXJlKDYsIDcsIDAuMCwgMS41NywgMC4wMTgpLmNvbG9yKDAuMDI1LCAwLjEzLCAwLjA2NSkuc29mdGxpZ2h0KG5vaXNlKDIuMCwgMC4wMTQpLCAwLjE4KTsKCnQuc3ludGgoCglvc2MoOCwgMC4wMTgsIDEuMCkKCQkubW9kdWxhdGVSZXBlYXQoCgkJCW5vaXNlKDIuNSwgMC4wMTgpLAoJCQlbMiwgNF0uZmFzdCgwLjEpLmVhc2UoJ2Vhc2VJbk91dFNpbmUnKSwKCQkJWzMsIDVdLmZhc3QoMC4xMikuZWFzZSgnZWFzZUluT3V0U2luZScpLAoJCQkwLjE4LAoJCQkwLjEyCgkJKQoJCS5jb2xvcigwLjM1LCAwLjg1LCAxLjApCgkJLnNvZnRsaWdodChwbGFzbWEoMywgMC4wMTgpLCAwLjMyKQoJCS5jb250cmFzdCgxLjE4KQoJCS5jaGFyTWFwKGdseXBocykKCQkuY2hhckNvbG9yKGluaykKCQkuY2VsbENvbG9yKHBhcGVyKQopOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 8,
+	plugins: [SynthPlugin],
+});
+
+t.bpm(18);
+
+const labelLayer = t.layers.add();
+const glyphs = ' .:-=+*#%@';
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('SYNTHSOURCE.MODREPEAT', x, y++, 110, 255, 170);
+	drawText('------------------------------------', x, y++, 70, 110, 140);
+	drawText('WARPED TILING', x, y++, 120, 220, 255);
+	drawText('A source offsets repeats.', x, y++, 160, 180, 210);
+	drawText('Tiles swim in formation.', x, y++, 160, 180, 210);
+	drawText('------------------------------------', x, y++, 70, 110, 140);
+	drawText('Separate animated ink and paper.', x, y++, 150, 255, 190);
+});
+
+const ink = plasma(4.2, 0.024, 0.0, 1.12).color(0.42, 1.0, 0.58).modulateRotate(noise(2.0, 0.015), 0.28, 0.04);
+const paper = moire(6, 7, 0.0, 1.57, 0.018).color(0.025, 0.13, 0.065).softlight(noise(2.0, 0.014), 0.18);
+
+t.synth(
+	osc(8, 0.018, 1.0)
+		.modulateRepeat(
+			noise(2.5, 0.018),
+			[2, 4].fast(0.1).ease('easeInOutSine'),
+			[3, 5].fast(0.12).ease('easeInOutSine'),
+			0.18,
+			0.12
+		)
+		.color(0.35, 0.85, 1.0)
+		.softlight(plasma(3, 0.018), 0.32)
+		.contrast(1.18)
+		.charMap(glyphs)
+		.charColor(ink)
+		.cellColor(paper)
+);
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

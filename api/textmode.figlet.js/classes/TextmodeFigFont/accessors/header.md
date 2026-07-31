@@ -8,7 +8,7 @@ api: true
 owner: TextmodeFigFont
 kind: Accessor
 ecosystem: textmode.js
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.figlet.js](../../../index.md) / [TextmodeFigFont](../../TextmodeFigFont.md) / header
@@ -29,5 +29,79 @@ The parsed FIGfont header metadata.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.figlet.js" language="javascript" title="header" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW0ZpZ2xldFBsdWdpbl0sCn0pOwoKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKbGV0IGZvbnQ7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCnQuc2V0dXAoYXN5bmMgKCkgPT4gewoJZm9udCA9IGF3YWl0IHQubG9hZEZpZ0ZvbnQoJ2h0dHBzOi8vY2RuLmpzZGVsaXZyLm5ldC9naC94ZXJvL2ZpZ2xldC1mb250c0BtYXN0ZXIvQnVsYmhlYWQuZmxmJyk7Cgl0LmZpZ0ZvbnQoZm9udCk7Cgl0LmZpZ1RleHRBbGlnbignY2VudGVyJyk7Cgl0LmZpZ1RleHRCYXNlbGluZSgnY2VudGVyJyk7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnVEVYVE1PREVGSUdGT05ULkhFQURFUicsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IEZJR0ZPTlQgSEVBREVSIEFDQ0VTUycsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnQWNjZXNzZXMgcGFyc2VkIGZvbnQgaGVhZGVyIG1ldGFkYXRhLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnSW5zcGVjdHMgZm9udCBzcGVjcyBhbmQgbGF5b3V0IG9wdGlvbnMuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglpZiAoZm9udCkgewoJCWRyYXdUZXh0KCdIZWFkZXIgcHJvcGVydGllcyBwcmludGVkIGJlbG93JywgeCwgeSsrLCAxNDAsIDI1NSwgMTgwKTsKCX0gZWxzZSB7CgkJZHJhd1RleHQoJ0xvYWRpbmcgaGVhZGVyLi4uJywgeCwgeSsrLCAyNTUsIDE4MCwgMTAwKTsKCX0KfSk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDEwLCAxMiwgMTQpOwoKCWlmICghZm9udCkgcmV0dXJuOwoKCS8vIFJlbmRlciAiSEVBREVSIiBhdCB0aGUgdG9wIGNlbnRlcgoJdC5maWdUZXh0KCdIRUFERVInLCAwLCAtNSk7CgoJLy8gUmVuZGVyIHRoZSBwYXJzZWQgaGVhZGVyIHByb3BlcnRpZXMgaW4gYSB0YWJsZQoJdC5wdXNoKCk7Cgljb25zdCB0aW1lID0gdC5zZWNzICogMS41OwoJY29uc3QgYyA9IDAuNSArIDAuNSAqIE1hdGguc2luKHRpbWUpOwoJdC5jaGFyQ29sb3IoTWF0aC5yb3VuZCgxMDAgKyAxNTUgKiBjKSwgTWF0aC5yb3VuZCgyMDAgKyA1NSAqICgxLjAgLSBjKSksIDI1NSk7CgoJY29uc3QgaCA9IGZvbnQuaGVhZGVyOwoJdC5wcmludEFsaWduKCdjZW50ZXInLCAnY2VudGVyJyk7Cgl0LnByaW50KGBzaWduYXR1cmUgOiAke2guc2lnbmF0dXJlfWAsIDAsIDIpOwoJdC5wcmludChgaGFyZGJsYW5rIDogJHtoLmhhcmRibGFua31gLCAwLCA0KTsKCXQucHJpbnQoYGhlaWdodCAgICA6ICR7aC5oZWlnaHR9YCwgMCwgNik7Cgl0LnByaW50KGBiYXNlbGluZSAgOiAke2guYmFzZWxpbmV9YCwgMCwgOCk7Cgl0LnByaW50KGBjb21tZW50TGluZXMgOiAke2guY29tbWVudExpbmVzfWAsIDAsIDEwKTsKCXQucG9wKCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 8,
+	plugins: [FigletPlugin],
+});
+
+const labelLayer = t.layers.add();
+
+let font;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.setup(async () => {
+	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Bulbhead.flf');
+	t.figFont(font);
+	t.figTextAlign('center');
+	t.figTextBaseline('center');
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODEFIGFONT.HEADER', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: FIGFONT HEADER ACCESS', x, y++, 100, 220, 255);
+	drawText('Accesses parsed font header metadata.', x, y++, 140, 160, 190);
+	drawText('Inspects font specs and layout options.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	if (font) {
+		drawText('Header properties printed below', x, y++, 140, 255, 180);
+	} else {
+		drawText('Loading header...', x, y++, 255, 180, 100);
+	}
+});
+
+t.draw(() => {
+	t.background(10, 12, 14);
+
+	if (!font) return;
+
+	// Render "HEADER" at the top center
+	t.figText('HEADER', 0, -5);
+
+	// Render the parsed header properties in a table
+	t.push();
+	const time = t.secs * 1.5;
+	const c = 0.5 + 0.5 * Math.sin(time);
+	t.charColor(Math.round(100 + 155 * c), Math.round(200 + 55 * (1.0 - c)), 255);
+
+	const h = font.header;
+	t.printAlign('center', 'center');
+	t.print(`signature : ${h.signature}`, 0, 2);
+	t.print(`hardblank : ${h.hardblank}`, 0, 4);
+	t.print(`height    : ${h.height}`, 0, 6);
+	t.print(`baseline  : ${h.baseline}`, 0, 8);
+	t.print(`commentLines : ${h.commentLines}`, 0, 10);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

@@ -8,7 +8,7 @@ api: true
 owner: TextmodeFigFont
 kind: Accessor
 ecosystem: textmode.js
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.figlet.js](../../../index.md) / [TextmodeFigFont](../../TextmodeFigFont.md) / name
@@ -29,5 +29,71 @@ The display name associated with this FIGfont.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.figlet.js" language="javascript" title="name" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW0ZpZ2xldFBsdWdpbl0sCn0pOwoKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKbGV0IGZvbnQ7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCnQuc2V0dXAoYXN5bmMgKCkgPT4gewoJZm9udCA9IGF3YWl0IHQubG9hZEZpZ0ZvbnQoJ2h0dHBzOi8vY2RuLmpzZGVsaXZyLm5ldC9naC94ZXJvL2ZpZ2xldC1mb250c0BtYXN0ZXIvQnVsYmhlYWQuZmxmJyk7Cgl0LmZpZ0ZvbnQoZm9udCk7Cgl0LmZpZ1RleHRBbGlnbignY2VudGVyJyk7Cgl0LmZpZ1RleHRCYXNlbGluZSgnY2VudGVyJyk7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnVEVYVE1PREVGSUdGT05ULk5BTUUnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBGT05UIE5BTUUgQUNDRVNTJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdBY2Nlc3NlcyBtZXRhZGF0YSBuYW1lIG9mIEZJR2ZvbnQuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdEeW5hbWljYWxseSBxdWVyaWVzIGxvYWRlZCBmaWxlLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJaWYgKGZvbnQpIHsKCQlkcmF3VGV4dChgRm9udCBuYW1lOiAiJHtmb250Lm5hbWV9ImAsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7Cgl9IGVsc2UgewoJCWRyYXdUZXh0KCdMb2FkaW5nIGZvbnQuLi4nLCB4LCB5KyssIDI1NSwgMTgwLCAxMDApOwoJfQp9KTsKCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoMTAsIDEwLCAxNik7CgoJaWYgKCFmb250KSByZXR1cm47CgoJY29uc3QgdGltZSA9IHQuc2VjcyAqIDEuNTsKCgkvLyBSZW5kZXIgdGhlIGZvbnQgbmFtZSBpdHNlbGYgdXNpbmcgdGhlIGFjdGl2ZSBmb250Cgl0LmZpZ1RleHQoZm9udC5uYW1lLnRvVXBwZXJDYXNlKCksIDAsIDAsIHsKCQljaGFyQ29sb3I6IChjZWxsKSA9PiB7CgkJCWNvbnN0IHdhdmUgPSAwLjUgKyAwLjUgKiBNYXRoLnNpbih0aW1lICsgY2VsbC5jb2wgKiAwLjE1KTsKCQkJcmV0dXJuIFtNYXRoLnJvdW5kKDEwMCArIDE1NSAqIHdhdmUpLCBNYXRoLnJvdW5kKDIwMCArIDU1ICogKDEuMCAtIHdhdmUpKSwgMjU1XTsKCQl9LAoJfSk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 8,
+	plugins: [FigletPlugin],
+});
+
+const labelLayer = t.layers.add();
+
+let font;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.setup(async () => {
+	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Bulbhead.flf');
+	t.figFont(font);
+	t.figTextAlign('center');
+	t.figTextBaseline('center');
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODEFIGFONT.NAME', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: FONT NAME ACCESS', x, y++, 100, 220, 255);
+	drawText('Accesses metadata name of FIGfont.', x, y++, 140, 160, 190);
+	drawText('Dynamically queries loaded file.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	if (font) {
+		drawText(`Font name: "${font.name}"`, x, y++, 140, 255, 180);
+	} else {
+		drawText('Loading font...', x, y++, 255, 180, 100);
+	}
+});
+
+t.draw(() => {
+	t.background(10, 10, 16);
+
+	if (!font) return;
+
+	const time = t.secs * 1.5;
+
+	// Render the font name itself using the active font
+	t.figText(font.name.toUpperCase(), 0, 0, {
+		charColor: (cell) => {
+			const wave = 0.5 + 0.5 * Math.sin(time + cell.col * 0.15);
+			return [Math.round(100 + 155 * wave), Math.round(200 + 55 * (1.0 - wave)), 255];
+		},
+	});
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

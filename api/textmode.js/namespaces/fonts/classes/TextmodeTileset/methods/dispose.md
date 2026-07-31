@@ -8,7 +8,7 @@ api: true
 owner: TextmodeTileset
 namespace: fonts
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../../../index.md) / [fonts](../../../index.md) / [TextmodeTileset](../../TextmodeTileset.md) / dispose
@@ -27,7 +27,101 @@ Dispose the tileset and release its shared atlas resources.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="dispose" encoded-code="Y29uc3QgVDY0X1VSTCA9ICdodHRwczovL2xpdHRsZWJpdHNwYWNlLmNvbS9yZXNvdXJjZXMvZm9udHMvVDY0LnBuZyc7CmNvbnN0IHQgPSB0ZXh0bW9kZS5jcmVhdGUoewoJd2lkdGg6IHdpbmRvdy5pbm5lcldpZHRoLAoJaGVpZ2h0OiB3aW5kb3cuaW5uZXJIZWlnaHQsCglmb250U2l6ZTogMTYsCn0pOwoKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwpsZXQgZGlzcG9zYWJsZVRpbGVzZXQgPSBudWxsOwpsZXQgZm9udFJlYWR5ID0gZmFsc2U7CmxldCBpc0Rpc3Bvc2VkID0gZmFsc2U7Cgp0LnNldHVwKGFzeW5jICgpID0-IHsKCWRpc3Bvc2FibGVUaWxlc2V0ID0gYXdhaXQgdC5sb2FkVGlsZXNldCh7IHNvdXJjZTogVDY0X1VSTCwgY29sdW1uczogMTYsIHJvd3M6IDE2LCBjb3VudDogMjU2LCBmb250U2l6ZTogMTYgfSk7Cglmb250UmVhZHkgPSB0cnVlOwp9KTsKCnQubW91c2VQcmVzc2VkKCgpID0-IHsKCWlmIChkaXNwb3NhYmxlVGlsZXNldCAmJiAhaXNEaXNwb3NlZCkgewoJCWRpc3Bvc2FibGVUaWxlc2V0LmRpc3Bvc2UoKTsKCQlpc0Rpc3Bvc2VkID0gdHJ1ZTsKCX0KfSk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDE2LCA2LCAxMCk7Cgljb25zdCBodyA9IE1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IGhoID0gTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJY29uc3QgdG0gPSB0LmZyYW1lQ291bnQgKiAwLjA1OwoJY29uc3QgYWN0aXZlQ2hhcnMgPSBmb250UmVhZHkgJiYgIWlzRGlzcG9zZWQgJiYgZGlzcG9zYWJsZVRpbGVzZXQgPyBkaXNwb3NhYmxlVGlsZXNldC5jaGFyYWN0ZXJzIDogW107CgoJZm9yIChsZXQgeSA9IC1oaDsgeSA8PSBoaDsgeSsrKSB7CgkJZm9yIChsZXQgeCA9IC1odzsgeCA8PSBodzsgeCsrKSB7CgkJCWNvbnN0IGRpc3QgPSBNYXRoLmh5cG90KHgsIHkpOwoJCQljb25zdCB3YXZlID0gTWF0aC5zaW4oZGlzdCAqIDAuMzUgLSB0bSAqIDIpOwoJCQljb25zdCBub3JtID0gKHdhdmUgKyAxKSAqIDAuNTsKCgkJCWNvbnN0IGNoYXJJZHggPSBNYXRoLmZsb29yKE1hdGguYWJzKGRpc3QgKiAwLjYgKyB0bSAqIDYpICUgKGFjdGl2ZUNoYXJzLmxlbmd0aCB8fCAxKSk7CgkJCWNvbnN0IGdseXBoT2JqID0gYWN0aXZlQ2hhcnNbY2hhcklkeF07CgkJCWNvbnN0IGNoYXJLZXkgPSBpc0Rpc3Bvc2VkID8gJy4nIDogZ2x5cGhPYmogPyBnbHlwaE9iai5jaGFyYWN0ZXIgOiAnIyc7CgoJCQl0LnB1c2goKTsKCQkJdC50cmFuc2xhdGUoeCwgeSk7CgkJCXQuY2hhckNvbG9yKAoJCQkJaXNEaXNwb3NlZCA_IDkwIDogTWF0aC5mbG9vcigyNDAgLSBub3JtICogMTQwKSwKCQkJCWlzRGlzcG9zZWQgPyA0MCA6IE1hdGguZmxvb3IoMTAwICsgbm9ybSAqIDE0MCksCgkJCQlpc0Rpc3Bvc2VkID8gNTAgOiBNYXRoLmZsb29yKDE4MCArIG5vcm0gKiA3NSkKCQkJKTsKCQkJdC5jZWxsQ29sb3IoCgkJCQlpc0Rpc3Bvc2VkID8gMTggOiBNYXRoLmZsb29yKDIwICsgbm9ybSAqIDE1KSwKCQkJCWlzRGlzcG9zZWQgPyA2IDogTWF0aC5mbG9vcig2ICsgbm9ybSAqIDEwKSwKCQkJCWlzRGlzcG9zZWQgPyA4IDogTWF0aC5mbG9vcigxMiArIG5vcm0gKiAyMCkKCQkJKTsKCQkJdC5jaGFyKGNoYXJLZXkpOwoJCQl0LnBvaW50KCk7CgkJCXQucG9wKCk7CgkJfQoJfQp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CgoJY29uc3Qgc3RhdGVUZXh0ID0gaXNEaXNwb3NlZCA_ICdESVNQT1NFRCAoR1BVIE1FTU9SWSBGUkVFRCknIDogJ0FDVElWRSAoR0xZUEggQVRMQVMgUkVBRFkpJzsKCgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKDEyMCwgMjQwLCAxODApOwoJdC5wcmludCgnVEVYVE1PREVUSUxFU0VULkRJU1BPU0UnLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoNzAsIDEwMCwgMTQwKTsKCXQucHJpbnQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDIxMCwgMjU1KTsKCXQucHJpbnQoJ0NPTkNFUFQ6IEdQVSBBVExBUyBESVNTT0xWRSBNQVRSSVgnLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAxNjAsIDE5MCk7Cgl0LnByaW50KCd0aWxlc2V0LmRpc3Bvc2UoKSByZWxlYXNlcyBXZWJHTCBHUFUnLCB4LCB5KyspOwoJdC5wcmludCgndGV4dHVyZXMgYW5kIGF0bGFzIGZyYW1lYnVmZmVyLicsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcig3MCwgMTAwLCAxNDApOwoJdC5wcmludCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMjU1LCAyMDApOwoJdC5wcmludChgU1RBVFVTOiAke3N0YXRlVGV4dH1gLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMjU1LCAyMDAsIDEwMCk7Cgl0LnByaW50KCdDTElDSyBDQU5WQVMgVE8gRElTUE9TRSBUSUxFU0VUJywgeCwgeSsrKTsKCXQucG9wKCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const T64_URL = 'https://littlebitspace.com/resources/fonts/T64.png';
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let disposableTileset = null;
+let fontReady = false;
+let isDisposed = false;
+
+t.setup(async () => {
+	disposableTileset = await t.loadTileset({ source: T64_URL, columns: 16, rows: 16, count: 256, fontSize: 16 });
+	fontReady = true;
+});
+
+t.mousePressed(() => {
+	if (disposableTileset && !isDisposed) {
+		disposableTileset.dispose();
+		isDisposed = true;
+	}
+});
+
+t.draw(() => {
+	t.background(16, 6, 10);
+	const hw = Math.floor(t.grid.cols / 2);
+	const hh = Math.floor(t.grid.rows / 2);
+	const tm = t.frameCount * 0.05;
+	const activeChars = fontReady && !isDisposed && disposableTileset ? disposableTileset.characters : [];
+
+	for (let y = -hh; y <= hh; y++) {
+		for (let x = -hw; x <= hw; x++) {
+			const dist = Math.hypot(x, y);
+			const wave = Math.sin(dist * 0.35 - tm * 2);
+			const norm = (wave + 1) * 0.5;
+
+			const charIdx = Math.floor(Math.abs(dist * 0.6 + tm * 6) % (activeChars.length || 1));
+			const glyphObj = activeChars[charIdx];
+			const charKey = isDisposed ? '.' : glyphObj ? glyphObj.character : '#';
+
+			t.push();
+			t.translate(x, y);
+			t.charColor(
+				isDisposed ? 90 : Math.floor(240 - norm * 140),
+				isDisposed ? 40 : Math.floor(100 + norm * 140),
+				isDisposed ? 50 : Math.floor(180 + norm * 75)
+			);
+			t.cellColor(
+				isDisposed ? 18 : Math.floor(20 + norm * 15),
+				isDisposed ? 6 : Math.floor(6 + norm * 10),
+				isDisposed ? 8 : Math.floor(12 + norm * 20)
+			);
+			t.char(charKey);
+			t.point();
+			t.pop();
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const stateText = isDisposed ? 'DISPOSED (GPU MEMORY FREED)' : 'ACTIVE (GLYPH ATLAS READY)';
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODETILESET.DISPOSE', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: GPU ATLAS DISSOLVE MATRIX', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('tileset.dispose() releases WebGL GPU', x, y++);
+	t.print('textures and atlas framebuffer.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 200);
+	t.print(`STATUS: ${stateText}`, x, y++);
+	t.charColor(255, 200, 100);
+	t.print('CLICK CANVAS TO DISPOSE TILESET', x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 
 ## Overrides
 

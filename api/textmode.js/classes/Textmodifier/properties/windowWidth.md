@@ -7,7 +7,7 @@ category: Properties
 api: true
 owner: Textmodifier
 kind: Property
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / windowWidth
@@ -22,5 +22,81 @@ Current browser window width in pixels.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="windowWidth" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCB3aW5XID0gMDsKbGV0IGZpbGwgPSAwOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9CgpmdW5jdGlvbiBkcmF3QmFuZCh4LCB5LCB3aWR0aCwgaGVpZ2h0LCByLCBnLCBiKSB7Cgl0LnB1c2goKTsKCXQudHJhbnNsYXRlKHgsIHkpOwoJdC5jaGFyKCfilognKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5yZWN0KHdpZHRoLCBoZWlnaHQpOwoJdC5wb3AoKTsKfQoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg1LCAxMCwgMTgpOwoJd2luVyA9IHQud2luZG93V2lkdGg7Cgljb25zdCBoYWxmQ29scyA9IE1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IGxlZnQgPSAtaGFsZkNvbHMgKyA0OwoJY29uc3QgcmlnaHQgPSBoYWxmQ29scyAtIDQ7Cgljb25zdCB3aWR0aCA9IE1hdGgubWF4KDYsIHJpZ2h0IC0gbGVmdCArIDEpOwoJY29uc3QgY2VudGVyID0gKGxlZnQgKyByaWdodCkgLyAyOwoJZmlsbCA9IHQuY29uc3RyYWluKE1hdGgucm91bmQodC5tYXAod2luVywgMzIwLCBNYXRoLm1heCgzMjEsIHQuZGlzcGxheVdpZHRoKSwgNCwgd2lkdGgpKSwgNCwgd2lkdGgpOwoKCWRyYXdCYW5kKGNlbnRlciwgLTcsIHdpZHRoLCAxLCA0MCwgNTUsIDg1KTsKCWRyYXdCYW5kKGNlbnRlciwgNywgd2lkdGgsIDEsIDQwLCA1NSwgODUpOwoJZHJhd0JhbmQobGVmdCwgMCwgMSwgMTUsIDc1LCAxNDUsIDE5MCk7CglkcmF3QmFuZChyaWdodCwgMCwgMSwgMTUsIDc1LCAxNDUsIDE5MCk7CglkcmF3QmFuZChsZWZ0ICsgZmlsbCAvIDIgLSAwLjUsIDAsIGZpbGwsIDEsIDEyMCwgMjQ1LCAxOTApOwoKCWZvciAobGV0IGkgPSAwOyBpIDwgd2lkdGg7IGkgKz0gMikgewoJCWNvbnN0IHggPSBsZWZ0ICsgaTsKCQljb25zdCBoZWlnaHQgPSBNYXRoLnJvdW5kKHQubWFwKE1hdGguc2luKGkgKiAwLjQgKyB0LmZyYW1lQ291bnQgKiAwLjA0KSwgLTEsIDEsIDIsIDEwKSk7CgkJY29uc3QgYWN0aXZlID0gaSA8PSBmaWxsOwoJCXQucHVzaCgpOwoJCXQudHJhbnNsYXRlKHgsIDApOwoJCXQuY2hhcihhY3RpdmUgPyAnIycgOiAnOicpOwoJCXQuY2hhckNvbG9yKGFjdGl2ZSA_IDEyMCA6IDQ1LCBhY3RpdmUgPyAyMjAgOiA3MCwgYWN0aXZlID8gMjU1IDogMTEwKTsKCQl0LnJlY3QoMSwgaGVpZ2h0KTsKCQl0LnBvcCgpOwoJfQp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLldJTkRPV1dJRFRIJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogVklFV1BPUlQgV0lEVEgnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ3dpbmRvd1dpZHRoIHJlYWRzIGlubmVyV2lkdGggbGl2ZS4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJ1Jlc2l6ZSBicm93c2VyIHRvIG1vdmUgdGhlIG1ldGVyLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoYFdJRFRIOiAke3dpbld9IFBYYCwgeCwgeSsrLCAxNDAsIDI1NSwgMTgwKTsKCWRyYXdUZXh0KGBDRUxMUzogJHtmaWxsfWAsIHgsIHkrKywgMjU1LCAyMTAsIDEyMCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let winW = 0;
+let fill = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+function drawBand(x, y, width, height, r, g, b) {
+	t.push();
+	t.translate(x, y);
+	t.char('█');
+	t.charColor(r, g, b);
+	t.rect(width, height);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(5, 10, 18);
+	winW = t.windowWidth;
+	const halfCols = Math.floor(t.grid.cols / 2);
+	const left = -halfCols + 4;
+	const right = halfCols - 4;
+	const width = Math.max(6, right - left + 1);
+	const center = (left + right) / 2;
+	fill = t.constrain(Math.round(t.map(winW, 320, Math.max(321, t.displayWidth), 4, width)), 4, width);
+
+	drawBand(center, -7, width, 1, 40, 55, 85);
+	drawBand(center, 7, width, 1, 40, 55, 85);
+	drawBand(left, 0, 1, 15, 75, 145, 190);
+	drawBand(right, 0, 1, 15, 75, 145, 190);
+	drawBand(left + fill / 2 - 0.5, 0, fill, 1, 120, 245, 190);
+
+	for (let i = 0; i < width; i += 2) {
+		const x = left + i;
+		const height = Math.round(t.map(Math.sin(i * 0.4 + t.frameCount * 0.04), -1, 1, 2, 10));
+		const active = i <= fill;
+		t.push();
+		t.translate(x, 0);
+		t.char(active ? '#' : ':');
+		t.charColor(active ? 120 : 45, active ? 220 : 70, active ? 255 : 110);
+		t.rect(1, height);
+		t.pop();
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.WINDOWWIDTH', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: VIEWPORT WIDTH', x, y++, 100, 220, 255);
+	drawText('windowWidth reads innerWidth live.', x, y++, 140, 160, 190);
+	drawText('Resize browser to move the meter.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`WIDTH: ${winW} PX`, x, y++, 140, 255, 180);
+	drawText(`CELLS: ${fill}`, x, y++, 255, 210, 120);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

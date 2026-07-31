@@ -6,7 +6,7 @@ description: Immutable character sequence for mapping numbers to glyphs.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 hasConstructor: true
 ---
 
@@ -23,7 +23,79 @@ Use [Textmodifier.createGlyphRamp](Textmodifier/methods/createGlyphRamp.md) to c
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="TextmodeGlyphRamp" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCByYW1wID0gdC5jcmVhdGVHbHlwaFJhbXAoJyAuOi09KyojJUAnKTsKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg2LCAxMiwgMTYpOwoJY29uc3QgaHcgPSBNYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCBoaCA9IE1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWNvbnN0IHRtID0gdC5mcmFtZUNvdW50ICogMC4wMzU7CgoJY29uc3Qgc2VlZHMgPSBbCgkJeyB4OiBNYXRoLmNvcyh0bSkgKiAoaHcgKiAwLjUpLCB5OiBNYXRoLnNpbih0bSAqIDAuOCkgKiAoaGggKiAwLjUpIH0sCgkJeyB4OiBNYXRoLmNvcyh0bSArIDIpICogKGh3ICogMC41KSwgeTogTWF0aC5zaW4odG0gKiAxLjEgKyAyKSAqIChoaCAqIDAuNSkgfSwKCQl7IHg6IE1hdGguY29zKHRtICsgNCkgKiAoaHcgKiAwLjUpLCB5OiBNYXRoLnNpbih0bSAqIDAuOSArIDQpICogKGhoICogMC41KSB9LAoJXTsKCglmb3IgKGxldCB5ID0gLWhoOyB5IDw9IGhoOyB5KyspIHsKCQlmb3IgKGxldCB4ID0gLWh3OyB4IDw9IGh3OyB4KyspIHsKCQkJbGV0IGRNaW4gPSBJbmZpbml0eTsKCQkJZm9yIChsZXQgaSA9IDA7IGkgPCBzZWVkcy5sZW5ndGg7IGkrKykgewoJCQkJY29uc3QgZCA9IE1hdGguaHlwb3QoeCAtIHNlZWRzW2ldLngsIHkgLSBzZWVkc1tpXS55KTsKCQkJCWlmIChkIDwgZE1pbikgZE1pbiA9IGQ7CgkJCX0KCgkJCWNvbnN0IHZhbCA9IE1hdGgubWluKDEsIGRNaW4gLyAoaHcgKiAwLjY1KSk7CgoJCQl0LnB1c2goKTsKCQkJdC50cmFuc2xhdGUoeCwgeSk7CgkJCXQuY2hhckNvbG9yKE1hdGguZmxvb3IoNDAgKyB2YWwgKiAyMDApLCBNYXRoLmZsb29yKDIyMCAtIHZhbCAqIDEwMCksIE1hdGguZmxvb3IoMTYwICsgdmFsICogODUpKTsKCQkJdC5jZWxsQ29sb3IoTWF0aC5mbG9vcig2ICsgdmFsICogMTUpLCBNYXRoLmZsb29yKDE4ICsgdmFsICogMjApLCBNYXRoLmZsb29yKDI0ICsgdmFsICogMjUpKTsKCQkJdC5jaGFyKHJhbXAuYXQodmFsKSk7CgkJCXQucG9pbnQoKTsKCQkJdC5wb3AoKTsKCQl9Cgl9Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKDEyMCwgMjQwLCAxODApOwoJdC5wcmludCgnVEVYVE1PREVHTFlQSFJBTVAuQ1JFQVRJT04nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoNzAsIDEwMCwgMTQwKTsKCXQucHJpbnQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDIxMCwgMjU1KTsKCXQucHJpbnQoJ0NPTkNFUFQ6IFZPUk9OT0kgR0xZUEggUkFNUCBNQVBQSU5HJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMTYwLCAxOTApOwoJdC5wcmludCgnQ3JlYXRlcyByZXVzYWJsZSBkZW5zaXR5IHJhbXBzLicsIHgsIHkrKyk7Cgl0LnByaW50KCdNYXBzIFZvcm9ub2kgZGlzdGFuY2VzIHRvIGdseXBocy4nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoNzAsIDEwMCwgMTQwKTsKCXQucHJpbnQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDI1NSwgMjAwKTsKCXQucHJpbnQoYFJBTVAgTEVOR1RIOiAke3JhbXAubGVuZ3RofSBHTFlQSFNgLCB4LCB5KyspOwoJdC5wb3AoKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const ramp = t.createGlyphRamp(' .:-=+*#%@');
+const labelLayer = t.layers.add();
+
+t.draw(() => {
+	t.background(6, 12, 16);
+	const hw = Math.floor(t.grid.cols / 2);
+	const hh = Math.floor(t.grid.rows / 2);
+	const tm = t.frameCount * 0.035;
+
+	const seeds = [
+		{ x: Math.cos(tm) * (hw * 0.5), y: Math.sin(tm * 0.8) * (hh * 0.5) },
+		{ x: Math.cos(tm + 2) * (hw * 0.5), y: Math.sin(tm * 1.1 + 2) * (hh * 0.5) },
+		{ x: Math.cos(tm + 4) * (hw * 0.5), y: Math.sin(tm * 0.9 + 4) * (hh * 0.5) },
+	];
+
+	for (let y = -hh; y <= hh; y++) {
+		for (let x = -hw; x <= hw; x++) {
+			let dMin = Infinity;
+			for (let i = 0; i < seeds.length; i++) {
+				const d = Math.hypot(x - seeds[i].x, y - seeds[i].y);
+				if (d < dMin) dMin = d;
+			}
+
+			const val = Math.min(1, dMin / (hw * 0.65));
+
+			t.push();
+			t.translate(x, y);
+			t.charColor(Math.floor(40 + val * 200), Math.floor(220 - val * 100), Math.floor(160 + val * 85));
+			t.cellColor(Math.floor(6 + val * 15), Math.floor(18 + val * 20), Math.floor(24 + val * 25));
+			t.char(ramp.at(val));
+			t.point();
+			t.pop();
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODEGLYPHRAMP.CREATION', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: VORONOI GLYPH RAMP MAPPING', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Creates reusable density ramps.', x, y++);
+	t.print('Maps Voronoi distances to glyphs.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 200);
+	t.print(`RAMP LENGTH: ${ramp.length} GLYPHS`, x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 
 ## Constructors
 
@@ -49,7 +121,78 @@ At least two grapheme clusters are required.
 
 #### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="TextmodeGlyphRamp" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCByYW1wID0gdC5jcmVhdGVHbHlwaFJhbXAoJyAuOi09KyojJUAnKTsKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg2LCAxMiwgMTYpOwoJY29uc3QgaHcgPSBNYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCBoaCA9IE1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWNvbnN0IHRtID0gdC5mcmFtZUNvdW50ICogMC4wMzU7CgoJY29uc3Qgc2VlZHMgPSBbCgkJeyB4OiBNYXRoLmNvcyh0bSkgKiAoaHcgKiAwLjUpLCB5OiBNYXRoLnNpbih0bSAqIDAuOCkgKiAoaGggKiAwLjUpIH0sCgkJeyB4OiBNYXRoLmNvcyh0bSArIDIpICogKGh3ICogMC41KSwgeTogTWF0aC5zaW4odG0gKiAxLjEgKyAyKSAqIChoaCAqIDAuNSkgfSwKCQl7IHg6IE1hdGguY29zKHRtICsgNCkgKiAoaHcgKiAwLjUpLCB5OiBNYXRoLnNpbih0bSAqIDAuOSArIDQpICogKGhoICogMC41KSB9LAoJXTsKCglmb3IgKGxldCB5ID0gLWhoOyB5IDw9IGhoOyB5KyspIHsKCQlmb3IgKGxldCB4ID0gLWh3OyB4IDw9IGh3OyB4KyspIHsKCQkJbGV0IGRNaW4gPSBJbmZpbml0eTsKCQkJZm9yIChsZXQgaSA9IDA7IGkgPCBzZWVkcy5sZW5ndGg7IGkrKykgewoJCQkJY29uc3QgZCA9IE1hdGguaHlwb3QoeCAtIHNlZWRzW2ldLngsIHkgLSBzZWVkc1tpXS55KTsKCQkJCWlmIChkIDwgZE1pbikgZE1pbiA9IGQ7CgkJCX0KCgkJCWNvbnN0IHZhbCA9IE1hdGgubWluKDEsIGRNaW4gLyAoaHcgKiAwLjY1KSk7CgoJCQl0LnB1c2goKTsKCQkJdC50cmFuc2xhdGUoeCwgeSk7CgkJCXQuY2hhckNvbG9yKE1hdGguZmxvb3IoNDAgKyB2YWwgKiAyMDApLCBNYXRoLmZsb29yKDIyMCAtIHZhbCAqIDEwMCksIE1hdGguZmxvb3IoMTYwICsgdmFsICogODUpKTsKCQkJdC5jZWxsQ29sb3IoTWF0aC5mbG9vcig2ICsgdmFsICogMTUpLCBNYXRoLmZsb29yKDE4ICsgdmFsICogMjApLCBNYXRoLmZsb29yKDI0ICsgdmFsICogMjUpKTsKCQkJdC5jaGFyKHJhbXAuYXQodmFsKSk7CgkJCXQucG9pbnQoKTsKCQkJdC5wb3AoKTsKCQl9Cgl9Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKDEyMCwgMjQwLCAxODApOwoJdC5wcmludCgnVEVYVE1PREVHTFlQSFJBTVAuQ1JFQVRJT04nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoNzAsIDEwMCwgMTQwKTsKCXQucHJpbnQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDIxMCwgMjU1KTsKCXQucHJpbnQoJ0NPTkNFUFQ6IFZPUk9OT0kgR0xZUEggUkFNUCBNQVBQSU5HJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMTYwLCAxOTApOwoJdC5wcmludCgnQ3JlYXRlcyByZXVzYWJsZSBkZW5zaXR5IHJhbXBzLicsIHgsIHkrKyk7Cgl0LnByaW50KCdNYXBzIFZvcm9ub2kgZGlzdGFuY2VzIHRvIGdseXBocy4nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoNzAsIDEwMCwgMTQwKTsKCXQucHJpbnQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDI1NSwgMjAwKTsKCXQucHJpbnQoYFJBTVAgTEVOR1RIOiAke3JhbXAubGVuZ3RofSBHTFlQSFNgLCB4LCB5KyspOwoJdC5wb3AoKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const ramp = t.createGlyphRamp(' .:-=+*#%@');
+const labelLayer = t.layers.add();
+
+t.draw(() => {
+	t.background(6, 12, 16);
+	const hw = Math.floor(t.grid.cols / 2);
+	const hh = Math.floor(t.grid.rows / 2);
+	const tm = t.frameCount * 0.035;
+
+	const seeds = [
+		{ x: Math.cos(tm) * (hw * 0.5), y: Math.sin(tm * 0.8) * (hh * 0.5) },
+		{ x: Math.cos(tm + 2) * (hw * 0.5), y: Math.sin(tm * 1.1 + 2) * (hh * 0.5) },
+		{ x: Math.cos(tm + 4) * (hw * 0.5), y: Math.sin(tm * 0.9 + 4) * (hh * 0.5) },
+	];
+
+	for (let y = -hh; y <= hh; y++) {
+		for (let x = -hw; x <= hw; x++) {
+			let dMin = Infinity;
+			for (let i = 0; i < seeds.length; i++) {
+				const d = Math.hypot(x - seeds[i].x, y - seeds[i].y);
+				if (d < dMin) dMin = d;
+			}
+
+			const val = Math.min(1, dMin / (hw * 0.65));
+
+			t.push();
+			t.translate(x, y);
+			t.charColor(Math.floor(40 + val * 200), Math.floor(220 - val * 100), Math.floor(160 + val * 85));
+			t.cellColor(Math.floor(6 + val * 15), Math.floor(18 + val * 20), Math.floor(24 + val * 25));
+			t.char(ramp.at(val));
+			t.point();
+			t.pop();
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODEGLYPHRAMP.CREATION', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: VORONOI GLYPH RAMP MAPPING', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Creates reusable density ramps.', x, y++);
+	t.print('Maps Voronoi distances to glyphs.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 200);
+	t.print(`RAMP LENGTH: ${ramp.length} GLYPHS`, x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 
 ## Properties
 
@@ -102,7 +245,75 @@ Character from this ramp.
 
 ##### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="TextmodeGlyphRamp" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCByYW1wID0gdC5jcmVhdGVHbHlwaFJhbXAoJyAuOi09KyojJUAnKTsKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCgxNCwgOCwgMTQpOwoJY29uc3QgaHcgPSBNYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCBoaCA9IE1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWNvbnN0IHRtID0gdC5mcmFtZUNvdW50ICogMC4wMjsKCgljb25zdCBuID0gMyArIE1hdGguc2luKHRtICogMC41KTsKCWNvbnN0IG0gPSA1ICsgTWF0aC5jb3ModG0gKiAwLjUpOwoKCWZvciAobGV0IHkgPSAtaGg7IHkgPD0gaGg7IHkrKykgewoJCWZvciAobGV0IHggPSAtaHc7IHggPD0gaHc7IHgrKykgewoJCQljb25zdCBueCA9ICh4IC8gKGh3IHx8IDEpKSAqIE1hdGguUEk7CgkJCWNvbnN0IG55ID0gKHkgLyAoaGggfHwgMSkpICogTWF0aC5QSTsKCQkJY29uc3QgdyA9IE1hdGguY29zKG4gKiBueCkgKiBNYXRoLmNvcyhtICogbnkpIC0gTWF0aC5jb3MobSAqIG54KSAqIE1hdGguY29zKG4gKiBueSk7CgoJCQljb25zdCBub3JtID0gKHcgKyAyKSAvIDQ7CgkJCXQucHVzaCgpOwoJCQl0LnRyYW5zbGF0ZSh4LCB5KTsKCQkJdC5jaGFyQ29sb3IoTWF0aC5mbG9vcigyNTUgLSBub3JtICogMTYwKSwgTWF0aC5mbG9vcigxMDAgKyBub3JtICogMTUwKSwgTWF0aC5mbG9vcigyMDAgLSBub3JtICogMTIwKSk7CgkJCXQuY2VsbENvbG9yKE1hdGguZmxvb3IoMjUgLSBub3JtICogMTUpLCBNYXRoLmZsb29yKDggKyBub3JtICogMTIpLCBNYXRoLmZsb29yKDIwICsgbm9ybSAqIDEwKSk7CgkJCXQuY2hhcihyYW1wLmF0KHcsIC0yLCAyKSk7CgkJCXQucG9pbnQoKTsKCQkJdC5wb3AoKTsKCQl9Cgl9Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCgljb25zdCBzYW1wbGVXID0gTWF0aC5zaW4odC5mcmFtZUNvdW50ICogMC4wNSkgKiAyOwoKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IoMTIwLCAyNDAsIDE4MCk7Cgl0LnByaW50KCdURVhUTU9ERUdMWVBIUkFNUC5BVCcsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcig3MCwgMTAwLCAxNDApOwoJdC5wcmludCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMjEwLCAyNTUpOwoJdC5wcmludCgnQ09OQ0VQVDogQ0hMQUROSSBDWU1BVElDIFJFU09OQU5DRScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDE2MCwgMTkwKTsKCXQucHJpbnQoJ2F0KHYsIG1pbiwgbWF4KSByZW1hcHMgc3RhbmRpbmcgd2F2ZScsIHgsIHkrKyk7Cgl0LnByaW50KCdub2RhbCBsaW5lcyBkaXJlY3RseSB0byB0aGUgcmFtcC4nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoNzAsIDEwMCwgMTQwKTsKCXQucHJpbnQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDI1NSwgMjAwKTsKCXQucHJpbnQoYFc6ICR7c2FtcGxlVy50b0ZpeGVkKDIpfSAtPiBHTFlQSDogIiR7cmFtcC5hdChzYW1wbGVXLCAtMiwgMil9ImAsIHgsIHkrKyk7Cgl0LnBvcCgpOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const ramp = t.createGlyphRamp(' .:-=+*#%@');
+const labelLayer = t.layers.add();
+
+t.draw(() => {
+	t.background(14, 8, 14);
+	const hw = Math.floor(t.grid.cols / 2);
+	const hh = Math.floor(t.grid.rows / 2);
+	const tm = t.frameCount * 0.02;
+
+	const n = 3 + Math.sin(tm * 0.5);
+	const m = 5 + Math.cos(tm * 0.5);
+
+	for (let y = -hh; y <= hh; y++) {
+		for (let x = -hw; x <= hw; x++) {
+			const nx = (x / (hw || 1)) * Math.PI;
+			const ny = (y / (hh || 1)) * Math.PI;
+			const w = Math.cos(n * nx) * Math.cos(m * ny) - Math.cos(m * nx) * Math.cos(n * ny);
+
+			const norm = (w + 2) / 4;
+			t.push();
+			t.translate(x, y);
+			t.charColor(Math.floor(255 - norm * 160), Math.floor(100 + norm * 150), Math.floor(200 - norm * 120));
+			t.cellColor(Math.floor(25 - norm * 15), Math.floor(8 + norm * 12), Math.floor(20 + norm * 10));
+			t.char(ramp.at(w, -2, 2));
+			t.point();
+			t.pop();
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const sampleW = Math.sin(t.frameCount * 0.05) * 2;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODEGLYPHRAMP.AT', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: CHLADNI CYMATIC RESONANCE', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('at(v, min, max) remaps standing wave', x, y++);
+	t.print('nodal lines directly to the ramp.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 200);
+	t.print(`W: ${sampleW.toFixed(2)} -> GLYPH: "${ramp.at(sampleW, -2, 2)}"`, x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 
 #### Call Signature
 
@@ -134,7 +345,75 @@ Character from this ramp.
 
 ##### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="TextmodeGlyphRamp" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCByYW1wID0gdC5jcmVhdGVHbHlwaFJhbXAoJyAuOi09KyojJUAnKTsKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCgxNCwgOCwgMTQpOwoJY29uc3QgaHcgPSBNYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCBoaCA9IE1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWNvbnN0IHRtID0gdC5mcmFtZUNvdW50ICogMC4wMjsKCgljb25zdCBuID0gMyArIE1hdGguc2luKHRtICogMC41KTsKCWNvbnN0IG0gPSA1ICsgTWF0aC5jb3ModG0gKiAwLjUpOwoKCWZvciAobGV0IHkgPSAtaGg7IHkgPD0gaGg7IHkrKykgewoJCWZvciAobGV0IHggPSAtaHc7IHggPD0gaHc7IHgrKykgewoJCQljb25zdCBueCA9ICh4IC8gKGh3IHx8IDEpKSAqIE1hdGguUEk7CgkJCWNvbnN0IG55ID0gKHkgLyAoaGggfHwgMSkpICogTWF0aC5QSTsKCQkJY29uc3QgdyA9IE1hdGguY29zKG4gKiBueCkgKiBNYXRoLmNvcyhtICogbnkpIC0gTWF0aC5jb3MobSAqIG54KSAqIE1hdGguY29zKG4gKiBueSk7CgoJCQljb25zdCBub3JtID0gKHcgKyAyKSAvIDQ7CgkJCXQucHVzaCgpOwoJCQl0LnRyYW5zbGF0ZSh4LCB5KTsKCQkJdC5jaGFyQ29sb3IoTWF0aC5mbG9vcigyNTUgLSBub3JtICogMTYwKSwgTWF0aC5mbG9vcigxMDAgKyBub3JtICogMTUwKSwgTWF0aC5mbG9vcigyMDAgLSBub3JtICogMTIwKSk7CgkJCXQuY2VsbENvbG9yKE1hdGguZmxvb3IoMjUgLSBub3JtICogMTUpLCBNYXRoLmZsb29yKDggKyBub3JtICogMTIpLCBNYXRoLmZsb29yKDIwICsgbm9ybSAqIDEwKSk7CgkJCXQuY2hhcihyYW1wLmF0KHcsIC0yLCAyKSk7CgkJCXQucG9pbnQoKTsKCQkJdC5wb3AoKTsKCQl9Cgl9Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCgljb25zdCBzYW1wbGVXID0gTWF0aC5zaW4odC5mcmFtZUNvdW50ICogMC4wNSkgKiAyOwoKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IoMTIwLCAyNDAsIDE4MCk7Cgl0LnByaW50KCdURVhUTU9ERUdMWVBIUkFNUC5BVCcsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcig3MCwgMTAwLCAxNDApOwoJdC5wcmludCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMjEwLCAyNTUpOwoJdC5wcmludCgnQ09OQ0VQVDogQ0hMQUROSSBDWU1BVElDIFJFU09OQU5DRScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDE2MCwgMTkwKTsKCXQucHJpbnQoJ2F0KHYsIG1pbiwgbWF4KSByZW1hcHMgc3RhbmRpbmcgd2F2ZScsIHgsIHkrKyk7Cgl0LnByaW50KCdub2RhbCBsaW5lcyBkaXJlY3RseSB0byB0aGUgcmFtcC4nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoNzAsIDEwMCwgMTQwKTsKCXQucHJpbnQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDI1NSwgMjAwKTsKCXQucHJpbnQoYFc6ICR7c2FtcGxlVy50b0ZpeGVkKDIpfSAtPiBHTFlQSDogIiR7cmFtcC5hdChzYW1wbGVXLCAtMiwgMil9ImAsIHgsIHkrKyk7Cgl0LnBvcCgpOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const ramp = t.createGlyphRamp(' .:-=+*#%@');
+const labelLayer = t.layers.add();
+
+t.draw(() => {
+	t.background(14, 8, 14);
+	const hw = Math.floor(t.grid.cols / 2);
+	const hh = Math.floor(t.grid.rows / 2);
+	const tm = t.frameCount * 0.02;
+
+	const n = 3 + Math.sin(tm * 0.5);
+	const m = 5 + Math.cos(tm * 0.5);
+
+	for (let y = -hh; y <= hh; y++) {
+		for (let x = -hw; x <= hw; x++) {
+			const nx = (x / (hw || 1)) * Math.PI;
+			const ny = (y / (hh || 1)) * Math.PI;
+			const w = Math.cos(n * nx) * Math.cos(m * ny) - Math.cos(m * nx) * Math.cos(n * ny);
+
+			const norm = (w + 2) / 4;
+			t.push();
+			t.translate(x, y);
+			t.charColor(Math.floor(255 - norm * 160), Math.floor(100 + norm * 150), Math.floor(200 - norm * 120));
+			t.cellColor(Math.floor(25 - norm * 15), Math.floor(8 + norm * 12), Math.floor(20 + norm * 10));
+			t.char(ramp.at(w, -2, 2));
+			t.point();
+			t.pop();
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const sampleW = Math.sin(t.frameCount * 0.05) * 2;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODEGLYPHRAMP.AT', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: CHLADNI CYMATIC RESONANCE', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('at(v, min, max) remaps standing wave', x, y++);
+	t.print('nodal lines directly to the ramp.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 200);
+	t.print(`W: ${sampleW.toFixed(2)} -> GLYPH: "${ramp.at(sampleW, -2, 2)}"`, x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 
 ***
 
@@ -163,5 +442,70 @@ A new shifted ramp.
 
 #### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="TextmodeGlyphRamp" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBiYXNlUmFtcCA9IHQuY3JlYXRlR2x5cGhSYW1wKCcgLjotPSsqIyVAJyk7CmNvbnN0IGxhYmVsTGF5ZXIgPSB0LmxheWVycy5hZGQoKTsKCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNiwgMTIsIDE4KTsKCWNvbnN0IGh3ID0gTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgaGggPSBNYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7Cgljb25zdCB0bSA9IHQuZnJhbWVDb3VudCAqIDAuMDQ7CgoJZm9yIChsZXQgeSA9IC1oaDsgeSA8PSBoaDsgeSsrKSB7CgkJZm9yIChsZXQgeCA9IC1odzsgeCA8PSBodzsgeCsrKSB7CgkJCWNvbnN0IGFuZ2xlID0gTWF0aC5hdGFuMih5LCB4KTsKCQkJY29uc3QgZGlzdCA9IE1hdGguaHlwb3QoeCwgeSk7CgkJCWNvbnN0IHNoaWZ0QW10ID0gTWF0aC5mbG9vcigoYW5nbGUgLyAoTWF0aC5QSSAqIDIpKSAqIGJhc2VSYW1wLmxlbmd0aCArIHRtICogMyk7CgkJCWNvbnN0IHNoaWZ0ZWRSYW1wID0gYmFzZVJhbXAuc2hpZnQoc2hpZnRBbXQpOwoJCQljb25zdCB2YWwgPSAoTWF0aC5zaW4oZGlzdCAqIDAuMyAtIHRtICogMikgKyAxKSAqIDAuNTsKCgkJCXQucHVzaCgpOwoJCQl0LnRyYW5zbGF0ZSh4LCB5KTsKCQkJdC5jaGFyQ29sb3IoTWF0aC5mbG9vcig2MCArIHZhbCAqIDE4MCksIE1hdGguZmxvb3IoMjAwIC0gdmFsICogODApLCBNYXRoLmZsb29yKDI0MCAtIHZhbCAqIDYwKSk7CgkJCXQuY2VsbENvbG9yKE1hdGguZmxvb3IoMTAgKyB2YWwgKiAyMCksIE1hdGguZmxvb3IoMjUgKyB2YWwgKiAyNSksIE1hdGguZmxvb3IoNDAgKyB2YWwgKiAyMCkpOwoJCQl0LmNoYXIoc2hpZnRlZFJhbXAuYXQodmFsKSk7CgkJCXQucG9pbnQoKTsKCQkJdC5wb3AoKTsKCQl9Cgl9Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCgljb25zdCBzaGlmdGVkID0gYmFzZVJhbXAuc2hpZnQoTWF0aC5mbG9vcih0LmZyYW1lQ291bnQgKiAwLjEpKTsKCgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKDEyMCwgMjQwLCAxODApOwoJdC5wcmludCgnVEVYVE1PREVHTFlQSFJBTVAuU0hJRlQnLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoNzAsIDEwMCwgMTQwKTsKCXQucHJpbnQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDIxMCwgMjU1KTsKCXQucHJpbnQoJ0NPTkNFUFQ6IFNISUZURUQgR0xZUEggUkFNUCBDT1BZJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMTYwLCAxOTApOwoJdC5wcmludCgnc2hpZnQobikgcmV0dXJucyBhIHJvdGF0ZWQgY29weS4nLCB4LCB5KyspOwoJdC5wcmludCgnT3JpZ2luYWwgcmFtcCByZW1haW5zIHVuY2hhbmdlZC4nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoNzAsIDEwMCwgMTQwKTsKCXQucHJpbnQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDI1NSwgMjAwKTsKCXQucHJpbnQoYFNISUZURUQ6ICIke3NoaWZ0ZWQuY2hhcmFjdGVyc30iYCwgeCwgeSsrKTsKCXQucG9wKCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const baseRamp = t.createGlyphRamp(' .:-=+*#%@');
+const labelLayer = t.layers.add();
+
+t.draw(() => {
+	t.background(6, 12, 18);
+	const hw = Math.floor(t.grid.cols / 2);
+	const hh = Math.floor(t.grid.rows / 2);
+	const tm = t.frameCount * 0.04;
+
+	for (let y = -hh; y <= hh; y++) {
+		for (let x = -hw; x <= hw; x++) {
+			const angle = Math.atan2(y, x);
+			const dist = Math.hypot(x, y);
+			const shiftAmt = Math.floor((angle / (Math.PI * 2)) * baseRamp.length + tm * 3);
+			const shiftedRamp = baseRamp.shift(shiftAmt);
+			const val = (Math.sin(dist * 0.3 - tm * 2) + 1) * 0.5;
+
+			t.push();
+			t.translate(x, y);
+			t.charColor(Math.floor(60 + val * 180), Math.floor(200 - val * 80), Math.floor(240 - val * 60));
+			t.cellColor(Math.floor(10 + val * 20), Math.floor(25 + val * 25), Math.floor(40 + val * 20));
+			t.char(shiftedRamp.at(val));
+			t.point();
+			t.pop();
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const shifted = baseRamp.shift(Math.floor(t.frameCount * 0.1));
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODEGLYPHRAMP.SHIFT', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: SHIFTED GLYPH RAMP COPY', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('shift(n) returns a rotated copy.', x, y++);
+	t.print('Original ramp remains unchanged.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 200);
+	t.print(`SHIFTED: "${shifted.characters}"`, x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

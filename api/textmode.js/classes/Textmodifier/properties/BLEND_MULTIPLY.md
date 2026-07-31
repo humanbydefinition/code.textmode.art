@@ -7,7 +7,7 @@ category: Properties
 api: true
 owner: Textmodifier
 kind: Property
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / BLEND\_MULTIPLY
@@ -26,4 +26,79 @@ shadow-like patterns that preserve underlying contrast.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="BLEND_MULTIPLY" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBtb2RlID0gdC5CTEVORF9NVUxUSVBMWTsKY29uc3QgbW9kZU5hbWUgPSAnQkxFTkRfTVVMVElQTFknOwpjb25zdCBhY2NlbnQgPSBbMTMwLCAxODAsIDI1NV07CmNvbnN0IGJhc2UgPSBbMjIwLCAxNTAsIDkwXTsKY29uc3QgYmxlbmRMYXllciA9IHQubGF5ZXJzLmFkZCh7IGJsZW5kTW9kZTogbW9kZSwgb3BhY2l0eTogMC44NCB9KTsKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LmRyYXcoKCkgPT4gewoJY29uc3QgdGltZSA9IHQuZnJhbWVDb3VudCAqIDAuMDMyOwoJdC5iYWNrZ3JvdW5kKDQyLCAzMCwgMTgpOwoJY29uc3QgeyBjb2xzLCByb3dzIH0gPSB0LmdyaWQ7Cglmb3IgKGxldCB5ID0gLU1hdGguZmxvb3Iocm93cyAvIDIpOyB5IDwgcm93cyAvIDI7IHkgKz0gMykgewoJCWZvciAobGV0IHggPSAtTWF0aC5mbG9vcihjb2xzIC8gMik7IHggPCBjb2xzIC8gMjsgeCArPSAzKSB7CgkJCWNvbnN0IHdhdmUgPSBNYXRoLnNpbih4ICogMC4xMiAtIHkgKiAwLjE2ICsgdGltZSk7CgkJCXQucHVzaCgpOwoJCQl0LnRyYW5zbGF0ZSh4LCB5KTsKCQkJdC5jaGFyKHdhdmUgPiAwID8gJyUnIDogJysnKTsKCQkJdC5jaGFyQ29sb3IoYmFzZVswXSwgYmFzZVsxXSArIHdhdmUgKiAzMCwgYmFzZVsyXSk7CgkJCXQuY2VsbENvbG9yKDUwLCAyOCwgMTIpOwoJCQl0LnJlY3QoMiwgMik7CgkJCXQucG9wKCk7CgkJfQoJfQoJYmxlbmRMYXllci5kcmF3KCgpID0-IHsKCQl0LmNsZWFyKCk7CgkJZm9yIChsZXQgcmluZyA9IDA7IHJpbmcgPCA0OyByaW5nKyspIHsKCQkJZm9yIChsZXQgaSA9IDA7IGkgPCAyMDsgaSsrKSB7CgkJCQljb25zdCBhbmdsZSA9IGkgKiAxOCArIHJpbmcgKiAxNCAtIHQuZnJhbWVDb3VudCAqIDEuMTsKCQkJCWNvbnN0IHJhZGl1cyA9IDYgKyByaW5nICogNCArIE1hdGguY29zKHRpbWUgKiAyICsgaSkgKiAyOwoJCQkJdC5wdXNoKCk7CgkJCQl0LnJvdGF0ZVooYW5nbGUpOwoJCQkJdC50cmFuc2xhdGUocmFkaXVzLCBNYXRoLnNpbih0aW1lICsgcmluZykgKiAyKTsKCQkJCXQuY2hhcihyaW5nICUgMiA_ICdYJyA6ICcjJyk7CgkJCQl0LmNoYXJDb2xvciguLi5hY2NlbnQpOwoJCQkJdC5jZWxsQ29sb3IoMTIsIDI1ICsgcmluZyAqIDIwLCA1OCArIHJpbmcgKiAxMik7CgkJCQl0LnJlY3QoNCwgMik7CgkJCQl0LnBvcCgpOwoJCQl9CgkJfQoJfSk7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuQkxFTkRfTVVMVElQTFknLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBNVUxUSVBMWSBTSEFERScsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnT3ZlcmxhcCBkYXJrZW5zIHRoZSBiYXNlLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnQ29sb3Igc3RheXMgdGllZCB0byBiZWxvdy4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KGBNT0RFOiAke21vZGVOYW1lfWAsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const mode = t.BLEND_MULTIPLY;
+const modeName = 'BLEND_MULTIPLY';
+const accent = [130, 180, 255];
+const base = [220, 150, 90];
+const blendLayer = t.layers.add({ blendMode: mode, opacity: 0.84 });
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	const time = t.frameCount * 0.032;
+	t.background(42, 30, 18);
+	const { cols, rows } = t.grid;
+	for (let y = -Math.floor(rows / 2); y < rows / 2; y += 3) {
+		for (let x = -Math.floor(cols / 2); x < cols / 2; x += 3) {
+			const wave = Math.sin(x * 0.12 - y * 0.16 + time);
+			t.push();
+			t.translate(x, y);
+			t.char(wave > 0 ? '%' : '+');
+			t.charColor(base[0], base[1] + wave * 30, base[2]);
+			t.cellColor(50, 28, 12);
+			t.rect(2, 2);
+			t.pop();
+		}
+	}
+	blendLayer.draw(() => {
+		t.clear();
+		for (let ring = 0; ring < 4; ring++) {
+			for (let i = 0; i < 20; i++) {
+				const angle = i * 18 + ring * 14 - t.frameCount * 1.1;
+				const radius = 6 + ring * 4 + Math.cos(time * 2 + i) * 2;
+				t.push();
+				t.rotateZ(angle);
+				t.translate(radius, Math.sin(time + ring) * 2);
+				t.char(ring % 2 ? 'X' : '#');
+				t.charColor(...accent);
+				t.cellColor(12, 25 + ring * 20, 58 + ring * 12);
+				t.rect(4, 2);
+				t.pop();
+			}
+		}
+	});
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.BLEND_MULTIPLY', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: MULTIPLY SHADE', x, y++, 100, 220, 255);
+	drawText('Overlap darkens the base.', x, y++, 140, 160, 190);
+	drawText('Color stays tied to below.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`MODE: ${modeName}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```

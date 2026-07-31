@@ -8,7 +8,7 @@ api: true
 owner: TextmodeLayer
 namespace: layering
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../../../index.md) / [layering](../../../index.md) / [TextmodeLayer](../../TextmodeLayer.md) / useTileColors
@@ -39,5 +39,100 @@ Current tileset-color mode when called without arguments.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="useTileColors" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCB0aWxlc0xheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IGxhYmVsTGF5ZXIgPSB0LmxheWVycy5hZGQoKTsKCmxldCB1c2VBdXRob3JlZCA9IGZhbHNlOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgY29sb3IgPSBbMjAwLCAyMjAsIDI1NV0pIHsKCXQucHVzaCgpOwoJdC50cmFuc2xhdGUoeCwgeSk7Cgl0LmNoYXJDb2xvcihjb2xvclswXSwgY29sb3JbMV0sIGNvbG9yWzJdKTsKCWZvciAobGV0IGkgPSAwOyBpIDwgdGV4dC5sZW5ndGg7IGkrKykgewoJCXQuY2hhcih0ZXh0W2ldKTsKCQl0LnBvaW50KCk7CgkJdC50cmFuc2xhdGUoMSwgMCk7Cgl9Cgl0LnBvcCgpOwp9Cgp0LnNldHVwKGFzeW5jICgpID0-IHsKCWF3YWl0IHRpbGVzTGF5ZXIubG9hZFRpbGVzZXQoewoJCXNvdXJjZTogJ2h0dHBzOi8vbGl0dGxlYml0c3BhY2UuY29tL3Jlc291cmNlcy9mb250cy9UNjQucG5nJywKCQljb2x1bW5zOiAxNiwKCQlyb3dzOiAxNiwKCQljb3VudDogMjU2LAoJfSk7Cn0pOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg2LCAxMCwgMjIpOwoJdXNlQXV0aG9yZWQgPSBNYXRoLmZsb29yKHQuZnJhbWVDb3VudCAvIDE1MCkgJSAyID09PSAwOwoJdGlsZXNMYXllci51c2VUaWxlQ29sb3JzKHVzZUF1dGhvcmVkKTsKfSk7Cgp0aWxlc0xheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoKCWNvbnN0IGZvbnQgPSB0aWxlc0xheWVyLmZvbnQ7CglpZiAoIWZvbnQgfHwgZm9udC5jaGFyYWN0ZXJzLmxlbmd0aCA9PT0gMCkgcmV0dXJuOwoKCWNvbnN0IGNvbHMgPSAxNjsKCWNvbnN0IHJvd3MgPSA4OwoJY29uc3Qgc3RhcnRYID0gLU1hdGguZmxvb3IoY29scyAvIDIpOwoJY29uc3Qgc3RhcnRZID0gLTM7CgoJZm9yIChsZXQgcm93ID0gMDsgcm93IDwgcm93czsgcm93KyspIHsKCQlmb3IgKGxldCBjb2wgPSAwOyBjb2wgPCBjb2xzOyBjb2wrKykgewoJCQljb25zdCB0aWxlSW5kZXggPSByb3cgKiBjb2xzICsgY29sOwoJCQlpZiAodGlsZUluZGV4ID49IGZvbnQuY2hhcmFjdGVycy5sZW5ndGgpIGJyZWFrOwoKCQkJdC5wdXNoKCk7CgkJCXQudHJhbnNsYXRlKHN0YXJ0WCArIGNvbCwgc3RhcnRZICsgcm93KTsKCQkJdC5jaGFyKHRpbGVJbmRleCk7CgkJCWNvbnN0IGh1ZSA9ICh0aWxlSW5kZXggLyBmb250LmNoYXJhY3RlcnMubGVuZ3RoKSAqIDM2MDsKCQkJY29uc3QgciA9IE1hdGgucm91bmQoMTI4ICsgMTAwICogTWF0aC5zaW4oKGh1ZSAqIE1hdGguUEkpIC8gMTgwKSk7CgkJCWNvbnN0IGcgPSBNYXRoLnJvdW5kKDEyOCArIDEwMCAqIE1hdGguc2luKCgoaHVlICsgMTIwKSAqIE1hdGguUEkpIC8gMTgwKSk7CgkJCWNvbnN0IGIgPSBNYXRoLnJvdW5kKDEyOCArIDEwMCAqIE1hdGguc2luKCgoaHVlICsgMjQwKSAqIE1hdGguUEkpIC8gMTgwKSk7CgkJCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoKCQkJdC5wb2ludCgpOwoJCQl0LnBvcCgpOwoJCX0KCX0KfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJbGV0IHkgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpICsgMzsKCWNvbnN0IHggPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpICsgMzsKCglkcmF3VGV4dCgnVEVYVE1PREVMQVlFUi5VU0VUSUxFQ09MT1JTJywgeCwgeSsrLCBbMTAwLCAyNTUsIDE0MF0pOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgWzgwLCAxMDAsIDE1MF0pOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IFRJTEVTRVQgQ09MT1IgU09VUkNFJywgeCwgeSsrLCBbMTAwLCAyMjAsIDI1NV0pOwoKCWlmICh1c2VBdXRob3JlZCkgewoJCWRyYXdUZXh0KCdNT0RFOiBBVVRIT1JFRCBDT0xPUlMnLCB4LCB5KyssIFsyNTUsIDIxMCwgMTAwXSk7CgkJZHJhd1RleHQoJ1RpbGUgUE5HIGNvbG9ycyBzaG93IGRpcmVjdGx5LicsIHgsIHkrKywgWzE0MCwgMTYwLCAxOTBdKTsKCX0gZWxzZSB7CgkJZHJhd1RleHQoJ01PREU6IFJFQ09MT1JFRCcsIHgsIHkrKywgWzEyMCwgMjU1LCAxODBdKTsKCQlkcmF3VGV4dCgnY2hhckNvbG9yIHBhbGV0dGUgaXMgYXBwbGllZC4nLCB4LCB5KyssIFsxNDAsIDE2MCwgMTkwXSk7Cgl9CgoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgWzgwLCAxMDAsIDE1MF0pOwoJY29uc3QgcmVtYWluaW5nID0gMTUwIC0gKHQuZnJhbWVDb3VudCAlIDE1MCk7CglkcmF3VGV4dChgU1dJVENIIElOOiAke3JlbWFpbmluZ30gRlJBTUVTYCwgeCwgeSsrLCBbMTYwLCAxNjAsIDE2MF0pOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const tilesLayer = t.layers.add();
+const labelLayer = t.layers.add();
+
+let useAuthored = false;
+
+function drawText(text, x, y, color = [200, 220, 255]) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(color[0], color[1], color[2]);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+t.setup(async () => {
+	await tilesLayer.loadTileset({
+		source: 'https://littlebitspace.com/resources/fonts/T64.png',
+		columns: 16,
+		rows: 16,
+		count: 256,
+	});
+});
+
+t.draw(() => {
+	t.background(6, 10, 22);
+	useAuthored = Math.floor(t.frameCount / 150) % 2 === 0;
+	tilesLayer.useTileColors(useAuthored);
+});
+
+tilesLayer.draw(() => {
+	t.clear();
+
+	const font = tilesLayer.font;
+	if (!font || font.characters.length === 0) return;
+
+	const cols = 16;
+	const rows = 8;
+	const startX = -Math.floor(cols / 2);
+	const startY = -3;
+
+	for (let row = 0; row < rows; row++) {
+		for (let col = 0; col < cols; col++) {
+			const tileIndex = row * cols + col;
+			if (tileIndex >= font.characters.length) break;
+
+			t.push();
+			t.translate(startX + col, startY + row);
+			t.char(tileIndex);
+			const hue = (tileIndex / font.characters.length) * 360;
+			const r = Math.round(128 + 100 * Math.sin((hue * Math.PI) / 180));
+			const g = Math.round(128 + 100 * Math.sin(((hue + 120) * Math.PI) / 180));
+			const b = Math.round(128 + 100 * Math.sin(((hue + 240) * Math.PI) / 180));
+			t.charColor(r, g, b);
+
+			t.point();
+			t.pop();
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	let y = -Math.floor(t.grid.rows / 2) + 3;
+	const x = -Math.floor(t.grid.cols / 2) + 3;
+
+	drawText('TEXTMODELAYER.USETILECOLORS', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: TILESET COLOR SOURCE', x, y++, [100, 220, 255]);
+
+	if (useAuthored) {
+		drawText('MODE: AUTHORED COLORS', x, y++, [255, 210, 100]);
+		drawText('Tile PNG colors show directly.', x, y++, [140, 160, 190]);
+	} else {
+		drawText('MODE: RECOLORED', x, y++, [120, 255, 180]);
+		drawText('charColor palette is applied.', x, y++, [140, 160, 190]);
+	}
+
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	const remaining = 150 - (t.frameCount % 150);
+	drawText(`SWITCH IN: ${remaining} FRAMES`, x, y++, [160, 160, 160]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

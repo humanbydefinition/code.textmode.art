@@ -8,7 +8,7 @@ api: true
 owner: TextmodeTileset
 namespace: fonts
 kind: Accessor
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../../../index.md) / [fonts](../../../index.md) / [TextmodeTileset](../../TextmodeTileset.md) / fontFramebuffer
@@ -29,5 +29,77 @@ Tileset atlas framebuffer backing this glyph atlas.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="fontFramebuffer" encoded-code="Y29uc3QgVDY0X1VSTCA9ICdodHRwczovL2xpdHRsZWJpdHNwYWNlLmNvbS9yZXNvdXJjZXMvZm9udHMvVDY0LnBuZyc7CmNvbnN0IFRJTEVfQ09MVU1OUyA9IDE2Owpjb25zdCBUSUxFX1JPV1MgPSAxNjsKY29uc3QgVElMRV9DT1VOVCA9IFRJTEVfQ09MVU1OUyAqIFRJTEVfUk9XUzsKCmNvbnN0IHQgPSB0ZXh0bW9kZS5jcmVhdGUoewoJd2lkdGg6IHdpbmRvdy5pbm5lcldpZHRoLAoJaGVpZ2h0OiB3aW5kb3cuaW5uZXJIZWlnaHQsCglmb250U2l6ZTogMTYsCn0pOwoKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKbGV0IHRpbGVzZXQgPSBudWxsOwoKZnVuY3Rpb24gdGlsZXNldE9wdGlvbnMoKSB7CglyZXR1cm4gewoJCXNvdXJjZTogVDY0X1VSTCwKCQljb2x1bW5zOiBUSUxFX0NPTFVNTlMsCgkJcm93czogVElMRV9ST1dTLAoJCWNvdW50OiBUSUxFX0NPVU5ULAoJCWZvbnRTaXplOiAxNiwKCX07Cn0KCnQuc2V0dXAoYXN5bmMgKCkgPT4gewoJdGlsZXNldCA9IGF3YWl0IHQubG9hZFRpbGVzZXQodGlsZXNldE9wdGlvbnMoKSk7Cn0pOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDUsIDcsIDE4KTsKCWlmICghdGlsZXNldCkgcmV0dXJuOwoJY29uc3Qgc3RhcnRYID0gLU1hdGguZmxvb3IoVElMRV9DT0xVTU5TIC8gMik7Cgljb25zdCBzdGFydFkgPSAtTWF0aC5mbG9vcihUSUxFX1JPV1MgLyAyKTsKCWZvciAobGV0IGkgPSAwOyBpIDwgVElMRV9DT1VOVDsgaSsrKSB7CgkJdC5wdXNoKCk7CgkJdC50cmFuc2xhdGUoc3RhcnRYICsgKGkgJSBUSUxFX0NPTFVNTlMpLCBzdGFydFkgKyBNYXRoLmZsb29yKGkgLyBUSUxFX0NPTFVNTlMpKTsKCQl0LmNoYXIoaSk7CgkJdC5jaGFyQ29sb3IoMTIwICsgaSAqIDYsIDIyMCwgMjU1IC0gaSAqIDcpOwoJCXQucG9pbnQoKTsKCQl0LnBvcCgpOwoJfQp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CgoJZHJhd1RleHQoJ1RFWFRNT0RFVElMRVNFVC5GT05URlJBTUVCVUZGRVInLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBHTFlQSCBBVExBUyBEQVRBJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdUNjQgd2ViIHRpbGVzZXQgZmVlZHMgZ2x5cGhzLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJY29uc3QgcmVhZHkgPSBCb29sZWFuKHRpbGVzZXQuZm9udEZyYW1lYnVmZmVyKTsKCWRyYXdUZXh0KGBHTFlQSCBBVExBUyBGUkFNRUJVRkZFUjogJHtyZWFkeX1gLCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const T64_URL = 'https://littlebitspace.com/resources/fonts/T64.png';
+const TILE_COLUMNS = 16;
+const TILE_ROWS = 16;
+const TILE_COUNT = TILE_COLUMNS * TILE_ROWS;
+
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+let tileset = null;
+
+function tilesetOptions() {
+	return {
+		source: T64_URL,
+		columns: TILE_COLUMNS,
+		rows: TILE_ROWS,
+		count: TILE_COUNT,
+		fontSize: 16,
+	};
+}
+
+t.setup(async () => {
+	tileset = await t.loadTileset(tilesetOptions());
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(5, 7, 18);
+	if (!tileset) return;
+	const startX = -Math.floor(TILE_COLUMNS / 2);
+	const startY = -Math.floor(TILE_ROWS / 2);
+	for (let i = 0; i < TILE_COUNT; i++) {
+		t.push();
+		t.translate(startX + (i % TILE_COLUMNS), startY + Math.floor(i / TILE_COLUMNS));
+		t.char(i);
+		t.charColor(120 + i * 6, 220, 255 - i * 7);
+		t.point();
+		t.pop();
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODETILESET.FONTFRAMEBUFFER', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: GLYPH ATLAS DATA', x, y++, 100, 220, 255);
+	drawText('T64 web tileset feeds glyphs.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	const ready = Boolean(tileset.fontFramebuffer);
+	drawText(`GLYPH ATLAS FRAMEBUFFER: ${ready}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

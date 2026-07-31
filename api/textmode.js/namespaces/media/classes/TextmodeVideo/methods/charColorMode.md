@@ -8,7 +8,7 @@ api: true
 owner: TextmodeVideo
 namespace: media
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../../../index.md) / [media](../../../index.md) / [TextmodeVideo](../../TextmodeVideo.md) / charColorMode
@@ -35,7 +35,75 @@ This instance for chaining.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="charColorMode" encoded-code="Y29uc3QgSU1BR0VfVVJMID0gJ2h0dHBzOi8vaW1hZ2VzLnVuc3BsYXNoLmNvbS9waG90by0xNTA2OTA1OTI1MzQ2LTIxYmRhNGQzMmRmND93PTkwMCZxPTgwJzsKY29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAp9KTsKCmNvbnN0IGxhYmVsTGF5ZXIgPSB0LmxheWVycy5hZGQoKTsKbGV0IHNvdXJjZUEgPSBudWxsOwpsZXQgc291cmNlQiA9IG51bGw7Cgp0LnNldHVwKGFzeW5jICgpID0-IHsKCXNvdXJjZUEgPSBhd2FpdCB0LmxvYWRJbWFnZShJTUFHRV9VUkwpOwoJc291cmNlQS5jaGFyYWN0ZXJzKCcgLjotPSsqIyVAJyk7Cglzb3VyY2VBLmNoYXJDb2xvck1vZGUoJ3NhbXBsZWQnKTsKCglzb3VyY2VCID0gYXdhaXQgdC5sb2FkSW1hZ2UoSU1BR0VfVVJMKTsKCXNvdXJjZUIuY2hhcmFjdGVycygnIC46LT0rKiMlQCcpOwoJc291cmNlQi5jaGFyQ29sb3JNb2RlKCdmaXhlZCcpLmNoYXJDb2xvcigxNDAsIDI1NSwgMTgwKTsKfSk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDEwLCAyMik7CgoJaWYgKCFzb3VyY2VBIHx8ICFzb3VyY2VCKSByZXR1cm47CgoJY29uc3QgaW1nVyA9IDIwOwoJY29uc3QgaW1nSCA9IDEyOwoKCXQucHVzaCgpOwoJdC50cmFuc2xhdGUoLTEyLCAwKTsKCXQuaW1hZ2Uoc291cmNlQSwgaW1nVywgaW1nSCk7Cgl0LnBvcCgpOwoKCXQucHVzaCgpOwoJdC50cmFuc2xhdGUoMTIsIDApOwoJdC5pbWFnZShzb3VyY2VCLCBpbWdXLCBpbWdIKTsKCXQucG9wKCk7Cn0pOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWRyYXdUZXh0KCdURVhUTU9ERVNPVVJDRS5DSEFSQ09MT1JNT0RFJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogU0VUIENIQVJBQ1RFUiBDT0xPUklORyBNT0RFJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdTZXRzIG1vZGUgdXNlZCBmb3IgZ2x5cGggZm9yZWdyb3VuZHMuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ0hBUiBDT0xPUiBNT0RFOiBzYW1wbGVkICYgZml4ZWQnLCB4LCB5KyssIDE0MCwgMTkwLCAyNTUpOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80';
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 8,
+});
+
+const labelLayer = t.layers.add();
+let sourceA = null;
+let sourceB = null;
+
+t.setup(async () => {
+	sourceA = await t.loadImage(IMAGE_URL);
+	sourceA.characters(' .:-=+*#%@');
+	sourceA.charColorMode('sampled');
+
+	sourceB = await t.loadImage(IMAGE_URL);
+	sourceB.characters(' .:-=+*#%@');
+	sourceB.charColorMode('fixed').charColor(140, 255, 180);
+});
+
+t.draw(() => {
+	t.background(6, 10, 22);
+
+	if (!sourceA || !sourceB) return;
+
+	const imgW = 20;
+	const imgH = 12;
+
+	t.push();
+	t.translate(-12, 0);
+	t.image(sourceA, imgW, imgH);
+	t.pop();
+
+	t.push();
+	t.translate(12, 0);
+	t.image(sourceB, imgW, imgH);
+	t.pop();
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODESOURCE.CHARCOLORMODE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SET CHARACTER COLORING MODE', x, y++, 100, 220, 255);
+	drawText('Sets mode used for glyph foregrounds.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CHAR COLOR MODE: sampled & fixed', x, y++, 140, 190, 255);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 
 ## Inherited from
 

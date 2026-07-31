@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / tan
@@ -36,5 +36,69 @@ Tangent of the angle.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="tan" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCBhbmdsZSA9IDA7CmxldCB0YW5nZW50ID0gMDsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg4LCA1LCAxNyk7CglhbmdsZSA9IHQuc2luKHQuZnJhbWVDb3VudCAqIDAuMDI1KSAqIHQucmFkaWFucyg3NSk7Cgl0YW5nZW50ID0gdC50YW4oYW5nbGUpOwoJY29uc3Qgc2xvcGUgPSB0LmNvbnN0cmFpbih0YW5nZW50LCAtNSwgNSk7CgoJdC5jaGFyKCd8Jyk7Cgl0LmNoYXJDb2xvcig3MCwgODAsIDEyNSk7Cgl0LmxpbmUoLTE4LCAtMTAsIC0xOCwgMTApOwoJdC5saW5lKDE4LCAtMTAsIDE4LCAxMCk7CgoJZm9yIChsZXQgeCA9IC0xODsgeCA8PSAxODsgeCsrKSB7CgkJY29uc3QgeSA9IHQucm91bmQodC5jb25zdHJhaW4odC50YW4oeCAqIDAuMDggKyBhbmdsZSksIC0xMCwgMTApKTsKCQljb25zdCBoZWF0ID0gdC5ub3JtKHQuYWJzKHkpLCAwLCAxMCk7CgkJdC5wdXNoKCk7CgkJdC50cmFuc2xhdGUoeCwgeSk7CgkJdC5jaGFyKGhlYXQgPiAwLjc1ID8gJyMnIDogaGVhdCA-IDAuNCA_ICcrJyA6ICcuJyk7CgkJdC5jaGFyQ29sb3IoOTAgKyBoZWF0ICogMTYwLCAxMjAsIDI1NSAtIGhlYXQgKiA4MCk7CgkJdC5wb2ludCgpOwoJCXQucG9wKCk7Cgl9CgoJdC5jaGFyKCcqJyk7Cgl0LmNoYXJDb2xvcigyNTUsIDIxNSwgMTAwKTsKCXQubGluZSgtNiwgdC5yb3VuZCgtc2xvcGUgKiAzKSwgNiwgdC5yb3VuZChzbG9wZSAqIDMpKTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC10LmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtdC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5UQU4nLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBTTE9QRSBBTkQgQVNZTVBUT1RFUycsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgndGFuKGFuZ2xlKSBncm93cyBzdGVlcCBmYXN0LicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnUmFpbHMgc2hvdyB0aGUgdW5zdGFibGUgZWRnZXMuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dChgVEFOOiAke3RhbmdlbnQudG9GaXhlZCgyKX1gLCB4LCB5KyssIDIyMCwgMjMwLCAyNTUpOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let angle = 0;
+let tangent = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(8, 5, 17);
+	angle = t.sin(t.frameCount * 0.025) * t.radians(75);
+	tangent = t.tan(angle);
+	const slope = t.constrain(tangent, -5, 5);
+
+	t.char('|');
+	t.charColor(70, 80, 125);
+	t.line(-18, -10, -18, 10);
+	t.line(18, -10, 18, 10);
+
+	for (let x = -18; x <= 18; x++) {
+		const y = t.round(t.constrain(t.tan(x * 0.08 + angle), -10, 10));
+		const heat = t.norm(t.abs(y), 0, 10);
+		t.push();
+		t.translate(x, y);
+		t.char(heat > 0.75 ? '#' : heat > 0.4 ? '+' : '.');
+		t.charColor(90 + heat * 160, 120, 255 - heat * 80);
+		t.point();
+		t.pop();
+	}
+
+	t.char('*');
+	t.charColor(255, 215, 100);
+	t.line(-6, t.round(-slope * 3), 6, t.round(slope * 3));
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -t.floor(t.grid.cols / 2);
+	const top = -t.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.TAN', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SLOPE AND ASYMPTOTES', x, y++, 100, 220, 255);
+	drawText('tan(angle) grows steep fast.', x, y++, 140, 160, 190);
+	drawText('Rails show the unstable edges.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`TAN: ${tangent.toFixed(2)}`, x, y++, 220, 230, 255);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

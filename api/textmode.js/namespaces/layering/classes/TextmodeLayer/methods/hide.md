@@ -8,7 +8,7 @@ api: true
 owner: TextmodeLayer
 namespace: layering
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../../../index.md) / [layering](../../../index.md) / [TextmodeLayer](../../TextmodeLayer.md) / hide
@@ -27,5 +27,102 @@ Hide this layer from rendering.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="hide" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBzaWduYWxMYXllciA9IHQubGF5ZXJzLmFkZCh7IGJsZW5kTW9kZTogJ2FkZGl0aXZlJyB9KTsKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwpsZXQgaXNWaXNpYmxlID0gdHJ1ZTsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHJnYiA9IFsyNTUsIDI1NSwgMjU1XSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyZ2JbMF0sIHJnYlsxXSwgcmdiWzJdKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDEwLCAyMik7CgoJaWYgKHQuZnJhbWVDb3VudCAlIDEyMCA9PT0gMCkgewoJCWlmIChpc1Zpc2libGUpIHsKCQkJc2lnbmFsTGF5ZXIuaGlkZSgpOwoJCX0gZWxzZSB7CgkJCXNpZ25hbExheWVyLnNob3coKTsKCQl9CgkJaXNWaXNpYmxlID0gIWlzVmlzaWJsZTsKCX0KCgl0LnB1c2goKTsKCXQuY2hhckNvbG9yKDQwLCA1MCwgODApOwoJdC5jaGFyKCcuJyk7Cgl0LnJlY3QodC5ncmlkLmNvbHMsIHQuZ3JpZC5yb3dzKTsKCXQucG9wKCk7Cn0pOwoKc2lnbmFsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCB0aW1lID0gdC5mcmFtZUNvdW50ICogMC4wNTsKCgl0LnB1c2goKTsKCXQuY2hhckNvbG9yKDE0MCwgMTgwLCAyNTUpOwoJdC5jaGFyKCcjJyk7Cgljb25zdCBzaXplID0gNiArIE1hdGguc2luKHRpbWUpICogMjsKCXQucmVjdChNYXRoLnJvdW5kKHNpemUgKiAxLjUpLCBNYXRoLnJvdW5kKHNpemUpKTsKCXQucG9wKCk7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCWNvbnN0IHN0YXR1c0NvbG9yID0gaXNWaXNpYmxlID8gWzE0MCwgMjU1LCAxODBdIDogWzI1NSwgMTAwLCAxMDBdOwoKCWRyYXdUZXh0KCdURVhUTU9ERUxBWUVSLkhJREUnLCB4LCB5KyssIFsxMDAsIDI1NSwgMTQwXSk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCBbODAsIDEwMCwgMTUwXSk7CglkcmF3VGV4dCgnQ09OQ0VQVDogSElERSBDT01QT1NJVElORycsIHgsIHkrKywgWzEwMCwgMjIwLCAyNTVdKTsKCWRyYXdUZXh0KCdMYXllciBkcmF3IGtlZXBzIHJ1bm5pbmcuJywgeCwgeSsrLCBbMTQwLCAxNjAsIDE5MF0pOwoJZHJhd1RleHQoJ0hpZGRlbiBvdXRwdXQgaXMgbm90IGNvbXBvc2l0ZWQuJywgeCwgeSsrLCBbMTQwLCAxNjAsIDE5MF0pOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgWzgwLCAxMDAsIDE1MF0pOwoJZHJhd1RleHQoaXNWaXNpYmxlID8gJ0xBWUVSOiBWSVNJQkxFJyA6ICdMQVlFUjogSElEREVOJywgeCwgeSsrLCBzdGF0dXNDb2xvcik7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const signalLayer = t.layers.add({ blendMode: 'additive' });
+const labelLayer = t.layers.add();
+let isVisible = true;
+
+t.draw(() => {
+	t.background(6, 10, 22);
+
+	if (t.frameCount % 120 === 0) {
+		if (isVisible) {
+			signalLayer.hide();
+		} else {
+			signalLayer.show();
+		}
+		isVisible = !isVisible;
+	}
+
+	const hw = Math.floor(t.grid.cols / 2);
+	const hh = Math.floor(t.grid.rows / 2);
+
+	t.push();
+	t.charColor(30, 45, 75);
+	t.char('+');
+	for (let y = -hh; y <= hh; y += 6) {
+		for (let x = -hw; x <= hw; x += 10) {
+			t.push();
+			t.translate(x, y);
+			t.point();
+			t.pop();
+		}
+	}
+	t.pop();
+});
+
+signalLayer.draw(() => {
+	t.clear();
+	const tm = t.frameCount * 0.04;
+	const hw = Math.floor(t.grid.cols / 2);
+	const hh = Math.floor(t.grid.rows / 2);
+
+	const trail = ['*', 'o', '.', ':'];
+	for (let i = 0; i < 16; i++) {
+		const angle = tm - i * 0.08;
+		const r = Math.min(hw, hh) * 0.5;
+		const px = Math.floor(Math.cos(angle) * r);
+		const py = Math.floor(Math.sin(angle) * (r * 0.6));
+		const idx = Math.min(trail.length - 1, Math.floor((i / 16) * trail.length));
+
+		t.push();
+		t.translate(px, py);
+		t.charColor(Math.floor(255 - i * 12), Math.floor(200 - i * 10), Math.floor(60 + i * 10));
+		t.cellColor(30, 20, 5);
+		t.char(trail[idx]);
+		t.point();
+		t.pop();
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODELAYER.HIDE', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: CONTINUOUS RADAR STATE MASKING', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('hide() pauses layer composition.', x, y++);
+	t.print('Background particle state advances.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	if (isVisible) {
+		t.charColor(140, 255, 180);
+		t.print('STATUS: VISIBLE (SIGNAL ON)', x, y++);
+	} else {
+		t.charColor(255, 120, 120);
+		t.print('STATUS: HIDDEN (STATE CONTINUES)', x, y++);
+	}
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

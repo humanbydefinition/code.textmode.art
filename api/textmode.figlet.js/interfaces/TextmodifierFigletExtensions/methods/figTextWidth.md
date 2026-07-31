@@ -8,7 +8,7 @@ api: true
 owner: TextmodifierFigletExtensions
 kind: Method
 ecosystem: textmode.js
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.figlet.js](../../../index.md) / [TextmodifierFigletExtensions](../../TextmodifierFigletExtensions.md) / figTextWidth
@@ -36,5 +36,85 @@ Width in grid cells.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.figlet.js" language="javascript" title="figTextWidth" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW0ZpZ2xldFBsdWdpbl0sCn0pOwoKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKbGV0IGZvbnQ7CmxldCB0ZXh0V2lkdGggPSAwOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LnNldHVwKGFzeW5jICgpID0-IHsKCWZvbnQgPSBhd2FpdCB0LmxvYWRGaWdGb250KCdodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvZ2gveGVyby9maWdsZXQtZm9udHNAbWFzdGVyL0J1bGJoZWFkLmZsZicpOwoJdC5maWdGb250KGZvbnQpOwoJdC5maWdUZXh0QWxpZ24oJ2NlbnRlcicpOwoJdC5maWdUZXh0QmFzZWxpbmUoJ2NlbnRlcicpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CgoJZHJhd1RleHQoJ1RFWFRNT0RJRklFUi5GSUdURVhUV0lEVEgnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBNRUFTVVJJTkcgUkVOREVSIFdJRFRIJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdHZXRzIHRoZSBleGFjdCBncmlkIHdpZHRoIG9mIHRleHQuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdBY2NvdW50cyBmb3IgaG9yaXpvbnRhbCBsYXlvdXQgbW9kZXMuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglpZiAoZm9udCkgewoJCWRyYXdUZXh0KGBNZWFzdXJlZCB3aWR0aDogJHt0ZXh0V2lkdGh9IGNlbGxzYCwgeCwgeSsrLCAxNDAsIDI1NSwgMTgwKTsKCX0gZWxzZSB7CgkJZHJhd1RleHQoJ0xvYWRpbmcgZm9udC4uLicsIHgsIHkrKywgMjU1LCAxODAsIDEwMCk7Cgl9Cn0pOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCgxMCwgMTIsIDE2KTsKCglpZiAoIWZvbnQpIHJldHVybjsKCgljb25zdCBsYXlvdXQgPSB7IGhvcml6b250YWxMYXlvdXQ6ICdmaXR0ZWQnIH07Cgl0ZXh0V2lkdGggPSB0LmZpZ1RleHRXaWR0aCgnV0lEVEgnLCBsYXlvdXQpOwoKCWNvbnN0IHRpbWUgPSB0LnNlY3MgKiAyLjA7CgoJLy8gRHJhdyB0aGUgRklHbGV0IHRleHQKCXQuZmlnVGV4dCgnV0lEVEgnLCAwLCAtMiwgbGF5b3V0KTsKCgkvLyBEcmF3IGEgZHluYW1pYyBob3Jpem9udGFsIHJ1bGVyIG1hdGNoaW5nIHRoZSBtZWFzdXJlZCB3aWR0aAoJY29uc3Qgc3RhcnRYID0gLU1hdGguZmxvb3IodGV4dFdpZHRoIC8gMik7Cgl0LnB1c2goKTsKCXQuY2hhckNvbG9yKDEwMCwgMjU1LCAxODApOwoJZm9yIChsZXQgaSA9IDA7IGkgPCB0ZXh0V2lkdGg7IGkrKykgewoJCXQucHVzaCgpOwoJCXQudHJhbnNsYXRlKHN0YXJ0WCArIGksIDMpOwoJCS8vIEFuaW1hdGUgcnVsZXIgY2hhcmFjdGVycwoJCWNvbnN0IHdhdmUgPSBNYXRoLnNpbih0aW1lICsgaSAqIDAuNCk7CgkJdC5jaGFyKHdhdmUgPiAwID8gJ-KWiCcgOiAn4paTJyk7CgkJdC5wb2ludCgpOwoJCXQucG9wKCk7Cgl9Cgl0LnBvcCgpOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 8,
+	plugins: [FigletPlugin],
+});
+
+const labelLayer = t.layers.add();
+
+let font;
+let textWidth = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.setup(async () => {
+	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Bulbhead.flf');
+	t.figFont(font);
+	t.figTextAlign('center');
+	t.figTextBaseline('center');
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODIFIER.FIGTEXTWIDTH', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: MEASURING RENDER WIDTH', x, y++, 100, 220, 255);
+	drawText('Gets the exact grid width of text.', x, y++, 140, 160, 190);
+	drawText('Accounts for horizontal layout modes.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	if (font) {
+		drawText(`Measured width: ${textWidth} cells`, x, y++, 140, 255, 180);
+	} else {
+		drawText('Loading font...', x, y++, 255, 180, 100);
+	}
+});
+
+t.draw(() => {
+	t.background(10, 12, 16);
+
+	if (!font) return;
+
+	const layout = { horizontalLayout: 'fitted' };
+	textWidth = t.figTextWidth('WIDTH', layout);
+
+	const time = t.secs * 2.0;
+
+	// Draw the FIGlet text
+	t.figText('WIDTH', 0, -2, layout);
+
+	// Draw a dynamic horizontal ruler matching the measured width
+	const startX = -Math.floor(textWidth / 2);
+	t.push();
+	t.charColor(100, 255, 180);
+	for (let i = 0; i < textWidth; i++) {
+		t.push();
+		t.translate(startX + i, 3);
+		// Animate ruler characters
+		const wave = Math.sin(time + i * 0.4);
+		t.char(wave > 0 ? '█' : '▓');
+		t.point();
+		t.pop();
+	}
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

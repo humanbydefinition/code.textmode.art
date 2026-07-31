@@ -8,7 +8,7 @@ api: true
 owner: TextmodeSource
 namespace: media
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../../../index.md) / [media](../../../index.md) / [TextmodeSource](../../TextmodeSource.md) / charRotation
@@ -35,5 +35,68 @@ This instance for chaining.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="charRotation" encoded-code="Y29uc3QgSU1BR0VfVVJMID0gJ2h0dHBzOi8vaW1hZ2VzLnVuc3BsYXNoLmNvbS9waG90by0xNTA2OTA1OTI1MzQ2LTIxYmRhNGQzMmRmND93PTkwMCZxPTgwJzsKY29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAp9KTsKCmNvbnN0IGxhYmVsTGF5ZXIgPSB0LmxheWVycy5hZGQoKTsKbGV0IHBvaW50ZXJTb3VyY2UgPSBudWxsOwoKdC5zZXR1cChhc3luYyAoKSA9PiB7Cglwb2ludGVyU291cmNlID0gYXdhaXQgdC5sb2FkSW1hZ2UoSU1BR0VfVVJMKTsKCXBvaW50ZXJTb3VyY2UuY2hhcmFjdGVycygnIC46LT0rKiMlQCcpOwp9KTsKCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNiwgMTAsIDIyKTsKCglpZiAoIXBvaW50ZXJTb3VyY2UpIHJldHVybjsKCgljb25zdCBpbWdXID0gMjA7Cgljb25zdCBpbWdIID0gMTI7CgoJdC5wdXNoKCk7Cgl0LnRyYW5zbGF0ZSgtMTIsIDApOwoJcG9pbnRlclNvdXJjZS5jaGFyUm90YXRpb24oMCk7Cgl0LmltYWdlKHBvaW50ZXJTb3VyY2UsIGltZ1csIGltZ0gpOwoJdC5wb3AoKTsKCgl0LnB1c2goKTsKCXQudHJhbnNsYXRlKDEyLCAwKTsKCXBvaW50ZXJTb3VyY2UuY2hhclJvdGF0aW9uKDkwKTsKCXQuaW1hZ2UocG9pbnRlclNvdXJjZSwgaW1nVywgaW1nSCk7Cgl0LnBvcCgpOwp9KTsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnVEVYVE1PREVTT1VSQ0UuQ0hBUlJPVEFUSU9OJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogR0xZUEggUk9UQVRJT04gQU5HTEUnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ1JvdGF0ZXMgbWFwcGVkIGNoYXJhY3RlcnMgaW4gZGVncmVlcy4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdST1RBVElPTiBBTkdMRTogMCAmIDkwIGRlZycsIHgsIHkrKywgMTQwLCAxOTAsIDI1NSk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80';
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 8,
+});
+
+const labelLayer = t.layers.add();
+let pointerSource = null;
+
+t.setup(async () => {
+	pointerSource = await t.loadImage(IMAGE_URL);
+	pointerSource.characters(' .:-=+*#%@');
+});
+
+t.draw(() => {
+	t.background(6, 10, 22);
+
+	if (!pointerSource) return;
+
+	const imgW = 20;
+	const imgH = 12;
+
+	t.push();
+	t.translate(-12, 0);
+	pointerSource.charRotation(0);
+	t.image(pointerSource, imgW, imgH);
+	t.pop();
+
+	t.push();
+	t.translate(12, 0);
+	pointerSource.charRotation(90);
+	t.image(pointerSource, imgW, imgH);
+	t.pop();
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODESOURCE.CHARROTATION', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: GLYPH ROTATION ANGLE', x, y++, 100, 220, 255);
+	drawText('Rotates mapped characters in degrees.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('ROTATION ANGLE: 0 & 90 deg', x, y++, 140, 190, 255);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

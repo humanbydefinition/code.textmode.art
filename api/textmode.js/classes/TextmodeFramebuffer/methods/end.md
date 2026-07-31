@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: TextmodeFramebuffer
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [TextmodeFramebuffer](../../TextmodeFramebuffer.md) / end
@@ -29,5 +29,71 @@ and viewport state from the renderer stack.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="end" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCBmYjsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMDAsIGcgPSAyMjAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC50cmFuc2xhdGUoeCwgeSk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCWZvciAobGV0IGkgPSAwOyBpIDwgdGV4dC5sZW5ndGg7IGkrKykgewoJCXQuY2hhcih0ZXh0W2ldKTsKCQl0LnBvaW50KCk7CgkJdC50cmFuc2xhdGUoMSwgMCk7Cgl9Cgl0LnBvcCgpOwp9Cgp0LnNldHVwKCgpID0-IHsKCWZiID0gdC5jcmVhdGVGcmFtZWJ1ZmZlcih7IHdpZHRoOiAxNiwgaGVpZ2h0OiAxMCB9KTsKfSk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDgsIDEwLCAxOCk7CgoJLy8gMS4gQmVnaW4gb2Zmc2NyZWVuIHJlbmRlciBwYXNzCglmYi5iZWdpbigpOwoJdC5jbGVhcigpOwoJdC5iYWNrZ3JvdW5kKDIyLCAxMCwgMzApOwoJdC5jaGFyQ29sb3IoMjU1LCAxODAsIDEwMCk7Cgl0LmNoYXIoJ08nKTsKCXQucmVjdChmYi53aWR0aCwgZmIuaGVpZ2h0KTsKCS8vIDIuIGVuZCgpIHJlc3RvcmVzIHRoZSBtYWluIGNhbnZhcyBhcyB0aGUgZHJhdyB0YXJnZXQKCWZiLmVuZCgpOwoKCS8vIDMuIERyYXcgdGhlIGZyYW1lYnVmZmVyIHJlc3VsdCBvbnRvIHRoZSBtYWluIGNhbnZhcwoJdC5wdXNoKCk7Cgl0LnRyYW5zbGF0ZSgwLCAzKTsKCXQucm90YXRlWih0LmZyYW1lQ291bnQgKiAxLjApOwoJdC5pbWFnZShmYik7Cgl0LnBvcCgpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CgoJZHJhd1RleHQoJ0VORCcsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnUmVzdG9yZXMgbWFpbiBjYW52YXMgdGFyZ2V0LicsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnMS4gZmIuYmVnaW4oKSAtPiBkcmF3IHRvIGZyYW1lYnVmZmVyJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCcyLiBmYi5lbmQoKSAgIC0-IHJlc3RvcmUgbWFpbicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnMy4gdC5pbWFnZShmYiktPiBibGl0IHRvIHNjcmVlbicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let fb;
+
+function drawText(text, x, y, r = 200, g = 220, b = 255) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(r, g, b);
+	for (let i = 0; i < text.length; i++) {
+		t.char(text[i]);
+		t.point();
+		t.translate(1, 0);
+	}
+	t.pop();
+}
+
+t.setup(() => {
+	fb = t.createFramebuffer({ width: 16, height: 10 });
+});
+
+t.draw(() => {
+	t.background(8, 10, 18);
+
+	// 1. Begin offscreen render pass
+	fb.begin();
+	t.clear();
+	t.background(22, 10, 30);
+	t.charColor(255, 180, 100);
+	t.char('O');
+	t.rect(fb.width, fb.height);
+	// 2. end() restores the main canvas as the draw target
+	fb.end();
+
+	// 3. Draw the framebuffer result onto the main canvas
+	t.push();
+	t.translate(0, 3);
+	t.rotateZ(t.frameCount * 1.0);
+	t.image(fb);
+	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('END', x, y++, 100, 255, 140);
+	drawText('--------------------------------', x, y++, 80, 100, 150);
+	drawText('Restores main canvas target.', x, y++, 100, 220, 255);
+	drawText('--------------------------------', x, y++, 80, 100, 150);
+	drawText('1. fb.begin() -> draw to framebuffer', x, y++, 140, 160, 190);
+	drawText('2. fb.end()   -> restore main', x, y++, 140, 160, 190);
+	drawText('3. t.image(fb)-> blit to screen', x, y++, 140, 160, 190);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

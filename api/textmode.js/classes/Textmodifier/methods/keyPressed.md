@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / keyPressed
@@ -32,5 +32,99 @@ Register the single-callback handler for key press events.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="keyPressed" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpsZXQgbGFzdCA9ICdOT05FJzsKbGV0IGNvdW50ID0gMDsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKdC5rZXlQcmVzc2VkKChkYXRhKSA9PiB7CglsYXN0ID0gZGF0YS5rZXkgfHwgJ1VOS05PV04nOwoJY291bnQrKzsKfSk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDEwLCAyMik7Cgl0LmNoYXIobGFzdFswXSB8fCAnPycpOwoJdC5jaGFyQ29sb3IoMjU1LCAyMTAsIDEyMCk7Cgl0LnJlY3QoOCwgNCk7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuS0VZUFJFU1NFRCcsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IEtFWSBET1dOIEVWRU5UJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdGaXJlcyB3aGVuIGEga2V5IGlzIHByZXNzZWQuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdMYXN0IGtleSBpcyBzaG93biBpbiBjZW50ZXIuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dChgQ09VTlQ6ICR7Y291bnR9YCwgeCwgeSsrLCAxNDAsIDI1NSwgMTgwKTsKCWRyYXdUZXh0KCdMQVNUOiAnICsgbGFzdC5zbGljZSgwLCAyMCksIHgsIHkrKywgMTgwLCAyMDAsIDIyMCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const labelLayer = t.layers.add(),
+	rings = [],
+	bars = new Array(10).fill(0);
+let keyCount = 0,
+	lastKey = 'NONE';
+
+function drawText(txt, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(txt, x, y);
+	t.pop();
+}
+
+t.keyPressed((data) => {
+	keyCount++;
+	const k = data.key || 'KEY';
+	lastKey = k;
+	rings.unshift({ age: 0, maxAge: 45, char: k.length === 1 ? k : '+' });
+	bars[(k.length > 0 ? k.charCodeAt(0) : 0) % 10] = 1.0;
+	if (rings.length > 10) rings.length = 10;
+});
+
+t.draw(() => {
+	t.background(10, 5, 24);
+	const hw = Math.floor(t.grid.cols / 2),
+		hh = Math.floor(t.grid.rows / 2);
+
+	for (let i = rings.length - 1; i >= 0; i--) {
+		if (++rings[i].age >= rings[i].maxAge) rings.splice(i, 1);
+	}
+
+	for (let i = 0; i < 10; i++) {
+		bars[i] *= 0.94;
+		const h = Math.floor(bars[i] * 12),
+			bx = (i - 4.5) * 4;
+		for (let dy = 0; dy < h; dy++) {
+			t.push();
+			t.translate(Math.round(bx), hh - 4 - dy);
+			t.charColor(255, Math.floor(100 + dy * 12), Math.floor(dy * 20));
+			if (dy > 8) t.cellColor(90, 0, 50);
+			t.char(dy === h - 1 ? '=' : '#');
+			t.point();
+			t.pop();
+		}
+	}
+
+	for (let y = -hh; y <= hh; y += 1) {
+		for (let x = -hw; x <= hw; x += 1) {
+			const d = Math.hypot(x, y);
+			let ringIntensity = 0,
+				ringChar = '+';
+			for (let i = 0; i < rings.length; i++) {
+				const r = rings[i],
+					rad = r.age * 0.9,
+					dist = Math.abs(d - rad);
+				if (dist < 2.0) {
+					ringIntensity += (1 - dist / 2.0) * (1 - r.age / r.maxAge);
+					if (r.char.length === 1) ringChar = r.char;
+				}
+			}
+			if (ringIntensity > 0.15) {
+				t.push();
+				t.translate(x, y);
+				t.charColor(0, 240, 255);
+				if (ringIntensity > 0.4) t.cellColor(0, 60, 90);
+				t.char(ringChar);
+				t.point();
+				t.pop();
+			}
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2),
+		top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODIFIER.KEYPRESSED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: INITIAL KEY DOWN EVENT', x, y++, 100, 220, 255);
+	drawText('Fires on initial key down-stroke.', x, y++, 140, 160, 190);
+	drawText('Keypress ejects frequency shockwave.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('KEY PRESSES:   ' + keyCount, x, y++, 140, 255, 180);
+	drawText('LAST KEY DOWN: ' + lastKey, x, y++, 180, 200, 220);
+});
+
+t.windowResized(() => t.resizeCanvas(window.innerWidth, window.innerHeight));
+```
 

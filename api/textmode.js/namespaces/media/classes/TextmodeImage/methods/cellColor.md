@@ -8,7 +8,7 @@ api: true
 owner: TextmodeImage
 namespace: media
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../../../index.md) / [media](../../../index.md) / [TextmodeImage](../../TextmodeImage.md) / cellColor
@@ -42,7 +42,71 @@ This instance for chaining.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="cellColor" encoded-code="Y29uc3QgSU1BR0VfVVJMID0gJ2h0dHBzOi8vaW1hZ2VzLnVuc3BsYXNoLmNvbS9waG90by0xNTA2OTA1OTI1MzQ2LTIxYmRhNGQzMmRmND93PTkwMCZxPTgwJzsKY29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAp9KTsKCmNvbnN0IGxhYmVsTGF5ZXIgPSB0LmxheWVycy5hZGQoKTsKbGV0IHRlY2hTb3VyY2UgPSBudWxsOwpsZXQgcmVkID0gNDA7CmxldCBibHVlID0gODA7Cgp0LnNldHVwKGFzeW5jICgpID0-IHsKCXRlY2hTb3VyY2UgPSBhd2FpdCB0LmxvYWRJbWFnZShJTUFHRV9VUkwpOwoJdGVjaFNvdXJjZS5jaGFyYWN0ZXJzKCcgLjotPSsqIyVAJyk7Cgl0ZWNoU291cmNlLmNoYXJDb2xvck1vZGUoJ2ZpeGVkJykuY2hhckNvbG9yKDI1NSk7Cgl0ZWNoU291cmNlLmNlbGxDb2xvck1vZGUoJ2ZpeGVkJyk7Cn0pOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg2LCAxMCwgMjIpOwoKCWlmICghdGVjaFNvdXJjZSkgcmV0dXJuOwoKCWNvbnN0IHRpbWUgPSB0LmZyYW1lQ291bnQgKiAwLjA0OwoJcmVkID0gTWF0aC5yb3VuZCg0MCArIDQwICogTWF0aC5zaW4odGltZSkpOwoJYmx1ZSA9IE1hdGgucm91bmQoODAgKyA0MCAqIE1hdGguY29zKHRpbWUgKiAwLjcpKTsKCgl0ZWNoU291cmNlLmNlbGxDb2xvcihyZWQsIDQwLCBibHVlKTsKCgl0LnB1c2goKTsKCXQudHJhbnNsYXRlKDAsIDApOwoJdC5pbWFnZSh0ZWNoU291cmNlLCAyNCwgMTQpOwoJdC5wb3AoKTsKfSk7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CgoJZHJhd1RleHQoJ1RFWFRNT0RFU09VUkNFLkNFTExDT0xPUicsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IFNFVCBDT05TVEFOVCBDRUxMIENPTE9SJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdTZXRzIGNvbG9yIHVzZWQgaW4gZml4ZWQgY29sb3JpbmcgbW9kZS4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KGBDRUxMIENPTE9SOiBSR0IoJHtyZWR9LDQwLCR7Ymx1ZX0pYCwgeCwgeSsrLCAxNDAsIDE5MCwgMjU1KTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80';
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 8,
+});
+
+const labelLayer = t.layers.add();
+let techSource = null;
+let red = 40;
+let blue = 80;
+
+t.setup(async () => {
+	techSource = await t.loadImage(IMAGE_URL);
+	techSource.characters(' .:-=+*#%@');
+	techSource.charColorMode('fixed').charColor(255);
+	techSource.cellColorMode('fixed');
+});
+
+t.draw(() => {
+	t.background(6, 10, 22);
+
+	if (!techSource) return;
+
+	const time = t.frameCount * 0.04;
+	red = Math.round(40 + 40 * Math.sin(time));
+	blue = Math.round(80 + 40 * Math.cos(time * 0.7));
+
+	techSource.cellColor(red, 40, blue);
+
+	t.push();
+	t.translate(0, 0);
+	t.image(techSource, 24, 14);
+	t.pop();
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODESOURCE.CELLCOLOR', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SET CONSTANT CELL COLOR', x, y++, 100, 220, 255);
+	drawText('Sets color used in fixed coloring mode.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`CELL COLOR: RGB(${red},40,${blue})`, x, y++, 140, 190, 255);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 
 ## Inherited from
 

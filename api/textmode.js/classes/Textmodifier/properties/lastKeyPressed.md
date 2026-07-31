@@ -7,7 +7,7 @@ category: Properties
 api: true
 owner: Textmodifier
 kind: Property
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / lastKeyPressed
@@ -22,5 +22,87 @@ Last key pressed, or `null` before any key press.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="lastKeyPressed" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNiwgMTAsIDIyKTsKCWNvbnN0IGtleSA9IHQubGFzdEtleVByZXNzZWQgfHwgJz8nOwoJdC5jaGFyKGtleVswXSB8fCAnPycpOwoJdC5jaGFyQ29sb3IoMjU1LCAyMTAsIDEyMCk7Cgl0LnJlY3QoOCwgNCk7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuTEFTVEtFWVBSRVNTRUQnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBMQVNUIEtFWSBET1dOJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdTdG9yZXMgbGF0ZXN0IHByZXNzZWQga2V5LicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnVmFsdWUgcGVyc2lzdHMgdW50aWwgbmV4dCBwcmVzcy4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdMQVNUOiAnICsgU3RyaW5nKHQubGFzdEtleVByZXNzZWQgfHwgJ05PTkUnKS5zbGljZSgwLCAyMCksIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const labelLayer = t.layers.add();
+
+function drawText(txt, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(txt, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(4, 18, 22);
+
+	const keyStr = String(t.lastKeyPressed || 'NONE').toUpperCase();
+	const hw = Math.floor(t.grid.cols / 2),
+		hh = Math.floor(t.grid.rows / 2);
+	const tm = t.frameCount * 0.04;
+
+	for (let y = -hh; y <= hh; y += 3) {
+		for (let x = -hw; x <= hw; x += 3) {
+			const wave = (Math.sin(x * 0.1 + tm) + Math.cos(y * 0.1 - tm)) * 0.5;
+			if (wave > 0.5) {
+				t.push();
+				t.translate(x, y);
+				t.charColor(10, 36, 42);
+				t.char(wave > 0.8 ? '#' : '*');
+				t.point();
+				t.pop();
+			}
+		}
+	}
+
+	const pedW = 16,
+		pedH = 7;
+	const px = -Math.floor(pedW / 2),
+		py = -Math.floor(pedH / 2);
+
+	for (let cy = 0; cy < pedH; cy++) {
+		for (let cx = 0; cx < pedW; cx++) {
+			const isBorder = cx === 0 || cx === pedW - 1 || cy === 0 || cy === pedH - 1;
+			t.push();
+			t.translate(px + cx, py + cy);
+			t.cellColor(10, 36, 45);
+			if (isBorder) {
+				t.charColor(0, 229, 255);
+				const isCorner = (cy === 0 || cy === pedH - 1) && (cx === 0 || cx === pedW - 1);
+				t.char(isCorner ? '+' : cy === 0 || cy === pedH - 1 ? '=' : '|');
+			} else {
+				t.char(' ');
+			}
+			t.point();
+			t.pop();
+		}
+	}
+
+	t.push();
+	t.printAlign('center', 'middle');
+	t.charColor(255, 183, 0);
+	t.print(keyStr.slice(0, 12), 0, 0);
+	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2),
+		top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	const keyStr = String(t.lastKeyPressed || 'NONE');
+
+	drawText('TEXTMODIFIER.LASTKEYPRESSED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: PERSISTENT LAST KEY STATE', x, y++, 100, 220, 255);
+	drawText('Reads last pressed key property.', x, y++, 140, 160, 190);
+	drawText('Persists until next key is pressed.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('MEMORY VAULT KEY: ' + keyStr, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => t.resizeCanvas(window.innerWidth, window.innerHeight));
+```
 

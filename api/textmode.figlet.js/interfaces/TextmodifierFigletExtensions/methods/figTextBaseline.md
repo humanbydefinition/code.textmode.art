@@ -8,7 +8,7 @@ api: true
 owner: TextmodifierFigletExtensions
 kind: Method
 ecosystem: textmode.js
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.figlet.js](../../../index.md) / [TextmodifierFigletExtensions](../../TextmodifierFigletExtensions.md) / figTextBaseline
@@ -31,7 +31,102 @@ The current baseline mode.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.figlet.js" language="javascript" title="figTextBaseline" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW0ZpZ2xldFBsdWdpbl0sCn0pOwpjb25zdCBndWlkZUxheWVyID0gdC5sYXllcnMuYWRkKCksCgl0ZXh0TGF5ZXIgPSB0LmxheWVycy5hZGQoKSwKCWxhYmVsTGF5ZXIgPSB0LmxheWVycy5hZGQoKTsKCmxldCBmb250Owpjb25zdCBiYXNlbGluZXMgPSBbJ3RvcCcsICdjZW50ZXInLCAnYm90dG9tJ107CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCnQuc2V0dXAoYXN5bmMgKCkgPT4gewoJZm9udCA9IGF3YWl0IHQubG9hZEZpZ0ZvbnQoJ2h0dHBzOi8vY2RuLmpzZGVsaXZyLm5ldC9naC94ZXJvL2ZpZ2xldC1mb250c0BtYXN0ZXIvQnVsYmhlYWQuZmxmJyk7Cgl0LmZpZ0ZvbnQoZm9udCk7Cgl0LmZpZ1RleHRBbGlnbignY2VudGVyJyk7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpLAoJCXRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDMsCgkJeCA9IGxlZnQgKyAzOwoKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuRklHVEVYVEJBU0VMSU5FJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogVkVSVElDQUwgQkFTRUxJTkUgQUxJR04nLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ0FsaWducyB0ZXh0IHJlbGF0aXZlIHRvIFkgb3JpZ2luLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnQ3ljbGU6IHRvcCAtPiBjZW50ZXIgLT4gYm90dG9tLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJaWYgKGZvbnQpIGRyYXdUZXh0KGBBY3RpdmUgYmFzZWxpbmU6ICR7dC5maWdUZXh0QmFzZWxpbmUoKX1gLCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwoJZWxzZSBkcmF3VGV4dCgnTG9hZGluZy4uLicsIHgsIHkrKywgMjU1LCAxODAsIDEwMCk7Cn0pOwoKZ3VpZGVMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWlmICghZm9udCkgcmV0dXJuOwoKCS8vIEN5Y2xlIGJhc2VsaW5lIGV2ZXJ5IDIuNSBzZWNvbmRzCgljb25zdCBpbmRleCA9IE1hdGguZmxvb3IodC5zZWNzIC8gMi41KSAlIGJhc2VsaW5lcy5sZW5ndGg7Cgl0LmZpZ1RleHRCYXNlbGluZShiYXNlbGluZXNbaW5kZXhdKTsKCgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKSwKCQlyaWdodCA9IE1hdGguY2VpbCh0LmdyaWQuY29scyAvIDIpLAoJCWJhc2UgPSB0LmZpZ1RleHRCYXNlbGluZSgpOwoKCS8vIERyYXcgYmFzZWxpbmUgYXhpcwoJdC5wdXNoKCk7Cgl0LmNoYXJDb2xvcig1MCwgMTAwLCAxNTApOwoJZm9yIChsZXQgeCA9IGxlZnQ7IHggPCByaWdodDsgeCsrKSB7CgkJdC5wcmludCgnLScsIHgsIDApOwoJfQoJdC5jaGFyQ29sb3IoMTAwLCAxODAsIDI1NSk7Cgl0LnByaW50KCdZID0gMCAoT3JpZ2luKScsIDE1LCAxKTsKCXQucG9wKCk7CgoJLy8gRHJhdyBhbGlnbm1lbnQgZmxvdyBpbmRpY2F0b3JzCgl0LnB1c2goKTsKCXQuY2hhckNvbG9yKDI1NSwgMTgwLCAxMDApOwoJdC5wcmludCgKCQliYXNlID09PSAndG9wJyA_ICfihpMgKEdyb3dzIERvd253YXJkKScgOiBiYXNlID09PSAnYm90dG9tJyA_ICfihpEgKEdyb3dzIFVwd2FyZCknIDogJ-KGlSAoQ2VudGVyZWQpJywKCQktOSwKCQliYXNlID09PSAnYm90dG9tJyA_IC01IDogNQoJKTsKCXQucG9wKCk7Cn0pOwoKdGV4dExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJaWYgKCFmb250KSByZXR1cm47CgoJY29uc3QgdGltZSA9IHQuc2VjcyAqIDEuNTsKCXQuZmlnVGV4dCgnQkFTRScsIDAsIDAsIHsKCQljaGFyQ29sb3I6IChjZWxsKSA9PiB7CgkJCWNvbnN0IHdhdmUgPSAwLjUgKyAwLjUgKiBNYXRoLnNpbih0aW1lICsgY2VsbC5yb3cgKiAwLjIpOwoJCQlyZXR1cm4gWzI1NSwgTWF0aC5yb3VuZCgxNTAgKyAxMDUgKiB3YXZlKSwgTWF0aC5yb3VuZCgxMDAgKyAxNTUgKiAoMS4wIC0gd2F2ZSkpXTsKCQl9LAoJfSk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 8,
+	plugins: [FigletPlugin],
+});
+const guideLayer = t.layers.add(),
+	textLayer = t.layers.add(),
+	labelLayer = t.layers.add();
+
+let font;
+const baselines = ['top', 'center', 'bottom'];
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.setup(async () => {
+	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Bulbhead.flf');
+	t.figFont(font);
+	t.figTextAlign('center');
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2),
+		top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3,
+		x = left + 3;
+
+	drawText('TEXTMODIFIER.FIGTEXTBASELINE', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: VERTICAL BASELINE ALIGN', x, y++, 100, 220, 255);
+	drawText('Aligns text relative to Y origin.', x, y++, 140, 160, 190);
+	drawText('Cycle: top -> center -> bottom.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	if (font) drawText(`Active baseline: ${t.figTextBaseline()}`, x, y++, 140, 255, 180);
+	else drawText('Loading...', x, y++, 255, 180, 100);
+});
+
+guideLayer.draw(() => {
+	t.clear();
+	if (!font) return;
+
+	// Cycle baseline every 2.5 seconds
+	const index = Math.floor(t.secs / 2.5) % baselines.length;
+	t.figTextBaseline(baselines[index]);
+
+	const left = -Math.floor(t.grid.cols / 2),
+		right = Math.ceil(t.grid.cols / 2),
+		base = t.figTextBaseline();
+
+	// Draw baseline axis
+	t.push();
+	t.charColor(50, 100, 150);
+	for (let x = left; x < right; x++) {
+		t.print('-', x, 0);
+	}
+	t.charColor(100, 180, 255);
+	t.print('Y = 0 (Origin)', 15, 1);
+	t.pop();
+
+	// Draw alignment flow indicators
+	t.push();
+	t.charColor(255, 180, 100);
+	t.print(
+		base === 'top' ? '↓ (Grows Downward)' : base === 'bottom' ? '↑ (Grows Upward)' : '↕ (Centered)',
+		-9,
+		base === 'bottom' ? -5 : 5
+	);
+	t.pop();
+});
+
+textLayer.draw(() => {
+	t.clear();
+	if (!font) return;
+
+	const time = t.secs * 1.5;
+	t.figText('BASE', 0, 0, {
+		charColor: (cell) => {
+			const wave = 0.5 + 0.5 * Math.sin(time + cell.row * 0.2);
+			return [255, Math.round(150 + 105 * wave), Math.round(100 + 155 * (1.0 - wave))];
+		},
+	});
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 
 ## Call Signature
 

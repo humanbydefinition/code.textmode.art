@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / printAlign
@@ -33,5 +33,99 @@ Sets the text alignment rules for subsequent `print` calls.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="printAlign" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7CmNvbnN0IGxhYmVsTGF5ZXIgPSB0LmxheWVycy5hZGQoKTsKCmNvbnN0IGFsaWdubWVudHMgPSBbCglbJ2xlZnQnLCAndG9wJ10sCglbJ2NlbnRlcicsICd0b3AnXSwKCVsncmlnaHQnLCAndG9wJ10sCglbJ2xlZnQnLCAnbWlkZGxlJ10sCglbJ2NlbnRlcicsICdtaWRkbGUnXSwKCVsncmlnaHQnLCAnbWlkZGxlJ10sCglbJ2xlZnQnLCAnYm90dG9tJ10sCglbJ2NlbnRlcicsICdib3R0b20nXSwKCVsncmlnaHQnLCAnYm90dG9tJ10sCl07Cgpjb25zdCBwbGFjZW1lbnRBbGlnbiA9IHsgbGVmdDogJ3JpZ2h0JywgY2VudGVyOiAnY2VudGVyJywgcmlnaHQ6ICdsZWZ0JyB9Owpjb25zdCBwbGFjZW1lbnRWZXJ0aWNhbEFsaWduID0geyB0b3A6ICdib3R0b20nLCBtaWRkbGU6ICdtaWRkbGUnLCBib3R0b206ICd0b3AnIH07Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDEwLCAyMik7CgoJY29uc3QgY29scyA9IHQuZ3JpZC5jb2xzOwoJY29uc3Qgcm93cyA9IHQuZ3JpZC5yb3dzOwoJdC5wdXNoKCk7Cgl0LmNoYXJDb2xvcigyMCwgMjUsIDQ1KTsKCWZvciAobGV0IHkgPSAtTWF0aC5mbG9vcihyb3dzIC8gMik7IHkgPCBNYXRoLmZsb29yKHJvd3MgLyAyKTsgeSArPSA0KSB7CgkJZm9yIChsZXQgeCA9IC1NYXRoLmZsb29yKGNvbHMgLyAyKTsgeCA8IE1hdGguZmxvb3IoY29scyAvIDIpOyB4ICs9IDQpIHsKCQkJdC5wdXNoKCk7CgkJCXQudHJhbnNsYXRlKHgsIHkpOwoJCQl0LmNoYXIoJysnKTsKCQkJdC5wb2ludCgpOwoJCQl0LnBvcCgpOwoJCX0KCX0KCXQucG9wKCk7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWNvbnN0IGJvdHRvbSA9IE1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWNvbnN0IGluZGV4ID0gTWF0aC5mbG9vcih0LmZyYW1lQ291bnQgLyA5MCkgJSBhbGlnbm1lbnRzLmxlbmd0aDsKCWNvbnN0IFtoLCB2XSA9IGFsaWdubWVudHNbaW5kZXhdOwoJY29uc3QgbGFiZWwgPSBgJHtofSwgJHt2fWA7Cgljb25zdCBsYWJlbFggPSBoID09PSAnbGVmdCcgPyAtMSA6IGggPT09ICdyaWdodCcgPyAxIDogMDsKCWNvbnN0IGxhYmVsWSA9IHYgPT09ICd0b3AnID8gLTEgOiB2ID09PSAnYm90dG9tJyA_IDEgOiAwOwoKCXQucHVzaCgpOwoJdC5jaGFyKCdPJyk7Cgl0LmNoYXJDb2xvcigyNTUsIDEwMCwgMTAwKTsKCXQuaW52ZXJ0KHRydWUpOwoJdC5wb2ludCgpOwoJdC5wb3AoKTsKCgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbihwbGFjZW1lbnRBbGlnbltoXSwgcGxhY2VtZW50VmVydGljYWxBbGlnblt2XSk7Cgl0LmNoYXJDb2xvcigxMDAsIDIyMCwgMjU1KTsKCXQucHJpbnQoCgkJYEFMSUdOTUVOVDogW2ZnPXllbGxvd11baW52XSAke2xhYmVsLnRvVXBwZXJDYXNlKCl9IFsvaW52XVsvZmddXG5BbmNob3I6ICgwLCAwKVxuTGluZXM6IDVcbkhvcml6b250YWw6ICR7aH1cblZlcnRpY2FsOiAke3Z9YCwKCQlsYWJlbFgsCgkJbGFiZWxZCgkpOwoJdC5wb3AoKTsKCgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignY2VudGVyJywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IoMTAwLCAyNTUsIDE0MCk7Cgl0LnByaW50KCdURVhUTU9ESUZJRVIuUFJJTlRBTElHTicsIDAsIHRvcCArIDIpOwoKCXQuY2hhckNvbG9yKDgwLCAxMDAsIDE1MCk7Cgl0LnByaW50KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCAwLCB0b3AgKyAzKTsKCgl0LmNoYXJDb2xvcigxNDAsIDE2MCwgMTkwKTsKCXQucHJpbnQoJ0FuY2hvcmVkIHR5cG9ncmFwaHkgcG9zaXRpb25pbmcgZGVtby4gXG5DeWNsZXMgYXV0b21hdGljYWxseS4nLCAwLCB0b3AgKyA0KTsKCXQucG9wKCk7CgoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2NlbnRlcicsICdib3R0b20nKTsKCXQuY2hhckNvbG9yKDgwLCAxMDAsIDE1MCk7Cgl0LnByaW50KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCAwLCBib3R0b20gLSAzKTsKCXQuY2hhckNvbG9yKDEyMCwgMTMwLCAxNTApOwoJdC5wcmludChgQWN0aXZlIHN0YXRlOiAke2luZGV4ICsgMX0gb2YgJHthbGlnbm1lbnRzLmxlbmd0aH0gfCBGcmFtZTogJHt0LmZyYW1lQ291bnR9YCwgMCwgYm90dG9tIC0gMik7Cgl0LnBvcCgpOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+const labelLayer = t.layers.add();
+
+const alignments = [
+	['left', 'top'],
+	['center', 'top'],
+	['right', 'top'],
+	['left', 'middle'],
+	['center', 'middle'],
+	['right', 'middle'],
+	['left', 'bottom'],
+	['center', 'bottom'],
+	['right', 'bottom'],
+];
+
+const placementAlign = { left: 'right', center: 'center', right: 'left' };
+const placementVerticalAlign = { top: 'bottom', middle: 'middle', bottom: 'top' };
+
+t.draw(() => {
+	t.background(6, 10, 22);
+
+	const cols = t.grid.cols;
+	const rows = t.grid.rows;
+	t.push();
+	t.charColor(20, 25, 45);
+	for (let y = -Math.floor(rows / 2); y < Math.floor(rows / 2); y += 4) {
+		for (let x = -Math.floor(cols / 2); x < Math.floor(cols / 2); x += 4) {
+			t.push();
+			t.translate(x, y);
+			t.char('+');
+			t.point();
+			t.pop();
+		}
+	}
+	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	const bottom = Math.floor(t.grid.rows / 2);
+	const index = Math.floor(t.frameCount / 90) % alignments.length;
+	const [h, v] = alignments[index];
+	const label = `${h}, ${v}`;
+	const labelX = h === 'left' ? -1 : h === 'right' ? 1 : 0;
+	const labelY = v === 'top' ? -1 : v === 'bottom' ? 1 : 0;
+
+	t.push();
+	t.char('O');
+	t.charColor(255, 100, 100);
+	t.invert(true);
+	t.point();
+	t.pop();
+
+	t.push();
+	t.printAlign(placementAlign[h], placementVerticalAlign[v]);
+	t.charColor(100, 220, 255);
+	t.print(
+		`ALIGNMENT: [fg=yellow][inv] ${label.toUpperCase()} [/inv][/fg]\nAnchor: (0, 0)\nLines: 5\nHorizontal: ${h}\nVertical: ${v}`,
+		labelX,
+		labelY
+	);
+	t.pop();
+
+	t.push();
+	t.printAlign('center', 'top');
+	t.charColor(100, 255, 140);
+	t.print('TEXTMODIFIER.PRINTALIGN', 0, top + 2);
+
+	t.charColor(80, 100, 150);
+	t.print('------------------------------------------------', 0, top + 3);
+
+	t.charColor(140, 160, 190);
+	t.print('Anchored typography positioning demo. \nCycles automatically.', 0, top + 4);
+	t.pop();
+
+	t.push();
+	t.printAlign('center', 'bottom');
+	t.charColor(80, 100, 150);
+	t.print('------------------------------------------------', 0, bottom - 3);
+	t.charColor(120, 130, 150);
+	t.print(`Active state: ${index + 1} of ${alignments.length} | Frame: ${t.frameCount}`, 0, bottom - 2);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

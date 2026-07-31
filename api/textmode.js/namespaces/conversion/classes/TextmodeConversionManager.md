@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: conversion
 kind: Class
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 hasConstructor: false
 ---
 
@@ -58,7 +58,99 @@ true if the strategy exists
 
 #### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="TextmodeConversionManager" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7IHdpZHRoOiB3aW5kb3cuaW5uZXJXaWR0aCwgaGVpZ2h0OiB3aW5kb3cuaW5uZXJIZWlnaHQgfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCBoYXNDdXN0b20gPSBmYWxzZTsKbGV0IHB1bHNlU2hhZGVyID0gbnVsbDsKCnQuc2V0dXAoYXN5bmMgKCkgPT4gewoJY29uc3QgdmVydCA9IGAjdmVyc2lvbiAzMDAgZXMKCQlpbiB2ZWM0IGFfcG9zaXRpb247CgkJaW4gdmVjMiBhX3V2OwoJCW91dCB2ZWMyIHZfdXY7CgkJdm9pZCBtYWluKCkgewoJCQlnbF9Qb3NpdGlvbiA9IGFfcG9zaXRpb247CgkJCXZfdXYgPSBhX3V2OwoJCX0KCWA7CgoJY29uc3QgZnJhZyA9IGAjdmVyc2lvbiAzMDAgZXMKCQlwcmVjaXNpb24gaGlnaHAgZmxvYXQ7CgkJaW4gdmVjMiB2X3V2OwoJCXVuaWZvcm0gc2FtcGxlcjJEIHVfaW1hZ2U7CgkJbGF5b3V0KGxvY2F0aW9uID0gMCkgb3V0IHZlYzQgb19jaGFyYWN0ZXI7CgkJbGF5b3V0KGxvY2F0aW9uID0gMSkgb3V0IHZlYzQgb19wcmltYXJ5Q29sb3I7CgkJbGF5b3V0KGxvY2F0aW9uID0gMikgb3V0IHZlYzQgb19zZWNvbmRhcnlDb2xvcjsKCQl2b2lkIG1haW4oKSB7CgkJCXZlYzQgY29sID0gdGV4dHVyZSh1X2ltYWdlLCB2X3V2KTsKCQkJb19jaGFyYWN0ZXIgPSB2ZWM0KGNvbC5yLCAwLjAsIDAuMCwgMC4wKTsKCQkJb19wcmltYXJ5Q29sb3IgPSB2ZWM0KGNvbC5yZ2IsIDEuMCk7CgkJCW9fc2Vjb25kYXJ5Q29sb3IgPSB2ZWM0KDAuMCwgMC4wLCAwLjAsIDEuMCk7CgkJfQoJYDsKCglwdWxzZVNoYWRlciA9IGF3YWl0IHQuY3JlYXRlU2hhZGVyKHZlcnQsIGZyYWcpOwp9KTsKCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNiwgOCwgMjApOwoJaGFzQ3VzdG9tID0gdC5jb252ZXJzaW9ucy5oYXMoJ2N1c3RvbS1tb2RlJyk7Cn0pOwoKdC5tb3VzZUNsaWNrZWQoKCkgPT4gewoJaWYgKGhhc0N1c3RvbSkgewoJCXQuY29udmVyc2lvbnMudW5yZWdpc3RlcignY3VzdG9tLW1vZGUnKTsKCX0gZWxzZSB7CgkJdC5jb252ZXJzaW9ucy5yZWdpc3Rlcih7CgkJCWlkOiAnY3VzdG9tLW1vZGUnLAoJCQljcmVhdGVTaGFkZXI6ICgpID0-IHB1bHNlU2hhZGVyLAoJCQljcmVhdGVVbmlmb3JtczogKGN0eCkgPT4gKHsgdV9pbWFnZTogY3R4LnNvdXJjZS50ZXh0dXJlIH0pLAoJCX0pOwoJfQp9KTsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCgljb25zdCBpc0RlZmF1bHQgPSB0LmNvbnZlcnNpb25zLmhhcygnYnJpZ2h0bmVzcycpOwoKCWRyYXdUZXh0KCdDT05WRVJTSU9OLkhBUycsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IENIRUNLIFJFR0lTVEVSRUQgU1RSQVRFR1knLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ1BlcmZvcm1zIGEga2V5IGxvb2t1cCBpbiBjb252ZXJzaW9ucy4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KGBoYXMoJ2JyaWdodG5lc3MnKSA6ICR7aXNEZWZhdWx0fWAsIHgsIHkrKywgMTgwLCAyNTUsIDE4MCk7CglkcmF3VGV4dCgKCQlgaGFzKCdjdXN0b20tbW9kZScpOiAke2hhc0N1c3RvbX1gLAoJCXgsCgkJeSsrLAoJCWhhc0N1c3RvbSA_IDE4MCA6IDI1NSwKCQloYXNDdXN0b20gPyAyNTUgOiAxMjAsCgkJaGFzQ3VzdG9tID8gMTgwIDogMTIwCgkpOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KGhhc0N1c3RvbSA_ICdDbGljayB0byB1bnJlZ2lzdGVyLicgOiAnQ2xpY2sgdG8gcmVnaXN0ZXIgY3VzdG9tLW1vZGUuJywgeCwgeSsrLCAxMjAsIDIwNSwgMjU1KTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+const labelLayer = t.layers.add();
+let hasCustom = false;
+let pulseShader = null;
+
+t.setup(async () => {
+	const vert = `#version 300 es
+		in vec4 a_position;
+		in vec2 a_uv;
+		out vec2 v_uv;
+		void main() {
+			gl_Position = a_position;
+			v_uv = a_uv;
+		}
+	`;
+
+	const frag = `#version 300 es
+		precision highp float;
+		in vec2 v_uv;
+		uniform sampler2D u_image;
+		layout(location = 0) out vec4 o_character;
+		layout(location = 1) out vec4 o_primaryColor;
+		layout(location = 2) out vec4 o_secondaryColor;
+		void main() {
+			vec4 col = texture(u_image, v_uv);
+			o_character = vec4(col.r, 0.0, 0.0, 0.0);
+			o_primaryColor = vec4(col.rgb, 1.0);
+			o_secondaryColor = vec4(0.0, 0.0, 0.0, 1.0);
+		}
+	`;
+
+	pulseShader = await t.createShader(vert, frag);
+});
+
+t.draw(() => {
+	t.background(6, 8, 20);
+	hasCustom = t.conversions.has('custom-mode');
+});
+
+t.mouseClicked(() => {
+	if (hasCustom) {
+		t.conversions.unregister('custom-mode');
+	} else {
+		t.conversions.register({
+			id: 'custom-mode',
+			createShader: () => pulseShader,
+			createUniforms: (ctx) => ({ u_image: ctx.source.texture }),
+		});
+	}
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const isDefault = t.conversions.has('brightness');
+
+	drawText('CONVERSION.HAS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: CHECK REGISTERED STRATEGY', x, y++, 100, 220, 255);
+	drawText('Performs a key lookup in conversions.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`has('brightness') : ${isDefault}`, x, y++, 180, 255, 180);
+	drawText(
+		`has('custom-mode'): ${hasCustom}`,
+		x,
+		y++,
+		hasCustom ? 180 : 255,
+		hasCustom ? 255 : 120,
+		hasCustom ? 180 : 120
+	);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(hasCustom ? 'Click to unregister.' : 'Click to register custom-mode.', x, y++, 120, 205, 255);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 
 ***
 
@@ -115,5 +207,82 @@ true if the strategy was unregistered, false if it wasn't found
 
 #### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="TextmodeConversionManager" encoded-code="Y29uc3QgSU1BR0VfVVJMID0gJ2h0dHBzOi8vaW1hZ2VzLnVuc3BsYXNoLmNvbS9waG90by0xNTA2OTA1OTI1MzQ2LTIxYmRhNGQzMmRmND93PTkwMCZxPTgwJzsKY29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7IHdpZHRoOiB3aW5kb3cuaW5uZXJXaWR0aCwgaGVpZ2h0OiB3aW5kb3cuaW5uZXJIZWlnaHQgfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCBpbWcgPSBudWxsOwpsZXQgcmVnaXN0ZXJlZCA9IGZhbHNlOwpsZXQgY3VzdG9tU2hhZGVyID0gbnVsbDsKCnQuc2V0dXAoYXN5bmMgKCkgPT4gewoJY29uc3QgdmVydCA9IGAjdmVyc2lvbiAzMDAgZXNcbmluIHZlYzQgYV9wb3NpdGlvbjsgaW4gdmVjMiBhX3V2OyBvdXQgdmVjMiB2X3V2OyB2b2lkIG1haW4oKSB7IGdsX1Bvc2l0aW9uID0gYV9wb3NpdGlvbjsgdl91diA9IGFfdXY7IH1gOwoJY29uc3QgZnJhZyA9IGAjdmVyc2lvbiAzMDAgZXNcbnByZWNpc2lvbiBoaWdocCBmbG9hdDsgaW4gdmVjMiB2X3V2OyB1bmlmb3JtIHNhbXBsZXIyRCB1X2ltYWdlOyBsYXlvdXQobG9jYXRpb24gPSAwKSBvdXQgdmVjNCBvX2NoYXJhY3RlcjsgbGF5b3V0KGxvY2F0aW9uID0gMSkgb3V0IHZlYzQgb19wcmltYXJ5Q29sb3I7IGxheW91dChsb2NhdGlvbiA9IDIpIG91dCB2ZWM0IG9fc2Vjb25kYXJ5Q29sb3I7IHZvaWQgbWFpbigpIHsgdmVjNCBjb2wgPSB0ZXh0dXJlKHVfaW1hZ2UsIHZfdXYpOyBmbG9hdCBncmVlbkx1bWEgPSBjb2wuZzsgb19jaGFyYWN0ZXIgPSB2ZWM0KGdyZWVuTHVtYSAqIDAuOCwgMC4wLCAwLjAsIDAuMCk7IG9fcHJpbWFyeUNvbG9yID0gdmVjNCgwLjEsIDAuOSwgMC4zLCAxLjApOyBvX3NlY29uZGFyeUNvbG9yID0gdmVjNCgwLjAxLCAwLjA1LCAwLjAyLCAxLjApOyB9YDsKCgljdXN0b21TaGFkZXIgPSBhd2FpdCB0LmNyZWF0ZVNoYWRlcih2ZXJ0LCBmcmFnKTsKCgl0LmNvbnZlcnNpb25zLnJlZ2lzdGVyKHsKCQlpZDogJ2dyZWVuLWN1c3RvbScsCgkJY3JlYXRlU2hhZGVyOiAoKSA9PiBjdXN0b21TaGFkZXIsCgkJY3JlYXRlVW5pZm9ybXM6IChjdHgpID0-ICh7IHVfaW1hZ2U6IGN0eC5zb3VyY2UudGV4dHVyZSB9KSwKCX0pOwoKCWltZyA9IGF3YWl0IHQubG9hZEltYWdlKElNQUdFX1VSTCk7CglpbWcuY2hhcmFjdGVycygnIC46LT0rKiMlQCcpOwoJaW1nLmNvbnZlcnNpb25Nb2RlKCdncmVlbi1jdXN0b20nKTsKCXJlZ2lzdGVyZWQgPSB0cnVlOwp9KTsKCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNiwgOCwgMjApOwoJaWYgKGltZykgewoJCXQuaW1hZ2UoaW1nLCB0LmdyaWQuY29scyAtIDgsIHQuZ3JpZC5yb3dzIC0gMTApOwoJfQp9KTsKCnQubW91c2VDbGlja2VkKCgpID0-IHsKCWlmICghcmVnaXN0ZXJlZCB8fCAhaW1nKSByZXR1cm47CglpbWcuY29udmVyc2lvbk1vZGUoJ2JyaWdodG5lc3MnKTsKCXQuY29udmVyc2lvbnMudW5yZWdpc3RlcignZ3JlZW4tY3VzdG9tJyk7CglyZWdpc3RlcmVkID0gZmFsc2U7Cn0pOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWNvbnN0IG1vZGUgPSByZWdpc3RlcmVkID8gJ2dyZWVuLWN1c3RvbScgOiAnYnJpZ2h0bmVzcyc7CgoJZHJhd1RleHQoJ0NPTlZFUlNJT04uVU5SRUdJU1RFUicsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IERJU1BPU0UgQ09OVkVSU0lPTiBTVFJBVEVHWScsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnUmVtb3ZlcyByZWdpc3RlcmVkIGN1c3RvbSBsb2dpYy4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KGBBQ1RJVkUgTU9ERTogJHttb2RlfWAsIHgsIHkrKywgMTQwLCAxOTAsIDI1NSk7CglkcmF3VGV4dCgKCQlyZWdpc3RlcmVkID8gJ0NsaWNrIHRvIHVucmVnaXN0ZXIgZ3JlZW4tY3VzdG9tLicgOiAnU3RyYXRlZ3kgdW5yZWdpc3RlcmVkIHN1Y2Nlc3NmdWxseS4nLAoJCXgsCgkJeSsrLAoJCTE4MCwKCQkyNTUsCgkJMTgwCgkpOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const IMAGE_URL = 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=80';
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });
+
+const labelLayer = t.layers.add();
+let img = null;
+let registered = false;
+let customShader = null;
+
+t.setup(async () => {
+	const vert = `#version 300 es\nin vec4 a_position; in vec2 a_uv; out vec2 v_uv; void main() { gl_Position = a_position; v_uv = a_uv; }`;
+	const frag = `#version 300 es\nprecision highp float; in vec2 v_uv; uniform sampler2D u_image; layout(location = 0) out vec4 o_character; layout(location = 1) out vec4 o_primaryColor; layout(location = 2) out vec4 o_secondaryColor; void main() { vec4 col = texture(u_image, v_uv); float greenLuma = col.g; o_character = vec4(greenLuma * 0.8, 0.0, 0.0, 0.0); o_primaryColor = vec4(0.1, 0.9, 0.3, 1.0); o_secondaryColor = vec4(0.01, 0.05, 0.02, 1.0); }`;
+
+	customShader = await t.createShader(vert, frag);
+
+	t.conversions.register({
+		id: 'green-custom',
+		createShader: () => customShader,
+		createUniforms: (ctx) => ({ u_image: ctx.source.texture }),
+	});
+
+	img = await t.loadImage(IMAGE_URL);
+	img.characters(' .:-=+*#%@');
+	img.conversionMode('green-custom');
+	registered = true;
+});
+
+t.draw(() => {
+	t.background(6, 8, 20);
+	if (img) {
+		t.image(img, t.grid.cols - 8, t.grid.rows - 10);
+	}
+});
+
+t.mouseClicked(() => {
+	if (!registered || !img) return;
+	img.conversionMode('brightness');
+	t.conversions.unregister('green-custom');
+	registered = false;
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	const mode = registered ? 'green-custom' : 'brightness';
+
+	drawText('CONVERSION.UNREGISTER', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: DISPOSE CONVERSION STRATEGY', x, y++, 100, 220, 255);
+	drawText('Removes registered custom logic.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`ACTIVE MODE: ${mode}`, x, y++, 140, 190, 255);
+	drawText(
+		registered ? 'Click to unregister green-custom.' : 'Strategy unregistered successfully.',
+		x,
+		y++,
+		180,
+		255,
+		180
+	);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

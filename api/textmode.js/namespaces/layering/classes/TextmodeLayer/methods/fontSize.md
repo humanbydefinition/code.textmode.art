@@ -8,7 +8,7 @@ api: true
 owner: TextmodeLayer
 namespace: layering
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../../../index.md) / [layering](../../../index.md) / [TextmodeLayer](../../TextmodeLayer.md) / fontSize
@@ -37,5 +37,74 @@ Current font size when called without arguments.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="fontSize" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBkZXRhaWxMYXllciA9IHQubGF5ZXJzLmFkZCh7IGZvbnRTaXplOiA4LCBibGVuZE1vZGU6ICdzY3JlZW4nIH0pOwpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByZ2IgPSBbMjU1LCAyNTUsIDI1NV0pIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IocmdiWzBdLCByZ2JbMV0sIHJnYlsyXSk7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg2LCAxMCwgMjIpOwoKCXQucHVzaCgpOwoJdC50cmFuc2xhdGUoMCwgMCk7Cgl0LmNoYXJDb2xvcig0MCwgNTAsIDgwKTsKCXQuY2hhcignIycpOwoJdC5yZWN0KDIwLCAxMCk7Cgl0LnBvcCgpOwp9KTsKCmRldGFpbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgdGltZSA9IHQuZnJhbWVDb3VudCAqIDAuMDM7CgoJdC5wdXNoKCk7Cgl0LnRyYW5zbGF0ZSgwLCAtMik7Cgl0LmNoYXJDb2xvcigyNTUsIDIyNSwgMTQwLCAxNTApOwoJdC5jaGFyKCcuJyk7CgoJZm9yIChsZXQgaSA9IDA7IGkgPCA0MDsgaSsrKSB7CgkJY29uc3QgYW5nbGUgPSB0aW1lICsgaSAqIDAuMjsKCQljb25zdCByID0gMTIgKyBNYXRoLnNpbih0aW1lICsgaSAqIDAuNSkgKiA0OwoJCXQucHVzaCgpOwoJCXQudHJhbnNsYXRlKE1hdGgucm91bmQoTWF0aC5jb3MoYW5nbGUpICogciAqIDEuNSksIE1hdGgucm91bmQoTWF0aC5zaW4oYW5nbGUpICogciAqIDAuNikpOwoJCXQucG9pbnQoKTsKCQl0LnBvcCgpOwoJfQoJdC5wb3AoKTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWRyYXdUZXh0KCdURVhUTU9ERUxBWUVSLkZPTlRTSVpFJywgeCwgeSsrLCBbMTAwLCAyNTUsIDE0MF0pOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgWzgwLCAxMDAsIDE1MF0pOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IFBFUi1MQVlFUiBSRVNPTFVUSU9OJywgeCwgeSsrLCBbMTAwLCAyMjAsIDI1NV0pOwoJZHJhd1RleHQoJ1NtYWxsZXIgZm9udCBnaXZlcyBkZW5zZXIgY2VsbHMuJywgeCwgeSsrLCBbMTQwLCAxNjAsIDE5MF0pOwoJZHJhd1RleHQoJ0xheWVyIGdyaWRzIHVwZGF0ZSBpbmRlcGVuZGVudGx5LicsIHgsIHkrKywgWzE0MCwgMTYwLCAxOTBdKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIFs4MCwgMTAwLCAxNTBdKTsKCWRyYXdUZXh0KGBCQVNFOiAke3QubGF5ZXJzLmJhc2UuZm9udFNpemUoKX0gUFhgLCB4LCB5KyssIFsxNDAsIDE4MCwgMjU1XSk7CglkcmF3VGV4dChgREVUQUlMOiAke2RldGFpbExheWVyLmZvbnRTaXplKCl9IFBYYCwgeCwgeSsrLCBbMjU1LCAyMjUsIDE0MF0pOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const detailLayer = t.layers.add({ fontSize: 8, blendMode: 'screen' });
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, rgb = [255, 255, 255]) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(rgb[0], rgb[1], rgb[2]);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(6, 10, 22);
+
+	t.push();
+	t.translate(0, 0);
+	t.charColor(40, 50, 80);
+	t.char('#');
+	t.rect(20, 10);
+	t.pop();
+});
+
+detailLayer.draw(() => {
+	t.clear();
+	const time = t.frameCount * 0.03;
+
+	t.push();
+	t.translate(0, -2);
+	t.charColor(255, 225, 140, 150);
+	t.char('.');
+
+	for (let i = 0; i < 40; i++) {
+		const angle = time + i * 0.2;
+		const r = 12 + Math.sin(time + i * 0.5) * 4;
+		t.push();
+		t.translate(Math.round(Math.cos(angle) * r * 1.5), Math.round(Math.sin(angle) * r * 0.6));
+		t.point();
+		t.pop();
+	}
+	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODELAYER.FONTSIZE', x, y++, [100, 255, 140]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText('CONCEPT: PER-LAYER RESOLUTION', x, y++, [100, 220, 255]);
+	drawText('Smaller font gives denser cells.', x, y++, [140, 160, 190]);
+	drawText('Layer grids update independently.', x, y++, [140, 160, 190]);
+	drawText('------------------------------------', x, y++, [80, 100, 150]);
+	drawText(`BASE: ${t.layers.base.fontSize()} PX`, x, y++, [140, 180, 255]);
+	drawText(`DETAIL: ${detailLayer.fontSize()} PX`, x, y++, [255, 225, 140]);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

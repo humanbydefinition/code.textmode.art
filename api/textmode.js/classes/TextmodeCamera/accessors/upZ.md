@@ -7,7 +7,7 @@ category: Accessors
 api: true
 owner: TextmodeCamera
 kind: Accessor
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [TextmodeCamera](../../TextmodeCamera.md) / upZ
@@ -28,5 +28,86 @@ Current Z component of the camera up vector.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="upZ" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCB1cFZhbHVlID0gMDsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMDAsIGcgPSAyMjAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC50cmFuc2xhdGUoeCwgeSk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCWZvciAobGV0IGkgPSAwOyBpIDwgdGV4dC5sZW5ndGg7IGkrKykgewoJCXQuY2hhcih0ZXh0W2ldKTsKCQl0LnBvaW50KCk7CgkJdC50cmFuc2xhdGUoMSwgMCk7Cgl9Cgl0LnBvcCgpOwp9CgpmdW5jdGlvbiBkcmF3U2NlbmUoKSB7Cgl0LnB1c2goKTsKCXQuY2hhcignLicpOwoJdC5jaGFyQ29sb3IoNjAsIDgwLCAxMjApOwoJZm9yIChsZXQgeCA9IC0yMDsgeCA8PSAyMDsgeCArPSA0KSB0LmxpbmUoeCwgMCwgLTIwLCB4LCAwLCAyMCk7Cglmb3IgKGxldCB6ID0gLTIwOyB6IDw9IDIwOyB6ICs9IDQpIHQubGluZSgtMjAsIDAsIHosIDIwLCAwLCB6KTsKCXQucG9wKCk7Cgl0LnB1c2goKTsKCXQudHJhbnNsYXRlKDAsIDUsIDApOwoJdC5jaGFyKCcjJyk7Cgl0LmNoYXJDb2xvcigyMDAsIDIyMCwgMjU1KTsKCXQuYm94KDQsIDEwLCA0KTsKCXQucG9wKCk7Cn0KCnQuc2V0dXAoKCkgPT4gewoJdC5wZXJzcGVjdGl2ZSg1OCwgMC4xLCA0MDk2KTsKfSk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDEwLCAyMik7CgoJY29uc3QgdGltZSA9IHQuZnJhbWVDb3VudCAqIDAuMDM7CgkvLyBUb3AtZG93biB2aWV3OyBvc2NpbGxhdGluZyB1cFogc3BpbnMgdGhlIGhvcml6b24KCWNvbnN0IGNhbSA9IHQuY3JlYXRlQ2FtZXJhKCkuc2V0UG9zaXRpb24oMCwgNDAsIDEwKS5sb29rQXQoMCwgMCwgMCk7CgljYW0uc2V0VXAoMSwgMCwgTWF0aC5zaW4odGltZSkgKiAxLjUpOwoKCXVwVmFsdWUgPSBjYW0udXBaOwoJdC5zZXRDYW1lcmEoY2FtKTsKCWRyYXdTY2VuZSgpOwoJdC5yZXNldENhbWVyYSgpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CgoJZHJhd1RleHQoJ1VQWicsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnWiBjb21wb25lbnQgb2YgdGhlIHVwIHZlY3Rvci4nLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ0Zyb20gdG9wLWRvd24sIHVwWiBzcGlucyB0aGUnLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJ2hvcml6b24gbGlrZSBhIGNvbXBhc3MgbmVlZGxlLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dChgdXBaID0gJHt1cFZhbHVlLnRvRml4ZWQoMyl9YCwgeCwgeSsrLCAxMjAsIDI1NSwgMTgwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let upZVal = 0;
+
+t.setup(() => {
+	t.perspective(58, 0.1, 4096);
+});
+
+function drawHelixVortex(tm) {
+	t.push();
+	t.ambientLight(30, 15, 30);
+	t.pointLight(255, 50, 150, 0, 0, 16);
+
+	for (let i = -12; i <= 12; i++) {
+		const angle = i * 0.4 + tm * 2;
+		const x = Math.cos(angle) * 14;
+		const y = Math.sin(angle) * 14;
+		const z = i * 2;
+
+		t.push();
+		t.translate(x, y, z);
+		t.charColor(255, Math.floor(50 + (i + 12) * 8), Math.floor(150 - (i + 12) * 4));
+		t.cellColor(30, 8, 25);
+		t.char('O');
+		t.box(3, 3, 3);
+		t.pop();
+	}
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(24, 6, 20);
+	const tm = t.frameCount * 0.04;
+	const tiltZ = Math.sin(tm) * 0.8;
+
+	const cam = t
+		.createCamera()
+		.setPosition(0, 0, 42)
+		.lookAt(0, 0, 0)
+		.setUp(0, Math.cos(tm) * 0.8, tiltZ);
+
+	upZVal = cam.upZ;
+	t.setCamera(cam);
+	drawHelixVortex(tm);
+	t.resetCamera();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODECAMERA.UPZ', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: HELICAL VORTEX Z-AXIS ROTOR', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Reads camera up-vector Z component.', x, y++);
+	t.print('Tilts camera Z-up orientation.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(255, 50, 150);
+	t.print(`UP Z: ${upZVal.toFixed(2)}`, x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

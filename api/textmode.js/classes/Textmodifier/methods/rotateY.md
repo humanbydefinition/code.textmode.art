@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / rotateY
@@ -36,5 +36,58 @@ Current Y-axis rotation in degrees when called without arguments.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="rotateY" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IFJBTVAgPSAnIC46LT0rKiMlQCc7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDEwLCAyNCk7Cgljb25zdCBjb2xzID0gdC5ncmlkLmNvbHMsIHJvd3MgPSB0LmdyaWQucm93czsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcigoY29scyAtIDEpIC8gMiksIHJpZ2h0ID0gbGVmdCArIGNvbHMgLSAxOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3Iocm93cyAvIDIpLCBib3R0b20gPSB0b3AgKyByb3dzIC0gMTsKCWNvbnN0IHRtID0gdC5mcmFtZUNvdW50ICogMC4wNDsKCglmb3IgKGxldCB5ID0gdG9wOyB5IDw9IGJvdHRvbTsgeSsrKSB7CgkJZm9yIChsZXQgeCA9IGxlZnQ7IHggPD0gcmlnaHQ7IHgrKykgewoJCQljb25zdCBkaXN0ID0gTWF0aC5oeXBvdCh4LCB5KTsKCQkJY29uc3QgYW5nbGUgPSBNYXRoLmF0YW4yKHksIHgpOwoJCQljb25zdCB3YXZlID0gTWF0aC5zaW4oYW5nbGUgKiA0ICsgdG0gKiAyKSAqIE1hdGguY29zKGRpc3QgKiAwLjIpOwoJCQljb25zdCBub3JtID0gKHdhdmUgKyAxKSAqIDAuNTsKCgkJCWNvbnN0IHJhbXBJZHggPSBNYXRoLmZsb29yKG5vcm0gKiAoUkFNUC5sZW5ndGggLSAxKSk7CgkJCWNvbnN0IGNoYXJLZXkgPSBSQU1QW3JhbXBJZHhdOwoKCQkJdC5wdXNoKCk7CgkJCXQucm90YXRlWSh0bSAqIDAuNSk7CgkJCXQudHJhbnNsYXRlKHgsIHksIHdhdmUgKiA1KTsKCQkJdC5jaGFyQ29sb3IoTWF0aC5mbG9vcigyNTUgLSBub3JtICogODApLCBNYXRoLmZsb29yKDE2MCArIG5vcm0gKiA5NSksIE1hdGguZmxvb3IoODAgKyBub3JtICogMTIwKSk7CgkJCXQuY2VsbENvbG9yKE1hdGguZmxvb3IoMjggKyBub3JtICogMTYpLCBNYXRoLmZsb29yKDEyICsgbm9ybSAqIDE0KSwgTWF0aC5mbG9vcig4ICsgbm9ybSAqIDEwKSk7CgkJCXQuY2hhcihjaGFyS2V5KTsKCQkJdC5wb2ludCgpOwoJCQl0LnBvcCgpOwoJCX0KCX0KfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMiksIHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDMsIHggPSBsZWZ0ICsgMzsKCgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKDEyMCwgMjQwLCAxODApOwoJdC5wcmludCgnVEVYVE1PRElGSUVSLlJPVEFURVknLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoNzAsIDEwMCwgMTQwKTsKCXQucHJpbnQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDIxMCwgMjU1KTsKCXQucHJpbnQoJ0NPTkNFUFQ6IDNEIFZPTFVNRVRSSUMgVFVSTlRBQkxFIE1PTk9MSVRIJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMTYwLCAxOTApOwoJdC5wcmludCgnUm90YXRlcyBjb29yZGluYXRlIG1hdHJpeCBhcm91bmQgWS1heGlzJywgeCwgeSsrKTsKCXQucHJpbnQoJ3RvIGdlbmVyYXRlIDNEIHlhdyB0dXJudGFibGUgc3Bpbm5pbmcuJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDcwLCAxMDAsIDE0MCk7Cgl0LnByaW50KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAyNTUsIDIwMCk7Cgl0LnByaW50KCdBWElTOiBST1RBVEUgWSAoM0QgWUFXIFRVUk5UQUJMRSknLCB4LCB5KyspOwoJdC5wb3AoKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+let value = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(6, 10, 22);
+	const time = t.frameCount * 0.04;
+	value = (time * 70) % 360;
+	t.charColor(50, 60, 90);
+	t.char('.');
+	t.line(-18, 0, 18, 0);
+	t.line(0, -10, 0, 10);
+	t.push();
+	t.rotateY(value);
+	t.char('#');
+	t.charColor(140, 255, 180);
+	t.rect(6, 4);
+	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.ROTATEY', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: Y AXIS ROTATION', x, y++, 100, 220, 255);
+	drawText('Yaw turns the rectangle.', x, y++, 140, 160, 190);
+	drawText('Grid cross shows original axes.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`DEG: ${value.toFixed(1)}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

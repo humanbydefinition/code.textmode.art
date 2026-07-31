@@ -8,7 +8,7 @@ api: true
 owner: TextmodeTexture
 namespace: media
 kind: Accessor
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../../../index.md) / [media](../../../index.md) / [TextmodeTexture](../../TextmodeTexture.md) / originalWidth
@@ -29,7 +29,81 @@ Original source width in pixels.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="originalWidth" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpsZXQgc291cmNlID0gbnVsbDsKbGV0IGRpc3Bvc2VkID0gZmFsc2U7CgpmdW5jdGlvbiBjcmVhdGVJbWFnZVVybCgpIHsKCWNvbnN0IGNhbnZhcyA9IGRvY3VtZW50LmNyZWF0ZUVsZW1lbnQoJ2NhbnZhcycpOwoJY2FudmFzLndpZHRoID0gOTY7CgljYW52YXMuaGVpZ2h0ID0gNjQ7Cgljb25zdCBjdHggPSBjYW52YXMuZ2V0Q29udGV4dCgnMmQnKTsKCWNvbnN0IGdyYWRpZW50ID0gY3R4LmNyZWF0ZUxpbmVhckdyYWRpZW50KDAsIDAsIDk2LCA2NCk7CglncmFkaWVudC5hZGRDb2xvclN0b3AoMCwgJyMwZWE1ZTknKTsKCWdyYWRpZW50LmFkZENvbG9yU3RvcCgxLCAnI2Y1OWUwYicpOwoJY3R4LmZpbGxTdHlsZSA9IGdyYWRpZW50OwoJY3R4LmZpbGxSZWN0KDAsIDAsIDk2LCA2NCk7CgljdHguZmlsbFN0eWxlID0gJyMwMjA2MTcnOwoJY3R4LmZpbGxSZWN0KDE2LCAxNiwgNjQsIDMyKTsKCWN0eC5maWxsU3R5bGUgPSAnI2Y4ZmFmYyc7CgljdHguZmlsbFJlY3QoMjgsIDI2LCA0MCwgMTIpOwoJcmV0dXJuIGNhbnZhcy50b0RhdGFVUkwoKTsKfQoKZnVuY3Rpb24gY29uZmlndXJlU291cmNlKHZhbHVlKSB7Cgl2YWx1ZS5jaGFyYWN0ZXJzKCcgLjotPSsqIyVAJyk7Cgl2YWx1ZS5jaGFyQ29sb3JNb2RlKCdzYW1wbGVkJyk7Cgl2YWx1ZS5jZWxsQ29sb3JNb2RlKCdmaXhlZCcpOwp9Cgp0LnNldHVwKGFzeW5jICgpID0-IHsKCXNvdXJjZSA9IGF3YWl0IHQubG9hZEltYWdlKGNyZWF0ZUltYWdlVXJsKCkpOwoJY29uZmlndXJlU291cmNlKHNvdXJjZSk7Cn0pOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDUsIDgsIDE4KTsKCWlmICghc291cmNlIHx8IGRpc3Bvc2VkKSByZXR1cm47Cgl0LmltYWdlKHNvdXJjZSwgTWF0aC5mbG9vcih0LmdyaWQuY29scyAqIDAuNTUpLCBNYXRoLmZsb29yKHQuZ3JpZC5yb3dzICogMC41NSkpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CgoJZHJhd1RleHQoJ1RFWFRNT0RFU09VUkNFLk9SSUdJTkFMV0lEVEgnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBTT1VSQ0UgU0VUVElOR1MnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ0ltYWdlIHNvdXJjZSBjb252ZXJzaW9uIEFQSS4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWNvbnN0IHcgPSBzb3VyY2UgPyBzb3VyY2Uub3JpZ2luYWxXaWR0aCA6IDA7CglkcmF3VGV4dChgT1JJRyBXOiAke3d9YCwgeCwgeSsrLCAxNDAsIDI1NSwgMTgwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+let source = null;
+let disposed = false;
+
+function createImageUrl() {
+	const canvas = document.createElement('canvas');
+	canvas.width = 96;
+	canvas.height = 64;
+	const ctx = canvas.getContext('2d');
+	const gradient = ctx.createLinearGradient(0, 0, 96, 64);
+	gradient.addColorStop(0, '#0ea5e9');
+	gradient.addColorStop(1, '#f59e0b');
+	ctx.fillStyle = gradient;
+	ctx.fillRect(0, 0, 96, 64);
+	ctx.fillStyle = '#020617';
+	ctx.fillRect(16, 16, 64, 32);
+	ctx.fillStyle = '#f8fafc';
+	ctx.fillRect(28, 26, 40, 12);
+	return canvas.toDataURL();
+}
+
+function configureSource(value) {
+	value.characters(' .:-=+*#%@');
+	value.charColorMode('sampled');
+	value.cellColorMode('fixed');
+}
+
+t.setup(async () => {
+	source = await t.loadImage(createImageUrl());
+	configureSource(source);
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(5, 8, 18);
+	if (!source || disposed) return;
+	t.image(source, Math.floor(t.grid.cols * 0.55), Math.floor(t.grid.rows * 0.55));
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODESOURCE.ORIGINALWIDTH', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: SOURCE SETTINGS', x, y++, 100, 220, 255);
+	drawText('Image source conversion API.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	const w = source ? source.originalWidth : 0;
+	drawText(`ORIG W: ${w}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 
 ## Inherited from
 

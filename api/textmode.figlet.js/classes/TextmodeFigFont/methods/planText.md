@@ -8,7 +8,7 @@ api: true
 owner: TextmodeFigFont
 kind: Method
 ecosystem: textmode.js
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.figlet.js](../../../index.md) / [TextmodeFigFont](../../TextmodeFigFont.md) / planText
@@ -34,5 +34,80 @@ Plan a string into positioned FIGlet cells and logical lines.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.figlet.js" language="javascript" title="planText" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW0ZpZ2xldFBsdWdpbl0sCn0pOwoKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKbGV0IGZvbnQ7CmxldCBwbGFuOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LnNldHVwKGFzeW5jICgpID0-IHsKCWZvbnQgPSBhd2FpdCB0LmxvYWRGaWdGb250KCdodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvZ2gveGVyby9maWdsZXQtZm9udHNAbWFzdGVyL0J1bGJoZWFkLmZsZicpOwoJdC5maWdGb250KGZvbnQpOwoJdC5maWdUZXh0QWxpZ24oJ2NlbnRlcicpOwoJdC5maWdUZXh0QmFzZWxpbmUoJ2NlbnRlcicpOwoJcGxhbiA9IGZvbnQucGxhblRleHQoJ1BMQU4nKTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWRyYXdUZXh0KCdURVhUTU9ERUZJR0ZPTlQuUExBTlRFWFQnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBQTEFOIExBWU9VVCBCRUZPUkUgUkVOREVSJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdDYWxjdWxhdGVzIGNvb3JkaW5hdGVzIG9mIGVhY2ggY2VsbC4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJ0FsbG93cyBjdXN0b20gcGVyLWNoYXJhY3RlciBlZmZlY3RzLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJaWYgKGZvbnQgJiYgcGxhbikgewoJCWRyYXdUZXh0KGBQbGFubmVkIGNlbGxzOiAke3BsYW4uY2VsbHMubGVuZ3RofWAsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7Cgl9IGVsc2UgewoJCWRyYXdUZXh0KCdQbGFubmluZyBsYXlvdXQuLi4nLCB4LCB5KyssIDI1NSwgMTgwLCAxMDApOwoJfQp9KTsKCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoMTAsIDEwLCAxNik7CgoJaWYgKCFmb250IHx8ICFwbGFuKSByZXR1cm47CgoJY29uc3QgdGltZSA9IHQuc2VjcyAqIDIuMDsKCWNvbnN0IGhhbGZXID0gTWF0aC5mbG9vcihwbGFuLmNvbHMgLyAyKTsKCWNvbnN0IGhhbGZIID0gTWF0aC5mbG9vcihwbGFuLnJvd3MgLyAyKTsKCgkvLyBJdGVyYXRlIG92ZXIgcGxhbm5lZCBjZWxscyBhbmQgZHJhdyB0aGVtIHdpdGggYSBzY2FubGluZSBmYWRlCglmb3IgKGNvbnN0IGNlbGwgb2YgcGxhbi5jZWxscykgewoJCWNvbnN0IGRlbGF5ID0gY2VsbC5jb2wgKiAwLjE1OwoJCWNvbnN0IGFscGhhID0gMC41ICsgMC41ICogTWF0aC5zaW4odGltZSAtIGRlbGF5KTsKCgkJdC5wdXNoKCk7CgkJdC50cmFuc2xhdGUoY2VsbC5jb2wgLSBoYWxmVywgY2VsbC5yb3cgLSBoYWxmSCk7CgkJdC5jaGFyKGNlbGwuY2hhcik7CgkJdC5jaGFyQ29sb3IoTWF0aC5yb3VuZCgxMDAgKyAxNTUgKiBhbHBoYSksIE1hdGgucm91bmQoMTUwICsgMTA1ICogKDEuMCAtIGFscGhhKSksIDI1NSk7CgkJdC5wb2ludCgpOwoJCXQucG9wKCk7Cgl9Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 8,
+	plugins: [FigletPlugin],
+});
+
+const labelLayer = t.layers.add();
+
+let font;
+let plan;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.setup(async () => {
+	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Bulbhead.flf');
+	t.figFont(font);
+	t.figTextAlign('center');
+	t.figTextBaseline('center');
+	plan = font.planText('PLAN');
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODEFIGFONT.PLANTEXT', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: PLAN LAYOUT BEFORE RENDER', x, y++, 100, 220, 255);
+	drawText('Calculates coordinates of each cell.', x, y++, 140, 160, 190);
+	drawText('Allows custom per-character effects.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	if (font && plan) {
+		drawText(`Planned cells: ${plan.cells.length}`, x, y++, 140, 255, 180);
+	} else {
+		drawText('Planning layout...', x, y++, 255, 180, 100);
+	}
+});
+
+t.draw(() => {
+	t.background(10, 10, 16);
+
+	if (!font || !plan) return;
+
+	const time = t.secs * 2.0;
+	const halfW = Math.floor(plan.cols / 2);
+	const halfH = Math.floor(plan.rows / 2);
+
+	// Iterate over planned cells and draw them with a scanline fade
+	for (const cell of plan.cells) {
+		const delay = cell.col * 0.15;
+		const alpha = 0.5 + 0.5 * Math.sin(time - delay);
+
+		t.push();
+		t.translate(cell.col - halfW, cell.row - halfH);
+		t.char(cell.char);
+		t.charColor(Math.round(100 + 155 * alpha), Math.round(150 + 105 * (1.0 - alpha)), 255);
+		t.point();
+		t.pop();
+	}
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

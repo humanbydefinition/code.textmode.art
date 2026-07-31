@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: media
 kind: Class
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 hasConstructor: false
 ---
 
@@ -22,7 +22,87 @@ and configure conversion through inherited chainable methods.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="TextmodeImage" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpsZXQgaW1hZ2UgPSBudWxsOwoKZnVuY3Rpb24gY3JlYXRlSW1hZ2VVcmwoKSB7Cgljb25zdCBjYW52YXMgPSBkb2N1bWVudC5jcmVhdGVFbGVtZW50KCdjYW52YXMnKTsKCWNhbnZhcy53aWR0aCA9IDk2OwoJY2FudmFzLmhlaWdodCA9IDY0OwoJY29uc3QgY3R4ID0gY2FudmFzLmdldENvbnRleHQoJzJkJyk7Cgljb25zdCBncmFkaWVudCA9IGN0eC5jcmVhdGVMaW5lYXJHcmFkaWVudCgwLCAwLCA5NiwgNjQpOwoJZ3JhZGllbnQuYWRkQ29sb3JTdG9wKDAsICcjMGVhNWU5Jyk7CglncmFkaWVudC5hZGRDb2xvclN0b3AoMSwgJyNmNTllMGInKTsKCWN0eC5maWxsU3R5bGUgPSBncmFkaWVudDsKCWN0eC5maWxsUmVjdCgwLCAwLCA5NiwgNjQpOwoJY3R4LmZpbGxTdHlsZSA9ICcjMDIwNjE3JzsKCWN0eC5maWxsUmVjdCgxMiwgMTgsIDcyLCAyOCk7CgljdHguZmlsbFN0eWxlID0gJyNmOGZhZmMnOwoJY3R4LmZpbGxSZWN0KDIyLCAyNiwgNTIsIDEyKTsKCXJldHVybiBjYW52YXMudG9EYXRhVVJMKCk7Cn0KCnQuc2V0dXAoYXN5bmMgKCkgPT4gewoJaW1hZ2UgPSBhd2FpdCB0LmxvYWRJbWFnZShjcmVhdGVJbWFnZVVybCgpKTsKCWltYWdlLmNoYXJhY3RlcnMoJyAuOi09KyojJUAnKTsKCWltYWdlLmNoYXJDb2xvck1vZGUoJ2ZpeGVkJyk7CglpbWFnZS5jaGFyQ29sb3IoMjU1LCAyMzUsIDE4MCk7CglpbWFnZS5jZWxsQ29sb3JNb2RlKCdzYW1wbGVkJyk7Cn0pOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDEwLCAxOCk7CglpZiAoIWltYWdlKSByZXR1cm47Cgl0LnB1c2goKTsKCXQucm90YXRlWihNYXRoLnNpbih0LmZyYW1lQ291bnQgKiAwLjAyKSAqIDQpOwoJdC5pbWFnZShpbWFnZSwgTWF0aC5mbG9vcih0LmdyaWQuY29scyAqIDAuNTUpLCBNYXRoLmZsb29yKHQuZ3JpZC5yb3dzICogMC41NSkpOwoJdC5wb3AoKTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWRyYXdUZXh0KCdURVhUTU9ERUlNQUdFLkNSRUFUSU9OJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogTE9BREVEIElNQUdFIFNPVVJDRScsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnSW1hZ2UgY29udmVydHMgdG8gY2VsbHMuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dChgU0laRTogJHtpbWFnZSA_IGltYWdlLndpZHRoIDogMH1gLCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let image = null;
+
+function createReactionCanvas() {
+	const canvas = document.createElement('canvas');
+	canvas.width = 64;
+	canvas.height = 48;
+	const ctx = canvas.getContext('2d');
+
+	const imgData = ctx.createImageData(64, 48);
+	const data = imgData.data;
+
+	for (let y = 0; y < 48; y++) {
+		for (let x = 0; x < 64; x++) {
+			const idx = (y * 64 + x) * 4;
+			const v = Math.sin(x * 0.15) * Math.cos(y * 0.15) + Math.sin(x * 0.3 + y * 0.2);
+			const norm = (v + 2) / 4;
+
+			data[idx] = Math.floor(15 + norm * 240);
+			data[idx + 1] = Math.floor(23 + norm * 160);
+			data[idx + 2] = Math.floor(42 + norm * 210);
+			data[idx + 3] = 255;
+		}
+	}
+	ctx.putImageData(imgData, 0, 0);
+	return canvas.toDataURL();
+}
+
+t.setup(async () => {
+	image = await t.loadImage(createReactionCanvas());
+	image.characters(' .:-=+*#%@');
+	image.cellColorMode('sampled');
+});
+
+t.draw(() => {
+	t.background(15, 23, 42);
+	if (!image) return;
+
+	t.push();
+	t.rotateZ(Math.sin(t.frameCount * 0.03) * 64);
+	t.image(image, Math.floor(t.grid.cols * 0.6), Math.floor(t.grid.rows * 0.6));
+	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODEIMAGE.CREATION', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: REACTION CANV CONVERTER', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Loads HTML canvas data into image.', x, y++);
+	t.print('Converts source pixels into cells.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(245, 158, 11);
+	t.print(`IMAGE SIZE: ${image ? image.width : 0}x${image ? image.height : 0} PX`, x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 
 ## Extends
 

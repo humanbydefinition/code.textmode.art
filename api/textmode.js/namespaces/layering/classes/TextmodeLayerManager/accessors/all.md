@@ -8,7 +8,7 @@ api: true
 owner: TextmodeLayerManager
 namespace: layering
 kind: Accessor
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../../../index.md) / [layering](../../../index.md) / [TextmodeLayerManager](../../TextmodeLayerManager.md) / all
@@ -29,5 +29,75 @@ readonly [`TextmodeLayer`](../../TextmodeLayer.md)[]
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="all" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7IHdpZHRoOiB3aW5kb3cuaW5uZXJXaWR0aCwgaGVpZ2h0OiB3aW5kb3cuaW5uZXJIZWlnaHQsIGZvbnRTaXplOiAxNiB9KTsKY29uc3QgcGlnbWVudHMgPSBbCglbMjQzLCAxMTQsIDkyXSwKCVs2NSwgMjA1LCAxNzddLAoJWzEwNSwgMTI3LCAyNDZdLAoJWzI0NCwgMTk2LCA5NF0sCl07CmNvbnN0IGN1cnRhaW5zID0gcGlnbWVudHMubWFwKChjb2xvcikgPT4gdC5sYXllcnMuYWRkKHsgYmxlbmRNb2RlOiAnc2NyZWVuJywgb3BhY2l0eTogMC42NCB9KSk7CmNvbnN0IGxhYmVsTGF5ZXIgPSB0LmxheWVycy5hZGQoKTsKCmZ1bmN0aW9uIHRleHQodmFsdWUsIHgsIHksIGNvbG9yID0gWzIyMCwgMjMwLCAyNDVdKSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKC4uLmNvbG9yKTsKCXQucHJpbnQodmFsdWUsIHgsIHkpOwoJdC5wb3AoKTsKfQpmdW5jdGlvbiBwdXQoeCwgeSwgZ2x5cGgsIGNvbG9yKSB7Cgl0LnB1c2goKTsKCXQudHJhbnNsYXRlKHgsIHkpOwoJdC5jaGFyQ29sb3IoLi4uY29sb3IpOwoJdC5jaGFyKGdseXBoKTsKCXQucG9pbnQoKTsKCXQucG9wKCk7Cn0KZnVuY3Rpb24gY3VydGFpbihpbmRleCkgewoJY29uc3QgQyA9IE1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKSwKCQlSID0gTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpLAoJCWYgPSB0LmZyYW1lQ291bnQgKiAwLjAyNjsKCWZvciAobGV0IHkgPSAtUjsgeSA8PSBSOyB5KyspIHsKCQljb25zdCBzcGluZSA9IE1hdGguc2luKHkgKiAwLjEzICsgaW5kZXggKiAxLjggKyBmKSAqICg4ICsgaW5kZXggKiAyKSArIE1hdGguc2luKHkgKiAwLjAzNSAtIGYpICogNzsKCQlmb3IgKGxldCB3aWR0aCA9IC01OyB3aWR0aCA8PSA1OyB3aWR0aCArPSAyKSB7CgkJCWNvbnN0IHggPSBNYXRoLnJvdW5kKHNwaW5lICsgd2lkdGggKyBNYXRoLnNpbih5ICogMC4zMSArIGYgKiAyKSAqIDIpOwoJCQlpZiAoTWF0aC5hYnMoeCkgPCBDIC0gMiAmJiAoeSArIHdpZHRoICsgaW5kZXgpICUgMyAhPT0gMCkKCQkJCXB1dCh4LCB5LCB3aWR0aCA9PT0gMCA_ICd8JyA6ICc6JywgcGlnbWVudHNbaW5kZXhdKTsKCQl9Cgl9Cn0KCmN1cnRhaW5zLmZvckVhY2goKGxheWVyLCBpbmRleCkgPT4KCWxheWVyLmRyYXcoKCkgPT4gewoJCXQuY2xlYXIoKTsKCQljdXJ0YWluKGluZGV4KTsKCX0pCik7CnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoNywgOCwgMjIpOwoJY29uc3QgQyA9IE1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKSwKCQlSID0gTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpLAoJCWYgPSB0LmZyYW1lQ291bnQgKiAwLjAxODsKCWZvciAobGV0IHggPSAtQzsgeCA8PSBDOyB4ICs9IDQpCgkJZm9yIChsZXQgeSA9IC1SOyB5IDw9IFI7IHkgKz0gMykgaWYgKCh4ICogMyArIHkpICUgMTEgPT09IDApIHB1dCh4LCB5LCAnLicsIFsyOCwgMzYsIDcwXSk7Cgl0LmxheWVycy5hbGwKCQkuZmlsdGVyKChsYXllcikgPT4gbGF5ZXIgIT09IGxhYmVsTGF5ZXIpCgkJLmZvckVhY2goKGxheWVyLCBpbmRleCkgPT4gewoJCQlsYXllci5vZmZzZXQoTWF0aC5zaW4oZiArIGluZGV4ICogMS43KSAqIDYsIE1hdGguY29zKGYgKiAxLjQgKyBpbmRleCkgKiAyKTsKCQkJbGF5ZXIub3BhY2l0eSgwLjQ0ICsgMC4zMiAqICgwLjUgKyAwLjUgKiBNYXRoLnNpbihmICogMyArIGluZGV4KSkpOwoJCX0pOwp9KTsKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IEwgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpLAoJCVQgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJdGV4dCgnTEFZRVJNQU5BR0VSLkFMTCcsIEwgKyAzLCBUICsgMywgWzEwMCwgMjU1LCAxNDBdKTsKCXRleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIEwgKyAzLCBUICsgNCwgWzgwLCAxMDAsIDE1MF0pOwoJdGV4dCgnVEhFIFdIT0xFIFNUQUNLIERSSUZUUyBUT0dFVEhFUicsIEwgKyAzLCBUICsgNSwgWzEwMCwgMjIwLCAyNTVdKTsKCXRleHQoYExJVkUgQ1VSVEFJTlM6ICR7dC5sYXllcnMuYWxsLmxlbmd0aCAtIDF9YCwgTCArIDMsIFQgKyA2LCBbMTQwLCAyNTUsIDE4MF0pOwp9KTsKdC53aW5kb3dSZXNpemVkKCgpID0-IHQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpKTs" />
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const pigments = [
+	[243, 114, 92],
+	[65, 205, 177],
+	[105, 127, 246],
+	[244, 196, 94],
+];
+const curtains = pigments.map((color) => t.layers.add({ blendMode: 'screen', opacity: 0.64 }));
+const labelLayer = t.layers.add();
+
+function text(value, x, y, color = [220, 230, 245]) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(...color);
+	t.print(value, x, y);
+	t.pop();
+}
+function put(x, y, glyph, color) {
+	t.push();
+	t.translate(x, y);
+	t.charColor(...color);
+	t.char(glyph);
+	t.point();
+	t.pop();
+}
+function curtain(index) {
+	const C = Math.floor(t.grid.cols / 2),
+		R = Math.floor(t.grid.rows / 2),
+		f = t.frameCount * 0.026;
+	for (let y = -R; y <= R; y++) {
+		const spine = Math.sin(y * 0.13 + index * 1.8 + f) * (8 + index * 2) + Math.sin(y * 0.035 - f) * 7;
+		for (let width = -5; width <= 5; width += 2) {
+			const x = Math.round(spine + width + Math.sin(y * 0.31 + f * 2) * 2);
+			if (Math.abs(x) < C - 2 && (y + width + index) % 3 !== 0)
+				put(x, y, width === 0 ? '|' : ':', pigments[index]);
+		}
+	}
+}
+
+curtains.forEach((layer, index) =>
+	layer.draw(() => {
+		t.clear();
+		curtain(index);
+	})
+);
+t.draw(() => {
+	t.background(7, 8, 22);
+	const C = Math.floor(t.grid.cols / 2),
+		R = Math.floor(t.grid.rows / 2),
+		f = t.frameCount * 0.018;
+	for (let x = -C; x <= C; x += 4)
+		for (let y = -R; y <= R; y += 3) if ((x * 3 + y) % 11 === 0) put(x, y, '.', [28, 36, 70]);
+	t.layers.all
+		.filter((layer) => layer !== labelLayer)
+		.forEach((layer, index) => {
+			layer.offset(Math.sin(f + index * 1.7) * 6, Math.cos(f * 1.4 + index) * 2);
+			layer.opacity(0.44 + 0.32 * (0.5 + 0.5 * Math.sin(f * 3 + index)));
+		});
+});
+labelLayer.draw(() => {
+	t.clear();
+	const L = -Math.floor(t.grid.cols / 2),
+		T = -Math.floor(t.grid.rows / 2);
+	text('LAYERMANAGER.ALL', L + 3, T + 3, [100, 255, 140]);
+	text('------------------------------------', L + 3, T + 4, [80, 100, 150]);
+	text('THE WHOLE STACK DRIFTS TOGETHER', L + 3, T + 5, [100, 220, 255]);
+	text(`LIVE CURTAINS: ${t.layers.all.length - 1}`, L + 3, T + 6, [140, 255, 180]);
+});
+t.windowResized(() => t.resizeCanvas(window.innerWidth, window.innerHeight));
+```
 

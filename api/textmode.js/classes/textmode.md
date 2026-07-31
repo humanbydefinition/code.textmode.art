@@ -6,7 +6,7 @@ description: The main entry point for the textmode.js library.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 hasConstructor: false
 ---
 
@@ -20,7 +20,79 @@ Use it to create [Textmodifier](Textmodifier.md) instances and configure global 
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="textmode" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpsZXQgcHggPSAwOwpsZXQgcHkgPSAwOwpjb25zdCB0cmFpbCA9IFtdOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCgxMCwgNiwgMjQpOwoKCWNvbnN0IGEgPSAxLjUgKyBNYXRoLnNpbih0LmZyYW1lQ291bnQgKiAwLjAwMjUpICogMC40OwoJY29uc3QgYiA9IC0xLjggKyBNYXRoLmNvcyh0LmZyYW1lQ291bnQgKiAwLjAwMykgKiAwLjM7Cgljb25zdCBjID0gMS4xICsgTWF0aC5zaW4odC5mcmFtZUNvdW50ICogMC4wMDM1KSAqIDAuMjsKCWNvbnN0IGQgPSAwLjggKyBNYXRoLmNvcyh0LmZyYW1lQ291bnQgKiAwLjAwMikgKiAwLjQ7CgoJbGV0IGx4ID0gcHg7CglsZXQgbHkgPSBweTsKCglmb3IgKGxldCBzID0gMDsgcyA8IDQ7IHMrKykgewoJCWNvbnN0IG54ID0gTWF0aC5zaW4oYSAqIGx5KSArIGMgKiBNYXRoLmNvcyhhICogbHgpOwoJCWNvbnN0IG55ID0gTWF0aC5zaW4oYiAqIGx4KSArIGQgKiBNYXRoLmNvcyhiICogbHkpOwoJCWx4ID0gbng7CgkJbHkgPSBueTsKCgkJY29uc3Qgc3ggPSBNYXRoLnJvdW5kKGx4ICogOSk7CgkJY29uc3Qgc3kgPSBNYXRoLnJvdW5kKGx5ICogNyk7CgkJdHJhaWwucHVzaCh7IHg6IHN4LCB5OiBzeSB9KTsKCX0KCglweCA9IGx4OwoJcHkgPSBseTsKCglpZiAodHJhaWwubGVuZ3RoID4gMTgwKSB0cmFpbC5zcGxpY2UoMCwgdHJhaWwubGVuZ3RoIC0gMTgwKTsKCglmb3IgKGxldCBpID0gMDsgaSA8IHRyYWlsLmxlbmd0aDsgaSsrKSB7CgkJY29uc3QgcCA9IHRyYWlsW2ldOwoJCWNvbnN0IHEgPSBpIC8gdHJhaWwubGVuZ3RoOwoKCQl0LnB1c2goKTsKCQl0LnRyYW5zbGF0ZShwLngsIHAueSk7CgkJdC5jaGFyQ29sb3IoMTgwICsgcSAqIDc1LCA2MCArIHEgKiA5MCwgMjEwICsgcSAqIDQ1KTsKCQl0LmNoYXIocSA-IDAuNyA_ICdAJyA6IHEgPiAwLjQgPyAnKicgOiAnLicpOwoJCXQucG9pbnQoKTsKCQl0LnBvcCgpOwoJfQp9KTsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnVEVYVE1PREUuQ1JFQVRJT04nLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBJTklUSUFMSVpBVElPTiBGVU5DVElPTicsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnQ3JlYXRlcyBhIFRleHRtb2RpZmllciBpbnN0YW5jZS4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJ0NvbmZpZ3VyZXMgZGVmYXVsdCB2aWV3cG9ydC9jYW52YXMuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+const RAMP = ' .:+*#@';
+
+t.draw(() => {
+	t.background(14, 6, 26);
+	const hw = Math.floor(t.grid.cols / 2);
+	const hh = Math.floor(t.grid.rows / 2);
+	const tm = t.frameCount * 0.02;
+
+	const n = 3 + Math.sin(tm * 0.5) * 1.5;
+	const m = 2 + Math.cos(tm * 0.7) * 1.5;
+
+	for (let y = -hh; y <= hh; y++) {
+		const ny = (y / hh) * Math.PI;
+		for (let x = -hw; x <= hw; x++) {
+			const nx = (x / hw) * Math.PI;
+
+			const chladni = Math.sin(n * nx) * Math.cos(m * ny) - Math.cos(m * nx) * Math.sin(n * ny);
+			const absVal = Math.abs(chladni);
+
+			if (absVal < 0.6) {
+				const norm = 1 - absVal / 0.6;
+				const idx = Math.floor(norm * (RAMP.length - 1));
+
+				t.push();
+				t.translate(x, y);
+				t.charColor(Math.floor(180 + norm * 75), Math.floor(140 + norm * 70), Math.floor(40 + norm * 50));
+				t.cellColor(Math.floor(25 + norm * 20), 8, Math.floor(40 + norm * 20));
+				t.char(RAMP[idx]);
+				t.point();
+				t.pop();
+			}
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODE.CREATION', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: CHLADNI NODAL RESONANCE', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Factory initialization setup.', x, y++);
+	t.print('Configures canvas & grid context.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(255, 210, 90);
+	t.print('RESONANCE: ACTIVE', x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 
 ## Accessors
 

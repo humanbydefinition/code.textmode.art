@@ -8,7 +8,7 @@ api: true
 owner: TextmodeVideo
 namespace: media
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../../../index.md) / [media](../../../index.md) / [TextmodeVideo](../../TextmodeVideo.md) / stop
@@ -27,5 +27,81 @@ Stop the video and seek to the beginning.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="stop" encoded-code="Y29uc3QgVklERU9fVVJMID0gJ2h0dHBzOi8vaW50ZXJhY3RpdmUtZXhhbXBsZXMubWRuLm1vemlsbGEubmV0L21lZGlhL2NjMC12aWRlb3MvZmxvd2VyLm1wNCc7CmNvbnN0IHQgPSB0ZXh0bW9kZS5jcmVhdGUoewoJd2lkdGg6IHdpbmRvdy5pbm5lcldpZHRoLAoJaGVpZ2h0OiB3aW5kb3cuaW5uZXJIZWlnaHQsCglmb250U2l6ZTogMTYsCn0pOwoKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwpsZXQgdmlkZW8gPSBudWxsOwpsZXQgcGxheWluZyA9IGZhbHNlOwpsZXQgcmVzdGFydFRpbWVvdXQgPSBudWxsOwoKdC5zZXR1cChhc3luYyAoKSA9PiB7Cgl2aWRlbyA9IGF3YWl0IHQubG9hZFZpZGVvKFZJREVPX1VSTCk7Cgl2aWRlby5jaGFyYWN0ZXJzKCcgLjotPSsqIyVAJyk7Cgl2aWRlby5sb29wKCk7Cgl2aWRlby52b2x1bWUoMCk7Cglhd2FpdCB2aWRlby5wbGF5KCk7Cn0pOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCg2LCA4LCAyMCk7CglpZiAoIXZpZGVvKSByZXR1cm47CgoJdC5pbWFnZSh2aWRlbyk7CglwbGF5aW5nID0gdmlkZW8uaXNQbGF5aW5nOwp9KTsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnVEVYVE1PREVWSURFTy5TVE9QJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogVEVSTUlOQVRJTkcgUExBWUJBQ0snLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ1N0b3BzIHZpZGVvIGFuZCByZXNldHMgdGltZWxpbmUuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CgoJaWYgKHZpZGVvKSB7CgkJY29uc3Qgc3RhdGUgPSBwbGF5aW5nID8gJ1BMQVlJTkcnIDogJ1NUT1BQRUQnOwoJCWRyYXdUZXh0KGBQTEFZOiAke3N0YXRlfWAsIHgsIHkrKywgMjU1LCAyMTAsIDkwKTsKCQlkcmF3VGV4dCgiUFJFU1MgJ1MnIFRPIFNUT1AgVklERU8iLCB4LCB5KyssIDEyMCwgMjA1LCAyNTUpOwoJCWlmIChyZXN0YXJ0VGltZW91dCkgewoJCQlkcmF3VGV4dCgnUkVTVEFSVElORyBJTiAxIFNFQ09ORC4uLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CgkJfQoJfSBlbHNlIHsKCQlkcmF3VGV4dCgnTE9BRElORyBWSURFTy4uLicsIHgsIHkrKywgMjU1LCAxODAsIDEyMCk7Cgl9Cn0pOwoKdC5rZXlQcmVzc2VkKCgpID0-IHsKCWlmICghdmlkZW8gfHwgIXQuaXNLZXlQcmVzc2VkKCdzJykpIHJldHVybjsKCgl2aWRlby5zdG9wKCk7CglpZiAocmVzdGFydFRpbWVvdXQpIGNsZWFyVGltZW91dChyZXN0YXJ0VGltZW91dCk7CglyZXN0YXJ0VGltZW91dCA9IHNldFRpbWVvdXQoKCkgPT4gewoJCXZvaWQgdmlkZW8ucGxheSgpOwoJCXJlc3RhcnRUaW1lb3V0ID0gbnVsbDsKCX0sIDEwMDApOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const VIDEO_URL = 'https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4';
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let video = null;
+let playing = false;
+let restartTimeout = null;
+
+t.setup(async () => {
+	video = await t.loadVideo(VIDEO_URL);
+	video.characters(' .:-=+*#%@');
+	video.loop();
+	video.volume(0);
+	await video.play();
+});
+
+t.draw(() => {
+	t.background(6, 8, 20);
+	if (!video) return;
+
+	t.image(video);
+	playing = video.isPlaying;
+});
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODEVIDEO.STOP', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: TERMINATING PLAYBACK', x, y++, 100, 220, 255);
+	drawText('Stops video and resets timeline.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+
+	if (video) {
+		const state = playing ? 'PLAYING' : 'STOPPED';
+		drawText(`PLAY: ${state}`, x, y++, 255, 210, 90);
+		drawText("PRESS 'S' TO STOP VIDEO", x, y++, 120, 205, 255);
+		if (restartTimeout) {
+			drawText('RESTARTING IN 1 SECOND...', x, y++, 140, 160, 190);
+		}
+	} else {
+		drawText('LOADING VIDEO...', x, y++, 255, 180, 120);
+	}
+});
+
+t.keyPressed(() => {
+	if (!video || !t.isKeyPressed('s')) return;
+
+	video.stop();
+	if (restartTimeout) clearTimeout(restartTimeout);
+	restartTimeout = setTimeout(() => {
+		void video.play();
+		restartTimeout = null;
+	}, 1000);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

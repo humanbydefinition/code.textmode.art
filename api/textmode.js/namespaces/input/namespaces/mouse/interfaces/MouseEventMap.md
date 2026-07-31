@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: input.mouse
 kind: Interface
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 isInterface: true
 ---
 

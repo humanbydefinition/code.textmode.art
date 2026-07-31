@@ -8,7 +8,7 @@ api: true
 owner: TextmodePluginContext
 namespace: plugins
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../../../index.md) / [plugins](../../../index.md) / [TextmodePluginContext](../../TextmodePluginContext.md) / registerPreDrawHook
@@ -36,5 +36,86 @@ A function to unregister the hook.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="registerPreDrawHook" encoded-code="bGV0IHByZURyYXdGcmFtZXMgPSAwOwpsZXQgZmx1aWRUaW1lID0gMDsKCmNvbnN0IHBsYXNtYVBsdWdpbiA9IHsKCW5hbWU6ICdwbGFzbWEtcHJlJywKCWluc3RhbGwodGV4dG1vZGlmaWVyLCBjb250ZXh0KSB7CgkJY29udGV4dC5yZWdpc3RlclByZURyYXdIb29rKCgpID0-IHsKCQkJcHJlRHJhd0ZyYW1lcysrOwoJCQlmbHVpZFRpbWUgKz0gMC4wNjsKCQl9KTsKCX0sCn07Cgpjb25zdCB0ID0gdGV4dG1vZGUuY3JlYXRlKHsKCXdpZHRoOiB3aW5kb3cuaW5uZXJXaWR0aCwKCWhlaWdodDogd2luZG93LmlubmVySGVpZ2h0LAoJZm9udFNpemU6IDE2LAoJcGx1Z2luczogW3BsYXNtYVBsdWdpbl0sCn0pOwoKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCgxMCwgNCwgMjApOwoJY29uc3QgY29scyA9IHQuZ3JpZC5jb2xzOwoJY29uc3Qgcm93cyA9IHQuZ3JpZC5yb3dzOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKChjb2xzIC0gMSkgLyAyKTsKCWNvbnN0IHJpZ2h0ID0gbGVmdCArIGNvbHMgLSAxOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3Iocm93cyAvIDIpOwoJY29uc3QgYm90dG9tID0gdG9wICsgcm93cyAtIDE7CgoJZm9yIChsZXQgeSA9IHRvcDsgeSA8PSBib3R0b207IHkrKykgewoJCWZvciAobGV0IHggPSBsZWZ0OyB4IDw9IHJpZ2h0OyB4KyspIHsKCQkJY29uc3QgdjEgPSBNYXRoLnNpbih4ICogMC4xNSArIGZsdWlkVGltZSk7CgkJCWNvbnN0IHYyID0gTWF0aC5zaW4oeSAqIDAuMTUgKyBmbHVpZFRpbWUgKiAxLjMpOwoJCQljb25zdCB2MyA9IE1hdGguc2luKCh4ICsgeSkgKiAwLjE1ICsgZmx1aWRUaW1lICogMC44KTsKCQkJY29uc3Qgbm9ybSA9ICh2MSArIHYyICsgdjMgKyAzKSAvIDY7CgoJCQljb25zdCBjaGFyS2V5ID0gbm9ybSA-IDAuNzUgPyAnQCcgOiBub3JtID4gMC41ID8gJyMnIDogbm9ybSA-IDAuMyA_ICcrJyA6ICcuJzsKCgkJCXQucHVzaCgpOwoJCQl0LnRyYW5zbGF0ZSh4LCB5KTsKCQkJdC5jaGFyQ29sb3IoTWF0aC5mbG9vcigxODAgKyBub3JtICogNzUpLCBNYXRoLmZsb29yKDYwICsgbm9ybSAqIDE0MCksIE1hdGguZmxvb3IoMjIwIC0gbm9ybSAqIDEwMCkpOwoJCQl0LmNlbGxDb2xvcihNYXRoLmZsb29yKDE2ICsgbm9ybSAqIDE0KSwgTWF0aC5mbG9vcig2ICsgbm9ybSAqIDEwKSwgTWF0aC5mbG9vcigyNCArIG5vcm0gKiAxOCkpOwoJCQl0LmNoYXIoY2hhcktleSk7CgkJCXQucG9pbnQoKTsKCQkJdC5wb3AoKTsKCQl9Cgl9Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKDEyMCwgMjQwLCAxODApOwoJdC5wcmludCgnUExVR0lOUy5SRUdJU1RFUlBSRURSQVdIT09LJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDcwLCAxMDAsIDE0MCk7Cgl0LnByaW50KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAyMTAsIDI1NSk7Cgl0LnByaW50KCdDT05DRVBUOiBHUkFWSVRBVElPTkFMIFBMQVNNQSBWT1JURVgnLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAxNjAsIDE5MCk7Cgl0LnByaW50KCdFeGVjdXRlcyByaWdodCBiZWZvcmUgbWFpbiB0LmRyYXcoKScsIHgsIHkrKyk7Cgl0LnByaW50KCdydW5zIGVhY2ggYW5pbWF0aW9uIGZyYW1lLicsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcig3MCwgMTAwLCAxNDApOwoJdC5wcmludCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMjU1LCAyMDApOwoJdC5wcmludChgUFJFLURSQVcgRlJBTUVTOiAke3ByZURyYXdGcmFtZXN9YCwgeCwgeSsrKTsKCXQucHJpbnQoYEZMVUlEIFRJTUU6ICR7Zmx1aWRUaW1lLnRvRml4ZWQoMil9IFNgLCB4LCB5KyspOwoJdC5wb3AoKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+let preDrawFrames = 0;
+let fluidTime = 0;
+
+const plasmaPlugin = {
+	name: 'plasma-pre',
+	install(textmodifier, context) {
+		context.registerPreDrawHook(() => {
+			preDrawFrames++;
+			fluidTime += 0.06;
+		});
+	},
+};
+
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+	plugins: [plasmaPlugin],
+});
+
+const labelLayer = t.layers.add();
+
+t.draw(() => {
+	t.background(10, 4, 20);
+	const cols = t.grid.cols;
+	const rows = t.grid.rows;
+	const left = -Math.floor((cols - 1) / 2);
+	const right = left + cols - 1;
+	const top = -Math.floor(rows / 2);
+	const bottom = top + rows - 1;
+
+	for (let y = top; y <= bottom; y++) {
+		for (let x = left; x <= right; x++) {
+			const v1 = Math.sin(x * 0.15 + fluidTime);
+			const v2 = Math.sin(y * 0.15 + fluidTime * 1.3);
+			const v3 = Math.sin((x + y) * 0.15 + fluidTime * 0.8);
+			const norm = (v1 + v2 + v3 + 3) / 6;
+
+			const charKey = norm > 0.75 ? '@' : norm > 0.5 ? '#' : norm > 0.3 ? '+' : '.';
+
+			t.push();
+			t.translate(x, y);
+			t.charColor(Math.floor(180 + norm * 75), Math.floor(60 + norm * 140), Math.floor(220 - norm * 100));
+			t.cellColor(Math.floor(16 + norm * 14), Math.floor(6 + norm * 10), Math.floor(24 + norm * 18));
+			t.char(charKey);
+			t.point();
+			t.pop();
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('PLUGINS.REGISTERPREDRAWHOOK', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: GRAVITATIONAL PLASMA VORTEX', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Executes right before main t.draw()', x, y++);
+	t.print('runs each animation frame.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 200);
+	t.print(`PRE-DRAW FRAMES: ${preDrawFrames}`, x, y++);
+	t.print(`FLUID TIME: ${fluidTime.toFixed(2)} S`, x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

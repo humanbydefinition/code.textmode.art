@@ -8,7 +8,7 @@ api: true
 owner: TextmodeFigFont
 kind: Method
 ecosystem: textmode.js
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.figlet.js](../../../index.md) / [TextmodeFigFont](../../TextmodeFigFont.md) / measureText
@@ -39,5 +39,88 @@ Measure rendered FIGlet text without drawing it.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.figlet.js" language="javascript" title="measureText" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW0ZpZ2xldFBsdWdpbl0sCn0pOwoKY29uc3QgbGFiZWxMYXllciA9IHQubGF5ZXJzLmFkZCgpOwoKbGV0IGZvbnQ7CmxldCBkaW1lbnNpb25zID0geyBjb2xzOiAwLCByb3dzOiAwIH07CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCnQuc2V0dXAoYXN5bmMgKCkgPT4gewoJZm9udCA9IGF3YWl0IHQubG9hZEZpZ0ZvbnQoJ2h0dHBzOi8vY2RuLmpzZGVsaXZyLm5ldC9naC94ZXJvL2ZpZ2xldC1mb250c0BtYXN0ZXIvQnVsYmhlYWQuZmxmJyk7Cgl0LmZpZ0ZvbnQoZm9udCk7Cgl0LmZpZ1RleHRBbGlnbignY2VudGVyJyk7Cgl0LmZpZ1RleHRCYXNlbGluZSgnY2VudGVyJyk7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCglkcmF3VGV4dCgnVEVYVE1PREVGSUdGT05ULk1FQVNVUkVURVhUJywgeCwgeSsrLCAxMDAsIDI1NSwgMTQwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnQ09OQ0VQVDogT0ZGU0NSRUVOIFRFWFQgTUVBU1VSRScsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnTWVhc3VyZXMgc2l6ZSB3aXRob3V0IHJlbmRlcmluZyBjZWxscy4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJ0NhbGN1bGF0ZXMgY29sdW1ucyBhbmQgcm93cyBzaXplLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJaWYgKGZvbnQpIHsKCQljb25zdCB3ID0gZGltZW5zaW9ucy5jb2xzOwoJCWNvbnN0IGggPSBkaW1lbnNpb25zLnJvd3M7CgkJZHJhd1RleHQoYFNpemU6ICR7d314JHtofWAsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7Cgl9IGVsc2UgewoJCWRyYXdUZXh0KCdNZWFzdXJpbmcgdGV4dC4uLicsIHgsIHkrKywgMjU1LCAxODAsIDEwMCk7Cgl9Cn0pOwoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCgxMCwgMTUsIDEyKTsKCglpZiAoIWZvbnQpIHJldHVybjsKCgkvLyBNZWFzdXJlIHRleHQgc2l6ZSBwcmlvciB0byBkcmF3aW5nCglkaW1lbnNpb25zID0gZm9udC5tZWFzdXJlVGV4dCgnTUVBU1VSRScpOwoKCWNvbnN0IHRpbWUgPSB0LnNlY3MgKiAxLjU7CgoJLy8gRHJhdyBGSUdsZXQgdGV4dAoJdC5maWdUZXh0KCdNRUFTVVJFJywgMCwgMCk7CgoJLy8gRHJhdyBtZWFzdXJlZCBmcmFtZQoJY29uc3QgdyA9IGRpbWVuc2lvbnMuY29sczsKCWNvbnN0IGggPSBkaW1lbnNpb25zLnJvd3M7Cgljb25zdCBoYWxmVyA9IE1hdGguZmxvb3IodyAvIDIpOwoJY29uc3QgaGFsZkggPSBNYXRoLmZsb29yKGggLyAyKTsKCgl0LnB1c2goKTsKCXQuY2hhckNvbG9yKDI1NSwgMjAwLCAxMDApOwoJZm9yIChsZXQgY29sID0gLWhhbGZXIC0gMjsgY29sIDw9IC1oYWxmVyArIHcgKyAxOyBjb2wrKykgewoJCWNvbnN0IHdhdmUgPSBNYXRoLnNpbih0aW1lICsgY29sICogMC4zKTsKCQljb25zdCBib3JkZXJDaGFyID0gd2F2ZSA-IDAgPyAnPScgOiAnLSc7CgkJdC5wcmludChib3JkZXJDaGFyLCBjb2wsIC1oYWxmSCAtIDIpOwoJCXQucHJpbnQoYm9yZGVyQ2hhciwgY29sLCAtaGFsZkggKyBoICsgMSk7Cgl9Cgl0LnBvcCgpOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 8,
+	plugins: [FigletPlugin],
+});
+
+const labelLayer = t.layers.add();
+
+let font;
+let dimensions = { cols: 0, rows: 0 };
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.setup(async () => {
+	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Bulbhead.flf');
+	t.figFont(font);
+	t.figTextAlign('center');
+	t.figTextBaseline('center');
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODEFIGFONT.MEASURETEXT', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: OFFSCREEN TEXT MEASURE', x, y++, 100, 220, 255);
+	drawText('Measures size without rendering cells.', x, y++, 140, 160, 190);
+	drawText('Calculates columns and rows size.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	if (font) {
+		const w = dimensions.cols;
+		const h = dimensions.rows;
+		drawText(`Size: ${w}x${h}`, x, y++, 140, 255, 180);
+	} else {
+		drawText('Measuring text...', x, y++, 255, 180, 100);
+	}
+});
+
+t.draw(() => {
+	t.background(10, 15, 12);
+
+	if (!font) return;
+
+	// Measure text size prior to drawing
+	dimensions = font.measureText('MEASURE');
+
+	const time = t.secs * 1.5;
+
+	// Draw FIGlet text
+	t.figText('MEASURE', 0, 0);
+
+	// Draw measured frame
+	const w = dimensions.cols;
+	const h = dimensions.rows;
+	const halfW = Math.floor(w / 2);
+	const halfH = Math.floor(h / 2);
+
+	t.push();
+	t.charColor(255, 200, 100);
+	for (let col = -halfW - 2; col <= -halfW + w + 1; col++) {
+		const wave = Math.sin(time + col * 0.3);
+		const borderChar = wave > 0 ? '=' : '-';
+		t.print(borderChar, col, -halfH - 2);
+		t.print(borderChar, col, -halfH + h + 1);
+	}
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

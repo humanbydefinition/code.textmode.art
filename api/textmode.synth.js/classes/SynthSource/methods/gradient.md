@@ -8,7 +8,7 @@ api: true
 owner: SynthSource
 kind: Method
 ecosystem: textmode.js
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.synth.js](../../../index.md) / [SynthSource](../../SynthSource.md) / gradient
@@ -33,5 +33,61 @@ Generate a rotating radial gradient.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="gradient" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW1N5bnRoUGx1Z2luXSwKfSk7Cgp0LmJwbSgxOCk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IGdseXBocyA9ICcgLjotPSsqIyVAJzsKY29uc3Qgc2xvdyA9IFswLjAsIDEuMF0uZmFzdCgwLjE2KS5lYXNlKCdlYXNlSW5PdXRTaW5lJyk7CmNvbnN0IHR1cm4gPSBbLTAuNDIsIDAuNDJdLmZhc3QoMC4xNCkuZWFzZSgnZWFzZUluT3V0U2luZScpOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCWRyYXdUZXh0KCdTWU5USFNPVVJDRS5HUkFESUVOVCcsIHgsIHkrKywgMTEwLCAyNTUsIDE3MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA3MCwgMTEwLCAxNDApOwoJZHJhd1RleHQoJ1JBRElBTCBVViBHUkFESUVOVCcsIHgsIHkrKywgMTIwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnUHVyZSBVViBiZWNvbWVzIGNvbG9yLicsIHgsIHkrKywgMTYwLCAxODAsIDIxMCk7CglkcmF3VGV4dCgnQ2hhbm5lbHMgYWRkIHNsb3cgcGFyYWxsYXguJywgeCwgeSsrLCAxNjAsIDE4MCwgMjEwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDcwLCAxMTAsIDE0MCk7CglkcmF3VGV4dCgnU2VwYXJhdGUgYW5pbWF0ZWQgaW5rIGFuZCBwYXBlci4nLCB4LCB5KyssIDE1MCwgMjU1LCAxOTApOwp9KTsKCmNvbnN0IGluayA9IG9zYyg2LCAwLjAxOCwgMS42KS5yb3RhdGUodHVybiwgMC4wMDIpLmNvbG9yKDAuOSwgMC41OCwgMS4wKS5tb2R1bGF0ZUthbGVpZChub2lzZSgyLjAsIDAuMDE0KSwgNSk7CmNvbnN0IHBhcGVyID0gcGxhc21hKDMuMiwgMC4wMjQsIDAuMiwgMS4wOCkuY29sb3IoMC4wOCwgMC4wMzUsIDAuMTYpLmh1ZShzbG93KTsKY29uc3QgZ3JhZGllbnRCYXNlID0gZ3JhZGllbnQoMC4wMjUpLnR3aXJsKFsxLjgsIDMuNl0uZmFzdCgwLjEpLmVhc2UoJ2Vhc2VJbk91dFNpbmUnKSwgMC43KS5rYWxlaWQoNSk7Cgp0LnN5bnRoKAoJZ3JhZGllbnRCYXNlCgkJLmh1ZShbMC4wLCAwLjE0XS5mYXN0KDAuMDgpLmVhc2UoJ2xpbmVhcicpKQoJCS5tdWx0KGdyYWRpZW50KDAuMDIyKS50d2lybChbMi4yLCAzLjRdLmZhc3QoMC4xKS5lYXNlKCdlYXNlSW5PdXRTaW5lJykub2Zmc2V0KDAuNSksIDAuNikua2FsZWlkKDQpLCAwLjYpCgkJLmJsZW5kKGdyYWRpZW50QmFzZS5jbG9uZSgpLnJvdGF0ZSgwLjcpLmh1ZShbMC40NSwgMC41OF0uZmFzdCgwLjA4KS5lYXNlKCdsaW5lYXInKSksIDAuMjIpCgkJLmNoYXJNYXAoZ2x5cGhzKQoJCS5jaGFyQ29sb3IoaW5rKQoJCS5jZWxsQ29sb3IocGFwZXIpCik7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 8,
+	plugins: [SynthPlugin],
+});
+
+t.bpm(18);
+
+const labelLayer = t.layers.add();
+const glyphs = ' .:-=+*#%@';
+const slow = [0.0, 1.0].fast(0.16).ease('easeInOutSine');
+const turn = [-0.42, 0.42].fast(0.14).ease('easeInOutSine');
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('SYNTHSOURCE.GRADIENT', x, y++, 110, 255, 170);
+	drawText('------------------------------------', x, y++, 70, 110, 140);
+	drawText('RADIAL UV GRADIENT', x, y++, 120, 220, 255);
+	drawText('Pure UV becomes color.', x, y++, 160, 180, 210);
+	drawText('Channels add slow parallax.', x, y++, 160, 180, 210);
+	drawText('------------------------------------', x, y++, 70, 110, 140);
+	drawText('Separate animated ink and paper.', x, y++, 150, 255, 190);
+});
+
+const ink = osc(6, 0.018, 1.6).rotate(turn, 0.002).color(0.9, 0.58, 1.0).modulateKaleid(noise(2.0, 0.014), 5);
+const paper = plasma(3.2, 0.024, 0.2, 1.08).color(0.08, 0.035, 0.16).hue(slow);
+const gradientBase = gradient(0.025).twirl([1.8, 3.6].fast(0.1).ease('easeInOutSine'), 0.7).kaleid(5);
+
+t.synth(
+	gradientBase
+		.hue([0.0, 0.14].fast(0.08).ease('linear'))
+		.mult(gradient(0.022).twirl([2.2, 3.4].fast(0.1).ease('easeInOutSine').offset(0.5), 0.6).kaleid(4), 0.6)
+		.blend(gradientBase.clone().rotate(0.7).hue([0.45, 0.58].fast(0.08).ease('linear')), 0.22)
+		.charMap(glyphs)
+		.charColor(ink)
+		.cellColor(paper)
+);
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

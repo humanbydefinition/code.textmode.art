@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / mousePressed
@@ -32,5 +32,89 @@ Register the single-callback handler for mouse press events.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="mousePressed" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7Cgpjb25zdCBwdWxzZXMgPSBbXTsKbGV0IGNvdW50ID0gMDsKbGV0IGxhc3QgPSAnV0FJVElORyc7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCmZ1bmN0aW9uIGFkZFB1bHNlKGxhYmVsLCB4ID0gMCwgeSA9IDApIHsKCWNvdW50Kys7CglsYXN0ID0gbGFiZWw7CglwdWxzZXMudW5zaGlmdCh7IGxhYmVsLCB4LCB5LCBsaWZlOiAxIH0pOwoJaWYgKHB1bHNlcy5sZW5ndGggPiAxMikgcHVsc2VzLmxlbmd0aCA9IDEyOwp9Cgp0Lm1vdXNlUHJlc3NlZCgoKSA9PiB7CglhZGRQdWxzZSgnTU9VU0UgRE9XTicsIHQubW91c2UueCwgdC5tb3VzZS55KTsKfSk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDEwLCAyMik7CgoJZm9yIChsZXQgaSA9IHB1bHNlcy5sZW5ndGggLSAxOyBpID49IDA7IGktLSkgewoJCWNvbnN0IHAgPSBwdWxzZXNbaV07CgkJcC5saWZlIC09IDAuMDI7CgkJaWYgKHAubGlmZSA8PSAwKSB7CgkJCXB1bHNlcy5zcGxpY2UoaSwgMSk7CgkJCWNvbnRpbnVlOwoJCX0KCQl0LnB1c2goKTsKCQl0LnRyYW5zbGF0ZShwLngsIHAueSAtICgxIC0gcC5saWZlKSAqIDQpOwoJCXQuY2hhcignKicpOwoJCXQuY2hhckNvbG9yKDI1NSwgMjEwLCAxMjApOwoJCXQucG9pbnQoKTsKCQl0LnBvcCgpOwoJfQp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLk1PVVNFUFJFU1NFRCcsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IFBSRVNTIEVWRU5UJywgeCwgeSsrLCAxMDAsIDIyMCwgMjU1KTsKCWRyYXdUZXh0KCdFdmVudCB1cGRhdGVzIGNvbXBhY3Qgc3RhdGUuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdQdWxzZXMgc2hvdyByZWNlbnQgdHJpZ2dlcnMuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyssIDgwLCAxMDAsIDE1MCk7CglkcmF3VGV4dCgnUFJFU1NFUzogJyArIGNvdW50LCB4LCB5KyssIDE0MCwgMjU1LCAxODApOwoJZHJhd1RleHQoJ0xBU1Q6ICcgKyBsYXN0LnNsaWNlKDAsIDI4KSwgeCwgeSsrLCAxODAsIDIwMCwgMjIwKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({ width: window.innerWidth, height: window.innerHeight, fontSize: 16 });
+const labelLayer = t.layers.add();
+const shocks = [];
+let pressCount = 0,
+	lastDown = 'NONE';
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.mousePressed(() => {
+	if (t.mouse.x !== Number.NEGATIVE_INFINITY) {
+		pressCount++;
+		lastDown = `(${t.mouse.x}, ${t.mouse.y})`;
+		shocks.unshift({ x: t.mouse.x, y: t.mouse.y, age: 0, maxAge: 40 });
+		if (shocks.length > 10) shocks.length = 10;
+	}
+});
+
+t.draw(() => {
+	t.background(18, 18, 20);
+	for (let i = shocks.length - 1; i >= 0; i--) {
+		if (++shocks[i].age >= shocks[i].maxAge) shocks.splice(i, 1);
+	}
+	const hw = Math.floor(t.grid.cols / 2),
+		hh = Math.floor(t.grid.rows / 2);
+
+	for (let y = -hh; y <= hh; y += 1) {
+		for (let x = -hw; x <= hw; x += 1) {
+			const isDiag1 = (x + y) % 7 === 0,
+				isDiag2 = (x - y) % 7 === 0;
+			const symbol = isDiag1 && isDiag2 ? '+' : isDiag1 ? '/' : isDiag2 ? '\\' : ' ';
+
+			let shockIntensity = 0;
+			for (let i = 0; i < shocks.length; i++) {
+				const s = shocks[i],
+					dist = Math.abs(Math.hypot(x - s.x, y - s.y) - s.age * 1.2);
+				if (dist < 2.5) shockIntensity += (1 - dist / 2.5) * (1 - s.age / s.maxAge);
+			}
+
+			if (symbol !== ' ' || shockIntensity > 0.1) {
+				t.push();
+				t.translate(x, y);
+				if (shockIntensity > 0.4) {
+					t.charColor(255, 255, 255);
+					t.cellColor(255, 0, 85);
+					t.char(symbol === ' ' ? '#' : '+');
+				} else if (shockIntensity > 0.15) {
+					t.charColor(255, 107, 107);
+					t.cellColor(70, 0, 30);
+					t.char(symbol === ' ' ? '=' : symbol);
+				} else {
+					t.charColor(42, 46, 61);
+					t.char(symbol);
+				}
+				t.point();
+				t.pop();
+			}
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2),
+		top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.MOUSEPRESSED', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: DOWN-STROKE PRESS EVENT', x, y++, 100, 220, 255);
+	drawText('Fires on initial down-stroke.', x, y++, 140, 160, 190);
+	drawText('Down-stroke fractures truss lines.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('DOWN PRESSES: ' + pressCount, x, y++, 140, 255, 180);
+	drawText('LAST DOWN:    ' + lastDown, x, y++, 180, 200, 220);
+});
+
+t.windowResized(() => t.resizeCanvas(window.innerWidth, window.innerHeight));
+```
 

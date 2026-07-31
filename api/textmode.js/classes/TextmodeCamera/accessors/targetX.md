@@ -7,7 +7,7 @@ category: Accessors
 api: true
 owner: TextmodeCamera
 kind: Accessor
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [TextmodeCamera](../../TextmodeCamera.md) / targetX
@@ -28,5 +28,77 @@ Current X position of the camera target.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="targetX" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCB0YXJnZXRYVmFsID0gMDsKCnQuc2V0dXAoKCkgPT4gewoJdC5wZXJzcGVjdGl2ZSg1OCwgMC4xLCA0MDk2KTsKfSk7CgpmdW5jdGlvbiBkcmF3QWx0YXJzKHBhblgpIHsKCXQucHVzaCgpOwoJdC5hbWJpZW50TGlnaHQoMjUsIDQ1LCAzMCk7Cgl0LnBvaW50TGlnaHQoMTIwLCAyNDAsIDI1NSwgcGFuWCwgMTIsIDEwKTsKCglmb3IgKGxldCB4ID0gLTIwOyB4IDw9IDIwOyB4ICs9IDEwKSB7CgkJdC5wdXNoKCk7CgkJdC50cmFuc2xhdGUoeCwgNCwgMCk7CgkJdC5jaGFyQ29sb3IoTWF0aC5mbG9vcigxMDAgKyAoeCArIDIwKSAqIDMuNSksIDI0MCwgMTgwKTsKCQl0LmNlbGxDb2xvcig4LCAyNCwgMTYpOwoJCXQuY2hhcignIycpOwoJCXQuYm94KDUsIDgsIDUpOwoJCXQucG9wKCk7Cgl9Cgl0LnBvcCgpOwp9Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDQsIDE0LCAxMCk7Cgljb25zdCB0bSA9IHQuZnJhbWVDb3VudCAqIDAuMDQ7Cgljb25zdCBwYW5YID0gTWF0aC5zaW4odG0pICogMjQ7CgoJY29uc3QgY2FtID0gdC5jcmVhdGVDYW1lcmEoKS5zZXRQb3NpdGlvbigwLCAxMiwgMzYpLmxvb2tBdChwYW5YLCA0LCAwKTsKCgl0YXJnZXRYVmFsID0gY2FtLnRhcmdldFg7Cgl0LnNldENhbWVyYShjYW0pOwoJZHJhd0FsdGFycyhwYW5YKTsKCXQucmVzZXRDYW1lcmEoKTsKfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IoMTIwLCAyNDAsIDE4MCk7Cgl0LnByaW50KCdURVhUTU9ERUNBTUVSQS5UQVJHRVRYJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDcwLCAxMDAsIDE0MCk7Cgl0LnByaW50KCctLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAyMTAsIDI1NSk7Cgl0LnByaW50KCdDT05DRVBUOiBMSVQgM0QgQUxUQVIgUEFOIFNDQU5ORVInLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAxNjAsIDE5MCk7Cgl0LnByaW50KCdSZWFkcyBsb29rLWF0IHRhcmdldCBYIGNvb3JkaW5hdGUuJywgeCwgeSsrKTsKCXQucHJpbnQoJ1BvaW50IGxpZ2h0IHRyYWNrcyB0YXJnZXQgYWNyb3NzIGFsdGFycy4nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoNzAsIDEwMCwgMTQwKTsKCXQucHJpbnQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDI1NSwgMjAwKTsKCXQucHJpbnQoYFRBUkdFVCBYOiAke3RhcmdldFhWYWwudG9GaXhlZCgyKX1gLCB4LCB5KyspOwoJdC5wb3AoKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let targetXVal = 0;
+
+t.setup(() => {
+	t.perspective(58, 0.1, 4096);
+});
+
+function drawAltars(panX) {
+	t.push();
+	t.ambientLight(25, 45, 30);
+	t.pointLight(120, 240, 255, panX, 12, 10);
+
+	for (let x = -20; x <= 20; x += 10) {
+		t.push();
+		t.translate(x, 4, 0);
+		t.charColor(Math.floor(100 + (x + 20) * 3.5), 240, 180);
+		t.cellColor(8, 24, 16);
+		t.char('#');
+		t.box(5, 8, 5);
+		t.pop();
+	}
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(4, 14, 10);
+	const tm = t.frameCount * 0.04;
+	const panX = Math.sin(tm) * 24;
+
+	const cam = t.createCamera().setPosition(0, 12, 36).lookAt(panX, 4, 0);
+
+	targetXVal = cam.targetX;
+	t.setCamera(cam);
+	drawAltars(panX);
+	t.resetCamera();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODECAMERA.TARGETX', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: LIT 3D ALTAR PAN SCANNER', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Reads look-at target X coordinate.', x, y++);
+	t.print('Point light tracks target across altars.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 200);
+	t.print(`TARGET X: ${targetXVal.toFixed(2)}`, x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

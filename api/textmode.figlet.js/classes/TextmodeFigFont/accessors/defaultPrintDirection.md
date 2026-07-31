@@ -8,7 +8,7 @@ api: true
 owner: TextmodeFigFont
 kind: Accessor
 ecosystem: textmode.js
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.figlet.js](../../../index.md) / [TextmodeFigFont](../../TextmodeFigFont.md) / defaultPrintDirection
@@ -29,5 +29,100 @@ Default print direction implied by the FIGfont header metadata.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.figlet.js" language="javascript" title="defaultPrintDirection" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiA4LAoJcGx1Z2luczogW0ZpZ2xldFBsdWdpbl0sCn0pOwpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCBmb250OwpsZXQgY3VycmVudERpcmVjdGlvbiA9ICdsdHInOwoKZnVuY3Rpb24gZHJhd1RleHQodGV4dCwgeCwgeSwgciA9IDIyMCwgZyA9IDIzMCwgYiA9IDI1NSkgewoJdC5wdXNoKCk7Cgl0LnByaW50QWxpZ24oJ2xlZnQnLCAndG9wJyk7Cgl0LmNoYXJDb2xvcihyLCBnLCBiKTsKCXQucHJpbnQodGV4dCwgeCwgeSk7Cgl0LnBvcCgpOwp9Cgp0LnNldHVwKGFzeW5jICgpID0-IHsKCWZvbnQgPSBhd2FpdCB0LmxvYWRGaWdGb250KCdodHRwczovL2Nkbi5qc2RlbGl2ci5uZXQvZ2gveGVyby9maWdsZXQtZm9udHNAbWFzdGVyL0J1bGJoZWFkLmZsZicpOwoJdC5maWdGb250KGZvbnQpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLU1hdGguZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CgoJZHJhd1RleHQoJ1RFWFRNT0RFRklHRk9OVC5ERUZBVUxUUFJJTlRESVJFQ1RJT04nLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBQUklOVCBESVJFQ1RJT04gRkxPVycsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnRGVmaW5lcyBMVFIgb3IgUlRMIGNoYXJhY3RlciBmbG93LicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnUmV2ZXJzZXMgY2hhcmFjdGVyIGxheW91dCBvcmRlcmluZy4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWlmIChmb250KSB7CgkJY29uc3QgZGVmRGlyID0gZm9udC5kZWZhdWx0UHJpbnREaXJlY3Rpb247CgkJY29uc3QgY3VyRGlyID0gY3VycmVudERpcmVjdGlvbjsKCQlkcmF3VGV4dChgRGVmYXVsdCBwcmludDogJHtkZWZEaXJ9YCwgeCwgeSsrLCAxNDAsIDI1NSwgMTgwKTsKCQlkcmF3VGV4dChgQ3VycmVudCBwcmludDogJHtjdXJEaXJ9YCwgeCwgeSsrLCAxMDAsIDIyNSwgMjU1KTsKCX0gZWxzZSB7CgkJZHJhd1RleHQoJ0xvYWRpbmcuLi4nLCB4LCB5KyssIDI1NSwgMTgwLCAxMDApOwoJfQp9KTsKCnQuZHJhdygoKSA9PiB7Cgl0LmJhY2tncm91bmQoMTAsIDEyLCAxOCk7CglpZiAoIWZvbnQpIHJldHVybjsKCgljb25zdCBkaXJlY3Rpb25zID0gWydsdHInLCAncnRsJ107Cgljb25zdCBpZHggPSBNYXRoLmZsb29yKHQuc2VjcyAvIDMuMCkgJSBkaXJlY3Rpb25zLmxlbmd0aDsKCWN1cnJlbnREaXJlY3Rpb24gPSBkaXJlY3Rpb25zW2lkeF07CgoJY29uc3QgcGxhbiA9IGZvbnQucGxhblRleHQoJ0ZMT1cnLCB7IGRpcmVjdGlvbjogY3VycmVudERpcmVjdGlvbiB9KTsKCWlmICghcGxhbikgcmV0dXJuOwoKCWNvbnN0IHN0YXJ0WCA9IC1NYXRoLmZsb29yKHBsYW4uY29scyAvIDIpOwoJY29uc3Qgc3RhcnRZID0gLU1hdGguZmxvb3IocGxhbi5yb3dzIC8gMik7Cgljb25zdCB0aW1lID0gdC5zZWNzICogMi4wOwoKCS8vIERyYXcgY2hhcmFjdGVycwoJZm9yIChjb25zdCBjZWxsIG9mIHBsYW4uY2VsbHMpIHsKCQl0LnB1c2goKTsKCQl0LnRyYW5zbGF0ZShzdGFydFggKyBjZWxsLmNvbCwgc3RhcnRZICsgY2VsbC5yb3cpOwoJCWNvbnN0IHdhdmUgPSAwLjUgKyAwLjUgKiBNYXRoLnNpbih0aW1lICsgY2VsbC5jb2wgKiAwLjEpOwoJCXQuY2hhckNvbG9yKE1hdGgucm91bmQoMTAwICsgMTU1ICogd2F2ZSksIE1hdGgucm91bmQoMTgwICsgNzUgKiAoMS4wIC0gd2F2ZSkpLCAyNTUpOwoJCXQuY2hhcihjZWxsLmNoYXIpOwoJCXQucG9pbnQoKTsKCQl0LnBvcCgpOwoJfQoKCS8vIERyYXcgZGlyZWN0aW9uIGZsb3cgYXJyb3dzCgl0LnB1c2goKTsKCXQuY2hhckNvbG9yKDEwMCwgMjU1LCAxNDApOwoJY29uc3QgYXJyb3dZID0gc3RhcnRZIC0gMzsKCWNvbnN0IGlzTFRSID0gY3VycmVudERpcmVjdGlvbiA9PT0gJ2x0cic7Cgljb25zdCBhcnJvd0NoYXIgPSBpc0xUUiA_ICc-JyA6ICc8JzsKCWNvbnN0IHNwZWVkID0gaXNMVFIgPyAxLjAgOiAtMS4wOwoKCWZvciAobGV0IGNvbCA9IDA7IGNvbCA8IHBsYW4uY29sczsgY29sKyspIHsKCQljb25zdCBwdWxzZSA9IDAuNSArIDAuNSAqIE1hdGguc2luKHRpbWUgKiAzICsgY29sICogMC4zICogc3BlZWQpOwoJCWlmIChwdWxzZSA-IDAuNykgewoJCQl0LnByaW50KGFycm93Q2hhciwgc3RhcnRYICsgY29sLCBhcnJvd1kpOwoJCX0gZWxzZSB7CgkJCXQucHJpbnQoJy4nLCBzdGFydFggKyBjb2wsIGFycm93WSk7CgkJfQoJfQoJdC5wb3AoKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 8,
+	plugins: [FigletPlugin],
+});
+const labelLayer = t.layers.add();
+let font;
+let currentDirection = 'ltr';
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.setup(async () => {
+	font = await t.loadFigFont('https://cdn.jsdelivr.net/gh/xero/figlet-fonts@master/Bulbhead.flf');
+	t.figFont(font);
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	drawText('TEXTMODEFIGFONT.DEFAULTPRINTDIRECTION', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: PRINT DIRECTION FLOW', x, y++, 100, 220, 255);
+	drawText('Defines LTR or RTL character flow.', x, y++, 140, 160, 190);
+	drawText('Reverses character layout ordering.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	if (font) {
+		const defDir = font.defaultPrintDirection;
+		const curDir = currentDirection;
+		drawText(`Default print: ${defDir}`, x, y++, 140, 255, 180);
+		drawText(`Current print: ${curDir}`, x, y++, 100, 225, 255);
+	} else {
+		drawText('Loading...', x, y++, 255, 180, 100);
+	}
+});
+
+t.draw(() => {
+	t.background(10, 12, 18);
+	if (!font) return;
+
+	const directions = ['ltr', 'rtl'];
+	const idx = Math.floor(t.secs / 3.0) % directions.length;
+	currentDirection = directions[idx];
+
+	const plan = font.planText('FLOW', { direction: currentDirection });
+	if (!plan) return;
+
+	const startX = -Math.floor(plan.cols / 2);
+	const startY = -Math.floor(plan.rows / 2);
+	const time = t.secs * 2.0;
+
+	// Draw characters
+	for (const cell of plan.cells) {
+		t.push();
+		t.translate(startX + cell.col, startY + cell.row);
+		const wave = 0.5 + 0.5 * Math.sin(time + cell.col * 0.1);
+		t.charColor(Math.round(100 + 155 * wave), Math.round(180 + 75 * (1.0 - wave)), 255);
+		t.char(cell.char);
+		t.point();
+		t.pop();
+	}
+
+	// Draw direction flow arrows
+	t.push();
+	t.charColor(100, 255, 140);
+	const arrowY = startY - 3;
+	const isLTR = currentDirection === 'ltr';
+	const arrowChar = isLTR ? '>' : '<';
+	const speed = isLTR ? 1.0 : -1.0;
+
+	for (let col = 0; col < plan.cols; col++) {
+		const pulse = 0.5 + 0.5 * Math.sin(time * 3 + col * 0.3 * speed);
+		if (pulse > 0.7) {
+			t.print(arrowChar, startX + col, arrowY);
+		} else {
+			t.print('.', startX + col, arrowY);
+		}
+	}
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

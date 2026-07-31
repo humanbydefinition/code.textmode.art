@@ -7,7 +7,7 @@ category: Properties
 api: true
 owner: Textmodifier
 kind: Property
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / BLEND\_HARD\_LIGHT
@@ -26,4 +26,79 @@ marks that should strongly reshape contrast.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="BLEND_HARD_LIGHT" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBtb2RlID0gdC5CTEVORF9IQVJEX0xJR0hUOwpjb25zdCBtb2RlTmFtZSA9ICdCTEVORF9IQVJEX0xJR0hUJzsKY29uc3QgYWNjZW50ID0gWzI1NSwgMjIwLCA3MF07CmNvbnN0IGJhc2UgPSBbNjUsIDc1LCAxNTBdOwpjb25zdCBibGVuZExheWVyID0gdC5sYXllcnMuYWRkKHsgYmxlbmRNb2RlOiBtb2RlLCBvcGFjaXR5OiAwLjg0IH0pOwpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CgpmdW5jdGlvbiBkcmF3VGV4dCh0ZXh0LCB4LCB5LCByID0gMjIwLCBnID0gMjMwLCBiID0gMjU1KSB7Cgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKHIsIGcsIGIpOwoJdC5wcmludCh0ZXh0LCB4LCB5KTsKCXQucG9wKCk7Cn0KCnQuZHJhdygoKSA9PiB7Cgljb25zdCB0aW1lID0gdC5mcmFtZUNvdW50ICogMC4wNDsKCXQuYmFja2dyb3VuZCgxMCwgMTIsIDMwKTsKCWNvbnN0IHsgY29scywgcm93cyB9ID0gdC5ncmlkOwoJZm9yIChsZXQgeSA9IC1NYXRoLmZsb29yKHJvd3MgLyAyKTsgeSA8IHJvd3MgLyAyOyB5ICs9IDMpIHsKCQlmb3IgKGxldCB4ID0gLU1hdGguZmxvb3IoY29scyAvIDIpOyB4IDwgY29scyAvIDI7IHggKz0gMykgewoJCQljb25zdCB3YXZlID0gTWF0aC5zaW4oeCAqIDAuMTggLSB5ICogMC4xMiArIHRpbWUpOwoJCQl0LnB1c2goKTsKCQkJdC50cmFuc2xhdGUoeCwgeSk7CgkJCXQuY2hhcih3YXZlID4gMCA_ICcjJyA6ICc6Jyk7CgkJCXQuY2hhckNvbG9yKGJhc2VbMF0sIGJhc2VbMV0gKyB3YXZlICogMzUsIGJhc2VbMl0pOwoJCQl0LmNlbGxDb2xvcig4LCA4LCAyNCk7CgkJCXQucmVjdCgyLCAyKTsKCQkJdC5wb3AoKTsKCQl9Cgl9CglibGVuZExheWVyLmRyYXcoKCkgPT4gewoJCXQuY2xlYXIoKTsKCQlmb3IgKGxldCByaW5nID0gMDsgcmluZyA8IDQ7IHJpbmcrKykgewoJCQlmb3IgKGxldCBpID0gMDsgaSA8IDE4OyBpKyspIHsKCQkJCWNvbnN0IGFuZ2xlID0gaSAqIDIwICsgcmluZyAqIDI3IC0gdC5mcmFtZUNvdW50ICogMS42OwoJCQkJY29uc3QgcmFkaXVzID0gNSArIHJpbmcgKiA0ICsgTWF0aC5zaW4odGltZSAqIDIgKyBpKSAqIDIuNDsKCQkJCXQucHVzaCgpOwoJCQkJdC5yb3RhdGVaKGFuZ2xlKTsKCQkJCXQudHJhbnNsYXRlKHJhZGl1cywgTWF0aC5zaW4odGltZSArIGkpICogMik7CgkJCQl0LmNoYXIocmluZyAlIDIgPyAnWCcgOiAnIycpOwoJCQkJdC5jaGFyQ29sb3IoLi4uYWNjZW50KTsKCQkJCXQuY2VsbENvbG9yKDQ1ICsgcmluZyAqIDIwLCAzOCArIHJpbmcgKiAxMiwgNik7CgkJCQl0LnJlY3QoNCwgMik7CgkJCQl0LnBvcCgpOwoJCQl9CgkJfQoJfSk7Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCWRyYXdUZXh0KCdURVhUTU9ESUZJRVIuQkxFTkRfSEFSRF9MSUdIVCcsIHgsIHkrKywgMTAwLCAyNTUsIDE0MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoJ0NPTkNFUFQ6IEhBUkQgQ09OVFJBU1QnLCB4LCB5KyssIDEwMCwgMjIwLCAyNTUpOwoJZHJhd1RleHQoJ1RoZSB0b3AgbGF5ZXIgZHJpdmVzIHB1bmNoLicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnRWRnZXMgYmVjb21lIG1vcmUgZ3JhcGhpYy4nLCB4LCB5KyssIDE0MCwgMTYwLCAxOTApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KGBNT0RFOiAke21vZGVOYW1lfWAsIHgsIHkrKywgMTQwLCAyNTUsIDE4MCk7Cn0pOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKCXQucmVzaXplQ2FudmFzKHdpbmRvdy5pbm5lcldpZHRoLCB3aW5kb3cuaW5uZXJIZWlnaHQpOwp9KTs" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const mode = t.BLEND_HARD_LIGHT;
+const modeName = 'BLEND_HARD_LIGHT';
+const accent = [255, 220, 70];
+const base = [65, 75, 150];
+const blendLayer = t.layers.add({ blendMode: mode, opacity: 0.84 });
+const labelLayer = t.layers.add();
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	const time = t.frameCount * 0.04;
+	t.background(10, 12, 30);
+	const { cols, rows } = t.grid;
+	for (let y = -Math.floor(rows / 2); y < rows / 2; y += 3) {
+		for (let x = -Math.floor(cols / 2); x < cols / 2; x += 3) {
+			const wave = Math.sin(x * 0.18 - y * 0.12 + time);
+			t.push();
+			t.translate(x, y);
+			t.char(wave > 0 ? '#' : ':');
+			t.charColor(base[0], base[1] + wave * 35, base[2]);
+			t.cellColor(8, 8, 24);
+			t.rect(2, 2);
+			t.pop();
+		}
+	}
+	blendLayer.draw(() => {
+		t.clear();
+		for (let ring = 0; ring < 4; ring++) {
+			for (let i = 0; i < 18; i++) {
+				const angle = i * 20 + ring * 27 - t.frameCount * 1.6;
+				const radius = 5 + ring * 4 + Math.sin(time * 2 + i) * 2.4;
+				t.push();
+				t.rotateZ(angle);
+				t.translate(radius, Math.sin(time + i) * 2);
+				t.char(ring % 2 ? 'X' : '#');
+				t.charColor(...accent);
+				t.cellColor(45 + ring * 20, 38 + ring * 12, 6);
+				t.rect(4, 2);
+				t.pop();
+			}
+		}
+	});
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.BLEND_HARD_LIGHT', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: HARD CONTRAST', x, y++, 100, 220, 255);
+	drawText('The top layer drives punch.', x, y++, 140, 160, 190);
+	drawText('Edges become more graphic.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`MODE: ${modeName}`, x, y++, 140, 255, 180);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```

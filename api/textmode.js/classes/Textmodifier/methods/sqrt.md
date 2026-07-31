@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / sqrt
@@ -34,5 +34,69 @@ Square root of the value.
 
 ## Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="sqrt" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmxldCB2YWx1ZSA9IDA7CmxldCByb290ID0gMDsKCmZ1bmN0aW9uIGRyYXdUZXh0KHRleHQsIHgsIHksIHIgPSAyMjAsIGcgPSAyMzAsIGIgPSAyNTUpIHsKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IociwgZywgYik7Cgl0LnByaW50KHRleHQsIHgsIHkpOwoJdC5wb3AoKTsKfQoKdC5kcmF3KCgpID0-IHsKCXQuYmFja2dyb3VuZCgzLCA4LCAxNik7Cgl2YWx1ZSA9IHQubm9ybSh0LnNpbih0LmZyYW1lQ291bnQgKiAwLjAzNSksIC0xLCAxKSAqIDY0ICsgdC5ub3JtKHQuY29zKHQuZnJhbWVDb3VudCAqIDAuMDE5KSwgLTEsIDEpICogODsKCXJvb3QgPSB0LnNxcnQodmFsdWUpOwoKCWZvciAobGV0IGkgPSAwOyBpIDwgMzI7IGkrKykgewoJCWNvbnN0IHYgPSBpICogMjsKCQljb25zdCB4ID0gLTI0ICsgaSAqIDEuNTsKCQljb25zdCB5ID0gOCAtIHQuc3FydCh2KSAqIDI7CgkJY29uc3QgYWN0aXZlID0gdiA8PSB2YWx1ZTsKCQl0LnB1c2goKTsKCQl0LnRyYW5zbGF0ZSh4LCB5KTsKCQl0LmNoYXIoYWN0aXZlID8gJyMnIDogJy4nKTsKCQl0LmNoYXJDb2xvcihhY3RpdmUgPyAxMTAgOiA0NSwgYWN0aXZlID8gMjI1IDogNjUsIGFjdGl2ZSA_IDI1NSA6IDk1KTsKCQl0LnBvaW50KCk7CgkJdC5wb3AoKTsKCX0KCgl0LmNoYXIoJ0AnKTsKCXQuY2hhckNvbG9yKDI1NSwgMjIwLCAxMDApOwoJdC5wdXNoKCk7Cgl0LnRyYW5zbGF0ZSgtMjQgKyB2YWx1ZSAqIDAuNzUsIDggLSByb290ICogMik7Cgl0LnBvaW50KCk7Cgl0LnBvcCgpOwp9KTsKCmxhYmVsTGF5ZXIuZHJhdygoKSA9PiB7Cgl0LmNsZWFyKCk7Cgljb25zdCBsZWZ0ID0gLXQuZmxvb3IodC5ncmlkLmNvbHMgLyAyKTsKCWNvbnN0IHRvcCA9IC10LmZsb29yKHQuZ3JpZC5yb3dzIC8gMik7CglsZXQgeSA9IHRvcCArIDM7Cgljb25zdCB4ID0gbGVmdCArIDM7CglkcmF3VGV4dCgnVEVYVE1PRElGSUVSLlNRUlQnLCB4LCB5KyssIDEwMCwgMjU1LCAxNDApOwoJZHJhd1RleHQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKywgODAsIDEwMCwgMTUwKTsKCWRyYXdUZXh0KCdDT05DRVBUOiBDT01QUkVTU0VEIEdST1dUSCcsIHgsIHkrKywgMTAwLCAyMjAsIDI1NSk7CglkcmF3VGV4dCgnc3FydCgpIGdyb3dzIHF1aWNrbHksIHRoZW4gZWFzZXMuJywgeCwgeSsrLCAxNDAsIDE2MCwgMTkwKTsKCWRyYXdUZXh0KCdUaGUgeWVsbG93IHNhbXBsZSBjbGltYnMgc2xvd2x5LicsIHgsIHkrKywgMTQwLCAxNjAsIDE5MCk7CglkcmF3VGV4dCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrLCA4MCwgMTAwLCAxNTApOwoJZHJhd1RleHQoYFZBTFVFOiAke3ZhbHVlLnRvRml4ZWQoMSl9YCwgeCwgeSsrLCAyMjAsIDIzMCwgMjU1KTsKCWRyYXdUZXh0KGBTUVJUOiAke3Jvb3QudG9GaXhlZCgyKX1gLCB4LCB5KyssIDIyMCwgMjMwLCAyNTUpOwp9KTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7Cgl0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+let value = 0;
+let root = 0;
+
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
+
+t.draw(() => {
+	t.background(3, 8, 16);
+	value = t.norm(t.sin(t.frameCount * 0.035), -1, 1) * 64 + t.norm(t.cos(t.frameCount * 0.019), -1, 1) * 8;
+	root = t.sqrt(value);
+
+	for (let i = 0; i < 32; i++) {
+		const v = i * 2;
+		const x = -24 + i * 1.5;
+		const y = 8 - t.sqrt(v) * 2;
+		const active = v <= value;
+		t.push();
+		t.translate(x, y);
+		t.char(active ? '#' : '.');
+		t.charColor(active ? 110 : 45, active ? 225 : 65, active ? 255 : 95);
+		t.point();
+		t.pop();
+	}
+
+	t.char('@');
+	t.charColor(255, 220, 100);
+	t.push();
+	t.translate(-24 + value * 0.75, 8 - root * 2);
+	t.point();
+	t.pop();
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -t.floor(t.grid.cols / 2);
+	const top = -t.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+	drawText('TEXTMODIFIER.SQRT', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: COMPRESSED GROWTH', x, y++, 100, 220, 255);
+	drawText('sqrt() grows quickly, then eases.', x, y++, 140, 160, 190);
+	drawText('The yellow sample climbs slowly.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText(`VALUE: ${value.toFixed(1)}`, x, y++, 220, 230, 255);
+	drawText(`SQRT: ${root.toFixed(2)}`, x, y++, 220, 230, 255);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 

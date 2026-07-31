@@ -7,7 +7,7 @@ category: Accessors
 api: true
 owner: TextmodeGrid
 kind: Accessor
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [TextmodeGrid](../../TextmodeGrid.md) / cols
@@ -28,7 +28,82 @@ Number of columns in the grid.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="cols" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDEwLCAyMik7Cgljb25zdCBjb2xzID0gdC5ncmlkLmNvbHM7Cgljb25zdCByb3dzID0gdC5ncmlkLnJvd3M7Cgljb25zdCBodyA9IE1hdGguZmxvb3IoY29scyAvIDIpOwoJY29uc3QgaGggPSBNYXRoLmZsb29yKHJvd3MgLyAyKTsKCWNvbnN0IHRtID0gdC5mcmFtZUNvdW50ICogMC4wNDsKCglmb3IgKGxldCBjID0gMDsgYyA8IGNvbHM7IGMrKykgewoJCWNvbnN0IHggPSBjIC0gaHc7CgkJY29uc3Qgd2F2ZSA9IE1hdGguc2luKGMgKiAwLjMgKyB0bSkgKiAwLjUgKyBNYXRoLmNvcyhjICogMC4xMiAtIHRtICogMS41KSAqIDAuMyArIDAuNTsKCQljb25zdCBiYXJIID0gTWF0aC5mbG9vcigxICsgd2F2ZSAqIChyb3dzIC0gNCkpOwoJCWNvbnN0IHJhbXAgPSBbJy4nLCAnOicsICcrJywgJyonLCAnIycsICclJywgJ0AnXTsKCgkJZm9yIChsZXQgciA9IDA7IHIgPCBiYXJIOyByKyspIHsKCQkJY29uc3QgeSA9IGhoIC0gcjsKCQkJY29uc3QgY2kgPSBNYXRoLm1pbihyYW1wLmxlbmd0aCAtIDEsIE1hdGguZmxvb3IoKHIgLyBNYXRoLm1heCgxLCBiYXJIIC0gMSkpICogcmFtcC5sZW5ndGgpKTsKCgkJCXQucHVzaCgpOwoJCQl0LnRyYW5zbGF0ZSh4LCB5KTsKCQkJdC5jaGFyQ29sb3IoTWF0aC5mbG9vcig2MCArIHdhdmUgKiAxNDApLCBNYXRoLmZsb29yKDE0MCArIGNpICogMTUpLCBNYXRoLmZsb29yKDI1NSAtIGNpICogMTApKTsKCQkJdC5jZWxsQ29sb3IoTWF0aC5mbG9vcig4ICsgY2kgKiAzKSwgTWF0aC5mbG9vcigxNiArIGNpICogNCksIE1hdGguZmxvb3IoMzAgKyBjaSAqIDUpKTsKCQkJdC5jaGFyKHJhbXBbY2ldKTsKCQkJdC5wb2ludCgpOwoJCQl0LnBvcCgpOwoJCX0KCgkJdC5wdXNoKCk7CgkJdC50cmFuc2xhdGUoeCwgaGggLSBiYXJIKTsKCQl0LmNoYXJDb2xvcigyNTUsIDIyMCwgMTAwKTsKCQl0LmNlbGxDb2xvcig0MCwgMzAsIDEwKTsKCQl0LmNoYXIoJyonKTsKCQl0LnBvaW50KCk7CgkJdC5wb3AoKTsKCX0KfSk7CgpsYWJlbExheWVyLmRyYXcoKCkgPT4gewoJdC5jbGVhcigpOwoJY29uc3QgbGVmdCA9IC1NYXRoLmZsb29yKHQuZ3JpZC5jb2xzIC8gMik7Cgljb25zdCB0b3AgPSAtTWF0aC5mbG9vcih0LmdyaWQucm93cyAvIDIpOwoJbGV0IHkgPSB0b3AgKyAzOwoJY29uc3QgeCA9IGxlZnQgKyAzOwoKCXQucHVzaCgpOwoJdC5wcmludEFsaWduKCdsZWZ0JywgJ3RvcCcpOwoJdC5jaGFyQ29sb3IoMTIwLCAyNDAsIDE4MCk7Cgl0LnByaW50KCdURVhUTU9ERUdSSUQuQ09MUycsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcig3MCwgMTAwLCAxNDApOwoJdC5wcmludCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMjEwLCAyNTUpOwoJdC5wcmludCgnQ09OQ0VQVDogTVVMVEktQ0hBTk5FTCBFUVVBTElaRVIgU1BFQ1RSVU0nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoMTQwLCAxNjAsIDE5MCk7Cgl0LnByaW50KCdOdW1iZXIgb2YgY29sdW1ucyBpbiBncmlkIGxheW91dC4nLCB4LCB5KyspOwoJdC5wcmludCgnUmVuZGVycyBleGFjdCAxOjEgY29sdW1uIGZyZXF1ZW5jeSBiYXJzLicsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcig3MCwgMTAwLCAxNDApOwoJdC5wcmludCgnLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tJywgeCwgeSsrKTsKCXQuY2hhckNvbG9yKDE0MCwgMjU1LCAyMDApOwoJdC5wcmludChgVE9UQUwgQ09MVU1OUzogJHt0LmdyaWQuY29sc31gLCB4LCB5KyspOwoJdC5wb3AoKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+
+t.draw(() => {
+	t.background(6, 10, 22);
+	const cols = t.grid.cols;
+	const rows = t.grid.rows;
+	const hw = Math.floor(cols / 2);
+	const hh = Math.floor(rows / 2);
+	const tm = t.frameCount * 0.04;
+
+	for (let c = 0; c < cols; c++) {
+		const x = c - hw;
+		const wave = Math.sin(c * 0.3 + tm) * 0.5 + Math.cos(c * 0.12 - tm * 1.5) * 0.3 + 0.5;
+		const barH = Math.floor(1 + wave * (rows - 4));
+		const ramp = ['.', ':', '+', '*', '#', '%', '@'];
+
+		for (let r = 0; r < barH; r++) {
+			const y = hh - r;
+			const ci = Math.min(ramp.length - 1, Math.floor((r / Math.max(1, barH - 1)) * ramp.length));
+
+			t.push();
+			t.translate(x, y);
+			t.charColor(Math.floor(60 + wave * 140), Math.floor(140 + ci * 15), Math.floor(255 - ci * 10));
+			t.cellColor(Math.floor(8 + ci * 3), Math.floor(16 + ci * 4), Math.floor(30 + ci * 5));
+			t.char(ramp[ci]);
+			t.point();
+			t.pop();
+		}
+
+		t.push();
+		t.translate(x, hh - barH);
+		t.charColor(255, 220, 100);
+		t.cellColor(40, 30, 10);
+		t.char('*');
+		t.point();
+		t.pop();
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODEGRID.COLS', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: MULTI-CHANNEL EQUALIZER SPECTRUM', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Number of columns in grid layout.', x, y++);
+	t.print('Renders exact 1:1 column frequency bars.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 200);
+	t.print(`TOTAL COLUMNS: ${t.grid.cols}`, x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
+
 
 ## Set Signature
 
@@ -50,5 +125,81 @@ Set the number of columns and lock grid sizing until `responsive()` is called.
 
 ### Example
 
-<TextmodeApiSandbox profile="textmode.js" language="javascript" title="cols" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7Cgl3aWR0aDogd2luZG93LmlubmVyV2lkdGgsCgloZWlnaHQ6IHdpbmRvdy5pbm5lckhlaWdodCwKCWZvbnRTaXplOiAxNiwKfSk7Cgpjb25zdCBsYWJlbExheWVyID0gdC5sYXllcnMuYWRkKCk7CmNvbnN0IHByZXNldHMgPSBbMTYsIDMyLCA0OCwgNjRdOwpsZXQgcHJlc2V0SWR4ID0gMTsKCnQuc2V0dXAoKCkgPT4gewoJdC5ncmlkLmNvbHMgPSBwcmVzZXRzW3ByZXNldElkeF07Cn0pOwoKdC5tb3VzZVByZXNzZWQoKCkgPT4gewoJcHJlc2V0SWR4ID0gKHByZXNldElkeCArIDEpICUgcHJlc2V0cy5sZW5ndGg7Cgl0LmdyaWQuY29scyA9IHByZXNldHNbcHJlc2V0SWR4XTsKfSk7Cgp0LmRyYXcoKCkgPT4gewoJdC5iYWNrZ3JvdW5kKDYsIDE0LCAyMik7Cgljb25zdCBjb2xzID0gdC5ncmlkLmNvbHM7Cgljb25zdCByb3dzID0gdC5ncmlkLnJvd3M7Cgljb25zdCBodyA9IE1hdGguZmxvb3IoY29scyAvIDIpOwoJY29uc3QgaGggPSBNYXRoLmZsb29yKHJvd3MgLyAyKTsKCWNvbnN0IHRtID0gdC5mcmFtZUNvdW50ICogMC4wNTsKCglmb3IgKGxldCB5ID0gLWhoOyB5IDw9IGhoOyB5KyspIHsKCQlmb3IgKGxldCB4ID0gLWh3OyB4IDw9IGh3OyB4KyspIHsKCQkJY29uc3Qgd2F2ZSA9IE1hdGguc2luKHggKiAwLjIgKyB0bSkgKiBNYXRoLmNvcyh5ICogMC4yICsgdG0pOwoJCQljb25zdCBub3JtID0gKHdhdmUgKyAxKSAqIDAuNTsKCgkJCWNvbnN0IGNoYXJLZXkgPSBub3JtID4gMC43ID8gJyMnIDogbm9ybSA-IDAuNCA_ICcrJyA6IG5vcm0gPiAwLjIgPyAnOicgOiAnLic7CgoJCQl0LnB1c2goKTsKCQkJdC50cmFuc2xhdGUoeCwgeSk7CgkJCXQuY2hhckNvbG9yKE1hdGguZmxvb3IoODAgKyBub3JtICogMTc1KSwgTWF0aC5mbG9vcigyMDAgKyBub3JtICogNTUpLCBNYXRoLmZsb29yKDE0MCAtIG5vcm0gKiA2MCkpOwoJCQl0LmNlbGxDb2xvcihNYXRoLmZsb29yKDYgKyBub3JtICogMTApLCBNYXRoLmZsb29yKDE4ICsgbm9ybSAqIDE0KSwgTWF0aC5mbG9vcigxMiArIG5vcm0gKiAxNikpOwoJCQl0LmNoYXIoY2hhcktleSk7CgkJCXQucG9pbnQoKTsKCQkJdC5wb3AoKTsKCQl9Cgl9Cn0pOwoKbGFiZWxMYXllci5kcmF3KCgpID0-IHsKCXQuY2xlYXIoKTsKCWNvbnN0IGxlZnQgPSAtTWF0aC5mbG9vcih0LmdyaWQuY29scyAvIDIpOwoJY29uc3QgdG9wID0gLU1hdGguZmxvb3IodC5ncmlkLnJvd3MgLyAyKTsKCWxldCB5ID0gdG9wICsgMzsKCWNvbnN0IHggPSBsZWZ0ICsgMzsKCgl0LnB1c2goKTsKCXQucHJpbnRBbGlnbignbGVmdCcsICd0b3AnKTsKCXQuY2hhckNvbG9yKDEyMCwgMjQwLCAxODApOwoJdC5wcmludCgnVEVYVE1PREVHUklELlNFVENPTFMnLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoNzAsIDEwMCwgMTQwKTsKCXQucHJpbnQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDIxMCwgMjU1KTsKCXQucHJpbnQoJ0NPTkNFUFQ6IENPTFVNTiBERU5TSVRZIFFVQU5USVpFUicsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDE2MCwgMTkwKTsKCXQucHJpbnQoJ1NldHMgY29sdW1uIGNvdW50IGFuZCBsb2NrcyBncmlkIHNpemUnLCB4LCB5KyspOwoJdC5wcmludCgndW50aWwgcmVzcG9uc2l2ZSgpIGlzIGNhbGxlZC4nLCB4LCB5KyspOwoJdC5jaGFyQ29sb3IoNzAsIDEwMCwgMTQwKTsKCXQucHJpbnQoJy0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLScsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigxNDAsIDI1NSwgMjAwKTsKCXQucHJpbnQoYExPQ0tFRCBDT0xTOiAke3QuZ3JpZC5jb2xzfWAsIHgsIHkrKyk7Cgl0LmNoYXJDb2xvcigyNTUsIDIwMCwgMTAwKTsKCXQucHJpbnQoJ0NMSUNLIENBTlZBUyBUTyBDWUNMRSBDT0xTIFBSRVNFVFMnLCB4LCB5KyspOwoJdC5wb3AoKTsKfSk7Cgp0LndpbmRvd1Jlc2l6ZWQoKCkgPT4gewoJdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+```javascript
+const t = textmode.create({
+	width: window.innerWidth,
+	height: window.innerHeight,
+	fontSize: 16,
+});
+
+const labelLayer = t.layers.add();
+const presets = [16, 32, 48, 64];
+let presetIdx = 1;
+
+t.setup(() => {
+	t.grid.cols = presets[presetIdx];
+});
+
+t.mousePressed(() => {
+	presetIdx = (presetIdx + 1) % presets.length;
+	t.grid.cols = presets[presetIdx];
+});
+
+t.draw(() => {
+	t.background(6, 14, 22);
+	const cols = t.grid.cols;
+	const rows = t.grid.rows;
+	const hw = Math.floor(cols / 2);
+	const hh = Math.floor(rows / 2);
+	const tm = t.frameCount * 0.05;
+
+	for (let y = -hh; y <= hh; y++) {
+		for (let x = -hw; x <= hw; x++) {
+			const wave = Math.sin(x * 0.2 + tm) * Math.cos(y * 0.2 + tm);
+			const norm = (wave + 1) * 0.5;
+
+			const charKey = norm > 0.7 ? '#' : norm > 0.4 ? '+' : norm > 0.2 ? ':' : '.';
+
+			t.push();
+			t.translate(x, y);
+			t.charColor(Math.floor(80 + norm * 175), Math.floor(200 + norm * 55), Math.floor(140 - norm * 60));
+			t.cellColor(Math.floor(6 + norm * 10), Math.floor(18 + norm * 14), Math.floor(12 + norm * 16));
+			t.char(charKey);
+			t.point();
+			t.pop();
+		}
+	}
+});
+
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2);
+	const top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3;
+	const x = left + 3;
+
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(120, 240, 180);
+	t.print('TEXTMODEGRID.SETCOLS', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 210, 255);
+	t.print('CONCEPT: COLUMN DENSITY QUANTIZER', x, y++);
+	t.charColor(140, 160, 190);
+	t.print('Sets column count and locks grid size', x, y++);
+	t.print('until responsive() is called.', x, y++);
+	t.charColor(70, 100, 140);
+	t.print('------------------------------------', x, y++);
+	t.charColor(140, 255, 200);
+	t.print(`LOCKED COLS: ${t.grid.cols}`, x, y++);
+	t.charColor(255, 200, 100);
+	t.print('CLICK CANVAS TO CYCLE COLS PRESETS', x, y++);
+	t.pop();
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
+```
 
