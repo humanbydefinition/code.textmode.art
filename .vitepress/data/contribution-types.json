@@ -1,0 +1,204 @@
+{
+  "$schema": "./contribution-types.schema.json",
+  "schemaVersion": 1,
+  "contributionTypes": [
+    {
+      "key": "code",
+      "emoji": "💻",
+      "label": "Code",
+      "description": "Commits and pull requests"
+    },
+    {
+      "key": "doc",
+      "emoji": "📖",
+      "label": "Documentation",
+      "description": "README, guides, and API documentation"
+    },
+    {
+      "key": "design",
+      "emoji": "🎨",
+      "label": "Design",
+      "description": "User experience, branding, and visual design"
+    },
+    {
+      "key": "example",
+      "emoji": "💡",
+      "label": "Examples",
+      "description": "Usage examples and creative sketches"
+    },
+    {
+      "key": "ideas",
+      "emoji": "🤔",
+      "label": "Ideas and planning",
+      "description": "Feature proposals, planning, and feedback"
+    },
+    {
+      "key": "maintenance",
+      "emoji": "🚧",
+      "label": "Maintenance",
+      "description": "Refactoring and project upkeep"
+    },
+    {
+      "key": "infra",
+      "emoji": "🚇",
+      "label": "Infrastructure",
+      "description": "Continuous integration, hosting, and build systems"
+    },
+    {
+      "key": "tool",
+      "emoji": "🔧",
+      "label": "Tools",
+      "description": "Developer and community tooling"
+    },
+    {
+      "key": "plugin",
+      "emoji": "🔌",
+      "label": "Plugins and libraries",
+      "description": "Plugin and utility library development"
+    },
+    {
+      "key": "review",
+      "emoji": "👀",
+      "label": "Code review",
+      "description": "Reviewing pull requests"
+    },
+    {
+      "key": "audio",
+      "emoji": "🔊",
+      "label": "Audio",
+      "description": "Podcasts, music, and sound effects"
+    },
+    {
+      "key": "a11y",
+      "emoji": "♿️",
+      "label": "Accessibility",
+      "description": "Accessibility improvements and audits"
+    },
+    {
+      "key": "bug",
+      "emoji": "🐛",
+      "label": "Bug reports",
+      "description": "Reporting reproducible bugs"
+    },
+    {
+      "key": "blog",
+      "emoji": "📝",
+      "label": "Blog posts",
+      "description": "Writing about the project"
+    },
+    {
+      "key": "business",
+      "emoji": "💼",
+      "label": "Business development",
+      "description": "Business strategy and partnerships"
+    },
+    {
+      "key": "content",
+      "emoji": "🖋",
+      "label": "Content",
+      "description": "Website copy and written material"
+    },
+    {
+      "key": "data",
+      "emoji": "🔣",
+      "label": "Data",
+      "description": "Datasets and test data"
+    },
+    {
+      "key": "eventOrganizing",
+      "emoji": "📋",
+      "label": "Event organizing",
+      "description": "Organizing project events"
+    },
+    {
+      "key": "financial",
+      "emoji": "💵",
+      "label": "Financial support",
+      "description": "Funding and donations"
+    },
+    {
+      "key": "fundingFinding",
+      "emoji": "🔍",
+      "label": "Funding research",
+      "description": "Identifying funding and grant opportunities"
+    },
+    {
+      "key": "mentoring",
+      "emoji": "🧑‍🏫",
+      "label": "Mentoring",
+      "description": "Supporting contributors"
+    },
+    {
+      "key": "platform",
+      "emoji": "📦",
+      "label": "Packaging",
+      "description": "Porting and packaging for new platforms"
+    },
+    {
+      "key": "projectManagement",
+      "emoji": "📆",
+      "label": "Project management",
+      "description": "Planning and coordination"
+    },
+    {
+      "key": "promotion",
+      "emoji": "📣",
+      "label": "Promotion",
+      "description": "Community outreach and social sharing"
+    },
+    {
+      "key": "question",
+      "emoji": "💬",
+      "label": "Community support",
+      "description": "Answering questions"
+    },
+    {
+      "key": "research",
+      "emoji": "🔬",
+      "label": "Research",
+      "description": "Technical and creative research"
+    },
+    {
+      "key": "security",
+      "emoji": "🛡️",
+      "label": "Security",
+      "description": "Security and privacy improvements"
+    },
+    {
+      "key": "translation",
+      "emoji": "🌍",
+      "label": "Translation",
+      "description": "Translating project content"
+    },
+    {
+      "key": "test",
+      "emoji": "⚠️",
+      "label": "Tests",
+      "description": "Writing and improving tests"
+    },
+    {
+      "key": "tutorial",
+      "emoji": "✅",
+      "label": "Tutorials",
+      "description": "Educational content"
+    },
+    {
+      "key": "talk",
+      "emoji": "📢",
+      "label": "Talks",
+      "description": "Presentations and talks"
+    },
+    {
+      "key": "userTesting",
+      "emoji": "📓",
+      "label": "User testing",
+      "description": "Testing workflows with users"
+    },
+    {
+      "key": "video",
+      "emoji": "📹",
+      "label": "Videos",
+      "description": "Creating video content"
+    }
+  ]
+}

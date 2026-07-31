@@ -1,0 +1,86 @@
+name: Contributors
+
+on:
+  pull_request:
+    branches: [dev, main]
+  push:
+    branches: [dev, main]
+  repository_dispatch:
+    types: [contributors-source-updated]
+  schedule:
+    - cron: "23 3 * * *"
+  workflow_dispatch:
+    inputs:
+      target-branch:
+        description: Branch to reconcile
+        required: true
+        default: dev
+        type: choice
+        options:
+          - dev
+          - main
+      dry-run:
+        description: Render and report without creating a pull request
+        required: true
+        default: true
+        type: boolean
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout pull request
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+
+      - name: Verify canonical contributor output
+        run: npm run check:contributors
+
+  reconcile-push:
+    if: github.event_name == 'push' && vars.CONTRIBUTOR_SYNC_ENABLED == 'true'
+    uses: ./.github/workflows/reconcile-contributors.yml
+    with:
+      mode: reconcile
+      target-branch: ${{ github.ref_name }}
+      source-ref: ${{ github.ref_name }}
+      app-client-id: ${{ vars.CONTRIBUTOR_SYNC_APP_CLIENT_ID }}
+    secrets:
+      app-private-key: ${{ secrets.CONTRIBUTOR_SYNC_APP_PRIVATE_KEY }}
+
+  reconcile-dev:
+    if: >-
+      (github.event_name == 'workflow_dispatch' &&
+      inputs.target-branch == 'dev' &&
+      (inputs.dry-run || vars.CONTRIBUTOR_SYNC_ENABLED == 'true')) ||
+      (vars.CONTRIBUTOR_SYNC_ENABLED == 'true' &&
+      (github.event_name == 'schedule' || github.event_name == 'repository_dispatch'))
+    uses: ./.github/workflows/reconcile-contributors.yml
+    with:
+      mode: ${{ github.event_name == 'workflow_dispatch' && inputs.dry-run && 'dry-run' || 'reconcile' }}
+      target-branch: dev
+      source-ref: ${{ github.event.client_payload.source_sha || 'main' }}
+      app-client-id: ${{ vars.CONTRIBUTOR_SYNC_APP_CLIENT_ID }}
+    secrets:
+      app-private-key: ${{ secrets.CONTRIBUTOR_SYNC_APP_PRIVATE_KEY }}
+
+  reconcile-main:
+    if: >-
+      (github.event_name == 'workflow_dispatch' &&
+      inputs.target-branch == 'main' &&
+      (inputs.dry-run || vars.CONTRIBUTOR_SYNC_ENABLED == 'true')) ||
+      (vars.CONTRIBUTOR_SYNC_ENABLED == 'true' &&
+      (github.event_name == 'schedule' || github.event_name == 'repository_dispatch'))
+    uses: ./.github/workflows/reconcile-contributors.yml
+    with:
+      mode: ${{ github.event_name == 'workflow_dispatch' && inputs.dry-run && 'dry-run' || 'reconcile' }}
+      target-branch: main
+      source-ref: ${{ github.event.client_payload.source_sha || 'main' }}
+      app-client-id: ${{ vars.CONTRIBUTOR_SYNC_APP_CLIENT_ID }}
+    secrets:
+      app-private-key: ${{ secrets.CONTRIBUTOR_SYNC_APP_PRIVATE_KEY }}

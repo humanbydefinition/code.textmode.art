@@ -12,13 +12,16 @@
   },
   "scripts": {
     "dev": "vitepress dev --host --port 4175",
-    "prebuild": "npm run check:api-sandpack",
+    "prebuild": "npm run check:contributors && npm run check:api-sandpack",
     "build": "vitepress build",
     "preview": "vitepress preview",
     "api:sandpack": "node scripts/api-sandpack-examples.mjs",
     "check:api-sandpack": "node scripts/api-sandpack-examples.mjs --check",
-    "contributors:add": "npx all-contributors-cli add",
-    "contributors:generate": "npx all-contributors-cli generate"
+    "contributors:validate": "node scripts/contributors.mjs validate",
+    "contributors:render": "node scripts/contributors.mjs render",
+    "contributors:check": "node scripts/contributors.mjs check",
+    "test:contributors": "node --test scripts/contributors.test.mjs",
+    "check:contributors": "npm run test:contributors && npm run contributors:check"
   },
   "dependencies": {
     "@iconify/vue": "^5.0.0",

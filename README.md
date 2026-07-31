@@ -4,8 +4,8 @@
 
 <img alt="textmodejs_banner" src="https://github.com/user-attachments/assets/f03c2d74-7dc3-45cf-a0a5-043f9438231e" />
 
-| <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->[![All Contributors](https://img.shields.io/github/all-contributors/humanbydefinition/code.textmode.art?color=ee8449&style=flat-square)](#contributors)<!-- ALL-CONTRIBUTORS-BADGE:END --> | [![VitePress](https://img.shields.io/badge/VitePress-646CFF?logo=vitepress&logoColor=white)](https://vitepress.dev/) [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-222?logo=github&logoColor=white)](https://pages.github.com/) | [![Discord](https://img.shields.io/discord/1357070706181017691?color=5865F2&label=Discord&logo=discord&logoColor=white)](https://discord.gg/sjrw8QXNks) [![ko-fi](https://shields.io/badge/ko--fi-donate-ff5f5f?logo=ko-fi)](https://ko-fi.com/V7V8JG2FY) |
-|:-------------|:-------------|:-------------|
+| [![Contributors](https://img.shields.io/badge/contributors-community-ee8449?style=flat-square)](#contributors) | [![VitePress](https://img.shields.io/badge/VitePress-646CFF?logo=vitepress&logoColor=white)](https://vitepress.dev/) [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-222?logo=github&logoColor=white)](https://pages.github.com/) | [![Discord](https://img.shields.io/discord/1357070706181017691?color=5865F2&label=Discord&logo=discord&logoColor=white)](https://discord.gg/sjrw8QXNks) [![ko-fi](https://shields.io/badge/ko--fi-donate-ff5f5f?logo=ko-fi)](https://ko-fi.com/V7V8JG2FY) |
+| :------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 </div>
 
@@ -47,33 +47,42 @@ We welcome contributions! There are many ways to help:
 - **Improve docs** - Better explanations, code examples, or tutorials
 - **Report issues** - Found a bug or typo? Let us know
 
-All contributors are credited in this README and on the site. See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+Ecosystem contributors are credited in this README and on the site. See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
+<!-- TEXTMODE-CONTRIBUTORS:START -->
+<!-- prettier-ignore-start -->
+<!-- Generated from https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contributors.json and https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contribution-types.json. Do not edit this section directly. -->
 ## Contributors
 
-Thanks go to these wonderful people ([emoji key](https://allcontributors.org/emoji-key)):
+Thanks to the people who contribute code, documentation, design, examples, ideas, infrastructure, and care
+across the textmode.js ecosystem.
 
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore-start -->
-<!-- markdownlint-disable -->
+<!-- markdownlint-disable MD033 -->
 <table>
   <tbody>
     <tr>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/humanbydefinition"><img src="https://avatars.githubusercontent.com/u/59119064?v=4?s=100" width="100px;" alt="humanbydefinition"/><br /><sub><b>humanbydefinition</b></sub></a><br /><a href="https://github.com/humanbydefinition/code.textmode.art/commits?author=humanbydefinition" title="Code">💻</a> <a href="https://github.com/humanbydefinition/code.textmode.art/commits?author=humanbydefinition" title="Documentation">📖</a> <a href="#design-humanbydefinition" title="Design">🎨</a> <a href="#example-humanbydefinition" title="Examples">💡</a> <a href="#ideas-humanbydefinition" title="Ideas, Planning, & Feedback">🤔</a> <a href="#maintenance-humanbydefinition" title="Maintenance">🚧</a> <a href="#infra-humanbydefinition" title="Infrastructure (Hosting, Build-Tools, etc)">🚇</a> <a href="#tool-humanbydefinition" title="Tools">🔧</a> <a href="#plugin-humanbydefinition" title="Plugin/utility libraries">🔌</a> <a href="https://github.com/humanbydefinition/code.textmode.art/pulls?q=is%3Apr+reviewed-by%3Ahumanbydefinition" title="Reviewed Pull Requests">👀</a></td>
-      <td align="center" valign="top" width="14.28%"><a href="https://github.com/trintlermint"><img src="https://www.github.com/trintlermint.png?s=100" width="100px;" alt="trintlermint"/><br /><sub><b>trintlermint</b></sub></a><br /><a href="#design-trintlermint" title="Design">🎨</a> <a href="#example-trintlermint" title="Examples">💡</a></td>
+      <td align="center" valign="top" width="14.28%">
+        <a href="https://github.com/humanbydefinition">
+          <img src="https://github.com/humanbydefinition.png?s=100" width="100px" alt="humanbydefinition avatar" />
+          <br /><sub><b>humanbydefinition</b></sub>
+        </a>
+        <br /><span title="Code: Commits and pull requests" aria-label="Code: Commits and pull requests">💻</span> <span title="Documentation: README, guides, and API documentation" aria-label="Documentation: README, guides, and API documentation">📖</span> <span title="Design: User experience, branding, and visual design" aria-label="Design: User experience, branding, and visual design">🎨</span> <span title="Examples: Usage examples and creative sketches" aria-label="Examples: Usage examples and creative sketches">💡</span> <span title="Ideas and planning: Feature proposals, planning, and feedback" aria-label="Ideas and planning: Feature proposals, planning, and feedback">🤔</span> <span title="Maintenance: Refactoring and project upkeep" aria-label="Maintenance: Refactoring and project upkeep">🚧</span> <span title="Infrastructure: Continuous integration, hosting, and build systems" aria-label="Infrastructure: Continuous integration, hosting, and build systems">🚇</span> <span title="Tools: Developer and community tooling" aria-label="Tools: Developer and community tooling">🔧</span> <span title="Plugins and libraries: Plugin and utility library development" aria-label="Plugins and libraries: Plugin and utility library development">🔌</span> <span title="Code review: Reviewing pull requests" aria-label="Code review: Reviewing pull requests">👀</span>
+      </td>
+      <td align="center" valign="top" width="14.28%">
+        <a href="https://github.com/trintlermint">
+          <img src="https://github.com/trintlermint.png?s=100" width="100px" alt="trintlermint avatar" />
+          <br /><sub><b>trintlermint</b></sub>
+        </a>
+        <br /><span title="Design: User experience, branding, and visual design" aria-label="Design: User experience, branding, and visual design">🎨</span> <span title="Examples: Usage examples and creative sketches" aria-label="Examples: Usage examples and creative sketches">💡</span>
+      </td>
     </tr>
   </tbody>
 </table>
+<!-- markdownlint-enable MD033 -->
 
-<!-- markdownlint-restore -->
+Contribution details and profile links are maintained on the [textmode.js contributors page](https://code.textmode.art/docs/contributors).
 <!-- prettier-ignore-end -->
-
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
-This project follows the [all-contributors](https://allcontributors.org) specification.
-Contributions of any kind are welcome.
-Maintainers can update this section with `npm run contributors:add -- <github-username> <contribution[,contribution]>`
-and `npm run contributors:generate`.
+<!-- TEXTMODE-CONTRIBUTORS:END -->
 
 ## Tech stack
 

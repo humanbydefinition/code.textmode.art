@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://code.textmode.art/schemas/contribution-types.schema.json",
+  "title": "textmode.js ecosystem contribution types",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "contributionTypes"],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "contributionTypes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/contributionType"
+      }
+    }
+  },
+  "$defs": {
+    "contributionType": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["key", "emoji", "label", "description"],
+      "properties": {
+        "key": {
+          "type": "string",
+          "pattern": "^[A-Za-z][A-Za-z0-9]*$"
+        },
+        "emoji": {
+          "type": "string",
+          "minLength": 1
+        },
+        "label": {
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    }
+  }
+}

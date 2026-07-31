@@ -1,0 +1,230 @@
+name: Reconcile contributor README
+
+on:
+  workflow_call:
+    inputs:
+      mode:
+        description: Operation to perform (check, dry-run, or reconcile)
+        required: true
+        type: string
+      target-branch:
+        description: Branch that owns the README and receives the synchronization PR
+        required: true
+        type: string
+      checkout-ref:
+        description: Optional commit to inspect instead of the target branch
+        required: false
+        default: ""
+        type: string
+      source-ref:
+        description: Exact code.textmode.art commit, main, or dev for local reconciliation
+        required: false
+        default: main
+        type: string
+      app-client-id:
+        description: Client ID for textmode-contributors-bot
+        required: false
+        default: ""
+        type: string
+    secrets:
+      app-private-key:
+        description: Private key for textmode-contributors-bot
+        required: false
+
+permissions:
+  contents: read
+
+jobs:
+  reconcile:
+    name: ${{ inputs.mode }} ${{ inputs.target-branch }}
+    runs-on: ubuntu-latest
+    concurrency:
+      group: contributors-${{ github.repository }}-${{ inputs.target-branch }}
+      cancel-in-progress: false
+
+    steps:
+      - name: Validate workflow inputs
+        env:
+          MODE: ${{ inputs.mode }}
+          TARGET_BRANCH: ${{ inputs.target-branch }}
+          SOURCE_REF: ${{ inputs.source-ref }}
+          APP_CLIENT_ID: ${{ inputs.app-client-id }}
+          APP_PRIVATE_KEY: ${{ secrets.app-private-key }}
+        run: |
+          case "$MODE" in
+            check|dry-run|reconcile) ;;
+            *) echo "::error::Unsupported reconciliation mode: $MODE"; exit 1 ;;
+          esac
+
+          case "$TARGET_BRANCH" in
+            dev|beta|main) ;;
+            *) echo "::error::Unsupported target branch: $TARGET_BRANCH"; exit 1 ;;
+          esac
+
+          if [[ "$SOURCE_REF" != "main" && "$SOURCE_REF" != "dev" && ! "$SOURCE_REF" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "::error::source-ref must be main, dev, or a full commit SHA"
+            exit 1
+          fi
+
+          if [[ "$MODE" == "reconcile" && (-z "$APP_CLIENT_ID" || -z "$APP_PRIVATE_KEY") ]]; then
+            echo "::error::Contributor synchronization GitHub App credentials are not configured"
+            exit 1
+          fi
+
+      - name: Create short-lived GitHub App token
+        if: inputs.mode == 'reconcile'
+        id: app-token
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3
+        with:
+          client-id: ${{ inputs.app-client-id }}
+          private-key: ${{ secrets.app-private-key }}
+          owner: ${{ github.repository_owner }}
+          repositories: ${{ github.event.repository.name }}
+          permission-contents: write
+          permission-pull-requests: write
+
+      - name: Check whether the target branch exists
+        id: target
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token || github.token }}
+          TARGET_BRANCH: ${{ inputs.target-branch }}
+        run: |
+          if RESPONSE="$(gh api "repos/$GITHUB_REPOSITORY/branches/$TARGET_BRANCH" 2>&1)"; then
+            echo "exists=true" >> "$GITHUB_OUTPUT"
+          elif [[ "$RESPONSE" == *"(HTTP 404)"* ]]; then
+            echo "exists=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::Skipping missing branch $TARGET_BRANCH"
+          else
+            printf '%s\n' "$RESPONSE"
+            exit 1
+          fi
+
+      - name: Checkout target repository
+        if: steps.target.outputs.exists == 'true'
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          ref: ${{ inputs.checkout-ref || inputs.target-branch }}
+          fetch-depth: 0
+          path: target
+          token: ${{ steps.app-token.outputs.token || github.token }}
+
+      - name: Checkout canonical contributor source
+        if: steps.target.outputs.exists == 'true'
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          repository: humanbydefinition/code.textmode.art
+          ref: ${{ inputs.source-ref }}
+          sparse-checkout: |
+            .vitepress/data/contribution-types.json
+            .vitepress/data/contributors.json
+            scripts/contributors.mjs
+          sparse-checkout-cone-mode: false
+          path: contributor-source
+          persist-credentials: false
+
+      - name: Resolve and validate canonical source
+        if: steps.target.outputs.exists == 'true'
+        id: source
+        working-directory: contributor-source
+        run: |
+          SOURCE_SHA="$(git rev-parse HEAD)"
+          if [[ ! "$SOURCE_SHA" =~ ^[0-9a-f]{40}$ ]]; then
+            echo "::error::Canonical source did not resolve to a full commit SHA"
+            exit 1
+          fi
+          echo "sha=$SOURCE_SHA" >> "$GITHUB_OUTPUT"
+
+      - name: Render canonical section
+        if: steps.target.outputs.exists == 'true'
+        run: |
+          node contributor-source/scripts/contributors.mjs render \
+            --registry contributor-source/.vitepress/data/contributors.json \
+            --types contributor-source/.vitepress/data/contribution-types.json \
+            --readme target/README.md
+
+      - name: Inspect generated diff
+        if: steps.target.outputs.exists == 'true'
+        id: diff
+        working-directory: target
+        run: |
+          if git diff --quiet -- README.md; then
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          CHANGED_FILES="$(git diff --name-only)"
+          if [[ "$CHANGED_FILES" != "README.md" ]]; then
+            echo "::error::Contributor renderer changed files other than README.md"
+            git diff --name-status
+            exit 1
+          fi
+
+          echo "changed=true" >> "$GITHUB_OUTPUT"
+
+      - name: Fail when pull request content is stale
+        if: inputs.mode == 'check' && steps.diff.outputs.changed == 'true'
+        working-directory: target
+        run: |
+          git diff -- README.md
+          echo "::error::README.md does not contain the canonical Contributors section"
+          exit 1
+
+      - name: Show dry-run diff
+        if: inputs.mode == 'dry-run' && steps.diff.outputs.changed == 'true'
+        working-directory: target
+        run: git diff -- README.md
+
+      - name: Create or refresh synchronization pull request
+        if: inputs.mode == 'reconcile' && steps.diff.outputs.changed == 'true'
+        working-directory: target
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          APP_SLUG: ${{ steps.app-token.outputs.app-slug }}
+          SOURCE_SHA: ${{ steps.source.outputs.sha }}
+          TARGET_BRANCH: ${{ inputs.target-branch }}
+          WORKFLOW_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: |
+          SYNC_BRANCH="automation/sync-contributors/$TARGET_BRANCH"
+          BOT_USER_ID="$(gh api "/users/$APP_SLUG[bot]" --jq .id)"
+
+          git config user.name "$APP_SLUG[bot]"
+          git config user.email "$BOT_USER_ID+$APP_SLUG[bot]@users.noreply.github.com"
+          git switch -C "$SYNC_BRANCH"
+          git add README.md
+          git commit -m "docs: sync ecosystem contributors"
+
+          if git ls-remote --exit-code --heads origin "$SYNC_BRANCH" >/dev/null 2>&1; then
+            git fetch origin "refs/heads/$SYNC_BRANCH:refs/remotes/origin/$SYNC_BRANCH"
+          fi
+          git push --force-with-lease origin "HEAD:refs/heads/$SYNC_BRANCH"
+
+          PR_NUMBER="$(gh pr list \
+            --base "$TARGET_BRANCH" \
+            --head "$SYNC_BRANCH" \
+            --state open \
+            --json number \
+            --jq '.[0].number // empty')"
+
+          printf -v PR_BODY \
+            'Generated from humanbydefinition/code.textmode.art@%s.\n\nThis pull request changes only the canonical README Contributors section.\n\nReconciliation run: %s' \
+            "$SOURCE_SHA" \
+            "$WORKFLOW_URL"
+
+          if [[ -z "$PR_NUMBER" ]]; then
+            PR_URL="$(gh pr create \
+              --base "$TARGET_BRANCH" \
+              --head "$SYNC_BRANCH" \
+              --title "docs: sync ecosystem contributors" \
+              --body "$PR_BODY")"
+            PR_NUMBER="${PR_URL##*/}"
+          else
+            gh pr edit "$PR_NUMBER" \
+              --title "docs: sync ecosystem contributors" \
+              --body "$PR_BODY"
+          fi
+
+          gh pr merge "$PR_NUMBER" --auto --squash
+
+      - name: Report no-op
+        if: steps.target.outputs.exists == 'true' && steps.diff.outputs.changed == 'false'
+        run: echo "README.md already matches code.textmode.art@${{ steps.source.outputs.sha }}"
