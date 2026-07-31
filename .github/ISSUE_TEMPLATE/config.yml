@@ -1,0 +1,14 @@
+blank_issues_enabled: true
+contact_links:
+    - name: Contributing overview
+      url: https://code.textmode.art/docs/contributing/
+      about: Choose the correct repository and contribution path before opening an issue.
+    - name: Documentation
+      url: https://code.textmode.art/
+      about: Search the guides, API reference, and examples before reporting a documentation problem.
+    - name: textmode.js core repository
+      url: https://github.com/humanbydefinition/textmode.js/issues
+      about: Report core library and rendering problems in the core repository.
+    - name: Discord
+      url: https://discord.gg/sjrw8QXNks
+      about: Ask usage questions or discuss documentation ideas before filing an issue.
