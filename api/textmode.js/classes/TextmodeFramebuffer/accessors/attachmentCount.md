@@ -7,7 +7,7 @@ category: Accessors
 api: true
 owner: TextmodeFramebuffer
 kind: Accessor
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [TextmodeFramebuffer](../../TextmodeFramebuffer.md) / attachmentCount

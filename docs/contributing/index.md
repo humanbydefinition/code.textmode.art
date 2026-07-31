@@ -40,10 +40,15 @@ Ready to contribute? Check out our [Getting Started guide](/docs/contributing/ge
 
 ## Credits
 
-All contributors are recognized on the [Contributors page](/docs/contributors) and in the [README](https://github.com/humanbydefinition/code.textmode.art#contributors) using the [All Contributors](https://allcontributors.org/) specification.
+All ecosystem contributors are recognized on the [Contributors page](/docs/contributors) and in the
+[README](https://github.com/humanbydefinition/code.textmode.art#contributors).
 
-Maintainers update contributor recognition with `npm run contributors:add -- <github-username> <contribution[,contribution]>` and `npm run contributors:generate`.
-If you want extra social links on the website, add them to [`.vitepress/data/contributors.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contributors.json).
+Maintainers update names and optional profile links in the canonical
+[contributors registry](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contributors.json).
+The supported labels and their display order live in the separate
+[contribution-type catalog](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contribution-types.json).
+Both files are validated and rendered with `npm run check:contributors`, and GitHub automation synchronizes the
+generated section to the official textmode.js library READMEs.
 
 ## Questions?
 

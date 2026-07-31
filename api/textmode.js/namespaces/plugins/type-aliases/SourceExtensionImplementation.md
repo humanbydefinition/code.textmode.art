@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 namespace: plugins
 kind: TypeAlias
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [plugins](../index.md) / SourceExtensionImplementation

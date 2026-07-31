@@ -8,7 +8,7 @@ api: true
 owner: TextmodeTexture
 namespace: media
 kind: Accessor
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../../../index.md) / [media](../../../index.md) / [TextmodeTexture](../../TextmodeTexture.md) / source

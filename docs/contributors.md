@@ -13,7 +13,8 @@ import { contributors } from '../.vitepress/theme/composables/contributors'
 `textmode.js` is built with passion and maintained by creative minds who believe in making textmode graphics accessible to everyone. (人´∀｀)．☆．。．:\*･°
 
 :::info About this page
-This page follows the [**All Contributors**](https://allcontributors.org/) specification and uses the same contributor data as the project README.
+This page and every official textmode.js README use the canonical contributor registry and contribution-type catalog
+maintained by `code.textmode.art`.
 :::
 
 :::tip Help us grow!
@@ -26,4 +27,5 @@ We welcome contributions of all sizes! Whether it's fixing a typo, adding a feat
 
 ## About the emoji key
 
-This page uses the standard All Contributors contribution types. For the complete reference, visit the [All Contributors Emoji Key](https://allcontributors.org/emoji-key).
+Each emoji describes a contribution type defined in the canonical contribution-type catalog. Hover or focus an emoji
+to see its label and description.

@@ -1,26 +1,45 @@
 {
-  "trintlermint": {
-    "links": [
-      {
-        "icon": "website",
-        "link": "https://trintler.me"
-      }
-    ]
-  },
-  "humanbydefinition": {
-    "links": [
-      {
-        "icon": "instagram",
-        "link": "https://www.instagram.com/humanbydefinition/"
-      },
-      {
-        "icon": "mastodon",
-        "link": "https://mastodon.social/@humanbydefinition"
-      },
-      {
-        "icon": "twitter",
-        "link": "https://twitter.com/textmode_art"
-      }
-    ]
-  }
+  "$schema": "./contributors.schema.json",
+  "schemaVersion": 1,
+  "contributors": [
+    {
+      "login": "humanbydefinition",
+      "contributions": [
+        "code",
+        "doc",
+        "design",
+        "example",
+        "ideas",
+        "maintenance",
+        "infra",
+        "tool",
+        "plugin",
+        "review"
+      ],
+      "links": [
+        {
+          "icon": "instagram",
+          "url": "https://www.instagram.com/humanbydefinition/"
+        },
+        {
+          "icon": "twitter",
+          "url": "https://twitter.com/textmode_art"
+        },
+        {
+          "icon": "mastodon",
+          "url": "https://mastodon.social/@humanbydefinition"
+        }
+      ]
+    },
+    {
+      "login": "trintlermint",
+      "contributions": ["design", "example"],
+      "links": [
+        {
+          "icon": "website",
+          "url": "https://trintler.me"
+        }
+      ]
+    }
+  ]
 }

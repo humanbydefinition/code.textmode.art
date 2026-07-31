@@ -62,10 +62,8 @@ If your sketch is for the public docs showcase:
 
 The current showcase metadata lives in [`.vitepress/data/sketches.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/sketches.json).
 
-Contributor recognition on the site is also tied to:
-
-- [`.all-contributorsrc`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.all-contributorsrc)
-- [`.vitepress/data/contributors.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contributors.json)
+Contributor recognition on the site comes from the canonical
+[contributors registry](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contributors.json).
 
 ## Submitting an API example sketch
 
@@ -77,10 +75,9 @@ If your sketch is for a generated API reference example:
 4. Add or update the sketch for the relevant API entry
 5. Submit a pull request explaining which API entry the example improves
 
-If you want your contribution metadata and optional profile links reflected on the `code.textmode.art` site as well, you may also need a companion PR in [`code.textmode.art`](https://github.com/humanbydefinition/code.textmode.art) touching:
-
-- [`.all-contributorsrc`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.all-contributorsrc)
-- [`.vitepress/data/contributors.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contributors.json)
+If you want your contribution metadata and optional profile links reflected on the `code.textmode.art` site as well,
+you may also need a companion PR updating the canonical
+[contributors registry](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contributors.json).
 
 If you are not sure which repository owns a given API example, open an issue first or ask in Discord before starting the implementation.
 

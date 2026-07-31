@@ -7,7 +7,7 @@ category: Accessors
 api: true
 owner: Textmodifier
 kind: Accessor
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / grid

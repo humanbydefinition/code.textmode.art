@@ -1,135 +1,148 @@
-import allContributorsRaw from '../../../.all-contributorsrc?raw'
-import contributorMetadataRaw from '../../data/contributors.json?raw'
+import contributionTypesCatalog from "../../data/contribution-types.json";
+import contributorsRegistry from "../../data/contributors.json";
 
 export interface ContributorLink {
-  icon: string
-  link: string
+  icon: string;
+  link: string;
 }
 
-interface AllContributorsEntry {
-  login: string
-  name: string
-  avatar_url: string
-  profile: string
-  contributions: string[]
+interface ContributionTypeDefinition {
+  key: string;
+  emoji: string;
+  label: string;
+  description: string;
 }
 
-interface AllContributorsConfig {
-  contributors: AllContributorsEntry[]
+interface ContributorRegistryEntry {
+  login: string;
+  name?: string;
+  profileUrl?: string;
+  avatarUrl?: string;
+  contributions: string[];
+  links?: Array<{
+    icon: string;
+    url: string;
+  }>;
 }
 
-interface ContributorMetadataEntry {
-  links?: ContributorLink[]
+interface ContributorsRegistry {
+  schemaVersion: 1;
+  contributors: ContributorRegistryEntry[];
 }
 
-type ContributorMetadata = Record<string, ContributorMetadataEntry>
+interface ContributionTypesCatalog {
+  schemaVersion: 1;
+  contributionTypes: ContributionTypeDefinition[];
+}
 
-const linkOrder = ['website', 'github', 'instagram', 'twitter', 'mastodon', 'bluesky', 'discord'] as const
+const linkOrder = [
+  "website",
+  "github",
+  "instagram",
+  "twitter",
+  "mastodon",
+  "bluesky",
+  "discord",
+] as const;
 
 interface Contribution {
-  type: string
-  emoji: string
-  name: string
-  description: string
+  type: string;
+  emoji: string;
+  name: string;
+  description: string;
 }
 
 export interface Contributor {
-  login: string
-  name: string
-  avatar: string
-  profile: string
-  contributions: Contribution[]
-  links: ContributorLink[]
+  login: string;
+  name: string;
+  avatar: string;
+  profile: string;
+  contributions: Contribution[];
+  links: ContributorLink[];
 }
 
-const contributionTypeMap: Record<string, Omit<Contribution, 'type'>> = {
-  audio: { emoji: '🔊', name: 'Audio', description: 'Podcasts, background music, sound effects' },
-  a11y: { emoji: '♿️', name: 'Accessibility', description: 'Accessibility improvements or audits' },
-  bug: { emoji: '🐛', name: 'Bug Reports', description: 'Reporting issues' },
-  blog: { emoji: '📝', name: 'Blogposts', description: 'Writing blog posts about the project' },
-  business: { emoji: '💼', name: 'Business Development', description: 'Business strategy or partnerships' },
-  code: { emoji: '💻', name: 'Code', description: 'Commits and pull requests' },
-  content: { emoji: '🖋', name: 'Content', description: 'Website copy or written material' },
-  data: { emoji: '🔣', name: 'Data', description: 'Contributed datasets or test data' },
-  doc: { emoji: '📖', name: 'Documentation', description: 'README, Wiki, API docs' },
-  design: { emoji: '🎨', name: 'Design', description: 'UI/UX, branding, visuals' },
-  example: { emoji: '💡', name: 'Examples', description: 'Usage examples' },
-  eventOrganizing: { emoji: '📋', name: 'Event Organizing', description: 'Organizing project events' },
-  financial: { emoji: '💵', name: 'Financial Support', description: 'Funding or donations' },
-  fundingFinding: { emoji: '🔍', name: 'Funding/Grant Finding', description: 'Identifying funding sources' },
-  ideas: { emoji: '🤔', name: 'Ideas & Planning', description: 'Feature proposals' },
-  infra: { emoji: '🚇', name: 'Infrastructure', description: 'CI, hosting, build systems' },
-  maintenance: { emoji: '🚧', name: 'Maintenance', description: 'Refactoring, upkeep' },
-  mentoring: { emoji: '🧑‍🏫', name: 'Mentoring', description: 'Supporting contributors' },
-  platform: { emoji: '📦', name: 'Packaging', description: 'Porting to new platforms' },
-  plugin: { emoji: '🔌', name: 'Plugin/Utility Libraries', description: 'Plugin development' },
-  projectManagement: { emoji: '📆', name: 'Project Management', description: 'Planning and coordination' },
-  promotion: { emoji: '📣', name: 'Promotion', description: 'Social sharing' },
-  question: { emoji: '💬', name: 'Answering Questions', description: 'Community support' },
-  research: { emoji: '🔬', name: 'Research', description: 'Literature reviews' },
-  review: { emoji: '👀', name: 'Code Review', description: 'Reviewing pull requests' },
-  security: { emoji: '🛡️', name: 'Security', description: 'Privacy and security improvements' },
-  tool: { emoji: '🔧', name: 'Tools', description: 'Tooling contributions' },
-  translation: { emoji: '🌍', name: 'Translation', description: 'Language translations' },
-  test: { emoji: '⚠️', name: 'Tests', description: 'Writing test cases' },
-  tutorial: { emoji: '✅', name: 'Tutorials', description: 'Educational content' },
-  talk: { emoji: '📢', name: 'Talks', description: 'Presentations and talks' },
-  userTesting: { emoji: '📓', name: 'User Testing', description: 'Conducting user testing' },
-  video: { emoji: '📹', name: 'Videos', description: 'Creating video content' },
+const registry = contributorsRegistry as ContributorsRegistry;
+const catalog = contributionTypesCatalog as ContributionTypesCatalog;
+const contributionTypes = new Map(
+  catalog.contributionTypes.map((contribution) => [
+    contribution.key,
+    contribution,
+  ]),
+);
+
+function getProfile(entry: ContributorRegistryEntry): string {
+  return entry.profileUrl ?? `https://github.com/${entry.login}`;
 }
 
-const allContributors = JSON.parse(allContributorsRaw) as AllContributorsConfig
-const contributorMetadata = JSON.parse(contributorMetadataRaw) as ContributorMetadata
+function getAvatar(entry: ContributorRegistryEntry): string {
+  const url = new URL(
+    entry.avatarUrl ?? `https://github.com/${entry.login}.png`,
+  );
+  url.searchParams.set("s", "160");
+  return url.toString();
+}
 
 function getContribution(type: string): Contribution {
-  const contribution = contributionTypeMap[type]
+  const contribution = contributionTypes.get(type);
 
   if (!contribution) {
-    return {
-      type,
-      emoji: '✨',
-      name: type,
-      description: 'Community contribution',
-    }
+    throw new Error(`Unknown contributor type: ${type}`);
   }
 
   return {
     type,
-    ...contribution,
-  }
+    emoji: contribution.emoji,
+    name: contribution.label,
+    description: contribution.description,
+  };
 }
 
-function getLinks(entry: AllContributorsEntry, metadata: ContributorMetadataEntry | undefined): ContributorLink[] {
-  const links: ContributorLink[] = [{ icon: 'github', link: entry.profile }]
+function getLinks(entry: ContributorRegistryEntry): ContributorLink[] {
+  const links: ContributorLink[] = [
+    { icon: "github", link: getProfile(entry) },
+  ];
 
-  for (const link of metadata?.links ?? []) {
-    if (!links.some(existing => existing.icon === link.icon && existing.link === link.link)) {
-      links.push(link)
+  for (const link of entry.links ?? []) {
+    if (
+      !links.some(
+        (existing) => existing.icon === link.icon && existing.link === link.url,
+      )
+    ) {
+      links.push({ icon: link.icon, link: link.url });
     }
   }
 
   return links.sort((left, right) => {
-    const leftIndex = linkOrder.indexOf(left.icon as (typeof linkOrder)[number])
-    const rightIndex = linkOrder.indexOf(right.icon as (typeof linkOrder)[number])
+    const leftIndex = linkOrder.indexOf(
+      left.icon as (typeof linkOrder)[number],
+    );
+    const rightIndex = linkOrder.indexOf(
+      right.icon as (typeof linkOrder)[number],
+    );
 
-    const normalizedLeftIndex = leftIndex === -1 ? linkOrder.length : leftIndex
-    const normalizedRightIndex = rightIndex === -1 ? linkOrder.length : rightIndex
+    const normalizedLeftIndex = leftIndex === -1 ? linkOrder.length : leftIndex;
+    const normalizedRightIndex =
+      rightIndex === -1 ? linkOrder.length : rightIndex;
 
-    return normalizedLeftIndex - normalizedRightIndex
-  })
+    return normalizedLeftIndex - normalizedRightIndex;
+  });
 }
 
-export const contributors: Contributor[] = allContributors.contributors.map((entry) => ({
-  login: entry.login,
-  name: entry.name,
-  avatar: `${entry.avatar_url}?s=160`,
-  profile: entry.profile,
-  contributions: entry.contributions.map(getContribution),
-  links: getLinks(entry, contributorMetadata[entry.login]),
-}))
+export const contributors: Contributor[] = registry.contributors.map(
+  (entry) => ({
+    login: entry.login,
+    name: entry.name ?? entry.login,
+    avatar: getAvatar(entry),
+    profile: getProfile(entry),
+    contributions: entry.contributions.map(getContribution),
+    links: getLinks(entry),
+  }),
+);
 
 export function findContributorByName(name: string): Contributor | null {
-  return contributors.find(
-    contributor => contributor.name === name || contributor.login === name,
-  ) ?? null
+  return (
+    contributors.find(
+      (contributor) => contributor.name === name || contributor.login === name,
+    ) ?? null
+  );
 }

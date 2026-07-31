@@ -6,7 +6,7 @@ description: All font rendering related modules and types.
 category: Namespaces
 api: true
 kind: Namespace
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../index.md) / fonts

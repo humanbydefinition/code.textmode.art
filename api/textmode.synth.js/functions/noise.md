@@ -7,7 +7,7 @@ category: Functions
 api: true
 kind: Function
 ecosystem: textmode.js
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.synth.js](../index.md) / noise

@@ -2,12 +2,12 @@
 layout: doc
 editLink: true
 title: textmode.filters.js
-description: GPU-accelerated image filters plugin for textmode.js.
+description: Image filters plugin for textmode.js
 category: API Reference
 api: true
 kind: Project
 ecosystem: textmode.js
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 # textmode.filters.js

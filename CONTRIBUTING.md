@@ -21,16 +21,19 @@ npm run dev
 
 ## Contributor credit
 
-This project uses the [All Contributors](https://allcontributors.org/) specification.
-
-Maintainers update contributor recognition with:
+The textmode.js ecosystem keeps contributor profiles in
+[`.vitepress/data/contributors.json`](./.vitepress/data/contributors.json) and the ordered contribution-type catalog
+in [`.vitepress/data/contribution-types.json`](./.vitepress/data/contribution-types.json). Maintainers update the
+relevant file and run:
 
 ```bash
-npm run contributors:add -- <github-username> <contribution[,contribution]>
-npm run contributors:generate
+npm run contributors:validate
+npm run contributors:render
+npm run check:contributors
 ```
 
-Optional website-only profile links live in [`.vitepress/data/contributors.json`](./.vitepress/data/contributors.json).
+The documentation site reads both canonical files directly. Automation synchronizes the same generated Contributors
+section to every official textmode.js library README.
 
 ## Need help?
 

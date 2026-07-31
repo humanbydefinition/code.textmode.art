@@ -8,7 +8,7 @@ api: true
 owner: TextmodeFont
 namespace: fonts
 kind: Method
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.js](../../../../../index.md) / [fonts](../../../index.md) / [TextmodeFont](../../TextmodeFont.md) / dispose

@@ -68,8 +68,9 @@ Understanding the project layout helps you find what you need:
 .vitepress/
 ├── config.mts          # VitePress configuration
 ├── data/
-│   ├── sketches.json   # Example sketch metadata
-│   └── contributors.json # Optional contributor profile metadata
+│   ├── sketches.json             # Example sketch metadata
+│   ├── contribution-types.json   # Ordered contribution-type catalog
+│   └── contributors.json         # Canonical contributor profiles
 └── theme/              # Custom theme components
 
 docs/                   # Documentation pages (you'll mostly edit here)
@@ -86,8 +87,8 @@ public/                 # Static assets (images, SVGs)
 
 - **[`.vitepress/config.mts`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/config.mts)** - VitePress configuration
 - **[`.vitepress/data/sketches.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/sketches.json)** - Example sketch metadata used by the docs
-- **[`.all-contributorsrc`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.all-contributorsrc)** - Canonical contributor registry
-- **[`.vitepress/data/contributors.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contributors.json)** - Optional social/profile metadata for the website
+- **[`.vitepress/data/contribution-types.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contribution-types.json)** - Ordered catalog of supported contribution keys, labels, descriptions, and emoji
+- **[`.vitepress/data/contributors.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contributors.json)** - Canonical ecosystem contributor profiles, contribution keys, and optional links
 
 ## Making changes
 
@@ -159,14 +160,19 @@ When submitting a pull request:
 
 ## Getting credit
 
-To be credited as a contributor, maintainers update [`.all-contributorsrc`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.all-contributorsrc) with:
+To credit a contributor, maintainers update the canonical
+[contributors registry](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contributors.json)
+and run:
 
 ```bash
-npm run contributors:add -- your-github-username doc
-npm run contributors:generate
+npm run contributors:validate
+npm run contributors:render
+npm run check:contributors
 ```
 
-If you want additional social links to appear on the site, add them to [`.vitepress/data/contributors.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contributors.json).
+The registry stores optional profile links and references keys from the separate
+[contribution-type catalog](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contribution-types.json).
+Together they drive every official textmode.js Contributors section.
 
 You'll appear on the [Contributors page](/docs/contributors) when your PR is merged!
 

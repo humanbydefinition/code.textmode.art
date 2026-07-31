@@ -8,7 +8,7 @@ api: true
 owner: TextmodeFigFont
 kind: Accessor
 ecosystem: textmode.js
-lastModified: 2026-07-25
+lastModified: 2026-07-31
 ---
 
 [textmode.figlet.js](../../../index.md) / [TextmodeFigFont](../../TextmodeFigFont.md) / characters
