@@ -1,17 +1,17 @@
-# code.textmode.art (✿◠‿◠)
+# code.textmode.art
 
 <div align="center">
 
-<img alt="textmodejs_banner" src="https://github.com/user-attachments/assets/f03c2d74-7dc3-45cf-a0a5-043f9438231e" />
+<img alt="code.textmode.art — explore textmode on the web" src=".github/assets/readme-og.png" />
 
-| [![Contributors](https://img.shields.io/badge/contributors-community-ee8449?style=flat-square)](#contributors) | [![VitePress](https://img.shields.io/badge/VitePress-646CFF?logo=vitepress&logoColor=white)](https://vitepress.dev/) [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-222?logo=github&logoColor=white)](https://pages.github.com/) | [![Discord](https://img.shields.io/discord/1357070706181017691?color=5865F2&label=Discord&logo=discord&logoColor=white)](https://discord.gg/sjrw8QXNks) [![ko-fi](https://shields.io/badge/ko--fi-donate-ff5f5f?logo=ko-fi)](https://ko-fi.com/V7V8JG2FY) |
-| :------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [![VitePress](https://img.shields.io/badge/VitePress-646CFF?logo=vitepress&logoColor=white)](https://vitepress.dev/) | [![docs](https://img.shields.io/badge/docs-vitepress-646cff?logo=vitepress&logoColor=white)](https://code.textmode.art/) [![Discord](https://img.shields.io/discord/1357070706181017691?color=5865F2&label=Discord&logo=discord&logoColor=white)](https://discord.gg/sjrw8QXNks) | [![ko-fi](https://shields.io/badge/ko--fi-donate-ff5f5f?logo=ko-fi)](https://ko-fi.com/V7V8JG2FY) [![GitHub-sponsors](https://img.shields.io/badge/sponsor-30363D?logo=GitHub-Sponsors&logoColor=#EA4AAA)](https://github.com/sponsors/humanbydefinition) |
+| :--- | :--- | :--- |
 
 </div>
 
-Official documentation, guides, and examples for [textmode.js](https://github.com/humanbydefinition/textmode.js) - a creative coding library for real-time ASCII art on the web.
+`code.textmode.art` is the central documentation home for [textmode.js](https://github.com/humanbydefinition/textmode.js), with core concepts, API references, practical guides, examples, and integrations for creative coding on the web.
 
-**Live site**: [code.textmode.art](https://code.textmode.art)
+Whether you are installing `textmode.js` for the first time or extending a sketch with ecosystem add-ons, these docs help you learn the essentials, make your first browser sketch, and explore what the wider ecosystem has to offer.
 
 ## What's inside
 
