@@ -281,7 +281,7 @@ GIF export works by registering a post-draw hook and capturing the next rendered
 
 ## Video export
 
-Use [`saveVideo()`](/api/textmode.export.js/interfaces/TextmodeExportAPI/methods/saveVideo.md) to record future frames from the final presented canvas and save them as video.
+Use [`saveVideo()`](/api/textmode.export.js/interfaces/TextmodeExportAPI#savevideo) to record future frames from the final presented canvas and save them as video.
 
 MP4 is the default format:
 
