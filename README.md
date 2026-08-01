@@ -40,14 +40,9 @@ npm run preview
 
 ## Contributing
 
-We welcome contributions! There are many ways to help:
+Thank you for considering contributing to this project! (✿◠‿◠)
 
-- **Suggest fonts** - Know a great pixel font? Add it to the showcase
-- **Share sketches** - Create example sketches for the documentation
-- **Improve docs** - Better explanations, code examples, or tutorials
-- **Report issues** - Found a bug or typo? Let us know
-
-Ecosystem contributors are credited in this README and on the site. See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+Please read the [Contributing Guide](./CONTRIBUTING.md) to get started.
 
 <!-- TEXTMODE-CONTRIBUTORS:START -->
 <!-- prettier-ignore-start -->
