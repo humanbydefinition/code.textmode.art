@@ -15,10 +15,13 @@ Whether you are installing `textmode.js` for the first time or extending a sketc
 
 ## What's inside
 
-- **Documentation** - Installation guides, API reference, and tutorials
-- **Examples** - Interactive demos and code samples
-- **Font showcase** - Curated collection of compatible pixel fonts
-- **Integrations** - Guides for p5.js, Three.js, Hydra Synth, and more
+- **Guided learning paths** - Start with installation and a first sketch, then work through lifecycle, grids, drawing, characters, typography, animation, input, fonts, and media.
+- **Advanced rendering guides** - Build layered scenes with compositing, filters, framebuffers, custom GLSL shaders, 3D drawing, cameras, and lighting.
+- **Interactive examples** - Explore live, editable sketches for core drawing, shaders, video and webcam conversion, p5.js, Three.js, and Hydra Synth integrations.
+- **Live-coding workflows** - Learn browser-based sketching with editor.textmode.art and collaborative audiovisual sessions in flok.cc.
+- **Ecosystem API reference** - Browse generated, typed API documentation for textmode.js and the official synth, filters, export, and FIGlet add-ons.
+- **Gallery and creative inspiration** - Discover featured community projects, showcase sketches, experiments, and real-world textmode.js work.
+- **Ways to contribute** - Find routes for improving documentation, contributing code, and submitting examples, with ecosystem-wide contributor recognition.
 
 ## Contributing
 
