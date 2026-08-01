@@ -1,29 +1,29 @@
 ---
-title: synth.textmode.art
-description: Use synth.textmode.art for browser-based ASCII synthesis with textmode.js and textmode.synth.js.
+title: editor.textmode.art
+description: Use editor.textmode.art for browser-based ASCII synthesis with textmode.js and textmode.synth.js.
 ---
 
 <script setup>
 import { GalleryCard } from '../.vitepress/theme/components/Gallery'
 import galleryData from '../.vitepress/data/gallery.json'
 
-const synthItem = {
-  id: 'synth-textmode-art',
-  ...galleryData['synth-textmode-art']
+const editorItem = {
+  id: 'editor-textmode-art',
+  ...galleryData['editor-textmode-art']
 }
 </script>
 
-# synth.textmode.art
+# editor.textmode.art
 
-[`synth.textmode.art`](https://synth.textmode.art/) is a browser-based live coding environment for procedural text generation and ASCII synthesis. It combines `textmode.js` with `textmode.synth.js` to provide a focused workflow for building animated textmode patches directly in the browser. (〜￣△￣)〜
+[`editor.textmode.art`](https://editor.textmode.art/) is a browser-based live coding environment for procedural text generation and ASCII synthesis. It combines `textmode.js` with `textmode.synth.js` to provide a focused workflow for building animated textmode patches directly in the browser. (〜￣△￣)〜
 
-Unlike [flok.cc](/docs/live-coding-flok-cc), which is built around collaborative sessions and multi-tool performances, `synth.textmode.art` is a dedicated single-surface environment for writing and iterating on textmode synth sketches.
+Unlike [flok.cc](/docs/live-coding-flok-cc), which is built around collaborative sessions and multi-tool performances, `editor.textmode.art` is a dedicated single-surface environment for writing and iterating on textmode synth sketches.
 
-<GalleryCard :item="synthItem" />
+<GalleryCard :item="editorItem" />
 
 ## Getting started
 
-1. Visit [synth.textmode.art](https://synth.textmode.art/).
+1. Visit [editor.textmode.art](https://editor.textmode.art/).
 2. Start from the default sketch or open the **examples** tab from the system menu.
 3. Edit the code and let the sketch auto-run, or press `Ctrl+Enter` to run it manually.
 
@@ -31,7 +31,7 @@ The editor saves your code locally in the browser, so you can close the page and
 
 ## The synthesis model
 
-`synth.textmode.art` exposes the standard `textmode.js` sketch API through the global `t` variable and adds the source-building functions from `textmode.synth.js`.
+`editor.textmode.art` exposes the standard `textmode.js` sketch API through the global `t` variable and adds the source-building functions from `textmode.synth.js`.
 
 The core idea is that a textmode frame is split into separate channels:
 
@@ -64,7 +64,7 @@ This patch uses three different synth sources:
 
 ## Character maps
 
-One of the most useful controls in `synth.textmode.art` is `charMap(...)`, which limits the glyph set used by `char(...)`.
+One of the most useful controls in `editor.textmode.art` is `charMap(...)`, which limits the glyph set used by `char(...)`.
 
 ```js
 const matrixData = noise(4, 0.2).pixelate(30).scrollY(1, 0.2);
@@ -78,7 +78,7 @@ Changing the character map can completely change the look of a patch, even when 
 
 ## Layering
 
-`synth.textmode.art` supports the full `textmode.js` layer system. You can stack synth layers with different blend modes, opacity values, offsets, and rotations, then combine them with direct drawing commands.
+`editor.textmode.art` supports the full `textmode.js` layer system. You can stack synth layers with different blend modes, opacity values, offsets, and rotations, then combine them with direct drawing commands.
 
 ```js
 t.layers.base.synth(
@@ -119,7 +119,7 @@ If you already work with Hydra-style source chains, the workflow will feel famil
 
 ## Sharing
 
-`synth.textmode.art` can generate share links that encode the current sketch directly in the URL. When a shared sketch is opened, the code is shown behind an unlock step before it runs.
+`editor.textmode.art` can generate share links that encode the current sketch directly in the URL. When a shared sketch is opened, the code is shown behind an unlock step before it runs.
 
 ## Related APIs
 
@@ -129,5 +129,5 @@ If you already work with Hydra-style source chains, the workflow will feel famil
 
 ## Resources
 
-- **App**: [https://synth.textmode.art/](https://synth.textmode.art/)
-- **Repository**: [https://github.com/humanbydefinition/synth.textmode.art](https://github.com/humanbydefinition/synth.textmode.art)
+- **App**: [https://editor.textmode.art/](https://editor.textmode.art/)
+- **Repository**: [https://github.com/humanbydefinition/editor.textmode.art](https://github.com/humanbydefinition/editor.textmode.art)

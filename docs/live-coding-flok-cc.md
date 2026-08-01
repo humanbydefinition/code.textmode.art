@@ -17,7 +17,7 @@ const flokItem = {
 
 [`flok.cc`](https://flok.cc/) is a collaborative live coding environment that runs entirely in the browser. `textmode.js` is integrated as a first-class panel target, which makes it a strong fit for performances where ASCII visuals need to live beside Hydra, Strudel, Mercury, or other browser-native tools. (ง'̀-'́)ง
 
-If you want a dedicated solo synth surface instead, see [synth.textmode.art](/docs/live-coding-synth-textmode-art).
+If you want a dedicated solo editor instead, see [editor.textmode.art](/docs/live-coding-editor-textmode-art).
 
 <GalleryCard :item="flokItem" />
 
