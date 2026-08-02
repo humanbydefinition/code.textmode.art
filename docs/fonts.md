@@ -296,11 +296,10 @@ Use a bitmap tileset when you want:
 
 For bold display headers, titles, and FIGfont banners rendered across multiple cells, use the official [`textmode.figlet.js`](/api/textmode.figlet.js/) add-on. See the [FIGlet typography guide](/docs/figlet-typography) for font loading, layout density, alignment, and per-cell styling options.
 
-## Discover more fonts
+## Discover fonts
 
 The curated font list lives in [`awesome-textmode`](https://github.com/humanbydefinition/awesome-textmode):
 
-- [`humanbydefinition/awesome-textmode`](https://github.com/humanbydefinition/awesome-textmode)
 - [Fonts](https://github.com/humanbydefinition/awesome-textmode#fonts)
 - [Font collections](https://github.com/humanbydefinition/awesome-textmode#font-collections)
 
