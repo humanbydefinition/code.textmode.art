@@ -54,7 +54,7 @@ export const transformHead = ({ pageData }: TransformContext): HeadConfig[] => {
   const defaultDescription = 'textmode.js is a lightweight creative coding library for creating real-time ASCII art on the web.'
   const ogTitle = pageData.title || 'textmode.js'
   const ogDescription = pageData.description || defaultDescription
-  const ogImage = 'https://code.textmode.art/png/textmodejs_banner.png'
+  const ogImage = 'https://code.textmode.art/png/readme-og.png'
 
   // Detect page types
   const isBlogPost = pageData.relativePath.startsWith('blog/') && pageData.relativePath !== 'blog/index.md';
