@@ -5,7 +5,7 @@
       <h2 class="featured-sketches__title">Built with <code>#textmodejs</code></h2>
       <p class="featured-sketches__description">
         Every pattern, every animation, every experiment adds to the growing tapestry of textmode art. 
-        These sketches are randomly selected from our featured collection.
+        These sketches are randomly selected from our featured community collection on editor.textmode.art.
       </p>
       <p class="featured-sketches__hint">
         <svg class="featured-sketches__hint-icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -18,7 +18,7 @@
         <div class="featured-sketches__cta">
           <span class="featured-sketches__cta-text">Want your sketch featured?</span>
           <a 
-            href="https://github.com/humanbydefinition/code.textmode.art?tab=contributing-ov-file#contributing" 
+            href="https://github.com/humanbydefinition/editor.textmode.art/tree/main/sketches" 
             target="_blank" 
             rel="noopener noreferrer"
             class="featured-sketches__cta-link"
@@ -33,7 +33,7 @@
           class="featured-sketches__refresh-btn"
           :class="{ 'featured-sketches__refresh-btn--loading': isRefreshing }"
           @click="refreshSketches"
-          :disabled="isRefreshing"
+          :disabled="isRefreshing || allSketches.length <= 1"
           title="Shuffle sketches"
           aria-label="Shuffle sketches"
         >
@@ -81,8 +81,13 @@
         :class="{ 'featured-sketches__gallery--loading': isRefreshing }"
         :key="galleryKey"
       >
-        <template v-for="(sketchId, index) in selectedSketches" :key="`${galleryKey}-${sketchId}`">
-          <component :is="sketchComponents[sketchId]" v-if="sketchComponents[sketchId]" />
+        <template v-for="(sketch, index) in selectedSketches" :key="`${galleryKey}-${sketch.slug}`">
+          <TextmodeLiveSandbox
+            :title="sketch.title"
+            :encoded-code="encodeBase64Url(sketch.textmodeCode)"
+            profile="textmode.js"
+            initial-view="preview"
+          />
           <hr v-if="index < selectedSketches.length - 1" class="featured-sketches__divider" />
         </template>
       </div>
@@ -91,8 +96,9 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount, defineAsyncComponent, shallowRef, nextTick, type Component } from 'vue'
-import sketchMetadata from '../../../data/sketches.json'
+import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { data as editorSketches, type EditorGallerySketch } from '../../../data/editorSketches.data.ts'
+import TextmodeLiveSandbox from '../TextmodeLiveSandbox.vue'
 
 defineOptions({ name: 'FeaturedSketches' })
 
@@ -100,33 +106,24 @@ const props = defineProps<{
   count?: number
 }>()
 
-// Type definitions for sketch metadata
-interface SketchMeta {
-  title: string
-  author: string
-  authorUrl?: string
-  featured?: boolean
+const allSketches = (editorSketches || []) as EditorGallerySketch[]
+
+// Encode code to base64url format for TextmodeLiveSandbox
+function encodeBase64Url(value: string): string {
+  if (!value) return ''
+  try {
+    const bytes = new TextEncoder().encode(value)
+    let binary = ''
+    const len = bytes.byteLength
+    for (let i = 0; i < len; i++) {
+      binary += String.fromCharCode(bytes[i])
+    }
+    const base64 = typeof window !== 'undefined' ? window.btoa(binary) : Buffer.from(value).toString('base64')
+    return base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
+  } catch {
+    return ''
+  }
 }
-
-type SketchMetadataMap = Record<string, SketchMeta>
-type SketchId = keyof typeof sketchMetadata
-
-// Use Vite's glob import to dynamically load all showcase markdown files
-// This automatically handles all featured sketches without manual imports
-const showcaseModules = import.meta.glob<Component>(
-  '../../../../docs/examples/showcase/*.md'
-)
-
-// Create a mapping from sketch ID to its module loader
-function getSketchLoader(sketchId: string): (() => Promise<Component>) | undefined {
-  const path = `../../../../docs/examples/showcase/${sketchId}.md`
-  return showcaseModules[path] as (() => Promise<Component>) | undefined
-}
-
-// Get all featured sketch IDs from metadata
-const featuredSketchIds = Object.entries(sketchMetadata as SketchMetadataMap)
-  .filter(([_, data]) => data.featured === true)
-  .map(([id]) => id as SketchId)
 
 // Fisher-Yates shuffle
 function shuffle<T>(array: T[]): T[] {
@@ -140,28 +137,23 @@ function shuffle<T>(array: T[]): T[] {
 
 // Select random sketches (default 3)
 const count = props.count ?? 3
-const selectedSketches = ref<SketchId[]>([])
+const selectedSketches = ref<EditorGallerySketch[]>([])
 const isRefreshing = ref(false)
 const galleryKey = ref(0) // Key to force re-render and cleanup
 
 // Reference to the gallery wrapper for manual cleanup
 const galleryWrapperRef = ref<HTMLElement | null>(null)
 
-// Map of sketch IDs to their async components
-const sketchComponents = shallowRef<Record<string, ReturnType<typeof defineAsyncComponent>>>({})
-
 // Cleanup function to remove any lingering iframes and canvases
 function cleanupSandpackElements() {
-  // Find and remove any orphaned Sandpack iframes that may have leaked
-  // These are typically in the document body with specific Sandpack/CodeSandbox attributes
+  if (typeof document === 'undefined') return
+
   const orphanedIframes = document.querySelectorAll(
     'iframe[src*="sandpack"], iframe[src*="codesandbox"], iframe[data-sandpack]'
   )
   
   orphanedIframes.forEach((iframe) => {
-    // Only remove if it's not within our gallery wrapper (i.e., it's orphaned)
     if (galleryWrapperRef.value && !galleryWrapperRef.value.contains(iframe)) {
-      // Clear iframe src first to stop any running content
       try {
         (iframe as HTMLIFrameElement).src = 'about:blank'
       } catch (e) {
@@ -171,7 +163,6 @@ function cleanupSandpackElements() {
     }
   })
 
-  // Also cleanup any hidden iframes that Sandpack might create at document level
   const hiddenIframes = document.querySelectorAll('body > iframe[style*="display: none"]')
   hiddenIframes.forEach((iframe) => {
     const src = (iframe as HTMLIFrameElement).src || ''
@@ -188,17 +179,8 @@ function cleanupSandpackElements() {
 
 // Load sketches helper function
 function loadSketches() {
-  const shuffled = shuffle(featuredSketchIds)
+  const shuffled = shuffle(allSketches)
   selectedSketches.value = shuffled.slice(0, Math.min(count, shuffled.length))
-  
-  const components: Record<string, ReturnType<typeof defineAsyncComponent>> = {}
-  for (const id of selectedSketches.value) {
-    const loader = getSketchLoader(id)
-    if (loader) {
-      components[id] = defineAsyncComponent(loader)
-    }
-  }
-  sketchComponents.value = components
 }
 
 // Refresh sketches with animation - uses key to force full cleanup
@@ -208,7 +190,6 @@ async function refreshSketches() {
   isRefreshing.value = true
   
   // Clear current state first to trigger unmounting
-  sketchComponents.value = {}
   selectedSketches.value = []
   
   // Wait for Vue to process the unmounting
@@ -252,7 +233,6 @@ onMounted(() => {
 .featured-sketches__header {
   margin-bottom: 1rem;
   padding: 0;
-
 }
 
 .featured-sketches__title {

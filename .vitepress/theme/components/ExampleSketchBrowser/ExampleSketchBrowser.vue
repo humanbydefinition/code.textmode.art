@@ -13,7 +13,7 @@
       </button>
 
       <div class="example-sketch-browser__counter" aria-live="polite">
-        {{ currentPosition }} / {{ sketchIds.length }}
+        {{ currentPosition }} / {{ sketches.length }}
       </div>
 
       <button
@@ -65,11 +65,17 @@
         @after-leave="cleanupRetiredSandpackElements"
       >
         <div
-          v-if="currentSketchComponent"
-          :key="`${renderKey}-${currentSketchId}`"
+          v-if="currentSketch"
+          :key="`${renderKey}-${currentSketch.slug}`"
           class="example-sketch-browser__sketch"
         >
-          <component :is="currentSketchComponent" />
+          <TextmodeLiveSandbox
+            :title="currentSketch.title"
+            :encoded-code="encodeBase64Url(currentSketch.textmodeCode)"
+            profile="textmode.js"
+            initial-view="preview"
+            hide-editor
+          />
         </div>
       </Transition>
 
@@ -128,18 +134,12 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineAsyncComponent, nextTick, onBeforeUnmount, ref, watch, type Component } from 'vue'
-import sketchMetadata from '../../../data/sketches.json'
+import { computed, nextTick, onBeforeUnmount, ref, watch } from 'vue'
+import { data as editorSketches, type EditorGallerySketch } from '../../../data/editorSketches.data.ts'
 import { UiIcon } from '../ui'
+import TextmodeLiveSandbox from '../TextmodeLiveSandbox.vue'
 
 defineOptions({ name: 'ExampleSketchBrowser' })
-
-interface SketchMeta {
-  title: string
-  author: string
-  authorUrl?: string
-  featured?: boolean
-}
 
 interface SourceFile {
   active: boolean
@@ -150,80 +150,59 @@ interface SourceFile {
   readOnly: boolean
 }
 
-type SketchMetadataMap = Record<string, SketchMeta>
 type SwitchDirection = 'next' | 'previous' | 'random'
 
-const showcaseModules = import.meta.glob<Component>(
-  '../../../../docs/examples/showcase/*.md'
-)
-const showcaseSourceModules = import.meta.glob<string>(
-  '../../../../docs/examples/showcase/*.md',
-  {
-    eager: true,
-    import: 'default',
-    query: '?raw',
-  }
-)
+const sketches = (editorSketches || []) as EditorGallerySketch[]
 
-const CODE_SANDBOX_ENDPOINT = 'https://codesandbox.io/api/v1/sandboxes/define'
-
-function getSketchLoader(sketchId: string): (() => Promise<Component>) | undefined {
-  const path = `../../../../docs/examples/showcase/${sketchId}.md`
-  return showcaseModules[path] as (() => Promise<Component>) | undefined
-}
-
-function getSketchSource(sketchId: string): string {
-  const path = `../../../../docs/examples/showcase/${sketchId}.md`
-  return showcaseSourceModules[path] ?? ''
-}
-
-const sketchIds = Object.entries(sketchMetadata as SketchMetadataMap)
-  .filter(([id, data]) => data.featured === true && Boolean(getSketchLoader(id)))
-  .map(([id]) => id)
-
-const sketchComponents = sketchIds.reduce<Record<string, ReturnType<typeof defineAsyncComponent>>>(
-  (components, sketchId) => {
-    const loader = getSketchLoader(sketchId)
-    if (loader) {
-      components[sketchId] = defineAsyncComponent(loader)
+function encodeBase64Url(value: string): string {
+  if (!value) return ''
+  try {
+    const bytes = new TextEncoder().encode(value)
+    let binary = ''
+    const len = bytes.byteLength
+    for (let i = 0; i < len; i++) {
+      binary += String.fromCharCode(bytes[i])
     }
-    return components
-  },
-  {}
-)
+    const base64 = typeof window !== 'undefined' ? window.btoa(binary) : Buffer.from(value).toString('base64')
+    return base64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '')
+  } catch {
+    return ''
+  }
+}
 
 const browserWrapperRef = ref<HTMLElement | null>(null)
 const currentIndex = ref(0)
 const renderKey = ref(0)
 const isSwitching = ref(false)
-const isOpeningSandbox = ref(false)
 const isSourceOpen = ref(false)
-const selectedSourcePath = ref('')
+const selectedSourcePath = ref('/sketch.js')
 const copyStatus = ref('Copy')
 const switchDirection = ref<SwitchDirection>('next')
 let switchFallbackTimer: ReturnType<typeof setTimeout> | null = null
 let copyStatusTimer: ReturnType<typeof setTimeout> | null = null
 
-const hasSketches = computed(() => sketchIds.length > 0)
-const canRandomize = computed(() => sketchIds.length > 1)
-const currentSketchId = computed(() => sketchIds[currentIndex.value] ?? null)
-const currentSketchComponent = computed(() => {
-  if (!currentSketchId.value) {
-    return null
-  }
-  return sketchComponents[currentSketchId.value] ?? null
-})
-const currentSourceFiles = computed(() => {
-  if (!currentSketchId.value) {
+const hasSketches = computed(() => sketches.length > 0)
+const canRandomize = computed(() => sketches.length > 1)
+const currentSketch = computed(() => sketches[currentIndex.value] ?? null)
+
+const currentSourceFiles = computed<SourceFile[]>(() => {
+  if (!currentSketch.value) {
     return []
   }
-
-  return extractSourceFiles(getSketchSource(currentSketchId.value))
+  return [
+    {
+      active: true,
+      code: currentSketch.value.textmodeCode,
+      label: 'sketch.js',
+      language: 'javascript',
+      path: '/sketch.js',
+      readOnly: true,
+    },
+  ]
 })
 const hasSourceFiles = computed(() => currentSourceFiles.value.length > 0)
 const selectedSourceFile = computed(() => {
   return currentSourceFiles.value.find((file) => file.path === selectedSourcePath.value)
-    ?? currentSourceFiles.value.find((file) => file.active)
     ?? currentSourceFiles.value[0]
     ?? null
 })
@@ -300,7 +279,7 @@ function cleanupSandpackElements(options: { includeHiddenBodyIframes?: boolean }
       try {
         (iframe as HTMLIFrameElement).src = 'about:blank'
       } catch (error) {
-        // Cross-origin iframes may reject src mutation during teardown.
+        // Ignore cross-origin iframes.
       }
       iframe.remove()
     }
@@ -312,33 +291,37 @@ async function showSketch(nextIndex: number, direction: SwitchDirection) {
     return
   }
 
-  const normalizedIndex = (nextIndex + sketchIds.length) % sketchIds.length
+  const normalizedIndex = (nextIndex + sketches.length) % sketches.length
   if (normalizedIndex === currentIndex.value) {
     return
   }
 
-  const nextSketchId = sketchIds[normalizedIndex]
-  const loader = getSketchLoader(nextSketchId)
-
   clearSwitchFallbackTimer()
   switchDirection.value = direction
   isSwitching.value = true
-
-  try {
-    if (loader) {
-      await loader()
-    }
-  } catch (error) {
-    console.error(`Failed to load example sketch "${nextSketchId}".`, error)
-    finishSwitch()
-    return
-  }
 
   currentIndex.value = normalizedIndex
   renderKey.value += 1
 
   await nextTick()
   switchFallbackTimer = setTimeout(finishSwitch, 1500)
+}
+
+function showNextSketch() {
+  showSketch(currentIndex.value + 1, 'next')
+}
+
+function showPreviousSketch() {
+  showSketch(currentIndex.value - 1, 'previous')
+}
+
+function showRandomSketch() {
+  if (!canRandomize.value) {
+    return
+  }
+
+  const offset = Math.floor(Math.random() * (sketches.length - 1)) + 1
+  showSketch(currentIndex.value + offset, 'random')
 }
 
 function toggleSource() {
@@ -367,150 +350,10 @@ async function copySelectedSource() {
   }
 }
 
-async function openCurrentSketchInCodeSandbox() {
-  if (!selectedSourceFile.value || isOpeningSandbox.value) {
-    return
-  }
-
-  isOpeningSandbox.value = true
-  const sandboxWindow = window.open('about:blank', '_blank')
-  if (sandboxWindow) {
-    sandboxWindow.opener = null
-  }
-
-  try {
-    const url = await buildCodeSandboxUrl(currentSourceFiles.value)
-    if (sandboxWindow) {
-      sandboxWindow.location.href = url
-    } else {
-      window.open(url, '_blank', 'noopener,noreferrer')
-    }
-  } catch (error) {
-    sandboxWindow?.close()
-    console.error('Failed to create CodeSandbox URL for example sketch.', error)
-  } finally {
-    isOpeningSandbox.value = false
-  }
-}
-
-function extractSourceFiles(markdownSource: string): SourceFile[] {
-  const files: SourceFile[] = []
-  const fencePattern = /```([^\n]*)\n([\s\S]*?)```/g
-
-  for (const match of markdownSource.matchAll(fencePattern)) {
-    const info = match[1] ?? ''
-    const code = match[2] ?? ''
-    const file = parseSourceFence(info, code)
-
-    if (file) {
-      files.push(file)
-    }
-  }
-
-  return files
-}
-
-function parseSourceFence(info: string, code: string): SourceFile | null {
-  const tokens = info.trim().split(/\s+/).filter(Boolean)
-  const language = normalizeLanguage(tokens[0] ?? 'text')
-  const path = tokens.find((token) => token.includes('.') && !token.startsWith('['))
-
-  if (!path) {
-    return null
-  }
-
-  return {
-    active: tokens.includes('[active]') || tokens.includes('#active'),
-    code: trimFenceCode(code),
-    label: path.replace(/^\//, ''),
-    language,
-    path: path.startsWith('/') ? path : `/${path}`,
-    readOnly: tokens.includes('[readonly]') || tokens.includes('[readOnly]') || tokens.includes('#readOnly'),
-  }
-}
-
-function normalizeLanguage(language: string) {
-  if (language === 'js') return 'javascript'
-  if (language === 'ts') return 'typescript'
-  return language || 'text'
-}
-
-function trimFenceCode(code: string) {
-  return code.replace(/^\n/, '').replace(/\s+$/, '\n')
-}
-
-async function buildCodeSandboxUrl(sourceFiles: SourceFile[]) {
-  const lzStringModule = await import('lz-string')
-  const compressToBase64 = lzStringModule.compressToBase64 ?? lzStringModule.default?.compressToBase64
-
-  if (typeof compressToBase64 !== 'function') {
-    throw new Error('Unable to load lz-string compressor.')
-  }
-
-  const files = buildCodeSandboxFiles(sourceFiles)
-  const activeFile = sourceFiles.find((file) => file.active) ?? sourceFiles[0]
-  const parameters = compressToBase64(JSON.stringify({ files }))
-    .replace(/\+/g, '-')
-    .replace(/\//g, '_')
-    .replace(/=+$/, '')
-  const query = activeFile ? `file=${activeFile.path}` : ''
-
-  return `${CODE_SANDBOX_ENDPOINT}?parameters=${parameters}&query=${encodeURIComponent(query)}`
-}
-
-function buildCodeSandboxFiles(sourceFiles: SourceFile[]) {
-  const files = sourceFiles.reduce<Record<string, { content: string, isBinary: boolean }>>((output, file) => {
-    output[file.path.replace(/^\//, '')] = {
-      content: file.code,
-      isBinary: false,
-    }
-
-    return output
-  }, {})
-
-  files['package.json'] = {
-    content: JSON.stringify({
-      name: 'textmode-example',
-      version: '1.0.0',
-      private: true,
-      scripts: {
-        start: 'parcel index.html',
-        build: 'parcel build index.html',
-      },
-      dependencies: {},
-      devDependencies: {
-        'parcel-bundler': '^1.12.5',
-      },
-    }, null, 2),
-    isBinary: false,
-  }
-
-  return files
-}
-
-function showPreviousSketch() {
-  void showSketch(currentIndex.value - 1, 'previous')
-}
-
-function showNextSketch() {
-  void showSketch(currentIndex.value + 1, 'next')
-}
-
-function showRandomSketch() {
-  if (!canRandomize.value) {
-    return
-  }
-
-  const offset = Math.floor(Math.random() * (sketchIds.length - 1)) + 1
-  void showSketch(currentIndex.value + offset, 'random')
-}
-
-watch(currentSketchId, () => {
-  const activeFile = currentSourceFiles.value.find((file) => file.active)
-    ?? currentSourceFiles.value.find((file) => file.language === 'javascript' || file.language === 'typescript')
+watch(currentSketch, () => {
+  const defaultFile = currentSourceFiles.value.find((file) => file.active)
     ?? currentSourceFiles.value[0]
-
-  selectedSourcePath.value = activeFile?.path ?? ''
+  selectedSourcePath.value = defaultFile?.path ?? '/sketch.js'
   copyStatus.value = 'Copy'
 })
 
@@ -519,30 +362,34 @@ watch(currentSourceFiles, () => {
     return
   }
 
-  const activeFile = currentSourceFiles.value.find((file) => file.active) ?? currentSourceFiles.value[0]
-  selectedSourcePath.value = activeFile?.path ?? ''
+  const defaultFile = currentSourceFiles.value.find((file) => file.active)
+    ?? currentSourceFiles.value[0]
+  selectedSourcePath.value = defaultFile?.path ?? '/sketch.js'
 }, { immediate: true })
 
 onBeforeUnmount(() => {
   clearSwitchFallbackTimer()
   clearCopyStatusTimer()
-  cleanupRetiredSandpackElements()
+  cleanupSandpackElements({ includeHiddenBodyIframes: true })
 })
 </script>
 
 <style scoped>
 .example-sketch-browser {
-  --example-sketch-browser-height: clamp(520px, 72vh, 780px);
-
-  margin: 1.5rem 0 3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 1.5rem 0 2rem;
 }
 
 .example-sketch-browser__toolbar {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: start;
+  align-items: center;
   gap: 0.5rem;
-  margin-bottom: 0.875rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 10px;
 }
 
 .example-sketch-browser__button {
@@ -550,39 +397,22 @@ onBeforeUnmount(() => {
   align-items: center;
   justify-content: center;
   gap: 0.375rem;
-  width: 2.5rem;
-  height: 2.5rem;
+  height: 34px;
+  min-width: 34px;
+  padding: 0 0.625rem;
+  background: var(--vp-c-bg-elv);
   border: 1px solid var(--vp-c-divider);
-  border-radius: 8px;
-  background: var(--vp-c-bg-soft);
-  color: var(--vp-c-text-2);
+  border-radius: 6px;
+  color: var(--vp-c-text-1);
+  font-size: 0.8125rem;
+  font-weight: 500;
   cursor: pointer;
-  transition:
-    background-color 0.2s ease,
-    border-color 0.2s ease,
-    color 0.2s ease,
-    transform 0.2s ease;
-}
-
-.example-sketch-browser__button--wide {
-  width: auto;
-  min-width: 5.75rem;
-  padding: 0 0.75rem;
-  font-family: var(--textmode-font);
-  font-size: 0.75rem;
-  font-weight: 650;
+  transition: all 0.2s ease;
 }
 
 .example-sketch-browser__button:hover:not(:disabled) {
   border-color: var(--vp-c-brand-1);
-  background: var(--vp-c-bg-elv);
   color: var(--vp-c-brand-1);
-  transform: translateY(-1px);
-}
-
-.example-sketch-browser__button:focus-visible {
-  outline: 2px solid var(--vp-c-brand-1);
-  outline-offset: 2px;
 }
 
 .example-sketch-browser__button:disabled {
@@ -590,393 +420,160 @@ onBeforeUnmount(() => {
   cursor: not-allowed;
 }
 
+.example-sketch-browser__button--wide {
+  margin-left: auto;
+}
+
 .example-sketch-browser__counter {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-width: 4.5rem;
-  height: 2.5rem;
-  padding: 0 0.875rem;
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 8px;
-  background: var(--vp-c-bg);
-  color: var(--vp-c-text-2);
   font-family: var(--textmode-font);
   font-size: 0.8125rem;
-  font-weight: 600;
-  line-height: 1;
+  color: var(--vp-c-text-2);
+  padding: 0 0.5rem;
 }
 
 .example-sketch-browser__stage {
-  overflow: hidden;
   position: relative;
-  min-height: var(--example-sketch-browser-height);
-  border-radius: 8px;
-  background: #000;
-  isolation: isolate;
+  border-radius: 12px;
+  overflow: hidden;
+  min-height: 480px;
 }
 
 .example-sketch-browser__sketch {
-  position: relative;
-  z-index: 1;
-  min-height: var(--example-sketch-browser-height);
-  will-change: opacity, transform;
-}
-
-.example-sketch-browser__stage--switching .example-sketch-browser__sketch {
-  pointer-events: none;
-}
-
-.example-sketch-browser__slide-next-enter-active,
-.example-sketch-browser__slide-next-leave-active,
-.example-sketch-browser__slide-previous-enter-active,
-.example-sketch-browser__slide-previous-leave-active,
-.example-sketch-browser__switch-random-enter-active,
-.example-sketch-browser__switch-random-leave-active {
-  transition:
-    opacity 0.28s cubic-bezier(0.22, 1, 0.36, 1),
-    transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.example-sketch-browser__slide-next-leave-active,
-.example-sketch-browser__slide-previous-leave-active,
-.example-sketch-browser__switch-random-leave-active {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
   width: 100%;
-}
-
-.example-sketch-browser__slide-next-enter-active,
-.example-sketch-browser__slide-previous-enter-active,
-.example-sketch-browser__switch-random-enter-active {
-  z-index: 2;
-}
-
-.example-sketch-browser__slide-next-enter-from {
-  opacity: 0;
-  transform: translate3d(24px, 0, 0) scale(0.992);
-}
-
-.example-sketch-browser__slide-next-leave-to {
-  opacity: 0;
-  transform: translate3d(-24px, 0, 0) scale(0.992);
-}
-
-.example-sketch-browser__slide-previous-enter-from {
-  opacity: 0;
-  transform: translate3d(-24px, 0, 0) scale(0.992);
-}
-
-.example-sketch-browser__slide-previous-leave-to {
-  opacity: 0;
-  transform: translate3d(24px, 0, 0) scale(0.992);
-}
-
-.example-sketch-browser__switch-random-enter-from {
-  opacity: 0;
-  transform: translate3d(0, 10px, 0) scale(0.985);
-}
-
-.example-sketch-browser__switch-random-leave-to {
-  opacity: 0;
-  transform: translate3d(0, -8px, 0) scale(1.01);
 }
 
 .example-sketch-browser__loading {
   position: absolute;
-  inset: 0;
-  z-index: 4;
-  overflow: hidden;
-  border-radius: 8px;
-  pointer-events: none;
-}
-
-.example-sketch-browser__loading::before {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      color-mix(in srgb, var(--vp-c-bg) 16%, transparent),
-      transparent
-    );
-  content: '';
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--vp-c-bg-backdrop, rgba(0, 0, 0, 0.4));
+  backdrop-filter: blur(4px);
+  z-index: 20;
+  display: flex;
+  align-items: flex-start;
 }
 
 .example-sketch-browser__loading-bar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 34%;
-  height: 2px;
-  border-radius: 999px;
-  background: var(--vp-c-brand-1);
-  box-shadow: var(--textmode-glow);
-  animation: example-sketch-browser-progress 0.9s cubic-bezier(0.22, 1, 0.36, 1) infinite;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, var(--vp-c-brand-1), transparent);
+  animation: loading-bar-pulse 1.2s ease-in-out infinite;
 }
 
-.example-sketch-browser__veil-enter-active,
-.example-sketch-browser__veil-leave-active {
-  transition: opacity 0.18s ease;
-}
-
-.example-sketch-browser__veil-enter-from,
-.example-sketch-browser__veil-leave-to {
-  opacity: 0;
-}
-
-.example-sketch-browser__source-enter-active,
-.example-sketch-browser__source-leave-active {
-  transition:
-    opacity 0.18s ease,
-    transform 0.2s ease;
-}
-
-.example-sketch-browser__source-enter-from,
-.example-sketch-browser__source-leave-to {
-  opacity: 0;
-  transform: translate3d(0, -6px, 0);
+@keyframes loading-bar-pulse {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
 }
 
 .example-sketch-browser__source {
-  margin-top: 0.875rem;
-  overflow: hidden;
   border: 1px solid var(--vp-c-divider);
-  border-radius: 8px;
-  background: var(--vp-c-bg-soft);
+  border-radius: 10px;
+  background: var(--vp-c-bg-alt);
+  overflow: hidden;
 }
 
 .example-sketch-browser__source-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 0.75rem;
-  padding: 0.625rem;
+  padding: 0.5rem 0.75rem;
+  background: var(--vp-c-bg-soft);
   border-bottom: 1px solid var(--vp-c-divider);
 }
 
 .example-sketch-browser__source-tabs {
   display: flex;
-  flex: 1 1 auto;
-  flex-wrap: wrap;
-  min-width: 0;
   gap: 0.375rem;
-}
-
-.example-sketch-browser__source-tab,
-.example-sketch-browser__source-copy {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 2rem;
-  border: 1px solid var(--vp-c-divider);
-  border-radius: 6px;
-  background: var(--vp-c-bg);
-  color: var(--vp-c-text-2);
-  cursor: pointer;
-  font-family: var(--textmode-font);
-  font-size: 0.75rem;
-  font-weight: 650;
-  line-height: 1.1;
-  transition:
-    background-color 0.2s ease,
-    border-color 0.2s ease,
-    color 0.2s ease;
 }
 
 .example-sketch-browser__source-tab {
-  padding: 0 0.625rem;
-}
-
-.example-sketch-browser__source-copy {
-  flex: 0 0 auto;
-  gap: 0.375rem;
-  min-width: 5.25rem;
-  padding: 0 0.625rem;
-}
-
-.example-sketch-browser__source-tab:hover,
-.example-sketch-browser__source-copy:hover:not(:disabled) {
-  border-color: var(--vp-c-brand-1);
-  color: var(--vp-c-brand-1);
-}
-
-.example-sketch-browser__source-tab:focus-visible,
-.example-sketch-browser__source-copy:focus-visible {
-  outline: 2px solid var(--vp-c-brand-1);
-  outline-offset: 2px;
+  padding: 0.25rem 0.625rem;
+  font-size: 0.8125rem;
+  font-family: var(--textmode-font);
+  color: var(--vp-c-text-2);
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .example-sketch-browser__source-tab--active {
-  border-color: var(--vp-c-brand-1);
-  background: var(--vp-c-brand-soft);
   color: var(--vp-c-brand-1);
+  background: var(--vp-c-bg);
+  border-color: var(--vp-c-divider);
 }
 
-.example-sketch-browser__source-copy:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+.example-sketch-browser__source-copy {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  color: var(--vp-c-text-2);
+  background: var(--vp-c-bg-elv);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.example-sketch-browser__source-copy:hover:not(:disabled) {
+  color: var(--vp-c-brand-1);
+  border-color: var(--vp-c-brand-1);
 }
 
 .example-sketch-browser__source-code {
-  max-height: min(540px, 60vh);
   margin: 0;
-  overflow: auto;
   padding: 1rem;
-  background: var(--vp-code-block-bg);
-  color: var(--vp-code-block-color);
-  font-family: var(--vp-font-family-mono);
-  font-size: 0.8125rem;
-  line-height: 1.65;
-  tab-size: 2;
-  white-space: pre;
+  font-family: var(--textmode-font);
+  font-size: 0.875rem;
+  line-height: 1.5;
+  overflow-x: auto;
+  color: var(--vp-c-text-1);
+  background: var(--vp-c-bg-alt);
 }
 
-.example-sketch-browser__source-code:focus-visible {
-  outline: 2px solid var(--vp-c-brand-1);
-  outline-offset: -2px;
+/* Transitions */
+.example-sketch-browser__slide-next-enter-active,
+.example-sketch-browser__slide-next-leave-active,
+.example-sketch-browser__slide-previous-enter-active,
+.example-sketch-browser__slide-previous-leave-active,
+.example-sketch-browser__switch-random-enter-active,
+.example-sketch-browser__switch-random-leave-active {
+  transition: all 0.3s ease;
 }
 
-@keyframes example-sketch-browser-progress {
-  from {
-    transform: translate3d(-110%, 0, 0);
-  }
-
-  to {
-    transform: translate3d(320%, 0, 0);
-  }
+.example-sketch-browser__slide-next-enter-from {
+  opacity: 0;
+  transform: translateX(20px);
+}
+.example-sketch-browser__slide-next-leave-to {
+  opacity: 0;
+  transform: translateX(-20px);
 }
 
-.example-sketch-browser :deep(.textmode-sandbox-wrapper) {
-  overflow: hidden;
-  border-radius: 8px;
-  background: #000;
+.example-sketch-browser__slide-previous-enter-from {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+.example-sketch-browser__slide-previous-leave-to {
+  opacity: 0;
+  transform: translateX(20px);
 }
 
-.example-sketch-browser :deep(.textmode-live-sandbox:not(.has-custom-preview-height)) {
-  --textmode-live-preview-height: var(--example-sketch-browser-height) !important;
-
-  min-height: var(--example-sketch-browser-height);
+.example-sketch-browser__switch-random-enter-from,
+.example-sketch-browser__switch-random-leave-to {
+  opacity: 0;
+  transform: scale(0.98);
 }
 
-.example-sketch-browser :deep(.textmode-live-sandbox) {
-  margin: 0;
-  border: 0;
-  border-radius: 8px;
-  background: #000;
+.example-sketch-browser__veil-enter-active,
+.example-sketch-browser__veil-leave-active {
+  transition: opacity 0.2s ease;
 }
-
-.example-sketch-browser :deep(.textmode-live-sandbox:not(.has-custom-preview-height) .textmode-live-sandbox__placeholder) {
-  min-height: var(--example-sketch-browser-height);
-}
-
-.example-sketch-browser :deep(.textmode-live-sandbox:not(.has-custom-preview-height) .textmode-live-sandpack-wrapper),
-.example-sketch-browser :deep(.textmode-live-sandbox:not(.has-custom-preview-height) .textmode-live-sandpack-layout) {
-  min-height: var(--example-sketch-browser-height);
-  overflow: hidden;
-  border-radius: 8px;
-  background: #000;
-}
-
-.example-sketch-browser :deep(.textmode-live-sandbox:not(.has-custom-preview-height) .textmode-live-sandpack-layout) {
-  border: 1px solid var(--vp-c-divider);
-}
-
-.example-sketch-browser :deep(.textmode-live-sandbox:not(.has-custom-preview-height) .textmode-live-sandpack-layout > .sp-preset-column),
-.example-sketch-browser :deep(.textmode-live-sandbox:not(.has-custom-preview-height) .textmode-live-sandpack-layout > .textmode-live-sandpack-preview) {
-  height: var(--example-sketch-browser-height) !important;
-  min-height: var(--example-sketch-browser-height);
-}
-
-.example-sketch-browser :deep(.textmode-live-sandpack-preview-container),
-.example-sketch-browser :deep(.textmode-live-sandpack-preview-iframe) {
-  height: 100% !important;
-  min-height: 100%;
-}
-
-.example-sketch-browser :deep(.textmode-live-sandpack-preview-container) {
-  background: #000;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .example-sketch-browser__slide-next-enter-active,
-  .example-sketch-browser__slide-next-leave-active,
-  .example-sketch-browser__slide-previous-enter-active,
-  .example-sketch-browser__slide-previous-leave-active,
-  .example-sketch-browser__switch-random-enter-active,
-  .example-sketch-browser__switch-random-leave-active,
-  .example-sketch-browser__veil-enter-active,
-  .example-sketch-browser__veil-leave-active {
-    transition: opacity 0.12s ease;
-  }
-
-  .example-sketch-browser__slide-next-enter-from,
-  .example-sketch-browser__slide-next-leave-to,
-  .example-sketch-browser__slide-previous-enter-from,
-  .example-sketch-browser__slide-previous-leave-to,
-  .example-sketch-browser__switch-random-enter-from,
-  .example-sketch-browser__switch-random-leave-to {
-    transform: none;
-  }
-
-  .example-sketch-browser__loading-bar {
-    animation: none;
-  }
-}
-
-@media (max-width: 768px) {
-  .example-sketch-browser {
-    --example-sketch-browser-height: clamp(420px, 68vh, 620px);
-
-    margin: 1.25rem 0 2.5rem;
-  }
-
-  .example-sketch-browser__toolbar {
-    justify-content: stretch;
-  }
-
-  .example-sketch-browser__counter {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .example-sketch-browser__button--wide {
-    flex: 1 1 calc(50% - 0.5rem);
-    min-width: 0;
-  }
-
-  .example-sketch-browser__source-header {
-    align-items: stretch;
-    flex-direction: column;
-  }
-
-  .example-sketch-browser__source-copy {
-    width: 100%;
-  }
-}
-
-@media (max-width: 480px) {
-  .example-sketch-browser {
-    --example-sketch-browser-height: clamp(400px, 66vh, 560px);
-  }
-
-  .example-sketch-browser__button {
-    width: 2.375rem;
-    height: 2.375rem;
-  }
-
-  .example-sketch-browser__button--wide {
-    width: auto;
-    min-width: 0;
-    padding: 0 0.5rem;
-  }
-
-  .example-sketch-browser__counter {
-    height: 2.375rem;
-    padding: 0 0.625rem;
-    font-size: 0.75rem;
-  }
+.example-sketch-browser__veil-enter-from,
+.example-sketch-browser__veil-leave-to {
+  opacity: 0;
 }
 </style>
