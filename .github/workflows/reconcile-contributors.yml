@@ -66,7 +66,7 @@ jobs:
 
       - name: Create short-lived target token
         id: app-token
-        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3
+        uses: actions/create-github-app-token@v3
         with:
           client-id: ${{ inputs.app-client-id }}
           private-key: ${{ secrets.app-private-key }}
@@ -82,7 +82,7 @@ jobs:
         run: gh api "repos/humanbydefinition/$TARGET_REPOSITORY/branches/dev" --silent
 
       - name: Checkout target dev branch
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@v6
         with:
           repository: humanbydefinition/${{ inputs.target-repository }}
           ref: dev
@@ -91,17 +91,26 @@ jobs:
           token: ${{ steps.app-token.outputs.token }}
 
       - name: Checkout canonical contributor source
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@v6
         with:
           repository: humanbydefinition/code.textmode.art
           ref: ${{ inputs.source-ref }}
           sparse-checkout: |
+            .nvmrc
             .vitepress/data/contribution-types.json
             .vitepress/data/contributors.json
             scripts/contributors.mjs
           sparse-checkout-cone-mode: false
           path: contributor-source
           persist-credentials: false
+
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: contributor-source/.nvmrc
+
+      - name: Report toolchain
+        run: node --version && npm --version
 
       - name: Resolve canonical source
         id: source
