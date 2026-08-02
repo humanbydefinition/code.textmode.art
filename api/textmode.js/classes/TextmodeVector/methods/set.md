@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: TextmodeVector
 kind: Method
-lastModified: 2026-07-31
+lastModified: 2026-08-02
 ---
 
 [textmode.js](../../../index.md) / [TextmodeVector](../../TextmodeVector.md) / set
@@ -45,8 +45,8 @@ This vector.
 
 ```ts
 set(
-   x?, 
-   y?, 
+   x?,
+   y?,
    z?): this;
 ```
 

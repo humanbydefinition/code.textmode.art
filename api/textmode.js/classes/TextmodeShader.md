@@ -2,11 +2,11 @@
 layout: doc
 editLink: true
 title: TextmodeShader
-description: WebGL shader program created by Textmodifier.createMaterialShader, Textmodifier.createFilterShader, or Textmodifier.createShader.
+description: WebGL shader program created by Textmodifier.createMaterialShader or Textmodifier.createShader.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-07-31
+lastModified: 2026-08-02
 hasConstructor: false
 ---
 
@@ -14,8 +14,7 @@ hasConstructor: false
 
 # Class: TextmodeShader
 
-WebGL shader program created by [Textmodifier.createMaterialShader](Textmodifier/methods/createMaterialShader.md),
-[Textmodifier.createFilterShader](Textmodifier/methods/createFilterShader.md), or [Textmodifier.createShader](Textmodifier/methods/createShader.md).
+WebGL shader program created by [Textmodifier.createMaterialShader](Textmodifier/methods/createMaterialShader.md) or [Textmodifier.createShader](Textmodifier/methods/createShader.md).
 
 Use shaders and set uniforms via [Textmodifier.shader](Textmodifier/methods/shader.md), [Textmodifier.setUniform](Textmodifier/methods/setUniform.md), and [Textmodifier.setUniforms](Textmodifier/methods/setUniforms.md).
 

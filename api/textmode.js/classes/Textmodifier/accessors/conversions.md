@@ -7,7 +7,7 @@ category: Accessors
 api: true
 owner: Textmodifier
 kind: Accessor
-lastModified: 2026-07-31
+lastModified: 2026-08-02
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / conversions

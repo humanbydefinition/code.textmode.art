@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-07-31
+lastModified: 2026-08-02
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / fill
@@ -59,9 +59,9 @@ Alias for [cellColor](cellColor.md). Set the fill (cell background) color using 
 
 ```ts
 fill(
-   r, 
-   g, 
-   b, 
+   r,
+   g,
+   b,
    a?): void;
 ```
 

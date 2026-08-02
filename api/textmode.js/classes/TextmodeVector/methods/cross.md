@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: TextmodeVector
 kind: Method
-lastModified: 2026-07-31
+lastModified: 2026-08-02
 ---
 
 [textmode.js](../../../index.md) / [TextmodeVector](../../TextmodeVector.md) / cross
@@ -42,8 +42,8 @@ A new vector containing the cross product.
 
 ```ts
 cross(
-   x?, 
-   y?, 
+   x?,
+   y?,
    z?): TextmodeVector;
 ```
 

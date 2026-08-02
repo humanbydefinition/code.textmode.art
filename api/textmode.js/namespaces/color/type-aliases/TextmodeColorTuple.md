@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 namespace: color
 kind: TypeAlias
-lastModified: 2026-07-31
+lastModified: 2026-08-02
 ---
 
 [textmode.js](../../../index.md) / [color](../index.md) / TextmodeColorTuple
@@ -15,7 +15,7 @@ lastModified: 2026-07-31
 # Type Alias: TextmodeColorTuple
 
 ```ts
-type TextmodeColorTuple = 
+type TextmodeColorTuple =
   | [number, number, number]
   | [number, number, number, number];
 ```

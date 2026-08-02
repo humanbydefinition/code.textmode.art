@@ -8,7 +8,7 @@ api: true
 owner: TextmodeLayer
 namespace: layering
 kind: Method
-lastModified: 2026-07-31
+lastModified: 2026-08-02
 ---
 
 [textmode.js](../../../../../index.md) / [layering](../../../index.md) / [TextmodeLayer](../../TextmodeLayer.md) / offset
@@ -16,7 +16,7 @@ lastModified: 2026-07-31
 # Method: offset()
 
 ```ts
-offset(x?, y?): 
+offset(x?, y?):
   | void
   | {
   x: number;

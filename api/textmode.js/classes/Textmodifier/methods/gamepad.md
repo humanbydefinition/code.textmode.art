@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-07-31
+lastModified: 2026-08-02
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / gamepad
@@ -15,7 +15,7 @@ lastModified: 2026-07-31
 # Method: gamepad()
 
 ```ts
-gamepad(index): 
+gamepad(index):
   | TextmodeGamepadSnapshot
   | undefined;
 ```

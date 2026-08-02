@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-07-31
+lastModified: 2026-08-02
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / print
@@ -16,9 +16,9 @@ lastModified: 2026-07-31
 
 ```ts
 print(
-   str, 
-   x, 
-   y, 
+   str,
+   x,
+   y,
    options?): void;
 ```
 

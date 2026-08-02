@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: TextmodeCamera
 kind: Method
-lastModified: 2026-07-31
+lastModified: 2026-08-02
 ---
 
 [textmode.js](../../../index.md) / [TextmodeCamera](../../TextmodeCamera.md) / move
@@ -16,8 +16,8 @@ lastModified: 2026-07-31
 
 ```ts
 move(
-   dx, 
-   dy, 
+   dx,
+   dy,
    dz): this;
 ```
 

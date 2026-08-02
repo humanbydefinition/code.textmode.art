@@ -6,7 +6,7 @@ description: Mutable two- or three-dimensional vector for creative-coding math.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-07-31
+lastModified: 2026-08-02
 hasConstructor: true
 ---
 
@@ -31,8 +31,8 @@ Use [Textmodifier.createVector](Textmodifier/methods/createVector.md) to create 
 
 ```ts
 new TextmodeVector(
-   x?, 
-   y?, 
+   x?,
+   y?,
    z?): TextmodeVector;
 ```
 

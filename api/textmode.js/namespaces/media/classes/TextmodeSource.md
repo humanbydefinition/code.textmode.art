@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: media
 kind: Class
-lastModified: 2026-07-31
+lastModified: 2026-08-02
 hasConstructor: false
 ---
 
@@ -27,7 +27,41 @@ Shared base for image, video, and dynamic texture sources drawn with [Textmodifi
 - [`TextmodeImage`](TextmodeImage.md)
 - [`TextmodeTexture`](TextmodeTexture.md)
 
-## Accessors
+## Character & color mapping
+
+Map sampled values to glyphs, foreground colors, cell colors, and a background.
+
+| Method | Description |
+| ------ | ------ |
+| [background](TextmodeSource/methods/background.md) | Set the background color used for transparent pixels. |
+| [cellColor](TextmodeSource/methods/cellColor.md) | Set the cell color used when [cellColorMode](TextmodeSource/methods/cellColorMode.md) is `'fixed'`. |
+| [cellColorMode](TextmodeSource/methods/cellColorMode.md) | Set whether cell color is sampled from the source or fixed. |
+| [characters](TextmodeSource/methods/characters.md) | Set the characters used for brightness mapping. |
+| [charColor](TextmodeSource/methods/charColor.md) | Set the character color used when [charColorMode](TextmodeSource/methods/charColorMode.md) is `'fixed'`. |
+| [charColorMode](TextmodeSource/methods/charColorMode.md) | Set whether character color is sampled from the source or fixed. |
+
+## Conversion
+
+Select and clear the conversion stack used when drawing this source.
+
+| Method | Description |
+| ------ | ------ |
+| [brightnessRange](TextmodeSource/methods/brightnessRange.md) | Capture only source pixels whose brightness is inside the inclusive byte range. |
+| [clearConversions](TextmodeSource/methods/clearConversions.md) | Clear this source's conversion stack and return to single-mode conversion. |
+| [conversionMode](TextmodeSource/methods/conversionMode.md) | Select the conversion mode for this source. |
+| [conversions](TextmodeSource/methods/conversions.md) | Set an ordered conversion stack for this source. |
+
+## Resource lifecycle
+
+Release the WebGL resources owned by the source.
+
+| Method | Description |
+| ------ | ------ |
+| [dispose](TextmodeSource/methods/dispose.md) | Dispose of the resource and free associated WebGL textures. |
+
+## Source dimensions
+
+Inspect the source texture and its original and grid-fitted dimensions.
 
 | Accessor | Description |
 | ------ | ------ |
@@ -37,22 +71,13 @@ Shared base for image, video, and dynamic texture sources drawn with [Textmodifi
 | [texture](TextmodeSource/accessors/texture.md) | WebGL texture backing this source. |
 | [width](TextmodeSource/accessors/width.md) | Ideal draw width in grid cells. |
 
-## Methods
+## Source transforms
+
+Mirror, invert, or rotate the source's converted output.
 
 | Method | Description |
 | ------ | ------ |
-| [background](TextmodeSource/methods/background.md) | Set the background color used for transparent pixels. |
-| [brightnessRange](TextmodeSource/methods/brightnessRange.md) | Capture only source pixels whose brightness is inside the inclusive byte range. |
-| [cellColor](TextmodeSource/methods/cellColor.md) | Set the cell color used when [cellColorMode](TextmodeSource/methods/cellColorMode.md) is `'fixed'`. |
-| [cellColorMode](TextmodeSource/methods/cellColorMode.md) | Set whether cell color is sampled from the source or fixed. |
-| [characters](TextmodeSource/methods/characters.md) | Set the characters used for brightness mapping. |
-| [charColor](TextmodeSource/methods/charColor.md) | Set the character color used when [charColorMode](TextmodeSource/methods/charColorMode.md) is `'fixed'`. |
-| [charColorMode](TextmodeSource/methods/charColorMode.md) | Set whether character color is sampled from the source or fixed. |
 | [charRotation](TextmodeSource/methods/charRotation.md) | Rotate generated characters. |
-| [clearConversions](TextmodeSource/methods/clearConversions.md) | Clear this source's conversion stack and return to single-mode conversion. |
-| [conversionMode](TextmodeSource/methods/conversionMode.md) | Select the conversion mode for this source. |
-| [conversions](TextmodeSource/methods/conversions.md) | Set an ordered conversion stack for this source. |
-| [dispose](TextmodeSource/methods/dispose.md) | Dispose of the resource and free associated WebGL textures. |
 | [flipX](TextmodeSource/methods/flipX.md) | Flip the source horizontally. |
 | [flipY](TextmodeSource/methods/flipY.md) | Flip the source vertically. |
 | [invert](TextmodeSource/methods/invert.md) | Enable or disable source color inversion. |

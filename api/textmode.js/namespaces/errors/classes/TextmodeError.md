@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: errors
 kind: Class
-lastModified: 2026-07-31
+lastModified: 2026-08-02
 hasConstructor: true
 ---
 
@@ -28,8 +28,8 @@ Error type that formats optional context data alongside the main message.
 
 ```ts
 new TextmodeError(
-   message, 
-   context?, 
+   message,
+   context?,
    options?): TextmodeError;
 ```
 

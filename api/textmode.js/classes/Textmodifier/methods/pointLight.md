@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-07-31
+lastModified: 2026-08-02
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / pointLight
@@ -18,11 +18,11 @@ lastModified: 2026-07-31
 
 ```ts
 pointLight(
-   v1, 
-   v2, 
-   v3, 
-   x, 
-   y, 
+   v1,
+   v2,
+   v3,
+   x,
+   y,
    z): void;
 ```
 
@@ -54,9 +54,9 @@ Up to five point lights are supported per frame. Additional calls are ignored.
 
 ```ts
 pointLight(
-   v1, 
-   v2, 
-   v3, 
+   v1,
+   v2,
+   v3,
    position): void;
 ```
 
@@ -83,9 +83,9 @@ Add a point light using RGB components and an object position.
 
 ```ts
 pointLight(
-   color, 
-   x, 
-   y, 
+   color,
+   x,
+   y,
    z): void;
 ```
 

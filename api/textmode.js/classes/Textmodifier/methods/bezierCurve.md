@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-07-31
+lastModified: 2026-08-02
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / bezierCurve
@@ -16,13 +16,13 @@ lastModified: 2026-07-31
 
 ```ts
 bezierCurve(
-   x1, 
-   y1, 
-   cp1x, 
-   cp1y, 
-   cp2x, 
-   cp2y, 
-   x2, 
+   x1,
+   y1,
+   cp1x,
+   cp1y,
+   cp2x,
+   cp2y,
+   x2,
    y2): void;
 ```
 

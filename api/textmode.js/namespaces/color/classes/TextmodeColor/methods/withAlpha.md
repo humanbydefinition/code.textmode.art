@@ -8,7 +8,7 @@ api: true
 owner: TextmodeColor
 namespace: color
 kind: Method
-lastModified: 2026-07-31
+lastModified: 2026-08-02
 ---
 
 [textmode.js](../../../../../index.md) / [color](../../../index.md) / [TextmodeColor](../../TextmodeColor.md) / withAlpha

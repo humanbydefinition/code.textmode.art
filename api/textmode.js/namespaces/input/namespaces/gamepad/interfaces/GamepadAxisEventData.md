@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: input.gamepad
 kind: Interface
-lastModified: 2026-07-31
+lastModified: 2026-08-02
 isInterface: true
 ---
 

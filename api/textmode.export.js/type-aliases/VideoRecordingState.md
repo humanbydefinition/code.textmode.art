@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-07-31
+lastModified: 2026-08-01
 ---
 
 [textmode.export.js](../index.md) / VideoRecordingState

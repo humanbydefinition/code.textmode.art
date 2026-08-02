@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-07-31
+lastModified: 2026-08-01
 isInterface: true
 ---
 
@@ -25,11 +25,11 @@ Context passed to dynamic parameter functions during rendering.
 
 | Property | Type | Description |
 | ------ | ------ | ------ |
-| <a id="property-time"></a> `time` | `number` | Current time in seconds |
-| <a id="property-framecount"></a> `frameCount` | `number` | Current frame count |
-| <a id="property-width"></a> `width` | `number` | Grid width in pixels |
-| <a id="property-height"></a> `height` | `number` | Grid height in pixels |
-| <a id="property-cols"></a> `cols` | `number` | Grid columns |
-| <a id="property-rows"></a> `rows` | `number` | Grid rows |
 | <a id="property-bpm"></a> `bpm` | `number` | Current BPM (beats per minute) for array modulation timing |
+| <a id="property-cols"></a> `cols` | `number` | Grid columns |
+| <a id="property-framecount"></a> `frameCount` | `number` | Current frame count |
+| <a id="property-height"></a> `height` | `number` | Grid height in pixels |
 | <a id="property-onerror"></a> `onError?` | (`error`, `uniformName`) => `void` | Optional callback for handling dynamic parameter evaluation errors |
+| <a id="property-rows"></a> `rows` | `number` | Grid rows |
+| <a id="property-time"></a> `time` | `number` | Current time in seconds |
+| <a id="property-width"></a> `width` | `number` | Grid width in pixels |

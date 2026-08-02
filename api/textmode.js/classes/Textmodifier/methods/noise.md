@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-07-31
+lastModified: 2026-08-02
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / noise
@@ -16,8 +16,8 @@ lastModified: 2026-07-31
 
 ```ts
 noise(
-   x, 
-   y?, 
+   x,
+   y?,
    z?): number;
 ```
 

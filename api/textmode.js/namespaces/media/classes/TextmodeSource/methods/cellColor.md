@@ -8,7 +8,7 @@ api: true
 owner: TextmodeSource
 namespace: media
 kind: Method
-lastModified: 2026-07-31
+lastModified: 2026-08-02
 ---
 
 [textmode.js](../../../../../index.md) / [media](../../../index.md) / [TextmodeSource](../../TextmodeSource.md) / cellColor
@@ -17,9 +17,9 @@ lastModified: 2026-07-31
 
 ```ts
 cellColor(
-   colorOrGray, 
-   g?, 
-   b?, 
+   colorOrGray,
+   g?,
+   b?,
    a?): this;
 ```
 

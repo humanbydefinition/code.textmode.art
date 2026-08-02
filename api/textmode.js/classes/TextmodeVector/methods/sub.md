@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: TextmodeVector
 kind: Method
-lastModified: 2026-07-31
+lastModified: 2026-08-02
 ---
 
 [textmode.js](../../../index.md) / [TextmodeVector](../../TextmodeVector.md) / sub
@@ -44,8 +44,8 @@ This vector.
 
 ```ts
 sub(
-   x?, 
-   y?, 
+   x?,
+   y?,
    z?): this;
 ```
 

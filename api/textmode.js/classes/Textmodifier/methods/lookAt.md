@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-07-31
+lastModified: 2026-08-02
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / lookAt
@@ -16,11 +16,11 @@ lastModified: 2026-07-31
 
 ```ts
 lookAt(
-   targetX, 
-   targetY, 
-   targetZ, 
-   upX?, 
-   upY?, 
+   targetX,
+   targetY,
+   targetZ,
+   upX?,
+   upY?,
    upZ?): void;
 ```
 

@@ -6,7 +6,7 @@ description: Color objects, color modes, and types.
 category: Namespaces
 api: true
 kind: Namespace
-lastModified: 2026-07-31
+lastModified: 2026-08-02
 ---
 
 [textmode.js](../../index.md) / color

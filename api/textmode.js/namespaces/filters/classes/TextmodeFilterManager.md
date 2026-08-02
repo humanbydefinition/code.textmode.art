@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: filters
 kind: Class
-lastModified: 2026-07-31
+lastModified: 2026-08-02
 hasConstructor: false
 ---
 
@@ -65,8 +65,8 @@ true if the filter exists
 
 ```ts
 register(
-   id, 
-   shader, 
+   id,
+   shader,
 uniformDefs?): Promise<void>;
 ```
 

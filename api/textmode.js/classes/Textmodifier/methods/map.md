@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-07-31
+lastModified: 2026-08-02
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / map
@@ -16,10 +16,10 @@ lastModified: 2026-07-31
 
 ```ts
 map(
-   value, 
-   start1, 
-   stop1, 
-   start2, 
+   value,
+   start1,
+   stop1,
+   start2,
    stop2): number;
 ```
 

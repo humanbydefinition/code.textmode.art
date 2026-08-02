@@ -8,7 +8,7 @@ api: true
 owner: TextmodePluginContext
 namespace: plugins
 kind: Method
-lastModified: 2026-07-31
+lastModified: 2026-08-02
 ---
 
 [textmode.js](../../../../../index.md) / [plugins](../../../index.md) / [TextmodePluginContext](../../TextmodePluginContext.md) / extendLayer

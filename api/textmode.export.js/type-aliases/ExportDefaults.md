@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-07-31
+lastModified: 2026-08-01
 ---
 
 [textmode.export.js](../index.md) / ExportDefaults
@@ -19,13 +19,13 @@ type ExportDefaults = object;
 ```
 
 Per-format default options used to seed the overlay UI inputs at mount time
-and after a [ExportOverlayController.resetDefaults](../interfaces/ExportOverlayController/methods/resetDefaults.md) call.
+and after a [ExportOverlayController.resetDefaults](../interfaces/ExportOverlayController.md#resetdefaults) call.
 
 Each sub-object contains the library-chosen defaults for the fields that
 the overlay exposes.  Top-level `format` controls which export format is
 selected in the overlay. You can read and override them at runtime via
-[ExportOverlayController.getDefaults](../interfaces/ExportOverlayController/methods/getDefaults.md) and
-[ExportOverlayController.setDefaults](../interfaces/ExportOverlayController/methods/setDefaults.md).
+[ExportOverlayController.getDefaults](../interfaces/ExportOverlayController.md#getdefaults) and
+[ExportOverlayController.setDefaults](../interfaces/ExportOverlayController.md#setdefaults).
 
 
 ## Properties
@@ -41,18 +41,10 @@ Export format selected by default in the overlay.
 
 ***
 
-### txt
+### gif
 
 ```ts
-txt: TXTOverlayDefaults;
-```
-
-***
-
-### json
-
-```ts
-json: JSONOverlayDefaults;
+gif: GIFOverlayDefaults;
 ```
 
 ***
@@ -65,6 +57,14 @@ image: ImageOverlayDefaults;
 
 ***
 
+### json
+
+```ts
+json: JSONOverlayDefaults;
+```
+
+***
+
 ### svg
 
 ```ts
@@ -73,10 +73,10 @@ svg: SVGOverlayDefaults;
 
 ***
 
-### gif
+### txt
 
 ```ts
-gif: GIFOverlayDefaults;
+txt: TXTOverlayDefaults;
 ```
 
 ***

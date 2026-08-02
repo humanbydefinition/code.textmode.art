@@ -8,7 +8,7 @@ api: true
 owner: TextmodeLayer
 namespace: layering
 kind: Method
-lastModified: 2026-07-31
+lastModified: 2026-08-02
 ---
 
 [textmode.js](../../../../../index.md) / [layering](../../../index.md) / [TextmodeLayer](../../TextmodeLayer.md) / camera
@@ -17,14 +17,14 @@ lastModified: 2026-07-31
 
 ```ts
 camera(
-   eyeX, 
-   eyeY, 
-   eyeZ, 
-   targetX?, 
-   targetY?, 
-   targetZ?, 
-   upX?, 
-   upY?, 
+   eyeX,
+   eyeY,
+   eyeZ,
+   targetX?,
+   targetY?,
+   targetZ?,
+   upX?,
+   upY?,
    upZ?): void;
 ```
 

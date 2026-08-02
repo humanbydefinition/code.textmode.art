@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: plugins
 kind: Interface
-lastModified: 2026-07-31
+lastModified: 2026-08-02
 isInterface: true
 ---
 

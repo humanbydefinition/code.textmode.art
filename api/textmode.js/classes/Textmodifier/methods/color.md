@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-07-31
+lastModified: 2026-08-02
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / color
@@ -43,9 +43,9 @@ A TextmodeColor instance
 
 ```ts
 color(
-   r, 
-   g, 
-   b, 
+   r,
+   g,
+   b,
    a?): TextmodeColor;
 ```
 
