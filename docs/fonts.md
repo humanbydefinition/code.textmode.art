@@ -292,6 +292,10 @@ Use a bitmap tileset when you want:
 - icon-like or sprite-like cells
 - preserved authored colors via `useTileColors()`
 
+## FIGlet display typography
+
+For bold display headers, titles, and FIGfont banners rendered across multiple cells, use the official [`textmode.figlet.js`](/api/textmode.figlet.js/) add-on. See the [FIGlet typography guide](/docs/figlet-typography) for font loading, layout density, alignment, and per-cell styling options.
+
 ## Discover more fonts
 
 The curated font list lives in [`awesome-textmode`](https://github.com/humanbydefinition/awesome-textmode):
@@ -314,3 +318,4 @@ The curated font list lives in [`awesome-textmode`](https://github.com/humanbyde
 - [`TextmodeFont`](/api/textmode.js/namespaces/fonts/classes/TextmodeFont.md)
 - [`TextmodeTileset`](/api/textmode.js/namespaces/fonts/classes/TextmodeTileset.md)
 - [`TextmodeTilesetOptions`](/api/textmode.js/namespaces/fonts/interfaces/TextmodeTilesetOptions.md)
+- [FIGlet typography](/docs/figlet-typography)
