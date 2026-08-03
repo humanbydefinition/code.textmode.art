@@ -22,19 +22,43 @@ declare const data: EditorGallerySketch[]
 export { data }
 
 /**
- * Ensures sketch code is standalone executable by prepending `const t = textmode.create();`
- * if `t` is not already initialized.
+ * Refactors sketch code from editor.textmode.art for code.textmode.art Sandpack:
+ * 1. Ensures textmode.create is initialized with responsive dimensions:
+ *    textmode.create({ width: window.innerWidth, height: window.innerHeight })
+ * 2. Ensures a t.windowResized callback exists and invokes:
+ *    t.resizeCanvas(window.innerWidth, window.innerHeight)
  */
 export function refactorSketchCode(code: string): string {
-  const trimmed = code.trim()
+  let refactored = code.trim()
+
+  // 1. Ensure textmode.create is initialized with responsive sizing
   if (
-    trimmed.includes('const t = textmode.create') ||
-    trimmed.includes('let t = textmode.create') ||
-    trimmed.includes('var t = textmode.create')
+    refactored.includes('const t = textmode.create') ||
+    refactored.includes('let t = textmode.create') ||
+    refactored.includes('var t = textmode.create')
   ) {
-    return code
+    refactored = refactored.replace(
+      /(?:const|let|var)\s+t\s*=\s*textmode\.create\s*\(\s*(?:\{\s*\})?\s*\)/g,
+      'const t = textmode.create({ width: window.innerWidth, height: window.innerHeight })'
+    )
+  } else {
+    refactored = `const t = textmode.create({ width: window.innerWidth, height: window.innerHeight });\n\n${refactored}`
   }
-  return `const t = textmode.create();\n\n${code}`
+
+  // 2. Ensure t.windowResized callback is present and calls t.resizeCanvas(window.innerWidth, window.innerHeight)
+  const hasWindowResized = refactored.includes('windowResized')
+  const hasResizeCanvas = refactored.includes('resizeCanvas')
+
+  if (!hasWindowResized) {
+    refactored += `\n\nt.windowResized(() => {\n  t.resizeCanvas(window.innerWidth, window.innerHeight);\n});\n`
+  } else if (!hasResizeCanvas) {
+    refactored = refactored.replace(
+      /(t\.windowResized\s*\(\s*(?:async\s*)?(?:function\s*\w*\s*\([^)]*\)|\([^)]*\)|[a-zA-Z0-9_$]+)?\s*(?:=>)?\s*\{)/g,
+      '$1\n  t.resizeCanvas(window.innerWidth, window.innerHeight);'
+    )
+  }
+
+  return refactored
 }
 
 const GITHUB_REPO_OWNER = 'humanbydefinition'
@@ -93,7 +117,6 @@ async function fetchFromGitHub(): Promise<EditorGallerySketch[]> {
 
 export default {
   async load(): Promise<EditorGallerySketch[]> {
-    // Strictly fetch published sketches from the remote main branch on GitHub
     return await fetchFromGitHub()
   },
 }
