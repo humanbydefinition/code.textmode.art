@@ -47,6 +47,7 @@ const docsSidebar: DefaultTheme.SidebarItem[] = [
           { text: "Transforms", link: "/docs/transforms" },
           { text: "Input events", link: "/docs/events" },
           { text: "Fonts and tilesets", link: "/docs/fonts" },
+          { text: "FIGlet typography", link: "/docs/figlet-typography" },
           { text: "Media sources", link: "/docs/loadables" },
           { text: "Media conversion", link: "/docs/media-conversion" },
         ],
@@ -97,8 +98,9 @@ const docsSidebar: DefaultTheme.SidebarItem[] = [
         text: "Contributing",
         items: [
           { text: "Overview", link: "/docs/contributing/" },
+          { text: "Contribute code", link: "/docs/contributing/code" },
           {
-            text: "Getting started",
+            text: "Documentation site",
             link: "/docs/contributing/getting-started",
           },
           {

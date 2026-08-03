@@ -28,11 +28,12 @@
   },
   "scripts": {
     "dev": "vitepress dev --host --port 4175",
-    "prebuild": "npm run check:contributors && npm run check:api-sandpack",
+    "prebuild": "npm run check:contributors && npm run check:api-sandpack && npm run test:api-examples",
     "build": "vitepress build",
     "preview": "vitepress preview",
     "api:sandpack": "node scripts/api-sandpack-examples.mjs",
     "check:api-sandpack": "node scripts/api-sandpack-examples.mjs --check",
+    "test:api-examples": "node --test scripts/api-examples.test.mjs",
     "contributors:validate": "node scripts/contributors.mjs validate",
     "contributors:render": "node scripts/contributors.mjs render",
     "contributors:check": "node scripts/contributors.mjs check",
