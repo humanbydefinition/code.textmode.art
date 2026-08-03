@@ -15,9 +15,9 @@ Fix bugs or improve `textmode.js`, its official add-ons, tests, examples, build 
 
 ### [Improve documentation](/docs/contributing/improve-docs)
 
-Fix or expand the guides on `code.textmode.art`, including explanations, examples, links, and accessibility.
+Fix or expand the guides on `code.textmode.art`, including explanations, links, and accessibility.
 
-### [Submit an example sketch](/docs/contributing/submit-a-sketch)
+### [Submit a sketch](/docs/contributing/submit-a-sketch)
 
 Add a community showcase sketch to this site or improve an API example in the package repository that owns it.
 
