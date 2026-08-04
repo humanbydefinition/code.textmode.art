@@ -271,7 +271,7 @@ function showRandomSketch() {
 }
 
 onMounted(() => {
-  currentIndex.value = randomIndex()
+  currentIndex.value = 0
 })
 
 onBeforeUnmount(() => {
