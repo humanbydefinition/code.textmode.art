@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: TextmodeLayerOptions
 description: Options for layers created with TextmodeLayerManager.add.
 category: Interfaces
 api: true
 namespace: layering
 kind: Interface
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 isInterface: true
 ---
 

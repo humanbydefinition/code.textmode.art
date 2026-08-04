@@ -1,6 +1,6 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: offset
 description: Set or get this layer's compositing offset in pixels.
 category: Methods
@@ -8,7 +8,7 @@ api: true
 owner: TextmodeLayer
 namespace: layering
 kind: Method
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../../../index.md) / [layering](../../../index.md) / [TextmodeLayer](../../TextmodeLayer.md) / offset
@@ -16,7 +16,7 @@ lastModified: 2026-08-02
 # Method: offset()
 
 ```ts
-offset(x?, y?):
+offset(x?, y?): 
   | void
   | {
   x: number;

@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: setErrorLevel
 description: Set the global error handling level for all Textmodifier instances.
 category: Methods
 api: true
 owner: textmode
 kind: Method
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [textmode](../../textmode.md) / setErrorLevel

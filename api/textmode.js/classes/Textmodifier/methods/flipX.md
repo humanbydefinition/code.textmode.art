@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: flipX
 description: Toggle horizontal flipping for subsequent characters, or get the current state.
 category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / flipX

@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: TextmodeCanvasHandle
 description: Stable read-only canvas handle exposed to plugins.
 category: Interfaces
 api: true
 namespace: plugins
 kind: Interface
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 isInterface: true
 ---
 

@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: grid
 description: Grid for the layer currently being drawn.
 category: Accessors
 api: true
 owner: Textmodifier
 kind: Accessor
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / grid

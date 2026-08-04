@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: filters
 description: Filter manager for this Textmodifier instance.
 category: Accessors
 api: true
 owner: Textmodifier
 kind: Accessor
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / filters

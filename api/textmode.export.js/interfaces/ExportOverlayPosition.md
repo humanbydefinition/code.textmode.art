@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: ExportOverlayPosition
 description: Current canvas-relative placement state for the export overlay UI.
 category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-08-01
+lastModified: 2026-08-03
 isInterface: true
 ---
 

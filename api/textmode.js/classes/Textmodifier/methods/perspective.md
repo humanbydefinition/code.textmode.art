@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: perspective
 description: Enable perspective projection and optionally set projection parameters.
 category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / perspective
@@ -16,8 +16,8 @@ lastModified: 2026-08-02
 
 ```ts
 perspective(
-   fov?,
-   near?,
+   fov?, 
+   near?, 
    far?): void;
 ```
 

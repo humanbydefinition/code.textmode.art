@@ -1,6 +1,6 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: colorama
 description: Apply colorama effect (hue rotation based on luminance).
 category: Methods
@@ -8,7 +8,7 @@ api: true
 owner: SynthSource
 kind: Method
 ecosystem: textmode.js
-lastModified: 2026-08-01
+lastModified: 2026-08-03
 ---
 
 [textmode.synth.js](../../../index.md) / [SynthSource](../../SynthSource.md) / colorama

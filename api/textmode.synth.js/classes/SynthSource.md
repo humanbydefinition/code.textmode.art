@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: SynthSource
 description: A chainable synthesis source that accumulates transforms to be compiled into a shader.
 category: Classes
 api: true
 kind: Class
 ecosystem: textmode.js
-lastModified: 2026-08-01
+lastModified: 2026-08-03
 hasConstructor: false
 ---
 

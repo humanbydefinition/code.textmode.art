@@ -1,6 +1,6 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: lookAt
 description: Update this layer camera's target and optional up vector.
 category: Methods
@@ -8,7 +8,7 @@ api: true
 owner: TextmodeLayer
 namespace: layering
 kind: Method
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../../../index.md) / [layering](../../../index.md) / [TextmodeLayer](../../TextmodeLayer.md) / lookAt
@@ -17,11 +17,11 @@ lastModified: 2026-08-02
 
 ```ts
 lookAt(
-   targetX,
-   targetY,
-   targetZ,
-   upX?,
-   upY?,
+   targetX, 
+   targetY, 
+   targetZ, 
+   upX?, 
+   upY?, 
    upZ?): void;
 ```
 

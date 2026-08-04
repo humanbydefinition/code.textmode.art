@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: vertex
 description: Add a vertex to the active custom shape. The current transform, character, color, and line state are captured for this vertex.
 category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / vertex
@@ -16,8 +16,8 @@ lastModified: 2026-08-02
 
 ```ts
 vertex(
-   x,
-   y,
+   x, 
+   y, 
    z?): void;
 ```
 

@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: create
 description: Create a Textmodifier instance.
 category: Methods
 api: true
 owner: textmode
 kind: Method
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [textmode](../../textmode.md) / create

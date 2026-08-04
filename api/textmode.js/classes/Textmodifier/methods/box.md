@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: box
 description: Draw a box mesh primitive.
 category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / box
@@ -16,8 +16,8 @@ lastModified: 2026-08-02
 
 ```ts
 box(
-   width?,
-   height?,
+   width?, 
+   height?, 
    depth?): void;
 ```
 

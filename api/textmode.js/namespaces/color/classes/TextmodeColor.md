@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: TextmodeColor
 description: Color value used by textmode drawing APIs.
 category: Classes
 api: true
 namespace: color
 kind: Class
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 hasConstructor: false
 ---
 

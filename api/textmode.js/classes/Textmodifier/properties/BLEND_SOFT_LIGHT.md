@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: BLEND_SOFT_LIGHT
 description: Apply a softer contrast blend based on the layer's brightness.
 category: Properties
 api: true
 owner: Textmodifier
 kind: Property
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / BLEND\_SOFT\_LIGHT

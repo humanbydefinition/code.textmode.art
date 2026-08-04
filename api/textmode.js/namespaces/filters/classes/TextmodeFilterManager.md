@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: TextmodeFilterManager
 description: Registers filter shaders and applies layer/global filter chains.
 category: Classes
 api: true
 namespace: filters
 kind: Class
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 hasConstructor: false
 ---
 
@@ -65,8 +65,8 @@ true if the filter exists
 
 ```ts
 register(
-   id,
-   shader,
+   id, 
+   shader, 
 uniformDefs?): Promise<void>;
 ```
 

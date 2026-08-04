@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: LoadingScreenRendererContext
 description: Context object passed to loading renderer callbacks.
 category: Interfaces
 api: true
 namespace: loading
 kind: Interface
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 isInterface: true
 ---
 

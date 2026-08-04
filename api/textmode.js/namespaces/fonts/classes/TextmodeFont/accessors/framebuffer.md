@@ -1,6 +1,6 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: framebuffer
 description: Normalized glyph atlas framebuffer used by the ASCII shader.
 category: Accessors
@@ -8,7 +8,7 @@ api: true
 owner: TextmodeFont
 namespace: fonts
 kind: Accessor
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../../../index.md) / [fonts](../../../index.md) / [TextmodeFont](../../TextmodeFont.md) / framebuffer

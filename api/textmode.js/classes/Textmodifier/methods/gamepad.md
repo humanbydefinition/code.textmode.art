@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: gamepad
 description: Resolve a connected gamepad by its browser-assigned slot index.
 category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / gamepad
@@ -15,7 +15,7 @@ lastModified: 2026-08-02
 # Method: gamepad()
 
 ```ts
-gamepad(index):
+gamepad(index): 
   | TextmodeGamepadSnapshot
   | undefined;
 ```

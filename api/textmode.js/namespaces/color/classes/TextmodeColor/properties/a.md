@@ -1,6 +1,6 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: a
 description: Alpha component (0-255).
 category: Properties
@@ -8,7 +8,7 @@ api: true
 owner: TextmodeColor
 namespace: color
 kind: Property
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../../../index.md) / [color](../../../index.md) / [TextmodeColor](../../TextmodeColor.md) / a

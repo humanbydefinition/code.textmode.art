@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: JSONExportColorMode
 description: Supported JSON color output modes.
 category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-08-01
+lastModified: 2026-08-03
 ---
 
 [textmode.export.js](../index.md) / JSONExportColorMode

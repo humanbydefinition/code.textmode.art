@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: sub
 description: Subtract components from this vector.
 category: Methods
 api: true
 owner: TextmodeVector
 kind: Method
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [TextmodeVector](../../TextmodeVector.md) / sub
@@ -44,8 +44,8 @@ This vector.
 
 ```ts
 sub(
-   x?,
-   y?,
+   x?, 
+   y?, 
    z?): this;
 ```
 

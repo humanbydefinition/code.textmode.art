@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: image
 description: Draw a framebuffer, image, video, or texture source to the currently bound framebuffer.
 category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / image
@@ -16,8 +16,8 @@ lastModified: 2026-08-02
 
 ```ts
 image(
-   source,
-   width?,
+   source, 
+   width?, 
    height?): void;
 ```
 

@@ -1,12 +1,12 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: TextmodeRandom
 description: A deterministic pseudo-random number generator for textmode sketches.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 hasConstructor: true
 ---
 

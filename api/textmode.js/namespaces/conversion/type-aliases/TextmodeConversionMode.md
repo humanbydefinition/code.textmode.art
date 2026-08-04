@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: TextmodeConversionMode
 description: Type representing the available textmode conversion modes
 category: Type Aliases
 api: true
 namespace: conversion
 kind: TypeAlias
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [conversion](../index.md) / TextmodeConversionMode

@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: gradient
 description: Generate a rotating radial gradient.
 category: Functions
 api: true
 kind: Function
 ecosystem: textmode.js
-lastModified: 2026-08-01
+lastModified: 2026-08-03
 ---
 
 [textmode.synth.js](../index.md) / gradient

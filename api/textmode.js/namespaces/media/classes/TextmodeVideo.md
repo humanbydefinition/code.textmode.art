@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: TextmodeVideo
 description: Video source for textmode rendering.
 category: Classes
 api: true
 namespace: media
 kind: Class
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 hasConstructor: false
 ---
 

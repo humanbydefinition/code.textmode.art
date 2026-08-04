@@ -1,6 +1,6 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: texture
 description: WebGL texture backing this source.
 category: Accessors
@@ -8,7 +8,7 @@ api: true
 owner: TextmodeSource
 namespace: media
 kind: Accessor
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../../../index.md) / [media](../../../index.md) / [TextmodeSource](../../TextmodeSource.md) / texture

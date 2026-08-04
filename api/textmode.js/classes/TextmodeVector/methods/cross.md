@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: cross
 description: Calculate the cross product with another vector-like value.
 category: Methods
 api: true
 owner: TextmodeVector
 kind: Method
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [TextmodeVector](../../TextmodeVector.md) / cross
@@ -42,8 +42,8 @@ A new vector containing the cross product.
 
 ```ts
 cross(
-   x?,
-   y?,
+   x?, 
+   y?, 
    z?): TextmodeVector;
 ```
 

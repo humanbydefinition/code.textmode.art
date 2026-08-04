@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: FigletPlugin
 description: Plugin entrypoint for the FIGlet add-on.
 category: Variables
 api: true
 kind: Variable
 ecosystem: textmode.js
-lastModified: 2026-08-01
+lastModified: 2026-08-03
 ---
 
 [textmode.figlet.js](../index.md) / FigletPlugin

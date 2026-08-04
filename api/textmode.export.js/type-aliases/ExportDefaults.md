@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: ExportDefaults
 description: Per-format default options used to seed the overlay UI inputs at mount time and after a ExportOverlayController.resetDefaults call.
 category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-08-01
+lastModified: 2026-08-03
 ---
 
 [textmode.export.js](../index.md) / ExportDefaults

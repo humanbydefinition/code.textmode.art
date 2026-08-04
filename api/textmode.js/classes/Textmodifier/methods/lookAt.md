@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: lookAt
 description: Update the look-at target and optional up vector for the active camera.
 category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / lookAt
@@ -16,11 +16,11 @@ lastModified: 2026-08-02
 
 ```ts
 lookAt(
-   targetX,
-   targetY,
-   targetZ,
-   upX?,
-   upY?,
+   targetX, 
+   targetY, 
+   targetZ, 
+   upX?, 
+   upY?, 
    upZ?): void;
 ```
 

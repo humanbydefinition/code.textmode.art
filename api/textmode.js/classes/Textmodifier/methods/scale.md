@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: scale
 description: Scale subsequent geometry in model space.
 category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / scale
@@ -16,8 +16,8 @@ lastModified: 2026-08-02
 
 ```ts
 scale(
-   x,
-   y?,
+   x, 
+   y?, 
    z?): void;
 ```
 

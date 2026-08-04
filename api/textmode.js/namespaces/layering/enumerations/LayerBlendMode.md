@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: LayerBlendMode
 description: Numeric blend mode constants for layer compositing.
 category: Enumerations
 api: true
 namespace: layering
 kind: Enum
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [layering](../index.md) / LayerBlendMode

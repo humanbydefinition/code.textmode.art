@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: dist
 description: Calculate the distance to another vector-like point.
 category: Methods
 api: true
 owner: TextmodeVector
 kind: Method
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [TextmodeVector](../../TextmodeVector.md) / dist
@@ -42,8 +42,8 @@ Euclidean distance between the two points.
 
 ```ts
 dist(
-   x?,
-   y?,
+   x?, 
+   y?, 
    z?): number;
 ```
 

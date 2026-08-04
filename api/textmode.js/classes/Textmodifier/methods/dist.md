@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: dist
 description: Calculate the Euclidean distance between two points.
 category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / dist
@@ -16,9 +16,9 @@ lastModified: 2026-08-02
 
 ```ts
 dist(
-   x1,
-   y1,
-   x2,
+   x1, 
+   y1, 
+   x2, 
    y2): number;
 ```
 

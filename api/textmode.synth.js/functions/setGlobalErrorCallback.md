@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: setGlobalErrorCallback
 description: Set a global error callback for dynamic parameter evaluation errors.
 category: Functions
 api: true
 kind: Function
 ecosystem: textmode.js
-lastModified: 2026-08-01
+lastModified: 2026-08-03
 ---
 
 [textmode.synth.js](../index.md) / setGlobalErrorCallback

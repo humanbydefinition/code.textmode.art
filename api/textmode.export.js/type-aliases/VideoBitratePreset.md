@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: VideoBitratePreset
 description: Subjective bitrate preset used when an exact bits-per-second value is not supplied.
 category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-08-01
+lastModified: 2026-08-03
 ---
 
 [textmode.export.js](../index.md) / VideoBitratePreset

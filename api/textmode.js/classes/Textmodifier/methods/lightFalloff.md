@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: lightFalloff
 description: Configure distance attenuation used by point lights.
 category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / lightFalloff
@@ -16,8 +16,8 @@ lastModified: 2026-08-02
 
 ```ts
 lightFalloff(
-   constant,
-   linear,
+   constant, 
+   linear, 
    quadratic): void;
 ```
 

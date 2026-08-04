@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: textmode.filters.js
 description: Image filters plugin for textmode.js
 category: API Reference
 api: true
 kind: Project
 ecosystem: textmode.js
-lastModified: 2026-08-01
+lastModified: 2026-08-03
 ---
 
 # textmode.filters.js

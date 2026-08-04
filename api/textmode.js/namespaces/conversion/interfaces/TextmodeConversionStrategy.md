@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: TextmodeConversionStrategy
 description: Interface for defining a custom textmode conversion strategy.
 category: Interfaces
 api: true
 namespace: conversion
 kind: Interface
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 isInterface: true
 ---
 

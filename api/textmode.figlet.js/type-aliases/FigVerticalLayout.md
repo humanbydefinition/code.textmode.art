@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: FigVerticalLayout
 description: Supported vertical layout modes for multi-line FIGlet rendering.
 category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-08-01
+lastModified: 2026-08-03
 ---
 
 [textmode.figlet.js](../index.md) / FigVerticalLayout

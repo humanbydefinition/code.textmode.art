@@ -1,6 +1,6 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: background
 description: Set the background color used for transparent pixels.
 category: Methods
@@ -8,7 +8,7 @@ api: true
 owner: TextmodeVideo
 namespace: media
 kind: Method
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../../../index.md) / [media](../../../index.md) / [TextmodeVideo](../../TextmodeVideo.md) / background
@@ -17,9 +17,9 @@ lastModified: 2026-08-02
 
 ```ts
 background(
-   colorOrGray,
-   g?,
-   b?,
+   colorOrGray, 
+   g?, 
+   b?, 
    a?): this;
 ```
 

@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: move
 description: Move eye and target together in world space.
 category: Methods
 api: true
 owner: TextmodeCamera
 kind: Method
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [TextmodeCamera](../../TextmodeCamera.md) / move
@@ -16,8 +16,8 @@ lastModified: 2026-08-02
 
 ```ts
 move(
-   dx,
-   dy,
+   dx, 
+   dy, 
    dz): this;
 ```
 

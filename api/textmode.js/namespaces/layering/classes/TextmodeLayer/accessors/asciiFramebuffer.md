@@ -1,6 +1,6 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: asciiFramebuffer
 description: Framebuffer containing this layer's rendered textmode output.
 category: Accessors
@@ -8,7 +8,7 @@ api: true
 owner: TextmodeLayer
 namespace: layering
 kind: Accessor
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../../../index.md) / [layering](../../../index.md) / [TextmodeLayer](../../TextmodeLayer.md) / asciiFramebuffer
@@ -18,7 +18,7 @@ lastModified: 2026-08-02
 ## Get Signature
 
 ```ts
-get asciiFramebuffer():
+get asciiFramebuffer(): 
   | TextmodeFramebuffer
   | undefined;
 ```

@@ -1,12 +1,12 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: TextmodeGlyphRamp
 description: Immutable character sequence for mapping numbers to glyphs.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 hasConstructor: true
 ---
 
@@ -108,8 +108,8 @@ Character from this ramp.
 
 ```ts
 at(
-   value,
-   min,
+   value, 
+   min, 
    max): string;
 ```
 

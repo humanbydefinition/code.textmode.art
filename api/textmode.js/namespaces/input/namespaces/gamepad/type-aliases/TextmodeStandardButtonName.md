@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: TextmodeStandardButtonName
 description: Semantic button names exposed for standard-mapped controllers.
 category: Type Aliases
 api: true
 namespace: input.gamepad
 kind: TypeAlias
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [gamepad](../index.md) / TextmodeStandardButtonName
@@ -15,7 +15,7 @@ lastModified: 2026-08-02
 # Type Alias: TextmodeStandardButtonName
 
 ```ts
-type TextmodeStandardButtonName =
+type TextmodeStandardButtonName = 
   | "south"
   | "east"
   | "west"

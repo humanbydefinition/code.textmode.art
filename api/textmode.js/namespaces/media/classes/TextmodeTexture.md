@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: TextmodeTexture
 description: Dynamic texture source for external canvas or video content.
 category: Classes
 api: true
 namespace: media
 kind: Class
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 hasConstructor: false
 ---
 

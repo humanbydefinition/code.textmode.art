@@ -1,12 +1,12 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: TextmodeShader
 description: WebGL shader program created by Textmodifier.createMaterialShader or Textmodifier.createShader.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 hasConstructor: false
 ---
 

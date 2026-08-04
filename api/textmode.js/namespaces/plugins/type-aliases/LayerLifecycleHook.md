@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: LayerLifecycleHook
 description: Callback type for layer lifecycle events.
 category: Type Aliases
 api: true
 namespace: plugins
 kind: TypeAlias
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [plugins](../index.md) / LayerLifecycleHook

@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: FiltersPlugin
 description: GPU-accelerated image filters plugin for textmode.js.
 category: Variables
 api: true
 kind: Variable
 ecosystem: textmode.js
-lastModified: 2026-08-01
+lastModified: 2026-08-03
 ---
 
 [textmode.filters.js](../index.md) / FiltersPlugin

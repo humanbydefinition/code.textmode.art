@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: TRIANGLE_STRIP
 description: Draw overlapping triplets of vertices as a connected triangle strip.
 category: Properties
 api: true
 owner: Textmodifier
 kind: Property
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / TRIANGLE\_STRIP

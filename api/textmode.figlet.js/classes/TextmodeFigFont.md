@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: TextmodeFigFont
 description: Parsed FIGfont resource used by figText() rendering.
 category: Classes
 api: true
 kind: Class
 ecosystem: textmode.js
-lastModified: 2026-08-01
+lastModified: 2026-08-03
 hasConstructor: false
 ---
 

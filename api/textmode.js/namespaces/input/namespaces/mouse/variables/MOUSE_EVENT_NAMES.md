@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: MOUSE_EVENT_NAMES
 description: Mouse event names supported by the shared input event API.
 category: Variables
 api: true
 namespace: input.mouse
 kind: Variable
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [mouse](../index.md) / MOUSE\_EVENT\_NAMES

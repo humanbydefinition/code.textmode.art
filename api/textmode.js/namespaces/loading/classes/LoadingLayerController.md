@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: LoadingLayerController
 description: Controls the internal loading layer lifecycle and rendering behavior.
 category: Classes
 api: true
 namespace: loading
 kind: Class
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 hasConstructor: false
 ---
 

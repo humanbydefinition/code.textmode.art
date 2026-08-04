@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: VignetteOptions
 description: Configuration options for the 'vignette' filter.
 category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-08-01
+lastModified: 2026-08-03
 isInterface: true
 ---
 

@@ -1,12 +1,12 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: input
 description: All types and interfaces related to input event handling.
 category: Namespaces
 api: true
 kind: Namespace
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../index.md) / input

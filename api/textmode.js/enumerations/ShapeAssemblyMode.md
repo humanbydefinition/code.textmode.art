@@ -1,12 +1,12 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: ShapeAssemblyMode
 description: Shape assembly modes for Textmodifier.beginShape.
 category: Enumerations
 api: true
 kind: Enum
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../index.md) / ShapeAssemblyMode

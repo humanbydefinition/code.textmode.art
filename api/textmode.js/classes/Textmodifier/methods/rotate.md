@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: rotate
 description: Set rotation for subsequent shape drawing.
 category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / rotate
@@ -69,8 +69,8 @@ rotate(angle, axis): void;
 
 ```ts
 rotate(
-   degreesX?,
-   degreesY?,
+   degreesX?, 
+   degreesY?, 
    degreesZ?): void;
 ```
 

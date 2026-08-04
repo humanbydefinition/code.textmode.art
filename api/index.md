@@ -1,6 +1,6 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: API Reference
 description: API reference for the textmode.js ecosystem.
 category: API Reference

@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: TouchEventMap
 description: Touch and gesture events emitted by the touch input manager.
 category: Interfaces
 api: true
 namespace: input.touch
 kind: Interface
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 isInterface: true
 ---
 

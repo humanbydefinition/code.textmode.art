@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: TextmodePluginContext
 description: Host-provided context passed to plugins when they are installed on a Textmodifier instance.
 category: Interfaces
 api: true
 namespace: plugins
 kind: Interface
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 isInterface: true
 ---
 
@@ -70,7 +70,7 @@ The framebuffer the user draws to with 3 attachments (from base layer).
 ### font
 
 ```ts
-font:
+font: 
   | TextmodeFont
   | TextmodeTileset;
 ```

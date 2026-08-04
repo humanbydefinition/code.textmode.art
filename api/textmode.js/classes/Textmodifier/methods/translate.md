@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: translate
 description: Translate subsequent shape drawing.
 category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / translate
@@ -16,8 +16,8 @@ lastModified: 2026-08-02
 
 ```ts
 translate(
-   x?,
-   y?,
+   x?, 
+   y?, 
    z?): void;
 ```
 

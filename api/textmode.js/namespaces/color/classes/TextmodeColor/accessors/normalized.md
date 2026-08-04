@@ -1,6 +1,6 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: normalized
 description: Normalized *(0-1)* RGBA tuple.
 category: Accessors
@@ -8,7 +8,7 @@ api: true
 owner: TextmodeColor
 namespace: color
 kind: Accessor
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../../../index.md) / [color](../../../index.md) / [TextmodeColor](../../TextmodeColor.md) / normalized

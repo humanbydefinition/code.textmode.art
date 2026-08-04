@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: lerp
 description: Linear interpolation between two values.
 category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / lerp
@@ -16,8 +16,8 @@ lastModified: 2026-08-02
 
 ```ts
 lerp(
-   start,
-   stop,
+   start, 
+   stop, 
    amount): number;
 ```
 

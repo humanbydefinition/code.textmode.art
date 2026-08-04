@@ -1,12 +1,12 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: color
 description: Color objects, color modes, and types.
 category: Namespaces
 api: true
 kind: Namespace
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../index.md) / color

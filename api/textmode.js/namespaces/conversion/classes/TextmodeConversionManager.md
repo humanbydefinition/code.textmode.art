@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: TextmodeConversionManager
 description: Registers conversion strategies for a Textmodifier instance.
 category: Classes
 api: true
 namespace: conversion
 kind: Class
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 hasConstructor: false
 ---
 

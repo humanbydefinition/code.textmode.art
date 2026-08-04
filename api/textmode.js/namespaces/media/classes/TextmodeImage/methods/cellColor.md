@@ -1,6 +1,6 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: cellColor
 description: Set the cell color used when cellColorMode is 'fixed'.
 category: Methods
@@ -8,7 +8,7 @@ api: true
 owner: TextmodeImage
 namespace: media
 kind: Method
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../../../index.md) / [media](../../../index.md) / [TextmodeImage](../../TextmodeImage.md) / cellColor
@@ -17,9 +17,9 @@ lastModified: 2026-08-02
 
 ```ts
 cellColor(
-   colorOrGray,
-   g?,
-   b?,
+   colorOrGray, 
+   g?, 
+   b?, 
    a?): this;
 ```
 

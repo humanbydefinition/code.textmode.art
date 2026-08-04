@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: applyMatrix
 description: Multiply the current model transform by a custom 4x4 matrix.
 category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / applyMatrix
@@ -42,21 +42,21 @@ Current implementation supports affine TRS-style matrices (no perspective/shear)
 
 ```ts
 applyMatrix(
-   m00,
-   m01,
-   m02,
-   m03,
-   m10,
-   m11,
-   m12,
-   m13,
-   m20,
-   m21,
-   m22,
-   m23,
-   m30,
-   m31,
-   m32,
+   m00, 
+   m01, 
+   m02, 
+   m03, 
+   m10, 
+   m11, 
+   m12, 
+   m13, 
+   m20, 
+   m21, 
+   m22, 
+   m23, 
+   m30, 
+   m31, 
+   m32, 
    m33): void;
 ```
 

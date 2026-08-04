@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: noise
 description: Return deterministic multi-octave noise for a coordinate.
 category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / noise
@@ -16,8 +16,8 @@ lastModified: 2026-08-02
 
 ```ts
 noise(
-   x,
-   y?,
+   x, 
+   y?, 
    z?): number;
 ```
 

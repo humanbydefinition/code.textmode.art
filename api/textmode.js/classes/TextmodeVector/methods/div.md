@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: div
 description: Divide this vector by a scalar.
 category: Methods
 api: true
 owner: TextmodeVector
 kind: Method
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [TextmodeVector](../../TextmodeVector.md) / div
@@ -68,8 +68,8 @@ This vector.
 
 ```ts
 div(
-   x,
-   y,
+   x, 
+   y, 
    z?): this;
 ```
 

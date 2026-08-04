@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: GESTURE_EVENT_NAMES
 description: Touch gesture event names supported by the shared input event API.
 category: Variables
 api: true
 namespace: input.touch
 kind: Variable
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [touch](../index.md) / GESTURE\_EVENT\_NAMES

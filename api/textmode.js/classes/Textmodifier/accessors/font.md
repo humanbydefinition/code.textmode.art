@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: font
 description: Font or tileset used by the current drawing layer.
 category: Accessors
 api: true
 owner: Textmodifier
 kind: Accessor
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / font
@@ -17,7 +17,7 @@ lastModified: 2026-08-02
 ## Get Signature
 
 ```ts
-get font():
+get font(): 
   | TextmodeFont
   | TextmodeTileset;
 ```

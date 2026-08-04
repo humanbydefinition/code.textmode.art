@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: TouchSwipeEventData
 description: Swipe event data reported when the finger travels a minimum distance within a time window.
 category: Interfaces
 api: true
 namespace: input.touch
 kind: Interface
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 isInterface: true
 ---
 

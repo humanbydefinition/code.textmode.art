@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: end
 description: Finish rendering into this framebuffer and restore the previous framebuffer.
 category: Methods
 api: true
 owner: TextmodeFramebuffer
 kind: Method
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [TextmodeFramebuffer](../../TextmodeFramebuffer.md) / end

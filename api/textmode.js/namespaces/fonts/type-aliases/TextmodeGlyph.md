@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: TextmodeGlyph
 description: Represents a single glyph entry in a textmode glyph atlas.
 category: Type Aliases
 api: true
 namespace: fonts
 kind: TypeAlias
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [fonts](../index.md) / TextmodeGlyph

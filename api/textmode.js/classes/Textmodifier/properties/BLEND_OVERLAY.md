@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: BLEND_OVERLAY
 description: Combine multiply and screen based on the brightness below the layer.
 category: Properties
 api: true
 owner: Textmodifier
 kind: Property
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / BLEND\_OVERLAY

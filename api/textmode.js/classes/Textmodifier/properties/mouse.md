@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: mouse
 description: Current mouse position in center-based grid coordinates.
 category: Properties
 api: true
 owner: Textmodifier
 kind: Property
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / mouse

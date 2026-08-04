@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: TextmodeSource
 description: Shared base for image, video, and dynamic texture sources drawn with Textmodifier.image.
 category: Classes
 api: true
 namespace: media
 kind: Class
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 hasConstructor: false
 ---
 

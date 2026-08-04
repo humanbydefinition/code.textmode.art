@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: background
 description: Current background color.
 category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / background
@@ -59,9 +59,9 @@ Set the background color using a grayscale value.
 
 ```ts
 background(
-   r,
-   g,
-   b,
+   r, 
+   g, 
+   b, 
    a?): void;
 ```
 

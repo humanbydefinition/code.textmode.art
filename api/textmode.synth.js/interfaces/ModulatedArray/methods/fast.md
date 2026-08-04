@@ -1,6 +1,6 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: fast
 description: Set speed multiplier for array cycling.
 category: Methods
@@ -8,7 +8,7 @@ api: true
 owner: ModulatedArray
 kind: Method
 ecosystem: textmode.js
-lastModified: 2026-08-01
+lastModified: 2026-08-03
 ---
 
 [textmode.synth.js](../../../index.md) / [ModulatedArray](../../ModulatedArray.md) / fast

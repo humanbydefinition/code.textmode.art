@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: triangle
 description: Draw a triangle with the current settings.
 category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / triangle
@@ -16,11 +16,11 @@ lastModified: 2026-08-02
 
 ```ts
 triangle(
-   x1,
-   y1,
-   x2,
-   y2,
-   x3,
+   x1, 
+   y1, 
+   x2, 
+   y2, 
+   x3, 
    y3): void;
 ```
 

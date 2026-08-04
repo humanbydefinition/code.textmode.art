@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: TextmodeErrorFormatOptions
 description: Formatting controls for textmode.js error messages.
 category: Interfaces
 api: true
 namespace: errors
 kind: Interface
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 isInterface: true
 ---
 

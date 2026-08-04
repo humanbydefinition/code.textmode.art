@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: color
 description: Create a reusable color object from a grayscale value.
 category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / color
@@ -43,9 +43,9 @@ A TextmodeColor instance
 
 ```ts
 color(
-   r,
-   g,
-   b,
+   r, 
+   g, 
+   b, 
    a?): TextmodeColor;
 ```
 

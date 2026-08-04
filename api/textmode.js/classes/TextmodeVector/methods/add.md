@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: add
 description: Add components to this vector.
 category: Methods
 api: true
 owner: TextmodeVector
 kind: Method
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [TextmodeVector](../../TextmodeVector.md) / add
@@ -44,8 +44,8 @@ This vector.
 
 ```ts
 add(
-   x?,
-   y?,
+   x?, 
+   y?, 
    z?): this;
 ```
 

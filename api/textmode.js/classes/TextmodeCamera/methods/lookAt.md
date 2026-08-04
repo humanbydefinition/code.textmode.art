@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: lookAt
 description: Set camera look-at target.
 category: Methods
 api: true
 owner: TextmodeCamera
 kind: Method
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [TextmodeCamera](../../TextmodeCamera.md) / lookAt
@@ -16,8 +16,8 @@ lastModified: 2026-08-02
 
 ```ts
 lookAt(
-   x,
-   y,
+   x, 
+   y, 
    z): this;
 ```
 

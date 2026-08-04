@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: TextmodeFilterStrategy
 description: Interface for implementing custom filter strategies.
 category: Interfaces
 api: true
 namespace: filters
 kind: Interface
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 isInterface: true
 ---
 

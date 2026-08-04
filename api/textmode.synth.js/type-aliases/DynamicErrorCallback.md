@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: DynamicErrorCallback
 description: Callback signature for dynamic parameter evaluation errors. Live coding environments can use this to display errors without interrupting rendering.
 category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-08-01
+lastModified: 2026-08-03
 ---
 
 [textmode.synth.js](../index.md) / DynamicErrorCallback

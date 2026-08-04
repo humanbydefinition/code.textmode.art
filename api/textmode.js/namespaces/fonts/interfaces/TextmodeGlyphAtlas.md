@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: TextmodeGlyphAtlas
 description: Backend-neutral glyph atlas contract used by the shared rendering pipeline.
 category: Interfaces
 api: true
 namespace: fonts
 kind: Interface
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 isInterface: true
 ---
 

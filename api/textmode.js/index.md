@@ -1,12 +1,12 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: textmode.js
 description: textmode.js is a lightweight creative coding library for creating real-time ASCII art on the web.
 category: API Reference
 api: true
 kind: Project
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 # textmode.js

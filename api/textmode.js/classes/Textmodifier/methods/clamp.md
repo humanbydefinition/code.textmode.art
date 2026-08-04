@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: clamp
 description: Clamp a value between a minimum and maximum range.
 category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / clamp
@@ -16,8 +16,8 @@ lastModified: 2026-08-02
 
 ```ts
 clamp(
-   value,
-   low,
+   value, 
+   low, 
    high): number;
 ```
 

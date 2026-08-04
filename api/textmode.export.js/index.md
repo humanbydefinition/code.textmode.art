@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: textmode.export.js
 description: Export plugin for textmode.js - Save your creations as images, GIFs, videos, SVG, JSON, and plain text.
 category: API Reference
 api: true
 kind: Project
 ecosystem: textmode.js
-lastModified: 2026-08-01
+lastModified: 2026-08-03
 ---
 
 # textmode.export.js

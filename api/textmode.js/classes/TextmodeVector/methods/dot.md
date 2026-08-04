@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: dot
 description: Calculate the dot product with another vector-like value.
 category: Methods
 api: true
 owner: TextmodeVector
 kind: Method
-lastModified: 2026-08-02
+lastModified: 2026-08-03
 ---
 
 [textmode.js](../../../index.md) / [TextmodeVector](../../TextmodeVector.md) / dot
@@ -42,8 +42,8 @@ Dot product.
 
 ```ts
 dot(
-   x?,
-   y?,
+   x?, 
+   y?, 
    z?): number;
 ```
 
