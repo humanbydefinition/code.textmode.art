@@ -32,31 +32,6 @@ t.draw(() => {
 });
 ```
 
-## Map cell indices exactly
-
-Grid indices use a top-left origin, while drawing coordinates use the center of
-the grid. To place content at an exact column or row, including on even-sized
-grids, map the index to the center of that cell:
-
-```js
-function cellIndexToCentered(index, dimension) {
-  return index - (dimension - 1) / 2;
-}
-
-const x = cellIndexToCentered(column, t.grid.cols);
-const y = cellIndexToCentered(row, t.grid.rows);
-t.print("A", x, y);
-```
-
-For example, the first column of a 5-column grid is centered at `-2`, while the
-first column of a 4-column grid is centered at `-1.5`. Even-sized grids therefore
-require half-integer coordinates for cell-exact placement.
-
-`-Math.floor(dimension / 2)` is useful as an approximate left or top layout
-anchor, especially when content has a margin. It is not the center of the first
-cell on an even-sized grid and can clip or shift content placed directly on a
-framebuffer edge.
-
 ## Grid metadata
 
 Use [`t.grid`](/api/textmode.js/classes/Textmodifier#grid) to inspect the active [`TextmodeGrid`](/api/textmode.js/classes/TextmodeGrid):
