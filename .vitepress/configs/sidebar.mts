@@ -45,10 +45,10 @@ const docsSidebar: DefaultTheme.SidebarItem[] = [
             link: "/docs/randomness-math-vectors-and-noise",
           },
           { text: "Transforms", link: "/docs/transforms" },
-          { text: "Input events", link: "/docs/events" },
-          { text: "Fonts and tilesets", link: "/docs/fonts" },
+          { text: "Input events", link: "/docs/event-handling" },
+          { text: "Fonts and tilesets", link: "/docs/fonts-and-tilesets" },
           { text: "FIGlet typography", link: "/docs/figlet-typography" },
-          { text: "Media sources", link: "/docs/loadables" },
+          { text: "Media sources", link: "/docs/media-sources" },
           { text: "Media conversion", link: "/docs/media-conversion" },
         ],
       },
@@ -87,8 +87,8 @@ const docsSidebar: DefaultTheme.SidebarItem[] = [
             items: [
               { text: "flok.cc", link: "/docs/live-coding-flok-cc" },
               {
-                text: "synth.textmode.art",
-                link: "/docs/live-coding-synth-textmode-art",
+                text: "editor.textmode.art",
+                link: "/docs/live-coding-editor-textmode-art",
               },
             ],
           },
@@ -101,7 +101,7 @@ const docsSidebar: DefaultTheme.SidebarItem[] = [
           { text: "Contribute code", link: "/docs/contributing/code" },
           {
             text: "Contribute docs",
-            link: "/docs/contributing/getting-started",
+            link: "/docs/contributing/docs",
           },
           {
             text: "Submit a sketch",

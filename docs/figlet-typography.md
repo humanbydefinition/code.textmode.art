@@ -226,5 +226,5 @@ const plan = font.planText("HELLO");
 - [`TextmodeFigFont`](/api/textmode.figlet.js/classes/TextmodeFigFont.md)
 - [`FigTextOptions`](/api/textmode.figlet.js/interfaces/FigTextOptions.md)
 - [`FigTextCellContext`](/api/textmode.figlet.js/interfaces/FigTextCellContext.md)
-- [Fonts and tilesets](/docs/fonts)
+- [Fonts and tilesets](/docs/fonts-and-tilesets)
 - [Plugins](/docs/plugins)

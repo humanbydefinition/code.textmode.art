@@ -13,7 +13,7 @@ Contributions to the textmode.js ecosystem can take many forms. Choose the path 
 
 Fix bugs or improve `textmode.js`, its official add-ons, tests, examples, build tooling, and API documentation.
 
-### [Improve documentation](/docs/contributing/getting-started)
+### [Improve documentation](/docs/contributing/docs)
 
 Fix or expand the guides on `code.textmode.art`, including explanations, links, and accessibility.
 
