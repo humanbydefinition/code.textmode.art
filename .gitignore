@@ -6,3 +6,4 @@ node_modules
 .vitepress/temp/
 .agents
 skills-lock.json
+.vitepress/data/.generated-editor-sketches.json
