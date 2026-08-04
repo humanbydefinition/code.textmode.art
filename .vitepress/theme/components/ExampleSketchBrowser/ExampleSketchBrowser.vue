@@ -93,6 +93,7 @@
             :profile="currentSketch.profile"
             :language="currentSketch.language"
             :hint-href="currentSketch.pageUrl"
+            :preview-height="previewHeight"
             initial-view="preview"
           />
         </div>
@@ -136,8 +137,10 @@ const activeProfile = ref<ApiProfile | 'all'>('all')
 const currentIndex = ref(0)
 const renderKey = ref(0)
 const isSwitching = ref(false)
+const previewHeight = ref(440)
 const browserWrapperRef = ref<HTMLElement | null>(null)
 let switchFallbackTimer: ReturnType<typeof setTimeout> | null = null
+let resizeObserver: ResizeObserver | null = null
 
 const filteredSketches = computed(() => {
   if (activeProfile.value === 'all') {
@@ -216,6 +219,22 @@ function randomIndex(): number {
   return total > 1 ? Math.floor(Math.random() * total) : 0
 }
 
+function measureStage() {
+  const stage = browserWrapperRef.value
+  if (!stage) {
+    return
+  }
+
+  const header = stage.querySelector<HTMLElement>('.textmode-live-sandbox__header')
+  const headerHeight = header?.getBoundingClientRect().height ?? 40
+  const borderHeight = 2
+
+  const width = stage.clientWidth
+  if (width > 0) {
+    previewHeight.value = Math.max(240, Math.round(width - headerHeight - borderHeight))
+  }
+}
+
 function selectProfile(profile: ApiProfile | 'all') {
   if (activeProfile.value === profile) {
     return
@@ -272,11 +291,18 @@ function showRandomSketch() {
 
 onMounted(() => {
   currentIndex.value = 0
+  measureStage()
+  resizeObserver = new ResizeObserver(measureStage)
+  if (browserWrapperRef.value) {
+    resizeObserver.observe(browserWrapperRef.value)
+  }
 })
 
 onBeforeUnmount(() => {
   clearSwitchFallbackTimer()
   cleanupSandpackElements({ includeHiddenBodyIframes: true })
+  resizeObserver?.disconnect()
+  resizeObserver = null
 })
 </script>
 
@@ -401,7 +427,7 @@ onBeforeUnmount(() => {
   position: relative;
   border-radius: 8px;
   overflow: hidden;
-  min-height: 480px;
+  min-height: 320px;
 }
 
 .example-sketch-browser__stage:focus-visible {
