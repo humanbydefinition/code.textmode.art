@@ -2,30 +2,21 @@
   <div class="example-sketch-browser">
     <!-- Toolbar: library picker + navigation -->
     <div class="example-sketch-browser__toolbar" aria-label="Example sketch navigation">
-      <label class="example-sketch-browser__picker">
-        <span class="example-sketch-browser__picker-label">Library</span>
-        <span class="example-sketch-browser__picker-control">
-          <select
-            class="example-sketch-browser__select"
-            :value="activeProfile"
-            :aria-label="`Filter by library: ${activeProfile}`"
-            @change="onProfileChange"
-          >
-            <option v-for="option in profileOptions" :key="option.id" :value="option.id">
-              {{ option.label }}
-            </option>
-          </select>
-          <svg
-            class="example-sketch-browser__picker-chevron"
-            viewBox="0 0 16 16"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-          >
-            <path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-          </svg>
-        </span>
-      </label>
+      <div class="example-sketch-browser__pills" role="group" aria-label="Filter by library">
+        <button
+          v-for="profile in profiles"
+          :key="profile.id"
+          class="example-sketch-browser__pill"
+          :class="{ 'is-active': activeProfiles.has(profile.id) }"
+          type="button"
+          :aria-pressed="activeProfiles.has(profile.id)"
+          :disabled="isSoleActive(profile.id)"
+          :title="`Show ${profile.label} examples`"
+          @click="toggleProfile(profile.id)"
+        >
+          {{ profile.label }}
+        </button>
+      </div>
 
       <div class="example-sketch-browser__nav">
         <button
@@ -122,18 +113,13 @@ const props = withDefaults(defineProps<{
 
 const profiles = [
   { id: 'textmode.js', label: 'textmode.js' },
-  { id: 'textmode.synth.js', label: 'synth' },
-  { id: 'textmode.filters.js', label: 'filters' },
-  { id: 'textmode.figlet.js', label: 'figlet' },
-  { id: 'textmode.export.js', label: 'export' },
+  { id: 'textmode.synth.js', label: 'tm.synth.js' },
+  { id: 'textmode.filters.js', label: 'tm.filters.js' },
+  { id: 'textmode.figlet.js', label: 'tm.figlet.js' },
+  { id: 'textmode.export.js', label: 'tm.export.js' },
 ] as const
 
-const profileOptions = computed(() => [
-  { id: 'all', label: 'All libraries' },
-  ...profiles.map((profile) => ({ id: profile.id, label: profile.label })),
-])
-
-const activeProfile = ref<ApiProfile | 'all'>('all')
+const activeProfiles = ref<Set<ApiProfile>>(new Set(profiles.map((profile) => profile.id)))
 const currentIndex = ref(0)
 const renderKey = ref(0)
 const isSwitching = ref(false)
@@ -143,10 +129,7 @@ let switchFallbackTimer: ReturnType<typeof setTimeout> | null = null
 let resizeObserver: ResizeObserver | null = null
 
 const filteredSketches = computed(() => {
-  if (activeProfile.value === 'all') {
-    return props.source
-  }
-  return props.source.filter((sketch) => sketch.profile === activeProfile.value)
+  return props.source.filter((sketch) => activeProfiles.value.has(sketch.profile))
 })
 
 const hasSketches = computed(() => filteredSketches.value.length > 0)
@@ -214,11 +197,6 @@ function cleanupSandpackElements(options: { includeHiddenBodyIframes?: boolean }
   })
 }
 
-function randomIndex(): number {
-  const total = filteredSketches.value.length
-  return total > 1 ? Math.floor(Math.random() * total) : 0
-}
-
 function measureStage() {
   const stage = browserWrapperRef.value
   if (!stage) {
@@ -235,20 +213,30 @@ function measureStage() {
   }
 }
 
-function selectProfile(profile: ApiProfile | 'all') {
-  if (activeProfile.value === profile) {
-    return
-  }
-  const target = currentSketch.value
-  activeProfile.value = profile
-  const index = target ? filteredSketches.value.findIndex((s) => s.id === target.id) : -1
-  currentIndex.value = index === -1 ? randomIndex() : index
-  renderKey.value += 1
+function isSoleActive(profile: ApiProfile): boolean {
+  return activeProfiles.value.size === 1 && activeProfiles.value.has(profile)
 }
 
-function onProfileChange(event: Event) {
-  const value = (event.target as HTMLSelectElement).value
-  selectProfile(value as ApiProfile | 'all')
+function toggleProfile(profile: ApiProfile) {
+  if (isSoleActive(profile)) {
+    return
+  }
+
+  const target = currentSketch.value
+  const next = new Set(activeProfiles.value)
+  if (next.has(profile)) {
+    next.delete(profile)
+  } else {
+    next.add(profile)
+  }
+  activeProfiles.value = next
+
+  const index = target ? filteredSketches.value.findIndex((s) => s.id === target.id) : -1
+  const nextIndex = index === -1 ? 0 : index
+  if (nextIndex !== currentIndex.value) {
+    currentIndex.value = nextIndex
+    renderKey.value += 1
+  }
 }
 
 async function showSketch(nextIndex: number) {
@@ -322,56 +310,51 @@ onBeforeUnmount(() => {
   flex-wrap: wrap;
 }
 
-/* Library picker (native select) */
-.example-sketch-browser__picker {
+/* Library filter pills */
+.example-sketch-browser__pills {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+}
+
+.example-sketch-browser__pill {
   display: inline-flex;
   align-items: center;
-  gap: 0.5rem;
-}
-
-.example-sketch-browser__picker-label {
-  font-family: var(--textmode-font);
-  font-size: 0.8125rem;
-  color: var(--vp-c-text-2);
-}
-
-.example-sketch-browser__picker-control {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-}
-
-.example-sketch-browser__select {
-  appearance: none;
-  -webkit-appearance: none;
-  padding: 0.375rem 1.875rem 0.375rem 0.625rem;
+  justify-content: center;
+  height: 28px;
+  padding: 0 0.75rem;
+  background: var(--vp-c-bg-soft);
   border: 1px solid var(--vp-c-divider);
-  border-radius: 6px;
-  background-color: var(--vp-c-bg-soft);
-  color: var(--vp-c-text-1);
+  border-radius: 999px;
+  color: var(--vp-c-text-2);
   font-family: var(--textmode-font);
   font-size: 0.8125rem;
-  line-height: 1.4;
+  font-weight: 500;
+  line-height: 1;
   cursor: pointer;
-  transition: border-color 0.2s ease, color 0.2s ease;
+  transition: border-color 0.2s ease, color 0.2s ease, background-color 0.2s ease;
 }
 
-.example-sketch-browser__select:hover {
+.example-sketch-browser__pill:hover:not(:disabled) {
   border-color: var(--vp-c-brand-1);
+  color: var(--vp-c-brand-1);
 }
 
-.example-sketch-browser__select:focus-visible {
+.example-sketch-browser__pill.is-active {
+  background: var(--vp-c-brand-soft);
+  border-color: var(--vp-c-brand-1);
+  color: var(--vp-c-brand-1);
+}
+
+.example-sketch-browser__pill:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.example-sketch-browser__pill:focus-visible {
   outline: 2px solid var(--vp-c-brand-1);
   outline-offset: 2px;
-}
-
-.example-sketch-browser__picker-chevron {
-  position: absolute;
-  right: 0.5rem;
-  width: 14px;
-  height: 14px;
-  color: var(--vp-c-text-2);
-  pointer-events: none;
 }
 
 .example-sketch-browser__nav {
@@ -468,12 +451,7 @@ onBeforeUnmount(() => {
     align-items: flex-start;
   }
 
-  .example-sketch-browser__picker {
-    width: 100%;
-  }
-
-  .example-sketch-browser__picker-control,
-  .example-sketch-browser__select {
+  .example-sketch-browser__pills {
     width: 100%;
   }
 
