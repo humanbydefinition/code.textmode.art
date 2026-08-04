@@ -1,207 +1,71 @@
 ---
-title: Getting started
-description: A step-by-step guide to setting up your local environment for contributing to the textmode.js documentation and codebase.
+title: Contribute to the documentation site
+description: Set up code.textmode.art locally and submit documentation-site changes.
 ---
 
-# Getting started
+# Contribute to the documentation site
 
-Ready to contribute to textmode.js documentation? This guide will help you set up your local development environment. (ง •̀ω•́)ง
+This guide covers local development for `code.textmode.art`. For library or add-on changes, use the
+[code contribution guide](/docs/contributing/code).
 
 ## Prerequisites
 
-Before you begin, make sure you have:
+- Node.js 24 LTS, as configured by the repository's `.nvmrc` file
+- npm, Git, a GitHub account, and a code editor
 
-- **[Node.js](https://nodejs.org/)** - Version 18 or higher recommended
-- **npm** - Comes with Node.js
-- **Git** - For version control
-- **A code editor** - VS Code, Sublime Text, or your favorite editor
-- **A GitHub account** - For submitting contributions
+## Set up the site
 
-## Setup steps
-
-### 1. Fork the repository
-
-Visit the [code.textmode.art repository](https://github.com/humanbydefinition/code.textmode.art) and click the **Fork** button in the top-right corner.
-
-### 2. Clone your fork
+1. Fork [`humanbydefinition/code.textmode.art`](https://github.com/humanbydefinition/code.textmode.art).
+2. Clone your fork and create a branch from `dev`.
+3. Install the locked dependencies and start VitePress:
 
 ```bash
-# Replace YOUR-USERNAME with your GitHub username
 git clone https://github.com/YOUR-USERNAME/code.textmode.art.git
 cd code.textmode.art
-```
-
-### 3. Install dependencies
-
-```bash
-npm install
-```
-
-This will install VitePress and all required dependencies.
-
-### 4. Start the development server
-
-```bash
+git checkout -b docs/describe-your-change origin/dev
+nvm install
+npm ci
 npm run dev
 ```
 
-The documentation site will be available at `http://localhost:4175`. The dev server supports hot reload - your code changes will appear instantly!
+The site is available at `http://localhost:4175` with hot reload.
 
-### 5. Create a branch
+## Find the source
 
-Always create a new branch for your changes:
+- `docs/` contains guides and contribution pages.
+- `docs/examples/` contains reusable examples included by documentation pages.
+- `.vitepress/configs/` contains navigation and sidebar configuration.
+- `.vitepress/data/editorSketches.data.ts` dynamically fetches and refactors gallery sketches from `editor.textmode.art`.
+- `.vitepress/data/contributors.json` and `.vitepress/data/contribution-types.json` are the canonical contributor data.
+- `api/` contains generated API reference files; do not edit them by hand.
 
-```bash
-# Use a descriptive branch name
-git checkout -b clarify-installation-docs
-# or
-git checkout -b fix-typo-first-sketch
-# or
-git checkout -b improve-export-docs
-```
+See [Improve documentation](/docs/contributing/improve-docs) for writing and example guidance, or
+[Submit an example sketch](/docs/contributing/submit-a-sketch) to choose the correct sketch workflow.
 
-## Project structure
+## Validate the change
 
-Understanding the project layout helps you find what you need:
-
-```
-.vitepress/
-├── config.mts          # VitePress configuration
-├── data/
-│   ├── sketches.json             # Example sketch metadata
-│   ├── contribution-types.json   # Ordered contribution-type catalog
-│   └── contributors.json         # Canonical contributor profiles
-└── theme/              # Custom theme components
-
-docs/                   # Documentation pages (you'll mostly edit here)
-├── examples/           # Example pages with interactive demos
-├── contributing/       # Contributing guides
-└── *.md                # Core documentation pages
-
-api/                    # Auto-generated API reference
-blog/                   # Blog posts
-public/                 # Static assets (images, SVGs)
-```
-
-## Key files
-
-- **[`.vitepress/config.mts`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/config.mts)** - VitePress configuration
-- **[`.vitepress/data/sketches.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/sketches.json)** - Example sketch metadata used by the docs
-- **[`.vitepress/data/contribution-types.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contribution-types.json)** - Ordered catalog of supported contribution keys, labels, descriptions, and emoji
-- **[`.vitepress/data/contributors.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contributors.json)** - Canonical ecosystem contributor profiles, contribution keys, and optional links
-
-## Making changes
-
-### Editing documentation
-
-Documentation files are in the `docs/` folder. They use Markdown format (`.md` files):
-
-```markdown
----
-title: Page Title
----
-
-# Heading
-
-Your content here...
-```
-
-### Testing your changes
-
-As you edit files, the dev server will automatically reload. Check your changes at `http://localhost:4175`.
-
-### Building the site
-
-Before submitting, verify the site builds without errors:
+Run the production build before opening a pull request:
 
 ```bash
 npm run build
 ```
 
-If the build succeeds, you're ready to submit!
-
-## Submitting your contribution
-
-### 1. Commit your changes
+For contributor registry or catalog changes, also run:
 
 ```bash
-# Stage your changes
-git add .
-
-# Commit with a clear message
-git commit -m "Clarify first sketch setup"
-```
-
-Write clear commit messages that describe **what** you changed and **why**.
-
-### 2. Push to your fork
-
-```bash
-# Push your branch to GitHub
-git push origin your-branch-name
-```
-
-### 3. Create a pull request
-
-1. Visit your fork on GitHub
-2. Click **"Pull request"** or **"Compare & pull request"**
-3. Provide a clear title and description
-4. Click **"Create pull request"**
-
-## Pull request guidelines
-
-When submitting a pull request:
-
-- **One feature per PR** - Keep changes focused
-- **Clear description** - Explain what you changed and why
-- **Test locally** - Make sure the site builds
-- **Follow existing style** - Match the formatting of surrounding code
-- **Be patient** - Maintainers will review your PR as soon as possible
-
-## Getting credit
-
-To credit a contributor, maintainers update the canonical
-[contributors registry](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contributors.json)
-and run:
-
-```bash
-npm run contributors:validate
-npm run contributors:render
 npm run check:contributors
 ```
 
-The registry stores optional profile links and references keys from the separate
-[contribution-type catalog](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contribution-types.json).
-Together they drive every official textmode.js Contributors section.
+Check edited pages in the browser at narrow and wide viewport sizes. Test links and interactive examples, and include
+screenshots or recordings when the rendered result changes.
 
-You'll appear on the [Contributors page](/docs/contributors) when your PR is merged!
+## Submit the change
 
-## Tips for success
-
-- **Start small** - Fix a typo or improve a single paragraph first
-- **Ask questions** - Open an issue or ask in Discord if you're unsure
-- **Read existing docs** - Match the style and tone of existing content
-- **Be responsive** - Reply to feedback on your pull request
-- **Have fun!** - Contributing should be enjoyable
-
-## Common tasks
-
-### Adding a sketch
-
-1. Add entry to `.vitepress/data/sketches.json`
-2. Test the sketch works correctly
-3. Submit pull request
-
-### Fixing a typo
-
-1. Find the file in `docs/`
-2. Make the correction
-3. Submit pull request
+Push your branch and open a focused pull request against `dev`. Explain what changed and why, link related issues, and
+list the commands or manual checks you ran. Maintainers review contributions on a best-effort basis and may request
+changes to scope, content, examples, or validation.
 
 ## Need help?
 
-- **GitHub Issues** - [Open an issue](https://github.com/humanbydefinition/code.textmode.art/issues)
-- **Discord** - [Join the community](https://discord.gg/sjrw8QXNks)
-- **Email** - Contact the maintainers directly
-
-Thank you for contributing to textmode.js! 🚀
+- [Open a documentation issue](https://github.com/humanbydefinition/code.textmode.art/issues)
+- [Join the Discord community](https://discord.gg/sjrw8QXNks)
