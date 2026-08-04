@@ -2,7 +2,7 @@
 
 Thank you for helping improve `code.textmode.art`.
 
-Start with the [documentation-site guide](https://code.textmode.art/docs/contributing/getting-started) for repository
+Start with the [documentation-site guide](https://code.textmode.art/docs/contributing/docs) for repository
 routing, setup, workflow, writing, validation, and review expectations. Library changes follow the shared
 [code contribution guide](https://code.textmode.art/docs/contributing/code).
 
