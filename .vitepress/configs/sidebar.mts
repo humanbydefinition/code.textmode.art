@@ -107,7 +107,6 @@ const docsSidebar: DefaultTheme.SidebarItem[] = [
             text: "Submit a sketch",
             link: "/docs/contributing/submit-a-sketch",
           },
-          { text: "Improve docs", link: "/docs/contributing/improve-docs" },
           { text: "Contributors", link: "/docs/contributors" },
         ],
       },
