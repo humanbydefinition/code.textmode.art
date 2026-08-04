@@ -100,7 +100,7 @@ const docsSidebar: DefaultTheme.SidebarItem[] = [
           { text: "Overview", link: "/docs/contributing/" },
           { text: "Contribute code", link: "/docs/contributing/code" },
           {
-            text: "Documentation site",
+            text: "Contribute docs",
             link: "/docs/contributing/getting-started",
           },
           {
