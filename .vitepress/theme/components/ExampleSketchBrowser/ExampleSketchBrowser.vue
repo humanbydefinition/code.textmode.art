@@ -115,13 +115,9 @@ defineOptions({ name: 'ExampleSketchBrowser' })
 
 const props = withDefaults(defineProps<{
   source?: ApiExampleSketch[]
-  initialId?: string
 }>(), {
   source: () => apiExamples,
-  initialId: '',
 })
-
-const HASH_PREFIX = 'ex-'
 
 const profiles = [
   { id: 'textmode.js', label: 'textmode.js' },
@@ -140,6 +136,7 @@ const activeProfile = ref<ApiProfile | 'all'>('all')
 const currentIndex = ref(0)
 const renderKey = ref(0)
 const isSwitching = ref(false)
+const browserWrapperRef = ref<HTMLElement | null>(null)
 let switchFallbackTimer: ReturnType<typeof setTimeout> | null = null
 
 const filteredSketches = computed(() => {
@@ -214,14 +211,9 @@ function cleanupSandpackElements(options: { includeHiddenBodyIframes?: boolean }
   })
 }
 
-function updateUrlHash(sketch: ApiExampleSketch) {
-  if (typeof history === 'undefined' || typeof location === 'undefined') {
-    return
-  }
-  const nextHash = `#${HASH_PREFIX}${sketch.slug}`
-  if (location.hash !== nextHash) {
-    history.replaceState(null, '', nextHash)
-  }
+function randomIndex(): number {
+  const total = filteredSketches.value.length
+  return total > 1 ? Math.floor(Math.random() * total) : 0
 }
 
 function selectProfile(profile: ApiProfile | 'all') {
@@ -231,7 +223,7 @@ function selectProfile(profile: ApiProfile | 'all') {
   const target = currentSketch.value
   activeProfile.value = profile
   const index = target ? filteredSketches.value.findIndex((s) => s.id === target.id) : -1
-  currentIndex.value = index === -1 ? 0 : index
+  currentIndex.value = index === -1 ? randomIndex() : index
   renderKey.value += 1
 }
 
@@ -257,10 +249,6 @@ async function showSketch(nextIndex: number) {
   currentIndex.value = normalizedIndex
   renderKey.value += 1
 
-  if (currentSketch.value) {
-    updateUrlHash(currentSketch.value)
-  }
-
   await nextTick()
   switchFallbackTimer = setTimeout(finishSwitch, 1500)
 }
@@ -282,31 +270,8 @@ function showRandomSketch() {
   showSketch(currentIndex.value + offset)
 }
 
-function resolveInitialIndex(): number {
-  if (typeof location === 'undefined') {
-    return 0
-  }
-  const hash = location.hash.replace(/^#/, '')
-  if (hash.startsWith(HASH_PREFIX)) {
-    const slug = hash.slice(HASH_PREFIX.length)
-    const index = filteredSketches.value.findIndex((sketch) => sketch.slug === slug)
-    if (index !== -1) {
-      return index
-    }
-  }
-  if (props.initialId) {
-    const index = filteredSketches.value.findIndex(
-      (sketch) => sketch.slug === props.initialId || sketch.id === props.initialId,
-    )
-    if (index !== -1) {
-      return index
-    }
-  }
-  return 0
-}
-
 onMounted(() => {
-  currentIndex.value = resolveInitialIndex()
+  currentIndex.value = randomIndex()
 })
 
 onBeforeUnmount(() => {
