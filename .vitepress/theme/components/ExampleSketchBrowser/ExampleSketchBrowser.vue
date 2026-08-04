@@ -456,8 +456,9 @@ onBeforeUnmount(() => {
   }
 
   .example-sketch-browser__nav {
-    margin-left: 0;
+    margin-left: auto;
     flex: 1;
+    justify-content: flex-end;
   }
 }
 </style>

@@ -255,12 +255,7 @@ const panelHeightPx = computed(() => `${Math.max(previewHeightValue.value, edito
 const sandpackClasses = computed(() => mergeSandpackClassNames(props.options))
 const theme = computed(() => isDark.value ? sandpackDark : githubLight)
 const sandpackTemplate = computed(() => props.template || 'static')
-const headerHint = computed(() => {
-  if (props.hintHref) {
-    return props.title || ''
-  }
-  return props.title ? `${props.title} - editable preview` : 'Editable Sandpack preview'
-})
+const headerHint = computed(() => props.title || '')
 const ariaLabel = computed(() => props.title ? `${props.title} live code example` : 'Live code example')
 const hasRenderableFiles = computed(() => Object.keys(sandpackFileMap.value).length > 0)
 const placeholderMessage = computed(() => (
@@ -741,6 +736,7 @@ function toKebabCase(value: string) {
 .textmode-live-sandbox__hint {
   overflow: hidden;
   color: var(--vp-c-text-2);
+  font-family: var(--textmode-font);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
@@ -968,24 +964,29 @@ function toKebabCase(value: string) {
 
 @media (max-width: 560px) {
   .textmode-live-sandbox__header {
-    align-items: flex-start;
+    align-items: stretch;
     flex-direction: column;
     gap: 8px;
   }
 
   .textmode-live-sandbox__title {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 2px;
+    align-items: baseline;
+    gap: 6px;
+    min-width: 0;
+    flex-wrap: wrap;
+  }
+
+  .textmode-live-sandbox__hint-link {
+    flex: 1 0 100%;
   }
 
   .textmode-live-sandbox__hint {
-    text-align: left;
-    white-space: normal;
+    white-space: nowrap;
   }
 
   .textmode-live-sandbox__toggle {
     width: 100%;
+    flex: 0 0 auto;
   }
 }
 </style>
