@@ -67,13 +67,3 @@ Contribution details and profile links are maintained on the [textmode.js contri
 ## License
 
 Documentation content is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Code examples are licensed under [MIT](https://opensource.org/licenses/MIT).
-
----
-
-<div align="center">
-
-<br />
-
-**[↑ back to top](#codetextmodeart)**
-
-</div>
