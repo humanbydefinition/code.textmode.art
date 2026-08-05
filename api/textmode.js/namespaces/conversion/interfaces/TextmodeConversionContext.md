@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: TextmodeConversionContext
 description: Interface for the context provided to conversion strategies during shader and uniform creation.
 category: Interfaces
 api: true
 namespace: conversion
 kind: Interface
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 isInterface: true
 ---
 

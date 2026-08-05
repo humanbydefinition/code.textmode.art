@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: VideoExportOptions
 description: Options for exporting the textmode content to video format.
 category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.export.js](../index.md) / VideoExportOptions
@@ -22,6 +22,46 @@ Options for exporting the textmode content to video format.
 
 
 ## Properties
+
+### bitrate?
+
+```ts
+optional bitrate?: number | VideoBitratePreset;
+```
+
+Target bitrate in bits per second or a bitrate preset. Defaults to `'medium'`.
+
+Bitrate controls how much encoded data is available per second of video. Higher values can preserve more detail
+in noisy or fast-changing sketches, but create larger files. Presets are resolved from the export dimensions and
+frame rate; numeric values are passed directly to the encoder.
+
+
+***
+
+### bitrateMode?
+
+```ts
+optional bitrateMode?: VideoBitrateMode;
+```
+
+Encoder bitrate allocation mode. Defaults to `'variable'`.
+
+Use `'variable'` for most exports so simple frames can compress efficiently and complex frames can receive more
+bits. Use `'constant'` only when a steadier data rate is more important than compression efficiency.
+
+
+***
+
+### debugLogging?
+
+```ts
+optional debugLogging?: boolean;
+```
+
+Enables verbose logging. Defaults to `false`.
+
+
+***
 
 ### filename?
 
@@ -67,49 +107,6 @@ Target frame rate for the export, in frames per second. Defaults to `60`.
 
 ***
 
-### bitrate?
-
-```ts
-optional bitrate?: number | VideoBitratePreset;
-```
-
-Target bitrate in bits per second or a bitrate preset. Defaults to `'medium'`.
-
-Bitrate controls how much encoded data is available per second of video. Higher values can preserve more detail
-in noisy or fast-changing sketches, but create larger files. Presets are resolved from the export dimensions and
-frame rate; numeric values are passed directly to the encoder.
-
-
-***
-
-### bitrateMode?
-
-```ts
-optional bitrateMode?: VideoBitrateMode;
-```
-
-Encoder bitrate allocation mode. Defaults to `'variable'`.
-
-Use `'variable'` for most exports so simple frames can compress efficiently and complex frames can receive more
-bits. Use `'constant'` only when a steadier data rate is more important than compression efficiency.
-
-
-***
-
-### latencyMode?
-
-```ts
-optional latencyMode?: VideoLatencyMode;
-```
-
-Encoder latency mode. Defaults to `'quality'`.
-
-Use `'quality'` for deterministic exports; it prioritizes completed output and avoids dropped frames. Use
-`'realtime'` only for low-latency use cases where dropped frames are acceptable.
-
-
-***
-
 ### hardwareAcceleration?
 
 ```ts
@@ -139,35 +136,16 @@ Use `0` to request every frame as a key frame.
 
 ***
 
-### pixelDensity?
+### latencyMode?
 
 ```ts
-optional pixelDensity?: number;
+optional latencyMode?: VideoLatencyMode;
 ```
 
-Pixel density used during export. Defaults to `1` so video dimensions match the live canvas.
+Encoder latency mode. Defaults to `'quality'`.
 
-
-***
-
-### signal?
-
-```ts
-optional signal?: AbortSignal;
-```
-
-Abort signal for cancelling an in-progress export.
-
-
-***
-
-### transparent?
-
-```ts
-optional transparent?: boolean;
-```
-
-When true, attempts to preserve alpha data in WebM recordings. MP4 exports reject this option.
+Use `'quality'` for deterministic exports; it prioritizes completed output and avoids dropped frames. Use
+`'realtime'` only for low-latency use cases where dropped frames are acceptable.
 
 
 ***
@@ -193,11 +171,44 @@ Progress callback invoked throughout the recording lifecycle.
 
 ***
 
-### debugLogging?
+### pixelDensity?
 
 ```ts
-optional debugLogging?: boolean;
+optional pixelDensity?: number;
 ```
 
-Enables verbose logging. Defaults to `false`.
+Pixel density used during export. Defaults to `1` so video dimensions match the live canvas.
+
+
+***
+
+### prepareFrame?
+
+```ts
+optional prepareFrame?: PrepareExportFrame;
+```
+
+Prepares external media before each deterministic frame is redrawn.
+
+
+***
+
+### signal?
+
+```ts
+optional signal?: AbortSignal;
+```
+
+Abort signal for cancelling an in-progress export.
+
+
+***
+
+### transparent?
+
+```ts
+optional transparent?: boolean;
+```
+
+When true, attempts to preserve alpha data in WebM recordings. MP4 exports reject this option.
 

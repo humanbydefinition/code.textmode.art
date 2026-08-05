@@ -1,6 +1,6 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: brightnessRange
 description: Capture only source pixels whose brightness is inside the inclusive byte range.
 category: Methods
@@ -8,7 +8,7 @@ api: true
 owner: TextmodeSource
 namespace: media
 kind: Method
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../../../index.md) / [media](../../../index.md) / [TextmodeSource](../../TextmodeSource.md) / brightnessRange

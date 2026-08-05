@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: TouchPinchEventData
 description: Pinch gesture event data describing the scaling factor between the initial and current distance.
 category: Interfaces
 api: true
 namespace: input.touch
 kind: Interface
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 isInterface: true
 ---
 

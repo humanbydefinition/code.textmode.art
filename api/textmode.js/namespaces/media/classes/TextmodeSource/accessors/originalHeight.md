@@ -1,6 +1,6 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: originalHeight
 description: Original source height in pixels.
 category: Accessors
@@ -8,7 +8,7 @@ api: true
 owner: TextmodeSource
 namespace: media
 kind: Accessor
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../../../index.md) / [media](../../../index.md) / [TextmodeSource](../../TextmodeSource.md) / originalHeight

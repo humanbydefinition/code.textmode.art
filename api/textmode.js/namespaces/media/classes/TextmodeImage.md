@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: TextmodeImage
 description: Image source for textmode rendering.
 category: Classes
 api: true
 namespace: media
 kind: Class
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 hasConstructor: false
 ---
 
@@ -28,7 +28,33 @@ and configure conversion through inherited chainable methods.
 
 - [`TextmodeSource`](TextmodeSource.md)
 
-## Accessors
+## Character & color mapping
+
+| Method | Description |
+| ------ | ------ |
+| [background](TextmodeImage/methods/background.md) | Set the background color used for transparent pixels. |
+| [cellColor](TextmodeImage/methods/cellColor.md) | Set the cell color used when [cellColorMode](TextmodeSource/methods/cellColorMode.md) is `'fixed'`. |
+| [cellColorMode](TextmodeImage/methods/cellColorMode.md) | Set whether cell color is sampled from the source or fixed. |
+| [characters](TextmodeImage/methods/characters.md) | Set the characters used for brightness mapping. |
+| [charColor](TextmodeImage/methods/charColor.md) | Set the character color used when [charColorMode](TextmodeSource/methods/charColorMode.md) is `'fixed'`. |
+| [charColorMode](TextmodeImage/methods/charColorMode.md) | Set whether character color is sampled from the source or fixed. |
+
+## Conversion
+
+| Method | Description |
+| ------ | ------ |
+| [brightnessRange](TextmodeImage/methods/brightnessRange.md) | Capture only source pixels whose brightness is inside the inclusive byte range. |
+| [clearConversions](TextmodeImage/methods/clearConversions.md) | Clear this source's conversion stack and return to single-mode conversion. |
+| [conversionMode](TextmodeImage/methods/conversionMode.md) | Select the conversion mode for this source. |
+| [conversions](TextmodeImage/methods/conversions.md) | Set an ordered conversion stack for this source. |
+
+## Resource lifecycle
+
+| Method | Description |
+| ------ | ------ |
+| [dispose](TextmodeImage/methods/dispose.md) | Dispose of the resource and free associated WebGL textures. |
+
+## Source dimensions
 
 | Accessor | Description |
 | ------ | ------ |
@@ -38,22 +64,11 @@ and configure conversion through inherited chainable methods.
 | [texture](TextmodeImage/accessors/texture.md) | WebGL texture backing this source. |
 | [width](TextmodeImage/accessors/width.md) | Ideal draw width in grid cells. |
 
-## Methods
+## Source transforms
 
 | Method | Description |
 | ------ | ------ |
-| [background](TextmodeImage/methods/background.md) | Set the background color used for transparent pixels. |
-| [brightnessRange](TextmodeImage/methods/brightnessRange.md) | Capture only source pixels whose brightness is inside the inclusive byte range. |
-| [cellColor](TextmodeImage/methods/cellColor.md) | Set the cell color used when [cellColorMode](TextmodeSource/methods/cellColorMode.md) is `'fixed'`. |
-| [cellColorMode](TextmodeImage/methods/cellColorMode.md) | Set whether cell color is sampled from the source or fixed. |
-| [characters](TextmodeImage/methods/characters.md) | Set the characters used for brightness mapping. |
-| [charColor](TextmodeImage/methods/charColor.md) | Set the character color used when [charColorMode](TextmodeSource/methods/charColorMode.md) is `'fixed'`. |
-| [charColorMode](TextmodeImage/methods/charColorMode.md) | Set whether character color is sampled from the source or fixed. |
 | [charRotation](TextmodeImage/methods/charRotation.md) | Rotate generated characters. |
-| [clearConversions](TextmodeImage/methods/clearConversions.md) | Clear this source's conversion stack and return to single-mode conversion. |
-| [conversionMode](TextmodeImage/methods/conversionMode.md) | Select the conversion mode for this source. |
-| [conversions](TextmodeImage/methods/conversions.md) | Set an ordered conversion stack for this source. |
-| [dispose](TextmodeImage/methods/dispose.md) | Dispose of the resource and free associated WebGL textures. |
 | [flipX](TextmodeImage/methods/flipX.md) | Flip the source horizontally. |
 | [flipY](TextmodeImage/methods/flipY.md) | Flip the source vertically. |
 | [invert](TextmodeImage/methods/invert.md) | Enable or disable source color inversion. |

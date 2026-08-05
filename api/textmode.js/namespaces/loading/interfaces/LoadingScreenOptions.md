@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: LoadingScreenOptions
 description: Options for configuring the loading screen.
 category: Interfaces
 api: true
 namespace: loading
 kind: Interface
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 isInterface: true
 ---
 

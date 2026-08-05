@@ -1,12 +1,12 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: TextmodeOptions
 description: Options when creating a Textmodifier instance via textmode.create.
 category: Type Aliases
 api: true
 kind: TypeAlias
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../index.md) / TextmodeOptions

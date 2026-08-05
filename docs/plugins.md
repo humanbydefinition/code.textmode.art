@@ -15,12 +15,13 @@ Pass plugins through [`TextmodeOptions.plugins`](/api/textmode.js/type-aliases/T
 
 ```js
 import { textmode } from "textmode.js";
-import { SynthPlugin } from "textmode.synth.js";
+import { FigletPlugin } from "textmode.figlet.js";
+import { FiltersPlugin } from "textmode.filters.js";
 
 const t = textmode.create({
   width: 800,
   height: 600,
-  plugins: [SynthPlugin],
+  plugins: [FigletPlugin, FiltersPlugin],
 });
 ```
 

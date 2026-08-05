@@ -1,6 +1,6 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: figTextBounds
 description: Measure the rendered bounds of a FIGlet string in grid cells.
 category: Methods
@@ -8,7 +8,7 @@ api: true
 owner: TextmodifierFigletExtensions
 kind: Method
 ecosystem: textmode.js
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.figlet.js](../../../index.md) / [TextmodifierFigletExtensions](../../TextmodifierFigletExtensions.md) / figTextBounds

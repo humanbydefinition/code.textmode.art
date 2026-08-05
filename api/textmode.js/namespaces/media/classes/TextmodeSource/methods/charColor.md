@@ -1,6 +1,6 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: charColor
 description: Set the character color used when charColorMode is 'fixed'.
 category: Methods
@@ -8,7 +8,7 @@ api: true
 owner: TextmodeSource
 namespace: media
 kind: Method
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../../../index.md) / [media](../../../index.md) / [TextmodeSource](../../TextmodeSource.md) / charColor

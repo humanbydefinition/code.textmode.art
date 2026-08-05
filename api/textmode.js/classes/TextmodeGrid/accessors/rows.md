@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: rows
 description: Number of rows in the grid.
 category: Accessors
 api: true
 owner: TextmodeGrid
 kind: Accessor
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../index.md) / [TextmodeGrid](../../TextmodeGrid.md) / rows

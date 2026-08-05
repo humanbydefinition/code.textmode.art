@@ -1,6 +1,6 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: framebuffer
 description: Framebuffer containing the atlas texture data.
 category: Accessors
@@ -8,7 +8,7 @@ api: true
 owner: TextmodeTileset
 namespace: fonts
 kind: Accessor
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../../../index.md) / [fonts](../../../index.md) / [TextmodeTileset](../../TextmodeTileset.md) / framebuffer

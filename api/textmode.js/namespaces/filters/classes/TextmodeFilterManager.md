@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: TextmodeFilterManager
 description: Registers filter shaders and applies layer/global filter chains.
 category: Classes
 api: true
 namespace: filters
 kind: Class
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 hasConstructor: false
 ---
 

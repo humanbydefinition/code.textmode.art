@@ -130,7 +130,6 @@ See [Framebuffers](/docs/framebuffers) for offscreen rendering patterns.
 
 ## Related APIs
 
-- [`Textmodifier.createFilterShader()`](/api/textmode.js/classes/Textmodifier/methods/createFilterShader)
 - [`Textmodifier.createMaterialShader()`](/api/textmode.js/classes/Textmodifier/methods/createMaterialShader)
 - [`Textmodifier.createShader()`](/api/textmode.js/classes/Textmodifier#createshader)
 - [`Textmodifier.shader()`](/api/textmode.js/classes/Textmodifier#shader)

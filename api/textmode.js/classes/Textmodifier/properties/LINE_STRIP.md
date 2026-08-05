@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: LINE_STRIP
 description: Draw consecutive vertices as one connected open path.
 category: Properties
 api: true
 owner: Textmodifier
 kind: Property
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / LINE\_STRIP

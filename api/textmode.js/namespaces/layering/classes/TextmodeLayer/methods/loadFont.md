@@ -1,6 +1,6 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: loadFont
 description: Load a font into this layer from a URL/path or existing TextmodeFont.
 category: Methods
@@ -8,7 +8,7 @@ api: true
 owner: TextmodeLayer
 namespace: layering
 kind: Method
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../../../index.md) / [layering](../../../index.md) / [TextmodeLayer](../../TextmodeLayer.md) / loadFont
@@ -42,7 +42,7 @@ const t = textmode.create({
 	fontSize: 16,
 });
 
-const detailedLayer = t.layers.add({ blendMode: 'screen' });
+const detailedLayer = t.layers.add({ blendMode: t.BLEND_SCREEN });
 const labelLayer = t.layers.add();
 
 function drawText(text, x, y, rgb = [255, 255, 255]) {

@@ -1,12 +1,12 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: TextmodeGlyphRamp
 description: Immutable character sequence for mapping numbers to glyphs.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 hasConstructor: true
 ---
 

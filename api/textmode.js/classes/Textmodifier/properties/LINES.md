@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: LINES
 description: Draw each pair of recorded vertices as an independent line segment.
 category: Properties
 api: true
 owner: Textmodifier
 kind: Property
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / LINES

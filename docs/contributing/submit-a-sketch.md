@@ -1,31 +1,30 @@
 ---
 title: Submit a Sketch
-description: How to submit your textmode.js sketch or example to the code.textmode.art documentation showcase and gallery.
+description: How to submit your textmode.js sketch or example to the code.textmode.art documentation gallery.
 ---
 
 # Submit an example sketch
 
-There are now two different sketch contribution paths in the `textmode.js` / `textmode.art` ecosystem:
+There are two different sketch contribution paths in the `textmode.js` / `textmode.art` ecosystem:
 
-- **Gallery / showcase sketches** live in the [`code.textmode.art`](https://github.com/humanbydefinition/code.textmode.art) repository and power the public documentation showcase.
+- **Gallery sketches** live in the [`editor.textmode.art`](https://github.com/humanbydefinition/editor.textmode.art) repository under `sketches/<slug>/` and are automatically published to the documentation site on `code.textmode.art`.
 - **API example sketches** belong to the repository that owns the source example used by the generated API docs.
 
 This page explains the difference so you can submit your sketch to the right repository. (ﾉ◕ヮ◕)ﾉ\*:･ﾟ
 
 ## Choose the right track
 
-### Gallery / showcase sketches
+### Gallery sketches
 
-Use this route if your sketch is meant to be a standalone community example for the website.
+Use this route if your sketch is meant to be a standalone community example for the live editor.
 
-These sketches are already used in two places:
+These sketches are dynamically fetched and shown on `code.textmode.art`:
 
 - The landing page displays **3 random featured sketches** at a time.
 - Visitors can click **Shuffle** to rotate that selection.
 - Reloading the landing page picks another random set.
-- The full showcase collection is also displayed on [Examples](/docs/examples).
 
-Submit gallery / showcase sketches to the [`code.textmode.art`](https://github.com/humanbydefinition/code.textmode.art) repository.
+Submit gallery sketches to the [`editor.textmode.art`](https://github.com/humanbydefinition/editor.textmode.art) repository under `sketches/<slug>/`.
 
 ### API example sketches
 
@@ -42,6 +41,8 @@ Right now, that means:
 
 As a rule of thumb: if an API page includes a **View sketch on GitHub** link, submit your change to the repository linked there.
 
+API example sketches are automatically enrolled on the [Examples](/docs/examples) page: every live sketch embedded in the generated API reference becomes a selectable entry in the interactive carousel there, so visitors can browse the hundreds of runnable examples side by side with the docs.
+
 ## What makes a good sketch?
 
 The best sketches are:
@@ -52,15 +53,15 @@ The best sketches are:
 - **Self-contained** - Avoid unnecessary dependencies
 - **Visually interesting** - Show why the technique is worth learning
 
-## Submitting a gallery / showcase sketch
+## Submitting a gallery sketch
 
-If your sketch is for the public docs showcase:
+If your sketch is for the public gallery:
 
-1. Fork the [code.textmode.art repository](https://github.com/humanbydefinition/code.textmode.art)
-2. Add or update the relevant showcase sketch files and metadata
-3. Submit a pull request with a short explanation of what the sketch demonstrates
+1. Fork the [editor.textmode.art repository](https://github.com/humanbydefinition/editor.textmode.art)
+2. Add your sketch folder under `sketches/<slug>/` containing `meta.json`, `sketch.js`, and `og.png`
+3. Submit a pull request to `editor.textmode.art` with a short explanation of what the sketch demonstrates
 
-The current showcase metadata lives in [`.vitepress/data/sketches.json`](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/sketches.json).
+When merged into `editor.textmode.art`'s `main` branch, your sketch will be fetched dynamically and refactored automatically to run on `code.textmode.art`.
 
 Contributor recognition on the site comes from the canonical
 [contributors registry](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contributors.json).
@@ -79,19 +80,17 @@ If you want your contribution metadata and optional profile links reflected on t
 you may also need a companion PR updating the canonical
 [contributors registry](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contributors.json).
 
-If you are not sure which repository owns a given API example, open an issue first or ask in Discord before starting the implementation.
-
 ## What happens after submission?
 
-### For gallery / showcase sketches
+### For gallery sketches
 
-- Your sketch can appear on the landing page as part of the rotating featured set
-- It can also appear on the [Examples](/docs/examples) page
-- You help expand the public showcase of what people are building with `textmode.js`
+- Your sketch will appear in the live web editor and can appear on `code.textmode.art`'s landing page as part of the rotating featured set
+- You help expand the public gallery of what people are building with `textmode.js`
 
 ### For API example sketches
 
-- Your sketch can improve a specific generated API reference entry for `textmode.js`, `textmode.synth.js`, or another package that adopts the same workflow
+- Your sketch becomes part of the interactive [Examples](/docs/examples) carousel alongside hundreds of other runnable examples
+- It can also improve a specific generated API reference entry for `textmode.js`, `textmode.synth.js`, or another package that adopts the same workflow
 - You help turn the supported API docs into a better learning resource
 
 ## Questions?

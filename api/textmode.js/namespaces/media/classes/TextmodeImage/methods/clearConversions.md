@@ -1,6 +1,6 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: clearConversions
 description: Clear this source's conversion stack and return to single-mode conversion.
 category: Methods
@@ -8,7 +8,7 @@ api: true
 owner: TextmodeImage
 namespace: media
 kind: Method
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../../../index.md) / [media](../../../index.md) / [TextmodeImage](../../TextmodeImage.md) / clearConversions

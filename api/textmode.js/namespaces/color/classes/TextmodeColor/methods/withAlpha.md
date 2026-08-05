@@ -1,6 +1,6 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: withAlpha
 description: Create a copy of this color with a different alpha value.
 category: Methods
@@ -8,7 +8,7 @@ api: true
 owner: TextmodeColor
 namespace: color
 kind: Method
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../../../index.md) / [color](../../../index.md) / [TextmodeColor](../../TextmodeColor.md) / withAlpha

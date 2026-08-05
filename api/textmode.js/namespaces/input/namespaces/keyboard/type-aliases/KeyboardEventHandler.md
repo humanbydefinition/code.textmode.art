@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: KeyboardEventHandler
 description: Keyboard event callback signature.
 category: Type Aliases
 api: true
 namespace: input.keyboard
 kind: TypeAlias
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [keyboard](../index.md) / KeyboardEventHandler

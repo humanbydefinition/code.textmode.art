@@ -3,30 +3,33 @@
     <TextmodeLiveSandbox
       v-bind="sandboxPropsPlain"
       profile="textmode.js"
-      :show-header="!metadata"
+      :show-header="!sketchMeta"
       :title="sandboxTitle"
     >
       <slot />
     </TextmodeLiveSandbox>
 
-    <div v-if="metadata" class="textmode-sketch-overlay">
+    <!-- Overlay with title, author, and social links -->
+    <div v-if="sketchMeta" class="textmode-sketch-overlay">
       <div class="overlay-content">
         <div class="sketch-info">
-          <div class="textmode-sketch-title">{{ metadata.title }}</div>
+          <div class="textmode-sketch-title">{{ sketchMeta.title }}</div>
           <div class="textmode-sketch-author">
             <span class="author-label">by</span>
             <a
               v-if="authorUrl"
-              class="textmode-sketch-author-link"
               :href="authorUrl"
               target="_blank"
               rel="noopener noreferrer"
+              class="textmode-sketch-author-link"
             >
-              {{ metadata.author }}
+              {{ sketchMeta.authorName }}
             </a>
-            <span v-else>{{ metadata.author }}</span>
+            <span v-else>{{ sketchMeta.authorName }}</span>
           </div>
         </div>
+
+        <!-- Contributor Social Links -->
         <div v-if="socialLinks" class="social-links">
           <a
             v-if="socialLinks.website"
@@ -109,11 +112,9 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { sandboxProps } from 'vitepress-plugin-sandpack'
-import sketchMetadata from '../../data/sketches.json'
+import { data as editorSketches } from '../../data/editorSketches.data.ts'
 import { findContributorByName } from '../composables/contributors'
 import TextmodeLiveSandbox from './TextmodeLiveSandbox.vue'
-
-type SketchMetadataMap = typeof sketchMetadata
 
 defineOptions({ name: 'TextmodeSandbox' })
 
@@ -133,35 +134,29 @@ const props = defineProps({
   }
 })
 
-const metadata = computed(() => {
-  if (!props.sketchId) {
-    return null
-  }
-  const key = props.sketchId as keyof SketchMetadataMap
-  return sketchMetadata[key] ?? null
+const sketchMeta = computed(() => {
+  if (!props.sketchId) return null
+  return editorSketches.find((s) => s.slug === props.sketchId) ?? null
 })
 
-// Find contributor by author name
 const contributor = computed(() => {
-  if (!metadata.value?.author) {
+  if (!sketchMeta.value?.authorName) {
     return null
   }
-  return findContributorByName(metadata.value.author)
+  return findContributorByName(sketchMeta.value.authorName)
 })
 
-// Extract GitHub URL from contributor links
 const authorUrl = computed(() => {
-  return contributor.value?.links?.find(l => l.icon === 'github')?.link ?? null
+  return contributor.value?.links?.find((l) => l.icon === 'github')?.link ?? null
 })
 
-// Get social links from contributor data
 const socialLinks = computed(() => {
   if (!contributor.value?.links) {
     return null
   }
   
   const links: Record<string, string> = {}
-  contributor.value.links.forEach(link => {
+  contributor.value.links.forEach((link) => {
     if (['github', 'website', 'instagram', 'twitter', 'mastodon', 'bluesky'].includes(link.icon)) {
       links[link.icon] = link.link
     }
@@ -179,6 +174,66 @@ const sandboxPropsPlain = computed(() => {
 })
 
 const sandboxTitle = computed(() => {
-  return metadata.value?.title || props.title || 'textmode.js sketch'
+  return sketchMeta.value?.title || props.title || 'textmode.js sketch'
 })
 </script>
+
+<style scoped>
+.textmode-sandbox-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.textmode-sketch-overlay {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--vp-c-bg-elv);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 6px;
+  padding: 8px 12px;
+  z-index: 10;
+}
+
+.overlay-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.textmode-sketch-title {
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--vp-c-text-1);
+}
+
+.textmode-sketch-author {
+  font-size: 0.75rem;
+  color: var(--vp-c-text-2);
+}
+
+.textmode-sketch-author-link {
+  color: var(--vp-c-brand-1);
+  text-decoration: none;
+}
+
+.social-links {
+  display: flex;
+  gap: 6px;
+}
+
+.social-link {
+  color: var(--vp-c-text-2);
+  display: flex;
+  align-items: center;
+}
+
+.social-link:hover {
+  color: var(--vp-c-brand-1);
+}
+
+.social-icon {
+  width: 14px;
+  height: 14px;
+}
+</style>

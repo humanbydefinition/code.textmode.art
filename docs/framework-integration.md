@@ -263,4 +263,4 @@ Most of the examples below use the overlay path because it is the lowest-frictio
 - [`Textmodifier.noLoop()`](/api/textmode.js/classes/Textmodifier#noloop)
 - [`Textmodifier.loop()`](/api/textmode.js/classes/Textmodifier#loop)
 - [`Textmodifier.redraw()`](/api/textmode.js/classes/Textmodifier#redraw)
-- [Media](/docs/loadables)
+- [Media](/docs/media-sources)

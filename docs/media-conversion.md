@@ -17,7 +17,7 @@ These source types share the same conversion controls:
 - [`TextmodeVideo`](/api/textmode.js/namespaces/media/classes/TextmodeVideo.md) from [`t.loadVideo()`](/api/textmode.js/classes/Textmodifier#loadvideo)
 - [`TextmodeTexture`](/api/textmode.js/namespaces/media/classes/TextmodeTexture.md) from [`t.createTexture()`](/api/textmode.js/classes/Textmodifier#createtexture)
 
-See [Media sources](/docs/loadables) for loading and playback details.
+See [Media sources](/docs/media-sources) for loading and playback details.
 
 ## Character mapping
 
@@ -89,4 +89,4 @@ Custom conversion strategies are scoped to the current [`Textmodifier`](/api/tex
 - [`Textmodifier.conversions`](/api/textmode.js/classes/Textmodifier#conversions)
 - [`TextmodeConversionManager`](/api/textmode.js/namespaces/conversion/classes/TextmodeConversionManager.md)
 - [`TextmodeConversionStrategy`](/api/textmode.js/namespaces/conversion/interfaces/TextmodeConversionStrategy.md)
-- [Media sources](/docs/loadables)
+- [Media sources](/docs/media-sources)

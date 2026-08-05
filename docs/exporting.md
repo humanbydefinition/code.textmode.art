@@ -21,7 +21,17 @@ const t = textmode.create({
 });
 ```
 
-Once installed, the plugin adds runtime export helpers directly to your `Textmodifier` instance.
+Once installed, the plugin adds runtime export helpers directly to your `Textmodifier` instance. This small sketch is
+ready to run and gives you a frame to export:
+
+```js
+t.draw(() => {
+  t.background('#10131f');
+  t.char('@');
+  t.charColor('#8ee6c9');
+  t.point();
+});
+```
 
 ## What can be exported
 
@@ -34,7 +44,7 @@ Once installed, the plugin adds runtime export helpers directly to your `Textmod
 - animated GIF via [`saveGIF()`](#gif-export)
 - MP4 and WebM video via [`saveVideo()`](#video-export)
 
-## Two export models
+## Choose the right export
 
 `textmode.export.js` has two different export paths, and the distinction matters:
 
@@ -117,13 +127,34 @@ t.saveJSON({
 });
 ```
 
-By default, the exported document is a [`TextmodeSelectedDocumentJSON`](/api/textmode.export.js/interfaces/TextmodeSelectedDocumentJSON.md) object with `format: "textmode.document"`, `formatVersion: "2.0.0"`, `target: "selected"`, and:
+By default, `toJSON()` returns a [`TextmodeDocumentJSON`](/api/textmode.export.js/type-aliases/TextmodeDocumentJSON.md)
+for one selected layer. It has `format: "textmode.document"`, `formatVersion: "2.0.0"`, `target: "selected"`, and:
 
 - canvas dimensions
 - grid dimensions
 - selected-layer cell data
 - per-cell character, foreground, background, and transform state
 - optional metadata about export time and generator version
+
+The cells are plain rows of objects, so the payload is easy to inspect or save without learning exporter-internal
+TypeScript names:
+
+```json
+{
+  "format": "textmode.document",
+  "formatVersion": "2.0.0",
+  "target": "selected",
+  "canvas": { "width": 800, "height": 600 },
+  "grid": { "cols": 80, "rows": 38, "cellWidth": 10, "cellHeight": 16 },
+  "layer": {
+    "id": "base",
+    "cells": {
+      "encoding": "object-rows-v1",
+      "rows": [[{ "x": 0, "y": 0, "character": "@", "foreground": "#8ee6c9", "background": "#10131f", "transform": { "invert": false, "flipX": false, "flipY": false, "rotation": 0 } }]]
+    }
+  }
+}
+```
 
 Example with explicit formatting options:
 
@@ -148,7 +179,9 @@ t.saveJSON({
 });
 ```
 
-All-layer JSON exports use [`TextmodeAllDocumentJSON`](/api/textmode.export.js/interfaces/TextmodeAllDocumentJSON.md) with `format: "textmode.document"`, `formatVersion: "2.0.0"`, and `target: "all"`. They include hidden layers and preserve each layer's `visible`, `opacity`, `blendMode`, `offsetX`, `offsetY`, and `rotationZ` values. This is descriptive layer data, not a flattened composite.
+All-layer JSON uses the same top-level format with `target: "all"` and a `layers` array. It includes hidden layers and
+preserves each layer's `visible`, `opacity`, `blendMode`, `offsetX`, `offsetY`, and `rotationZ` values. This is
+descriptive layer data, not a flattened composite.
 
 Available [`JSONExportOptions`](/api/textmode.export.js/type-aliases/JSONExportOptions.md):
 
@@ -281,7 +314,7 @@ GIF export works by registering a post-draw hook and capturing the next rendered
 
 ## Video export
 
-Use [`saveVideo()`](/api/textmode.export.js/interfaces/TextmodeExportAPI/methods/saveVideo.md) to record future frames from the final presented canvas and save them as video.
+Use [`saveVideo()`](/api/textmode.export.js/interfaces/TextmodeExportAPI.md#savevideo) to record future frames from the final presented canvas and save them as video.
 
 MP4 is the default format:
 
@@ -354,21 +387,10 @@ Use `transparent: true` only with WebM. MP4/H.264 does not provide portable alph
 - [`ExportPlugin`](/api/textmode.export.js/variables/ExportPlugin.md)
 - [`TextmodeExportAPI`](/api/textmode.export.js/interfaces/TextmodeExportAPI.md)
 - [`ExportOverlayController`](/api/textmode.export.js/interfaces/ExportOverlayController.md)
-- [`LayerExportOptions`](/api/textmode.export.js/interfaces/LayerExportOptions.md)
 - [`ImageExportOptions`](/api/textmode.export.js/type-aliases/ImageExportOptions.md)
 - [`TXTExportOptions`](/api/textmode.export.js/type-aliases/TXTExportOptions.md)
 - [`JSONExportOptions`](/api/textmode.export.js/type-aliases/JSONExportOptions.md)
-- [`JSONExportTarget`](/api/textmode.export.js/type-aliases/JSONExportTarget.md)
-- [`TextmodeSelectedDocumentJSON`](/api/textmode.export.js/interfaces/TextmodeSelectedDocumentJSON.md)
-- [`TextmodeAllDocumentJSON`](/api/textmode.export.js/interfaces/TextmodeAllDocumentJSON.md)
 - [`TextmodeDocumentJSON`](/api/textmode.export.js/type-aliases/TextmodeDocumentJSON.md)
 - [`SVGExportOptions`](/api/textmode.export.js/type-aliases/SVGExportOptions.md)
 - [`GIFExportOptions`](/api/textmode.export.js/type-aliases/GIFExportOptions.md)
-- [`GIFExportProgress`](/api/textmode.export.js/type-aliases/GIFExportProgress.md)
 - [`VideoExportOptions`](/api/textmode.export.js/type-aliases/VideoExportOptions.md)
-- [`VideoExportFormat`](/api/textmode.export.js/type-aliases/VideoExportFormat.md)
-- [`VideoBitratePreset`](/api/textmode.export.js/type-aliases/VideoBitratePreset.md)
-- [`VideoBitrateMode`](/api/textmode.export.js/type-aliases/VideoBitrateMode.md)
-- [`VideoLatencyMode`](/api/textmode.export.js/type-aliases/VideoLatencyMode.md)
-- [`VideoHardwareAcceleration`](/api/textmode.export.js/type-aliases/VideoHardwareAcceleration.md)
-- [`VideoExportProgress`](/api/textmode.export.js/type-aliases/VideoExportProgress.md)

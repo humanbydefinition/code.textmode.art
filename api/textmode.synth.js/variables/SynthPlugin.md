@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: SynthPlugin
 description: The textmode.synth.js plugin to install.
 category: Variables
 api: true
 kind: Variable
 ecosystem: textmode.js
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.synth.js](../index.md) / SynthPlugin

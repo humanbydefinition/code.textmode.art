@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: TextmodePlugin
 description: A plugin interface for extending the functionality of a Textmodifier instance.
 category: Interfaces
 api: true
 namespace: plugins
 kind: Interface
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 isInterface: true
 ---
 

@@ -1,6 +1,6 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: registerLayerPreRenderHook
 description: Register a callback to be invoked before each layer's render cycle. This happens after the layer's visibility check but before any drawing operations. Useful...
 category: Methods
@@ -8,7 +8,7 @@ api: true
 owner: TextmodePluginContext
 namespace: plugins
 kind: Method
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../../../index.md) / [plugins](../../../index.md) / [TextmodePluginContext](../../TextmodePluginContext.md) / registerLayerPreRenderHook

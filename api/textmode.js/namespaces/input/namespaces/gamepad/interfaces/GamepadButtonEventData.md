@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: GamepadButtonEventData
 description: Button edge payload emitted when a button crosses configured thresholds.
 category: Interfaces
 api: true
 namespace: input.gamepad
 kind: Interface
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 isInterface: true
 ---
 

@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: gamepad
 description: Types and interfaces for gamepad event handling
 category: Namespaces
 api: true
 namespace: input
 kind: Namespace
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../../index.md) / [input](../../index.md) / gamepad

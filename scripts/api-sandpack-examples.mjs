@@ -2,6 +2,14 @@
 import { promises as fs } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import {
+  API_SANDBOX_COMPONENT_PATTERN,
+  escapeAttribute,
+  getAttribute,
+  unescapeAttribute,
+  encodeBase64Url,
+  decodeBase64Url,
+} from './lib/api-sandbox-attributes.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ROOT = path.resolve(__dirname, '..')
@@ -46,7 +54,6 @@ const KNOWN_ECOSYSTEM_IMPORTS = new Set([
 const API_MARKDOWN_PATTERN = /^api\/[^/]+\/.+\.md$/
 const EXAMPLE_HEADING_PATTERN = /^(#{2,6}) Examples?$/gm
 const RUNNABLE_FENCE_PATTERN = /```(javascript|js|typescript|ts)([^\n]*)\n([\s\S]*?)\n```/g
-const API_SANDBOX_COMPONENT_PATTERN = /<Textmode(?:Api|Live)Sandbox\b[^>]*\/>/g
 const SANDBOX_BLOCK_PATTERN = /:::\s*textmode-api-sandbox\b[^\n]*\n([\s\S]*?)\n:::/m
 const MALFORMED_API_SANDBOX_TAIL_PATTERN = /\/>[A-Za-z0-9_-]{20,}"\s*\/>/
 const LOCAL_ASSET_PATTERN = /\b(?:loadFont|loadImage|loadVideo|loadTileset)\(\s*['"](?:\.{1,2}\/|\/)|\bsource\s*:\s*['"](?:\.{1,2}\/|\/)/
@@ -450,50 +457,6 @@ function unwrapSketchCode(code) {
     .trim()
     .replace(/^void \(async \(\) => \{\n/, '')
     .replace(/\n\}\)\(\)\.catch\(\(error\) => \{\n  setTimeout\(\(\) => \{\n    throw error\n  \}\)\n\}\)$/, '')
-}
-
-function getAttribute(source, name) {
-  const match = source.match(new RegExp(`\\b${name}="([^"]*)"`))
-  return match ? unescapeAttribute(match[1]) : undefined
-}
-
-function escapeAttribute(value) {
-  return String(value)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;')
-}
-
-function unescapeAttribute(value) {
-  return String(value)
-    .replace(/&#39;/g, "'")
-    .replace(/&quot;/g, '"')
-    .replace(/&gt;/g, '>')
-    .replace(/&lt;/g, '<')
-    .replace(/&amp;/g, '&')
-}
-
-function encodeBase64Url(value) {
-  return Buffer.from(value, 'utf8')
-    .toString('base64')
-    .replace(/\+/g, '-')
-    .replace(/\//g, '_')
-    .replace(/=+$/g, '')
-}
-
-function decodeBase64Url(value) {
-  try {
-    const base64 = value
-      .replace(/-/g, '+')
-      .replace(/_/g, '/')
-      .padEnd(Math.ceil(value.length / 4) * 4, '=')
-
-    return Buffer.from(base64, 'base64').toString('utf8')
-  } catch {
-    return ''
-  }
 }
 
 function decodeFiles(encodedFiles) {

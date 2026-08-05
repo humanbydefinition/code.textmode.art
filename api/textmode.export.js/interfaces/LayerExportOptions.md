@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: LayerExportOptions
 description: Shared option for exporters that read layer framebuffer data.
 category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 isInterface: true
 ---
 

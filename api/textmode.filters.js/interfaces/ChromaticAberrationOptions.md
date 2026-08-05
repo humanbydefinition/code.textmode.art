@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: ChromaticAberrationOptions
 description: Configuration options for the 'chromaticAberration' filter.
 category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 isInterface: true
 ---
 

@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: shape
 description: Generate geometric shapes (polygons).
 category: Functions
 api: true
 kind: Function
 ecosystem: textmode.js
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.synth.js](../index.md) / shape

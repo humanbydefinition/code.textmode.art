@@ -1,6 +1,6 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: hardblank
 description: Hardblank character declared by the font.
 category: Accessors
@@ -8,7 +8,7 @@ api: true
 owner: TextmodeFigFont
 kind: Accessor
 ecosystem: textmode.js
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.figlet.js](../../../index.md) / [TextmodeFigFont](../../TextmodeFigFont.md) / hardblank

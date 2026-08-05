@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: QUADS
 description: Draw each group of four vertices as a quad split into two triangles.
 category: Properties
 api: true
 owner: Textmodifier
 kind: Property
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / QUADS

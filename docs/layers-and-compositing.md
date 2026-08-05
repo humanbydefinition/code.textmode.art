@@ -31,7 +31,7 @@ Create user layers with [`t.layers.add()`](/api/textmode.js/namespaces/layering/
 ```js
 const glow = t.layers.add({
   opacity: 0.75,
-  blendMode: "screen",
+  blendMode: t.BLEND_SCREEN,
   fontSize: 8,
 });
 
@@ -59,10 +59,10 @@ Layer options include:
 [`blendMode()`](/api/textmode.js/namespaces/layering/classes/TextmodeLayer.md#blendmode) controls how a layer is composited over the result below it:
 
 ```js
-glow.blendMode("additive");
+glow.blendMode(t.BLEND_ADDITIVE);
 ```
 
-Built-in modes include `normal`, `additive`, `multiply`, `screen`, `overlay`, `difference`, and other modes listed in [`TEXTMODE_LAYER_BLEND_MODES`](/api/textmode.js/namespaces/layering/variables/TEXTMODE_LAYER_BLEND_MODES.md).
+Use the [`LayerBlendMode`](/api/textmode.js/namespaces/layering/enumerations/LayerBlendMode.md) values exposed through constants such as `t.BLEND_NORMAL`, `t.BLEND_ADDITIVE`, `t.BLEND_MULTIPLY`, `t.BLEND_SCREEN`, `t.BLEND_OVERLAY`, and `t.BLEND_DIFFERENCE`.
 
 ## Opacity, visibility, and placement
 
@@ -150,4 +150,4 @@ Use [Exporting](/docs/exporting) to choose the right export model:
 - [`TextmodeLayerManager`](/api/textmode.js/namespaces/layering/classes/TextmodeLayerManager.md)
 - [`TextmodeLayer`](/api/textmode.js/namespaces/layering/classes/TextmodeLayer.md)
 - [`TextmodeLayerOptions`](/api/textmode.js/namespaces/layering/interfaces/TextmodeLayerOptions.md)
-- [`TEXTMODE_LAYER_BLEND_MODES`](/api/textmode.js/namespaces/layering/variables/TEXTMODE_LAYER_BLEND_MODES.md)
+- [`LayerBlendMode`](/api/textmode.js/namespaces/layering/enumerations/LayerBlendMode.md)

@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: targetX
 description: Current X position of the camera target.
 category: Accessors
 api: true
 owner: TextmodeCamera
 kind: Accessor
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../index.md) / [TextmodeCamera](../../TextmodeCamera.md) / targetX

@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: loading
 description: Built-in loading layer controller.
 category: Accessors
 api: true
 owner: Textmodifier
 kind: Accessor
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / loading

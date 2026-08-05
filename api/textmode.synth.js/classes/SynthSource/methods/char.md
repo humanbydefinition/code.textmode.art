@@ -1,6 +1,6 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: char
 description: Set the character indices using a character source chain. The number of characters is determined by charMap() if defined, otherwise falls back to the total c...
 category: Methods
@@ -8,7 +8,7 @@ api: true
 owner: SynthSource
 kind: Method
 ecosystem: textmode.js
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.synth.js](../../../index.md) / [SynthSource](../../SynthSource.md) / char

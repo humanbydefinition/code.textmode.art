@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: SourceExtensionImplementation
 description: Type for source extension method implementations.
 category: Type Aliases
 api: true
 namespace: plugins
 kind: TypeAlias
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../index.md) / [plugins](../index.md) / SourceExtensionImplementation

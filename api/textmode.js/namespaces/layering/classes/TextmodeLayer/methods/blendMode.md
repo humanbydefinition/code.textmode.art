@@ -1,6 +1,6 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: blendMode
 description: Set or get this layer's blend mode.
 category: Methods
@@ -8,7 +8,7 @@ api: true
 owner: TextmodeLayer
 namespace: layering
 kind: Method
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../../../index.md) / [layering](../../../index.md) / [TextmodeLayer](../../TextmodeLayer.md) / blendMode
@@ -21,14 +21,13 @@ blendMode(mode?): void | LayerBlendMode;
 
 Set or get this layer's blend mode.
 
-Pass a [LayerBlendMode](../../../enumerations/LayerBlendMode.md) constant (e.g. `t.BLEND_ADDITIVE`) or a
-legacy string (e.g. `'additive'` — deprecated).
+Pass a [LayerBlendMode](../../../enumerations/LayerBlendMode.md) constant such as `t.BLEND_ADDITIVE`.
 
 ## Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `mode?` | `string` \| [`LayerBlendMode`](../../../enumerations/LayerBlendMode.md) | Blend mode to apply. |
+| `mode?` | [`LayerBlendMode`](../../../enumerations/LayerBlendMode.md) | Blend mode to apply. |
 
 ## Returns
 

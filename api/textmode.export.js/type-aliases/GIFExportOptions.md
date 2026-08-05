@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: GIFExportOptions
 description: Options for exporting the textmode content to GIF format.
 category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.export.js](../index.md) / GIFExportOptions
@@ -56,32 +56,6 @@ Target frame rate for the export, in frames per second. Defaults to `60`.
 
 ***
 
-### scale?
-
-```ts
-optional scale?: number;
-```
-
-Scale factor for the output image.
-
-`1.0` = original size, `2.0` = double size, `0.5` = half size.
-
-Defaults to `1.0`.
-
-
-***
-
-### repeat?
-
-```ts
-optional repeat?: number;
-```
-
-GIF loop count. 0 = loop forever. Defaults to `0`.
-
-
-***
-
 ### onProgress?
 
 ```ts
@@ -99,4 +73,52 @@ Progress callback invoked throughout the recording lifecycle.
 #### Returns
 
 `void`
+
+
+***
+
+### prepareFrame?
+
+```ts
+optional prepareFrame?: PrepareExportFrame;
+```
+
+Prepares external media before each deterministic frame is redrawn.
+
+
+***
+
+### repeat?
+
+```ts
+optional repeat?: number;
+```
+
+GIF loop count. 0 = loop forever. Defaults to `0`.
+
+
+***
+
+### scale?
+
+```ts
+optional scale?: number;
+```
+
+Scale factor for the output image.
+
+`1.0` = original size, `2.0` = double size, `0.5` = half size.
+
+Defaults to `1.0`.
+
+
+***
+
+### signal?
+
+```ts
+optional signal?: AbortSignal;
+```
+
+Abort signal for cancelling capture or encoding.
 

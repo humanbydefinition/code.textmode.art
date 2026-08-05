@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: INPUT_EVENT_NAMES
 description: Flat readonly list of every input event name accepted by Textmodifier.on, Textmodifier.off, and Textmodifier.once.
 category: Variables
 api: true
 namespace: input
 kind: Variable
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../index.md) / [input](../index.md) / INPUT\_EVENT\_NAMES

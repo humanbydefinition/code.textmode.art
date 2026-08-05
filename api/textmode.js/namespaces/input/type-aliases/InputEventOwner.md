@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: InputEventOwner
 description: Input subsystem that owns a given event name.
 category: Type Aliases
 api: true
 namespace: input
 kind: TypeAlias
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../index.md) / [input](../index.md) / InputEventOwner

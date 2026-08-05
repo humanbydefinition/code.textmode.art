@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: KeyboardEventMap
 description: Keyboard events emitted by the keyboard input manager.
 category: Interfaces
 api: true
 namespace: input.keyboard
 kind: Interface
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 isInterface: true
 ---
 

@@ -282,8 +282,6 @@ body::-webkit-scrollbar-thumb:hover {
 .social-link:hover {
   color: var(--vp-c-brand-1);
   border-color: var(--vp-c-brand-1);
-  transform: translateY(-2px);
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
 .social-icon {

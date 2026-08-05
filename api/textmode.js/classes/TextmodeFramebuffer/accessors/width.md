@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: width
 description: Width of the framebuffer in pixels.
 category: Accessors
 api: true
 owner: TextmodeFramebuffer
 kind: Accessor
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../index.md) / [TextmodeFramebuffer](../../TextmodeFramebuffer.md) / width

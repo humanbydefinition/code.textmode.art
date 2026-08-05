@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: BLEND_DARKEN
 description: Keep the darker channel from either the layer or the layers below it.
 category: Properties
 api: true
 owner: Textmodifier
 kind: Property
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / BLEND\_DARKEN

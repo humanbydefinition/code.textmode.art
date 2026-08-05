@@ -1,53 +1,33 @@
-# code.textmode.art (✿◠‿◠)
+# code.textmode.art
 
 <div align="center">
 
-<img alt="textmodejs_banner" src="https://github.com/user-attachments/assets/f03c2d74-7dc3-45cf-a0a5-043f9438231e" />
+<img alt="code.textmode.art — explore textmode on the web" src=".github/assets/readme-og.png" />
 
-| [![Contributors](https://img.shields.io/badge/contributors-community-ee8449?style=flat-square)](#contributors) | [![VitePress](https://img.shields.io/badge/VitePress-646CFF?logo=vitepress&logoColor=white)](https://vitepress.dev/) [![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-222?logo=github&logoColor=white)](https://pages.github.com/) | [![Discord](https://img.shields.io/discord/1357070706181017691?color=5865F2&label=Discord&logo=discord&logoColor=white)](https://discord.gg/sjrw8QXNks) [![ko-fi](https://shields.io/badge/ko--fi-donate-ff5f5f?logo=ko-fi)](https://ko-fi.com/V7V8JG2FY) |
-| :------------------------------------------------------------------------------------------------------------- | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [![VitePress](https://img.shields.io/badge/VitePress-646CFF?logo=vitepress&logoColor=white)](https://vitepress.dev/) | [![docs](https://img.shields.io/badge/docs-vitepress-646cff?logo=vitepress&logoColor=white)](https://code.textmode.art/) [![Discord](https://img.shields.io/discord/1357070706181017691?color=5865F2&label=Discord&logo=discord&logoColor=white)](https://discord.gg/sjrw8QXNks) | [![ko-fi](https://shields.io/badge/ko--fi-donate-ff5f5f?logo=ko-fi)](https://ko-fi.com/V7V8JG2FY) [![GitHub-sponsors](https://img.shields.io/badge/sponsor-30363D?logo=GitHub-Sponsors&logoColor=#EA4AAA)](https://github.com/sponsors/humanbydefinition) |
+| :--- | :--- | :--- |
 
 </div>
 
-Official documentation, guides, and examples for [textmode.js](https://github.com/humanbydefinition/textmode.js) - a creative coding library for real-time ASCII art on the web.
+`code.textmode.art` is the central documentation home for [textmode.js](https://github.com/humanbydefinition/textmode.js), with core concepts, API references, practical guides, examples, and integrations for creative coding on the web.
 
-**Live site**: [code.textmode.art](https://code.textmode.art)
+Whether you are installing `textmode.js` for the first time or extending a sketch with ecosystem add-ons, these docs help you learn the essentials, make your first browser sketch, and explore what the wider ecosystem has to offer.
 
 ## What's inside
 
-- **Documentation** - Installation guides, API reference, and tutorials
-- **Examples** - Interactive demos and code samples
-- **Font showcase** - Curated collection of compatible pixel fonts
-- **Integrations** - Guides for p5.js, Three.js, Hydra Synth, and more
-
-## Local development
-
-To run this documentation site locally:
-
-```bash
-# Install dependencies
-npm install
-
-# Start dev server
-npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
-```
+- **Guided learning paths** - Start with installation and a first sketch, then work through lifecycle, grids, drawing, characters, typography, animation, input, fonts, and media.
+- **Advanced rendering guides** - Build layered scenes with compositing, filters, framebuffers, custom GLSL shaders, 3D drawing, cameras, and lighting.
+- **Interactive examples** - Explore live, editable sketches for core drawing, shaders, video and webcam conversion, p5.js, Three.js, and Hydra Synth integrations.
+- **Live-coding workflows** - Learn browser-based sketching with editor.textmode.art and collaborative audiovisual sessions in flok.cc.
+- **Ecosystem API reference** - Browse generated, typed API documentation for textmode.js and the official synth, filters, export, and FIGlet add-ons.
+- **Gallery and creative inspiration** - Discover featured community projects, showcase sketches, experiments, and real-world textmode.js work.
+- **Ways to contribute** - Find routes for improving documentation, contributing code, and submitting examples, with ecosystem-wide contributor recognition.
 
 ## Contributing
 
-We welcome contributions! There are many ways to help:
+Thank you for considering contributing to this project! (✿◠‿◠)
 
-- **Suggest fonts** - Know a great pixel font? Add it to the showcase
-- **Share sketches** - Create example sketches for the documentation
-- **Improve docs** - Better explanations, code examples, or tutorials
-- **Report issues** - Found a bug or typo? Let us know
-
-Ecosystem contributors are credited in this README and on the site. See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
+Please read the [Contributing Guide](./CONTRIBUTING.md) to get started.
 
 <!-- TEXTMODE-CONTRIBUTORS:START -->
 <!-- prettier-ignore-start -->
@@ -84,23 +64,6 @@ Contribution details and profile links are maintained on the [textmode.js contri
 <!-- prettier-ignore-end -->
 <!-- TEXTMODE-CONTRIBUTORS:END -->
 
-## Tech stack
-
-- [VitePress](https://vitepress.dev) - Static site generator
-- [vitepress-plugin-sandpack](https://github.com/jerrywu001/vitepress-plugin-sandpack) - Interactive code playgrounds
-- [vitepress-plugin-mermaid](https://github.com/emersonbottero/vitepress-plugin-mermaid) - Diagrams
-- [vitepress-plugin-blog](https://github.com/humanbydefinition/vitepress-plugin-blog) - Blog functionality
-- [vitepress-plugin-codeblocks-fold](https://github.com/T-miracle/vitepress-plugin-codeblocks-fold) - Collapsible code blocks
-- [vitepress-plugin-codesandbox](https://github.com/humanbydefinition/vitepress-plugin-codesandbox) - `Open in CodeSandbox` buttons on code blocks
-- [Giscus](https://giscus.app) - Comments powered by GitHub Discussions
-
 ## License
 
 Documentation content is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Code examples are licensed under [MIT](https://opensource.org/licenses/MIT).
-
-## Links
-
-- [textmode.js on npm](https://www.npmjs.com/package/textmode.js)
-- [textmode.js repository](https://github.com/humanbydefinition/textmode.js)
-- [textmode.js web editor](https://editor.textmode.art)
-- [Discord community](https://discord.gg/sjrw8QXNks)

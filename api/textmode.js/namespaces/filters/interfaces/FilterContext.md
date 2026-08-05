@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: FilterContext
 description: Context provided to filter strategies for shader creation
 category: Interfaces
 api: true
 namespace: filters
 kind: Interface
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 isInterface: true
 ---
 

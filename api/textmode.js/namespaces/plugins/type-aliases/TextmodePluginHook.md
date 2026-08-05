@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: TextmodePluginHook
 description: Callback type for simple plugin hooks without parameters.
 category: Type Aliases
 api: true
 namespace: plugins
 kind: TypeAlias
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../index.md) / [plugins](../index.md) / TextmodePluginHook

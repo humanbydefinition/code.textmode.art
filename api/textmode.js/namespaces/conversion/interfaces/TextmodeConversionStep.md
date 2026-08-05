@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: TextmodeConversionStep
 description: One pass in a source-level conversion stack.
 category: Interfaces
 api: true
 namespace: conversion
 kind: Interface
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 isInterface: true
 ---
 

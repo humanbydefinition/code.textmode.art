@@ -9,7 +9,19 @@
       <div v-if="showHeader" class="textmode-live-sandbox__header">
         <div class="textmode-live-sandbox__title">
           <span class="textmode-live-sandbox__eyebrow">Live example</span>
-          <span class="textmode-live-sandbox__hint">{{ headerHint }}</span>
+          <span v-if="headerHint" class="textmode-live-sandbox__hint">{{ headerHint }}</span>
+          <a
+            v-if="hintHref"
+            class="textmode-live-sandbox__hint-link"
+            :href="hintHref"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open API reference
+            <svg class="textmode-live-sandbox__hint-arrow" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M6 5h5v5M11 5l-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </a>
         </div>
         <button
           v-if="canToggleCode"
@@ -126,6 +138,10 @@ const props = defineProps({
   title: {
     type: String,
     default: ''
+  },
+  hintHref: {
+    type: String,
+    default: ''
   }
 })
 
@@ -239,7 +255,7 @@ const panelHeightPx = computed(() => `${Math.max(previewHeightValue.value, edito
 const sandpackClasses = computed(() => mergeSandpackClassNames(props.options))
 const theme = computed(() => isDark.value ? sandpackDark : githubLight)
 const sandpackTemplate = computed(() => props.template || 'static')
-const headerHint = computed(() => props.title ? `${props.title} - editable preview` : 'Editable Sandpack preview')
+const headerHint = computed(() => props.title || '')
 const ariaLabel = computed(() => props.title ? `${props.title} live code example` : 'Live code example')
 const hasRenderableFiles = computed(() => Object.keys(sandpackFileMap.value).length > 0)
 const placeholderMessage = computed(() => (
@@ -608,6 +624,16 @@ function createSandboxHtml(scripts: string[], activeScript: string) {
     '        display: block;',
     '      }',
     '    </style>',
+    '    <' + 'script>',
+    '      if (typeof window !== "undefined" && typeof ResizeObserver !== "undefined") {',
+    '        const ro = new ResizeObserver(() => {',
+    '          window.dispatchEvent(new Event("resize"));',
+    '        });',
+    '        document.addEventListener("DOMContentLoaded", () => {',
+    '          if (document.body) ro.observe(document.body);',
+    '        });',
+    '      }',
+    '    </' + 'script>',
     ...scripts.map((script) => `    <script src="${escapeHtmlAttribute(script)}"></` + 'script>'),
     `    <script type="module" src="${escapeHtmlAttribute(activeScript)}"></` + 'script>',
     '  </head>',
@@ -710,8 +736,32 @@ function toKebabCase(value: string) {
 .textmode-live-sandbox__hint {
   overflow: hidden;
   color: var(--vp-c-text-2);
+  font-family: var(--textmode-font);
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.textmode-live-sandbox__hint-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+  color: var(--vp-c-brand-1);
+  font-weight: 500;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.textmode-live-sandbox__hint-link:hover,
+.textmode-live-sandbox__hint-link:focus {
+  color: var(--vp-c-brand-2);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.textmode-live-sandbox__hint-arrow {
+  width: 12px;
+  height: 12px;
 }
 
 .textmode-live-sandbox__toggle {
@@ -914,24 +964,29 @@ function toKebabCase(value: string) {
 
 @media (max-width: 560px) {
   .textmode-live-sandbox__header {
-    align-items: flex-start;
+    align-items: stretch;
     flex-direction: column;
     gap: 8px;
   }
 
   .textmode-live-sandbox__title {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 2px;
+    align-items: baseline;
+    gap: 6px;
+    min-width: 0;
+    flex-wrap: wrap;
+  }
+
+  .textmode-live-sandbox__hint-link {
+    flex: 1 0 100%;
   }
 
   .textmode-live-sandbox__hint {
-    text-align: left;
-    white-space: normal;
+    white-space: nowrap;
   }
 
   .textmode-live-sandbox__toggle {
     width: 100%;
+    flex: 0 0 auto;
   }
 }
 </style>

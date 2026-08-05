@@ -1,6 +1,6 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: maxGlyphDimensions
 description: Effective tile dimensions used by the layer grid.
 category: Accessors
@@ -8,7 +8,7 @@ api: true
 owner: TextmodeTileset
 namespace: fonts
 kind: Accessor
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../../../index.md) / [fonts](../../../index.md) / [TextmodeTileset](../../TextmodeTileset.md) / maxGlyphDimensions

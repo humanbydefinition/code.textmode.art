@@ -126,7 +126,7 @@ Bitmap tilesets can provide their own colors. Use [`useTileColors()`](/api/textm
 t.useTileColors(true);
 ```
 
-See [Fonts and tilesets](/docs/fonts) for the full tileset workflow.
+See [Fonts and tilesets](/docs/fonts-and-tilesets) for the full tileset workflow.
 
 ## Related APIs
 

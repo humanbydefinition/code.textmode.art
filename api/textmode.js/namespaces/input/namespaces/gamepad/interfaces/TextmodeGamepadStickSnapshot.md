@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: TextmodeGamepadStickSnapshot
 description: Normalized two-axis stick state for standard-mapped controllers.
 category: Interfaces
 api: true
 namespace: input.gamepad
 kind: Interface
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 isInterface: true
 ---
 

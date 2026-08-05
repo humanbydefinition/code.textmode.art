@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: overlay
 description: Overlay source image for the target canvas or video, when overlay mode is enabled.
 category: Accessors
 api: true
 owner: Textmodifier
 kind: Accessor
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / overlay

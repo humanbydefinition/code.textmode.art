@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: version
 description: The current textmode.js package version.
 category: Accessors
 api: true
 owner: textmode
 kind: Accessor
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../index.md) / [textmode](../../textmode.md) / version

@@ -1,12 +1,12 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: layering
 description: All modules and types related to multi-layered textmode rendering.
 category: Namespaces
 api: true
 kind: Namespace
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../index.md) / layering
@@ -33,9 +33,3 @@ All modules and types related to multi-layered textmode rendering.
 | Interface | Description |
 | ------ | ------ |
 | [TextmodeLayerOptions](interfaces/TextmodeLayerOptions.md) | Options for layers created with [TextmodeLayerManager.add](classes/TextmodeLayerManager/methods/add.md). |
-
-## Variables
-
-| Variable | Description |
-| ------ | ------ |
-| [~~TEXTMODE\_LAYER\_BLEND\_MODES~~](variables/TEXTMODE_LAYER_BLEND_MODES.md) | Use the [LayerBlendMode](enumerations/LayerBlendMode.md) enum and the `t.BLEND_*` constants (e.g. `t.BLEND_ADDITIVE`). String blend modes are accepted for backwards compatibility and emit a deprecation warning; they will be removed in a future version. |

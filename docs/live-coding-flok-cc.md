@@ -17,7 +17,7 @@ const flokItem = {
 
 [`flok.cc`](https://flok.cc/) is a collaborative live coding environment that runs entirely in the browser. `textmode.js` is integrated as a first-class panel target, which makes it a strong fit for performances where ASCII visuals need to live beside Hydra, Strudel, Mercury, or other browser-native tools. (ง'̀-'́)ง
 
-If you want a dedicated solo synth surface instead, see [synth.textmode.art](/docs/live-coding-synth-textmode-art).
+If you want a dedicated solo editor instead, see [editor.textmode.art](/docs/live-coding-editor-textmode-art).
 
 <GalleryCard :item="flokItem" />
 
@@ -193,7 +193,7 @@ The flok integration supports the full `textmode.js` layering system, so you can
 ```js
 t.fontSize(32);
 
-const audioLayer = t.layers.add({ blendMode: "additive", opacity: 0.8 });
+const audioLayer = t.layers.add({ blendMode: t.BLEND_ADDITIVE, opacity: 0.8 });
 
 audioLayer.draw(() => {
   t.clear();
@@ -219,7 +219,7 @@ audioLayer.draw(() => {
 });
 
 const LABEL = "flok x hydra x strudel x textmode.js";
-const labelLayer = t.layers.add({ blendMode: "normal", opacity: 1.0 });
+const labelLayer = t.layers.add({ blendMode: t.BLEND_NORMAL, opacity: 1.0 });
 
 labelLayer.draw(() => {
   t.clear();
@@ -314,7 +314,7 @@ osc(30, 0.01, 1)
 t.fontSize(32);
 
 const FFT_BINS = 48;
-const audioLayer = t.layers.add({ blendMode: "additive", opacity: 0.8 });
+const audioLayer = t.layers.add({ blendMode: t.BLEND_ADDITIVE, opacity: 0.8 });
 
 audioLayer.draw(() => {
   t.clear();
@@ -341,7 +341,7 @@ audioLayer.draw(() => {
 });
 
 const LABEL_TEXT = "flok x hydra x strudel x textmode.js";
-const labelLayer = t.layers.add({ blendMode: "normal", opacity: 1.0 });
+const labelLayer = t.layers.add({ blendMode: t.BLEND_NORMAL, opacity: 1.0 });
 
 labelLayer.draw(() => {
   t.clear();

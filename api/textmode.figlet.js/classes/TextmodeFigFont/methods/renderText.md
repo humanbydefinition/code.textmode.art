@@ -1,6 +1,6 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: renderText
 description: Render a string into a FIGlet sub-character grid.
 category: Methods
@@ -8,7 +8,7 @@ api: true
 owner: TextmodeFigFont
 kind: Method
 ecosystem: textmode.js
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.figlet.js](../../../index.md) / [TextmodeFigFont](../../TextmodeFigFont.md) / renderText

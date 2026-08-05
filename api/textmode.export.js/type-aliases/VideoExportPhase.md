@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: VideoExportPhase
 description: More granular phase information for progress UIs that need to distinguish setup, rendering, and finalization.
 category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.export.js](../index.md) / VideoExportPhase

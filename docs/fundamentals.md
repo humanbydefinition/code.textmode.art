@@ -24,8 +24,8 @@ This page has been split into focused guides so each topic is easier to find, re
 
 ## Nearby topics
 
-- [Input events](/docs/events)
-- [Fonts and tilesets](/docs/fonts)
-- [Media sources](/docs/loadables)
+- [Input events](/docs/event-handling)
+- [Fonts and tilesets](/docs/fonts-and-tilesets)
+- [Media sources](/docs/media-sources)
 
 The old URL is kept for compatibility. New docs should link to the focused pages above.

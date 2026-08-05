@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: GlyphDimensions
 description: Glyph cell dimensions in pixels.
 category: Interfaces
 api: true
 namespace: fonts
 kind: Interface
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 isInterface: true
 ---
 

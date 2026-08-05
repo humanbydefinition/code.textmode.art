@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: ModulatedArray
 description: Extended array interface with modulation methods.
 category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 isInterface: true
 ---
 
@@ -39,8 +39,8 @@ manually tracking time or state.
 
 | Method | Description |
 | ------ | ------ |
-| [fast](ModulatedArray/methods/fast.md) | Set speed multiplier for array cycling. |
-| [smooth](ModulatedArray/methods/smooth.md) | Enable smooth interpolation between array values. |
 | [ease](ModulatedArray/methods/ease.md) | Apply easing function to interpolation between array values. |
-| [offset](ModulatedArray/methods/offset.md) | Set time offset for array cycling. |
+| [fast](ModulatedArray/methods/fast.md) | Set speed multiplier for array cycling. |
 | [fit](ModulatedArray/methods/fit.md) | Fit (remap) array values to a new range. |
+| [offset](ModulatedArray/methods/offset.md) | Set time offset for array cycling. |
+| [smooth](ModulatedArray/methods/smooth.md) | Enable smooth interpolation between array values. |

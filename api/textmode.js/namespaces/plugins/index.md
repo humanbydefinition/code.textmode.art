@@ -1,12 +1,12 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: plugins
 description: Plugin system types for extending textmode.js functionality.
 category: Namespaces
 api: true
 kind: Namespace
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../index.md) / plugins

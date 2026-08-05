@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: GamepadConnectionEventData
 description: Connection lifecycle payload emitted by the gamepad manager.
 category: Interfaces
 api: true
 namespace: input.gamepad
 kind: Interface
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 isInterface: true
 ---
 

@@ -1,58 +1,41 @@
 ---
 title: Contributing
-description: Overview of contribution opportunities for textmode.js, including example sketches and documentation improvements.
+description: Choose how to contribute code, documentation, examples, resources, or feedback to the textmode.js ecosystem.
 ---
 
 # Contributing
 
-Thank you for your interest in contributing! This documentation site thrives on community input, and there are many ways to help - no matter your skill level. (＾ω＾)
+Contributions to the textmode.js ecosystem can take many forms. Choose the path that best matches your change.
 
-:::warning Work in progress
-This contributing guide is a work in progress and may not answer all questions. If you have suggestions or need help, please open an issue or join the [Discord community](https://discord.gg/sjrw8QXNks).
-:::
+## Choose a contribution path
 
-## Ways to contribute
+### [Contribute code](/docs/contributing/code)
 
-There are many ways you can help improve textmode.js and its documentation:
+Fix bugs or improve `textmode.js`, its official add-ons, tests, examples, build tooling, and API documentation.
 
-### [Submit an example sketch](/docs/contributing/submit-a-sketch)
+### [Improve documentation](/docs/contributing/docs)
 
-Share your creative work! Example sketches help others learn and showcase what's possible with textmode.js.
+Fix or expand the guides on `code.textmode.art`, including explanations, links, and accessibility.
 
-### [Improve documentation](/docs/contributing/improve-docs)
+### [Submit a sketch](/docs/contributing/submit-a-sketch)
 
-Help make the docs clearer and more helpful by fixing typos, improving explanations, or adding code examples.
+Add a community showcase sketch to this site or improve an API example in the package repository that owns it.
 
-If you want to suggest fonts or other textmode resources, contribute to [`awesome-textmode`](https://github.com/humanbydefinition/awesome-textmode).
+### Report an issue
 
-### Report issues
+Open an issue in the repository that owns the affected code or documentation. Include the expected behavior, actual
+behavior, reproduction steps, versions, and screenshots when relevant. Report suspected vulnerabilities privately by
+following that repository's `SECURITY.md`; do not open a public issue.
 
-Found something wrong? Open an issue describing:
+## Contributor credit
 
-- What you expected to happen
-- What actually happened
-- Steps to reproduce (if applicable)
-- Screenshots (if helpful)
-
-## Getting started
-
-Ready to contribute? Check out our [Getting Started guide](/docs/contributing/getting-started) to set up your local development environment.
-
-## Credits
-
-All ecosystem contributors are recognized on the [Contributors page](/docs/contributors) and in the
-[README](https://github.com/humanbydefinition/code.textmode.art#contributors).
-
-Maintainers update names and optional profile links in the canonical
-[contributors registry](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contributors.json).
-The supported labels and their display order live in the separate
+All ecosystem contributors are recognized on the [Contributors page](/docs/contributors) and in the official package
+READMEs. Maintainers manage profiles through the canonical
+[contributors registry](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contributors.json)
+and the
 [contribution-type catalog](https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contribution-types.json).
-Both files are validated and rendered with `npm run check:contributors`, and GitHub automation synchronizes the
-generated section to the official textmode.js library READMEs.
 
-## Questions?
+## Need help?
 
-- Open an [issue](https://github.com/humanbydefinition/code.textmode.art/issues)
-- Join the [Discord community](https://discord.gg/sjrw8QXNks)
-
-Thank you for helping to make the textmode.js documentation better!
+- [Open a documentation issue](https://github.com/humanbydefinition/code.textmode.art/issues)
+- [Join the Discord community](https://discord.gg/sjrw8QXNks)

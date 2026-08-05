@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: KEYBOARD_EVENT_NAMES
 description: Keyboard event names supported by the shared input event API.
 category: Variables
 api: true
 namespace: input.keyboard
 kind: Variable
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [keyboard](../index.md) / KEYBOARD\_EVENT\_NAMES

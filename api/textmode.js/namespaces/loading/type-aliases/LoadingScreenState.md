@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: LoadingScreenState
 description: Internal state of the loading screen.
 category: Type Aliases
 api: true
 namespace: loading
 kind: TypeAlias
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../index.md) / [loading](../index.md) / LoadingScreenState

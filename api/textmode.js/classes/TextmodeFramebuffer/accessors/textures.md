@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: textures
 description: The color attachment textures owned by this framebuffer.
 category: Accessors
 api: true
 owner: TextmodeFramebuffer
 kind: Accessor
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../index.md) / [TextmodeFramebuffer](../../TextmodeFramebuffer.md) / textures

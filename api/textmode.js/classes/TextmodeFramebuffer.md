@@ -1,12 +1,12 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: TextmodeFramebuffer
 description: Framebuffer class for managing offscreen rendering targets initialized via Textmodifier.createFramebuffer.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 hasConstructor: false
 ---
 

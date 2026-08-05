@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: TextmodeColorMode
 description: Color interpretation mode used by Textmodifier.colorMode.
 category: Type Aliases
 api: true
 namespace: color
 kind: TypeAlias
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../index.md) / [color](../index.md) / TextmodeColorMode

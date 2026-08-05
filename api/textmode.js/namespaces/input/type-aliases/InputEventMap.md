@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: InputEventMap
 description: Union of every input event emitted by the library.
 category: Type Aliases
 api: true
 namespace: input
 kind: TypeAlias
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../index.md) / [input](../index.md) / InputEventMap

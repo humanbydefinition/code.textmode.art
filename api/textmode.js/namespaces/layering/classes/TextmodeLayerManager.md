@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: TextmodeLayerManager
 description: Manages the stack of layers within a Textmodifier instance.
 category: Classes
 api: true
 namespace: layering
 kind: Class
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 hasConstructor: false
 ---
 

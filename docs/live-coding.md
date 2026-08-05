@@ -1,6 +1,6 @@
 ---
 title: Live coding
-description: "Compare the two primary browser-based live coding surfaces in the textmode.js ecosystem: flok.cc and synth.textmode.art."
+description: "Compare the two primary browser-based live coding surfaces in the textmode.js ecosystem: flok.cc and editor.textmode.art."
 ---
 
 <script setup>
@@ -12,9 +12,9 @@ const flokItem = {
   ...galleryData['textmode-flok']
 }
 
-const synthItem = {
-  id: 'synth-textmode-art',
-  ...galleryData['synth-textmode-art']
+const editorItem = {
+  id: 'editor-textmode-art',
+  ...galleryData['editor-textmode-art']
 }
 </script>
 
@@ -23,7 +23,7 @@ const synthItem = {
 `textmode.js` currently has two distinct browser-based live coding surfaces:
 
 - [**flok.cc**](/docs/live-coding-flok-cc): a collaborative performance environment where `textmode.js` sits alongside Hydra, Strudel, and other live coding tools.
-- [**synth.textmode.art**](/docs/live-coding-synth-textmode-art): a dedicated single-surface live coding app for procedural ASCII synthesis built around `textmode.js` and `textmode.synth.js`.
+- [**editor.textmode.art**](/docs/live-coding-editor-textmode-art): a dedicated single-surface live coding app for procedural ASCII synthesis built around `textmode.js` and `textmode.synth.js`.
 
 Both are browser-native, fast to try, and built for playful iteration. ヽ(⌐■_■)ノ♪
 
@@ -36,11 +36,11 @@ Both are browser-native, fast to try, and built for playful iteration. ヽ(⌐�
 - Best when you want collaboration, audio-reactive visuals, or cross-tool performance setups.
 - Detailed guide: [Live coding with flok.cc](/docs/live-coding-flok-cc)
 
-## synth.textmode.art
+## editor.textmode.art
 
-[synth.textmode.art](https://synth.textmode.art/) is a dedicated live coding app for procedural ASCII synthesis. It uses `textmode.js` as the rendering core and exposes `textmode.synth.js` globally, so the workflow feels closer to Hydra-style source chaining, but with separate channels for glyphs, glyph color, and cell color.
+[editor.textmode.art](https://editor.textmode.art/) is a dedicated live coding app for procedural ASCII synthesis. It uses `textmode.js` as the rendering core and exposes `textmode.synth.js` globally, so the workflow feels closer to Hydra-style source chaining, but with separate channels for glyphs, glyph color, and cell color.
 
-<GalleryCard :item="synthItem" />
+<GalleryCard :item="editorItem" />
 
 - Best when you want a focused textmode environment with built-in examples, share links, and a stronger editor experience.
-- Detailed guide: [Live coding with synth.textmode.art](/docs/live-coding-synth-textmode-art)
+- Detailed guide: [Live coding with editor.textmode.art](/docs/live-coding-editor-textmode-art)

@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: MouseEventMap
 description: Mouse events emitted by the mouse input manager.
 category: Interfaces
 api: true
 namespace: input.mouse
 kind: Interface
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 isInterface: true
 ---
 

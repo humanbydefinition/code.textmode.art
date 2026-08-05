@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: GlyphData
 description: Glyph outline data for a character *(TextmodeFont only)*.
 category: Interfaces
 api: true
 namespace: fonts
 kind: Interface
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 isInterface: true
 ---
 

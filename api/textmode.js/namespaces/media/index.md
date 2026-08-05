@@ -1,12 +1,12 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: media
 description: All media asset related modules and types.
 category: Namespaces
 api: true
 kind: Namespace
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../index.md) / media

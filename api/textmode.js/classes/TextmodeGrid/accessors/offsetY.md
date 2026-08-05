@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: offsetY
 description: Vertical offset in pixels from the canvas edge to the grid.
 category: Accessors
 api: true
 owner: TextmodeGrid
 kind: Accessor
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../index.md) / [TextmodeGrid](../../TextmodeGrid.md) / offsetY

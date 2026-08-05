@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: BuiltInConversionMode
 description: Built-in conversion mode names provided by textmode.js
 category: Type Aliases
 api: true
 namespace: conversion
 kind: TypeAlias
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../index.md) / [conversion](../index.md) / BuiltInConversionMode

@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: TextmodeConversionStepOptions
 description: Custom options passed to conversion strategies for one conversion stack pass.
 category: Type Aliases
 api: true
 namespace: conversion
 kind: TypeAlias
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../index.md) / [conversion](../index.md) / TextmodeConversionStepOptions

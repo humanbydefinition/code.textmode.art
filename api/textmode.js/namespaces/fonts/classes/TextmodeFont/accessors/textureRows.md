@@ -1,6 +1,6 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: textureRows
 description: Number of rows in the glyph atlas.
 category: Accessors
@@ -8,7 +8,7 @@ api: true
 owner: TextmodeFont
 namespace: fonts
 kind: Accessor
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../../../index.md) / [fonts](../../../index.md) / [TextmodeFont](../../TextmodeFont.md) / textureRows

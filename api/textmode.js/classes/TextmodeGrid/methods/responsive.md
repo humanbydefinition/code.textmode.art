@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: responsive
 description: Restore responsive sizing so subsequent canvas resizes recompute columns and rows.
 category: Methods
 api: true
 owner: TextmodeGrid
 kind: Method
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../index.md) / [TextmodeGrid](../../TextmodeGrid.md) / responsive

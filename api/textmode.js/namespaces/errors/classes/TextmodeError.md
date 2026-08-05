@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: TextmodeError
 description: Error type that formats optional context data alongside the main message.
 category: Classes
 api: true
 namespace: errors
 kind: Class
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 hasConstructor: true
 ---
 

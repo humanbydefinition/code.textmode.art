@@ -35,12 +35,12 @@
     "featured": true,
     "date": null
   },
-  "synth-textmode-art": {
-    "title": "synth.textmode.art",
-    "description": "Live coding environment for ASCII synthesis and algorithmic audio patterns.",
+  "editor-textmode-art": {
+    "title": "editor.textmode.art",
+    "description": "Browser-based live coding environment for textmode.js sketches, add-ons, and ASCII synthesis.",
     "type": "website",
-    "thumbnailUrl": "/gallery/synth-textmode-art.png",
-    "url": "https://synth.textmode.art/",
+    "thumbnailUrl": "/gallery/editor-textmode-art.png",
+    "url": "https://editor.textmode.art/",
     "author": "humanbydefinition",
     "authorUrl": "https://github.com/humanbydefinition",
     "tags": ["live-coding", "audio-reactive", "visuals"],

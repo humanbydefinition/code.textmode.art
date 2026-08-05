@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: MouseEventData
 description: Mouse event payload passed to input callbacks.
 category: Interfaces
 api: true
 namespace: input.mouse
 kind: Interface
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 isInterface: true
 ---
 

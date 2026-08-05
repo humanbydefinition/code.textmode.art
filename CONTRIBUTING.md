@@ -1,41 +1,28 @@
-# Contributing
+# Contributing to `code.textmode.art`
 
-Thank you for your interest in contributing to `code.textmode.art`.
+Thank you for helping improve `code.textmode.art`.
 
-The full contribution guides live in the documentation site:
-
-- [Contributing overview](https://code.textmode.art/docs/contributing/)
-- [Getting started](https://code.textmode.art/docs/contributing/getting-started)
-- [Suggest a font](https://code.textmode.art/docs/contributing/suggest-a-font)
-- [Submit a sketch](https://code.textmode.art/docs/contributing/submit-a-sketch)
-- [Improve documentation](https://code.textmode.art/docs/contributing/improve-docs)
+Start with the [documentation-site guide](https://code.textmode.art/docs/contributing/docs) for repository
+routing, setup, workflow, writing, validation, and review expectations. Library changes follow the shared
+[code contribution guide](https://code.textmode.art/docs/contributing/code).
 
 ## Quick start
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/code.textmode.art.git
-cd code.textmode.art
-npm install
-npm run dev
+npm ci
+npm run build
 ```
 
-## Contributor credit
+Create a focused branch from `dev` and open the pull request against `dev`. Discuss major documentation structure,
+site behavior, integration, or generated-content changes in an issue or Discussion before implementation.
 
-The textmode.js ecosystem keeps contributor profiles in
-[`.vitepress/data/contributors.json`](./.vitepress/data/contributors.json) and the ordered contribution-type catalog
-in [`.vitepress/data/contribution-types.json`](./.vitepress/data/contribution-types.json). Maintainers update the
-relevant file and run:
+Update relevant guides, examples, and site configuration when behavior changes. Test rendered changes in a real browser
+and include screenshots or recordings for visual changes. For contributor registry or contribution-type catalog changes,
+also run `npm run check:contributors`.
 
-```bash
-npm run contributors:validate
-npm run contributors:render
-npm run check:contributors
-```
+Read the [Code of Conduct](CODE_OF_CONDUCT.md). Report vulnerabilities privately by following
+[SECURITY.md](SECURITY.md), not through a public issue.
 
-The documentation site reads both canonical files directly. Automation synchronizes the same generated Contributors
-section to every official textmode.js library README.
-
-## Need help?
-
-- [Open an issue](https://github.com/humanbydefinition/code.textmode.art/issues)
-- [Join the Discord community](https://discord.gg/sjrw8QXNks)
+Need help? [Open an issue](https://github.com/humanbydefinition/code.textmode.art/issues),
+[start a Discussion](https://github.com/humanbydefinition/code.textmode.art/discussions), or
+[join Discord](https://discord.gg/sjrw8QXNks).

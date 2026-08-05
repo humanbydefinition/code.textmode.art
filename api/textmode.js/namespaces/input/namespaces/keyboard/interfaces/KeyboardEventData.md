@@ -1,13 +1,13 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: KeyboardEventData
 description: Keyboard event payload passed to input callbacks.
 category: Interfaces
 api: true
 namespace: input.keyboard
 kind: Interface
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 isInterface: true
 ---
 

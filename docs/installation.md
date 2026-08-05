@@ -27,7 +27,7 @@ Use it to learn the ecosystem, prototype an idea, or decide which packages your 
 
 - A modern browser with [`WebGL2`](https://developer.mozilla.org/en-US/docs/Web/API/WebGL2RenderingContext)
   support
-- [Node.js 20.8.1 or newer](https://nodejs.org/) and npm when using the package-manager workflow
+- [Node.js 24 LTS](https://nodejs.org/) and npm when using the package-manager workflow
 
 You do not need to create a `<canvas>` element yourself. Unless you provide one, `textmode.js` creates and
 mounts a canvas after the document body is available.

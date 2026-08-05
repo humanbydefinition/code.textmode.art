@@ -1,6 +1,6 @@
 ---
 layout: doc
-editLink: true
+editLink: false
 title: b
 description: Blue component (0-255).
 category: Properties
@@ -8,7 +8,7 @@ api: true
 owner: TextmodeColor
 namespace: color
 kind: Property
-lastModified: 2026-07-31
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../../../index.md) / [color](../../../index.md) / [TextmodeColor](../../TextmodeColor.md) / b
