@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: TextmodeGrid
 kind: Method
-lastModified: 2026-08-03
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../index.md) / [TextmodeGrid](../../TextmodeGrid.md) / responsive

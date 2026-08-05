@@ -7,7 +7,7 @@ category: Enumerations
 api: true
 namespace: layering
 kind: Enum
-lastModified: 2026-08-03
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../index.md) / [layering](../index.md) / LayerBlendMode

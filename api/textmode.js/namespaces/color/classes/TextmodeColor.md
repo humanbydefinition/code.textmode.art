@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: color
 kind: Class
-lastModified: 2026-08-03
+lastModified: 2026-08-05
 hasConstructor: false
 ---
 

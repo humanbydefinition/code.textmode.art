@@ -6,7 +6,7 @@ description: textmode.js is a lightweight creative coding library for creating r
 category: API Reference
 api: true
 kind: Project
-lastModified: 2026-08-03
+lastModified: 2026-08-05
 ---
 
 # textmode.js

@@ -8,7 +8,7 @@ api: true
 owner: SynthSource
 kind: Method
 ecosystem: textmode.js
-lastModified: 2026-08-03
+lastModified: 2026-08-05
 ---
 
 [textmode.synth.js](../../../index.md) / [SynthSource](../../SynthSource.md) / noise

@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 namespace: color
 kind: TypeAlias
-lastModified: 2026-08-03
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../index.md) / [color](../index.md) / TextmodeColorModeState

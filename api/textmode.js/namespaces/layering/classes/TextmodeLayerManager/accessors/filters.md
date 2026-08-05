@@ -8,7 +8,7 @@ api: true
 owner: TextmodeLayerManager
 namespace: layering
 kind: Accessor
-lastModified: 2026-08-03
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../../../index.md) / [layering](../../../index.md) / [TextmodeLayerManager](../../TextmodeLayerManager.md) / filters

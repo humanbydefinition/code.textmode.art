@@ -7,7 +7,7 @@ category: Classes
 api: true
 kind: Class
 ecosystem: textmode.js
-lastModified: 2026-08-03
+lastModified: 2026-08-05
 hasConstructor: false
 ---
 

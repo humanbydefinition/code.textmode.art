@@ -7,7 +7,7 @@ category: Functions
 api: true
 kind: Function
 ecosystem: textmode.js
-lastModified: 2026-08-03
+lastModified: 2026-08-05
 ---
 
 [textmode.synth.js](../index.md) / src

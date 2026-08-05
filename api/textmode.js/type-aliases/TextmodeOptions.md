@@ -6,7 +6,7 @@ description: Options when creating a Textmodifier instance via textmode.create.
 category: Type Aliases
 api: true
 kind: TypeAlias
-lastModified: 2026-08-03
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../index.md) / TextmodeOptions

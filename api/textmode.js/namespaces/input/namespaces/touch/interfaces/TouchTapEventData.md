@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: input.touch
 kind: Interface
-lastModified: 2026-08-03
+lastModified: 2026-08-05
 isInterface: true
 ---
 

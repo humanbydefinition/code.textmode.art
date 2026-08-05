@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-08-03
+lastModified: 2026-08-05
 ---
 
 [textmode.export.js](../index.md) / GIFOverlayDefaults

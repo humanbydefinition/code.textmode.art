@@ -8,7 +8,7 @@ api: true
 owner: TextmodifierFigletExtensions
 kind: Method
 ecosystem: textmode.js
-lastModified: 2026-08-03
+lastModified: 2026-08-05
 ---
 
 [textmode.figlet.js](../../../index.md) / [TextmodifierFigletExtensions](../../TextmodifierFigletExtensions.md) / figText

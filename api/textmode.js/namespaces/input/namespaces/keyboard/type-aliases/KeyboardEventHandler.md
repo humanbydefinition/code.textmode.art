@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 namespace: input.keyboard
 kind: TypeAlias
-lastModified: 2026-08-03
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [keyboard](../index.md) / KeyboardEventHandler

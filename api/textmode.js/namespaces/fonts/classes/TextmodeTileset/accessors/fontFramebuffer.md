@@ -8,7 +8,7 @@ api: true
 owner: TextmodeTileset
 namespace: fonts
 kind: Accessor
-lastModified: 2026-08-03
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../../../index.md) / [fonts](../../../index.md) / [TextmodeTileset](../../TextmodeTileset.md) / fontFramebuffer

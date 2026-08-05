@@ -7,7 +7,7 @@ category: Accessors
 api: true
 owner: TextmodeGrid
 kind: Accessor
-lastModified: 2026-08-03
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../index.md) / [TextmodeGrid](../../TextmodeGrid.md) / cellHeight

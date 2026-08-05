@@ -8,7 +8,7 @@ api: true
 owner: TextmodeVideo
 namespace: media
 kind: Method
-lastModified: 2026-08-03
+lastModified: 2026-08-05
 ---
 
 [textmode.js](../../../../../index.md) / [media](../../../index.md) / [TextmodeVideo](../../TextmodeVideo.md) / charColorMode
