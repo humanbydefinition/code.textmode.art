@@ -117,6 +117,7 @@ const profiles = [
   { id: 'textmode.filters.js', label: 'tm.filters.js' },
   { id: 'textmode.figlet.js', label: 'tm.figlet.js' },
   { id: 'textmode.export.js', label: 'tm.export.js' },
+  { id: 'textmode.overlay.js', label: 'tm.overlay.js' },
 ] as const
 
 const activeProfiles = ref<Set<ApiProfile>>(new Set(profiles.map((profile) => profile.id)))

@@ -13,7 +13,7 @@ in the browser. Official add-ons use the same plugin setup in either environment
 Open [editor.textmode.art](https://editor.textmode.art/), a browser-based live-coding environment for the
 complete official `textmode.js` ecosystem. Sketches run as you edit, with no local toolchain required.
 
-The editor includes `textmode.js` and all four official add-ons: `textmode.export.js`, `textmode.filters.js`,
+The editor includes `textmode.js` and the add-ons `textmode.export.js`, `textmode.filters.js`,
 `textmode.figlet.js`, and `textmode.synth.js`.
 
 - Write with Monaco-powered completions, hover documentation, and diagnostics.
@@ -114,10 +114,11 @@ you pass to `textmode.create()` through the `plugins` array:
 | [`textmode.export.js`](/api/textmode.export.js/) | `ExportPlugin`      |
 | [`textmode.filters.js`](/api/textmode.filters.js/) | `FiltersPlugin`   |
 | [`textmode.figlet.js`](/api/textmode.figlet.js/) | `FigletPlugin`      |
+| [`textmode.overlay.js`](/api/textmode.overlay.js/) | `OverlayPlugin`   |
 | [`textmode.synth.js`](/api/textmode.synth.js/)   | `SynthPlugin`       |
 
 The corresponding UMD files are `dist/textmode.export.umd.js`, `dist/textmode.filters.umd.js`,
-`dist/textmode.figlet.umd.js`, and `dist/textmode.synth.umd.js`.
+`dist/textmode.figlet.umd.js`, `dist/textmode.overlay.umd.js`, and `dist/textmode.synth.umd.js`.
 
 ### npm and ESM
 

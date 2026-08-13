@@ -177,6 +177,12 @@ const TEXTMODE_SANDBOX_PROFILES: Record<string, ProfileConfig> = {
       'https://unpkg.com/textmode.export.js@latest/dist/textmode.export.umd.js',
     ],
   },
+  'textmode.overlay.js': {
+    scripts: [
+      'https://unpkg.com/textmode.js@latest/dist/textmode.umd.js',
+      'https://unpkg.com/textmode.overlay.js@latest/dist/textmode.overlay.umd.js',
+    ],
+  },
   custom: {
     scripts: [],
   },

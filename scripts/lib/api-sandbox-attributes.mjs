@@ -18,6 +18,7 @@ export const API_SANDBOX_PROFILES = {
   'api/textmode.filters.js': { id: 'textmode.filters.js' },
   'api/textmode.figlet.js': { id: 'textmode.figlet.js' },
   'api/textmode.export.js': { id: 'textmode.export.js' },
+  'api/textmode.overlay.js': { id: 'textmode.overlay.js' },
 }
 
 export function getAttribute(source, name) {

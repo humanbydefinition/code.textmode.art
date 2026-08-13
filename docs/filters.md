@@ -98,7 +98,7 @@ Here `grayscale` runs on the composited scene first. `invert` then runs on that 
 
 ## Register a custom filter
 
-Use [`t.filters.register()`](/api/textmode.js/namespaces/filters/classes/TextmodeFilterManager.md#register) to add a named filter:
+Use [`t.filters.register()`](/api/textmode.filters.js/classes/TextmodeFilterManager.md#register) to add a named filter:
 
 ```js
 await t.filters.register("vignette", "./vignette.frag", {
@@ -117,7 +117,7 @@ The `uniformDefs` object maps shader uniform names to public parameter names and
 t.filter("vignette", 0.8);
 ```
 
-Use [`has()`](/api/textmode.js/namespaces/filters/classes/TextmodeFilterManager.md#has) and [`unregister()`](/api/textmode.js/namespaces/filters/classes/TextmodeFilterManager.md#unregister) to manage the filter registry.
+Use [`has()`](/api/textmode.filters.js/classes/TextmodeFilterManager.md#has) and [`unregister()`](/api/textmode.filters.js/classes/TextmodeFilterManager.md#unregister) to manage the filter registry.
 
 ## Add-on filter package
 
@@ -139,7 +139,7 @@ const t = textmode.create({
 - [`Textmodifier.filter()`](/api/textmode.js/classes/Textmodifier#filter)
 - [`Textmodifier.finalDraw()`](/api/textmode.js/classes/Textmodifier#finaldraw)
 - [`Textmodifier.filters`](/api/textmode.js/classes/Textmodifier#filters)
-- [`TextmodeFilterManager`](/api/textmode.js/namespaces/filters/classes/TextmodeFilterManager.md)
+- [`TextmodeFilterManager`](/api/textmode.filters.js/classes/TextmodeFilterManager.md)
 - [`TextmodeLayer.filter()`](/api/textmode.js/namespaces/layering/classes/TextmodeLayer.md#filter)
 - [`TextmodeLayer.postDraw()`](/api/textmode.js/namespaces/layering/classes/TextmodeLayer.md#postdraw)
 - [`textmode.filters.js`](/api/textmode.filters.js/)
