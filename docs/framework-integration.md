@@ -10,7 +10,7 @@ description: Integrate textmode.js with framework-owned canvases, overlay target
 In practice, there are four useful ways to integrate it:
 
 1. render directly into a framework-owned canvas
-2. run in overlay mode on top of another canvas or video
+2. run the [`textmode.overlay.js`](/api/textmode.overlay.js/) add-on on top of another canvas or video
 3. sample another canvas or video through [`createTexture()`](/api/textmode.js/classes/Textmodifier#createtexture)
 4. share an existing `WebGL2RenderingContext`
 
@@ -20,7 +20,7 @@ The right choice depends on who should own the canvas, who should own the render
 
 Use a framework-owned canvas when `textmode.js` should be the only renderer for that element.
 
-Use overlay mode when another canvas or video should remain visible and `textmode.js` should create a second canvas directly on top of it.
+Use the `textmode.overlay.js` add-on when another canvas or video should remain visible and `textmode.js` should create a second canvas directly on top of it.
 
 Use [`createTexture()`](/api/textmode.js/classes/Textmodifier#createtexture) when another library already renders into a canvas or video element and you want to pull that content into your own textmode scene.
 
@@ -43,23 +43,24 @@ This keeps canvas ownership with the host framework. `textmode.js` will use that
 
 This is the simplest path when the host app is just responsible for layout and lifecycle, while `textmode.js` is responsible for all rendering.
 
-## 2. Use overlay mode
+## 2. Use the overlay add-on
 
-Overlay mode is for cases where another canvas or video should keep rendering normally and `textmode.js` should sit above it as a separate ASCII layer.
+Overlay mode now lives in the official [`textmode.overlay.js`](/api/textmode.overlay.js/) add-on. Use it when another canvas or video should keep rendering normally and `textmode.js` should sit above it as a separate ASCII layer.
 
-Pass the target element as `canvas` and enable [`overlay`](/api/textmode.js/type-aliases/TextmodeOptions#overlay):
+Install the add-on and pass its [`OverlayPlugin`](/api/textmode.overlay.js/variables/OverlayPlugin.md) to `textmode.create()`, then bind the target element:
 
 ```js
 const sourceCanvas = renderer.domElement;
 
 const t = textmode.create({
-  canvas: sourceCanvas,
-  overlay: true,
+  plugins: [OverlayPlugin],
   fontSize: 8,
 });
 
+const source = t.overlay.setTarget(sourceCanvas);
+
 t.setup(() => {
-  t.overlay
+  source
     .characters(" .:-=+*#%@")
     .charColorMode("sampled")
     .cellColorMode("fixed")
@@ -68,10 +69,7 @@ t.setup(() => {
 
 t.draw(() => {
   t.clear();
-
-  if (t.overlay) {
-    t.image(t.overlay, t.grid.cols, t.grid.rows);
-  }
+  t.image(source, t.grid.cols, t.grid.rows);
 });
 ```
 
@@ -80,9 +78,9 @@ In overlay mode:
 - `textmode.js` creates its own canvas
 - that canvas is inserted directly after the target element
 - its size and position are kept in sync with the target
-- the target content is exposed as [`t.overlay`](/api/textmode.js/classes/Textmodifier#overlay), a [`TextmodeImage`](/api/textmode.js/namespaces/media/classes/TextmodeImage.md)
+- the target content is exposed through [`t.overlay.source`](/api/textmode.overlay.js/interfaces/TextmodeOverlayController#source), a [`TextmodeTexture`](/api/textmode.js/namespaces/media/classes/TextmodeTexture.md)
 
-Overlay mode accepts both `HTMLCanvasElement` and `HTMLVideoElement` targets. Outside overlay mode, `canvas` must be a real canvas.
+The overlay controller accepts both `HTMLCanvasElement` and `HTMLVideoElement` targets via [`setTarget()`](/api/textmode.overlay.js/interfaces/TextmodeOverlayController#settarget), and can [`show()`](/api/textmode.overlay.js/interfaces/TextmodeOverlayController#show), [`hide()`](/api/textmode.overlay.js/interfaces/TextmodeOverlayController#hide), or [`toggle()`](/api/textmode.overlay.js/interfaces/TextmodeOverlayController#toggle) the output canvas while drawing continues. Without the add-on, `canvas` must be a real canvas.
 
 ## 3. Sample external content with `createTexture()`
 
@@ -192,7 +190,7 @@ If `textmode.js` owns its canvas size, resize it explicitly with [`resizeCanvas(
 t.resizeCanvas(window.innerWidth, window.innerHeight);
 ```
 
-If you use overlay mode, the target element is the source of truth. `textmode.js` observes that target and keeps the overlay canvas in sync automatically. In that case, resize the host canvas or video element and let `textmode.js` follow it.
+If you use the overlay add-on, the target element is the source of truth. The overlay controller observes that target and keeps the overlay canvas in sync automatically. In that case, resize the host canvas or video element and let `textmode.js` follow it.
 
 If you use [`createTexture()`](/api/textmode.js/classes/Textmodifier#createtexture), resize both sides as needed:
 
@@ -233,7 +231,7 @@ If the framework already controls when frames should render, combine that with `
 
 Prefer direct canvas ownership when `textmode.js` is the main renderer.
 
-Prefer overlay mode when you want ASCII conversion on top of an existing canvas or video with minimal coordination.
+Prefer the [`textmode.overlay.js`](/api/textmode.overlay.js/) add-on when you want ASCII conversion on top of an existing canvas or video with minimal coordination.
 
 Prefer [`createTexture()`](/api/textmode.js/classes/Textmodifier#createtexture) when you want another framework's output inside a normal textmode composition.
 
@@ -241,7 +239,7 @@ Prefer shared `gl` when integrating with an existing WebGL renderer and you want
 
 ## Examples
 
-Most of the examples below use the overlay path because it is the lowest-friction way to drop `textmode.js` on top of an existing renderer or media element.
+Most of the examples below use the [`textmode.overlay.js`](/api/textmode.overlay.js/) add-on because it is the lowest-friction way to drop `textmode.js` on top of an existing renderer or media element.
 
 <!--@include: ./examples/integration/p5js.md-->
 <!--@include: ./examples/integration/hydra-synth.md-->
@@ -253,9 +251,9 @@ Most of the examples below use the overlay path because it is the lowest-frictio
 
 - [`TextmodeOptions.canvas`](/api/textmode.js/type-aliases/TextmodeOptions#canvas)
 - [`TextmodeOptions.gl`](/api/textmode.js/type-aliases/TextmodeOptions#gl)
-- [`TextmodeOptions.overlay`](/api/textmode.js/type-aliases/TextmodeOptions#overlay)
+- [`OverlayPlugin`](/api/textmode.overlay.js/variables/OverlayPlugin.md)
+- [`TextmodeOverlayController`](/api/textmode.overlay.js/interfaces/TextmodeOverlayController.md)
 - [`Textmodifier.canvas`](/api/textmode.js/classes/Textmodifier#canvas)
-- [`Textmodifier.overlay`](/api/textmode.js/classes/Textmodifier#overlay)
 - [`Textmodifier.createTexture()`](/api/textmode.js/classes/Textmodifier#createtexture)
 - [`Textmodifier.image()`](/api/textmode.js/classes/Textmodifier#image)
 - [`Textmodifier.resizeCanvas()`](/api/textmode.js/classes/Textmodifier#resizecanvas)
