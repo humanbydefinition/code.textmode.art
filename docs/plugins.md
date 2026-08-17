@@ -21,37 +21,44 @@ const t = textmode.create({
 });
 ```
 
-`install()` and `uninstall()` are synchronous. Extensions are therefore available as soon as `textmode.create()`
-returns. Awaited initialization belongs in the `preSetup` or `postSetup` hook.
+`install()` is synchronous and returns an optional cleanup function. Extensions are therefore available as soon as
+`textmode.create()` returns. Awaited initialization belongs in the `preSetup` or `postSetup` hook. The returned cleanup
+releases the plugin's own resources and runs exactly once during rollback or teardown.
 
 ## Lifecycle
 
 ```mermaid
-flowchart LR
-  A["Construct renderer and base layer"] --> B["plugin.install()"]
+flowchart TD
+  A["Construct renderer, canvas & base layer"] --> B["plugin.install(t, context)"]
   B --> C["Initialize layers and GPU resources"]
-  C --> D["await preSetup hooks"]
-  D --> E["await user setup"]
-  E --> F["await postSetup hooks"]
-  F --> G["render loop"]
+  C --> D["Await preSetup hooks (sequential)"]
+  D --> E["Await user setup() callback"]
+  E --> F["Await postSetup hooks (sequential)"]
+  F --> G["Active render loop & synchronous frame hooks"]
+  G --> H["Teardown: t.destroy()"]
+  H --> I["Dispose layers -> plugin cleanups -> host resources"]
 ```
 
 Each user frame runs in this order:
 
 ```mermaid
 flowchart TD
-  A["preDraw"] --> B["For each visible user layer"]
-  B --> C["layerPreRender"]
-  C --> D["user layer draw"]
-  D --> E["layerPostRender"]
-  E --> F["ASCII resolve"]
-  F --> G["layerOutput (resolved)"]
-  G --> H["user layer postDraw"]
-  H --> I["layerOutput (finalized)"]
-  I --> J["composite layers"]
-  J --> K["compositeOutput"]
-  K --> L["present"]
-  L --> M["postDraw"]
+  A["preDraw hook"] --> B["For each visible user layer (bottom-to-top)"]
+
+  subgraph LayerPass ["Per-Layer Render Pass"]
+    B --> C["layerPreRender hook"]
+    C --> D["User layer draw() callback"]
+    D --> E["layerPostRender hook"]
+    E --> F["ASCII resolve (glyphs & colors)"]
+    F --> G["layerOutput hook (phase: resolved)"]
+    G --> H["User layer postDraw() callback"]
+    H --> I["layerOutput hook (phase: finalized)"]
+  end
+
+  I --> J["Composite all visible layers"]
+  J --> K["compositeOutput hook"]
+  K --> L["Present to canvas"]
+  L --> M["postDraw hook"]
 ```
 
 Setup hooks run sequentially in plugin installation order and may be asynchronous. Every draw, layer, and output hook
@@ -147,13 +154,6 @@ install(t, context) {
 The shader's vertex source defines how the rectangle maps to clip space. `Textmodifier` owns both resources, while the
 plugin controls their earlier replacement or disposal. Keep source and destination framebuffers distinct for texture
 passes; `push()`/`pop()` and `begin()`/`end()` preserve drawing and framebuffer state after success or failure.
-
-## Teardown
-
-Plugins uninstall in reverse installation order. The runtime removes their hooks and extensions even when plugin cleanup
-fails. It attempts every plugin and core cleanup before reporting aggregated errors. A captured context cannot register
-hooks or define extensions after uninstall. Resources created through `Textmodifier` are also released when that instance
-is destroyed.
 
 ## Related interfaces
 
