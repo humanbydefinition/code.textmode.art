@@ -7,7 +7,7 @@ description: Compose textmode.js scenes with base and user layers, blend modes, 
 
 Layers let you build a composition from independent render passes. Each layer has its own draw callback, grid, font, framebuffers, opacity, blend mode, filter sequences, and camera state. (ﾉ◕ヮ◕)ﾉ\*:･ﾟ✧
 
-Access layers through [`t.layers`](/api/textmode.js/classes/Textmodifier#layers), a [`TextmodeLayerManager`](/api/textmode.js/namespaces/layering/classes/TextmodeLayerManager.md).
+Access layers through [`t.layers`](/api/textmode.js/classes/Textmodifier#layers), a [`TextmodeLayerManager`](/api/textmode.js/namespaces/layering/classes/TextmodeLayerManager).
 
 ## Base layer
 
@@ -26,7 +26,7 @@ Calling `t.draw(...)` is the common shorthand for drawing on the base layer.
 
 ## Add a layer
 
-Create user layers with [`t.layers.add()`](/api/textmode.js/namespaces/layering/classes/TextmodeLayerManager.md#add):
+Create user layers with [`t.layers.add()`](/api/textmode.js/namespaces/layering/classes/TextmodeLayerManager#add):
 
 ```js
 const glow = t.layers.add({
@@ -56,13 +56,13 @@ Layer options include:
 
 ## Blend modes
 
-[`blendMode()`](/api/textmode.js/namespaces/layering/classes/TextmodeLayer.md#blendmode) controls how a layer is composited over the result below it:
+[`blendMode()`](/api/textmode.js/namespaces/layering/classes/TextmodeLayer#blendmode) controls how a layer is composited over the result below it:
 
 ```js
 glow.blendMode(t.BLEND_ADDITIVE);
 ```
 
-Use the [`LayerBlendMode`](/api/textmode.js/namespaces/layering/enumerations/LayerBlendMode.md) values exposed through constants such as `t.BLEND_NORMAL`, `t.BLEND_ADDITIVE`, `t.BLEND_MULTIPLY`, `t.BLEND_SCREEN`, `t.BLEND_OVERLAY`, and `t.BLEND_DIFFERENCE`.
+Use the [`LayerBlendMode`](/api/textmode.js/namespaces/layering/enumerations/LayerBlendMode) values exposed through constants such as `t.BLEND_NORMAL`, `t.BLEND_ADDITIVE`, `t.BLEND_MULTIPLY`, `t.BLEND_SCREEN`, `t.BLEND_OVERLAY`, and `t.BLEND_DIFFERENCE`.
 
 ## Opacity, visibility, and placement
 
@@ -103,13 +103,13 @@ Layer-local font loading lets one sketch mix different glyph systems without cha
 
 ## Filters on layers
 
-Apply filters before a layer is composited. Each layer has its own filter queue, and filters run in the order they are requested:
+Apply filters before a layer is composited (requires [`textmode.filters.js`](/docs/filters)). Each layer has its own filter queue, and filters run in the order they are requested:
 
 ```js
-glow.filter("threshold", { threshold: 0.5 });
+glow.filter("threshold", { cutoff: 0.5 });
 ```
 
-Calls to [`layer.filter()`](/api/textmode.js/namespaces/layering/classes/TextmodeLayer.md#filter) made during a layer's `draw()` callback run after that layer is converted to ASCII. Calls made during [`layer.postDraw()`](/api/textmode.js/namespaces/layering/classes/TextmodeLayer.md#postdraw) run after the draw-time filter sequence and still before compositing:
+Calls to [`layer.filter()`](/api/textmode.js/namespaces/layering/classes/TextmodeLayer#filter) made during a layer's `draw()` callback run after that layer is converted to ASCII. Calls made during [`layer.postDraw()`](/api/textmode.js/namespaces/layering/classes/TextmodeLayer#postdraw) run after the draw-time filter sequence and still before compositing:
 
 ```js
 glow.draw(() => {
@@ -123,6 +123,8 @@ glow.postDraw(() => {
   glow.filter("invert");
 });
 ```
+
+The `invert` filter runs after the layer has already been converted and passed through `grayscale`, but before `glow` is composited with other layers.
 
 Apply global filters with [`t.filter()`](/api/textmode.js/classes/Textmodifier#filter) after all layers are composited. See [Filters](/docs/filters) for the full filtering model.
 
@@ -147,7 +149,7 @@ Use [Exporting](/docs/exporting) to choose the right export model:
 ## Related APIs
 
 - [`Textmodifier.layers`](/api/textmode.js/classes/Textmodifier#layers)
-- [`TextmodeLayerManager`](/api/textmode.js/namespaces/layering/classes/TextmodeLayerManager.md)
-- [`TextmodeLayer`](/api/textmode.js/namespaces/layering/classes/TextmodeLayer.md)
-- [`TextmodeLayerOptions`](/api/textmode.js/namespaces/layering/interfaces/TextmodeLayerOptions.md)
-- [`LayerBlendMode`](/api/textmode.js/namespaces/layering/enumerations/LayerBlendMode.md)
+- [`TextmodeLayerManager`](/api/textmode.js/namespaces/layering/classes/TextmodeLayerManager)
+- [`TextmodeLayer`](/api/textmode.js/namespaces/layering/classes/TextmodeLayer)
+- [`TextmodeLayerOptions`](/api/textmode.js/namespaces/layering/interfaces/TextmodeLayerOptions)
+- [`LayerBlendMode`](/api/textmode.js/namespaces/layering/enumerations/LayerBlendMode)
