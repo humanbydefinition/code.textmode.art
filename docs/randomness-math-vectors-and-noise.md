@@ -69,7 +69,10 @@ t.draw(() => {
     const pulse = Math.sin(t.secs * 1.5 + star.phase) * 0.5 + 0.5;
     t.char(star.glyph);
     t.charColor(120 + pulse * 135, 170 + pulse * 70, 255);
-    t.point(star.x, star.y);
+    t.push();
+    t.translate(star.x, star.y);
+    t.point();
+    t.pop();
   }
 });
 ```
@@ -105,7 +108,10 @@ for (let i = 0; i < 120; i++) {
 
   t.char("*");
   t.charColor(brightness, brightness, 255);
-  t.point(x, y);
+  t.push();
+  t.translate(x, y);
+  t.point();
+  t.pop();
 }
 ```
 
@@ -169,7 +175,10 @@ t.draw(() => {
   t.background(0);
   t.char("@");
   t.charColor(120, 255, 180);
-  t.point(position.x, position.y);
+  t.push();
+  t.translate(position.x, position.y);
+  t.point();
+  t.pop();
 });
 ```
 
@@ -191,7 +200,10 @@ t.draw(() => {
 
       t.char(ramp.at(value));
       t.charColor(80 + value * 120, 130 + value * 90, 255);
-      t.point(x, y);
+      t.push();
+      t.translate(x, y);
+      t.point();
+      t.pop();
     }
   }
 });
