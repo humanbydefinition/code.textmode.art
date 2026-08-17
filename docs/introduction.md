@@ -42,10 +42,10 @@ Here’s a high‑level overview of what the library offers. Later pages dive in
 - Real‑time\* ASCII/textmode rendering with a simple drawing API
 - Font system with runtime font loading and dynamic sizing _(supports TTF/OTF/WOFF)_
 - Dynamic layering system with blend modes and opacity for multi‑layered textmode scenes
-- Filter system with built-in filters and support for custom filter shaders
+- Post-processing filter system with built-in GPU filters and custom shader support _(via [`textmode.filters.js`](/docs/filters))_
 - Load images and videos as sources and render them as textmode with adjustable converters
 - Author custom shaders in [`GLSL ES 3.00`](https://registry.khronos.org/OpenGL/specs/es/3.0/GLSL_ES_Specification_3.00.pdf) for advanced effects
-- Flexible exporting: TXT, SVG, raster images _(PNG/JPG/WebP)_, animated GIFs, and video _(MP4/WebM)_
+- Flexible exporting: TXT, SVG, raster images _(PNG/JPG/WebP)_, animated GIFs, and video _(MP4/WebM)_ _(via [`textmode.export.js`](/docs/exporting))_
 - Animation loop control: `frameRate`, `loop`/`noLoop`, `redraw`, `frameCount`, etc.
 - Deterministic sketch seeds, independent random streams, smooth noise fields, and vector math
 - HiDPI rendering with `pixelDensity`, plus `rgb`, `hsl`, and `hsb` numeric color modes
