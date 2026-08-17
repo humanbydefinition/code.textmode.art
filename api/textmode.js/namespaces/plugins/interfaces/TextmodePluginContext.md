@@ -2,12 +2,12 @@
 layout: doc
 editLink: false
 title: TextmodePluginContext
-description: Host-provided context passed to plugins when they are installed on a Textmodifier instance.
+description: Host facilities available while installing a plugin.
 category: Interfaces
 api: true
 namespace: plugins
 kind: Interface
-lastModified: 2026-08-05
+lastModified: 2026-08-17
 isInterface: true
 ---
 
@@ -15,119 +15,84 @@ isInterface: true
 
 # Interface: TextmodePluginContext
 
-Host-provided context passed to plugins when they are installed on a [Textmodifier](../../../classes/Textmodifier.md) instance.
+Host facilities available while installing a plugin.
 
 
-## Extensions
+## Methods
 
-Add and remove methods on layer and source instances.
+### defineExtension()
 
-| Method | Description |
+```ts
+defineExtension<TTarget>(
+   target, 
+   propertyName, 
+   descriptor): () => void;
+```
+
+Define one plugin-owned method or accessor on runtime objects.
+
+#### Type Parameters
+
+| Type Parameter |
+| ------ |
+| `TTarget` *extends* [`TextmodeExtensionTarget`](../type-aliases/TextmodeExtensionTarget.md) |
+
+#### Parameters
+
+| Parameter | Type |
 | ------ | ------ |
-| [extendLayer](TextmodePluginContext/methods/extendLayer.md) | Extend TextmodeLayer instances with a new method. The method will be available on all existing and future layer instances. |
-| [extendSource](TextmodePluginContext/methods/extendSource.md) | Extend TextmodeSource instances with a new method. The method will be available on image, video, texture, and overlay sources. |
-| [removeLayerExtension](TextmodePluginContext/methods/removeLayerExtension.md) | Remove a method extension from TextmodeLayer. |
-| [removeSourceExtension](TextmodePluginContext/methods/removeSourceExtension.md) | Remove a method extension from TextmodeSource. |
+| `target` | `TTarget` |
+| `propertyName` | `string` |
+| `descriptor` | [`TextmodeExtensionDescriptor`](TextmodeExtensionDescriptor.md)\<[`TextmodeExtensionInstance`](../type-aliases/TextmodeExtensionInstance.md)\<`TTarget`\>\> |
 
-## Host resources
+#### Returns
 
-Access the renderer, grid, glyph atlas, canvas, framebuffers, and layer manager.
+A function that removes the extension.
 
-### asciiFramebuffer
+() => `void`
+
+#### Example
 
 ```ts
-asciiFramebuffer: TextmodeFramebuffer;
+context.defineExtension('textmodifier', 'effect', { value() {} });
 ```
-
-The framebuffer containing the ASCII representation (from base layer).<br/>
-This framebuffer only has a single attachment.
 
 
 ***
 
-### canvas
+### on()
 
 ```ts
-canvas: TextmodeCanvasHandle;
+on<K>(hook, callback): () => void;
 ```
 
-A stable handle for the canvas used by the Textmodifier instance.
+Register a lifecycle hook or output transform.
 
+Setup hooks may be asynchronous. Draw, layer, and output hooks must finish synchronously.
+Callbacks run in plugin installation order and then registration order.
 
-***
+#### Type Parameters
 
-### drawFramebuffer
+| Type Parameter |
+| ------ |
+| `K` *extends* keyof [`TextmodePluginHookMap`](TextmodePluginHookMap.md) |
 
-```ts
-drawFramebuffer: TextmodeFramebuffer;
-```
+#### Parameters
 
-The framebuffer the user draws to with 3 attachments (from base layer).
-
-
-***
-
-### font
-
-```ts
-font: 
-  | TextmodeFont
-  | TextmodeTileset;
-```
-
-The active glyph source used by the Textmodifier instance (from base layer).
-
-
-***
-
-### glyphAtlas
-
-```ts
-glyphAtlas: TextmodeGlyphAtlas;
-```
-
-Backend-neutral glyph atlas used by the Textmodifier instance (from base layer).
-
-
-***
-
-### grid
-
-```ts
-grid: TextmodeGrid;
-```
-
-The grid used by the Textmodifier instance (from base layer).
-
-
-***
-
-### layerManager
-
-```ts
-layerManager: TextmodeLayerManager;
-```
-
-The layer manager for accessing and managing all layers.
-
-
-## Layer hooks
-
-Register callbacks around individual layer renders and disposal.
-
-| Method | Description |
+| Parameter | Type |
 | ------ | ------ |
-| [registerLayerDisposedHook](TextmodePluginContext/methods/registerLayerDisposedHook.md) | Register a callback to be invoked when a layer is about to be disposed. |
-| [registerLayerPostRenderHook](TextmodePluginContext/methods/registerLayerPostRenderHook.md) | Register a callback to be invoked after each layer's render cycle. This happens after the user draw callback but before the ASCII resolve pass. |
-| [registerLayerPreRenderHook](TextmodePluginContext/methods/registerLayerPreRenderHook.md) | Register a callback to be invoked before each layer's render cycle. This happens after the layer's visibility check but before any drawing operations. Useful for rendering content to the layer's framebuffer before user draw callbacks. |
+| `hook` | `K` |
+| `callback` | [`TextmodePluginHookMap`](TextmodePluginHookMap.md)\[`K`\] |
 
-## Sketch hooks
+#### Returns
 
-Register callbacks around setup and the sketch draw cycle.
+A function that unregisters the callback.
 
-| Method | Description |
-| ------ | ------ |
-| [registerPostDrawHook](TextmodePluginContext/methods/registerPostDrawHook.md) | Register a callback to be invoked after each draw cycle. Happens outside of the draw framebuffer being bound after the final result is drawn to the screen. |
-| [registerPostSetupHook](TextmodePluginContext/methods/registerPostSetupHook.md) | Register a callback to be invoked after the user's setup callback completes. This happens after user code in `setup()` has finished executing, but before the loading screen finishes and the main render loop begins. Useful for plugins that need to finalize initialization after user setup. |
-| [registerPreDrawHook](TextmodePluginContext/methods/registerPreDrawHook.md) | Register a callback to be invoked before each draw cycle. Happens just before any framebuffer |
-| [registerPreSetupHook](TextmodePluginContext/methods/registerPreSetupHook.md) | Register a callback to be invoked before the user's setup callback runs. This happens after the Textmodifier and all layers are fully initialized, but before user code in `setup()` executes. Useful for plugins that need to prepare resources or state before user setup. |
+() => `void`
+
+#### Example
+
+```ts
+context.on('postDraw', () => updateOverlay());
+```
+

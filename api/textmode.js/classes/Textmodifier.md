@@ -6,7 +6,7 @@ description: The main textmode.js drawing context.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-08-05
+lastModified: 2026-08-17
 hasConstructor: false
 ---
 
@@ -18,8 +18,7 @@ The main `textmode.js` drawing context.
 
 A Textmodifier manages a canvas, renderer, layers, fonts, media sources, input,
 animation, and the p5-style drawing API. When no canvas is supplied, it creates
-one; when a canvas is supplied, it renders into or over that element depending
-on the chosen options.
+one; when a canvas is supplied, it renders into that element.
 
 
 ## 2D drawing
@@ -83,7 +82,7 @@ Control the camera and projection used for spatial drawing.
 
 ## Canvas & display
 
-Inspect and resize the canvas, display, and overlay output.
+Inspect and resize the canvas and display output.
 
 | Name | Description |
 | ------ | ------ |
@@ -93,7 +92,6 @@ Inspect and resize the canvas, display, and overlay output.
 | [windowWidth](Textmodifier/properties/windowWidth.md) | Current browser window width in pixels. |
 | [canvas](Textmodifier/accessors/canvas.md) | Canvas containing the rendered output. |
 | [height](Textmodifier/accessors/height.md) | Canvas height in pixels. |
-| [overlay](Textmodifier/accessors/overlay.md) | Overlay source image for the target canvas or video, when overlay mode is enabled. |
 | [width](Textmodifier/accessors/width.md) | Canvas width in pixels. |
 | [pixelDensity](Textmodifier/methods/pixelDensity.md) | Get the current pixel density for HiDPI rendering. |
 | [resizeCanvas](Textmodifier/methods/resizeCanvas.md) | Resize the canvas and adjust all related components accordingly. |
@@ -119,15 +117,13 @@ Set the glyph, colors, and per-character appearance for later drawing.
 | [invert](Textmodifier/methods/invert.md) | Toggle character/cell color inversion, or get the current state. |
 | [stroke](Textmodifier/methods/stroke.md) | Alias for [charColor](Textmodifier/methods/charColor.md). Current stroke (character) color. |
 
-## Conversion & filters
+## Conversion
 
 Convert source imagery and post-process rendered output.
 
-| Name | Description |
+| Accessor | Description |
 | ------ | ------ |
 | [conversions](Textmodifier/accessors/conversions.md) | Access the conversion manager for this Textmodifier instance. |
-| [filters](Textmodifier/accessors/filters.md) | Filter manager for this Textmodifier instance. |
-| [filter](Textmodifier/methods/filter.md) | Apply a filter to the final composited output. |
 
 ## Custom geometry
 
@@ -353,7 +349,6 @@ Configure callbacks and manage the lifetime of a sketch.
 | [isRenderingFrame](Textmodifier/accessors/isRenderingFrame.md) | Check if rendering is currently in progress for this frame. |
 | [destroy](Textmodifier/methods/destroy.md) | Completely destroy this Textmodifier instance and free all associated resources. |
 | [draw](Textmodifier/methods/draw.md) | Set the base layer draw callback. |
-| [finalDraw](Textmodifier/methods/finalDraw.md) | Set the final post-processing callback for the composited output. |
 | [postDraw](Textmodifier/methods/postDraw.md) | Set the base layer post-draw callback. |
 | [setup](Textmodifier/methods/setup.md) | Set the setup callback that runs once initialization is complete. |
 
@@ -391,8 +386,8 @@ Position geometry and isolate changes to draw state.
 | Method | Description |
 | ------ | ------ |
 | [applyMatrix](Textmodifier/methods/applyMatrix.md) | Multiply the current model transform by a custom 4x4 matrix. |
-| [pop](Textmodifier/methods/pop.md) | Restore the most recently saved rendering state from the state stack. Use with [push](Textmodifier/methods/push.md) to isolate style changes within a block. |
-| [push](Textmodifier/methods/push.md) | Save the current rendering state to the state stack. Use with [pop](Textmodifier/methods/pop.md) to isolate style changes within a block. |
+| [pop](Textmodifier/methods/pop.md) | Restore the most recently saved rendering state, shader, and uniforms from the state stack. Use with [push](Textmodifier/methods/push.md) to isolate style changes within a block. |
+| [push](Textmodifier/methods/push.md) | Save the current rendering state, shader, and uniforms to the state stack. Use with [pop](Textmodifier/methods/pop.md) to isolate style changes within a block. |
 | [resetMatrix](Textmodifier/methods/resetMatrix.md) | Reset the current model transform to identity. |
 | [rotate](Textmodifier/methods/rotate.md) | Set rotation for subsequent shape drawing. |
 | [rotateX](Textmodifier/methods/rotateX.md) | Set X-axis rotation for subsequent shape drawing, or get the current angle. |

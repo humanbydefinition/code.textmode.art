@@ -6,7 +6,7 @@ description: Plugin system types for extending textmode.js functionality.
 category: Namespaces
 api: true
 kind: Namespace
-lastModified: 2026-08-05
+lastModified: 2026-08-17
 ---
 
 [textmode.js](../../index.md) / plugins
@@ -15,30 +15,33 @@ lastModified: 2026-08-05
 
 Plugin system types for extending textmode.js functionality.
 
-Plugins can:
-- Add methods to TextmodeLayer instances (e.g., `.synth()`)
+Plugins receive the [Textmodifier](../../classes/Textmodifier.md) instance for existing public state (canvas, dimensions, font, grid,
+layers, and per-layer framebuffers) plus a plugin context used only for plugin-owned concerns:
+- Define instance-safe methods and accessors on supported runtime objects
 - Hook into the render lifecycle (pre/post draw, per-layer rendering)
 - React to layer creation and disposal events
-- Access the WebGL renderer, framebuffers, and other internals
+- Replace layer or composited scene output with custom framebuffers
 
 ## Example
 
 ```ts
-import type { TextmodePlugin, TextmodePluginContext } from 'textmode.js';
+import type { TextmodeLayer, TextmodePlugin, TextmodePluginContext } from 'textmode.js';
+
+const states = new WeakMap<TextmodeLayer, { value: number }>();
 
 const MyPlugin: TextmodePlugin = {
   name: 'my-plugin',
   version: '1.0.0',
   install(textmodifier, context: TextmodePluginContext) {
-    // Extend layers with a new method
-    context.extendLayer('setMyState', function(value: number) {
-      // `this` is bound to the TextmodeLayer instance
-      this.setPluginState('my-plugin', { value });
+    context.defineExtension('layer', 'setMyState', {
+      value(value: number) {
+        states.set(this, { value });
+      }
     });
 
     // Hook into layer rendering
-    context.registerLayerPreRenderHook((layer) => {
-      const state = layer.getPluginState<{ value: number }>('my-plugin');
+    context.on('layerPreRender', (layer) => {
+      const state = states.get(layer);
       if (state && state.value > 0.5) {
         // Render custom content based on plugin state
       }
@@ -51,17 +54,17 @@ const MyPlugin: TextmodePlugin = {
 
 | Interface | Description |
 | ------ | ------ |
-| [TextmodeCanvasHandle](interfaces/TextmodeCanvasHandle.md) | Stable read-only canvas handle exposed to plugins. |
+| [TextmodeExtensionDescriptor](interfaces/TextmodeExtensionDescriptor.md) | Descriptor for a plugin-provided method or accessor. |
+| [TextmodeLayerOutputTransformContext](interfaces/TextmodeLayerOutputTransformContext.md) | Values supplied to a layer output transform. |
 | [TextmodePlugin](interfaces/TextmodePlugin.md) | A plugin interface for extending the functionality of a [Textmodifier](../../classes/Textmodifier.md) instance. |
-| [TextmodePluginContext](interfaces/TextmodePluginContext.md) | Host-provided context passed to plugins when they are installed on a [Textmodifier](../../classes/Textmodifier.md) instance. |
+| [TextmodePluginContext](interfaces/TextmodePluginContext.md) | Host facilities available while installing a plugin. |
+| [TextmodePluginHookMap](interfaces/TextmodePluginHookMap.md) | Typed callback map used by [TextmodePluginContext.on](interfaces/TextmodePluginContext.md#on). |
 
 ## Type Aliases
 
 | Type Alias | Description |
 | ------ | ------ |
-| [LayerExtensionImplementation](type-aliases/LayerExtensionImplementation.md) | Type for layer extension method implementations. |
-| [LayerLifecycleHook](type-aliases/LayerLifecycleHook.md) | Callback type for layer lifecycle events. |
-| [LayerRenderHook](type-aliases/LayerRenderHook.md) | Callback type for layer render hooks. |
-| [SetupLifecycleHook](type-aliases/SetupLifecycleHook.md) | Callback type for setup lifecycle hooks. |
-| [SourceExtensionImplementation](type-aliases/SourceExtensionImplementation.md) | Type for source extension method implementations. |
-| [TextmodePluginHook](type-aliases/TextmodePluginHook.md) | Callback type for simple plugin hooks without parameters. |
+| [TextmodeExtensionInstance](type-aliases/TextmodeExtensionInstance.md) | Instance type associated with an extension target. |
+| [TextmodeExtensionTarget](type-aliases/TextmodeExtensionTarget.md) | Runtime objects that plugins may extend. |
+| [TextmodeLayerOutputPhase](type-aliases/TextmodeLayerOutputPhase.md) | Stage at which a rendered layer output can be replaced by a plugin. |
+| [TextmodePluginHookName](type-aliases/TextmodePluginHookName.md) | Name of a plugin hook accepted by [TextmodePluginContext.on](interfaces/TextmodePluginContext.md#on). |

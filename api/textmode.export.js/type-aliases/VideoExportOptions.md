@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-08-05
+lastModified: 2026-08-17
 ---
 
 [textmode.export.js](../index.md) / VideoExportOptions
@@ -29,11 +29,12 @@ Options for exporting the textmode content to video format.
 optional bitrate?: number | VideoBitratePreset;
 ```
 
-Target bitrate in bits per second or a bitrate preset. Defaults to `'medium'`.
+Target bitrate in bits per second or a quality preset. Defaults to `'medium'`.
 
 Bitrate controls how much encoded data is available per second of video. Higher values can preserve more detail
-in noisy or fast-changing sketches, but create larger files. Presets are resolved from the export dimensions and
-frame rate; numeric values are passed directly to the encoder.
+in noisy or fast-changing sketches, but create larger files. Presets resolve to a fixed bits-per-pixel budget
+from the export dimensions only, so a given preset targets the same bitrate regardless of the frame rate.
+Numeric values are passed directly to the encoder.
 
 
 ***

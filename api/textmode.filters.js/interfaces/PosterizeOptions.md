@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-08-05
+lastModified: 2026-08-17
 isInterface: true
 ---
 
@@ -28,4 +28,4 @@ creating a retro quantized/poster-like look.
 
 | Property | Type | Description |
 | ------ | ------ | ------ |
-| <a id="property-levels"></a> `levels` | `number` | Number of color levels per channel. Lower values create more dramatic banding effects. Higher values approach the original image quality. - `2` = extreme posterization (very few colors) - `4` = strong posterization (default) - `8+` = subtle posterization **Default** `4.0` |
+| <a id="property-levels"></a> `levels?` | `number` | Number of color levels per channel. Lower values create more dramatic banding effects. Higher values approach the original image quality. - `2` = extreme posterization (very few colors) - `4` = strong posterization (default) - `8+` = subtle posterization **Default** `4.0` |

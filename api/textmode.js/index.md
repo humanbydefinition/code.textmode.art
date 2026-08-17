@@ -6,7 +6,7 @@ description: textmode.js is a lightweight creative coding library for creating r
 category: API Reference
 api: true
 kind: Project
-lastModified: 2026-08-05
+lastModified: 2026-08-17
 ---
 
 # textmode.js
@@ -41,21 +41,20 @@ t.windowResized(() => {
 1. Create the drawing context with [textmode.create](classes/textmode/methods/create.md).
 2. Load or configure resources in [Textmodifier.setup](classes/Textmodifier/methods/setup.md).
 3. Draw the base scene in [Textmodifier.draw](classes/Textmodifier/methods/draw.md).
-4. Add layers, media conversion, filters, or shaders when the sketch needs them.
+4. Add layers, media conversion, plugins, or shaders when the sketch needs them.
 5. Respond to resize and input events as the sketch runs.
 
 Read the [first sketch guide](/docs/first-sketch),
 [fundamentals](/docs/fundamentals), and [examples](/docs/examples) for
 guided learning; use [Textmodifier](classes/Textmodifier.md) for the complete drawing interface.
 
-## Conversion & filters
+## Conversion
 
 Convert visual sources into textmode data and post-process the result.
 
 | Namespace | Description |
 | ------ | ------ |
 | [conversion](namespaces/conversion/index.md) | All media conversion related modules and types. |
-| [filters](namespaces/filters/index.md) | All filter related modules and types. |
 
 ## Core workflow
 
@@ -122,6 +121,7 @@ Compose scenes and work with GPU-backed drawing resources.
 | [TextmodeFramebuffer](classes/TextmodeFramebuffer.md) | Framebuffer class for managing offscreen rendering targets initialized via [Textmodifier.createFramebuffer](classes/Textmodifier/methods/createFramebuffer.md). |
 | [TextmodeShader](classes/TextmodeShader.md) | WebGL shader program created by [Textmodifier.createMaterialShader](classes/Textmodifier/methods/createMaterialShader.md) or [Textmodifier.createShader](classes/Textmodifier/methods/createShader.md). |
 | [TextmodeFramebufferOptions](type-aliases/TextmodeFramebufferOptions.md) | Options for creating a framebuffer via [Textmodifier.createFramebuffer](classes/Textmodifier/methods/createFramebuffer.md). If not specified, width and height default to the current textmode grid size. |
+| [TextmodeUniformValue](type-aliases/TextmodeUniformValue.md) | Values accepted by custom shader uniforms. |
 
 ## Loading & errors
 
@@ -134,7 +134,7 @@ Control loading feedback and diagnose runtime failures.
 
 ## Plugins
 
-Extend layers, sources, and the sketch lifecycle.
+Extend runtime instances and the sketch lifecycle.
 
 | Namespace | Description |
 | ------ | ------ |

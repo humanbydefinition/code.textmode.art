@@ -7,7 +7,7 @@ category: Classes
 api: true
 kind: Class
 ecosystem: textmode.js
-lastModified: 2026-08-05
+lastModified: 2026-08-17
 hasConstructor: false
 ---
 
@@ -32,6 +32,7 @@ Methods for reusing or copying an existing synthesis chain.
 | Method | Description |
 | ------ | ------ |
 | [clone](SynthSource/methods/clone.md) | Create a deep clone of this SynthSource. Useful when you want to create a modified version of an existing chain without affecting the original. |
+| [transform](SynthSource/methods/transform.md) | Apply a registered transform by name with explicit arguments. |
 
 ## Color transforms
 

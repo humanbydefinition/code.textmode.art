@@ -2,12 +2,12 @@
 layout: doc
 editLink: false
 title: push
-description: Save the current rendering state to the state stack. Use with pop to isolate style changes within a block.
+description: Save the current rendering state, shader, and uniforms to the state stack. Use with pop to isolate style changes within a block.
 category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-08-05
+lastModified: 2026-08-17
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / push
@@ -18,7 +18,7 @@ lastModified: 2026-08-05
 push(): void;
 ```
 
-Save the current rendering state to the state stack.
+Save the current rendering state, shader, and uniforms to the state stack.
 Use with [pop](pop.md) to isolate style changes within a block.
 
 ## Returns

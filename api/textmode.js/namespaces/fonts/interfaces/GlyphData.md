@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: fonts
 kind: Interface
-lastModified: 2026-08-05
+lastModified: 2026-08-17
 isInterface: true
 ---
 

@@ -6,7 +6,7 @@ description: Framebuffer class for managing offscreen rendering targets initiali
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-08-05
+lastModified: 2026-08-17
 hasConstructor: false
 ---
 

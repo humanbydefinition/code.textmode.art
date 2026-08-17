@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: TextmodeGrid
 kind: Method
-lastModified: 2026-08-05
+lastModified: 2026-08-17
 ---
 
 [textmode.js](../../../index.md) / [TextmodeGrid](../../TextmodeGrid.md) / reset

@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-08-05
+lastModified: 2026-08-17
 isInterface: true
 ---
 
@@ -28,4 +28,4 @@ Useful for color grading or creating surreal color effects.
 
 | Property | Type | Description |
 | ------ | ------ | ------ |
-| <a id="property-angle"></a> `angle` | `number` | Rotation angle in degrees. - `0` = no change - `180` = complementary colors - `360` = full rotation (same as 0) Values wrap around, so `370` is equivalent to `10`. **Default** `0.0` |
+| <a id="property-angle"></a> `angle?` | `number` | Rotation angle in degrees. - `0` = no change - `180` = complementary colors - `360` = full rotation (same as 0) Values wrap around, so `370` is equivalent to `10`. **Default** `0.0` |

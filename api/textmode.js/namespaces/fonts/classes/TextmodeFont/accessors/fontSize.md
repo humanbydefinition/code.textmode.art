@@ -8,7 +8,7 @@ api: true
 owner: TextmodeFont
 namespace: fonts
 kind: Accessor
-lastModified: 2026-08-05
+lastModified: 2026-08-17
 ---
 
 [textmode.js](../../../../../index.md) / [fonts](../../../index.md) / [TextmodeFont](../../TextmodeFont.md) / fontSize

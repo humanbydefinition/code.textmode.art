@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: layering
 kind: Class
-lastModified: 2026-08-05
+lastModified: 2026-08-17
 hasConstructor: false
 ---
 
@@ -17,15 +17,14 @@ hasConstructor: false
 
 A single layer within a multi-layered textmode rendering context.
 
-Each layer has its own draw callback, grid, glyph source, filters, camera state,
+Each layer has its own draw callback, grid, glyph source, camera state,
 opacity, blend mode, offset, and rotation.
 
 Draw on a layer by providing a callback, similar to [Textmodifier.draw](../../../classes/Textmodifier/methods/draw.md)
 on the base layer.
 
-Plugins can extend TextmodeLayer with additional methods using the plugin API's
-`extendLayer` function. For example, the `textmode-synth` plugin adds a `.synth()`
-method for hydra-like procedural generation.
+Plugins can add instance-safe methods and accessors with
+`context.defineExtension('layer', ...)`.
 
 The base layer, which is always present at the bottom of the layer stack,
 can be accessed via [Textmodifier.layers](../../../classes/Textmodifier/accessors/layers.md) as `t.layers.base`.
@@ -47,12 +46,11 @@ Create and configure the camera used while rendering this layer.
 
 ## Compositing & visibility
 
-Adjust the layer's opacity, blend mode, position, rotation, and filters.
+Adjust the layer's opacity, blend mode, position, and rotation.
 
 | Method | Description |
 | ------ | ------ |
 | [blendMode](TextmodeLayer/methods/blendMode.md) | Set or get this layer's blend mode. |
-| [filter](TextmodeLayer/methods/filter.md) | Queue a post-processing filter for this layer. |
 | [offset](TextmodeLayer/methods/offset.md) | Set or get this layer's compositing offset in pixels. |
 | [opacity](TextmodeLayer/methods/opacity.md) | Set or get this layer's opacity. |
 | [rotateZ](TextmodeLayer/methods/rotateZ.md) | Set or get this layer's compositing rotation in degrees. |
@@ -78,17 +76,6 @@ Set a layer's drawing callbacks and control whether it is visible.
 | [hide](TextmodeLayer/methods/hide.md) | Hide this layer from rendering. |
 | [postDraw](TextmodeLayer/methods/postDraw.md) | Set this layer's post-draw callback. |
 | [show](TextmodeLayer/methods/show.md) | Show this layer for rendering. |
-
-## Plugin state
-
-Store state owned by a plugin on this layer.
-
-| Method | Description |
-| ------ | ------ |
-| [deletePluginState](TextmodeLayer/methods/deletePluginState.md) | Delete plugin-specific state from this layer. |
-| [getPluginState](TextmodeLayer/methods/getPluginState.md) | Retrieve plugin-specific state stored on this layer. |
-| [hasPluginState](TextmodeLayer/methods/hasPluginState.md) | Check whether plugin-specific state exists on this layer. |
-| [setPluginState](TextmodeLayer/methods/setPluginState.md) | Store plugin-specific state on this layer. Plugins can use this to attach their own data to layer instances. |
 
 ## Render outputs
 

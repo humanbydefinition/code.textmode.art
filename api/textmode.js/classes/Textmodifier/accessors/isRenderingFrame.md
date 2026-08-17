@@ -7,7 +7,7 @@ category: Accessors
 api: true
 owner: Textmodifier
 kind: Accessor
-lastModified: 2026-08-05
+lastModified: 2026-08-17
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / isRenderingFrame
