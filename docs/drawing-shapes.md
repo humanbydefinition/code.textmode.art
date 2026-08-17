@@ -69,6 +69,37 @@ t.pop();
 t.rect(6, 6); // back to the previous state
 ```
 
+## Custom shapes
+
+Use [`beginShape()`](/api/textmode.js/classes/Textmodifier#beginshape), [`vertex()`](/api/textmode.js/classes/Textmodifier#vertex), and [`endShape()`](/api/textmode.js/classes/Textmodifier#endshape) to construct custom polygon paths and vertex geometry:
+
+```js
+t.char("■");
+t.charColor(255, 200, 50);
+
+t.beginShape(t.LINE_STRIP);
+t.vertex(-10, -5);
+t.vertex(0, -10);
+t.vertex(10, -5);
+t.vertex(8, 8);
+t.vertex(-8, 8);
+t.endShape("close");
+```
+
+### Shape assembly modes
+
+Pass an assembly mode to `beginShape(mode)` to control how vertices are connected:
+
+- `t.POINTS`: Draws each vertex as an individual point.
+- `t.LINES`: Connects pairs of vertices as disconnected line segments.
+- `t.LINE_STRIP`: *(Default)* Connects consecutive vertices as a polyline.
+- `t.LINE_LOOP`: Connects vertices and automatically closes the loop.
+- `t.TRIANGLES`: Draws each group of 3 vertices as a filled triangle.
+- `t.TRIANGLE_STRIP`: Draws a connected strip of triangles.
+- `t.TRIANGLE_FAN`: Draws triangles radiating from the first vertex.
+- `t.QUADS`: Draws each group of 4 vertices as a quadrilateral.
+- `t.QUAD_STRIP`: Draws a continuous strip of quadrilaterals.
+
 ## When to use 3D primitives
 
 Use [3D drawing](/docs/3d-drawing) when you need volume, depth, cameras, or lighting. The 2D primitives are the most direct path for text patterns, interfaces, typography-like layouts, and grid art.
@@ -82,3 +113,6 @@ Use [3D drawing](/docs/3d-drawing) when you need volume, depth, cameras, or ligh
 - [`Textmodifier.triangle()`](/api/textmode.js/classes/Textmodifier#triangle)
 - [`Textmodifier.arc()`](/api/textmode.js/classes/Textmodifier#arc)
 - [`Textmodifier.bezierCurve()`](/api/textmode.js/classes/Textmodifier#beziercurve)
+- [`Textmodifier.beginShape()`](/api/textmode.js/classes/Textmodifier#beginshape)
+- [`Textmodifier.vertex()`](/api/textmode.js/classes/Textmodifier#vertex)
+- [`Textmodifier.endShape()`](/api/textmode.js/classes/Textmodifier#endshape)
