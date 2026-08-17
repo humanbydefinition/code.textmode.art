@@ -5,9 +5,27 @@ description: Apply built-in and custom fragment-shader filters to textmode.js la
 
 # Filters
 
-Filters are fragment-shader post-processing passes. They run on already-rendered ASCII textures: either a single layer's ASCII result, the final composited output from all layers, or the final texture immediately before presentation.
+Filters are fragment-shader post-processing passes provided by the official [`textmode.filters.js`](/api/textmode.filters.js/) add-on (`FiltersPlugin`). They run on already-rendered ASCII textures: either a single layer's ASCII result, the final composited output from all layers, or the final texture immediately before presentation.
 
-Use filters when you want to process rendered textmode imagery with effects such as inversion, thresholding, scanlines, bloom, glitch, or custom GLSL. (✧ω✧)
+Use filters when you want to process rendered textmode imagery with effects such as inversion, color grading, scanlines, bloom, glitch, CRT monitors, or custom GLSL. (✧ω✧)
+
+## Installation & Plugin Setup
+
+To use filters, install `textmode.filters.js` and pass `FiltersPlugin` when creating your sketch:
+
+```js
+import { textmode } from "textmode.js";
+import { FiltersPlugin } from "textmode.filters.js";
+
+const t = textmode.create({
+  width: 800,
+  height: 600,
+  fontSize: 16,
+  plugins: [FiltersPlugin],
+});
+```
+
+Installing `FiltersPlugin` registers `t.filter()`, `layer.filter()`, and the `t.filters` filter manager on your sketch instance.
 
 ## Filter scopes
 
@@ -22,7 +40,7 @@ Each layer has its own independent filter sequence. A filter queued on one layer
 
 ## Global filters
 
-Use [`t.filter()`](/api/textmode.js/classes/Textmodifier#filter) in `draw()` to queue a filter for the final output:
+Use `t.filter()` in `draw()` to queue a filter for the final output:
 
 ```js
 t.draw(() => {
@@ -30,22 +48,21 @@ t.draw(() => {
   t.char("@");
   t.rect(20, 12);
 
-  t.filter("threshold", { threshold: 0.5 });
+  t.filter("threshold", { cutoff: 0.5 });
 });
 ```
 
 Global filters run after all visible layers have been composited. They do not replace layer-local filters; they process the already-blended scene.
 
-The core library includes:
+`textmode.filters.js` includes 18 built-in filters:
 
-- `invert`
-- `grayscale`
-- `sepia`
-- `threshold`
+- **Color adjustment**: `brightness`, `contrast`, `grayscale`, `hueRotate`, `invert`, `posterize`, `saturation`, `sepia`, `threshold`
+- **Distortion**: `chromaticAberration`, `gridDistortion`, `pixelate`
+- **Stylization**: `bloom`, `crtMattias`, `filmGrain`, `glitch`, `scanlines`, `vignette`
 
 ## Layer filters
 
-Call [`layer.filter()`](/api/textmode.js/namespaces/layering/classes/TextmodeLayer.md#filter) inside a layer draw callback to process that layer before it is composited:
+Call [`layer.filter()`](/api/textmode.js/namespaces/layering/classes/TextmodeLayer#filter) inside a layer draw callback to process that layer before it is composited:
 
 ```js
 const glow = t.layers.add({ blendMode: t.BLEND_SCREEN });
@@ -62,7 +79,7 @@ glow.draw(() => {
 
 Layer filters are applied in the order they are called. Each layer keeps its own queue, so one layer can run `threshold` while another runs `invert` and the base layer runs no filters at all.
 
-Use [`layer.postDraw()`](/api/textmode.js/namespaces/layering/classes/TextmodeLayer.md#postdraw) when you need a second layer-local filter stage after the filters requested during `draw()`:
+Use [`layer.postDraw()`](/api/textmode.js/namespaces/layering/classes/TextmodeLayer#postdraw) when you need a second layer-local filter stage after the filters requested during `draw()`:
 
 ```js
 glow.draw(() => {
@@ -98,7 +115,7 @@ Here `grayscale` runs on the composited scene first. `invert` then runs on that 
 
 ## Register a custom filter
 
-Use [`t.filters.register()`](/api/textmode.filters.js/classes/TextmodeFilterManager.md#register) to add a named filter:
+Use [`t.filters.register()`](/api/textmode.filters.js/classes/TextmodeFilterManager#register) to add a named filter:
 
 ```js
 await t.filters.register("vignette", "./vignette.frag", {
@@ -117,29 +134,13 @@ The `uniformDefs` object maps shader uniform names to public parameter names and
 t.filter("vignette", 0.8);
 ```
 
-Use [`has()`](/api/textmode.filters.js/classes/TextmodeFilterManager.md#has) and [`unregister()`](/api/textmode.filters.js/classes/TextmodeFilterManager.md#unregister) to manage the filter registry.
-
-## Add-on filter package
-
-The separate [`textmode.filters.js`](/api/textmode.filters.js/) package adds creative filters such as bloom, glitch, scanlines, vignette, film grain, pixelation, grid distortion, color adjustment, and chromatic aberration.
-
-Install the package's plugin when you want those named effects available in `t.filter()` or `layer.filter()`:
-
-```js
-import { textmode } from "textmode.js";
-import { FiltersPlugin } from "textmode.filters.js";
-
-const t = textmode.create({
-  plugins: [FiltersPlugin],
-});
-```
+Use [`has()`](/api/textmode.filters.js/classes/TextmodeFilterManager#has) and [`unregister()`](/api/textmode.filters.js/classes/TextmodeFilterManager#unregister) to manage the filter registry.
 
 ## Related APIs
 
-- [`Textmodifier.filter()`](/api/textmode.js/classes/Textmodifier#filter)
 - [`Textmodifier.finalDraw()`](/api/textmode.js/classes/Textmodifier#finaldraw)
-- [`Textmodifier.filters`](/api/textmode.js/classes/Textmodifier#filters)
-- [`TextmodeFilterManager`](/api/textmode.filters.js/classes/TextmodeFilterManager.md)
-- [`TextmodeLayer.filter()`](/api/textmode.js/namespaces/layering/classes/TextmodeLayer.md#filter)
-- [`TextmodeLayer.postDraw()`](/api/textmode.js/namespaces/layering/classes/TextmodeLayer.md#postdraw)
+- [`TextmodeFilterManager`](/api/textmode.filters.js/classes/TextmodeFilterManager)
+- [`TextmodeLayer.filter()`](/api/textmode.js/namespaces/layering/classes/TextmodeLayer#filter)
+- [`TextmodeLayer.postDraw()`](/api/textmode.js/namespaces/layering/classes/TextmodeLayer#postdraw)
+- [`FiltersPlugin`](/api/textmode.filters.js/variables/FiltersPlugin)
 - [`textmode.filters.js`](/api/textmode.filters.js/)
