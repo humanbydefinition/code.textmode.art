@@ -58,5 +58,17 @@
     "tags": ["live-coding", "creative-coding", "audio-visual"],
     "featured": true,
     "date": null
+  },
+   "loopdroneloop": {
+    "title": "Loopdroneloop",
+    "description": "Loopdroneloop: Ambient cassette loops by Nicolas Tilly",
+    "type": "integration",
+    "thumbnailUrl": "https://loopdroneloop.nicolastilly.fr/vignette.jpg",
+    "url": "https://loopdroneloop.nicolastilly.fr/",
+    "author": "Nicolas Tilly",
+    "authorUrl": "https://github.com/nicolastilly",
+    "tags": ["creative-coding", "audio-visual"],
+    "featured": true,
+    "date": null
   }
 }
