@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-08-05
+lastModified: 2026-08-17
 isInterface: true
 ---
 
@@ -28,4 +28,4 @@ reminiscent of retro video games or censored content.
 
 | Property | Type | Description |
 | ------ | ------ | ------ |
-| <a id="property-pixelsize"></a> `pixelSize` | `number` | Size of each pixel block in pixels. Larger values create bigger, more visible pixels. Minimum value: `1.0` **Default** `4.0` |
+| <a id="property-pixelsize"></a> `pixelSize?` | `number` | Size of each pixel block in pixels. Larger values create bigger, more visible pixels. Minimum value: `1.0` **Default** `4.0` |

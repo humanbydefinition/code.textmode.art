@@ -619,3 +619,39 @@ body::-webkit-scrollbar-thumb:hover {
 #app > div > aside nav::-webkit-scrollbar-thumb:hover {
   background: var(--vp-c-text-3);
 }
+
+/*
+ * Mermaid Diagrams
+ * Consistent vertical lifecycle graphs and flowchart styling across documentation
+ */
+.mermaid {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 1.75rem 0;
+  padding: 1.5rem 1rem;
+  background: var(--vp-c-bg-soft);
+  border: 1px solid var(--vp-c-divider);
+  border-radius: 8px;
+  overflow-x: auto;
+  transition: border-color 0.25s ease;
+}
+
+.mermaid:hover {
+  border-color: var(--vp-c-divider);
+}
+
+.mermaid svg {
+  max-width: 100%;
+  height: auto;
+  font-family: var(--textmode-font), monospace !important;
+}
+
+.mermaid .node rect,
+.mermaid .node circle,
+.mermaid .node ellipse,
+.mermaid .node polygon,
+.mermaid .node path {
+  rx: 6px;
+  ry: 6px;
+}

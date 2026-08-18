@@ -6,6 +6,7 @@ export type ApiProfile =
   | 'textmode.filters.js'
   | 'textmode.figlet.js'
   | 'textmode.export.js'
+  | 'textmode.overlay.js'
 
 export interface ApiExampleSketch {
   id: string

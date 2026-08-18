@@ -7,7 +7,7 @@ category: Properties
 api: true
 owner: Textmodifier
 kind: Property
-lastModified: 2026-08-05
+lastModified: 2026-08-17
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / QUAD\_STRIP

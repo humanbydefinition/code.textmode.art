@@ -8,7 +8,7 @@ api: true
 owner: TextmodeLayer
 namespace: layering
 kind: Method
-lastModified: 2026-08-05
+lastModified: 2026-08-17
 ---
 
 [textmode.js](../../../../../index.md) / [layering](../../../index.md) / [TextmodeLayer](../../TextmodeLayer.md) / postDraw
@@ -21,16 +21,14 @@ postDraw(callback): void;
 
 Set this layer's post-draw callback.
 
-The callback is executed after the layer has been converted to ASCII and after
-any filters queued in [filter](filter.md) during [draw](draw.md) have been applied.
-Filters queued inside this callback are applied to the layer's final ASCII texture
-before the layer is composited with the rest of the scene.
+The callback is executed after the layer has been converted to textmode and after
+plugin-provided resolved-output transforms. Finalized-output transforms run afterward.
 
 ## Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | () => `void` | Function to run after this layer has been drawn and filtered. |
+| `callback` | () => `void` | Function to run after this layer has been drawn and resolved. |
 
 ## Returns
 
@@ -45,11 +43,10 @@ layer.draw(() => {
 	t.background(0);
 	t.char('A');
 	t.rect(12, 8);
-	layer.filter('grayscale', 0.4);
 });
 
 layer.postDraw(() => {
-	layer.filter('invert');
+	// inspect post-draw state
 });
 ```
 

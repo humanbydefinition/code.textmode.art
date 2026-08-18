@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-08-05
+lastModified: 2026-08-17
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / postDraw
@@ -20,10 +20,8 @@ postDraw(callback): void;
 
 Set the base layer post-draw callback.
 
-This callback runs after the base layer's draw callback, ASCII resolve pass, and
-any filters queued on the base layer during draw. Filters queued on
-`t.layers.base` inside this callback are applied to the base layer before
-other layers are composited on top.
+This callback runs after the base layer's draw callback, textmode resolve pass,
+and plugin-provided resolved-output transforms.
 
 Calling this method is equivalent to setting the callback on `textmodifier.layers.base`:
 ```js
@@ -34,7 +32,7 @@ textmodifier.layers.base.postDraw(callback);
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `callback` | () => `void` | Function to run after the base layer has been drawn and filtered. |
+| `callback` | () => `void` | Function to run after the base layer has been drawn and resolved. |
 
 ## Returns
 
@@ -47,11 +45,10 @@ t.draw(() => {
 	t.background(0);
 	t.char('A');
 	t.rect(12, 8);
-	t.layers.base.filter('grayscale', 0.5);
 });
 
 t.postDraw(() => {
-	t.layers.base.filter('invert');
+	// inspect post-draw state
 });
 ```
 

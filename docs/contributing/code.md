@@ -16,6 +16,7 @@ Use this guide for changes to `textmode.js` and its official add-ons.
 | [`textmode.synth.js`](https://github.com/humanbydefinition/textmode.synth.js) | Synth sources, transforms, and shader composition | [Guide](/docs/live-coding-editor-textmode-art) · [API](/api/textmode.synth.js/) |
 | [`textmode.figlet.js`](https://github.com/humanbydefinition/textmode.figlet.js) | FIGfont parsing, layout, and rendering | [Guide](/docs/figlet-typography) · [API](/api/textmode.figlet.js/) |
 | [`textmode.filters.js`](https://github.com/humanbydefinition/textmode.filters.js) | GPU filter shaders and filter options | [Guide](/docs/filters) · [API](/api/textmode.filters.js/) |
+| [`textmode.overlay.js`](https://github.com/humanbydefinition/textmode.overlay.js) | DOM overlay target sampling and alignment | [API](/api/textmode.overlay.js/) |
 
 Report an add-on problem in its add-on repository. Use the core repository only when the problem is in `textmode.js`
 itself or can be reproduced without the add-on.

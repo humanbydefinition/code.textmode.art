@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-08-05
+lastModified: 2026-08-17
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / setUniform
@@ -25,7 +25,7 @@ Set a uniform value on the current custom shader.
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
 | `name` | `string` | Uniform variable name. |
-| `value` | `unknown` | Uniform value. |
+| `value` | [`TextmodeUniformValue`](../../../type-aliases/TextmodeUniformValue.md) | Uniform value. |
 
 ## Returns
 

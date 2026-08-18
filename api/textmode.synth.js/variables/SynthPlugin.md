@@ -2,12 +2,12 @@
 layout: doc
 editLink: false
 title: SynthPlugin
-description: The textmode.synth.js plugin to install.
+description: textmode.synth.js plugin for textmode.js.
 category: Variables
 api: true
 kind: Variable
 ecosystem: textmode.js
-lastModified: 2026-08-05
+lastModified: 2026-08-17
 ---
 
 [textmode.synth.js](../index.md) / SynthPlugin
@@ -18,11 +18,11 @@ lastModified: 2026-08-05
 const SynthPlugin: TextmodePlugin;
 ```
 
-The `textmode.synth.js` plugin to install.
+textmode.synth.js plugin for textmode.js.
 
-Install this plugin to enable `.synth()` on TextmodeLayer instances.
-
-## Example
-
-<TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="SynthPlugin" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CiAgd2lkdGg6IHdpbmRvdy5pbm5lcldpZHRoLAogIGhlaWdodDogd2luZG93LmlubmVySGVpZ2h0LAogIHBsdWdpbnM6IFtTeW50aFBsdWdpbl0KfSk7Cgp0LnN5bnRoKAogIG5vaXNlKDEwKQogICAgLmNoYXJNYXAoJ0AjJSorPS06LiAnKQogICAgLmNoYXJDb2xvcihvc2MoNSwgMC4xLCAxLjIpLmthbGVpZCg0KSkKKTsKCnQud2luZG93UmVzaXplZCgoKSA9PiB7CiAgdC5yZXNpemVDYW52YXMod2luZG93LmlubmVyV2lkdGgsIHdpbmRvdy5pbm5lckhlaWdodCk7Cn0pOw" />
+Adds procedural synthesis to TextmodeLayer instances through the
+native textmode.js plugin system. Layer extensions (`synth`, `clearSynth`,
+`bpm`) and Textmodifier extensions (`synth`, `bpm`, `seed`) are registered
+via TextmodePluginContext.defineExtension, so the host owns their
+cleanup when the plugin is removed.
 

@@ -1,108 +1,163 @@
 ---
 title: Plugins
-description: Extend textmode.js with installable plugins, lifecycle hooks, layer extensions, and shared runtime context.
+description: Extend textmode.js with lifecycle hooks, output transforms, and instance extensions.
 ---
 
 # Plugins
 
-Plugins extend a [`Textmodifier`](/api/textmode.js/classes/Textmodifier) instance at creation time. They can register lifecycle hooks, add methods to layers, manage plugin state, and integrate with the renderer.
+Plugins extend one [`Textmodifier`](/api/textmode.js/classes/Textmodifier) when it is created. Hook and extension
+registrations belong to that installation and are removed when the instance is destroyed.
 
-Use plugins when an add-on needs to participate in the rendering lifecycle rather than only exporting helper functions. (⊃｡•́‿•̀｡)⊃
-
-## Install plugins
-
-Pass plugins through [`TextmodeOptions.plugins`](/api/textmode.js/type-aliases/TextmodeOptions#plugins):
+## Install a plugin
 
 ```js
 import { textmode } from "textmode.js";
-import { FigletPlugin } from "textmode.figlet.js";
 import { FiltersPlugin } from "textmode.filters.js";
 
 const t = textmode.create({
   width: 800,
   height: 600,
-  plugins: [FigletPlugin, FiltersPlugin],
+  plugins: [FiltersPlugin],
 });
 ```
 
-Plugins are installed synchronously during creation so layer extensions are available immediately.
+`install()` is synchronous and returns an optional cleanup function. Extensions are therefore available as soon as
+`textmode.create()` returns. Awaited initialization belongs in the `preSetup` or `postSetup` hook. The returned cleanup
+releases the plugin's own resources and runs exactly once during rollback or teardown.
 
-## Plugin shape
+## Lifecycle
 
-A plugin implements [`TextmodePlugin`](/api/textmode.js/namespaces/plugins/interfaces/TextmodePlugin.md):
+```mermaid
+flowchart TD
+  A["Construct renderer, canvas & base layer"] --> B["plugin.install(t, context)"]
+  B --> C["Initialize layers and GPU resources"]
+  C --> D["Await preSetup hooks (sequential)"]
+  D --> E["Await user setup() callback"]
+  E --> F["Await postSetup hooks (sequential)"]
+  F --> G["Active render loop & synchronous frame hooks"]
+  G --> H["Teardown: t.destroy()"]
+  H --> I["Dispose layers -> plugin cleanups -> host resources"]
+```
+
+Each user frame runs in this order:
+
+```mermaid
+flowchart TD
+  A["preDraw hook"] --> B["For each visible user layer (bottom-to-top)"]
+
+  subgraph LayerPass ["Per-Layer Render Pass"]
+    B --> C["layerPreRender hook"]
+    C --> D["User layer draw() callback"]
+    D --> E["layerPostRender hook"]
+    E --> F["ASCII resolve (glyphs & colors)"]
+    F --> G["layerOutput hook (phase: resolved)"]
+    G --> H["User layer postDraw() callback"]
+    H --> I["layerOutput hook (phase: finalized)"]
+  end
+
+  I --> J["Composite all visible layers"]
+  J --> K["compositeOutput hook"]
+  K --> L["Present to canvas"]
+  L --> M["postDraw hook"]
+```
+
+Setup hooks run sequentially in plugin installation order and may be asynchronous. Every draw, layer, and output hook
+must finish synchronously. Returning a promise from one of those hooks raises an error immediately.
+
+## Plugin context
+
+The context has two facilities:
+
+| Need | Method |
+| --- | --- |
+| Observe lifecycle or transform output | `context.on(name, callback)` |
+| Add a method or accessor to one runtime instance | `context.defineExtension(target, name, descriptor)` |
+
+### Register a hook
 
 ```ts
 import type { TextmodePlugin } from "textmode.js";
 
-export const MyPlugin: TextmodePlugin = {
-  name: "my-plugin",
-  version: "1.0.0",
+export const MeterPlugin: TextmodePlugin = {
+  name: "meter",
 
-  install(textmodifier, context) {
-    context.registerPreDrawHook(() => {
-      // Runs before each draw cycle.
+  install(t, context) {
+    context.on("preSetup", async () => {
+      await loadMeterData();
+    });
+
+    context.on("postDraw", () => {
+      updateMeter(t.frameRate());
     });
   },
 };
 ```
 
-The optional `uninstall()` hook runs during teardown.
+Available hook names are `preDraw`, `postDraw`, `layerCreated`, `layerDisposed`, `layerPreRender`, `layerPostRender`,
+`preSetup`, `postSetup`, `layerOutput`, and `compositeOutput`.
 
-## Plugin context
-
-[`TextmodePluginContext`](/api/textmode.js/namespaces/plugins/interfaces/TextmodePluginContext.md) exposes stable access to:
-
-- the WebGL renderer
-- the base font, glyph atlas, and grid
-- the canvas handle
-- base draw and ASCII framebuffers
-- the layer manager
-- lifecycle hook registration methods
-- layer extension registration methods
-
-Prefer context methods over reaching into private fields.
-
-## Lifecycle hooks
-
-Plugins can register hooks for setup, draw, and layer rendering:
+### Define an instance extension
 
 ```ts
 install(t, context) {
-  const disposePreDraw = context.registerPreDrawHook(() => {
-    // Before each draw cycle.
-  });
-
-  const disposeLayerHook = context.registerLayerPostRenderHook((layer) => {
-    // After a layer draw callback, before ASCII conversion.
+  context.defineExtension("textmodifier", "pulse", {
+    value(amount: number) {
+      applyPulse(t, amount);
+    },
   });
 }
 ```
 
-Registration methods return cleanup functions.
+Extensions are own properties of the targeted `Textmodifier`, layer manager, or layer. They do not mutate global
+prototypes or other textmode instances. Name conflicts fail installation and all registrations made by that plugin are
+rolled back.
 
-## Layer extensions
-
-Plugins can add methods to every [`TextmodeLayer`](/api/textmode.js/namespaces/layering/classes/TextmodeLayer.md):
+### Transform output
 
 ```ts
-context.extendLayer("pulse", function (amount: number) {
-  this.setPluginState("my-plugin", { amount });
-});
+install(t, context) {
+  let shader;
+  let output;
+
+  context.on("preSetup", async () => {
+    shader = await t.createShader(vertexSource, fragmentSource);
+    output = t.createFramebuffer({ width: 1, height: 1, attachments: 1, depth: false });
+  });
+
+  context.on("layerOutput", ({ phase, output: input }) => {
+    if (phase !== "resolved") return;
+    output.resize(input.width, input.height);
+
+    t.push();
+    let begun = false;
+    try {
+      output.begin();
+      begun = true;
+      t.shader(shader);
+      t.setUniforms({
+        u_texture: input.textures[0],
+        u_resolution: [output.width, output.height],
+      });
+      t.rect(output.width, output.height);
+    } finally {
+      try {
+        if (begun) output.end();
+      } finally {
+        t.pop();
+      }
+    }
+    return output;
+  });
+}
 ```
 
-Layer state helpers make plugin data explicit and layer-local:
+The shader's vertex source defines how the rectangle maps to clip space. `Textmodifier` owns both resources, while the
+plugin controls their earlier replacement or disposal. Keep source and destination framebuffers distinct for texture
+passes; `push()`/`pop()` and `begin()`/`end()` preserve drawing and framebuffer state after success or failure.
 
-- [`setPluginState()`](/api/textmode.js/namespaces/layering/classes/TextmodeLayer.md#setpluginstate)
-- [`getPluginState()`](/api/textmode.js/namespaces/layering/classes/TextmodeLayer.md#getpluginstate)
-- [`hasPluginState()`](/api/textmode.js/namespaces/layering/classes/TextmodeLayer.md#haspluginstate)
-- [`deletePluginState()`](/api/textmode.js/namespaces/layering/classes/TextmodeLayer.md#deletepluginstate)
-
-Remove extensions with [`removeLayerExtension()`](/api/textmode.js/namespaces/plugins/interfaces/TextmodePluginContext.md#removelayerextension).
-
-## Related APIs
+## Related interfaces
 
 - [`TextmodeOptions.plugins`](/api/textmode.js/type-aliases/TextmodeOptions#plugins)
 - [`plugins`](/api/textmode.js/namespaces/plugins/)
 - [`TextmodePlugin`](/api/textmode.js/namespaces/plugins/interfaces/TextmodePlugin.md)
 - [`TextmodePluginContext`](/api/textmode.js/namespaces/plugins/interfaces/TextmodePluginContext.md)
-- [`TextmodeLayer`](/api/textmode.js/namespaces/layering/classes/TextmodeLayer.md)

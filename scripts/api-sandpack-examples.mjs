@@ -40,6 +40,11 @@ const API_SANDBOX_PROFILES = {
     apiRoot: 'api/textmode.export.js',
     defaultTitle: 'textmode.export.js API example',
   },
+  'api/textmode.overlay.js': {
+    id: 'textmode.overlay.js',
+    apiRoot: 'api/textmode.overlay.js',
+    defaultTitle: 'textmode.overlay.js API example',
+  },
 }
 
 const KNOWN_ECOSYSTEM_IMPORTS = new Set([
@@ -49,6 +54,7 @@ const KNOWN_ECOSYSTEM_IMPORTS = new Set([
   'textmode.filters.js',
   'textmode.figlet.js',
   'textmode.export.js',
+  'textmode.overlay.js',
 ])
 
 const API_MARKDOWN_PATTERN = /^api\/[^/]+\/.+\.md$/

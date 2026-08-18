@@ -11,7 +11,7 @@ The separate [`textmode.figlet.js`](/api/textmode.figlet.js/) package adds FIGfo
 
 ## Install and register the plugin
 
-Pass [`FigletPlugin`](/api/textmode.figlet.js/variables/FigletPlugin.md) to `textmode.create()` via the `plugins` option:
+Pass [`FigletPlugin`](/api/textmode.figlet.js/variables/FigletPlugin) to `textmode.create()` via the `plugins` option:
 
 ```js
 import { textmode } from "textmode.js";
@@ -24,7 +24,7 @@ const t = textmode.create({
 });
 ```
 
-Installing `FigletPlugin` registers FIGlet extension methods on your [`Textmodifier`](/api/textmode.js/classes/Textmodifier.md) instance, documented in [`TextmodifierFigletExtensions`](/api/textmode.figlet.js/interfaces/TextmodifierFigletExtensions.md).
+Installing `FigletPlugin` registers FIGlet extension methods on your [`Textmodifier`](/api/textmode.js/classes/Textmodifier) instance, documented in [`TextmodifierFigletExtensions`](/api/textmode.figlet.js/interfaces/TextmodifierFigletExtensions).
 
 ## Load and select FIGfonts
 
@@ -32,7 +32,7 @@ Before rendering FIGlet text, load a `.flf` font file and set it as active.
 
 ### Load a font from URL or path
 
-Use [`t.loadFigFont()`](/api/textmode.figlet.js/interfaces/TextmodifierFigletExtensions/methods/loadFigFont.md) to load a `.flf` font file asynchronously:
+Use [`t.loadFigFont()`](/api/textmode.figlet.js/interfaces/TextmodifierFigletExtensions/methods/loadFigFont) to load a `.flf` font file asynchronously:
 
 ```js
 t.setup(async () => {
@@ -43,7 +43,7 @@ t.setup(async () => {
 
 ### Parse raw FIGfont data
 
-Use [`t.parseFigFont()`](/api/textmode.figlet.js/interfaces/TextmodifierFigletExtensions/methods/parseFigFont.md) when working with preloaded string data:
+Use [`t.parseFigFont()`](/api/textmode.figlet.js/interfaces/TextmodifierFigletExtensions/methods/parseFigFont) when working with preloaded string data:
 
 ```js
 const font = t.parseFigFont("standard", rawFlfString);
@@ -52,7 +52,7 @@ t.figFont(font);
 
 ### Manage the active font
 
-Use [`t.figFont()`](/api/textmode.figlet.js/interfaces/TextmodifierFigletExtensions/methods/figFont.md) to retrieve or update the active FIGfont:
+Use [`t.figFont()`](/api/textmode.figlet.js/interfaces/TextmodifierFigletExtensions/methods/figFont) to retrieve or update the active FIGfont:
 
 ```js
 // Set active font
@@ -66,7 +66,7 @@ Calling `t.figText()` without an active font throws an error.
 
 ## Render FIGlet text
 
-Use [`t.figText()`](/api/textmode.figlet.js/interfaces/TextmodifierFigletExtensions/methods/figText.md) inside your `draw()` loop to render text at grid column and row coordinates:
+Use [`t.figText()`](/api/textmode.figlet.js/interfaces/TextmodifierFigletExtensions/methods/figText) inside your `draw()` loop to render text at grid column and row coordinates:
 
 ```js
 t.draw(() => {
@@ -85,7 +85,7 @@ Positioning FIGlet text depends on horizontal alignment and vertical baselines.
 
 ### Horizontal alignment
 
-Use [`t.figTextAlign()`](/api/textmode.figlet.js/interfaces/TextmodifierFigletExtensions/methods/figTextAlign.md) or specify `alignment` to shift the text origin:
+Use [`t.figTextAlign()`](/api/textmode.figlet.js/interfaces/TextmodifierFigletExtensions/methods/figTextAlign) or specify `alignment` to shift the text origin:
 
 ```js
 t.figTextAlign("center"); // 'left' | 'center' | 'right'
@@ -98,7 +98,7 @@ t.figText("HERO", t.grid.cols / 2, 5);
 
 ### Vertical baseline
 
-Use [`t.figTextBaseline()`](/api/textmode.figlet.js/interfaces/TextmodifierFigletExtensions/methods/figTextBaseline.md) to adjust vertical positioning:
+Use [`t.figTextBaseline()`](/api/textmode.figlet.js/interfaces/TextmodifierFigletExtensions/methods/figTextBaseline) to adjust vertical positioning:
 
 ```js
 t.figTextBaseline("center"); // 'top' | 'center' | 'bottom' | 'baseline'
@@ -112,7 +112,7 @@ t.figText("TITLE", t.grid.cols / 2, t.grid.rows / 2);
 
 ## Layout options and wrapping
 
-Pass a [`FigTextOptions`](/api/textmode.figlet.js/interfaces/FigTextOptions.md) object to `t.figText()` to control layout algorithms, line wrapping, and direction:
+Pass a [`FigTextOptions`](/api/textmode.figlet.js/interfaces/FigTextOptions) object to `t.figText()` to control layout algorithms, line wrapping, and direction:
 
 ```js
 t.figText("COMPACT HEADER", 0, 0, {
@@ -164,7 +164,7 @@ t.figText("GLOW", 2, 4, {
 
 ### Dynamic color callbacks
 
-For gradients, rainbow effects, or per-character highlights, pass a resolver function that accepts [`FigTextCellContext`](/api/textmode.figlet.js/interfaces/FigTextCellContext.md):
+For gradients, rainbow effects, or per-character highlights, pass a resolver function that accepts [`FigTextCellContext`](/api/textmode.figlet.js/interfaces/FigTextCellContext):
 
 ```js
 t.figText("RAINBOW", 0, 5, {
@@ -189,7 +189,7 @@ The `cell` context object provides details for precise styling:
 
 ## Measurement and bounds
 
-Calculate the dimensions of FIGlet text before drawing to center elements, build bounding boxes, or dynamically size layouts with [`t.figTextWidth()`](/api/textmode.figlet.js/interfaces/TextmodifierFigletExtensions/methods/figTextWidth.md), [`t.figTextHeight()`](/api/textmode.figlet.js/interfaces/TextmodifierFigletExtensions/methods/figTextHeight.md), and [`t.figTextBounds()`](/api/textmode.figlet.js/interfaces/TextmodifierFigletExtensions/methods/figTextBounds.md):
+Calculate the dimensions of FIGlet text before drawing to center elements, build bounding boxes, or dynamically size layouts with [`t.figTextWidth()`](/api/textmode.figlet.js/interfaces/TextmodifierFigletExtensions/methods/figTextWidth), [`t.figTextHeight()`](/api/textmode.figlet.js/interfaces/TextmodifierFigletExtensions/methods/figTextHeight), and [`t.figTextBounds()`](/api/textmode.figlet.js/interfaces/TextmodifierFigletExtensions/methods/figTextBounds):
 
 ```js
 const width = t.figTextWidth("HEADER", { horizontalLayout: "fitted" });
@@ -199,7 +199,7 @@ const bounds = t.figTextBounds("HEADER"); // { cols: number, rows: number }
 
 ### Inspecting parsed `TextmodeFigFont`
 
-Inspect font metadata and low-level character plans directly on a [`TextmodeFigFont`](/api/textmode.figlet.js/classes/TextmodeFigFont.md) instance:
+Inspect font metadata and low-level character plans directly on a [`TextmodeFigFont`](/api/textmode.figlet.js/classes/TextmodeFigFont) instance:
 
 ```js
 const font = t.figFont();
@@ -221,10 +221,10 @@ const plan = font.planText("HELLO");
 ## Related APIs
 
 - [`textmode.figlet.js` API reference](/api/textmode.figlet.js/)
-- [`FigletPlugin`](/api/textmode.figlet.js/variables/FigletPlugin.md)
-- [`TextmodifierFigletExtensions`](/api/textmode.figlet.js/interfaces/TextmodifierFigletExtensions.md)
-- [`TextmodeFigFont`](/api/textmode.figlet.js/classes/TextmodeFigFont.md)
-- [`FigTextOptions`](/api/textmode.figlet.js/interfaces/FigTextOptions.md)
-- [`FigTextCellContext`](/api/textmode.figlet.js/interfaces/FigTextCellContext.md)
+- [`FigletPlugin`](/api/textmode.figlet.js/variables/FigletPlugin)
+- [`TextmodifierFigletExtensions`](/api/textmode.figlet.js/interfaces/TextmodifierFigletExtensions)
+- [`TextmodeFigFont`](/api/textmode.figlet.js/classes/TextmodeFigFont)
+- [`FigTextOptions`](/api/textmode.figlet.js/interfaces/FigTextOptions)
+- [`FigTextCellContext`](/api/textmode.figlet.js/interfaces/FigTextCellContext)
 - [Fonts and tilesets](/docs/fonts-and-tilesets)
 - [Plugins](/docs/plugins)

@@ -8,7 +8,7 @@ api: true
 owner: TextmodeLayerManager
 namespace: layering
 kind: Accessor
-lastModified: 2026-08-05
+lastModified: 2026-08-17
 ---
 
 [textmode.js](../../../../../index.md) / [layering](../../../index.md) / [TextmodeLayerManager](../../TextmodeLayerManager.md) / base
@@ -24,8 +24,7 @@ get base(): TextmodeLayer;
 Base layer rendered at the bottom of the stack.
 
 Use this when you want direct access to the main layer as a [TextmodeLayer](../../TextmodeLayer.md),
-including layer-specific methods like [TextmodeLayer.draw](../../TextmodeLayer/methods/draw.md), [TextmodeLayer.filter](../../TextmodeLayer/methods/filter.md),
-and [TextmodeLayer.offset](../../TextmodeLayer/methods/offset.md).
+including layer-specific methods like [TextmodeLayer.draw](../../TextmodeLayer/methods/draw.md) and [TextmodeLayer.offset](../../TextmodeLayer/methods/offset.md).
 
 The base layer cannot be removed or moved.
 

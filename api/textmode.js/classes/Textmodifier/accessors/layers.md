@@ -7,7 +7,7 @@ category: Accessors
 api: true
 owner: Textmodifier
 kind: Accessor
-lastModified: 2026-08-05
+lastModified: 2026-08-17
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / layers
@@ -23,7 +23,7 @@ get layers(): TextmodeLayerManager;
 Layer manager for this Textmodifier instance.
 
 Use this to create and manage multiple layers within the textmode rendering context.
-Each layer has its own grid, font, draw callback, and filters.
+Each layer has its own grid, font, and draw callback.
 
 ### Returns
 

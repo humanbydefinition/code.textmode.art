@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 namespace: fonts
 kind: TypeAlias
-lastModified: 2026-08-05
+lastModified: 2026-08-17
 ---
 
 [textmode.js](../../../index.md) / [fonts](../index.md) / TextmodeGlyph

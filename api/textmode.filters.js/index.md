@@ -7,38 +7,51 @@ category: API Reference
 api: true
 kind: Project
 ecosystem: textmode.js
-lastModified: 2026-08-05
+lastModified: 2026-08-17
 ---
 
 # textmode.filters.js
 
-Apply GPU-accelerated image filters to finished textmode.js scenes.
+Complete optional filter system for textmode.js, including 18 setup-compiled GPU effects,
+custom registration, layer/global/final queues, and automatic resource cleanup.
 
-Add [FiltersPlugin](variables/FiltersPlugin.md) to a sketch to register the built-in WebGL2
-effects. Use the option interfaces below to configure a filter when adding
-it to a layer, the composited scene, or the final presentation stage.
+## Built-in filters
 
-## Choose a filter
+The shipped filter names and their parameter types.
 
-**Color adjustment** changes brightness, contrast, saturation, hue, and
-posterization. **Distortion** changes pixels, color channels, or grid
-geometry. **Stylization** adds glitch, CRT, scanlines, vignette, bloom, and
-film grain treatments.
-
-Start with [FiltersPlugin](variables/FiltersPlugin.md), then read the
-[Filters guide](/docs/filters) for scopes and workflows.
+| Name | Description |
+| ------ | ------ |
+| [BuiltInFilterParameterMap](interfaces/BuiltInFilterParameterMap.md) | Parameter types for every built-in filter. |
+| [BuiltInFilterName](type-aliases/BuiltInFilterName.md) | Names installed synchronously by [FiltersPlugin](variables/FiltersPlugin.md). |
 
 ## Color adjustment filters
+
+Configuration options for the bundled color-adjustment effects.
 
 | Interface | Description |
 | ------ | ------ |
 | [BrightnessOptions](interfaces/BrightnessOptions.md) | Configuration options for the `'brightness'` filter. |
 | [ContrastOptions](interfaces/ContrastOptions.md) | Configuration options for the `'contrast'` filter. |
+| [GrayscaleOptions](interfaces/GrayscaleOptions.md) | Options for the built-in grayscale effect. |
 | [HueRotateOptions](interfaces/HueRotateOptions.md) | Configuration options for the `'hueRotate'` filter. |
 | [PosterizeOptions](interfaces/PosterizeOptions.md) | Configuration options for the `'posterize'` filter. |
 | [SaturationOptions](interfaces/SaturationOptions.md) | Configuration options for the `'saturation'` filter. |
+| [SepiaOptions](interfaces/SepiaOptions.md) | Options for the built-in sepia effect. |
+| [ThresholdOptions](interfaces/ThresholdOptions.md) | Options for the built-in threshold effect. |
+
+## Custom filters
+
+Types used when registering bespoke GPU filters on the manager.
+
+| Type Alias | Description |
+| ------ | ------ |
+| [FilterName](type-aliases/FilterName.md) | Built-in names retain completion while arbitrary custom names remain valid. |
+| [TextmodeFilterShader](type-aliases/TextmodeFilterShader.md) | A precompiled textmode shader, inline fragment source, or shader URL accepted by custom registration. |
+| [TextmodeFilterUniformDefinitions](type-aliases/TextmodeFilterUniformDefinitions.md) | Uniform declarations for a custom filter, mapping GLSL names to public parameter names and defaults. |
 
 ## Distortion filters
+
+Configuration options for the bundled distortion effects.
 
 | Interface | Description |
 | ------ | ------ |
@@ -46,7 +59,17 @@ Start with [FiltersPlugin](variables/FiltersPlugin.md), then read the
 | [GridDistortionOptions](interfaces/GridDistortionOptions.md) | Configuration options for the `'gridDistortion'` filter. |
 | [PixelateOptions](interfaces/PixelateOptions.md) | Configuration options for the `'pixelate'` filter. |
 
+## Filter management
+
+The runtime that owns filter registration, queues, GPU resources, and cleanup.
+
+| Class | Description |
+| ------ | ------ |
+| [TextmodeFilterManager](classes/TextmodeFilterManager.md) | Owns filter registration, queues, GPU resources, pass execution, and cleanup. |
+
 ## Stylization filters
+
+Configuration options for the bundled stylization effects.
 
 | Interface | Description |
 | ------ | ------ |
@@ -59,6 +82,8 @@ Start with [FiltersPlugin](variables/FiltersPlugin.md), then read the
 
 ## Workflow
 
+The plugin that installs the filter system on a textmode.js sketch.
+
 | Variable | Description |
 | ------ | ------ |
-| [FiltersPlugin](variables/FiltersPlugin.md) | GPU-accelerated image filters plugin for textmode.js. |
+| [FiltersPlugin](variables/FiltersPlugin.md) | GPU-accelerated filters plugin. Installing it adds the complete 18-filter workflow to one Textmodifier. |

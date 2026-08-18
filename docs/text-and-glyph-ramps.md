@@ -143,7 +143,10 @@ t.draw(() => {
 
       t.char(ramp.at(value));
       t.charColor(90 + value * 140, 150 + value * 80, 255);
-      t.point(x, y);
+      t.push();
+      t.translate(x, y);
+      t.point();
+      t.pop();
     }
   }
 });

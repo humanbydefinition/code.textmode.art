@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-08-05
+lastModified: 2026-08-17
 isInterface: true
 ---
 
@@ -28,4 +28,4 @@ Perfect for creating vivid, oversaturated looks or desaturating to grayscale.
 
 | Property | Type | Description |
 | ------ | ------ | ------ |
-| <a id="property-amount"></a> `amount` | `number` | Saturation multiplier. - `0.0` = grayscale (no color) - `1.0` = normal saturation (no change) - `> 1.0` = vivid/oversaturated colors **Default** `1.0` |
+| <a id="property-amount"></a> `amount?` | `number` | Saturation multiplier. - `0.0` = grayscale (no color) - `1.0` = normal saturation (no change) - `> 1.0` = vivid/oversaturated colors **Default** `1.0` |

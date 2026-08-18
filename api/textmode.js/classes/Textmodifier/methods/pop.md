@@ -2,12 +2,12 @@
 layout: doc
 editLink: false
 title: pop
-description: Restore the most recently saved rendering state from the state stack. Use with push to isolate style changes within a block.
+description: Restore the most recently saved rendering state, shader, and uniforms from the state stack. Use with push to isolate style changes within a block.
 category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-08-05
+lastModified: 2026-08-17
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / pop
@@ -18,7 +18,7 @@ lastModified: 2026-08-05
 pop(): void;
 ```
 
-Restore the most recently saved rendering state from the state stack.
+Restore the most recently saved rendering state, shader, and uniforms from the state stack.
 Use with [push](push.md) to isolate style changes within a block.
 
 ## Returns

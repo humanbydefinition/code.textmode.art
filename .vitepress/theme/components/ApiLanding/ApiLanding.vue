@@ -48,6 +48,7 @@ const heroActions: ApiHeroAction[] = [
   { label: 'textmode.filters.js API', href: '/api/textmode.filters.js/', variant: 'secondary' },
   { label: 'textmode.export.js API', href: '/api/textmode.export.js/', variant: 'secondary' },
   { label: 'textmode.figlet.js API', href: '/api/textmode.figlet.js/', variant: 'secondary' },
+  { label: 'textmode.overlay.js API', href: '/api/textmode.overlay.js/', variant: 'secondary' },
 ]
 
 const libraries: ApiLibrary[] = [
@@ -105,6 +106,17 @@ const libraries: ApiLibrary[] = [
     secondary: '/api/textmode.figlet.js/variables/FigletPlugin',
     githubUser: 'humanbydefinition',
     githubRepo: 'textmode.figlet.js'
+  },
+  {
+    name: 'textmode.overlay.js',
+    kicker: 'dom overlay',
+    badge: 'overlay',
+    description: 'Sampling and DOM alignment for overlaying textmode.js output above a live canvas or video target.',
+    highlights: [],
+    cta: '/api/textmode.overlay.js/',
+    secondary: '/api/textmode.overlay.js/variables/OverlayPlugin',
+    githubUser: 'humanbydefinition',
+    githubRepo: 'textmode.overlay.js'
   }
 ]
 

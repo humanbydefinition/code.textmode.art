@@ -8,7 +8,7 @@ api: true
 owner: SynthSource
 kind: Method
 ecosystem: textmode.js
-lastModified: 2026-08-05
+lastModified: 2026-08-17
 ---
 
 [textmode.synth.js](../../../index.md) / [SynthSource](../../SynthSource.md) / scale

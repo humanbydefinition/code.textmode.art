@@ -7,7 +7,7 @@ category: Variables
 api: true
 kind: Variable
 ecosystem: textmode.js
-lastModified: 2026-08-05
+lastModified: 2026-08-17
 ---
 
 [textmode.figlet.js](../index.md) / FigletPlugin
@@ -19,6 +19,11 @@ const FigletPlugin: TextmodePlugin;
 ```
 
 Plugin entrypoint for the FIGlet add-on.
+
+Installs FIGlet methods on the `Textmodifier` through
+TextmodePluginContext.defineExtension, so the plugin runtime owns conflict
+detection and cleanup for the extension properties. Per-instance plugin state is
+cleared by the returned cleanup function.
 
 ## Example
 

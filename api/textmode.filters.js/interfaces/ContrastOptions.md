@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-08-05
+lastModified: 2026-08-17
 isInterface: true
 ---
 
@@ -27,4 +27,4 @@ Adjusts image contrast by scaling pixel values around mid-gray.
 
 | Property | Type | Description |
 | ------ | ------ | ------ |
-| <a id="property-amount"></a> `amount` | `number` | Contrast multiplier. - `1.0` = normal contrast (no change) - `> 1.0` = more contrast (darker darks, brighter brights) - `< 1.0` = less contrast (more gray/washed out) - `0.0` = solid gray **Default** `1.0` |
+| <a id="property-amount"></a> `amount?` | `number` | Contrast multiplier. - `1.0` = normal contrast (no change) - `> 1.0` = more contrast (darker darks, brighter brights) - `< 1.0` = less contrast (more gray/washed out) - `0.0` = solid gray **Default** `1.0` |

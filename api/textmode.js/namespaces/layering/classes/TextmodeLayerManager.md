@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: layering
 kind: Class
-lastModified: 2026-08-05
+lastModified: 2026-08-17
 hasConstructor: false
 ---
 
@@ -18,7 +18,7 @@ hasConstructor: false
 Manages the stack of layers within a [Textmodifier](../../../classes/Textmodifier.md) instance.
 
 The `base` layer is always present at the bottom of the stack. User-created layers are added
-above it and can render with independent grids, fonts, filters, offsets, opacity, and blend modes.
+above it and can render with independent grids, fonts, offsets, opacity, and blend modes.
 
 Access this manager via `textmodifier.layers`.
 
@@ -29,7 +29,6 @@ Access this manager via `textmodifier.layers`.
 | ------ | ------ |
 | [all](TextmodeLayerManager/accessors/all.md) | All user-created layers in stack order. |
 | [base](TextmodeLayerManager/accessors/base.md) | Base layer rendered at the bottom of the stack. |
-| [filters](TextmodeLayerManager/accessors/filters.md) | Filter manager used by this layer stack. |
 | [resultFramebuffer](TextmodeLayerManager/accessors/resultFramebuffer.md) | Framebuffer containing the most recent composited result. |
 
 ## Methods

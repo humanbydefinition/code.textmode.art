@@ -8,6 +8,7 @@ export const API_PROFILE_IDS = [
   'textmode.filters.js',
   'textmode.figlet.js',
   'textmode.export.js',
+  'textmode.overlay.js',
 ]
 
 const VALID_LANGUAGES = new Set(['javascript', 'typescript'])

@@ -6,7 +6,7 @@ description: Options for creating a framebuffer via Textmodifier.createFramebuff
 category: Type Aliases
 api: true
 kind: TypeAlias
-lastModified: 2026-08-05
+lastModified: 2026-08-17
 ---
 
 [textmode.js](../index.md) / TextmodeFramebufferOptions
@@ -34,6 +34,28 @@ Defaults to 3 for textmode framebuffers *(character/transform data, charColor, c
 You probably do not want to go below 3 for textmode rendering, otherwise rendering will not function correctly.
 
 Going above 3 is only recommended for advanced use cases involving custom shaders that utilize additional attachments.
+
+
+***
+
+### depth?
+
+```ts
+optional depth?: boolean;
+```
+
+Whether to allocate a depth attachment. Defaults to `true`.
+
+
+***
+
+### filter?
+
+```ts
+optional filter?: "nearest" | "linear";
+```
+
+Texture sampling mode. Defaults to `'nearest'`.
 
 
 ***

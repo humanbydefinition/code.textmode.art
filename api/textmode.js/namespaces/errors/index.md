@@ -6,7 +6,7 @@ description: All error handling related modules and types.
 category: Namespaces
 api: true
 kind: Namespace
-lastModified: 2026-08-05
+lastModified: 2026-08-17
 ---
 
 [textmode.js](../../index.md) / errors

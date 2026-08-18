@@ -4,6 +4,7 @@ import typedocSidebarSynth from "../../api/textmode.synth.js/typedoc-sidebar.jso
 import typedocSidebarFilters from "../../api/textmode.filters.js/typedoc-sidebar.json";
 import typedocSidebarExport from "../../api/textmode.export.js/typedoc-sidebar.json";
 import typedocSidebarFiglet from "../../api/textmode.figlet.js/typedoc-sidebar.json";
+import typedocSidebarOverlay from "../../api/textmode.overlay.js/typedoc-sidebar.json";
 import { defineBlogConfig } from "vitepress-plugin-blog/config";
 
 export const blog = defineBlogConfig({
@@ -152,6 +153,13 @@ const apiSidebar: DefaultTheme.SidebarItem[] = [
     items: [
       { text: "Index", link: "/api/textmode.figlet.js/" },
       ...typedocSidebarFiglet,
+    ],
+  },
+  {
+    text: "textmode.overlay.js",
+    items: [
+      { text: "Index", link: "/api/textmode.overlay.js/" },
+      ...typedocSidebarOverlay,
     ],
   },
 ];

@@ -8,7 +8,7 @@ api: true
 owner: TextmodeLayerManager
 namespace: layering
 kind: Accessor
-lastModified: 2026-08-05
+lastModified: 2026-08-17
 ---
 
 [textmode.js](../../../../../index.md) / [layering](../../../index.md) / [TextmodeLayerManager](../../TextmodeLayerManager.md) / resultFramebuffer
@@ -23,8 +23,9 @@ get resultFramebuffer(): TextmodeFramebuffer;
 
 Framebuffer containing the most recent composited result.
 
-When accessed mid-frame before presentation completes, this returns the framebuffer
-that will receive the current frame's composited result.
+During a frame, before composite output transforms and presentation complete, this
+continues to return the previous completed frame. Plugins may replace the current
+frame's output, so callers should not use this accessor to predict a future target.
 
 ### Returns
 

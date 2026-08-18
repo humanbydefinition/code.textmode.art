@@ -7,7 +7,7 @@ category: Enumerations
 api: true
 namespace: errors
 kind: Enum
-lastModified: 2026-08-05
+lastModified: 2026-08-17
 ---
 
 [textmode.js](../../../index.md) / [errors](../index.md) / TextmodeErrorLevel

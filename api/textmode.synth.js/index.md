@@ -7,7 +7,7 @@ category: API Reference
 api: true
 kind: Project
 ecosystem: textmode.js
-lastModified: 2026-08-05
+lastModified: 2026-08-17
 ---
 
 # textmode.synth.js
@@ -38,6 +38,20 @@ textmode.synth.js adapts the compositional approach of
 ## Example
 
 <TextmodeApiSandbox profile="textmode.synth.js" language="javascript" title="textmode.synth.js" encoded-code="Y29uc3QgdCA9IHRleHRtb2RlLmNyZWF0ZSh7CiAgd2lkdGg6IHdpbmRvdy5pbm5lcldpZHRoLAogIGhlaWdodDogd2luZG93LmlubmVySGVpZ2h0LAogIHBsdWdpbnM6IFtTeW50aFBsdWdpbl0KfSk7Cgpjb25zdCBzeW50aCA9IG5vaXNlKDgpCiAgLnJvdGF0ZSgwLjIpCiAgLmthbGVpZCg1KQogIC5jaGFyQ29sb3Iob3NjKDYsIDAuMSwgMS4yKSkKICAuY2VsbENvbG9yKG9zYyg2LCAwLjEsIDEuMikuaW52ZXJ0KCkpCiAgLmNoYXJNYXAoJ0AjJSorPS06LiAnKTsKCnQuc3ludGgoc3ludGgpOwoKdC53aW5kb3dSZXNpemVkKCgpID0-IHsKICB0LnJlc2l6ZUNhbnZhcyh3aW5kb3cuaW5uZXJXaWR0aCwgd2luZG93LmlubmVySGVpZ2h0KTsKfSk7" />
+
+## Extensibility
+
+Register custom transform and source definitions with setFunction.
+
+| Name | Description |
+| ------ | ------ |
+| [ExtensionOptions](interfaces/ExtensionOptions.md) | Options controlling a single or batch registration. |
+| [ExtensionRegistration](interfaces/ExtensionRegistration.md) | Handle returned by a successful registration. |
+| [TransformDefinition](interfaces/TransformDefinition.md) | Definition of a synthesis transform function. |
+| [TransformInput](interfaces/TransformInput.md) | Input parameter definition for a transform function. |
+| [SourceFunction](type-aliases/SourceFunction.md) | A standalone function that starts a source chain. |
+| [SynthTransformType](type-aliases/SynthTransformType.md) | Transform type categories determining how functions compose in the shader pipeline. |
+| [setFunction](functions/setFunction.md) | Register one or more transform definitions using Hydra's `setFunction()` contract. |
 
 ## Live-Coding Errors
 
@@ -101,4 +115,4 @@ The plugin that enables synthesis on textmode.js layers.
 
 | Variable | Description |
 | ------ | ------ |
-| [SynthPlugin](variables/SynthPlugin.md) | The `textmode.synth.js` plugin to install. |
+| [SynthPlugin](variables/SynthPlugin.md) | textmode.synth.js plugin for textmode.js. |
