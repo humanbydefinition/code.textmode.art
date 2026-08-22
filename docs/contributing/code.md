@@ -11,7 +11,7 @@ Use this guide for changes to `textmode.js` and its official add-ons.
 
 | Project | Use it for | Documentation |
 | --- | --- | --- |
-| [`textmode.js`](https://github.com/humanbydefinition/textmode.js) | Core APIs, rendering, layers, fonts, media, input, and plugins | [Guides](/docs/introduction) · [API](/api/textmode.js/) |
+| [`textmode.js`](https://github.com/humanbydefinition/textmode.js) | Core APIs, rendering, layers, fonts, media, input, and plugins | [Guides](/docs/) · [API](/api/textmode.js/) |
 | [`textmode.export.js`](https://github.com/humanbydefinition/textmode.export.js) | Image, document, and animation export | [Guide](/docs/exporting) · [API](/api/textmode.export.js/) |
 | [`textmode.synth.js`](https://github.com/humanbydefinition/textmode.synth.js) | Synth sources, transforms, and shader composition | [Guide](/docs/live-coding-editor-textmode-art) · [API](/api/textmode.synth.js/) |
 | [`textmode.figlet.js`](https://github.com/humanbydefinition/textmode.figlet.js) | FIGfont parsing, layout, and rendering | [Guide](/docs/figlet-typography) · [API](/api/textmode.figlet.js/) |

@@ -10,58 +10,137 @@ const baseHeaders: HeadConfig[] = [
 export const head: HeadConfig[] = [...baseHeaders]
 
 export const transformHead = ({ pageData }: TransformContext): HeadConfig[] => {
-  const canonicalUrl = `https://code.textmode.art/${pageData.relativePath.replace(/index\.md$/, '').replace(/\.md$/, '')}`
-    .replace(/\/$/, '');
+  const relative = pageData.relativePath
 
-  // Breadcrumb Schema Generation
-  const segments = pageData.relativePath.replace(/\.md$/, '').split('/').filter(s => s !== 'index')
+  // Normalize canonical URL
+  let canonicalUrl: string
+  if (relative === 'index.md') {
+    canonicalUrl = 'https://code.textmode.art/'
+  } else if (relative.endsWith('/index.md')) {
+    canonicalUrl = `https://code.textmode.art/${relative.replace(/\/index\.md$/, '')}/`
+  } else {
+    canonicalUrl = `https://code.textmode.art/${relative.replace(/\.md$/, '')}`
+  }
+
+  // Detect page categories
+  const isHomePage = relative === 'index.md'
+  const isDocsIndex = relative === 'docs/index.md'
+  const isDocsPage = relative.startsWith('docs/') && !isDocsIndex
+  const isApiIndex = relative === 'api/index.md'
+  const isApiPage = relative.startsWith('api/') && !isApiIndex
+
+  // Construct valid BreadcrumbList (ensuring every item has a resolvable 200 OK URL)
   const breadcrumbItems = [
     {
       "@type": "ListItem",
       "position": 1,
       "name": "Home",
-      "item": "https://code.textmode.art"
+      "item": "https://code.textmode.art/"
     }
   ]
 
-  let currentPath = ''
-  segments.forEach((segment, index) => {
-    currentPath += `/${segment}`
-    const isLast = index === segments.length - 1
-
-    let name = segment.charAt(0).toUpperCase() + segment.slice(1).replace(/-/g, ' ')
-    let itemUrl = `https://code.textmode.art${currentPath}`
-
-    // Manual override for 'docs' root to prevent 404s
-    if (segment === 'docs' && !isLast) {
-      itemUrl = 'https://code.textmode.art/docs/introduction'
-    }
-
-    if (isLast) {
-      name = pageData.title || name
-      // Use the canonical URL for the leaf node to ensure consistency (e.g. .html vs directory)
-      itemUrl = canonicalUrl
-    }
-
+  if (isDocsIndex) {
     breadcrumbItems.push({
       "@type": "ListItem",
-      "position": breadcrumbItems.length + 1,
-      "name": name,
-      "item": itemUrl
+      "position": 2,
+      "name": "Documentation",
+      "item": "https://code.textmode.art/docs/"
     })
-  })
+  } else if (isDocsPage) {
+    breadcrumbItems.push({
+      "@type": "ListItem",
+      "position": 2,
+      "name": "Documentation",
+      "item": "https://code.textmode.art/docs/"
+    })
+
+    if (relative.startsWith('docs/contributing/')) {
+      if (relative === 'docs/contributing/index.md') {
+        breadcrumbItems.push({
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Contributing",
+          "item": "https://code.textmode.art/docs/contributing/"
+        })
+      } else {
+        breadcrumbItems.push({
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Contributing",
+          "item": "https://code.textmode.art/docs/contributing/"
+        })
+        breadcrumbItems.push({
+          "@type": "ListItem",
+          "position": 4,
+          "name": pageData.title || "Guide",
+          "item": canonicalUrl
+        })
+      }
+    } else {
+      breadcrumbItems.push({
+        "@type": "ListItem",
+        "position": 3,
+        "name": pageData.title || "Guide",
+        "item": canonicalUrl
+      })
+    }
+  } else if (isApiIndex) {
+    breadcrumbItems.push({
+      "@type": "ListItem",
+      "position": 2,
+      "name": "API",
+      "item": "https://code.textmode.art/api/"
+    })
+  } else if (isApiPage) {
+    breadcrumbItems.push({
+      "@type": "ListItem",
+      "position": 2,
+      "name": "API",
+      "item": "https://code.textmode.art/api/"
+    })
+
+    // Check if under an API sub-package e.g. api/textmode.export.js/...
+    const apiMatch = relative.match(/^api\/(textmode(?:\.[a-z]+)?\.js)\//)
+    if (apiMatch) {
+      const pkgName = apiMatch[1]
+      const isPkgIndex = relative === `api/${pkgName}/index.md`
+      
+      breadcrumbItems.push({
+        "@type": "ListItem",
+        "position": 3,
+        "name": pkgName,
+        "item": `https://code.textmode.art/api/${pkgName}/`
+      })
+
+      if (!isPkgIndex) {
+        breadcrumbItems.push({
+          "@type": "ListItem",
+          "position": 4,
+          "name": pageData.title || "Reference",
+          "item": canonicalUrl
+        })
+      }
+    } else {
+      breadcrumbItems.push({
+        "@type": "ListItem",
+        "position": 3,
+        "name": pageData.title || "Reference",
+        "item": canonicalUrl
+      })
+    }
+  } else if (!isHomePage) {
+    breadcrumbItems.push({
+      "@type": "ListItem",
+      "position": 2,
+      "name": pageData.title || "Page",
+      "item": canonicalUrl
+    })
+  }
 
   const defaultDescription = 'textmode.js is a lightweight creative coding library for creating real-time ASCII art on the web.'
-  const ogTitle = pageData.title || 'textmode.js'
+  const ogTitle = pageData.title ? `${pageData.title} | textmode.js` : 'textmode.js'
   const ogDescription = pageData.description || defaultDescription
   const ogImage = 'https://code.textmode.art/png/readme-og.png'
-
-  // Detect page types
-  const isBlogPost = pageData.relativePath.startsWith('blog/') && pageData.relativePath !== 'blog/index.md';
-  const isHomePage = pageData.relativePath === 'index.md';
-  const isDocsPage = pageData.relativePath.startsWith('docs/') && !pageData.relativePath.endsWith('/index.md');
-
-  const ogType = isBlogPost ? 'article' : 'website';
 
   const head: HeadConfig[] = [
     ['link', { rel: 'canonical', href: canonicalUrl }],
@@ -69,7 +148,7 @@ export const transformHead = ({ pageData }: TransformContext): HeadConfig[] => {
     ['meta', { name: 'description', content: ogDescription }],
     ['meta', { name: 'robots', content: 'index, follow' }],
     // Open Graph
-    ['meta', { property: 'og:type', content: ogType }],
+    ['meta', { property: 'og:type', content: 'website' }],
     ['meta', { property: 'og:site_name', content: 'textmode.js' }],
     ['meta', { property: 'og:locale', content: 'en_US' }],
     ['meta', { property: 'og:title', content: ogTitle }],
@@ -86,14 +165,14 @@ export const transformHead = ({ pageData }: TransformContext): HeadConfig[] => {
   ]
 
   // Add Keywords (from frontmatter or default)
-  const defaultKeywords = 'textmode, ascii art, creative coding, webgl, javascript library, generative art, real-time, canvas, visualization, retro, 8-bit, terminal, petscii, live coding';
-  const keywords = pageData.frontmatter.keywords || defaultKeywords;
+  const defaultKeywords = 'textmode, ascii art, creative coding, webgl, javascript library, generative art, real-time, canvas, visualization, retro, 8-bit, terminal, petscii, live coding'
+  const keywords = pageData.frontmatter.keywords || defaultKeywords
 
   if (keywords) {
-    head.push(['meta', { name: 'keywords', content: keywords }]);
+    head.push(['meta', { name: 'keywords', content: keywords }])
   }
 
-  // Schema: Home page with consolidated @graph
+  // Schema: Home page
   if (isHomePage) {
     head.push(['script', { type: 'application/ld+json' }, JSON.stringify({
       "@context": "https://schema.org",
@@ -101,7 +180,7 @@ export const transformHead = ({ pageData }: TransformContext): HeadConfig[] => {
         {
           "@type": "Organization",
           "name": "textmode.js",
-          "url": "https://code.textmode.art",
+          "url": "https://code.textmode.art/",
           "logo": "https://code.textmode.art/svg/doc_logo.svg",
           "sameAs": [
             "https://github.com/humanbydefinition/textmode.js",
@@ -111,12 +190,8 @@ export const transformHead = ({ pageData }: TransformContext): HeadConfig[] => {
         {
           "@type": "WebSite",
           "name": "textmode.js",
-          "url": "https://code.textmode.art",
-          "potentialAction": {
-            "@type": "SearchAction",
-            "target": "https://code.textmode.art/search?q={search_term_string}",
-            "query-input": "required name=search_term_string"
-          }
+          "url": "https://code.textmode.art/",
+          "description": defaultDescription
         },
         {
           "@type": "SoftwareApplication",
@@ -128,65 +203,42 @@ export const transformHead = ({ pageData }: TransformContext): HeadConfig[] => {
             "price": "0",
             "priceCurrency": "USD"
           },
-          "description": "textmode.js is a lightweight creative coding library for creating real-time ASCII art on the web.",
-          "url": "https://code.textmode.art"
-        },
-        {
-          "@type": "BreadcrumbList",
-          "itemListElement": breadcrumbItems
+          "description": defaultDescription,
+          "url": "https://code.textmode.art/"
         }
       ]
-    })]);
+    })])
   }
-  // Schema: Blog posts
-  else if (isBlogPost) {
+  // Schema: Documentation & API Reference Pages (TechArticle)
+  else if (isDocsPage || isDocsIndex || isApiPage || isApiIndex) {
     head.push(['script', { type: 'application/ld+json' }, JSON.stringify({
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": breadcrumbItems
-    })]);
-    head.push(['script', { type: 'application/ld+json' }, JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "BlogPosting",
-      "headline": pageData.title,
-      "image": [ogImage],
-      "datePublished": pageData.frontmatter.date ? new Date(pageData.frontmatter.date).toISOString() : undefined,
-      "dateModified": pageData.lastUpdated ? new Date(pageData.lastUpdated).toISOString() : undefined,
-      "author": [{
-        "@type": "Person",
-        "name": pageData.frontmatter.author || "textmode.js team",
-        "url": "https://code.textmode.art"
-      }]
-    })]);
-  }
-  // Schema: Documentation pages (TechArticle)
-  else if (isDocsPage) {
-    head.push(['script', { type: 'application/ld+json' }, JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": breadcrumbItems
-    })]);
+    })])
+
     const techArticle: Record<string, unknown> = {
       "@context": "https://schema.org",
       "@type": "TechArticle",
-      "headline": pageData.title,
+      "headline": pageData.title || "textmode.js Documentation",
       "description": ogDescription,
       "author": {
         "@type": "Organization",
         "name": "textmode.js",
-        "url": "https://code.textmode.art"
+        "url": "https://code.textmode.art/"
       },
       "publisher": {
         "@type": "Organization",
         "name": "textmode.js",
-        "url": "https://code.textmode.art"
+        "url": "https://code.textmode.art/"
       },
       "url": canonicalUrl
-    };
-    if (pageData.lastUpdated) {
-      techArticle.dateModified = new Date(pageData.lastUpdated).toISOString();
     }
-    head.push(['script', { type: 'application/ld+json' }, JSON.stringify(techArticle)]);
+
+    if (pageData.lastUpdated) {
+      techArticle.dateModified = new Date(pageData.lastUpdated).toISOString()
+    }
+    head.push(['script', { type: 'application/ld+json' }, JSON.stringify(techArticle)])
   }
   // Schema: All other pages
   else {
@@ -194,8 +246,8 @@ export const transformHead = ({ pageData }: TransformContext): HeadConfig[] => {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
       "itemListElement": breadcrumbItems
-    })]);
+    })])
   }
 
-  return head;
+  return head
 }

@@ -28,9 +28,6 @@ import ExampleSketchBrowser from './components/ExampleSketchBrowser/ExampleSketc
 import { GalleryGrid } from './components/Gallery'
 import { PromoCallout } from './components/PromoCallout'
 
-// Blog
-import { withBlogTheme } from 'vitepress-plugin-blog'
-import 'vitepress-plugin-blog/style.css'
 
 // Composables
 import { useComments } from './composables'
@@ -122,6 +119,4 @@ const baseTheme: Theme = {
   }
 }
 
-const theme = withBlogTheme(baseTheme)
-
-export default theme
+export default baseTheme

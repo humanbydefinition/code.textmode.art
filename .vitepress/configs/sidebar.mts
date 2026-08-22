@@ -5,13 +5,6 @@ import typedocSidebarFilters from "../../api/textmode.filters.js/typedoc-sidebar
 import typedocSidebarExport from "../../api/textmode.export.js/typedoc-sidebar.json";
 import typedocSidebarFiglet from "../../api/textmode.figlet.js/typedoc-sidebar.json";
 import typedocSidebarOverlay from "../../api/textmode.overlay.js/typedoc-sidebar.json";
-import { defineBlogConfig } from "vitepress-plugin-blog/config";
-
-export const blog = defineBlogConfig({
-  sidebar: {
-    recentPostsCount: 5,
-  },
-});
 
 const docsSidebar: DefaultTheme.SidebarItem[] = [
   {
@@ -19,8 +12,9 @@ const docsSidebar: DefaultTheme.SidebarItem[] = [
     items: [
       {
         text: "Start",
+        link: "/docs/",
         items: [
-          { text: "Introduction", link: "/docs/introduction" },
+          { text: "Introduction", link: "/docs/" },
           { text: "Installation", link: "/docs/installation" },
           { text: "First sketch", link: "/docs/first-sketch" },
           { text: "Examples", link: "/docs/examples" },
@@ -167,5 +161,4 @@ const apiSidebar: DefaultTheme.SidebarItem[] = [
 export const sidebar: DefaultTheme.Sidebar = {
   "/docs/": docsSidebar,
   "/api/": apiSidebar,
-  "/blog/": blog.sidebar,
 };

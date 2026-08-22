@@ -1,4 +1,7 @@
 User-agent: *
 Allow: /
+Disallow: /blog/
+Disallow: /blog
 
 Sitemap: https://code.textmode.art/sitemap.xml
+
