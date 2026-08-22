@@ -30,6 +30,7 @@ description: Combine Hydra live-coding visuals with textmode.js to create real-t
     <!-- Import dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/hydra-synth/dist/hydra-synth.js"></script>
     <script src="https://unpkg.com/textmode.js@latest/dist/textmode.umd.js"></script>
+    <script src="https://unpkg.com/textmode.overlay.js@latest/dist/textmode.overlay.umd.js"></script>
   </head>
 
   <body>
@@ -46,8 +47,21 @@ description: Combine Hydra live-coding visuals with textmode.js to create real-t
  * @link https://github.com/humanbydefinition/textmode.js
  */
 
-// Initialize hydra-synth
+// Establish the WebGL context attributes before Hydra creates regl.
+const canvas = document.createElement('canvas');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+document.body.appendChild(canvas);
+
+const gl = canvas.getContext('webgl', { preserveDrawingBuffer: true });
+
+if (!gl) {
+    throw new Error('WebGL is not available.');
+}
+
+// Initialize hydra-synth with the preserved canvas.
 const hydraInstance = new Hydra({
+    canvas,
     makeGlobal: false,
     detectAudio: false,
     width: window.innerWidth,
@@ -56,18 +70,21 @@ const hydraInstance = new Hydra({
 
 const hydra = hydraInstance.synth;
 
-// Create animated pattern with hydra
-hydra.osc().rotate().out();
-
-// Get the canvas that hydra is rendering to
-const canvas = hydraInstance.canvas;
+// Create an animated, layered field with Hydra's normal autoLoop.
+hydra
+    .osc(9, 0.04, 1.1)
+    .kaleid(5)
+    .modulate(hydra.noise(2, 0.08), 0.12)
+    .out();
 
 // Initialize textmodifier
-const tm = textmode.create({ canvas: canvas, overlay: true });
+const tm = textmode.create({ plugins: [OverlayPlugin] });
+
+const source = tm.overlay.setTarget(canvas);
 
 tm.setup(() => {
     // Configure overlay settings
-    tm.overlay
+    source
         .characters(" .:-=+*#%@")           // Character set for brightness mapping
         .cellColorMode("fixed")             // Use fixed cell color
         .cellColor(0, 0, 0)                 // Black cell background
@@ -77,7 +94,7 @@ tm.setup(() => {
 
 tm.draw(() => {
     tm.background(0);
-    tm.image(tm.overlay, tm.grid.cols, tm.grid.rows);
+    tm.image(source, tm.grid.cols, tm.grid.rows);
 });
 
 // Handle window resize

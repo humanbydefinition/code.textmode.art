@@ -44,46 +44,88 @@ description: Combine Three.js 3D rendering with textmode.js to create real-time 
 
 import * as THREE from 'https://cdn.jsdelivr.net/npm/three@0.178.0/build/three.module.js';
 import { textmode } from 'https://cdn.jsdelivr.net/npm/textmode.js@latest/dist/textmode.esm.js';
+import { OverlayPlugin } from 'https://cdn.jsdelivr.net/npm/textmode.overlay.js@latest/dist/textmode.overlay.esm.js';
 
 let tm;
-let scene, camera, renderer, cube;
-let frameCount = 0;
+let scene, camera, renderer, orbitalRig, core;
+const rings = [];
 
 async function setup() {
   // Create scene
   scene = new THREE.Scene();
-  scene.background = new THREE.Color(0x000000);
+  scene.background = new THREE.Color(0x01030a);
   
   // Create camera
-  camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-  camera.position.z = 3;
+  camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 100);
+  camera.position.set(0, 0, 5.6);
   
-  // Create renderer
-  renderer = new THREE.WebGLRenderer();
+  // Preserve the host frame so textmode.js can sample it independently.
+  renderer = new THREE.WebGLRenderer({
+    antialias: true,
+    preserveDrawingBuffer: true,
+  });
+  renderer.toneMapping = THREE.ACESFilmicToneMapping;
+  renderer.toneMappingExposure = 1.35;
   renderer.setSize(window.innerWidth, window.innerHeight);
   document.body.appendChild(renderer.domElement);
   
-  // Add directional light
-  const directionalLight = new THREE.DirectionalLight(0xffffff, 1);
-  directionalLight.position.set(0, 0, 1);
-  scene.add(directionalLight);
-  
-  // Add ambient light for some base illumination
-  const ambientLight = new THREE.AmbientLight(0x404040, 0.2);
-  scene.add(ambientLight);
-  
-  // Create stick-like box geometry
-  const geometry = new THREE.BoxGeometry(8, 1, 1);
-  const material = new THREE.MeshLambertMaterial({ color: 0xffffff });
-  cube = new THREE.Mesh(geometry, material);
-  scene.add(cube);
+  scene.add(new THREE.AmbientLight(0x203050, 1.4));
+
+  const keyLight = new THREE.PointLight(0x62e8ff, 34, 18);
+  keyLight.position.set(4, 3, 5);
+  scene.add(keyLight);
+
+  const fillLight = new THREE.PointLight(0xff4fa3, 28, 16);
+  fillLight.position.set(-4, -2, 3);
+  scene.add(fillLight);
+
+  orbitalRig = new THREE.Group();
+  const ringGeometry = new THREE.TorusGeometry(1.7, 0.2, 18, 96);
+  const ringColors = [0x62e8ff, 0xff4fa3, 0xffd166];
+  const ringRotations = [
+    [0.35, 0.15, 0],
+    [1.05, 0.5, 0.75],
+    [-0.65, 0.9, -0.45],
+  ];
+
+  ringColors.forEach((color, index) => {
+    const ring = new THREE.Mesh(
+      ringGeometry,
+      new THREE.MeshStandardMaterial({
+        color,
+        emissive: color,
+        emissiveIntensity: 0.28,
+        metalness: 0.25,
+        roughness: 0.3,
+      }),
+    );
+    ring.rotation.set(...ringRotations[index]);
+    rings.push(ring);
+    orbitalRig.add(ring);
+  });
+
+  core = new THREE.Mesh(
+    new THREE.IcosahedronGeometry(0.95, 1),
+    new THREE.MeshStandardMaterial({
+      color: 0xf4f0ff,
+      emissive: 0x201636,
+      emissiveIntensity: 0.35,
+      flatShading: true,
+      metalness: 0.15,
+      roughness: 0.32,
+    }),
+  );
+  orbitalRig.add(core);
+  scene.add(orbitalRig);
   
   // Initialize textmode.js with the Three.js canvas
-  tm = textmode.create({ fontSize: 16, canvas: renderer.domElement, overlay: true });
+  tm = textmode.create({ fontSize: 16, plugins: [OverlayPlugin] });
+
+  const source = tm.overlay.setTarget(renderer.domElement);
 
   tm.setup(() => {
     // Configure overlay settings
-    tm.overlay
+    source
         .characters(" .:-=+*#%@")           // Character set for brightness mapping
         .cellColorMode("fixed")             // Use fixed cell color
         .cellColor(0, 0, 0)                 // Black cell background
@@ -93,25 +135,28 @@ async function setup() {
 
   tm.draw(() => {
     tm.background(0);
-    tm.image(tm.overlay, tm.grid.cols, tm.grid.rows);
+    tm.image(source, tm.grid.cols, tm.grid.rows);
  });
   
-  // Start animation
-  animate();
+  // Three.js and textmode.js keep independent animation loops.
+  renderer.setAnimationLoop(animate);
 }
 
 // Animation loop
-function animate() {
-  frameCount++;
-  
-  // Rotate the cube
-  cube.rotation.x = frameCount * -0.05;
-  cube.rotation.z = frameCount * -0.02;
+function animate(timestamp) {
+  const time = timestamp * 0.001;
+
+  orbitalRig.rotation.x = -0.22 + Math.sin(time * 0.4) * 0.08;
+  orbitalRig.rotation.y = time * 0.22;
+  rings[0].rotation.z = time * 0.12;
+  rings[1].rotation.z = 0.75 - time * 0.1;
+  rings[2].rotation.x = -0.65 + Math.sin(time * 0.25) * 0.12;
+  rings[2].rotation.z = -0.45 + time * 0.08;
+  core.rotation.x = time * 0.32;
+  core.rotation.y = -time * 0.38;
   
   // Render the scene
   renderer.render(scene, camera);
-  
-  requestAnimationFrame(animate);
 }
 
 // Handle window resize

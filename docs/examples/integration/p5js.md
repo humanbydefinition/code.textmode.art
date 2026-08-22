@@ -29,6 +29,7 @@ description: Use textmode.js with p5.js sketches to render creative coding proje
     <!-- Import textmode.js -->
     <script src="https://cdn.jsdelivr.net/npm/p5@1.11.9/lib/p5.js"></script>
     <script src="https://unpkg.com/textmode.js@latest/dist/textmode.umd.js"></script>
+    <script src="https://unpkg.com/textmode.overlay.js@latest/dist/textmode.overlay.umd.js"></script>
   </head>
 
   <body>
@@ -48,14 +49,20 @@ description: Use textmode.js with p5.js sketches to render creative coding proje
 let tm;
 
 function setup() {
+  // One source pixel per display pixel is sufficient for textmode conversion.
+  // p5.js 1.x preserves WEBGL drawing buffers by default.
+  pixelDensity(1);
   const canvas = createCanvas(windowWidth, windowHeight, WEBGL);
+  noStroke();
 
   // Initialize textmode.js with the p5.js canvas
-  tm = textmode.create({ canvas: canvas.canvas, overlay: true, fontSize: 16 });
+  tm = textmode.create({ plugins: [OverlayPlugin], fontSize: 16 });
+
+  const source = tm.overlay.setTarget(canvas.canvas);
 
   tm.setup(() => {
       // Configure overlay settings
-      tm.overlay
+      source
           .characters(" .:-=+*#%@")           // Character set for brightness mapping
           .cellColorMode("fixed")             // Use fixed cell color
           .cellColor(0, 0, 0)                 // Black cell background
@@ -65,19 +72,37 @@ function setup() {
 
   tm.draw(() => {
       tm.background(0);
-      tm.image(tm.overlay, tm.grid.cols, tm.grid.rows);
+      tm.image(source, tm.grid.cols, tm.grid.rows);
   });
 }
 
 function draw() {
-  clear();
-  push();
-  fill(255);
-  rotateX(radians(frameCount * 3));
-  rotateZ(radians(frameCount));
-  directionalLight(255, 255, 255, 0, 0, -1);
-  box(800, 100, 100);
-  pop();
+  background(2, 5, 14);
+  const time = millis() * 0.001;
+  const spacing = min(width, height) / 7.5;
+
+  ambientLight(35, 45, 70);
+  directionalLight(90, 180, 255, -0.4, 0.6, -1);
+  pointLight(255, 80, 150, 0, 0, 320);
+
+  rotateX(-0.8);
+  rotateZ(0.12 * sin(time * 0.35));
+
+  for (let y = -3; y <= 3; y++) {
+    for (let x = -3; x <= 3; x++) {
+      const distance = sqrt(x * x + y * y);
+      const phase = time * 1.1 + x * 0.62 + y * 0.44;
+      const lift = sin(phase) * spacing * 0.8;
+      const depth = spacing * (0.45 + 0.16 * cos(phase + distance));
+
+      push();
+      translate(x * spacing, y * spacing, lift);
+      rotateZ(phase * 0.08);
+      ambientMaterial(80 + x * 18, 150 + y * 12, 230);
+      box(spacing * 0.55, spacing * 0.55, depth);
+      pop();
+    }
+  }
 }
 
 function windowResized() {

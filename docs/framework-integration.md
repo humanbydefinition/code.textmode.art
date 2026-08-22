@@ -122,9 +122,11 @@ It simply samples a live `canvas` or `video` element as media input. That means:
 - you can show both at once, hide one, or position them independently
 - sizing and layout are entirely up to your application
 
+The same WebGL drawing-buffer rule applies here: an independently rendered WebGL canvas must use `preserveDrawingBuffer: true`, or the application must sample it synchronously before the browser is allowed to discard its contents.
+
 ## 4. Share an existing WebGL context
 
-If another library already owns a `WebGL2RenderingContext`, pass it through [`gl`](/api/textmode.js/type-aliases/TextmodeOptions#gl):
+If another library already owns a `WebGL2RenderingContext` and both renderers intentionally share one canvas, pass it through [`gl`](/api/textmode.js/type-aliases/TextmodeOptions#gl):
 
 ```js
 const t = textmode.create({
@@ -132,36 +134,36 @@ const t = textmode.create({
 });
 ```
 
-This tells `textmode.js` to render through the host library's existing context instead of creating its own.
+This is an advanced single-context integration, not a DOM overlay. Both renderers mutate the same WebGL state and present to the same canvas, so the application must establish render order and restore any renderer-specific state between them.
 
-That path is especially useful for WebGL-based frameworks such as `three.js`, `Babylon.js`, or `A-Frame`.
-
-It is commonly paired with [`createTexture()`](/api/textmode.js/classes/Textmodifier#createtexture) so the host renderer can draw first and `textmode.js` can reinterpret the same canvas as a live source:
+For example, a deliberately coordinated Three.js integration can render the host scene first and then let `textmode.js` replace the shared canvas output:
 
 ```js
 const t = textmode.create({
   gl: renderer.getContext(),
 });
-
-let sceneTex;
 
 t.setup(() => {
-  sceneTex = t.createTexture(renderer.domElement);
+  // Configure the textmode scene.
 });
 
-t.draw(() => {
-  t.clear();
-  t.image(sceneTex, t.grid.cols, t.grid.rows);
+t.noLoop();
+
+renderer.setAnimationLoop(() => {
+  renderer.render(scene, camera);
+  renderer.resetState();
+  t.redraw();
+  renderer.resetState();
 });
 ```
 
-When you pass `gl`, the host framework still owns the underlying canvas and context. Calling [`destroy()`](/api/textmode.js/classes/Textmodifier#destroy) cleans up `textmode.js` resources, but it does not tear down the external canvas or external context.
+Do not combine an independently running `createTexture(renderer.domElement)` loop with shared `gl` as a default pattern: the source and destination would be the same canvas, and either renderer may overwrite state before the other finishes. When you pass `gl`, the host framework still owns the underlying canvas and context. Calling [`destroy()`](/api/textmode.js/classes/Textmodifier#destroy) cleans up `textmode.js` resources, but it does not tear down the external canvas or external context.
 
 ## Render-loop coordination
 
-Many frameworks already have their own animation loop. `textmode.js` does too.
+Many frameworks already have their own animation loop. `textmode.js` does too. For normal overlay integrations, let both loops run independently; the examples below all use that pattern.
 
-You can let both loops run independently, but when you want deterministic ordering it is better to let the host render first and then trigger `textmode.js` manually:
+When deterministic ordering is a requirement, such as a shared context or an unpreserved source captured immediately after rendering, coordinate the loops explicitly:
 
 ```js
 t.noLoop();
@@ -174,7 +176,7 @@ function animate() {
 }
 ```
 
-This is especially useful with shared textures or shared WebGL contexts, where you want `textmode.js` to sample the latest host frame immediately after it is rendered.
+This advanced pattern is especially useful with shared textures or shared WebGL contexts. It is not required for ordinary overlay sketches whose host drawing buffer remains available.
 
 Relevant APIs:
 
@@ -225,7 +227,7 @@ function unmount() {
 }
 ```
 
-If the framework already controls when frames should render, combine that with `t.noLoop()` and `t.redraw()`.
+If the framework must also guarantee deterministic shared-context ordering, use the advanced `t.noLoop()` and `t.redraw()` coordination pattern described above.
 
 ## Which path to prefer
 
@@ -245,7 +247,6 @@ Most of the examples below use the [`textmode.overlay.js`](/api/textmode.overlay
 <!--@include: ./examples/integration/hydra-synth.md-->
 <!--@include: ./examples/integration/threejs.md-->
 <!--@include: ./examples/integration/webcam.md-->
-<!--@include: ./examples/integration/video.md-->
 
 ## Related APIs
 
