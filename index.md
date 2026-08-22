@@ -9,7 +9,7 @@ hero:
   actions:
     - theme: brand
       text: Get started
-      link: /docs/introduction
+      link: /docs/
     - theme: alt
       text: View examples
       link: /docs/examples
