@@ -3,7 +3,7 @@ import { defineConfig } from 'vitepress'
 import container from 'markdown-it-container'
 import { renderSandbox } from 'vitepress-plugin-sandpack'
 import { withMermaid } from 'vitepress-plugin-mermaid'
-import { head, nav, sidebar, blog, transformHead } from './configs/index.mts'
+import { head, nav, sidebar, transformHead } from './configs/index.mts'
 
 const LIVE_SANDBOX_CONTAINER_PATTERN = /:{3,}\s*textmode-(?:api-)?sandbox\b[^\n]*\n[\s\S]*?\n:{3,}/g
 const LIVE_SANDBOX_COMPONENT_PATTERN = /<Textmode(?:Api|Live)?Sandbox\b[^>]*\/>/g
@@ -65,7 +65,17 @@ export default withMermaid(defineConfig({
   lang: 'en-US',
   appearance: 'dark',
   lastUpdated: true,
-  srcExclude: ['docs/examples/**'],
+  srcExclude: [
+    'docs/examples/**',
+    'blog/**',
+    'README.md',
+    'LICENSE.md',
+    'CONTRIBUTING.md',
+    'CODE_OF_CONDUCT.md',
+    'SECURITY.md',
+    'CONTRIBUTORS_AUTOMATION.md',
+    '.vitepress/data/TESTIMONIALS_README.md',
+  ],
   title: "textmode.js",
   description: "textmode.js is a lightweight creative coding library for creating real-time ASCII art on the web.",
   head,
@@ -74,10 +84,6 @@ export default withMermaid(defineConfig({
     hostname: 'https://code.textmode.art'
   },
   transformHead,
-
-  vite: {
-    plugins: [blog.plugin],
-  },
 
   markdown: {
     config(md) {
