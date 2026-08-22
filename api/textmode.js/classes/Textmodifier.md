@@ -6,7 +6,7 @@ description: The main textmode.js drawing context.
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-08-17
+lastModified: 2026-08-22
 hasConstructor: false
 ---
 
@@ -20,6 +20,10 @@ A Textmodifier manages a canvas, renderer, layers, fonts, media sources, input,
 animation, and the p5-style drawing API. When no canvas is supplied, it creates
 one; when a canvas is supplied, it renders into that element.
 
+
+## Extends
+
+- `TextmodifierExtensions`
 
 ## 2D drawing
 
@@ -170,6 +174,7 @@ Configure the drawing grid and the glyph source that populates it.
 | [fontSize](Textmodifier/methods/fontSize.md) | Set or get the base layer font size. |
 | [loadFont](Textmodifier/methods/loadFont.md) | Load a font and optionally set it as the base layer's active font. |
 | [loadTileset](Textmodifier/methods/loadTileset.md) | Load a tileset and optionally set it as the base layer's active glyph source. |
+| [projectClientToGrid](Textmodifier/methods/projectClientToGrid.md) | Project CSS viewport/client coordinates into a textmode grid. |
 | [useTileColors](Textmodifier/methods/useTileColors.md) | Configure authored tileset color preservation on the base layer. |
 
 ## Input events

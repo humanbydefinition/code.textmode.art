@@ -6,7 +6,7 @@ description: A deterministic pseudo-random number generator for textmode sketche
 category: Classes
 api: true
 kind: Class
-lastModified: 2026-08-17
+lastModified: 2026-08-22
 hasConstructor: true
 ---
 

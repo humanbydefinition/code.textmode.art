@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-08-17
+lastModified: 2026-08-22
 ---
 
 [textmode.export.js](../index.md) / VideoExportOptions
@@ -23,6 +23,17 @@ Options for exporting the textmode content to video format.
 
 ## Properties
 
+### allowLargeInMemory?
+
+```ts
+optional allowLargeInMemory?: boolean;
+```
+
+Allows `toVideoBlob()` to retain its in-memory contract above the safe 100 MB default.
+
+
+***
+
 ### bitrate?
 
 ```ts
@@ -31,10 +42,9 @@ optional bitrate?: number | VideoBitratePreset;
 
 Target bitrate in bits per second or a quality preset. Defaults to `'medium'`.
 
-Bitrate controls how much encoded data is available per second of video. Higher values can preserve more detail
-in noisy or fast-changing sketches, but create larger files. Presets resolve to a fixed bits-per-pixel budget
-from the export dimensions only, so a given preset targets the same bitrate regardless of the frame rate.
-Numeric values are passed directly to the encoder.
+String values request constant-quality encoding through Mediabunny. `low`, `medium`, and `high` map to the
+upstream `medium`, `high`, and `very-high` quality levels; `ultra` requests quantizer zero and may create very
+large files. Numeric values remain exact bits-per-second targets and are wrapped in Mediabunny `Quality`.
 
 
 ***
@@ -45,10 +55,21 @@ Numeric values are passed directly to the encoder.
 optional bitrateMode?: VideoBitrateMode;
 ```
 
-Encoder bitrate allocation mode. Defaults to `'variable'`.
+Bitrate allocation mode for numeric bitrates and quality fallback paths. Defaults to `'variable'`.
 
 Use `'variable'` for most exports so simple frames can compress efficiently and complex frames can receive more
 bits. Use `'constant'` only when a steadier data rate is more important than compression efficiency.
+
+
+***
+
+### contentHint?
+
+```ts
+optional contentHint?: VideoContentHint;
+```
+
+Content hint passed to the native video encoder. Defaults to `'text'`.
 
 
 ***
@@ -178,7 +199,7 @@ Progress callback invoked throughout the recording lifecycle.
 optional pixelDensity?: number;
 ```
 
-Pixel density used during export. Defaults to `1` so video dimensions match the live canvas.
+Pixel density used during export. Defaults to `1` so video dimensions match the logical canvas size.
 
 
 ***

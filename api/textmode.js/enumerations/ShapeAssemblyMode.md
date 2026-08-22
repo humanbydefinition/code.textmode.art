@@ -6,7 +6,7 @@ description: Shape assembly modes for Textmodifier.beginShape.
 category: Enumerations
 api: true
 kind: Enum
-lastModified: 2026-08-17
+lastModified: 2026-08-22
 ---
 
 [textmode.js](../index.md) / ShapeAssemblyMode

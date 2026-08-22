@@ -69,6 +69,7 @@ description: Render a live webcam feed as real-time textmode ASCII art using tex
 
     <!-- Import textmode.js -->
     <script src="https://unpkg.com/textmode.js@latest/dist/textmode.umd.js"></script>
+    <script src="https://unpkg.com/textmode.overlay.js@latest/dist/textmode.overlay.umd.js"></script>
   </head>
 
   <body>
@@ -131,14 +132,15 @@ async function initWebcam() {
         
         // Initialize textmode.js overlay on webcam
         tm = textmode.create({
-            canvas: video,
-            overlay: true,
+            plugins: [OverlayPlugin],
             fontSize: 8
         });
 
+        const source = tm.overlay.setTarget(video);
+
         tm.setup(() => {
             // Configure overlay settings for webcam
-            tm.overlay
+            source
                 .characters(" .:-=+*#%@")           // Character set for brightness mapping
                 .cellColorMode("fixed")             // Use fixed cell color
                 .cellColor(0, 0, 0, 0)              // Transparent cell background
@@ -151,7 +153,7 @@ async function initWebcam() {
             tm.background(0, 0, 0, 255);
             
             // Draw the converted webcam feed
-            tm.image(tm.overlay, tm.grid.cols, tm.grid.rows);
+            tm.image(source, tm.grid.cols, tm.grid.rows);
         });
         
     } catch (err) {
@@ -174,18 +176,13 @@ async function initWebcam() {
     }
 }
 
-// Handle window resize
-function handleResize() {
-    // Overlay mode follows the video element automatically.
-    // No explicit textmode.js resize call is needed here.
-}
-
 // Initialize when page loads
 window.addEventListener('load', initWebcam);
-window.addEventListener('resize', handleResize);
 
 // Cleanup on page unload
 window.addEventListener('beforeunload', () => {
+    tm?.destroy();
+
     if (video && video.srcObject) {
         const tracks = video.srcObject.getTracks();
         tracks.forEach(track => track.stop());

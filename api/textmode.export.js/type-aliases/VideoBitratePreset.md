@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-08-17
+lastModified: 2026-08-22
 ---
 
 [textmode.export.js](../index.md) / VideoBitratePreset
@@ -15,12 +15,12 @@ lastModified: 2026-08-17
 # Type Alias: VideoBitratePreset
 
 ```ts
-type VideoBitratePreset = "low" | "medium" | "high";
+type VideoBitratePreset = "low" | "medium" | "high" | "ultra";
 ```
 
 Subjective bitrate preset used when an exact bits-per-second value is not supplied.
 
-Higher presets produce larger files with more detail. Each preset maps to a fixed bits-per-pixel budget
-(bits per pixel per second), so a given preset resolves to the same bitrate regardless of the export
-frame rate. For exact control, pass a numeric `bitrate` value in bits per second instead.
+Higher presets request higher constant perceptual quality from Mediabunny. The `ultra` preset requests quantizer
+zero with a frame-rate-aware bitrate fallback and should be described as near-lossless, never mathematically
+lossless. For exact bitrate control, pass a numeric `bitrate` value in bits per second instead.
 
