@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: layering
 kind: Class
-lastModified: 2026-08-17
+lastModified: 2026-08-22
 hasConstructor: false
 ---
 
@@ -74,6 +74,7 @@ Set a layer's drawing callbacks and control whether it is visible.
 | ------ | ------ |
 | [draw](TextmodeLayer/methods/draw.md) | Set this layer's draw callback. |
 | [hide](TextmodeLayer/methods/hide.md) | Hide this layer from rendering. |
+| [isVisible](TextmodeLayer/methods/isVisible.md) | Check whether this layer is visible for rendering. |
 | [postDraw](TextmodeLayer/methods/postDraw.md) | Set this layer's post-draw callback. |
 | [show](TextmodeLayer/methods/show.md) | Show this layer for rendering. |
 

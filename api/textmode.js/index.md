@@ -6,7 +6,7 @@ description: textmode.js is a lightweight creative coding library for creating r
 category: API Reference
 api: true
 kind: Project
-lastModified: 2026-08-17
+lastModified: 2026-08-22
 ---
 
 # textmode.js
@@ -102,6 +102,7 @@ Define the cell-based visual language of a sketch.
 | [color](namespaces/color/index.md) | Color objects, color modes, and types. |
 | [TextmodeGlyphRamp](classes/TextmodeGlyphRamp.md) | Immutable character sequence for mapping numbers to glyphs. |
 | [TextmodeGrid](classes/TextmodeGrid.md) | Grid used by a textmode layer. |
+| [GridPosition](interfaces/GridPosition.md) | Position on a grid, typically in center-based coordinates. |
 
 ## Interaction
 

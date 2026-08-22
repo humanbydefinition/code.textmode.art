@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: loading
 kind: Class
-lastModified: 2026-08-17
+lastModified: 2026-08-22
 hasConstructor: false
 ---
 

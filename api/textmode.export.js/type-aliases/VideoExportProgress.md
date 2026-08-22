@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-08-17
+lastModified: 2026-08-22
 ---
 
 [textmode.export.js](../index.md) / VideoExportProgress
@@ -22,6 +22,17 @@ Progress information emitted during the video export process.
 
 
 ## Properties
+
+### estimatedBytes?
+
+```ts
+optional estimatedBytes?: number;
+```
+
+Conservative output-size estimate in bytes, when available.
+
+
+***
 
 ### frame?
 
@@ -74,6 +85,17 @@ optional progress?: number;
 ```
 
 Export completion ratio between `0` and `1`.
+
+
+***
+
+### rateControl?
+
+```ts
+optional rateControl?: "quantizer" | "bitrate-fallback" | "bitrate";
+```
+
+The rate-control path selected by the browser, when known.
 
 
 ***

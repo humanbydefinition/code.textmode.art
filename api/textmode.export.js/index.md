@@ -7,7 +7,7 @@ category: API Reference
 api: true
 kind: Project
 ecosystem: textmode.js
-lastModified: 2026-08-17
+lastModified: 2026-08-22
 ---
 
 # textmode.export.js
@@ -64,6 +64,12 @@ the [Exporting guide](/docs/exporting).
 | [LayerExportOptions](interfaces/LayerExportOptions.md) | Shared option for exporters that read layer framebuffer data. |
 | [SVGExportOptions](type-aliases/SVGExportOptions.md) | Options for exporting the textmode content to SVG format. |
 | [TXTExportOptions](type-aliases/TXTExportOptions.md) | Options for exporting the textmode content to TXT format. |
+
+## Other
+
+| Type Alias | Description |
+| ------ | ------ |
+| [VideoContentHint](type-aliases/VideoContentHint.md) | Hint for the encoder's content-aware rate control. |
 
 ## Overlay
 

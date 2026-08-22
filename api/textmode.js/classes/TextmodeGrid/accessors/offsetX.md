@@ -7,7 +7,7 @@ category: Accessors
 api: true
 owner: TextmodeGrid
 kind: Accessor
-lastModified: 2026-08-17
+lastModified: 2026-08-22
 ---
 
 [textmode.js](../../../index.md) / [TextmodeGrid](../../TextmodeGrid.md) / offsetX

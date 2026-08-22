@@ -7,7 +7,7 @@ category: Functions
 api: true
 kind: Function
 ecosystem: textmode.js
-lastModified: 2026-08-17
+lastModified: 2026-08-22
 ---
 
 [textmode.synth.js](../index.md) / gradient

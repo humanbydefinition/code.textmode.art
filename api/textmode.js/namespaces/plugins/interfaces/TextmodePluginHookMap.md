@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 namespace: plugins
 kind: Interface
-lastModified: 2026-08-17
+lastModified: 2026-08-22
 isInterface: true
 ---
 
@@ -23,6 +23,7 @@ Typed callback map used by [TextmodePluginContext.on](TextmodePluginContext.md#o
 | Property | Type | Description |
 | ------ | ------ | ------ |
 | <a id="property-compositeoutput"></a> `compositeOutput` | (`output`) => `void` \| [`TextmodeFramebuffer`](../../../classes/TextmodeFramebuffer.md) | Replaces composited scene output. **See** [API reference](https://code.textmode.art/api/textmode.js/namespaces/plugins/interfaces/TextmodePluginHookMap#property-compositeoutput) |
+| <a id="property-framestart"></a> `frameStart` | () => `void` | Runs once at the start of every rendered user frame, before any `preDraw` hook. **See** [API reference](https://code.textmode.art/api/textmode.js/namespaces/plugins/interfaces/TextmodePluginHookMap#property-framestart) |
 | <a id="property-layercreated"></a> `layerCreated` | (`layer`) => `void` | Runs for existing and future layers. **See** [API reference](https://code.textmode.art/api/textmode.js/namespaces/plugins/interfaces/TextmodePluginHookMap#property-layercreated) |
 | <a id="property-layerdisposed"></a> `layerDisposed` | (`layer`) => `void` | Runs immediately before a plugin-visible base or user layer is disposed, including during host destruction. The layer's plugin extensions remain available while this callback runs. **See** [API reference](https://code.textmode.art/api/textmode.js/namespaces/plugins/interfaces/TextmodePluginHookMap#property-layerdisposed) |
 | <a id="property-layeroutput"></a> `layerOutput` | (`context`) => `void` \| [`TextmodeFramebuffer`](../../../classes/TextmodeFramebuffer.md) | Replaces resolved or finalized layer output. **See** [API reference](https://code.textmode.art/api/textmode.js/namespaces/plugins/interfaces/TextmodePluginHookMap#property-layeroutput) |
