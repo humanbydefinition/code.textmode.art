@@ -15,13 +15,18 @@ description: Combine Three.js 3D rendering with textmode.js to create real-time 
     <title>textmode | Three.js</title>
 
     <style>
+      html,
       body {
+        width: 100%;
+        height: 100%;
         margin: 0;
-        padding: 0;
+        overflow: hidden;
       }
 
       canvas {
         display: block;
+        width: 100%;
+        height: 100%;
       }
     </style>
   </head>
@@ -56,7 +61,7 @@ async function setup() {
   scene.background = new THREE.Color(0x01030a);
   
   // Create camera
-  camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 100);
+  camera = new THREE.PerspectiveCamera(50, 1, 0.1, 100);
   camera.position.set(0, 0, 5.6);
   
   // Preserve the host frame so textmode.js can sample it independently.
@@ -66,8 +71,8 @@ async function setup() {
   });
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.35;
-  renderer.setSize(window.innerWidth, window.innerHeight);
   document.body.appendChild(renderer.domElement);
+  resizeRendererToDisplaySize();
   
   scene.add(new THREE.AmbientLight(0x203050, 1.4));
 
@@ -146,6 +151,8 @@ async function setup() {
 function animate(timestamp) {
   const time = timestamp * 0.001;
 
+  resizeRendererToDisplaySize();
+
   orbitalRig.rotation.x = -0.22 + Math.sin(time * 0.4) * 0.08;
   orbitalRig.rotation.y = time * 0.22;
   rings[0].rotation.z = time * 0.12;
@@ -159,14 +166,18 @@ function animate(timestamp) {
   renderer.render(scene, camera);
 }
 
-// Handle window resize
-function onWindowResize() {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize(window.innerWidth, window.innerHeight);
-}
+function resizeRendererToDisplaySize() {
+  const canvas = renderer.domElement;
+  const width = canvas.clientWidth;
+  const height = canvas.clientHeight;
+  const needsResize = canvas.width !== width || canvas.height !== height;
 
-window.addEventListener('resize', onWindowResize);
+  if (needsResize) {
+    renderer.setSize(width, height, false);
+    camera.aspect = width / height;
+    camera.updateProjectionMatrix();
+  }
+}
 
 // Initialize everything
 setup();
