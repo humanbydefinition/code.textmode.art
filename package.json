@@ -38,6 +38,7 @@
     "contributors:render": "node scripts/contributors.mjs render",
     "contributors:check": "node scripts/contributors.mjs check",
     "test:contributors": "node --test scripts/contributors.test.mjs",
+    "test:contributors-composable": "node --test scripts/contributors-composable.test.mjs",
     "check:contributors": "npm run test:contributors && npm run contributors:check"
   },
   "dependencies": {
