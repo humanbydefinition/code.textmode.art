@@ -115,18 +115,29 @@ export async function transformApiSandpackExamples({ mode = 'write', root = ROOT
   let skipped = 0
   let liveExamples = 0
 
-  for (const file of files) {
+  const results = await Promise.all(files.map(async (file) => {
     const relativePath = slash(path.relative(root, file))
     const profile = getApiSandboxProfile(relativePath)
 
     if (!profile || !isTargetApiPage(relativePath)) {
-      continue
+      return null
     }
 
     const source = await fs.readFile(file, 'utf8')
     const output = transformMarkdown(source, relativePath)
     const validation = validateLiveSandboxBlocks(output.markdown)
 
+    if (output.changed && mode === 'write') {
+      await fs.writeFile(file, output.markdown)
+    }
+
+    return { relativePath, output, validation }
+  }))
+
+  for (const result of results) {
+    if (!result) continue
+
+    const { relativePath, output, validation } = result
     mergeSkippedReasons(skippedReasons, output.skippedReasons)
 
     if (!validation.valid) {
@@ -138,10 +149,6 @@ export async function transformApiSandpackExamples({ mode = 'write', root = ROOT
     if (output.changed) {
       changed.push(relativePath)
       transformed += 1
-
-      if (mode === 'write') {
-        await fs.writeFile(file, output.markdown)
-      }
     } else if (output.skipped) {
       skipped += 1
     }
