@@ -47,6 +47,8 @@ const API_SANDBOX_PROFILES = {
   },
 }
 
+const API_SANDBOX_PROFILE_VALUES = Object.values(API_SANDBOX_PROFILES)
+
 const KNOWN_ECOSYSTEM_IMPORTS = new Set([
   'textmode.js',
   'textmode.js/plugins',
@@ -413,13 +415,13 @@ function isTargetApiPage(relativePath) {
 }
 
 function getApiSandboxProfile(relativePath) {
-  return Object.values(API_SANDBOX_PROFILES).find((profile) => (
+  return API_SANDBOX_PROFILE_VALUES.find((profile) => (
     relativePath === profile.apiRoot || relativePath.startsWith(`${profile.apiRoot}/`)
   ))
 }
 
 function getProfileById(profileId) {
-  return Object.values(API_SANDBOX_PROFILES).find((profile) => profile.id === profileId)
+  return API_SANDBOX_PROFILE_VALUES.find((profile) => profile.id === profileId)
 }
 
 async function collectApiMarkdownFiles(root) {
