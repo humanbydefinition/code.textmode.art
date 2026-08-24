@@ -2,12 +2,12 @@
 layout: doc
 editLink: false
 title: VideoExportPhase
-description: More granular phase information for progress UIs that need to distinguish setup, rendering, and finalization.
+description: Detailed phase information for progress UIs that distinguish capability probing, frame capture, and output.
 category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-08-22
+lastModified: 2026-08-24
 ---
 
 [textmode.export.js](../index.md) / VideoExportPhase
@@ -25,7 +25,9 @@ type VideoExportPhase =
   | "finalizing";
 ```
 
-More granular phase information for progress UIs that need to distinguish setup, rendering, and finalization.
+Detailed phase information for progress UIs that distinguish capability probing, frame capture, and output.
 
-`rendering` is retained for 1.5.x compatibility. Current deterministic video capture emits `capturing`.
+Current exports emit `probing`, `capturing`, and either `writing` for streamed file-system output or `finalizing`
+for buffered output. `rendering`, `encoding`, and `draining` remain available for compatibility with older progress
+producers.
 

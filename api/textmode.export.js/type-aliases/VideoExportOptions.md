@@ -2,12 +2,12 @@
 layout: doc
 editLink: false
 title: VideoExportOptions
-description: Options for exporting the textmode content to video format.
+description: Options for capturing deterministic textmode frames as MP4 or WebM video.
 category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-08-22
+lastModified: 2026-08-24
 ---
 
 [textmode.export.js](../index.md) / VideoExportOptions
@@ -18,61 +18,10 @@ lastModified: 2026-08-22
 type VideoExportOptions = object;
 ```
 
-Options for exporting the textmode content to video format.
+Options for capturing deterministic textmode frames as MP4 or WebM video.
 
 
 ## Properties
-
-### allowLargeInMemory?
-
-```ts
-optional allowLargeInMemory?: boolean;
-```
-
-Allows `toVideoBlob()` to retain its in-memory contract above the safe 100 MB default.
-
-
-***
-
-### bitrate?
-
-```ts
-optional bitrate?: number | VideoBitratePreset;
-```
-
-Target bitrate in bits per second or a quality preset. Defaults to `'medium'`.
-
-String values request constant-quality encoding through Mediabunny. `low`, `medium`, and `high` map to the
-upstream `medium`, `high`, and `very-high` quality levels; `ultra` requests quantizer zero and may create very
-large files. Numeric values remain exact bits-per-second targets and are wrapped in Mediabunny `Quality`.
-
-
-***
-
-### bitrateMode?
-
-```ts
-optional bitrateMode?: VideoBitrateMode;
-```
-
-Bitrate allocation mode for numeric bitrates and quality fallback paths. Defaults to `'variable'`.
-
-Use `'variable'` for most exports so simple frames can compress efficiently and complex frames can receive more
-bits. Use `'constant'` only when a steadier data rate is more important than compression efficiency.
-
-
-***
-
-### contentHint?
-
-```ts
-optional contentHint?: VideoContentHint;
-```
-
-Content hint passed to the native video encoder. Defaults to `'text'`.
-
-
-***
 
 ### debugLogging?
 
@@ -81,6 +30,20 @@ optional debugLogging?: boolean;
 ```
 
 Enables verbose logging. Defaults to `false`.
+
+
+***
+
+### destination?
+
+```ts
+optional destination?: VideoSaveDestination;
+```
+
+Save destination used by `saveVideo()`. Defaults to `'download'`.
+
+`'file-system'` opens a save picker and streams directly to the selected file when the File System Access API is
+available. `toVideoBlob()` always returns an in-memory blob and does not use this setting.
 
 
 ***
@@ -158,20 +121,6 @@ Use `0` to request every frame as a key frame.
 
 ***
 
-### latencyMode?
-
-```ts
-optional latencyMode?: VideoLatencyMode;
-```
-
-Encoder latency mode. Defaults to `'quality'`.
-
-Use `'quality'` for deterministic exports; it prioritizes completed output and avoids dropped frames. Use
-`'realtime'` only for low-latency use cases where dropped frames are acceptable.
-
-
-***
-
 ### onProgress?
 
 ```ts
@@ -215,6 +164,20 @@ Prepares external media before each deterministic frame is redrawn.
 
 ***
 
+### quality?
+
+```ts
+optional quality?: VideoQuality;
+```
+
+Video quality policy. Defaults to `'medium'`.
+
+Named levels map one-to-one to Mediabunny's qualitative levels and produce content-dependent file sizes. Use the
+object form to request a positive target bitrate in bits per second and an optional bitrate mode.
+
+
+***
+
 ### signal?
 
 ```ts
@@ -232,5 +195,5 @@ Abort signal for cancelling an in-progress export.
 optional transparent?: boolean;
 ```
 
-When true, attempts to preserve alpha data in WebM recordings. MP4 exports reject this option.
+When `true`, attempts to preserve alpha data in WebM recordings. MP4 exports reject this option.
 

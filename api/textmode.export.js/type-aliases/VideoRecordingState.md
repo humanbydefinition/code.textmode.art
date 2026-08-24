@@ -2,12 +2,12 @@
 layout: doc
 editLink: false
 title: VideoRecordingState
-description: Lifecycle state reported while a video export is being prepared, recorded, encoded, or completed.
+description: High-level lifecycle state reported while a video export is captured, encoded, or completed.
 category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-08-22
+lastModified: 2026-08-24
 ---
 
 [textmode.export.js](../index.md) / VideoRecordingState
@@ -18,5 +18,5 @@ lastModified: 2026-08-22
 type VideoRecordingState = "idle" | "recording" | "encoding" | "completed" | "error";
 ```
 
-Lifecycle state reported while a video export is being prepared, recorded, encoded, or completed.
+High-level lifecycle state reported while a video export is captured, encoded, or completed.
 

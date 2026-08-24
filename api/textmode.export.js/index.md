@@ -7,7 +7,7 @@ category: API Reference
 api: true
 kind: Project
 ecosystem: textmode.js
-lastModified: 2026-08-22
+lastModified: 2026-08-24
 ---
 
 # textmode.export.js
@@ -16,39 +16,72 @@ Export finished textmode.js artworks without leaving the sketch.
 
 ## Choose an output
 
-Use **canvas capture** for the exact image on screen: PNG, JPEG, WebP, GIF,
-or video preserve compositing, filters, shaders, and post-processing. Use
-**layer data export** when the artwork should stay editable or machine
-readable: TXT, SVG, and JSON read from the selected layer, while JSON can
-also describe the full layer stack.
+Use **canvas capture** for the rendered image on screen: PNG, JPEG, WebP,
+GIF, and video preserve compositing, filters, shaders, and post-processing.
+Use **layer data export** when the artwork should stay editable or machine
+readable: TXT and SVG read from the selected layer, while JSON can describe
+either the selected layer or the full layer stack.
 
 Start with [ExportPlugin](variables/ExportPlugin.md), then call the helpers added to your sketch
 or use the built-in export overlay. For recipes and format trade-offs, read
 the [Exporting guide](/docs/exporting).
 
-## Animation export
+## Workflow
 
-| Type Alias | Description |
+Install the plugin and use the export helpers added to a textmode.js sketch.
+
+| Name | Description |
 | ------ | ------ |
-| [GIFExportOptions](type-aliases/GIFExportOptions.md) | Options for exporting the textmode content to GIF format. |
-| [GIFExportProgress](type-aliases/GIFExportProgress.md) | Progress information emitted during the GIF export process. |
-| [VideoBitrateMode](type-aliases/VideoBitrateMode.md) | Bitrate allocation strategy for the native encoder. |
-| [VideoBitratePreset](type-aliases/VideoBitratePreset.md) | Subjective bitrate preset used when an exact bits-per-second value is not supplied. |
-| [VideoExportFormat](type-aliases/VideoExportFormat.md) | Video container format written by `saveVideo`. |
-| [VideoExportOptions](type-aliases/VideoExportOptions.md) | Options for exporting the textmode content to video format. |
-| [VideoExportPhase](type-aliases/VideoExportPhase.md) | More granular phase information for progress UIs that need to distinguish setup, rendering, and finalization. |
-| [VideoExportProgress](type-aliases/VideoExportProgress.md) | Progress information emitted during the video export process. |
-| [VideoHardwareAcceleration](type-aliases/VideoHardwareAcceleration.md) | WebCodecs hardware acceleration preference. |
-| [VideoLatencyMode](type-aliases/VideoLatencyMode.md) | Encoder scheduling mode. |
-| [VideoRecordingState](type-aliases/VideoRecordingState.md) | Lifecycle state reported while a video export is being prepared, recorded, encoded, or completed. |
+| [TextmodeExportAPI](interfaces/TextmodeExportAPI.md) | Runtime export helpers that `ExportPlugin` attaches to the `Textmodifier` instance. |
+| [ExportPlugin](variables/ExportPlugin.md) | Default export plugin instance for the standard textmode.js workflow. |
 
 ## Canvas capture
+
+Export a still image from the rendered canvas.
 
 | Type Alias | Description |
 | ------ | ------ |
 | [ImageExportOptions](type-aliases/ImageExportOptions.md) | Options for exporting the textmode content to image format. |
 
+## GIF export
+
+Capture deterministic frames and encode an animated GIF.
+
+| Type Alias | Description |
+| ------ | ------ |
+| [GIFExportOptions](type-aliases/GIFExportOptions.md) | Options for capturing deterministic textmode frames as an animated GIF. |
+| [GIFExportProgress](type-aliases/GIFExportProgress.md) | Progress information emitted while deterministic frames are captured and encoded as an animated GIF. |
+
+## Video export
+
+Capture deterministic frames and encode MP4 or WebM video with Mediabunny.
+
+| Type Alias | Description |
+| ------ | ------ |
+| [VideoBitrateMode](type-aliases/VideoBitrateMode.md) | Bitrate allocation strategy for the native encoder. |
+| [VideoExportFormat](type-aliases/VideoExportFormat.md) | Video container format produced by `saveVideo()` and `toVideoBlob()`. |
+| [VideoExportOptions](type-aliases/VideoExportOptions.md) | Options for capturing deterministic textmode frames as MP4 or WebM video. |
+| [VideoExportPhase](type-aliases/VideoExportPhase.md) | Detailed phase information for progress UIs that distinguish capability probing, frame capture, and output. |
+| [VideoExportProgress](type-aliases/VideoExportProgress.md) | Progress information emitted while a deterministic video is probed, captured, and written. |
+| [VideoHardwareAcceleration](type-aliases/VideoHardwareAcceleration.md) | WebCodecs hardware acceleration preference. |
+| [VideoQuality](type-aliases/VideoQuality.md) | Video compression policy passed to Mediabunny. |
+| [VideoQualityLevel](type-aliases/VideoQualityLevel.md) | Qualitative video quality level matching Mediabunny's five native levels. |
+| [VideoRecordingState](type-aliases/VideoRecordingState.md) | High-level lifecycle state reported while a video export is captured, encoded, or completed. |
+| [VideoSaveDestination](type-aliases/VideoSaveDestination.md) | Destination policy used by `saveVideo()`. |
+
+## Layer data export
+
+Export selected-layer text or vector data as TXT or SVG.
+
+| Name | Description |
+| ------ | ------ |
+| [LayerExportOptions](interfaces/LayerExportOptions.md) | Shared option for exporters that read layer framebuffer data. |
+| [SVGExportOptions](type-aliases/SVGExportOptions.md) | Options for exporting the textmode content to SVG format. |
+| [TXTExportOptions](type-aliases/TXTExportOptions.md) | Options for exporting the textmode content to TXT format. |
+
 ## JSON document data
+
+Export selected-layer or full-stack document data as JSON.
 
 | Type Alias | Description |
 | ------ | ------ |
@@ -57,21 +90,9 @@ the [Exporting guide](/docs/exporting).
 | [JSONExportTarget](type-aliases/JSONExportTarget.md) | Target scope for JSON export. |
 | [TextmodeDocumentJSON](type-aliases/TextmodeDocumentJSON.md) | JSON document exported by the JSON exporter. |
 
-## Layer data export
-
-| Name | Description |
-| ------ | ------ |
-| [LayerExportOptions](interfaces/LayerExportOptions.md) | Shared option for exporters that read layer framebuffer data. |
-| [SVGExportOptions](type-aliases/SVGExportOptions.md) | Options for exporting the textmode content to SVG format. |
-| [TXTExportOptions](type-aliases/TXTExportOptions.md) | Options for exporting the textmode content to TXT format. |
-
-## Other
-
-| Type Alias | Description |
-| ------ | ------ |
-| [VideoContentHint](type-aliases/VideoContentHint.md) | Hint for the encoder's content-aware rate control. |
-
 ## Overlay
+
+Configure and control the built-in export overlay.
 
 | Name | Description |
 | ------ | ------ |
@@ -86,10 +107,3 @@ the [Exporting guide](/docs/exporting).
 | [SVGOverlayDefaults](type-aliases/SVGOverlayDefaults.md) | Default SVG export fields controlled by the export overlay. |
 | [TXTOverlayDefaults](type-aliases/TXTOverlayDefaults.md) | Default TXT export fields controlled by the export overlay. |
 | [VideoOverlayDefaults](type-aliases/VideoOverlayDefaults.md) | Default video export fields controlled by the export overlay. |
-
-## Workflow
-
-| Name | Description |
-| ------ | ------ |
-| [TextmodeExportAPI](interfaces/TextmodeExportAPI.md) | Runtime export helpers that `ExportPlugin` attaches to the `Textmodifier` instance. |
-| [ExportPlugin](variables/ExportPlugin.md) | Default export plugin instance for the standard textmode.js workflow. |

@@ -2,12 +2,12 @@
 layout: doc
 editLink: false
 title: GIFExportOptions
-description: Options for exporting the textmode content to GIF format.
+description: Options for capturing deterministic textmode frames as an animated GIF.
 category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-08-22
+lastModified: 2026-08-24
 ---
 
 [textmode.export.js](../index.md) / GIFExportOptions
@@ -18,7 +18,7 @@ lastModified: 2026-08-22
 type GIFExportOptions = object;
 ```
 
-Options for exporting the textmode content to GIF format.
+Options for capturing deterministic textmode frames as an animated GIF.
 
 
 ## Properties
