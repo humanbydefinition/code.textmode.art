@@ -2,12 +2,12 @@
 layout: doc
 editLink: false
 title: GIFExportProgress
-description: Progress information emitted during the GIF export process.
+description: Progress information emitted while deterministic frames are captured and encoded as an animated GIF.
 category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-08-22
+lastModified: 2026-08-24
 ---
 
 [textmode.export.js](../index.md) / GIFExportProgress
@@ -18,7 +18,7 @@ lastModified: 2026-08-22
 type GIFExportProgress = object;
 ```
 
-Progress information emitted during the GIF export process.
+Progress information emitted while deterministic frames are captured and encoded as an animated GIF.
 
 
 ## Properties
@@ -29,7 +29,7 @@ Progress information emitted during the GIF export process.
 optional frameIndex?: number;
 ```
 
-Number of frames that have been recorded so far.
+Number of frames captured so far.
 
 
 ***
@@ -51,7 +51,7 @@ Optional status message for UI consumption.
 state: "idle" | "recording" | "encoding" | "completed" | "error";
 ```
 
-Current state of the recording process.
+Current GIF capture or encoding state.
 
 
 ***

@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-08-22
+lastModified: 2026-08-24
 ---
 
 [textmode.export.js](../index.md) / VideoOverlayDefaults
@@ -19,18 +19,11 @@ type VideoOverlayDefaults = Pick<VideoExportOptions,
   | "format"
   | "frameCount"
   | "frameRate"
-  | "bitrateMode"
-  | "latencyMode"
+  | "quality"
   | "hardwareAcceleration"
   | "keyFrameInterval"
-  | "transparent"> & object;
+| "transparent">;
 ```
 
 Default video export fields controlled by the export overlay.
-
-## Type Declaration
-
-| Name | Type |
-| ------ | ------ |
-| `bitrate?` | [`VideoBitratePreset`](VideoBitratePreset.md) |
 

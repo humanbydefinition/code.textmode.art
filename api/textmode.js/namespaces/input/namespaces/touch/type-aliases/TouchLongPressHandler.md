@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 namespace: input.touch
 kind: TypeAlias
-lastModified: 2026-08-22
+lastModified: 2026-08-24
 ---
 
 [textmode.js](../../../../../index.md) / [input](../../../index.md) / [touch](../index.md) / TouchLongPressHandler

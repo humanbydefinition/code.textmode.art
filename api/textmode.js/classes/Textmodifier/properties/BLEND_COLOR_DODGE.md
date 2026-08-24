@@ -7,7 +7,7 @@ category: Properties
 api: true
 owner: Textmodifier
 kind: Property
-lastModified: 2026-08-22
+lastModified: 2026-08-24
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / BLEND\_COLOR\_DODGE

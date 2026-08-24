@@ -70,9 +70,9 @@ Use narrower test scripts from the target `package.json` while developing. Run `
 - Document every new asset's source, author, license, redistribution permission, and required attribution.
 - Do not hand-edit generated API Markdown or commit generated exports unless the repository explicitly requires them.
 
-Library commits use [Conventional Commits](https://www.conventionalcommits.org/). All libraries share the same commit
-rules through `@textmode/commitlint-config` and an automatically installed `commit-msg` hook, so no per-repository
-commit configuration is needed.
+Library commits use [Conventional Commits](https://www.conventionalcommits.org/). Shared repositories use the
+`@textmode/release` commitlint preset and its managed `commit-msg` hook, so no per-repository commit configuration is
+needed.
 
 ## Open the pull request
 

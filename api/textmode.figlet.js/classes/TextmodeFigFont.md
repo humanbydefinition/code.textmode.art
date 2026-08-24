@@ -7,7 +7,7 @@ category: Classes
 api: true
 kind: Class
 ecosystem: textmode.js
-lastModified: 2026-08-22
+lastModified: 2026-08-24
 hasConstructor: false
 ---
 
@@ -17,10 +17,6 @@ hasConstructor: false
 
 Parsed FIGfont resource used by `figText()` rendering.
 
-
-## Extends
-
-- `Disposable`
 
 ## Accessors
 
@@ -40,8 +36,7 @@ Parsed FIGfont resource used by `figText()` rendering.
 
 | Method | Description |
 | ------ | ------ |
-| [\_addOnDispose](TextmodeFigFont/methods/addOnDispose.md) | Register a callback to run when the resource is disposed. |
-| [dispose](TextmodeFigFont/methods/dispose.md) | Dispose the resource and invoke all registered callbacks. |
+| [dispose](TextmodeFigFont/methods/dispose.md) | Dispose resources associated with this FIGfont. |
 | [getCharacter](TextmodeFigFont/methods/getCharacter.md) | Look up a FIGcharacter by Unicode code point or by the first character in a string. |
 | [measureText](TextmodeFigFont/methods/measureText.md) | Measure rendered FIGlet text without drawing it. |
 | [planText](TextmodeFigFont/methods/planText.md) | Plan a string into positioned FIGlet cells and logical lines. |

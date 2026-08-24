@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-08-22
+lastModified: 2026-08-24
 isInterface: true
 ---
 
@@ -309,15 +309,29 @@ Captures a video and saves it to disk *(`'mp4'` by default)*.
 #### Example
 
 ```ts
-await t.saveVideo({ frameCount: 240, frameRate: 60, filename: 'capture' });
+// Mediabunny's qualitative quality levels produce content-dependent file sizes.
 await t.saveVideo({
     format: 'webm',
-    bitrate: 'high',
-    bitrateMode: 'variable',
-    latencyMode: 'quality',
-    keyFrameInterval: 2,
+    quality: 'very-high',
     frameCount: 240,
-    filename: 'capture',
+    frameRate: 60,
+    filename: 'high-quality-capture',
+});
+
+// Request a target bitrate and rate-control mode.
+await t.saveVideo({
+    quality: { bitrate: 8_000_000, bitrateMode: 'variable' },
+    frameCount: 240,
+    frameRate: 60,
+    filename: 'target-bitrate-capture',
+});
+
+// Stream directly to a user-selected file when the browser supports it.
+await t.saveVideo({
+    destination: 'file-system',
+    quality: 'high',
+    frameCount: 240,
+    frameRate: 60,
 });
 ```
 
@@ -502,7 +516,9 @@ const svg = t.toSVG({ layer: t.layers.base, drawMode: 'stroke', strokeWidth: 1.5
 toVideoBlob(options?): Promise<Blob>;
 ```
 
-Generates a video blob without downloading it.
+Generates an in-memory video blob without downloading it.
+
+`destination` is only used by [saveVideo](#savevideo); this method always buffers and returns a `Blob`.
 
 #### Parameters
 

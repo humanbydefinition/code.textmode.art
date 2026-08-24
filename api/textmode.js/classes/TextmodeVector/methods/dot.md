@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: TextmodeVector
 kind: Method
-lastModified: 2026-08-22
+lastModified: 2026-08-24
 ---
 
 [textmode.js](../../../index.md) / [TextmodeVector](../../TextmodeVector.md) / dot

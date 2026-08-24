@@ -6,7 +6,7 @@ description: Values accepted by custom shader uniforms.
 category: Type Aliases
 api: true
 kind: TypeAlias
-lastModified: 2026-08-22
+lastModified: 2026-08-24
 ---
 
 [textmode.js](../index.md) / TextmodeUniformValue

@@ -2,12 +2,12 @@
 layout: doc
 editLink: false
 title: VideoExportFormat
-description: Video container format written by saveVideo.
+description: Video container format produced by saveVideo() and toVideoBlob().
 category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-08-22
+lastModified: 2026-08-24
 ---
 
 [textmode.export.js](../index.md) / VideoExportFormat
@@ -18,5 +18,8 @@ lastModified: 2026-08-22
 type VideoExportFormat = "webm" | "mp4";
 ```
 
-Video container format written by `saveVideo`.
+Video container format produced by `saveVideo()` and `toVideoBlob()`.
+
+MP4 uses AVC/H.264 and requires even coded dimensions. WebM selects VP9 when available and falls back to VP8; it
+is the only format that can be requested with transparency.
 

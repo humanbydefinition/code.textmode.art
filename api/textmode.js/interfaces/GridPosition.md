@@ -6,7 +6,7 @@ description: Position on a grid, typically in center-based coordinates.
 category: Interfaces
 api: true
 kind: Interface
-lastModified: 2026-08-22
+lastModified: 2026-08-24
 isInterface: true
 ---
 

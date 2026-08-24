@@ -2,12 +2,12 @@
 layout: doc
 editLink: false
 title: VideoExportProgress
-description: Progress information emitted during the video export process.
+description: Progress information emitted while a deterministic video is probed, captured, and written.
 category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-08-22
+lastModified: 2026-08-24
 ---
 
 [textmode.export.js](../index.md) / VideoExportProgress
@@ -18,18 +18,40 @@ lastModified: 2026-08-22
 type VideoExportProgress = object;
 ```
 
-Progress information emitted during the video export process.
+Progress information emitted while a deterministic video is probed, captured, and written.
 
 
 ## Properties
 
-### estimatedBytes?
+### codec?
 
 ```ts
-optional estimatedBytes?: number;
+optional codec?: VideoCodec;
 ```
 
-Conservative output-size estimate in bytes, when available.
+Effective codec family selected after capability probing (`avc`, `vp9`, or `vp8`).
+
+
+***
+
+### codedHeight?
+
+```ts
+optional codedHeight?: number;
+```
+
+Effective coded height in pixels.
+
+
+***
+
+### codedWidth?
+
+```ts
+optional codedWidth?: number;
+```
+
+Effective coded width in pixels.
 
 
 ***
@@ -51,7 +73,18 @@ Alias for [frameIndex](#frameindex). Prefer this field in new code.
 optional frameIndex?: number;
 ```
 
-Number of frames that have been recorded so far.
+Number of frames captured so far.
+
+
+***
+
+### frameRate?
+
+```ts
+optional frameRate?: number;
+```
+
+Exact output frame rate passed to the muxer.
 
 
 ***
@@ -73,7 +106,7 @@ Optional status message for UI consumption.
 optional phase?: VideoExportPhase;
 ```
 
-Current export phase for newer progress UIs.
+Current detailed phase. See [VideoExportPhase](VideoExportPhase.md) for current and compatibility-only values.
 
 
 ***
@@ -84,18 +117,9 @@ Current export phase for newer progress UIs.
 optional progress?: number;
 ```
 
-Export completion ratio between `0` and `1`.
+Normalized frame-capture completion ratio between `0` and `1`.
 
-
-***
-
-### rateControl?
-
-```ts
-optional rateControl?: "quantizer" | "bitrate-fallback" | "bitrate";
-```
-
-The rate-control path selected by the browser, when known.
+Final writing or muxing may still be in progress when this value reaches `1`.
 
 
 ***
@@ -106,7 +130,7 @@ The rate-control path selected by the browser, when known.
 state: VideoRecordingState;
 ```
 
-Current state of the recording process.
+Current high-level export state.
 
 
 ***

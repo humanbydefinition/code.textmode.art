@@ -7,7 +7,7 @@ category: Accessors
 api: true
 owner: Textmodifier
 kind: Accessor
-lastModified: 2026-08-22
+lastModified: 2026-08-24
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / canvas
@@ -21,6 +21,10 @@ get canvas(): HTMLCanvasElement;
 ```
 
 Canvas containing the rendered output.
+
+`width` and `height` on this element are backing-store pixels. Exporters
+that promise logical dimensions must divide them by [pixelDensity](../methods/pixelDensity.md)
+before applying their own output scale.
 
 ### Returns
 
