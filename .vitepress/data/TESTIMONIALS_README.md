@@ -93,4 +93,4 @@ Search for testimonials using:
 
 ## Contributing
 
-Found a great testimonial in the wild? Submit a PR adding it to this file, or let us know in the Discord!
+Found a great testimonial in the wild? Submit a PR adding it to this file!

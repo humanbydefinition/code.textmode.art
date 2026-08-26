@@ -98,6 +98,5 @@ you may also need a companion PR updating the canonical
 If you're unsure which route your sketch belongs to:
 
 - Open an [issue](https://github.com/humanbydefinition/code.textmode.art/issues)
-- Join the [Discord community](https://discord.gg/sjrw8QXNks)
 
 Thank you for contributing to the `textmode.js` documentation ecosystem!

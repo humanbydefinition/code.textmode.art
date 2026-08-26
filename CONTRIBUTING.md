@@ -23,6 +23,5 @@ also run `npm run check:contributors`.
 Read the [Code of Conduct](CODE_OF_CONDUCT.md). Report vulnerabilities privately by following
 [SECURITY.md](SECURITY.md), not through a public issue.
 
-Need help? [Open an issue](https://github.com/humanbydefinition/code.textmode.art/issues),
-[start a Discussion](https://github.com/humanbydefinition/code.textmode.art/discussions), or
-[join Discord](https://discord.gg/sjrw8QXNks).
+Need help? [Open an issue](https://github.com/humanbydefinition/code.textmode.art/issues) or
+[start a Discussion](https://github.com/humanbydefinition/code.textmode.art/discussions).

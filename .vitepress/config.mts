@@ -56,7 +56,6 @@ const themeConfig = {
 
   socialLinks: [
     { icon: 'github', link: 'https://github.com/humanbydefinition/textmode.js' },
-    { icon: 'discord', link: 'https://discord.gg/sjrw8QXNks' },
   ],
 }
 
