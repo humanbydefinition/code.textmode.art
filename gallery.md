@@ -23,6 +23,5 @@ The gallery is just getting started! As more creators share their work, this spa
 
 1. **Create a pull request** - [Add your project to gallery.json](https://github.com/humanbydefinition/code.textmode.art/edit/main/.vitepress/data/gallery.json) directly
 2. **Tag your work** - Share on social media with `#textmodejs`
-3. **Join Discord** - Share your work in our [community server](https://discord.gg/sjrw8QXNks) and we'll help you submit it
 
 We review submissions regularly and love featuring creative uses of the library!

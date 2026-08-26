@@ -9,6 +9,3 @@ contact_links:
     - name: textmode.js core repository
       url: https://github.com/humanbydefinition/textmode.js/issues
       about: Report core library and rendering problems in the core repository.
-    - name: Discord
-      url: https://discord.gg/sjrw8QXNks
-      about: Ask usage questions or discuss documentation ideas before filing an issue.

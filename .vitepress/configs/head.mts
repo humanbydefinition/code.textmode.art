@@ -183,8 +183,7 @@ export const transformHead = ({ pageData }: TransformContext): HeadConfig[] => {
           "url": "https://code.textmode.art/",
           "logo": "https://code.textmode.art/svg/doc_logo.svg",
           "sameAs": [
-            "https://github.com/humanbydefinition/textmode.js",
-            "https://discord.gg/sjrw8QXNks"
+            "https://github.com/humanbydefinition/textmode.js"
           ]
         },
         {

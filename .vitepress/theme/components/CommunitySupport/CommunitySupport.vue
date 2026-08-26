@@ -106,15 +106,6 @@
           <UiIcon name="ph:star-duotone" size="sm" />
           Star on GitHub
         </a>
-        <a 
-          href="https://discord.gg/sjrw8QXNks" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          class="community-support__banner-btn community-support__banner-btn--secondary"
-        >
-          <UiIcon name="ic:baseline-discord" size="sm" />
-          Join Discord
-        </a>
       </div>
     </div>
   </section>
@@ -157,12 +148,12 @@ const resources: LinkItem[] = [
 
 const connect: LinkItem[] = [
   {
-    title: 'Discord',
-    description: 'Chat with the community',
-    link: 'https://discord.gg/sjrw8QXNks',
-    icon: 'ic:baseline-discord',
+    title: 'Discussions',
+    description: 'Ideas and Q&A',
+    link: 'https://github.com/humanbydefinition/textmode.js/discussions',
+    icon: 'ph:chats-teardrop-duotone',
     external: true,
-    color: 'discord'
+    color: 'github'
   },
   {
     title: 'GitHub',
@@ -301,15 +292,6 @@ const connect: LinkItem[] = [
   color: var(--vp-c-brand-1);
   flex-shrink: 0;
   transition: all 0.2s ease;
-}
-
-.community-support__link-icon-wrapper--discord {
-  color: #5865F2;
-}
-
-.community-support__link:hover .community-support__link-icon-wrapper--discord {
-  background: #5865F2;
-  color: white;
 }
 
 .community-support__link-icon-wrapper--github {
