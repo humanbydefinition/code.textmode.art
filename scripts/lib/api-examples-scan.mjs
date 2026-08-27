@@ -1,15 +1,13 @@
 import { readFileSync, readdirSync, existsSync } from 'node:fs'
 import { resolve, join, relative } from 'node:path'
 import { extractApiSandboxComponents } from './api-sandbox-attributes.mjs'
+import {
+  API_SANDBOX_PROFILE_IDS,
+  API_SANDBOX_PROFILE_ID_SET,
+  getApiSandboxProfileIndex,
+} from './api-sandbox-profiles.mjs'
 
-export const API_PROFILE_IDS = [
-  'textmode.js',
-  'textmode.synth.js',
-  'textmode.filters.js',
-  'textmode.figlet.js',
-  'textmode.export.js',
-  'textmode.overlay.js',
-]
+export const API_PROFILE_IDS = API_SANDBOX_PROFILE_IDS
 
 const VALID_LANGUAGES = new Set(['javascript', 'typescript'])
 
@@ -101,14 +99,14 @@ export function scanApiExamples(root = process.cwd()) {
   for (const file of files) {
     const apiPath = relative(root, file).replace(/\\/g, '/')
     const profile = apiPath.split('/')[1]
-    if (!API_PROFILE_IDS.includes(profile)) continue
+    if (!API_SANDBOX_PROFILE_ID_SET.has(profile)) continue
 
     const content = readFileSync(file, 'utf-8')
     const frontmatter = parseFrontmatter(content)
     const components = extractApiSandboxComponents(content)
     const runnableInstances = components.filter(
       (instance) => instance.encodedCode
-        && API_PROFILE_IDS.includes(instance.profile)
+        && API_SANDBOX_PROFILE_ID_SET.has(instance.profile)
         && VALID_LANGUAGES.has(instance.language),
     )
     const needsDisambiguation = runnableInstances.length > 1
@@ -161,7 +159,7 @@ export function scanApiExamples(root = process.cwd()) {
   }
 
   return entries.sort((a, b) => {
-    const profileOrder = API_PROFILE_IDS.indexOf(a.profile) - API_PROFILE_IDS.indexOf(b.profile)
+    const profileOrder = getApiSandboxProfileIndex(a.profile) - getApiSandboxProfileIndex(b.profile)
     if (profileOrder !== 0) return profileOrder
     const pathOrder = a.apiPath.localeCompare(b.apiPath)
     if (pathOrder !== 0) return pathOrder
