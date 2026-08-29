@@ -53,7 +53,6 @@ type ConsentDecision = 'accepted' | 'rejected'
 
 const CONSENT_STORAGE_KEY = 'textmodejs_analytics_consent_v1'
 const GA_MEASUREMENT_ID = 'G-FYNSMPCNJ3'
-const GA_SCRIPT_ID = 'textmodejs-google-analytics'
 
 const visible = ref(false)
 const fallbackDecision = ref<ConsentDecision | null>(null)
@@ -119,45 +118,26 @@ function writeConsentDecision(decision: ConsentDecision) {
   writeLocalStorage(CONSENT_STORAGE_KEY, decision)
 }
 
+function updateConsent(status: 'granted' | 'denied') {
+  if (typeof window !== 'undefined' && typeof (window as any).gtag === 'function') {
+    ;(window as any).gtag('consent', 'update', {
+      analytics_storage: status
+    })
+  }
+}
+
 function enableAnalytics() {
   if (typeof window !== 'undefined') {
     delete (window as any)[`ga-disable-${GA_MEASUREMENT_ID}`]
   }
-  injectGoogleAnalyticsScript()
+  updateConsent('granted')
 }
 
 function disableAnalytics() {
   if (typeof window !== 'undefined') {
     ;(window as any)[`ga-disable-${GA_MEASUREMENT_ID}`] = true
   }
-  removeGoogleAnalyticsScript()
-}
-
-function injectGoogleAnalyticsScript() {
-  if (typeof document === 'undefined' || document.getElementById(GA_SCRIPT_ID)) {
-    return
-  }
-
-  const script = document.createElement('script')
-  script.id = GA_SCRIPT_ID
-  script.async = true
-  script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`
-
-  document.head.appendChild(script)
-
-  const win = window as any
-  win.dataLayer = win.dataLayer || []
-  function gtag(...args: any[]) {
-    win.dataLayer.push(args)
-  }
-  win.gtag = gtag
-  gtag('js', new Date())
-  gtag('config', GA_MEASUREMENT_ID)
-}
-
-function removeGoogleAnalyticsScript() {
-  if (typeof document === 'undefined') return
-  document.getElementById(GA_SCRIPT_ID)?.remove()
+  updateConsent('denied')
 }
 
 function readLocalStorage(key: string): string | null {
