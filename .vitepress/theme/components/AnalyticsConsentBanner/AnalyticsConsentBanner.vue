@@ -13,7 +13,7 @@
           Analytics preferences
         </h2>
         <p id="analytics-consent-description" class="analytics-consent__body">
-          We use Google Analytics to improve code.textmode.art. It only runs if you allow analytics.
+          We use Google Analytics to improve code.textmode.art. Analytics only run if you allow it.
         </p>
         <a
           class="analytics-consent__link"
