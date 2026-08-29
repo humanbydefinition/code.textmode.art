@@ -1,5 +1,6 @@
 import { scanApiExamples } from '../../scripts/lib/api-examples-scan.mjs'
 
+// Keep this public TypeScript union aligned with scripts/lib/api-sandbox-profiles.mjs.
 export type ApiProfile =
   | 'textmode.js'
   | 'textmode.synth.js'

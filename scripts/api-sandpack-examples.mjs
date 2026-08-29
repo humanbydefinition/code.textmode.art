@@ -10,53 +10,19 @@ import {
   encodeBase64Url,
   decodeBase64Url,
 } from './lib/api-sandbox-attributes.mjs'
+import {
+  API_SANDBOX_PROFILES,
+  API_SANDBOX_PROFILE_IDS,
+  getApiSandboxProfileById,
+  getApiSandboxProfileForPath,
+} from './lib/api-sandbox-profiles.mjs'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const ROOT = path.resolve(__dirname, '..')
 
-const API_SANDBOX_PROFILES = {
-  'api/textmode.js': {
-    id: 'textmode.js',
-    apiRoot: 'api/textmode.js',
-    defaultTitle: 'textmode.js API example',
-  },
-  'api/textmode.synth.js': {
-    id: 'textmode.synth.js',
-    apiRoot: 'api/textmode.synth.js',
-    defaultTitle: 'textmode.synth.js API example',
-  },
-  'api/textmode.filters.js': {
-    id: 'textmode.filters.js',
-    apiRoot: 'api/textmode.filters.js',
-    defaultTitle: 'textmode.filters.js API example',
-  },
-  'api/textmode.figlet.js': {
-    id: 'textmode.figlet.js',
-    apiRoot: 'api/textmode.figlet.js',
-    defaultTitle: 'textmode.figlet.js API example',
-  },
-  'api/textmode.export.js': {
-    id: 'textmode.export.js',
-    apiRoot: 'api/textmode.export.js',
-    defaultTitle: 'textmode.export.js API example',
-  },
-  'api/textmode.overlay.js': {
-    id: 'textmode.overlay.js',
-    apiRoot: 'api/textmode.overlay.js',
-    defaultTitle: 'textmode.overlay.js API example',
-  },
-}
-
-const API_SANDBOX_PROFILE_VALUES = Object.values(API_SANDBOX_PROFILES)
-
 const KNOWN_ECOSYSTEM_IMPORTS = new Set([
-  'textmode.js',
   'textmode.js/plugins',
-  'textmode.synth.js',
-  'textmode.filters.js',
-  'textmode.figlet.js',
-  'textmode.export.js',
-  'textmode.overlay.js',
+  ...API_SANDBOX_PROFILE_IDS,
 ])
 
 const API_MARKDOWN_PATTERN = /^api\/[^/]+\/.+\.md$/
@@ -119,7 +85,7 @@ export async function transformApiSandpackExamples({ mode = 'write', root = ROOT
 
   const results = await Promise.all(files.map(async (file) => {
     const relativePath = slash(path.relative(root, file))
-    const profile = getApiSandboxProfile(relativePath)
+    const profile = getApiSandboxProfileForPath(relativePath)
 
     if (!profile || !isTargetApiPage(relativePath)) {
       return null
@@ -168,7 +134,7 @@ export async function transformApiSandpackExamples({ mode = 'write', root = ROOT
 }
 
 export function transformMarkdown(source, relativePath) {
-  const profile = getApiSandboxProfile(relativePath)
+  const profile = getApiSandboxProfileForPath(relativePath)
 
   if (!profile || !isTargetApiPage(relativePath)) {
     return createTransformResult(source, false, false)
@@ -347,7 +313,7 @@ function validateLiveSandboxBlocks(source) {
     const code = decodeBase64Url(getAttribute(component, 'encoded-code') || '')
     const files = decodeFiles(getAttribute(component, 'encoded-files') || '')
 
-    return Boolean(getProfileById(profile))
+    return Boolean(getApiSandboxProfileById(profile))
       && (language === 'javascript' || language === 'typescript')
       && (Boolean(code) || Boolean(files && findActiveSketchFile(files)))
   })
@@ -411,23 +377,13 @@ function getPageTitle(source) {
 }
 
 function isTargetApiPage(relativePath) {
-  return API_MARKDOWN_PATTERN.test(relativePath) && Boolean(getApiSandboxProfile(relativePath))
-}
-
-function getApiSandboxProfile(relativePath) {
-  return API_SANDBOX_PROFILE_VALUES.find((profile) => (
-    relativePath === profile.apiRoot || relativePath.startsWith(`${profile.apiRoot}/`)
-  ))
-}
-
-function getProfileById(profileId) {
-  return API_SANDBOX_PROFILE_VALUES.find((profile) => profile.id === profileId)
+  return API_MARKDOWN_PATTERN.test(relativePath) && Boolean(getApiSandboxProfileForPath(relativePath))
 }
 
 async function collectApiMarkdownFiles(root) {
   const files = []
 
-  for (const profile of Object.values(API_SANDBOX_PROFILES)) {
+  for (const profile of API_SANDBOX_PROFILES) {
     files.push(...await collectMarkdownFiles(path.join(root, profile.apiRoot)))
   }
 
