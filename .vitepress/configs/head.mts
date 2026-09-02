@@ -1,10 +1,14 @@
 import type { HeadConfig, TransformContext } from 'vitepress'
 
 const baseHeaders: HeadConfig[] = [
-  ['link', { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/icon-16.png' }],
-  ['link', { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/icon-32.png' }],
-  ['link', { rel: 'icon', type: 'image/png', sizes: '64x64', href: '/icon-64.png' }],
+  ['link', { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/icon-light-16.png', media: '(prefers-color-scheme: light)' }],
+  ['link', { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/icon-light-32.png', media: '(prefers-color-scheme: light)' }],
+  ['link', { rel: 'icon', type: 'image/png', sizes: '64x64', href: '/icon-light-64.png', media: '(prefers-color-scheme: light)' }],
+  ['link', { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/icon-dark-16.png', media: '(prefers-color-scheme: dark)' }],
+  ['link', { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/icon-dark-32.png', media: '(prefers-color-scheme: dark)' }],
+  ['link', { rel: 'icon', type: 'image/png', sizes: '64x64', href: '/icon-dark-64.png', media: '(prefers-color-scheme: dark)' }],
   ['link', { rel: 'manifest', href: '/site.webmanifest' }],
+  ['script', {}, "(()=>{const m=window.matchMedia('(prefers-color-scheme: dark)');const u=()=>{const mode=m.matches?'dark':'light';document.querySelectorAll('link[rel*=\"icon\"][sizes]').forEach(l=>{l.href=l.href.replace(/-(light|dark)-/,`-${mode}-`)});};m.addEventListener('change',u);})();"],
   ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
   ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
   ['link', { href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap', rel: 'stylesheet' }]
