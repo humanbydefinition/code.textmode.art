@@ -51,7 +51,8 @@ defineOptions({ name: 'AnalyticsConsentBanner' })
 
 type ConsentDecision = 'accepted' | 'rejected'
 
-const CONSENT_STORAGE_KEY = 'textmodejs_analytics_consent_v1'
+const CONSENT_STORAGE_KEY = 'code.textmode.art:analytics-consent:v2'
+const LEGACY_CONSENT_STORAGE_KEY = 'textmodejs_analytics_consent_v1'
 const GA_MEASUREMENT_ID = 'G-FYNSMPCNJ3'
 
 const visible = ref(false)
@@ -63,12 +64,12 @@ onMounted(() => {
   const decision = readConsentDecision()
 
   if (decision === 'accepted') {
-    enableAnalytics()
+    loadGoogleAnalyticsAfterConsent()
     return
   }
 
   if (decision === 'rejected') {
-    disableAnalytics()
+    revokeGoogleAnalytics()
     return
   }
 
@@ -93,51 +94,88 @@ function handleDocumentClick(event: MouseEvent) {
 
 function allowAnalytics() {
   writeConsentDecision('accepted')
-  enableAnalytics()
+  loadGoogleAnalyticsAfterConsent()
   visible.value = false
 }
 
 function rejectAnalytics() {
   writeConsentDecision('rejected')
-  disableAnalytics()
+  revokeGoogleAnalytics()
   visible.value = false
 }
 
 function readConsentDecision(): ConsentDecision | null {
+  removeLegacyConsent()
   const stored = readLocalStorage(CONSENT_STORAGE_KEY)
 
-  if (stored === 'accepted' || stored === 'rejected') {
-    return stored
+  if (!stored) {
+    return fallbackDecision.value
   }
 
-  return fallbackDecision.value
+  try {
+    const record = JSON.parse(stored) as {
+      decision?: ConsentDecision
+      version?: number
+      decidedAt?: string
+    }
+    return record.version === 2 &&
+      (record.decision === 'accepted' || record.decision === 'rejected') &&
+      typeof record.decidedAt === 'string'
+      ? record.decision
+      : null
+  } catch {
+    return null
+  }
 }
 
 function writeConsentDecision(decision: ConsentDecision) {
   fallbackDecision.value = decision
-  writeLocalStorage(CONSENT_STORAGE_KEY, decision)
+  writeLocalStorage(CONSENT_STORAGE_KEY, JSON.stringify({
+    decision,
+    version: 2,
+    decidedAt: new Date().toISOString()
+  }))
 }
 
-function updateConsent(status: 'granted' | 'denied') {
-  if (typeof window !== 'undefined' && typeof (window as any).gtag === 'function') {
-    ;(window as any).gtag('consent', 'update', {
-      analytics_storage: status
-    })
+function loadGoogleAnalyticsAfterConsent() {
+  if (typeof window === 'undefined' || readConsentDecision() !== 'accepted') {
+    return
   }
+
+  const analyticsWindow = window as Window & Record<string, any>
+  if (analyticsWindow.__codeTextmodeGoogleAnalyticsInitialized) return
+
+  analyticsWindow.__codeTextmodeGoogleAnalyticsInitialized = true
+  delete analyticsWindow[`ga-disable-${GA_MEASUREMENT_ID}`]
+  analyticsWindow.dataLayer = analyticsWindow.dataLayer || []
+  analyticsWindow.gtag = analyticsWindow.gtag || function (...args: unknown[]) {
+    analyticsWindow.dataLayer.push(args)
+  }
+  analyticsWindow.gtag('consent', 'default', {
+    analytics_storage: 'granted',
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied'
+  })
+  analyticsWindow.gtag('js', new Date())
+  analyticsWindow.gtag('config', GA_MEASUREMENT_ID)
+
+  if (document.querySelector(`script[data-google-analytics-id="${GA_MEASUREMENT_ID}"]`)) return
+
+  const tag = document.createElement('script')
+  tag.async = true
+  tag.src = `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`
+  tag.dataset.googleAnalyticsId = GA_MEASUREMENT_ID
+  document.head.append(tag)
 }
 
-function enableAnalytics() {
-  if (typeof window !== 'undefined') {
-    delete (window as any)[`ga-disable-${GA_MEASUREMENT_ID}`]
-  }
-  updateConsent('granted')
-}
+function revokeGoogleAnalytics() {
+  if (typeof window === 'undefined') return
 
-function disableAnalytics() {
-  if (typeof window !== 'undefined') {
-    ;(window as any)[`ga-disable-${GA_MEASUREMENT_ID}`] = true
+  ;(window as any)[`ga-disable-${GA_MEASUREMENT_ID}`] = true
+  for (const name of ['_ga', `_ga_${GA_MEASUREMENT_ID.replace(/^G-/, '')}`]) {
+    document.cookie = `${name}=; Max-Age=0; Path=/; SameSite=Lax`
   }
-  updateConsent('denied')
 }
 
 function readLocalStorage(key: string): string | null {
@@ -153,6 +191,14 @@ function writeLocalStorage(key: string, value: string) {
     window.localStorage.setItem(key, value)
   } catch {
     // The in-memory fallback still preserves the current session choice.
+  }
+}
+
+function removeLegacyConsent() {
+  try {
+    window.localStorage.removeItem(LEGACY_CONSENT_STORAGE_KEY)
+  } catch {
+    // Storage may be unavailable; ignoring v1 data remains safe.
   }
 }
 </script>
