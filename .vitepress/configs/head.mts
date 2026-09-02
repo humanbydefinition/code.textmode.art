@@ -1,7 +1,10 @@
 import type { HeadConfig, TransformContext } from 'vitepress'
 
 const baseHeaders: HeadConfig[] = [
-  ['link', { rel: 'icon', href: '/svg/doc_logo.svg', type: 'image/svg+xml' }],
+  ['link', { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/icon-16.png' }],
+  ['link', { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/icon-32.png' }],
+  ['link', { rel: 'icon', type: 'image/png', sizes: '64x64', href: '/icon-64.png' }],
+  ['link', { rel: 'manifest', href: '/site.webmanifest' }],
   ['link', { rel: 'preconnect', href: 'https://fonts.googleapis.com' }],
   ['link', { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' }],
   ['link', { href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap', rel: 'stylesheet' }]
