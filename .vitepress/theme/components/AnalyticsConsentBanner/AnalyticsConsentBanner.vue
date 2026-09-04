@@ -51,12 +51,19 @@ defineOptions({ name: 'AnalyticsConsentBanner' })
 
 type ConsentDecision = 'accepted' | 'rejected'
 
+type Gtag = (...args: unknown[]) => void
+
+type AnalyticsWindow = Window & {
+  [key: string]: unknown
+  dataLayer?: IArguments[]
+  gtag?: Gtag
+  __codeTextmodeGoogleAnalyticsInitialized?: boolean
+}
+
 const CONSENT_STORAGE_KEY = 'code.textmode.art:analytics-consent:v2'
-const LEGACY_CONSENT_STORAGE_KEY = 'textmodejs_analytics_consent_v1'
 const GA_MEASUREMENT_ID = 'G-FYNSMPCNJ3'
 
 const visible = ref(false)
-const fallbackDecision = ref<ConsentDecision | null>(null)
 
 onMounted(() => {
   document.addEventListener('click', handleDocumentClick)
@@ -105,11 +112,10 @@ function rejectAnalytics() {
 }
 
 function readConsentDecision(): ConsentDecision | null {
-  removeLegacyConsent()
   const stored = readLocalStorage(CONSENT_STORAGE_KEY)
 
   if (!stored) {
-    return fallbackDecision.value
+    return null
   }
 
   try {
@@ -129,7 +135,6 @@ function readConsentDecision(): ConsentDecision | null {
 }
 
 function writeConsentDecision(decision: ConsentDecision) {
-  fallbackDecision.value = decision
   writeLocalStorage(CONSENT_STORAGE_KEY, JSON.stringify({
     decision,
     version: 2,
@@ -142,25 +147,17 @@ function loadGoogleAnalyticsAfterConsent() {
     return
   }
 
-  const analyticsWindow = window as Window & Record<string, any>
+  const analyticsWindow = window as AnalyticsWindow
   if (analyticsWindow.__codeTextmodeGoogleAnalyticsInitialized) return
 
   analyticsWindow.__codeTextmodeGoogleAnalyticsInitialized = true
   delete analyticsWindow[`ga-disable-${GA_MEASUREMENT_ID}`]
-  analyticsWindow.dataLayer = analyticsWindow.dataLayer || []
-  analyticsWindow.gtag = analyticsWindow.gtag || function (...args: unknown[]) {
-    analyticsWindow.dataLayer.push(args)
+  analyticsWindow.dataLayer ??= []
+  analyticsWindow.gtag = function gtag(): void {
+    analyticsWindow.dataLayer?.push(arguments)
   }
-  analyticsWindow.gtag('consent', 'default', {
-    analytics_storage: 'granted',
-    ad_storage: 'denied',
-    ad_user_data: 'denied',
-    ad_personalization: 'denied'
-  })
   analyticsWindow.gtag('js', new Date())
   analyticsWindow.gtag('config', GA_MEASUREMENT_ID)
-
-  if (document.querySelector(`script[data-google-analytics-id="${GA_MEASUREMENT_ID}"]`)) return
 
   const tag = document.createElement('script')
   tag.async = true
@@ -190,15 +187,7 @@ function writeLocalStorage(key: string, value: string) {
   try {
     window.localStorage.setItem(key, value)
   } catch {
-    // The in-memory fallback still preserves the current session choice.
-  }
-}
-
-function removeLegacyConsent() {
-  try {
-    window.localStorage.removeItem(LEGACY_CONSENT_STORAGE_KEY)
-  } catch {
-    // Storage may be unavailable; ignoring v1 data remains safe.
+    // Analytics remains disabled when consent cannot be persisted.
   }
 }
 </script>
