@@ -7,3 +7,4 @@ node_modules
 .agents
 skills-lock.json
 .vitepress/data/.generated-editor-sketches.json
+indexnow.log

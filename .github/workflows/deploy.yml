@@ -57,3 +57,33 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  indexnow:
+    needs: deploy
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: .nvmrc
+
+      - name: Resolve IndexNow key from committed key file
+        run: |
+          KEY_FILE=$(grep -lE '^[A-Za-z0-9-]{8,128}$' public/*.txt 2>/dev/null | head -n1)
+          if [ -z "$KEY_FILE" ]; then
+            echo "::error::No IndexNow key file found in public/"
+            exit 1
+          fi
+          echo "INDEXNOW_KEY=$(basename "$KEY_FILE" .txt)" >> "$GITHUB_ENV"
+
+      - name: Submit recently modified docs to IndexNow
+        env:
+          INDEXNOW_HOST: code.textmode.art
+        run: |
+          npx --yes "indexnow-submitter@^1.5.0" submit-sitemap \
+            https://code.textmode.art/sitemap.xml \
+            --modified-since "$(date -u -d '2 days ago' +%F)"
