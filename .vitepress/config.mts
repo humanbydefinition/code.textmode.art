@@ -67,6 +67,7 @@ export default withMermaid(defineConfig({
   srcExclude: [
     'docs/examples/**',
     'blog/**',
+    'scripts/**',
     'README.md',
     'LICENSE.md',
     'CONTRIBUTING.md',
