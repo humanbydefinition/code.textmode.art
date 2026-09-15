@@ -72,7 +72,6 @@ export default withMermaid(defineConfig({
     'CONTRIBUTING.md',
     'CODE_OF_CONDUCT.md',
     'SECURITY.md',
-    'CONTRIBUTORS_AUTOMATION.md',
     '.vitepress/data/TESTIMONIALS_README.md',
   ],
   title: "textmode.js",
