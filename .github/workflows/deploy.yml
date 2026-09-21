@@ -33,7 +33,7 @@ jobs:
         run: node --version && npm --version
 
       - name: Setup Pages
-        uses: actions/configure-pages@v4
+        uses: actions/configure-pages@v6
 
       - name: Install dependencies
         run: npm ci
