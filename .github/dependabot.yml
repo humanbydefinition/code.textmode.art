@@ -13,12 +13,6 @@ updates:
       commit-message:
           prefix: chore
           include: scope
-      ignore:
-          # vitepress-plugin-mermaid@2.0.17 declares a peer of mermaid "10 || 11".
-          # Hold major bumps until the plugin supports mermaid 12.
-          - dependency-name: mermaid
-            update-types:
-                - version-update:semver-major
       groups:
           npm-development:
               dependency-type: development
