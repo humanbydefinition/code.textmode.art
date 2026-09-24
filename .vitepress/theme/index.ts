@@ -19,6 +19,7 @@ import NotificationToast from './components/NotificationToast/NotificationToast.
 import AnalyticsConsentBanner from './components/AnalyticsConsentBanner/AnalyticsConsentBanner.vue'
 import TextmodeHero from './components/TextmodeHero.vue'
 import DocFooter from './components/DocFooter/DocFooter.vue'
+import SiteFooter from './components/SiteFooter/SiteFooter.vue'
 import FeaturedSketches from './components/FeaturedSketches/FeaturedSketches.vue'
 import CommunitySupport from './components/CommunitySupport/CommunitySupport.vue'
 import Testimonials from './components/Testimonials/Testimonials.vue'
@@ -85,6 +86,7 @@ const baseTheme: Theme = {
     app.component('ApiLanding', ApiLanding)
     app.component('ExampleSketchBrowser', ExampleSketchBrowser)
     app.component('PromoCallout', PromoCallout)
+    app.component('SiteFooter', SiteFooter)
   },
   setup() {
     const { frontmatter } = useData()
