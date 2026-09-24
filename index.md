@@ -3,6 +3,7 @@ title: Home
 description: textmode.js is a lightweight creative coding library for creating real-time ASCII art on the web.
 keywords: textmode, ascii art, creative coding, webgl, javascript library, generative art, real-time, canvas, visualization, retro, 8-bit, terminal, petscii, live coding
 layout: home
+footer: false
 
 hero:
   text: textmode.js
@@ -109,3 +110,5 @@ Simple, powerful, and ready for your wildest ideas.
 <CommunitySupport />
 
 <WhatWillYouCreate />
+
+<SiteFooter />
