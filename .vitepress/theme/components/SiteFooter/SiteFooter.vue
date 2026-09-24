@@ -109,11 +109,11 @@ const columns: FooterColumn[] = [
   {
     title: 'Tools',
     links: [
-      { label: 'Editor', href: 'https://editor.textmode.art', external: true },
-      { label: 'Create', href: 'https://create.textmode.art', external: true },
-      { label: 'Export', href: 'https://export.textmode.art', external: true },
-      { label: 'Automata', href: 'https://automata.textmode.art', external: true },
-      { label: 'Overlay extension', href: 'https://extension.textmode.art', external: true }
+      { label: 'Web Editor', href: 'https://editor.textmode.art', external: true },
+      { label: 'Textmode Painter', href: 'https://create.textmode.art', external: true },
+      { label: 'Media Converter', href: 'https://export.textmode.art', external: true },
+      { label: 'Automata Playground', href: 'https://automata.textmode.art', external: true },
+      { label: 'Browser Extension', href: 'https://extension.textmode.art', external: true }
     ]
   },
   {
