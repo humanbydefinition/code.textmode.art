@@ -128,3 +128,4 @@ changes to scope, content, examples, or validation.
 ## Need help?
 
 - [Open a documentation issue](https://github.com/humanbydefinition/code.textmode.art/issues)
+- [Join the Discord community](https://discord.gg/sjrw8QXNks)

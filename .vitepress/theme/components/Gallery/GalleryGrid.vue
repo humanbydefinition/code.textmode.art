@@ -80,7 +80,7 @@
         <div class="gallery-grid__cta-text">
           <h4 class="gallery-grid__cta-title">Submit your project</h4>
           <p class="gallery-grid__cta-desc">
-            Built something awesome with <code>#textmodejs</code>? Add your project to the gallery by creating a pull request!
+            Built something awesome with <code>#textmodejs</code>? Add your project to the gallery by creating a pull request, or share it on Discord and we'll help you get it featured!
           </p>
         </div>
       </div>
@@ -93,6 +93,15 @@
         >
           <UiIcon name="ph:github-logo-duotone" size="sm" />
           Create Pull Request
+        </a>
+        <a
+          href="https://discord.gg/sjrw8QXNks"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="gallery-grid__cta-btn gallery-grid__cta-btn--secondary"
+        >
+          <UiIcon name="ic:baseline-discord" size="sm" />
+          Share on Discord
         </a>
       </div>
     </div>
