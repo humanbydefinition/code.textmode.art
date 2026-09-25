@@ -56,6 +56,7 @@ const themeConfig = {
 
   socialLinks: [
     { icon: 'github', link: 'https://github.com/humanbydefinition/textmode.js' },
+    { icon: 'discord', link: 'https://discord.gg/sjrw8QXNks' },
   ],
 }
 
@@ -83,6 +84,15 @@ export default withMermaid(defineConfig({
     hostname: 'https://code.textmode.art'
   },
   transformHead,
+
+  vite: {
+    optimizeDeps: {
+      // Mermaid is only reached through a lazily-loaded component, so Vite's
+      // dependency scanner misses it. Pre-bundle it (and its CommonJS
+      // dependencies such as fastdom) to keep CJS interop working in dev.
+      include: ['mermaid', 'fastdom'],
+    },
+  },
 
   markdown: {
     config(md) {
