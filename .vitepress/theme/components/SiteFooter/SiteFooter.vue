@@ -84,6 +84,7 @@ const { theme } = useData()
 const footer = computed(() => theme.value.footer)
 
 const GITHUB_URL = 'https://github.com/humanbydefinition/textmode.js'
+const DISCORD_URL = 'https://discord.gg/sjrw8QXNks'
 
 interface FooterLink {
   label: string
@@ -120,10 +121,10 @@ const columns: FooterColumn[] = [
     title: 'Community',
     links: [
       { label: 'GitHub', href: GITHUB_URL, external: true },
+      { label: 'Discord', href: DISCORD_URL, external: true },
       { label: 'Discussions', href: `${GITHUB_URL}/discussions`, external: true },
       { label: 'Issues', href: `${GITHUB_URL}/issues`, external: true },
-      { label: 'Contributors', href: '/docs/contributors' },
-      { label: 'Support', href: '/docs/support' }
+      { label: 'Contributors', href: '/docs/contributors' }
     ]
   }
 ]
