@@ -20,6 +20,7 @@ lastUpdated: false
 The most helpful support is often simple and public:
 
 - Share work you made with `textmode.js`.
+- Join the [textmode.js Discord community](https://discord.gg/sjrw8QXNks) to share work, ask questions, and connect with other users.
 - Mention `textmode.js` when you publish a sketch, stream, article, class, workshop, or project.
 - Star the repositories you use.
 - Submit examples that show real creative use cases.
