@@ -85,6 +85,15 @@ export default withMermaid(defineConfig({
   },
   transformHead,
 
+  vite: {
+    optimizeDeps: {
+      // Mermaid is only reached through a lazily-loaded component, so Vite's
+      // dependency scanner misses it. Pre-bundle it (and its CommonJS
+      // dependencies such as fastdom) to keep CJS interop working in dev.
+      include: ['mermaid', 'fastdom'],
+    },
+  },
+
   markdown: {
     config(md) {
       md
