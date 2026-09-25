@@ -60,7 +60,7 @@ features:
 
 A library designed for building generative art installations, retro games, interactive visualizations, live coding performances, and experimental web experiences. Whether you're prototyping an idea or shipping a production app, textmode.js has you covered.
 
-**Shape the future of textmode graphics.** Your feedback, ideas, and creations help drive development.
+**Shape the future of textmode graphics.** Your feedback, ideas, and creations help drive development. Join our [Discord](https://discord.gg/sjrw8QXNks) to share what you're building, get support, and connect with fellow textmode enthusiasts.
 
 ### From zero to textmode in minutes
 
