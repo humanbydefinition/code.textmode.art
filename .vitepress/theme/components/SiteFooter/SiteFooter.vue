@@ -108,13 +108,14 @@ const columns: FooterColumn[] = [
     ]
   },
   {
-    title: 'Tools',
+    title: 'TEXTMODE PROJECTS',
     links: [
-      { label: 'Web Editor', href: 'https://editor.textmode.art', external: true },
-      { label: 'Textmode Painter', href: 'https://create.textmode.art', external: true },
+      { label: 'Code Editor', href: 'https://editor.textmode.art', external: true },
+      { label: 'Browser Extension', href: 'https://extension.textmode.art', external: true },
+      { label: 'Textmode Art Explorer', href: 'https://explore.textmode.art', external: true },
       { label: 'Media Converter', href: 'https://export.textmode.art', external: true },
-      { label: 'Automata Playground', href: 'https://automata.textmode.art', external: true },
-      { label: 'Browser Extension', href: 'https://extension.textmode.art', external: true }
+      { label: 'Textmode Editor', href: 'https://create.textmode.art', external: true },
+      { label: 'Automata Playground', href: 'https://automata.textmode.art', external: true }
     ]
   },
   {
@@ -211,7 +212,7 @@ const columns: FooterColumn[] = [
 .site-footer__nav {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1.5rem 2rem;
+  gap: 1rem 1.5rem;
 }
 
 .site-footer__column {
@@ -219,7 +220,7 @@ const columns: FooterColumn[] = [
 }
 
 .site-footer__heading {
-  margin: 0 0 0.75rem;
+  margin: 0 0 0.5rem;
   padding: 0;
   border: none;
   font-family: var(--textmode-font);
@@ -234,7 +235,7 @@ const columns: FooterColumn[] = [
 .site-footer__list {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.375rem;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -343,7 +344,7 @@ const columns: FooterColumn[] = [
 @container (min-width: 900px) {
   .site-footer__top {
     grid-template-columns: minmax(200px, 300px) minmax(0, 1fr);
-    gap: 2.5rem 3.5rem;
+    gap: 2rem 2.5rem;
   }
 
   .site-footer__brand {
