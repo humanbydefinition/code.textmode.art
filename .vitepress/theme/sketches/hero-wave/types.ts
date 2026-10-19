@@ -9,4 +9,6 @@ export interface HeroWaveOptions {
    * "hero" shows the logo + tagline overlay, "background" only renders the waves.
    */
   mode?: 'hero' | 'background'
+  /** Called after the first complete frame, before playback may be paused. */
+  onReady?: () => void
 }
