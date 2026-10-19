@@ -6,7 +6,8 @@ layout: home
 footer: false
 
 hero:
-  text: textmode.js
+  name: textmode.js
+  tagline: A creative coding library for real-time ASCII art and textmode graphics on the web.
   actions:
     - theme: brand
       text: Get started
@@ -42,11 +43,6 @@ features:
     details: Export your creations as TXT, SVG, GIF, video, and image. Perfect for sharing on social media, printing, or integrating into other projects.
 
 ---
-
-<h1 class="sr-only">textmode.js - Real-time ASCII art for the web</h1>
-<p class="sr-only">
-  Lightweight creative coding library for real-time textmode graphics in the browser.
-</p>
 
 <HomeCta />
 

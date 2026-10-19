@@ -65,7 +65,8 @@ export function createHeroWaveSketch(
   tm.draw(() => {
     if (!isReady || isDestroyed) return
 
-    if (!hasRenderedFrame) {
+    const firstFrame = !hasRenderedFrame
+    if (firstFrame) {
       hasRenderedFrame = true
       schedulePendingResize()
     }
@@ -81,6 +82,7 @@ export function createHeroWaveSketch(
       }
       renderBrandingOverlay(tm, time, subheaderLines)
     }
+    if (firstFrame) options.onReady?.()
   })
 
   const applyResize = (width: number, height: number) => {
