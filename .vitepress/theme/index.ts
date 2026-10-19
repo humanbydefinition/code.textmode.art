@@ -3,7 +3,7 @@ import DefaultTheme from 'vitepress/theme'
 import type { EnhanceAppContext, Theme } from 'vitepress'
 import { useData, useRoute } from 'vitepress'
 import './custom.css'
-import { defineComponent, h } from 'vue'
+import { defineAsyncComponent, defineComponent, h } from 'vue'
 import codeblocksFold from 'vitepress-plugin-codeblocks-fold'
 import 'vitepress-plugin-codeblocks-fold/style/index.css'
 import { useCodeSandbox } from 'vitepress-plugin-codesandbox'
@@ -71,6 +71,7 @@ const baseTheme: Theme = {
     const { app } = ctx
 
     // Register components
+    app.component('Mermaid', defineAsyncComponent(() => import('vitepress-plugin-mermaid/Mermaid.vue')))
     app.component('TextmodeLiveSandbox', TextmodeLiveSandbox)
     app.component('TextmodeSandbox', TextmodeSandbox)
     app.component('TextmodeApiSandbox', TextmodeApiSandbox)

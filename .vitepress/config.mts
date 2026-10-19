@@ -2,7 +2,7 @@
 import { defineConfig } from 'vitepress'
 import container from 'markdown-it-container'
 import { renderSandbox } from 'vitepress-plugin-sandpack'
-import { withMermaid } from 'vitepress-plugin-mermaid'
+import { MermaidMarkdown, MermaidPlugin } from 'vitepress-plugin-mermaid'
 import { head, nav, sidebar, transformHead } from './configs/index.mts'
 
 const LIVE_SANDBOX_CONTAINER_PATTERN = /:{3,}\s*textmode-(?:api-)?sandbox\b[^\n]*\n[\s\S]*?\n:{3,}/g
@@ -61,7 +61,7 @@ const themeConfig = {
 }
 
 // https://vitepress.dev/reference/site-config
-export default withMermaid(defineConfig({
+export default defineConfig({
   lang: 'en-US',
   appearance: 'dark',
   lastUpdated: true,
@@ -84,8 +84,20 @@ export default withMermaid(defineConfig({
     hostname: 'https://code.textmode.art'
   },
   transformHead,
+  transformHtml: (html, _id, { pageData }) => pageData.frontmatter.layout === 'home'
+    ? html.replace(/(<div[^>]*id="VPContent")/, '$1 role="main"') : html,
 
   vite: {
+    // Retain the plugin's configuration module; the theme loads its renderer lazily.
+    plugins: [{ ...MermaidPlugin(), transform: undefined }],
+    resolve: {
+      alias: {
+        'dayjs/plugin/advancedFormat.js': 'dayjs/esm/plugin/advancedFormat',
+        'dayjs/plugin/customParseFormat.js': 'dayjs/esm/plugin/customParseFormat',
+        'dayjs/plugin/isoWeek.js': 'dayjs/esm/plugin/isoWeek',
+        'cytoscape/dist/cytoscape.umd.js': 'cytoscape/dist/cytoscape.esm.js',
+      },
+    },
     optimizeDeps: {
       // Mermaid is only reached through a lazily-loaded component, so Vite's
       // dependency scanner misses it. Pre-bundle it (and its CommonJS
@@ -96,6 +108,8 @@ export default withMermaid(defineConfig({
 
   markdown: {
     config(md) {
+      // Keep the plugin's Markdown syntax without its eager browser runtime.
+      MermaidMarkdown(md, {})
       md
         .use(container, 'textmode-sandbox', {
           render(tokens: any[], idx: number) {
@@ -121,4 +135,4 @@ export default withMermaid(defineConfig({
   },
 
   themeConfig,
-}))
+})
