@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-08-24
+lastModified: 2026-10-27
 isInterface: true
 ---
 
@@ -117,13 +117,18 @@ t.windowResized(() => {
 ```
 
 
-## Properties
+## Uncategorized
 
-| Property | Type | Description |
-| ------ | ------ | ------ |
-| <a id="property-exportoverlay"></a> `exportOverlay` | [`ExportOverlayController`](ExportOverlayController.md) | Controller for managing the export overlay UI visibility at runtime. |
+### exportOverlay
 
-## Methods
+```ts
+exportOverlay: ExportOverlayController;
+```
+
+Controller for managing the export overlay UI visibility at runtime.
+
+
+***
 
 ### copyCanvas()
 
@@ -212,7 +217,7 @@ await t.saveGIF({ frameCount: 120, frameRate: 30, filename: 'loop' });
 saveJSON(options?): void;
 ```
 
-Downloads the selected layer or layer stack as a JSON file.
+Downloads the selected layer or layer stack as a v3 JSON document file.
 
 #### Parameters
 
@@ -398,7 +403,8 @@ const blob = await t.toImageBlob({ format: 'webp', scale: 2 });
 toJSON(options?): TextmodeDocumentJSON;
 ```
 
-Produces the selected layer or layer stack as structured JSON data.
+Produces a v3 document with a nonempty layers array.
+Selected layers retain their visibility, opacity, blending, and transforms.
 
 #### Parameters
 
@@ -408,7 +414,7 @@ Produces the selected layer or layer stack as structured JSON data.
 
 #### Returns
 
-[`TextmodeDocumentJSON`](../type-aliases/TextmodeDocumentJSON.md)
+`TextmodeDocumentJSON`
 
 The JSON document representing the selected layer or layer stack.
 
@@ -417,6 +423,7 @@ The JSON document representing the selected layer or layer stack.
 ```ts
 const layer = t.toJSON({ layer: t.layers.base, colorMode: 'hex', includeMetadata: true });
 const stack = t.toJSON({ target: 'all' });
+console.log(layer.layers[0].grid, stack.formatVersion); // 3.0.0
 ```
 
 
@@ -428,7 +435,7 @@ const stack = t.toJSON({ target: 'all' });
 toJSONString(options?): string;
 ```
 
-Produces the selected layer or layer stack as a JSON string.
+Produces the selected layer or layer stack as a v3 JSON document string.
 
 #### Parameters
 
@@ -534,5 +541,83 @@ Generates an in-memory video blob without downloading it.
 
 ```ts
 const blob = await t.toVideoBlob({ format: 'webm', frameCount: 120, frameRate: 30 });
+```
+
+
+## ZIP frame-sequence export
+
+### saveZip()
+
+```ts
+saveZip(options): Promise<void>;
+```
+
+Captures and downloads a deterministic frame sequence as a ZIP archive.
+
+The archive contains a versioned manifest followed by one-based, zero-padded frame files. ZIP export is available
+through code only and does not appear in the export overlay.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `options` | [`ZIPExportOptions`](../type-aliases/ZIPExportOptions.md) | Required archive format, deterministic capture controls, and per-frame exporter options. |
+
+#### Returns
+
+`Promise`\<`void`\>
+
+A promise that resolves after the archive download is initiated.
+
+#### Throws
+
+When validation, capture, serialization, archive writing, or download fails.
+
+#### Example
+
+```ts
+await t.saveZip({
+    format: 'png',
+    filename: 'orbit-frames',
+    frameCount: 120,
+    frameRate: 30,
+    frameOptions: { scale: 2 },
+});
+```
+
+
+***
+
+### toZipBlob()
+
+```ts
+toZipBlob(options): Promise<Blob>;
+```
+
+Captures a deterministic frame sequence as an in-memory ZIP archive without downloading it.
+
+Peak memory includes the completed ZIP because this method returns a `Blob`; individual uncompressed frame
+payloads are serialized and released sequentially.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `options` | [`ZIPExportOptions`](../type-aliases/ZIPExportOptions.md) | Required archive format, deterministic capture controls, and per-frame exporter options. |
+
+#### Returns
+
+`Promise`\<`Blob`\>
+
+The completed `application/zip` blob.
+
+#### Throws
+
+When validation, capture, serialization, archive writing, or cancellation fails.
+
+#### Example
+
+```ts
+const archive = await t.toZipBlob({ format: 'svg', frameCount: 60, frameRate: 24 });
 ```
 
