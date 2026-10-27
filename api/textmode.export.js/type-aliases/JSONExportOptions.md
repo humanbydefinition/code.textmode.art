@@ -2,12 +2,12 @@
 layout: doc
 editLink: false
 title: JSONExportOptions
-description: Options for exporting the textmode content to JSON format.
+description: Options for exporting textmode content to JSON.
 category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-08-24
+lastModified: 2026-10-27
 ---
 
 [textmode.export.js](../index.md) / JSONExportOptions
@@ -18,15 +18,15 @@ lastModified: 2026-08-24
 type JSONExportOptions = LayerExportOptions & object;
 ```
 
-Options for exporting the textmode content to JSON format.
+Options for exporting textmode content to JSON.
 
 ## Type Declaration
 
 | Name | Type | Description |
 | ------ | ------ | ------ |
-| `colorMode?` | [`JSONExportColorMode`](JSONExportColorMode.md) | Color representation used for foreground and background values. Defaults to `'hex'`. |
-| `filename?` | `string` | The filename to save the JSON file as. If not provided, a default filename is used. |
-| `includeMetadata?` | `boolean` | Whether to include export metadata such as timestamp and generator details. Defaults to `true`. |
-| `pretty?` | `boolean` \| `number` | Pretty-print the generated JSON. When set to `true`, output uses two-space indentation. When set to a number, that value is used as indentation width. When `false`, the output is minified. Defaults to `true`. |
-| `target?` | [`JSONExportTarget`](JSONExportTarget.md) | Scope of the JSON export. Use `'selected'` to export one layer, or `'all'` to export the base layer and every user-created layer. Defaults to `'selected'`. |
+| `colorMode?` | [`JSONExportColorMode`](JSONExportColorMode.md) | Foreground and background color representation. Defaults to `hex`. |
+| `filename?` | `string` | Filename used by the download helper. A default name is used when omitted. |
+| `includeMetadata?` | `boolean` | Include the creation timestamp and generator metadata. Defaults to `true`. |
+| `pretty?` | `boolean` \| `number` | Pretty-print with two spaces when `true`, use the given indentation width when numeric, or produce compact JSON when `false`. Defaults to `true`. |
+| `target?` | [`JSONExportTarget`](JSONExportTarget.md) | Export one selected layer or the complete layer stack. Defaults to `selected`. |
 

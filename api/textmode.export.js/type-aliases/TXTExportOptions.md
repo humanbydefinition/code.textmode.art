@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-08-24
+lastModified: 2026-10-27
 ---
 
 [textmode.export.js](../index.md) / TXTExportOptions

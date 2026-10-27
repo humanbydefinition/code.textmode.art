@@ -7,7 +7,7 @@ category: Variables
 api: true
 kind: Variable
 ecosystem: textmode.js
-lastModified: 2026-08-24
+lastModified: 2026-10-27
 ---
 
 [textmode.export.js](../index.md) / ExportPlugin
