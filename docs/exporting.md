@@ -1,6 +1,6 @@
 ---
 title: Exporting
-description: Export textmode.js sketches with textmode.export.js as TXT, JSON, SVG, raster images, animated GIFs, MP4 video, and WebM video.
+description: Export textmode.js sketches as TXT, JSON, SVG, raster images, animated GIFs, video, and ZIP frame sequences.
 ---
 
 # Exporting
@@ -35,7 +35,7 @@ t.draw(() => {
 
 ## What can be exported
 
-`textmode.export.js` covers six export targets:
+`textmode.export.js` supports these export types:
 
 - plain text via [`toString()`](#text-export) and [`saveStrings()`](#text-export)
 - structured document data via [`toJSON()`](#json-export), [`toJSONString()`](#json-export), and [`saveJSON()`](#json-export)
@@ -43,6 +43,7 @@ t.draw(() => {
 - raster images via [`saveCanvas()`](#image-export) and [`copyCanvas()`](#image-export)
 - animated GIF via [`saveGIF()`](#gif-export)
 - MP4 and WebM video via [`saveVideo()`](#video-export)
+- deterministic ZIP frame sequences via [`saveZip()`](#zip-export) and [`toZipBlob()`](#zip-export)
 
 ## Choose the right export
 
@@ -116,7 +117,9 @@ Text export comes from the selected layer grid. It does not export the final com
 
 ## JSON export
 
-JSON export is useful when you want structured document data for tooling, storage, or further processing.
+JSON export is useful when you want structured document data for tooling, storage, or further processing. It writes a
+`textmode.document` v3 document. By default, the document contains the selected layer in a one-item `layers` array.
+Set `target: "all"` to include the full layer stack.
 
 ```js
 const documentData = t.toJSON();
@@ -127,34 +130,48 @@ t.saveJSON({
 });
 ```
 
-By default, `toJSON()` returns a [`TextmodeDocumentJSON`](/api/textmode.export.js/type-aliases/TextmodeDocumentJSON.md)
-for one selected layer. It has `format: "textmode.document"`, `formatVersion: "2.0.0"`, `target: "selected"`, and:
-
-- canvas dimensions
-- grid dimensions
-- selected-layer cell data
-- per-cell character, foreground, background, and transform state
-- optional metadata about export time and generator version
-
-The cells are plain rows of objects, so the payload is easy to inspect or save without learning exporter-internal
-TypeScript names:
+The root has `format`, `formatVersion`, and a nonempty `layers` array. Optional `metadata` records the creation time
+and exporter version. Each layer has its own grid, presentation fields, and dense rows of cell objects. There is no
+root canvas, grid, or `target` field. The `target` option controls which layers the exporter includes; it is not
+written into the document.
 
 ```json
 {
   "format": "textmode.document",
-  "formatVersion": "2.0.0",
-  "target": "selected",
-  "canvas": { "width": 800, "height": 600 },
-  "grid": { "cols": 80, "rows": 38, "cellWidth": 10, "cellHeight": 16 },
-  "layer": {
-    "id": "base",
-    "cells": {
-      "encoding": "object-rows-v1",
-      "rows": [[{ "x": 0, "y": 0, "character": "@", "foreground": "#8ee6c9", "background": "#10131f", "transform": { "invert": false, "flipX": false, "flipY": false, "rotation": 0 } }]]
+  "formatVersion": "3.0.0",
+  "metadata": {
+    "createdAt": "2026-01-01T00:00:00.000Z",
+    "generator": { "name": "textmode.export.js", "version": "1.9.0" }
+  },
+  "layers": [
+    {
+      "id": "base",
+      "visible": true,
+      "opacity": 1,
+      "blendMode": "normal",
+      "offsetX": 0,
+      "offsetY": 0,
+      "rotationZ": 0,
+      "grid": { "cols": 1, "rows": 1, "cellWidth": 10, "cellHeight": 16 },
+      "cells": {
+        "encoding": "object-rows-v1",
+        "rows": [[{
+          "x": 0,
+          "y": 0,
+          "character": "@",
+          "foreground": "#8ee6c9ff",
+          "background": "#10131fff",
+          "transform": { "invert": false, "flipX": false, "flipY": false, "rotation": 0 }
+        }]]
+      }
     }
-  }
+  ]
 }
 ```
+
+Layer entries are ordered from bottom to top. Each layer keeps its own grid and presentation, including visibility,
+opacity, blend mode, offsets, and rotation. Cell rows include coordinates, character, foreground and background color,
+and transform. `colorMode: "rgba"` writes color channels as objects instead of hexadecimal strings.
 
 Example with explicit formatting options:
 
@@ -179,9 +196,8 @@ t.saveJSON({
 });
 ```
 
-All-layer JSON uses the same top-level format with `target: "all"` and a `layers` array. It includes hidden layers and
-preserves each layer's `visible`, `opacity`, `blendMode`, `offsetX`, `offsetY`, and `rotationZ` values. This is
-descriptive layer data, not a flattened composite.
+All-layer JSON uses the same document shape and includes hidden layers. It is descriptive layer data, not a flattened
+composite.
 
 Available [`JSONExportOptions`](/api/textmode.export.js/type-aliases/JSONExportOptions.md):
 
@@ -195,6 +211,30 @@ Available [`JSONExportOptions`](/api/textmode.export.js/type-aliases/JSONExportO
 `toJSON()` returns the structured object. `toJSONString()` returns serialized JSON text.
 
 Like TXT export, JSON export reads layer data rather than the final presented canvas.
+
+## ZIP export
+
+Use ZIP export to capture a deterministic sequence of future frames in PNG, JPEG, WebP, SVG, JSON, or TXT format.
+ZIP export is available through code and is not part of the export overlay.
+
+```js
+await t.saveZip({
+  format: "png",
+  filename: "frames",
+  frameCount: 60,
+  frameRate: 30,
+  frameOptions: { scale: 2 },
+});
+
+const archive = await t.toZipBlob({
+  format: "svg",
+  frameCount: 60,
+  frameRate: 24,
+});
+```
+
+See [`ZIPExportOptions`](/api/textmode.export.js/type-aliases/ZIPExportOptions.md) for archive settings and
+[`TextmodeExportAPI`](/api/textmode.export.js/interfaces/TextmodeExportAPI.md) for both methods.
 
 ## SVG export
 
@@ -390,7 +430,9 @@ Use `transparent: true` only with WebM. MP4/H.264 does not provide portable alph
 - [`ImageExportOptions`](/api/textmode.export.js/type-aliases/ImageExportOptions.md)
 - [`TXTExportOptions`](/api/textmode.export.js/type-aliases/TXTExportOptions.md)
 - [`JSONExportOptions`](/api/textmode.export.js/type-aliases/JSONExportOptions.md)
-- [`TextmodeDocumentJSON`](/api/textmode.export.js/type-aliases/TextmodeDocumentJSON.md)
+- [`JSONExportTarget`](/api/textmode.export.js/type-aliases/JSONExportTarget.md)
+- [`JSONExportColorMode`](/api/textmode.export.js/type-aliases/JSONExportColorMode.md)
 - [`SVGExportOptions`](/api/textmode.export.js/type-aliases/SVGExportOptions.md)
 - [`GIFExportOptions`](/api/textmode.export.js/type-aliases/GIFExportOptions.md)
 - [`VideoExportOptions`](/api/textmode.export.js/type-aliases/VideoExportOptions.md)
+- [`ZIPExportOptions`](/api/textmode.export.js/type-aliases/ZIPExportOptions.md)
