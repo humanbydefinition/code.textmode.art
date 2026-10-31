@@ -7,7 +7,7 @@ category: Classes
 api: true
 namespace: fonts
 kind: Class
-lastModified: 2026-08-24
+lastModified: 2026-10-31
 hasConstructor: false
 ---
 
@@ -30,16 +30,28 @@ glyph atlas, and used by [layering.TextmodeLayer](../../layering/classes/Textmod
 
 ## Accessors
 
-| Accessor | Description |
-| ------ | ------ |
-| [characterMap](TextmodeFont/accessors/characterMap.md) | Character-to-glyph lookup map. |
-| [characters](TextmodeFont/accessors/characters.md) | Unicode glyphs available in this font. |
-| [font](TextmodeFont/accessors/font.md) | Implementation-specific parsed font data. |
-| [fontSize](TextmodeFont/accessors/fontSize.md) | Font size used for the glyph atlas. |
-| [framebuffer](TextmodeFont/accessors/framebuffer.md) | Normalized glyph atlas framebuffer used by the ASCII shader. |
-| [maxGlyphDimensions](TextmodeFont/accessors/maxGlyphDimensions.md) | Maximum glyph cell dimensions in pixels. |
-| [textureColumns](TextmodeFont/accessors/textureColumns.md) | Number of columns in the glyph atlas. |
-| [textureRows](TextmodeFont/accessors/textureRows.md) | Number of rows in the glyph atlas. |
+### sourceData
+
+#### Get Signature
+
+```ts
+get sourceData(): TextmodeFontSourceData;
+```
+
+Immutable decoded font source, shared across layer-safe copies.
+
+##### Returns
+
+[`TextmodeFontSourceData`](../interfaces/TextmodeFontSourceData.md)
+
+
+##### Example
+
+```ts
+const font = await t.loadFont('font.ttf');
+const bytes = font.sourceData.copyBytes();
+console.log(bytes.byteLength);
+```
 
 ## Methods
 

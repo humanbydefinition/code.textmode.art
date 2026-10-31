@@ -8,7 +8,7 @@ api: true
 owner: TextmodeLayer
 namespace: layering
 kind: Method
-lastModified: 2026-08-24
+lastModified: 2026-10-31
 ---
 
 [textmode.js](../../../../../index.md) / [layering](../../../index.md) / [TextmodeLayer](../../TextmodeLayer.md) / loadFont
@@ -25,13 +25,13 @@ Load a font into this layer from a URL/path or existing [TextmodeFont](../../../
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `fontSource` | `string` \| [`TextmodeFont`](../../../../fonts/classes/TextmodeFont.md) | Font URL/path or TextmodeFont to fork from. |
+| `fontSource` | `string` \| [`TextmodeFont`](../../../../fonts/classes/TextmodeFont.md) | Font URL/path or TextmodeFont to fork from. The replacement becomes active only after it loads successfully. Use the returned font or layer.font after replacement; earlier references retain the previous instance. |
 
 ## Returns
 
 `Promise`\<[`TextmodeFont`](../../../../fonts/classes/TextmodeFont.md)\>
 
-The loaded TextmodeFont.
+The new active TextmodeFont.
 
 ## Example
 
