@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-10-27
+lastModified: 2026-10-31
 ---
 
 [textmode.export.js](../index.md) / GIFExportProgress
@@ -26,7 +26,7 @@ Progress information emitted while deterministic frames are captured and encoded
 ### frameIndex?
 
 ```ts
-optional frameIndex?: number;
+frameIndex?: number;
 ```
 
 Number of frames captured so far.
@@ -37,7 +37,7 @@ Number of frames captured so far.
 ### message?
 
 ```ts
-optional message?: string;
+message?: string;
 ```
 
 Optional status message for UI consumption.
@@ -59,7 +59,7 @@ Current GIF capture or encoding state.
 ### totalFrames?
 
 ```ts
-optional totalFrames?: number;
+totalFrames?: number;
 ```
 
 Total number of frames planned for the recording.

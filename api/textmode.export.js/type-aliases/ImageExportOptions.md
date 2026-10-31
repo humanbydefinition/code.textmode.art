@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-10-27
+lastModified: 2026-10-31
 ---
 
 [textmode.export.js](../index.md) / ImageExportOptions
@@ -26,7 +26,7 @@ Options for exporting the textmode content to image format.
 ### filename?
 
 ```ts
-optional filename?: string;
+filename?: string;
 ```
 
 Target filename without extension. Defaults to an auto-generated value.
@@ -37,7 +37,7 @@ Target filename without extension. Defaults to an auto-generated value.
 ### format?
 
 ```ts
-optional format?: "png" | "jpg" | "webp";
+format?: "png" | "jpg" | "webp";
 ```
 
 The image format to export *(`'png'`, `'jpg'`, or `'webp'`)*. Defaults to `'png'`.
@@ -48,7 +48,7 @@ The image format to export *(`'png'`, `'jpg'`, or `'webp'`)*. Defaults to `'png'
 ### scale?
 
 ```ts
-optional scale?: number;
+scale?: number;
 ```
 
 Scale factor for the output image.

@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-10-27
+lastModified: 2026-10-31
 ---
 
 [textmode.export.js](../index.md) / GIFExportOptions
@@ -26,7 +26,7 @@ Options for capturing deterministic textmode frames as an animated GIF.
 ### filename?
 
 ```ts
-optional filename?: string;
+filename?: string;
 ```
 
 Target filename without extension. Defaults to an auto-generated value.
@@ -37,7 +37,7 @@ Target filename without extension. Defaults to an auto-generated value.
 ### frameCount?
 
 ```ts
-optional frameCount?: number;
+frameCount?: number;
 ```
 
 Desired total number of frames to capture. Defaults to `300`.
@@ -48,7 +48,7 @@ Desired total number of frames to capture. Defaults to `300`.
 ### frameRate?
 
 ```ts
-optional frameRate?: number;
+frameRate?: number;
 ```
 
 Target frame rate for the export, in frames per second. Defaults to `60`.
@@ -59,7 +59,7 @@ Target frame rate for the export, in frames per second. Defaults to `60`.
 ### onProgress?
 
 ```ts
-optional onProgress?: (progress) => void;
+onProgress?: (progress) => void;
 ```
 
 Progress callback invoked throughout the recording lifecycle.
@@ -80,7 +80,7 @@ Progress callback invoked throughout the recording lifecycle.
 ### prepareFrame?
 
 ```ts
-optional prepareFrame?: PrepareExportFrame;
+prepareFrame?: PrepareExportFrame;
 ```
 
 Prepares external media before each deterministic frame is redrawn.
@@ -91,7 +91,7 @@ Prepares external media before each deterministic frame is redrawn.
 ### repeat?
 
 ```ts
-optional repeat?: number;
+repeat?: number;
 ```
 
 GIF loop count. 0 = loop forever. Defaults to `0`.
@@ -102,7 +102,7 @@ GIF loop count. 0 = loop forever. Defaults to `0`.
 ### scale?
 
 ```ts
-optional scale?: number;
+scale?: number;
 ```
 
 Scale factor for the output image.
@@ -117,7 +117,7 @@ Defaults to `1.0`.
 ### signal?
 
 ```ts
-optional signal?: AbortSignal;
+signal?: AbortSignal;
 ```
 
 Abort signal for cancelling capture or encoding.

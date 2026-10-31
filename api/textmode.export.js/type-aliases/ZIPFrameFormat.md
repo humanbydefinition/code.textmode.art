@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-10-27
+lastModified: 2026-10-31
 ---
 
 [textmode.export.js](../index.md) / ZIPFrameFormat
@@ -15,7 +15,7 @@ lastModified: 2026-10-27
 # Type Alias: ZIPFrameFormat
 
 ```ts
-type ZIPFrameFormat = "png" | "jpg" | "webp" | "svg" | "json" | "txt";
+type ZIPFrameFormat = "png" | "jpg" | "webp" | "svg" | "txt";
 ```
 
 File format used for every frame in a ZIP frame-sequence export.

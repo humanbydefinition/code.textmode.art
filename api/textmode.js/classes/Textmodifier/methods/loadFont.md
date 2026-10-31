@@ -7,7 +7,7 @@ category: Methods
 api: true
 owner: Textmodifier
 kind: Method
-lastModified: 2026-08-24
+lastModified: 2026-10-31
 ---
 
 [textmode.js](../../../index.md) / [Textmodifier](../../Textmodifier.md) / loadFont
@@ -25,6 +25,10 @@ instance to use as a reusable source.
 
 If `setActive` is true (default), the font is set as the base layer's font.
 If `setActive` is false, the font is loaded/initialized and returned without modifying the layer.
+
+Active replacement returns a new font instance after successful initialization.
+Use the returned font or the current layer.font after replacement.
+A failed replacement leaves the current font and grid unchanged.
 
 The returned font can be reused on other layers via [TextmodeLayer.loadFont](../../../namespaces/layering/classes/TextmodeLayer/methods/loadFont.md),
 which creates a layer-local fork rather than sharing a mutable instance by reference.
