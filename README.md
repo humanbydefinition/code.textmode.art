@@ -67,3 +67,13 @@ Contribution details and profile links are maintained on the [textmode.js contri
 ## License
 
 Documentation content is licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Code examples are licensed under [MIT](https://opensource.org/licenses/MIT).
+
+### Update generated API documentation
+
+Build each package's API documentation, then pass the generated package directories to the site update command:
+
+```sh
+npm run api:update -- --source ../textmode.js-dev/api/textmode.js --source ../textmode.export.js/api/textmode.export.js
+```
+
+Install a version of `@textmode/docs` that provides `dates reconcile` first. The command snapshots the existing site pages, converts runnable examples to Sandpack, and preserves `lastModified` on unchanged pages. Use `--baseline-ref HEAD` to compare against committed site pages when replacing an already regenerated working tree. Use `--docs-cli <path>` to select a local tooling CLI. VitePress separately derives its visible “Last updated” and sitemap dates from site Git history.

@@ -38,7 +38,8 @@
     "contributors:render": "node scripts/contributors.mjs render",
     "contributors:check": "node scripts/contributors.mjs check",
     "test:contributors": "node --test scripts/contributors.test.mjs",
-    "check:contributors": "npm run test:contributors && npm run contributors:check"
+    "check:contributors": "npm run test:contributors && npm run contributors:check",
+    "api:update": "node scripts/update-api-docs.mjs"
   },
   "dependencies": {
     "@iconify/vue": "^5.0.4",
