@@ -7,7 +7,7 @@ category: Classes
 api: true
 kind: Class
 ecosystem: textmode.js
-lastModified: 2026-10-27
+lastModified: 2026-10-31
 hasConstructor: true
 ---
 
@@ -30,7 +30,8 @@ Error raised by ZIP frame-sequence validation, capture, or archive creation.
 new ZIPExportError(
    code, 
    message, 
-   cause?): ZIPExportError;
+   cause?
+): ZIPExportError;
 ```
 
 #### Parameters
@@ -47,23 +48,19 @@ new ZIPExportError(
 
 #### Overrides
 
-```ts
-Error.constructor
-```
+`Error.constructor`
 
 ## Properties
 
 ### cause?
 
 ```ts
-readonly optional cause?: unknown;
+readonly cause?: unknown;
 ```
 
 #### Overrides
 
-```ts
-Error.cause
-```
+`Error.cause`
 
 ***
 

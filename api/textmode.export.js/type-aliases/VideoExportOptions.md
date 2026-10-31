@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-10-27
+lastModified: 2026-10-31
 ---
 
 [textmode.export.js](../index.md) / VideoExportOptions
@@ -26,7 +26,7 @@ Options for capturing deterministic textmode frames as MP4 or WebM video.
 ### debugLogging?
 
 ```ts
-optional debugLogging?: boolean;
+debugLogging?: boolean;
 ```
 
 Enables verbose logging. Defaults to `false`.
@@ -37,7 +37,7 @@ Enables verbose logging. Defaults to `false`.
 ### destination?
 
 ```ts
-optional destination?: VideoSaveDestination;
+destination?: VideoSaveDestination;
 ```
 
 Save destination used by `saveVideo()`. Defaults to `'download'`.
@@ -51,7 +51,7 @@ available. `toVideoBlob()` always returns an in-memory blob and does not use thi
 ### filename?
 
 ```ts
-optional filename?: string;
+filename?: string;
 ```
 
 Target filename without extension. Defaults to an auto-generated value.
@@ -62,7 +62,7 @@ Target filename without extension. Defaults to an auto-generated value.
 ### format?
 
 ```ts
-optional format?: VideoExportFormat;
+format?: VideoExportFormat;
 ```
 
 Video container format. Defaults to `'mp4'`.
@@ -73,7 +73,7 @@ Video container format. Defaults to `'mp4'`.
 ### frameCount?
 
 ```ts
-optional frameCount?: number;
+frameCount?: number;
 ```
 
 Desired total number of frames to capture. Defaults to `300`.
@@ -84,7 +84,7 @@ Desired total number of frames to capture. Defaults to `300`.
 ### frameRate?
 
 ```ts
-optional frameRate?: number;
+frameRate?: number;
 ```
 
 Target frame rate for the export, in frames per second. Defaults to `60`.
@@ -95,7 +95,7 @@ Target frame rate for the export, in frames per second. Defaults to `60`.
 ### hardwareAcceleration?
 
 ```ts
-optional hardwareAcceleration?: VideoHardwareAcceleration;
+hardwareAcceleration?: VideoHardwareAcceleration;
 ```
 
 WebCodecs hardware acceleration hint. Defaults to `'no-preference'`.
@@ -109,7 +109,7 @@ more predictable but slower. `'no-preference'` lets the browser choose.
 ### keyFrameInterval?
 
 ```ts
-optional keyFrameInterval?: number;
+keyFrameInterval?: number;
 ```
 
 Key frame interval in seconds. Defaults to `2`.
@@ -124,7 +124,7 @@ Use `0` to request every frame as a key frame.
 ### onProgress?
 
 ```ts
-optional onProgress?: (progress) => void;
+onProgress?: (progress) => void;
 ```
 
 Progress callback invoked throughout the recording lifecycle.
@@ -145,7 +145,7 @@ Progress callback invoked throughout the recording lifecycle.
 ### pixelDensity?
 
 ```ts
-optional pixelDensity?: number;
+pixelDensity?: number;
 ```
 
 Pixel density used during export. Defaults to `1` so video dimensions match the logical canvas size.
@@ -156,7 +156,7 @@ Pixel density used during export. Defaults to `1` so video dimensions match the 
 ### prepareFrame?
 
 ```ts
-optional prepareFrame?: PrepareExportFrame;
+prepareFrame?: PrepareExportFrame;
 ```
 
 Prepares external media before each deterministic frame is redrawn.
@@ -167,7 +167,7 @@ Prepares external media before each deterministic frame is redrawn.
 ### quality?
 
 ```ts
-optional quality?: VideoQuality;
+quality?: VideoQuality;
 ```
 
 Video quality policy. Defaults to `'medium'`.
@@ -181,7 +181,7 @@ object form to request a positive target bitrate in bits per second and an optio
 ### signal?
 
 ```ts
-optional signal?: AbortSignal;
+signal?: AbortSignal;
 ```
 
 Abort signal for cancelling an in-progress export.
@@ -192,7 +192,7 @@ Abort signal for cancelling an in-progress export.
 ### transparent?
 
 ```ts
-optional transparent?: boolean;
+transparent?: boolean;
 ```
 
 When `true`, attempts to preserve alpha data in WebM recordings. MP4 exports reject this option.

@@ -7,7 +7,7 @@ category: Interfaces
 api: true
 kind: Interface
 ecosystem: textmode.js
-lastModified: 2026-10-27
+lastModified: 2026-10-31
 isInterface: true
 ---
 
@@ -117,18 +117,7 @@ t.windowResized(() => {
 ```
 
 
-## Uncategorized
-
-### exportOverlay
-
-```ts
-exportOverlay: ExportOverlayController;
-```
-
-Controller for managing the export overlay UI visibility at runtime.
-
-
-***
+## Canvas capture
 
 ### copyCanvas()
 
@@ -184,6 +173,33 @@ await t.saveCanvas({ format: 'png', filename: 'frame-001' });
 
 ***
 
+### toImageBlob()
+
+```ts
+toImageBlob(options?): Promise<Blob>;
+```
+
+Generates the current canvas as an image blob without downloading it.
+
+#### Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `options?` | [`ImageExportOptions`](../type-aliases/ImageExportOptions.md) |
+
+#### Returns
+
+`Promise`\<`Blob`\>
+
+#### Example
+
+```ts
+const blob = await t.toImageBlob({ format: 'webp', scale: 2 });
+```
+
+
+## GIF export
+
 ### saveGIF()
 
 ```ts
@@ -211,87 +227,32 @@ await t.saveGIF({ frameCount: 120, frameRate: 30, filename: 'loop' });
 
 ***
 
-### saveJSON()
+### toGIFBlob()
 
 ```ts
-saveJSON(options?): void;
+toGIFBlob(options?): Promise<Blob>;
 ```
 
-Downloads the selected layer or layer stack as a v3 JSON document file.
+Generates an animated GIF blob without downloading it.
 
 #### Parameters
 
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `options?` | [`JSONExportOptions`](../type-aliases/JSONExportOptions.md) | Export options. |
+| Parameter | Type |
+| ------ | ------ |
+| `options?` | [`GIFExportOptions`](../type-aliases/GIFExportOptions.md) |
 
 #### Returns
 
-`void`
+`Promise`\<`Blob`\>
 
 #### Example
 
 ```ts
-t.saveJSON({ filename: 'frame', layer: t.layers.base, pretty: true });
-t.saveJSON({ filename: 'stack', target: 'all' });
+const blob = await t.toGIFBlob({ frameCount: 90, frameRate: 30 });
 ```
 
 
-***
-
-### saveStrings()
-
-```ts
-saveStrings(options?): void;
-```
-
-Downloads the selected layer's text content as a plain-text file.
-
-#### Parameters
-
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `options?` | [`TXTExportOptions`](../type-aliases/TXTExportOptions.md) | Export options. |
-
-#### Returns
-
-`void`
-
-#### Example
-
-```ts
-t.saveStrings({ filename: 'frame', layer: t.layers.base, preserveTrailingSpaces: true });
-```
-
-
-***
-
-### saveSVG()
-
-```ts
-saveSVG(options?): void;
-```
-
-Downloads the selected layer as an SVG file.
-
-#### Parameters
-
-| Parameter | Type | Description |
-| ------ | ------ | ------ |
-| `options?` | [`SVGExportOptions`](../type-aliases/SVGExportOptions.md) | Export options. |
-
-#### Returns
-
-`void`
-
-#### Example
-
-```ts
-t.saveSVG({ filename: 'poster', layer: t.layers.base, includeBackgroundRectangles: true });
-```
-
-
-***
+## Video export
 
 ### saveVideo()
 
@@ -343,19 +304,21 @@ await t.saveVideo({
 
 ***
 
-### toGIFBlob()
+### toVideoBlob()
 
 ```ts
-toGIFBlob(options?): Promise<Blob>;
+toVideoBlob(options?): Promise<Blob>;
 ```
 
-Generates an animated GIF blob without downloading it.
+Generates an in-memory video blob without downloading it.
+
+`destination` is only used by [saveVideo](#savevideo); this method always buffers and returns a `Blob`.
 
 #### Parameters
 
 | Parameter | Type |
 | ------ | ------ |
-| `options?` | [`GIFExportOptions`](../type-aliases/GIFExportOptions.md) |
+| `options?` | [`VideoExportOptions`](../type-aliases/VideoExportOptions.md) |
 
 #### Returns
 
@@ -364,96 +327,61 @@ Generates an animated GIF blob without downloading it.
 #### Example
 
 ```ts
-const blob = await t.toGIFBlob({ frameCount: 90, frameRate: 30 });
+const blob = await t.toVideoBlob({ format: 'webm', frameCount: 120, frameRate: 30 });
 ```
 
 
-***
+## Layer data export
 
-### toImageBlob()
+### saveStrings()
 
 ```ts
-toImageBlob(options?): Promise<Blob>;
+saveStrings(options?): void;
 ```
 
-Generates the current canvas as an image blob without downloading it.
-
-#### Parameters
-
-| Parameter | Type |
-| ------ | ------ |
-| `options?` | [`ImageExportOptions`](../type-aliases/ImageExportOptions.md) |
-
-#### Returns
-
-`Promise`\<`Blob`\>
-
-#### Example
-
-```ts
-const blob = await t.toImageBlob({ format: 'webp', scale: 2 });
-```
-
-
-***
-
-### toJSON()
-
-```ts
-toJSON(options?): TextmodeDocumentJSON;
-```
-
-Produces a v3 document with a nonempty layers array.
-Selected layers retain their visibility, opacity, blending, and transforms.
+Downloads the selected layer's text content as a plain-text file.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `options?` | [`JSONExportOptions`](../type-aliases/JSONExportOptions.md) | Export options. |
+| `options?` | [`TXTExportOptions`](../type-aliases/TXTExportOptions.md) | Export options. |
 
 #### Returns
 
-`TextmodeDocumentJSON`
-
-The JSON document representing the selected layer or layer stack.
+`void`
 
 #### Example
 
 ```ts
-const layer = t.toJSON({ layer: t.layers.base, colorMode: 'hex', includeMetadata: true });
-const stack = t.toJSON({ target: 'all' });
-console.log(layer.layers[0].grid, stack.formatVersion); // 3.0.0
+t.saveStrings({ filename: 'frame', layer: t.layers.base, preserveTrailingSpaces: true });
 ```
 
 
 ***
 
-### toJSONString()
+### saveSVG()
 
 ```ts
-toJSONString(options?): string;
+saveSVG(options?): void;
 ```
 
-Produces the selected layer or layer stack as a v3 JSON document string.
+Downloads the selected layer as an SVG file.
 
 #### Parameters
 
 | Parameter | Type | Description |
 | ------ | ------ | ------ |
-| `options?` | [`JSONExportOptions`](../type-aliases/JSONExportOptions.md) | Export options. |
+| `options?` | [`SVGExportOptions`](../type-aliases/SVGExportOptions.md) | Export options. |
 
 #### Returns
 
-`string`
-
-Serialized JSON string for the selected layer or layer stack.
+`void`
 
 #### Example
 
 ```ts
-const json = t.toJSONString({ layer: t.layers.base, pretty: false, colorMode: 'hex' });
-const stackJson = t.toJSONString({ target: 'all' });
+t.saveSVG({ filename: 'poster', layer: t.layers.base, includeBackgroundRectangles: true });
 ```
 
 
@@ -515,23 +443,139 @@ const svg = t.toSVG({ layer: t.layers.base, drawMode: 'stroke', strokeWidth: 1.5
 ```
 
 
-***
+## JSON document data
 
-### toVideoBlob()
+### saveJSON()
 
 ```ts
-toVideoBlob(options?): Promise<Blob>;
+saveJSON(options?): void;
 ```
 
-Generates an in-memory video blob without downloading it.
+Downloads the full layer stack as a v4 JSON document by default.
 
-`destination` is only used by [saveVideo](#savevideo); this method always buffers and returns a `Blob`.
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `options?` | [`JSONExportOptions`](../type-aliases/JSONExportOptions.md) | Export options. |
+
+#### Returns
+
+`void`
+
+#### Example
+
+```ts
+t.saveJSON({ filename: 'frame', target: 'selected', layer: t.layers.base, pretty: true });
+t.saveJSON({ filename: 'stack' }); // The full layer stack is the default.
+```
+
+
+***
+
+### toJSON()
+
+```ts
+toJSON(options?): TextmodeDocumentJSON;
+```
+
+Produces a v4 document with a nonempty frames array. The full layer stack
+is included by default. Selected layers retain their visibility, opacity,
+blending, and transforms.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `options?` | [`JSONExportOptions`](../type-aliases/JSONExportOptions.md) | Export options. |
+
+#### Returns
+
+`TextmodeDocumentJSON`
+
+The JSON document representing the selected layer or layer stack.
+
+#### Example
+
+```ts
+const layer = t.toJSON({ target: 'selected', layer: t.layers.base, colorMode: 'hex', includeMetadata: true });
+const stack = t.toJSON(); // The full layer stack is the default.
+console.log(layer.frames[0].layers[0].grid, stack.formatVersion); // 4.0.0
+```
+
+
+***
+
+### toJSONString()
+
+```ts
+toJSONString(options?): string;
+```
+
+Produces the full layer stack as a v4 JSON document string by default.
+
+#### Parameters
+
+| Parameter | Type | Description |
+| ------ | ------ | ------ |
+| `options?` | [`JSONExportOptions`](../type-aliases/JSONExportOptions.md) | Export options. |
+
+#### Returns
+
+`string`
+
+Serialized JSON string for the selected layer or layer stack.
+
+#### Example
+
+```ts
+const json = t.toJSONString({ target: 'selected', layer: t.layers.base, pretty: false, colorMode: 'hex' });
+const stackJson = t.toJSONString(); // The full layer stack is the default.
+```
+
+
+## JSON frame-sequence export
+
+### saveJSONSequence()
+
+```ts
+saveJSONSequence(options?): Promise<void>;
+```
+
+Capture and download a fixed-rate JSON sequence.
 
 #### Parameters
 
 | Parameter | Type |
 | ------ | ------ |
-| `options?` | [`VideoExportOptions`](../type-aliases/VideoExportOptions.md) |
+| `options?` | [`JSONSequenceExportOptions`](../type-aliases/JSONSequenceExportOptions.md) |
+
+#### Returns
+
+`Promise`\<`void`\>
+
+#### Example
+
+```ts
+await t.saveJSONSequence({ frameCount: 60, frameRate: 30 });
+```
+
+
+***
+
+### toJSONSequenceBlob()
+
+```ts
+toJSONSequenceBlob(options?): Promise<Blob>;
+```
+
+Capture a fixed-rate sequence as one JSON blob.
+
+#### Parameters
+
+| Parameter | Type |
+| ------ | ------ |
+| `options?` | [`JSONSequenceExportOptions`](../type-aliases/JSONSequenceExportOptions.md) |
 
 #### Returns
 
@@ -540,7 +584,7 @@ Generates an in-memory video blob without downloading it.
 #### Example
 
 ```ts
-const blob = await t.toVideoBlob({ format: 'webm', frameCount: 120, frameRate: 30 });
+const blob = await t.toJSONSequenceBlob({ frameCount: 60, frameRate: 30 });
 ```
 
 
@@ -620,4 +664,15 @@ When validation, capture, serialization, archive writing, or cancellation fails.
 ```ts
 const archive = await t.toZipBlob({ format: 'svg', frameCount: 60, frameRate: 24 });
 ```
+
+
+## Overlay
+
+### exportOverlay
+
+```ts
+exportOverlay: ExportOverlayController;
+```
+
+Controller for managing the export overlay UI visibility at runtime.
 

@@ -7,7 +7,7 @@ category: API Reference
 api: true
 kind: Project
 ecosystem: textmode.js
-lastModified: 2026-10-27
+lastModified: 2026-10-31
 ---
 
 # textmode.export.js
@@ -83,11 +83,38 @@ Export selected-layer text or vector data as TXT or SVG.
 
 Export selected-layer or full-stack document data as JSON.
 
-| Type Alias | Description |
+| Name | Description |
 | ------ | ------ |
 | [JSONExportColorMode](type-aliases/JSONExportColorMode.md) | Color representation written by the JSON exporter: hexadecimal strings or RGBA channel objects. |
 | [JSONExportOptions](type-aliases/JSONExportOptions.md) | Options for exporting textmode content to JSON. |
 | [JSONExportTarget](type-aliases/JSONExportTarget.md) | Layer selection for export; never serialized into the document. |
+| [getFontReference](functions/getFontReference.md) | Identify a loaded font once per immutable source and return an independent reference. |
+
+## JSON frame-sequence export
+
+Capture deterministic frames as a single JSON document.
+
+| Name | Description |
+| ------ | ------ |
+| [JSONSequenceExportError](classes/JSONSequenceExportError.md) | Error raised by JSON sequence capture. |
+| [JSONSequenceExportProgress](interfaces/JSONSequenceExportProgress.md) | Progress emitted by JSON frame-sequence capture. |
+| [JSONSequenceExportErrorCode](type-aliases/JSONSequenceExportErrorCode.md) | Machine-readable JSON sequence failure. |
+| [JSONSequenceExportOptions](type-aliases/JSONSequenceExportOptions.md) | Options for deterministic, fixed-rate JSON sequence capture. |
+
+## ZIP frame-sequence export
+
+Capture deterministic PNG, JPEG, WebP, SVG, or TXT frames in a code-only ZIP archive.
+
+| Name | Description |
+| ------ | ------ |
+| [ZIPExportError](classes/ZIPExportError.md) | Error raised by ZIP frame-sequence validation, capture, or archive creation. |
+| [ZIPCaptureOptions](interfaces/ZIPCaptureOptions.md) | Options shared by all ZIP frame formats. |
+| [ZIPExportProgress](interfaces/ZIPExportProgress.md) | Progress information emitted while ZIP frames are captured and archived. |
+| [ZIPFrameOptionsMap](interfaces/ZIPFrameOptionsMap.md) | Options accepted by `frameOptions` for each ZIP frame format. |
+| [ZIPExportErrorCode](type-aliases/ZIPExportErrorCode.md) | Machine-readable ZIP export failure category. |
+| [ZIPExportOptions](type-aliases/ZIPExportOptions.md) | Options for capturing a frame sequence as a ZIP archive. |
+| [ZIPExportState](type-aliases/ZIPExportState.md) | Lifecycle state reported by a ZIP frame-sequence export. |
+| [ZIPFrameFormat](type-aliases/ZIPFrameFormat.md) | File format used for every frame in a ZIP frame-sequence export. |
 
 ## Overlay
 
@@ -102,22 +129,7 @@ Configure and control the built-in export overlay.
 | [ExportDefaultsPatch](type-aliases/ExportDefaultsPatch.md) | Partial patch accepted by [ExportOverlayController.setDefaults](interfaces/ExportOverlayController.md#setdefaults). |
 | [GIFOverlayDefaults](type-aliases/GIFOverlayDefaults.md) | Default GIF export fields controlled by the export overlay. |
 | [ImageOverlayDefaults](type-aliases/ImageOverlayDefaults.md) | Default image export fields controlled by the export overlay. |
-| [JSONOverlayDefaults](type-aliases/JSONOverlayDefaults.md) | Default JSON export fields controlled by the export overlay. |
+| [JSONOverlayDefaults](type-aliases/JSONOverlayDefaults.md) | Default JSON export fields controlled by the export overlay. JSON exports include all layers by default. |
 | [SVGOverlayDefaults](type-aliases/SVGOverlayDefaults.md) | Default SVG export fields controlled by the export overlay. |
 | [TXTOverlayDefaults](type-aliases/TXTOverlayDefaults.md) | Default TXT export fields controlled by the export overlay. |
 | [VideoOverlayDefaults](type-aliases/VideoOverlayDefaults.md) | Default video export fields controlled by the export overlay. |
-
-## ZIP frame-sequence export
-
-Capture deterministic PNG, JPEG, WebP, SVG, JSON, or TXT frames in a code-only ZIP archive.
-
-| Name | Description |
-| ------ | ------ |
-| [ZIPExportError](classes/ZIPExportError.md) | Error raised by ZIP frame-sequence validation, capture, or archive creation. |
-| [ZIPCaptureOptions](interfaces/ZIPCaptureOptions.md) | Options shared by all ZIP frame formats. |
-| [ZIPExportProgress](interfaces/ZIPExportProgress.md) | Progress information emitted while ZIP frames are captured and archived. |
-| [ZIPFrameOptionsMap](interfaces/ZIPFrameOptionsMap.md) | Format-specific options forwarded to each existing still exporter. |
-| [ZIPExportErrorCode](type-aliases/ZIPExportErrorCode.md) | Machine-readable ZIP export failure category. |
-| [ZIPExportOptions](type-aliases/ZIPExportOptions.md) | Discriminated options for a deterministic ZIP frame-sequence export. |
-| [ZIPExportState](type-aliases/ZIPExportState.md) | Lifecycle state reported by a ZIP frame-sequence export. |
-| [ZIPFrameFormat](type-aliases/ZIPFrameFormat.md) | File format used for every frame in a ZIP frame-sequence export. |

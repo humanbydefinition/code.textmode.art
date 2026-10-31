@@ -7,7 +7,7 @@ category: Type Aliases
 api: true
 kind: TypeAlias
 ecosystem: textmode.js
-lastModified: 2026-10-27
+lastModified: 2026-10-31
 ---
 
 [textmode.export.js](../index.md) / VideoExportProgress
@@ -26,7 +26,7 @@ Progress information emitted while a deterministic video is probed, captured, an
 ### codec?
 
 ```ts
-optional codec?: VideoCodec;
+codec?: VideoCodec;
 ```
 
 Effective codec family selected after capability probing (`avc`, `vp9`, or `vp8`).
@@ -37,7 +37,7 @@ Effective codec family selected after capability probing (`avc`, `vp9`, or `vp8`
 ### codedHeight?
 
 ```ts
-optional codedHeight?: number;
+codedHeight?: number;
 ```
 
 Effective coded height in pixels.
@@ -48,7 +48,7 @@ Effective coded height in pixels.
 ### codedWidth?
 
 ```ts
-optional codedWidth?: number;
+codedWidth?: number;
 ```
 
 Effective coded width in pixels.
@@ -59,7 +59,7 @@ Effective coded width in pixels.
 ### frame?
 
 ```ts
-optional frame?: number;
+frame?: number;
 ```
 
 Alias for [frameIndex](#frameindex). Prefer this field in new code.
@@ -70,7 +70,7 @@ Alias for [frameIndex](#frameindex). Prefer this field in new code.
 ### frameIndex?
 
 ```ts
-optional frameIndex?: number;
+frameIndex?: number;
 ```
 
 Number of frames captured so far.
@@ -81,7 +81,7 @@ Number of frames captured so far.
 ### frameRate?
 
 ```ts
-optional frameRate?: number;
+frameRate?: number;
 ```
 
 Exact output frame rate passed to the muxer.
@@ -92,7 +92,7 @@ Exact output frame rate passed to the muxer.
 ### message?
 
 ```ts
-optional message?: string;
+message?: string;
 ```
 
 Optional status message for UI consumption.
@@ -103,7 +103,7 @@ Optional status message for UI consumption.
 ### phase?
 
 ```ts
-optional phase?: VideoExportPhase;
+phase?: VideoExportPhase;
 ```
 
 Current detailed phase. See [VideoExportPhase](VideoExportPhase.md) for current and compatibility-only values.
@@ -114,7 +114,7 @@ Current detailed phase. See [VideoExportPhase](VideoExportPhase.md) for current 
 ### progress?
 
 ```ts
-optional progress?: number;
+progress?: number;
 ```
 
 Normalized frame-capture completion ratio between `0` and `1`.
@@ -138,7 +138,7 @@ Current high-level export state.
 ### totalFrames?
 
 ```ts
-optional totalFrames?: number;
+totalFrames?: number;
 ```
 
 Total number of frames planned for the recording.
