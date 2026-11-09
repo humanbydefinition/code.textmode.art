@@ -42,7 +42,7 @@
     "api:update": "node scripts/update-api-docs.mjs"
   },
   "dependencies": {
-    "@iconify/vue": "^5.0.4",
+    "@iconify/vue": "^5.0.5",
     "lz-string": "^1.5.0",
     "vitepress-plugin-blog": "^0.2.0",
     "vitepress-plugin-codeblocks-fold": "^1.2.35",
